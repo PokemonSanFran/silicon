@@ -108,6 +108,104 @@ const struct SiliconFrontierTrainers gSiliconFrontierTrainers[SILICON_FRONTIER_T
             },
         },
         .partner = PARTNER_PUA,
+        .partnerMonSet =
+        {
+            [SPARRING_TYPE_NORMAL] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_PIDGEOT_1,
+                SILICON_FRONTIER_MON_SINGLES_WYRDEER_1,
+            },
+            [SPARRING_TYPE_FIGHTING] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_BRELOOM_4,
+                SILICON_FRONTIER_MON_SINGLES_GALLADE_2,
+            },
+            [SPARRING_TYPE_FLYING] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_PIDGEOT_1,
+                SILICON_FRONTIER_MON_SINGLES_AERODACTYL_1,
+            },
+            [SPARRING_TYPE_POISON] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_NIDOKING_1,
+                SILICON_FRONTIER_MON_SINGLES_TENTACRUEL_3,
+            },
+            [SPARRING_TYPE_GROUND] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_NIDOKING_1,
+                SILICON_FRONTIER_MON_SINGLES_MAMOSWINE_3,
+            },
+            [SPARRING_TYPE_ROCK] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_KLEAVOR_2,
+                SILICON_FRONTIER_MON_SINGLES_OMASTAR_1,
+            },
+            [SPARRING_TYPE_BUG] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_KLEAVOR_2,
+                SILICON_FRONTIER_MON_SINGLES_LEAVANNY_3,
+            },
+            [SPARRING_TYPE_GHOST] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_CHANDELURE_2,
+                SILICON_FRONTIER_MON_SINGLES_AEGISLASH_4,
+            },
+            [SPARRING_TYPE_STEEL] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_AEGISLASH_4,
+                SILICON_FRONTIER_MON_SINGLES_ARCHALUDON_3,
+            },
+            [SPARRING_TYPE_FIRE] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_CHANDELURE_2,
+                SILICON_FRONTIER_MON_SINGLES_SCOVILLAIN_3,
+            },
+            [SPARRING_TYPE_WATER] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_TENTACRUEL_3,
+                SILICON_FRONTIER_MON_SINGLES_OMASTAR_1,
+            },
+            [SPARRING_TYPE_GRASS] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_SCOVILLAIN_3,
+                SILICON_FRONTIER_MON_SINGLES_LEAVANNY_3,
+            },
+            [SPARRING_TYPE_ELECTRIC] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_SCOVILLAIN_3,
+                SILICON_FRONTIER_MON_SINGLES_DRACOZOLT_3,
+            },
+            [SPARRING_TYPE_PSYCHIC] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_WYRDEER_1,
+                SILICON_FRONTIER_MON_SINGLES_GALLADE_2,
+            },
+            [SPARRING_TYPE_ICE] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_MAMOSWINE_3,
+                SILICON_FRONTIER_MON_SINGLES_JYNX_3,
+            },
+            [SPARRING_TYPE_DRAGON] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_ARCHALUDON_3,
+                SILICON_FRONTIER_MON_SINGLES_DRACOZOLT_3,
+            },
+            [SPARRING_TYPE_DARK] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_HONCHKROW_2,
+                SILICON_FRONTIER_MON_SINGLES_SPIRITOMB_3,
+            },
+            [SPARRING_TYPE_FAIRY] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_TOGEKISS_4,
+                SILICON_FRONTIER_MON_SINGLES_GARDEVOIR_3,
+            },
+            [SPARRING_TYPE_COUNT] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_GARDEVOIR_3,
+                SILICON_FRONTIER_MON_SINGLES_GALLADE_2,
+            },
+        },
     },
     [SILICON_FRONTIER_TRAINER_CHARLOTTE] =
     {
@@ -163,6 +261,104 @@ const struct SiliconFrontierTrainers gSiliconFrontierTrainers[SILICON_FRONTIER_T
             },
         },
         .partner = PARTNER_CHARLOTTE,
+        .partnerMonSet =
+        {
+            [SPARRING_TYPE_NORMAL] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_PIDGEOT_1,
+                SILICON_FRONTIER_MON_SINGLES_WYRDEER_1,
+            },
+            [SPARRING_TYPE_FIGHTING] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_BRELOOM_4,
+                SILICON_FRONTIER_MON_SINGLES_GALLADE_2,
+            },
+            [SPARRING_TYPE_FLYING] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_PIDGEOT_1,
+                SILICON_FRONTIER_MON_SINGLES_AERODACTYL_1,
+            },
+            [SPARRING_TYPE_POISON] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_NIDOKING_1,
+                SILICON_FRONTIER_MON_SINGLES_TENTACRUEL_3,
+            },
+            [SPARRING_TYPE_GROUND] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_NIDOKING_1,
+                SILICON_FRONTIER_MON_SINGLES_MAMOSWINE_3,
+            },
+            [SPARRING_TYPE_ROCK] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_KLEAVOR_2,
+                SILICON_FRONTIER_MON_SINGLES_OMASTAR_1,
+            },
+            [SPARRING_TYPE_BUG] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_KLEAVOR_2,
+                SILICON_FRONTIER_MON_SINGLES_LEAVANNY_3,
+            },
+            [SPARRING_TYPE_GHOST] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_CHANDELURE_2,
+                SILICON_FRONTIER_MON_SINGLES_AEGISLASH_4,
+            },
+            [SPARRING_TYPE_STEEL] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_AEGISLASH_4,
+                SILICON_FRONTIER_MON_SINGLES_ARCHALUDON_3,
+            },
+            [SPARRING_TYPE_FIRE] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_CHANDELURE_2,
+                SILICON_FRONTIER_MON_SINGLES_SCOVILLAIN_3,
+            },
+            [SPARRING_TYPE_WATER] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_TENTACRUEL_3,
+                SILICON_FRONTIER_MON_SINGLES_OMASTAR_1,
+            },
+            [SPARRING_TYPE_GRASS] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_SCOVILLAIN_3,
+                SILICON_FRONTIER_MON_SINGLES_LEAVANNY_3,
+            },
+            [SPARRING_TYPE_ELECTRIC] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_SCOVILLAIN_3,
+                SILICON_FRONTIER_MON_SINGLES_DRACOZOLT_3,
+            },
+            [SPARRING_TYPE_PSYCHIC] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_WYRDEER_1,
+                SILICON_FRONTIER_MON_SINGLES_GALLADE_2,
+            },
+            [SPARRING_TYPE_ICE] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_MAMOSWINE_3,
+                SILICON_FRONTIER_MON_SINGLES_JYNX_3,
+            },
+            [SPARRING_TYPE_DRAGON] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_ARCHALUDON_3,
+                SILICON_FRONTIER_MON_SINGLES_DRACOZOLT_3,
+            },
+            [SPARRING_TYPE_DARK] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_HONCHKROW_2,
+                SILICON_FRONTIER_MON_SINGLES_SPIRITOMB_3,
+            },
+            [SPARRING_TYPE_FAIRY] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_TOGEKISS_4,
+                SILICON_FRONTIER_MON_SINGLES_GARDEVOIR_3,
+            },
+            [SPARRING_TYPE_COUNT] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_GARDEVOIR_3,
+                SILICON_FRONTIER_MON_SINGLES_GALLADE_2,
+            },
+        },
     },
     [SILICON_FRONTIER_TRAINER_AMI_ARGENTO] =
     {
@@ -218,6 +414,104 @@ const struct SiliconFrontierTrainers gSiliconFrontierTrainers[SILICON_FRONTIER_T
             },
         },
         .partner = PARTNER_AMIARGENTO,
+        .partnerMonSet =
+        {
+            [SPARRING_TYPE_NORMAL] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_PIDGEOT_1,
+                SILICON_FRONTIER_MON_SINGLES_WYRDEER_1,
+            },
+            [SPARRING_TYPE_FIGHTING] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_BRELOOM_4,
+                SILICON_FRONTIER_MON_SINGLES_GALLADE_2,
+            },
+            [SPARRING_TYPE_FLYING] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_PIDGEOT_1,
+                SILICON_FRONTIER_MON_SINGLES_AERODACTYL_1,
+            },
+            [SPARRING_TYPE_POISON] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_NIDOKING_1,
+                SILICON_FRONTIER_MON_SINGLES_TENTACRUEL_3,
+            },
+            [SPARRING_TYPE_GROUND] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_NIDOKING_1,
+                SILICON_FRONTIER_MON_SINGLES_MAMOSWINE_3,
+            },
+            [SPARRING_TYPE_ROCK] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_KLEAVOR_2,
+                SILICON_FRONTIER_MON_SINGLES_OMASTAR_1,
+            },
+            [SPARRING_TYPE_BUG] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_KLEAVOR_2,
+                SILICON_FRONTIER_MON_SINGLES_LEAVANNY_3,
+            },
+            [SPARRING_TYPE_GHOST] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_CHANDELURE_2,
+                SILICON_FRONTIER_MON_SINGLES_AEGISLASH_4,
+            },
+            [SPARRING_TYPE_STEEL] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_AEGISLASH_4,
+                SILICON_FRONTIER_MON_SINGLES_ARCHALUDON_3,
+            },
+            [SPARRING_TYPE_FIRE] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_CHANDELURE_2,
+                SILICON_FRONTIER_MON_SINGLES_SCOVILLAIN_3,
+            },
+            [SPARRING_TYPE_WATER] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_TENTACRUEL_3,
+                SILICON_FRONTIER_MON_SINGLES_OMASTAR_1,
+            },
+            [SPARRING_TYPE_GRASS] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_SCOVILLAIN_3,
+                SILICON_FRONTIER_MON_SINGLES_LEAVANNY_3,
+            },
+            [SPARRING_TYPE_ELECTRIC] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_SCOVILLAIN_3,
+                SILICON_FRONTIER_MON_SINGLES_DRACOZOLT_3,
+            },
+            [SPARRING_TYPE_PSYCHIC] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_WYRDEER_1,
+                SILICON_FRONTIER_MON_SINGLES_GALLADE_2,
+            },
+            [SPARRING_TYPE_ICE] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_MAMOSWINE_3,
+                SILICON_FRONTIER_MON_SINGLES_JYNX_3,
+            },
+            [SPARRING_TYPE_DRAGON] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_ARCHALUDON_3,
+                SILICON_FRONTIER_MON_SINGLES_DRACOZOLT_3,
+            },
+            [SPARRING_TYPE_DARK] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_HONCHKROW_2,
+                SILICON_FRONTIER_MON_SINGLES_SPIRITOMB_3,
+            },
+            [SPARRING_TYPE_FAIRY] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_TOGEKISS_4,
+                SILICON_FRONTIER_MON_SINGLES_GARDEVOIR_3,
+            },
+            [SPARRING_TYPE_COUNT] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_GARDEVOIR_3,
+                SILICON_FRONTIER_MON_SINGLES_GALLADE_2,
+            },
+        },
     },
     [SILICON_FRONTIER_TRAINER_TALA] =
     {
@@ -273,6 +567,104 @@ const struct SiliconFrontierTrainers gSiliconFrontierTrainers[SILICON_FRONTIER_T
             },
         },
         .partner = PARTNER_TALA,
+        .partnerMonSet =
+        {
+            [SPARRING_TYPE_NORMAL] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_PIDGEOT_1,
+                SILICON_FRONTIER_MON_SINGLES_WYRDEER_1,
+            },
+            [SPARRING_TYPE_FIGHTING] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_BRELOOM_4,
+                SILICON_FRONTIER_MON_SINGLES_GALLADE_2,
+            },
+            [SPARRING_TYPE_FLYING] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_PIDGEOT_1,
+                SILICON_FRONTIER_MON_SINGLES_AERODACTYL_1,
+            },
+            [SPARRING_TYPE_POISON] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_NIDOKING_1,
+                SILICON_FRONTIER_MON_SINGLES_TENTACRUEL_3,
+            },
+            [SPARRING_TYPE_GROUND] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_NIDOKING_1,
+                SILICON_FRONTIER_MON_SINGLES_MAMOSWINE_3,
+            },
+            [SPARRING_TYPE_ROCK] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_KLEAVOR_2,
+                SILICON_FRONTIER_MON_SINGLES_OMASTAR_1,
+            },
+            [SPARRING_TYPE_BUG] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_KLEAVOR_2,
+                SILICON_FRONTIER_MON_SINGLES_LEAVANNY_3,
+            },
+            [SPARRING_TYPE_GHOST] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_CHANDELURE_2,
+                SILICON_FRONTIER_MON_SINGLES_AEGISLASH_4,
+            },
+            [SPARRING_TYPE_STEEL] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_AEGISLASH_4,
+                SILICON_FRONTIER_MON_SINGLES_ARCHALUDON_3,
+            },
+            [SPARRING_TYPE_FIRE] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_CHANDELURE_2,
+                SILICON_FRONTIER_MON_SINGLES_SCOVILLAIN_3,
+            },
+            [SPARRING_TYPE_WATER] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_TENTACRUEL_3,
+                SILICON_FRONTIER_MON_SINGLES_OMASTAR_1,
+            },
+            [SPARRING_TYPE_GRASS] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_SCOVILLAIN_3,
+                SILICON_FRONTIER_MON_SINGLES_LEAVANNY_3,
+            },
+            [SPARRING_TYPE_ELECTRIC] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_SCOVILLAIN_3,
+                SILICON_FRONTIER_MON_SINGLES_DRACOZOLT_3,
+            },
+            [SPARRING_TYPE_PSYCHIC] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_WYRDEER_1,
+                SILICON_FRONTIER_MON_SINGLES_GALLADE_2,
+            },
+            [SPARRING_TYPE_ICE] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_MAMOSWINE_3,
+                SILICON_FRONTIER_MON_SINGLES_JYNX_3,
+            },
+            [SPARRING_TYPE_DRAGON] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_ARCHALUDON_3,
+                SILICON_FRONTIER_MON_SINGLES_DRACOZOLT_3,
+            },
+            [SPARRING_TYPE_DARK] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_HONCHKROW_2,
+                SILICON_FRONTIER_MON_SINGLES_SPIRITOMB_3,
+            },
+            [SPARRING_TYPE_FAIRY] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_TOGEKISS_4,
+                SILICON_FRONTIER_MON_SINGLES_GARDEVOIR_3,
+            },
+            [SPARRING_TYPE_COUNT] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_GARDEVOIR_3,
+                SILICON_FRONTIER_MON_SINGLES_GALLADE_2,
+            },
+        },
     },
     [SILICON_FRONTIER_TRAINER_DIMU] =
     {
@@ -328,6 +720,104 @@ const struct SiliconFrontierTrainers gSiliconFrontierTrainers[SILICON_FRONTIER_T
             },
         },
         .partner = PARTNER_DIMU,
+        .partnerMonSet =
+        {
+            [SPARRING_TYPE_NORMAL] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_PIDGEOT_1,
+                SILICON_FRONTIER_MON_SINGLES_WYRDEER_1,
+            },
+            [SPARRING_TYPE_FIGHTING] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_BRELOOM_4,
+                SILICON_FRONTIER_MON_SINGLES_GALLADE_2,
+            },
+            [SPARRING_TYPE_FLYING] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_PIDGEOT_1,
+                SILICON_FRONTIER_MON_SINGLES_AERODACTYL_1,
+            },
+            [SPARRING_TYPE_POISON] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_NIDOKING_1,
+                SILICON_FRONTIER_MON_SINGLES_TENTACRUEL_3,
+            },
+            [SPARRING_TYPE_GROUND] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_NIDOKING_1,
+                SILICON_FRONTIER_MON_SINGLES_MAMOSWINE_3,
+            },
+            [SPARRING_TYPE_ROCK] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_KLEAVOR_2,
+                SILICON_FRONTIER_MON_SINGLES_OMASTAR_1,
+            },
+            [SPARRING_TYPE_BUG] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_KLEAVOR_2,
+                SILICON_FRONTIER_MON_SINGLES_LEAVANNY_3,
+            },
+            [SPARRING_TYPE_GHOST] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_CHANDELURE_2,
+                SILICON_FRONTIER_MON_SINGLES_AEGISLASH_4,
+            },
+            [SPARRING_TYPE_STEEL] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_AEGISLASH_4,
+                SILICON_FRONTIER_MON_SINGLES_ARCHALUDON_3,
+            },
+            [SPARRING_TYPE_FIRE] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_CHANDELURE_2,
+                SILICON_FRONTIER_MON_SINGLES_SCOVILLAIN_3,
+            },
+            [SPARRING_TYPE_WATER] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_TENTACRUEL_3,
+                SILICON_FRONTIER_MON_SINGLES_OMASTAR_1,
+            },
+            [SPARRING_TYPE_GRASS] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_SCOVILLAIN_3,
+                SILICON_FRONTIER_MON_SINGLES_LEAVANNY_3,
+            },
+            [SPARRING_TYPE_ELECTRIC] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_SCOVILLAIN_3,
+                SILICON_FRONTIER_MON_SINGLES_DRACOZOLT_3,
+            },
+            [SPARRING_TYPE_PSYCHIC] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_WYRDEER_1,
+                SILICON_FRONTIER_MON_SINGLES_GALLADE_2,
+            },
+            [SPARRING_TYPE_ICE] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_MAMOSWINE_3,
+                SILICON_FRONTIER_MON_SINGLES_JYNX_3,
+            },
+            [SPARRING_TYPE_DRAGON] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_ARCHALUDON_3,
+                SILICON_FRONTIER_MON_SINGLES_DRACOZOLT_3,
+            },
+            [SPARRING_TYPE_DARK] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_HONCHKROW_2,
+                SILICON_FRONTIER_MON_SINGLES_SPIRITOMB_3,
+            },
+            [SPARRING_TYPE_FAIRY] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_TOGEKISS_4,
+                SILICON_FRONTIER_MON_SINGLES_GARDEVOIR_3,
+            },
+            [SPARRING_TYPE_COUNT] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_GARDEVOIR_3,
+                SILICON_FRONTIER_MON_SINGLES_GALLADE_2,
+            },
+        },
     },
     [SILICON_FRONTIER_TRAINER_ADAORA] =
     {
@@ -383,6 +873,104 @@ const struct SiliconFrontierTrainers gSiliconFrontierTrainers[SILICON_FRONTIER_T
             },
         },
         .partner = PARTNER_ADAORA,
+        .partnerMonSet =
+        {
+            [SPARRING_TYPE_NORMAL] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_PIDGEOT_1,
+                SILICON_FRONTIER_MON_SINGLES_WYRDEER_1,
+            },
+            [SPARRING_TYPE_FIGHTING] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_BRELOOM_4,
+                SILICON_FRONTIER_MON_SINGLES_GALLADE_2,
+            },
+            [SPARRING_TYPE_FLYING] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_PIDGEOT_1,
+                SILICON_FRONTIER_MON_SINGLES_AERODACTYL_1,
+            },
+            [SPARRING_TYPE_POISON] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_NIDOKING_1,
+                SILICON_FRONTIER_MON_SINGLES_TENTACRUEL_3,
+            },
+            [SPARRING_TYPE_GROUND] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_NIDOKING_1,
+                SILICON_FRONTIER_MON_SINGLES_MAMOSWINE_3,
+            },
+            [SPARRING_TYPE_ROCK] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_KLEAVOR_2,
+                SILICON_FRONTIER_MON_SINGLES_OMASTAR_1,
+            },
+            [SPARRING_TYPE_BUG] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_KLEAVOR_2,
+                SILICON_FRONTIER_MON_SINGLES_LEAVANNY_3,
+            },
+            [SPARRING_TYPE_GHOST] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_CHANDELURE_2,
+                SILICON_FRONTIER_MON_SINGLES_AEGISLASH_4,
+            },
+            [SPARRING_TYPE_STEEL] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_AEGISLASH_4,
+                SILICON_FRONTIER_MON_SINGLES_ARCHALUDON_3,
+            },
+            [SPARRING_TYPE_FIRE] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_CHANDELURE_2,
+                SILICON_FRONTIER_MON_SINGLES_SCOVILLAIN_3,
+            },
+            [SPARRING_TYPE_WATER] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_TENTACRUEL_3,
+                SILICON_FRONTIER_MON_SINGLES_OMASTAR_1,
+            },
+            [SPARRING_TYPE_GRASS] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_SCOVILLAIN_3,
+                SILICON_FRONTIER_MON_SINGLES_LEAVANNY_3,
+            },
+            [SPARRING_TYPE_ELECTRIC] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_SCOVILLAIN_3,
+                SILICON_FRONTIER_MON_SINGLES_DRACOZOLT_3,
+            },
+            [SPARRING_TYPE_PSYCHIC] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_WYRDEER_1,
+                SILICON_FRONTIER_MON_SINGLES_GALLADE_2,
+            },
+            [SPARRING_TYPE_ICE] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_MAMOSWINE_3,
+                SILICON_FRONTIER_MON_SINGLES_JYNX_3,
+            },
+            [SPARRING_TYPE_DRAGON] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_ARCHALUDON_3,
+                SILICON_FRONTIER_MON_SINGLES_DRACOZOLT_3,
+            },
+            [SPARRING_TYPE_DARK] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_HONCHKROW_2,
+                SILICON_FRONTIER_MON_SINGLES_SPIRITOMB_3,
+            },
+            [SPARRING_TYPE_FAIRY] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_TOGEKISS_4,
+                SILICON_FRONTIER_MON_SINGLES_GARDEVOIR_3,
+            },
+            [SPARRING_TYPE_COUNT] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_GARDEVOIR_3,
+                SILICON_FRONTIER_MON_SINGLES_GALLADE_2,
+            },
+        },
     },
     [SILICON_FRONTIER_TRAINER_EMRYS] =
     {
@@ -438,6 +1026,104 @@ const struct SiliconFrontierTrainers gSiliconFrontierTrainers[SILICON_FRONTIER_T
             },
         },
         .partner = PARTNER_EMRYS,
+        .partnerMonSet =
+        {
+            [SPARRING_TYPE_NORMAL] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_PIDGEOT_1,
+                SILICON_FRONTIER_MON_SINGLES_WYRDEER_1,
+            },
+            [SPARRING_TYPE_FIGHTING] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_BRELOOM_4,
+                SILICON_FRONTIER_MON_SINGLES_GALLADE_2,
+            },
+            [SPARRING_TYPE_FLYING] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_PIDGEOT_1,
+                SILICON_FRONTIER_MON_SINGLES_AERODACTYL_1,
+            },
+            [SPARRING_TYPE_POISON] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_NIDOKING_1,
+                SILICON_FRONTIER_MON_SINGLES_TENTACRUEL_3,
+            },
+            [SPARRING_TYPE_GROUND] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_NIDOKING_1,
+                SILICON_FRONTIER_MON_SINGLES_MAMOSWINE_3,
+            },
+            [SPARRING_TYPE_ROCK] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_KLEAVOR_2,
+                SILICON_FRONTIER_MON_SINGLES_OMASTAR_1,
+            },
+            [SPARRING_TYPE_BUG] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_KLEAVOR_2,
+                SILICON_FRONTIER_MON_SINGLES_LEAVANNY_3,
+            },
+            [SPARRING_TYPE_GHOST] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_CHANDELURE_2,
+                SILICON_FRONTIER_MON_SINGLES_AEGISLASH_4,
+            },
+            [SPARRING_TYPE_STEEL] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_AEGISLASH_4,
+                SILICON_FRONTIER_MON_SINGLES_ARCHALUDON_3,
+            },
+            [SPARRING_TYPE_FIRE] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_CHANDELURE_2,
+                SILICON_FRONTIER_MON_SINGLES_SCOVILLAIN_3,
+            },
+            [SPARRING_TYPE_WATER] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_TENTACRUEL_3,
+                SILICON_FRONTIER_MON_SINGLES_OMASTAR_1,
+            },
+            [SPARRING_TYPE_GRASS] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_SCOVILLAIN_3,
+                SILICON_FRONTIER_MON_SINGLES_LEAVANNY_3,
+            },
+            [SPARRING_TYPE_ELECTRIC] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_SCOVILLAIN_3,
+                SILICON_FRONTIER_MON_SINGLES_DRACOZOLT_3,
+            },
+            [SPARRING_TYPE_PSYCHIC] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_WYRDEER_1,
+                SILICON_FRONTIER_MON_SINGLES_GALLADE_2,
+            },
+            [SPARRING_TYPE_ICE] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_MAMOSWINE_3,
+                SILICON_FRONTIER_MON_SINGLES_JYNX_3,
+            },
+            [SPARRING_TYPE_DRAGON] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_ARCHALUDON_3,
+                SILICON_FRONTIER_MON_SINGLES_DRACOZOLT_3,
+            },
+            [SPARRING_TYPE_DARK] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_HONCHKROW_2,
+                SILICON_FRONTIER_MON_SINGLES_SPIRITOMB_3,
+            },
+            [SPARRING_TYPE_FAIRY] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_TOGEKISS_4,
+                SILICON_FRONTIER_MON_SINGLES_GARDEVOIR_3,
+            },
+            [SPARRING_TYPE_COUNT] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_GARDEVOIR_3,
+                SILICON_FRONTIER_MON_SINGLES_GALLADE_2,
+            },
+        },
     },
     [SILICON_FRONTIER_TRAINER_MAGNUS] =
     {
@@ -493,6 +1179,104 @@ const struct SiliconFrontierTrainers gSiliconFrontierTrainers[SILICON_FRONTIER_T
             },
         },
         .partner = PARTNER_MAGNUS,
+        .partnerMonSet =
+        {
+            [SPARRING_TYPE_NORMAL] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_PIDGEOT_1,
+                SILICON_FRONTIER_MON_SINGLES_WYRDEER_1,
+            },
+            [SPARRING_TYPE_FIGHTING] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_BRELOOM_4,
+                SILICON_FRONTIER_MON_SINGLES_GALLADE_2,
+            },
+            [SPARRING_TYPE_FLYING] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_PIDGEOT_1,
+                SILICON_FRONTIER_MON_SINGLES_AERODACTYL_1,
+            },
+            [SPARRING_TYPE_POISON] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_NIDOKING_1,
+                SILICON_FRONTIER_MON_SINGLES_TENTACRUEL_3,
+            },
+            [SPARRING_TYPE_GROUND] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_NIDOKING_1,
+                SILICON_FRONTIER_MON_SINGLES_MAMOSWINE_3,
+            },
+            [SPARRING_TYPE_ROCK] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_KLEAVOR_2,
+                SILICON_FRONTIER_MON_SINGLES_OMASTAR_1,
+            },
+            [SPARRING_TYPE_BUG] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_KLEAVOR_2,
+                SILICON_FRONTIER_MON_SINGLES_LEAVANNY_3,
+            },
+            [SPARRING_TYPE_GHOST] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_CHANDELURE_2,
+                SILICON_FRONTIER_MON_SINGLES_AEGISLASH_4,
+            },
+            [SPARRING_TYPE_STEEL] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_AEGISLASH_4,
+                SILICON_FRONTIER_MON_SINGLES_ARCHALUDON_3,
+            },
+            [SPARRING_TYPE_FIRE] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_CHANDELURE_2,
+                SILICON_FRONTIER_MON_SINGLES_SCOVILLAIN_3,
+            },
+            [SPARRING_TYPE_WATER] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_TENTACRUEL_3,
+                SILICON_FRONTIER_MON_SINGLES_OMASTAR_1,
+            },
+            [SPARRING_TYPE_GRASS] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_SCOVILLAIN_3,
+                SILICON_FRONTIER_MON_SINGLES_LEAVANNY_3,
+            },
+            [SPARRING_TYPE_ELECTRIC] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_SCOVILLAIN_3,
+                SILICON_FRONTIER_MON_SINGLES_DRACOZOLT_3,
+            },
+            [SPARRING_TYPE_PSYCHIC] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_WYRDEER_1,
+                SILICON_FRONTIER_MON_SINGLES_GALLADE_2,
+            },
+            [SPARRING_TYPE_ICE] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_MAMOSWINE_3,
+                SILICON_FRONTIER_MON_SINGLES_JYNX_3,
+            },
+            [SPARRING_TYPE_DRAGON] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_ARCHALUDON_3,
+                SILICON_FRONTIER_MON_SINGLES_DRACOZOLT_3,
+            },
+            [SPARRING_TYPE_DARK] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_HONCHKROW_2,
+                SILICON_FRONTIER_MON_SINGLES_SPIRITOMB_3,
+            },
+            [SPARRING_TYPE_FAIRY] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_TOGEKISS_4,
+                SILICON_FRONTIER_MON_SINGLES_GARDEVOIR_3,
+            },
+            [SPARRING_TYPE_COUNT] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_GARDEVOIR_3,
+                SILICON_FRONTIER_MON_SINGLES_GALLADE_2,
+            },
+        },
     },
     [SILICON_FRONTIER_TRAINER_BD] =
     {
@@ -548,6 +1332,104 @@ const struct SiliconFrontierTrainers gSiliconFrontierTrainers[SILICON_FRONTIER_T
             },
         },
         .partner = PARTNER_BD,
+        .partnerMonSet =
+        {
+            [SPARRING_TYPE_NORMAL] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_PIDGEOT_1,
+                SILICON_FRONTIER_MON_SINGLES_WYRDEER_1,
+            },
+            [SPARRING_TYPE_FIGHTING] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_BRELOOM_4,
+                SILICON_FRONTIER_MON_SINGLES_GALLADE_2,
+            },
+            [SPARRING_TYPE_FLYING] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_PIDGEOT_1,
+                SILICON_FRONTIER_MON_SINGLES_AERODACTYL_1,
+            },
+            [SPARRING_TYPE_POISON] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_NIDOKING_1,
+                SILICON_FRONTIER_MON_SINGLES_TENTACRUEL_3,
+            },
+            [SPARRING_TYPE_GROUND] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_NIDOKING_1,
+                SILICON_FRONTIER_MON_SINGLES_MAMOSWINE_3,
+            },
+            [SPARRING_TYPE_ROCK] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_KLEAVOR_2,
+                SILICON_FRONTIER_MON_SINGLES_OMASTAR_1,
+            },
+            [SPARRING_TYPE_BUG] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_KLEAVOR_2,
+                SILICON_FRONTIER_MON_SINGLES_LEAVANNY_3,
+            },
+            [SPARRING_TYPE_GHOST] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_CHANDELURE_2,
+                SILICON_FRONTIER_MON_SINGLES_AEGISLASH_4,
+            },
+            [SPARRING_TYPE_STEEL] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_AEGISLASH_4,
+                SILICON_FRONTIER_MON_SINGLES_ARCHALUDON_3,
+            },
+            [SPARRING_TYPE_FIRE] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_CHANDELURE_2,
+                SILICON_FRONTIER_MON_SINGLES_SCOVILLAIN_3,
+            },
+            [SPARRING_TYPE_WATER] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_TENTACRUEL_3,
+                SILICON_FRONTIER_MON_SINGLES_OMASTAR_1,
+            },
+            [SPARRING_TYPE_GRASS] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_SCOVILLAIN_3,
+                SILICON_FRONTIER_MON_SINGLES_LEAVANNY_3,
+            },
+            [SPARRING_TYPE_ELECTRIC] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_SCOVILLAIN_3,
+                SILICON_FRONTIER_MON_SINGLES_DRACOZOLT_3,
+            },
+            [SPARRING_TYPE_PSYCHIC] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_WYRDEER_1,
+                SILICON_FRONTIER_MON_SINGLES_GALLADE_2,
+            },
+            [SPARRING_TYPE_ICE] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_MAMOSWINE_3,
+                SILICON_FRONTIER_MON_SINGLES_JYNX_3,
+            },
+            [SPARRING_TYPE_DRAGON] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_ARCHALUDON_3,
+                SILICON_FRONTIER_MON_SINGLES_DRACOZOLT_3,
+            },
+            [SPARRING_TYPE_DARK] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_HONCHKROW_2,
+                SILICON_FRONTIER_MON_SINGLES_SPIRITOMB_3,
+            },
+            [SPARRING_TYPE_FAIRY] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_TOGEKISS_4,
+                SILICON_FRONTIER_MON_SINGLES_GARDEVOIR_3,
+            },
+            [SPARRING_TYPE_COUNT] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_GARDEVOIR_3,
+                SILICON_FRONTIER_MON_SINGLES_GALLADE_2,
+            },
+        },
     },
     [SILICON_FRONTIER_TRAINER_BAIYA] =
     {
@@ -603,6 +1485,104 @@ const struct SiliconFrontierTrainers gSiliconFrontierTrainers[SILICON_FRONTIER_T
             },
         },
         .partner = PARTNER_BAIYA,
+        .partnerMonSet =
+        {
+            [SPARRING_TYPE_NORMAL] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_PIDGEOT_1,
+                SILICON_FRONTIER_MON_SINGLES_WYRDEER_1,
+            },
+            [SPARRING_TYPE_FIGHTING] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_BRELOOM_4,
+                SILICON_FRONTIER_MON_SINGLES_GALLADE_2,
+            },
+            [SPARRING_TYPE_FLYING] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_PIDGEOT_1,
+                SILICON_FRONTIER_MON_SINGLES_AERODACTYL_1,
+            },
+            [SPARRING_TYPE_POISON] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_NIDOKING_1,
+                SILICON_FRONTIER_MON_SINGLES_TENTACRUEL_3,
+            },
+            [SPARRING_TYPE_GROUND] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_NIDOKING_1,
+                SILICON_FRONTIER_MON_SINGLES_MAMOSWINE_3,
+            },
+            [SPARRING_TYPE_ROCK] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_KLEAVOR_2,
+                SILICON_FRONTIER_MON_SINGLES_OMASTAR_1,
+            },
+            [SPARRING_TYPE_BUG] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_KLEAVOR_2,
+                SILICON_FRONTIER_MON_SINGLES_LEAVANNY_3,
+            },
+            [SPARRING_TYPE_GHOST] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_CHANDELURE_2,
+                SILICON_FRONTIER_MON_SINGLES_AEGISLASH_4,
+            },
+            [SPARRING_TYPE_STEEL] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_AEGISLASH_4,
+                SILICON_FRONTIER_MON_SINGLES_ARCHALUDON_3,
+            },
+            [SPARRING_TYPE_FIRE] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_CHANDELURE_2,
+                SILICON_FRONTIER_MON_SINGLES_SCOVILLAIN_3,
+            },
+            [SPARRING_TYPE_WATER] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_TENTACRUEL_3,
+                SILICON_FRONTIER_MON_SINGLES_OMASTAR_1,
+            },
+            [SPARRING_TYPE_GRASS] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_SCOVILLAIN_3,
+                SILICON_FRONTIER_MON_SINGLES_LEAVANNY_3,
+            },
+            [SPARRING_TYPE_ELECTRIC] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_SCOVILLAIN_3,
+                SILICON_FRONTIER_MON_SINGLES_DRACOZOLT_3,
+            },
+            [SPARRING_TYPE_PSYCHIC] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_WYRDEER_1,
+                SILICON_FRONTIER_MON_SINGLES_GALLADE_2,
+            },
+            [SPARRING_TYPE_ICE] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_MAMOSWINE_3,
+                SILICON_FRONTIER_MON_SINGLES_JYNX_3,
+            },
+            [SPARRING_TYPE_DRAGON] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_ARCHALUDON_3,
+                SILICON_FRONTIER_MON_SINGLES_DRACOZOLT_3,
+            },
+            [SPARRING_TYPE_DARK] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_HONCHKROW_2,
+                SILICON_FRONTIER_MON_SINGLES_SPIRITOMB_3,
+            },
+            [SPARRING_TYPE_FAIRY] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_TOGEKISS_4,
+                SILICON_FRONTIER_MON_SINGLES_GARDEVOIR_3,
+            },
+            [SPARRING_TYPE_COUNT] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_GARDEVOIR_3,
+                SILICON_FRONTIER_MON_SINGLES_GALLADE_2,
+            },
+        },
     },
     [SILICON_FRONTIER_TRAINER_NERIENE] =
     {
@@ -658,6 +1638,104 @@ const struct SiliconFrontierTrainers gSiliconFrontierTrainers[SILICON_FRONTIER_T
             },
         },
         .partner = PARTNER_NERIENE,
+        .partnerMonSet =
+        {
+            [SPARRING_TYPE_NORMAL] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_PIDGEOT_1,
+                SILICON_FRONTIER_MON_SINGLES_WYRDEER_1,
+            },
+            [SPARRING_TYPE_FIGHTING] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_BRELOOM_4,
+                SILICON_FRONTIER_MON_SINGLES_GALLADE_2,
+            },
+            [SPARRING_TYPE_FLYING] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_PIDGEOT_1,
+                SILICON_FRONTIER_MON_SINGLES_AERODACTYL_1,
+            },
+            [SPARRING_TYPE_POISON] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_NIDOKING_1,
+                SILICON_FRONTIER_MON_SINGLES_TENTACRUEL_3,
+            },
+            [SPARRING_TYPE_GROUND] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_NIDOKING_1,
+                SILICON_FRONTIER_MON_SINGLES_MAMOSWINE_3,
+            },
+            [SPARRING_TYPE_ROCK] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_KLEAVOR_2,
+                SILICON_FRONTIER_MON_SINGLES_OMASTAR_1,
+            },
+            [SPARRING_TYPE_BUG] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_KLEAVOR_2,
+                SILICON_FRONTIER_MON_SINGLES_LEAVANNY_3,
+            },
+            [SPARRING_TYPE_GHOST] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_CHANDELURE_2,
+                SILICON_FRONTIER_MON_SINGLES_AEGISLASH_4,
+            },
+            [SPARRING_TYPE_STEEL] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_AEGISLASH_4,
+                SILICON_FRONTIER_MON_SINGLES_ARCHALUDON_3,
+            },
+            [SPARRING_TYPE_FIRE] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_CHANDELURE_2,
+                SILICON_FRONTIER_MON_SINGLES_SCOVILLAIN_3,
+            },
+            [SPARRING_TYPE_WATER] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_TENTACRUEL_3,
+                SILICON_FRONTIER_MON_SINGLES_OMASTAR_1,
+            },
+            [SPARRING_TYPE_GRASS] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_SCOVILLAIN_3,
+                SILICON_FRONTIER_MON_SINGLES_LEAVANNY_3,
+            },
+            [SPARRING_TYPE_ELECTRIC] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_SCOVILLAIN_3,
+                SILICON_FRONTIER_MON_SINGLES_DRACOZOLT_3,
+            },
+            [SPARRING_TYPE_PSYCHIC] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_WYRDEER_1,
+                SILICON_FRONTIER_MON_SINGLES_GALLADE_2,
+            },
+            [SPARRING_TYPE_ICE] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_MAMOSWINE_3,
+                SILICON_FRONTIER_MON_SINGLES_JYNX_3,
+            },
+            [SPARRING_TYPE_DRAGON] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_ARCHALUDON_3,
+                SILICON_FRONTIER_MON_SINGLES_DRACOZOLT_3,
+            },
+            [SPARRING_TYPE_DARK] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_HONCHKROW_2,
+                SILICON_FRONTIER_MON_SINGLES_SPIRITOMB_3,
+            },
+            [SPARRING_TYPE_FAIRY] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_TOGEKISS_4,
+                SILICON_FRONTIER_MON_SINGLES_GARDEVOIR_3,
+            },
+            [SPARRING_TYPE_COUNT] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_GARDEVOIR_3,
+                SILICON_FRONTIER_MON_SINGLES_GALLADE_2,
+            },
+        },
     },
     [SILICON_FRONTIER_TRAINER_FRANK] =
     {
@@ -713,6 +1791,104 @@ const struct SiliconFrontierTrainers gSiliconFrontierTrainers[SILICON_FRONTIER_T
             },
         },
         .partner = PARTNER_FRANK,
+        .partnerMonSet =
+        {
+            [SPARRING_TYPE_NORMAL] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_PIDGEOT_1,
+                SILICON_FRONTIER_MON_SINGLES_WYRDEER_1,
+            },
+            [SPARRING_TYPE_FIGHTING] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_BRELOOM_4,
+                SILICON_FRONTIER_MON_SINGLES_GALLADE_2,
+            },
+            [SPARRING_TYPE_FLYING] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_PIDGEOT_1,
+                SILICON_FRONTIER_MON_SINGLES_AERODACTYL_1,
+            },
+            [SPARRING_TYPE_POISON] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_NIDOKING_1,
+                SILICON_FRONTIER_MON_SINGLES_TENTACRUEL_3,
+            },
+            [SPARRING_TYPE_GROUND] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_NIDOKING_1,
+                SILICON_FRONTIER_MON_SINGLES_MAMOSWINE_3,
+            },
+            [SPARRING_TYPE_ROCK] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_KLEAVOR_2,
+                SILICON_FRONTIER_MON_SINGLES_OMASTAR_1,
+            },
+            [SPARRING_TYPE_BUG] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_KLEAVOR_2,
+                SILICON_FRONTIER_MON_SINGLES_LEAVANNY_3,
+            },
+            [SPARRING_TYPE_GHOST] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_CHANDELURE_2,
+                SILICON_FRONTIER_MON_SINGLES_AEGISLASH_4,
+            },
+            [SPARRING_TYPE_STEEL] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_AEGISLASH_4,
+                SILICON_FRONTIER_MON_SINGLES_ARCHALUDON_3,
+            },
+            [SPARRING_TYPE_FIRE] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_CHANDELURE_2,
+                SILICON_FRONTIER_MON_SINGLES_SCOVILLAIN_3,
+            },
+            [SPARRING_TYPE_WATER] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_TENTACRUEL_3,
+                SILICON_FRONTIER_MON_SINGLES_OMASTAR_1,
+            },
+            [SPARRING_TYPE_GRASS] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_SCOVILLAIN_3,
+                SILICON_FRONTIER_MON_SINGLES_LEAVANNY_3,
+            },
+            [SPARRING_TYPE_ELECTRIC] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_SCOVILLAIN_3,
+                SILICON_FRONTIER_MON_SINGLES_DRACOZOLT_3,
+            },
+            [SPARRING_TYPE_PSYCHIC] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_WYRDEER_1,
+                SILICON_FRONTIER_MON_SINGLES_GALLADE_2,
+            },
+            [SPARRING_TYPE_ICE] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_MAMOSWINE_3,
+                SILICON_FRONTIER_MON_SINGLES_JYNX_3,
+            },
+            [SPARRING_TYPE_DRAGON] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_ARCHALUDON_3,
+                SILICON_FRONTIER_MON_SINGLES_DRACOZOLT_3,
+            },
+            [SPARRING_TYPE_DARK] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_HONCHKROW_2,
+                SILICON_FRONTIER_MON_SINGLES_SPIRITOMB_3,
+            },
+            [SPARRING_TYPE_FAIRY] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_TOGEKISS_4,
+                SILICON_FRONTIER_MON_SINGLES_GARDEVOIR_3,
+            },
+            [SPARRING_TYPE_COUNT] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_GARDEVOIR_3,
+                SILICON_FRONTIER_MON_SINGLES_GALLADE_2,
+            },
+        },
     },
     [SILICON_FRONTIER_TRAINER_SHINZO] =
     {
@@ -768,6 +1944,104 @@ const struct SiliconFrontierTrainers gSiliconFrontierTrainers[SILICON_FRONTIER_T
             },
         },
         .partner = PARTNER_SHINZO,
+        .partnerMonSet =
+        {
+            [SPARRING_TYPE_NORMAL] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_PIDGEOT_1,
+                SILICON_FRONTIER_MON_SINGLES_WYRDEER_1,
+            },
+            [SPARRING_TYPE_FIGHTING] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_BRELOOM_4,
+                SILICON_FRONTIER_MON_SINGLES_GALLADE_2,
+            },
+            [SPARRING_TYPE_FLYING] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_PIDGEOT_1,
+                SILICON_FRONTIER_MON_SINGLES_AERODACTYL_1,
+            },
+            [SPARRING_TYPE_POISON] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_NIDOKING_1,
+                SILICON_FRONTIER_MON_SINGLES_TENTACRUEL_3,
+            },
+            [SPARRING_TYPE_GROUND] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_NIDOKING_1,
+                SILICON_FRONTIER_MON_SINGLES_MAMOSWINE_3,
+            },
+            [SPARRING_TYPE_ROCK] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_KLEAVOR_2,
+                SILICON_FRONTIER_MON_SINGLES_OMASTAR_1,
+            },
+            [SPARRING_TYPE_BUG] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_KLEAVOR_2,
+                SILICON_FRONTIER_MON_SINGLES_LEAVANNY_3,
+            },
+            [SPARRING_TYPE_GHOST] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_CHANDELURE_2,
+                SILICON_FRONTIER_MON_SINGLES_AEGISLASH_4,
+            },
+            [SPARRING_TYPE_STEEL] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_AEGISLASH_4,
+                SILICON_FRONTIER_MON_SINGLES_ARCHALUDON_3,
+            },
+            [SPARRING_TYPE_FIRE] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_CHANDELURE_2,
+                SILICON_FRONTIER_MON_SINGLES_SCOVILLAIN_3,
+            },
+            [SPARRING_TYPE_WATER] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_TENTACRUEL_3,
+                SILICON_FRONTIER_MON_SINGLES_OMASTAR_1,
+            },
+            [SPARRING_TYPE_GRASS] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_SCOVILLAIN_3,
+                SILICON_FRONTIER_MON_SINGLES_LEAVANNY_3,
+            },
+            [SPARRING_TYPE_ELECTRIC] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_SCOVILLAIN_3,
+                SILICON_FRONTIER_MON_SINGLES_DRACOZOLT_3,
+            },
+            [SPARRING_TYPE_PSYCHIC] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_WYRDEER_1,
+                SILICON_FRONTIER_MON_SINGLES_GALLADE_2,
+            },
+            [SPARRING_TYPE_ICE] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_MAMOSWINE_3,
+                SILICON_FRONTIER_MON_SINGLES_JYNX_3,
+            },
+            [SPARRING_TYPE_DRAGON] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_ARCHALUDON_3,
+                SILICON_FRONTIER_MON_SINGLES_DRACOZOLT_3,
+            },
+            [SPARRING_TYPE_DARK] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_HONCHKROW_2,
+                SILICON_FRONTIER_MON_SINGLES_SPIRITOMB_3,
+            },
+            [SPARRING_TYPE_FAIRY] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_TOGEKISS_4,
+                SILICON_FRONTIER_MON_SINGLES_GARDEVOIR_3,
+            },
+            [SPARRING_TYPE_COUNT] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_GARDEVOIR_3,
+                SILICON_FRONTIER_MON_SINGLES_GALLADE_2,
+            },
+        },
     },
     [SILICON_FRONTIER_TRAINER_KEI_YING] =
     {
@@ -823,6 +2097,104 @@ const struct SiliconFrontierTrainers gSiliconFrontierTrainers[SILICON_FRONTIER_T
             },
         },
         .partner = PARTNER_KEI_YING,
+        .partnerMonSet =
+        {
+            [SPARRING_TYPE_NORMAL] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_PIDGEOT_1,
+                SILICON_FRONTIER_MON_SINGLES_WYRDEER_1,
+            },
+            [SPARRING_TYPE_FIGHTING] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_BRELOOM_4,
+                SILICON_FRONTIER_MON_SINGLES_GALLADE_2,
+            },
+            [SPARRING_TYPE_FLYING] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_PIDGEOT_1,
+                SILICON_FRONTIER_MON_SINGLES_AERODACTYL_1,
+            },
+            [SPARRING_TYPE_POISON] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_NIDOKING_1,
+                SILICON_FRONTIER_MON_SINGLES_TENTACRUEL_3,
+            },
+            [SPARRING_TYPE_GROUND] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_NIDOKING_1,
+                SILICON_FRONTIER_MON_SINGLES_MAMOSWINE_3,
+            },
+            [SPARRING_TYPE_ROCK] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_KLEAVOR_2,
+                SILICON_FRONTIER_MON_SINGLES_OMASTAR_1,
+            },
+            [SPARRING_TYPE_BUG] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_KLEAVOR_2,
+                SILICON_FRONTIER_MON_SINGLES_LEAVANNY_3,
+            },
+            [SPARRING_TYPE_GHOST] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_CHANDELURE_2,
+                SILICON_FRONTIER_MON_SINGLES_AEGISLASH_4,
+            },
+            [SPARRING_TYPE_STEEL] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_AEGISLASH_4,
+                SILICON_FRONTIER_MON_SINGLES_ARCHALUDON_3,
+            },
+            [SPARRING_TYPE_FIRE] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_CHANDELURE_2,
+                SILICON_FRONTIER_MON_SINGLES_SCOVILLAIN_3,
+            },
+            [SPARRING_TYPE_WATER] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_TENTACRUEL_3,
+                SILICON_FRONTIER_MON_SINGLES_OMASTAR_1,
+            },
+            [SPARRING_TYPE_GRASS] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_SCOVILLAIN_3,
+                SILICON_FRONTIER_MON_SINGLES_LEAVANNY_3,
+            },
+            [SPARRING_TYPE_ELECTRIC] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_SCOVILLAIN_3,
+                SILICON_FRONTIER_MON_SINGLES_DRACOZOLT_3,
+            },
+            [SPARRING_TYPE_PSYCHIC] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_WYRDEER_1,
+                SILICON_FRONTIER_MON_SINGLES_GALLADE_2,
+            },
+            [SPARRING_TYPE_ICE] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_MAMOSWINE_3,
+                SILICON_FRONTIER_MON_SINGLES_JYNX_3,
+            },
+            [SPARRING_TYPE_DRAGON] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_ARCHALUDON_3,
+                SILICON_FRONTIER_MON_SINGLES_DRACOZOLT_3,
+            },
+            [SPARRING_TYPE_DARK] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_HONCHKROW_2,
+                SILICON_FRONTIER_MON_SINGLES_SPIRITOMB_3,
+            },
+            [SPARRING_TYPE_FAIRY] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_TOGEKISS_4,
+                SILICON_FRONTIER_MON_SINGLES_GARDEVOIR_3,
+            },
+            [SPARRING_TYPE_COUNT] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_GARDEVOIR_3,
+                SILICON_FRONTIER_MON_SINGLES_GALLADE_2,
+            },
+        },
     },
     [SILICON_FRONTIER_TRAINER_BELEN] =
     {
@@ -878,6 +2250,104 @@ const struct SiliconFrontierTrainers gSiliconFrontierTrainers[SILICON_FRONTIER_T
             },
         },
         .partner = PARTNER_BELEN,
+        .partnerMonSet =
+        {
+            [SPARRING_TYPE_NORMAL] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_PIDGEOT_1,
+                SILICON_FRONTIER_MON_SINGLES_WYRDEER_1,
+            },
+            [SPARRING_TYPE_FIGHTING] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_BRELOOM_4,
+                SILICON_FRONTIER_MON_SINGLES_GALLADE_2,
+            },
+            [SPARRING_TYPE_FLYING] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_PIDGEOT_1,
+                SILICON_FRONTIER_MON_SINGLES_AERODACTYL_1,
+            },
+            [SPARRING_TYPE_POISON] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_NIDOKING_1,
+                SILICON_FRONTIER_MON_SINGLES_TENTACRUEL_3,
+            },
+            [SPARRING_TYPE_GROUND] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_NIDOKING_1,
+                SILICON_FRONTIER_MON_SINGLES_MAMOSWINE_3,
+            },
+            [SPARRING_TYPE_ROCK] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_KLEAVOR_2,
+                SILICON_FRONTIER_MON_SINGLES_OMASTAR_1,
+            },
+            [SPARRING_TYPE_BUG] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_KLEAVOR_2,
+                SILICON_FRONTIER_MON_SINGLES_LEAVANNY_3,
+            },
+            [SPARRING_TYPE_GHOST] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_CHANDELURE_2,
+                SILICON_FRONTIER_MON_SINGLES_AEGISLASH_4,
+            },
+            [SPARRING_TYPE_STEEL] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_AEGISLASH_4,
+                SILICON_FRONTIER_MON_SINGLES_ARCHALUDON_3,
+            },
+            [SPARRING_TYPE_FIRE] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_CHANDELURE_2,
+                SILICON_FRONTIER_MON_SINGLES_SCOVILLAIN_3,
+            },
+            [SPARRING_TYPE_WATER] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_TENTACRUEL_3,
+                SILICON_FRONTIER_MON_SINGLES_OMASTAR_1,
+            },
+            [SPARRING_TYPE_GRASS] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_SCOVILLAIN_3,
+                SILICON_FRONTIER_MON_SINGLES_LEAVANNY_3,
+            },
+            [SPARRING_TYPE_ELECTRIC] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_SCOVILLAIN_3,
+                SILICON_FRONTIER_MON_SINGLES_DRACOZOLT_3,
+            },
+            [SPARRING_TYPE_PSYCHIC] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_WYRDEER_1,
+                SILICON_FRONTIER_MON_SINGLES_GALLADE_2,
+            },
+            [SPARRING_TYPE_ICE] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_MAMOSWINE_3,
+                SILICON_FRONTIER_MON_SINGLES_JYNX_3,
+            },
+            [SPARRING_TYPE_DRAGON] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_ARCHALUDON_3,
+                SILICON_FRONTIER_MON_SINGLES_DRACOZOLT_3,
+            },
+            [SPARRING_TYPE_DARK] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_HONCHKROW_2,
+                SILICON_FRONTIER_MON_SINGLES_SPIRITOMB_3,
+            },
+            [SPARRING_TYPE_FAIRY] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_TOGEKISS_4,
+                SILICON_FRONTIER_MON_SINGLES_GARDEVOIR_3,
+            },
+            [SPARRING_TYPE_COUNT] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_GARDEVOIR_3,
+                SILICON_FRONTIER_MON_SINGLES_GALLADE_2,
+            },
+        },
     },
     [SILICON_FRONTIER_TRAINER_ELEANOR] =
     {
@@ -933,6 +2403,104 @@ const struct SiliconFrontierTrainers gSiliconFrontierTrainers[SILICON_FRONTIER_T
             },
         },
         .partner = PARTNER_ELEANOR,
+        .partnerMonSet =
+        {
+            [SPARRING_TYPE_NORMAL] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_PIDGEOT_1,
+                SILICON_FRONTIER_MON_SINGLES_WYRDEER_1,
+            },
+            [SPARRING_TYPE_FIGHTING] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_BRELOOM_4,
+                SILICON_FRONTIER_MON_SINGLES_GALLADE_2,
+            },
+            [SPARRING_TYPE_FLYING] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_PIDGEOT_1,
+                SILICON_FRONTIER_MON_SINGLES_AERODACTYL_1,
+            },
+            [SPARRING_TYPE_POISON] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_NIDOKING_1,
+                SILICON_FRONTIER_MON_SINGLES_TENTACRUEL_3,
+            },
+            [SPARRING_TYPE_GROUND] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_NIDOKING_1,
+                SILICON_FRONTIER_MON_SINGLES_MAMOSWINE_3,
+            },
+            [SPARRING_TYPE_ROCK] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_KLEAVOR_2,
+                SILICON_FRONTIER_MON_SINGLES_OMASTAR_1,
+            },
+            [SPARRING_TYPE_BUG] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_KLEAVOR_2,
+                SILICON_FRONTIER_MON_SINGLES_LEAVANNY_3,
+            },
+            [SPARRING_TYPE_GHOST] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_CHANDELURE_2,
+                SILICON_FRONTIER_MON_SINGLES_AEGISLASH_4,
+            },
+            [SPARRING_TYPE_STEEL] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_AEGISLASH_4,
+                SILICON_FRONTIER_MON_SINGLES_ARCHALUDON_3,
+            },
+            [SPARRING_TYPE_FIRE] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_CHANDELURE_2,
+                SILICON_FRONTIER_MON_SINGLES_SCOVILLAIN_3,
+            },
+            [SPARRING_TYPE_WATER] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_TENTACRUEL_3,
+                SILICON_FRONTIER_MON_SINGLES_OMASTAR_1,
+            },
+            [SPARRING_TYPE_GRASS] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_SCOVILLAIN_3,
+                SILICON_FRONTIER_MON_SINGLES_LEAVANNY_3,
+            },
+            [SPARRING_TYPE_ELECTRIC] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_SCOVILLAIN_3,
+                SILICON_FRONTIER_MON_SINGLES_DRACOZOLT_3,
+            },
+            [SPARRING_TYPE_PSYCHIC] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_WYRDEER_1,
+                SILICON_FRONTIER_MON_SINGLES_GALLADE_2,
+            },
+            [SPARRING_TYPE_ICE] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_MAMOSWINE_3,
+                SILICON_FRONTIER_MON_SINGLES_JYNX_3,
+            },
+            [SPARRING_TYPE_DRAGON] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_ARCHALUDON_3,
+                SILICON_FRONTIER_MON_SINGLES_DRACOZOLT_3,
+            },
+            [SPARRING_TYPE_DARK] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_HONCHKROW_2,
+                SILICON_FRONTIER_MON_SINGLES_SPIRITOMB_3,
+            },
+            [SPARRING_TYPE_FAIRY] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_TOGEKISS_4,
+                SILICON_FRONTIER_MON_SINGLES_GARDEVOIR_3,
+            },
+            [SPARRING_TYPE_COUNT] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_GARDEVOIR_3,
+                SILICON_FRONTIER_MON_SINGLES_GALLADE_2,
+            },
+        },
     },
     [SILICON_FRONTIER_TRAINER_IMELDA] =
     {
@@ -988,6 +2556,104 @@ const struct SiliconFrontierTrainers gSiliconFrontierTrainers[SILICON_FRONTIER_T
             },
         },
         .partner = PARTNER_IMELDA,
+        .partnerMonSet =
+        {
+            [SPARRING_TYPE_NORMAL] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_PIDGEOT_1,
+                SILICON_FRONTIER_MON_SINGLES_WYRDEER_1,
+            },
+            [SPARRING_TYPE_FIGHTING] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_BRELOOM_4,
+                SILICON_FRONTIER_MON_SINGLES_GALLADE_2,
+            },
+            [SPARRING_TYPE_FLYING] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_PIDGEOT_1,
+                SILICON_FRONTIER_MON_SINGLES_AERODACTYL_1,
+            },
+            [SPARRING_TYPE_POISON] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_NIDOKING_1,
+                SILICON_FRONTIER_MON_SINGLES_TENTACRUEL_3,
+            },
+            [SPARRING_TYPE_GROUND] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_NIDOKING_1,
+                SILICON_FRONTIER_MON_SINGLES_MAMOSWINE_3,
+            },
+            [SPARRING_TYPE_ROCK] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_KLEAVOR_2,
+                SILICON_FRONTIER_MON_SINGLES_OMASTAR_1,
+            },
+            [SPARRING_TYPE_BUG] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_KLEAVOR_2,
+                SILICON_FRONTIER_MON_SINGLES_LEAVANNY_3,
+            },
+            [SPARRING_TYPE_GHOST] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_CHANDELURE_2,
+                SILICON_FRONTIER_MON_SINGLES_AEGISLASH_4,
+            },
+            [SPARRING_TYPE_STEEL] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_AEGISLASH_4,
+                SILICON_FRONTIER_MON_SINGLES_ARCHALUDON_3,
+            },
+            [SPARRING_TYPE_FIRE] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_CHANDELURE_2,
+                SILICON_FRONTIER_MON_SINGLES_SCOVILLAIN_3,
+            },
+            [SPARRING_TYPE_WATER] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_TENTACRUEL_3,
+                SILICON_FRONTIER_MON_SINGLES_OMASTAR_1,
+            },
+            [SPARRING_TYPE_GRASS] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_SCOVILLAIN_3,
+                SILICON_FRONTIER_MON_SINGLES_LEAVANNY_3,
+            },
+            [SPARRING_TYPE_ELECTRIC] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_SCOVILLAIN_3,
+                SILICON_FRONTIER_MON_SINGLES_DRACOZOLT_3,
+            },
+            [SPARRING_TYPE_PSYCHIC] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_WYRDEER_1,
+                SILICON_FRONTIER_MON_SINGLES_GALLADE_2,
+            },
+            [SPARRING_TYPE_ICE] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_MAMOSWINE_3,
+                SILICON_FRONTIER_MON_SINGLES_JYNX_3,
+            },
+            [SPARRING_TYPE_DRAGON] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_ARCHALUDON_3,
+                SILICON_FRONTIER_MON_SINGLES_DRACOZOLT_3,
+            },
+            [SPARRING_TYPE_DARK] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_HONCHKROW_2,
+                SILICON_FRONTIER_MON_SINGLES_SPIRITOMB_3,
+            },
+            [SPARRING_TYPE_FAIRY] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_TOGEKISS_4,
+                SILICON_FRONTIER_MON_SINGLES_GARDEVOIR_3,
+            },
+            [SPARRING_TYPE_COUNT] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_GARDEVOIR_3,
+                SILICON_FRONTIER_MON_SINGLES_GALLADE_2,
+            },
+        },
     },
     [SILICON_FRONTIER_TRAINER_IMELDA_SILVER] =
     {
@@ -1043,6 +2709,104 @@ const struct SiliconFrontierTrainers gSiliconFrontierTrainers[SILICON_FRONTIER_T
             },
         },
         .partner = PARTNER_IMELDA,
+        .partnerMonSet =
+        {
+            [SPARRING_TYPE_NORMAL] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_PIDGEOT_1,
+                SILICON_FRONTIER_MON_SINGLES_WYRDEER_1,
+            },
+            [SPARRING_TYPE_FIGHTING] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_BRELOOM_4,
+                SILICON_FRONTIER_MON_SINGLES_GALLADE_2,
+            },
+            [SPARRING_TYPE_FLYING] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_PIDGEOT_1,
+                SILICON_FRONTIER_MON_SINGLES_AERODACTYL_1,
+            },
+            [SPARRING_TYPE_POISON] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_NIDOKING_1,
+                SILICON_FRONTIER_MON_SINGLES_TENTACRUEL_3,
+            },
+            [SPARRING_TYPE_GROUND] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_NIDOKING_1,
+                SILICON_FRONTIER_MON_SINGLES_MAMOSWINE_3,
+            },
+            [SPARRING_TYPE_ROCK] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_KLEAVOR_2,
+                SILICON_FRONTIER_MON_SINGLES_OMASTAR_1,
+            },
+            [SPARRING_TYPE_BUG] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_KLEAVOR_2,
+                SILICON_FRONTIER_MON_SINGLES_LEAVANNY_3,
+            },
+            [SPARRING_TYPE_GHOST] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_CHANDELURE_2,
+                SILICON_FRONTIER_MON_SINGLES_AEGISLASH_4,
+            },
+            [SPARRING_TYPE_STEEL] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_AEGISLASH_4,
+                SILICON_FRONTIER_MON_SINGLES_ARCHALUDON_3,
+            },
+            [SPARRING_TYPE_FIRE] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_CHANDELURE_2,
+                SILICON_FRONTIER_MON_SINGLES_SCOVILLAIN_3,
+            },
+            [SPARRING_TYPE_WATER] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_TENTACRUEL_3,
+                SILICON_FRONTIER_MON_SINGLES_OMASTAR_1,
+            },
+            [SPARRING_TYPE_GRASS] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_SCOVILLAIN_3,
+                SILICON_FRONTIER_MON_SINGLES_LEAVANNY_3,
+            },
+            [SPARRING_TYPE_ELECTRIC] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_SCOVILLAIN_3,
+                SILICON_FRONTIER_MON_SINGLES_DRACOZOLT_3,
+            },
+            [SPARRING_TYPE_PSYCHIC] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_WYRDEER_1,
+                SILICON_FRONTIER_MON_SINGLES_GALLADE_2,
+            },
+            [SPARRING_TYPE_ICE] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_MAMOSWINE_3,
+                SILICON_FRONTIER_MON_SINGLES_JYNX_3,
+            },
+            [SPARRING_TYPE_DRAGON] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_ARCHALUDON_3,
+                SILICON_FRONTIER_MON_SINGLES_DRACOZOLT_3,
+            },
+            [SPARRING_TYPE_DARK] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_HONCHKROW_2,
+                SILICON_FRONTIER_MON_SINGLES_SPIRITOMB_3,
+            },
+            [SPARRING_TYPE_FAIRY] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_TOGEKISS_4,
+                SILICON_FRONTIER_MON_SINGLES_GARDEVOIR_3,
+            },
+            [SPARRING_TYPE_COUNT] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_GARDEVOIR_3,
+                SILICON_FRONTIER_MON_SINGLES_GALLADE_2,
+            },
+        },
     },
     [SILICON_FRONTIER_TRAINER_IMELDA_GOLD] =
     {
@@ -1098,6 +2862,104 @@ const struct SiliconFrontierTrainers gSiliconFrontierTrainers[SILICON_FRONTIER_T
             },
         },
         .partner = PARTNER_IMELDA,
+        .partnerMonSet =
+        {
+            [SPARRING_TYPE_NORMAL] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_PIDGEOT_1,
+                SILICON_FRONTIER_MON_SINGLES_WYRDEER_1,
+            },
+            [SPARRING_TYPE_FIGHTING] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_BRELOOM_4,
+                SILICON_FRONTIER_MON_SINGLES_GALLADE_2,
+            },
+            [SPARRING_TYPE_FLYING] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_PIDGEOT_1,
+                SILICON_FRONTIER_MON_SINGLES_AERODACTYL_1,
+            },
+            [SPARRING_TYPE_POISON] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_NIDOKING_1,
+                SILICON_FRONTIER_MON_SINGLES_TENTACRUEL_3,
+            },
+            [SPARRING_TYPE_GROUND] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_NIDOKING_1,
+                SILICON_FRONTIER_MON_SINGLES_MAMOSWINE_3,
+            },
+            [SPARRING_TYPE_ROCK] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_KLEAVOR_2,
+                SILICON_FRONTIER_MON_SINGLES_OMASTAR_1,
+            },
+            [SPARRING_TYPE_BUG] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_KLEAVOR_2,
+                SILICON_FRONTIER_MON_SINGLES_LEAVANNY_3,
+            },
+            [SPARRING_TYPE_GHOST] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_CHANDELURE_2,
+                SILICON_FRONTIER_MON_SINGLES_AEGISLASH_4,
+            },
+            [SPARRING_TYPE_STEEL] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_AEGISLASH_4,
+                SILICON_FRONTIER_MON_SINGLES_ARCHALUDON_3,
+            },
+            [SPARRING_TYPE_FIRE] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_CHANDELURE_2,
+                SILICON_FRONTIER_MON_SINGLES_SCOVILLAIN_3,
+            },
+            [SPARRING_TYPE_WATER] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_TENTACRUEL_3,
+                SILICON_FRONTIER_MON_SINGLES_OMASTAR_1,
+            },
+            [SPARRING_TYPE_GRASS] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_SCOVILLAIN_3,
+                SILICON_FRONTIER_MON_SINGLES_LEAVANNY_3,
+            },
+            [SPARRING_TYPE_ELECTRIC] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_SCOVILLAIN_3,
+                SILICON_FRONTIER_MON_SINGLES_DRACOZOLT_3,
+            },
+            [SPARRING_TYPE_PSYCHIC] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_WYRDEER_1,
+                SILICON_FRONTIER_MON_SINGLES_GALLADE_2,
+            },
+            [SPARRING_TYPE_ICE] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_MAMOSWINE_3,
+                SILICON_FRONTIER_MON_SINGLES_JYNX_3,
+            },
+            [SPARRING_TYPE_DRAGON] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_ARCHALUDON_3,
+                SILICON_FRONTIER_MON_SINGLES_DRACOZOLT_3,
+            },
+            [SPARRING_TYPE_DARK] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_HONCHKROW_2,
+                SILICON_FRONTIER_MON_SINGLES_SPIRITOMB_3,
+            },
+            [SPARRING_TYPE_FAIRY] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_TOGEKISS_4,
+                SILICON_FRONTIER_MON_SINGLES_GARDEVOIR_3,
+            },
+            [SPARRING_TYPE_COUNT] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_GARDEVOIR_3,
+                SILICON_FRONTIER_MON_SINGLES_GALLADE_2,
+            },
+        },
     },
     [SILICON_FRONTIER_TRAINER_DOYLE] =
     {
@@ -1153,6 +3015,104 @@ const struct SiliconFrontierTrainers gSiliconFrontierTrainers[SILICON_FRONTIER_T
             },
         },
         .partner = PARTNER_DOYLE,
+        .partnerMonSet =
+        {
+            [SPARRING_TYPE_NORMAL] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_PIDGEOT_1,
+                SILICON_FRONTIER_MON_SINGLES_WYRDEER_1,
+            },
+            [SPARRING_TYPE_FIGHTING] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_BRELOOM_4,
+                SILICON_FRONTIER_MON_SINGLES_GALLADE_2,
+            },
+            [SPARRING_TYPE_FLYING] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_PIDGEOT_1,
+                SILICON_FRONTIER_MON_SINGLES_AERODACTYL_1,
+            },
+            [SPARRING_TYPE_POISON] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_NIDOKING_1,
+                SILICON_FRONTIER_MON_SINGLES_TENTACRUEL_3,
+            },
+            [SPARRING_TYPE_GROUND] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_NIDOKING_1,
+                SILICON_FRONTIER_MON_SINGLES_MAMOSWINE_3,
+            },
+            [SPARRING_TYPE_ROCK] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_KLEAVOR_2,
+                SILICON_FRONTIER_MON_SINGLES_OMASTAR_1,
+            },
+            [SPARRING_TYPE_BUG] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_KLEAVOR_2,
+                SILICON_FRONTIER_MON_SINGLES_LEAVANNY_3,
+            },
+            [SPARRING_TYPE_GHOST] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_CHANDELURE_2,
+                SILICON_FRONTIER_MON_SINGLES_AEGISLASH_4,
+            },
+            [SPARRING_TYPE_STEEL] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_AEGISLASH_4,
+                SILICON_FRONTIER_MON_SINGLES_ARCHALUDON_3,
+            },
+            [SPARRING_TYPE_FIRE] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_CHANDELURE_2,
+                SILICON_FRONTIER_MON_SINGLES_SCOVILLAIN_3,
+            },
+            [SPARRING_TYPE_WATER] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_TENTACRUEL_3,
+                SILICON_FRONTIER_MON_SINGLES_OMASTAR_1,
+            },
+            [SPARRING_TYPE_GRASS] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_SCOVILLAIN_3,
+                SILICON_FRONTIER_MON_SINGLES_LEAVANNY_3,
+            },
+            [SPARRING_TYPE_ELECTRIC] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_SCOVILLAIN_3,
+                SILICON_FRONTIER_MON_SINGLES_DRACOZOLT_3,
+            },
+            [SPARRING_TYPE_PSYCHIC] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_WYRDEER_1,
+                SILICON_FRONTIER_MON_SINGLES_GALLADE_2,
+            },
+            [SPARRING_TYPE_ICE] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_MAMOSWINE_3,
+                SILICON_FRONTIER_MON_SINGLES_JYNX_3,
+            },
+            [SPARRING_TYPE_DRAGON] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_ARCHALUDON_3,
+                SILICON_FRONTIER_MON_SINGLES_DRACOZOLT_3,
+            },
+            [SPARRING_TYPE_DARK] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_HONCHKROW_2,
+                SILICON_FRONTIER_MON_SINGLES_SPIRITOMB_3,
+            },
+            [SPARRING_TYPE_FAIRY] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_TOGEKISS_4,
+                SILICON_FRONTIER_MON_SINGLES_GARDEVOIR_3,
+            },
+            [SPARRING_TYPE_COUNT] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_GARDEVOIR_3,
+                SILICON_FRONTIER_MON_SINGLES_GALLADE_2,
+            },
+        },
     },
     [SILICON_FRONTIER_TRAINER_DOYLE_SILVER] =
     {
@@ -1208,6 +3168,104 @@ const struct SiliconFrontierTrainers gSiliconFrontierTrainers[SILICON_FRONTIER_T
             },
         },
         .partner = PARTNER_DOYLE,
+        .partnerMonSet =
+        {
+            [SPARRING_TYPE_NORMAL] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_PIDGEOT_1,
+                SILICON_FRONTIER_MON_SINGLES_WYRDEER_1,
+            },
+            [SPARRING_TYPE_FIGHTING] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_BRELOOM_4,
+                SILICON_FRONTIER_MON_SINGLES_GALLADE_2,
+            },
+            [SPARRING_TYPE_FLYING] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_PIDGEOT_1,
+                SILICON_FRONTIER_MON_SINGLES_AERODACTYL_1,
+            },
+            [SPARRING_TYPE_POISON] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_NIDOKING_1,
+                SILICON_FRONTIER_MON_SINGLES_TENTACRUEL_3,
+            },
+            [SPARRING_TYPE_GROUND] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_NIDOKING_1,
+                SILICON_FRONTIER_MON_SINGLES_MAMOSWINE_3,
+            },
+            [SPARRING_TYPE_ROCK] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_KLEAVOR_2,
+                SILICON_FRONTIER_MON_SINGLES_OMASTAR_1,
+            },
+            [SPARRING_TYPE_BUG] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_KLEAVOR_2,
+                SILICON_FRONTIER_MON_SINGLES_LEAVANNY_3,
+            },
+            [SPARRING_TYPE_GHOST] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_CHANDELURE_2,
+                SILICON_FRONTIER_MON_SINGLES_AEGISLASH_4,
+            },
+            [SPARRING_TYPE_STEEL] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_AEGISLASH_4,
+                SILICON_FRONTIER_MON_SINGLES_ARCHALUDON_3,
+            },
+            [SPARRING_TYPE_FIRE] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_CHANDELURE_2,
+                SILICON_FRONTIER_MON_SINGLES_SCOVILLAIN_3,
+            },
+            [SPARRING_TYPE_WATER] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_TENTACRUEL_3,
+                SILICON_FRONTIER_MON_SINGLES_OMASTAR_1,
+            },
+            [SPARRING_TYPE_GRASS] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_SCOVILLAIN_3,
+                SILICON_FRONTIER_MON_SINGLES_LEAVANNY_3,
+            },
+            [SPARRING_TYPE_ELECTRIC] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_SCOVILLAIN_3,
+                SILICON_FRONTIER_MON_SINGLES_DRACOZOLT_3,
+            },
+            [SPARRING_TYPE_PSYCHIC] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_WYRDEER_1,
+                SILICON_FRONTIER_MON_SINGLES_GALLADE_2,
+            },
+            [SPARRING_TYPE_ICE] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_MAMOSWINE_3,
+                SILICON_FRONTIER_MON_SINGLES_JYNX_3,
+            },
+            [SPARRING_TYPE_DRAGON] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_ARCHALUDON_3,
+                SILICON_FRONTIER_MON_SINGLES_DRACOZOLT_3,
+            },
+            [SPARRING_TYPE_DARK] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_HONCHKROW_2,
+                SILICON_FRONTIER_MON_SINGLES_SPIRITOMB_3,
+            },
+            [SPARRING_TYPE_FAIRY] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_TOGEKISS_4,
+                SILICON_FRONTIER_MON_SINGLES_GARDEVOIR_3,
+            },
+            [SPARRING_TYPE_COUNT] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_GARDEVOIR_3,
+                SILICON_FRONTIER_MON_SINGLES_GALLADE_2,
+            },
+        },
     },
     [SILICON_FRONTIER_TRAINER_DOYLE_GOLD] =
     {
@@ -1263,6 +3321,104 @@ const struct SiliconFrontierTrainers gSiliconFrontierTrainers[SILICON_FRONTIER_T
             },
         },
         .partner = PARTNER_DOYLE,
+        .partnerMonSet =
+        {
+            [SPARRING_TYPE_NORMAL] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_PIDGEOT_1,
+                SILICON_FRONTIER_MON_SINGLES_WYRDEER_1,
+            },
+            [SPARRING_TYPE_FIGHTING] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_BRELOOM_4,
+                SILICON_FRONTIER_MON_SINGLES_GALLADE_2,
+            },
+            [SPARRING_TYPE_FLYING] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_PIDGEOT_1,
+                SILICON_FRONTIER_MON_SINGLES_AERODACTYL_1,
+            },
+            [SPARRING_TYPE_POISON] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_NIDOKING_1,
+                SILICON_FRONTIER_MON_SINGLES_TENTACRUEL_3,
+            },
+            [SPARRING_TYPE_GROUND] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_NIDOKING_1,
+                SILICON_FRONTIER_MON_SINGLES_MAMOSWINE_3,
+            },
+            [SPARRING_TYPE_ROCK] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_KLEAVOR_2,
+                SILICON_FRONTIER_MON_SINGLES_OMASTAR_1,
+            },
+            [SPARRING_TYPE_BUG] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_KLEAVOR_2,
+                SILICON_FRONTIER_MON_SINGLES_LEAVANNY_3,
+            },
+            [SPARRING_TYPE_GHOST] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_CHANDELURE_2,
+                SILICON_FRONTIER_MON_SINGLES_AEGISLASH_4,
+            },
+            [SPARRING_TYPE_STEEL] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_AEGISLASH_4,
+                SILICON_FRONTIER_MON_SINGLES_ARCHALUDON_3,
+            },
+            [SPARRING_TYPE_FIRE] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_CHANDELURE_2,
+                SILICON_FRONTIER_MON_SINGLES_SCOVILLAIN_3,
+            },
+            [SPARRING_TYPE_WATER] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_TENTACRUEL_3,
+                SILICON_FRONTIER_MON_SINGLES_OMASTAR_1,
+            },
+            [SPARRING_TYPE_GRASS] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_SCOVILLAIN_3,
+                SILICON_FRONTIER_MON_SINGLES_LEAVANNY_3,
+            },
+            [SPARRING_TYPE_ELECTRIC] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_SCOVILLAIN_3,
+                SILICON_FRONTIER_MON_SINGLES_DRACOZOLT_3,
+            },
+            [SPARRING_TYPE_PSYCHIC] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_WYRDEER_1,
+                SILICON_FRONTIER_MON_SINGLES_GALLADE_2,
+            },
+            [SPARRING_TYPE_ICE] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_MAMOSWINE_3,
+                SILICON_FRONTIER_MON_SINGLES_JYNX_3,
+            },
+            [SPARRING_TYPE_DRAGON] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_ARCHALUDON_3,
+                SILICON_FRONTIER_MON_SINGLES_DRACOZOLT_3,
+            },
+            [SPARRING_TYPE_DARK] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_HONCHKROW_2,
+                SILICON_FRONTIER_MON_SINGLES_SPIRITOMB_3,
+            },
+            [SPARRING_TYPE_FAIRY] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_TOGEKISS_4,
+                SILICON_FRONTIER_MON_SINGLES_GARDEVOIR_3,
+            },
+            [SPARRING_TYPE_COUNT] =
+            {
+                SILICON_FRONTIER_MON_SINGLES_GARDEVOIR_3,
+                SILICON_FRONTIER_MON_SINGLES_GALLADE_2,
+            },
+        },
     },
     [SILICON_FRONTIER_TRAINER_TOWER] =
     {

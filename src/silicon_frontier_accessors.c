@@ -200,7 +200,7 @@ void SiliconFrontier_SetLongestStreakPlayerPartyMonAttribute(enum SiliconFrontie
     return;
 }
 
-enum SiliconFrontierPartner SiliconFrontier_GetLongestStreakPartner(enum SiliconFrontierFacility facility, enum SiliconFrontierSparringTypes sparringType)
+u32 SiliconFrontier_GetLongestStreakPartner(enum SiliconFrontierFacility facility, enum SiliconFrontierSparringTypes sparringType)
 {
     struct FacilityRecords *rec;
     struct BattleFrontier *battleFrontier = &gSaveBlock2Ptr->frontier;
@@ -216,12 +216,12 @@ enum SiliconFrontierPartner SiliconFrontier_GetLongestStreakPartner(enum Silicon
         case SILICON_FACILITY_FACTORY:  rec = &battleFrontier->factory;
                                         break;
         default:
-                                        return SILICON_FRONTIER_PARTNER_NONE;
+                                        return PARTNER_NONE;
     }
     return rec->longestStreakPartner;
 }
 
-void SiliconFrontier_SetLongestStreakPartner(enum SiliconFrontierFacility facility, enum SiliconFrontierSparringTypes sparringType, enum SiliconFrontierPartner partner)
+void SiliconFrontier_SetLongestStreakPartner(enum SiliconFrontierFacility facility, enum SiliconFrontierSparringTypes sparringType, u32 partner)
 {
     struct FacilityRecords *rec;
     struct BattleFrontier *battleFrontier = &gSaveBlock2Ptr->frontier;
@@ -252,12 +252,12 @@ void SiliconFrontier_SetPlayerFactoryRentalMon(enum SiliconFrontierChallengeType
     gSaveBlock2Ptr->frontier.factoryRentalMonIds[challengeType][slot] = monId;
 }
 
-enum SiliconFrontierPartner SiliconFrontier_GetCurrentPartner(void)
+u32 SiliconFrontier_GetCurrentPartner(void)
 {
     return gSaveBlock2Ptr->frontier.currentPartner;
 }
 
-void SiliconFrontier_SetCurrentPartner(enum SiliconFrontierPartner currentPartner)
+void SiliconFrontier_SetCurrentPartner(u32 currentPartner)
 {
     gSaveBlock2Ptr->frontier.currentPartner = currentPartner;
 }

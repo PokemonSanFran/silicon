@@ -9,12 +9,12 @@ u16 SiliconFrontier_GetLongestStreak(enum SiliconFrontierFacility facility, enum
 void SiliconFrontier_SetLongestStreak(enum SiliconFrontierFacility facility, enum SiliconFrontierChallengeType challengeType, enum SiliconFrontierSparringTypes sparringType, u32 value);
 struct BattleFrontierRecordMon SiliconFrontier_GetLongestStreakPlayerPartyMon(enum SiliconFrontierFacility facility, enum SiliconFrontierSparringTypes sparringType, enum SiliconFrontierChallengeType challengeType, u32 slot);
 void SiliconFrontier_SetLongestStreakPlayerPartyMonAttribute(enum SiliconFrontierFacility facility, enum SiliconFrontierSparringTypes sparringType, enum SiliconFrontierChallengeType challengeType, u32 slot, enum MonData attribute, u32 value);
-enum SiliconFrontierPartner SiliconFrontier_GetLongestStreakPartner(enum SiliconFrontierFacility facility, enum SiliconFrontierSparringTypes sparringType);
-void SiliconFrontier_SetLongestStreakPartner(enum SiliconFrontierFacility facility, enum SiliconFrontierSparringTypes sparringType, enum SiliconFrontierPartner partner);
+u32 SiliconFrontier_GetLongestStreakPartner(enum SiliconFrontierFacility facility, enum SiliconFrontierSparringTypes sparringType);
+void SiliconFrontier_SetLongestStreakPartner(enum SiliconFrontierFacility facility, enum SiliconFrontierSparringTypes sparringType, u32 partner);
 u16 SiliconFrontier_GetPlayerFactoryRentalMon(enum SiliconFrontierChallengeType challengeType, u32 slot);
 void SiliconFrontier_SetPlayerFactoryRentalMon(enum SiliconFrontierChallengeType challengeType, u32 slot, u32 monId);
-enum SiliconFrontierPartner SiliconFrontier_GetCurrentPartner(void);
-void SiliconFrontier_SetCurrentPartner(enum SiliconFrontierPartner currentPartner);
+u32 SiliconFrontier_GetCurrentPartner(void);
+void SiliconFrontier_SetCurrentPartner(u32 currentPartner);
 u8 SiliconFrontier_GetRemainingHeals(void);
 void SiliconFrontier_SetRemainingHeals(u32 value);
 void SiliconFrontier_AllowRecordedBattle(void);

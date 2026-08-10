@@ -82,14 +82,13 @@ const u8* SiliconFrontier_GetOpponentIntroText(enum SiliconFrontierTrainerIds tr
 enum NameplateSpeaker SiliconFrontier_GetSpeaker(enum SiliconFrontierTrainerIds trainerId);
 enum NameplateTail SiliconFrontier_GetTail(enum SiliconFrontierTrainerIds trainerId);
 enum NameplateEmotes SiliconFrontier_GetEmote(enum SiliconFrontierTrainerIds trainerId);
-enum SiliconFrontierPartner SiliconFrontier_GetPartnerFromTrainer(enum SiliconFrontierTrainerIds trainerId);
+u32 SiliconFrontier_GetPartnerFromTrainer(enum SiliconFrontierTrainerIds trainerId);
 void SiliconFrontier_BufferOpponentText(enum SiliconFrontierTrainerIds trainerId);
 void SiliconFrontier_SetUpTextA(void);
 void SiliconFrontier_SetUpTextB(void);
 static void SiliconFrontier_FillTrainerParty(enum SiliconFrontierTrainerIds trainerId, u32 monCount, enum BattleTrainer trainer);
 static void SiliconFrontier_FillOpponentParties(void);
 void SiliconFrontier_SetUpOpponent(void);
-//static void SiliconFrontier_IncreaseNumBattles(void);
 static void HandleFacilityTrainerBattleEnd(void);
 static void Task_StartBattleAfterTransition(u8 taskId);
 void SiliconFrontier_StartFacilityBattle(void);
@@ -111,7 +110,6 @@ void Script_BufferMilestonePoints(void);
 void Script_BufferSilverBadgeAndStreak(void);
 void Script_BufferGoldBadgeAndStreak(void);
 void SiliconFrontier_ResetCurrentStreak(void);
-u32 SiliconFrontier_TranslatePartnerId(enum SiliconFrontierPartner partnerId);
 void SiliconFrontier_DebugChoosePartner(void);
 void SiliconFrontier_ResetCurrentPartner(void);
 void Script_SiliconFrontier_GetTypeFromCurrentChallenge(void);
@@ -120,24 +118,6 @@ enum SiliconFrontierChallengeType SiliconFrontier_GetLastChallengeTypeFromCurren
 {
     return SiliconFrontier_GetTypeFromLastChallenge(SiliconFrontier_GetFacilityFromMap());
 }
-
-/*
-u32 SiliconFrontier_GetNumberAllBattles(void)
-{
-    u32 total = 0;
-    for (enum SiliconFrontierFacility facility = 0; facility < SILICON_FACILITY_COUNT; facility++)
-    {
-        for (enum SiliconFrontierSparringTypes sparringType = 0; sparringType < SPARRING_TYPE_COUNT; sparringType++)
-        {
-            for (enum SiliconFrontierChallengeType type = 0; type < SILICON_FRONTIER_CHALLENGE_TYPE_COUNT; type++)
-            {
-                total += SiliconFrontier_GetNumberBattles(facility,type,sparringType);
-            }
-        }
-    }
-    return min(total, MAX_u32);
-}
-*/
 
 void SiliconFrontier_ResetRemainingHeals(void)
 {
@@ -812,7 +792,7 @@ enum NameplateEmotes SiliconFrontier_GetEmote(enum SiliconFrontierTrainerIds tra
     return gSiliconFrontierTrainers[trainerId].emote;
 }
 
-enum SiliconFrontierPartner SiliconFrontier_GetPartnerFromTrainer(enum SiliconFrontierTrainerIds trainerId)
+u32 SiliconFrontier_GetPartnerFromTrainer(enum SiliconFrontierTrainerIds trainerId)
 {
     return gSiliconFrontierTrainers[trainerId].partner;
 }
@@ -886,6 +866,27 @@ static void SiliconFrontier_FillTrainerParty(enum SiliconFrontierTrainerIds trai
     }
 }
 
+static void SiliconFrontier_FillPartnerParty(u32 partySize)
+{
+    enum SiliconFrontierTrainerIds trainerId = 0;
+    for (trainerId = 0; trainerId < SILICON_FRONTIER_TRAINER_COUNT; trainerId++)
+    {
+        if (SiliconFrontier_GetCurrentPartner() == SiliconFrontier_GetPartnerFromTrainer(trainerId))
+            break;
+    }
+
+    enum SiliconFrontierSparringTypes sparringType = SiliconFrontier_GetCurrentChallengeSparringType();
+    const u16 *monSet = gSiliconFrontierTrainers[trainerId].partnerMonSet[sparringType];
+    const u8 fixedIV = MAX_PER_STAT_IVS;
+    const u32 otID = Random32();
+
+    for (u32 monIndex = 0; monIndex < partySize; monIndex++)
+    {
+        u32 monId = monSet[monIndex];
+        CreateFacilityMon(&gSiliconFrontierMons[monId], SILICON_FRONTIER_LEVEL, fixedIV, otID, 0, &gParties[B_TRAINER_PARTNER][monIndex]);
+    }
+}
+
 static void SiliconFrontier_FillOpponentParties(void)
 {
     ZeroEnemyPartyMons();
@@ -896,7 +897,7 @@ static void SiliconFrontier_FillOpponentParties(void)
     if (SiliconFroniter_IsCurrentChallengeTypeMulti() == FALSE)
         return;
     SiliconFrontier_FillTrainerParty(TRAINER_BATTLE_PARAM.opponentB,partySize,B_TRAINER_OPPONENT_B);
-    SiliconFrontier_FillTrainerParty(TRAINER_BATTLE_PARAM.opponentB,partySize,B_TRAINER_PARTNER);
+    SiliconFrontier_FillPartnerParty(partySize);
 }
 
 void SiliconFrontier_SetUpOpponent(void)
@@ -906,25 +907,8 @@ void SiliconFrontier_SetUpOpponent(void)
     SiliconFrontier_FillOpponentParties();
 }
 
-/*
-static void SiliconFrontier_IncreaseNumBattles(void)
-{
-
-    enum SiliconFrontierFacility facility = SiliconFrontier_GetFacilityFromCurrentChallenge();
-    enum SiliconFrontierChallengeType challengeType = SiliconFrontier_GetTypeFromCurrentChallenge();
-
-    u32 battles = SiliconFrontier_GetNumberBattles(facility,challengeType);
-
-    if (++battles > MAX_u32)
-        return;
-
-    SiliconFrontier_SetNumberBattles(facility,challengeType,battles);
-}
-*/
-
 static void HandleFacilityTrainerBattleEnd(void)
 {
-    //SiliconFrontier_IncreaseNumBattles();
     SetMainCallback2(CB2_ReturnToFieldContinueScriptPlayMapMusic);
 }
 
@@ -1201,41 +1185,18 @@ void SiliconFrontier_ResetCurrentStreak(void)
     SiliconFrontier_SetCurrentStreak(SiliconFrontier_GetFacilityFromCurrentChallenge(),SiliconFrontier_GetTypeFromCurrentChallenge(), SiliconFrontier_GetCurrentChallengeSparringType(),0);
 }
 
-u32 SiliconFrontier_TranslatePartnerId(enum SiliconFrontierPartner partnerId)
-{
-    const u32 partnerMapping[SILICON_FRONTIER_PARTNER_COUNT] =
-    {
-        [SILICON_FRONTIER_PARTNER_PUA] = PARTNER_PUA,
-        [SILICON_FRONTIER_PARTNER_CHARLOTTE] = PARTNER_CHARLOTTE,
-        [SILICON_FRONTIER_PARTNER_AMI_ARGENTO] = PARTNER_AMIARGENTO,
-        [SILICON_FRONTIER_PARTNER_TALA] = PARTNER_TALA,
-        [SILICON_FRONTIER_PARTNER_DIMU] = PARTNER_DIMU,
-        [SILICON_FRONTIER_PARTNER_ADAORA] = PARTNER_ADAORA,
-        [SILICON_FRONTIER_PARTNER_EMRYS] = PARTNER_EMRYS,
-        [SILICON_FRONTIER_PARTNER_MAGNUS] = PARTNER_MAGNUS,
-        [SILICON_FRONTIER_PARTNER_BD] = PARTNER_BD,
-        [SILICON_FRONTIER_PARTNER_BAIYA] = PARTNER_BAIYA,
-        [SILICON_FRONTIER_PARTNER_NERIENE] = PARTNER_NERIENE,
-        [SILICON_FRONTIER_PARTNER_FRANK] = PARTNER_FRANK,
-        [SILICON_FRONTIER_PARTNER_SHINZO] = PARTNER_SHINZO,
-        [SILICON_FRONTIER_PARTNER_KEI_YING] = PARTNER_KEI_YING,
-        [SILICON_FRONTIER_PARTNER_BELEN] = PARTNER_BELEN,
-        [SILICON_FRONTIER_PARTNER_ELEANOR] = PARTNER_ELEANOR,
-    };
-
-    return partnerMapping[partnerId];
-}
 
 void SiliconFrontier_DebugChoosePartner(void)
 {
-    u32 partner = SiliconFrontier_TranslatePartnerId(Random() % SILICON_FRONTIER_PARTNER_COUNT);
+    enum SiliconFrontierTrainerIds trainer = Random() % SILICON_FRONTIER_TRAINER_BOSS_END;
+    u32 partner = SiliconFrontier_GetPartnerFromTrainer(trainer);
 
     SiliconFrontier_SetCurrentPartner(partner);
 }
 
 void SiliconFrontier_ResetCurrentPartner(void)
 {
-    SiliconFrontier_SetCurrentPartner(SILICON_FRONTIER_PARTNER_NONE);
+    SiliconFrontier_SetCurrentPartner(PARTNER_NONE);
 }
 
 void Script_SiliconFrontier_GetTypeFromCurrentChallenge(void)
