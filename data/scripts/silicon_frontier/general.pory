@@ -43,6 +43,8 @@ script SiliconFroniter_Dialogue_AskMenu
 }
 script SiliconFrontier_Script_QuitAttendant
 {
+    callnative(SiliconFrontier_ResetCurrentChallenge)
+    callnative(SiliconFrontier_ResetCurrentPartner)
     call(SiliconFrontier_Dialogue_HopeToSeeYou)
     closemessage
     release
@@ -116,6 +118,7 @@ script SiliconFrontier_Script_RegisterChallenge
     callnative(SiliconFrontier_SetCurrentChallengeFacilityFromMap)
     callnative(SiliconFrontier_SetCurrentChallengeChallengeTypeFromVarResult)
     call(RestrictedSparring_Script_PickSparringType)
+    call(RestrictedSparring_Script_HandleHealsBeforeChallenge)
     goto(SiliconFrontier_Script_ChoosePartyMons)
 }
 
@@ -185,18 +188,7 @@ script SiliconFrontier_Script_StartBattle
 
     callnative(SiliconFrontier_SetUpOpponent)
 
-    removeobject(LOCALID_TOWER_OPPONENT_A)
-    clearobjectflagfromlocalid(LOCALID_TOWER_OPPONENT_A)
-    addobject(LOCALID_TOWER_OPPONENT_A)
-
-    callnative(Script_SiliconFroniter_IsCurrentChallengeTypeMulti)
-    if (var(VAR_TEMP_E) == TRUE)
-    {
-        removeobject(LOCALID_TOWER_OPPONENT_B)
-        clearobjectflagfromlocalid(LOCALID_TOWER_OPPONENT_B)
-        addobject(LOCALID_TOWER_OPPONENT_B)
-    }
-
+    call(SiliconFrontier_Script_RefreshOpponentObjects)
     call(SiliconFrontier_Movement_MoveOpponentsIntoPosition)
     callnative(SiliconFrontier_SetUpTextA)
     msgbox(format("{STR_VAR_1}"))
@@ -205,7 +197,6 @@ script SiliconFrontier_Script_StartBattle
     call(SiliconFrontier_Movement_MoveBattlersIntoBattle)
     callnative(SiliconFrontier_StartFacilityBattle)
     waitstate
-    callnative(SiliconFrontier_DisableRecordedBattle)
     specialvar(VAR_RESULT,GetBattleOutcome)
     goto_if_ne(VAR_RESULT,B_OUTCOME_WON,SiliconFrontier_Script_LossBattle)
     goto(SiliconFrontier_Script_WonBattle)
@@ -221,30 +212,78 @@ script SiliconFrontier_Script_WonBattle
     variableaddbp(VAR_0x8007,TRUE)
     call(SiliconFrontier_Movement_MoveBattlersOutOfBattle)
     bypass_healblock
-    cueobjectplayer(LOCALID_TIRABUDIN_BATTLE_ROOM_ATTENDANT)
+    call(SiliconFrontier_Movement_CueAttendant)
     hidebpbox
     waitse
     callnative(SiliconFrontier_TryAwardBadge)
     call_if_ne(VAR_RESULT,SILICON_FRONTIER_BOSS_PHASE_COUNT,SiliconFrontier_Dialogue_AwardBadge)
+    clearflag(FLAG_TEMP_12)
     goto(SiliconFrontier_Script_BattleMenu)
+}
+
+script SiliconFrontier_Script_TryShowQuitMenuOption
+{
+    callnative(Script_SiliconFrontier_GetFacilityFromCurrentChallenge)
+    if (var(VAR_TEMP_F) == SILICON_FACILITY_SPARRING)
+    {
+        dynmultipush("Quit",SILICON_FACILITY_STREAK_MENU_QUIT)
+    }
+    else
+    {
+        dynmultipush("Leave",SILICON_FACILITY_STREAK_MENU_LEAVE)
+    }
+}
+
+script SiliconFrontier_Script_TryShowHeal
+{
+    callnative(Script_SiliconFrontier_GetRemainingHeals)
+    if (var(VAR_TEMP_E) <= 0)
+    {
+        return
+    }
+
+    if (flag(FLAG_TEMP_12) == TRUE)
+    {
+        return
+    }
+
+    dynmultipush("Heal",SILICON_FACILITY_STREAK_MENU_HEAL)
+}
+
+script SiliconFrontier_Script_TryShowRecord
+{
+    callnative(Script_SiliconFrontier_CanBattleBeRecorded)
+    if (var(VAR_TEMP_E) == TRUE)
+    {
+        dynmultipush("Record",SILICON_FACILITY_STREAK_MENU_RECORD)
+    }
 }
 
 script SiliconFrontier_Script_BattleMenu
 {
     playse(SE_USE_ITEM)
-    callnative(SiliconFrontier_BufferStreakString)
+    callnative(SiliconFrontier_BufferCurrentStreakString)
     call(SiliconFrontier_Dialogue_YourPartyHasBeenHealed)
     waitse
-    dynmultichoice(0,0,TRUE,3,0,NULL, "Continue", "Leave", "Record")
+    dynmultipush("Continue",SILICON_FACILITY_STREAK_MENU_CONTINUE)
+    call(SiliconFrontier_Script_TryShowQuitMenuOption)
+    call(SiliconFrontier_Script_TryShowHeal)
+    call(SiliconFrontier_Script_TryShowRecord)
+    dynmultistack(0, 0, TRUE, 3, TRUE, 0, NULL)
+
     switch(var(VAR_RESULT))
     {
-        case 0:
+        case SILICON_FACILITY_STREAK_MENU_CONTINUE:
             closemessage
             goto(SiliconFrontier_Script_StartBattle)
-        case 1:
+        case SILICON_FACILITY_STREAK_MENU_LEAVE:
             goto(SiliconFrontier_Script_LeaveChallenge)
-        case 2:
+        case SILICON_FACILITY_STREAK_MENU_RECORD:
             goto(SiliconFroniter_Script_RecordBattle)
+        case SILICON_FACILITY_STREAK_MENU_QUIT:
+            goto(RestrictedSparring_Script_AskQuit)
+        case SILICON_FACILITY_STREAK_MENU_HEAL:
+            goto(RestrictedSparring_Script_AskHeal)
     }
 }
 
@@ -284,20 +323,30 @@ script SiliconFrontier_Script_LossBattle
 {
     lock
     callnative(SiliconFrontier_ResetCurrentStreak)
-    goto(SiliconFrontier_Dialogue_LeaveBattleRoom)
+    goto(SiliconFrontier_Script_LeaveBattleRoom)
 }
 
 script SiliconFrontier_Script_LeaveChallenge
 {
     call(SiliconFrontier_Dialogue_YouWillStop)
     closemessage
-    goto(SiliconFrontier_Dialogue_LeaveBattleRoom)
+    goto(SiliconFrontier_Script_LeaveBattleRoom)
 }
 
-script SiliconFrontier_Dialogue_LeaveBattleRoom
+script SiliconFrontier_Script_LeaveBattleRoom
 {
     setvar(VAR_SILICON_FACILITY_CHALLENGE_STATUS,SILICON_FRONTIER_CHALLENGE_ENDED)
-    warpsilent(MAP_TIRABUDIN_PLACE_GYM_LOBBY,4,5)
+
+    callnative(Script_SiliconFrontier_GetFacilityFromCurrentChallenge)
+    switch (var(VAR_TEMP_F))
+    {
+        case SILICON_FACILITY_SPARRING:
+            warpsilent(MAP_HODOU_CITY_GYM,6,7)
+        case SILICON_FACILITY_TOWER:
+            warpsilent(MAP_TIRABUDIN_PLACE_GYM_LOBBY,4,5)
+        case SILICON_FACILITY_ARCADE:
+        case SILICON_FACILITY_FACTORY:
+    }
     waitstate
 }
 
@@ -370,8 +419,6 @@ script SiliconFrontier_Dialogue_InvalidParty
         addvar(VAR_0x8006,1)
     } while (var(VAR_0x8006) < FRONTIER_DOUBLES_PARTY_SIZE)
     special(LoadPlayerParty)
-    callnative(SiliconFrontier_ResetCurrentChallenge)
-    callnative(SiliconFrontier_ResetCurrentPartner)
     goto(SiliconFrontier_Script_AdjustPartyQuit)
 }
 

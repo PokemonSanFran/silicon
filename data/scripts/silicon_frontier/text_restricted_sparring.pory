@@ -1,38 +1,3 @@
-script RestrictedSparring_Script_PickSparringType
-{
-    callnative(Script_SiliconFrontier_GetFacilityFromCurrentChallenge)
-    if (var(VAR_TEMP_F) == SILICON_FACILITY_SPARRING)
-    {
-        msgbox(format("Which type do you want to register with?"),,SPEAKER_RESTRICTED_SPARRING)
-        dynmultipush(COMPOUND_STRING("Normal"),SPARRING_TYPE_NORMAL)
-        dynmultipush(COMPOUND_STRING("Fighting"),SPARRING_TYPE_FIGHTING)
-        dynmultipush(COMPOUND_STRING("Flying"),SPARRING_TYPE_FLYING)
-        dynmultipush(COMPOUND_STRING("Poison"),SPARRING_TYPE_POISON)
-        dynmultipush(COMPOUND_STRING("Ground"),SPARRING_TYPE_GROUND)
-        dynmultipush(COMPOUND_STRING("Rock"),SPARRING_TYPE_ROCK)
-        dynmultipush(COMPOUND_STRING("Bug"),SPARRING_TYPE_BUG)
-        dynmultipush(COMPOUND_STRING("Ghost"),SPARRING_TYPE_GHOST)
-        dynmultipush(COMPOUND_STRING("Steel"),SPARRING_TYPE_STEEL)
-        dynmultipush(COMPOUND_STRING("Fire"),SPARRING_TYPE_FIRE)
-        dynmultipush(COMPOUND_STRING("Water"),SPARRING_TYPE_WATER)
-        dynmultipush(COMPOUND_STRING("Grass"),SPARRING_TYPE_GRASS)
-        dynmultipush(COMPOUND_STRING("Electric"),SPARRING_TYPE_ELECTRIC)
-        dynmultipush(COMPOUND_STRING("Psychic"),SPARRING_TYPE_PSYCHIC)
-        dynmultipush(COMPOUND_STRING("Ice"),SPARRING_TYPE_ICE)
-        dynmultipush(COMPOUND_STRING("Dragon"),SPARRING_TYPE_DRAGON)
-        dynmultipush(COMPOUND_STRING("Dark"),SPARRING_TYPE_DARK)
-        dynmultipush(COMPOUND_STRING("Fairy"),SPARRING_TYPE_FAIRY)
-        dynmultipush(COMPOUND_STRING("Never mind."),MULTI_B_PRESSED)
-        dynmultistack(0, 0, FALSE, 5, TRUE, 0, NULL)
-        goto_if_eq(VAR_RESULT,MULTI_B_PRESSED,SiliconFrontier_Script_QuitAttendant)
-    }
-    else
-    {
-        setvar(VAR_RESULT,SPARRING_TYPE_COUNT)
-    }
-    callnative(SiliconFrontier_SetCurrentChallengeSparringTypeFromVarResult)
-}
-
 script RestrictedSparring_Dialogue_WelcomeBackNewChallenge
 {
     msgbox(format("Welcome back! Are you ready to start a new {STR_VAR_1} challenge?"),MSGBOX_YESNO,SPEAKER_RESTRICTED_SPARRING)
@@ -60,7 +25,7 @@ script RestrictedSparring_Dialogue_WhatWouldYouLikeInfo
 
 script RestrictedSparring_Dialogue_ExplainFacility
 {
-    msgbox(format("At the {STR_VAR_1}, defeat as many Trainers in a row as you can! Once you register with your party, you battle against a randomly chosen Trainer. If you defeat them, your party is healed and then you battle another Trainer. You keep going until you finally lose."),,SPEAKER_RESTRICTED_SPARRING)
+    msgbox(format("At the {STR_VAR_1}, defeat as many Trainers in a row as you can.  You may only register Pokemon of one specific type of your choice. You then battle against a randomly chosen Trainer. If you defeat them, then you battle another Trainer. Between battles, you may heal your party up to two times during a single streak. You keep going until you finally lose."),,SPEAKER_RESTRICTED_SPARRING)
 }
 
 script RestrictedSparring_Dialogue_YouCanCompete
@@ -133,9 +98,9 @@ script RestrictedSparring_Dialogue_YouCannotEnter
     msgbox(format("Unfortunately, you cannot enter the facility until you save. Please return when you're ready to save."),,SPEAKER_RESTRICTED_SPARRING)
 }
 
-script RestrictedSparring_Dialogue_YourPartyHasBeenHealed
+script RestrictedSparring_Dialogue_WouldYouLikeToContinue
 {
-    msgbox(format("Your party has been fully healed. Would you like to continue your {STR_VAR_2} battle streak?"),,SPEAKER_RESTRICTED_SPARRING)
+    msgbox(format("Would you like to continue your {STR_VAR_2} battle streak?"),,SPEAKER_RESTRICTED_SPARRING)
 }
 
 script RestrictedSparring_Dialogue_ThereWasAnError
@@ -220,3 +185,22 @@ script RestrictedSparring_Dialogue_EligibilityType
     msgbox(format("You selected {STR_VAR_3}-type for this challenge, but {STR_VAR_1} does not have that type."),,SPEAKER_RESTRICTED_SPARRING)
 }
 
+script RestrictedSparring_Dialogue_YouHaveHeals
+{
+    msgbox(format("You can heal your side {STR_VAR_1} more time(s) during this streak. Would you like to heal your side and continue your streak?"),MSGBOX_YESNO,SPEAKER_RESTRICTED_SPARRING)
+}
+
+script RestrictedSparring_Dialogue_YouHaveHealed
+{
+    msgbox(format("Your side has been healed."),,SPEAKER_RESTRICTED_SPARRING)
+}
+
+script RestrictedSparring_Dialogue_YouHaveWon
+{
+    msgbox(format("You have won {STR_VAR_2} battles so far."),,SPEAKER_RESTRICTED_SPARRING)
+}
+
+script RestrictedSparring_Dialogue_YourRecordIs
+{
+    msgbox(format("Your record for {STR_VAR_1}, {STR_VAR_3}-type battles is {STR_VAR_2} battles. Are you sure you want to end your streak here?"),MSGBOX_YESNO,SPEAKER_RESTRICTED_SPARRING)
+}

@@ -328,7 +328,7 @@ script SiliconFrontier_Dialogue_YourPartyHasBeenHealed
     switch(var(VAR_TEMP_F))
     {
         case SILICON_FACILITY_SPARRING:
-                    call(RestrictedSparring_Dialogue_YourPartyHasBeenHealed)
+                    call(RestrictedSparring_Dialogue_WouldYouLikeToContinue)
         case SILICON_FACILITY_TOWER:
             call(BattleJam_Dialogue_YourPartyHasBeenHealed)
         case SILICON_FACILITY_ARCADE:
@@ -520,13 +520,13 @@ script SiliconFrontier_Dialogue_AdjustPartyQuit
     switch(var(VAR_TEMP_F))
     {
         case SILICON_FACILITY_SPARRING:
-                    call(RestrictedSparring_Dialogue_AdjustPartyQuit)
+            call(RestrictedSparring_Dialogue_AdjustPartyQuit)
         case SILICON_FACILITY_TOWER:
             call(BattleJam_Dialogue_AdjustPartyQuit)
         case SILICON_FACILITY_ARCADE:
-                    call(BattleStudio_Dialogue_AdjustPartyQuit)
+            call(BattleStudio_Dialogue_AdjustPartyQuit)
         case SILICON_FACILITY_FACTORY:
-                    call(BattleConvention_Dialogue_AdjustPartyQuit)
+            call(BattleConvention_Dialogue_AdjustPartyQuit)
     }
 }
 

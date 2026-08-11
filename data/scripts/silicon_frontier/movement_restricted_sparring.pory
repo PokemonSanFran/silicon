@@ -1,0 +1,119 @@
+script RestrictedSparring_Movement_LeaveForBattleRoom
+{
+    moveobjecttocoords(LOCALID_PLAYER,3,4,DIR_EAST)
+    moveobjecttocoords(LOCALID_HODOU_CITY_GYM_JOHNNY,1,4,DIR_EAST)
+
+    callnative(Script_SiliconFroniter_IsCurrentChallengeTypeMulti)
+    if (var(VAR_TEMP_E) == TRUE)
+    {
+        callnative(SiliconFrontier_SetPartnerObject)
+        playse(SE_EXIT)
+        addobject(LOCALID_SPARRING_PARTNER)
+    }
+    waitmovement(LOCALID_PLAYER)
+    waitmovement(LOCALID_HODOU_CITY_GYM_JOHNNY)
+    waitmovement(LOCALID_SPARRING_PARTNER)
+    waitse
+    goto(SiliconFrontier_Script_WalkIntoRoom)
+}
+
+script RestrictedSparring_Movement_MovePlayerIntoBattlePosition
+{
+    moveobjecttocoords(LOCALID_PLAYER,3,4,DIR_EAST)
+    callnative(Script_SiliconFroniter_IsCurrentChallengeTypeMulti)
+    if (var(VAR_TEMP_E) == TRUE)
+    {
+        moveobjecttocoords(LOCALID_SPARRING_PARTNER,3,5,DIR_EAST)
+        waitmovement(LOCALID_SPARRING_PARTNER)
+    }
+    waitmovement(LOCALID_PLAYER)
+}
+
+script RestrictedSparring_Movement_MoveOpponentsIntoPosition
+{
+    callnative(Script_SiliconFroniter_IsCurrentChallengeTypeMulti)
+    moveobjecttocoords(LOCALID_HODOU_CITY_GYM_JOHNNY,1,4,DIR_EAST)
+    moveobjecttocoords(LOCALID_SPARRING_OPPONENT_A,7,4,DIR_WEST)
+    if (var(VAR_TEMP_E) == TRUE)
+    {
+        moveobjecttocoords(LOCALID_SPARRING_OPPONENT_B,7,5,DIR_WEST)
+        waitmovement(LOCALID_SPARRING_OPPONENT_B)
+    }
+    waitmovement(LOCALID_PLAYER)
+    waitmovement(LOCALID_SPARRING_OPPONENT_A)
+    waitmovement(LOCALID_HODOU_CITY_GYM_JOHNNY)
+}
+
+script RestrictedSparring_Movement_MoveBattlersIntoBattle
+{
+    moveobjecttocoords(LOCALID_PLAYER,4,4,DIR_EAST)
+    moveobjecttocoords(LOCALID_SPARRING_OPPONENT_A,6,4,DIR_WEST)
+    callnative(Script_SiliconFroniter_IsCurrentChallengeTypeMulti)
+    if (var(VAR_TEMP_E) == TRUE)
+    {
+        moveobjecttocoords(LOCALID_SPARRING_OPPONENT_B,6,5,DIR_WEST)
+        moveobjecttocoords(LOCALID_SPARRING_PARTNER,4,5,DIR_EAST)
+        waitmovement(LOCALID_SPARRING_OPPONENT_B)
+        waitmovement(LOCALID_SPARRING_PARTNER)
+    }
+    waitmovement(LOCALID_PLAYER)
+    waitmovement(LOCALID_SPARRING_OPPONENT_A)
+}
+
+script RestrictedSparring_Script_HideOpponents
+{
+    setobjectflagfromlocalid(LOCALID_SPARRING_OPPONENT_A)
+    setobjectflagfromlocalid(LOCALID_SPARRING_OPPONENT_B)
+    setobjectflagfromlocalid(LOCALID_SPARRING_PARTNER)
+}
+
+script RestrictedSparring_Movement_MoveBattlersOutOfBattle
+{
+    moveobjecttocoords(LOCALID_SPARRING_OPPONENT_A,5,9,DIR_SOUTH)
+    moveobjecttocoords(LOCALID_PLAYER,3,4,DIR_WEST)
+    moveobjecttocoords(LOCALID_HODOU_CITY_GYM_JOHNNY,2,4,DIR_EAST)
+    callnative(Script_SiliconFroniter_IsCurrentChallengeTypeMulti)
+    if (var(VAR_TEMP_E) == TRUE)
+    {
+        moveobjecttocoords(LOCALID_SPARRING_OPPONENT_B,4,9,DIR_SOUTH)
+        moveobjecttocoords(LOCALID_SPARRING_PARTNER,2,5,DIR_NORTH)
+    }
+
+    waitmovement(LOCALID_SPARRING_OPPONENT_A)
+    applymovement(LOCALID_SPARRING_OPPONENT_A,moves(set_invisible))
+    waitmovement(LOCALID_SPARRING_OPPONENT_A)
+    playse(SE_EXIT)
+    if (var(VAR_TEMP_E) == TRUE)
+    {
+        waitmovement(LOCALID_SPARRING_OPPONENT_B)
+        applymovement(LOCALID_SPARRING_OPPONENT_B,moves(set_invisible))
+        waitmovement(LOCALID_SPARRING_OPPONENT_B)
+        playse(SE_EXIT)
+    }
+    waitmovement(LOCALID_SPARRING_PARTNER)
+    waitmovement(LOCALID_PLAYER)
+    waitmovement(LOCALID_HODOU_CITY_GYM_JOHNNY)
+}
+
+script RestrictedSparring_Script_RefreshOpponentObjects
+{
+    removeobject(LOCALID_SPARRING_OPPONENT_A)
+    clearobjectflagfromlocalid(LOCALID_SPARRING_OPPONENT_A)
+    playse(SE_EXIT)
+    addobject(LOCALID_SPARRING_OPPONENT_A)
+
+    callnative(Script_SiliconFroniter_IsCurrentChallengeTypeMulti)
+    if (var(VAR_TEMP_E) == TRUE)
+    {
+        removeobject(LOCALID_SPARRING_OPPONENT_B)
+        clearobjectflagfromlocalid(LOCALID_SPARRING_OPPONENT_B)
+        playse(SE_EXIT)
+        addobject(LOCALID_SPARRING_OPPONENT_B)
+    }
+    waitse
+}
+
+script RestrictedSparring_Movement_CueAttendant
+{
+    cueobjectplayer(LOCALID_HODOU_CITY_GYM_JOHNNY)
+}

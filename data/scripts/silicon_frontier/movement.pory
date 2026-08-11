@@ -4,6 +4,7 @@ script SiliconFrontier_Movement_MovePlayerIntoBattlePosition
     switch(var(VAR_TEMP_F))
     {
         case SILICON_FACILITY_SPARRING:
+            call(RestrictedSparring_Movement_MovePlayerIntoBattlePosition)
         case SILICON_FACILITY_TOWER:
             call(BattleJam_Movement_MovePlayerIntoBattlePosition)
         case SILICON_FACILITY_ARCADE:
@@ -17,6 +18,7 @@ script SiliconFrontier_Movement_MoveOpponentsIntoPosition
     switch(var(VAR_TEMP_F))
     {
         case SILICON_FACILITY_SPARRING:
+            call(RestrictedSparring_Movement_MoveOpponentsIntoPosition)
         case SILICON_FACILITY_TOWER:
             call(BattleJam_Movement_MoveOpponentsIntoPosition)
         case SILICON_FACILITY_ARCADE:
@@ -30,6 +32,7 @@ script SiliconFrontier_Movement_MoveBattlersIntoBattle
     switch(var(VAR_TEMP_F))
     {
         case SILICON_FACILITY_SPARRING:
+            call(RestrictedSparring_Movement_MoveBattlersIntoBattle)
         case SILICON_FACILITY_TOWER:
             call(BattleJam_Movement_MoveBattlersIntoBattle)
         case SILICON_FACILITY_ARCADE:
@@ -43,6 +46,7 @@ script SiliconFrontier_Movement_MoveBattlersOutOfBattle
     switch(var(VAR_TEMP_F))
     {
         case SILICON_FACILITY_SPARRING:
+            call(RestrictedSparring_Movement_MoveBattlersOutOfBattle)
         case SILICON_FACILITY_TOWER:
             call(BattleJam_Movement_MoveBattlersOutOfBattle)
         case SILICON_FACILITY_ARCADE:
@@ -56,9 +60,39 @@ script SiliconFrontier_Movement_LeaveForBattleRoom
     switch(var(VAR_TEMP_F))
     {
         case SILICON_FACILITY_SPARRING:
+            call(RestrictedSparring_Movement_LeaveForBattleRoom)
         case SILICON_FACILITY_TOWER:
             call(BattleJam_Movement_LeaveForBattleRoom)
         case SILICON_FACILITY_ARCADE:
         case SILICON_FACILITY_FACTORY:
     }
 }
+
+script SiliconFrontier_Script_RefreshOpponentObjects
+{
+    callnative(Script_SiliconFrontier_GetFacilityFromCurrentChallenge)
+    switch(var(VAR_TEMP_F))
+    {
+        case SILICON_FACILITY_SPARRING:
+            call(RestrictedSparring_Script_RefreshOpponentObjects)
+        case SILICON_FACILITY_TOWER:
+            call(BattleJam_Script_RefreshOpponentObjects)
+        case SILICON_FACILITY_ARCADE:
+        case SILICON_FACILITY_FACTORY:
+    }
+}
+
+script SiliconFrontier_Movement_CueAttendant
+{
+    callnative(Script_SiliconFrontier_GetFacilityFromCurrentChallenge)
+    switch(var(VAR_TEMP_F))
+    {
+        case SILICON_FACILITY_SPARRING:
+            call(RestrictedSparring_Movement_CueAttendant)
+        case SILICON_FACILITY_TOWER:
+            call(BattleJam_Movement_CueAttendant)
+        case SILICON_FACILITY_ARCADE:
+        case SILICON_FACILITY_FACTORY:
+    }
+}
+

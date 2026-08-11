@@ -113,3 +113,23 @@ script BattleJam_Movement_LeaveForBattleRoom
     warpsilent(MAP_TIRABUDIN_PLACE_GYM_BATTLE_ROOM,0)
     waitstate
 }
+
+script BattleJam_Script_RefreshOpponentObjects
+{
+    removeobject(LOCALID_TOWER_OPPONENT_A)
+    clearobjectflagfromlocalid(LOCALID_TOWER_OPPONENT_A)
+    addobject(LOCALID_TOWER_OPPONENT_A)
+
+    callnative(Script_SiliconFroniter_IsCurrentChallengeTypeMulti)
+    if (var(VAR_TEMP_E) == TRUE)
+    {
+        removeobject(LOCALID_TOWER_OPPONENT_B)
+        clearobjectflagfromlocalid(LOCALID_TOWER_OPPONENT_B)
+        addobject(LOCALID_TOWER_OPPONENT_B)
+    }
+}
+
+script BattleJam_Movement_CueAttendant
+{
+    cueobjectplayer(LOCALID_TIRABUDIN_BATTLE_ROOM_ATTENDANT)
+}
