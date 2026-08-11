@@ -1,13 +1,21 @@
 mapscripts HodouCity_Gym_MapScripts{
+    MAP_SCRIPT_ON_WARP_INTO_MAP_TABLE
+    [
+        VAR_SILICON_FACILITY_CHALLENGE_STATUS,SILICON_FRONTIER_CHALLENGE_ENDED: SiliconFrontier_Script_FacePlayerUp
+    ]
     MAP_SCRIPT_ON_FRAME_TABLE[
         VAR_QUEST_RESTOREHODOUGYM,POST_PEWFAT_INTO_GYM: Quest_Restorehodoucity_FirstTimeInside_Dialogue
         VAR_QUEST_RESTOREHODOUGYM,FOUND_HODOU_CITY_LEADER: Quest_Restorehodoucity_FoundJohnny_Dialogue
         VAR_QUEST_RESTOREHODOUGYM,FOUND_ALL_BLACKBELTS: Quest_Restorehodoucity_Reward_Dialogue
+        VAR_SILICON_FACILITY_CHALLENGE_STATUS,SILICON_FRONTIER_CHALLENGE_IN_PROGRESS: SiliconFrontier_Dialogue_Disqualified
+        VAR_SILICON_FACILITY_CHALLENGE_STATUS,SILICON_FRONTIER_CHALLENGE_STARTED: SiliconFrontier_Dialogue_Disqualified
+        VAR_SILICON_FACILITY_CHALLENGE_STATUS,SILICON_FRONTIER_CHALLENGE_ENDED: SiliconFrontier_Script_SaveAfterQuitChallenge
     ]
     MAP_SCRIPT_ON_TRANSITION
     {
-        call(Quest_Restorehodoucity_Script_LoadPewfatMons)
+        call(RestrictedSparring_Script_HideOpponents)
         call_if_ne(VAR_QUEST_RESTOREHODOUGYM,POST_PEWFAT_INTO_GYM,Quest_Restorehodoucity_HidePokemnon_Script)
+        call_if_subquest_not_complete(QUEST_RESTOREHODOUGYM,SUB_QUEST_1,Quest_Restorehodoucity_Script_LoadPewfatMons)
         call_if_subquest_not_complete(QUEST_RESTOREHODOUGYM,SUB_QUEST_1,Restorehodoucity_Script_HideGymTrainer_Johnny)
         call_if_subquest_not_complete(QUEST_RESTOREHODOUGYM,SUB_QUEST_2,Restorehodoucity_Script_HideGymTrainer_Adam)
         call_if_subquest_not_complete(QUEST_RESTOREHODOUGYM,SUB_QUEST_3,Restorehodoucity_Script_HideGymTrainer_Andreas)
@@ -16,6 +24,7 @@ mapscripts HodouCity_Gym_MapScripts{
         call_if_subquest_not_complete(QUEST_RESTOREHODOUGYM,SUB_QUEST_6,Restorehodoucity_Script_HideGymTrainer_DaJuan)
         call_if_subquest_not_complete(QUEST_RESTOREHODOUGYM,SUB_QUEST_7,Restorehodoucity_Script_HideGymTrainer_Juan)
         call_if_subquest_not_complete(QUEST_RESTOREHODOUGYM,SUB_QUEST_8,Restorehodoucity_Script_HideGymTrainer_Jason)
+        callnative(SiliconFrontier_SetPartnerObject)
     }
 }
 
