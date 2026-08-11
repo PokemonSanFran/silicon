@@ -464,7 +464,8 @@ void SiliconFrontier_CheckMonEligibility(void)
 
     for (u32 partyIndex = 0; partyIndex < size; partyIndex++)
     {
-        struct Pokemon *mon = &gParties[B_TRAINER_PLAYER][partyIndex];
+        u32 monIndex = SiliconFrontier_GetSelectedPartyMon(partyIndex) - 1;
+        struct Pokemon *mon = &gParties[B_TRAINER_PLAYER][monIndex];
         speciesArray[partyIndex] = SPECIES_NONE;
         itemArray[partyIndex] = ITEM_NONE;
 
