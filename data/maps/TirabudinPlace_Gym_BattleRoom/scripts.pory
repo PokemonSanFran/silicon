@@ -3,7 +3,6 @@ mapscripts TirabudinPlace_Gym_BattleRoom_MapScripts {
     {
         setobjectflagfromlocalid(LOCALID_TOWER_OPPONENT_A)
         setobjectflagfromlocalid(LOCALID_TOWER_OPPONENT_B)
-        callnative(SiliconFrontier_SetPartnerObject)
         call(BattleJam_Script_TryHidePartner)
     }
     MAP_SCRIPT_ON_FRAME_TABLE
