@@ -95,7 +95,7 @@ void SiliconFrontier_StartFacilityBattle(void);
 void SiliconFrontier_TryIncrementWinStreakAndRecord(void);
 u32 SiliconFrontier_CalculateStreakBP(void);
 void SiliconFrontier_BufferBP(void);
-void SiliconFrontier_BufferStreakString(void);
+void SiliconFrontier_BufferCurrentStreakString(void);
 void SiliconFrontier_TryAwardBadge(void);
 void SiliconFrontier_BufferAwardSpeech(void);
 void SiliconFrontier_BufferGoldMilestone(void);
@@ -119,9 +119,25 @@ enum SiliconFrontierChallengeType SiliconFrontier_GetLastChallengeTypeFromCurren
     return SiliconFrontier_GetTypeFromLastChallenge(SiliconFrontier_GetFacilityFromMap());
 }
 
+void Script_SiliconFrontier_GetRemainingHeals(void)
+{
+    VarSet(VAR_TEMP_E,SiliconFrontier_GetRemainingHeals());
+}
+
+void Buffer_SiliconFrontier_GetRemainingHeals(void)
+{
+    u32 heals = SiliconFrontier_GetRemainingHeals();
+    ConvertIntToDecimalStringN(gStringVar1,heals,STR_CONV_MODE_LEFT_ALIGN,CountDigits(heals));
+}
+
 void SiliconFrontier_ResetRemainingHeals(void)
 {
     SiliconFrontier_SetRemainingHeals(RESTRICTED_SPARRING_MAX_HEALS_COUNT);
+}
+
+void SiliconFrontier_EmptyRemainingHeals(void)
+{
+    SiliconFrontier_SetRemainingHeals(0);
 }
 
 void SiliconFrontier_DecreaseRemainingHeals(void)
@@ -250,18 +266,24 @@ void Script_SiliconFrontier_GetLastChallengeTypeFromCurrentFacility(void)
     gSpecialVar_Result = SiliconFrontier_GetLastChallengeTypeFromCurrentFacility();
 }
 
+const u8* const challengeTypeTitles[] =
+{
+    [SILICON_FRONTIER_CHALLENGE_TYPE_NONE] = COMPOUND_STRING(""),
+    [SILICON_FRONTIER_CHALLENGE_TYPE_SINGLE] = gText_Single,
+    [SILICON_FRONTIER_CHALLENGE_TYPE_DOUBLE] = gText_Double,
+    [SILICON_FRONTIER_CHALLENGE_TYPE_MULTI] = COMPOUND_STRING("Multi"),
+    [SILICON_FRONTIER_CHALLENGE_TYPE_LINK_MULTI] = COMPOUND_STRING("Multi Link"),
+};
+
 void BufferLastChallengeType(void)
 {
-    const u8* challengeTypeTitles[] =
-    {
-        [SILICON_FRONTIER_CHALLENGE_TYPE_NONE] = COMPOUND_STRING(""),
-        [SILICON_FRONTIER_CHALLENGE_TYPE_SINGLE] = gText_Single,
-        [SILICON_FRONTIER_CHALLENGE_TYPE_DOUBLE] = gText_Double,
-        [SILICON_FRONTIER_CHALLENGE_TYPE_MULTI] = COMPOUND_STRING("Multi"),
-        [SILICON_FRONTIER_CHALLENGE_TYPE_LINK_MULTI] = COMPOUND_STRING("Multi Link"),
-    };
 
     StringCopy(gStringVar1,challengeTypeTitles[SiliconFrontier_GetLastChallengeTypeFromCurrentFacility()]);
+}
+
+void BufferCurrentChallengeType(void)
+{
+    StringCopy(gStringVar1,challengeTypeTitles[SiliconFrontier_GetTypeFromCurrentChallenge()]);
 }
 
 void SiliconFrontier_ResetLastChallenge(void)
@@ -483,6 +505,12 @@ void Script_SiliconFrontier_AreChosenMonsEligible(void)
     gSpecialVar_Result = SiliconFrontier_AreChosenMonsEligible();
 }
 
+void SiliconFrontier_BufferCurrentSparringType(void)
+{
+    enum Type requiredType = SiliconFrontier_ConvertSparringTypeToMonType(SiliconFrontier_GetCurrentChallengeSparringType());
+    StringCopy(gStringVar3,gTypesInfo[requiredType].name);
+}
+
 void SiliconFrontier_ReturnPartyCodes(void)
 {
     u32 partyIndex = VarGet(VAR_0x8006);
@@ -518,9 +546,7 @@ void SiliconFrontier_ReturnPartyCodes(void)
         VarSet(VAR_0x8004,partyIndex);
         BufferMonNickname();
         StringCopy(gStringVar2,GetItemName(GetMonData(&gParties[B_TRAINER_PLAYER][partyIndex],MON_DATA_HELD_ITEM)));
-        enum Type requiredType = SiliconFrontier_ConvertSparringTypeToMonType(SiliconFrontier_GetCurrentChallengeSparringType());
-
-        StringCopy(gStringVar3,gTypesInfo[requiredType].name);
+        SiliconFrontier_BufferCurrentSparringType();
         gSpecialVar_Result = SILICON_FRONTIER_ELIGIBILITY_CODE_ALL;
         return;
     }
@@ -937,6 +963,7 @@ void SiliconFrontier_StartFacilityBattle(void)
 
     CreateTask(Task_StartBattleAfterTransition, 1);
     PlayMapChosenOrBattleBGM(0);
+    SiliconFrontier_AllowRecordedBattle();
     BattleTransition_StartOnField(GetSpecialBattleTransition(B_TRANSITION_GROUP_B_TOWER));
 }
 
@@ -986,13 +1013,27 @@ void SiliconFrontier_BufferBP(void)
     VarSet(VAR_0x8007,SiliconFrontier_CalculateStreakBP());
 }
 
-void SiliconFrontier_BufferStreakString(void)
+void SiliconFrontier_BufferCurrentStreakString(void)
 {
     enum SiliconFrontierFacility facility = SiliconFrontier_GetFacilityFromCurrentChallenge();
     enum SiliconFrontierChallengeType challengeType = SiliconFrontier_GetTypeFromCurrentChallenge();
     enum SiliconFrontierSparringTypes sparringType = SiliconFrontier_GetCurrentChallengeSparringType();
 
     u32 value = SiliconFrontier_GetCurrentStreak(facility,challengeType, sparringType);
+
+    if (value >= MAX_u16)
+        StringCopy(gStringVar2,COMPOUND_STRING("infinite"));
+    else
+        ConvertIntToDecimalStringN(gStringVar2,value,STR_CONV_MODE_LEFT_ALIGN,CountDigits(value));
+}
+
+void SiliconFrontier_BufferLongestStreakString(void)
+{
+    enum SiliconFrontierFacility facility = SiliconFrontier_GetFacilityFromCurrentChallenge();
+    enum SiliconFrontierChallengeType challengeType = SiliconFrontier_GetTypeFromCurrentChallenge();
+    enum SiliconFrontierSparringTypes sparringType = SiliconFrontier_GetCurrentChallengeSparringType();
+
+    u32 value = SiliconFrontier_GetLongestStreak(facility,challengeType, sparringType);
 
     if (value >= MAX_u16)
         StringCopy(gStringVar2,COMPOUND_STRING("infinite"));
@@ -1202,4 +1243,9 @@ void SiliconFrontier_ResetCurrentPartner(void)
 void Script_SiliconFrontier_GetTypeFromCurrentChallenge(void)
 {
     VarSet(VAR_TEMP_0,SiliconFrontier_GetTypeFromCurrentChallenge());
+}
+
+void Script_SiliconFrontier_CanBattleBeRecorded(void)
+{
+    VarSet(VAR_TEMP_E,SiliconFrontier_CanBattleBeRecorded());
 }
