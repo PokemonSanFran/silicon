@@ -211,7 +211,11 @@ script SiliconFrontier_Script_WonBattle
     callnative(SiliconFrontier_BufferBP)
     variableaddbp(VAR_0x8007,TRUE)
     call(SiliconFrontier_Movement_MoveBattlersOutOfBattle)
-    bypass_healblock
+    callnative(Script_SiliconFrontier_GetFacilityFromCurrentChallenge)
+    if (var(VAR_TEMP_F) != SILICON_FACILITY_SPARRING)
+    {
+        bypass_healblock
+    }
     call(SiliconFrontier_Movement_CueAttendant)
     hidebpbox
     waitse
