@@ -4967,7 +4967,10 @@ void EnterCode(void)
 void GetCodeFeedback(void)
 {
     static const u8 sText_SampleCode[] = _("SampleCode");
-    if (!StringCompare(gStringVar2, sText_SampleCode))
+    static const u8 sText_RangerStationPassword[] = _("J4CKW41K3r");
+    if (!StringCompare(gStringVar2, sText_RangerStationPassword))
+        gSpecialVar_Result = QUEST_MANOFMANYHATS;
+    else if (!StringCompare(gStringVar2, sText_SampleCode))
         gSpecialVar_Result = 1;
     else
         gSpecialVar_Result = 0;

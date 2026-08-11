@@ -192,33 +192,6 @@
     {
       "type": "trigger",
       "x": 11,
-      "y": 8,
-      "elevation": 0,
-      "var": "VAR_TEMP_0",
-      "var_value": "0",
-      "script": "LeaverraForest_ShoreSign_Script"
-    },
-    {
-      "type": "trigger",
-      "x": 11,
-      "y": 7,
-      "elevation": 0,
-      "var": "VAR_TEMP_0",
-      "var_value": "0",
-      "script": "LeaverraForest_ForestSign_Script"
-    },
-    {
-      "type": "trigger",
-      "x": 11,
-      "y": 6,
-      "elevation": 0,
-      "var": "VAR_TEMP_0",
-      "var_value": "0",
-      "script": "LeaverraForest_HillSign_Script"
-    },
-    {
-      "type": "trigger",
-      "x": 11,
       "y": 24,
       "elevation": 0,
       "var": "VAR_TEMP_1",

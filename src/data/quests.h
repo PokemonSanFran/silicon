@@ -3253,11 +3253,11 @@ const struct SideQuest sSideQuests[QUEST_COUNT] =
     },
     [QUEST_MANOFMANYHATS] =
     {
-        .name = gText_Quest_ManOfManyHats_Name,
-        .desc[FLAG_GET_ACTIVE] = gText_Quest_ManOfManyHats_Desc,
-        .desc[FLAG_GET_COMPLETED] = gText_Quest_ManOfManyHats_DoneDesc,
-        .map = gText_Quest_ManOfManyHats_Map,
-        .sprite = OBJ_EVENT_GFX_ARTIST,
+        .name = COMPOUND_STRING("Man Of Many Hats"),
+        .desc[FLAG_GET_ACTIVE] = COMPOUND_STRING("Installnatureprobesworker's headphones are at the Ranger Station on Route 100, the password is “J4CKW41K3r”."),
+        .desc[FLAG_GET_COMPLETED] = COMPOUND_STRING("Installnatureprobesworker got his headphones back."),
+        .map = COMPOUND_STRING("ResidoRegion"),
+        .sprite = OBJ_EVENT_GFX_INSTALLNATUREPROBES_RANGER,
         .spritetype = QUEST_SPRITE_TYPE_OBJECT,
         .subquests = NULL,
         .numSubquests = 0
