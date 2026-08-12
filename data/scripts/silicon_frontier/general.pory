@@ -199,6 +199,12 @@ script SiliconFrontier_Script_StartBattle
     call(SiliconFrontier_Movement_MoveOpponentsIntoPosition)
     callnative(SiliconFrontier_SetUpTextA)
     msgbox(format("{STR_VAR_1}"))
+    callnative(Script_SiliconFrontier_GetTypeFromCurrentChallenge)
+    if (var(VAR_TEMP_0) == SILICON_FRONTIER_CHALLENGE_TYPE_MULTI)
+    {
+        callnative(SiliconFrontier_SetUpTextB)
+        msgbox(format("{STR_VAR_1}"))
+    }
     closemessage
 
     call(SiliconFrontier_Movement_MoveBattlersIntoBattle)
