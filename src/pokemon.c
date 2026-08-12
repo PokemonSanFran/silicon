@@ -4427,7 +4427,10 @@ bool32 DoesMonMeetAdditionalConditions(struct Pokemon *mon, const struct Evoluti
         case IF_WEATHER:
             if (params[i].arg1 == WEATHER_RAIN)
             {
+                // Start siliconMerge
+                //if (weather == WEATHER_RAIN || weather == WEATHER_RAIN_THUNDERSTORM || weather == WEATHER_DOWNPOUR)
                 if ((gBattleWeather & B_WEATHER_RAIN) || weather == WEATHER_RAIN || weather == WEATHER_RAIN_THUNDERSTORM || weather == WEATHER_DOWNPOUR)
+                // End siliconMerge
                     currentCondition = TRUE;
             }
             else if (params[i].arg1 == WEATHER_FOG)
