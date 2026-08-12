@@ -113,6 +113,10 @@ void SiliconFrontier_ResetCurrentStreak(void);
 void SiliconFrontier_DebugChoosePartner(void);
 void SiliconFrontier_ResetCurrentPartner(void);
 void Script_SiliconFrontier_GetTypeFromCurrentChallenge(void);
+bool8 SiliconFrontier_CountPartnerNonFaintedMons(void);
+void SiliconFrontier_SwapFaintedMons(u32 first, u32 second);
+void SiliconFrontier_SwapBeforeFaintedMons(void);
+void SiliconFrontier_SwapAfterFaintedMons(void);
 
 enum SiliconFrontierChallengeType SiliconFrontier_GetLastChallengeTypeFromCurrentFacility(void)
 {
@@ -957,6 +961,8 @@ void SiliconFrontier_StartFacilityBattle(void)
 
     if (SiliconFroniter_IsCurrentChallengeTypeLinkMulti())
         gBattleTypeFlags |= BATTLE_TYPE_DOUBLE | BATTLE_TYPE_LINK | BATTLE_TYPE_MULTI | BATTLE_TYPE_TOWER_LINK_MULTI;
+    else if ((SiliconFroniter_IsCurrentChallengeTypeMulti()) && (SiliconFrontier_CountPartnerNonFaintedMons() == 0))
+        gBattleTypeFlags |= BATTLE_TYPE_DOUBLE | BATTLE_TYPE_TWO_OPPONENTS;
     else if (SiliconFroniter_IsCurrentChallengeTypeMulti())
         gBattleTypeFlags |= BATTLE_TYPE_DOUBLE | BATTLE_TYPE_INGAME_PARTNER | BATTLE_TYPE_MULTI | BATTLE_TYPE_TWO_OPPONENTS;
     else if (SiliconFroniter_IsCurrentChallengeTypeDouble())
@@ -1255,7 +1261,7 @@ void SiliconFrontier_ResetPartnerDamage(void)
 {
     enum SiliconFrontierFacility facility = SiliconFrontier_GetFacilityFromCurrentChallenge();
 
-    if (facility == SILICON_FACILITY_SPARRING)
+    if (facility != SILICON_FACILITY_SPARRING)
         return;
 
     for (u32 partyIndex = 0; partyIndex < FRONTIER_MULTI_PARTY_SIZE; partyIndex++)
@@ -1273,8 +1279,10 @@ void SiliconFrontier_RecordPartnerDamage(void)
 {
     enum SiliconFrontierFacility facility = SiliconFrontier_GetFacilityFromCurrentChallenge();
 
-    if (facility == SILICON_FACILITY_SPARRING)
+    if (facility != SILICON_FACILITY_SPARRING)
         return;
+
+    SiliconFrontier_SwapAfterFaintedMons();
 
     for (u32 partyIndex = 0; partyIndex < FRONTIER_MULTI_PARTY_SIZE; partyIndex++)
     {
@@ -1293,7 +1301,7 @@ void SiliconFroniter_HealUpdateDamage(void)
 {
     enum SiliconFrontierFacility facility = SiliconFrontier_GetFacilityFromCurrentChallenge();
 
-    if (facility == SILICON_FACILITY_SPARRING)
+    if (facility != SILICON_FACILITY_SPARRING)
         return;
 
     for (u32 i = 0; i < gPartiesCount[B_TRAINER_PARTNER]; i++)
@@ -1302,11 +1310,47 @@ void SiliconFroniter_HealUpdateDamage(void)
     SiliconFrontier_RecordPartnerDamage();
 }
 
+void SiliconFrontier_SwapBeforeFaintedMons(void)
+{
+    if (SiliconFrontier_GetPartnerHP(0) != 0)
+        return;
+
+    if (SiliconFrontier_GetPartnerHP(1) == 0)
+        return;
+
+    FlagSet(FLAG_SILICON_FRONTIER_SWAPPED_PARTNER);
+    SiliconFrontier_SwapFaintedMons(0,1);
+}
+
+void SiliconFrontier_SwapAfterFaintedMons(void)
+{
+    if (SiliconFrontier_GetPartnerHP(0) != 0)
+        return;
+
+    if (SiliconFrontier_GetPartnerHP(1) == 0)
+        return;
+
+    if (FlagGet(FLAG_SILICON_FRONTIER_SWAPPED_PARTNER))
+        SiliconFrontier_SwapFaintedMons(1,0);
+
+    FlagClear(FLAG_SILICON_FRONTIER_SWAPPED_PARTNER);
+}
+
+void SiliconFrontier_SwapFaintedMons(u32 first, u32 second)
+{
+    struct Pokemon temp;
+    struct Pokemon *partnerParty = gParties[B_TRAINER_PARTNER];
+
+    CopyMon(&temp, &partnerParty[first], sizeof(struct Pokemon));
+    CopyMon(&partnerParty[first], &partnerParty[second], sizeof(struct Pokemon));
+    CopyMon(&partnerParty[second], &temp, sizeof(struct Pokemon));
+}
+
 void SiliconFrontier_SetPartnerDamage(void)
 {
     enum SiliconFrontierFacility facility = SiliconFrontier_GetFacilityFromCurrentChallenge();
 
-    if (facility == SILICON_FACILITY_SPARRING)
+    if (facility != SILICON_FACILITY_SPARRING)
         return;
 
     enum SiliconFrontierChallengeType challengeType = SiliconFrontier_GetTypeFromCurrentChallenge();
@@ -1315,9 +1359,11 @@ void SiliconFrontier_SetPartnerDamage(void)
     if (SiliconFrontier_GetCurrentStreak(facility,challengeType, sparringType) == 0)
         return;
 
+    struct Pokemon *partnerParty = gParties[B_TRAINER_PARTNER];
+
     for (u32 partyIndex = 0; partyIndex < FRONTIER_MULTI_PARTY_SIZE; partyIndex++)
     {
-        struct Pokemon *mon = &gParties[B_TRAINER_PARTNER][partyIndex];
+        struct Pokemon *mon = &partnerParty[partyIndex];
 
         u32 status = SiliconFrontier_GetPartnerStatus(partyIndex);
         u16 hp = SiliconFrontier_GetPartnerHP(partyIndex);
@@ -1333,4 +1379,18 @@ void SiliconFrontier_SetPartnerDamage(void)
             SetMonData(mon, MON_DATA_PP1 + moveIndex, &pp);
         }
     }
+
+    SiliconFrontier_SwapBeforeFaintedMons();
+}
+
+bool8 SiliconFrontier_CountPartnerNonFaintedMons(void)
+{
+    u32 count = 0;
+    for (u32 partyIndex = 0; partyIndex < FRONTIER_MULTI_PARTY_SIZE; partyIndex++)
+    {
+        struct Pokemon *mon = &gParties[B_TRAINER_PARTNER][partyIndex];
+        if(GetMonData(mon, MON_DATA_HP) > 0)
+            count++;
+    }
+    return count;
 }
