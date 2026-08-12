@@ -52,6 +52,7 @@ u32 CanHealPlayer(void);
 u32 GetTakeWildItemsOption(void);
 
 // Battle Settings: Move Healing
+bool32 IsBattlerAllowedToHeal(enum BattlerId battler);
 u32 IsPlayerAllowedToUseHealingMoves(u8 battlerId, u16 moveId);
 
 // Battle Settings: First Pokémon Catch

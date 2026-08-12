@@ -52,7 +52,6 @@
 #include "pokedex.h"
 #include "test/battle.h"
 
-static void PlayerHandleMidBattleEvolution(enum BattlerId battler); // midBattleEvolution
 static void PlayerHandleLoadMonSprite(enum BattlerId battler);
 static void PlayerHandleDrawTrainerPic(enum BattlerId battler);
 static void PlayerHandleTrainerSlide(enum BattlerId battler);
@@ -2443,11 +2442,13 @@ static void Controller_WaitForEvo(enum BattlerId battler)
         gBattleEnvironment = sSavedBattleEnvironment; // Evolution changes terrain.
         AllocateMonSpritesGfx(); // We need to allocate gfx for mons again
         UpdateStatsAfterLevelUp(sMidBattleEvolvedPartyId);
+        //  Update species in gBattleMons
+        gBattleMons[battler].species = GetMonData(&gParties[B_TRAINER_PLAYER][sMidBattleEvolvedPartyId], MON_DATA_SPECIES);
         ReshowBattleScreenAfterMenu();
     }
 }
 
-static void PlayerHandleMidBattleEvolution(enum BattlerId battler)
+void PlayerHandleMidBattleEvolution(enum BattlerId battler)
 {
     // Don't evolve abruptly, wait a couple of frames.
     if (++sMidBattleEvoFramesCount == 30)
@@ -2457,7 +2458,7 @@ static void PlayerHandleMidBattleEvolution(enum BattlerId battler)
 
         sMidBattleEvoFramesCount = 0;
         sSavedBattleEnvironment = gBattleEnvironment;
-        FreeAllWindowBuffers();
+        CloseMainBattleScreen();
 
         gCB2_AfterEvolution = BattleMainCB2;
         EvolutionScene(&gParties[B_TRAINER_PLAYER][monId], species, TRUE, monId);

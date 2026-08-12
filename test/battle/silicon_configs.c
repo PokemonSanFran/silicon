@@ -6,6 +6,7 @@
 #include "pokedex.h"
 #include "malloc.h"
 #include "constants/characters.h"
+#include "test/overworld_script.h"
 
 #define MON_TO_USE SPECIES_TSAREENA
 
@@ -592,9 +593,9 @@ AI_SINGLE_BATTLE_TEST("OPTIONS (BATTLE): Switch Style (SET)")
     }
 }
 
-/*
-AI_SINGLE_BATTLE_TEST("OPTIONS (BATTLE): Mid Battle Evo (ON)")
+AI_SINGLE_BATTLE_TEST("OPTIONS (BATTLE): Mid Battle Evo (ON) (Level Up)")
 {
+    //  EVO_LEVEL
     //  Necessary for being able to get exp
     gSaveBlock2Ptr->optionsBattle[BATTLE_OPTIONS_PLAYER_LEVEL] = BATTLE_OPTION_LEVEL_NO_CAP;
     gSaveBlock2Ptr->optionsBattle[BATTLE_OPTIONS_EXP_MULTIPLIER] = BATTLE_OPTION_MULTIPLIER_1;
@@ -608,9 +609,186 @@ AI_SINGLE_BATTLE_TEST("OPTIONS (BATTLE): Mid Battle Evo (ON)")
     } WHEN {
         TURN { }
         TURN { }
+    } THEN {
+        EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_SPECIES), SPECIES_TESTING_ERRATIC);
+        EXPECT_EQ(player->species, SPECIES_TESTING_ERRATIC);
     }
 }
-*/
+
+AI_SINGLE_BATTLE_TEST("OPTIONS (BATTLE): Mid Battle Evo (ON) (Level Up, Battle Only)")
+{
+    //  EVO_LEVEL_BATTLE_ONLY
+    //  Necessary for being able to get exp
+    gSaveBlock2Ptr->optionsBattle[BATTLE_OPTIONS_PLAYER_LEVEL] = BATTLE_OPTION_LEVEL_NO_CAP;
+    gSaveBlock2Ptr->optionsBattle[BATTLE_OPTIONS_EXP_MULTIPLIER] = BATTLE_OPTION_MULTIPLIER_1;
+
+    gSaveBlock2Ptr->optionsBattle[BATTLE_OPTIONS_MID_BATTLE_EVOLUTION] = BATTLE_OPTION_MID_BATTLE_EVOLUTION_ON;
+
+    GIVEN {
+        PLAYER(SPECIES_TANDEMAUS) { Level(46); }
+        OPPONENT(SPECIES_WOBBUFFET) { Moves(MOVE_MEMENTO); }
+        OPPONENT(SPECIES_WOBBUFFET) { Moves(MOVE_CELEBRATE); }
+    } WHEN {
+        TURN { }
+        TURN { }
+    } THEN {
+        EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_SPECIES), SPECIES_MAUSHOLD_FOUR);
+        EXPECT_EQ(player->species, SPECIES_MAUSHOLD_FOUR);
+    }
+}
+
+AI_SINGLE_BATTLE_TEST("OPTIONS (BATTLE): Mid Battle Evo (ON) (Level Up, Weather)")
+{
+    //  EVO_LEVEL, IF_WEATHER
+    //  Necessary for being able to get exp
+    gSaveBlock2Ptr->optionsBattle[BATTLE_OPTIONS_PLAYER_LEVEL] = BATTLE_OPTION_LEVEL_NO_CAP;
+    gSaveBlock2Ptr->optionsBattle[BATTLE_OPTIONS_EXP_MULTIPLIER] = BATTLE_OPTION_MULTIPLIER_1;
+
+    gSaveBlock2Ptr->optionsBattle[BATTLE_OPTIONS_MID_BATTLE_EVOLUTION] = BATTLE_OPTION_MID_BATTLE_EVOLUTION_ON;
+
+    GIVEN {
+        PLAYER(SPECIES_SLIGGOO) { Level(49); }
+        OPPONENT(SPECIES_CHANSEY) { Moves(MOVE_MEMENTO); }
+        OPPONENT(SPECIES_WOBBUFFET) { Moves(MOVE_CELEBRATE); }
+    } WHEN {
+        TURN { MOVE(player, MOVE_RAIN_DANCE); }
+        TURN { }
+    } THEN {
+        EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_SPECIES), SPECIES_GOODRA);
+        EXPECT_EQ(player->species, SPECIES_GOODRA);
+    }
+}
+
+AI_SINGLE_BATTLE_TEST("OPTIONS (BATTLE): Mid Battle Evo (ON) (Level Up, Knows Move)")
+{
+    //  EVO_LEVEL, IF_KNOWS_MOVE
+    //  Necessary for being able to get exp
+    gSaveBlock2Ptr->optionsBattle[BATTLE_OPTIONS_PLAYER_LEVEL] = BATTLE_OPTION_LEVEL_NO_CAP;
+    gSaveBlock2Ptr->optionsBattle[BATTLE_OPTIONS_EXP_MULTIPLIER] = BATTLE_OPTION_MULTIPLIER_1;
+
+    gSaveBlock2Ptr->optionsBattle[BATTLE_OPTIONS_MID_BATTLE_EVOLUTION] = BATTLE_OPTION_MID_BATTLE_EVOLUTION_ON;
+
+    GIVEN {
+        PLAYER(SPECIES_GIRAFARIG) { Level(49); }
+        OPPONENT(SPECIES_CHANSEY) { Moves(MOVE_MEMENTO); }
+        OPPONENT(SPECIES_WOBBUFFET) { Moves(MOVE_CELEBRATE); }
+    } WHEN {
+        TURN { MOVE(player, MOVE_TWIN_BEAM); }
+        TURN { }
+    } THEN {
+        EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_SPECIES), SPECIES_FARIGIRAF);
+        EXPECT_EQ(player->species, SPECIES_FARIGIRAF);
+    }
+}
+
+AI_SINGLE_BATTLE_TEST("OPTIONS (BATTLE): Mid Battle Evo (ON) (Level Up, Type in party)")
+{
+    //  EVO_LEVEL, IF_TYPE_IN_PARTY
+    //  Necessary for being able to get exp
+    gSaveBlock2Ptr->optionsBattle[BATTLE_OPTIONS_PLAYER_LEVEL] = BATTLE_OPTION_LEVEL_NO_CAP;
+    gSaveBlock2Ptr->optionsBattle[BATTLE_OPTIONS_EXP_MULTIPLIER] = BATTLE_OPTION_MULTIPLIER_1;
+
+    gSaveBlock2Ptr->optionsBattle[BATTLE_OPTIONS_MID_BATTLE_EVOLUTION] = BATTLE_OPTION_MID_BATTLE_EVOLUTION_ON;
+
+    GIVEN {
+        PLAYER(SPECIES_PANCHAM) { Level(44); }
+        PLAYER(SPECIES_ABSOL);
+        OPPONENT(SPECIES_CHANSEY) { Moves(MOVE_MEMENTO); }
+        OPPONENT(SPECIES_WOBBUFFET) { Moves(MOVE_CELEBRATE); }
+    } WHEN {
+        TURN { }
+        TURN { }
+    } THEN {
+        EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_SPECIES), SPECIES_PANGORO);
+        EXPECT_EQ(player->species, SPECIES_PANGORO);
+    }
+}
+
+AI_SINGLE_BATTLE_TEST("OPTIONS (BATTLE): Mid Battle Evo (ON) (Level Up, Use move X times)")
+{
+    //  EVO_LEVEL, _IF_USED_MOVE_X_TIMES
+    //  Had to edit the number of times the move needed to be used to fit within MAX_TURNS
+    //  Necessary for being able to get exp
+    gSaveBlock2Ptr->optionsBattle[BATTLE_OPTIONS_PLAYER_LEVEL] = BATTLE_OPTION_LEVEL_NO_CAP;
+    gSaveBlock2Ptr->optionsBattle[BATTLE_OPTIONS_EXP_MULTIPLIER] = BATTLE_OPTION_MULTIPLIER_1;
+
+    gSaveBlock2Ptr->optionsBattle[BATTLE_OPTIONS_MID_BATTLE_EVOLUTION] = BATTLE_OPTION_MID_BATTLE_EVOLUTION_ON;
+
+    GIVEN {
+        PLAYER(SPECIES_PRIMEAPE) { Level(53); }
+        OPPONENT(SPECIES_GROUDON) { Moves(MOVE_CURSE, MOVE_MEMENTO); }
+        OPPONENT(SPECIES_WOBBUFFET) { Moves(MOVE_CELEBRATE); }
+    } WHEN {
+        TURN { MOVE(player, MOVE_RAGE_FIST); }
+        TURN { MOVE(player, MOVE_RAGE_FIST); }
+        TURN { MOVE(player, MOVE_RAGE_FIST); }
+        TURN { MOVE(player, MOVE_RAGE_FIST); }
+        TURN { MOVE(player, MOVE_RAGE_FIST); }
+        TURN { MOVE(player, MOVE_RAGE_FIST); }
+        TURN { MOVE(player, MOVE_RAGE_FIST); }
+        TURN { MOVE(player, MOVE_RAGE_FIST); }
+        TURN { MOVE(player, MOVE_RAGE_FIST); }
+        TURN { MOVE(player, MOVE_RAGE_FIST); }
+        TURN { }
+    } THEN {
+        EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_SPECIES), SPECIES_ANNIHILAPE);
+        EXPECT_EQ(player->species, SPECIES_ANNIHILAPE);
+    }
+}
+
+AI_SINGLE_BATTLE_TEST("OPTIONS (BATTLE): Mid Battle Evo (ON) (Shedinja)")
+{
+    //  EVO_SPLIT_FORM_EVO
+    //  Necessary for being able to get exp
+    gSaveBlock2Ptr->optionsBattle[BATTLE_OPTIONS_PLAYER_LEVEL] = BATTLE_OPTION_LEVEL_NO_CAP;
+    gSaveBlock2Ptr->optionsBattle[BATTLE_OPTIONS_EXP_MULTIPLIER] = BATTLE_OPTION_MULTIPLIER_1;
+
+    gSaveBlock2Ptr->optionsBattle[BATTLE_OPTIONS_MID_BATTLE_EVOLUTION] = BATTLE_OPTION_MID_BATTLE_EVOLUTION_ON;
+
+    RUN_OVERWORLD_SCRIPT(
+        additem ITEM_POKE_BALL;
+    );
+
+    GIVEN {
+        PLAYER(SPECIES_NINCADA) { Level(40); }
+        OPPONENT(SPECIES_WOBBUFFET) { Moves(MOVE_MEMENTO); }
+        OPPONENT(SPECIES_WOBBUFFET) { Moves(MOVE_CELEBRATE); }
+    } WHEN {
+        TURN { }
+        TURN { }
+    } THEN {
+        EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_SPECIES), SPECIES_NINJASK);
+        EXPECT_EQ(player->species, SPECIES_NINJASK);
+        EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][1], MON_DATA_SPECIES), SPECIES_SHEDINJA);
+    }
+}
+
+AI_SINGLE_BATTLE_TEST("OPTIONS (BATTLE): Mid Battle Evo (ON) (Kingambit)")
+{
+    //  EVO_LEVEL + IF_DEFEAT_X_WITH_ITEMS
+    //  Necessary for being able to get exp
+    gSaveBlock2Ptr->optionsBattle[BATTLE_OPTIONS_PLAYER_LEVEL] = BATTLE_OPTION_LEVEL_NO_CAP;
+    gSaveBlock2Ptr->optionsBattle[BATTLE_OPTIONS_EXP_MULTIPLIER] = BATTLE_OPTION_MULTIPLIER_1;
+
+    gSaveBlock2Ptr->optionsBattle[BATTLE_OPTIONS_MID_BATTLE_EVOLUTION] = BATTLE_OPTION_MID_BATTLE_EVOLUTION_ON;
+
+    GIVEN {
+        AI_FLAGS(AI_FLAG_SEQUENCE_SWITCHING);
+        PLAYER(SPECIES_BISHARP) { Level(71); Ability(ABILITY_PRESSURE); }
+        OPPONENT(SPECIES_BISHARP) { HP(1); Moves(MOVE_MEMENTO); Item(ITEM_LEADERS_CREST); }
+        OPPONENT(SPECIES_BISHARP) { HP(1); Moves(MOVE_MEMENTO); Item(ITEM_LEADERS_CREST); }
+        OPPONENT(SPECIES_BISHARP) { HP(1); Moves(MOVE_MEMENTO); Item(ITEM_LEADERS_CREST); }
+        OPPONENT(SPECIES_WOBBUFFET) { Moves(MOVE_CELEBRATE); }
+    } WHEN {
+        TURN { MOVE(player, MOVE_SCRATCH); }
+        TURN { MOVE(player, MOVE_SCRATCH); }
+        TURN { MOVE(player, MOVE_SCRATCH); }
+        TURN { }
+    } THEN {
+        EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_SPECIES), SPECIES_KINGAMBIT);
+        EXPECT_EQ(player->species, SPECIES_KINGAMBIT);
+    }
+}
 
 SINGLE_BATTLE_TEST("OPTIONS (BATTLE): Fainted mon (Allowed)")
 {
@@ -993,4 +1171,155 @@ SINGLE_BATTLE_TEST("OPTIONS (VISUAL): Text Speed", u32 frames)
         EXPECT_GT(results[1].frames, results[2].frames);
         EXPECT_GT(results[2].frames, results[3].frames);
     }
+}
+
+SINGLE_BATTLE_TEST("OPTIONS (BATTLE): Move Healing (Primary effect")
+{
+    GIVEN {
+        gSaveBlock2Ptr->optionsBattle[BATTLE_OPTIONS_MOVE_HEALING] = BATTLE_OPTION_MOVE_HEALING_DISABLED;
+        PLAYER(SPECIES_WOBBUFFET) { HP(100); MaxHP(200); }
+        OPPONENT(SPECIES_WOBBUFFET) { HP(100); MaxHP(200); }
+    } WHEN {
+        TURN { MOVE(player, MOVE_RECOVER); MOVE(opponent, MOVE_RECOVER); }
+    } SCENE {
+        NONE_OF {
+            ANIMATION(ANIM_TYPE_MOVE, MOVE_RECOVER, player);
+            HP_BAR(player);
+        }
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_RECOVER, opponent);
+        HP_BAR(opponent);
+    } THEN {
+        EXPECT_EQ(player->hp, 100);
+        EXPECT_EQ(opponent->hp, 200);
+    }
+}
+
+SINGLE_BATTLE_TEST("OPTIONS (BATTLE): Move Healing (Secondary effect, Absorb)")
+{
+    GIVEN {
+        gSaveBlock2Ptr->optionsBattle[BATTLE_OPTIONS_MOVE_HEALING] = BATTLE_OPTION_MOVE_HEALING_DISABLED;
+        PLAYER(SPECIES_WOBBUFFET) { HP(100); MaxHP(200); }
+        OPPONENT(SPECIES_WOBBUFFET) { HP(100); MaxHP(200); }
+    } WHEN {
+        TURN { MOVE(player, MOVE_ABSORB); MOVE(opponent, MOVE_ABSORB); }
+    } SCENE {
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_ABSORB, player);
+        HP_BAR(opponent);
+        NOT HP_BAR(player);
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_ABSORB, opponent);
+        HP_BAR(player);
+        HP_BAR(opponent);
+    } THEN {
+        EXPECT_GT(opponent->hp, player->hp);
+    }
+}
+
+SINGLE_BATTLE_TEST("OPTIONS (BATTLE): Move Healing (Secondary effect, Strength Sap)")
+{
+    GIVEN {
+        gSaveBlock2Ptr->optionsBattle[BATTLE_OPTIONS_MOVE_HEALING] = BATTLE_OPTION_MOVE_HEALING_DISABLED;
+        PLAYER(SPECIES_WOBBUFFET) { HP(100); MaxHP(200); }
+        OPPONENT(SPECIES_WOBBUFFET) { HP(100); MaxHP(200); }
+    } WHEN {
+        TURN { MOVE(player, MOVE_STRENGTH_SAP); MOVE(opponent, MOVE_STRENGTH_SAP); }
+    } SCENE {
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_STRENGTH_SAP, player);
+        ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, opponent);
+        NOT HP_BAR(player);
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_STRENGTH_SAP, opponent);
+        ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, player);
+        HP_BAR(opponent);
+    } THEN {
+        EXPECT_GT(opponent->hp, player->hp);
+    }
+}
+
+SINGLE_BATTLE_TEST("OPTIONS (BATTLE): Move Healing (Secondary effect, Dream Eater)")
+{
+    GIVEN {
+        gSaveBlock2Ptr->optionsBattle[BATTLE_OPTIONS_MOVE_HEALING] = BATTLE_OPTION_MOVE_HEALING_DISABLED;
+        PLAYER(SPECIES_KOMALA) { HP(100); MaxHP(200); }
+        OPPONENT(SPECIES_KOMALA) { HP(100); MaxHP(200); }
+    } WHEN {
+        TURN { MOVE(player, MOVE_SOAK); MOVE(opponent, MOVE_SOAK); }
+        TURN { MOVE(player, MOVE_DREAM_EATER); MOVE(opponent, MOVE_DREAM_EATER); }
+    } SCENE {
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_DREAM_EATER, player);
+        HP_BAR(opponent);
+        NOT HP_BAR(player);
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_DREAM_EATER, opponent);
+        HP_BAR(player);
+        HP_BAR(opponent);
+    } THEN {
+        EXPECT_GT(opponent->hp, player->hp);
+    }
+}
+
+AI_SINGLE_BATTLE_TEST("OPTIONS (BATTLE): Opponent Items (On)")
+{
+    GIVEN {
+        gSaveBlock2Ptr->optionsBattle[BATTLE_OPTIONS_OPPONENTS_ITEMS] = BATTLE_OPTION_OPPONENTS_ITEMS_ALLOWED;
+        gSiliconTestVariables.opponentHasItems = TRUE;
+        AI_FLAGS(AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_CHECK_VIABILITY | AI_FLAG_TRY_TO_FAINT);
+        PLAYER(SPECIES_WOBBUFFET) { Moves(MOVE_CRUNCH, MOVE_CELEBRATE); }
+        OPPONENT(SPECIES_WOBBUFFET) { Moves(MOVE_CELEBRATE); HP(1); }
+    } WHEN {
+        TURN { MOVE(player, MOVE_CELEBRATE); }
+    } SCENE {
+        HP_BAR(opponent);
+    } THEN {
+        EXPECT_EQ(opponent->hp, opponent->maxHP);
+    }
+}
+
+AI_SINGLE_BATTLE_TEST("OPTIONS (BATTLE): Opponent Items (Off)")
+{
+    GIVEN {
+        gSaveBlock2Ptr->optionsBattle[BATTLE_OPTIONS_OPPONENTS_ITEMS] = BATTLE_OPTION_OPPONENTS_ITEMS_DISABLED;
+        gSiliconTestVariables.opponentHasItems = TRUE;
+        AI_FLAGS(AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_CHECK_VIABILITY | AI_FLAG_TRY_TO_FAINT);
+        PLAYER(SPECIES_WOBBUFFET) { Moves(MOVE_CRUNCH, MOVE_CELEBRATE); }
+        OPPONENT(SPECIES_WOBBUFFET) { Moves(MOVE_CELEBRATE); HP(1); }
+    } WHEN {
+        TURN { MOVE(player, MOVE_CELEBRATE); }
+    } SCENE {
+        NOT HP_BAR(opponent);
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_CELEBRATE, opponent);
+    } THEN {
+        EXPECT_EQ(opponent->hp, 1);
+    }
+}
+
+TEST("OPTIONS (BATTLE): Trainer Scaling (Off)")
+{
+    RUN_OVERWORLD_SCRIPT(
+        givemon SPECIES_WOBBUFFET, 50
+    );
+    gSaveBlock2Ptr->optionsBattle[BATTLE_OPTIONS_TRAINER_SCALING] = BATTLE_OPTION_TRAINER_SCALING_OFF;
+    struct Pokemon *testParty = Alloc(6 * sizeof(struct Pokemon));
+    u32 currTrainer = 15;
+    CreateNPCTrainerPartyFromTrainer(testParty, GetTrainerStructFromId(currTrainer), TRUE, BATTLE_TYPE_TRAINER);
+
+    EXPECT_EQ(GetMonData(&testParty[0], MON_DATA_SPECIES), SPECIES_WYNAUT);
+    EXPECT_EQ(GetMonData(&testParty[0], MON_DATA_LEVEL), 1);
+    EXPECT_EQ(GetMonData(&testParty[1], MON_DATA_SPECIES), SPECIES_WOBBUFFET);
+    EXPECT_EQ(GetMonData(&testParty[1], MON_DATA_LEVEL), 100);
+
+    Free(testParty);
+}
+
+TEST("OPTIONS (BATTLE): Trainer Scaling (Level)")
+{
+    RUN_OVERWORLD_SCRIPT(
+        givemon SPECIES_WOBBUFFET, 50
+    );
+    gSaveBlock2Ptr->optionsBattle[BATTLE_OPTIONS_TRAINER_SCALING] = BATTLE_OPTION_TRAINER_SCALING_LEVEL;
+    struct Pokemon *testParty = Alloc(6 * sizeof(struct Pokemon));
+    u32 currTrainer = 15;
+    CreateNPCTrainerPartyFromTrainer(testParty, GetTrainerStructFromId(currTrainer), TRUE, BATTLE_TYPE_TRAINER);
+
+    EXPECT_GT(GetMonData(&testParty[0], MON_DATA_LEVEL), 1);
+    EXPECT_LT(GetMonData(&testParty[1], MON_DATA_LEVEL), 100);
+
+    Free(testParty);
 }

@@ -756,17 +756,24 @@ static bool32 IsBattlerOwnedByPlayer(u8 battlerId)
     return TRUE;
 }
 
+bool32 IsBattlerAllowedToHeal(enum BattlerId battler)
+{
+    return !(GetBattlerSide(battler) == B_SIDE_PLAYER
+          && GetMoveHealingOption() == BATTLE_OPTION_MOVE_HEALING_DISABLED
+          && IsBattlerOwnedByPlayer(battler));
+}
+
 u32 IsPlayerAllowedToUseHealingMoves(u8 battlerId, u16 moveId)
 {
-    if (GetBattlerSide(battlerId) == B_SIDE_PLAYER
-     && GetMoveHealingOption() == BATTLE_OPTION_MOVE_HEALING_DISABLED
-     && IsBattlerOwnedByPlayer(battlerId))
+    if (!IsBattlerAllowedToHeal(battlerId))
     {
+        //  Only stop moves whose primary effect is healing
         switch (gMovesInfo[moveId].effect)
         {
-        case EFFECT_ABSORB:
-        case EFFECT_STRENGTH_SAP:
-        case EFFECT_DREAM_EATER:
+        //  These 3 cases are handled in their respective move resolution steps
+        //case EFFECT_ABSORB:
+        //case EFFECT_STRENGTH_SAP:
+        //case EFFECT_DREAM_EATER:
         case EFFECT_MORNING_SUN:
         case EFFECT_SYNTHESIS:
         case EFFECT_MOONLIGHT:
@@ -774,6 +781,7 @@ u32 IsPlayerAllowedToUseHealingMoves(u8 battlerId, u16 moveId)
         case EFFECT_REST:
         case EFFECT_ROOST:
         case EFFECT_HEALING_WISH:
+        case EFFECT_LUNAR_DANCE:
         case EFFECT_WISH:
         case EFFECT_HEAL_PULSE:
         case EFFECT_JUNGLE_HEALING:

@@ -12,6 +12,7 @@
 #include "item.h"
 #include "battle_controllers.h"
 #include "move.h"
+#include "options_battle.h" // siliconTests
 #include "constants/battle_move_resolution.h"
 
 static void ValidateBattlers(void);
@@ -2652,7 +2653,12 @@ static enum MoveEndResult MoveEndAbsorb(struct BattleCalcValues *cv)
     switch (cv->moveEffect)
     {
     case EFFECT_STRENGTH_SAP:
-        if (gBattleStruct->passiveHpUpdate[cv->battlerAtk] > 0 && !IsBattlerUnaffectedByMove(cv->battlerDef))
+        // Start Battle Settings: Move Healing
+        // if (gBattleStruct->passiveHpUpdate[cv->battlerAtk] > 0 && !IsBattlerUnaffectedByMove(cv->battlerDef))
+        if (gBattleStruct->passiveHpUpdate[cv->battlerAtk] > 0
+         && !IsBattlerUnaffectedByMove(cv->battlerDef)
+         && IsBattlerAllowedToHeal(cv->battlerAtk))
+        // End Battle Settings: Move Healing
         {
             s32 healAmount = gBattleStruct->passiveHpUpdate[cv->battlerAtk];
             SetHealScript(cv, healAmount);
@@ -2663,7 +2669,11 @@ static enum MoveEndResult MoveEndAbsorb(struct BattleCalcValues *cv)
     case EFFECT_DREAM_EATER:
         if (gBattleStruct->moveDamage[cv->battlerDef] > 0
          && IsBattlerTurnDamaged(cv->battlerDef, INCLUDING_SUBSTITUTES)
-         && IsBattlerAlive(cv->battlerAtk))
+        // Start Battle Settings: Move Healing
+         //&& IsBattlerAlive(cv->battlerAtk))
+         && IsBattlerAlive(cv->battlerAtk)
+         && IsBattlerAllowedToHeal(cv->battlerAtk))
+        // End Battle Settings: Move Healing
         {
             s32 healAmount = (gBattleStruct->moveDamage[cv->battlerDef] * GetMoveAbsorbPercentage(cv->move) / 100);
             SetHealScript(cv, healAmount);
