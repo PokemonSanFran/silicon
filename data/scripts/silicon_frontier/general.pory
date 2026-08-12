@@ -454,16 +454,6 @@ script SiliconFrontier_Script_AdjustPartyQuit
     goto(SiliconFrontier_Script_QuitAttendant)
 }
 
-script Debug_ToggleBosses
-{
-    msgbox(format("what boss do you want to unlock?"))
-    dynmultichoice(0,0,TRUE,5,0,NULL,"Pua","Baiya","Ami_Argento","Tala","Dimu","Adaora","Emrys","Magnus","Bd","Charlotte","Neriene","Frank","Shinzo","Kei_Ying","Belen","Eleanor")
-    callnative(DebugToggleBosses)
-    msgbox(format("done"))
-    closemessage
-    end
-}
-
 script SiliconFrontier_Script_FacePlayerUp
 {
     turnobject(LOCALID_PLAYER,DIR_NORTH)
