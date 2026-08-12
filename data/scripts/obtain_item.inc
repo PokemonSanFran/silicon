@@ -41,7 +41,10 @@ EventScript_BufferItemsPocket::
 
 EventScript_BufferKeyItemsPocket::
 	bufferstdstring STR_VAR_3, STDSTRING_KEYITEMS
-	call_if_eq VAR_0x8007, TRUE, EventScript_PlayFanfareObtainedItem
+    // Start siliconMerge
+	//call_if_eq VAR_0x8007, TRUE, EventScript_PlayFanfareObtainedItem
+	call_if_eq VAR_0x8007, TRUE, EventScript_PlayFanfareObtainedKeyItem
+    // End siliconMerge
 	return
 
 EventScript_BufferPokeballsPocket::
@@ -120,6 +123,12 @@ EventScript_NoRoomForItem::
 EventScript_PlayFanfareObtainedItem::
 	playfanfare MUS_OBTAIN_ITEM
 	return
+
+// Start siliconMusic
+EventScript_PlayFanfareObtainedKeyItem::
+	playfanfare MUS_OBTAIN_KEY_ITEM
+	return
+// End siliconMusic
 
 EventScript_PlayFanfareObtainedTMHM::
 	playfanfare MUS_OBTAIN_TMHM

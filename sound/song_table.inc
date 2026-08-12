@@ -376,7 +376,7 @@ gSongTable::
 	song mus_level_up, MUSIC_PLAYER_SE2, 2
 	song mus_heal, MUSIC_PLAYER_SE2, 2
 	song mus_obtain_badge, MUSIC_PLAYER_SE2, 2
-	song mus_obtain_item, MUSIC_PLAYER_SE2, 2
+	song mus_obtain_item, MUSIC_PLAYER_SE1, 1
 	song mus_evolved, MUSIC_PLAYER_SE2, 2
 	song mus_obtain_tmhm, MUSIC_PLAYER_SE2, 2
 	song mus_lilycove_museum, MUSIC_PLAYER_BGM, 0
@@ -664,6 +664,7 @@ gSongTable::
 	song mus_mermereza_gym, MUSIC_PLAYER_BGM, 0
 	song mus_oroland_night, MUSIC_PLAYER_BGM, 0
 	song mus_victory_tournament, MUSIC_PLAYER_BGM, 0
+	song mus_obtain_key_item, MUSIC_PLAYER_SE2, 0
 	song ph_trap_blend, MUSIC_PLAYER_SE2, 2
 	song ph_trap_held, MUSIC_PLAYER_SE2, 2
 	song ph_trap_solo, MUSIC_PLAYER_SE2, 2

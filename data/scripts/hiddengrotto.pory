@@ -67,6 +67,7 @@ script HiddenGrotto_Script_StartSecret
 script HiddenGrotto_Script_GetItem
 {
 	callnative(HiddenGrotto_LoadItemBallScript)
+    copyvar(VAR_TEMP_4,VAR_RESULT)
     finditem(VAR_RESULT,VAR_0x8009)
     call(Common_EventScript_StoryItem)
 }
