@@ -128,7 +128,7 @@
 #define FLAG_EDUCATED_FOG_ROUTE11                                    0x41
 #define FLAG_EDUCATED_FOG_ROUTE5                                     0x42
 //#define FLAG_ADVENTURE_STARTED                                     0x43 // RECEIVED                                                     Pokédex.
-#define FLAG_SILICON_UNUSED_0x44                                     0x44
+#define FLAG_SILICON_FRONTIER_SWAPPED_PARTNER                        0x44
 #define FLAG_IS_RESIDO_CHAMPION                                      0x45
 #define FLAG_LOCKEDOUT_PLAYED                                        0x46
 #define FLAG_PLAYED_CATCH_TUTORIAL                                   0x47
