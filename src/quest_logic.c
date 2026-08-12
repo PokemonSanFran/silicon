@@ -4052,6 +4052,58 @@ void Script_Quest_ManOfManyHats_ClearForcedTextSpeedFastFlag(void)
 {
     gTextFlags.forceFastTextSpeed = FALSE;
 }
+
+void DebugQuest_SetArcadeAsVisibleNPC(void)
+{
+    gSpecialVar_Result = FALSE;
+
+    if(Quest_ManOfManyHats_ManOfManyHatsSeenAllJobs() == FALSE)
+        return;
+
+    if (IsQuestActiveState(QUEST_MANOFMANYHATS))
+        return;
+
+    SetVariableBit(VAR_QUEST_MANOFMANYHATS,SEEN_INSTALLNATUREPROBESWORKER_3RD + 3,TRUE);
+    gSpecialVar_Result = TRUE;
+}
+
+void DebugQuest_ManOfManyHats(u8 state)
+{
+    switch (state)
+    {
+        default:
+        case STATE_QUEST_MANOFMANYHATS_NOT_STARTED:
+            FlagSet(FLAG_SYS_STARTER_APPS_GET);            
+            JumpPlayerTo_YoungPadawan(JUMP_DEBUG);
+            DebugQuest_InstallNatureProbes(STATE_QUEST_INSTALLNATUREPROBES_COMPLETE);
+            break;
+        case STATE_QUEST_MANOFMANYHATS_BOBA_VISITED:
+            Quest_ManOfManyHats_ManOfManyHatsIncrementBoba();
+            break;
+        case STATE_QUEST_MANOFMANYHATS_FISH_VISITED:
+            Quest_ManOfManyHats_ManOfManyHatsIncrementBoba();
+            Quest_ManOfManyHats_ManOfManyHatsIncrementFish();
+            break;
+        case STATE_QUEST_MANOFMANYHATS_STARTED:
+            Quest_ManOfManyHats_ManOfManyHatsIncrementBoba();
+            Quest_ManOfManyHats_ManOfManyHatsIncrementFish();
+            Quest_ManOfManyHats_ManOfManyHatsIncrementArcade();
+            DebugQuest_SetArcadeAsVisibleNPC();
+            QuestMenu_ScriptSetActive(QUEST_MANOFMANYHATS);
+            break;
+        case STATE_QUEST_MANOFMANYHATS_OUTPOST_VISITED:
+            Quest_ManOfManyHats_SetDoorUnlockBit();
+            break;
+        case STATE_QUEST_MANOFMANYHATS_HEADPHONES_PICKED_UP:
+            Quest_ManOfManyHats_SetDoorUnlockBit();
+            AddBagItem(ITEM_QUEST_MANOFMANYHATS_HEADPHONES, 1);
+            break;
+        case STATE_QUEST_MANOFMANYHATS_COMPLETE:
+            FlagSet(FLAG_ITEM_QUEST_MANOFMANYHATS_HEADPHONES);
+            QuestMenu_ScriptSetComplete(QUEST_MANOFMANYHATS);
+            break;
+    }
+}
 // ***********************************************************************
 // Cutscene: Earthquake
 // ***********************************************************************

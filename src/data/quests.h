@@ -3260,7 +3260,66 @@ const struct SideQuest sSideQuests[QUEST_COUNT] =
         .sprite = OBJ_EVENT_GFX_INSTALLNATUREPROBES_RANGER,
         .spritetype = QUEST_SPRITE_TYPE_OBJECT,
         .subquests = NULL,
-        .numSubquests = 0
+        .numSubquests = 0,
+        .states =
+        {
+            [STATE_QUEST_MANOFMANYHATS_NOT_STARTED] = 
+            {
+                .name = COMPOUND_STRING("Not Started"),
+                .setupFunc = DebugQuest_ManOfManyHats,
+                side_quest_map(MAP_QUEST_MANOFMANYHATS),
+                .warpId = 0,
+            },
+            [STATE_QUEST_MANOFMANYHATS_BOBA_VISITED] = 
+            {
+                .name = COMPOUND_STRING("Visited Waiter"),
+                .setupFunc = DebugQuest_ManOfManyHats,
+                side_quest_map(MAP_QUEST_MANOFMANYHATS),
+                .warpId = 0,
+            },
+            [STATE_QUEST_MANOFMANYHATS_FISH_VISITED] = 
+            {
+                .name = COMPOUND_STRING("Visited Fisherman"),
+                .setupFunc = DebugQuest_ManOfManyHats,
+                side_quest_map(MAP_QUEST_MANOFMANYHATS),
+                .warpId = 0,
+            },
+            [STATE_QUEST_MANOFMANYHATS_ARCADE_VISITED] = 
+            {
+                .name = COMPOUND_STRING("Visited Attendant"),
+                .setupFunc = DebugQuest_ManOfManyHats,
+                side_quest_map(MAP_QUEST_MANOFMANYHATS),
+                .warpId = 0,
+            },
+            [STATE_QUEST_MANOFMANYHATS_STARTED] = 
+            {
+                .name = COMPOUND_STRING("Started"),
+                .setupFunc = DebugQuest_ManOfManyHats,
+                side_quest_map(MAP_QUEST_MANOFMANYHATS),
+                .warpId = 0,
+            },
+            [STATE_QUEST_MANOFMANYHATS_OUTPOST_VISITED] = 
+            {
+                .name = COMPOUND_STRING("Visited Outpost"),
+                .setupFunc = DebugQuest_ManOfManyHats,
+                side_quest_map(MAP_QUEST_MANOFMANYHATS),
+                .warpId = 0,
+            },
+            [STATE_QUEST_MANOFMANYHATS_HEADPHONES_PICKED_UP] = 
+            {
+                .name = COMPOUND_STRING("Got the Headphones"),
+                .setupFunc = DebugQuest_ManOfManyHats,
+                side_quest_map(MAP_QUEST_MANOFMANYHATS),
+                .warpId = 0,
+            },
+            [STATE_QUEST_MANOFMANYHATS_COMPLETE] = 
+            {
+                .name = COMPOUND_STRING("Complete"),
+                .setupFunc = DebugQuest_ManOfManyHats,
+                side_quest_map(MAP_QUEST_MANOFMANYHATS),
+                .warpId = 0,
+            }
+        },
     },
     [QUEST_RECRUITLOCALARTISTS] =
     {
