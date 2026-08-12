@@ -1250,3 +1250,87 @@ void Script_SiliconFrontier_CanBattleBeRecorded(void)
 {
     VarSet(VAR_TEMP_E,SiliconFrontier_CanBattleBeRecorded());
 }
+
+void SiliconFrontier_ResetPartnerDamage(void)
+{
+    enum SiliconFrontierFacility facility = SiliconFrontier_GetFacilityFromCurrentChallenge();
+
+    if (facility == SILICON_FACILITY_SPARRING)
+        return;
+
+    for (u32 partyIndex = 0; partyIndex < FRONTIER_MULTI_PARTY_SIZE; partyIndex++)
+    {
+        gSaveBlock2Ptr->frontier.partnerSparring[partyIndex].status = 0;
+        gSaveBlock2Ptr->frontier.partnerSparring[partyIndex].hp = 0;
+        gSaveBlock2Ptr->frontier.partnerSparring[partyIndex].heldItem = 0;
+
+        for (u32 moveIndex = 0; moveIndex < MAX_MON_MOVES; moveIndex++)
+            gSaveBlock2Ptr->frontier.partnerSparring[partyIndex].pp[moveIndex] = 0;
+    }
+}
+
+void SiliconFrontier_RecordPartnerDamage(void)
+{
+    enum SiliconFrontierFacility facility = SiliconFrontier_GetFacilityFromCurrentChallenge();
+
+    if (facility == SILICON_FACILITY_SPARRING)
+        return;
+
+    for (u32 partyIndex = 0; partyIndex < FRONTIER_MULTI_PARTY_SIZE; partyIndex++)
+    {
+        struct Pokemon *mon = &gParties[B_TRAINER_PARTNER][partyIndex];
+
+        SiliconFrontier_SetPartnerStatus(partyIndex, GetMonData(mon, MON_DATA_STATUS));
+        SiliconFrontier_SetPartnerHP(partyIndex, GetMonData(mon, MON_DATA_HP));
+        SiliconFrontier_SetPartnerHeldItem(partyIndex, GetMonData(mon, MON_DATA_HELD_ITEM));
+
+        for (u32 moveIndex = 0; moveIndex < MAX_MON_MOVES; moveIndex++)
+            SiliconFrontier_SetPartnerPP(partyIndex, moveIndex, GetMonData(mon, MON_DATA_PP1 + moveIndex));
+    }
+}
+
+void SiliconFroniter_HealUpdateDamage(void)
+{
+    enum SiliconFrontierFacility facility = SiliconFrontier_GetFacilityFromCurrentChallenge();
+
+    if (facility == SILICON_FACILITY_SPARRING)
+        return;
+
+    for (u32 i = 0; i < gPartiesCount[B_TRAINER_PARTNER]; i++)
+        HealPokemon(&gParties[B_TRAINER_PARTNER][i]);
+
+    SiliconFrontier_RecordPartnerDamage();
+}
+
+void SiliconFrontier_SetPartnerDamage(void)
+{
+    enum SiliconFrontierFacility facility = SiliconFrontier_GetFacilityFromCurrentChallenge();
+
+    if (facility == SILICON_FACILITY_SPARRING)
+        return;
+
+    enum SiliconFrontierChallengeType challengeType = SiliconFrontier_GetTypeFromCurrentChallenge();
+    enum SiliconFrontierSparringTypes sparringType = SiliconFrontier_GetCurrentChallengeSparringType();
+
+    if (SiliconFrontier_GetCurrentStreak(facility,challengeType, sparringType) == 0)
+        return;
+
+    for (u32 partyIndex = 0; partyIndex < FRONTIER_MULTI_PARTY_SIZE; partyIndex++)
+    {
+        struct Pokemon *mon = &gParties[B_TRAINER_PARTNER][partyIndex];
+
+        u32 status = SiliconFrontier_GetPartnerStatus(partyIndex);
+        u16 hp = SiliconFrontier_GetPartnerHP(partyIndex);
+        enum Item item = SiliconFrontier_GetPartnerHeldItem(partyIndex);
+
+        SetMonData(mon, MON_DATA_STATUS, &status);
+        SetMonData(mon, MON_DATA_HP, &hp);
+        SetMonData(mon, MON_DATA_HELD_ITEM, &item);
+
+        for (u32 moveIndex = 0; moveIndex < MAX_MON_MOVES; moveIndex++)
+        {
+            u32 pp = SiliconFrontier_GetPartnerPP(partyIndex, moveIndex);
+            SetMonData(mon, MON_DATA_PP1 + moveIndex, &pp);
+        }
+    }
+}

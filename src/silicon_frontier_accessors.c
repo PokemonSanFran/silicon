@@ -347,3 +347,42 @@ enum SiliconFrontierSparringTypes SiliconFrontier_GetLastSparringType(enum Silic
     return gSaveBlock2Ptr->frontier.lastChallenge[facility].sparringType;
 }
 
+u32 SiliconFrontier_GetPartnerStatus(u32 partyIndex)
+{
+    return gSaveBlock2Ptr->frontier.partnerSparring[partyIndex].status;
+}
+
+u16 SiliconFrontier_GetPartnerHP(u32 partyIndex)
+{
+    return gSaveBlock2Ptr->frontier.partnerSparring[partyIndex].hp;
+}
+
+enum Item SiliconFrontier_GetPartnerHeldItem(u32 partyIndex)
+{
+    return gSaveBlock2Ptr->frontier.partnerSparring[partyIndex].heldItem;
+}
+
+u8 SiliconFrontier_GetPartnerPP(u32 partyIndex, u32 moveIndex)
+{
+    return gSaveBlock2Ptr->frontier.partnerSparring[partyIndex].pp[moveIndex];
+}
+
+void SiliconFrontier_SetPartnerStatus(u32 partyIndex, u32 status)
+{
+    gSaveBlock2Ptr->frontier.partnerSparring[partyIndex].status = status;
+}
+
+void SiliconFrontier_SetPartnerHP(u32 partyIndex, u32 hp)
+{
+    gSaveBlock2Ptr->frontier.partnerSparring[partyIndex].hp = hp;
+}
+
+void SiliconFrontier_SetPartnerHeldItem(u32 partyIndex, enum Item item)
+{
+    gSaveBlock2Ptr->frontier.partnerSparring[partyIndex].heldItem = item;
+}
+
+void SiliconFrontier_SetPartnerPP(u32 partyIndex, u32 moveIndex, u32 pp)
+{
+    gSaveBlock2Ptr->frontier.partnerSparring[partyIndex].pp[moveIndex] = pp;
+}

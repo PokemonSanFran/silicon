@@ -25,7 +25,7 @@ script SiliconFrontier_Dialogue_AskResume
         return
     }
     callnative(SiliconFrontier_SetCurrentChallengeFromLastChallenge)
-    goto(SiliconFrontier_Script_ChoosePartyMons)
+    goto(SiliconFrontier_Script_SetFacilityAndPickSparringType)
 }
 
 script SiliconFroniter_Dialogue_AskMenu
@@ -115,8 +115,14 @@ script SiliconFrontier_Script_RegisterChallenge
     dynmultipush("Never mind.",MULTI_B_PRESSED)
     dynmultistack(0, 0, FALSE, 3, TRUE, 0, NULL)
     goto_if_eq(VAR_RESULT,MULTI_B_PRESSED,SiliconFrontier_Script_QuitAttendant)
-    callnative(SiliconFrontier_SetCurrentChallengeFacilityFromMap)
+
     callnative(SiliconFrontier_SetCurrentChallengeChallengeTypeFromVarResult)
+    goto(SiliconFrontier_Script_SetFacilityAndPickSparringType)
+}
+
+script SiliconFrontier_Script_SetFacilityAndPickSparringType
+{
+    callnative(SiliconFrontier_SetCurrentChallengeFacilityFromMap)
     call(RestrictedSparring_Script_PickSparringType)
     call(RestrictedSparring_Script_HandleHealsBeforeChallenge)
     goto(SiliconFrontier_Script_ChoosePartyMons)
@@ -187,6 +193,7 @@ script SiliconFrontier_Script_StartBattle
     callnative(LevelUpAllPokemonForFrontier)
 
     callnative(SiliconFrontier_SetUpOpponent)
+    callnative(SiliconFrontier_SetPartnerDamage)
 
     call(SiliconFrontier_Script_RefreshOpponentObjects)
     call(SiliconFrontier_Movement_MoveOpponentsIntoPosition)
@@ -212,10 +219,7 @@ script SiliconFrontier_Script_WonBattle
     variableaddbp(VAR_0x8007,TRUE)
     call(SiliconFrontier_Movement_MoveBattlersOutOfBattle)
     callnative(Script_SiliconFrontier_GetFacilityFromCurrentChallenge)
-    if (var(VAR_TEMP_F) != SILICON_FACILITY_SPARRING)
-    {
-        bypass_healblock
-    }
+    call(SiliconFrontier_Script_HealOrRecordDamage)
     call(SiliconFrontier_Movement_CueAttendant)
     hidebpbox
     waitse
@@ -223,6 +227,18 @@ script SiliconFrontier_Script_WonBattle
     call_if_ne(VAR_RESULT,SILICON_FRONTIER_BOSS_PHASE_COUNT,SiliconFrontier_Dialogue_AwardBadge)
     clearflag(FLAG_TEMP_12)
     goto(SiliconFrontier_Script_BattleMenu)
+}
+
+script SiliconFrontier_Script_HealOrRecordDamage
+{
+    if (var(VAR_TEMP_F) != SILICON_FACILITY_SPARRING)
+    {
+        bypass_healblock
+    }
+    else
+    {
+        callnative(SiliconFrontier_RecordPartnerDamage)
+    }
 }
 
 script SiliconFrontier_Script_TryShowQuitMenuOption

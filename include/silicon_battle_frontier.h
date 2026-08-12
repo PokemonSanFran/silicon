@@ -11,6 +11,7 @@ const u8* SiliconFrontier_GetBattleText(enum SiliconFrontierSpeechStrings string
 
 bool32 SiliconFrontier_ShouldSpeciesBeBlockedFromFrontier(enum Species species);
 u32 SiliconFroniter_CountCaughtBlockedSpecies(void);
+void SiliconFroniter_HealUpdateDamage(void);
 
 struct SiliconFrontierStreaks
 {

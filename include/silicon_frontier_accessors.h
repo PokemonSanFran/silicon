@@ -38,5 +38,13 @@ enum SiliconFrontierFacility SiliconFrontier_GetFacilityFromLastChallenge(void);
 enum SiliconFrontierChallengeType SiliconFrontier_GetTypeFromLastChallenge(enum SiliconFrontierFacility facility);
 enum SiliconFrontierSparringTypes SiliconFrontier_GetCurrentChallengeSparringType(void);
 enum SiliconFrontierSparringTypes SiliconFrontier_GetLastSparringType(enum SiliconFrontierFacility facility);
+void SiliconFrontier_SetPartnerPP(u32 partyIndex, u32 moveIndex, u32 pp);
+void SiliconFrontier_SetPartnerHeldItem(u32 partyIndex, enum Item item);
+void SiliconFrontier_SetPartnerHP(u32 partyIndex, u32 hp);
+void SiliconFrontier_SetPartnerStatus(u32 partyIndex, u32 status);
+u8 SiliconFrontier_GetPartnerPP(u32 partyIndex, u32 moveIndex);
+enum Item SiliconFrontier_GetPartnerHeldItem(u32 partyIndex);
+u16 SiliconFrontier_GetPartnerHP(u32 partyIndex);
+u32 SiliconFrontier_GetPartnerStatus(u32 partyIndex);
 
 #endif // GUARD_SILICON_FRONTIER_ACCESSORS_H

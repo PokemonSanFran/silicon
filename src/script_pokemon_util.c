@@ -51,6 +51,9 @@ void HealPlayerParty(void)
 // End siliconMerge
     for (i = 0; i < gPartiesCount[B_TRAINER_PLAYER]; i++)
         HealPokemon(&gParties[B_TRAINER_PLAYER][i]);
+    // Start siliconFrontier
+    SiliconFroniter_HealUpdateDamage();
+    // End siliconFrontier
     if (OW_PC_HEAL >= GEN_8)
         HealPlayerBoxes();
 
