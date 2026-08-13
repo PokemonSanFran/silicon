@@ -531,18 +531,18 @@ static void Menu_InitWindows(void)
 	CopyWindowToVram(WINDOW_1, 3);
 }
 
+static const u32 screenOptionNumber[] = 
+{
+    [GAME_SETTINGS] = NUM_OPTIONS_GAME_SETTINGS,
+    [BATTLE_SETTINGS] = NUM_OPTIONS_BATTLE_SETTINGS,
+    [VISUAL_SETTINGS] = NUM_OPTIONS_VISUAL_SETTINGS,
+    [MUSIC_SETTINGS] = NUM_OPTIONS_MUSIC_SETTINGS,
+    [RANDOM_SETTINGS] = NUM_OPTIONS_RANDOM_SETTINGS,
+};
+
 static u8 GetCurrentScreenOptionNumber(){
 
     u32 value = OptionsMenu_GetCurrentScreenId();
-    const u32 screenOptionNumber[] = 
-    {
-        [GAME_SETTINGS] = NUM_OPTIONS_GAME_SETTINGS,
-        [BATTLE_SETTINGS] = NUM_OPTIONS_BATTLE_SETTINGS,
-        [VISUAL_SETTINGS] = NUM_OPTIONS_VISUAL_SETTINGS,
-        [MUSIC_SETTINGS] = NUM_OPTIONS_MUSIC_SETTINGS,
-        [RANDOM_SETTINGS] = NUM_OPTIONS_RANDOM_SETTINGS,
-    };
-
     return screenOptionNumber[value];
 }
 
@@ -1087,66 +1087,17 @@ static const u8 Preset_Options[NUM_OF_PRESET_OPTIONS][NUM_MAX_SETTINGS][MAX_OPTI
 
 void HandlePresetData()
 {
-	u8 i;
+    u32 maxNumber = GetCurrentScreenOptionNumber();
+    u32 settings = OptionsMenu_GetCurrentScreenId();
 
-	if(AreYouOnCustomPresetData()){
-		switch(OptionsMenu_GetCurrentScreenId()){
-			case GAME_SETTINGS:
-				for(i = 1 ;i < NUM_OPTIONS_GAME_SETTINGS; i++){
-					TemporalOptions[GAME_SETTINGS][i] = gSaveBlock2Ptr->options[GAME_SETTINGS][i];
-				}
-				break;
-			case BATTLE_SETTINGS:
-				for(i = 1 ;i < NUM_OPTIONS_BATTLE_SETTINGS; i++){
-					TemporalOptions[BATTLE_SETTINGS][i] = gSaveBlock2Ptr->options[BATTLE_SETTINGS][i];
-				}
-				break;
-			case VISUAL_SETTINGS:
-				for(i = 1 ;i < NUM_OPTIONS_VISUAL_SETTINGS; i++){
-					TemporalOptions[VISUAL_SETTINGS][i] = gSaveBlock2Ptr->options[VISUAL_SETTINGS][i];
-				}
-				break;
-			case MUSIC_SETTINGS:
-				for(i = 1 ;i < NUM_OPTIONS_MUSIC_SETTINGS; i++){
-					TemporalOptions[MUSIC_SETTINGS][i] = gSaveBlock2Ptr->options[MUSIC_SETTINGS][i];
-				}
-				break;
-			case RANDOM_SETTINGS:
-				for(i = 1 ;i < NUM_OPTIONS_RANDOM_SETTINGS; i++){
-					TemporalOptions[RANDOM_SETTINGS][i] = gSaveBlock2Ptr->options[RANDOM_SETTINGS][i];
-				}
-				break;
-		}
-	}
-	else{
-		switch(OptionsMenu_GetCurrentScreenId()){
-			case GAME_SETTINGS:
-				for(i = 1 ;i < NUM_OPTIONS_GAME_SETTINGS; i++){
-					TemporalOptions[GAME_SETTINGS][i] = Preset_Options[GAME_SETTINGS][TemporalOptions[GAME_SETTINGS][0]][i];
-				}
-				break;
-			case BATTLE_SETTINGS:
-				for(i = 1 ;i < NUM_OPTIONS_BATTLE_SETTINGS; i++){
-					TemporalOptions[BATTLE_SETTINGS][i] = Preset_Options[BATTLE_SETTINGS][TemporalOptions[BATTLE_SETTINGS][0]][i];
-				}
-				break;
-			case VISUAL_SETTINGS:
-				for(i = 1 ;i < NUM_OPTIONS_VISUAL_SETTINGS; i++){
-					TemporalOptions[VISUAL_SETTINGS][i] = Preset_Options[VISUAL_SETTINGS][TemporalOptions[VISUAL_SETTINGS][0]][i];
-				}
-				break;
-			case MUSIC_SETTINGS:
-				for(i = 1 ;i < NUM_OPTIONS_MUSIC_SETTINGS; i++){
-					TemporalOptions[MUSIC_SETTINGS][i] = Preset_Options[MUSIC_SETTINGS][TemporalOptions[MUSIC_SETTINGS][0]][i];
-				}
-				break;
-			case RANDOM_SETTINGS:
-				for(i = 1 ;i < NUM_OPTIONS_RANDOM_SETTINGS; i++){
-					TemporalOptions[RANDOM_SETTINGS][i] = Preset_Options[RANDOM_SETTINGS][TemporalOptions[RANDOM_SETTINGS][0]][i];
-				}
-				break;
-		}
-	}
+    if(AreYouOnCustomPresetData()){
+        for (u32 i = 1; i < maxNumber; i++)
+            TemporalOptions[settings][i] = gSaveBlock2Ptr->options[settings][i];
+    }
+    else{
+        for (u32 i = 1; i < maxNumber; i++)
+            TemporalOptions[settings][i] = Preset_Options[settings][TemporalOptions[settings][0]][i];
+    }
 }
 
 bool8 AreYouOnCustomPresetData()
