@@ -4,6 +4,7 @@
 #include "constants/cries.h"
 #include "options_music.h"
 #include "overworld.h"
+#include "ui_pokedex.h"
 #include "quest_logic.h"
 #include "sound.h"
 #include "constants/species.h"
@@ -58,10 +59,12 @@ void PreviewBGM(u32 currentOptionId, u32 musicOption)
                 ResetCurrentlyPlayingMusic();
             break;
         case MUSIC_OPTIONS_MUTE_SOUNDFX:
-            return;
+            if (!musicOption)
+                PlaySE(SE_WARP_OUT);
+            break;
         case MUSIC_OPTIONS_MUTE_CRIES:
             if (!musicOption)
-                PlayCry_NormalNoDucking(Random() % NUM_SPECIES, 0, CRY_VOLUME_RS, CRY_PRIORITY_NORMAL);
+                PlayCry_NormalNoDucking(GetRandomSpeciesInResidoDex(), 0, CRY_VOLUME_RS, CRY_PRIORITY_NORMAL);
             break;
         case MUSIC_OPTIONS_MUTE_FANFARES:
             if (!musicOption)
