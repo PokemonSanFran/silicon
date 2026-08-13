@@ -31,6 +31,7 @@
 #include "task.h"
 #include "text_window.h"
 #include "overworld.h"
+#include "trig.h"
 #include "event_data.h"
 #include "constants/items.h"
 #include "constants/field_weather.h"
@@ -48,7 +49,14 @@
 //==========DEFINES==========//
 struct MenuResources
 {
-	MainCallback savedCallback;     // determines callback to run when we exit. e.g. where do we want to go after closing the menu
+	MainCallback savedCallback;
+    u8 spriteIds[OPTIONS_SPRITE_ID_ARROW_COUNT];
+    bool8 shouldShowDiscardDialogue;
+    u8 currentOptionId;
+    u8 currentScreenId;
+    u8 currentFirstOption;
+    bool8 areYouNotOnSettingsHub;
+    u8 TemporalOptions[SETTINGS_COUNT][NUM_OPTIONS_MAX_SETTINGS];
 };
 
 enum WindowIds
@@ -93,6 +101,15 @@ static void InitializeBackgroundsAndLoadBackgroundGraphics(void);
 static bool32 AllocZeroedTilemapBuffers(void);
 static void HandleAndShowBgs(void);
 static void SetScheduleBgs(u32 backgroundId);
+static void SpriteCallback_UpArrow(struct Sprite *sprite);
+static void CreateUpArrowSprite(void);
+static void SpriteCallback_DownArrow(struct Sprite *sprite);
+static void CreateDownArrowSprite(void);
+static void SpriteCallback_LeftArrow(struct Sprite *sprite);
+static void CreateLeftArrowSprite(void);
+static void SpriteCallback_RightArrow(struct Sprite *sprite);
+static void CreateRightArrowSprite(void);
+static void ResetAllSpriteIds(void);
 
 u8 OptionsMenu_GetSavedOptions(u32 category, u32 setting)
 {
@@ -106,72 +123,16 @@ void OptionsMenu_SetSavedOptions(u32 category, u32 setting, u32 value)
 
 void CopyTemporalDataToSaveBlockData()
 {
-	u8 i, j;
-
-	for(i = 0 ;i < NUM_OF_PRESET_OPTIONS; i++){
-		switch(i){
-			case GAME_SETTINGS:
-				for(j = 0 ;j < NUM_OPTIONS_GAME_SETTINGS; j++){
-					gSaveBlock2Ptr->options[GAME_SETTINGS][j] = TemporalOptions[i][j];
-				}
-				break;
-			case BATTLE_SETTINGS:
-				for(j = 0 ;j < NUM_OPTIONS_BATTLE_SETTINGS; j++){
-					gSaveBlock2Ptr->options[BATTLE_SETTINGS][j] = TemporalOptions[i][j];
-				}
-				break;
-			case VISUAL_SETTINGS:
-				for(j = 0 ;j < NUM_OPTIONS_VISUAL_SETTINGS; j++){
-					gSaveBlock2Ptr->options[VISUAL_SETTINGS][j] = TemporalOptions[i][j];
-				}
-				break;
-			case MUSIC_SETTINGS:
-				for(j = 0 ;j < NUM_OPTIONS_MUSIC_SETTINGS; j++){
-					gSaveBlock2Ptr->options[MUSIC_SETTINGS][j] = TemporalOptions[i][j];
-				}
-				break;
-			case RANDOM_SETTINGS:
-				for(j = 0 ;j < NUM_OPTIONS_RANDOM_SETTINGS; j++){
-					gSaveBlock2Ptr->options[RANDOM_SETTINGS][j] = TemporalOptions[i][j];
-				}
-				break;
-		}
-	}
+	for(u32 i = 0 ;i < NUM_OF_PRESET_OPTIONS; i++)
+        for(u32 j = 0 ;j < NUM_OPTIONS_GAME_SETTINGS; j++)
+            gSaveBlock2Ptr->options[i][j] = TemporalOptions[i][j];
 }
 
 void CopySaveBlockDataToTemporalData()
 {
-	u8 i, j;
-
-	for(i = 0 ;i < NUM_OF_PRESET_OPTIONS; i++){
-		switch(i){
-			case GAME_SETTINGS:
-				for(j = 0 ;j < NUM_OPTIONS_GAME_SETTINGS; j++){
-					TemporalOptions[GAME_SETTINGS][j] = gSaveBlock2Ptr->options[GAME_SETTINGS][j];
-				}
-				break;
-			case BATTLE_SETTINGS:
-				for(j = 0 ;j < NUM_OPTIONS_BATTLE_SETTINGS; j++){
-					TemporalOptions[BATTLE_SETTINGS][j] = gSaveBlock2Ptr->options[BATTLE_SETTINGS][j];
-				}
-				break;
-			case VISUAL_SETTINGS:
-				for(j = 0 ;j < NUM_OPTIONS_VISUAL_SETTINGS; j++){
-					TemporalOptions[VISUAL_SETTINGS][j] = gSaveBlock2Ptr->options[VISUAL_SETTINGS][j];
-				}
-				break;
-			case MUSIC_SETTINGS:
-				for(j = 0 ;j < NUM_OPTIONS_MUSIC_SETTINGS; j++){
-					TemporalOptions[MUSIC_SETTINGS][j] = gSaveBlock2Ptr->options[MUSIC_SETTINGS][j];
-				}
-				break;
-			case RANDOM_SETTINGS:
-				for(j = 0 ;j < NUM_OPTIONS_RANDOM_SETTINGS; j++){
-					TemporalOptions[RANDOM_SETTINGS][j] = gSaveBlock2Ptr->options[RANDOM_SETTINGS][j];
-				}
-				break;
-		}
-	}
+	for(u32 i = 0 ;i < NUM_OF_PRESET_OPTIONS; i++)
+        for(u32 j = 0 ;j < NUM_OPTIONS_GAME_SETTINGS; j++)
+            TemporalOptions[i][j] = gSaveBlock2Ptr->options[i][j];
 }
 
 //==========CONST=DATA==========//
@@ -212,12 +173,19 @@ static const struct WindowTemplate sMenuWindowTemplates[] =
     DUMMY_WIN_TEMPLATE
 };
 
+
+static const u32 sCustomizationMenuUpArrow_Gfx[]        = INCGFX_U32("graphics/ui_menus/character_customization/up_arrow.png", ".4bpp.smol");
+static const u32 sCustomizationMenuDownArrow_Gfx[]      = INCGFX_U32("graphics/ui_menus/character_customization/down_arrow.png", ".4bpp.smol");
+static const u32 sCustomizationMenuLeftArrow_Gfx[]      = INCGFX_U32("graphics/ui_menus/character_customization/left_arrow.png", ".4bpp.smol");
+static const u32 sCustomizationMenuRightArrow_Gfx[]     = INCGFX_U32("graphics/ui_menus/character_customization/right_arrow.png", ".4bpp.smol");
+
 static const u32 sTMenuTiles[]   = INCGFX_U32("graphics/ui_menus/options_menu/tTiles.png", ".4bpp.smol");
 static const u32 sTMenuTilemap[] = INCBIN_U32("graphics/ui_menus/options_menu/tTiles.bin.smolTM");
 
 static const u32 sMenuTiles[]   = INCGFX_U32("graphics/ui_menus/options_menu/tiles.png", ".4bpp.smol");
 static const u32 sMenuTilemap[] = INCBIN_U32("graphics/ui_menus/options_menu/tiles.bin.smolTM");
 static const u16 sMenuPalette[] = INCGFX_U16("graphics/ui_menus/options_menu/palette_custom.pal", ".gbapal");
+static const struct SpritePalette sInterfaceSpritePalette[] = {{sMenuPalette, 0}};
 
 static const u16 sMenuPalette_Red[]      = INCGFX_U16("graphics/ui_menus/options_menu/palettes/red.pal", ".gbapal");
 static const u16 sMenuPalette_Black[]    = INCGFX_U16("graphics/ui_menus/options_menu/palettes/black.pal", ".gbapal");
@@ -379,6 +347,11 @@ static bool8 Menu_DoGfxSetup(void)
 			gMain.state++;
 			break;
 		case 6:
+            ResetAllSpriteIds();
+            CreateUpArrowSprite();
+            CreateDownArrowSprite();
+            CreateLeftArrowSprite();
+            CreateRightArrowSprite();
 			BeginNormalPaletteFade(PALETTES_ALL, 0, 16, 0, RGB_BLACK);
 			gMain.state++;
 			break;
@@ -471,6 +444,7 @@ static void SetScheduleBgs(u32 backgroundId)
 
 static void LoadOptionsMenuPalettes(void)
 {
+    LoadSpritePalette(sInterfaceSpritePalette);
     switch(gSaveBlock2Ptr->options[VISUAL_SETTINGS][VISUAL_OPTIONS_COLOR]){
         case VISUAL_OPTION_COLOR_BLACK:
             LoadPalette(sMenuPalette_Black, 0, 32);
@@ -611,9 +585,6 @@ static void PressedUpButton(){
 	}
 }
 
-#define OPTION_NAME_LENGTH 20
-#define MAX_OPTION_DESCRIPTION_LENGTH 400
-
 struct OptionData
 {
 	const u8* title;
@@ -646,110 +617,6 @@ static const u8 sOptionMenuArrow_Right[]     = INCGFX_U8("graphics/ui_menus/opti
 
 static const u8 sOptionMenuSelector[]       = INCGFX_U8("graphics/ui_menus/options_menu/selector.png", ".4bpp");
 // Preset
-
-static const struct OptionData Hub_Options[NUM_OF_PRESET_OPTIONS] = {
-	[GAME_SETTINGS] =
-	{
-		.title = COMPOUND_STRING("Game Settings"),
-		.options = {
-			COMPOUND_STRING("Default"),
-			COMPOUND_STRING("Speedrun"),
-			COMPOUND_STRING("Custom"),
-		},
-		.optionDescription = {
-			COMPOUND_STRING("Default Description"),
-			COMPOUND_STRING("Speedrun Description"),
-			COMPOUND_STRING("Custom Description"),
-		},
-		.numOptions = GAME_PRESET_COUNT,
-	},
-	[BATTLE_SETTINGS] =
-	{
-		.title = COMPOUND_STRING("Battle Settings"),
-		.options = {
-			COMPOUND_STRING("Default"),
-			COMPOUND_STRING("Challenge"),
-			COMPOUND_STRING("Speedrun"),
-			COMPOUND_STRING("Nuzlocke"),
-			COMPOUND_STRING("Kaizo"),
-			COMPOUND_STRING("Custom"),
-		},
-		.optionDescription = {
-			COMPOUND_STRING("Default Description"),
-			COMPOUND_STRING("Challenge Description"),
-			COMPOUND_STRING("Speedrun Description"),
-			COMPOUND_STRING("Nuzlocke Description"),
-			COMPOUND_STRING("Kaizo Description"),
-			COMPOUND_STRING("Custom Description"),
-		},
-		.numOptions = BATTLE_PRESET_COUNT,
-	},
-	[VISUAL_SETTINGS] =
-	{
-		.title = COMPOUND_STRING("Visual Settings"),
-		.options = {
-			COMPOUND_STRING("Default"),
-			COMPOUND_STRING("Speedrun"),
-			COMPOUND_STRING("Custom"),
-		},
-		.optionDescription = {
-			COMPOUND_STRING("Default Description"),
-			COMPOUND_STRING("Speedrun Description"),
-			COMPOUND_STRING("Custom Description"),
-		},
-		.numOptions = VISUAL_PRESET_COUNT,
-	},
-	[MUSIC_SETTINGS] =
-	{
-		.title = COMPOUND_STRING("Music Settings"),
-		.options = {
-			COMPOUND_STRING("PSF"),
-			COMPOUND_STRING("LGPE"),
-			COMPOUND_STRING("HGSS"),
-			COMPOUND_STRING("ORAS"),
-			COMPOUND_STRING("BDSP"),
-			COMPOUND_STRING("BW2"),
-			COMPOUND_STRING("XY"),
-			COMPOUND_STRING("USUM"),
-			COMPOUND_STRING("SWSH"),
-			COMPOUND_STRING("SV"),
-			COMPOUND_STRING("Custom"),
-		},
-		.optionDescription = {
-			COMPOUND_STRING("PSF Description"),
-			COMPOUND_STRING("LGPE Description"),
-			COMPOUND_STRING("HGSS Description"),
-			COMPOUND_STRING("ORAS Description"),
-			COMPOUND_STRING("BDSP Description"),
-			COMPOUND_STRING("BW2 Description"),
-			COMPOUND_STRING("XY Description"),
-			COMPOUND_STRING("USUM Description"),
-			COMPOUND_STRING("SWSH Description"),
-			COMPOUND_STRING("SV Description"),
-			COMPOUND_STRING("Custom Description"),
-		},
-		.numOptions = MUSIC_PRESET_COUNT,
-	},
-	[RANDOM_SETTINGS] =
-	{
-		.title = COMPOUND_STRING("Random Settings"),
-		.options = {
-			COMPOUND_STRING("Default"),
-			COMPOUND_STRING("Sane"),
-			COMPOUND_STRING("Crazy"),
-			COMPOUND_STRING("Total Chaos"),
-			COMPOUND_STRING("Custom"),
-		},
-		.optionDescription = {
-			COMPOUND_STRING("Default Description"),
-			COMPOUND_STRING("Sane Description"),
-			COMPOUND_STRING("Crazy Description"),
-			COMPOUND_STRING("Total Chaos Description"),
-			COMPOUND_STRING("Custom Description"),
-		},
-		.numOptions = RANDOM_PRESET_COUNT,
-	},
-};
 
 static const u8 Preset_Options[NUM_OF_PRESET_OPTIONS][NUM_MAX_SETTINGS][MAX_OPTIONS_PER_SETTING] = {
     [GAME_SETTINGS] =
@@ -976,150 +843,151 @@ static const u8 Preset_Options[NUM_OF_PRESET_OPTIONS][NUM_MAX_SETTINGS][MAX_OPTI
     },
     [MUSIC_SETTINGS] =
     {
-        [MUSIC_PRESET_DEFAULT]  = {
-            [MUSIC_OPTIONS_PRESET]           = MUSIC_PRESET_DEFAULT,
+        [MUSIC_OPTIONS_RESIDO]  = {
+            [MUSIC_OPTIONS_PRESET]           = MUSIC_OPTIONS_RESIDO,
             [MUSIC_OPTIONS_SPEAKER]          = OPTIONS_SOUND_STEREO,
-            [MUSIC_OPTIONS_SURF]             = MUSIC_PRESET_DEFAULT,
-            [MUSIC_OPTIONS_BIKE]             = MUSIC_PRESET_DEFAULT,
-            [MUSIC_OPTIONS_WILD]             = MUSIC_PRESET_DEFAULT,
-            [MUSIC_OPTIONS_TRAINER]          = MUSIC_PRESET_DEFAULT,
-            [MUSIC_OPTIONS_GYM]              = MUSIC_PRESET_DEFAULT,
-            [MUSIC_OPTIONS_TOURNAMENT]       = MUSIC_PRESET_DEFAULT,
-            [MUSIC_OPTIONS_CHAMPION]         = MUSIC_PRESET_DEFAULT,
+            [MUSIC_OPTIONS_SURF]             = MUSIC_OPTION_SURF_RESIDO,
+            [MUSIC_OPTIONS_BIKE]             = MUSIC_OPTION_BIKE_RESIDO,
+            [MUSIC_OPTIONS_WILD]             = MUSIC_OPTION_BATTLE_WILD_RESIDO,
+            [MUSIC_OPTIONS_TRAINER]          = MUSIC_OPTION_BATTLE_TRAINER_RESIDO,
+            [MUSIC_OPTIONS_GYM]              = MUSIC_OPTION_BATTLE_GYM_RESIDO,
+            [MUSIC_OPTIONS_TOURNAMENT]       = MUSIC_OPTION_BATTLE_TOURNAMENT_RESIDO,
+            [MUSIC_OPTIONS_CHAMPION]         = MUSIC_OPTION_BATTLE_CHAMPION_RESIDO,
             [MUSIC_OPTIONS_MUTE_MUSIC]        = MUSIC_OPTIONS_UNMUTED,
             [MUSIC_OPTIONS_MUTE_SOUNDFX]      = MUSIC_OPTIONS_UNMUTED,
             [MUSIC_OPTIONS_MUTE_CRIES]        = MUSIC_OPTIONS_UNMUTED,
             [MUSIC_OPTIONS_MUTE_FANFARES]     = MUSIC_OPTIONS_UNMUTED,
         },
-        [MUSIC_PRESET_LGPE]  = {
-            [MUSIC_OPTIONS_PRESET]           = MUSIC_PRESET_LGPE,
+        [MUSIC_OPTIONS_KANTO]  = {
+            [MUSIC_OPTIONS_PRESET]           = MUSIC_OPTIONS_KANTO,
             [MUSIC_OPTIONS_SPEAKER]          = OPTIONS_SOUND_STEREO,
-            [MUSIC_OPTIONS_SURF]             = MUSIC_PRESET_LGPE,
-            [MUSIC_OPTIONS_BIKE]             = MUSIC_PRESET_LGPE,
-            [MUSIC_OPTIONS_WILD]             = MUSIC_PRESET_LGPE,
-            [MUSIC_OPTIONS_TRAINER]          = MUSIC_PRESET_LGPE,
-            [MUSIC_OPTIONS_GYM]              = MUSIC_PRESET_LGPE,
-            [MUSIC_OPTIONS_TOURNAMENT]       = MUSIC_PRESET_LGPE,
-            [MUSIC_OPTIONS_CHAMPION]         = MUSIC_PRESET_LGPE,
+            [MUSIC_OPTIONS_SURF]             = MUSIC_OPTION_SURF_TOHJO,
+            [MUSIC_OPTIONS_BIKE]             = MUSIC_OPTION_BIKE_KANTO,
+            [MUSIC_OPTIONS_WILD]             = MUSIC_OPTION_BATTLE_WILD_KANTO,
+            [MUSIC_OPTIONS_TRAINER]          = MUSIC_OPTION_BATTLE_TRAINER_KANTO,
+            [MUSIC_OPTIONS_GYM]              = MUSIC_OPTION_BATTLE_GYM_KANTO,
+            [MUSIC_OPTIONS_TOURNAMENT]       = MUSIC_OPTION_BATTLE_TOURNAMENT_TOHJO,
+            [MUSIC_OPTIONS_CHAMPION]         = MUSIC_OPTION_BATTLE_CHAMPION_KANTO_OLD,
             [MUSIC_OPTIONS_MUTE_MUSIC]        = MUSIC_OPTIONS_UNMUTED,
             [MUSIC_OPTIONS_MUTE_SOUNDFX]      = MUSIC_OPTIONS_UNMUTED,
             [MUSIC_OPTIONS_MUTE_CRIES]        = MUSIC_OPTIONS_UNMUTED,
             [MUSIC_OPTIONS_MUTE_FANFARES]     = MUSIC_OPTIONS_UNMUTED,
         },
-        [MUSIC_PRESET_HGSS]  = {
-            [MUSIC_OPTIONS_PRESET]           = MUSIC_PRESET_HGSS,
+        [MUSIC_OPTIONS_JOHTO]  = {
+            [MUSIC_OPTIONS_PRESET]           = MUSIC_OPTIONS_JOHTO,
             [MUSIC_OPTIONS_SPEAKER]          = OPTIONS_SOUND_STEREO,
-            [MUSIC_OPTIONS_SURF]             = MUSIC_PRESET_HGSS,
-            [MUSIC_OPTIONS_BIKE]             = MUSIC_PRESET_HGSS,
-            [MUSIC_OPTIONS_WILD]             = MUSIC_PRESET_HGSS,
-            [MUSIC_OPTIONS_TRAINER]          = MUSIC_PRESET_HGSS,
-            [MUSIC_OPTIONS_GYM]              = MUSIC_PRESET_HGSS,
-            [MUSIC_OPTIONS_TOURNAMENT]       = MUSIC_PRESET_HGSS,
-            [MUSIC_OPTIONS_CHAMPION]         = MUSIC_PRESET_HGSS,
+            [MUSIC_OPTIONS_SURF]             = MUSIC_OPTION_SURF_TOHJO,
+            [MUSIC_OPTIONS_BIKE]             = MUSIC_OPTION_BIKE_JOHTO,
+            [MUSIC_OPTIONS_WILD]             = MUSIC_OPTION_BATTLE_WILD_JOHTO,
+            [MUSIC_OPTIONS_TRAINER]          = MUSIC_OPTION_BATTLE_TRAINER_JOHTO,
+            [MUSIC_OPTIONS_GYM]              = MUSIC_OPTION_BATTLE_GYM_JOHTO,
+            [MUSIC_OPTIONS_TOURNAMENT]       = MUSIC_OPTION_BATTLE_TOURNAMENT_TOHJO,
+            [MUSIC_OPTIONS_CHAMPION]         = MUSIC_OPTION_BATTLE_CHAMPION_KANTO_NEW,
             [MUSIC_OPTIONS_MUTE_MUSIC]        = MUSIC_OPTIONS_UNMUTED,
             [MUSIC_OPTIONS_MUTE_SOUNDFX]      = MUSIC_OPTIONS_UNMUTED,
             [MUSIC_OPTIONS_MUTE_CRIES]        = MUSIC_OPTIONS_UNMUTED,
             [MUSIC_OPTIONS_MUTE_FANFARES]     = MUSIC_OPTIONS_UNMUTED,
         },
-        [MUSIC_PRESET_ORAS]  = {
+        [MUSIC_OPTIONS_HOENN]  = {
+            [MUSIC_OPTIONS_PRESET]           = MUSIC_OPTIONS_HOENN,
             [MUSIC_OPTIONS_SPEAKER]          = OPTIONS_SOUND_STEREO,
-            [MUSIC_OPTIONS_SURF]             = MUSIC_PRESET_ORAS,
-            [MUSIC_OPTIONS_BIKE]             = MUSIC_PRESET_ORAS,
-            [MUSIC_OPTIONS_WILD]             = MUSIC_PRESET_ORAS,
-            [MUSIC_OPTIONS_TRAINER]          = MUSIC_PRESET_ORAS,
-            [MUSIC_OPTIONS_GYM]              = MUSIC_PRESET_ORAS,
-            [MUSIC_OPTIONS_TOURNAMENT]       = MUSIC_PRESET_ORAS,
-            [MUSIC_OPTIONS_CHAMPION]         = MUSIC_PRESET_ORAS,
+            [MUSIC_OPTIONS_SURF]             = MUSIC_OPTION_SURF_HOENN,
+            [MUSIC_OPTIONS_BIKE]             = MUSIC_OPTION_BIKE_HOENN,
+            [MUSIC_OPTIONS_WILD]             = MUSIC_OPTION_BATTLE_WILD_HOENN,
+            [MUSIC_OPTIONS_TRAINER]          = MUSIC_OPTION_BATTLE_TRAINER_HOENN,
+            [MUSIC_OPTIONS_GYM]              = MUSIC_OPTION_BATTLE_GYM_HOENN,
+            [MUSIC_OPTIONS_TOURNAMENT]       = MUSIC_OPTION_BATTLE_TOURNAMENT_HOENN,
+            [MUSIC_OPTIONS_CHAMPION]         = MUSIC_OPTION_BATTLE_CHAMPION_HOENN,
             [MUSIC_OPTIONS_MUTE_MUSIC]        = MUSIC_OPTIONS_UNMUTED,
             [MUSIC_OPTIONS_MUTE_SOUNDFX]      = MUSIC_OPTIONS_UNMUTED,
             [MUSIC_OPTIONS_MUTE_CRIES]        = MUSIC_OPTIONS_UNMUTED,
             [MUSIC_OPTIONS_MUTE_FANFARES]     = MUSIC_OPTIONS_UNMUTED,
         },
-        [MUSIC_PRESET_BDSP]  = {
-            [MUSIC_OPTIONS_PRESET]           = MUSIC_PRESET_BDSP,
+        [MUSIC_OPTIONS_SINNOH]  = {
+            [MUSIC_OPTIONS_PRESET]           = MUSIC_OPTIONS_SINNOH,
             [MUSIC_OPTIONS_SPEAKER]          = OPTIONS_SOUND_STEREO,
-            [MUSIC_OPTIONS_SURF]             = MUSIC_PRESET_BDSP,
-            [MUSIC_OPTIONS_BIKE]             = MUSIC_PRESET_BDSP,
-            [MUSIC_OPTIONS_WILD]             = MUSIC_PRESET_BDSP,
-            [MUSIC_OPTIONS_TRAINER]          = MUSIC_PRESET_BDSP,
-            [MUSIC_OPTIONS_GYM]              = MUSIC_PRESET_BDSP,
-            [MUSIC_OPTIONS_TOURNAMENT]       = MUSIC_PRESET_BDSP,
-            [MUSIC_OPTIONS_CHAMPION]         = MUSIC_PRESET_BDSP,
+            [MUSIC_OPTIONS_SURF]             = MUSIC_OPTION_SURF_SINNOH,
+            [MUSIC_OPTIONS_BIKE]             = MUSIC_OPTION_BIKE_SINNOH,
+            [MUSIC_OPTIONS_WILD]             = MUSIC_OPTION_BATTLE_WILD_SINNOH,
+            [MUSIC_OPTIONS_TRAINER]          = MUSIC_OPTION_BATTLE_TRAINER_SINNOH,
+            [MUSIC_OPTIONS_GYM]              = MUSIC_OPTION_BATTLE_GYM_SINNOH,
+            [MUSIC_OPTIONS_TOURNAMENT]       = MUSIC_OPTION_BATTLE_TOURNAMENT_SINNOH,
+            [MUSIC_OPTIONS_CHAMPION]         = MUSIC_OPTION_BATTLE_CHAMPION_SINNOH,
             [MUSIC_OPTIONS_MUTE_MUSIC]        = MUSIC_OPTIONS_UNMUTED,
             [MUSIC_OPTIONS_MUTE_SOUNDFX]      = MUSIC_OPTIONS_UNMUTED,
             [MUSIC_OPTIONS_MUTE_CRIES]        = MUSIC_OPTIONS_UNMUTED,
             [MUSIC_OPTIONS_MUTE_FANFARES]     = MUSIC_OPTIONS_UNMUTED,
         },
-        [MUSIC_PRESET_BW2]  = {
-            [MUSIC_OPTIONS_PRESET]           = MUSIC_PRESET_BW2,
+        [MUSIC_OPTIONS_UNOVA]  = {
+            [MUSIC_OPTIONS_PRESET]           = MUSIC_OPTIONS_UNOVA,
             [MUSIC_OPTIONS_SPEAKER]          = OPTIONS_SOUND_STEREO,
-            [MUSIC_OPTIONS_SURF]             = MUSIC_PRESET_BW2,
-            [MUSIC_OPTIONS_BIKE]             = MUSIC_PRESET_BW2,
-            [MUSIC_OPTIONS_WILD]             = MUSIC_PRESET_BW2,
-            [MUSIC_OPTIONS_TRAINER]          = MUSIC_PRESET_BW2,
-            [MUSIC_OPTIONS_GYM]              = MUSIC_PRESET_BW2,
-            [MUSIC_OPTIONS_TOURNAMENT]       = MUSIC_PRESET_BW2,
-            [MUSIC_OPTIONS_CHAMPION]         = MUSIC_PRESET_BW2,
+            [MUSIC_OPTIONS_SURF]             = MUSIC_OPTION_SURF_UNOVA,
+            [MUSIC_OPTIONS_BIKE]             = MUSIC_OPTION_BIKE_UNOVA,
+            [MUSIC_OPTIONS_WILD]             = MUSIC_OPTION_BATTLE_WILD_UNOVA,
+            [MUSIC_OPTIONS_TRAINER]          = MUSIC_OPTION_BATTLE_TRAINER_UNOVA,
+            [MUSIC_OPTIONS_GYM]              = MUSIC_OPTION_BATTLE_GYM_UNOVA,
+            [MUSIC_OPTIONS_TOURNAMENT]       = MUSIC_OPTION_BATTLE_TOURNAMENT_UNOVA,
+            [MUSIC_OPTIONS_CHAMPION]         = MUSIC_OPTION_BATTLE_CHAMPION_UNOVA_NEW,
             [MUSIC_OPTIONS_MUTE_MUSIC]        = MUSIC_OPTIONS_UNMUTED,
             [MUSIC_OPTIONS_MUTE_SOUNDFX]      = MUSIC_OPTIONS_UNMUTED,
             [MUSIC_OPTIONS_MUTE_CRIES]        = MUSIC_OPTIONS_UNMUTED,
             [MUSIC_OPTIONS_MUTE_FANFARES]     = MUSIC_OPTIONS_UNMUTED,
         },
-        [MUSIC_PRESET_XY]  = {
-            [MUSIC_OPTIONS_PRESET]           = MUSIC_PRESET_XY,
+        [MUSIC_OPTIONS_KALOS]  = {
+            [MUSIC_OPTIONS_PRESET]           = MUSIC_OPTIONS_KALOS,
             [MUSIC_OPTIONS_SPEAKER]          = OPTIONS_SOUND_STEREO,
-            [MUSIC_OPTIONS_SURF]             = MUSIC_PRESET_XY,
-            [MUSIC_OPTIONS_BIKE]             = MUSIC_PRESET_XY,
-            [MUSIC_OPTIONS_WILD]             = MUSIC_PRESET_XY,
-            [MUSIC_OPTIONS_TRAINER]          = MUSIC_PRESET_XY,
-            [MUSIC_OPTIONS_GYM]              = MUSIC_PRESET_XY,
-            [MUSIC_OPTIONS_TOURNAMENT]       = MUSIC_PRESET_XY,
-            [MUSIC_OPTIONS_CHAMPION]         = MUSIC_PRESET_XY,
+            [MUSIC_OPTIONS_SURF]             = MUSIC_OPTION_SURF_KALOS,
+            [MUSIC_OPTIONS_BIKE]             = MUSIC_OPTION_BIKE_KALOS,
+            [MUSIC_OPTIONS_WILD]             = MUSIC_OPTION_BATTLE_WILD_KALOS,
+            [MUSIC_OPTIONS_TRAINER]          = MUSIC_OPTION_BATTLE_TRAINER_KALOS,
+            [MUSIC_OPTIONS_GYM]              = MUSIC_OPTION_BATTLE_GYM_KALOS,
+            [MUSIC_OPTIONS_TOURNAMENT]       = MUSIC_OPTION_BATTLE_TOURNAMENT_KALOS,
+            [MUSIC_OPTIONS_CHAMPION]         = MUSIC_OPTION_BATTLE_CHAMPION_KALOS,
             [MUSIC_OPTIONS_MUTE_MUSIC]        = MUSIC_OPTIONS_UNMUTED,
             [MUSIC_OPTIONS_MUTE_SOUNDFX]      = MUSIC_OPTIONS_UNMUTED,
             [MUSIC_OPTIONS_MUTE_CRIES]        = MUSIC_OPTIONS_UNMUTED,
             [MUSIC_OPTIONS_MUTE_FANFARES]     = MUSIC_OPTIONS_UNMUTED,
         },
-        [MUSIC_PRESET_USUM]  = {
-            [MUSIC_OPTIONS_PRESET]           = MUSIC_PRESET_USUM,
+        [MUSIC_OPTIONS_ALOLA]  = {
+            [MUSIC_OPTIONS_PRESET]           = MUSIC_OPTIONS_ALOLA,
             [MUSIC_OPTIONS_SPEAKER]          = OPTIONS_SOUND_STEREO,
-            [MUSIC_OPTIONS_SURF]             = MUSIC_PRESET_USUM,
-            [MUSIC_OPTIONS_BIKE]             = MUSIC_PRESET_USUM,
-            [MUSIC_OPTIONS_WILD]             = MUSIC_PRESET_USUM,
-            [MUSIC_OPTIONS_TRAINER]          = MUSIC_PRESET_USUM,
-            [MUSIC_OPTIONS_GYM]              = MUSIC_PRESET_USUM,
-            [MUSIC_OPTIONS_TOURNAMENT]       = MUSIC_PRESET_USUM,
-            [MUSIC_OPTIONS_CHAMPION]         = MUSIC_PRESET_USUM,
+            [MUSIC_OPTIONS_SURF]             = MUSIC_OPTION_SURF_ALOLA,
+            [MUSIC_OPTIONS_BIKE]             = MUSIC_OPTION_BIKE_ALOLA,
+            [MUSIC_OPTIONS_WILD]             = MUSIC_OPTION_BATTLE_WILD_ALOLA,
+            [MUSIC_OPTIONS_TRAINER]          = MUSIC_OPTION_BATTLE_TRAINER_ALOLA,
+            [MUSIC_OPTIONS_GYM]              = MUSIC_OPTION_BATTLE_GYM_ALOLA,
+            [MUSIC_OPTIONS_TOURNAMENT]       = MUSIC_OPTION_BATTLE_TOURNAMENT_ALOLA,
+            [MUSIC_OPTIONS_CHAMPION]         = MUSIC_OPTION_BATTLE_CHAMPION_ALOLA,
             [MUSIC_OPTIONS_MUTE_MUSIC]        = MUSIC_OPTIONS_UNMUTED,
             [MUSIC_OPTIONS_MUTE_SOUNDFX]      = MUSIC_OPTIONS_UNMUTED,
             [MUSIC_OPTIONS_MUTE_CRIES]        = MUSIC_OPTIONS_UNMUTED,
             [MUSIC_OPTIONS_MUTE_FANFARES]     = MUSIC_OPTIONS_UNMUTED,
         },
-        [MUSIC_PRESET_SWSH]  = {
-            [MUSIC_OPTIONS_PRESET]           = MUSIC_PRESET_SWSH,
+        [MUSIC_OPTIONS_GALAR]  = {
+            [MUSIC_OPTIONS_PRESET]           = MUSIC_OPTIONS_GALAR,
             [MUSIC_OPTIONS_SPEAKER]          = OPTIONS_SOUND_STEREO,
-            [MUSIC_OPTIONS_SURF]             = MUSIC_PRESET_SWSH,
-            [MUSIC_OPTIONS_BIKE]             = MUSIC_PRESET_SWSH,
-            [MUSIC_OPTIONS_WILD]             = MUSIC_PRESET_SWSH,
-            [MUSIC_OPTIONS_TRAINER]          = MUSIC_PRESET_SWSH,
-            [MUSIC_OPTIONS_GYM]              = MUSIC_PRESET_SWSH,
-            [MUSIC_OPTIONS_TOURNAMENT]       = MUSIC_PRESET_SWSH,
-            [MUSIC_OPTIONS_CHAMPION]         = MUSIC_PRESET_SWSH,
+            [MUSIC_OPTIONS_SURF]             = MUSIC_OPTION_SURF_RESIDO,
+            [MUSIC_OPTIONS_BIKE]             = MUSIC_OPTION_BIKE_RESIDO,
+            [MUSIC_OPTIONS_WILD]             = MUSIC_OPTION_BATTLE_WILD_GALAR,
+            [MUSIC_OPTIONS_TRAINER]          = MUSIC_OPTION_BATTLE_TRAINER_GALAR,
+            [MUSIC_OPTIONS_GYM]              = MUSIC_OPTION_BATTLE_GYM_GALAR,
+            [MUSIC_OPTIONS_TOURNAMENT]       = MUSIC_OPTION_BATTLE_TOURNAMENT_GALAR,
+            [MUSIC_OPTIONS_CHAMPION]         = MUSIC_OPTION_BATTLE_CHAMPION_GALAR,
             [MUSIC_OPTIONS_MUTE_MUSIC]        = MUSIC_OPTIONS_UNMUTED,
             [MUSIC_OPTIONS_MUTE_SOUNDFX]      = MUSIC_OPTIONS_UNMUTED,
             [MUSIC_OPTIONS_MUTE_CRIES]        = MUSIC_OPTIONS_UNMUTED,
             [MUSIC_OPTIONS_MUTE_FANFARES]     = MUSIC_OPTIONS_UNMUTED,
         },
-        [MUSIC_PRESET_SV]  = {
-            [MUSIC_OPTIONS_PRESET]           = MUSIC_PRESET_SV,
+        [MUSIC_OPTIONS_PALDEA]  = {
+            [MUSIC_OPTIONS_PRESET]           = MUSIC_OPTIONS_PALDEA,
             [MUSIC_OPTIONS_SPEAKER]          = OPTIONS_SOUND_STEREO,
-            [MUSIC_OPTIONS_SURF]             = MUSIC_PRESET_DEFAULT,
-            [MUSIC_OPTIONS_BIKE]             = MUSIC_PRESET_DEFAULT,
-            [MUSIC_OPTIONS_WILD]             = MUSIC_PRESET_SV,
-            [MUSIC_OPTIONS_TRAINER]          = MUSIC_PRESET_SV,
-            [MUSIC_OPTIONS_GYM]              = MUSIC_PRESET_SV,
-            [MUSIC_OPTIONS_TOURNAMENT]       = MUSIC_PRESET_SV,
-            [MUSIC_OPTIONS_CHAMPION]         = MUSIC_PRESET_SV,
+            [MUSIC_OPTIONS_SURF]             = MUSIC_OPTION_SURF_RESIDO,
+            [MUSIC_OPTIONS_BIKE]             = MUSIC_OPTION_BIKE_RESIDO,
+            [MUSIC_OPTIONS_WILD]             = MUSIC_OPTION_BATTLE_WILD_PALDEA,
+            [MUSIC_OPTIONS_TRAINER]          = MUSIC_OPTION_BATTLE_TRAINER_PALDEA,
+            [MUSIC_OPTIONS_GYM]              = MUSIC_OPTION_BATTLE_GYM_PALDEA,
+            [MUSIC_OPTIONS_TOURNAMENT]       = MUSIC_OPTION_BATTLE_TOURNAMENT_PALDEA,
+            [MUSIC_OPTIONS_CHAMPION]         = MUSIC_OPTION_BATTLE_CHAMPION_PALDEA,
             [MUSIC_OPTIONS_MUTE_MUSIC]        = MUSIC_OPTIONS_UNMUTED,
             [MUSIC_OPTIONS_MUTE_SOUNDFX]      = MUSIC_OPTIONS_UNMUTED,
             [MUSIC_OPTIONS_MUTE_CRIES]        = MUSIC_OPTIONS_UNMUTED,
@@ -1337,9 +1205,9 @@ static const struct OptionData Settings_Options[SETTINGS_COUNT][NUM_OPTIONS_MAX_
                 COMPOUND_STRING("Custom"),
             },
             .optionDescription = {
-                COMPOUND_STRING("Default Description"),
-                COMPOUND_STRING("Speedrun Description"),
-                COMPOUND_STRING("Custom Description"),
+                COMPOUND_STRING("Gameplay options like autosave, autorun, puzzles, cutscenes, and Adventure Guides are optimized for the game's intended design."),
+                COMPOUND_STRING("Gameplay options like autosave, autorun, puzzles, cutscenes, and Adventure Guides are optimized for speedrunning."),
+                COMPOUND_STRING(""),
             },
             .numOptions = GAME_PRESET_COUNT,
         },
@@ -1458,12 +1326,12 @@ static const struct OptionData Settings_Options[SETTINGS_COUNT][NUM_OPTIONS_MAX_
                 COMPOUND_STRING("Custom"),
             },
             .optionDescription = {
-                COMPOUND_STRING("Default Description"),
-                COMPOUND_STRING("Challenge Description"),
-                COMPOUND_STRING("Speedrun Description"),
-                COMPOUND_STRING("Nuzlocke Description"),
-                COMPOUND_STRING("Kaizo Description"),
-                COMPOUND_STRING("Custom Description"),
+                COMPOUND_STRING("Trainer difficulty, Individual Values, Nuzlocking, Healing, Animations and more are optimized for the game's intended design."),
+                COMPOUND_STRING("Trainer difficulty, Individual Values, Nuzlocking, Healing, Animations and more are optimized for challenging playthrough."),
+                COMPOUND_STRING("Trainer difficulty, Individual Values, Nuzlocking, Healing, Animations and more are optimized for speedrunning."),
+                COMPOUND_STRING("Trainer difficulty, Individual Values, Nuzlocking, Healing, Animations and more are optimized for nuzlocking."),
+                COMPOUND_STRING("Trainer difficulty, Individual Values, Nuzlocking, Healing, Animations and more are optimized for an insanely brutal playthrough."),
+                COMPOUND_STRING(""),
             },
             .numOptions = 6,
         },
@@ -1939,9 +1807,9 @@ static const struct OptionData Settings_Options[SETTINGS_COUNT][NUM_OPTIONS_MAX_
                 COMPOUND_STRING("Custom"),
             },
             .optionDescription = {
-                COMPOUND_STRING("Default Description"),
-                COMPOUND_STRING("Speedrun Description"),
-                COMPOUND_STRING("Custom Description"),
+                COMPOUND_STRING("Measurements, Time, Pokemon colors, font, interface colors, and more are optimized for the game's intended design."),
+                COMPOUND_STRING("Measurements, Time, Pokemon colors, font, interface colors, and more are optimized for speedrunning."),
+                COMPOUND_STRING(""),
             },
             .numOptions = 3,
         },
@@ -2057,33 +1925,31 @@ static const struct OptionData Settings_Options[SETTINGS_COUNT][NUM_OPTIONS_MAX_
         [MUSIC_OPTIONS_PRESET] =
         {
             .title = COMPOUND_STRING("Music Settings"),
-            .options =
-            {
-                COMPOUND_STRING("PSF"),
-                COMPOUND_STRING("LGPE"),
-                COMPOUND_STRING("HGSS"),
-                COMPOUND_STRING("ORAS"),
-                COMPOUND_STRING("BDSP"),
-                COMPOUND_STRING("BW2"),
-                COMPOUND_STRING("XY"),
-                COMPOUND_STRING("USUM"),
-                COMPOUND_STRING("SWSH"),
-                COMPOUND_STRING("SV"),
+            .options = {
+                COMPOUND_STRING("Resido"),
+                COMPOUND_STRING("Kanto"),
+                COMPOUND_STRING("Johto"),
+                COMPOUND_STRING("Hoenn"),
+                COMPOUND_STRING("Sinnoh"),
+                COMPOUND_STRING("Unova"),
+                COMPOUND_STRING("Kalos"),
+                COMPOUND_STRING("Alola"),
+                COMPOUND_STRING("Galar"),
+                COMPOUND_STRING("Paldea"),
                 COMPOUND_STRING("Custom"),
             },
-            .optionDescription =
-            {
-                COMPOUND_STRING("PSF Description"),
-                COMPOUND_STRING("LGPE Description"),
-                COMPOUND_STRING("HGSS Description"),
-                COMPOUND_STRING("ORAS Description"),
-                COMPOUND_STRING("BDSP Description"),
-                COMPOUND_STRING("BW2 Description"),
-                COMPOUND_STRING("XY Description"),
-                COMPOUND_STRING("USUM Description"),
-                COMPOUND_STRING("SWSH Description"),
-                COMPOUND_STRING("SV Description"),
-                COMPOUND_STRING("Custom Description"),
+            .optionDescription = {
+                COMPOUND_STRING("Surfing, biking, and select battles (Wild, Trainer, and more) use music from the Resido region."),
+                COMPOUND_STRING("Surfing, biking, and select battles (Wild, Trainer, and more) use music from the Kanto region."),
+                COMPOUND_STRING("Surfing, biking, and select battles (Wild, Trainer, and more) use music from the Johto region."),
+                COMPOUND_STRING("Surfing, biking, and select battles (Wild, Trainer, and more) use music from the Hoenn region."),
+                COMPOUND_STRING("Surfing, biking, and select battles (Wild, Trainer, and more) use music from the Sinnoh region."),
+                COMPOUND_STRING("Surfing, biking, and select battles (Wild, Trainer, and more) use music from the Unova region."),
+                COMPOUND_STRING("Surfing, biking, and select battles (Wild, Trainer, and more) use music from the Kalos region."),
+                COMPOUND_STRING("Surfing, biking, and select battles (Wild, Trainer, and more) use music from the Alola region."),
+                COMPOUND_STRING("Surfing, biking, and select battles (Wild, Trainer, and more) use music from the Galar region."),
+                COMPOUND_STRING("Surfing, biking, and select battles (Wild, Trainer, and more) use music from the Paldea region."),
+                COMPOUND_STRING(""),
             },
             .numOptions = MUSIC_PRESET_COUNT,
         },
@@ -2097,227 +1963,220 @@ static const struct OptionData Settings_Options[SETTINGS_COUNT][NUM_OPTIONS_MAX_
             },
             .optionDescription =
             {
-                COMPOUND_STRING("Mono"),
-                COMPOUND_STRING("Stereo"),
+                COMPOUND_STRING("All audio is handled by the system's mono audio mode."),
+                COMPOUND_STRING("All audio is handled by the system's stereo audio mode."),
             },
-            .numOptions = 2,
+            .numOptions = MUSIC_OPTIONS_SPEAKER_COUNT,
         },
         [MUSIC_OPTIONS_SURF] =
         {
             .title = COMPOUND_STRING("Surf"),
             .options =
             {
-                COMPOUND_STRING("PSF"),
-                COMPOUND_STRING("LGPE"),
-                COMPOUND_STRING("HGSS"),
-                COMPOUND_STRING("ORAS"),
-                COMPOUND_STRING("BDSP"),
-                COMPOUND_STRING("BW2"),
-                COMPOUND_STRING("XY"),
-                COMPOUND_STRING("USUM"),
-                COMPOUND_STRING("SWSH"),
-                COMPOUND_STRING("SV"),
+                COMPOUND_STRING("Resido"),
+                COMPOUND_STRING("Tohjo"),
+                COMPOUND_STRING("Hoenn"),
+                COMPOUND_STRING("Sinnoh"),
+                COMPOUND_STRING("Unova"),
+                COMPOUND_STRING("Kalos"),
+                COMPOUND_STRING("Alola"),
+                COMPOUND_STRING("Mantine Surf"),
             },
             .optionDescription =
             {
-                COMPOUND_STRING("PSF"),
-                COMPOUND_STRING("LGPE"),
-                COMPOUND_STRING("HGSS"),
-                COMPOUND_STRING("ORAS"),
-                COMPOUND_STRING("BDSP"),
-                COMPOUND_STRING("BW2"),
-                COMPOUND_STRING("XY"),
-                COMPOUND_STRING("USUM"),
-                COMPOUND_STRING("SWSH"),
-                COMPOUND_STRING("SV"),
+                COMPOUND_STRING("While Surfing, you'll hear Resido's Surfing music."),
+                COMPOUND_STRING("While Surfing, you'll hear the Surfing music from Johto and Kanto."),
+                COMPOUND_STRING("While Surfing, you'll hear the Surfing music from Hoenn."),
+                COMPOUND_STRING("While Surfing, you'll hear the Surfing music from Sinnoh."),
+                COMPOUND_STRING("While Surfing, you'll hear the Surfing music from Unova."),
+                COMPOUND_STRING("While Surfing, you'll hear the Surfing music from Kalos."),
+                COMPOUND_STRING("While Surfing, you'll hear the Surfing music from Alola."),
+                COMPOUND_STRING("While Surfing, you'll hear the Surfing music from Alola's Mantine Surf."),
+
             },
-            .numOptions = MUSIC_OPTIONS_COUNT,
+            .numOptions = MUSIC_SURF_OPTIONS_COUNT,
         },
         [MUSIC_OPTIONS_BIKE] =
         {
             .title = COMPOUND_STRING("Bike"),
             .options =
             {
-                COMPOUND_STRING("PSF"),
-                COMPOUND_STRING("LGPE"),
-                COMPOUND_STRING("HGSS"),
-                COMPOUND_STRING("ORAS"),
-                COMPOUND_STRING("BDSP"),
-                COMPOUND_STRING("BW2"),
-                COMPOUND_STRING("XY"),
-                COMPOUND_STRING("USUM"),
-                COMPOUND_STRING("SWSH"),
-                COMPOUND_STRING("SV"),
+                COMPOUND_STRING("Resido"),
+                COMPOUND_STRING("Kanto"),
+                COMPOUND_STRING("Johto"),
+                COMPOUND_STRING("Hoenn"),
+                COMPOUND_STRING("Sinnoh"),
+                COMPOUND_STRING("Unova"),
+                COMPOUND_STRING("Kalos"),
+                COMPOUND_STRING("Alola"),
             },
             .optionDescription =
             {
-                COMPOUND_STRING("PSF"),
-                COMPOUND_STRING("LGPE"),
-                COMPOUND_STRING("HGSS"),
-                COMPOUND_STRING("ORAS"),
-                COMPOUND_STRING("BDSP"),
-                COMPOUND_STRING("BW2"),
-                COMPOUND_STRING("XY"),
-                COMPOUND_STRING("USUM"),
-                COMPOUND_STRING("SWSH"),
-                COMPOUND_STRING("SV"),
+                COMPOUND_STRING("While riding a bicycle, you'll hear Resido's bicycle music."),
+                COMPOUND_STRING("While riding a bicycle, you'll hear the bicycle music from Kanto."),
+                COMPOUND_STRING("While riding a bicycle, you'll hear the bicycle music from Johto."),
+                COMPOUND_STRING("While riding a bicycle, you'll hear the bicycle music from Hoenn."),
+                COMPOUND_STRING("While riding a bicycle, you'll hear the bicycle music from Sinnoh."),
+                COMPOUND_STRING("While riding a bicycle, you'll hear the bicycle music from Unova."),
+                COMPOUND_STRING("While riding a bicycle, you'll hear the bicycle music from Kalos."),
+                COMPOUND_STRING("While riding a bicycle, you'll hear the bicycle music from Alola."),
             },
-            .numOptions = MUSIC_OPTIONS_COUNT,
+            .numOptions = MUSIC_BIKE_OPTIONS_COUNT,
         },
         [MUSIC_OPTIONS_WILD] =
         {
             .title = COMPOUND_STRING("Wild Battle"),
             .options =
             {
-                COMPOUND_STRING("PSF"),
-                COMPOUND_STRING("LGPE"),
-                COMPOUND_STRING("HGSS"),
-                COMPOUND_STRING("ORAS"),
-                COMPOUND_STRING("BDSP"),
-                COMPOUND_STRING("BW2"),
-                COMPOUND_STRING("XY"),
-                COMPOUND_STRING("USUM"),
-                COMPOUND_STRING("SWSH"),
-                COMPOUND_STRING("SV"),
+                COMPOUND_STRING("Resido"),
+                COMPOUND_STRING("Kanto"),
+                COMPOUND_STRING("Johto"),
+                COMPOUND_STRING("Hoenn"),
+                COMPOUND_STRING("Sinnoh"),
+                COMPOUND_STRING("Unova"),
+                COMPOUND_STRING("Kalos"),
+                COMPOUND_STRING("Alola"),
+                COMPOUND_STRING("Galar"),
+                COMPOUND_STRING("Paldea"),
             },
             .optionDescription =
             {
-                COMPOUND_STRING("PSF"),
-                COMPOUND_STRING("LGPE"),
-                COMPOUND_STRING("HGSS"),
-                COMPOUND_STRING("ORAS"),
-                COMPOUND_STRING("BDSP"),
-                COMPOUND_STRING("BW2"),
-                COMPOUND_STRING("XY"),
-                COMPOUND_STRING("USUM"),
-                COMPOUND_STRING("SWSH"),
-                COMPOUND_STRING("SV"),
+                COMPOUND_STRING("While battling a wild Pokemon, you'll hear Resido's wild battle music."),
+                COMPOUND_STRING("While battling a wild Pokemon, you'll hear the wild battle music from Kanto."),
+                COMPOUND_STRING("While battling a wild Pokemon, you'll hear the wild battle music from Johto."),
+                COMPOUND_STRING("While battling a wild Pokemon, you'll hear the wild battle music from Hoenn."),
+                COMPOUND_STRING("While battling a wild Pokemon, you'll hear the wild battle music from Sinnoh."),
+                COMPOUND_STRING("While battling a wild Pokemon, you'll hear the wild battle music from Unova."),
+                COMPOUND_STRING("While battling a wild Pokemon, you'll hear the wild battle music from Kalos."),
+                COMPOUND_STRING("While battling a wild Pokemon, you'll hear the wild battle music from Alola."),
+                COMPOUND_STRING("While battling a wild Pokemon, you'll hear the wild battle music from Galar."),
+                COMPOUND_STRING("While battling a wild Pokemon, you'll hear the wild battle music from Paldea."),
             },
-            .numOptions = MUSIC_OPTIONS_COUNT,
+            .numOptions = MUSIC_BATTLE_WILD_OPTIONS_COUNT,
         },
         [MUSIC_OPTIONS_TRAINER] =
         {
             .title = COMPOUND_STRING("Trainer Battle"),
             .options =
             {
-                COMPOUND_STRING("PSF"),
-                COMPOUND_STRING("LGPE"),
-                COMPOUND_STRING("HGSS"),
-                COMPOUND_STRING("ORAS"),
-                COMPOUND_STRING("BDSP"),
-                COMPOUND_STRING("BW2"),
-                COMPOUND_STRING("XY"),
-                COMPOUND_STRING("USUM"),
-                COMPOUND_STRING("SWSH"),
-                COMPOUND_STRING("SV"),
+                COMPOUND_STRING("Resido"),
+                COMPOUND_STRING("Kanto"),
+                COMPOUND_STRING("Johto"),
+                COMPOUND_STRING("Hoenn"),
+                COMPOUND_STRING("Sinnoh"),
+                COMPOUND_STRING("Unova"),
+                COMPOUND_STRING("Kalos"),
+                COMPOUND_STRING("Alola"),
+                COMPOUND_STRING("Galar"),
+                COMPOUND_STRING("Paldea"),
             },
             .optionDescription =
             {
-                COMPOUND_STRING("PSF"),
-                COMPOUND_STRING("LGPE"),
-                COMPOUND_STRING("HGSS"),
-                COMPOUND_STRING("ORAS"),
-                COMPOUND_STRING("BDSP"),
-                COMPOUND_STRING("BW2"),
-                COMPOUND_STRING("XY"),
-                COMPOUND_STRING("USUM"),
-                COMPOUND_STRING("SWSH"),
-                COMPOUND_STRING("SV"),
+                COMPOUND_STRING("While battling a Pokemon Trainer, you'll hear Resido's Trainer battle music."),
+                COMPOUND_STRING("While battling a Pokemon Trainer, you'll hear the Trainer battle music from Kanto."),
+                COMPOUND_STRING("While battling a Pokemon Trainer, you'll hear the Trainer battle music from Johto."),
+                COMPOUND_STRING("While battling a Pokemon Trainer, you'll hear the Trainer battle music from Hoenn."),
+                COMPOUND_STRING("While battling a Pokemon Trainer, you'll hear the Trainer battle music from Sinnoh."),
+                COMPOUND_STRING("While battling a Pokemon Trainer, you'll hear the Trainer battle music from Unova."),
+                COMPOUND_STRING("While battling a Pokemon Trainer, you'll hear the Trainer battle music from Kalos."),
+                COMPOUND_STRING("While battling a Pokemon Trainer, you'll hear the Trainer battle music from Alola."),
+                COMPOUND_STRING("While battling a Pokemon Trainer, you'll hear the Trainer battle music from Galar."),
+                COMPOUND_STRING("While battling a Pokemon Trainer, you'll hear the Trainer battle music from Paldea."),
             },
-            .numOptions = MUSIC_OPTIONS_COUNT,
+            .numOptions = MUSIC_BATTLE_TRAINER_OPTIONS_COUNT,
         },
         [MUSIC_OPTIONS_GYM] =
         {
             .title = COMPOUND_STRING("Gym Battle"),
             .options =
             {
-                COMPOUND_STRING("PSF"),
-                COMPOUND_STRING("LGPE"),
-                COMPOUND_STRING("HGSS"),
-                COMPOUND_STRING("ORAS"),
-                COMPOUND_STRING("BDSP"),
-                COMPOUND_STRING("BW2"),
-                COMPOUND_STRING("XY"),
-                COMPOUND_STRING("USUM"),
-                COMPOUND_STRING("SWSH"),
-                COMPOUND_STRING("SV"),
+                COMPOUND_STRING("Resido"),
+                COMPOUND_STRING("Kanto"),
+                COMPOUND_STRING("Johto"),
+                COMPOUND_STRING("Hoenn"),
+                COMPOUND_STRING("Sinnoh"),
+                COMPOUND_STRING("Unova"),
+                COMPOUND_STRING("Kalos"),
+                COMPOUND_STRING("Alola"),
+                COMPOUND_STRING("Galar"),
+                COMPOUND_STRING("Paldea")
             },
             .optionDescription =
             {
-                COMPOUND_STRING("PSF"),
-                COMPOUND_STRING("LGPE"),
-                COMPOUND_STRING("HGSS"),
-                COMPOUND_STRING("ORAS"),
-                COMPOUND_STRING("BDSP"),
-                COMPOUND_STRING("BW2"),
-                COMPOUND_STRING("XY"),
-                COMPOUND_STRING("USUM"),
-                COMPOUND_STRING("SWSH"),
-                COMPOUND_STRING("SV"),
+                COMPOUND_STRING("While battling a Gym Leader, you'll hear Resido's Gym Battle music."),
+                COMPOUND_STRING("While battling a Gym Leader, you'll hear the Gym Battle music from Kanto."),
+                COMPOUND_STRING("While battling a Gym Leader, you'll hear the Gym Battle music from Johto."),
+                COMPOUND_STRING("While battling a Gym Leader, you'll hear the Gym Battle music from Hoenn."),
+                COMPOUND_STRING("While battling a Gym Leader, you'll hear the Gym Battle music from Sinnoh."),
+                COMPOUND_STRING("While battling a Gym Leader, you'll hear the Gym Battle music from Unova."),
+                COMPOUND_STRING("While battling a Gym Leader, you'll hear the Gym Battle music from Kalos."),
+                COMPOUND_STRING("While battling a Gym Leader, you'll hear the Kahuna Battle music from Alola."),
+                COMPOUND_STRING("While battling a Gym Leader, you'll hear the Gym Battle music from Galar."),
+                COMPOUND_STRING("While battling a Gym Leader, you'll hear the Gym Battle music from Paldea."),
             },
-            .numOptions = MUSIC_OPTIONS_COUNT,
+            .numOptions = MUSIC_BATTLE_GYM_OPTIONS_COUNT,
         },
         [MUSIC_OPTIONS_TOURNAMENT] =
         {
             .title = COMPOUND_STRING("Tournament Battle"),
             .options =
             {
-                COMPOUND_STRING("PSF"),
-                COMPOUND_STRING("LGPE"),
-                COMPOUND_STRING("HGSS"),
-                COMPOUND_STRING("ORAS"),
-                COMPOUND_STRING("BDSP"),
-                COMPOUND_STRING("BW2"),
-                COMPOUND_STRING("XY"),
-                COMPOUND_STRING("USUM"),
-                COMPOUND_STRING("SWSH"),
-                COMPOUND_STRING("SV"),
+                COMPOUND_STRING("Resido"),
+                COMPOUND_STRING("Tohjo"),
+                COMPOUND_STRING("Hoenn"),
+                COMPOUND_STRING("Sinnoh"),
+                COMPOUND_STRING("Unova"),
+                COMPOUND_STRING("Kalos"),
+                COMPOUND_STRING("Alola"),
+                COMPOUND_STRING("Galar"),
+                COMPOUND_STRING("Paldea"),
             },
             .optionDescription =
             {
-                COMPOUND_STRING("PSF"),
-                COMPOUND_STRING("LGPE"),
-                COMPOUND_STRING("HGSS"),
-                COMPOUND_STRING("ORAS"),
-                COMPOUND_STRING("BDSP"),
-                COMPOUND_STRING("BW2"),
-                COMPOUND_STRING("XY"),
-                COMPOUND_STRING("USUM"),
-                COMPOUND_STRING("SWSH"),
-                COMPOUND_STRING("SV"),
+                COMPOUND_STRING("While battling in a tournament, you'll hear Resido's tournament Battle music."),
+                COMPOUND_STRING("While battling in a tournament, you'll hear the Elite Four music from Kanto and Johto."),
+                COMPOUND_STRING("While battling in a tournament, you'll hear the Elite Four music from Hoenn."),
+                COMPOUND_STRING("While battling in a tournament, you'll hear the Elite Four music from Sinnoh."),
+                COMPOUND_STRING("While battling in a tournament, you'll hear the Elite Four music from Unova."),
+                COMPOUND_STRING("While battling in a tournament, you'll hear the Elite Four music from Kalos."),
+                COMPOUND_STRING("While battling in a tournament, you'll hear the Elite Four music from Alola."),
+                COMPOUND_STRING("While battling in a tournament, you'll hear the tournament music from Galar."),
+                COMPOUND_STRING("While battling in a tournament, you'll hear the Elite Four music from Paldea."),
             },
-            .numOptions = MUSIC_OPTIONS_COUNT,
+            .numOptions = MUSIC_OPTION_BATTLE_TOURNAMENT_COUNT,
         },
         [MUSIC_OPTIONS_CHAMPION] =
         {
             .title = COMPOUND_STRING("Champion Battle"),
             .options =
             {
-                COMPOUND_STRING("PSF"),
-                COMPOUND_STRING("LGPE"),
-                COMPOUND_STRING("HGSS"),
-                COMPOUND_STRING("ORAS"),
-                COMPOUND_STRING("BDSP"),
-                COMPOUND_STRING("BW2"),
-                COMPOUND_STRING("XY"),
-                COMPOUND_STRING("USUM"),
-                COMPOUND_STRING("SWSH"),
-                COMPOUND_STRING("SV"),
+                COMPOUND_STRING("Resido"),
+                COMPOUND_STRING("old Kanto"),
+                COMPOUND_STRING("new Kanto"),
+                COMPOUND_STRING("Hoenn"),
+                COMPOUND_STRING("Sinnoh"),
+                COMPOUND_STRING("old Unova"),
+                COMPOUND_STRING("new Unova"),
+                COMPOUND_STRING("Kalos"),
+                COMPOUND_STRING("Alola"),
+                COMPOUND_STRING("Galar"),
+                COMPOUND_STRING("Paldea"),
             },
             .optionDescription =
             {
-                COMPOUND_STRING("PSF"),
-                COMPOUND_STRING("LGPE"),
-                COMPOUND_STRING("HGSS"),
-                COMPOUND_STRING("ORAS"),
-                COMPOUND_STRING("BDSP"),
-                COMPOUND_STRING("BW2"),
-                COMPOUND_STRING("XY"),
-                COMPOUND_STRING("USUM"),
-                COMPOUND_STRING("SWSH"),
-                COMPOUND_STRING("SV"),
+                COMPOUND_STRING("While battling in the finals of a tournament, you'll hear Resido's tournament Battle music."),
+                COMPOUND_STRING("While battling in the finals of a tournament, you'll hear the Champion battle music from old Kanto."),
+                COMPOUND_STRING("While battling in the finals of a tournament, you'll hear the Champion battle music from new Kanto."),
+                COMPOUND_STRING("While battling in the finals of a tournament, you'll hear the Champion battle music from Hoenn."),
+                COMPOUND_STRING("While battling in the finals of a tournament, you'll hear the Champion battle music from Sinnoh."),
+                COMPOUND_STRING("While battling in the finals of a tournament, you'll hear the Champion battle music from old Unova."),
+                COMPOUND_STRING("While battling in the finals of a tournament, you'll hear the Champion battle music from new Unova."),
+                COMPOUND_STRING("While battling in the finals of a tournament, you'll hear the Champion battle music from Kalos."),
+                COMPOUND_STRING("While battling in the finals of a tournament, you'll hear the Champion battle music from Alola."),
+                COMPOUND_STRING("While battling in the finals of a tournament, you'll hear the Champion battle music from Galar."),
+                COMPOUND_STRING("While battling in the finals of a tournament, you'll hear the Champion battle music from Paldea."),
             },
-            .numOptions = MUSIC_OPTIONS_COUNT,
+            .numOptions = MUSIC_BATTLE_CHAMPION_OPTIONS_COUNT,
         },
         [MUSIC_OPTIONS_MUTE_MUSIC] =
         {
@@ -2329,8 +2188,8 @@ static const struct OptionData Settings_Options[SETTINGS_COUNT][NUM_OPTIONS_MAX_
             },
             .optionDescription =
             {
-                COMPOUND_STRING("Unmuted"),
-                COMPOUND_STRING("Muted"),
+                COMPOUND_STRING("The background music throughout the game plays normally."),
+                COMPOUND_STRING("The background music throughout the game does not play."),
             },
             .numOptions = MUSIC_OPTIONS_MUTE_COUNT,
         },
@@ -2344,8 +2203,8 @@ static const struct OptionData Settings_Options[SETTINGS_COUNT][NUM_OPTIONS_MAX_
             },
             .optionDescription =
             {
-                COMPOUND_STRING("Unmuted"),
-                COMPOUND_STRING("Muted"),
+                COMPOUND_STRING("The sound effects throughout the game play normally."),
+                COMPOUND_STRING("The sound effects throughout the game do not play."),
             },
             .numOptions = MUSIC_OPTIONS_MUTE_COUNT,
         },
@@ -2359,8 +2218,8 @@ static const struct OptionData Settings_Options[SETTINGS_COUNT][NUM_OPTIONS_MAX_
             },
             .optionDescription =
             {
-                COMPOUND_STRING("Unmuted"),
-                COMPOUND_STRING("Muted"),
+                COMPOUND_STRING("The Pokemon's cries throughout the game play normally."),
+                COMPOUND_STRING("The Pokemon's cries throughout the game do not play."),
             },
             .numOptions = MUSIC_OPTIONS_MUTE_COUNT,
         },
@@ -2374,8 +2233,8 @@ static const struct OptionData Settings_Options[SETTINGS_COUNT][NUM_OPTIONS_MAX_
             },
             .optionDescription =
             {
-                COMPOUND_STRING("Unmuted"),
-                COMPOUND_STRING("Muted"),
+                COMPOUND_STRING("The musical fanfares throughout the game play normally."),
+                COMPOUND_STRING("The musical fanfares throughout the game do not play."),
             },
             .numOptions = MUSIC_OPTIONS_MUTE_COUNT,
         },
@@ -2683,6 +2542,7 @@ static void PrintToWindow(u8 windowId, u8 colorIdx)
 
         BlitBitmapToWindow(windowId, sOptionMenuIcons[currentScreenId], (x*8), (y*8), 16, 16);
 	}
+    /*
 	// Up Arrow --------------------------------------------------------------------------------------------------------------------
 	x = 7;
 	y = 1;
@@ -2715,6 +2575,7 @@ static void PrintToWindow(u8 windowId, u8 colorIdx)
 		y = 2 + (GetCursorPosition() * 2);
 
 	BlitBitmapToWindow(windowId, sOptionMenuArrow_Right, (x*8) + 6, (y*8) + 7, 16, 16);
+    */
 
 	// Settings Hub Text --------------------------------------------------------------------------------------------------------------------
 	// Only gets displayed you are on the Settings Hub
@@ -2731,7 +2592,7 @@ static void PrintToWindow(u8 windowId, u8 colorIdx)
 		x = 2;
 		y = 0;
 
-		AddTextPrinterParameterized4(windowId, 8, (x*8) + 4, (y*8), 0, 0, sMenuWindowFontColors[FONT_WHITE], 0xFF,  Hub_Options[currentScreenId].title);
+		AddTextPrinterParameterized4(windowId, 8, (x*8) + 4, (y*8), 0, 0, sMenuWindowFontColors[FONT_WHITE], 0xFF,  Settings_Options[currentScreenId][0].title);
 	}
 
 	// Settings Names --------------------------------------------------------------------------------------------------------------------
@@ -2739,46 +2600,30 @@ static void PrintToWindow(u8 windowId, u8 colorIdx)
 		x = 3;
 		y = 2;
 		for(i = 0; i < NUM_OF_POSSIBLE_OPTIONS_THAT_FIT_ON_SCREEN; i++){
-			AddTextPrinterParameterized4(windowId, 8, (x*8) + 4, (y*8) + 4, 0, 0, sMenuWindowFontColors[FONT_WHITE], 0xFF, Hub_Options[i].title);
+            StringExpandPlaceholders(gStringVar1,Settings_Options[i][0].title);
+            u32 fontId = FONT_OPTION_DESC;
+            u32 letterSpacing = GetFontAttribute(fontId,FONTATTR_LETTER_SPACING);
+            u32 lineSpacing = GetFontAttribute(fontId,FONTATTR_LINE_SPACING);
+            u32 windowWidth = 90;
+            fontId = GetFontIdToFit(gStringVar1,FONT_OPTION_DESC,letterSpacing,windowWidth);
+			AddTextPrinterParameterized4(windowId, 8, (x*8) + 4, (y*8) + 4, letterSpacing, lineSpacing, sMenuWindowFontColors[FONT_WHITE], TEXT_SKIP_DRAW, gStringVar1);
 			y = y + 2;
 		}
 	}
-	else{
-		x = 1;
-		y = 2;
-		switch(currentScreenId){
-			case GAME_SETTINGS:
-				for(i = 0; i < NUM_OF_POSSIBLE_OPTIONS_THAT_FIT_ON_SCREEN; i++){
-					AddTextPrinterParameterized4(windowId, 8, (x*8) + 4, (y*8) + 4, 0, 0, sMenuWindowFontColors[FONT_WHITE], 0xFF, Settings_Options[GAME_SETTINGS][GetCurrentSlotOption(i)].title);
-					y = y + 2;
-				}
-				break;
-			case BATTLE_SETTINGS:
-				for(i = 0; i < NUM_OF_POSSIBLE_OPTIONS_THAT_FIT_ON_SCREEN; i++){
-					AddTextPrinterParameterized4(windowId, 8, (x*8) + 4, (y*8) + 4, 0, 0, sMenuWindowFontColors[FONT_WHITE], 0xFF, Settings_Options[BATTLE_SETTINGS][GetCurrentSlotOption(i)].title);
-					y = y + 2;
-				}
-				break;
-			case VISUAL_SETTINGS:
-				for(i = 0; i < NUM_OF_POSSIBLE_OPTIONS_THAT_FIT_ON_SCREEN; i++){
-					AddTextPrinterParameterized4(windowId, 8, (x*8) + 4, (y*8) + 4, 0, 0, sMenuWindowFontColors[FONT_WHITE], 0xFF, Settings_Options[VISUAL_SETTINGS][GetCurrentSlotOption(i)].title);
-					y = y + 2;
-				}
-				break;
-			case MUSIC_SETTINGS:
-				for(i = 0; i < NUM_OF_POSSIBLE_OPTIONS_THAT_FIT_ON_SCREEN; i++){
-					AddTextPrinterParameterized4(windowId, 8, (x*8) + 4, (y*8) + 4, 0, 0, sMenuWindowFontColors[FONT_WHITE], 0xFF, Settings_Options[MUSIC_SETTINGS][GetCurrentSlotOption(i)].title);
-					y = y + 2;
-				}
-				break;
-			default:
-				for(i = 0; i < NUM_OF_POSSIBLE_OPTIONS_THAT_FIT_ON_SCREEN; i++){
-					AddTextPrinterParameterized4(windowId, 8, (x*8) + 4, (y*8) + 4, 0, 0, sMenuWindowFontColors[FONT_WHITE], 0xFF, Settings_Options[RANDOM_SETTINGS][GetCurrentSlotOption(i)].title);
-					y = y + 2;
-				}
-				break;
-		}
-	}
+    else{
+        x = 1;
+        y = 2;
+        for(i = 0; i < NUM_OF_POSSIBLE_OPTIONS_THAT_FIT_ON_SCREEN; i++){
+            StringExpandPlaceholders(gStringVar1,Settings_Options[currentScreenId][GetCurrentSlotOption(i)].title);
+            u32 fontId = FONT_OPTION_DESC;
+            u32 letterSpacing = GetFontAttribute(fontId,FONTATTR_LETTER_SPACING);
+            u32 lineSpacing = GetFontAttribute(fontId,FONTATTR_LINE_SPACING);
+            u32 windowWidth = 90;
+            fontId = GetFontIdToFit(gStringVar1,FONT_OPTION_DESC,letterSpacing,windowWidth);
+            AddTextPrinterParameterized4(windowId, fontId, (x*8) + 4, (y*8) + 4, letterSpacing, lineSpacing, sMenuWindowFontColors[FONT_WHITE], TEXT_SKIP_DRAW, gStringVar1);
+            y = y + 2;
+        }
+    }
 
 	// Current Settings --------------------------------------------------------------------------------------------------------------------
 	// Only gets displayed you are on the Settings Hub
@@ -2787,24 +2632,13 @@ static void PrintToWindow(u8 windowId, u8 colorIdx)
 		y = 2;
 
 		for(i = 0; i < NUM_OF_POSSIBLE_OPTIONS_THAT_FIT_ON_SCREEN; i++){
-
-			switch(i){
-				case GAME_SETTINGS:
-					AddTextPrinterParameterized4(windowId, 8, (x*8) + 6, (y*8) + 4, 0, 0, sMenuWindowFontColors[FONT_WHITE], 0xFF, Settings_Options[GAME_SETTINGS][0].options[TemporalOptions[GAME_SETTINGS][0]]);
-					break;
-				case BATTLE_SETTINGS:
-					AddTextPrinterParameterized4(windowId, 8, (x*8) + 6, (y*8) + 4, 0, 0, sMenuWindowFontColors[FONT_WHITE], 0xFF, Settings_Options[BATTLE_SETTINGS][0].options[TemporalOptions[BATTLE_SETTINGS][0]]);
-					break;
-				case VISUAL_SETTINGS:
-					AddTextPrinterParameterized4(windowId, 8, (x*8) + 6, (y*8) + 4, 0, 0, sMenuWindowFontColors[FONT_WHITE], 0xFF, Settings_Options[VISUAL_SETTINGS][0].options[TemporalOptions[VISUAL_SETTINGS][0]]);
-					break;
-				case MUSIC_SETTINGS:
-					AddTextPrinterParameterized4(windowId, 8, (x*8) + 6, (y*8) + 4, 0, 0, sMenuWindowFontColors[FONT_WHITE], 0xFF, Settings_Options[MUSIC_SETTINGS][0].options[TemporalOptions[MUSIC_SETTINGS][0]]);
-					break;
-				case RANDOM_SETTINGS:
-					AddTextPrinterParameterized4(windowId, 8, (x*8) + 6, (y*8) + 4, 0, 0, sMenuWindowFontColors[FONT_WHITE], 0xFF, Settings_Options[RANDOM_SETTINGS][0].options[TemporalOptions[RANDOM_SETTINGS][0]]);
-					break;
-			}
+            StringExpandPlaceholders(gStringVar1,Settings_Options[i][0].options[TemporalOptions[i][0]]);
+            u32 fontId = FONT_OPTION_DESC;
+            u32 letterSpacing = GetFontAttribute(fontId,FONTATTR_LETTER_SPACING);
+            u32 lineSpacing = GetFontAttribute(fontId,FONTATTR_LINE_SPACING);
+            u32 windowWidth = 48;
+            fontId = GetFontIdToFit(gStringVar1,FONT_OPTION_DESC,letterSpacing,windowWidth);
+            AddTextPrinterParameterized4(windowId, fontId, (x*8) + 6, (y*8) + 4, letterSpacing, lineSpacing, sMenuWindowFontColors[FONT_WHITE], TEXT_SKIP_DRAW, gStringVar1);
 			y = y + 2;
 		}
 	}
@@ -2812,39 +2646,17 @@ static void PrintToWindow(u8 windowId, u8 colorIdx)
 		x = 21;
 		y = 2;
 
-		switch(currentScreenId){
-			case GAME_SETTINGS:
-				for(i = 0; i < NUM_OF_POSSIBLE_OPTIONS_THAT_FIT_ON_SCREEN; i++){
-					AddTextPrinterParameterized4(windowId, 8, (x*8) + 6, (y*8) + 4, 0, 0, sMenuWindowFontColors[FONT_WHITE], 0xFF, Settings_Options[GAME_SETTINGS][GetCurrentSlotOption(i)].options[TemporalOptions[GAME_SETTINGS][GetCurrentSlotOption(i)]]);
-					y = y + 2;
-				}
-				break;
-			case BATTLE_SETTINGS:
-				for(i = 0; i < NUM_OF_POSSIBLE_OPTIONS_THAT_FIT_ON_SCREEN; i++){
-					AddTextPrinterParameterized4(windowId, 8, (x*8) + 6, (y*8) + 4, 0, 0, sMenuWindowFontColors[FONT_WHITE], 0xFF, Settings_Options[BATTLE_SETTINGS][GetCurrentSlotOption(i)].options[TemporalOptions[BATTLE_SETTINGS][GetCurrentSlotOption(i)]]);
-					y = y + 2;
-				}
-				break;
-			case VISUAL_SETTINGS:
-				for(i = 0; i < NUM_OF_POSSIBLE_OPTIONS_THAT_FIT_ON_SCREEN; i++){
-					AddTextPrinterParameterized4(windowId, 8, (x*8) + 6, (y*8) + 4, 0, 0, sMenuWindowFontColors[FONT_WHITE], 0xFF, Settings_Options[VISUAL_SETTINGS][GetCurrentSlotOption(i)].options[TemporalOptions[VISUAL_SETTINGS][GetCurrentSlotOption(i)]]);
-					y = y + 2;
-				}
-				break;
-			case MUSIC_SETTINGS:
-				for(i = 0; i < NUM_OF_POSSIBLE_OPTIONS_THAT_FIT_ON_SCREEN; i++){
-					AddTextPrinterParameterized4(windowId, 8, (x*8) + 6, (y*8) + 4, 0, 0, sMenuWindowFontColors[FONT_WHITE], 0xFF, Settings_Options[MUSIC_SETTINGS][GetCurrentSlotOption(i)].options[TemporalOptions[MUSIC_SETTINGS][GetCurrentSlotOption(i)]]);
-					y = y + 2;
-				}
-				break;
-			case RANDOM_SETTINGS:
-				for(i = 0; i < NUM_OF_POSSIBLE_OPTIONS_THAT_FIT_ON_SCREEN; i++){
-					AddTextPrinterParameterized4(windowId, 8, (x*8) + 6, (y*8) + 4, 0, 0, sMenuWindowFontColors[FONT_WHITE], 0xFF, Settings_Options[RANDOM_SETTINGS][GetCurrentSlotOption(i)].options[TemporalOptions[RANDOM_SETTINGS][GetCurrentSlotOption(i)]]);
-					y = y + 2;
-				}
-				break;
-		}
 
+		for(i = 0; i < NUM_OF_POSSIBLE_OPTIONS_THAT_FIT_ON_SCREEN; i++){
+            StringExpandPlaceholders(gStringVar1,Settings_Options[currentScreenId][GetCurrentSlotOption(i)].options[TemporalOptions[currentScreenId][GetCurrentSlotOption(i)]]);
+            u32 fontId = FONT_OPTION_DESC;
+            u32 letterSpacing = GetFontAttribute(fontId,FONTATTR_LETTER_SPACING);
+            u32 lineSpacing = GetFontAttribute(fontId,FONTATTR_LINE_SPACING);
+            u32 windowWidth = 48;
+            fontId = GetFontIdToFit(gStringVar1,FONT_OPTION_DESC,letterSpacing,windowWidth);
+            AddTextPrinterParameterized4(windowId, fontId, (x*8) + 6, (y*8) + 4, letterSpacing, lineSpacing, sMenuWindowFontColors[FONT_WHITE], TEXT_SKIP_DRAW, gStringVar1);
+			y = y + 2;
+		}
 	}
 
 	// Option Description --------------------------------------------------------------------------------------------------------------------
@@ -2855,51 +2667,24 @@ static void PrintToWindow(u8 windowId, u8 colorIdx)
 		AddTextPrinterParameterized4(windowId, 8, (x*8)+4, (y*8), 0, 0, sMenuWindowFontColors[FONT_WHITE], 0xFF, COMPOUND_STRING("Are you sure you want to leave without\nsaving the changes?"));
 	}
 	else if(!areYouNotOnSettingsHub){
-		switch(currentScreenId){
-			case GAME_SETTINGS:
-				AddTextPrinterParameterized4(windowId, 8, (x*8)+4, (y*8), 0, 0, sMenuWindowFontColors[FONT_WHITE], 0xFF, Settings_Options[GAME_SETTINGS][0].optionDescription[TemporalOptions[GAME_SETTINGS][0]]);
-				break;
-			case BATTLE_SETTINGS:
-				AddTextPrinterParameterized4(windowId, 8, (x*8)+4, (y*8), 0, 0, sMenuWindowFontColors[FONT_WHITE], 0xFF, Settings_Options[BATTLE_SETTINGS][0].optionDescription[TemporalOptions[BATTLE_SETTINGS][0]]);
-				break;
-			case VISUAL_SETTINGS:
-				AddTextPrinterParameterized4(windowId, 8, (x*8)+4, (y*8), 0, 0, sMenuWindowFontColors[FONT_WHITE], 0xFF, Settings_Options[VISUAL_SETTINGS][0].optionDescription[TemporalOptions[VISUAL_SETTINGS][0]]);
-				break;
-			case MUSIC_SETTINGS:
-				AddTextPrinterParameterized4(windowId, 8, (x*8)+4, (y*8), 0, 0, sMenuWindowFontColors[FONT_WHITE], 0xFF, Settings_Options[MUSIC_SETTINGS][0].optionDescription[TemporalOptions[MUSIC_SETTINGS][0]]);
-				break;
-			case RANDOM_SETTINGS:
-				AddTextPrinterParameterized4(windowId, 8, (x*8)+4, (y*8), 0, 0, sMenuWindowFontColors[FONT_WHITE], 0xFF, Settings_Options[RANDOM_SETTINGS][0].optionDescription[TemporalOptions[RANDOM_SETTINGS][0]]);
-				break;
-		}
-	}
-    else
-    {
-        switch(currentScreenId)
-        {
-            case GAME_SETTINGS:
-                StringExpandPlaceholders(gStringVar1,Settings_Options[GAME_SETTINGS][currentOptionId].optionDescription[TemporalOptions[GAME_SETTINGS][currentOptionId]]);
-                break;
-            case BATTLE_SETTINGS:
-                StringExpandPlaceholders(gStringVar1,Settings_Options[BATTLE_SETTINGS][currentOptionId].optionDescription[TemporalOptions[BATTLE_SETTINGS][currentOptionId]]);
-                break;
-            case VISUAL_SETTINGS:
-                StringExpandPlaceholders(gStringVar1,Settings_Options[VISUAL_SETTINGS][currentOptionId].optionDescription[TemporalOptions[VISUAL_SETTINGS][currentOptionId]]);
-                break;
-            case MUSIC_SETTINGS:
-                StringExpandPlaceholders(gStringVar1,Settings_Options[MUSIC_SETTINGS][currentOptionId].optionDescription[TemporalOptions[MUSIC_SETTINGS][currentOptionId]]);
-                break;
-            default:
-                StringExpandPlaceholders(gStringVar1,Settings_Options[RANDOM_SETTINGS][currentOptionId].optionDescription[TemporalOptions[RANDOM_SETTINGS][currentOptionId]]);
-
-                break;
-        }
+        //AddTextPrinterParameterized4(windowId, 8, (x*8)+4, (y*8), 0, 0, sMenuWindowFontColors[FONT_WHITE], 0xFF, Settings_Options[currentScreenId][0].optionDescription[TemporalOptions[currentScreenId][0]]);
+        StringExpandPlaceholders(gStringVar1,Settings_Options[currentScreenId][0].optionDescription[TemporalOptions[currentScreenId][0]]);
         u32 halfTile = (TILE_SIZE_1BPP / 2);
         u32 fontId = FONT_OPTION_DESC;
         u32 letterSpacing = GetFontAttribute(fontId,FONTATTR_LETTER_SPACING);
         u32 lineSpacing = GetFontAttribute(fontId,FONTATTR_LINE_SPACING);
         BreakStringNaive(gStringVar1,OPTION_DESC_PIXEL_WIDTH,OPTION_DESC_LINES_COUNT,fontId, HIDE_SCROLL_PROMPT);
-        AddTextPrinterParameterized4(windowId, fontId, halfTile, 108, letterSpacing, lineSpacing, sMenuWindowFontColors[FONT_WHITE], 0xFF, gStringVar1);
+        AddTextPrinterParameterized4(windowId, fontId, halfTile, 108, letterSpacing, lineSpacing, sMenuWindowFontColors[FONT_WHITE], TEXT_SKIP_DRAW, gStringVar1);
+	}
+    else
+    {
+        StringExpandPlaceholders(gStringVar1,Settings_Options[currentScreenId][currentOptionId].optionDescription[TemporalOptions[currentScreenId][currentOptionId]]);
+        u32 halfTile = (TILE_SIZE_1BPP / 2);
+        u32 fontId = FONT_OPTION_DESC;
+        u32 letterSpacing = GetFontAttribute(fontId,FONTATTR_LETTER_SPACING);
+        u32 lineSpacing = GetFontAttribute(fontId,FONTATTR_LINE_SPACING);
+        BreakStringNaive(gStringVar1,OPTION_DESC_PIXEL_WIDTH,OPTION_DESC_LINES_COUNT,fontId, HIDE_SCROLL_PROMPT);
+        AddTextPrinterParameterized4(windowId, fontId, halfTile, 108, letterSpacing, lineSpacing, sMenuWindowFontColors[FONT_WHITE], TEXT_SKIP_DRAW, gStringVar1);
     }
 
 	// Help Bar --------------------------------------------------------------------------------------------------------------------
@@ -3379,4 +3164,140 @@ static void InitializeBackgroundsAndLoadBackgroundGraphics(void)
         Menu_LoadGraphics();
     else
         Menu_FadeAndBail();
+}
+
+static void SpriteCallback_UpArrow(struct Sprite *sprite)
+{
+    u8 val = sprite->data[0];
+    sprite->y2 = gSineTable[val] / 128;
+    sprite->data[0] += 8;
+
+	if((!areYouNotOnSettingsHub && currentScreenId != 0) || (areYouNotOnSettingsHub && currentFirstOption != 0))
+    {
+        sprite->invisible = FALSE;
+    }
+    else 
+    {
+        sprite->invisible = TRUE;
+    }
+}
+
+static void CreateUpArrowSprite(void)
+{
+    u32 SpriteTag = OPTIONS_SPRITETAG_ARROW_UP;
+    struct CompressedSpriteSheet sSpriteSheet_OptionsDownArrow = {sCustomizationMenuUpArrow_Gfx, 0x0800, SpriteTag};
+    struct SpriteTemplate TempSpriteTemplate = gDummySpriteTemplate;
+
+    TempSpriteTemplate.tileTag = SpriteTag;
+    TempSpriteTemplate.callback = SpriteCallback_UpArrow;
+
+    LoadCompressedSpriteSheet(&sSpriteSheet_OptionsDownArrow);
+    u32 spriteId = CreateSprite(&TempSpriteTemplate, ARROW_UP_POSITION_X, ARROW_UP_POSITION_Y, 0);
+    sMenuDataPtr->spriteIds[OPTIONS_SPRITE_ID_ARROW_UP] = spriteId;
+
+    gSprites[spriteId].oam.shape = SPRITE_SHAPE(16x16);
+    gSprites[spriteId].oam.size = SPRITE_SIZE(16x16);
+    gSprites[spriteId].oam.priority = 1;
+}
+
+static void SpriteCallback_DownArrow(struct Sprite *sprite)
+{
+    u8 val = sprite->data[0] + 128;
+    sprite->y2 = gSineTable[val] / 128;
+    sprite->data[0] += 8;
+
+	if((!areYouNotOnSettingsHub && currentScreenId != (NUM_OF_SCREENS - 1)) ||
+			(areYouNotOnSettingsHub && (currentFirstOption + NUM_OF_POSSIBLE_OPTIONS_THAT_FIT_ON_SCREEN) <= (GetCurrentScreenOptionNumber() - 1)))
+    {
+        sprite->invisible = FALSE;
+    }
+    else 
+    {
+        sprite->invisible = TRUE;
+    }
+}
+
+static void CreateDownArrowSprite(void)
+{
+    u32 SpriteTag = OPTIONS_SPRITETAG_ARROW_DOWN;
+    struct CompressedSpriteSheet sSpriteSheet_OptionsDownArrow = {sCustomizationMenuDownArrow_Gfx, 0x0800, SpriteTag};
+    struct SpriteTemplate TempSpriteTemplate = gDummySpriteTemplate;
+
+    TempSpriteTemplate.tileTag = SpriteTag;
+    TempSpriteTemplate.callback = SpriteCallback_DownArrow;
+
+    LoadCompressedSpriteSheet(&sSpriteSheet_OptionsDownArrow);
+    u32 spriteId = CreateSprite(&TempSpriteTemplate, ARROW_DOWN_POSITION_X, ARROW_DOWN_POSITION_Y, 0);
+    sMenuDataPtr->spriteIds[OPTIONS_SPRITE_ID_ARROW_DOWN] = spriteId;
+
+    gSprites[spriteId].oam.shape = SPRITE_SHAPE(16x16);
+    gSprites[spriteId].oam.size = SPRITE_SIZE(16x16);
+    gSprites[spriteId].oam.priority = 1;
+}
+
+static void SpriteCallback_LeftArrow(struct Sprite *sprite)
+{
+    u8 val = sprite->data[0] + 128;
+    u32 position = (areYouNotOnSettingsHub == TRUE) ? GetCursorPosition() : currentScreenId;
+    u32 y = ARROW_LEFT_POSITION_Y + (position * 16);
+
+    sprite->x = ARROW_LEFT_POSITION_X;
+    sprite->y = y;
+    sprite->x2 = gSineTable[val] / 128;
+    sprite->data[0] += 8;
+}
+
+static void CreateLeftArrowSprite(void)
+{
+    u32 SpriteTag = OPTIONS_SPRITETAG_ARROW_LEFT;
+    struct CompressedSpriteSheet sSpriteSheet_OptionsLeftArrow = {sCustomizationMenuLeftArrow_Gfx, 0x0800, SpriteTag};
+    struct SpriteTemplate TempSpriteTemplate = gDummySpriteTemplate;
+
+    TempSpriteTemplate.tileTag  = SpriteTag;
+    TempSpriteTemplate.callback = SpriteCallback_LeftArrow;
+
+    LoadCompressedSpriteSheet(&sSpriteSheet_OptionsLeftArrow);
+    u32 spriteId = CreateSprite(&TempSpriteTemplate, ARROW_LEFT_POSITION_X, ARROW_LEFT_POSITION_Y, 0);
+    sMenuDataPtr->spriteIds[OPTIONS_SPRITE_ID_ARROW_LEFT] = spriteId;
+
+    gSprites[spriteId].oam.shape = SPRITE_SHAPE(16x16);
+    gSprites[spriteId].oam.size = SPRITE_SIZE(16x16);
+    gSprites[spriteId].oam.priority = 1;
+}
+
+static void SpriteCallback_RightArrow(struct Sprite *sprite)
+{
+    u8 val = sprite->data[0];
+    u32 position = (areYouNotOnSettingsHub == TRUE) ? GetCursorPosition() : currentScreenId;
+    u32 y = ARROW_RIGHT_POSITION_Y + (position * 16);
+
+    sprite->x = ARROW_RIGHT_POSITION_X;
+    sprite->y = y;
+    sprite->x2 = gSineTable[val] / 128;
+    sprite->data[0] += 8;
+}
+
+static void CreateRightArrowSprite(void)
+{
+    u32 SpriteTag = OPTIONS_SPRITETAG_ARROW_RIGHT;
+    struct CompressedSpriteSheet sSpriteSheet_OptionsLeftArrow = {sCustomizationMenuRightArrow_Gfx, 0x0800, SpriteTag};
+    struct SpriteTemplate TempSpriteTemplate = gDummySpriteTemplate;
+
+    TempSpriteTemplate.tileTag  = SpriteTag;
+    TempSpriteTemplate.callback = SpriteCallback_RightArrow;
+
+    LoadCompressedSpriteSheet(&sSpriteSheet_OptionsLeftArrow);
+    u32 spriteId = CreateSprite(&TempSpriteTemplate, ARROW_RIGHT_POSITION_X, ARROW_RIGHT_POSITION_Y, 0);
+    sMenuDataPtr->spriteIds[OPTIONS_SPRITE_ID_ARROW_RIGHT] = spriteId;
+
+    gSprites[spriteId].oam.shape = SPRITE_SHAPE(16x16);
+    gSprites[spriteId].oam.size = SPRITE_SIZE(16x16);
+    gSprites[spriteId].oam.priority = 1;
+}
+
+static void ResetAllSpriteIds(void)
+{
+    for (u32 spriteId = 0; spriteId < OPTIONS_SPRITE_ID_ARROW_COUNT; spriteId++)
+        sMenuDataPtr->spriteIds[spriteId] = SPRITE_NONE;
+
 }
