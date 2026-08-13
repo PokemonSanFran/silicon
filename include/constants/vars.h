@@ -145,9 +145,9 @@
 #define VAR_DIMU_STATE                                              0x4047
 #define VAR_BD_STATE                                                0x4048
 #define VAR_AMIARGENTO_STATE                                        0x4049
-#define VAR_PLAYER_HOME_STATE                                       0x404A
+//#define VAR_POKELOT_RND1                                          0x404A
 #define VAR_ROUTE10_STATE                                           0x404B
-#define VAR_CAPHE_CITY_STATE                                        0x404C
+//#define VAR_POKELOT_RND2                                          0x404C
 #define VAR_ANBEH_BEND_STATE                                        0x404D
 #define VAR_SHARPRISE_SPIRE_PRODUCTION_STATE                        0x404E
 #define VAR_POPIDORA_PIER_STATE                                     0x404F
@@ -247,8 +247,8 @@
 #define VAR_HOWDISAPPOINTING_STATE                                  0x4077
 #define VAR_KEIYING_STATE                                           0x4078
 #define VAR_LETSBURNTHISMOTHERSTATE                                 0x4079
-#define VAR_SILICON_UNUSED_0x407A                                   0x407A
-#define VAR_SILICON_UNUSED_0x407B                                   0x407B
+#define VAR_PLAYER_HOME_STATE                                       0x407A
+#define VAR_CAPHE_CITY_STATE                                        0x407B
 #define VAR_SILICON_UNUSED_0x407C                                   0x407C
 #define VAR_SILICON_UNUSED_0x407D                                   0x407D
 #define VAR_SILICON_UNUSED_0x407E                                   0x407E
