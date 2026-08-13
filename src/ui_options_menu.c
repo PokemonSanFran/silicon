@@ -121,8 +121,8 @@ static void OptionsMenu_IncrementCurrentScreenId(void);
 static void OptionsMenu_DecrementCurrentScreenId(void);
 static u8 OptionsMenu_GetCurrentFirstOption(void);
 static void OptionsMenu_SetCurrentFirstOption(u8 value);
-static u16 OptionsMenu_GetTemporalOptions(enum OptionsIds settings, u32 option);
-static void OptionsMenu_SetTemporalOptions(enum OptionsIds settings, u32 option, u8 value);
+//static u16 OptionsMenu_GetTemporalOptions(enum OptionsIds settings, u32 option);
+//static void OptionsMenu_SetTemporalOptions(enum OptionsIds settings, u32 option, u8 value);
 static void OptionsMenu_DecrementCurrentFirstOption(void);
 static void OptionsMenu_IncrementCurrentFirstOption(void);
 
@@ -517,7 +517,7 @@ static void Menu_InitWindows(void)
 	CopyWindowToVram(WINDOW_1, 3);
 }
 
-static const u8 screenOptionNumber[] = 
+static const u8 screenOptionNumber[] =
 {
     [GAME_SETTINGS] = NUM_OPTIONS_GAME_SETTINGS,
     [BATTLE_SETTINGS] = NUM_OPTIONS_BATTLE_SETTINGS,
@@ -526,7 +526,7 @@ static const u8 screenOptionNumber[] =
     [RANDOM_SETTINGS] = NUM_OPTIONS_RANDOM_SETTINGS,
 };
 
-static const u8 presetCustomValues[] = 
+static const u8 presetCustomValues[] =
 {
     [GAME_SETTINGS] = GAME_PRESET_CUSTOM,
     [BATTLE_SETTINGS] = BATTLE_PRESET_CUSTOM,
@@ -1124,7 +1124,7 @@ void UNUSED ChangePresetDataToCustom()
 // For Game Settings
 static const struct OptionData Settings_Options[SETTINGS_COUNT][NUM_OPTIONS_MAX_SETTINGS] =
 {
-    [GAME_SETTINGS] = 
+    [GAME_SETTINGS] =
     {
         [GAME_OPTIONS_PRESET] =
         {
@@ -1242,7 +1242,7 @@ static const struct OptionData Settings_Options[SETTINGS_COUNT][NUM_OPTIONS_MAX_
             .numOptions = GAME_OPTION_GUIDE_SKIP_COUNT,
         },
     },
-    [BATTLE_SETTINGS] = 
+    [BATTLE_SETTINGS] =
     {
         [BATTLE_OPTIONS_PRESET] =
         {
@@ -1850,7 +1850,7 @@ static const struct OptionData Settings_Options[SETTINGS_COUNT][NUM_OPTIONS_MAX_
             .numOptions = VISUAL_OPTION_COLOR_VARIATION_COUNT,
         },
     },
-    [MUSIC_SETTINGS] = 
+    [MUSIC_SETTINGS] =
     {
         [MUSIC_OPTIONS_PRESET] =
         {
@@ -2169,7 +2169,7 @@ static const struct OptionData Settings_Options[SETTINGS_COUNT][NUM_OPTIONS_MAX_
             .numOptions = MUSIC_OPTIONS_MUTE_COUNT,
         },
     },
-    [RANDOM_SETTINGS] = 
+    [RANDOM_SETTINGS] =
     {
         [RANDOM_OPTIONS_PRESET] =
         {
@@ -3051,7 +3051,7 @@ static void SpriteCallback_UpArrow(struct Sprite *sprite)
     {
         sprite->invisible = FALSE;
     }
-    else 
+    else
     {
         sprite->invisible = TRUE;
     }
@@ -3086,7 +3086,7 @@ static void SpriteCallback_DownArrow(struct Sprite *sprite)
     {
         sprite->invisible = FALSE;
     }
-    else 
+    else
     {
         sprite->invisible = TRUE;
     }
@@ -3227,7 +3227,7 @@ static void OptionsMenu_IncrementCurrentOptionId(void)
 
     if (value == MAX_u8)
         return;
-    
+
     value++;
     OptionsMenu_SetCurrentOptionId(value);
 }
@@ -3259,7 +3259,7 @@ static void OptionsMenu_IncrementCurrentScreenId(void)
 
     if (value == MAX_u8)
         return;
-    
+
     value++;
     OptionsMenu_SetCurrentScreenId(value);
 }
@@ -3303,7 +3303,7 @@ static void OptionsMenu_IncrementCurrentFirstOption(void)
 
     if (value == MAX_u8)
         return;
-    
+
     value++;
     OptionsMenu_SetCurrentFirstOption(value);
 }
