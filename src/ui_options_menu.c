@@ -65,14 +65,8 @@ enum WindowIds
 };
 
 //==========EWRAM==========//
-static EWRAM_DATA struct MenuResources *sMenuDataPtr = NULL;
-static EWRAM_DATA u8 *sBgTilemapBuffer[MENU_BACKGROUND_COUNT] = {NULL};
-static EWRAM_DATA bool8 ShouldShowDiscardDialogue = FALSE;
-static EWRAM_DATA u8 currentOptionId = 0;
-static EWRAM_DATA u8 currentScreenId = 0;
-static EWRAM_DATA u8 currentFirstOption = 0;
-static EWRAM_DATA bool8 areYouNotOnSettingsHub = FALSE;
-
+static struct MenuResources *sMenuDataPtr = NULL;
+static u8 *sBgTilemapBuffer[MENU_BACKGROUND_COUNT] = {NULL};
 static u8 TemporalOptions[SETTINGS_COUNT][NUM_OPTIONS_MAX_SETTINGS]; //This is a temporal data used for the Discard Feature on Leave Dialog
 
 //==========STATIC=DEFINES==========//
@@ -110,6 +104,26 @@ static void CreateLeftArrowSprite(void);
 static void SpriteCallback_RightArrow(struct Sprite *sprite);
 static void CreateRightArrowSprite(void);
 static void ResetAllSpriteIds(void);
+static bool8 OptionsMenu_GetShouldShowDiscardDialogue(void);
+static void OptionsMenu_SetShouldShowDiscardDialogue(bool8 value);
+static void OptionsMenu_ToggleShouldShowDiscardDialogue(void);
+static bool8 OptionsMenu_GetAreYouNotOnSettingsHub(void);
+static void OptionsMenu_SetAreYouNotOnSettingsHub(bool8 value);
+static void OptionsMenu_ToggleAreYouNotOnSettingsHub(void);
+static u8 OptionsMenu_GetCurrentOptionId(void);
+static void OptionsMenu_SetCurrentOptionId(u8 value);
+static void OptionsMenu_IncrementCurrentOptionId(void);
+static void OptionsMenu_DecrementCurrentOptionId(void);
+static u8 OptionsMenu_GetCurrentScreenId(void);
+static void OptionsMenu_SetCurrentScreenId(u8 value);
+static void OptionsMenu_IncrementCurrentScreenId(void);
+static void OptionsMenu_DecrementCurrentScreenId(void);
+static u8 OptionsMenu_GetCurrentFirstOption(void);
+static void OptionsMenu_SetCurrentFirstOption(u8 value);
+static u16 OptionsMenu_GetTemporalOptions(enum OptionsIds settings, u32 option);
+static void OptionsMenu_SetTemporalOptions(enum OptionsIds settings, u32 option, u8 value);
+static void OptionsMenu_DecrementCurrentFirstOption(void);
+static void OptionsMenu_IncrementCurrentFirstOption(void);
 
 u8 OptionsMenu_GetSavedOptions(u32 category, u32 setting)
 {
@@ -365,7 +379,8 @@ static bool8 Menu_DoGfxSetup(void)
 
 static void Menu_FreeResources(void)
 {
-    ShouldShowDiscardDialogue = FALSE;
+
+    OptionsMenu_SetShouldShowDiscardDialogue(FALSE);
     FreeAllSpritePalettes();
 
     if (sMenuDataPtr != NULL)
@@ -517,54 +532,49 @@ static void Menu_InitWindows(void)
 }
 
 static u8 GetCurrentScreenOptionNumber(){
-	switch(currentScreenId){
-		case GAME_SETTINGS:
-			return NUM_OPTIONS_GAME_SETTINGS;
-			break;
-		case BATTLE_SETTINGS:
-			return NUM_OPTIONS_BATTLE_SETTINGS;
-			break;
-		case VISUAL_SETTINGS:
-			return NUM_OPTIONS_VISUAL_SETTINGS;
-			break;
-		case MUSIC_SETTINGS:
-			return NUM_OPTIONS_MUSIC_SETTINGS;
-		default:
-		case RANDOM_SETTINGS:
-			return NUM_OPTIONS_RANDOM_SETTINGS;
-			break;
-	}
+
+    u32 value = OptionsMenu_GetCurrentScreenId();
+    const u32 screenOptionNumber[] = 
+    {
+        [GAME_SETTINGS] = NUM_OPTIONS_GAME_SETTINGS,
+        [BATTLE_SETTINGS] = NUM_OPTIONS_BATTLE_SETTINGS,
+        [VISUAL_SETTINGS] = NUM_OPTIONS_VISUAL_SETTINGS,
+        [MUSIC_SETTINGS] = NUM_OPTIONS_MUSIC_SETTINGS,
+        [RANDOM_SETTINGS] = NUM_OPTIONS_RANDOM_SETTINGS,
+    };
+
+    return screenOptionNumber[value];
 }
 
 // --------------------------------------------------------------------------------------------------------------------
 
 static u8 GetCurrentSlotOption(u8 option)
 {
-	return currentFirstOption + option;
+	return OptionsMenu_GetCurrentFirstOption() + option;
 }
 
 static u8 GetCursorPosition()
 {
-	return currentOptionId - currentFirstOption;
+	return OptionsMenu_GetCurrentOptionId() - OptionsMenu_GetCurrentFirstOption();
 }
 
 static void PressedDownButton(){
 	u8 halfScreen = ((NUM_OF_POSSIBLE_OPTIONS_THAT_FIT_ON_SCREEN) - 1) / 2;
 	u8 finalhalfScreen = GetCurrentScreenOptionNumber() - halfScreen;
 
-	if(currentOptionId < halfScreen){
-		currentOptionId++;
+	if(OptionsMenu_GetCurrentOptionId() < halfScreen){
+		OptionsMenu_IncrementCurrentOptionId();
 	}
-	else if(currentOptionId >= (GetCurrentScreenOptionNumber() - 1)){ //If you are in the last option go to the first one
-		currentOptionId = 0;
-		currentFirstOption = 0;
+	else if(OptionsMenu_GetCurrentOptionId() >= (GetCurrentScreenOptionNumber() - 1)){ //If you are in the last option go to the first one
+		OptionsMenu_SetCurrentOptionId(0);
+		OptionsMenu_SetCurrentFirstOption(0);
 	}
-	else if(currentOptionId >= (finalhalfScreen - 1)){
-		currentOptionId++;
+	else if(OptionsMenu_GetCurrentOptionId() >= (finalhalfScreen - 1)){
+		OptionsMenu_IncrementCurrentOptionId();
 	}
 	else{
-		currentOptionId++;
-		currentFirstOption++;
+		OptionsMenu_IncrementCurrentOptionId();
+		OptionsMenu_IncrementCurrentFirstOption();
 	}
 }
 
@@ -572,16 +582,16 @@ static void PressedUpButton(){
 	u8 halfScreen = ((NUM_OF_POSSIBLE_OPTIONS_THAT_FIT_ON_SCREEN) - 1) / 2;
 	u8 finalhalfScreen = GetCurrentScreenOptionNumber() - halfScreen;
 
-	if(currentOptionId > halfScreen && currentOptionId <= (finalhalfScreen - 1)){
-		currentOptionId--;
-		currentFirstOption--;
+	if(OptionsMenu_GetCurrentOptionId() > halfScreen && OptionsMenu_GetCurrentOptionId() <= (finalhalfScreen - 1)){
+		OptionsMenu_DecrementCurrentOptionId();
+		OptionsMenu_DecrementCurrentFirstOption();
 	}
-	else if(currentOptionId == 0){ //If you are in the first option go to the last one
-		currentOptionId = GetCurrentScreenOptionNumber() - 1;
-		currentFirstOption = GetCurrentScreenOptionNumber() - NUM_OF_POSSIBLE_OPTIONS_THAT_FIT_ON_SCREEN;
+	else if(OptionsMenu_GetCurrentOptionId() == 0){ //If you are in the first option go to the last one
+        OptionsMenu_SetCurrentOptionId(GetCurrentScreenOptionNumber() - 1);
+        OptionsMenu_SetCurrentFirstOption(GetCurrentScreenOptionNumber() - NUM_OF_POSSIBLE_OPTIONS_THAT_FIT_ON_SCREEN);
 	}
 	else{
-		currentOptionId--;
+		OptionsMenu_DecrementCurrentOptionId();
 	}
 }
 
@@ -1080,7 +1090,7 @@ void HandlePresetData()
 	u8 i;
 
 	if(AreYouOnCustomPresetData()){
-		switch(currentScreenId){
+		switch(OptionsMenu_GetCurrentScreenId()){
 			case GAME_SETTINGS:
 				for(i = 1 ;i < NUM_OPTIONS_GAME_SETTINGS; i++){
 					TemporalOptions[GAME_SETTINGS][i] = gSaveBlock2Ptr->options[GAME_SETTINGS][i];
@@ -1109,7 +1119,7 @@ void HandlePresetData()
 		}
 	}
 	else{
-		switch(currentScreenId){
+		switch(OptionsMenu_GetCurrentScreenId()){
 			case GAME_SETTINGS:
 				for(i = 1 ;i < NUM_OPTIONS_GAME_SETTINGS; i++){
 					TemporalOptions[GAME_SETTINGS][i] = Preset_Options[GAME_SETTINGS][TemporalOptions[GAME_SETTINGS][0]][i];
@@ -1141,7 +1151,7 @@ void HandlePresetData()
 
 bool8 AreYouOnCustomPresetData()
 {
-	switch(currentScreenId){
+	switch(OptionsMenu_GetCurrentScreenId()){
 		case GAME_SETTINGS:
 			return (TemporalOptions[GAME_SETTINGS][0] == GAME_PRESET_CUSTOM);
 			break;
@@ -1163,7 +1173,7 @@ bool8 AreYouOnCustomPresetData()
 
 void ChangeCurrentScreenPresetDataToCustom()
 {
-	switch(currentScreenId){
+	switch(OptionsMenu_GetCurrentScreenId()){
 		case GAME_SETTINGS:
 			TemporalOptions[GAME_SETTINGS][0] = GAME_PRESET_CUSTOM;
 			break;
@@ -2515,8 +2525,8 @@ static void PrintToWindow(u8 windowId, u8 colorIdx)
 
 	// Selector Sprite --------------------------------------------------------------------------------------------------------------------
 	x = 0;
-	if(!areYouNotOnSettingsHub)
-		y = 2 + (currentScreenId * 2);
+	if((OptionsMenu_GetAreYouNotOnSettingsHub() == FALSE))
+		y = 2 + (OptionsMenu_GetCurrentScreenId() * 2);
 	else
 		y = 2 + (GetCursorPosition() * 2);
 
@@ -2524,7 +2534,7 @@ static void PrintToWindow(u8 windowId, u8 colorIdx)
 
 	// Settings Icons --------------------------------------------------------------------------------------------------------------------
 	// Only gets displayed you are on the Settings Hub
-	if(!areYouNotOnSettingsHub){
+	if((OptionsMenu_GetAreYouNotOnSettingsHub() == FALSE)){
 		x = 1;
 		y = 2;
 
@@ -2536,50 +2546,16 @@ static void PrintToWindow(u8 windowId, u8 colorIdx)
 	}
 	// Current Setting Icon --------------------------------------------------------------------------------------------------------------------
 	// Only gets displayed you have a selected settings
-	if(areYouNotOnSettingsHub){
+	if(OptionsMenu_GetAreYouNotOnSettingsHub()){
 		x = 0;
 		y = 0;
 
-        BlitBitmapToWindow(windowId, sOptionMenuIcons[currentScreenId], (x*8), (y*8), 16, 16);
+        BlitBitmapToWindow(windowId, sOptionMenuIcons[OptionsMenu_GetCurrentScreenId()], (x*8), (y*8), 16, 16);
 	}
-    /*
-	// Up Arrow --------------------------------------------------------------------------------------------------------------------
-	x = 7;
-	y = 1;
-
-	if((!areYouNotOnSettingsHub && currentScreenId != 0) || (areYouNotOnSettingsHub && currentFirstOption != 0))
-		BlitBitmapToWindow(windowId, sOptionMenuArrow_Up, (x*8), (y*8) + 7, 16, 16);
-
-	// Down Arrow --------------------------------------------------------------------------------------------------------------------
-	x = 7;
-	y = 11;
-
-	if((!areYouNotOnSettingsHub && currentScreenId != (NUM_OF_SCREENS - 1)) ||
-			(areYouNotOnSettingsHub && (currentFirstOption + NUM_OF_POSSIBLE_OPTIONS_THAT_FIT_ON_SCREEN) <= (GetCurrentScreenOptionNumber() - 1)))
-		BlitBitmapToWindow(windowId, sOptionMenuArrow_Down, (x*8), (y*8) + 7, 16, 16);
-
-	// Left Arrow --------------------------------------------------------------------------------------------------------------------
-	x = 19;
-	if(!areYouNotOnSettingsHub)
-		y = 2 + (currentScreenId * 2);
-	else
-		y = 2 + (GetCursorPosition() * 2);
-
-	BlitBitmapToWindow(windowId, sOptionMenuArrow_Left, (x*8) + 6, (y*8) + 7, 16, 16);
-
-	// Right Arrow --------------------------------------------------------------------------------------------------------------------
-	x = 27;
-	if(!areYouNotOnSettingsHub)
-		y = 2 + (currentScreenId * 2);
-	else
-		y = 2 + (GetCursorPosition() * 2);
-
-	BlitBitmapToWindow(windowId, sOptionMenuArrow_Right, (x*8) + 6, (y*8) + 7, 16, 16);
-    */
 
 	// Settings Hub Text --------------------------------------------------------------------------------------------------------------------
 	// Only gets displayed you are on the Settings Hub
-	if(!areYouNotOnSettingsHub){
+	if((OptionsMenu_GetAreYouNotOnSettingsHub() == FALSE)){
 		x = 0;
 		y = 0;
 
@@ -2588,15 +2564,15 @@ static void PrintToWindow(u8 windowId, u8 colorIdx)
 
 	// Current Settings Title --------------------------------------------------------------------------------------------------------------------
 	// Only gets displayed you have a selected settings
-	if(areYouNotOnSettingsHub){
+	if(OptionsMenu_GetAreYouNotOnSettingsHub()){
 		x = 2;
 		y = 0;
 
-		AddTextPrinterParameterized4(windowId, 8, (x*8) + 4, (y*8), 0, 0, sMenuWindowFontColors[FONT_WHITE], 0xFF,  Settings_Options[currentScreenId][0].title);
+		AddTextPrinterParameterized4(windowId, 8, (x*8) + 4, (y*8), 0, 0, sMenuWindowFontColors[FONT_WHITE], 0xFF,  Settings_Options[OptionsMenu_GetCurrentScreenId()][0].title);
 	}
 
 	// Settings Names --------------------------------------------------------------------------------------------------------------------
-	if(!areYouNotOnSettingsHub){
+	if((OptionsMenu_GetAreYouNotOnSettingsHub() == FALSE)){
 		x = 3;
 		y = 2;
 		for(i = 0; i < NUM_OF_POSSIBLE_OPTIONS_THAT_FIT_ON_SCREEN; i++){
@@ -2614,7 +2590,7 @@ static void PrintToWindow(u8 windowId, u8 colorIdx)
         x = 1;
         y = 2;
         for(i = 0; i < NUM_OF_POSSIBLE_OPTIONS_THAT_FIT_ON_SCREEN; i++){
-            StringExpandPlaceholders(gStringVar1,Settings_Options[currentScreenId][GetCurrentSlotOption(i)].title);
+            StringExpandPlaceholders(gStringVar1,Settings_Options[OptionsMenu_GetCurrentScreenId()][GetCurrentSlotOption(i)].title);
             u32 fontId = FONT_OPTION_DESC;
             u32 letterSpacing = GetFontAttribute(fontId,FONTATTR_LETTER_SPACING);
             u32 lineSpacing = GetFontAttribute(fontId,FONTATTR_LINE_SPACING);
@@ -2627,7 +2603,7 @@ static void PrintToWindow(u8 windowId, u8 colorIdx)
 
 	// Current Settings --------------------------------------------------------------------------------------------------------------------
 	// Only gets displayed you are on the Settings Hub
-	if(!areYouNotOnSettingsHub){
+	if((OptionsMenu_GetAreYouNotOnSettingsHub() == FALSE)){
 		x = 21;
 		y = 2;
 
@@ -2648,7 +2624,7 @@ static void PrintToWindow(u8 windowId, u8 colorIdx)
 
 
 		for(i = 0; i < NUM_OF_POSSIBLE_OPTIONS_THAT_FIT_ON_SCREEN; i++){
-            StringExpandPlaceholders(gStringVar1,Settings_Options[currentScreenId][GetCurrentSlotOption(i)].options[TemporalOptions[currentScreenId][GetCurrentSlotOption(i)]]);
+            StringExpandPlaceholders(gStringVar1,Settings_Options[OptionsMenu_GetCurrentScreenId()][GetCurrentSlotOption(i)].options[TemporalOptions[OptionsMenu_GetCurrentScreenId()][GetCurrentSlotOption(i)]]);
             u32 fontId = FONT_OPTION_DESC;
             u32 letterSpacing = GetFontAttribute(fontId,FONTATTR_LETTER_SPACING);
             u32 lineSpacing = GetFontAttribute(fontId,FONTATTR_LINE_SPACING);
@@ -2663,12 +2639,11 @@ static void PrintToWindow(u8 windowId, u8 colorIdx)
 	// Only gets displayed you are on the Settings Hub
 	x = 0;
 	y = 14;
-	if(ShouldShowDiscardDialogue){
+	if(OptionsMenu_GetShouldShowDiscardDialogue()){
 		AddTextPrinterParameterized4(windowId, 8, (x*8)+4, (y*8), 0, 0, sMenuWindowFontColors[FONT_WHITE], 0xFF, COMPOUND_STRING("Are you sure you want to leave without\nsaving the changes?"));
 	}
-	else if(!areYouNotOnSettingsHub){
-        //AddTextPrinterParameterized4(windowId, 8, (x*8)+4, (y*8), 0, 0, sMenuWindowFontColors[FONT_WHITE], 0xFF, Settings_Options[currentScreenId][0].optionDescription[TemporalOptions[currentScreenId][0]]);
-        StringExpandPlaceholders(gStringVar1,Settings_Options[currentScreenId][0].optionDescription[TemporalOptions[currentScreenId][0]]);
+	else if((OptionsMenu_GetAreYouNotOnSettingsHub() == FALSE)){
+        StringExpandPlaceholders(gStringVar1,Settings_Options[OptionsMenu_GetCurrentScreenId()][0].optionDescription[TemporalOptions[OptionsMenu_GetCurrentScreenId()][0]]);
         u32 halfTile = (TILE_SIZE_1BPP / 2);
         u32 fontId = FONT_OPTION_DESC;
         u32 letterSpacing = GetFontAttribute(fontId,FONTATTR_LETTER_SPACING);
@@ -2678,7 +2653,7 @@ static void PrintToWindow(u8 windowId, u8 colorIdx)
 	}
     else
     {
-        StringExpandPlaceholders(gStringVar1,Settings_Options[currentScreenId][currentOptionId].optionDescription[TemporalOptions[currentScreenId][currentOptionId]]);
+        StringExpandPlaceholders(gStringVar1,Settings_Options[OptionsMenu_GetCurrentScreenId()][OptionsMenu_GetCurrentOptionId()].optionDescription[TemporalOptions[OptionsMenu_GetCurrentScreenId()][OptionsMenu_GetCurrentOptionId()]]);
         u32 halfTile = (TILE_SIZE_1BPP / 2);
         u32 fontId = FONT_OPTION_DESC;
         u32 letterSpacing = GetFontAttribute(fontId,FONTATTR_LETTER_SPACING);
@@ -2692,10 +2667,10 @@ static void PrintToWindow(u8 windowId, u8 colorIdx)
 	y = 18;
 
 //Text
-    if(ShouldShowDiscardDialogue){
+    if(OptionsMenu_GetShouldShowDiscardDialogue()){
         AddTextPrinterParameterized4(windowId, 8, (x*8)+4, (y*8), 0, 0, sMenuWindowFontColors[FONT_WHITE], 0xFF, COMPOUND_STRING("{A_BUTTON} Yes {B_BUTTON} Cancel {START_BUTTON} Save"));
     }
-    else if(!areYouNotOnSettingsHub){
+    else if((OptionsMenu_GetAreYouNotOnSettingsHub() == FALSE)){
         AddTextPrinterParameterized4(windowId, 8, (x*8)+4, (y*8), 0, 0, sMenuWindowFontColors[FONT_WHITE], 0xFF, COMPOUND_STRING("{DPAD_LEFTRIGHT} Preset {A_BUTTON} Explore {B_BUTTON} Discard {START_BUTTON} Save and Quit"));
     }
     else{
@@ -2764,14 +2739,14 @@ static void RecolorWindow(){
 /* This is the meat of the UI. This is where you wait for player inputs and can branch to other tasks accordingly */
 static void Task_MenuMain(u8 taskId)
 {
-    if(JOY_NEW(DPAD_UP) && !ShouldShowDiscardDialogue)
+    if(JOY_NEW(DPAD_UP) && (OptionsMenu_GetShouldShowDiscardDialogue() == FALSE))
     {
-        if(!areYouNotOnSettingsHub){
-            if(currentScreenId > 0){
-                currentScreenId--;
+        if((OptionsMenu_GetAreYouNotOnSettingsHub() == FALSE)){
+            if(OptionsMenu_GetCurrentScreenId() > 0){
+                OptionsMenu_DecrementCurrentScreenId();
             }
             else{
-                currentScreenId = NUM_OF_POSSIBLE_OPTIONS_THAT_FIT_ON_SCREEN - 1;
+                OptionsMenu_SetCurrentScreenId(NUM_OF_POSSIBLE_OPTIONS_THAT_FIT_ON_SCREEN - 1);
             }
         }
         else{
@@ -2781,14 +2756,14 @@ static void Task_MenuMain(u8 taskId)
         PrintToWindow(WINDOW_1, FONT_BLACK);
     }
 
-	if(JOY_NEW(DPAD_DOWN) && !ShouldShowDiscardDialogue)
+	if(JOY_NEW(DPAD_DOWN) && (OptionsMenu_GetShouldShowDiscardDialogue() == FALSE))
 	{
-        if(!areYouNotOnSettingsHub){
-            if(currentScreenId < NUM_OF_POSSIBLE_OPTIONS_THAT_FIT_ON_SCREEN-1){
-                currentScreenId++;
+        if((OptionsMenu_GetAreYouNotOnSettingsHub() == FALSE)){
+            if(OptionsMenu_GetCurrentScreenId() < NUM_OF_POSSIBLE_OPTIONS_THAT_FIT_ON_SCREEN-1){
+                OptionsMenu_IncrementCurrentScreenId();
             }
             else{
-                currentScreenId = 0;
+                OptionsMenu_SetCurrentScreenId(0);
             }
         }
         else{
@@ -2798,11 +2773,11 @@ static void Task_MenuMain(u8 taskId)
         PrintToWindow(WINDOW_1, FONT_BLACK);
 	}
 
-	if(JOY_NEW(DPAD_LEFT) && !ShouldShowDiscardDialogue)
+	if(JOY_NEW(DPAD_LEFT) && (OptionsMenu_GetShouldShowDiscardDialogue() == FALSE))
 	{
-        if(!areYouNotOnSettingsHub || currentOptionId == 0){
+        if((OptionsMenu_GetAreYouNotOnSettingsHub() == FALSE) || OptionsMenu_GetCurrentOptionId() == 0){
             //For Presets
-            switch(currentScreenId){
+            switch(OptionsMenu_GetCurrentScreenId()){
                 case GAME_SETTINGS:
                     if(TemporalOptions[GAME_SETTINGS][0] > 0)
                         TemporalOptions[GAME_SETTINGS][0]--;
@@ -2826,7 +2801,7 @@ static void Task_MenuMain(u8 taskId)
                         TemporalOptions[MUSIC_SETTINGS][0]--;
                     else
                         TemporalOptions[MUSIC_SETTINGS][0] = Settings_Options[MUSIC_SETTINGS][0].numOptions - 1;
-                PreviewBGM(currentOptionId, TemporalOptions[MUSIC_SETTINGS][currentOptionId]);
+                PreviewBGM(OptionsMenu_GetCurrentOptionId(), TemporalOptions[MUSIC_SETTINGS][OptionsMenu_GetCurrentOptionId()]);
                 break;
                 case RANDOM_SETTINGS:
                     if(TemporalOptions[RANDOM_SETTINGS][0] > 0)
@@ -2837,46 +2812,46 @@ static void Task_MenuMain(u8 taskId)
             }
 
 			HandlePresetData();
-			if(currentScreenId == VISUAL_SETTINGS)
+			if(OptionsMenu_GetCurrentScreenId() == VISUAL_SETTINGS)
 				RecolorWindow();
 		}
 		else{
 			// For Other Options
-			switch(currentScreenId){
+			switch(OptionsMenu_GetCurrentScreenId()){
 				case GAME_SETTINGS:
-					if(TemporalOptions[GAME_SETTINGS][currentOptionId] > 0){
-						TemporalOptions[GAME_SETTINGS][currentOptionId]--;
+					if(TemporalOptions[GAME_SETTINGS][OptionsMenu_GetCurrentOptionId()] > 0){
+						TemporalOptions[GAME_SETTINGS][OptionsMenu_GetCurrentOptionId()]--;
 					}
 					else
-						TemporalOptions[GAME_SETTINGS][currentOptionId] = Settings_Options[GAME_SETTINGS][currentOptionId].numOptions - 1;
+						TemporalOptions[GAME_SETTINGS][OptionsMenu_GetCurrentOptionId()] = Settings_Options[GAME_SETTINGS][OptionsMenu_GetCurrentOptionId()].numOptions - 1;
 					break;
 				case BATTLE_SETTINGS:
-					if(TemporalOptions[BATTLE_SETTINGS][currentOptionId] > 0)
-						TemporalOptions[BATTLE_SETTINGS][currentOptionId]--;
+					if(TemporalOptions[BATTLE_SETTINGS][OptionsMenu_GetCurrentOptionId()] > 0)
+						TemporalOptions[BATTLE_SETTINGS][OptionsMenu_GetCurrentOptionId()]--;
 					else
-						TemporalOptions[BATTLE_SETTINGS][currentOptionId] = Settings_Options[BATTLE_SETTINGS][currentOptionId].numOptions - 1;
+						TemporalOptions[BATTLE_SETTINGS][OptionsMenu_GetCurrentOptionId()] = Settings_Options[BATTLE_SETTINGS][OptionsMenu_GetCurrentOptionId()].numOptions - 1;
 					break;
 				case VISUAL_SETTINGS:
-					if(TemporalOptions[VISUAL_SETTINGS][currentOptionId] > 0)
-						TemporalOptions[VISUAL_SETTINGS][currentOptionId]--;
+					if(TemporalOptions[VISUAL_SETTINGS][OptionsMenu_GetCurrentOptionId()] > 0)
+						TemporalOptions[VISUAL_SETTINGS][OptionsMenu_GetCurrentOptionId()]--;
 					else
-						TemporalOptions[VISUAL_SETTINGS][currentOptionId] = Settings_Options[VISUAL_SETTINGS][currentOptionId].numOptions - 1;
+						TemporalOptions[VISUAL_SETTINGS][OptionsMenu_GetCurrentOptionId()] = Settings_Options[VISUAL_SETTINGS][OptionsMenu_GetCurrentOptionId()].numOptions - 1;
 
-                    if(currentOptionId == VISUAL_OPTIONS_COLOR)
+                    if(OptionsMenu_GetCurrentOptionId() == VISUAL_OPTIONS_COLOR)
                         RecolorWindow();
                 break;
                 case MUSIC_SETTINGS:
-                    if(TemporalOptions[MUSIC_SETTINGS][currentOptionId] > 0)
-                        TemporalOptions[MUSIC_SETTINGS][currentOptionId]--;
+                    if(TemporalOptions[MUSIC_SETTINGS][OptionsMenu_GetCurrentOptionId()] > 0)
+                        TemporalOptions[MUSIC_SETTINGS][OptionsMenu_GetCurrentOptionId()]--;
                     else
-                        TemporalOptions[MUSIC_SETTINGS][currentOptionId] = Settings_Options[MUSIC_SETTINGS][currentOptionId].numOptions - 1;
-                    PreviewBGM(currentOptionId, TemporalOptions[MUSIC_SETTINGS][currentOptionId]);
+                        TemporalOptions[MUSIC_SETTINGS][OptionsMenu_GetCurrentOptionId()] = Settings_Options[MUSIC_SETTINGS][OptionsMenu_GetCurrentOptionId()].numOptions - 1;
+                    PreviewBGM(OptionsMenu_GetCurrentOptionId(), TemporalOptions[MUSIC_SETTINGS][OptionsMenu_GetCurrentOptionId()]);
                 break;
                 case RANDOM_SETTINGS:
-                    if(TemporalOptions[RANDOM_SETTINGS][currentOptionId] > 0)
-                        TemporalOptions[RANDOM_SETTINGS][currentOptionId]--;
+                    if(TemporalOptions[RANDOM_SETTINGS][OptionsMenu_GetCurrentOptionId()] > 0)
+                        TemporalOptions[RANDOM_SETTINGS][OptionsMenu_GetCurrentOptionId()]--;
                     else
-                        TemporalOptions[RANDOM_SETTINGS][currentOptionId] = Settings_Options[RANDOM_SETTINGS][currentOptionId].numOptions - 1;
+                        TemporalOptions[RANDOM_SETTINGS][OptionsMenu_GetCurrentOptionId()] = Settings_Options[RANDOM_SETTINGS][OptionsMenu_GetCurrentOptionId()].numOptions - 1;
                 break;
             }
 
@@ -2886,11 +2861,11 @@ static void Task_MenuMain(u8 taskId)
         PrintToWindow(WINDOW_1, FONT_BLACK);
 	}
 
-	if(JOY_NEW(DPAD_RIGHT) && !ShouldShowDiscardDialogue)
+	if(JOY_NEW(DPAD_RIGHT) && (OptionsMenu_GetShouldShowDiscardDialogue() == FALSE))
 	{
-        if(!areYouNotOnSettingsHub || currentOptionId == 0){
+        if((OptionsMenu_GetAreYouNotOnSettingsHub() == FALSE) || OptionsMenu_GetCurrentOptionId() == 0){
             //For Presets
-            switch(currentScreenId){
+            switch(OptionsMenu_GetCurrentScreenId()){
                 case GAME_SETTINGS:
                     if(TemporalOptions[GAME_SETTINGS][0] < Settings_Options[GAME_SETTINGS][0].numOptions - 1)
                         TemporalOptions[GAME_SETTINGS][0]++;
@@ -2914,7 +2889,7 @@ static void Task_MenuMain(u8 taskId)
                         TemporalOptions[MUSIC_SETTINGS][0]++;
                     else
                         TemporalOptions[MUSIC_SETTINGS][0] = 0;
-                PreviewBGM(currentOptionId, TemporalOptions[MUSIC_SETTINGS][currentOptionId]);
+                PreviewBGM(OptionsMenu_GetCurrentOptionId(), TemporalOptions[MUSIC_SETTINGS][OptionsMenu_GetCurrentOptionId()]);
                 break;
                 case RANDOM_SETTINGS:
                     if(TemporalOptions[RANDOM_SETTINGS][0] < Settings_Options[RANDOM_SETTINGS][0].numOptions - 1)
@@ -2925,51 +2900,51 @@ static void Task_MenuMain(u8 taskId)
             }
 
 			HandlePresetData();
-			if(currentScreenId == VISUAL_SETTINGS)
+			if(OptionsMenu_GetCurrentScreenId() == VISUAL_SETTINGS)
 				RecolorWindow();
 		}
 		else{
 			//For other Options
-			switch(currentScreenId){
+			switch(OptionsMenu_GetCurrentScreenId()){
 				case GAME_SETTINGS:
-					if(TemporalOptions[GAME_SETTINGS][currentOptionId] < Settings_Options[GAME_SETTINGS][currentOptionId].numOptions - 1){
-						TemporalOptions[GAME_SETTINGS][currentOptionId]++;
+					if(TemporalOptions[GAME_SETTINGS][OptionsMenu_GetCurrentOptionId()] < Settings_Options[GAME_SETTINGS][OptionsMenu_GetCurrentOptionId()].numOptions - 1){
+						TemporalOptions[GAME_SETTINGS][OptionsMenu_GetCurrentOptionId()]++;
 					}
 					else
-						TemporalOptions[GAME_SETTINGS][currentOptionId] = 0;
+						TemporalOptions[GAME_SETTINGS][OptionsMenu_GetCurrentOptionId()] = 0;
 					break;
 				case BATTLE_SETTINGS:
-					if(TemporalOptions[BATTLE_SETTINGS][currentOptionId] < Settings_Options[BATTLE_SETTINGS][currentOptionId].numOptions - 1){
-						TemporalOptions[BATTLE_SETTINGS][currentOptionId]++;
+					if(TemporalOptions[BATTLE_SETTINGS][OptionsMenu_GetCurrentOptionId()] < Settings_Options[BATTLE_SETTINGS][OptionsMenu_GetCurrentOptionId()].numOptions - 1){
+						TemporalOptions[BATTLE_SETTINGS][OptionsMenu_GetCurrentOptionId()]++;
 					}
 					else
-						TemporalOptions[BATTLE_SETTINGS][currentOptionId] = 0;
+						TemporalOptions[BATTLE_SETTINGS][OptionsMenu_GetCurrentOptionId()] = 0;
 					break;
 				case VISUAL_SETTINGS:
-					if(TemporalOptions[VISUAL_SETTINGS][currentOptionId] < Settings_Options[VISUAL_SETTINGS][currentOptionId].numOptions - 1){
-						TemporalOptions[VISUAL_SETTINGS][currentOptionId]++;
+					if(TemporalOptions[VISUAL_SETTINGS][OptionsMenu_GetCurrentOptionId()] < Settings_Options[VISUAL_SETTINGS][OptionsMenu_GetCurrentOptionId()].numOptions - 1){
+						TemporalOptions[VISUAL_SETTINGS][OptionsMenu_GetCurrentOptionId()]++;
 					}
 					else
-						TemporalOptions[VISUAL_SETTINGS][currentOptionId] = 0;
+						TemporalOptions[VISUAL_SETTINGS][OptionsMenu_GetCurrentOptionId()] = 0;
 
-                    if(currentOptionId == VISUAL_OPTIONS_COLOR)
+                    if(OptionsMenu_GetCurrentOptionId() == VISUAL_OPTIONS_COLOR)
                             RecolorWindow();
                 break;
                 case MUSIC_SETTINGS:
-                    if(TemporalOptions[MUSIC_SETTINGS][currentOptionId] < Settings_Options[MUSIC_SETTINGS][currentOptionId].numOptions - 1){
-                        TemporalOptions[MUSIC_SETTINGS][currentOptionId]++;
+                    if(TemporalOptions[MUSIC_SETTINGS][OptionsMenu_GetCurrentOptionId()] < Settings_Options[MUSIC_SETTINGS][OptionsMenu_GetCurrentOptionId()].numOptions - 1){
+                        TemporalOptions[MUSIC_SETTINGS][OptionsMenu_GetCurrentOptionId()]++;
                     }
                     else
-                        TemporalOptions[MUSIC_SETTINGS][currentOptionId] = 0;
+                        TemporalOptions[MUSIC_SETTINGS][OptionsMenu_GetCurrentOptionId()] = 0;
 
-                    PreviewBGM(currentOptionId, TemporalOptions[MUSIC_SETTINGS][currentOptionId]);
+                    PreviewBGM(OptionsMenu_GetCurrentOptionId(), TemporalOptions[MUSIC_SETTINGS][OptionsMenu_GetCurrentOptionId()]);
                 break;
                 case RANDOM_SETTINGS:
-                    if(TemporalOptions[RANDOM_SETTINGS][currentOptionId] < Settings_Options[RANDOM_SETTINGS][currentOptionId].numOptions - 1){
-                        TemporalOptions[RANDOM_SETTINGS][currentOptionId]++;
+                    if(TemporalOptions[RANDOM_SETTINGS][OptionsMenu_GetCurrentOptionId()] < Settings_Options[RANDOM_SETTINGS][OptionsMenu_GetCurrentOptionId()].numOptions - 1){
+                        TemporalOptions[RANDOM_SETTINGS][OptionsMenu_GetCurrentOptionId()]++;
                     }
                     else
-                        TemporalOptions[RANDOM_SETTINGS][currentOptionId] = 0;
+                        TemporalOptions[RANDOM_SETTINGS][OptionsMenu_GetCurrentOptionId()] = 0;
                 break;
             }
 
@@ -2981,27 +2956,27 @@ static void Task_MenuMain(u8 taskId)
 
 	if (JOY_NEW(A_BUTTON))
 	{
-		if(!areYouNotOnSettingsHub && !ShouldShowDiscardDialogue){
-			areYouNotOnSettingsHub = !areYouNotOnSettingsHub;
+		if((OptionsMenu_GetAreYouNotOnSettingsHub() == FALSE) && (OptionsMenu_GetShouldShowDiscardDialogue() == FALSE)){
+            OptionsMenu_ToggleAreYouNotOnSettingsHub();
 			HandlePresetData();
-			currentOptionId = 0;
-			currentFirstOption = 0;
+			OptionsMenu_SetCurrentOptionId(0);
+			OptionsMenu_SetCurrentFirstOption(0);
 
-			if(currentScreenId == VISUAL_SETTINGS){
+			if(OptionsMenu_GetCurrentScreenId() == VISUAL_SETTINGS){
 				RecolorWindow();
 			}
 
             PrintToWindow(WINDOW_1, FONT_BLACK);
         }
-        else if(areYouNotOnSettingsHub && ShouldShowDiscardDialogue){
+        else if(OptionsMenu_GetAreYouNotOnSettingsHub() && OptionsMenu_GetShouldShowDiscardDialogue()){
             CopySaveBlockDataToTemporalData();
-            ShouldShowDiscardDialogue = FALSE;
-            areYouNotOnSettingsHub = !areYouNotOnSettingsHub;
-            currentOptionId = 0;
-            currentFirstOption = 0;
+            OptionsMenu_SetShouldShowDiscardDialogue(FALSE);
+            OptionsMenu_ToggleAreYouNotOnSettingsHub();
+            OptionsMenu_SetCurrentOptionId(0);
+            OptionsMenu_SetCurrentFirstOption(0);
             PrintToWindow(WINDOW_1, FONT_BLACK);
         }
-        else if(ShouldShowDiscardDialogue && !areYouNotOnSettingsHub){
+        else if((OptionsMenu_GetShouldShowDiscardDialogue())&& (OptionsMenu_GetAreYouNotOnSettingsHub() == FALSE)){
             PlaySoundEffectBasedOnTemporalMute(SE_PC_OFF);
             BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, OptionMenu_FadeWhiteIfMainMenu());
             gTasks[taskId].func = Task_MenuTurnOff;
@@ -3011,16 +2986,16 @@ static void Task_MenuMain(u8 taskId)
     if (JOY_NEW(B_BUTTON))
     {
         if(HaveSettingsChanged())
-            ShouldShowDiscardDialogue = !ShouldShowDiscardDialogue;
-        else if (!areYouNotOnSettingsHub){
+            OptionsMenu_ToggleShouldShowDiscardDialogue();
+        else if ((OptionsMenu_GetAreYouNotOnSettingsHub() == FALSE)){
             PlaySoundEffectBasedOnTemporalMute(SE_PC_OFF);
             BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, OptionMenu_FadeWhiteIfMainMenu());
             gTasks[taskId].func = Task_MenuTurnOff;
         }
         else{
-            areYouNotOnSettingsHub = !areYouNotOnSettingsHub;
-            currentOptionId = 0;
-            currentFirstOption = 0;
+            OptionsMenu_ToggleAreYouNotOnSettingsHub();
+            OptionsMenu_SetCurrentOptionId(0);
+            OptionsMenu_SetCurrentFirstOption(0);
         }
 
 		PrintToWindow(WINDOW_1, FONT_BLACK);
@@ -3028,9 +3003,9 @@ static void Task_MenuMain(u8 taskId)
 
 	if (JOY_NEW(START_BUTTON))
 	{
-		ShouldShowDiscardDialogue = FALSE;
+		OptionsMenu_SetShouldShowDiscardDialogue(FALSE);
 
-        if(!areYouNotOnSettingsHub){
+        if((OptionsMenu_GetAreYouNotOnSettingsHub() == FALSE)){
             CopyTemporalDataToSaveBlockData();
             PlaySE(SE_PC_OFF);
             BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, OptionMenu_FadeWhiteIfMainMenu());
@@ -3038,41 +3013,41 @@ static void Task_MenuMain(u8 taskId)
         }
         else{
             CopyTemporalDataToSaveBlockData();
-            areYouNotOnSettingsHub = !areYouNotOnSettingsHub;
-            currentOptionId = 0;
-            currentFirstOption = 0;
+            OptionsMenu_ToggleAreYouNotOnSettingsHub();
+            OptionsMenu_SetCurrentOptionId(0);
+            OptionsMenu_SetCurrentFirstOption(0);
             PrintToWindow(WINDOW_1, FONT_BLACK);
         }
     }
 
-	if (JOY_NEW(L_BUTTON) && !ShouldShowDiscardDialogue)
+	if (JOY_NEW(L_BUTTON) && (OptionsMenu_GetShouldShowDiscardDialogue() == FALSE))
 	{
-		if(areYouNotOnSettingsHub){
-			if(currentScreenId > 0){
-				currentScreenId--;
+		if(OptionsMenu_GetAreYouNotOnSettingsHub()){
+			if(OptionsMenu_GetCurrentScreenId() > 0){
+				OptionsMenu_DecrementCurrentScreenId();
 			}
 			else{
-				currentScreenId = NUM_OF_POSSIBLE_OPTIONS_THAT_FIT_ON_SCREEN - 1;
+                OptionsMenu_SetCurrentScreenId(NUM_OF_POSSIBLE_OPTIONS_THAT_FIT_ON_SCREEN - 1);
 			}
 
-			currentOptionId = 0;
-			currentFirstOption = 0;
+			OptionsMenu_SetCurrentOptionId(0);
+			OptionsMenu_SetCurrentFirstOption(0);
 			PrintToWindow(WINDOW_1, FONT_BLACK);
 		}
 	}
 
-	if (JOY_NEW(R_BUTTON) && !ShouldShowDiscardDialogue)
+	if (JOY_NEW(R_BUTTON) && (OptionsMenu_GetShouldShowDiscardDialogue() == FALSE))
 	{
-		if(areYouNotOnSettingsHub){
-			if(currentScreenId < NUM_OF_POSSIBLE_OPTIONS_THAT_FIT_ON_SCREEN-1){
-				currentScreenId++;
+		if(OptionsMenu_GetAreYouNotOnSettingsHub()){
+			if(OptionsMenu_GetCurrentScreenId() < NUM_OF_POSSIBLE_OPTIONS_THAT_FIT_ON_SCREEN-1){
+				OptionsMenu_IncrementCurrentScreenId();
 			}
 			else{
-				currentScreenId = 0;
+				OptionsMenu_SetCurrentScreenId(0);
 			}
 
-			currentOptionId = 0;
-			currentFirstOption = 0;
+			OptionsMenu_SetCurrentOptionId(0);
+			OptionsMenu_SetCurrentFirstOption(0);
 			PrintToWindow(WINDOW_1, FONT_BLACK);
 		}
 	}
@@ -3172,7 +3147,7 @@ static void SpriteCallback_UpArrow(struct Sprite *sprite)
     sprite->y2 = gSineTable[val] / 128;
     sprite->data[0] += 8;
 
-	if((!areYouNotOnSettingsHub && currentScreenId != 0) || (areYouNotOnSettingsHub && currentFirstOption != 0))
+	if(((OptionsMenu_GetAreYouNotOnSettingsHub() == FALSE) && OptionsMenu_GetCurrentScreenId() != 0) || (OptionsMenu_GetAreYouNotOnSettingsHub() && OptionsMenu_GetCurrentFirstOption() != 0))
     {
         sprite->invisible = FALSE;
     }
@@ -3206,8 +3181,8 @@ static void SpriteCallback_DownArrow(struct Sprite *sprite)
     sprite->y2 = gSineTable[val] / 128;
     sprite->data[0] += 8;
 
-	if((!areYouNotOnSettingsHub && currentScreenId != (NUM_OF_SCREENS - 1)) ||
-			(areYouNotOnSettingsHub && (currentFirstOption + NUM_OF_POSSIBLE_OPTIONS_THAT_FIT_ON_SCREEN) <= (GetCurrentScreenOptionNumber() - 1)))
+	if(((OptionsMenu_GetAreYouNotOnSettingsHub() == FALSE) && OptionsMenu_GetCurrentScreenId() != (NUM_OF_SCREENS - 1)) ||
+			(OptionsMenu_GetAreYouNotOnSettingsHub() && (OptionsMenu_GetCurrentFirstOption() + NUM_OF_POSSIBLE_OPTIONS_THAT_FIT_ON_SCREEN) <= (GetCurrentScreenOptionNumber() - 1)))
     {
         sprite->invisible = FALSE;
     }
@@ -3238,7 +3213,7 @@ static void CreateDownArrowSprite(void)
 static void SpriteCallback_LeftArrow(struct Sprite *sprite)
 {
     u8 val = sprite->data[0] + 128;
-    u32 position = (areYouNotOnSettingsHub == TRUE) ? GetCursorPosition() : currentScreenId;
+    u32 position = (OptionsMenu_GetAreYouNotOnSettingsHub() == TRUE) ? GetCursorPosition() : OptionsMenu_GetCurrentScreenId();
     u32 y = ARROW_LEFT_POSITION_Y + (position * 16);
 
     sprite->x = ARROW_LEFT_POSITION_X;
@@ -3268,7 +3243,7 @@ static void CreateLeftArrowSprite(void)
 static void SpriteCallback_RightArrow(struct Sprite *sprite)
 {
     u8 val = sprite->data[0];
-    u32 position = (areYouNotOnSettingsHub == TRUE) ? GetCursorPosition() : currentScreenId;
+    u32 position = (OptionsMenu_GetAreYouNotOnSettingsHub() == TRUE) ? GetCursorPosition() : OptionsMenu_GetCurrentScreenId();
     u32 y = ARROW_RIGHT_POSITION_Y + (position * 16);
 
     sprite->x = ARROW_RIGHT_POSITION_X;
@@ -3300,4 +3275,144 @@ static void ResetAllSpriteIds(void)
     for (u32 spriteId = 0; spriteId < OPTIONS_SPRITE_ID_ARROW_COUNT; spriteId++)
         sMenuDataPtr->spriteIds[spriteId] = SPRITE_NONE;
 
+}
+
+static bool8 OptionsMenu_GetShouldShowDiscardDialogue(void)
+{
+    return sMenuDataPtr->shouldShowDiscardDialogue;
+}
+
+static void OptionsMenu_SetShouldShowDiscardDialogue(bool8 value)
+{
+    sMenuDataPtr->shouldShowDiscardDialogue = value;
+}
+
+static void OptionsMenu_ToggleShouldShowDiscardDialogue(void)
+{
+    bool32 value = OptionsMenu_GetShouldShowDiscardDialogue();
+    value = !value;
+    OptionsMenu_SetShouldShowDiscardDialogue(value);
+}
+
+static bool8 OptionsMenu_GetAreYouNotOnSettingsHub(void)
+{
+    return sMenuDataPtr->areYouNotOnSettingsHub;
+}
+
+static void OptionsMenu_SetAreYouNotOnSettingsHub(bool8 value)
+{
+    sMenuDataPtr->areYouNotOnSettingsHub = value;
+}
+
+static void OptionsMenu_ToggleAreYouNotOnSettingsHub(void)
+{
+    bool32 value = OptionsMenu_GetAreYouNotOnSettingsHub();
+    value = !value;
+    OptionsMenu_SetAreYouNotOnSettingsHub(value);
+}
+
+static u8 OptionsMenu_GetCurrentOptionId(void)
+{
+    return sMenuDataPtr->currentOptionId;
+}
+
+static void OptionsMenu_SetCurrentOptionId(u8 value)
+{
+    sMenuDataPtr->currentOptionId = value;
+}
+
+static void OptionsMenu_IncrementCurrentOptionId(void)
+{
+    u32 value = OptionsMenu_GetCurrentOptionId();
+
+    if (value == MAX_u8)
+        return;
+    
+    value++;
+    OptionsMenu_SetCurrentOptionId(value);
+}
+
+static void OptionsMenu_DecrementCurrentOptionId(void)
+{
+    u32 value = OptionsMenu_GetCurrentOptionId();
+
+    if (value == 0)
+        return;
+
+    value--;
+    OptionsMenu_SetCurrentOptionId(value);
+}
+
+static u8 OptionsMenu_GetCurrentScreenId(void)
+{
+    return sMenuDataPtr->currentScreenId;
+}
+
+static void OptionsMenu_SetCurrentScreenId(u8 value)
+{
+    sMenuDataPtr->currentScreenId = value;
+}
+
+static void OptionsMenu_IncrementCurrentScreenId(void)
+{
+    u32 value = OptionsMenu_GetCurrentScreenId();
+
+    if (value == MAX_u8)
+        return;
+    
+    value++;
+    OptionsMenu_SetCurrentScreenId(value);
+}
+
+static void OptionsMenu_DecrementCurrentScreenId(void)
+{
+    u32 value = OptionsMenu_GetCurrentScreenId();
+
+    if (value == 0)
+        return;
+
+    value--;
+    OptionsMenu_SetCurrentScreenId(value);
+}
+
+static u8 OptionsMenu_GetCurrentFirstOption(void)
+{
+    return sMenuDataPtr->currentFirstOption;
+}
+
+static void OptionsMenu_SetCurrentFirstOption(u8 value)
+{
+    sMenuDataPtr->currentFirstOption = value;
+}
+
+static u16 OptionsMenu_GetTemporalOptions(enum OptionsIds setting, u32 option)
+{
+    return sMenuDataPtr->TemporalOptions[setting][option];
+}
+
+static void OptionsMenu_SetTemporalOptions(enum OptionsIds setting, u32 option, u8 value)
+{
+    sMenuDataPtr->TemporalOptions[setting][option] = value;
+}
+
+static void OptionsMenu_IncrementCurrentFirstOption(void)
+{
+    u32 value = OptionsMenu_GetCurrentFirstOption();
+
+    if (value == MAX_u8)
+        return;
+    
+    value++;
+    OptionsMenu_SetCurrentFirstOption(value);
+}
+
+static void OptionsMenu_DecrementCurrentFirstOption(void)
+{
+    u32 value = OptionsMenu_GetCurrentFirstOption();
+
+    if (value == 0)
+        return;
+
+    value--;
+    OptionsMenu_SetCurrentFirstOption(value);
 }
