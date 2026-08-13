@@ -17,6 +17,7 @@
 #include "international_string_util.h"
 #include "main.h"
 #include "malloc.h"
+#include "options_visual.h"
 #include "line_break.h"
 #include "main_menu.h"
 #include "menu.h"
@@ -203,6 +204,7 @@ static const struct SpritePalette sInterfaceSpritePalette[] = {{sMenuPalette, 0}
 
 static const u16 sMenuPalette_Red[]      = INCGFX_U16("graphics/ui_menus/options_menu/palettes/red.pal", ".gbapal");
 static const u16 sMenuPalette_Black[]    = INCGFX_U16("graphics/ui_menus/options_menu/palettes/black.pal", ".gbapal");
+static const u16 sMenuPalette_Default[]    = INCGFX_U16("graphics/ui_menus/options_menu/palettes/black.pal", ".gbapal");
 static const u16 sMenuPalette_Green[]    = INCGFX_U16("graphics/ui_menus/options_menu/palettes/green.pal", ".gbapal");
 static const u16 sMenuPalette_Blue[]     = INCGFX_U16("graphics/ui_menus/options_menu/palettes/blue.pal", ".gbapal");
 static const u16 sMenuPalette_Platinum[] = INCGFX_U16("graphics/ui_menus/options_menu/palettes/platinum.pal", ".gbapal");
@@ -457,41 +459,25 @@ static void SetScheduleBgs(u32 backgroundId)
     ScheduleBgCopyTilemapToVram(backgroundId);
 }
 
+static const u16* const sOptionsMenuPalettesLUT[] =
+{
+    [VISUAL_OPTION_COLOR_RED] = sMenuPalette_Red,
+    [VISUAL_OPTION_COLOR_GREEN] = sMenuPalette_Green,
+    [VISUAL_OPTION_COLOR_BLUE] = sMenuPalette_Blue,
+    [VISUAL_OPTION_COLOR_YELLOW] = sMenuPalette_Yellow,
+    [VISUAL_OPTION_COLOR_BLACK] = sMenuPalette_Black,
+    [VISUAL_OPTION_COLOR_WHITE] = sMenuPalette_White,
+    [VISUAL_OPTION_COLOR_PLATINUM] = sMenuPalette_Platinum,
+    [VISUAL_OPTION_COLOR_SCARLET] = sMenuPalette_Scarlet,
+    [VISUAL_OPTION_COLOR_VIOLET] = sMenuPalette_Violet,
+    [VISUAL_OPTION_COLOR_CUSTOM] = sMenuPalette_Default,
+    [VISUAL_OPTION_COLOR_COUNT] = sMenuPalette_Default,
+};
+
 static void LoadOptionsMenuPalettes(void)
 {
     LoadSpritePalette(sInterfaceSpritePalette);
-    switch(gSaveBlock2Ptr->options[VISUAL_SETTINGS][VISUAL_OPTIONS_COLOR]){
-        case VISUAL_OPTION_COLOR_BLACK:
-            LoadPalette(sMenuPalette_Black, 0, 32);
-            break;
-        case VISUAL_OPTION_COLOR_BLUE:
-            LoadPalette(sMenuPalette_Blue, 0, 32);
-            break;
-        case VISUAL_OPTION_COLOR_GREEN:
-            LoadPalette(sMenuPalette_Green, 0, 32);
-            break;
-        case VISUAL_OPTION_COLOR_PLATINUM:
-            LoadPalette(sMenuPalette_Platinum, 0, 32);
-            break;
-        case VISUAL_OPTION_COLOR_RED:
-            LoadPalette(sMenuPalette_Red, 0, 32);
-            break;
-        case VISUAL_OPTION_COLOR_SCARLET:
-            LoadPalette(sMenuPalette_Scarlet, 0, 32);
-            break;
-        case VISUAL_OPTION_COLOR_VIOLET:
-            LoadPalette(sMenuPalette_Violet, 0, 32);
-            break;
-        case VISUAL_OPTION_COLOR_WHITE:
-            LoadPalette(sMenuPalette_White, 0, 32);
-            break;
-        case VISUAL_OPTION_COLOR_YELLOW:
-            LoadPalette(sMenuPalette_Yellow, 0, 32);
-            break;
-        default:
-            LoadPalette(sMenuPalette, 0, 32);
-            break;
-    }
+    LoadPalette(sOptionsMenuPalettesLUT[GetVisualColor()], 0, PLTT_SIZE_4BPP);
 }
 
 static const u32* const sOptionsTilesLUT[] =
@@ -531,7 +517,7 @@ static void Menu_InitWindows(void)
 	CopyWindowToVram(WINDOW_1, 3);
 }
 
-static const u32 screenOptionNumber[] = 
+static const u8 screenOptionNumber[] = 
 {
     [GAME_SETTINGS] = NUM_OPTIONS_GAME_SETTINGS,
     [BATTLE_SETTINGS] = NUM_OPTIONS_BATTLE_SETTINGS,
@@ -539,6 +525,20 @@ static const u32 screenOptionNumber[] =
     [MUSIC_SETTINGS] = NUM_OPTIONS_MUSIC_SETTINGS,
     [RANDOM_SETTINGS] = NUM_OPTIONS_RANDOM_SETTINGS,
 };
+
+static const u8 presetCustomValues[] = 
+{
+    [GAME_SETTINGS] = GAME_PRESET_CUSTOM,
+    [BATTLE_SETTINGS] = BATTLE_PRESET_CUSTOM,
+    [VISUAL_SETTINGS] = VISUAL_PRESET_CUSTOM,
+    [MUSIC_SETTINGS] = MUSIC_PRESET_CUSTOM,
+    [RANDOM_SETTINGS] = RANDOM_PRESET_CUSTOM,
+};
+
+static u8 GetCustomPresetValueFromScreenId(){
+    u32 value = OptionsMenu_GetCurrentScreenId();
+    return presetCustomValues[value];
+}
 
 static u8 GetCurrentScreenOptionNumber(){
 
@@ -1102,45 +1102,14 @@ void HandlePresetData()
 
 bool8 AreYouOnCustomPresetData()
 {
-	switch(OptionsMenu_GetCurrentScreenId()){
-		case GAME_SETTINGS:
-			return (TemporalOptions[GAME_SETTINGS][0] == GAME_PRESET_CUSTOM);
-			break;
-		case BATTLE_SETTINGS:
-			return (TemporalOptions[BATTLE_SETTINGS][0] == BATTLE_PRESET_CUSTOM);
-			break;
-		case VISUAL_SETTINGS:
-			return (TemporalOptions[VISUAL_SETTINGS][0] == VISUAL_PRESET_CUSTOM);
-			break;
-		case MUSIC_SETTINGS:
-			return (TemporalOptions[MUSIC_SETTINGS][0] == MUSIC_PRESET_CUSTOM);
-			break;
-		default:
-		case RANDOM_SETTINGS:
-			return (TemporalOptions[RANDOM_SETTINGS][0] == RANDOM_PRESET_CUSTOM);
-			break;
-	}
+    u32 settings = OptionsMenu_GetCurrentScreenId();
+    return (TemporalOptions[settings][0] == GetCustomPresetValueFromScreenId());
 }
 
 void ChangeCurrentScreenPresetDataToCustom()
 {
-	switch(OptionsMenu_GetCurrentScreenId()){
-		case GAME_SETTINGS:
-			TemporalOptions[GAME_SETTINGS][0] = GAME_PRESET_CUSTOM;
-			break;
-		case BATTLE_SETTINGS:
-			TemporalOptions[BATTLE_SETTINGS][0] = BATTLE_PRESET_CUSTOM;
-			break;
-		case VISUAL_SETTINGS:
-			TemporalOptions[VISUAL_SETTINGS][0] = VISUAL_PRESET_CUSTOM;
-			break;
-		case MUSIC_SETTINGS:
-			TemporalOptions[MUSIC_SETTINGS][0] = MUSIC_PRESET_CUSTOM;
-			break;
-		case RANDOM_SETTINGS:
-			TemporalOptions[RANDOM_SETTINGS][0] = RANDOM_PRESET_CUSTOM;
-			break;
-	}
+    u32 settings = OptionsMenu_GetCurrentScreenId();
+    TemporalOptions[settings][0] = GetCustomPresetValueFromScreenId();
 }
 
 void UNUSED ChangePresetDataToCustom()
@@ -2653,38 +2622,7 @@ static void Task_MenuTurnOff(u8 taskId)
 
 static void RecolorWindow(){
 	FreeAllSpritePalettes();
-	switch(TemporalOptions[VISUAL_SETTINGS][VISUAL_OPTIONS_COLOR]){
-		case VISUAL_OPTION_COLOR_BLACK:
-			LoadPalette(sMenuPalette_Black, 0, 32);
-			break;
-		case VISUAL_OPTION_COLOR_BLUE:
-			LoadPalette(sMenuPalette_Blue, 0, 32);
-			break;
-		case VISUAL_OPTION_COLOR_GREEN:
-			LoadPalette(sMenuPalette_Green, 0, 32);
-			break;
-		case VISUAL_OPTION_COLOR_PLATINUM:
-			LoadPalette(sMenuPalette_Platinum, 0, 32);
-			break;
-		case VISUAL_OPTION_COLOR_RED:
-			LoadPalette(sMenuPalette_Red, 0, 32);
-			break;
-		case VISUAL_OPTION_COLOR_SCARLET:
-			LoadPalette(sMenuPalette_Scarlet, 0, 32);
-			break;
-		case VISUAL_OPTION_COLOR_VIOLET:
-			LoadPalette(sMenuPalette_Violet, 0, 32);
-			break;
-		case VISUAL_OPTION_COLOR_WHITE:
-			LoadPalette(sMenuPalette_White, 0, 32);
-			break;
-		case VISUAL_OPTION_COLOR_YELLOW:
-			LoadPalette(sMenuPalette_Yellow, 0, 32);
-			break;
-		default:
-			LoadPalette(sMenuPalette, 0, 32);
-			break;
-	}
+    LoadPalette(sOptionsMenuPalettesLUT[TemporalOptions[VISUAL_SETTINGS][VISUAL_OPTIONS_COLOR]], 0, PLTT_SIZE_4BPP);
 }
 
 /* This is the meat of the UI. This is where you wait for player inputs and can branch to other tasks accordingly */
