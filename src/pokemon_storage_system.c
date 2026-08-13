@@ -7338,7 +7338,7 @@ static u8 InBoxInput_Normal(void)
             return INPUT_PRESSED_B;
 
         //Start siliconMerge
-		if (gSaveBlock2Ptr->optionsGame[GAME_OPTIONS_BUTTON_MODE] == OPTIONS_BUTTON_MODE_LR)
+        if (OptionsMenu_GetSavedOptions(GAME_SETTINGS,GAME_OPTIONS_BUTTON_MODE) == OPTIONS_BUTTON_MODE_LR)
 		// if (gSaveBlock2Ptr->optionsButtonMode == OPTIONS_BUTTON_MODE_LR) // siliconMerge
 		// End siliconMerge
         {
@@ -7510,7 +7510,7 @@ static u8 InBoxInput_MovingMultiple(void)
     else
     {
         //Start siliconMerge
-		if (gSaveBlock2Ptr->optionsGame[GAME_OPTIONS_BUTTON_MODE] == OPTIONS_BUTTON_MODE_LR)
+        if (OptionsMenu_GetSavedOptions(GAME_SETTINGS,GAME_OPTIONS_BUTTON_MODE) == OPTIONS_BUTTON_MODE_LR)
 		// if (gSaveBlock2Ptr->optionsButtonMode == OPTIONS_BUTTON_MODE_LR) // siliconMerge
 		// End siliconMerge
         {
@@ -7683,7 +7683,7 @@ static u8 HandleInput_OnBox(void)
             return INPUT_SCROLL_RIGHT;
 
         //Start siliconMerge
-		if (gSaveBlock2Ptr->optionsGame[GAME_OPTIONS_BUTTON_MODE] == OPTIONS_BUTTON_MODE_LR)
+        if (OptionsMenu_GetSavedOptions(GAME_SETTINGS,GAME_OPTIONS_BUTTON_MODE) == OPTIONS_BUTTON_MODE_LR)
 		// if (gSaveBlock2Ptr->optionsButtonMode == OPTIONS_BUTTON_MODE_LR) // siliconMerge
 		// End siliconMerge
         {

@@ -1025,7 +1025,7 @@ static void SetScheduleBgs(u32 backgroundId)
 
 static void LoadOptionsMenuPalettes(void)
 {
-    switch(gSaveBlock2Ptr->optionsVisual[VISUAL_OPTIONS_COLOR])
+    switch(OptionsMenu_GetSavedOptions(VISUAL_SETTINGS,VISUAL_OPTIONS_COLOR))
     {
         case VISUAL_OPTION_COLOR_BLACK:
             LoadPalette(sMenuPalette_Black, 0, 32);

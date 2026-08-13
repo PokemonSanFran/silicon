@@ -12,7 +12,7 @@
 
 void _SiliconExpTest(const struct SiliconExpTestData *data, struct BattlePokemon *player, u32 benchPercent)
 {
-    gSaveBlock2Ptr->optionsBattle[BATTLE_OPTIONS_PLAYER_LEVEL] = BATTLE_OPTION_LEVEL_NO_CAP;
+    OptionsMenu_SetSavedOptions(BATTLE_SETTINGS,BATTLE_OPTIONS_PLAYER_LEVEL,BATTLE_OPTION_LEVEL_NO_CAP);
 
     u32 startLevel = max(GetLowestLevelStarter(),data->startLevel);
     u32 numTrainers = ExpTest_CountTrainers(data);
@@ -472,20 +472,20 @@ static const struct SiliconExpTestData sAdelaide_WecanstopyouactuallyTrainers =
 
 AI_SINGLE_BATTLE_TEST("Silicon Exp Test: Belen")
 {
-    gSaveBlock2Ptr->optionsBattle[BATTLE_OPTIONS_EXP_MULTIPLIER] = BATTLE_OPTION_MULTIPLIER_1;
+    OptionsMenu_SetSavedOptions(BATTLE_SETTINGS,BATTLE_OPTIONS_EXP_MULTIPLIER,BATTLE_OPTION_MULTIPLIER_1);
 
     SiliconExpTest(&sBelenTrainers, SILICON_MINIMUM_BENCH_LEVEL_PERCENT);
 }
 AI_SINGLE_BATTLE_TEST("Silicon Exp Test: Kai Newassholeappears")
 {
-    gSaveBlock2Ptr->optionsBattle[BATTLE_OPTIONS_EXP_MULTIPLIER] = BATTLE_OPTION_MULTIPLIER_1;
+    OptionsMenu_SetSavedOptions(BATTLE_SETTINGS,BATTLE_OPTIONS_EXP_MULTIPLIER,BATTLE_OPTION_MULTIPLIER_1);
 
     SiliconExpTest(&sKai_NewassholeappearsTrainers, SILICON_MINIMUM_BENCH_LEVEL_PERCENT);
 }
 
 AI_SINGLE_BATTLE_TEST("Silicon Exp Test: Shinzo Gym")
 {
-    gSaveBlock2Ptr->optionsBattle[BATTLE_OPTIONS_EXP_MULTIPLIER] = BATTLE_OPTION_MULTIPLIER_1;
+    OptionsMenu_SetSavedOptions(BATTLE_SETTINGS,BATTLE_OPTIONS_EXP_MULTIPLIER,BATTLE_OPTION_MULTIPLIER_1);
 
     SiliconExpTest(&sShinzo_GymTrainers, SILICON_MINIMUM_BENCH_LEVEL_PERCENT);
 }
@@ -493,7 +493,7 @@ AI_SINGLE_BATTLE_TEST("Silicon Exp Test: Shinzo Gym")
 /*
 AI_SINGLE_BATTLE_TEST("Silicon Exp Test: Charlotte Oldassholeappears")
 {
-    gSaveBlock2Ptr->optionsBattle[BATTLE_OPTIONS_EXP_MULTIPLIER] = BATTLE_OPTION_MULTIPLIER_1;
+    OptionsMenu_SetSavedOptions(BATTLE_SETTINGS,BATTLE_OPTIONS_EXP_MULTIPLIER,BATTLE_OPTION_MULTIPLIER_1);
 
     SiliconExpTest(&sCharlotte_OldassholeappearsTrainers, SILICON_MINIMUM_BENCH_LEVEL_PERCENT);
 
@@ -501,191 +501,191 @@ AI_SINGLE_BATTLE_TEST("Silicon Exp Test: Charlotte Oldassholeappears")
 
 AI_SINGLE_BATTLE_TEST("Silicon Exp Test: Emrys Gym")
 {
-    gSaveBlock2Ptr->optionsBattle[BATTLE_OPTIONS_EXP_MULTIPLIER] = BATTLE_OPTION_MULTIPLIER_1;
+    OptionsMenu_SetSavedOptions(BATTLE_SETTINGS,BATTLE_OPTIONS_EXP_MULTIPLIER,BATTLE_OPTION_MULTIPLIER_1);
 
     SiliconExpTest(&sEmrys_GymTrainers, SILICON_MINIMUM_BENCH_LEVEL_PERCENT);
 }
 /*
 AI_SINGLE_BATTLE_TEST("Silicon Exp Test: Kai Assholeshome")
 {
-    gSaveBlock2Ptr->optionsBattle[BATTLE_OPTIONS_EXP_MULTIPLIER] = BATTLE_OPTION_MULTIPLIER_1;
+    OptionsMenu_SetSavedOptions(BATTLE_SETTINGS,BATTLE_OPTIONS_EXP_MULTIPLIER,BATTLE_OPTION_MULTIPLIER_1);
 
     SiliconExpTest(&sKai_AssholeshomeTrainers, SILICON_MINIMUM_BENCH_LEVEL_PERCENT);
 }
 AI_SINGLE_BATTLE_TEST("Silicon Exp Test: Kauna Gym")
 {
-    gSaveBlock2Ptr->optionsBattle[BATTLE_OPTIONS_EXP_MULTIPLIER] = BATTLE_OPTION_MULTIPLIER_1;
+    OptionsMenu_SetSavedOptions(BATTLE_SETTINGS,BATTLE_OPTIONS_EXP_MULTIPLIER,BATTLE_OPTION_MULTIPLIER_1);
 
     SiliconExpTest(&sKauna_GymTrainers, SILICON_MINIMUM_BENCH_LEVEL_PERCENT);
 }*/
 AI_SINGLE_BATTLE_TEST("Silicon Exp Test: Tala")
 {
-    gSaveBlock2Ptr->optionsBattle[BATTLE_OPTIONS_EXP_MULTIPLIER] = BATTLE_OPTION_MULTIPLIER_1;
+    OptionsMenu_SetSavedOptions(BATTLE_SETTINGS,BATTLE_OPTIONS_EXP_MULTIPLIER,BATTLE_OPTION_MULTIPLIER_1);
 
     SiliconExpTest(&sTalaTrainers, SILICON_MINIMUM_BENCH_LEVEL_PERCENT);
 }
 AI_SINGLE_BATTLE_TEST("Silicon Exp Test: Neriene Gym")
 {
-    gSaveBlock2Ptr->optionsBattle[BATTLE_OPTIONS_EXP_MULTIPLIER] = BATTLE_OPTION_MULTIPLIER_1;
+    OptionsMenu_SetSavedOptions(BATTLE_SETTINGS,BATTLE_OPTIONS_EXP_MULTIPLIER,BATTLE_OPTION_MULTIPLIER_1);
 
     SiliconExpTest(&sNeriene_GymTrainers, SILICON_MINIMUM_BENCH_LEVEL_PERCENT);
 }
 /*
 AI_SINGLE_BATTLE_TEST("Silicon Exp Test: Charlotte Beachbattle")
 {
-    gSaveBlock2Ptr->optionsBattle[BATTLE_OPTIONS_EXP_MULTIPLIER] = BATTLE_OPTION_MULTIPLIER_1;
+    OptionsMenu_SetSavedOptions(BATTLE_SETTINGS,BATTLE_OPTIONS_EXP_MULTIPLIER,BATTLE_OPTION_MULTIPLIER_1);
 
     SiliconExpTest(&sCharlotte_BeachbattleTrainers, SILICON_MINIMUM_BENCH_LEVEL_PERCENT);
 }
 AI_SINGLE_BATTLE_TEST("Silicon Exp Test: Dimu Gym")
 {
-    gSaveBlock2Ptr->optionsBattle[BATTLE_OPTIONS_EXP_MULTIPLIER] = BATTLE_OPTION_MULTIPLIER_1;
+    OptionsMenu_SetSavedOptions(BATTLE_SETTINGS,BATTLE_OPTIONS_EXP_MULTIPLIER,BATTLE_OPTION_MULTIPLIER_1);
 
     SiliconExpTest(&sDimu_GymTrainers, SILICON_MINIMUM_BENCH_LEVEL_PERCENT);
 }
 */
 AI_SINGLE_BATTLE_TEST("Silicon Exp Test: BD Gym")
 {
-    gSaveBlock2Ptr->optionsBattle[BATTLE_OPTIONS_EXP_MULTIPLIER] = BATTLE_OPTION_MULTIPLIER_1;
+    OptionsMenu_SetSavedOptions(BATTLE_SETTINGS,BATTLE_OPTIONS_EXP_MULTIPLIER,BATTLE_OPTION_MULTIPLIER_1);
 
     SiliconExpTest(&sBd_GymTrainers, SILICON_MINIMUM_BENCH_LEVEL_PERCENT);
 }
 /*
 AI_SINGLE_BATTLE_TEST("Silicon Exp Test: Kai Battle8")
 {
-    gSaveBlock2Ptr->optionsBattle[BATTLE_OPTIONS_EXP_MULTIPLIER] = BATTLE_OPTION_MULTIPLIER_1;
+    OptionsMenu_SetSavedOptions(BATTLE_SETTINGS,BATTLE_OPTIONS_EXP_MULTIPLIER,BATTLE_OPTION_MULTIPLIER_1);
 
     SiliconExpTest(&sKai_Battle8Trainers, SILICON_MINIMUM_BENCH_LEVEL_PERCENT);
 }
 AI_SINGLE_BATTLE_TEST("Silicon Exp Test: Ami Gym")
 {
-    gSaveBlock2Ptr->optionsBattle[BATTLE_OPTIONS_EXP_MULTIPLIER] = BATTLE_OPTION_MULTIPLIER_1;
+    OptionsMenu_SetSavedOptions(BATTLE_SETTINGS,BATTLE_OPTIONS_EXP_MULTIPLIER,BATTLE_OPTION_MULTIPLIER_1);
 
     SiliconExpTest(&sAmi_GymTrainers, SILICON_MINIMUM_BENCH_LEVEL_PERCENT);
 }
 AI_SINGLE_BATTLE_TEST("Silicon Exp Test: Kai Whyareyouhelpingthem")
 {
-    gSaveBlock2Ptr->optionsBattle[BATTLE_OPTIONS_EXP_MULTIPLIER] = BATTLE_OPTION_MULTIPLIER_1;
+    OptionsMenu_SetSavedOptions(BATTLE_SETTINGS,BATTLE_OPTIONS_EXP_MULTIPLIER,BATTLE_OPTION_MULTIPLIER_1);
 
     SiliconExpTest(&sKai_WhyareyouhelpingthemTrainers, SILICON_MINIMUM_BENCH_LEVEL_PERCENT);
 }
 AI_SINGLE_BATTLE_TEST("Silicon Exp Test: Leagueopponent1")
 {
-    gSaveBlock2Ptr->optionsBattle[BATTLE_OPTIONS_EXP_MULTIPLIER] = BATTLE_OPTION_MULTIPLIER_1;
+    OptionsMenu_SetSavedOptions(BATTLE_SETTINGS,BATTLE_OPTIONS_EXP_MULTIPLIER,BATTLE_OPTION_MULTIPLIER_1);
 
     SiliconExpTest(&sLeagueopponent1Trainers, SILICON_MINIMUM_BENCH_LEVEL_PERCENT);
 }
 AI_SINGLE_BATTLE_TEST("Silicon Exp Test: Leagueopponent2")
 {
-    gSaveBlock2Ptr->optionsBattle[BATTLE_OPTIONS_EXP_MULTIPLIER] = BATTLE_OPTION_MULTIPLIER_1;
+    OptionsMenu_SetSavedOptions(BATTLE_SETTINGS,BATTLE_OPTIONS_EXP_MULTIPLIER,BATTLE_OPTION_MULTIPLIER_1);
 
     SiliconExpTest(&sLeagueopponent2Trainers, SILICON_MINIMUM_BENCH_LEVEL_PERCENT);
 }
 AI_SINGLE_BATTLE_TEST("Silicon Exp Test: Leagueopponent3")
 {
-    gSaveBlock2Ptr->optionsBattle[BATTLE_OPTIONS_EXP_MULTIPLIER] = BATTLE_OPTION_MULTIPLIER_1;
+    OptionsMenu_SetSavedOptions(BATTLE_SETTINGS,BATTLE_OPTIONS_EXP_MULTIPLIER,BATTLE_OPTION_MULTIPLIER_1);
 
     SiliconExpTest(&sLeagueopponent3Trainers, SILICON_MINIMUM_BENCH_LEVEL_PERCENT);
 }
 AI_SINGLE_BATTLE_TEST("Silicon Exp Test: Leagueopponent4")
 {
-    gSaveBlock2Ptr->optionsBattle[BATTLE_OPTIONS_EXP_MULTIPLIER] = BATTLE_OPTION_MULTIPLIER_1;
+    OptionsMenu_SetSavedOptions(BATTLE_SETTINGS,BATTLE_OPTIONS_EXP_MULTIPLIER,BATTLE_OPTION_MULTIPLIER_1);
 
     SiliconExpTest(&sLeagueopponent4Trainers, SILICON_MINIMUM_BENCH_LEVEL_PERCENT);
 }
 AI_SINGLE_BATTLE_TEST("Silicon Exp Test: Kai Finals")
 {
-    gSaveBlock2Ptr->optionsBattle[BATTLE_OPTIONS_EXP_MULTIPLIER] = BATTLE_OPTION_MULTIPLIER_1;
+    OptionsMenu_SetSavedOptions(BATTLE_SETTINGS,BATTLE_OPTIONS_EXP_MULTIPLIER,BATTLE_OPTION_MULTIPLIER_1);
 
     SiliconExpTest(&sKai_FinalsTrainers, SILICON_MINIMUM_BENCH_LEVEL_PERCENT);
 }
 AI_SINGLE_BATTLE_TEST("Silicon Exp Test: Kai Letsgrablunch")
 {
-    gSaveBlock2Ptr->optionsBattle[BATTLE_OPTIONS_EXP_MULTIPLIER] = BATTLE_OPTION_MULTIPLIER_1;
+    OptionsMenu_SetSavedOptions(BATTLE_SETTINGS,BATTLE_OPTIONS_EXP_MULTIPLIER,BATTLE_OPTION_MULTIPLIER_1);
 
     SiliconExpTest(&sKai_LetsgrablunchTrainers, SILICON_MINIMUM_BENCH_LEVEL_PERCENT);
 }
 AI_SINGLE_BATTLE_TEST("Silicon Exp Test: Imelda Restoration")
 {
-    gSaveBlock2Ptr->optionsBattle[BATTLE_OPTIONS_EXP_MULTIPLIER] = BATTLE_OPTION_MULTIPLIER_1;
+    OptionsMenu_SetSavedOptions(BATTLE_SETTINGS,BATTLE_OPTIONS_EXP_MULTIPLIER,BATTLE_OPTION_MULTIPLIER_1);
 
     SiliconExpTest(&sImelda_RestorationTrainers, SILICON_MINIMUM_BENCH_LEVEL_PERCENT);
 }
 AI_SINGLE_BATTLE_TEST("Silicon Exp Test: Kai Letsburnthismotherdown")
 {
-    gSaveBlock2Ptr->optionsBattle[BATTLE_OPTIONS_EXP_MULTIPLIER] = BATTLE_OPTION_MULTIPLIER_1;
+    OptionsMenu_SetSavedOptions(BATTLE_SETTINGS,BATTLE_OPTIONS_EXP_MULTIPLIER,BATTLE_OPTION_MULTIPLIER_1);
 
     SiliconExpTest(&sKai_LetsburnthismotherdownTrainers, SILICON_MINIMUM_BENCH_LEVEL_PERCENT);
 }
 AI_SINGLE_BATTLE_TEST("Silicon Exp Test: Adaora Howdisappointing")
 {
-    gSaveBlock2Ptr->optionsBattle[BATTLE_OPTIONS_EXP_MULTIPLIER] = BATTLE_OPTION_MULTIPLIER_1;
+    OptionsMenu_SetSavedOptions(BATTLE_SETTINGS,BATTLE_OPTIONS_EXP_MULTIPLIER,BATTLE_OPTION_MULTIPLIER_1);
 
     SiliconExpTest(&sAdaora_HowdisappointingTrainers, SILICON_MINIMUM_BENCH_LEVEL_PERCENT);
 }
 AI_SINGLE_BATTLE_TEST("Silicon Exp Test: Alcmene Manhunt")
 {
-    gSaveBlock2Ptr->optionsBattle[BATTLE_OPTIONS_EXP_MULTIPLIER] = BATTLE_OPTION_MULTIPLIER_1;
+    OptionsMenu_SetSavedOptions(BATTLE_SETTINGS,BATTLE_OPTIONS_EXP_MULTIPLIER,BATTLE_OPTION_MULTIPLIER_1);
 
     SiliconExpTest(&sAlcmene_ManhuntTrainers, SILICON_MINIMUM_BENCH_LEVEL_PERCENT);
 }
 AI_SINGLE_BATTLE_TEST("Silicon Exp Test: Diantha")
 {
-    gSaveBlock2Ptr->optionsBattle[BATTLE_OPTIONS_EXP_MULTIPLIER] = BATTLE_OPTION_MULTIPLIER_1;
+    OptionsMenu_SetSavedOptions(BATTLE_SETTINGS,BATTLE_OPTIONS_EXP_MULTIPLIER,BATTLE_OPTION_MULTIPLIER_1);
 
     SiliconExpTest(&sDianthaTrainers, SILICON_MINIMUM_BENCH_LEVEL_PERCENT);
 }
 AI_SINGLE_BATTLE_TEST("Silicon Exp Test: Keiying Warehouserisk")
 {
-    gSaveBlock2Ptr->optionsBattle[BATTLE_OPTIONS_EXP_MULTIPLIER] = BATTLE_OPTION_MULTIPLIER_1;
+    OptionsMenu_SetSavedOptions(BATTLE_SETTINGS,BATTLE_OPTIONS_EXP_MULTIPLIER,BATTLE_OPTION_MULTIPLIER_1);
 
     SiliconExpTest(&sKeiying_WarehouseriskTrainers, SILICON_MINIMUM_BENCH_LEVEL_PERCENT);
 }
 AI_SINGLE_BATTLE_TEST("Silicon Exp Test: Arriba Ceo")
 {
-    gSaveBlock2Ptr->optionsBattle[BATTLE_OPTIONS_EXP_MULTIPLIER] = BATTLE_OPTION_MULTIPLIER_1;
+    OptionsMenu_SetSavedOptions(BATTLE_SETTINGS,BATTLE_OPTIONS_EXP_MULTIPLIER,BATTLE_OPTION_MULTIPLIER_1);
 
     SiliconExpTest(&sArriba_CeoTrainers, SILICON_MINIMUM_BENCH_LEVEL_PERCENT);
 }
 AI_SINGLE_BATTLE_TEST("Silicon Exp Test: Buzzr Ceo")
 {
-    gSaveBlock2Ptr->optionsBattle[BATTLE_OPTIONS_EXP_MULTIPLIER] = BATTLE_OPTION_MULTIPLIER_1;
+    OptionsMenu_SetSavedOptions(BATTLE_SETTINGS,BATTLE_OPTIONS_EXP_MULTIPLIER,BATTLE_OPTION_MULTIPLIER_1);
 
     SiliconExpTest(&sBuzzr_CeoTrainers, SILICON_MINIMUM_BENCH_LEVEL_PERCENT);
 }
 AI_SINGLE_BATTLE_TEST("Silicon Exp Test: Presto Ceo")
 {
-    gSaveBlock2Ptr->optionsBattle[BATTLE_OPTIONS_EXP_MULTIPLIER] = BATTLE_OPTION_MULTIPLIER_1;
+    OptionsMenu_SetSavedOptions(BATTLE_SETTINGS,BATTLE_OPTIONS_EXP_MULTIPLIER,BATTLE_OPTION_MULTIPLIER_1);
 
     SiliconExpTest(&sPresto_CeoTrainers, SILICON_MINIMUM_BENCH_LEVEL_PERCENT);
 }
 AI_SINGLE_BATTLE_TEST("Silicon Exp Test: Excadrill")
 {
-    gSaveBlock2Ptr->optionsBattle[BATTLE_OPTIONS_EXP_MULTIPLIER] = BATTLE_OPTION_MULTIPLIER_1;
+    OptionsMenu_SetSavedOptions(BATTLE_SETTINGS,BATTLE_OPTIONS_EXP_MULTIPLIER,BATTLE_OPTION_MULTIPLIER_1);
 
     SiliconExpTest(&sExcadrillTrainers, SILICON_MINIMUM_BENCH_LEVEL_PERCENT);
 }
 AI_SINGLE_BATTLE_TEST("Silicon Exp Test: Ramesh Imin")
 {
-    gSaveBlock2Ptr->optionsBattle[BATTLE_OPTIONS_EXP_MULTIPLIER] = BATTLE_OPTION_MULTIPLIER_1;
+    OptionsMenu_SetSavedOptions(BATTLE_SETTINGS,BATTLE_OPTIONS_EXP_MULTIPLIER,BATTLE_OPTION_MULTIPLIER_1);
 
     SiliconExpTest(&sRamesh_IminTrainers, SILICON_MINIMUM_BENCH_LEVEL_PERCENT);
 }
 AI_SINGLE_BATTLE_TEST("Silicon Exp Test: Charlotte Imin")
 {
-    gSaveBlock2Ptr->optionsBattle[BATTLE_OPTIONS_EXP_MULTIPLIER] = BATTLE_OPTION_MULTIPLIER_1;
+    OptionsMenu_SetSavedOptions(BATTLE_SETTINGS,BATTLE_OPTIONS_EXP_MULTIPLIER,BATTLE_OPTION_MULTIPLIER_1);
 
     SiliconExpTest(&sCharlotte_IminTrainers, SILICON_MINIMUM_BENCH_LEVEL_PERCENT);
 }
 AI_SINGLE_BATTLE_TEST("Silicon Exp Test: Adelaide Youcantstopme")
 {
-    gSaveBlock2Ptr->optionsBattle[BATTLE_OPTIONS_EXP_MULTIPLIER] = BATTLE_OPTION_MULTIPLIER_1;
+    OptionsMenu_SetSavedOptions(BATTLE_SETTINGS,BATTLE_OPTIONS_EXP_MULTIPLIER,BATTLE_OPTION_MULTIPLIER_1);
 
     SiliconExpTest(&sAdelaide_YoucantstopmeTrainers, SILICON_MINIMUM_BENCH_LEVEL_PERCENT);
 }
 AI_SINGLE_BATTLE_TEST("Silicon Exp Test: Adelaide Wecanstopyouactually")
 {
-    gSaveBlock2Ptr->optionsBattle[BATTLE_OPTIONS_EXP_MULTIPLIER] = BATTLE_OPTION_MULTIPLIER_1;
+    OptionsMenu_SetSavedOptions(BATTLE_SETTINGS,BATTLE_OPTIONS_EXP_MULTIPLIER,BATTLE_OPTION_MULTIPLIER_1);
 
     SiliconExpTest(&sAdelaide_WecanstopyouactuallyTrainers, SILICON_MINIMUM_BENCH_LEVEL_PERCENT);
 }

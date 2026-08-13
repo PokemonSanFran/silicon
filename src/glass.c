@@ -875,7 +875,7 @@ static const u32* GetBg3Tilemap(void)
 
 static const u16 *GetRelevantPalette(void)
 {
-    switch(gSaveBlock2Ptr->optionsVisual[VISUAL_OPTIONS_COLOR])
+    switch(OptionsMenu_GetSavedOptions(VISUAL_SETTINGS,VISUAL_OPTIONS_COLOR))
     {
         case VISUAL_OPTION_COLOR_RED: return glassPalettesRed;
         case VISUAL_OPTION_COLOR_BLACK: return glassPalettesBlack;

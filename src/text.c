@@ -371,8 +371,8 @@ u32 GetPlayerTextSpeed(void)
         return OPTIONS_TEXT_SPEED_MID;
 
     // Start siliconMerge
-    if (gSaveBlock2Ptr->optionsVisual[VISUAL_OPTIONS_TEXT_SPEED] > OPTIONS_TEXT_SPEED_INSTANT)
-        gSaveBlock2Ptr->optionsVisual[VISUAL_OPTIONS_TEXT_SPEED] = OPTIONS_TEXT_SPEED_FAST;
+    if (OptionsMenu_GetSavedOptions(VISUAL_SETTINGS,VISUAL_OPTIONS_TEXT_SPEED) > OPTIONS_TEXT_SPEED_INSTANT)
+        OptionsMenu_SetSavedOptions(VISUAL_SETTINGS,VISUAL_OPTIONS_TEXT_SPEED,OPTIONS_TEXT_SPEED_FAST);
     /*
     if (gSaveBlock2Ptr->optionsTextSpeed > OPTIONS_TEXT_SPEED_INSTANT)
         gSaveBlock2Ptr->optionsTextSpeed = OPTIONS_TEXT_SPEED_FAST;
@@ -382,7 +382,7 @@ u32 GetPlayerTextSpeed(void)
     if (FlagGet(FLAG_TEXT_SPEED_INSTANT) || TEXT_SPEED_INSTANT)
         return OPTIONS_TEXT_SPEED_INSTANT;
 
-    return gSaveBlock2Ptr->optionsVisual[VISUAL_OPTIONS_TEXT_SPEED]; // siliconMerge
+    return OptionsMenu_GetSavedOptions(VISUAL_SETTINGS,VISUAL_OPTIONS_TEXT_SPEED);
     //return gSaveBlock2Ptr->optionsTextSpeed;
 }
 

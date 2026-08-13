@@ -4,6 +4,7 @@
 #include "constants/cries.h"
 #include "options_music.h"
 #include "overworld.h"
+#include "ui_pokedex.h"
 #include "quest_logic.h"
 #include "sound.h"
 #include "constants/species.h"
@@ -58,10 +59,12 @@ void PreviewBGM(u32 currentOptionId, u32 musicOption)
                 ResetCurrentlyPlayingMusic();
             break;
         case MUSIC_OPTIONS_MUTE_SOUNDFX:
-            return;
+            if (!musicOption)
+                PlaySE(SE_WARP_OUT);
+            break;
         case MUSIC_OPTIONS_MUTE_CRIES:
             if (!musicOption)
-                PlayCry_NormalNoDucking(Random() % NUM_SPECIES, 0, CRY_VOLUME_RS, CRY_PRIORITY_NORMAL);
+                PlayCry_NormalNoDucking(GetRandomSpeciesInResidoDex(), 0, CRY_VOLUME_RS, CRY_PRIORITY_NORMAL);
             break;
         case MUSIC_OPTIONS_MUTE_FANFARES:
             if (!musicOption)
@@ -85,7 +88,7 @@ void ResetCurrentlyPlayingMusic(void)
 
 bool32 IsMusicMuted(void)
 {
-    return gSaveBlock2Ptr->optionsMusic[MUSIC_OPTIONS_MUTE_MUSIC];
+    return OptionsMenu_GetSavedOptions(MUSIC_SETTINGS,MUSIC_OPTIONS_MUTE_MUSIC);
 }
 
 void ReturnDummyMusicIfMuted(u16* songNum)
@@ -102,7 +105,7 @@ void ReturnDummyMusicIfMuted(u16* songNum)
 
 bool32 AreSoundEffectsMuted(void)
 {
-    return gSaveBlock2Ptr->optionsMusic[MUSIC_OPTIONS_MUTE_SOUNDFX];
+    return OptionsMenu_GetSavedOptions(MUSIC_SETTINGS,MUSIC_OPTIONS_MUTE_SOUNDFX);
 }
 
 // ***********************************************************************
@@ -111,7 +114,7 @@ bool32 AreSoundEffectsMuted(void)
 
 bool32 AreCriesMuted(void)
 {
-    return gSaveBlock2Ptr->optionsMusic[MUSIC_OPTIONS_MUTE_CRIES];
+    return OptionsMenu_GetSavedOptions(MUSIC_SETTINGS,MUSIC_OPTIONS_MUTE_CRIES);
 }
 
 // ***********************************************************************
@@ -120,7 +123,7 @@ bool32 AreCriesMuted(void)
 
 bool32 AreFanfaresMuted(void)
 {
-    return gSaveBlock2Ptr->optionsMusic[MUSIC_OPTIONS_MUTE_FANFARES];
+    return OptionsMenu_GetSavedOptions(MUSIC_SETTINGS,MUSIC_OPTIONS_MUTE_FANFARES);
 }
 
 // ***********************************************************************
@@ -155,7 +158,7 @@ static void CorrectSavedSurfMusic(u16 music)
 
 static u32 GetSurfMusicOption(void)
 {
-    return gSaveBlock2Ptr->optionsMusic[MUSIC_OPTIONS_SURF];
+    return OptionsMenu_GetSavedOptions(MUSIC_SETTINGS,MUSIC_OPTIONS_SURF);
 }
 
 bool32 IsCurrentMusicSurfOrUnderwaterMusic(u32 currentMusic)
@@ -223,7 +226,7 @@ static void CorrectSavedBikeMusic(u16 music)
 }
 static u32 GetBikeMusicOption(void)
 {
-    return gSaveBlock2Ptr->optionsMusic[MUSIC_OPTIONS_BIKE];
+    return OptionsMenu_GetSavedOptions(MUSIC_SETTINGS,MUSIC_OPTIONS_BIKE);
 }
 
 u32 GetBikeMusicFromOption(void)
@@ -253,7 +256,7 @@ static u32 GetBikeMusic(u32 musicIndex)
 // ***********************************************************************
 static u32 GetWildBattleMusicOption(void)
 {
-    return gSaveBlock2Ptr->optionsMusic[MUSIC_OPTIONS_WILD];
+    return OptionsMenu_GetSavedOptions(MUSIC_SETTINGS,MUSIC_OPTIONS_WILD);
 }
 
 u32 GetWildBattleMusicFromOption(void)
@@ -283,7 +286,7 @@ static u32 GetWildBattleMusic(u32 musicIndex)
 // ***********************************************************************
 static u32 GetTrainerBattleMusicOption(void)
 {
-    return gSaveBlock2Ptr->optionsMusic[MUSIC_OPTIONS_TRAINER];
+    return OptionsMenu_GetSavedOptions(MUSIC_SETTINGS,MUSIC_OPTIONS_TRAINER);
 }
 
 u32 GetTrainerBattleMusicFromOption(void)
@@ -312,7 +315,7 @@ static u32 GetTrainerBattleMusic(u32 musicIndex)
 // ***********************************************************************
 static u32 GetGymBattleMusicOption(void)
 {
-    return gSaveBlock2Ptr->optionsMusic[MUSIC_OPTIONS_GYM];
+    return OptionsMenu_GetSavedOptions(MUSIC_SETTINGS,MUSIC_OPTIONS_GYM);
 }
 
 u32 GetGymBattleMusicFromOption(void)
@@ -341,7 +344,7 @@ static u32 GetGymBattleMusic(u32 musicIndex)
 // ***********************************************************************
 static u32 GetTournamentBattleMusicOption(void)
 {
-    return gSaveBlock2Ptr->optionsMusic[MUSIC_OPTIONS_TOURNAMENT];
+    return OptionsMenu_GetSavedOptions(MUSIC_SETTINGS,MUSIC_OPTIONS_TOURNAMENT);
 }
 
 u32 GetTournamentBattleMusicFromOption(void)
@@ -370,7 +373,7 @@ static u32 GetTournamentBattleMusic(u32 musicIndex)
 // ***********************************************************************
 static u32 GetChampionBattleMusicOption(void)
 {
-    return gSaveBlock2Ptr->optionsMusic[MUSIC_OPTIONS_CHAMPION];
+    return OptionsMenu_GetSavedOptions(MUSIC_SETTINGS,MUSIC_OPTIONS_CHAMPION);
 }
 
 u32 GetChampionBattleMusicFromOption(void)

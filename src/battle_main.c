@@ -3133,7 +3133,7 @@ static void ClearSetBScriptingStruct(void)
     gBattleScripting.windowsType = temp;
 	// Start siliconMerge
     //gBattleScripting.battleStyle = gSaveBlock2Ptr->optionsBattleStyle;
-    gBattleScripting.battleStyle = gSaveBlock2Ptr->optionsBattle[BATTLE_OPTIONS_SWITCH_STYLE];
+    gBattleScripting.battleStyle = OptionsMenu_GetSavedOptions(BATTLE_SETTINGS,BATTLE_OPTIONS_SWITCH_STYLE);
 	// End siliconMerge
     #if TESTING
     if (!gSiliconTestVariables.overrideSwitchMode)
@@ -3195,7 +3195,7 @@ static void BattleStartClearSetData(void)
     {
 		// Start siliconMerge
 		// if (!(gBattleTypeFlags & BATTLE_TYPE_LINK) && gSaveBlock2Ptr->optionsBattleSceneOff == TRUE)
-		if (!(gBattleTypeFlags & BATTLE_TYPE_LINK) && gSaveBlock2Ptr->optionsBattle[BATTLE_OPTIONS_ANIMATIONS] == TRUE)
+		if (!(gBattleTypeFlags & BATTLE_TYPE_LINK) && OptionsMenu_GetSavedOptions(BATTLE_SETTINGS,BATTLE_OPTIONS_ANIMATIONS) == TRUE)
 		// End siliconMerge
             gHitMarker |= HITMARKER_NO_ANIMATIONS;
     }
@@ -3207,7 +3207,7 @@ static void BattleStartClearSetData(void)
 #if TESTING
     else if (gSiliconTestVariables.checkVramUse)
     {
-        if (!(gBattleTypeFlags & BATTLE_TYPE_LINK) && gSaveBlock2Ptr->optionsBattle[BATTLE_OPTIONS_ANIMATIONS] == TRUE)
+		if (!(gBattleTypeFlags & BATTLE_TYPE_LINK) && OptionsMenu_GetSavedOptions(BATTLE_SETTINGS,BATTLE_OPTIONS_ANIMATIONS) == TRUE)
             gHitMarker |= HITMARKER_NO_ANIMATIONS;
     }
 #endif
