@@ -56,7 +56,7 @@ struct MenuResources
     u8 currentScreenId;
     u8 currentFirstOption;
     bool8 areYouNotOnSettingsHub;
-    u8 TemporalOptions[SETTINGS_COUNT][NUM_OPTIONS_MAX_SETTINGS];
+    //u8 TemporalOptions[SETTINGS_COUNT][NUM_OPTIONS_MAX_SETTINGS];
 };
 
 enum WindowIds
@@ -2782,32 +2782,33 @@ static void Task_MenuMain(u8 taskId)
                     if(TemporalOptions[GAME_SETTINGS][0] > 0)
                         TemporalOptions[GAME_SETTINGS][0]--;
                     else
-                        TemporalOptions[GAME_SETTINGS][0] = Settings_Options[GAME_SETTINGS][0].numOptions - 1;
+                        TemporalOptions[GAME_SETTINGS][0] = Settings_Options[GAME_SETTINGS][0].numOptions - 2;
+
                 break;
                 case BATTLE_SETTINGS:
                     if(TemporalOptions[BATTLE_SETTINGS][0] > 0)
                         TemporalOptions[BATTLE_SETTINGS][0]--;
                     else
-                        TemporalOptions[BATTLE_SETTINGS][0] = Settings_Options[BATTLE_SETTINGS][0].numOptions - 1;
+                        TemporalOptions[BATTLE_SETTINGS][0] = Settings_Options[BATTLE_SETTINGS][0].numOptions - 2;
                 break;
                 case VISUAL_SETTINGS:
                     if(TemporalOptions[VISUAL_SETTINGS][0] > 0)
                         TemporalOptions[VISUAL_SETTINGS][0]--;
                     else
-                        TemporalOptions[VISUAL_SETTINGS][0] = Settings_Options[VISUAL_SETTINGS][0].numOptions - 1;
+                        TemporalOptions[VISUAL_SETTINGS][0] = Settings_Options[VISUAL_SETTINGS][0].numOptions - 2;
                 break;
                 case MUSIC_SETTINGS:
                     if(TemporalOptions[MUSIC_SETTINGS][0] > 0)
                         TemporalOptions[MUSIC_SETTINGS][0]--;
                     else
-                        TemporalOptions[MUSIC_SETTINGS][0] = Settings_Options[MUSIC_SETTINGS][0].numOptions - 1;
+                        TemporalOptions[MUSIC_SETTINGS][0] = Settings_Options[MUSIC_SETTINGS][0].numOptions - 2;
                 PreviewBGM(OptionsMenu_GetCurrentOptionId(), TemporalOptions[MUSIC_SETTINGS][OptionsMenu_GetCurrentOptionId()]);
                 break;
                 case RANDOM_SETTINGS:
                     if(TemporalOptions[RANDOM_SETTINGS][0] > 0)
                         TemporalOptions[RANDOM_SETTINGS][0]--;
                     else
-                        TemporalOptions[RANDOM_SETTINGS][0] = Settings_Options[RANDOM_SETTINGS][0].numOptions - 1;
+                        TemporalOptions[RANDOM_SETTINGS][0] = Settings_Options[RANDOM_SETTINGS][0].numOptions - 2;
                 break;
             }
 
@@ -2867,32 +2868,42 @@ static void Task_MenuMain(u8 taskId)
             //For Presets
             switch(OptionsMenu_GetCurrentScreenId()){
                 case GAME_SETTINGS:
-                    if(TemporalOptions[GAME_SETTINGS][0] < Settings_Options[GAME_SETTINGS][0].numOptions - 1)
+                    if(TemporalOptions[GAME_SETTINGS][0] == Settings_Options[GAME_SETTINGS][0].numOptions - 2)
+                        TemporalOptions[GAME_SETTINGS][0] = 0;
+                    else if(TemporalOptions[GAME_SETTINGS][0] < Settings_Options[GAME_SETTINGS][0].numOptions - 1)
                         TemporalOptions[GAME_SETTINGS][0]++;
                     else
                         TemporalOptions[GAME_SETTINGS][0] = 0;
                 break;
                 case BATTLE_SETTINGS:
-                    if(TemporalOptions[BATTLE_SETTINGS][0] < Settings_Options[BATTLE_SETTINGS][0].numOptions - 1)
+                    if(TemporalOptions[BATTLE_SETTINGS][0] == Settings_Options[BATTLE_SETTINGS][0].numOptions - 2)
+                        TemporalOptions[BATTLE_SETTINGS][0] = 0;
+                else if(TemporalOptions[BATTLE_SETTINGS][0] < Settings_Options[BATTLE_SETTINGS][0].numOptions - 1)
                         TemporalOptions[BATTLE_SETTINGS][0]++;
                     else
                         TemporalOptions[BATTLE_SETTINGS][0] = 0;
                 break;
                 case VISUAL_SETTINGS:
-                    if(TemporalOptions[VISUAL_SETTINGS][0] < Settings_Options[VISUAL_SETTINGS][0].numOptions - 1)
+                    if(TemporalOptions[VISUAL_SETTINGS][0] == Settings_Options[VISUAL_SETTINGS][0].numOptions - 2)
+                        TemporalOptions[VISUAL_SETTINGS][0] = 0;
+                else if(TemporalOptions[VISUAL_SETTINGS][0] < Settings_Options[VISUAL_SETTINGS][0].numOptions - 1)
                         TemporalOptions[VISUAL_SETTINGS][0]++;
                     else
                         TemporalOptions[VISUAL_SETTINGS][0] = 0;
                 break;
                 case MUSIC_SETTINGS:
-                    if(TemporalOptions[MUSIC_SETTINGS][0] < Settings_Options[MUSIC_SETTINGS][0].numOptions - 1)
+                    if(TemporalOptions[MUSIC_SETTINGS][0] == Settings_Options[MUSIC_SETTINGS][0].numOptions - 2)
+                        TemporalOptions[MUSIC_SETTINGS][0] = 0;
+                else if(TemporalOptions[MUSIC_SETTINGS][0] < Settings_Options[MUSIC_SETTINGS][0].numOptions - 1)
                         TemporalOptions[MUSIC_SETTINGS][0]++;
                     else
                         TemporalOptions[MUSIC_SETTINGS][0] = 0;
                 PreviewBGM(OptionsMenu_GetCurrentOptionId(), TemporalOptions[MUSIC_SETTINGS][OptionsMenu_GetCurrentOptionId()]);
                 break;
                 case RANDOM_SETTINGS:
-                    if(TemporalOptions[RANDOM_SETTINGS][0] < Settings_Options[RANDOM_SETTINGS][0].numOptions - 1)
+                    if(TemporalOptions[RANDOM_SETTINGS][0] == Settings_Options[RANDOM_SETTINGS][0].numOptions - 2)
+                        TemporalOptions[RANDOM_SETTINGS][0] = 0;
+                else if(TemporalOptions[RANDOM_SETTINGS][0] < Settings_Options[RANDOM_SETTINGS][0].numOptions - 1)
                         TemporalOptions[RANDOM_SETTINGS][0]++;
                     else
                         TemporalOptions[RANDOM_SETTINGS][0] = 0;
@@ -3385,6 +3396,7 @@ static void OptionsMenu_SetCurrentFirstOption(u8 value)
     sMenuDataPtr->currentFirstOption = value;
 }
 
+/*
 static u16 OptionsMenu_GetTemporalOptions(enum OptionsIds setting, u32 option)
 {
     return sMenuDataPtr->TemporalOptions[setting][option];
@@ -3394,6 +3406,7 @@ static void OptionsMenu_SetTemporalOptions(enum OptionsIds setting, u32 option, 
 {
     sMenuDataPtr->TemporalOptions[setting][option] = value;
 }
+*/
 
 static void OptionsMenu_IncrementCurrentFirstOption(void)
 {
