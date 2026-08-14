@@ -41,13 +41,14 @@ script Swagbag_WelcomeToResido_Dialogue {
 
 script Swagbag_LeagueStipend_Dialogue
 {
-	showmoneybox(0,0)
+	setflag(FLAG_SYS_STARTER_APPS_GET)
 	msgbox(format("So first, you'll each be getting a stipend from the League, which should be hitting your accounts soon. That money is yours, no strings attached, so do whatever you like with it. Just don't spend it all in one place!"),,SPEAKER_OLIVER)
 	msgbox(format("Because accounting absolutely won't let us give you any more..."),,SPEAKER_OLIVER,TAIL_WHISPER)
 	closemessage
+	showmoneybox(0,0)
+    delay(16)
 	playse(SE_SHOP)
-	addmoney(50000,TRUE)
-	setflag(FLAG_SYS_STARTER_APPS_GET)
+	addmoney(STIPEND_MONEY,TRUE)
 	waitse
 	waitbuttonpress
 	hidemoneybox
@@ -62,8 +63,9 @@ script Swagbag_PokedexApps_Dialogue {
         msgbox(format("Another perk: you'll get access to some of the newest bleeding edge apps. We're excited for you to try out Quest Log, which should help keep you organized. As a members of our program, you've also got access to our private Pokédex build, which should prove to be very useful!"),,SPEAKER_OLIVER)
         msgbox(format("Right! Maps works very well in Resido, and is another available app on your phone. You can press {START_BUTTON} to access all \lof your apps."),,SPEAKER_OLIVER)
 
-        playfanfare(MUS_OBTAIN_ITEM)
-        msgbox(format("{PLAYER} received ¥50000, and updated phone apps from Oliver."))
+        playfanfare(MUS_OBTAIN_KEY_ITEM)
+        callnative(BufferStipendAmount)
+        msgbox(format("{PLAYER} received ¥{STR_VAR_1}, and updated phone apps from Oliver."))
         waitmessage
         waitfanfare
         goto(Swagbag_WhenCanWeStart_Dialogue)
@@ -84,7 +86,8 @@ script Swagbag_WhenCanWeStart_Dialogue {
 }
 
 script Swagbag_DontLeaveCuconuTown_Dialogue {
-        msgbox(format("{PLAYER}, I'll be working on my laptop here for the next few hours. If you've got any questions, don't be afraid to ask. It's fine if you explore, but don't leave CuconuTown, okay?"),,SPEAKER_OLIVER)
+        buffermapname(STR_VAR_1,MAP_CUCONU_TOWN)
+        msgbox(format("{PLAYER}, feel free to explore {STR_VAR_1}. Just don't leave!"),,SPEAKER_OLIVER)
         msgbox(format("Got it. Thanks for all the help, Oliver! I'm still so stoked for the opportunity and the Challenge!"),,SPEAKER_ALICIA)
         closemessage
 
@@ -98,7 +101,7 @@ script Swagbag_DontLeaveCuconuTown_Dialogue {
         end
 }
 
-script swagbag_HelpPlayer_Script {//TODO Set up actual question a answer for Oliver here
+script swagbag_HelpPlayer_Script {
         msgbox(format("In the actual game, this will be a list of questions that the player can ask and getr answers to. Tutorial level shit."),MSGBOX_NPC,SPEAKER_OLIVER)
 
         applymovement(SHARPRISE_COMPOUND_1F_OLIVER,Common_Movement_FaceRight)
@@ -108,7 +111,8 @@ script swagbag_HelpPlayer_Script {//TODO Set up actual question a answer for Oli
 
 script swagbag_PreventPlayerLeavingCuconuTown_Event_Script {
     lock
-    msgbox(format("Oliver mentioned that I shouldn't leave CuconuTown yet! Maybe I should get some sleep..."),,SPEAKER_ALICIA)
+    buffermapname(STR_VAR_1,MAP_CUCONU_TOWN)
+    msgbox(format("Oliver mentioned that I shouldn't leave {STR_VAR_1} yet! Maybe I should get some sleep..."),,SPEAKER_ALICIA)
 
     closemessage
     applymovement(LOCALID_PLAYER,swagbag_WalkBackwards)

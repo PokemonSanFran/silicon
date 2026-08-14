@@ -75,7 +75,7 @@ script ImProbablyBetterThanYou_TookTheLeftBedroom_Dialogue {
         msgbox(format("I know our orientation is supposed to start soon, or something like that. I took the bedroom on the left, so the one to the right is yours. I tried to take the good one because I got here first..."),,SPEAKER_CHARLOTTE)
         applymovement(SHARPRISE_COMPOUND_1F_CHARLOTTE, moves(face_up, delay_16, delay_16, face_down, step_end))
         waitmovement(0)
-        msgbox(format("but both rooms are exactly the same! Let's chill after you unpack."),,SPEAKER_CHARLOTTE,,EMOTE_LAUGH)
+        msgbox(format("but both rooms are exactly the same!"),,SPEAKER_CHARLOTTE,,EMOTE_LAUGH)
                 closemessage
         applymovement(SHARPRISE_COMPOUND_1F_CHARLOTTE, moves(walk_up, walk_left, step_end))
         waitmovement(0)
