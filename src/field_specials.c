@@ -1551,6 +1551,28 @@ void LoadWallyZigzagoon(void)
     SetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_MOVE4, &monData);
 }
 
+// Start siliconMerge
+void LoadTrachyMon(void)
+{
+    u16 monData;
+    CreateRandomMon(&gParties[B_TRAINER_PLAYER][0], SPECIES_PARASECT, 25);
+    monData = 0;
+    SetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_ABILITY_NUM, &monData);
+    monData = MOVE_SPORE;
+    SetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_MOVE1, &monData);
+    monData = MOVE_FALSE_SWIPE;
+    SetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_MOVE2, &monData);
+    monData = MOVE_ABSORB;
+    SetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_MOVE3, &monData);
+    monData = MOVE_STUN_SPORE;
+    SetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_MOVE4, &monData);
+    monData = MAX_PER_STAT_IVS;
+    SetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_SPEED_IV, &monData);
+    monData = MAX_PER_STAT_EVS;
+    SetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_SPEED_EV, &monData);
+}
+// End siliconMerge
+
 bool8 IsStarterInParty(void)
 {
     u8 i;
