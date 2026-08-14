@@ -1,5 +1,5 @@
 const FLAG_HIDE_INSTALLNATUREPROBESWORKER = FLAG_TEMP_A
-const FLAG_UNLOCK_DOOR = FLAG_TEMP_2
+const FLAG_LOCK_DOOR = FLAG_TEMP_2
 const INSTALLNATUREPROBESWORKER_WAITER = LOCALID_QIU_VILLAGE_RESTAURANT_INSTALLNATUREPROBESWORKER
 const INSTALLNATUREPROBESWORKER_FISHERMAN = LOCALID_POPIDORA_ARCADE_INSTALLNATUREPROBESWORKER
 const INSTALLNATUREPROBESWORKER_ATTENDANT = LOCALID_LAKE_WAJABI_INSTALLNATUREPROBESWORKER
@@ -107,7 +107,7 @@ script Quest_ManOfManyHats_StartQuest_Dialogue{
 	applymovement(INSTALLNATUREPROBESWORKER_INTERACT, moves(emote_exclamation_mark, delay_16, face_player, step_end))
 	waitse
 	lock
-	msgbox("It's you. I remember you.",MSGBOX_NPC,SPEAKER_INSTALLNATUREPROBESWORKER,TAIL_TALK)
+	msgbox("It's you. I remember you.",,SPEAKER_INSTALLNATUREPROBESWORKER,TAIL_TALK)
 	msgbox("To this day I'm thankful for your help.\nAnd don't worry, I don't blame you for how\nthings went down.",,SPEAKER_INSTALLNATUREPROBESWORKER,TAIL_TALK,EMOTE_SWEAT)
 	closemessage
 	applymovement(INSTALLNATUREPROBESWORKER_INTERACT,Common_Movement_FaceLeft)
@@ -187,51 +187,70 @@ script Quest_ManOfManyHats_Complete_Dialogue{
 
 script Quest_ManOfManyHats_GuessDoorCombination_Dialogue
 {
+	lock
 	msgbox("It needs a password…",,SPEAKER_PLAYER,TAIL_THOUGHT)
 	special(EnterCode)
     waitstate
     special(GetCodeFeedback)
 	if(var(VAR_RESULT) == QUEST_MANOFMANYHATS)
 	{
-		callnative(Quest_ManOfManyHats_SetDoorUnlockBit)
-		playse(SE_DING_DONG)
-		waitse
-		playse(SE_BANG)
-		waitse
-		setmetatile(13,8,0x248,FALSE)
-		special(DrawWholeMapView)
-		msgbox("That may be the most insane guess I have\never made in my life.",,SPEAKER_PLAYER,TAIL_THOUGHT)
-		closemessage
-		warpdoor(MAP_ESPULEE_OUTSKIRTS_RANGER,0)
-		waitstate
+		call(Quest_ManOfManyHats_UnlockingDoor)
+		release
 		end
 	}
 	else
 	{
 		playse(SE_FAILURE)
 		msgbox("Something tells me guessing isn't gonna\nget me anywhere.",,SPEAKER_PLAYER,TAIL_THOUGHT)
+		closemessage
+		release
 		end
 	}
 }
 
 script Quest_ManOfManyHats_EnterDoorCombination_Dialogue{
-	msgbox("Okay, INSTALLNATUREPROBESWORKER said the\ncombination was J4CKW41K3r{PAUSE 30}.{PAUSE 30}.{PAUSE 30}.",,SPEAKER_PLAYER,TAIL_THOUGHT)
+	lock
+	msgbox("Okay, Installnatureprobesworker said the\ncombination was J4CKW41K3r{PAUSE 30}.{PAUSE 30}.{PAUSE 30}.",,SPEAKER_PLAYER,TAIL_THOUGHT)
 	closemessage
+	call(Quest_ManOfManyHats_UnlockingDoor)
+	release
+	end
+}
+
+script Quest_ManOfManyHats_UnlockingDoor
+{
 	callnative(Quest_ManOfManyHats_SetDoorUnlockBit)
 	playse(SE_DING_DONG)
 	waitse
 	playse(SE_BANG)
 	waitse
-	setmetatile(13,8,0x248,FALSE)
+	setmetatile(13,8,METATILE_General_Door,FALSE)
 	special(DrawWholeMapView)
 	warpdoor(MAP_ESPULEE_OUTSKIRTS_RANGER,0)
 	waitstate
-	end
+	return
 }
 
-script Quest_ManOfManyHats_CheckDoorLock_Script{
+script Quest_ManOfManyHats_CheckDoorLock_Script_Flags{
 	callnative(Script_Quest_ManOfManyHats_GetDoorUnlockBit)
-	if(var(VAR_RESULT)==TRUE){setflag(FLAG_UNLOCK_DOOR)}
+	if(var(VAR_RESULT)==TRUE){
+		setflag(FLAG_LOCK_DOOR)
+	}
+	else
+	{
+		clearflag(FLAG_LOCK_DOOR)
+	}
+}
+
+script Quest_ManOfManyHats_CheckDoorLock_Script_Metatiles{
+	callnative(Script_Quest_ManOfManyHats_GetDoorUnlockBit)
+	if(var(VAR_RESULT)==TRUE){
+		setmetatile(13,8,METATILE_General_Door,FALSE)
+	}
+	else
+	{
+		setmetatile(13,8,0x23b,TRUE)
+	}
 }
 
 script Quest_ManofManyHats_ManOfManyHatsComputerScreen
