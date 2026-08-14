@@ -3,8 +3,6 @@ const CHARLOTTE = 1
 const LIIDIA = 2
 const DIMU = 3
 const FLAG_HIDE_CHARLOTTE = FLAG_TEMP_3
-const FLAG_HIDE_LIIDIA = FLAG_TEMP_4
-const FLAG_UNLOCK_DOOR = FLAG_TEMP_2
 
 mapscripts EspuleeOutskirts_MapScripts {
 	MAP_SCRIPT_ON_RESUME
@@ -13,10 +11,9 @@ mapscripts EspuleeOutskirts_MapScripts {
 	}
     MAP_SCRIPT_ON_TRANSITION {
         call(EspuleeOutskirts_HideCharlotte_Script)
-        call(EspuleeOutskirts_HideLiidia_Script)
         call(IGuessWeShouldBeNiceNow_HidePopup_Script)
         callnative(LetsGrabLunch_IncrementStoryVariable)
-        call(Quest_ManOfManyHats_CheckDoorLock_Script)
+        call(Quest_ManOfManyHats_CheckDoorLock_Script_Flags)
         call(Quest_Breaktheinternet_EspuleeOutskirtsGirl_Visibility_Script)
         call_if_quest_complete(QUEST_RESTOREESPULEEGYM,Quest_Restoreespuleeoutskirts_Script_HideImelda)
         call_if_set(FLAG_TIMELINE_FALSE,Quest_Restoreespuleeoutskirts_Script_HideImelda)
@@ -30,28 +27,13 @@ mapscripts EspuleeOutskirts_MapScripts {
     ]
 
     MAP_SCRIPT_ON_LOAD{
-        call(EspuleeOutskirts_LockRangerDoor_Script)
+        call(Quest_ManOfManyHats_CheckDoorLock_Script_Metatiles)
     }
 }
 
 script EspuleeOutskirts_HideCharlotte_Script {
     setflag(FLAG_HIDE_CHARLOTTE)
         return
-}
-
-script EspuleeOutskirts_HideLiidia_Script{
-    questmenu(QUEST_MENU_CHECK_COMPLETE,QUEST_INSTALLNATUREPROBES)
-
-        if (var(VAR_RESULT)){
-            setflag(FLAG_HIDE_LIIDIA)
-        }
-    return
-}
-
-script EspuleeOutskirts_LockRangerDoor_Script{
-        if(var(VAR_QUEST_MANOFMANYHATS) < OPEN_LOCKED_DOOR){
-            setmetatile(13,8,0x23B,TRUE)
-        }
 }
 
 script EspuleeOutskirts_RangerStationDoor_Script{

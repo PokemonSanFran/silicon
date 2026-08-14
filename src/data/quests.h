@@ -3254,7 +3254,7 @@ const struct SideQuest sSideQuests[QUEST_COUNT] =
     [QUEST_MANOFMANYHATS] =
     {
         .name = COMPOUND_STRING("Man Of Many Hats"),
-        .desc[FLAG_GET_ACTIVE] = COMPOUND_STRING("Installnatureprobesworker's headphones are at the Ranger Station on Route 100, the password is “J4CKW41K3r”."),
+        .desc[FLAG_GET_ACTIVE] = COMPOUND_STRING("Installnatureprobesworker's headphones are at the Ranger Station on {STR_VAR_1}, the password is “J4CKW41K3r”."),
         .desc[FLAG_GET_COMPLETED] = COMPOUND_STRING("Installnatureprobesworker got his headphones back."),
         .map = COMPOUND_STRING("ResidoRegion"),
         .sprite = OBJ_EVENT_GFX_INSTALLNATUREPROBES_RANGER,
@@ -3274,21 +3274,14 @@ const struct SideQuest sSideQuests[QUEST_COUNT] =
             {
                 .name = COMPOUND_STRING("Visited Waiter"),
                 .setupFunc = DebugQuest_ManOfManyHats,
-                side_quest_map(MAP_QUEST_MANOFMANYHATS),
+                side_quest_map(MAP_QUEST_MANOFMANYHATS_RESTAURANT),
                 .warpId = 0,
             },
             [STATE_QUEST_MANOFMANYHATS_FISH_VISITED] = 
             {
                 .name = COMPOUND_STRING("Visited Fisherman"),
                 .setupFunc = DebugQuest_ManOfManyHats,
-                side_quest_map(MAP_QUEST_MANOFMANYHATS),
-                .warpId = 0,
-            },
-            [STATE_QUEST_MANOFMANYHATS_ARCADE_VISITED] = 
-            {
-                .name = COMPOUND_STRING("Visited Attendant"),
-                .setupFunc = DebugQuest_ManOfManyHats,
-                side_quest_map(MAP_QUEST_MANOFMANYHATS),
+                side_quest_map(MAP_QUEST_MANOFMANYHATS_LAKE),
                 .warpId = 0,
             },
             [STATE_QUEST_MANOFMANYHATS_STARTED] = 
@@ -3302,7 +3295,7 @@ const struct SideQuest sSideQuests[QUEST_COUNT] =
             {
                 .name = COMPOUND_STRING("Visited Outpost"),
                 .setupFunc = DebugQuest_ManOfManyHats,
-                side_quest_map(MAP_QUEST_MANOFMANYHATS),
+                side_quest_map(MAP_QUEST_MANOFMANYHATS_TARGET),
                 .warpId = 0,
             },
             [STATE_QUEST_MANOFMANYHATS_HEADPHONES_PICKED_UP] = 

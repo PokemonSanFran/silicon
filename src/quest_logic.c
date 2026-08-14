@@ -4063,6 +4063,9 @@ void DebugQuest_SetArcadeAsVisibleNPC(void)
     if (IsQuestActiveState(QUEST_MANOFMANYHATS))
         return;
 
+    Quest_ManOfManyHats_ManOfManyHatsIncrementBoba();
+    Quest_ManOfManyHats_ManOfManyHatsIncrementFish();
+    Quest_ManOfManyHats_ManOfManyHatsIncrementArcade();
     SetVariableBit(VAR_QUEST_MANOFMANYHATS,SEEN_INSTALLNATUREPROBESWORKER_3RD + 3,TRUE);
     gSpecialVar_Result = TRUE;
 }
@@ -4084,7 +4087,6 @@ void DebugQuest_ManOfManyHats(u8 state)
             Quest_ManOfManyHats_ManOfManyHatsIncrementFish();
             break;
         case STATE_QUEST_MANOFMANYHATS_STARTED:
-            Quest_ManOfManyHats_ManOfManyHatsIncrementArcade();
             DebugQuest_SetArcadeAsVisibleNPC();
             QuestMenu_ScriptSetActive(QUEST_MANOFMANYHATS);
             break;

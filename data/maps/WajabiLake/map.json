@@ -289,7 +289,15 @@
       "flag": "FLAG_TEMP_A"
     }
   ],
-  "warp_events": [],
+  "warp_events": [
+    {
+      "x": 0,
+      "y": 0,
+      "elevation": 0,
+      "dest_map": "MAP_WAJABI_LAKE",
+      "dest_warp_id": "0"
+    }
+  ],
   "coord_events": [
     {
       "type": "trigger",
