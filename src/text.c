@@ -371,6 +371,9 @@ u32 GetPlayerTextSpeed(void)
         return OPTIONS_TEXT_SPEED_MID;
 
     // Start siliconMerge
+    if (gTextFlags.forceFastTextSpeed)
+        return OPTIONS_TEXT_SPEED_FAST;
+
     if (OptionsMenu_GetSavedOptions(VISUAL_SETTINGS,VISUAL_OPTIONS_TEXT_SPEED) > OPTIONS_TEXT_SPEED_INSTANT)
         OptionsMenu_SetSavedOptions(VISUAL_SETTINGS,VISUAL_OPTIONS_TEXT_SPEED,OPTIONS_TEXT_SPEED_FAST);
     /*

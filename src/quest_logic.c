@@ -3901,7 +3901,208 @@ void DebugQuest_InstallNatureProbes(u8 state)
             break;
     }
 }
+/*
+void SetVariableBit(u32 varConst, u32 bit, bool32 bitValue)
+{
+    u32 var = VarGet(varConst);
 
+    if (bitValue)
+        var |= (1 << bit); //if bitValue == true
+    else
+        var &= ~(1 << bit);
+
+    VarSet(varConst,var);
+}
+
+bool8 GetVariableBit(u32 varConst, u32 bit)
+{
+    u32 var = VarGet(varConst);
+    return (var >> bit) & 1;
+}
+*/
+void Quest_ManOfManyHats_ManOfManyHatsIncrementBoba(void)
+{
+    if(!GetVariableBit(VAR_QUEST_MANOFMANYHATS,SEEN_INSTALLNATUREPROBESWORKER_1ST))
+        SetVariableBit(VAR_QUEST_MANOFMANYHATS,SEEN_INSTALLNATUREPROBESWORKER_1ST,TRUE);
+}
+
+void Quest_ManOfManyHats_ManOfManyHatsIncrementFish(void)
+{
+    if(!GetVariableBit(VAR_QUEST_MANOFMANYHATS,SEEN_INSTALLNATUREPROBESWORKER_2ND))
+        SetVariableBit(VAR_QUEST_MANOFMANYHATS,SEEN_INSTALLNATUREPROBESWORKER_2ND,TRUE);
+}
+
+void Quest_ManOfManyHats_ManOfManyHatsIncrementArcade(void)
+{
+    if(!GetVariableBit(VAR_QUEST_MANOFMANYHATS,SEEN_INSTALLNATUREPROBESWORKER_3RD))
+        SetVariableBit(VAR_QUEST_MANOFMANYHATS,SEEN_INSTALLNATUREPROBESWORKER_3RD,TRUE);
+}
+
+bool32 Quest_ManOfManyHats_GetVariable_SawBoba(void)
+{
+    return GetVariableBit(VAR_QUEST_MANOFMANYHATS,SEEN_INSTALLNATUREPROBESWORKER_1ST);
+}
+
+bool32 Quest_ManOfManyHats_ShouldStayBoba(void)
+{
+return GetVariableBit(VAR_QUEST_MANOFMANYHATS,(SEEN_INSTALLNATUREPROBESWORKER_1ST + 3));
+}
+
+bool32 Quest_ManOfManyHats_GetVariable_SawFish(void)
+{
+    return GetVariableBit(VAR_QUEST_MANOFMANYHATS,SEEN_INSTALLNATUREPROBESWORKER_2ND);
+}
+
+bool32 Quest_ManOfManyHats_ShouldStayFish(void)
+{
+return GetVariableBit(VAR_QUEST_MANOFMANYHATS,(SEEN_INSTALLNATUREPROBESWORKER_2ND + 3));
+}
+
+bool32 Quest_ManOfManyHats_GetVariable_SawArcade(void)
+{
+    return GetVariableBit(VAR_QUEST_MANOFMANYHATS,SEEN_INSTALLNATUREPROBESWORKER_3RD);
+}
+
+bool32 Quest_ManOfManyHats_ShouldStayArcade(void)
+{
+return GetVariableBit(VAR_QUEST_MANOFMANYHATS,(SEEN_INSTALLNATUREPROBESWORKER_3RD + 3));
+}
+
+void Script_Quest_ManOfManyHats_ShouldStayBoba(void)
+{
+    gSpecialVar_Result = Quest_ManOfManyHats_ShouldStayBoba();
+}
+
+void Script_Quest_ManOfManyHats_ShouldStayFish(void)
+{
+    gSpecialVar_Result = Quest_ManOfManyHats_ShouldStayFish();
+}
+
+void Script_Quest_ManOfManyHats_ShouldStayArcade(void)
+{
+    gSpecialVar_Result = Quest_ManOfManyHats_ShouldStayArcade();
+}
+
+bool32 Quest_ManOfManyHats_ManOfManyHatsSeenAllJobs(void)
+{
+    if (Quest_ManOfManyHats_GetVariable_SawBoba() == FALSE)
+        return FALSE;
+ 
+    if (Quest_ManOfManyHats_GetVariable_SawFish() == FALSE)
+         return FALSE;
+
+    if (Quest_ManOfManyHats_GetVariable_SawArcade() == FALSE)
+        return FALSE;
+
+    return TRUE;
+}
+
+void Quest_ManOfManyHats_ManOfManyHatsSetThirdJobVisible(void)
+{
+    gSpecialVar_Result = FALSE;
+
+    if(Quest_ManOfManyHats_ManOfManyHatsSeenAllJobs() == FALSE)
+        return;
+
+    if (IsQuestActiveState(QUEST_MANOFMANYHATS))
+        return;
+
+    u32 bit = 0;
+    switch (GetCurrentMap())
+    {
+        case MAP_QIU_VILLAGE_RESTAURANT:
+            bit = SEEN_INSTALLNATUREPROBESWORKER_1ST;
+            break;
+        case MAP_WAJABI_LAKE:
+            bit = SEEN_INSTALLNATUREPROBESWORKER_2ND;
+            break;
+        case MAP_POPIDORA_PIER_ARCADE:
+            bit = SEEN_INSTALLNATUREPROBESWORKER_3RD;
+            break;
+        default:
+            return;
+        }
+
+    bit += 3;
+    SetVariableBit(VAR_QUEST_MANOFMANYHATS,bit,TRUE);
+    gSpecialVar_Result = TRUE;
+}
+
+void Quest_ManOfManyHats_SetDoorUnlockBit(void)
+{
+    SetVariableBit(VAR_QUEST_MANOFMANYHATS,OPEN_LOCKED_DOOR,TRUE);
+}
+
+bool32 Quest_ManOfManyHats_GetDoorUnlockBit(void)
+{
+    return GetVariableBit(VAR_QUEST_MANOFMANYHATS,OPEN_LOCKED_DOOR);
+}
+
+void Script_Quest_ManOfManyHats_GetDoorUnlockBit(void)
+{
+    gSpecialVar_Result = GetVariableBit(VAR_QUEST_MANOFMANYHATS,OPEN_LOCKED_DOOR);
+}
+
+void Script_Quest_ManOfManyHats_SetForcedTextSpeedFastFlag(void)
+{
+    gTextFlags.forceFastTextSpeed = TRUE;
+}
+
+void Script_Quest_ManOfManyHats_ClearForcedTextSpeedFastFlag(void)
+{
+    gTextFlags.forceFastTextSpeed = FALSE;
+}
+
+void DebugQuest_SetArcadeAsVisibleNPC(void)
+{
+    gSpecialVar_Result = FALSE;
+
+    if(Quest_ManOfManyHats_ManOfManyHatsSeenAllJobs() == FALSE)
+        return;
+
+    if (IsQuestActiveState(QUEST_MANOFMANYHATS))
+        return;
+
+    Quest_ManOfManyHats_ManOfManyHatsIncrementBoba();
+    Quest_ManOfManyHats_ManOfManyHatsIncrementFish();
+    Quest_ManOfManyHats_ManOfManyHatsIncrementArcade();
+    SetVariableBit(VAR_QUEST_MANOFMANYHATS,SEEN_INSTALLNATUREPROBESWORKER_3RD + 3,TRUE);
+    gSpecialVar_Result = TRUE;
+}
+
+void DebugQuest_ManOfManyHats(u8 state)
+{
+    switch (state)
+    {
+        default:
+        case STATE_QUEST_MANOFMANYHATS_NOT_STARTED:
+            FlagSet(FLAG_SYS_STARTER_APPS_GET);            
+            JumpPlayerTo_YoungPadawan(JUMP_DEBUG);
+            DebugQuest_InstallNatureProbes(STATE_QUEST_INSTALLNATUREPROBES_COMPLETE);
+            break;
+        case STATE_QUEST_MANOFMANYHATS_BOBA_VISITED:
+            Quest_ManOfManyHats_ManOfManyHatsIncrementBoba();
+            break;
+        case STATE_QUEST_MANOFMANYHATS_FISH_VISITED:
+            Quest_ManOfManyHats_ManOfManyHatsIncrementFish();
+            break;
+        case STATE_QUEST_MANOFMANYHATS_STARTED:
+            DebugQuest_SetArcadeAsVisibleNPC();
+            QuestMenu_ScriptSetActive(QUEST_MANOFMANYHATS);
+            break;
+        case STATE_QUEST_MANOFMANYHATS_OUTPOST_VISITED:
+            Quest_ManOfManyHats_SetDoorUnlockBit();
+            break;
+        case STATE_QUEST_MANOFMANYHATS_HEADPHONES_PICKED_UP:
+            AddBagItem(ITEM_QUEST_MANOFMANYHATS_HEADPHONES, 1);
+            QuestMenu_ScriptSetReward(QUEST_MANOFMANYHATS);
+            break;
+        case STATE_QUEST_MANOFMANYHATS_COMPLETE:
+            FlagSet(FLAG_ITEM_QUEST_MANOFMANYHATS_HEADPHONES);
+            QuestMenu_ScriptSetComplete(QUEST_MANOFMANYHATS);
+            break;
+    }
+}
 // ***********************************************************************
 // Cutscene: Earthquake
 // ***********************************************************************

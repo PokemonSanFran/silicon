@@ -10,7 +10,7 @@ script Common_EventScript_StoryItem
 {
     switch(var(VAR_RESULT))
     {
-        case ITEM_OAKS_PARCEL: call(EspuleeOutskirts_Ranger_Quest_Manofmanyhats_EventScript_ItemHeadphones)
+        case ITEM_RANGER_HEADPHONES: call(EspuleeOutskirts_Ranger_Quest_ManOfManyHats_EventScript_ItemHeadphones)
         case ITEM_ROTOM_CATALOG: call(WajabiLake_Quest_Theboywhocrieswithwolves_EventScript_ItemStuff1)
         case ITEM_GRACIDEA: call(WajabiLake_Quest_Theboywhocrieswithwolves_EventScript_ItemStuff2)
         case ITEM_REVEAL_GLASS: call(WajabiLake_Quest_Theboywhocrieswithwolves_EventScript_ItemStuff3)
@@ -27,7 +27,7 @@ script Common_EventScript_StoryItem
     }
 }
 
-script EspuleeOutskirts_Ranger_Quest_Manofmanyhats_EventScript_ItemHeadphones
+script EspuleeOutskirts_Ranger_Quest_ManOfManyHats_EventScript_ItemHeadphones
 {
     questmenu(QUEST_MENU_SET_REWARD,QUEST_MANOFMANYHATS)
 }

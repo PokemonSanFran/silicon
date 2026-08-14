@@ -1319,9 +1319,9 @@
 #define FLAG_ITEM_ROUTE_116_REPEL                                    0x27E
 #define FLAG_ITEM_ROUTE_116_HP_UP                                    0x27F
 
-#define FLAG_ITEM_ESPULEE_OUTSKIRTS_RANGER_HEADPHONES                0x270
-#define FLAG_ITEM_ESPULEE_OUTSKIRTS_RANGER_ROCKY_HELMET              0x271
-#define FLAG_ITEM_ESPULEE_OUTSKIRTS_RANGER_WIDE_LENS                 0x272
+#define FLAG_ITEM_QUEST_MANOFMANYHATS_HEADPHONES                     0x270
+#define FLAG_ITEM_QUEST_MANOFMANYHATS_ITEM2                          0x271
+#define FLAG_ITEM_QUEST_MANOFMANYHATS_ITEM3                          0x272
 #define FLAG_ITEM_WAJABI_LAKE_STUFF1                                 0x273
 #define FLAG_ITEM_WAJABI_LAKE_STUFF2                                 0x274
 #define FLAG_ITEM_WAJABI_LAKE_STUFF3                                 0x275
