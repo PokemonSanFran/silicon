@@ -209,9 +209,11 @@ script Quest_ManOfManyHats_GuessDoorCombination_Dialogue
 }
 
 script Quest_ManOfManyHats_EnterDoorCombination_Dialogue{
+	lock
 	msgbox("Okay, Installnatureprobesworker said the\ncombination was J4CKW41K3r{PAUSE 30}.{PAUSE 30}.{PAUSE 30}.",,SPEAKER_PLAYER,TAIL_THOUGHT)
 	closemessage
 	call(Quest_ManOfManyHats_UnlockingDoor)
+	release
 	end
 }
 

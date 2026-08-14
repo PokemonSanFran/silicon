@@ -37,10 +37,9 @@ script EspuleeOutskirts_HideCharlotte_Script {
 }
 
 script EspuleeOutskirts_RangerStationDoor_Script{
-    lock
-        msgbox(format("The door is locked."),MSGBOX_SIGN)
-        goto_if_quest_active(QUEST_MANOFMANYHATS,Quest_ManOfManyHats_EnterDoorCombination_Dialogue)
-        goto(Quest_ManOfManyHats_GuessDoorCombination_Dialogue)
+    msgbox(format("The door is locked."))
+    goto_if_quest_active(QUEST_MANOFMANYHATS,Quest_ManOfManyHats_EnterDoorCombination_Dialogue)
+    goto(Quest_ManOfManyHats_GuessDoorCombination_Dialogue)
 }
 
 script EspuleeOutskirts_Stan_Interact_Script{
