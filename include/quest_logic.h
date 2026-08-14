@@ -105,5 +105,7 @@ void BufferSunriseTimes(void);
 void BufferSunsetTimes(void);
 bool32 ShouldBaiyaCallPlayer(void);
 bool32 ShouldStartANewStrike(void);
-
+bool32 Quest_ManOfManyHats_ShouldStayFish(void);
+bool32 Quest_ManOfManyHats_ShouldStayArcade(void);
+bool32 Quest_ManOfManyHats_ShouldStayBoba(void);
 #endif //GUARD_QUESTLOGIC_H
