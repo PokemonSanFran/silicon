@@ -36,7 +36,7 @@ script TwoHoursAgo_TheyreEager_Dialogue {
 
 script TwoHoursAgo_ExplainLeague_ObjectSetUp_Script {
         lock
-        fadescreenswapbuffers(FADE_TO_BLACK)
+        fadescreen(FADE_TO_BLACK)
         setobjectxy(OLIVER, 4, 6)
         turnobject(OLIVER, DIR_WEST)
         setobjectnewmovementtype(OLIVER, MOVEMENT_TYPE_FACE_LEFT)
@@ -54,24 +54,31 @@ script TwoHoursAgo_ExplainLeague_Script {
         msgbox(format("The tournament will test all of your skills as a Trainer, but the winner will become a SharpRise Capital-sponsored career Pokémon Trainer."),,SPEAKER_OLIVER)
         msgbox(format("We expect the best from you and Charlotte! If you fail to qualify for the Championship, we'll be terminating your contract, and you'll be on your own... but we know that won't be the case! So don't worry."),,SPEAKER_OLIVER)
         closemessage
-        fadescreenswapbuffers(FADE_FROM_BLACK)
+        fadescreen(FADE_FROM_BLACK)
         goto(TwoHoursAgo_LeftoversPokeballs_Dialogue)
 }
 
-script TwoHoursAgo_LeftoversPokeballs_Dialogue {
+script TwoHoursAgo_LeftoversPokeballs_Dialogue
+{
     setflag(FLAG_TEMP_1F)
-        msgbox(format("Needles is always so delicious! Too bad Charlotte didn't eat with us. I guess you can take their portion of the food, and I bought you both PokéBalls, but you can have theirs too!"),SPEAKER_OLIVER)
-        lockall
-        giveitem(ITEM_LEFTOVERS)
-        giveitem(ITEM_POKE_BALL, 5)
-        closemessage
-        releaseall
-        end
+    bufferitemnameplural(STR_VAR_1,ITEM_GREAT_BALL,10)
+    msgbox(format("Needles is always so delicious! Too bad Charlotte didn't eat with us. I guess you can take their portion of the food, and I bought you both {STR_VAR_1}, but you can have theirs too!"),SPEAKER_OLIVER)
+    lockall
+    giveitem(ITEM_LEFTOVERS)
+    giveitem(ITEM_GREAT_BALL, 10)
+    closemessage
+    releaseall
+    end
 }
 
-script TwoHoursAgo_ExplainLeftovers_Dialouge {
-        bufferleadmonspeciesname(0)
-        msgbox(format("Your {STR_VAR_1} can hold those Leftovers to restore HP during battle. Now, you should get a move on! Don't let Charlotte get too far ahead of you!"), MSGBOX_NPC,,SPEAKER_OLIVER)
-
+script TwoHoursAgo_ExplainLeftovers_Dialouge
+{
+    bufferleadmonspeciesname(STR_VAR_1)
+    bufferitemname(STR_VAR_2,ITEM_LEFTOVERS)
+    msgbox(format("Your {STR_VAR_1} can hold those {STR_VAR_2} to restore HP during battle."),,SPEAKER_OLIVER,TAIL_TALK)
+    msgbox(format("Now, you should get a move on! Don't let Charlotte get too far ahead of you!"),,SPEAKER_OLIVER,TAIL_TALK)
+    closemessage
+    applymovement(OLIVER,moves(face_left))
+    waitmovement(OLIVER)
 }
 
