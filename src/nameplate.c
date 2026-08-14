@@ -18,7 +18,7 @@ static bool32 AllocateNameplateStrings(void);
 static void FreeNameplateStrings(void);
 static void AddNameplateEmote(u32 windowId, u32 nameplateWidth, enum NameplateEmotes emote);
 static void AddNameplatePhone(u32 windowId, u32 nameplateWidth, enum NameplatePhone onPhone);
-static void AddNameplateTail(u32 windowId, u32 nameplateWidth, enum NameplateTail tail);
+static void AddNameplateTail(u32 windowId, u32 nameplateWidth, enum NameplateSpeaker speaker, enum NameplateTail tail);
 static void BufferSpeakerName(u32 speaker);
 static void BufferSpeakerTitle(u32 speaker);
 static enum Gender GetSpeakerGender(void);
@@ -318,7 +318,7 @@ void DrawNameplate(void)
         DrawSecondRowNameplateTiles(windowId, nameplateWidth, offset, nameplateTileWidth);
         DrawThirdRowNameplateTiles(windowId, nameplateWidth, offset, nameplateTileWidth);
 
-        AddNameplateTail(windowId, nameplateWidth, tail);
+        AddNameplateTail(windowId, nameplateWidth, speaker, tail);
         AddNameplatePhone(windowId, nameplateWidth, onPhone);
         CreateSpeakerIconSprite(nameplateWidth, speaker);
         AddNameplateEmote(windowId, nameplateWidth, emote);
@@ -570,9 +570,12 @@ void DestroySpeakerIconSprite(void)
     sPortaitSpriteID = 0;
 }
 
-static void AddNameplateTail(u32 windowId, u32 nameplateWidth, enum NameplateTail tail)
+static void AddNameplateTail(u32 windowId, u32 nameplateWidth, enum NameplateSpeaker speaker, enum NameplateTail tail)
 {
     if (tail <= TAIL_DEFAULT || tail >= TAIL_COUNT)
+        return;
+
+    if (speaker == SPEAKER_DEFAULT || speaker == NUM_SPEAKERS)
         return;
 
     u32 tailX = (tail == TAIL_TALK) ? (nameplateWidth - TAILS_TALK_RIGHT_PADDING) : (nameplateWidth - TAILS_RIGHT_PADDING);
