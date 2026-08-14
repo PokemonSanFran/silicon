@@ -4081,12 +4081,9 @@ void DebugQuest_ManOfManyHats(u8 state)
             Quest_ManOfManyHats_ManOfManyHatsIncrementBoba();
             break;
         case STATE_QUEST_MANOFMANYHATS_FISH_VISITED:
-            Quest_ManOfManyHats_ManOfManyHatsIncrementBoba();
             Quest_ManOfManyHats_ManOfManyHatsIncrementFish();
             break;
         case STATE_QUEST_MANOFMANYHATS_STARTED:
-            Quest_ManOfManyHats_ManOfManyHatsIncrementBoba();
-            Quest_ManOfManyHats_ManOfManyHatsIncrementFish();
             Quest_ManOfManyHats_ManOfManyHatsIncrementArcade();
             DebugQuest_SetArcadeAsVisibleNPC();
             QuestMenu_ScriptSetActive(QUEST_MANOFMANYHATS);
@@ -4095,8 +4092,8 @@ void DebugQuest_ManOfManyHats(u8 state)
             Quest_ManOfManyHats_SetDoorUnlockBit();
             break;
         case STATE_QUEST_MANOFMANYHATS_HEADPHONES_PICKED_UP:
-            Quest_ManOfManyHats_SetDoorUnlockBit();
             AddBagItem(ITEM_QUEST_MANOFMANYHATS_HEADPHONES, 1);
+            QuestMenu_ScriptSetReward(QUEST_MANOFMANYHATS);
             break;
         case STATE_QUEST_MANOFMANYHATS_COMPLETE:
             FlagSet(FLAG_ITEM_QUEST_MANOFMANYHATS_HEADPHONES);
