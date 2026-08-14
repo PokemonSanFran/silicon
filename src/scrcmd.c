@@ -4038,6 +4038,7 @@ void ScrFunc_timeprintinggiven(struct ScriptContext *ctx)
 }
 // End timePrinting
 
+// Start siliconQuests
 bool8 ScrCmd_debugprint(struct ScriptContext *ctx)
 {
     u16 num;
@@ -4058,3 +4059,4 @@ bool8 ScrCmd_debugprint(struct ScriptContext *ctx)
     }
     return FALSE;
 }
+// End siliconQuests
