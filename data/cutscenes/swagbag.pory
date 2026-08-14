@@ -101,12 +101,16 @@ script Swagbag_DontLeaveCuconuTown_Dialogue {
         end
 }
 
-script swagbag_HelpPlayer_Script {
-        msgbox(format("In the actual game, this will be a list of questions that the player can ask and getr answers to. Tutorial level shit."),MSGBOX_NPC,SPEAKER_OLIVER)
-
-        applymovement(SHARPRISE_COMPOUND_1F_OLIVER,Common_Movement_FaceRight)
-        waitmovement(0)
-        return
+script swagbag_HelpPlayer_Script
+{
+    msgbox(format("I didn't mention it earlier, but your phone's new operating system will also have lots of ways to help you during your challenge."),,SPEAKER_OLIVER,TAIL_TALK)
+    msgbox(format("Our phones are always listening, so the home screen will give you hints on what you should do next if you're stuck."),,SPEAKER_OLIVER,TAIL_TALK)
+    msgbox(format("The Adventure Guide app also has lots of information on training Pokemon, using apps, or traversing Resido."),,SPEAKER_OLIVER,TAIL_TALK)
+    msgbox(format("Our team worked hard on those, so make sure you read them!"),,SPEAKER_OLIVER,TAIL_TALK,EMOTE_SWEAT)
+    closemessage
+    applymovement(SHARPRISE_COMPOUND_1F_OLIVER,Common_Movement_FaceRight)
+    waitmovement(0)
+    return
 }
 
 script swagbag_PreventPlayerLeavingCuconuTown_Event_Script {

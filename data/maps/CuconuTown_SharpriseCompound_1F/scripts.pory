@@ -41,18 +41,12 @@ script Charlotte_CuconuTown_Compound_1F_InteractScript
 
 script Oliver_CuconuTown_Compound_1F_InteractScript
 {
-    lockall
-    call_if_ne(VAR_PLAYER_HOME_STATE,SLEPT_AFTER_SWAGBAG,swagbag_HelpPlayer_Script)
-    call_if_unset(FLAG_RECIEVED_LEFTOVERS,TwoHoursAgo_TheyreEager_Dialogue)
-
-    if(flag(FLAG_TEMP_1F))
-    {
-        call(TwoHoursAgo_ExplainLeftovers_Dialouge)
-    }
-    else
-    {
-        call(swagbag_HelpPlayer_Script)
-    }
+    lock
+    faceplayer
+    goto_if_lt(VAR_PLAYER_HOME_STATE,SLEPT_AFTER_SWAGBAG,swagbag_HelpPlayer_Script)
+    goto_if_unset(FLAG_RECIEVED_LEFTOVERS,TwoHoursAgo_TheyreEager_Dialogue)
+    call_if_set(FLAG_TEMP_1F,TwoHoursAgo_ExplainLeftovers_Dialouge)
+    call_if_unset(FLAG_TEMP_1F,swagbag_HelpPlayer_Script)
     closemessage
     releaseall
     end
