@@ -12,12 +12,12 @@ script EnterEmrys_LeaderPosition_Script
 	setobjectflagfromlocalid(LOCALID_PERLACIA_GYM_PUZZLE_KID_3)
 }
 
-script EnterEmrys_ObjectSetUp_Script 
+script EnterEmrys_ObjectSetUp_Script
 {
     setobjectmovementtype(LOCALID_PERLACIA_GYM_EMRYS, MOVEMENT_TYPE_FACE_LEFT)
 }
 
-script EnterEmrys_StartBattle_ObjectSetup_Script 
+script EnterEmrys_StartBattle_ObjectSetup_Script
 {
 	setobjectflagfromlocalid(LOCALID_PERLACIA_GYM_PUZZLE_KID_3)
 	setobjectxy(LOCALID_PERLACIA_GYM_EMRYS, 10, 6)

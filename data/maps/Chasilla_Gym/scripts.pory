@@ -161,10 +161,10 @@ script Chasilla_Gym_Attendant_Victory_Script
     msgbox(format("Congrats on the win, {PLAYER}!. I wonder how he battles when he's not here in the Gym..."),MSGBOX_NPC)
 }
 
-script EnterPua_Event_Script 
+script EnterPua_Event_Script
 {
 	goto_if_quest_complete(QUEST_WHIRLPOOLFERRY,Rematches_Script_Pua)
-    switch (var (VAR_GYM_4_STATE)) 
+    switch (var (VAR_GYM_4_STATE))
 	{
 		case GYM_SAVE_BEFORE_LEADER:
 			goto(EnterPua_StartGymBattle_Script)

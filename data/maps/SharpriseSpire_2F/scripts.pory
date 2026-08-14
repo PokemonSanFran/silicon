@@ -18,7 +18,7 @@ mapscripts SharpriseSpire_2F_MapScripts {
 script SharpriseSpire_2F_MapScripts_OnTransition {
 
     switch (var(VAR_SHARPRISESPIRE_CONFERENCE_STATE)){
-        case 0: 
+        case 0:
         case STEPPED_INTO_RAMESH_ROOM:
         case POST_ALWAYS_WATCHING_WAZOWSKI:
         case POST_WELCOME_TO_THE_WAR_ROOM: call(WelcomeToTheWarRoom_Object_Hide_Script)

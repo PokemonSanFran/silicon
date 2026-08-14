@@ -136,7 +136,7 @@ script ThereCanOnlyBeOne_Dialogue_ChooseFood
 	msgbox(format("“What is your favorite food?”\nOrre has such good choices, but I guess I really like..."),,SPEAKER_PLAYER,TAIL_TALK)
 	dynmultichoice(0,0,TRUE,3,0,NULL,gText_MascarponePizza,gText_GreenChiliBurger,gText_ChilaquilesEgg,gText_BaconAsiagoBagel,gText_SavorySorbet)
 	copyvar(VAR_PLAYER_FAVORITE_FOOD,VAR_RESULT)
-	callnative(BufferFavoriteFood)	
+	callnative(BufferFavoriteFood)
 	msgbox(format("{STR_VAR_1}!"),,SPEAKER_PLAYER,TAIL_TALK,EMOTE_HAPPY)
 	closemessage
 	startmenu_savescreen

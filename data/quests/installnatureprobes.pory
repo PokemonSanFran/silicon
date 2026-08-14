@@ -31,7 +31,7 @@ script Quest_InstallNatureProbes_StartQuest_Dialogue
     msgbox("Sure, sounds good to me.", MSGBOX_AUTOCLOSE, SPEAKER_PLAYER, TAIL_TALK)
 
 	startquest(QUEST_INSTALLNATUREPROBES)
-    
+
     cueobjectplayer(INSTALLNATUREPROBESWORKER)
     giveitem(ITEM_QUEST_INSTALLNATUREPROBES_FOREST)
     additem(ITEM_QUEST_INSTALLNATUREPROBES_HILL)
@@ -181,7 +181,7 @@ script Quest_InstallNatureProbes_Reward_Cutscene
     closemessage
     moveobjecttocoords(INSTALLNATUREPROBESWORKER,12,8,DIR_SOUTH)
     fadeandremovelasttalked
-    
+
     completequest(QUEST_INSTALLNATUREPROBES)
     release
     end

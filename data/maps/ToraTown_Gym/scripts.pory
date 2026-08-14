@@ -10,10 +10,10 @@ mapscripts ToraTown_Gym_MapScripts {
     ]
 }
 
-script EnterShinzo_Event_Script 
+script EnterShinzo_Event_Script
 {
 	goto_if_quest_complete(QUEST_HYBRIDCULTURE,Rematches_Script_Shinzo)
-    switch (var(VAR_GYM_2_STATE)) 
+    switch (var(VAR_GYM_2_STATE))
 	{
         default: goto(EnterShinzo_ShinzoIntro_Dialogue)
         case TORA_GYM_SAVE_BEFORE_BATTLE: goto(EnterShinzo_StartGymBattle_Script)

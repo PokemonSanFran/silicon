@@ -3,7 +3,7 @@ mapscripts QiuVillage_RameshHouse_MapScripts {
         goto(QiuVillage_Ramesh_House_MapScripts_OnTransition)
     }
     MAP_SCRIPT_ON_FRAME_TABLE [
-        VAR_TOWER_RAID_STATE,1:Imin_BeginHouseSearch_Script 
+        VAR_TOWER_RAID_STATE,1:Imin_BeginHouseSearch_Script
     ]
     MAP_SCRIPT_ON_LOAD {
         goto(QiuVillage_Ramesh_House_MapScripts_OnLoad)
