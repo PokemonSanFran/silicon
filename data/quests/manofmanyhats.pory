@@ -215,7 +215,7 @@ script Quest_ManOfManyHats_GuessDoorCombination_Dialogue
 }
 
 script Quest_ManOfManyHats_EnterDoorCombination_Dialogue{
-	msgbox("Okay, INSTALLNATUREPROBESWORKER said the\ncombination was J4CKW41K3r{PAUSE 30}.{PAUSE 30}.{PAUSE 30}.",,SPEAKER_PLAYER,TAIL_THOUGHT)
+	msgbox("Okay, Installnatureprobesworker said the\ncombination was J4CKW41K3r{PAUSE 30}.{PAUSE 30}.{PAUSE 30}.",,SPEAKER_PLAYER,TAIL_THOUGHT)
 	closemessage
 	callnative(Quest_ManOfManyHats_SetDoorUnlockBit)
 	playse(SE_DING_DONG)
