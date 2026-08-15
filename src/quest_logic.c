@@ -6202,3 +6202,13 @@ bool8 IsPlayerInSharpriseArena(void)
 {
     return (GetCurrentMap() == MAP_SHARPRISE_STADIUM_ARENA);
 }
+
+// ***********************************************************************
+// Cutscene: Old Asshole Appears
+// ***********************************************************************
+
+void BufferArribaDiscount(void)
+{
+    u32 difference = (FARE_DISCOUNT_ARRIBA_DENOMINATOR - FARE_DISCOUNT_ARRIBA_NUMERATOR);
+    ConvertIntToDecimalStringN(gStringVar1, difference, STR_CONV_MODE_LEFT_ALIGN, CountDigits(difference));
+}
