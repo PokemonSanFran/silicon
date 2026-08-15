@@ -108,7 +108,8 @@
     "CaveTemplate_3",
     "CaveTemplate_4",
     "CaveTemplate_Water",
-    "CaveTemplate_Water1"
+    "CaveTemplate_Water1",
+    "RegularIndoorTest"
   ],
   "gMapGroup_PsfTownsAndRoutes": [
     "CuconuTown",

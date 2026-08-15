@@ -13759,6 +13759,16 @@
       "blockdata_filepath": "data/layouts/HodouCity_Alley1/map.bin",
       "border_height": 2,
       "border_width": 2
+    },
+    {
+      "id": "LAYOUT_REGULAR_INDOOR_TEST",
+      "name": "RegularIndoorTest_Layout",
+      "width": 20,
+      "height": 20,
+      "primary_tileset": "gTileset_BuildingSilicon",
+      "secondary_tileset": "gTileset_Petalburg",
+      "border_filepath": "data/layouts/RegularIndoorTest/border.bin",
+      "blockdata_filepath": "data/layouts/RegularIndoorTest/map.bin"
     }
   ]
 }

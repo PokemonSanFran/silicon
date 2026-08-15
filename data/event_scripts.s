@@ -2271,3 +2271,5 @@ EventScript_PalletTown_PlayersHouse_2F_TurnOnPC::
 	.include "data/maps/HodouCity_Cookie/scripts.inc"
 
 	.include "data/maps/HodouCity_Alley1/scripts.inc"
+
+	.include "data/maps/RegularIndoorTest/scripts.inc"
