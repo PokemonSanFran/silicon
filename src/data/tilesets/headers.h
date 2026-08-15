@@ -1552,3 +1552,14 @@ const struct Tileset gTileset_GeneralSilicon =
     .metatileAttributes = gMetatileAttributes_PorytilesManaged_GeneralSilicon,
     .callback = NULL,
 };
+
+const struct Tileset gTileset_BuildingSilicon =
+{
+    .isCompressed = TRUE,
+    .isSecondary = FALSE,
+    .tiles = gTilesetTiles_PorytilesManaged_BuildingSilicon,
+    .palettes = gTilesetPalettes_PorytilesManaged_BuildingSilicon,
+    .metatiles = gMetatiles_PorytilesManaged_BuildingSilicon,
+    .metatileAttributes = gMetatileAttributes_PorytilesManaged_BuildingSilicon,
+    .callback = NULL,
+};
