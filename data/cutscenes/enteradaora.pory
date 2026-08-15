@@ -200,9 +200,7 @@ script EnterAdaora_GiveKeystone_Dialogue{
         msgbox(format("A Gym! I'm taking part in the League Challenge."),MSGBOX_DEFAULT,SPEAKER_ALICIA)
         msgbox(format("Ah, well good luck. Actually... a League Challenger that isn't from here... let me see your phone.."),MSGBOX_DEFAULT,SPEAKER_ADAORA_FIRST_INTRO)
         closemessage
-        fadescreen(FADE_TO_BLACK)
         call(EventScript_InstallGlassApp)
-        fadescreen(FADE_FROM_BLACK)
         msgbox(format("That app lets you see the parties of all the Trainers you've fought and a list of the Trainers you have't fought."),MSGBOX_DEFAULT,SPEAKER_ADAORA_FIRST_INTRO)
         msgbox(format("Thank you so much! But how did you get all this data?"),MSGBOX_DEFAULT,SPEAKER_ALICIA)
         msgbox(format("SharpRise Capital has data on all the Trainers in the region, but hasn't released it anywhere publicly. We found their source and... made it available for all. I hear they're not super happy about it, which is probably why they didn't give it to you!"),MSGBOX_DEFAULT,SPEAKER_ADAORA_FIRST_INTRO)

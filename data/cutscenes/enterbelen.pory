@@ -558,12 +558,9 @@ script EnterBelen_ExplainBuzzr_Dialogue
 script EnterBelen_DownloadBuzzr_Dialogue
 {
     msgbox(format("Let me download it real quick..."),,SPEAKER_ALICIA)
-        closemessage
-        fadescreen(FADE_TO_BLACK)
-        call(EventScript_InstallBuzzrApp)
-        fadescreen(FADE_FROM_BLACK)
-        return
-
+    closemessage
+    call(EventScript_InstallBuzzrApp)
+    return
 }
 
 script EnterBelen_PostDefeat1_Dialogue {

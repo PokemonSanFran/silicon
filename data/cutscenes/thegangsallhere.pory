@@ -218,9 +218,7 @@ script TheGangsAllHere_GivePrestoApp_Script{
     applymovement(PLAYER,Common_Movement_FaceDown)
     applymovement(LUCREZIA, moves(walk_left, face_up, walk_in_place_up, step_end))
     waitmovement(LUCREZIA)
-    fadescreen(FADE_TO_BLACK)
     call(EventScript_InstallPrestoApp)
-    fadescreen(FADE_FROM_BLACK)
     goto(TheGangsAllHere_GivePrestoApp_Dialogue)
     end
 }
