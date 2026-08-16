@@ -1563,3 +1563,14 @@ const struct Tileset gTileset_BuildingSilicon =
     .metatileAttributes = gMetatileAttributes_PorytilesManaged_BuildingSilicon,
     .callback = NULL,
 };
+
+const struct Tileset gTileset_RegularIndoors =
+{
+    .isCompressed = TRUE,
+    .isSecondary = TRUE,
+    .tiles = gTilesetTiles_PorytilesManaged_RegularIndoors,
+    .palettes = gTilesetPalettes_PorytilesManaged_RegularIndoors,
+    .metatiles = gMetatiles_PorytilesManaged_RegularIndoors,
+    .metatileAttributes = gMetatileAttributes_PorytilesManaged_RegularIndoors,
+    .callback = NULL,
+};
