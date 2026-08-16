@@ -13763,12 +13763,14 @@
     {
       "id": "LAYOUT_REGULAR_INDOOR_TEST",
       "name": "RegularIndoorTest_Layout",
-      "width": 20,
-      "height": 20,
+      "width": 15,
+      "height": 15,
       "primary_tileset": "gTileset_BuildingSilicon",
-      "secondary_tileset": "gTileset_Petalburg",
+      "secondary_tileset": "gTileset_RegularIndoors",
       "border_filepath": "data/layouts/RegularIndoorTest/border.bin",
-      "blockdata_filepath": "data/layouts/RegularIndoorTest/map.bin"
+      "blockdata_filepath": "data/layouts/RegularIndoorTest/map.bin",
+      "border_height": 2,
+      "border_width": 2
     }
   ]
 }
