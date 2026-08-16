@@ -4,7 +4,7 @@ script EnterEmrys_LeaderPosition_Script
 {
 	goto_if_eq(VAR_GYM_3_STATE,PERLACIA_GYM_SAVE_BEFORE_BATTLE,EnterEmrys_StartBattle_ObjectSetup_Script)
 
-	if (var(VAR_GYM_3_STATE < PERLACIA_GYM_PUZZLE_COMPLETE))
+	if (var(VAR_GYM_3_STATE) < PERLACIA_GYM_PUZZLE_COMPLETE)
 	{
 		return
 	}
@@ -61,7 +61,10 @@ script EnterEmrys_MuseumArrangement_Dialogue {
 }
 
 script EnterEmrys_StartBattle_Script {
-    trainerbattle_single(TRAINER_EMRYS, format("Let's see how your socialization impacted your battling ability!"),format("If this battle is any indication, your assimilation is going perfectly!"),EnterEmrys_Defeated_Script, NO_MUSIC)
+    msgbox(format("Let's see how your socialization impacted your battling ability!"),,SPEAKER_EMRYS)
+    closemessage
+    trainerbattle_no_intro(TRAINER_EMRYS,format("If this battle is any indication, your assimilation is going perfectly!"))
+    goto(EnterEmrys_Defeated_Script)
 }
 
 script EnterEmrys_Defeated_Script {
