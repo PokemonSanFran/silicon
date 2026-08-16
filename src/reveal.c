@@ -325,7 +325,7 @@ const struct RevealCharacterStruct sRevealCharacters[REVEAL_COUNT] =
         .trainerId = TRAINER_RAMESH_IMIN,
         .buzzrId = BUZZR_USER_RAMESH,
         .quote = COMPOUND_STRING("Security, Marketing, Production - there's nothing I can't execute."),
-        .bio = COMPOUND_STRING("- Ramesh looks bored when talking to me.\n - He's holding multiple phones."),
+        .bio = COMPOUND_STRING("- Ramesh looks bored when talking to me.\n- He's holding multiple phones."),
         .accentColor = RGB(27,30,4),
     },
     [REVEAL_LUCREZIA] =
