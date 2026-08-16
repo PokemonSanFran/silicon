@@ -57,7 +57,7 @@ script GroupOfAssholesAppears_PlayerToDavid_Script
 }
 
 script GroupOfAssholesAppears_PlayerIntervene_Dialogue {
-        msgbox(format("What the hell is going on here? Why are you ganging up on this guy?"),MSGBOX_DEFAULT,SPEAKER_ALICIA)
+        msgbox(format("What the hell is going on here? Why are you ganging up on this guy?"),MSGBOX_DEFAULT,SPEAKER_ALICIA,TAIL_SHOUT,EMOTE_ANGRY)
                 closemessage
         applymovement(GRUNT2,Common_Movement_FaceRight)
         applymovement(GRUNT3,Common_Movement_FaceRight)
@@ -136,30 +136,32 @@ script GroupOfAssholesAppears_ExplainTeam_Dialogue {
         applymovement(PLAYER,Common_Movement_FaceUp)
         msgbox(format("Thank you so much..."),SPEAKER_DAVID,,EMOTE_LOVE)
         msgbox(format("Are you going to be okay?"),MSGBOX_DEFAULT,SPEAKER_ALICIA)
-                msgbox(format("Honestly? Gonna need to pop several Xanax after I come down from this panic attack, but I'll survive for sure."),,SPEAKER_DAVID,,EMOTE_SWEAT)
+                msgbox(format("Honestly? Gonna need to pop some meds after I come down from this panic attack, but I'll survive for sure."),,SPEAKER_DAVID,,EMOTE_SWEAT)
         msgbox(format("Why were they bullying you? Who are they?"),MSGBOX_DEFAULT,SPEAKER_ALICIA)
-                msgbox(format("Uhh... I think A Wave or something stupid like that. I don't know what they want from me, they're like this band of idiots that just roll around everywhere, getting high and telling people they can't do things. Guess it was my turn."),,SPEAKER_DAVID)
+                msgbox(format("Uhh... I think “The Wave” or something stupid like that. I don't know what they want from me, they're like this band of idiots that just roll around everywhere, getting high and telling people they can't do things. Guess it was my turn."),,SPEAKER_DAVID)
         msgbox(format("That doesn't make any sense! You're just trying to open a.... Uh..."),MSGBOX_DEFAULT,SPEAKER_ALICIA)
-                msgbox(format("Memento Boutique!"),,SPEAKER_DAVID,,EMOTE_HAPPY)
+                buffermovename(STR_VAR_1,MOVE_MEMENTO)
+                msgbox(format("{STR_VAR_1} Boutique!"),,SPEAKER_DAVID,,EMOTE_HAPPY)
         msgbox(format("A souvenir shop?"),MSGBOX_DEFAULT,SPEAKER_ALICIA,,EMOTE_CONFUSE)
-                msgbox(format("When I pitched it to the League, it was a little more...upscale than some tacky place to buy snow globes and magnets. We're talking handcrafted items from the people of Resido! "),,SPEAKER_DAVID)
+                msgbox(format("When I pitched it to SharpRise, it was a little more...upscale than some tacky place to buy snow globes and magnets. We're talking handcrafted items from the people of Resido! "),,SPEAKER_DAVID)
         msgbox(format("Oh, yeah... that makes sense."),MSGBOX_DEFAULT,SPEAKER_ALICIA)
                 goto(GroupOfAssholesAppears_GiveRewards_Dialogue)
 }
 
 script GroupOfAssholesAppears_GiveRewards_Dialogue {
     msgbox(format("You'll have to come by once I open! And here, take this!"),,SPEAKER_DAVID,,EMOTE_LOVE)
-        closemessage
-        giveitem(ITEM_DOWSING_MACHINE,1)
-        msgbox(format("If you put that on, it'll point you towards hidden shit on the ground. My sister gave that to me... but I'm like literally never going to use it. Me? Dig around in the dirt? Wearing that? Absolutely not."),,SPEAKER_DAVID)
-        closemessage
-        addvar(VAR_STORYLINE_STATE,1)
-        setvar(VAR_TEMP_0,0)
-        endcutscene
-        call(TryAutoSave)
-        call(AaandWereBack_Monologue)
-        releaseall
-        end
+    closemessage
+    cueobjectplayer(DAVID)
+    giveitem(ITEM_GROUP_OF_ASSHOLES_REWARD,1)
+    msgbox(format("My sister gave that to me... but I'm like literally never going to use it. Me? A Trainer? Absolutely not."),,SPEAKER_DAVID)
+    closemessage
+    addvar(VAR_STORYLINE_STATE,1)
+    setvar(VAR_TEMP_0,0)
+    endcutscene
+    call(TryAutoSave)
+    call(AaandWereBack_Monologue)
+    releaseall
+    end
 }
 
 script GroupOfAssholesAppears_LookForXanax_Dialogue {

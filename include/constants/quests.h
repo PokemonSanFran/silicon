@@ -1402,5 +1402,11 @@ enum
 // ***********************************************************************
 
 #define CHARLOTTE_MON_INDEX                    5
+//
+// ***********************************************************************
+// Cutscene: Group of Assholes
+// ***********************************************************************
+
+#define ITEM_GROUP_OF_ASSHOLES_REWARD ITEM_POTION
 
 #endif // GUARD_CONSTANTS_QUESTS_H
