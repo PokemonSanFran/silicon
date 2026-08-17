@@ -1176,6 +1176,9 @@ void MapPreviewScript(struct ScriptContext *ctx)
 // Start mapPreviews
 bool8 ShouldRunOutdoorMapPreview(void)
 {
+    if (ArePlayerFieldControlsLocked() == FALSE)
+        return FALSE;
+
     if (ShouldRunMapPreview() == FALSE)
         return FALSE;
 
