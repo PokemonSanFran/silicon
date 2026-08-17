@@ -27,6 +27,7 @@ script AaandWereBack_ObjectHide_Script
 
 script AaandWereBack_Monologue
 {
+    setvar(VAR_PLAYER_HOME_STATE,FINISHED_1_1)
     addvar(VAR_TEMP_0,1)
     if (var(VAR_STORYLINE_STATE) != STORY_EAST_RESIDO_COMPLETE)
     {
@@ -39,7 +40,10 @@ script AaandWereBack_Monologue
     }
 
     lock
-    msgbox(format("I've got all three Badges from this side of the pennisula. The ferry to Oroland looks like it's going to be broken until at least tomorrow, and I can't head west without Go-Goggles. It's been a long day... I think I should head back to CuconuTown and call it a night."),MSGBOX_DEFAULT,SPEAKER_ALICIA,TAIL_THOUGHT,EMOTE_SWEAT,PHONE_OFF)
+    buffermapname(STR_VAR_1,MAP_HALAI_ISLAND)
+    bufferitemname(STR_VAR_2,ITEM_GO_GOGGLES)
+    buffermapname(STR_VAR_3,MAP_CUCONU_TOWN_SHARPRISE_COMPOUND_1F)
+    msgbox(format("I've got all three Badges from this side of the pennisula. The ferry to {STR_VAR_1} looks like it's going to be broken until at least tomorrow, and I can't head west without {STR_VAR_2}. It's been a long day... I think I should head back to {STR_VAR_3} and call it a night."),MSGBOX_DEFAULT,SPEAKER_ALICIA,TAIL_THOUGHT,EMOTE_SWEAT,PHONE_OFF)
     closemessage
     call(AaandWereBack_WarpToCompound_Script)
     release
@@ -48,39 +52,45 @@ script AaandWereBack_Monologue
 }
 
 script AaandWereBack_WarpToCompound_Script {
-        setvar(VAR_PLAYER_HOME_STATE,FINISHED_1_1)
-        msgbox(format("Do you want to go back to CuconuTown?"),MSGBOX_YESNO)
+    buffermapname(STR_VAR_3,MAP_CUCONU_TOWN_SHARPRISE_COMPOUND_1F)
+        msgbox(format("Do you want to go back to {STR_VAR_3}?"),MSGBOX_YESNO)
         closemessage
-        if (var(VAR_RESULT) == YES){
+        if (var(VAR_RESULT) == YES)
+        {
             fadeblackandsetremovewarpfadeflag
             warpsilent(MAP_CUCONU_TOWN_SHARPRISE_COMPOUND_1F,0)
-			waitstate
+            waitstate
         }
 }
 
 script AaandWereBack_Charlotte_Dialogue {
         msgbox(format("Damn I'm beat. Getting five badges in one day was a hustle! What about you?"),MSGBOX_NPC,SPEAKER_CHARLOTTE)
         msgbox(format("Only three so far. I'm praying the ferry is fixed tomorrow."),MSGBOX_DEFAULT,SPEAKER_ALICIA)
-        msgbox(format("Yeah, that busted ferry sucks. I'm going to challenge the IrisinaTown and TirabudinPlace Gyms tomorrow, and the ferry will definately be fixed after that, so Chasilla Gym will be last."),MSGBOX_DEFAULT,SPEAKER_CHARLOTTE)
-        msgbox(format("I need to figure out how to get some Go-Goggles too..."),MSGBOX_DEFAULT,SPEAKER_ALICIA)
+        buffermapname(STR_VAR_1,MAP_IRISINA_TOWN)
+        buffermapname(STR_VAR_2,MAP_TIRABUDIN_PLACE)
+        buffermapname(STR_VAR_3,MAP_CHASILLA_GYM)
+        msgbox(format("Yeah, that busted ferry sucks. I'm going to challenge the {STR_VAR_1} and {STR_VAR_2} Gyms tomorrow, and the ferry will definately be fixed after that, so {STR_VAR_3} Gym will be last."),MSGBOX_DEFAULT,SPEAKER_CHARLOTTE)
+        bufferitemname(STR_VAR_2,ITEM_GO_GOGGLES)
+        msgbox(format("I need to figure out how to get some {STR_VAR_2} too..."),MSGBOX_DEFAULT,SPEAKER_ALICIA)
         msgbox(format("They're hard to come by right now. I only got these because Daddys knows the manufactuer over in Kanto."),MSGBOX_DEFAULT,SPEAKER_CHARLOTTE)
         msgbox(format("I'm sure I'll figure something out."),MSGBOX_DEFAULT,SPEAKER_ALICIA)
         closemessage
 }
 
-script AaandWereBack_FerryRepaired_Dialogue {
-        startcutscene(JUMPPLAYER_AAANDWEREBACK)
-        setvar(VAR_STORYLINE_STATE,STORY_FERRY_FIXED)
-        setvar(VAR_FERRY_STATE,FERRY_HALAI_ISLAND_AVAILABLE)
-        showzap(ZAP_STORY_GRUNT_RESTORED)
-        msgbox(format("That's a different notification..."),SPEAKER_ALICIA,TAIL_THOUGHT,EMOTE_CONFUSE)
-        msgbox(format("Looks like east Resido is next! Too bad there's no ferry directly to the Gym in Chasilla..."),MSGBOX_DEFAULT,SPEAKER_ALICIA,TAIL_THOUGHT)
+script AaandWereBack_FerryRepaired_Dialogue
+{
+    startcutscene(JUMPPLAYER_AAANDWEREBACK)
+    setvar(VAR_STORYLINE_STATE,STORY_FERRY_FIXED)
+    setvar(VAR_FERRY_STATE,FERRY_HALAI_ISLAND_AVAILABLE)
+    showzap(ZAP_STORY_GRUNT_RESTORED)
+    buffermapname(STR_VAR_3,MAP_CHASILLA_GYM)
+    msgbox(format("Looks like east Resido is next! Too bad there's no ferry directly to the Gym in {STR_VAR_3}..."),MSGBOX_DEFAULT,SPEAKER_ALICIA,TAIL_THOUGHT)
 
-        if (var(VAR_FAINTED_FOG_STATE))
-        {
-                msgbox(format("Hopefully, I'll find a way through the fog after that..."),SPEAKER_ALICIA,TAIL_THOUGHT,EMOTE_SWEAT)
-        }
-        closemessage
-        endcutscene
+    if (var(VAR_FAINTED_FOG_STATE))
+    {
+        msgbox(format("Hopefully, I'll find a way through the fog after that..."),SPEAKER_ALICIA,TAIL_THOUGHT,EMOTE_SWEAT)
+    }
+    closemessage
+    endcutscene
 }
 
