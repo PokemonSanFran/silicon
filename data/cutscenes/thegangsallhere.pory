@@ -172,7 +172,7 @@ script TheGangsAllHere_ComeOnIn_Dialogue
     waitmovement(LUCREZIA)
     applymovement(LUCREZIA, moves(walk_right * 2, walk_up * 3, walk_left, face_up, step_end))
 
-    msgbox(format("{PLAYER}! Oliver! I just finished an email! Glad you're both here, and excellent timing that you ran into each other."),,SPEAKER_LUCREZIA)
+    msgbox(format("{PLAYER}! Oliver! I just finished an email! Glad you're both here, and excellent timing that you ran into each other."),,SPEAKER_LUCREZIA_BEFORE)
     closemessage
     waitmovement(LUCREZIA)
 
@@ -192,16 +192,17 @@ script TheGangsAllHere_ComeOnIn_Dialogue
 }
 
 script TheGangsAllHere_NotIntentionally_Dialogue{
-    msgbox(format("Not intentionally! I was just so swept up in your battle!"),,SPEAKER_LUCREZIA)
+    msgbox(format("Not intentionally! I was just so swept up in your battle!"),,SPEAKER_LUCREZIA_BEFORE)
     reveal(REVEAL_LUCREZIA)
 
     if(var(VAR_SHARPRISE_SPIRE_PRODUCTION_STATE) == POST_ALWAYS_WATCHING_WAZOWSKI){
-        msgbox(format("Oliver, please tell me you'll go back and watch Ramesh's highlight reel later, it was fantastic."))
+        msgbox(format("Oliver, please tell me you'll go back and watch Ramesh's highlight reel later, it was fantastic."),,SPEAKER_LUCREZIA)
 
     msgbox(format("I heard wonderful things on the way over here, but I'll be certain to observe later."),,SPEAKER_OLIVER)
     }
 
     msgbox(format("In any case, your package, Lucrezia."),,SPEAKER_OLIVER)
+    closemessage
 
     applymovement(OBJ_EVENT_ID_NPC_FOLLOWER,Common_Movement_WalkInPlaceDown)
     waitmovement(OBJ_EVENT_ID_NPC_FOLLOWER)
@@ -270,8 +271,8 @@ script TheGangsAllHere_EndScene_Dialogue{
     addvar(VAR_STORYLINE_STATE,1)
     setvar(VAR_TEMP_0,0)
     endcutscene
-    call(TryAutoSave)
     call(AaandWereBack_Monologue)
+    call(TryAutoSave)
     release
     end
 }
