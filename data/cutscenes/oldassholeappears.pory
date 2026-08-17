@@ -137,8 +137,8 @@ script OldAssholeAppears_CharlotteExit_Script
     removeobject(CHARLOTTE)
     setvar(VAR_TEMP_0,0)
     endcutscene
-    call(TryAutoSave)
     call(AaandWereBack_Monologue)
+    call(TryAutoSave)
     releaseall
     end
 }

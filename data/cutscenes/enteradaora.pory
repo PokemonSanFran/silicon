@@ -214,8 +214,8 @@ script EnterAdaora_GiveKeystone_Dialogue{
         setvar(VAR_CAPHE_CITY_STATE,LINE_IS_NOT_BLOCKING)
         setvar(VAR_TEMP_0,0)
         endcutscene
-    call(TryAutoSave)
         call(AaandWereBack_Monologue)
+        call(TryAutoSave)
         releaseall
         end
 }

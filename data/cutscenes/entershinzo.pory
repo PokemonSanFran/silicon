@@ -44,10 +44,10 @@ script EnterShinzo_ShinzoDefeated_Script {
     addvar(VAR_STORYLINE_STATE,1)
     call(WowYoureStrong_CheckCutsceneScript)
     setvar(VAR_TEMP_0,0)
-    call(TryAutoSave)
-    call(AaandWereBack_Monologue)
-    releaseall
 	clearflag(FLAG_TEMP_1)
+    call(AaandWereBack_Monologue)
+    call(TryAutoSave)
+    releaseall
     end
 }
 

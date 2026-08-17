@@ -539,8 +539,8 @@ script EnterBelen_BelenDefeated_Script
     moveobjecttocoords(LOCALID_MERMEREZA_GYM_BELEN,8,2,DIR_NORTH)
     waitmovement(LOCALID_MERMEREZA_GYM_BELEN)
     setvar(VAR_TEMP_0,0)
-    call(TryAutoSave)
     call(AaandWereBack_Monologue)
+    call(TryAutoSave)
     releaseall
     end
 }

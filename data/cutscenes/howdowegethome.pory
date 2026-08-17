@@ -115,8 +115,8 @@ script HowDoWeGetHome_MadisonHowDoWeGetHome_Dialogue {
         addvar(VAR_STORYLINE_STATE,1)
         setvar(VAR_TEMP_0,0)
         fadedefaultbgm
-        call(TryAutoSave)
         call(AaandWereBack_Monologue)
+        call(TryAutoSave)
         releaseall
         endcutscene
         end
