@@ -4574,23 +4574,6 @@ u8 GetNumberOfBadges(void)
     return count;
 }
 
-#define NUM_ARANTRAZ_TRAINERS 6
-
-u8 CheckNumArantrazExhibitDefeated(void)
-{
-    u32 trainerFlag, count = 0;
-
-    for(trainerFlag = 0; trainerFlag < NUM_ARANTRAZ_TRAINERS; trainerFlag++)
-        if (FlagGet(TRAINER_FLAGS_START + TRAINER_0D416B2C + trainerFlag))
-            count++;
-
-    if (count == NUM_ARANTRAZ_TRAINERS)
-        VarSet(VAR_ARANTRAZ_EXHIBIT_STATE,ARANTRAZ_EXHIBIT_FINISH);
-
-    gSpecialVar_Result = count;
-    return count;
-}
-
 void CheckSpecies(void)
 {
     u8 i;

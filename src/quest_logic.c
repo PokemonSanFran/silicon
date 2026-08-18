@@ -6212,3 +6212,36 @@ void BufferArribaDiscount(void)
     u32 difference = (FARE_DISCOUNT_ARRIBA_DENOMINATOR - FARE_DISCOUNT_ARRIBA_NUMERATOR);
     ConvertIntToDecimalStringN(gStringVar1, difference, STR_CONV_MODE_LEFT_ALIGN, CountDigits(difference));
 }
+// ***********************************************************************
+// Cutscene: The Story So Far
+// ***********************************************************************
+
+u8 CountArantrazExhibitDefeated(void)
+{
+    u32 count = 0;
+    for(u32 trainerFlag = 0; trainerFlag < STORY_ARANTRAZ_EXHIBIT_TRAINERS_COUNT; trainerFlag++)
+        if (FlagGet(TRAINER_FLAGS_START + TRAINER_0D416B2C + trainerFlag))
+            count++;
+
+    return count;
+}
+
+void Script_CountArantrazExhibitDefeated(void)
+{
+    gSpecialVar_Result = CountArantrazExhibitDefeated();
+}
+
+void TryIncrementArantrazVariable(void)
+{
+    if (VarGet(VAR_ARANTRAZ_EXHIBIT_STATE) != ARANTRAZ_EXHIBIT_START)
+        return;
+
+    if (CountArantrazExhibitDefeated() == STORY_ARANTRAZ_EXHIBIT_TRAINERS_COUNT)
+        VarSet(VAR_ARANTRAZ_EXHIBIT_STATE,ARANTRAZ_EXHIBIT_FINISH);
+}
+
+void BufferNumberArantrazExhibitDefeated(void)
+{
+    u32 count = (STORY_ARANTRAZ_EXHIBIT_TRAINERS_COUNT - CountArantrazExhibitDefeated());
+    ConvertIntToDecimalStringN(gStringVar1, count, STR_CONV_MODE_LEFT_ALIGN, CountDigits(count));
+}

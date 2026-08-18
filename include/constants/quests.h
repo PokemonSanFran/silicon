@@ -1408,5 +1408,12 @@ enum
 // ***********************************************************************
 
 #define ITEM_GROUP_OF_ASSHOLES_REWARD ITEM_POTION
+//
+// ***********************************************************************
+// Cutscene: The Story So Far
+// ***********************************************************************
+
+#define STORY_ARANTRAZ_EXHIBIT_TRAINERS_COUNT 6
+#define ITEM_ARANTRAZ_EXHIBIT_REWARD ITEM_MACHO_BRACE
 
 #endif // GUARD_CONSTANTS_QUESTS_H
