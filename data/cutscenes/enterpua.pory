@@ -27,9 +27,9 @@ script EnterPua_StartGymBattle_Script
 {
     lock
     faceplayer
+    special(PreparePartyForLittleCupBattle)
     msgbox(format("Ha ha, no, yeah. All right, I know you didn't come here to talk about Eggs. You tryna scramble?"),,SPEAKER_PUA)
     closemessage
-    special(PreparePartyForLittleCupBattle)
     trainerbattle_no_intro(TRAINER_PUA, format("I'm not trippin' - that was hella tight. Harder than a 15-minute egg."))
     goto(EnterPua_PuaDefeated_Script)
 }
