@@ -58,15 +58,15 @@ script HowDoWeGetHome_AdaoraGetsInvolved_Dialogue {
         applymovement(LOCALID_CURENO_ADAORA,Common_Movement_FaceLeft)
         waitmovement(LOCALID_CURENO_ADAORA)
 
-        msgbox(format("Hey!"),,SPEAKER_ADAORA)
+        msgbox(format("Hey!"),,SPEAKER_ADAORA_FIRST_INTRO)
 
         closemessage
 
         call(HowDoWeGetHome_AdaoraEntrance_Script)
-        msgbox(format("This ends now. Lady, this park doesn't belong to you. These people are gonna play in it, just like you. These parks are for the public. Is that going to be a problem?"),,SPEAKER_ADAORA)
+        msgbox(format("This ends now. Lady, this park doesn't belong to you. These people are gonna play in it, just like you. These parks are for the public. Is that going to be a problem?"),,SPEAKER_ADAORA_FIRST_INTRO)
 
         msgbox(format("Yes it is a problem! Why the hell shouldn't I mess you up too?"),,SPEAKER_MADISON)
-        msgbox(format("That's not going to go the way you think it is."),,SPEAKER_ADAORA)
+        msgbox(format("That's not going to go the way you think it is."),,SPEAKER_ADAORA_FIRST_INTRO)
 
         goto(HowDoWeGetHome_CrowdRecgonizesAdaora_Dialogue)
 }
