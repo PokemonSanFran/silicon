@@ -66,6 +66,7 @@ script YoungPadawan_Secret_Dialogue{
         msgbox(format("Keep it secret too. Here, take these."),,SPEAKER_TALA)
 
         closemessage
+        cueobjectplayer(TALA)
 
         additem(ITEM_POWER_ANKLET,1)
         additem(ITEM_POWER_BAND,1)
@@ -83,7 +84,8 @@ script YoungPadawan_Secret_Dialogue{
 script YoungPadawan_NoZRing_Dialogue
 {
     bufferitemname(STR_VAR_1,ITEM_Z_POWER_RING)
-    msgbox(format("And I see you don't have a {STR_VAR_1} yet! I don't have a spare one, but there's a new Alolan exhibit at the Perlacia Museum that could point you in the right direction."),,SPEAKER_TALA)
+    buffermapname(STR_VAR_2,MAP_PERLACIA_CITY_GYM)
+    msgbox(format("And I see you don't have a {STR_VAR_1} yet! I don't have a spare one, but there's a new Alolan exhibit at the {STR_VAR_2} Museum that could point you in the right direction."),,SPEAKER_TALA)
     return
 }
 
@@ -91,24 +93,28 @@ script YoungPadawan_PostBattle_Dialogue
 {
     playbgm(MUS_ENCOUNTER_ELITE_FOUR,TRUE)
     specialvar(VAR_RESULT,GetBattleOutcome)
-
     if (var(VAR_RESULT) == B_OUTCOME_WON)
     {
         call(YoungPadawan_Secret_Dialogue)
     }
 
-    bypass_healblock
-    msgbox(format("Keep training! Once you learn a little bit more about the world, let's battle again."),,SPEAKER_TALA)
+    specialvar(VAR_RESULT,GetBattleOutcome)
+    if (var(VAR_RESULT) == B_OUTCOME_LOST)
+    {
+        bypass_healblock
+    }
+
     startcutscene(JUMPPLAYER_YOUNGPADAWAN)
     special(HealPlayerParty)
+    setvar(VAR_STORYLINE_STATE,STORY_COMPLETE_ARANTRAZ)
     msgbox(format("I've never battled anybody so strong!"),,SPEAKER_ALICIA,TAIL_THOUGHT,EMOTE_SHOCK)
     msgbox(format("Keep training! Once you learn a little bit more about the world, let's battle again."),,SPEAKER_TALA,,EMOTE_LAUGH)
     msgbox(format("Will do!"),,SPEAKER_ALICIA)
     call_if_quest_not_complete(QUEST_ALOHAFROMALOLA,YoungPadawan_NoZRing_Dialogue)
     msgbox(format("Now that I'm getting a good look at you, you're not very well equipped at all! I've got an extra one of these you can use, lemme look through this bag..."),,SPEAKER_TALA)
     closemessage
+    cueobjectplayer(TALA)
     giveitem(ITEM_GO_GOGGLES,1)
-    setvar(VAR_STORYLINE_STATE,STORY_COMPLETE_ARANTRAZ)
 
     msgbox(format("I hear those can be tough to get if you're not from here. Good luck with the rest of your challenge, {PLAYER}."),,SPEAKER_TALA)
 
@@ -125,11 +131,3 @@ script YoungPadawan_PostBattle_Dialogue
     release
     end
 }
-
-movement YoungPadawan_StepDownWalkBeside_Movement {
-
-    walk_down
-        face_left
-        step_end
-}
-
