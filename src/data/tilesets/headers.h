@@ -1574,3 +1574,14 @@ const struct Tileset gTileset_RegularIndoors =
     .metatileAttributes = gMetatileAttributes_PorytilesManaged_RegularIndoors,
     .callback = NULL,
 };
+
+const struct Tileset gTileset_FancyIndoors =
+{
+    .isCompressed = TRUE,
+    .isSecondary = TRUE,
+    .tiles = gTilesetTiles_PorytilesManaged_FancyIndoors,
+    .palettes = gTilesetPalettes_PorytilesManaged_FancyIndoors,
+    .metatiles = gMetatiles_PorytilesManaged_FancyIndoors,
+    .metatileAttributes = gMetatileAttributes_PorytilesManaged_FancyIndoors,
+    .callback = NULL,
+};

@@ -1,0 +1,35 @@
+{
+  "id": "MAP_FANCY_INDOOR_TEST",
+  "name": "FancyIndoorTest",
+  "layout": "LAYOUT_FANCY_INDOOR_TEST",
+  "music": "MUS_IRISINA_TOWN",
+  "region_map_section": "MAPSEC_ABANDONED_SHIP",
+  "requires_flash": false,
+  "weather": "WEATHER_NONE",
+  "map_type": "MAP_TYPE_INDOOR",
+  "allow_cycling": false,
+  "allow_escaping": false,
+  "allow_running": false,
+  "show_map_name": true,
+  "battle_scene": "MAP_BATTLE_SCENE_FRONTIER",
+  "connections": null,
+  "object_events": [],
+  "warp_events": [
+    {
+      "x": 4,
+      "y": 14,
+      "elevation": 0,
+      "dest_map": "MAP_PSFROUTE7E17FDD1",
+      "dest_warp_id": "0"
+    },
+    {
+      "x": 5,
+      "y": 14,
+      "elevation": 0,
+      "dest_map": "MAP_PSFROUTE7E17FDD1",
+      "dest_warp_id": "0"
+    }
+  ],
+  "coord_events": [],
+  "bg_events": []
+}
