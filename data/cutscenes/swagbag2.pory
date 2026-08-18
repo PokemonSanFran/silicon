@@ -61,7 +61,8 @@ script swagbag2_DiscussCosts_Dialogue {
 
 script swagbag2_BringToCenter_Dialogue {
 
-    msgbox(format("Have you seen the Chasilla Breeding Center? Truly state of the art."),,SPEAKER_OLIVER)
+    buffermapname(STR_VAR_1,MAP_CHASILLA_BREEDING_CENTER)
+    msgbox(format("Have you seen the {STR_VAR_1} Breeding Center? Truly state of the art."),,SPEAKER_OLIVER)
 
     msgbox(format("No, should I?"),,SPEAKER_ALICIA)
 
