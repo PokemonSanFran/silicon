@@ -27,25 +27,22 @@ script EnterBD_MumbleToSelf_Dialogue {
     setvar(VAR_GYM_7_STATE, GYM_SAVE_BEFORE_LEADER)
     msgbox(format("stupid fucking parade…"),,SPEAKER_BD,TAIL_WHISPER)
     closemessage
-        applymovement(BD, moves(walk_right * 3, face_up, step_end))
-    waitmovement(0)
-
+    applymovement(BD, moves(walk_right * 3, face_up, step_end))
+    waitmovement(BD)
     msgbox(format("They wouldn't get it…Sharprise were gonna own this place one way or another…It wouldn't even be a Gym anymore if not for me…"),,SPEAKER_BD,TAIL_WHISPER)
     closemessage
 
     applymovement(BD, moves(walk_left * 3, face_up, step_end))
-    waitmovement(0)
+    waitmovement(BD)
 
     msgbox(format("Hey, you seem busy, but are you BD?"),MSGBOX_DEFAULT,SPEAKER_ALICIA)
     closemessage
 
     playse(SE_PIN)
-    applymovement(BD, Common_Movement_ExclamationMark)
-    waitmovement(0)
-    applymovement(BD, Common_Movement_FaceDown)
-    waitmovement(0)
+    applymovement(BD, moves(emote_exclamation_mark, face_down))
+    waitmovement(BD)
 
-    msgbox(format("! Shit. Shit shit shit hi, are you a challenger? Hold on yeah, hold on. NOPE, not doing this sober, hold on… Lemme just…"), MSGBOX_NPC,SPEAKER_BD)
+    msgbox(format("Shit. Shit shit shit hi, are you a challenger? Hold on yeah, hold on. NOPE, not doing this sober, hold on… Lemme just…"), MSGBOX_NPC,SPEAKER_BD)
     closemessage
 
     applymovement(BD, moves(walk_left, walk_in_place_slow_up, delay_16, walk_down, walk_right, step_end))
@@ -53,77 +50,10 @@ script EnterBD_MumbleToSelf_Dialogue {
     applymovement(PLAYER,Common_Movement_WalkLeft)
     waitmovement(PLAYER)
     goto(EnterPsf7leader_ExplainLab_Dialogue)
-    //goto(EnterBD_CalculateMovement_Script)
 }
 
-script EnterBD_CalculateMovement_Script {
-    getplayerxy(VAR_TEMP_0, VAR_TEMP_1)
-
-    switch (var (VAR_TEMP_0)) {
-    case 8:
-        call(EnterBD_PlayerPosition8)
-    case 9:
-        call(EnterBD_PlayerPosition9)
-    case 10:
-        call(EnterBD_PlayerPosition10)
-    case 11:
-        call(EnterBD_PlayerPosition11)
-    case 12:
-        call(EnterBD_PlayerPosition12)
-    case 13:
-        call(EnterBD_PlayerPosition13)
-    case 14:
-        call(EnterBD_PlayerPosition14)
-    case 15:
-        call(EnterBD_PlayerPosition15)
-    case 16:
-        call(EnterBD_PlayerPosition16)
-    }
-
-    waitmovement(0)
-    applymovement(PLAYER, Common_Movement_FaceRight)
-    waitmovement(0)
-    goto(EnterPsf7leader_ExplainLab_Dialogue)
-}
-
-script EnterBD_PlayerPosition8 {
-    applymovement(BD, EnterBD_BD_WalkToBattlefield)
-    applymovement(PLAYER, moves(walk_left * 1, walk_down * 4, step_end))
-}
-script EnterBD_PlayerPosition9 {
-    applymovement(BD, EnterBD_BD_WalkToBattlefield)
-    applymovement(PLAYER, moves(walk_left * 2, walk_down * 3, step_end))
-}
-script EnterBD_PlayerPosition10 {
-    applymovement(BD, EnterBD_BD_WalkToBattlefield)
-    applymovement(PLAYER, moves(walk_left * 3, walk_down * 3, step_end))
-}
-script EnterBD_PlayerPosition11 {
-    applymovement(BD, moves(walk_left * 3, walk_down * 3, walk_left, step_end))
-    applymovement(PLAYER, moves(walk_left * 4, walk_down * 3, step_end))
-}
-script EnterBD_PlayerPosition12 {
-    applymovement(BD, EnterBD_BD_WalkToBattlefield)
-    applymovement(PLAYER, moves(walk_left * 5, walk_down * 3, step_end))
-}
-script EnterBD_PlayerPosition13 {
-    applymovement(BD, EnterBD_BD_WalkToBattlefield)
-    applymovement(PLAYER, moves(walk_left * 6, walk_down * 3, step_end))
-}
-script EnterBD_PlayerPosition14 {
-    applymovement(BD, EnterBD_BD_WalkToBattlefield)
-    applymovement(PLAYER, moves(walk_left * 7, walk_down * 3, step_end))
-}
-script EnterBD_PlayerPosition15 {
-    applymovement(BD, EnterBD_BD_WalkToBattlefield)
-    applymovement(PLAYER, moves(walk_left * 8, walk_down * 3, step_end))
-}
-script EnterBD_PlayerPosition16 {
-    applymovement(BD, EnterBD_BD_WalkToBattlefield)
-    applymovement(PLAYER, moves(walk_left * 9, walk_down * 3, step_end))
-}
-
-script EnterPsf7leader_ExplainLab_Dialogue {
+script EnterPsf7leader_ExplainLab_Dialogue
+{
     reveal(REVEAL_BD)
     msgbox(format("So back here, I experiment with new synthetic drugs. Always trying to get an edge, you know? Let's see if I can battle under the influence of MGB-07."),,SPEAKER_BD)
 
@@ -147,24 +77,15 @@ script EnterBD_PostBattle_Script {
     setvar(VAR_BD_STATE,BATTLE_1_COMPLETE)
     addvar(VAR_STORYLINE_STATE, 1)
     zapfanfare(ZAP_GYM_TIRABUDIN_PLACE_BADGE,MUS_GET_BADGE)
+    cueobjectplayer(BD)
     giveitem(ITEM_TM07)
     closemessage
-    call(EnterBD_MoveBacktoDesk_Script)
+    moveobjecttocoords(BD,3,3,DIR_NORTH)
     waitmovement(BD)
     call(TryAutoSave)
     endcutscene
     release
     end
-}
-
-script EnterBD_MoveBacktoDesk_Script {
-    getplayerxy(VAR_TEMP_0, VAR_TEMP_1)
-
-    if (var (VAR_TEMP_0) != 12) {
-        applymovement(BD, moves(walk_right * 4, walk_up * 4, step_end))
-    } else {
-        applymovement(BD, moves(walk_up * 4, walk_right * 4, face_up, step_end))
-    }
 }
 
 script EnterBD_PostDefeat1_Dialogue {
