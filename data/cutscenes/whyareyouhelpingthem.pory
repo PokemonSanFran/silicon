@@ -161,27 +161,31 @@ script WhyAreYouHelpingThem_PreBattleBoss_Script {
         goto(WhyAreYouHelpingThem_PostBattleBoss_Dialogue)
 }
 
+script WhyAreYouHelpingThem_Script_HealOrReward
+{
+    specialvar(VAR_RESULT,GetBattleOutcome)
+    if (var(VAR_RESULT) == B_OUTCOME_WON)
+    {
+        msgbox(format("You're incredible. Or a cheater. Can't quite tell. Either way, you can have this."),,SPEAKER_VIGRIM)
+        closemessage
+        cueobjectplayer(VIGRIM)
+        waitmovement(VIGRIM)
+        giveitem(ITEM_MASTER_BALL,1)
+        clearflag(TRAINER_FLAGS_START + TRAINER_VIGRIM)
+    }
+    else
+    {
+        bypass_healblock
+        msgbox(format("…I didn't even touch them…"),,SPEAKER_ALICIA)
+    }
+}
+
 script WhyAreYouHelpingThem_PostBattleBoss_Dialogue{
 		clearflag(B_FLAG_NO_WHITEOUT)
         setvar(VAR_NAVAL_BASE_STATE,SAVE_BAIYA_NAVAL_BASE)
         addobject(ADAORA)
         call(WhyAreYouHelpingThem_MoveObjectAdaora_Script)
-
-        if (defeated(TRAINER_VIGRIM)){
-
-                msgbox(format("You're incredible. Or a cheater. Can't quite tell. Either way, you can have this."),,SPEAKER_VIGRIM)
-                closemessage
-
-                applymovement(VIGRIM,Common_Movement_WalkInPlaceLeft)
-                waitmovement(0)
-                giveitem(ITEM_MASTER_BALL,1)
-                clearflag(TRAINER_FLAGS_START + TRAINER_VIGRIM)
-
-        }else {
-
-                msgbox(format("…I didn't even touch them…"),,SPEAKER_ALICIA)
-        }
-
+        call(WhyAreYouHelpingThem_Script_HealOrReward)
         msgbox(format("I'm sorry you have to experience this. I hope you eventually understand what's at stake here, {PLAYER}. Let me help you."),,SPEAKER_VIGRIM)
 
         closemessage
