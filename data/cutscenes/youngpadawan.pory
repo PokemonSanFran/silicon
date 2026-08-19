@@ -59,6 +59,7 @@ script YoungPadawan_StartBattle_Script{
 }
 
 script YoungPadawan_Secret_Dialogue{
+        clearflag(TRAINER_FLAGS_START + TRAINER_TALA)
     msgbox(format("Did you hack the Matrix? Maybe you got REAL lucky on a randomizer run? ... We're gonna pretend I won, okay?"),,SPEAKER_TALA)
 
         msgbox(format("Haha got it, you won."),,SPEAKER_ALICIA)
@@ -91,6 +92,7 @@ script YoungPadawan_NoZRing_Dialogue
 
 script YoungPadawan_PostBattle_Dialogue
 {
+    clearflag(B_FLAG_NO_WHITEOUT)
     playbgm(MUS_ENCOUNTER_ELITE_FOUR,TRUE)
     specialvar(VAR_RESULT,GetBattleOutcome)
     if (var(VAR_RESULT) == B_OUTCOME_WON)
