@@ -78,7 +78,8 @@ script EnterEmrys_Defeated_Script {
     closemessage
     call(EnterEmrys_ExplainBuzzr_Dialogue)
     zapfanfare(ZAP_GYM_PERLACIA_CITY_BADGE,MUS_GET_BADGE)
-    giveitem(ITEM_TM34)
+    cueobjectplayer(LOCALID_PERLACIA_GYM_EMRYS)
+    giveitem(ITEM_GYM_REWARD_PERLACIA)
     setvar(VAR_TEMP_0,0)
     call(TryAutoSave)
     releaseall

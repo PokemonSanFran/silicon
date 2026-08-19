@@ -1416,4 +1416,15 @@ enum
 #define STORY_ARANTRAZ_EXHIBIT_TRAINERS_COUNT 6
 #define ITEM_ARANTRAZ_EXHIBIT_REWARD ITEM_MACHO_BRACE
 
+// ***********************************************************************
+// Cutscene: The Story So Far
+// ***********************************************************************
+#define ITEM_GYM_REWARD_MERMEREZA ITEM_TM001
+#define ITEM_GYM_REWARD_TORA      ITEM_TM002
+#define ITEM_GYM_REWARD_PERLACIA  ITEM_TM003
+#define ITEM_GYM_REWARD_CHASILLA  ITEM_TM004
+#define ITEM_GYM_REWARD_FORT_YOBU ITEM_TM005
+#define ITEM_GYM_REWARD_HALERBA   ITEM_TM006
+#define ITEM_GYM_REWARD_TIRABUDIN ITEM_TM007
+#define ITEM_GYM_REWARD_IRISINA   ITEM_TM008
 #endif // GUARD_CONSTANTS_QUESTS_H

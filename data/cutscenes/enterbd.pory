@@ -78,7 +78,7 @@ script EnterBD_PostBattle_Script {
     addvar(VAR_STORYLINE_STATE, 1)
     zapfanfare(ZAP_GYM_TIRABUDIN_PLACE_BADGE,MUS_GET_BADGE)
     cueobjectplayer(BD)
-    giveitem(ITEM_TM07)
+    giveitem(ITEM_GYM_REWARD_TIRABUDIN)
     closemessage
     moveobjecttocoords(BD,3,3,DIR_NORTH)
     waitmovement(BD)

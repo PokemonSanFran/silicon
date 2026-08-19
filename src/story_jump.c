@@ -769,7 +769,7 @@ void FlagsVarWarp_EnterFallkner()
 void GiveItems_EnterBelen(bool32 jumpType)
 {
     if (!FlagGet(FLAG_BADGE01_GET))
-        AddBagItem(ITEM_TM001, 1);
+        AddBagItem(ITEM_GYM_REWARD_MERMEREZA, 1);
 }
 
 void JumpPlayerTo_EnterBelen(bool32 jumpType)
@@ -803,7 +803,7 @@ void FlagsVarWarp_EnterShinzo()
 void GiveItems_EnterShinzo(bool32 jumpType)
 {
     if (!FlagGet(FLAG_BADGE02_GET))
-        AddBagItem(ITEM_TM002, 1);
+        AddBagItem(ITEM_GYM_REWARD_TORA, 1);
 }
 
 void JumpPlayerTo_EnterShinzo(bool32 jumpType)
@@ -818,7 +818,7 @@ void JumpPlayerTo_EnterShinzo(bool32 jumpType)
 void GiveItems_EnterEmrys(bool32 jumpType)
 {
     if (!FlagGet(FLAG_BADGE03_GET))
-        AddBagItem(ITEM_TM003,1);
+        AddBagItem(ITEM_GYM_REWARD_PERLACIA,1);
 }
 
 void FlagsVarWarp_EnterEmrys()
@@ -1118,7 +1118,7 @@ void FlagsVarWarp_EnterPua()
 void GiveItems_EnterPua(bool32 jumpType)
 {
     if (!FlagGet(FLAG_BADGE04_GET))
-        AddBagItem(ITEM_TM004, 1);
+        AddBagItem(ITEM_GYM_REWARD_CHASILLA, 1);
 }
 
 void JumpPlayerTo_EnterPua(bool32 jumpType)
@@ -1253,7 +1253,7 @@ void FlagsVarWarp_EnterNeriene()
 void GiveItems_EnterNeriene(bool32 jumpType)
 {
     if (!FlagGet(FLAG_BADGE05_GET))
-        AddBagItem(ITEM_TM005, 1);
+        AddBagItem(ITEM_GYM_REWARD_FORT_YOBU, 1);
 }
 
 void JumpPlayerTo_EnterNeriene(bool32 jumpType)
@@ -1318,7 +1318,7 @@ void JumpPlayerTo_BeachBattle(bool32 jumpType)
 void GiveItems_EnterDimu(bool32 jumpType)
 {
     if (!FlagGet(FLAG_BADGE06_GET))
-        AddBagItem(ITEM_TM006, 1);
+        AddBagItem(ITEM_GYM_REWARD_HALERBA, 1);
 }
 
 void FlagsVarWarp_EnterDimu()
@@ -1376,7 +1376,7 @@ void JumpPlayerTo_AndWeMarchOn(bool32 jumpType)
 void GiveItems_EnterBD(bool32 jumpType)
 {
     if (!FlagGet(FLAG_BADGE07_GET))
-        AddBagItem(ITEM_TM007, 1);
+        AddBagItem(ITEM_GYM_REWARD_TIRABUDIN, 1);
 }
 
 void FlagsVarWarp_EnterBD()
@@ -1427,7 +1427,7 @@ void JumpPlayerTo_Battle8(bool32 jumpType)
 void GiveItems_EnterAmiArgento(bool32 jumpType)
 {
     if (!FlagGet(FLAG_BADGE08_GET))
-        AddBagItem(ITEM_TM008, 1);
+        AddBagItem(ITEM_GYM_REWARD_IRISINA, 1);
 }
 
 void FlagsVarWarp_EnterAmiArgento()
@@ -1901,7 +1901,7 @@ void GiveItems_YouRealizeTheyreEvilRight_Phone(bool32 jumpType)
     if (VarGet(VAR_ARANTRAZ_STATE) >= BAIYA_SUMMONED_ARANTRAZ)
         return;
 
-    AddBagItem(ITEM_TM345, 1);
+    AddBagItem(ITEM_TM_SURF, 1);
     AddBagItem(ITEM_SURF_TOOL, 1);
 }
 

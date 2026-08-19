@@ -46,7 +46,8 @@ script EnterPua_PuaDefeated_Script {
     msgbox(format("That battle was off the hook! You've got mad skills, {PLAYER}. Take this, you earned it!"),,SPEAKER_PUA)
     closemessage
     zapfanfare(ZAP_GYM_CHASILLA_BADGE,MUS_OBTAIN_BADGE)
-    giveitem(ITEM_TM17)
+    cueobjectplayer(PUA)
+    giveitem(ITEM_GYM_REWARD_CHASILLA)
     closemessage
     call(TryAutoSave)
     endcutscene

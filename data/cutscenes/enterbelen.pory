@@ -533,7 +533,8 @@ script EnterBelen_BelenDefeated_Script
     special(GetNumberOfBadges)
     call_if_eq(VAR_RESULT,1,EnterBelen_ExplainBuzzr_Dialogue)
     zapfanfare(ZAP_GYM_MERMEREZA_CITY_BADGE,MUS_OBTAIN_BADGE)
-    giveitem(ITEM_TM01)
+    cueobjectplayer(LOCALID_MERMEREZA_GYM_BELEN)
+    giveitem(ITEM_GYM_REWARD_MERMEREZA)
     msgbox(format("Oh, the food!"),,SPEAKER_BELEN)
     closemessage
     moveobjecttocoords(LOCALID_MERMEREZA_GYM_BELEN,8,2,DIR_NORTH)

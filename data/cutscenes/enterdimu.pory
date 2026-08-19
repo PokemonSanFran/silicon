@@ -29,7 +29,8 @@ script EnterDimu_PostGymBattle_Script {
         setvar(VAR_DIMU_STATE,BATTLE_1_COMPLETE)
         addvar(VAR_STORYLINE_STATE,1)
         zapfanfare(ZAP_GYM_HALERBA_CITY_BADGE,MUS_GET_BADGE)
-        giveitem(ITEM_TM06)
+        cueobjectplayer(DIMU)
+        giveitem(ITEM_GYM_REWARD_TIRABUDIN)
         closemessage
         call(TryAutoSave)
         endcutscene

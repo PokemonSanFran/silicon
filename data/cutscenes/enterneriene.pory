@@ -40,7 +40,8 @@ script EnterNeriene_NerieneDefeated_Script {
     msgbox(format("You're no joke! My strategy is usually to wear the opponent out, but I ran out of gas quick against you!"),MSGBOX_DEFAULT,SPEAKER_NERIENE)
     closemessage
     zapfanfare(ZAP_GYM_FORT_YOBU_BADGE,MUS_GET_BADGE)
-    giveitem(ITEM_TM05)
+    cueobjectplayer(NERIENE)
+    giveitem(ITEM_GYM_REWARD_FORT_YOBU)
     closemessage
     call(TryAutoSave)
     endcutscene

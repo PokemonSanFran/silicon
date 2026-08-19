@@ -39,7 +39,8 @@ script EnterShinzo_ShinzoDefeated_Script {
     closemessage
     call(EnterShinzo_ExplainBuzzr_Dialogue)
     zapfanfare(ZAP_GYM_TORA_TOWN_BADGE,MUS_OBTAIN_BADGE)
-    giveitem(ITEM_TM02)
+    cueobjectplayer(ITEM_GYM_REWARD_TORA)
+    giveitem(ITEM_GYM_REWARD_TORA)
     closemessage
     addvar(VAR_STORYLINE_STATE,1)
     call(WowYoureStrong_CheckCutsceneScript)
