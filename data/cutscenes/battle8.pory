@@ -20,22 +20,11 @@ script Battle8_FaceGoToPlayer
     playbgm(MUS_ENCOUNTER_CHAMPION,TRUE)
 
     playse(SE_PIN)
-    getplayerxy(VAR_TEMP_0,VAR_TEMP_1)
-    if (var(VAR_TEMP_0) == 17)
-    {
-        applymovement(PLAYER,Common_Movement_FaceRight)
-        applymovement(BAIYA,Battle8_ExclaimAndTurn_Movement)
-        waitmovement(BAIYA)
-        applymovement(BAIYA,Common_Movement_WalkLeft)
-    }
-    else
-    {
-        applymovement(PLAYER,Common_Movement_FaceLeft)
-        applymovement(BAIYA,Battle8_ExclaimAndTurn_Movement)
-        waitmovement(BAIYA)
-        applymovement(BAIYA,Common_Movement_WalkRight)
-    }
+    moveobjecttocoords(LOCALID_PLAYER,19,17,DIR_NORTH)
+    applymovement(BAIYA,moves(emote_exclamation_mark))
     waitmovement(BAIYA)
+    waitmovement(LOCALID_PLAYER)
+
     goto(Battle8_ExplainAttraction_Dialogue)
 }
 
@@ -94,7 +83,7 @@ script Battle8_BaiyaDefeated_Dialogue
         setvar(VAR_BATTLE_8_STATE,DEFEATED_BAIYA_PINTILLONHOUSE)
         addvar(VAR_STORYLINE_STATE,1)
 
-        msgbox(format("You know, it doesn't have to be like this. I'm not out to get you."),MSGBOX_NPC,SPEAKER_ALICIA)
+        msgbox(format("You know, it doesn't have to be like this. I'm not out to get you."),,SPEAKER_ALICIA)
 
         msgbox(format("Yeah, that's part of the problem. Your ignorance of the situation and your skill almost makes it worse."),MSGBOX_DEFAULT,SPEAKER_BAIYA)
 
@@ -104,38 +93,12 @@ script Battle8_BaiyaDefeated_Dialogue
         msgbox(format("This region has rich with so much culture that you won't see unless you dig deeper. If you actually care, the Seven Sisters Challenge is a good start."),MSGBOX_DEFAULT,SPEAKER_BAIYA)
         closemessage
 
-        getplayerxy(VAR_TEMP_0,VAR_TEMP_1)
-        if (var(VAR_TEMP_0) == 17)
-        {
-            applymovement(PLAYER,Common_Movement_WalkDown)
-                waitmovement(0)
-                applymovement(PLAYER,Common_Movement_FaceUp)
-        }
-
-    applymovement(BAIYA, moves(walk_left * 8, step_end))
-        waitmovement(0)
+        moveobjecttocoords(BAIYA,8,16,DIR_WEST)
+        waitmovement(BAIYA)
         removeobject(BAIYA)
         fadedefaultbgm
         call(TryAutoSave)
         endcutscene
         release
         end
-}
-
-movement Battle8_WalkOutOfHouse
-{
-    walk_down
-        step_end
-}
-movement Battle8_GetOutOfWay
-{
-    walk_right
-        step_end
-}
-
-movement Battle8_ExclaimAndTurn_Movement
-{
-    emote_exclamation_mark
-        face_player
-        step_end
 }
