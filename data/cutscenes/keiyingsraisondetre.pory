@@ -5,17 +5,22 @@ const KEIYING = 3
 const CRYING_MAID = 4
 const CAMERA = OBJ_EVENT_ID_CAMERA
 
-script KeiyingRaisonDetre_HideObjectKids_Script {
-    setflag(FLAG_TEMP_1)
+script KeiyingRaisonDetre_HideObjectKids_Script
+{
+    setobjectflagfromlocalid(LOCALID_KEIYING_MANSION_CHILD_FEMALE)
+    setobjectflagfromlocalid(LOCALID_KEIYING_MANSION_CHILD_MALE)
 }
 
-script KeiyingRaisonDetre_HideObjectMaid_Script {
-    setflag(FLAG_TEMP_2)
+script KeiyingRaisonDetre_HideObjectMaid_Script
+{
+    setobjectflagfromlocalid(LOCALID_KEIYING_MANSION_MAID_1)
+    setobjectflagfromlocalid(LOCALID_KEIYING_MANSION_MAID_2)
 }
 
-script KeiyingRaisonDetre_ObjectCleanUp_Script {
-    setflag(FLAG_TEMP_1)
-        setflag(FLAG_TEMP_2)
+script KeiyingRaisonDetre_ObjectCleanUp_Script
+{
+    call(KeiyingRaisonDetre_HideObjectMaid_Script)
+    call(KeiyingRaisonDetre_HideObjectKids_Script)
 }
 
 script KeiyingRaisonDetre_MoveIntoFoyer_Script {
@@ -32,6 +37,7 @@ script KeiyingRaisonDetre_MoveIntoFoyer_Script {
 }
 
 script KeiyingRaisonDetre_KidsMeetPlayer_Dialogue {
+        fwdtime(EVENING_HOUR_BEGIN,0)
     msgbox(format("Aaaahhhh! {PLAYER}! You're here! In the flesh!"),,SPEAKER_ALEKSANDER)
         msgbox(format("…Alek, you're a freak."),,SPEAKER_SUMMER)
         closemessage
@@ -66,7 +72,8 @@ script KeiyingRaisonDetre_CityDiscussion_Dialogue {
         waitmovement(0)
         msgbox(format("Your house is beautiful. Actually, the entire city is beautiful."),MSGBOX_DEFAULT,SPEAKER_ALICIA)
 
-        msgbox(format("Thank you. It was important to me that I raised my family in PetarosaBorough. Most SharpRise Capital employees want to be in the city - close to the office and the nightlife. "),,SPEAKER_KEIYING)
+        buffermapname(STR_VAR_1,MAP_PETAROSA_BOROUGH)
+        msgbox(format("Thank you. It was important to me that I raised my family in {STR_VAR_1}. Most SharpRise Capital employees want to be in the city - close to the office and the nightlife. "),,SPEAKER_KEIYING)
 
         msgbox(format("But it's hard to justify raising a family there. It's expensive on this side, sure, but it's less dangerous… and not suffering as much."),,SPEAKER_KEIYING)
 
@@ -76,7 +83,8 @@ script KeiyingRaisonDetre_CityDiscussion_Dialogue {
 
         msgbox(format("Do I really deserve all of this just because I'm decent at battles?"),MSGBOX_DEFAULT,SPEAKER_ALICIA)
 
-        msgbox(format("I completely understand, trust me. When I worked in HodouCity, it wasn't this bad, but despite my best efforts, things have gotten worse."),,SPEAKER_KEIYING)
+        buffermapname(STR_VAR_1,MAP_HODOU_CITY)
+        msgbox(format("I completely understand, trust me. When I worked in {STR_VAR_1}, it wasn't this bad, but despite my best efforts, things have gotten worse."),,SPEAKER_KEIYING)
         closemessage
 
         applymovement(KEIYING, moves(walk_up, face_down, step_end))
@@ -140,11 +148,12 @@ script KeiyingRaisonDetre_Wine_Dialogue {
         msgbox(format("Yes. My kids being obsessed with you isn't an accident. We're building rock stars."),,SPEAKER_KEIYING)
 
         msgbox(format("SharpRise Capital is going to make Resido the region where Trainers come to become rock stars. Resido's new talent will attract the best and the brightest, and the region will be richer for it. We can uplift all of Resido's citizens to something much much greater. You're an investment, {PLAYER}, but it's all part of a much bigger play."),,SPEAKER_KEIYING)
+        closemessage
 
         applymovement(KEIYING,Common_Movement_FaceAwayPlayer)
         waitmovement(KEIYING)
 
-        msgbox(format("I choose to believe that this is for the greater good."),,SPEAKER_KEIYING)
+        msgbox(format("I choose to believe that this is for the greater good."),,SPEAKER_KEIYING,TAIL_WHISPER)
 
         msgbox(format("What did you sa -"),MSGBOX_DEFAULT,SPEAKER_ALICIA)
         closemessage
@@ -167,14 +176,9 @@ script KeiyingRaisonDetre_Wine_Dialogue {
 }
 
 script KeiyingRaisonDetre_StartDinner_Script {
-    getplayerxy(VAR_TEMP_0, VAR_TEMP_1)
 
-        if (var (VAR_TEMP_0) == 36) {
-            applymovement(PLAYER, moves(walk_up, walk_right * 9, walk_up * 4, face_left, step_end))
-        } else {
-            applymovement(PLAYER, moves(walk_up, walk_right * 8, walk_up * 4, face_left, step_end))
-        }
-    waitmovement(0)
+        moveobjecttocoords(LOCALID_PLAYER,45,5,DIR_WEST)
+        waitmovement(LOCALID_PLAYER)
         startcutscene(JUMPPLAYER_KEIYINGSRAISONDETRE)
 
         msgbox(format("{PLAYER}, we're honored to have you in our home. Enjoy dinner!"),,SPEAKER_KEIYING)
@@ -203,7 +207,7 @@ script KeiyingRaisonDetre_DinnerConversation_Dialogue {
         closemessage
         msgbox(format("How many badges did you have in Orre?"),,SPEAKER_ALEKSANDER)
         closemessage
-        bufferitemnameplural(STR_VAR_1,ITEM_LAVA_COOKIE,2)
+        callnative(BufferFavoriteFood)
         msgbox(format("Dad, I was right, {PLAYER} does like {STR_VAR_1}!"),,SPEAKER_SUMMER)
         closemessage
 		waitmovement(CAMERA)
@@ -221,6 +225,7 @@ script KeiyingRaisonDetre_DinnerConversation_Dialogue {
 
 script KeiyingRaisonDetre_RunToWork_Dialogue {
 
+        fwdtime(EVENING_HOUR_BEGIN+1,30)
     msgbox(format("Sorry, that's my phone and I need to take that."),,SPEAKER_KEIYING)
         closemessage
         applymovement(KEIYING, moves(walk_left, step_end))
@@ -231,7 +236,8 @@ script KeiyingRaisonDetre_RunToWork_Dialogue {
         applymovement(KEIYING, Common_Movement_FaceRight)
         waitmovement(0)
         msgbox(format("Ah!...There's an urgent matter at work. I'm so sorry kids, I'll try to hurry back."),,SPEAKER_KEIYING)
-        msgbox(format("{PLAYER}, I would hate to have you make the trek back to CuconuTown this late. We have a guest room, if you'd like to stay here."),,SPEAKER_KEIYING)
+        buffermapname(STR_VAR_1,MAP_CUCONU_TOWN_SHARPRISE_COMPOUND_2F)
+        msgbox(format("{PLAYER}, I would hate to have you make the trek back to {STR_VAR_1} this late. We have a guest room, if you'd like to stay here."),,SPEAKER_KEIYING)
         msgbox(format("Oh, that would be great, thanks!"),,SPEAKER_ALICIA,,EMOTE_HAPPY)
         closemessage
 
@@ -248,6 +254,7 @@ script KeiyingRaisonDetre_RunToWork_Dialogue {
         fadescreen(FADE_TO_BLACK)
         removeobject(SUMMER)
         removeobject(ALEKSANDER)
+        fwdtime(MORNING_HOUR_BEGIN,0)
         msgbox("The next morning…")
         closemessage
         goto(KeiyingRaisonDetre_NewsStory_Script)
@@ -276,14 +283,16 @@ script KeiyingRaisonDetre_NewsStory_Script {
         special(TurnOnTVScreen)
         delay(60)
         msgbox(format("And now we go to Da Lin, for more details about last night's riots. "),,SPEAKER_NEWS)
-        msgbox(format("Thanks Ken. We're gathering details on the ground here, but it sounds like this riot was instigated by members of The Tide, culminating in violent attacks on the CapheCity Police Force. Both sides sustained significant injury, and dozens of members of The Tide were taken into custody last night. Back to you, Ken."),,SPEAKER_NEWS_B)
+        buffermapname(STR_VAR_1,MAP_CAPHE_CITY)
+        msgbox(format("Thanks Ken. We're gathering details on the ground here, but it sounds like this riot was instigated by members of The Tide, culminating in violent attacks on the {STR_VAR_1} Police Force. Both sides sustained significant injury, and dozens of members of The Tide were taken into custody last night. Back to you, Ken."),,SPEAKER_NEWS_B)
         msgbox(format("We're also learning that the Police Department released a press statement ten minutes ago, primarily addressing The Tide, asking for an end to the violence and begging them to “work with us, not against us”. We'll have more updates within the hour."),,SPEAKER_NEWS)
         closemessage
         special(TurnOffTVScreen)
         applymovement(4, moves(walk_right, face_down, step_end))
         waitmovement(0)
 
-        msgbox(format("Is there anything else I can get you, Lord {PLAYER}?"),,SPEAKER_MAID)
+        callnative(BufferTitleFromPossessivePronouns)
+        msgbox(format("Is there anything else I can get you, {STR_VAR_1} {PLAYER}?"),,SPEAKER_MAID)
         applymovement(PLAYER, Common_Movement_FaceUp)
         waitmovement(0)
 
@@ -303,9 +312,11 @@ script KeiyingRaisonDetre_NewsStory_Script {
         end
 }
 
-script KeiyingRaisonDetre_PreventPlayerLeaving_Script {
-    if (var(VAR_KEIYING_STATE) < STATE_KEIYING_POST_RAISON_DETRE){
-        msgbox(format("Keiying has been so generous... I should stay."),MSGBOX_DEFAULT,SPEAKER_ALICIA,TAIL_THOUGHT)
+script KeiyingRaisonDetre_PreventPlayerLeaving_Script
+{
+    if (var(VAR_KEIYING_STATE) < STATE_KEIYING_POST_RAISON_DETRE)
+    {
+        msgbox(format("Kei-Ying has been so generous... I should stay."),MSGBOX_DEFAULT,SPEAKER_ALICIA,TAIL_THOUGHT)
             closemessage
             applymovement(PLAYER, Common_Movement_WalkUp)
             waitmovement(0)

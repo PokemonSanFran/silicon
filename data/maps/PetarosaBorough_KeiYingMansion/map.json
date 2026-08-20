@@ -15,6 +15,7 @@
   "connections": null,
   "object_events": [
     {
+      "local_id": "LOCALID_KEIYING_MANSION_CHILD_MALE",
       "graphics_id": "OBJ_EVENT_GFX_LITTLE_BOY_3",
       "x": 25,
       "y": 11,
@@ -28,6 +29,7 @@
       "flag": "FLAG_TEMP_1"
     },
     {
+      "local_id": "LOCALID_KEIYING_MANSION_CHILD_FEMALE",
       "graphics_id": "OBJ_EVENT_GFX_GIRL_2",
       "x": 26,
       "y": 10,
@@ -41,6 +43,7 @@
       "flag": "FLAG_TEMP_1"
     },
     {
+      "local_id": "LOCALID_KEIYING_MANSION_KEYING",
       "graphics_id": "OBJ_EVENT_GFX_KEIYING",
       "x": 23,
       "y": 10,
@@ -54,6 +57,7 @@
       "flag": "FLAG_TEMP_2"
     },
     {
+      "local_id": "LOCALID_KEIYING_MANSION_MAID_2",
       "graphics_id": "OBJ_EVENT_GFX_NURSE",
       "x": 42,
       "y": 4,
@@ -67,6 +71,7 @@
       "flag": "FLAG_TEMP_2"
     },
     {
+      "local_id": "LOCALID_KEIYING_MANSION_MAID_1",
       "graphics_id": "OBJ_EVENT_GFX_UNION_ROOM_NURSE",
       "x": 39,
       "y": 4,
