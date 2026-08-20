@@ -21,25 +21,6 @@ script FriendsForDinner_InteractKeiying_Script {
         goto(FriendsForDinner_Intro_Dialogue)
 }
 
-script FriendsForDinner_Trigger_Script {
-    lock
-        call(FriendsForDinner_WalkToKeiying_Script)
-        applymovement(KEIYING,Common_Movement_FacePlayer)
-        goto(FriendsForDinner_Intro_Dialogue)
-}
-
-script FriendsForDinner_WalkToKeiying_Script {
-    getplayerxy(VAR_TEMP_0,VAR_TEMP_1)
-
-        switch(var(VAR_TEMP_0)){
-            case 7: applymovement(PLAYER, moves(walk_up, face_left, step_end))
-            case 8: applymovement(PLAYER, moves(walk_up * 2, walk_left, step_end))
-            case 9: applymovement(PLAYER, moves(walk_up * 3, walk_left * 2, step_end))
-            case 10: applymovement(PLAYER, moves(walk_up * 4, walk_left * 3, step_end))
-        }
-    waitmovement(0)
-}
-
 script FriendsForDinner_Intro_Dialogue
 {
     lock
@@ -50,24 +31,25 @@ script FriendsForDinner_Intro_Dialogue
     applymovement(KEIYING,Common_Movement_FaceRight)
     waitmovement(KEIYING)
 
-        msgbox(format("Sorry to interrupt - are you {PLAYER}?"),,SPEAKER_KEIYING)
+        msgbox(format("Sorry to interrupt - are you {PLAYER}?"),,SPEAKER_KEIYING_INTRO)
 
         closemessage
 
     applymovement(PLAYER,Common_Movement_FaceLeft)
     waitmovement(PLAYER)
 
-    applymovement(KEIYING, moves(walk_right * 3, step_end))
+    moveobjecttocoords(KEIYING,22,6,DIR_EAST)
     waitmovement(KEIYING)
 
         msgbox(format("Yeah, what's up?"),,SPEAKER_ALICIA)
 
-        msgbox(format("Ah, Ramesh was right, glad I was able to run into you. I'm Keiying."),,SPEAKER_KEIYING)
+        msgbox(format("Ah, Ramesh was right, glad I was able to run into you. I'm Kei-Ying."),,SPEAKER_KEIYING_INTRO)
 
         msgbox(format("Ramesh... they work for SharpRise Capital, right? So I guess you do too?"),,SPEAKER_ALICIA)
 
-        msgbox(format("Yes sorry, I'm the SharpRise Capital Chief Operating Officer, and Lucrezia's right hand. It's a pleasure to meet you, we're all very impressed with you."),,SPEAKER_KEIYING)
+        msgbox(format("Yes sorry, I'm the SharpRise Capital Chief Operating Officer, and Lucrezia's right hand."),,SPEAKER_KEIYING)
         reveal(REVEAL_KEI_YING)
+        msgbox(format("It's a pleasure to meet you, we're all very impressed with you."),,SPEAKER_KEIYING)
 
         msgbox(format("Yeah, I keep hearing that! It's a little overwhelming."),,SPEAKER_ALICIA)
 
@@ -87,7 +69,8 @@ script FriendsForDinner_BadgeJudge_Script {
 
 script FriendsForDinner_AcceptInvite_Dialogue {
         msgbox(format("It's been an interesting ride, but I'm going to keep giving it my all. Thanks."),,SPEAKER_ALICIA)
-        msgbox(format("Wait, didn't I see you talking to Adaora in CurenoPort the other day?"),,SPEAKER_ALICIA)
+    buffermapname(STR_VAR_1,MAP_CURENO_PORT)
+        msgbox(format("Wait, didn't I see you talking to Adaora in {STR_VAR_1} the other day?"),,SPEAKER_ALICIA)
 
         msgbox(format("Where did you hear that name? You shouldn't repeat that around other members of SharpRise Capital. Besides, that couldn't have been me."),,SPEAKER_KEIYING)
         msgbox(format("I imagine you're probably exhausted. Why don't you come over to my place for dinner? I bet you haven't had a home-cooked meal in a while, what do you say?"),,SPEAKER_KEIYING)
@@ -101,7 +84,8 @@ script FriendsForDinner_AcceptInvite_Dialogue {
         applymovement(KEIYING,Common_Movement_FaceLeft)
         waitmovement(0)
 
-        msgbox(format("I live in PetarosaBorough, west of here. "),,SPEAKER_KEIYING)
+    buffermapname(STR_VAR_1,MAP_PETAROSA_BOROUGH)
+        msgbox(format("I live in {STR_VAR_1}, west of here. "),,SPEAKER_KEIYING)
 
         closemessage
 
@@ -117,8 +101,8 @@ script FriendsForDinner_AcceptInvite_Dialogue {
 
         closemessage
 
-        call(FriendsForDinner_WalkAway_Script)
-        waitmovement(0)
+        moveobjecttocoords(KEIYING,23,13,DIR_SOUTH)
+        waitmovement(KEIYING)
         fadedefaultbgm
         removeobject(KEIYING)
         setvar(VAR_FORT_YOBU_STATE,MET_KEIYING_OUTSIDE_GYM)
@@ -126,15 +110,5 @@ script FriendsForDinner_AcceptInvite_Dialogue {
         endcutscene
         release
         end
-}
-
-script FriendsForDinner_WalkAway_Script {
-    getplayerxy(VAR_TEMP_0,VAR_TEMP_1)
-
-        if (var(VAR_TEMP_0) == 6){
-            applymovement(KEIYING, moves(walk_right, walk_down * 6, step_end))
-        } else {
-            applymovement(KEIYING, moves(walk_down * 6, step_end))
-        }
 }
 
