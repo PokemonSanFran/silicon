@@ -3,7 +3,7 @@ const NERIENE = 1
 
 script EnterNeriene_Intro_Dialogue {
     lock
-    msgbox(format("Ain't it beautiful? All of it! The bridge, the ocean, this base. That battle was off the hook! You've got mad skills, {PLAYER}. Take this, you earned it!"), MSGBOX_NPC,SPEAKER_NERIENE)
+    msgbox(format("Ain't it beautiful? All of it! The bridge, the ocean, this base."), MSGBOX_NPC,SPEAKER_NERIENE)
     reveal(REVEAL_NERIENE)
     msgbox(format("Do you know why I built the Gym into the base, {PLAYER}?"),MSGBOX_DEFAULT,SPEAKER_NERIENE)
 
@@ -40,6 +40,7 @@ script EnterNeriene_NerieneDefeated_Script {
     msgbox(format("You're no joke! My strategy is usually to wear the opponent out, but I ran out of gas quick against you!"),MSGBOX_DEFAULT,SPEAKER_NERIENE)
     closemessage
     zapfanfare(ZAP_GYM_FORT_YOBU_BADGE,MUS_GET_BADGE)
+    msgbox(format("That battle was off the hook! You've got mad skills, {PLAYER}. Take this, you earned it!"), ,SPEAKER_NERIENE)
     cueobjectplayer(NERIENE)
     giveitem(ITEM_GYM_REWARD_FORT_YOBU)
     closemessage
@@ -52,7 +53,9 @@ script EnterNeriene_NerieneDefeated_Script {
 script EnterNeriene_PostDefeat1_Dialogue {
     setvar(VAR_GYM_5_STATE, GYM_EXPLAINED_BADGE_AND_TM)
     lock
-    msgbox(format("Maybe my defense wasn't strong enough? Should I start using Sandstorm? Maybe Toxic..."), MSGBOX_NPC,SPEAKER_NERIENE)
+    buffermovename(STR_VAR_1,MOVE_SANDSTORM)
+    buffermovename(STR_VAR_2,MOVE_TOXIC)
+    msgbox(format("Maybe my defense wasn't strong enough? Should I start using {STR_VAR_1}? Maybe {STR_VAR_2}..."), MSGBOX_NPC,SPEAKER_NERIENE)
         closemessage
     release
     end
