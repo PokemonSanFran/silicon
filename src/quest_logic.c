@@ -6245,3 +6245,22 @@ void BufferNumberArantrazExhibitDefeated(void)
     u32 count = (STORY_ARANTRAZ_EXHIBIT_TRAINERS_COUNT - CountArantrazExhibitDefeated());
     ConvertIntToDecimalStringN(gStringVar1, count, STR_CONV_MODE_LEFT_ALIGN, CountDigits(count));
 }
+
+// ***********************************************************************
+// Cutscene: Kei-Ying's Raison detre
+// ***********************************************************************
+
+void BufferTitleFromPossessivePronouns(void)
+{
+    StringCopy(gStringVar1,COMPOUND_STRING(""));
+    switch(gSaveBlock3Ptr->customizationValues[CUSTOMIZATION_POSSESIVE_PRONOUN])
+    {
+        case PRONOUN_POSSESSIVE_HIS: StringCopy(gStringVar1,COMPOUND_STRING("Lord"));
+                                     break;
+        case PRONOUN_POSSESSIVE_HER: StringCopy(gStringVar1,COMPOUND_STRING("Lady"));
+                                     break;
+        default:
+                                     break;
+    }
+}
+
