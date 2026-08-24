@@ -44,6 +44,7 @@
 u8 IsThereAPhenomenonOnCords(s16 coordX, s16 coordXY);
 u16 getFieldEffectForPhenomenon(u16 slot);
 static u32 CalculateDistanceBetweenPoints(s16 x1, s16 y1, s16 x2, s16 y2);
+static inline unsigned int GetPhenomenonVolume(void);
 
 struct Phenomenon{
     u8 fldEffSpriteId;
@@ -477,6 +478,8 @@ void TryCreatingPhenomenon(void){
             if(GeneratePhenomenonFieldEffectAt(emptyPhenomenonSlot, getFieldEffectForPhenomenon(emptyPhenomenonSlot))){
                 sPhenomenonData[emptyPhenomenonSlot].active = TRUE;
                 emptyPhenomenonSlot++;
+                taskId = CreateTask(Task_UpdatePhenomenonVolume, 64);
+                gTasks[taskId].data[0] = (u16)GetPhenomenonVolume();
             }
         }
     }
@@ -684,60 +687,77 @@ bool8 IsFieldEffectForPhenomenon(u32 fieldEffectId)
     return (fieldEffectId == FLDEFF_SHAKING_GRASS || fieldEffectId == FLDEFF_SHAKING_LONG_GRASS || fieldEffectId == FLDEFF_SAND_HOLE || fieldEffectId == FLDEFF_CAVE_DUST || fieldEffectId == FLDEFF_WATER_SURFACING);
 }
 
-static u8 GetVolumeBasedOnPlayerDistance(void)
+static inline unsigned int GetPhenomenonVolume(void)
 {
-    if(sPhenomenonData[0].active == FALSE)
-        return 0;
-
+    s16 distance;
     s16 phenomenonX = sPhenomenonData[0].coordX + MAP_OFFSET;
     s16 phenomenonY = sPhenomenonData[0].coordY + MAP_OFFSET;
-    s16 playerX, playerY;
-    PlayerGetDestCoords(&playerX, &playerY);
+    distance = GetCurrentDistanceFromPlayer(phenomenonX, phenomenonY);
+    
+    if (distance < 4)
+        return 256;
+    else if (distance < 8)
+        return 180;
+    else if (distance < 12)
+        return 120;
+    else
+        return 80;
+}
 
-    s32 distance = MAX_PHENOMENON_DISTANCE - (CalculateDistanceBetweenPoints(playerX, playerY, phenomenonX, phenomenonY) - 1);
-    if (distance <= 0)
-        return 0;
+static inline unsigned int ModulatePhenomenonVolume(unsigned int curVolume, unsigned int targetVolume)
+{
+    if (curVolume < targetVolume)
+        return curVolume + 4;
+    else if (curVolume > targetVolume)
+        return curVolume - 4;
+    return curVolume;
 
-    u32 volume = MAX_u8 * distance / MAX_PHENOMENON_DISTANCE;
-    if (volume > MAX_u8)
-        return 0;
+static void Task_UpdatePhenomenonVolume(u8 taskId)
+{
+    s16 distance;
+    struct Task * task;
+    unsigned int targetVolume = 0;
+    s16 phenomenonX = sPhenomenonData[0].coordX + MAP_OFFSET;
+    s16 phenomenonY = sPhenomenonData[0].coordY + MAP_OFFSET;
+    distance = GetCurrentDistanceFromPlayer(phenomenonX, phenomenonY);
+    task = &gTasks[taskId];
 
-    return volume;
+    if (sPhenomenonData[0].active == FALSE)
+    {
+        DestroyTask(taskid);
+        return;
+    }
+
+    tVolume = ModulatePhenomenonVolume(tVolume, GetPhenomenonVolume());
+    m4aMPlayVolumeControl(&gMPlayInfo_SE4, TRACKS_ALL, (u16)tVolume);
 }
 
 void SpriteCB_PlayFieldEffectSound(struct Sprite *sprite)
 {
+    u32 sound;
+    u32 delay;
     u32 fieldEffectId = sprite->sWaitFldEff;
 
     if (!IsFieldEffectForPhenomenon(fieldEffectId))
         return;
 
-    u32 volume = GetVolumeBasedOnPlayerDistance();
-    
-    if (volume == 0)
-        return;
-
-    m4aMPlayVolumeControl(&gMPlayInfo_SE1,TRACKS_ALL,volume);
-    m4aMPlayVolumeControl(&gMPlayInfo_SE2,TRACKS_ALL,volume);
-    m4aMPlayVolumeControl(&gMPlayInfo_SE3,TRACKS_ALL,volume);
-
-    u32 sound = MUS_DUMMY, delay = 0;
+    sound = MUS_DUMMY, delay = 0;
 
     switch (fieldEffectId)
     {
         default:
         case FLDEFF_SHAKING_GRASS:
         case FLDEFF_SHAKING_LONG_GRASS:
-            sound = SE_SUDOWOODO_SHAKE;
+            sound = SE_SUDOWOODO_SHAKE_2;
             delay = PHENOMENON_SOUND_DELAY_GRASS;
             break;
         case FLDEFF_SAND_HOLE:
         case FLDEFF_CAVE_DUST:
-            sound = SE_LAVARIDGE_FALL_WARP;
+            sound = SE_LAVARIDGE_FALL_WARP_2;
             delay = PHENOMENON_SOUND_DELAY_DUST;
             break;
         case FLDEFF_WATER_SURFACING:
-            sound = SE_M_BUBBLE;
+            sound = SE_M_BUBBLE_2;
             delay = PHENOMENON_SOUND_DELAY_WATER;
             break;
     }
