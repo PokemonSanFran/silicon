@@ -6179,17 +6179,18 @@ bool32 ShouldStartANewStrike(void)
     if (FlagGet(FLAG_CONSTRUCTION_BREAKING_NEWS) == FALSE)
         return FALSE;
 
+    ++(*GetVarPointer(VAR_ANEWSTRIKE_STEP_COUNTER));
 
     switch (gMapHeader.mapType)
     {
-    case MAP_TYPE_TOWN:
-    case MAP_TYPE_CITY:
-    case MAP_TYPE_ROUTE:
-    case MAP_TYPE_OCEAN_ROUTE:
-        return (++(*GetVarPointer(VAR_ANEWSTRIKE_STEP_COUNTER)) >= 250);
-        break;
-    default:
-        return FALSE;
+        case MAP_TYPE_TOWN:
+        case MAP_TYPE_CITY:
+        case MAP_TYPE_ROUTE:
+        case MAP_TYPE_OCEAN_ROUTE:
+            return ((VarGet(VAR_ANEWSTRIKE_STEP_COUNTER)) > 250);
+            break;
+        default:
+            return FALSE;
     }
     return FALSE;
 }
