@@ -1,46 +1,47 @@
 const PLAYER = OBJ_EVENT_ID_PLAYER
-const CHARLOTTE = 1
-const OLIVER = 2
-const VIGRIM = 3
-const ROCKET_A = 4
-const ROCKET_B = 5
-const CROWD_A = 6
-const CROWD_B = 7
-const CROWD_C = 8
-const POLICE_A = 9
-const POLICE_B = 10
-const LUCREZIA = 11
-const ORI = 12
+const LOCALID_ROUTE2_CHARLOTTE = LOCALID_CAMERA + 1
+const LOCALID_ROUTE2_OLIVER = LOCALID_CAMERA + 2
+const LOCALID_ROUTE2_LUCREZIA = LOCALID_CAMERA + 3
+const LOCALID_ROUTE2_VIGRIM = LOCALID_CAMERA + 4
+const LOCALID_ROUTE2_POLICE_A = LOCALID_CAMERA + 5
+const LOCALID_ROUTE2_POLICE_B = LOCALID_CAMERA + 6
+const LOCALID_ROUTE2_TIDE_A = LOCALID_CAMERA + 7
+const LOCALID_ROUTE2_TIDE_B = LOCALID_CAMERA + 8
 
-const FLAG_HIDE_CHARLOTTE_COMPOUND = FLAG_TEMP_1
-const FLAG_HIDE_OLIVER_COMPOUND = FLAG_TEMP_2
-const FLAG_HIDE_CHARLOTTE = FLAG_TEMP_1
+const LOCALID_VS_GARBODOR_CHARLOTTE = LOCALID_CAMERA + 1
 
-script VSGarbodor_Arrest_ObjectSetup_Script {
-    setobjectxy(ROCKET_A, 26, 19)
-        setobjectxy(ROCKET_B, 26, 20)
-        setobjectxy(CHARLOTTE, 21, 21)
-        setobjectxy(OLIVER, 21, 22)
-
-        setobjectxyperm(ROCKET_A, 26, 19)
-        setobjectxyperm(ROCKET_B, 26, 20)
-        setobjectxyperm(CHARLOTTE, 21, 21)
-        setobjectxyperm(OLIVER, 21, 22)
+script VsGarbodor_Script_AddCharlotteEntrance
+{
+    spawnobject(OBJ_EVENT_GFX_CHARLOTTE,LOCALID_VS_GARBODOR_CHARLOTTE,11,22,MOVEMENT_TYPE_FACE_LEFT,3)
 }
 
-script VSGarbodor_ConstructionObjectCleanUp_Script{
-    if (var(VAR_CONSTRUCTION_STRIKE_STATE) != START_VS_GARBODOR){
-        setflag(FLAG_HIDE_CHARLOTTE)
-    }
-    return
+script VsGarbodor_Script_AddCharlotteMiddle
+{
+    spawnobject(OBJ_EVENT_GFX_CHARLOTTE,LOCALID_VS_GARBODOR_CHARLOTTE,10,8,MOVEMENT_TYPE_FACE_LEFT,3)
 }
+
+script TheStrikeStrikesBack_Script_AddSharpriseCharlotteTide
+{
+    spawnobject(OBJ_EVENT_GFX_OLIVER,LOCALID_ROUTE2_OLIVER,21,22,DIR_NORTH,3)
+    spawnobject(OBJ_EVENT_GFX_LUCREZIA,LOCALID_ROUTE2_LUCREZIA,20,21,DIR_NORTH,3)
+    spawnobject(OBJ_EVENT_GFX_CHARLOTTE,LOCALID_ROUTE2_CHARLOTTE,21,21,DIR_NORTH,3)
+
+    spawnobject(OBJ_EVENT_GFX_COMRADE_5,LOCALID_ROUTE2_TIDE_B,26,19,DIR_WEST,3)
+    spawnobject(OBJ_EVENT_GFX_COMRADE_9,LOCALID_ROUTE2_TIDE_A,26,20,DIR_WEST,3)
+    spawnobject(OBJ_EVENT_GFX_VIGRIM,LOCALID_ROUTE2_VIGRIM,25,20,DIR_WEST,3)
+
+    spawnobject(OBJ_EVENT_GFX_MYSTERY_GIFT_MAN,LOCALID_ROUTE2_POLICE_A,27,19,DIR_WEST,3)
+    spawnobject(OBJ_EVENT_GFX_MYSTERY_GIFT_MAN,LOCALID_ROUTE2_POLICE_B,27,20,DIR_WEST,3)
+}
+
 
 script VSGarbodor_Scouting_Dialogue {
     lock
         applymovement(PLAYER, Common_Movement_FaceRight)
         waitmovement(0)
-        msgbox(format("I did some scouting while waiting for you. Both sides have two Garbodor and two Trainers guarding ‘em. Do you care which side you take?"),,SPEAKER_CHARLOTTE)
-        dynmultichoice(18,6,TRUE,3,0,NULL,
+        bufferspeciesname(STR_VAR_1,SPECIES_GARBODOR)
+        msgbox(format("I did some scouting while waiting for you. Both sides have two {STR_VAR_1} and two Trainers guarding ‘em. Do you care which side you take?"),,SPEAKER_CHARLOTTE)
+        dynmultichoice(0,0,TRUE,3,0,NULL,
             "Left",
             "Right",
             "Either one.",
@@ -71,11 +72,10 @@ script VSGarbodor_ChooseLeft_Script {
 
         closemessage
 
-        applymovement(CHARLOTTE, moves(walk_up * 8, walk_right * 8, step_end))
-        delay(60)
-        applymovement(PLAYER, moves(walk_up * 8, walk_left * 2, step_end))
-        waitmovement(0)
-        removeobject(CHARLOTTE)
+        moveobjecttocoords(PLAYER,8,9,DIR_WEST)
+        moveobjecttocoords(LOCALID_VS_GARBODOR_CHARLOTTE,21,18,DIR_NORTH)
+        waitmovement(PLAYER)
+        removeobject(LOCALID_VS_GARBODOR_CHARLOTTE)
         release
         end
 }
@@ -86,11 +86,10 @@ script VSGarbodor_ChooseRight_Script {
 
         closemessage
 
-        applymovement(CHARLOTTE, moves(walk_up * 15, walk_left * 8, step_end))
-        delay(60)
-        applymovement(PLAYER, moves(walk_up * 8, walk_right * 2, step_end))
-        waitmovement(0)
-        removeobject(CHARLOTTE)
+        moveobjecttocoords(PLAYER,16,9,DIR_EAST)
+        moveobjecttocoords(LOCALID_VS_GARBODOR_CHARLOTTE,3,18,DIR_NORTH)
+        waitmovement(PLAYER)
+        removeobject(LOCALID_VS_GARBODOR_CHARLOTTE)
         release
         end
 }
@@ -114,7 +113,8 @@ script VSGarbodor_The_TideGrunt2_Battle_Script
 script VSGarbodor_The_TideGrunt3_Battle_Script
 {
     trainerbattle_single(TRAINER_FAKEROCKET_B, format("The Tide is the name, and shutting this shit down is our game!"), format("They didn't prepare us for this!"), VSGarbodor_The_TideGrunt3_Battle_Script)
-        msgbox(format("Oh thank Giratina, I can go back to the office now…"), MSGBOX_AUTOCLOSE,SPEAKER_ROCKET_MEMBER_B)
+        bufferspeciesname(STR_VAR_1,SPECIES_GIRATINA)
+        msgbox(format("Oh thank {STR_VAR_1}, I can go back to the office now…"), MSGBOX_AUTOCLOSE,SPEAKER_ROCKET_MEMBER_B)
         goto(VSGarbodor_RemoveGrunt)
         end
 }
@@ -201,38 +201,19 @@ script VSGarbodor_PreventCrossingSides_Script {
 
 script VSGarbodor_MoveCharlotte_Script {
     lock
-startcutscene(JUMPPLAYER_VSGARBODOR)
+    startcutscene(JUMPPLAYER_VSGARBODOR)
+    call(VsGarbodor_Script_AddCharlotteMiddle)
 
-        getplayerxy(VAR_TEMP_0, VAR_TEMP_1)
-        clearflag(FLAG_TEMP_1)
-        addobject(CHARLOTTE)
-
-        if (var (VAR_TEMP_0) < 10) {
-            applymovement(PLAYER, Common_Movement_FaceRight)
-                if (var (VAR_TEMP_1) > 9) {
-                    setobjectxy(CHARLOTTE, 11, 12)
-                        copyobjectxytoperm(CHARLOTTE)
-                        applymovement(CHARLOTTE, moves(walk_left * 6, step_end))
-                } else {
-                    setobjectxy(CHARLOTTE, 13, 6)
-                        copyobjectxytoperm(CHARLOTTE)
-                        applymovement(CHARLOTTE, moves(walk_left * 6, step_end))
-                }
-        } else {
-            if (var (VAR_TEMP_1) > 9) {
-                applymovement(PLAYER, Common_Movement_FaceUp)
-                    setobjectxy(CHARLOTTE, 22, 4)
-                    copyobjectxytoperm(CHARLOTTE)
-                    applymovement(CHARLOTTE, moves(walk_down * 6, step_end))
-            } else {
-                applymovement(PLAYER, Common_Movement_FaceLeft)
-                    setobjectxy(CHARLOTTE, 10, 6)
-                    copyobjectxytoperm(CHARLOTTE)
-                    applymovement(CHARLOTTE, moves(walk_right * 7, step_end))
-            }
-        }
-    waitmovement(0)
-        goto(VSGarbodor_DefeatedAll_Dialogue)
+    if (var(VAR_INNER_CONSTRUCTION_SITE_STATE) == PLAYER_LEFT_SIDE)
+    {
+        moveobjecttocoords(LOCALID_VS_GARBODOR_CHARLOTTE,5,9,DIR_WEST)
+    }
+    else
+    {
+        moveobjecttocoords(LOCALID_VS_GARBODOR_CHARLOTTE,16,5,DIR_EAST)
+    }
+    waitmovement(LOCALID_VS_GARBODOR_CHARLOTTE)
+    goto(VSGarbodor_DefeatedAll_Dialogue)
 }
 
 script VSGarbodor_DefeatedAll_Dialogue {
@@ -241,9 +222,10 @@ script VSGarbodor_DefeatedAll_Dialogue {
         msgbox(format("God, you were taking forever. They don't teach efficiency in Orre, do they?"),,SPEAKER_CHARLOTTE)
         closemessage
 
-        applymovement(CHARLOTTE, moves(face_up, delay_16, face_left, delay_16, face_right, delay_16, step_end))
+        applymovement(LOCALID_VS_GARBODOR_CHARLOTTE, moves(face_up, delay_16, face_left, delay_16, face_right, delay_16, step_end))
         waitmovement(0)
-        msgbox(format("Whatever. Mine were easy, they just both used Self-Destruct before I could really get a move in. I already texted Oliver, he said meet in front of the construction site."),,SPEAKER_CHARLOTTE)
+        buffermovename(STR_VAR_1,MOVE_SELFDESTRUCT)
+        msgbox(format("Whatever. Mine were easy, they just both used {STR_VAR_1} before I could really get a move in. I already texted Oliver, he said meet in front of the construction site."),,SPEAKER_CHARLOTTE)
         closemessage
 
         fadeblackandsetremovewarpfadeflag
@@ -253,34 +235,36 @@ script VSGarbodor_DefeatedAll_Dialogue {
 }
 
 script VSGarbodor_Arrest_Script {
+        lock
     setvar(VAR_CONSTRUCTION_STRIKE_STATE,THE_TIDE_ARRESTED)
         setvar(VAR_STORYLINE_STATE,STORY_DEFEATED_GARBODOR)
 
-        applymovement(LUCREZIA,Common_Movement_FaceUp)
-        applymovement(CHARLOTTE,Common_Movement_FaceUp)
-        applymovement(OLIVER,Common_Movement_FaceUp)
+        applymovement(LOCALID_ROUTE2_LUCREZIA,Common_Movement_FaceUp)
+        applymovement(LOCALID_ROUTE2_CHARLOTTE,Common_Movement_FaceUp)
+        applymovement(LOCALID_ROUTE2_OLIVER,Common_Movement_FaceUp)
         applymovement(PLAYER,Common_Movement_FaceUp)
         waitmovement(0)
 
-        applymovement(ROCKET_A, VSGarbodor_PerpWalk)
-        applymovement(ROCKET_B, VSGarbodor_PerpWalk)
-        applymovement(POLICE_A, VSGarbodor_PerpWalk)
-        applymovement(POLICE_B, VSGarbodor_PerpWalk)
+        applymovement(LOCALID_ROUTE2_TIDE_A, VSGarbodor_PerpWalk)
+        applymovement(LOCALID_ROUTE2_TIDE_B, VSGarbodor_PerpWalk)
+        applymovement(LOCALID_ROUTE2_VIGRIM, VSGarbodor_PerpWalk)
+        applymovement(LOCALID_ROUTE2_POLICE_A, VSGarbodor_PerpWalk)
+        applymovement(LOCALID_ROUTE2_POLICE_B, VSGarbodor_PerpWalk)
         waitmovement(0)
 
         call(VSGarbodor_CleanUpPerpWalk)
-        applymovement(LUCREZIA, Common_Movement_FaceDown)
-        applymovement(CHARLOTTE, Common_Movement_FaceDown)
+        applymovement(LOCALID_ROUTE2_LUCREZIA, Common_Movement_FaceDown)
+        applymovement(LOCALID_ROUTE2_CHARLOTTE, Common_Movement_FaceDown)
         waitmovement(0)
         goto(VSGarbodor_Negotiating_Dialogue)
 }
 
 script VSGarbodor_CleanUpPerpWalk {
-    removeobject(ROCKET_A)
-        removeobject(ROCKET_B)
-        removeobject(POLICE_A)
-        removeobject(POLICE_B)
-        removeobject(VIGRIM)
+    removeobject(LOCALID_ROUTE2_TIDE_A)
+        removeobject(LOCALID_ROUTE2_TIDE_B)
+        removeobject(LOCALID_ROUTE2_POLICE_A)
+        removeobject(LOCALID_ROUTE2_POLICE_B)
+        removeobject(LOCALID_ROUTE2_VIGRIM)
 }
 
 script VSGarbodor_Negotiating_Dialogue
@@ -292,22 +276,40 @@ script VSGarbodor_Negotiating_Dialogue
         msgbox(format("Thank you both, and I'm sorry you had to get dragged into this. I'll work with our team to figure out what to do about the Championship."),,SPEAKER_LUCREZIA)
         msgbox(format("To show my appreciation, I have these for you."),,SPEAKER_LUCREZIA)
         closemessage
+        cueobjectplayer(LOCALID_ROUTE2_LUCREZIA)
 		callnative(Script_VSGarbodor_ChooseGemBasedOnStarter)
         giveitem(VAR_0x8003,1)
 
+        applymovement(LOCALID_ROUTE2_CHARLOTTE,Common_Movement_FaceLeft)
+        waitmovement(LOCALID_ROUTE2_CHARLOTTE)
         msgbox(format("How did you get these? I've been trying to get daddy to buy me a set of these for YEARS!"),,SPEAKER_CHARLOTTE,TAIL_SHOUT,EMOTE_SHOCK)
-        msgbox(format("...Did I miss someting?"),,SPEAKER_ALICIA,,EMOTE_CONFUSE)
+        msgbox(format("...Did I miss something?"),,SPEAKER_ALICIA,,EMOTE_CONFUSE)
         msgbox(format("They're only found in Unova, but they're impossible to get a hold of. They've been banned everywhere for like six years!"),,SPEAKER_CHARLOTTE,,EMOTE_SHOCK)
         msgbox(format("They are indeed removed from circulation worldwide, but consider it a perk. SharpRise Capital is an investor in Clay's Driftveil mining operations, and you've more than earned it. Make sure one of you wins the Championship with one of these!"),,SPEAKER_LUCREZIA)
         msgbox(format("Now, I think you two should head back to the Compound and get some rest."),,SPEAKER_LUCREZIA)
+        closemessage
+
+        //moveobjecttocoords(LOCALID_ROUTE2_LUCREZIA,13,21,DIR_SOUTH,3)
+        //delay(16)
+        //moveobjecttocoords(LOCALID_ROUTE2_OLIVER,13,20,DIR_SOUTH,3)
+        //delay(16)
+        removeobject(LOCALID_ROUTE2_LUCREZIA)
+        removeobject(LOCALID_ROUTE2_OLIVER)
+        moveobjecttocoords(LOCALID_ROUTE2_CHARLOTTE,20,21,DIR_SOUTH,3)
+        delay(16)
+        waitmovement(LOCALID_ROUTE2_CHARLOTTE)
         buffermapname(STR_VAR_1,MAP_CUCONU_TOWN_SHARPRISE_COMPOUND_1F)
         msgbox(format("Yeah, I'm beat. Do you want a ride back to {STR_VAR_1}?"), MSGBOX_YESNO,SPEAKER_CHARLOTTE)
 
-        if (var (VAR_RESULT) == NO) {
+        if (var (VAR_RESULT) == NO)
+        {
 
             msgbox(format("Weird, but okay. I'll see you around."),,SPEAKER_CHARLOTTE)
-
                 closemessage
+            waitmovement(LOCALID_ROUTE2_LUCREZIA)
+            waitmovement(LOCALID_ROUTE2_OLIVER)
+                removeobject(LOCALID_ROUTE2_LUCREZIA)
+                removeobject(LOCALID_ROUTE2_OLIVER)
                 call(VSGarbodor_FlyWithoutPlayer_Script)
                 release
                 end
@@ -325,13 +327,13 @@ script VSGarbodor_Negotiating_Dialogue
 }
 
 script VSGarbodor_FlyWithoutPlayer_Script {
-    applymovement(CHARLOTTE, Common_Movement_WalkInPlaceFasterDown)
+    applymovement(LOCALID_ROUTE2_CHARLOTTE, Common_Movement_WalkInPlaceFasterDown)
         waitmovement(0)
         delay(50)
         setfieldeffectargument(0,1)
         dofieldeffect(FLDEFF_NPCFLY_OUT)
         delay(15)
-        removeobject(CHARLOTTE)
+        removeobject(LOCALID_ROUTE2_CHARLOTTE)
         waitfieldeffect(FLDEFF_NPCFLY_OUT)
 }
 
@@ -358,11 +360,11 @@ script VSGarbodor_ReturnToTheCompound_Dialogue {
 
                 closemessage
 
-                applymovement(CHARLOTTE, moves(walk_up, step_end))
-                waitmovement(0)
+                applymovement(SHARPRISE_COMPOUND_1F_CHARLOTTE, moves(walk_up, step_end))
+                waitmovement(SHARPRISE_COMPOUND_1F_CHARLOTTE)
                 playse(SE_EXIT)
                 waitse
-                removeobject(CHARLOTTE)
+                removeobject(SHARPRISE_COMPOUND_1F_CHARLOTTE)
                 setvar(VAR_STORYLINE_STATE,STORY_NEED_SLEEP_BEFORE_FRANK)
 
         call(TryAutoSave)

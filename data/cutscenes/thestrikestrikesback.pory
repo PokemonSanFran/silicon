@@ -1,84 +1,45 @@
 const PLAYER = OBJ_EVENT_ID_PLAYER
-const CHARLOTTE = 1
-const OLIVER = 2
-const VIGRIM = 3
-const ROCKET_A = 4
-const ROCKET_B = 5
-const CROWD_A = 6
-const CROWD_B = 7
-const CROWD_C = 8
-const POLICE_A = 9
-const POLICE_B = 10
-const LUCREZIA = 11
-const ORI = 12
+const LOCALID_ROUTE2_CHARLOTTE = LOCALID_CAMERA + 1
+const LOCALID_ROUTE2_OLIVER = LOCALID_CAMERA + 2
+const LOCALID_ROUTE2_LUCREZIA = LOCALID_CAMERA + 3
+const LOCALID_ROUTE2_VIGRIM = LOCALID_CAMERA + 4
+const LOCALID_ROUTE2_POLICE_A = LOCALID_CAMERA + 5
+const LOCALID_ROUTE2_POLICE_B = LOCALID_CAMERA + 6
+const LOCALID_ROUTE2_TIDE_A = LOCALID_CAMERA + 7
+const LOCALID_ROUTE2_TIDE_B = LOCALID_CAMERA + 8
 
-const FLAG_HIDE_LUCREZIA = FLAG_TEMP_1
-const FLAG_HIDE_ROCKET_POLICE = FLAG_TEMP_2
-const FLAG_HIDE_OLIVER = FLAG_TEMP_3
-const FLAG_HIDE_CHARLOTTE = FLAG_TEMP_4
-const FLAG_HIDE_CROWD = FLAG_TEMP_5
-const FLAG_HIDE_ORI = FLAG_TEMP_6
-
-script TheStrikeStrikesBack_HideObject_Script {
-    setflag(FLAG_HIDE_LUCREZIA)
-        setflag(FLAG_HIDE_ROCKET_POLICE)
-        setflag(FLAG_HIDE_OLIVER)
-        setflag(FLAG_HIDE_CHARLOTTE)
-        setflag(FLAG_HIDE_CROWD)
-        return
+script TheStrikeStrikesBack_Script_AddOliverCharlotte
+{
+    spawnobject(OBJ_EVENT_GFX_OLIVER,LOCALID_ROUTE2_OLIVER,21,26,DIR_NORTH,3)
+    spawnobject(OBJ_EVENT_GFX_CHARLOTTE,LOCALID_ROUTE2_CHARLOTTE,22,26,DIR_WEST,3)
 }
 
-script TheStrikeStrikesBack_ShowCrowd_Script{
-    setflag(FLAG_HIDE_LUCREZIA)
-        setflag(FLAG_HIDE_ROCKET_POLICE)
-        setflag(FLAG_HIDE_OLIVER)
-        setflag(FLAG_HIDE_CHARLOTTE)
+script TheStrikeStrikesBack_UnblockConstruction_Script
+{
+    setmetatile(21,19,0x211,FALSE)
+    special(DrawWholeMapView)
 }
 
-script TheStrikeStrikesBack_UnblockConstruction_Script {
-    if (var(VAR_CONSTRUCTION_STRIKE_STATE)) {
-        setmetatile(21,19,0x211,FALSE)
-            special(DrawWholeMapView)
-    }
-    return
+script TheStrikeStrikesBack_AddRocketObjects_Script
+{
+    spawnobject(OBJ_EVENT_GFX_VIGRIM,LOCALID_ROUTE2_VIGRIM,21,19,DIR_SOUTH,3)
+    spawnobject(OBJ_EVENT_GFX_COMRADE_5,LOCALID_ROUTE2_TIDE_A,20,18,DIR_SOUTH,3)
+    spawnobject(OBJ_EVENT_GFX_COMRADE_9,LOCALID_ROUTE2_TIDE_B,22,18,DIR_SOUTH,3)
 }
 
-script TheStrikeStrikesBack_ObjectSetup_Script {
-    setflag(FLAG_HIDE_LUCREZIA)
-        setflag(FLAG_HIDE_ROCKET_POLICE)
-}
-
-script TheStrikeStrikesBack_AddRocketObjects_Script{
-    addobject(VIGRIM)
-        addobject(ROCKET_A)
-        addobject(ROCKET_B)
-
-        setobjectxy(VIGRIM,21,19)
-        setobjectxy(ROCKET_A,20,18)
-        setobjectxy(ROCKET_B,22,18)
-        return
-}
-
-script TheStrikeStrikesBack_ObjectCleanup_Script {
-    removeobject(OLIVER)
-        removeobject(CHARLOTTE)
-        removeobject(VIGRIM)
-        removeobject(ROCKET_A)
-        removeobject(ROCKET_B)
-}
-
-script TheStrikeStrikesBack_CrowdFacesNorth_Script {
+script TheStrikeStrikesBack_CrowdFacesNorth_Script
+{
     playse(SE_PIN)
-        applymovement(6,TheStrikeStrikesBack_FaceNorth)
-        applymovement(7,Common_Movement_FaceUp)
-        applymovement(8,TheStrikeStrikesBack_FaceNorth)
-        applymovement(9,Common_Movement_FaceUp)
-        applymovement(10,Common_Movement_FaceUp)
-        applymovement(11,TheStrikeStrikesBack_FaceNorth)
-        applymovement(CHARLOTTE,TheStrikeStrikesBack_FaceNorth)
-        applymovement(OLIVER,TheStrikeStrikesBack_FaceNorth)
-        applymovement(PLAYER,Common_Movement_FaceUp)
-        waitmovement(0)
+    applymovement(LOCALID_ROUTE2_CROWD_A,TheStrikeStrikesBack_FaceNorth)
+    applymovement(LOCALID_ROUTE2_CROWD_B,Common_Movement_FaceUp)
+    applymovement(LOCALID_ROUTE2_CROWD_C,TheStrikeStrikesBack_FaceNorth)
+    applymovement(LOCALID_ROUTE2_POLICE_A,Common_Movement_FaceUp)
+    applymovement(LOCALID_ROUTE2_POLICE_B,Common_Movement_FaceUp)
+    applymovement(LOCALID_ROUTE2_LUCREZIA,TheStrikeStrikesBack_FaceNorth)
+    applymovement(LOCALID_ROUTE2_CHARLOTTE,TheStrikeStrikesBack_FaceNorth)
+    applymovement(LOCALID_ROUTE2_OLIVER,TheStrikeStrikesBack_FaceNorth)
+    applymovement(PLAYER,Common_Movement_FaceUp)
+    waitmovement(PLAYER)
 }
 
 script TheStrikeStrikesBack_PhoneCall_Dialogue
@@ -94,16 +55,18 @@ script TheStrikeStrikesBack_PhoneCall_Dialogue
         msgbox(format("Lucrezia! Aren't you busy...?"),MSGBOX_DEFAULT,SPEAKER_ALICIA,TAIL_DEFAULT,EMOTE_DEFAULT,PHONE_ON)
 
         specialvar(VAR_0x8004,GetCurrentMap)
-        switch(var(VAR_0x8004)){
-            case 31:
-            case 37:
-            case 38:
-            case 42: msgbox(format("Nonsense, I'm never too busy to congratulate you on all eight badges!"),MSGBOX_DEFAULT,SPEAKER_LUCREZIA,TAIL_DEFAULT,EMOTE_DEFAULT,PHONE_ON)
+        switch(var(VAR_0x8004))
+        {
+            case MAP_IRISINA_TOWN:
+            case MAP_HALERBA_CITY:
+            case MAP_FORT_YOBU:
+            case MAP_TIRABUDIN_PLACE: msgbox(format("Nonsense, I'm never too busy to congratulate you on all eight badges!"),MSGBOX_DEFAULT,SPEAKER_LUCREZIA,TAIL_DEFAULT,EMOTE_DEFAULT,PHONE_ON)
             default: msgbox(format("So busy in fact, that I'm late in congratulating you. I hear you've got all eight badges!"),MSGBOX_DEFAULT,SPEAKER_LUCREZIA,TAIL_DEFAULT,EMOTE_DEFAULT,PHONE_ON)
         }
 
     msgbox(format("Heh, thanks! Means a lot."),,SPEAKER_ALICIA)
-        msgbox(format("You're right though, we're both about to be very busy. I'll cut to the chase. Could you head down to Route2? Oliver will meet you there and explain everything."),MSGBOX_DEFAULT,SPEAKER_LUCREZIA,TAIL_DEFAULT,EMOTE_DEFAULT,PHONE_ON)
+        buffermapname(STR_VAR_1,MAP_ROUTE2)
+        msgbox(format("You're right though, we're both about to be very busy. I'll cut to the chase. Could you head down to {STR_VAR_1}? Oliver will meet you there and explain everything."),MSGBOX_DEFAULT,SPEAKER_LUCREZIA,TAIL_DEFAULT,EMOTE_DEFAULT,PHONE_ON)
         msgbox(format("Sure. Be right there!"),MSGBOX_DEFAULT,SPEAKER_ALICIA,TAIL_DEFAULT,EMOTE_DEFAULT,PHONE_ON)
         playse(SE_POKENAV_HANG_UP)
         closemessage
@@ -130,9 +93,9 @@ script TheStrikeStrikesBack_Intro_Dialogue
 
             call(TheStrikeStrikesBack_AddRocketObjects_Script)
 
-            applymovement(VIGRIM,TheStrikeStrikesBack_WalkIntoFrame)
-            applymovement(ROCKET_A,TheStrikeStrikesBack_WalkIntoFrame)
-            applymovement(ROCKET_B,TheStrikeStrikesBack_WalkIntoFrame)
+            applymovement(LOCALID_ROUTE2_VIGRIM,TheStrikeStrikesBack_WalkIntoFrame)
+            applymovement(LOCALID_ROUTE2_TIDE_A,TheStrikeStrikesBack_WalkIntoFrame)
+            applymovement(LOCALID_ROUTE2_TIDE_B,TheStrikeStrikesBack_WalkIntoFrame)
             waitmovement(0)
 
             call(TheStrikeStrikesBack_CrowdFacesNorth_Script)
@@ -144,18 +107,19 @@ script TheStrikeStrikesBack_Intro_Dialogue
 
             msgbox(format("We are fighting alongside the construction workers here, and we are hoping to come to a reasonable conclusion for all."),,SPEAKER_VIGRIM)
 
-            msgbox(format("Our single demand is that the pay for all Sharprise Stadium construction workers is doubled. Until this demand is met, these hard-working Resido laborers will dig not another hole, place another brick, or lay another cable."),,SPEAKER_VIGRIM)
+            buffermapname(STR_VAR_1,MAP_SHARPRISE_STADIUM_ARENA)
+            msgbox(format("Our single demand is that the pay for all {STR_VAR_1} construction workers is doubled. Until this demand is met, these hard-working Resido laborers will dig not another hole, place another brick, or lay another cable."),,SPEAKER_VIGRIM)
 
             closemessage
 
-            applymovement(VIGRIM,TheStrikeStrikesBack_WalkOutFrame)
-            applymovement(ROCKET_A,TheStrikeStrikesBack_WalkOutFrame)
-            applymovement(ROCKET_B,TheStrikeStrikesBack_WalkOutFrame)
-            applymovement(CHARLOTTE,Common_Movement_FaceLeft)
+            applymovement(LOCALID_ROUTE2_VIGRIM,TheStrikeStrikesBack_WalkOutFrame)
+            applymovement(LOCALID_ROUTE2_TIDE_A,TheStrikeStrikesBack_WalkOutFrame)
+            applymovement(LOCALID_ROUTE2_TIDE_B,TheStrikeStrikesBack_WalkOutFrame)
+            applymovement(LOCALID_ROUTE2_CHARLOTTE,Common_Movement_FaceLeft)
             applymovement(PLAYER,Common_Movement_FaceDown)
-            applymovement(9,Common_Movement_FaceDown)
-            applymovement(7,Common_Movement_FaceLeft)
-            applymovement(6,Common_Movement_FaceRight)
+            applymovement(LOCALID_ROUTE2_POLICE_A,Common_Movement_FaceDown)
+            applymovement(LOCALID_ROUTE2_CROWD_A,Common_Movement_FaceLeft)
+            applymovement(LOCALID_ROUTE2_CROWD_B,Common_Movement_FaceRight)
 
             waitmovement(0)
 
@@ -165,23 +129,26 @@ script TheStrikeStrikesBack_Intro_Dialogue
 
             msgbox(format("Agreed, and that's why we need you two while Lucrezia and I work on a peaceful solution."),,SPEAKER_OLIVER)
 
-            msgbox(format("The police are working to make sure the protests remain civil but we don't want a repeat of the riots in CapheCity."),,SPEAKER_OLIVER)
+            buffermapname(STR_VAR_1,MAP_CAPHE_CITY)
+            msgbox(format("The police are working to make sure the protests remain civil but we don't want a repeat of the riots in {STR_VAR_1}."),,SPEAKER_OLIVER)
 
-            msgbox(format("We think The Tide agitated wild Garbodor, and we need you to capture or knock them out while Lucrezia and I negotiate with Vigrim. Time is of the essence!"),,SPEAKER_OLIVER)
+            bufferspeciesname(STR_VAR_1,SPECIES_GARBODOR)
+            msgbox(format("We think The Tide agitated wild {STR_VAR_1}, and we need you to capture or knock them out while Lucrezia and I negotiate with Vigrim. Time is of the essence!"),,SPEAKER_OLIVER)
 
             closemessage
 
-            applymovement(OLIVER,TheStrikeStrikesBack_WalkOutFrame)
-            waitmovement(0)
-            applymovement(CHARLOTTE, moves(walk_left, face_up, step_end))
-            waitmovement(0)
+            applymovement(LOCALID_ROUTE2_OLIVER,TheStrikeStrikesBack_WalkOutFrame)
+            applymovement(LOCALID_ROUTE2_CHARLOTTE, moves(walk_left, face_up, step_end))
+            waitmovement(LOCALID_ROUTE2_OLIVER)
 
             msgbox(format("{PLAYER}, I'll be in there when you're ready."),,SPEAKER_CHARLOTTE)
 
             closemessage
-            applymovement(CHARLOTTE,TheStrikeStrikesBack_WalkOutFrame)
+            applymovement(LOCALID_ROUTE2_CHARLOTTE,TheStrikeStrikesBack_WalkOutFrame)
             waitmovement(0)
-            call(TheStrikeStrikesBack_ObjectCleanup_Script)
+            removeobject(LOCALID_ROUTE2_CHARLOTTE)
+            removeobject(LOCALID_ROUTE2_OLIVER)
+            //call(TheStrikeStrikesBack_ObjectCleanup_Script)
     call(TryAutoSave)
 endcutscene
             release
@@ -200,14 +167,6 @@ movement TheStrikeStrikesBack_WalkIntoFrame {
 movement TheStrikeStrikesBack_WalkOutFrame {
     walk_left * 2
         walk_up * 8
-        step_end
-}
-movement TurnInivisible {
-    set_invisible
-        step_end
-}
-movement TurnVisible {
-    set_visible
         step_end
 }
 
