@@ -196,10 +196,8 @@ script KeiyingRaisonDetre_StartDinner_Script {
 }
 
 script KeiyingRaisonDetre_DinnerConversation_Dialogue {
-    special(SpawnCameraObject)
-        setvar(VAR_0x8004, 37)
-        setvar(VAR_0x8005, 5)
-        special(TeleportCamera)
+        special(SpawnCameraObject)
+        TeleportCamera(37,5)
         special(DrawWholeMapView)
         fadescreen(FADE_FROM_BLACK)
         applymovement(CAMERA, moves(walk_slow_right * 6, step_end))
@@ -212,8 +210,6 @@ script KeiyingRaisonDetre_DinnerConversation_Dialogue {
         closemessage
 		waitmovement(CAMERA)
         fadescreen(FADE_TO_BLACK)
-        TeleportCamera(43,5)
-        special(RemoveCameraObject)
         delay(60)
         playse(SE_POKENAV_CALL)
         waitse
@@ -279,6 +275,8 @@ script KeiyingRaisonDetre_NewsStory_Script {
         setobjectnewmovementtype(CRYING_MAID, MOVEMENT_TYPE_FACE_UP)
         setobjectnewmovementtype(5, MOVEMENT_TYPE_FACE_UP)
         lockall
+        special(ReturnCameraToPlayer)
+        special(RemoveCameraObject)
         fadescreen(FADE_FROM_BLACK)
         special(TurnOnTVScreen)
         delay(60)
@@ -301,11 +299,14 @@ script KeiyingRaisonDetre_NewsStory_Script {
         msgbox(format("I'm sorry. My… son is in the ICU after the riots last night. The Tide keeps getting impressionable young folk involved in their nonsense… I hope the city can get rid of them!"),,SPEAKER_MAID)
         closemessage
         applymovement(CRYING_MAID, moves(walk_up * 2, walk_faster_left * 8))
+        delay(32)
+        fadescreen(FADE_TO_BLACK)
         waitmovement(0)
         removeobject(CRYING_MAID)
         removeobject(KEIYING)
         addvar(VAR_STORYLINE_STATE,1)
         setvar(VAR_KEIYING_STATE, STATE_KEIYING_POST_RAISON_DETRE)
+        fadescreen(FADE_FROM_BLACK)
         call(TryAutoSave)
         endcutscene
         release
