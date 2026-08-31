@@ -10400,7 +10400,10 @@ bool8 IsElevationMismatchAt(u8 elevation, s16 x, s16 y)
 
     mapElevation = MapGridGetElevationAt(x, y);
 
-    if (mapElevation == ELEVATION_TRANSITION || mapElevation == ELEVATION_MULTI_LEVEL)
+// Start expandMetatileCount
+    //if (mapElevation == ELEVATION_TRANSITION || mapElevation == ELEVATION_MULTI_LEVEL)
+    if (mapElevation == ELEVATION_TRANSITION || mapElevation == ELEVATION_LEVEL_MAX)
+// End expandMetatileCount
         return FALSE;
 
     if (mapElevation != elevation)
@@ -10459,7 +10462,10 @@ void ObjectEventUpdateElevation(struct ObjectEvent *objEvent, struct Sprite *spr
     u8 curElevation = MapGridGetElevationAt(objEvent->currentCoords.x, objEvent->currentCoords.y);
     u8 prevElevation = MapGridGetElevationAt(objEvent->previousCoords.x, objEvent->previousCoords.y);
 
-    if (curElevation == ELEVATION_MULTI_LEVEL || prevElevation == ELEVATION_MULTI_LEVEL)
+// Start expandMetatileCount
+    //if (curElevation == ELEVATION_MULTI_LEVEL || prevElevation == ELEVATION_MULTI_LEVEL)
+    if (curElevation == ELEVATION_LEVEL_MAX || prevElevation == ELEVATION_LEVEL_MAX)
+// End expandMetatileCount
     {
         // Ignore subsprite priorities under bridges
         // so all subsprites will display below it
@@ -10470,7 +10476,10 @@ void ObjectEventUpdateElevation(struct ObjectEvent *objEvent, struct Sprite *spr
 
     objEvent->currentElevation = curElevation;
 
-    if (curElevation != ELEVATION_TRANSITION && curElevation != ELEVATION_MULTI_LEVEL)
+// Start expandMetatileCount
+    //if (curElevation != ELEVATION_TRANSITION && curElevation != ELEVATION_MULTI_LEVEL)
+    if (curElevation != ELEVATION_TRANSITION && curElevation != ELEVATION_LEVEL_MAX)
+// End expandMetatileCount
         objEvent->previousElevation = curElevation;
 }
 
