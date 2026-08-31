@@ -857,10 +857,10 @@ static const struct PlayerAdventureText playerAdventureText[] =
     {
       {
         .dataType = QUEST_FLAVOR_COMPARE_VAR,
-        .dataAddress = VAR_STORYLINE_STATE,
+        .dataAddress = VAR_CONSTRUCTION_STRIKE_STATE,
         .compareOp = EQUAL,
-        .targetValue = STORY_NEED_SLEEP_BEFORE_FRANK,
-      }
+        .targetValue = THE_TIDE_ARRESTED,
+      },
     }
   },
   {
