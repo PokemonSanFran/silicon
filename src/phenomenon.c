@@ -45,6 +45,7 @@ u8 IsThereAPhenomenonOnCords(s16 coordX, s16 coordXY);
 u16 getFieldEffectForPhenomenon(u16 slot);
 static u32 CalculateDistanceBetweenPoints(s16 x1, s16 y1, s16 x2, s16 y2);
 static inline unsigned int GetPhenomenonVolume(void);
+static void Task_UpdatePhenomenonVolume(u8 taskId);
 
 struct Phenomenon{
     u8 fldEffSpriteId;
@@ -476,6 +477,7 @@ void TryCreatingPhenomenon(void){
         if(GeneratePhenomenonTile(emptyPhenomenonSlot)){
 
             if(GeneratePhenomenonFieldEffectAt(emptyPhenomenonSlot, getFieldEffectForPhenomenon(emptyPhenomenonSlot))){
+                u8 taskId;
                 sPhenomenonData[emptyPhenomenonSlot].active = TRUE;
                 emptyPhenomenonSlot++;
                 taskId = CreateTask(Task_UpdatePhenomenonVolume, 64);
@@ -711,25 +713,24 @@ static inline unsigned int ModulatePhenomenonVolume(unsigned int curVolume, unsi
     else if (curVolume > targetVolume)
         return curVolume - 4;
     return curVolume;
+}
 
 static void Task_UpdatePhenomenonVolume(u8 taskId)
 {
-    s16 distance;
     struct Task * task;
     unsigned int targetVolume = 0;
-    s16 phenomenonX = sPhenomenonData[0].coordX + MAP_OFFSET;
-    s16 phenomenonY = sPhenomenonData[0].coordY + MAP_OFFSET;
-    distance = GetCurrentDistanceFromPlayer(phenomenonX, phenomenonY);
     task = &gTasks[taskId];
 
     if (sPhenomenonData[0].active == FALSE)
     {
-        DestroyTask(taskid);
+        DestroyTask(taskId);
         return;
     }
 
-    tVolume = ModulatePhenomenonVolume(tVolume, GetPhenomenonVolume());
-    m4aMPlayVolumeControl(&gMPlayInfo_SE4, TRACKS_ALL, (u16)tVolume);
+    targetVolume = ModulatePhenomenonVolume(task->data[0], GetPhenomenonVolume());
+    task->data[0] = targetVolume;
+    m4aMPlayVolumeControl(&gMPlayInfo_SE4, TRACKS_ALL, (u16)targetVolume);
+    DebugPrintf("Volume: %d\n", (u16)targetVolume);
 }
 
 void SpriteCB_PlayFieldEffectSound(struct Sprite *sprite)
@@ -769,6 +770,7 @@ void SpriteCB_PlayFieldEffectSound(struct Sprite *sprite)
     {
         PlaySE(sound);
         sprite->sSoundEffectDelay = 1;
+        DebugPrintf("SE Played!\n");
     }
     else
     {

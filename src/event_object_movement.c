@@ -12845,8 +12845,8 @@ u16 GetCurrentDistanceFromPlayer(u8 x, u8 y)
 {
     unsigned int xDistance, yDistance;
 
-    xDistance = ABS(tPlayerX - x);
-    yDistance = ABS(tPlayerY - y);
+    xDistance = abs(tPlayerX - x);
+    yDistance = abs(tPlayerY - y);
 
     return max(xDistance, yDistance);
 }
@@ -12855,8 +12855,8 @@ s16 GetPreviousDistanceFromPlayer(u8 x, u8 y)
 {
     unsigned int xDistance, yDistance;
 
-    xDistance = ABS(tPlayerPrevX - x);
-    yDistance = ABS(tPlayerPrevY - y);
+    xDistance = abs(tPlayerPrevX - x);
+    yDistance = abs(tPlayerPrevY - y);
 
     return max(xDistance, yDistance);
 }
