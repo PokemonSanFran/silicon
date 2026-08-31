@@ -13763,8 +13763,8 @@
     {
       "id": "LAYOUT_REGULAR_INDOOR_TEST",
       "name": "RegularIndoorTest_Layout",
-      "width": 15,
-      "height": 15,
+      "width": 20,
+      "height": 30,
       "primary_tileset": "gTileset_BuildingSilicon",
       "secondary_tileset": "gTileset_RegularIndoors",
       "border_filepath": "data/layouts/RegularIndoorTest/border.bin",
