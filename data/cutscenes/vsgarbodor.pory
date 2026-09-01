@@ -128,7 +128,7 @@ script VSGarbodor_The_TideGrunt4_Battle_Script
 }
 
 script VS_Garbodor_CoreEncounter_Script {
-goto(PathfinderDebug)
+//goto(PathfinderDebug)
     startmenu_savescreen
         faceplayer
         setwildbattle(SPECIES_GARBODOR, 40, ITEM_NORMAL_GEM)
@@ -279,59 +279,54 @@ script VSGarbodor_CleanUpPerpWalk {
 
 script VSGarbodor_Negotiating_Dialogue
 {
-    //msgbox(format("As we were negotiating, things started to get a little rowdy. The police aren't taking any chances this time, so they've halted escalation… for now. I'm hoping to continue the conversations over email, which are a little more civilized. How's the SharpRise Capital Task Force?"),,SPEAKER_LUCREZIA)
+    msgbox(format("As we were negotiating, things started to get a little rowdy. The police aren't taking any chances this time, so they've halted escalation… for now. I'm hoping to continue the conversations over email, which are a little more civilized. How's the SharpRise Capital Task Force?"),,SPEAKER_LUCREZIA)
+    msgbox(format("Done. Like you guys said, The Tide up to their shit as usual."),,SPEAKER_ALICIA)
+    msgbox(format("Thank you both, and I'm sorry you had to get dragged into this. I'll work with our team to figure out what to do about the Championship."),,SPEAKER_LUCREZIA)
+    msgbox(format("To show my appreciation, I have these for you."),,SPEAKER_LUCREZIA)
+    closemessage
+    cueobjectplayer(LOCALID_ROUTE2_LUCREZIA)
+    callnative(Script_VSGarbodor_ChooseGemBasedOnStarter)
+    giveitem(VAR_0x8003,1)
 
-        //msgbox(format("Done. Like you guys said, The Tide up to their shit as usual."),,SPEAKER_ALICIA)
+    applymovement(LOCALID_ROUTE2_CHARLOTTE,Common_Movement_FaceLeft)
+    waitmovement(LOCALID_ROUTE2_CHARLOTTE)
+    msgbox(format("How did you get these? I've been trying to get daddy to buy me a set of these for YEARS!"),,SPEAKER_CHARLOTTE,TAIL_SHOUT,EMOTE_SHOCK)
+    msgbox(format("...Did I miss something?"),,SPEAKER_ALICIA,,EMOTE_CONFUSE)
+    msgbox(format("They're only found in Unova, but they're impossible to get a hold of. They've been banned everywhere for like six years!"),,SPEAKER_CHARLOTTE,,EMOTE_SHOCK)
+    msgbox(format("They are indeed removed from circulation worldwide, but consider it a perk. SharpRise Capital is an investor in Clay's Driftveil mining operations, and you've more than earned it. Make sure one of you wins the Championship with one of these!"),,SPEAKER_LUCREZIA)
+    msgbox(format("Now, I think you two should head back to the Compound and get some rest."),,SPEAKER_LUCREZIA)
+    closemessage
 
-        //msgbox(format("Thank you both, and I'm sorry you had to get dragged into this. I'll work with our team to figure out what to do about the Championship."),,SPEAKER_LUCREZIA)
-        //msgbox(format("To show my appreciation, I have these for you."),,SPEAKER_LUCREZIA)
-        //closemessage
-        //cueobjectplayer(LOCALID_ROUTE2_LUCREZIA)
-		//callnative(Script_VSGarbodor_ChooseGemBasedOnStarter)
-        //giveitem(VAR_0x8003,1)
+    moveobjecttocoords(LOCALID_ROUTE2_LUCREZIA,13,21,DIR_SOUTH)
+    delay(16)
+    moveobjecttocoords(LOCALID_ROUTE2_OLIVER,13,20,DIR_SOUTH)
+    delay(16)
+    moveobjecttocoords(LOCALID_ROUTE2_CHARLOTTE,20,21,DIR_SOUTH)
+    delay(16)
+    waitmovement(LOCALID_ROUTE2_CHARLOTTE)
+    buffermapname(STR_VAR_1,MAP_CUCONU_TOWN_SHARPRISE_COMPOUND_1F)
+    msgbox(format("Yeah, I'm beat. Do you want a ride back to {STR_VAR_1}?"), MSGBOX_YESNO,SPEAKER_CHARLOTTE)
 
-        applymovement(LOCALID_ROUTE2_CHARLOTTE,Common_Movement_FaceLeft)
-        waitmovement(LOCALID_ROUTE2_CHARLOTTE)
-        //msgbox(format("How did you get these? I've been trying to get daddy to buy me a set of these for YEARS!"),,SPEAKER_CHARLOTTE,TAIL_SHOUT,EMOTE_SHOCK)
-        //msgbox(format("...Did I miss something?"),,SPEAKER_ALICIA,,EMOTE_CONFUSE)
-        //msgbox(format("They're only found in Unova, but they're impossible to get a hold of. They've been banned everywhere for like six years!"),,SPEAKER_CHARLOTTE,,EMOTE_SHOCK)
-        //msgbox(format("They are indeed removed from circulation worldwide, but consider it a perk. SharpRise Capital is an investor in Clay's Driftveil mining operations, and you've more than earned it. Make sure one of you wins the Championship with one of these!"),,SPEAKER_LUCREZIA)
-        msgbox(format("Now, I think you two should head back to the Compound and get some rest."),,SPEAKER_LUCREZIA)
+    if (var (VAR_RESULT) == NO)
+    {
+        msgbox(format("Weird, but okay. I'll see you around."),,SPEAKER_CHARLOTTE)
         closemessage
-
-        moveobjecttocoords(LOCALID_ROUTE2_LUCREZIA,13,21,DIR_SOUTH)
-        delay(16)
-        moveobjecttocoords(LOCALID_ROUTE2_OLIVER,13,20,DIR_SOUTH)
-        delay(16)
-        moveobjecttocoords(LOCALID_ROUTE2_CHARLOTTE,20,21,DIR_SOUTH)
-        delay(16)
-        waitmovement(LOCALID_ROUTE2_CHARLOTTE)
-        buffermapname(STR_VAR_1,MAP_CUCONU_TOWN_SHARPRISE_COMPOUND_1F)
-        msgbox(format("Yeah, I'm beat. Do you want a ride back to {STR_VAR_1}?"), MSGBOX_YESNO,SPEAKER_CHARLOTTE)
-
-        if (var (VAR_RESULT) == NO)
-        {
-
-            msgbox(format("Weird, but okay. I'll see you around."),,SPEAKER_CHARLOTTE)
-                closemessage
-            waitmovement(LOCALID_ROUTE2_LUCREZIA)
-            waitmovement(LOCALID_ROUTE2_OLIVER)
-                removeobject(LOCALID_ROUTE2_LUCREZIA)
-                removeobject(LOCALID_ROUTE2_OLIVER)
-                call(VSGarbodor_FlyWithoutPlayer_Script)
-                release
-                end
-        } else {
-
-            msgbox(format("Let's bounce."),,SPEAKER_CHARLOTTE)
-
-                closemessage
-                fadeblackandsetremovewarpfadeflag
-                warpsilent(MAP_CUCONU_TOWN_SHARPRISE_COMPOUND_1F, 7, 3)
-				waitstate
-                release
-                end
-        }
+        waitmovement(LOCALID_ROUTE2_LUCREZIA)
+        waitmovement(LOCALID_ROUTE2_OLIVER)
+        removeobject(LOCALID_ROUTE2_LUCREZIA)
+        removeobject(LOCALID_ROUTE2_OLIVER)
+        call(VSGarbodor_FlyWithoutPlayer_Script)
+    }
+    else
+    {
+        msgbox(format("Let's bounce."),,SPEAKER_CHARLOTTE)
+        closemessage
+        fadeblackandsetremovewarpfadeflag
+        warpsilent(MAP_CUCONU_TOWN_SHARPRISE_COMPOUND_1F, 7, 3)
+        waitstate
+    }
+    release
+    end
 }
 
 script VSGarbodor_FlyWithoutPlayer_Script {
