@@ -4758,6 +4758,7 @@ static void DebugAction_Quest_SelectState(u8 taskId)
     X(MUS_OROLAND_NIGHT) \
     X(MUS_VICTORY_TOURNAMENT) \
     X(MUS_OBTAIN_KEY_ITEM) \
+    X(MUS_HOW_DISAPPOINTING) \
 
 #define SOUND_LIST_SE               \
     X(SE_USE_ITEM)                  \
