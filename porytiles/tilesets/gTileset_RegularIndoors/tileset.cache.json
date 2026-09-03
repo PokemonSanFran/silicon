@@ -1,5 +1,5 @@
 {
-  "data/tilesets/secondary/regular_indoors/porytiles_bin/metatile_attributes.bin": "de4f906483292eedd12e83f20d6cbbee",
+  "data/tilesets/secondary/regular_indoors/porytiles_bin/metatile_attributes.bin": "bae6706361db323def88267b66178897",
   "data/tilesets/secondary/regular_indoors/porytiles_bin/metatiles.bin": "6043fbb701bd68493e642a06c5f092a9",
   "data/tilesets/secondary/regular_indoors/porytiles_bin/palettes/00.pal": "6fc3bad0f86551321018d7c66c7e9b64",
   "data/tilesets/secondary/regular_indoors/porytiles_bin/palettes/01.pal": "b324c3e89be895ac24935a8503a0154e",
@@ -17,9 +17,9 @@
   "data/tilesets/secondary/regular_indoors/porytiles_bin/palettes/13.pal": "59f83737350efeb148a299bdbf87e97f",
   "data/tilesets/secondary/regular_indoors/porytiles_bin/palettes/14.pal": "59f83737350efeb148a299bdbf87e97f",
   "data/tilesets/secondary/regular_indoors/porytiles_bin/palettes/15.pal": "59f83737350efeb148a299bdbf87e97f",
-  "data/tilesets/secondary/regular_indoors/porytiles_bin/tiles.png": "a24fddadf24a318d1d38b522bdcaff19",
-  "data/tilesets/secondary/regular_indoors/porytiles_src/attributes.csv": "250f83b66d4293f909230ef9e37d1952",
+  "data/tilesets/secondary/regular_indoors/porytiles_bin/tiles.png": "fb72d0e2f98e3c8c5c9008c1908acb88",
+  "data/tilesets/secondary/regular_indoors/porytiles_src/attributes.csv": "c0b76c14305f98169fab8ebfdcec9b63",
   "data/tilesets/secondary/regular_indoors/porytiles_src/bottom.png": "0265968c8c49e1debc5267410b62799c",
-  "data/tilesets/secondary/regular_indoors/porytiles_src/middle.png": "d5258fd18c96c2ca7e54068c7d5d3b86",
+  "data/tilesets/secondary/regular_indoors/porytiles_src/middle.png": "9f440cb2af80809bc08b08c0cd1ce9a4",
   "data/tilesets/secondary/regular_indoors/porytiles_src/top.png": "a4fcff3825146ef1c4189bf099177208"
 }
