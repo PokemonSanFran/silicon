@@ -348,33 +348,25 @@ script VSGarbodor_ReturnToTheCompound_ObjectSetUp
     setobjectflagfromlocalid(SHARPRISE_COMPOUND_1F_OLIVER)
 }
 
-script VSGarbodor_ReturnToTheCompound_Dialogue {
-    getplayerxy(VAR_TEMP_0,VAR_TEMP_1)
-        if (var(VAR_TEMP_0) != 7){
-            fadeblackandsetremovewarpfadeflag
-            warpsilent(MAP_CUCONU_TOWN_SHARPRISE_COMPOUND_1F, 7, 3)
-                waitstate
-        }else{
-            applymovement(PLAYER,Common_Movement_FaceUp)
-                waitmovement(0)
-                msgbox(format("I'm gonna get some sleep. Good shit on finishing your Badges. Can't wait to kick your ass at the Championship… whenever that is."),,SPEAKER_CHARLOTTE)
+script VSGarbodor_ReturnToTheCompound_Dialogue
+{
+    setvar(VAR_STORYLINE_STATE,STORY_NEED_SLEEP_BEFORE_FRANK)
+    moveobjecttocoords(PLAYER,7,3,DIR_NORTH)
+    applymovement(PLAYER,Common_Movement_FaceUp)
+    waitmovement(0)
+    msgbox(format("I'm gonna get some sleep. Good shit on finishing your Badges. Can't wait to kick your ass at the Championship… whenever that is."),,SPEAKER_CHARLOTTE)
+    msgbox(format("Heh, we'll see. Good night."),,SPEAKER_ALICIA)
+    closemessage
 
-                msgbox(format("Heh, we'll see. Good night."),,SPEAKER_ALICIA)
-
-                closemessage
-
-                applymovement(SHARPRISE_COMPOUND_1F_CHARLOTTE, moves(walk_up, step_end))
-                waitmovement(SHARPRISE_COMPOUND_1F_CHARLOTTE)
-                playse(SE_EXIT)
-                waitse
-                removeobject(SHARPRISE_COMPOUND_1F_CHARLOTTE)
-                setvar(VAR_STORYLINE_STATE,STORY_NEED_SLEEP_BEFORE_FRANK)
-
-        call(TryAutoSave)
-                endcutscene
-                release
-                end
-        }
+    applymovement(SHARPRISE_COMPOUND_1F_CHARLOTTE, moves(walk_up, step_end))
+    playse(SE_EXIT)
+    waitmovement(SHARPRISE_COMPOUND_1F_CHARLOTTE)
+    waitse
+    removeobject(SHARPRISE_COMPOUND_1F_CHARLOTTE)
+    call(TryAutoSave)
+    endcutscene
+    release
+    end
 }
 
 movement VSGarbodor_PerpWalk {

@@ -12,9 +12,7 @@ mapscripts EspuleeOutskirts_MapScripts {
 		callnative(WarpTaxiAfterCutscene)
 	}
     MAP_SCRIPT_ON_TRANSITION {
-        call(EspuleeOutskirts_HideCharlotte_Script)
         call(EspuleeOutskirts_HideLiidia_Script)
-        call(IGuessWeShouldBeNiceNow_HidePopup_Script)
         callnative(LetsGrabLunch_IncrementStoryVariable)
         call(Quest_Manofmanyhats_CheckDoorLock_Script)
         call(Quest_Breaktheinternet_EspuleeOutskirtsGirl_Visibility_Script)
@@ -25,18 +23,12 @@ mapscripts EspuleeOutskirts_MapScripts {
 
     MAP_SCRIPT_ON_FRAME_TABLE [
         FLAG_VISITED_ESPULEE_OUTSKIRTS, FALSE: Generic_Mappreview
-        VAR_ESPULEE_OUTSKIRTS_STATE, ROBINWILLIAMSTUNNEL_PUZZLES_SOLVED: IGuessWeShouldBeNiceNow_ExitCave_Script
-            VAR_STORYLINE_STATE, STORY_RESTORATION_1_COMPLETE: YouRealizeWereEvilRight_PhoneCall_Dialogue
+        VAR_STORYLINE_STATE, STORY_RESTORATION_1_COMPLETE: YouRealizeWereEvilRight_PhoneCall_Dialogue
     ]
 
     MAP_SCRIPT_ON_LOAD{
         call(EspuleeOutskirts_LockRangerDoor_Script)
     }
-}
-
-script EspuleeOutskirts_HideCharlotte_Script {
-    setflag(FLAG_HIDE_CHARLOTTE)
-        return
 }
 
 script EspuleeOutskirts_HideLiidia_Script{
@@ -83,11 +75,6 @@ script EspuleeOutskirts_Stan_PostBattle_Script{
 
     release
         end
-}
-
-script EspuleeOutskirts_HideMapNamePopup_Script{
-    setflag(FLAG_HIDE_MAP_NAME_POPUP)
-        return
 }
 
 script EspuleeOutskirts_Script_InteractImelda

@@ -15,6 +15,7 @@
   "connections": null,
   "object_events": [
     {
+      "local_id": "LOCALID_LANJINGTUNNEL_CHARLOTTE",
       "graphics_id": "OBJ_EVENT_GFX_CHARLOTTE",
       "x": 8,
       "y": 22,
@@ -28,7 +29,8 @@
       "flag": "FLAG_TEMP_1"
     },
     {
-      "graphics_id": "OBJ_EVENT_GFX_BIG_REGIROCK_DOLL",
+      "local_id": "LOCALID_LANJINGTUNNEL_FRANK_PARTNER_MON",
+      "graphics_id": "OBJ_EVENT_GFX_VAR_1",
       "x": 9,
       "y": 5,
       "elevation": 3,
@@ -37,12 +39,13 @@
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "IGuessWeShouldBeNiceNow_CoreEncounter_Script",
+      "script": "IGuessWeShouldBeNiceNow_Script_InteractMons",
       "flag": "FLAG_TEMP_2"
     },
     {
-      "graphics_id": "OBJ_EVENT_GFX_BIG_REGISTEEL_DOLL",
-      "x": 7,
+      "local_id": "LOCALID_LANJINGTUNNEL_FRANK_LEAD_MON",
+      "graphics_id": "OBJ_EVENT_GFX_VAR_0",
+      "x": 8,
       "y": 5,
       "elevation": 3,
       "movement_type": "MOVEMENT_TYPE_NONE",
@@ -50,10 +53,11 @@
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "IGuessWeShouldBeNiceNow_CoreEncounter_Script",
+      "script": "IGuessWeShouldBeNiceNow_Script_InteractMons",
       "flag": "FLAG_TEMP_2"
     },
     {
+      "local_id": "LOCALID_LANJINGTUNNEL_FRANK_JOURNAL",
       "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
       "x": 8,
       "y": 3,
@@ -67,6 +71,7 @@
       "flag": "FLAG_TEMP_4"
     },
     {
+      "local_id": "LOCALID_LANJINGTUNNEL_DEBUG_BOULDER",
       "graphics_id": "OBJ_EVENT_GFX_PUSHABLE_BOULDER",
       "x": 8,
       "y": 9,
@@ -78,19 +83,6 @@
       "trainer_sight_or_berry_tree_id": "0",
       "script": "NULL",
       "flag": "0"
-    },
-    {
-      "graphics_id": "OBJ_EVENT_GFX_DUSCLOPS",
-      "x": 8,
-      "y": 5,
-      "elevation": 3,
-      "movement_type": "MOVEMENT_TYPE_NONE",
-      "movement_range_x": 0,
-      "movement_range_y": 0,
-      "trainer_type": "TRAINER_TYPE_NONE",
-      "trainer_sight_or_berry_tree_id": "0",
-      "script": "IGuessWeShouldBeNiceNow_CoreEncounter_Script",
-      "flag": "FLAG_TEMP_2"
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_BREAKABLE_ROCK",
@@ -155,7 +147,7 @@
       "x": 2,
       "y": 15,
       "elevation": 0,
-      "var": "VAR_ROBINWILLIAMSTUNNEL_STATE",
+      "var": "VAR_LANJINGTUNNEL_STATE",
       "var_value": "3",
       "script": "IGuessWeShouldBeNiceNow_SolvedPuzzleA"
     },
@@ -164,7 +156,7 @@
       "x": 4,
       "y": 12,
       "elevation": 0,
-      "var": "VAR_ROBINWILLIAMSTUNNEL_STATE",
+      "var": "VAR_LANJINGTUNNEL_STATE",
       "var_value": "4",
       "script": "IGuessWeShouldBeNiceNow_SolvedPuzzleB"
     }

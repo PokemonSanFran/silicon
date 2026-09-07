@@ -1427,4 +1427,16 @@ enum
 #define ITEM_GYM_REWARD_HALERBA   ITEM_TM006
 #define ITEM_GYM_REWARD_TIRABUDIN ITEM_TM007
 #define ITEM_GYM_REWARD_IRISINA   ITEM_TM008
+
+// ***********************************************************************
+// Cutscene: I Guess We Should Be Nice Now
+// ***********************************************************************
+
+#define SPECIES_FRANK_MON_LEAD SPECIES_CENTISKORCH
+#define SPECIES_FRANK_MON_PARTNER SPECIES_SIZZLIPEDE
+#define LEVEL_FRANK_MON_LEAD 70
+#define LEVEL_FRANK_MON_PARTNER 60
+#define ITEM_FRANK_MON_LEAD ITEM_LIFE_ORB
+#define ITEM_FRANK_MON_PARTNER ITEM_SITRUS_BERRY
+
 #endif // GUARD_CONSTANTS_QUESTS_H

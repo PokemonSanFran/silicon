@@ -1942,7 +1942,7 @@ bool32 ShouldBaiyaCallPlayer(void)
 enum Type VSGarbodor_RandomlyChooseTypeFromStarter(void)
 {
     u32 typeIndex = (VarGet(VAR_INNER_CONSTRUCTION_SITE_STATE) == PLAYER_LEFT_SIDE) ? 0 : 1;
-    enum Species species = SanitizeSpeciesId(VarGet(VAR_CHOSEN_PSF_STARTER));
+    enum Species species = SanitizeSpeciesId(VarGet(VAR_STARTER_MON));
 
     return GetSpeciesType(species,typeIndex);
 }
@@ -2116,8 +2116,12 @@ bool32 CanMonMegaEvolve(u32 species)
         return FALSE;
 
     for (i = 0; formChangeTable[i].method != FORM_CHANGE_TERMINATOR; i++)
+    {
         if (formChangeTable[i].method != FORM_CHANGE_BATTLE_MEGA_EVOLUTION_ITEM)
             continue;
+
+        StringCopy(gStringVar2,GetItemName(formChangeTable[i].param1));
+    }
 
     return TRUE;
 }
@@ -6126,6 +6130,12 @@ void UpdateMusicForRave(void)
 // Cutscene: Enter The Master
 // ***********************************************************************
 
+void EnterTheMaster_BufferStarterMonName(void)
+{
+    enum Species species = VarGet(VAR_STARTER_MON);
+    StringCopy(gStringVar3,GetSpeciesName(species));
+}
+
 void EnterTheMaster_BufferPlayerPronouns(void)
 {
     StringCopy(gStringVar2,COMPOUND_STRING(""));
@@ -6265,3 +6275,25 @@ void BufferTitleFromPossessivePronouns(void)
     }
 }
 
+// ***********************************************************************
+// Cutscene: I Guess We Should Be Nice Now
+// ***********************************************************************
+
+void IGuessWeShouldBeNiceNow_LoadOverworldMons(void)
+{
+    enum Species species[] = {SPECIES_FRANK_MON_LEAD, SPECIES_FRANK_MON_PARTNER};
+    u32 level[] = {LEVEL_FRANK_MON_LEAD, LEVEL_FRANK_MON_PARTNER};
+    enum Item item[] = {ITEM_FRANK_MON_LEAD, ITEM_FRANK_MON_PARTNER};
+
+    FlagSet(FLAG_FORCE_NO_SHINY);
+    CreateScriptedDoubleWildMon(species[0], level[0], item[0], species[1], level[1], item[1]);
+    FlagClear(FLAG_FORCE_NO_SHINY);
+
+    for (u32 monIndex = 0; monIndex < 2; monIndex++)
+    {
+        struct Pokemon *mon = &gParties[B_TRAINER_OPPONENT_A][monIndex];
+        u32 female = (GetGenderFromSpeciesAndPersonality(species[monIndex],GetMonData(mon,MON_DATA_PERSONALITY)) == MON_FEMALE) ? OBJ_EVENT_MON_FEMALE : 0;
+        u32 shiny = GetMonData(mon,MON_DATA_IS_SHINY) ? OBJ_EVENT_MON_SHINY : 0;
+        VarSet((VAR_OBJ_GFX_ID_0+monIndex),(OBJ_EVENT_MON + species[monIndex] + female + shiny));
+    }
+}

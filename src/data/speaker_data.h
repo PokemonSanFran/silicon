@@ -3276,4 +3276,12 @@ static const struct SpeakerData sSpeakerData[NUM_SPEAKERS] =
         .speakerIcon = gSpeakerIcon_Bill,
         .speakerPal = sSpeakerPal_Bill,
     },
+    [SPEAKER_ROBOT] =
+    {
+        .name = COMPOUND_STRING("Training Robot"),
+        .title = COMPOUND_STRING(""),
+        .gender = MALE,
+        .speakerIcon = gSpeakerIcon_Mom,
+        .speakerPal = sSpeakerPal_Mom,
+    },
 };
