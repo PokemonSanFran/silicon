@@ -26,32 +26,6 @@
   ],
   "object_events": [
     {
-      "graphics_id": "OBJ_EVENT_GFX_CHARLOTTE",
-      "x": 15,
-      "y": 10,
-      "elevation": 3,
-      "movement_type": "MOVEMENT_TYPE_NONE",
-      "movement_range_x": 0,
-      "movement_range_y": 0,
-      "trainer_type": "TRAINER_TYPE_NONE",
-      "trainer_sight_or_berry_tree_id": "0",
-      "script": "OffYouGo_WarpPlayer_Script",
-      "flag": "FLAG_TEMP_1"
-    },
-    {
-      "graphics_id": "OBJ_EVENT_GFX_OLIVER",
-      "x": 16,
-      "y": 10,
-      "elevation": 3,
-      "movement_type": "MOVEMENT_TYPE_NONE",
-      "movement_range_x": 0,
-      "movement_range_y": 0,
-      "trainer_type": "TRAINER_TYPE_NONE",
-      "trainer_sight_or_berry_tree_id": "0",
-      "script": "OffYouGo_InteractOliver_Event_Script",
-      "flag": "FLAG_TEMP_1"
-    },
-    {
       "local_id": "LOCALID_ANGELDELIVERYBIKERA",
       "graphics_id": "OBJ_EVENT_GFX_MAN_5",
       "x": 6,
@@ -92,6 +66,34 @@
       "trainer_sight_or_berry_tree_id": "3",
       "script": "PiocaBridge_Script_Findtheguiltyplanth",
       "flag": "FLAG_TEMP_2"
+    },
+    {
+      "local_id": "LOCALID_PIOCABRIDGE_CHARLOTTE ",
+      "graphics_id": "OBJ_EVENT_GFX_CHARLOTTE",
+      "x": 15,
+      "y": 13,
+      "elevation": 0,
+      "movement_type": "MOVEMENT_TYPE_NONE",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "NULL",
+      "flag": "FLAG_TEMP_3"
+    },
+    {
+      "local_id": "LOCALID_PIOCABRIDGE_OLIVER",
+      "graphics_id": "OBJ_EVENT_GFX_OLIVER",
+      "x": 16,
+      "y": 13,
+      "elevation": 0,
+      "movement_type": "MOVEMENT_TYPE_NONE",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "NULL",
+      "flag": "FLAG_TEMP_4"
     }
   ],
   "warp_events": [
@@ -106,20 +108,11 @@
   "coord_events": [
     {
       "type": "trigger",
-      "x": 15,
-      "y": 11,
-      "elevation": 0,
-      "var": "VAR_GOLDENGATEBRIDGE_STATE",
-      "var_value": "1",
-      "script": "OffYouGo_WelcomeParty_Dialogue"
-    },
-    {
-      "type": "trigger",
       "x": 16,
-      "y": 11,
+      "y": 12,
       "elevation": 0,
-      "var": "VAR_GOLDENGATEBRIDGE_STATE",
-      "var_value": "1",
+      "var": "VAR_PIOCABRIDGE_STATE",
+      "var_value": "CALLED_BY_CHARLOTTE",
       "script": "OffYouGo_WelcomeParty_Dialogue"
     },
     {
@@ -373,6 +366,51 @@
       "var": "VAR_TEMP_2",
       "var_value": "0",
       "script": "HybridCulture_Try_StartAttraction1"
+    },
+    {
+      "type": "trigger",
+      "x": 15,
+      "y": 12,
+      "elevation": 0,
+      "var": "VAR_PIOCABRIDGE_STATE",
+      "var_value": "CALLED_BY_CHARLOTTE",
+      "script": "OffYouGo_WelcomeParty_Dialogue"
+    },
+    {
+      "type": "trigger",
+      "x": 14,
+      "y": 13,
+      "elevation": 0,
+      "var": "VAR_PIOCABRIDGE_STATE",
+      "var_value": "CALLED_BY_CHARLOTTE",
+      "script": "OffYouGo_WelcomeParty_Dialogue"
+    },
+    {
+      "type": "trigger",
+      "x": 15,
+      "y": 14,
+      "elevation": 0,
+      "var": "VAR_PIOCABRIDGE_STATE",
+      "var_value": "CALLED_BY_CHARLOTTE",
+      "script": "OffYouGo_WelcomeParty_Dialogue"
+    },
+    {
+      "type": "trigger",
+      "x": 16,
+      "y": 14,
+      "elevation": 0,
+      "var": "VAR_PIOCABRIDGE_STATE",
+      "var_value": "CALLED_BY_CHARLOTTE",
+      "script": "OffYouGo_WelcomeParty_Dialogue"
+    },
+    {
+      "type": "trigger",
+      "x": 17,
+      "y": 13,
+      "elevation": 0,
+      "var": "VAR_PIOCABRIDGE_STATE",
+      "var_value": "CALLED_BY_CHARLOTTE",
+      "script": "OffYouGo_WelcomeParty_Dialogue"
     }
   ],
   "bg_events": []
