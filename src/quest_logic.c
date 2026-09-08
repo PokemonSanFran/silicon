@@ -6297,3 +6297,26 @@ void IGuessWeShouldBeNiceNow_LoadOverworldMons(void)
         VarSet((VAR_OBJ_GFX_ID_0+monIndex),(OBJ_EVENT_MON + species[monIndex] + female + shiny));
     }
 }
+
+// ***********************************************************************
+// Cutscene: Congrats You're An Asshole
+// ***********************************************************************
+
+bool8 FalseTimeline_CheckRewardStatus(void)
+{
+    if (IsQuestRewardState(QUEST_LETSBURNTHISMOTHERDOWN))
+        return FALSE;
+
+    if (IsQuestRewardState(QUEST_HOWDISAPPOINTING))
+        return FALSE;
+
+    if (IsQuestRewardState(QUEST_MANHUNT))
+        return FALSE;
+
+    return TRUE;
+}
+
+void Script_FalseTimeline_CheckRewardStatus(void)
+{
+    gSpecialVar_Result = FalseTimeline_CheckRewardStatus();
+}
