@@ -4759,6 +4759,7 @@ static void DebugAction_Quest_SelectState(u8 taskId)
     X(MUS_VICTORY_TOURNAMENT) \
     X(MUS_OBTAIN_KEY_ITEM) \
     X(MUS_HOW_DISAPPOINTING) \
+    X(MUS_ENCOUNTER_GAMER_HODLER_INFLUENCER) \
 
 #define SOUND_LIST_SE               \
     X(SE_USE_ITEM)                  \
