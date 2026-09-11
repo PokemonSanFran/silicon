@@ -1777,6 +1777,9 @@ void SetPlayerBackSlidePicPalette(u32 battler, struct Sprite *sprite)
     if (IndexOfSpritePaletteTag(TRAINER_PIC_TRACHY+TRAINER_PIC_COUNT) == sprite->oam.paletteNum)
         return;
 
+    if (IndexOfSpritePaletteTag(TRAINER_PIC_SHINJI+TRAINER_PIC_COUNT) == sprite->oam.paletteNum)
+        return;
+
     if (GetBattlerPosition(battler) == B_POSITION_PLAYER_LEFT)
         RecolorPlayerCharacters(sprite->oam.paletteNum);
 }

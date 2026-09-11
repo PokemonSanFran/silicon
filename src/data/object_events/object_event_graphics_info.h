@@ -9397,4 +9397,23 @@ const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Trachy = {
     .images = gObjectEventPicTable_Trachy,
     .affineAnims = gDummySpriteAffineAnimTable,
 };
+
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Shinji = {
+    .tileTag = TAG_NONE,
+    .paletteTag = OBJ_EVENT_PAL_TAG_SHINJI,
+    .reflectionPaletteTag = OBJ_EVENT_PAL_TAG_BRIDGE_REFLECTION,
+    .size = 512,
+    .width = 32,
+    .height = 32,
+    .paletteSlot = PALSLOT_PLAYER,
+    .shadowSize = SHADOW_SIZE_M,
+    .inanimate = FALSE,
+    .compressed = FALSE,
+    .tracks = TRACKS_FOOT,
+    .oam = &gObjectEventBaseOam_32x32,
+    .subspriteTables = sOamTables_32x32,
+    .anims = sAnimTable_BrendanMayNormal,
+    .images = gObjectEventPicTable_Shinji,
+    .affineAnims = gDummySpriteAffineAnimTable,
+};
 // End silicon

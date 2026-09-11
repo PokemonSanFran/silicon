@@ -339,4 +339,10 @@ $(OBJEVENTGFXDIR)/people/product_manager_2.4bpp: %.4bpp: %.png
 
 $(OBJEVENTGFXDIR)/people/trachy.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
+
+$(OBJEVENTGFXDIR)/people/shinji/walking.4bpp: %.4bpp: %.png
+	$(GFX) $< $@ -mwidth 4 -mheight 4
+
+$(OBJEVENTGFXDIR)/people/shinji/running.4bpp: %.4bpp: %.png
+	$(GFX) $< $@ -mwidth 4 -mheight 4
 # End silicon
