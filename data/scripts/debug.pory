@@ -492,7 +492,7 @@ script Debug_EventScript_SetAbility
 	dynmultipush(gStringVar1, 0)
 	dynmultipush(gStringVar2, 1)
 	dynmultipush(gStringVar3, 2)
-	dynmultistack(0, 0, FALSE, 3 FALSE, 0, NULL)
+	dynmultistack(0, 0, FALSE, 3, FALSE, 0, NULL)
 	switch(var(VAR_RESULT))
 	{
 		case MULTI_B_PRESSED: goto(Debug_EventScript_SetAbilityClose)
