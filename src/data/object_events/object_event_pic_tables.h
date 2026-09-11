@@ -1989,6 +1989,10 @@ const struct SpriteFrameImage gObjectEventPicTable_CharlotteFieldMove[] =
 {
     overworld_ascending_frames(gObjectEventPic_CharlotteFieldMove, 4, 4),
 };
+
+const struct SpriteFrameImage gObjectEventPicTable_Trachy[] = {
+    overworld_ascending_frames(gObjectEventPic_Trachy,4,4),
+};
 // End silicon
 
 static const struct SpriteFrameImage sPicTable_ApricornTree[] = {

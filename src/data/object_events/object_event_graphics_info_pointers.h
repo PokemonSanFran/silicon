@@ -559,6 +559,7 @@ extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Product_Man
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Product_Manager_2;
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_CharlotteNormal;
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_CharlotteFieldMove;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Trachy;
 // End silicon
 // Begin Pokémon event objects
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_PokeBall;
@@ -1067,6 +1068,7 @@ const struct ObjectEventGraphicsInfo *const gObjectEventGraphicsInfoPointers[NUM
     [OBJ_EVENT_GFX_PRODUCT_MANAGER_2] = &gObjectEventGraphicsInfo_Product_Manager_2,
     [OBJ_EVENT_GFX_CHARLOTTE] =               &gObjectEventGraphicsInfo_CharlotteNormal,
     [OBJ_EVENT_GFX_CHARLOTTE_FIELD_MOVE] =               &gObjectEventGraphicsInfo_CharlotteFieldMove,
+    [OBJ_EVENT_GFX_TRACHY] =               &gObjectEventGraphicsInfo_Trachy,
     // End silicon
 };
 

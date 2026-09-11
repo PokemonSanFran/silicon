@@ -211,6 +211,7 @@ enum __attribute__((packed)) TrainerPicID
     TRAINER_PIC_AMI,
     TRAINER_PIC_FRANK,
     TRAINER_PIC_ELEANOR,
+    TRAINER_PIC_TRACHY,
     // End silicon
     TRAINER_PIC_COUNT,
 };

@@ -586,6 +586,9 @@ const u16 gObjectEventPal_CharlotteNormal[] = INCGFX_U16("graphics/trainers/back
 
 const u32 gObjectEventPic_CharlotteFieldMove[] = INCGFX_U32("graphics/object_events/pics/people/charlotte/fieldMove.png", ".4bpp", "-mwidth 4 -mheight 4");
 
+const u32 gObjectEventPic_Trachy[] = INCGFX_U32("graphics/object_events/pics/people/trachy.png", ".4bpp", "-mwidth 4 -mheight 4");
+const u16 gObjectEventPal_Trachy[] = INCGFX_U16("graphics/object_events/pics/people/trachy.png", ".gbapal");
+
 // End silicon
 const u16 gObjectEventPal_HoOh[] = INCGFX_U16("graphics/object_events/palettes/ho_oh.pal", ".gbapal");
 const u16 gObjectEventPal_Lugia[] = INCGFX_U16("graphics/object_events/palettes/lugia.pal", ".gbapal");
