@@ -565,6 +565,7 @@ static const struct SpritePalette sObjectEventSpritePalettes[] = {
     // Start silicon
     {gObjectEventPal_siliconPlayer,         OBJ_EVENT_PAL_TAG_SILICON},
     {gObjectEventPal_BaiyaNormal,             OBJ_EVENT_PAL_TAG_BAIYA},
+    {gObjectEventPal_CharlotteNormal,             OBJ_EVENT_PAL_TAG_CHARLOTTE},
     {gObjectEventPal_UnknownNormal,         OBJ_EVENT_PAL_TAG_UNKNOWN},
     {gObjectEventPal_AdaoraWalking,         OBJ_EVENT_PAL_TAG_ADAORA},
     {gObjectEventPal_VigrimWalking,        OBJ_EVENT_PAL_TAG_VIGRIM},

@@ -1980,6 +1980,15 @@ const struct SpriteFrameImage gObjectEventPicTable_Product_Manager_2[] =
 static const struct SpriteFrameImage sPicTable_Unknown[] = {
     obj_frame_tiles(gObjectEventPic_UnknownNormal),
 };
+
+const struct SpriteFrameImage gObjectEventPicTable_CharlotteNormal[] = {
+    overworld_ascending_frames(gObjectEventPic_CharlotteNormal,4,4),
+};
+
+const struct SpriteFrameImage gObjectEventPicTable_CharlotteFieldMove[] =
+{
+    overworld_ascending_frames(gObjectEventPic_CharlotteFieldMove, 4, 4),
+};
 // End silicon
 
 static const struct SpriteFrameImage sPicTable_ApricornTree[] = {

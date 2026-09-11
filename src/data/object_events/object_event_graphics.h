@@ -581,6 +581,11 @@ const u16 gObjectEventPal_Product_Manager_1[] = INCGFX_U16("graphics/object_even
 const u32 gObjectEventPic_Product_Manager_2[] = INCGFX_U32("graphics/object_events/pics/people/product_manager_2.png", ".4bpp", "-mwidth 4 -mheight 4");
 const u16 gObjectEventPal_Product_Manager_2[] = INCGFX_U16("graphics/object_events/palettes/product_manager_2.pal", ".gbapal");
 
+const u32 gObjectEventPic_CharlotteNormal[] = INCBIN_U32("graphics/object_events/pics/people/charlotte/walking.4bpp", "graphics/object_events/pics/people/charlotte/running.4bpp");
+const u16 gObjectEventPal_CharlotteNormal[] = INCGFX_U16("graphics/trainers/back_pics/charlotte.png", ".gbapal");
+
+const u32 gObjectEventPic_CharlotteFieldMove[] = INCGFX_U32("graphics/object_events/pics/people/charlotte/fieldMove.png", ".4bpp", "-mwidth 4 -mheight 4");
+
 // End silicon
 const u16 gObjectEventPal_HoOh[] = INCGFX_U16("graphics/object_events/palettes/ho_oh.pal", ".gbapal");
 const u16 gObjectEventPal_Lugia[] = INCGFX_U16("graphics/object_events/palettes/lugia.pal", ".gbapal");

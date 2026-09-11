@@ -557,6 +557,8 @@ extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Founder_1;
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Founder_2;
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Product_Manager_1;
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Product_Manager_2;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_CharlotteNormal;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_CharlotteFieldMove;
 // End silicon
 // Begin Pokémon event objects
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_PokeBall;
@@ -1063,6 +1065,8 @@ const struct ObjectEventGraphicsInfo *const gObjectEventGraphicsInfoPointers[NUM
     [OBJ_EVENT_GFX_FOUNDER_2] = &gObjectEventGraphicsInfo_Founder_2,
     [OBJ_EVENT_GFX_PRODUCT_MANAGER_1] = &gObjectEventGraphicsInfo_Product_Manager_1,
     [OBJ_EVENT_GFX_PRODUCT_MANAGER_2] = &gObjectEventGraphicsInfo_Product_Manager_2,
+    [OBJ_EVENT_GFX_CHARLOTTE] =               &gObjectEventGraphicsInfo_CharlotteNormal,
+    [OBJ_EVENT_GFX_CHARLOTTE_FIELD_MOVE] =               &gObjectEventGraphicsInfo_CharlotteFieldMove,
     // End silicon
 };
 
