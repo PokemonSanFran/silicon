@@ -7,10 +7,14 @@ script TryAutoSave
 script DoAutoSaveFieldEffect
 {
     lockall
+    call(DoAutoSaveFieldEffectInner)
+    releaseall
+}
+
+script DoAutoSaveFieldEffectInner
+{
     dofieldeffect(FLDEFF_SAVING)
     delay(1)
     callnative(DoAutoSave)
     waitfieldeffect(FLDEFF_SAVING)
-    releaseall
 }
-

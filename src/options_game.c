@@ -35,7 +35,7 @@ bool32 CheckSaveBootAndFileStatus()
 // ***********************************************************************
 // Game Settings: Save Behavior
 // ***********************************************************************
-extern const u8 DoAutoSaveFieldEffect[];
+extern const u8 DoAutoSaveFieldEffectInner[];
 
 static bool32 IsAutosaveTurnedOn(void)
 {
@@ -59,7 +59,7 @@ void CountAndTryAutoSave(void)
         return;
 
     VarSet(VAR_AUTOSAVE,0);
-    ScriptContext_SetupScript(DoAutoSaveFieldEffect);
+    ScriptContext_SetupScript(DoAutoSaveFieldEffectInner);
 }
 
 // ***********************************************************************
