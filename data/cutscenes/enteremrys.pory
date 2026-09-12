@@ -4,7 +4,7 @@ script EnterEmrys_LeaderPosition_Script
 {
 	goto_if_eq(VAR_GYM_3_STATE,PERLACIA_GYM_SAVE_BEFORE_BATTLE,EnterEmrys_StartBattle_ObjectSetup_Script)
 
-	if (var(VAR_GYM_3_STATE < PERLACIA_GYM_PUZZLE_COMPLETE))
+	if (var(VAR_GYM_3_STATE) < PERLACIA_GYM_PUZZLE_COMPLETE)
 	{
 		return
 	}
