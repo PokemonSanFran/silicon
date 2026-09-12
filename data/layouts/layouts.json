@@ -13759,6 +13759,30 @@
       "blockdata_filepath": "data/layouts/HodouCity_Alley1/map.bin",
       "border_height": 2,
       "border_width": 2
+    },
+    {
+      "id": "LAYOUT_REGULAR_INDOOR_TEST",
+      "name": "RegularIndoorTest_Layout",
+      "width": 24,
+      "height": 52,
+      "primary_tileset": "gTileset_BuildingSilicon",
+      "secondary_tileset": "gTileset_RegularIndoors",
+      "border_filepath": "data/layouts/RegularIndoorTest/border.bin",
+      "blockdata_filepath": "data/layouts/RegularIndoorTest/map.bin",
+      "border_height": 2,
+      "border_width": 2
+    },
+    {
+      "id": "LAYOUT_FANCY_INDOOR_TEST",
+      "name": "FancyIndoorTest_Layout",
+      "width": 24,
+      "height": 52,
+      "primary_tileset": "gTileset_BuildingSilicon",
+      "secondary_tileset": "gTileset_FancyIndoors",
+      "border_filepath": "data/layouts/FancyIndoorTest/border.bin",
+      "blockdata_filepath": "data/layouts/FancyIndoorTest/map.bin",
+      "border_height": 2,
+      "border_width": 2
     }
   ]
 }

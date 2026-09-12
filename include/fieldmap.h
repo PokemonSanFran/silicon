@@ -6,10 +6,17 @@
 #define NUM_PALS_IN_PRIMARY_FRLG 7
 
 #define NUM_TILES_IN_PRIMARY 512
-#define NUM_METATILES_IN_PRIMARY 512
+// Start expandMetatileCount
+//#define NUM_METATILES_IN_PRIMARY 512
+#define NUM_METATILES_IN_PRIMARY 2048
+// End expandMetatileCount
 #define NUM_PALS_IN_PRIMARY 6
 
-#define NUM_METATILES_TOTAL 1024
+// Start expandMetatileCount
+//#define NUM_METATILES_IN_PRIMARY 512
+//#define NUM_METATILES_TOTAL 1024
+#define NUM_METATILES_TOTAL 4096
+// End expandMetatileCount
 #define NUM_TILES_TOTAL 1024
 #define NUM_PALS_TOTAL 13
 #define MAX_MAP_DATA_SIZE 10240
