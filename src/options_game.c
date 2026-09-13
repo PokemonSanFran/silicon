@@ -1,5 +1,6 @@
 #include "global.h"
 #include "fieldmap.h"
+#include "field_screen_effect.h"
 #include "follower_npc.h"
 #include "event_data.h"
 #include "bike.h"
@@ -11,6 +12,8 @@
 #include "script.h"
 #include "story_jump.h"
 #include "save.h"
+#include "palette.h"
+#include "overworld.h"
 
 // ***********************************************************************
 // Game Settings: Save Boot
@@ -35,7 +38,7 @@ bool32 CheckSaveBootAndFileStatus()
 // ***********************************************************************
 // Game Settings: Save Behavior
 // ***********************************************************************
-extern const u8 DoAutoSaveFieldEffect[];
+extern const u8 DoAutoSaveFieldEffectInner[];
 
 static bool32 IsAutosaveTurnedOn(void)
 {
@@ -47,19 +50,38 @@ void Script_IsAutosaveTurnedOn(void)
     gSpecialVar_Result = IsAutosaveTurnedOn();
 }
 
-void CountAndTryAutoSave(void)
+bool8 ShouldAutoSaveOnReturnToField(void)
 {
-    if(!IsAutosaveTurnedOn())
-        return;
+    if(IsAutosaveTurnedOn() == FALSE)
+        return FALSE;
 
     u32 autoSaveCount = VarGet(VAR_AUTOSAVE);
     VarSet(VAR_AUTOSAVE,++autoSaveCount);
 
-    if (autoSaveCount < AUTOSAVE_THRESHOLD)
+    return (autoSaveCount >= AUTOSAVE_THRESHOLD);
+}
+
+void Task_ReturnToFieldAutosave(u8 taskId)
+{
+    if (ShouldAutoSaveOnReturnToField() == FALSE)
+    {
+        gTasks[taskId].func = Task_ReturnToFieldNoScript;
+        return;
+    }
+
+    if (gPaletteFade.active)
         return;
 
-    VarSet(VAR_AUTOSAVE,0);
-    ScriptContext_SetupScript(DoAutoSaveFieldEffect);
+    ScriptContext_SetupScript(DoAutoSaveFieldEffectInner);
+    gTasks[taskId].func = Task_ReturnToFieldNoScript;
+}
+
+void FieldCB_ReturnToFieldPostWildBattleCheckMusic(void)
+{
+    LockPlayerFieldControls();
+    Overworld_PlaySpecialMapMusic();
+    FadeInFromBlack();
+    CreateTask(Task_ReturnToFieldAutosave,10);
 }
 
 // ***********************************************************************
