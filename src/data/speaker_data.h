@@ -385,6 +385,14 @@ static const struct SpeakerData sSpeakerData[NUM_SPEAKERS] =
         .speakerIcon = gSpeakerIcon_Kid,
         .speakerPal = sSpeakerPal_Kid,
     },
+    [SPEAKER_KEIYING_INTRO]
+    {
+        .name = COMPOUND_STRING("???"),
+        .title = COMPOUND_STRING("???"),
+        .gender = MALE,
+        .speakerIcon = gSpeakerIcon_Keiying,
+        .speakerPal = sSpeakerPal_Keiying,
+    },
     [SPEAKER_KEIYING] =
     {
         .name = COMPOUND_STRING("Kei-Ying"),
@@ -3267,5 +3275,13 @@ static const struct SpeakerData sSpeakerData[NUM_SPEAKERS] =
         .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Bill,
         .speakerPal = sSpeakerPal_Bill,
+    },
+    [SPEAKER_ROBOT] =
+    {
+        .name = COMPOUND_STRING("Training Robot"),
+        .title = COMPOUND_STRING(""),
+        .gender = MALE,
+        .speakerIcon = gSpeakerIcon_Mom,
+        .speakerPal = sSpeakerPal_Mom,
     },
 };

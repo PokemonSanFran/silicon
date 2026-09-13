@@ -242,7 +242,7 @@ script Prologue_BeginAdventure_Dialogue
     if (var(VAR_RESULT) == YES)
     {
         setvar(VAR_PROLOGUE_STATE,START_ADVENTURE)
-        setvar(VAR_CHOSEN_PSF_STARTER,CUTSCENE_NOT_PLAYED)
+        setvar(VAR_STARTER_MON,CUTSCENE_NOT_PLAYED)
         setflag(FLAG_SPAWN_INVISIBLE)
         fadeblackandsetremovewarpfadeflag
         msgbox(format("Ten years later..."))

@@ -1,96 +1,87 @@
 const PLAYER = OBJ_EVENT_ID_PLAYER
-const ARNAV = 1
-const TECHIE = 2
-const OLIVER = 3
-const CHARLOTTE = 4
-const LUCREZIA = 5
-const CHIEF = 6
-const RAMESH = 7
-const KEIYING = 8
+const LOCALID_LEAGUEOPS_ARNAV = LOCALID_CAMERA + 1
+const LOCALID_LEAGUEOPS_TECHIE = LOCALID_CAMERA + 2
+const LOCALID_LEAGUEOPS_CHIEF = LOCALID_CAMERA + 6
 
-const FLAG_HIDE_NERDS_COPS = FLAG_TEMP_1
-const FLAG_HIDE_OLIVER = FLAG_TEMP_2
-const FLAG_HIDE_CHARLOTTE = FLAG_TEMP_3
-const FLAG_HIDE_LUCREZIA = FLAG_TEMP_4
-const FLAG_HIDE_RAMESH = FLAG_TEMP_5
-const FLAG_HIDE_KEIYING = FLAG_TEMP_6
-
-script WelcomeToTheWarRoom_Object_Setup_Script{
-    setflag(FLAG_HIDE_KEIYING)
-    setflag(FLAG_HIDE_RAMESH)
+script WelcomeToTheWarRoom_Object_Setup_Script
+{
+    spawnobject(OBJ_EVENT_GFX_DEVELOPER_2,LOCALID_LEAGUEOPS_ARNAV,21,26,DIR_SOUTH,3)
+    spawnobject(OBJ_EVENT_GFX_PRODUCT_MANAGER_1,LOCALID_LEAGUEOPS_TECHIE,17,26,DIR_SOUTH,3)
+    spawnobject(OBJ_EVENT_GFX_MART_EMPLOYEE,LOCALID_LEAGUEOPS_CHIEF,21,27,DIR_SOUTH,3)
+    setobjectflagfromlocalid(LOCALID_LEAGUEOPS_RAMESH)
+    setobjectflagfromlocalid(LOCALID_LEAGUEOPS_KEIYING)
 }
 
 script WelcomeToTheWarRoom_Object_Hide_Script{
-    setflag(FLAG_HIDE_KEIYING)
-    setflag(FLAG_HIDE_RAMESH)
-    setflag(FLAG_HIDE_NERDS_COPS)
-    setflag(FLAG_HIDE_CHARLOTTE)
-    setflag(FLAG_HIDE_LUCREZIA)
-    setobjectxy(OLIVER,34,2)
-    setobjectmovementtype(OLIVER,MOVEMENT_TYPE_FACE_DOWN)
+    setobjectflagfromlocalid(LOCALID_LEAGUEOPS_KEIYING)
+    setobjectflagfromlocalid(LOCALID_SHARPRISE_CHARLOTTE)
+    setobjectflagfromlocalid(LOCALID_SHARPRISE_LUCREZIA)
+    setobjectflagfromlocalid(LOCALID_LEAGUEOPS_RAMESH)
+    setobjectxy(LOCALID_SHARPRISE_OLIVER,34,2)
+    setobjectmovementtype(LOCALID_SHARPRISE_OLIVER,MOVEMENT_TYPE_FACE_DOWN)
 }
 
 script WelcomeToTheWarRoom_FaceSpeakerLucrezia {
-    applymovement(TECHIE,Common_Movement_FaceUp)
-    applymovement(ARNAV,Common_Movement_FaceUp)
-    applymovement(CHIEF,Common_Movement_FaceUp)
-    applymovement(OLIVER,Common_Movement_FaceUp)
-    applymovement(CHARLOTTE,Common_Movement_FaceUp)
+    applymovement(LOCALID_LEAGUEOPS_TECHIE,Common_Movement_FaceUp)
+    applymovement(LOCALID_LEAGUEOPS_ARNAV,Common_Movement_FaceUp)
+    applymovement(LOCALID_LEAGUEOPS_CHIEF,Common_Movement_FaceUp)
+    applymovement(LOCALID_SHARPRISE_OLIVER,Common_Movement_FaceUp)
+    applymovement(LOCALID_SHARPRISE_CHARLOTTE,Common_Movement_FaceUp)
     applymovement(PLAYER,Common_Movement_FaceUp)
     waitmovement(0)
 }
 
 script WelcomeToTheWarRoom_FaceSpeakerArnav {
-    applymovement(TECHIE,Common_Movement_FaceRight)
-    applymovement(ARNAV,Common_Movement_WalkInPlaceFasterDown)
-    applymovement(CHIEF,Common_Movement_FaceUp)
-    applymovement(OLIVER,Common_Movement_FaceRight)
-    applymovement(CHARLOTTE,Common_Movement_FaceRight)
+    applymovement(LOCALID_LEAGUEOPS_TECHIE,Common_Movement_FaceRight)
+    applymovement(LOCALID_LEAGUEOPS_ARNAV,Common_Movement_WalkInPlaceFasterDown)
+    applymovement(LOCALID_LEAGUEOPS_CHIEF,Common_Movement_FaceUp)
+    applymovement(LOCALID_SHARPRISE_OLIVER,Common_Movement_FaceRight)
+    applymovement(LOCALID_SHARPRISE_CHARLOTTE,Common_Movement_FaceRight)
     applymovement(PLAYER,Common_Movement_FaceRight)
     waitmovement(0)
 }
 script WelcomeToTheWarRoom_FaceSpeakerTechie {
-    applymovement(TECHIE,Common_Movement_WalkInPlaceFasterDown)
-    applymovement(ARNAV,Common_Movement_FaceLeft)
-    applymovement(CHIEF,Common_Movement_FaceLeft)
-    applymovement(OLIVER,Common_Movement_FaceUp)
-    applymovement(CHARLOTTE,Common_Movement_FaceUp)
+    applymovement(LOCALID_LEAGUEOPS_TECHIE,Common_Movement_WalkInPlaceFasterDown)
+    applymovement(LOCALID_LEAGUEOPS_ARNAV,Common_Movement_FaceLeft)
+    applymovement(LOCALID_LEAGUEOPS_CHIEF,Common_Movement_FaceLeft)
+    applymovement(LOCALID_SHARPRISE_OLIVER,Common_Movement_FaceUp)
+    applymovement(LOCALID_SHARPRISE_CHARLOTTE,Common_Movement_FaceUp)
     applymovement(PLAYER,Common_Movement_FaceUp)
     waitmovement(0)
 }
 script WelcomeToTheWarRoom_FaceSpeakerChief {
-    applymovement(TECHIE,Common_Movement_FaceRight)
-    applymovement(ARNAV,Common_Movement_FaceDown)
-    applymovement(CHIEF,Common_Movement_WalkInPlaceFasterLeft)
-    applymovement(OLIVER,Common_Movement_FaceRight)
-    applymovement(CHARLOTTE,Common_Movement_FaceRight)
+    applymovement(LOCALID_LEAGUEOPS_TECHIE,Common_Movement_FaceRight)
+    applymovement(LOCALID_LEAGUEOPS_ARNAV,Common_Movement_FaceDown)
+    applymovement(LOCALID_LEAGUEOPS_CHIEF,Common_Movement_WalkInPlaceFasterLeft)
+    applymovement(LOCALID_SHARPRISE_OLIVER,Common_Movement_FaceRight)
+    applymovement(LOCALID_SHARPRISE_CHARLOTTE,Common_Movement_FaceRight)
     applymovement(PLAYER,Common_Movement_FaceRight)
     waitmovement(0)
 }
 script WelcomeToTheWarRoom_FaceSpeakerCharlotte {
-    applymovement(TECHIE,Common_Movement_FaceDown)
-    applymovement(ARNAV,Common_Movement_FaceDown)
-    applymovement(CHIEF,Common_Movement_FaceLeft)
-    applymovement(OLIVER,Common_Movement_FaceDown)
-    applymovement(CHARLOTTE,Common_Movement_WalkInPlaceFasterRight)
+    applymovement(LOCALID_LEAGUEOPS_TECHIE,Common_Movement_FaceDown)
+    applymovement(LOCALID_LEAGUEOPS_ARNAV,Common_Movement_FaceDown)
+    applymovement(LOCALID_LEAGUEOPS_CHIEF,Common_Movement_FaceLeft)
+    applymovement(LOCALID_SHARPRISE_OLIVER,Common_Movement_FaceDown)
+    applymovement(LOCALID_SHARPRISE_CHARLOTTE,Common_Movement_WalkInPlaceFasterRight)
     applymovement(PLAYER,Common_Movement_FaceUp)
     waitmovement(0)
 }
 script WelcomeToTheWarRoom_FaceSpeakerPlayer {
-    applymovement(TECHIE,Common_Movement_FaceDown)
-    applymovement(ARNAV,Common_Movement_FaceDown)
-    applymovement(CHIEF,Common_Movement_FaceLeft)
-    applymovement(OLIVER,Common_Movement_FaceDown)
-    applymovement(CHARLOTTE,Common_Movement_FaceDown)
+    applymovement(LOCALID_LEAGUEOPS_TECHIE,Common_Movement_FaceDown)
+    applymovement(LOCALID_LEAGUEOPS_ARNAV,Common_Movement_FaceDown)
+    applymovement(LOCALID_LEAGUEOPS_CHIEF,Common_Movement_FaceLeft)
+    applymovement(LOCALID_SHARPRISE_OLIVER,Common_Movement_FaceDown)
+    applymovement(LOCALID_SHARPRISE_CHARLOTTE,Common_Movement_FaceDown)
     applymovement(PLAYER,Common_Movement_WalkInPlaceFasterRight)
     waitmovement(0)
 }
 script WelcomeToTheWarRoom_FaceSpeakerOliver {
-    applymovement(TECHIE,Common_Movement_FaceLeft)
-    applymovement(ARNAV,Common_Movement_FaceDown)
-    applymovement(CHIEF,Common_Movement_FaceLeft)
-    applymovement(OLIVER,Common_Movement_WalkInPlaceFasterRight)
-    applymovement(CHARLOTTE,Common_Movement_FaceUp)
+    applymovement(LOCALID_LEAGUEOPS_TECHIE,Common_Movement_FaceLeft)
+    applymovement(LOCALID_LEAGUEOPS_ARNAV,Common_Movement_FaceDown)
+    applymovement(LOCALID_LEAGUEOPS_CHIEF,Common_Movement_FaceLeft)
+    applymovement(LOCALID_SHARPRISE_OLIVER,Common_Movement_WalkInPlaceFasterRight)
+    applymovement(LOCALID_SHARPRISE_CHARLOTTE,Common_Movement_FaceUp)
     applymovement(PLAYER,Common_Movement_FaceUp)
     waitmovement(0)
 }
@@ -104,7 +95,7 @@ script WelcomeToTheWarRoom_ExplainSitaution_Dialogue
     setvar(VAR_FERRYBUILDING_STATE,CHIEF_LEFT_WAR_ROOM)
 
     call(WelcomeToTheWarRoom_FaceSpeakerLucrezia)
-        applymovement(LUCREZIA, moves(walk_left * 2, walk_right *2, walk_left * 2, walk_right *2, face_down, step_end))
+        applymovement(LOCALID_SHARPRISE_LUCREZIA, moves(walk_left * 2, walk_right *2, walk_left * 2, walk_right *2, face_down, step_end))
         waitmovement(0)
 
         msgbox(format("I read the summary email, but I want to hear the whole story."),,SPEAKER_LUCREZIA)
@@ -115,13 +106,16 @@ script WelcomeToTheWarRoom_ExplainSitaution_Dialogue
         msgbox(format("All major social media networks were attacked this morning. This hack is wild - we've been locked out of our accounts and the administrative teams of those networks can't get us back in."),,SPEAKER_ARNAV)
 
         call(WelcomeToTheWarRoom_FaceSpeakerTechie)
-        msgbox(format("The new owners of our accounts have been pushing a narrative about SharpRise Capital's “crimes against the region”. They're calling for everybody to boycott the League and the upcoming Championship. We've found evidence that the perpetrators are at NavalBase. "),,SPEAKER_TECH)
+        buffermapname(STR_VAR_1,MAP_NAVAL_BASE_EXTERIOR)
+        msgbox(format("The new owners of our accounts have been pushing a narrative about SharpRise Capital's “crimes against the region”. They're calling for everybody to boycott the League and the upcoming Championship. We've found evidence that the perpetrators are at {STR_VAR_1}. "),,SPEAKER_TECH)
 
         call(WelcomeToTheWarRoom_FaceSpeakerChief)
-        msgbox(format("We've long theorized that NavalBase is The Tide's primary base of operations so we've got reason to believe that they're the ones behind this cyber-attack. We have authorization to raid their headquarters and are looking -"),,SPEAKER_CHIEF)
+        buffermapname(STR_VAR_1,MAP_NAVAL_BASE_EXTERIOR)
+        msgbox(format("We've long theorized that {STR_VAR_1} is The Tide's primary base of operations so we've got reason to believe that they're the ones behind this cyber-attack. We have authorization to raid their headquarters and are looking -"),,SPEAKER_CHIEF)
 
         call(WelcomeToTheWarRoom_FaceSpeakerLucrezia)
-        msgbox(format("Charlotte, {PLAYER} you really impressed me back at SharpRise Stadium, and we'd like you to assist as well. You'll work under Chief Bill, and help us shut down these terrorists once and for all."),,SPEAKER_LUCREZIA)
+        buffermapname(STR_VAR_1,MAP_SHARPRISE_STADIUM_ARENA)
+        msgbox(format("Charlotte, {PLAYER} you really impressed me back at {STR_VAR_1}, and we'd like you to assist as well. You'll work under Chief Bill, and help us shut down these terrorists once and for all."),,SPEAKER_LUCREZIA)
 
         call(WelcomeToTheWarRoom_FaceSpeakerCharlotte)
         msgbox(format("Hell yeah, we'd love to."),,SPEAKER_CHARLOTTE)
@@ -137,7 +131,8 @@ script WelcomeToTheWarRoom_ExplainSitaution_Dialogue
         msgbox(format("We've already outlined a battle plan. Kids, you're gonna come with me and take the ferry."),,SPEAKER_CHIEF)
 
         call(WelcomeToTheWarRoom_FaceSpeakerCharlotte)
-        msgbox(format("Why can't we just Fly over?"),,SPEAKER_CHARLOTTE)
+        buffermovename(STR_VAR_1,MOVE_FLY)
+        msgbox(format("Why can't we just {STR_VAR_1} over?"),,SPEAKER_CHARLOTTE)
         closemessage
 
         call(WelcomeToTheWarRoom_FaceSpeakerChief)
@@ -148,48 +143,51 @@ script WelcomeToTheWarRoom_ExplainSitaution_Dialogue
         closemessage
 
         call(WelcomeToTheWarRoom_FaceSpeakerChief)
-        msgbox(format("Great. We'll start the operation as soon as you're ready. Meet me outside NavalBase."),,SPEAKER_CHIEF)
+        buffermapname(STR_VAR_1,MAP_FERRYBUILDING)
+        buffermapname(STR_VAR_2,MAP_HALAI_ISLAND)
+        msgbox(format("Great. We'll start the operation as soon as you're ready. Meet me at {STR_VAR_1}, en route to {STR_VAR_2}."),,SPEAKER_CHIEF)
         closemessage
 
-        applymovement(CHIEF, moves(walk_right, walk_down * 4, walk_left * 2, walk_down * 3, step_end))
+        applymovement(LOCALID_LEAGUEOPS_CHIEF, moves(walk_right, walk_down * 4, walk_left * 2, walk_down * 3, step_end))
         delay(30)
         fadescreenswapbuffers(FADE_TO_BLACK)
-        removeobject(CHIEF)
+        removeobject(LOCALID_LEAGUEOPS_CHIEF)
         fadescreenswapbuffers(FADE_FROM_BLACK)
 
         call(WelcomeToTheWarRoom_FaceSpeakerLucrezia)
         msgbox(format("Charlotte, {PLAYER}, don't let the chief's attitude get in the way. You've all got orders, so let's get to it."),,SPEAKER_LUCREZIA)
         closemessage
 
-        applymovement(ARNAV, moves(walk_right, walk_down * 5, step_end))
-        applymovement(TECHIE, moves(walk_left, walk_down * 5, step_end))
-        applymovement(LUCREZIA, moves(walk_right * 3, walk_down * 5, step_end))
+        applymovement(LOCALID_LEAGUEOPS_ARNAV, moves(walk_right, walk_down * 5, step_end))
+        applymovement(LOCALID_LEAGUEOPS_TECHIE, moves(walk_left, walk_down * 5, step_end))
+        applymovement(LOCALID_SHARPRISE_LUCREZIA, moves(walk_right * 3, walk_down * 5, step_end))
 
         delay(30)
         fadescreenswapbuffers(FADE_TO_BLACK)
-        removeobject(LUCREZIA)
-        removeobject(ARNAV)
-        removeobject(TECHIE)
+        removeobject(LOCALID_SHARPRISE_LUCREZIA)
+        removeobject(LOCALID_LEAGUEOPS_ARNAV)
+        removeobject(LOCALID_LEAGUEOPS_TECHIE)
         fadescreenswapbuffers(FADE_FROM_BLACK)
 
-        applymovement(OLIVER, moves(walk_left, walk_down, face_right, step_end))
-        applymovement(CHARLOTTE,Common_Movement_FaceLeft)
+        applymovement(LOCALID_SHARPRISE_OLIVER, moves(walk_left, walk_down, face_right, step_end))
+        applymovement(LOCALID_SHARPRISE_CHARLOTTE,Common_Movement_FaceLeft)
         applymovement(PLAYER,Common_Movement_FaceLeft)
-        waitmovement(OLIVER)
+        waitmovement(LOCALID_SHARPRISE_OLIVER)
 
         msgbox(format("Thanks again you two. Be careful out there!"),,SPEAKER_OLIVER)
         closemessage
 
-        applymovement(OLIVER, moves(walk_down * 4, walk_right * 3, walk_down * 3, step_end))
+        applymovement(LOCALID_SHARPRISE_OLIVER, moves(walk_down * 4, walk_right * 3, walk_down * 3, step_end))
         delay(30)
         fadescreenswapbuffers(FADE_TO_BLACK)
-        removeobject(OLIVER)
+        removeobject(LOCALID_SHARPRISE_OLIVER)
         fadescreenswapbuffers(FADE_FROM_BLACK)
 
-        applymovement(CHARLOTTE,Common_Movement_FaceDown)
+        applymovement(LOCALID_SHARPRISE_CHARLOTTE,Common_Movement_FaceDown)
         applymovement(PLAYER,Common_Movement_FaceUp)
 
-        msgbox(format("I'm going to head over to Ferrybuilding. Want to come with?"),MSGBOX_YESNO,SPEAKER_CHARLOTTE)
+        buffermapname(STR_VAR_1,MAP_FERRYBUILDING)
+        msgbox(format("I'm going to head over to {STR_VAR_1}. Want to come with?"),MSGBOX_YESNO,SPEAKER_CHARLOTTE)
         endcutscene
         fadedefaultbgm
 
@@ -197,10 +195,10 @@ script WelcomeToTheWarRoom_ExplainSitaution_Dialogue
             msgbox(format("Okay, I'll meet you over there."),,SPEAKER_CHARLOTTE)
             closemessage
 
-            applymovement(CHARLOTTE, moves(walk_left, walk_down * 4, step_end))
-            fadescreenswapbuffers(FADE_TO_BLACK)
-            removeobject(CHARLOTTE)
-            fadescreenswapbuffers(FADE_FROM_BLACK)
+            applymovement(LOCALID_SHARPRISE_CHARLOTTE, moves(walk_left, walk_down * 4, step_end))
+            fadescreen(FADE_TO_BLACK)
+            removeobject(LOCALID_SHARPRISE_CHARLOTTE)
+            fadescreen(FADE_FROM_BLACK)
             release
             end
         } else {

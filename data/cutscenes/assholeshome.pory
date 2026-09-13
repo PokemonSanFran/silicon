@@ -35,9 +35,9 @@ script AssholesHome_Baiya_Dialogue {
         setvar(VAR_HALAI_ISLAND_STATE,SAVE_BAIYA_HALAI_ISLAND)
         msgbox(format("Judging from the swarm of transplants at Jim's this today, I'm guessing the ferry is fixed."),,SPEAKER_BAIYA)
         msgbox(format("I was hoping I wouldn't have to deal with you again. What's Jim's?"),,SPEAKER_ALICIA)
-        msgbox(format("Halai Island is my home, and also home to to Jim's, the best boba shop in the region!"),,SPEAKER_BAIYA)
+        buffermapname(STR_VAR_1,MAP_HALAI_ISLAND)
+        msgbox(format("{STR_VAR_1} is my home, and also home to Jim's, the best boba shop in the region!"),,SPEAKER_BAIYA)
         closemessage
-
         msgbox(format("But if they're getting some business, maybe you transplants aren't completely useless!"),,SPEAKER_BAIYA,EMOTE_LAUGH)
         msgbox(format("What do you want this time?"),,SPEAKER_ALICIA)
         closemessage
@@ -64,9 +64,10 @@ script AssholesHome_PostBattle_Dialogue {
         msgbox(format("Oh wow, a name instead of an insult."),MSGBOX_DEFAULT,SPEAKER_ALICIA)
         msgbox(format("I like being pushed to my limits like that. You're stronger than the rest of them, that's for sure. See you around."),MSGBOX_DEFAULT,SPEAKER_BAIYA)
 
-        if (var(VAR_SHARPRISE_SPIRE_PRODUCTION_STATE) == POST_ALWAYS_WATCHING_WAZOWSKI){
+        if (var(VAR_SHARPRISE_SPIRE_PRODUCTION_STATE) == POST_ALWAYS_WATCHING_WAZOWSKI)
+        {
                 msgbox(format("Wait! I saw that you're participating in the League Challenge like the rest of us. After all the insults and endless complaints about it, what am I missing?"),MSGBOX_DEFAULT,SPEAKER_ALICIA)
-                msgbox(format("You're right, it's hypocritical. But I'm tired of fighting a system from the outside. I'm going to try and change it from the inside out.And at some point before then, I'm gonna beat you!"),MSGBOX_DEFAULT,SPEAKER_BAIYA)
+                msgbox(format("You're right, it's hypocritical. But I'm tired of fighting a system from the outside. I'm going to try and change it from the inside out. And at some point before then, I'm gonna beat you!"),MSGBOX_DEFAULT,SPEAKER_BAIYA)
                 msgbox(format("(What a weird kid...)"),MSGBOX_DEFAULT,SPEAKER_ALICIA)
         }
         closemessage

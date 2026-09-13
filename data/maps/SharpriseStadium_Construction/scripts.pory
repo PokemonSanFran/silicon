@@ -1,9 +1,11 @@
 mapscripts SharpriseStadium_Construction_MapScripts {
     MAP_SCRIPT_ON_TRANSITION {
-        call(VSGarbodor_ConstructionObjectCleanUp_Script)
     }
     MAP_SCRIPT_ON_LOAD {
     }
+    MAP_SCRIPT_ON_WARP_INTO_MAP_TABLE [
+        VAR_INNER_CONSTRUCTION_SITE_STATE,PLAYER_SIDE_NEITHER:VsGarbodor_Script_AddCharlotteEntrance
+    ]
     MAP_SCRIPT_ON_FRAME_TABLE [
     ]
 }

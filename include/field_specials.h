@@ -36,7 +36,6 @@ bool8 ShouldShowBoxWasFullMessage(void);
 void SetPCBoxToSendMon(u8 boxId);
 // Start siliconMerge
 u8 GetNumberOfBadges(void);
-u8 CheckNumArantrazExhibitDefeated(void);
 void GiveFrontierBattlePoints(u32 amount);
 void DeleteChosenPartyMon(void);
 // End siliconMerge

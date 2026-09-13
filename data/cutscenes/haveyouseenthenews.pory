@@ -26,17 +26,18 @@ script HaveYouSeenTheNews_AskHelp_Dialogue {
 
     msgbox(format("Never mind that... okay. We'd like your help again."),,SPEAKER_OLIVER)
     msgbox(format("Shit, what did The Tide do now?"),MSGBOX_DEFAULT,SPEAKER_ALICIA)
-
-    msgbox(format("You're starting to sound like a native… they've completely infiltrated our social media platforms. Lucrezia was impressed with your work at SharpRise Stadium, and thinks you two might be able to help."),,SPEAKER_OLIVER)
+    buffermapname(STR_VAR_1,MAP_SHARPRISE_STADIUM_ARENA)
+    msgbox(format("You're starting to sound like a native… they've completely infiltrated our social media platforms. Lucrezia was impressed with your work at {STR_VAR_1}, and thinks you two might be able to help."),,SPEAKER_OLIVER)
 
     msgbox(format("How are we going to help? Sounds a little above us."),,SPEAKER_CHARLOTTE)
 
-    msgbox(format("No time to explain! We're heading to SharpRise Spire right now. Do you want to ride in our Arriba, {PLAYER}?"),MSGBOX_YESNO,SPEAKER_OLIVER)
+    buffermapname(STR_VAR_1,MAP_SHARPRISE_SPIRE_1F)
+    msgbox(format("No time to explain! We're heading to {STR_VAR_1} right now. Do you want to ride in our Arriba, {PLAYER}?"),MSGBOX_YESNO,SPEAKER_OLIVER)
 
         endcutscene
     if (var (VAR_RESULT) == NO) {
 
-        msgbox(format("Fine, but don't dawdle. Come to the second floor."),,SPEAKER_OLIVER)
+        msgbox(format("Fine, but don't dawdle. Meet us at League Ops."),,SPEAKER_OLIVER)
         closemessage
 
         applymovement(LOCALID_LEAVERRA_OLIVER, Common_Movement_WalkDown)

@@ -27,9 +27,9 @@ script EnterPua_StartGymBattle_Script
 {
     lock
     faceplayer
+    special(PreparePartyForLittleCupBattle)
     msgbox(format("Ha ha, no, yeah. All right, I know you didn't come here to talk about Eggs. You tryna scramble?"),,SPEAKER_PUA)
     closemessage
-    special(PreparePartyForLittleCupBattle)
     trainerbattle_no_intro(TRAINER_PUA, format("I'm not trippin' - that was hella tight. Harder than a 15-minute egg."))
     goto(EnterPua_PuaDefeated_Script)
 }
@@ -46,7 +46,8 @@ script EnterPua_PuaDefeated_Script {
     msgbox(format("That battle was off the hook! You've got mad skills, {PLAYER}. Take this, you earned it!"),,SPEAKER_PUA)
     closemessage
     zapfanfare(ZAP_GYM_CHASILLA_BADGE,MUS_OBTAIN_BADGE)
-    giveitem(ITEM_TM17)
+    cueobjectplayer(PUA)
+    giveitem(ITEM_GYM_REWARD_CHASILLA)
     closemessage
     call(TryAutoSave)
     endcutscene
