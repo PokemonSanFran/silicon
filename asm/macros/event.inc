@@ -3861,3 +3861,11 @@
   .2byte \minutes
   .endm
   @ end timePrinting
+
+// Start siliconQuests
+	.macro debugprint str:req, numOrVar=65535
+	callnative ScrCmd_debugprint
+	.4byte \str
+	.2byte \numOrVar
+	.endm
+// End siliconQuests

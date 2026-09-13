@@ -1,0 +1,4 @@
+mapscripts FancyIndoorTest_MapScripts{
+    MAP_SCRIPT_ON_TRANSITION{
+    }
+}

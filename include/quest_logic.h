@@ -72,6 +72,7 @@ void DebugQuest_Hang20(u8 state);
 void DebugQuest_CulturalPurity(u8 state);
 void DebugQuest_HybridCulture(u8 state);
 void DebugQuest_InstallNatureProbes(u8 state);
+void DebugQuest_ManOfManyHats(u8 state);
 
 void AwardPartyMonChampionRibbon(void);
 void Script_CheckIfAnyMonHasChampionRibbon(void);
@@ -105,5 +106,7 @@ void BufferSunsetTimes(void);
 bool32 ShouldBaiyaCallPlayer(void);
 bool32 ShouldStartANewStrike(void);
 bool8 IsPlayerInSharpriseArena(void);
-
+bool32 Quest_ManOfManyHats_ShouldStayFish(void);
+bool32 Quest_ManOfManyHats_ShouldStayArcade(void);
+bool32 Quest_ManOfManyHats_ShouldStayBoba(void);
 #endif //GUARD_QUESTLOGIC_H

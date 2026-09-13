@@ -408,3 +408,15 @@ const u16 gMetatiles_HallOfFame[] = INCBIN_U16("data/tilesets/secondary/hall_of_
 const u16 gMetatileAttributes_HallOfFame[] = INCBIN_U16("data/tilesets/secondary/hall_of_fame_frlg/metatile_attributes.bin");
 
 #endif // IS_FRLG
+
+const u16 gMetatiles_PorytilesManaged_GeneralSilicon[] = INCBIN_U16("data/tilesets/primary/general_silicon/porytiles_bin/metatiles.bin");
+const u16 gMetatileAttributes_PorytilesManaged_GeneralSilicon[] = INCBIN_U16("data/tilesets/primary/general_silicon/porytiles_bin/metatile_attributes.bin");
+
+const u16 gMetatiles_PorytilesManaged_BuildingSilicon[] = INCBIN_U16("data/tilesets/primary/building_silicon/porytiles_bin/metatiles.bin");
+const u16 gMetatileAttributes_PorytilesManaged_BuildingSilicon[] = INCBIN_U16("data/tilesets/primary/building_silicon/porytiles_bin/metatile_attributes.bin");
+
+const u16 gMetatiles_PorytilesManaged_RegularIndoors[] = INCBIN_U16("data/tilesets/secondary/regular_indoors/porytiles_bin/metatiles.bin");
+const u16 gMetatileAttributes_PorytilesManaged_RegularIndoors[] = INCBIN_U16("data/tilesets/secondary/regular_indoors/porytiles_bin/metatile_attributes.bin");
+
+const u16 gMetatiles_PorytilesManaged_FancyIndoors[] = INCBIN_U16("data/tilesets/secondary/fancy_indoors/porytiles_bin/metatiles.bin");
+const u16 gMetatileAttributes_PorytilesManaged_FancyIndoors[] = INCBIN_U16("data/tilesets/secondary/fancy_indoors/porytiles_bin/metatile_attributes.bin");
