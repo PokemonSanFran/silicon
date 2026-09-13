@@ -13,6 +13,7 @@ script DoAutoSaveFieldEffect
 
 script DoAutoSaveFieldEffectInner
 {
+    setvar(VAR_AUTOSAVE,0)
     dofieldeffect(FLDEFF_SAVING)
     delay(1)
     callnative(DoAutoSave)
