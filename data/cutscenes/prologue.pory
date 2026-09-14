@@ -237,12 +237,12 @@ script Prologue_TimeSkip_Dialogue{
 script Prologue_BeginAdventure_Dialogue
 {
     lock
-    msgbox(format("I've never been one for parties anyways..."),,SPEAKER_SHINJI,TAIL_THOUGHT)
+    msgbox(format("I've never been one for parties anyways..."),,SPEAKER_USUL,TAIL_THOUGHT)
     msgbox(format("Are you ready to leave your coronation party? Once you leave, you will not be able to return."),MSGBOX_YESNO)
     if (var(VAR_RESULT) == YES)
     {
         setvar(VAR_PROLOGUE_STATE,START_ADVENTURE)
-        setvar(VAR_CHOSEN_PSF_STARTER,CUTSCENE_NOT_PLAYED)
+        setvar(VAR_STARTER_MON,CUTSCENE_NOT_PLAYED)
         setflag(FLAG_SPAWN_INVISIBLE)
         fadeblackandsetremovewarpfadeflag
         msgbox(format("Ten years later..."))

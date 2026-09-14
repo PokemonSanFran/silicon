@@ -296,7 +296,7 @@
 #define P_FAMILY_PALKIA                  FALSE
 #define P_FAMILY_HEATRAN                 FALSE
 #define P_FAMILY_REGIGIGAS               FALSE
-#define P_FAMILY_GIRATINA                FALSE
+#define P_FAMILY_GIRATINA                P_GEN_4_POKEMON
 #define P_FAMILY_CRESSELIA               FALSE
 #define P_FAMILY_MANAPHY                 FALSE
 #define P_FAMILY_DARKRAI                 FALSE

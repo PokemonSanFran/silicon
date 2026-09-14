@@ -365,19 +365,7 @@ script HowDisappointing_ArrestScene_Dialogue
     waitstate
 }
 
-const ARNAV = 1
-const TECHIE = 2
-const OLIVER = 3
-const CHARLOTTE = 4
-const LUCREZIA = 5
 const CHIEF2 = 6
-
-const FLAG_HIDE_NERDS_COPS = FLAG_TEMP_1
-const FLAG_HIDE_OLIVER = FLAG_TEMP_2
-const FLAG_HIDE_CHARLOTTE = FLAG_TEMP_3
-const FLAG_HIDE_LUCREZIA = FLAG_TEMP_4
-const FLAG_HIDE_RAMESH = FLAG_TEMP_5
-const FLAG_HIDE_KEIYING = FLAG_TEMP_6
 
 script HowDisappointing_MissionComplete_Dialogue
 {
@@ -388,9 +376,9 @@ script HowDisappointing_MissionComplete_Dialogue
     msgbox(format("Excellent work everybody! Imelda, Doyle, and Adaora have all been arrested, and all of the Gyms were successfully shut down. The region will see how quickly we’re responding to these threats, and hopefully, this will slow their efforts. Maybe I'll send a region wide email..."),,SPEAKER_LUCREZIA,,EMOTE_HAPPY)
 
     closemessage
-    applymovement(CHARLOTTE,Common_Movement_WalkUp)
+    applymovement(LOCALID_SHARPRISE_CHARLOTTE,Common_Movement_WalkUp)
     applymovement(CHIEF2,Common_Movement_WalkUp)
-    applymovement(LUCREZIA,Common_Movement_WalkRight)
+    applymovement(LOCALID_SHARPRISE_LUCREZIA,Common_Movement_WalkRight)
 
     fadescreenswapbuffers(FADE_TO_BLACK)
     delay(30)

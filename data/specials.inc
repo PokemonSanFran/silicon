@@ -553,7 +553,6 @@ gSpecials::
     def_special GetNumberOfBadges
     def_special GetPartySlotIfMonCanMegaEvolve
     def_special SetObjectMovementType
-    def_special CheckNumArantrazExhibitDefeated
     def_special GetCurrentMap
 // End siliconMerge
 	def_special TrySpecialOverworldEvo

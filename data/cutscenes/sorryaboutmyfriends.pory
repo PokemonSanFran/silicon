@@ -27,13 +27,14 @@ script SorryAboutMyFriends_Intro_Dialogue {
         moveobjecttocoords(LOCALID_CHASILLA_ADAORA,15,10,DIR_NORTH)
         waitmovement(LOCALID_CHASILLA_ADAORA)
 
-        msgbox(format("{PLAYER}. How goes your Gym Challenge?"),,SPEAKER_ADAORA)
+        msgbox(format("{PLAYER}. How goes your Gym Challenge?"),,SPEAKER_ADAORA_FIRST_INTRO)
 
         msgbox(format("Good thanks! It's been - wait."),,SPEAKER_ALICIA)
 
         msgbox(format("You're part of The Tide, right?"),,SPEAKER_ALICIA)
 
-        msgbox(format("Yeah, did I not mention that when we met in CapheCity?"),,SPEAKER_ADAORA)
+        buffermapname(STR_VAR_1,MAP_CAPHE_CITY)
+        msgbox(format("Yeah, did I not mention that when we met in {STR_VAR_1}?"),,SPEAKER_ADAORA_FIRST_INTRO)
         reveal(REVEAL_ADAORA)
 
         msgbox(format("Wait, that was The Tide? Everytime I run into them, they're attacking innocent people! "),,SPEAKER_ALICIA)
@@ -44,13 +45,14 @@ script SorryAboutMyFriends_Intro_Dialogue {
 
         msgbox(format("There was a protest here earlier that involved The Tide, that apparently began to get out of hand. Two memb -"),,SPEAKER_ADAORA)
 
-        msgbox(format("I know. I was the one who shut your goons down. They were trying to destroy this building! Or take it back? I'm not really sure, but it was messed up."),,SPEAKER_ALICIA)
+        msgbox(format("I know. I was the one who shut your goons down. They were trying to destroy that building! Or take it back? I'm not really sure, but it was messed up."),,SPEAKER_ALICIA)
 
         msgbox(format("Well then, when they mentioned powerful Trainer, I should have assumed. And I'm very very sorry for their actions. We're all about peace and non-violence."),,SPEAKER_ADAORA)
 
         msgbox(format("Uh huh."),,SPEAKER_ALICIA)
 
-        msgbox(format("I hope our CapheCity work shows that our hearts are in the right place. I'm actually here to fix this mess too."),,SPEAKER_ADAORA)
+        buffermapname(STR_VAR_1,MAP_CAPHE_CITY)
+        msgbox(format("I hope our {STR_VAR_1} work shows that our hearts are in the right place. I'm actually here to fix this mess too."),,SPEAKER_ADAORA)
         msgbox(format("I've been trying to track down the The Tide members that you battled, but they're gone! Their names aren't familiar, so they must be new. Vigrim is adamant that we can't have people like that violating our stance of non-violence."),,SPEAKER_ADAORA)
         msgbox(format("A shame, of course. The execution was certainly sloppy, but if it were me, we'd be doing some more... well.. anwyays."),,SPEAKER_ADAORA,TAIL_WHISPER)
         msgbox(format("Thanks for taking care of them, {PLAYER}."),,SPEAKER_ADAORA)
@@ -82,19 +84,26 @@ script SorryAboutMyFriends_GiveTicket_Script {
 
         msgbox(format("I appreciate the gesture, but doesn't my version of the app from SharpRise Capital get me everywhere?"),,SPEAKER_ALICIA)
 
-        msgbox(format("Nope. Arantraz is such a popular tourist destination that its impossible to get there, even with your fancy pass. But this should be able to get you there whenever you want."),,SPEAKER_ADAORA)
+    buffermapname(STR_VAR_1,MAP_ARANTRAZ)
+        msgbox(format("Nope. {STR_VAR_1} is such a popular tourist destination that its unuslally hard to get there, even with your fancy pass. But this should be able to get you there whenever you want."),,SPEAKER_ADAORA)
 
-        msgbox(format("You'll learn a lot about Resido by going, and it's an excellent place to train for the Gym Challenge. With that, you can go to Arantraz from the HalaiIsland Ferry."),,SPEAKER_ADAORA)
+    buffermapname(STR_VAR_2,MAP_HALAI_ISLAND)
+        msgbox(format("You'll learn a lot about Resido by going, and it's an excellent place to train for the Gym Challenge. With that upgrade, you can go to {STR_VAR_1} from the {STR_VAR_2} Ferry."),,SPEAKER_ADAORA)
+    buffermapname(STR_VAR_1,MAP_CHASILLA)
+        msgbox(format("Once its repaired, you can also use the {STR_VAR_1} Ferry to get there."),,SPEAKER_ADAORA)
 
-        if (var(VAR_FAINTED_FOG_STATE) > 0){
-                msgbox(format("(Guess I should go while I wait for the fog to clear...)"),,SPEAKER_ALICIA)
+        if (var(VAR_FAINTED_FOG_STATE) > 0)
+        {
+            msgbox(format("Guess I should go while I wait for the fog to clear..."),,SPEAKER_ALICIA,TAIL_THOUGHT)
         }
 
-        msgbox(format("Do you know which way Rabia and Vitomar went? I'm going to follow some more leads."),,SPEAKER_ADAORA)
+        msgbox(format("You battled two comrades... do you know which went they went? I'm going to follow some more leads."),,SPEAKER_ADAORA)
 
-        msgbox(format("After we battled, they went towards HalaiIsland."),,SPEAKER_ALICIA)
+    buffermapname(STR_VAR_2,MAP_HALAI_ISLAND)
+    buffermapname(STR_VAR_1,MAP_ARANTRAZ)
+        msgbox(format("After we battled, they went towards {STR_VAR_2}."),,SPEAKER_ALICIA)
 
-        msgbox(format("Thank you {PLAYER}. Enjoy Arantraz."),,SPEAKER_ADAORA)
+        msgbox(format("Thank you {PLAYER}. Enjoy {STR_VAR_1}."),,SPEAKER_ADAORA)
         closemessage
 
         applymovement(LOCALID_CHASILLA_ADAORA, moves(walk_down * 6, step_end))

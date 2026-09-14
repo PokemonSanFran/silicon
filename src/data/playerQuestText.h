@@ -857,10 +857,10 @@ static const struct PlayerAdventureText playerAdventureText[] =
     {
       {
         .dataType = QUEST_FLAVOR_COMPARE_VAR,
-        .dataAddress = VAR_STORYLINE_STATE,
+        .dataAddress = VAR_CONSTRUCTION_STRIKE_STATE,
         .compareOp = EQUAL,
-        .targetValue = STORY_NEED_SLEEP_BEFORE_FRANK,
-      }
+        .targetValue = THE_TIDE_ARRESTED,
+      },
     }
   },
   {
@@ -876,7 +876,7 @@ static const struct PlayerAdventureText playerAdventureText[] =
     {
       {
         .dataType = QUEST_FLAVOR_COMPARE_VAR,
-        .dataAddress = VAR_GOLDENGATEBRIDGE_STATE,
+        .dataAddress = VAR_PIOCABRIDGE_STATE,
         .compareOp = EQUAL,
         .targetValue = CALLED_BY_CHARLOTTE,
       }
@@ -895,25 +895,25 @@ static const struct PlayerAdventureText playerAdventureText[] =
     {
       {
         .dataType = QUEST_FLAVOR_COMPARE_VAR,
-        .dataAddress = VAR_ROBINWILLIAMSTUNNEL_STATE,
+        .dataAddress = VAR_LANJINGTUNNEL_STATE,
         .compareOp = GREATER_THAN_OR_EQUAL,
         .targetValue = CHARLOTTE_INSIDE_TUNNEL,
       },
       {
         .dataType = QUEST_FLAVOR_COMPARE_VAR,
-        .dataAddress = VAR_ROBINWILLIAMSTUNNEL_STATE,
+        .dataAddress = VAR_LANJINGTUNNEL_STATE,
         .compareOp = LESS_THAN,
         .targetValue = FRANK_BOSS_DEFEATED,
       }
     }
   },
   {
-    .text = COMPOUND_STRING("Meet Charlotte in {STR_VAR_1}."),
+    .text = COMPOUND_STRING("Meet Charlotte at the exit to {STR_VAR_1}."),
     .textComponent =
     {
       {
         .textTargetType = QUEST_FLAVOR_GET_NAME_MAP,
-        .textTargetValue = MAP_ESPULEE_OUTSKIRTS,
+        .textTargetValue = MAP_LANJING_TUNNEL,
       },
     },
     .textCondition =
@@ -922,7 +922,7 @@ static const struct PlayerAdventureText playerAdventureText[] =
         .dataType = QUEST_FLAVOR_COMPARE_VAR,
         .dataAddress = VAR_ESPULEE_OUTSKIRTS_STATE,
         .compareOp = EQUAL,
-        .targetValue = ROBINWILLIAMSTUNNEL_PUZZLES_SOLVED,
+        .targetValue = LANJINGTUNNEL_PUZZLES_SOLVED,
       },
     }
   },

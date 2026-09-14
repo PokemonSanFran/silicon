@@ -47,9 +47,10 @@
       "flag": "0"
     },
     {
+      "local_id": "LOCALID_ARANTAZ_TRAINER_6",
       "graphics_id": "OBJ_EVENT_GFX_RUNNING_TRIATHLETE_M",
-      "x": 17,
-      "y": 50,
+      "x": 19,
+      "y": 51,
       "elevation": 3,
       "movement_type": "MOVEMENT_TYPE_NONE",
       "movement_range_x": 0,
@@ -60,9 +61,10 @@
       "flag": "0"
     },
     {
+      "local_id": "LOCALID_ARANTAZ_TRAINER_1",
       "graphics_id": "OBJ_EVENT_GFX_GENTLEMAN",
       "x": 29,
-      "y": 59,
+      "y": 64,
       "elevation": 3,
       "movement_type": "MOVEMENT_TYPE_NONE",
       "movement_range_x": 0,
@@ -73,9 +75,10 @@
       "flag": "0"
     },
     {
+      "local_id": "LOCALID_ARANTAZ_TRAINER_5",
       "graphics_id": "OBJ_EVENT_GFX_HIKER",
       "x": 8,
-      "y": 34,
+      "y": 35,
       "elevation": 3,
       "movement_type": "MOVEMENT_TYPE_NONE",
       "movement_range_x": 0,
@@ -86,9 +89,10 @@
       "flag": "0"
     },
     {
+      "local_id": "LOCALID_ARANTAZ_TRAINER_3",
       "graphics_id": "OBJ_EVENT_GFX_GIRL_2",
-      "x": 25,
-      "y": 9,
+      "x": 28,
+      "y": 8,
       "elevation": 3,
       "movement_type": "MOVEMENT_TYPE_NONE",
       "movement_range_x": 0,
@@ -99,9 +103,10 @@
       "flag": "0"
     },
     {
+      "local_id": "LOCALID_ARANTAZ_TRAINER_2",
       "graphics_id": "OBJ_EVENT_GFX_SCIENTIST_1",
       "x": 37,
-      "y": 12,
+      "y": 14,
       "elevation": 3,
       "movement_type": "MOVEMENT_TYPE_NONE",
       "movement_range_x": 0,
@@ -125,9 +130,10 @@
       "flag": "0"
     },
     {
+      "local_id": "LOCALID_ARANTAZ_TRAINER_4",
       "graphics_id": "OBJ_EVENT_GFX_WOMAN_1",
-      "x": 27,
-      "y": 21,
+      "x": 29,
+      "y": 22,
       "elevation": 3,
       "movement_type": "MOVEMENT_TYPE_NONE",
       "movement_range_x": 0,
@@ -262,61 +268,56 @@
       "var": "VAR_ARANTRAZ_STATE",
       "var_value": "0",
       "script": "TheStorySoFar_EntranceTrigger_Script"
-    },
+    }
+  ],
+  "bg_events": [
     {
-      "type": "trigger",
+      "type": "sign",
       "x": 29,
-      "y": 60,
+      "y": 63,
       "elevation": 0,
-      "var": "VAR_TEMP_D",
-      "var_value": "0",
-      "script": "TheStorySoFar_ReadSign1_Dialogue"
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "Arantaz_Dialogue_Sign1"
     },
     {
-      "type": "trigger",
+      "type": "sign",
+      "x": 19,
+      "y": 50,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "Arantaz_Dialogue_Sign6"
+    },
+    {
+      "type": "sign",
+      "x": 8,
+      "y": 34,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "Arantaz_Dialogue_Sign5"
+    },
+    {
+      "type": "sign",
+      "x": 29,
+      "y": 21,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "Arantaz_Dialogue_Sign4"
+    },
+    {
+      "type": "sign",
       "x": 37,
       "y": 13,
       "elevation": 0,
-      "var": "VAR_TEMP_D",
-      "var_value": "0",
-      "script": "TheStorySoFar_ReadSign2_Dialogue"
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "Arantaz_Dialogue_Sign2"
     },
     {
-      "type": "trigger",
-      "x": 25,
-      "y": 10,
+      "type": "sign",
+      "x": 28,
+      "y": 7,
       "elevation": 0,
-      "var": "VAR_TEMP_D",
-      "var_value": "0",
-      "script": "TheStorySoFar_ReadSign3_Dialogue"
-    },
-    {
-      "type": "trigger",
-      "x": 8,
-      "y": 35,
-      "elevation": 0,
-      "var": "VAR_TEMP_D",
-      "var_value": "0",
-      "script": "TheStorySoFar_ReadSign4_Dialogue"
-    },
-    {
-      "type": "trigger",
-      "x": 27,
-      "y": 22,
-      "elevation": 0,
-      "var": "VAR_TEMP_D",
-      "var_value": "0",
-      "script": "TheStorySoFar_ReadSign5_Dialogue"
-    },
-    {
-      "type": "trigger",
-      "x": 17,
-      "y": 51,
-      "elevation": 0,
-      "var": "VAR_TEMP_D",
-      "var_value": "0",
-      "script": "TheStorySoFar_ReadSign6_Dialogue"
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "Arantaz_Dialogue_Sign3"
     }
-  ],
-  "bg_events": []
+  ]
 }

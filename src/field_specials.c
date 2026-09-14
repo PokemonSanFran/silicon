@@ -1551,6 +1551,28 @@ void LoadWallyZigzagoon(void)
     SetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_MOVE4, &monData);
 }
 
+// Start siliconMerge
+void LoadTrachyMon(void)
+{
+    u16 monData;
+    CreateRandomMon(&gParties[B_TRAINER_PLAYER][0], SPECIES_PARASECT, 25);
+    monData = 0;
+    SetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_ABILITY_NUM, &monData);
+    monData = MOVE_SPORE;
+    SetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_MOVE1, &monData);
+    monData = MOVE_FALSE_SWIPE;
+    SetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_MOVE2, &monData);
+    monData = MOVE_ABSORB;
+    SetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_MOVE3, &monData);
+    monData = MOVE_STUN_SPORE;
+    SetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_MOVE4, &monData);
+    monData = MAX_PER_STAT_IVS;
+    SetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_SPEED_IV, &monData);
+    monData = MAX_PER_STAT_EVS;
+    SetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_SPEED_EV, &monData);
+}
+// End siliconMerge
+
 bool8 IsStarterInParty(void)
 {
     u8 i;
@@ -4547,23 +4569,6 @@ u8 GetNumberOfBadges(void)
     for (u32 badgeIndex = 0; badgeIndex < ARRAY_COUNT(badgeList); badgeIndex++)
         if (FlagGet(badgeList[badgeIndex]))
             count++;
-
-    gSpecialVar_Result = count;
-    return count;
-}
-
-#define NUM_ARANTRAZ_TRAINERS 6
-
-u8 CheckNumArantrazExhibitDefeated(void)
-{
-    u32 trainerFlag, count = 0;
-
-    for(trainerFlag = 0; trainerFlag < NUM_ARANTRAZ_TRAINERS; trainerFlag++)
-        if (FlagGet(TRAINER_FLAGS_START + TRAINER_0D416B2C + trainerFlag))
-            count++;
-
-    if (count == NUM_ARANTRAZ_TRAINERS)
-        VarSet(VAR_ARANTRAZ_EXHIBIT_STATE,ARANTRAZ_EXHIBIT_FINISH);
 
     gSpecialVar_Result = count;
     return count;
