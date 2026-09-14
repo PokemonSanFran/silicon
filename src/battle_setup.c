@@ -64,6 +64,7 @@
 #include "ui_dexnav.h" // dexnav
 #include "fishing.h"
 #include "field_effect.h" // flyEncounters
+#include "options_game.h" // autoSave
 
 enum TransitionType
 {
@@ -726,7 +727,10 @@ static void CB2_EndWildBattle(void)
         IncrementFogVariable(); // fogBattle
         SetMainCallback2(CB2_ReturnToField);
         DowngradeBadPoison();
-        gFieldCallback = FieldCB_ReturnToFieldNoScriptCheckMusic;
+        // Start autoSave
+        //gFieldCallback = FieldCB_ReturnToFieldNoScriptCheckMusic;
+        gFieldCallback = FieldCB_ReturnToFieldPostWildBattleCheckMusic;
+        // End autoSave
     }
 }
 
