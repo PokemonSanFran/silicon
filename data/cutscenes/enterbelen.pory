@@ -473,7 +473,7 @@ script EnterBelen_PutMeatInOven_Dialogue
     applymovement(LOCALID_MERMEREZA_GYM_BELEN, Common_Movement_FaceOriginalDirection)
     waitmovement(LOCALID_MERMEREZA_GYM_BELEN)
     delay(24)
-    msgbox(format("Excellente, all set! Follow me to the battlefield."), MSGBOX_NPC,SPEAKER_BELEN)
+    msgbox(format("Excelente, all set! Follow me to the battlefield."), MSGBOX_NPC,SPEAKER_BELEN)
     closemessage
     //applymovement(LOCALID_PLAYER,moves(walk_left * 4))
     //applymovement(LOCALID_MERMEREZA_GYM_BELEN,moves(walk_left * 4))
