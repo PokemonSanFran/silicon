@@ -148,6 +148,7 @@
       "dest_warp_id": "0"
     },
     {
+      "warp_id": "WARP_ID_SPIRE_ELEVATOR_TO_PRODUCTION",
       "x": 9,
       "y": 39,
       "elevation": 0,

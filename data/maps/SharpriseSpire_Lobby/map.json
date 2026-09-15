@@ -115,6 +115,7 @@
       "dest_warp_id": "0"
     },
     {
+      "warp_id": "WARP_ID_SPIRE_ELEVATOR_TO_LOBBY",
       "x": 4,
       "y": 2,
       "elevation": 0,

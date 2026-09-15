@@ -3991,7 +3991,7 @@ bool32 Quest_ManOfManyHats_ManOfManyHatsSeenAllJobs(void)
 {
     if (Quest_ManOfManyHats_GetVariable_SawBoba() == FALSE)
         return FALSE;
- 
+
     if (Quest_ManOfManyHats_GetVariable_SawFish() == FALSE)
          return FALSE;
 
@@ -4080,7 +4080,7 @@ void DebugQuest_ManOfManyHats(u8 state)
     {
         default:
         case STATE_QUEST_MANOFMANYHATS_NOT_STARTED:
-            FlagSet(FLAG_SYS_STARTER_APPS_GET);            
+            FlagSet(FLAG_SYS_STARTER_APPS_GET);
             JumpPlayerTo_YoungPadawan(JUMP_DEBUG);
             DebugQuest_InstallNatureProbes(STATE_QUEST_INSTALLNATUREPROBES_COMPLETE);
             break;
@@ -6520,4 +6520,27 @@ bool8 FalseTimeline_CheckRewardStatus(void)
 void Script_FalseTimeline_CheckRewardStatus(void)
 {
     gSpecialVar_Result = FalseTimeline_CheckRewardStatus();
+}
+
+// ***********************************************************************
+// Sharprise Elevator
+// ***********************************************************************
+
+void Script_SetCurrentSpireFloor(void)
+{
+    u32 currentMapGroup = gSaveBlock1Ptr->dynamicWarp.mapGroup;
+    u32 currentMapNum = gSaveBlock1Ptr->dynamicWarp.mapNum;
+
+    if ((currentMapNum | (currentMapGroup << 8)) == MAP_SHARPRISE_SPIRE_1F)
+        gSpecialVar_0x8005 = SHARPRISE_FLOOR_FOYER;
+    else if ((currentMapNum | (currentMapGroup << 8)) == MAP_SHARPRISE_SPIRE_LOBBY)
+        gSpecialVar_0x8005 = SHARPRISE_FLOOR_LOBBY;
+    else if ((currentMapNum | (currentMapGroup << 8)) == MAP_SHARPRISE_SPIRE_PARK)
+        gSpecialVar_0x8005 = SHARPRISE_FLOOR_PARK;
+    else if ((currentMapNum | (currentMapGroup << 8)) == MAP_SHARPRISE_SPIRE_GIFTSHOP)
+        gSpecialVar_0x8005 = SHARPRISE_FLOOR_GIFTSHOP;
+    else if ((currentMapNum | (currentMapGroup << 8)) == MAP_SHARPRISE_SPIRE_PRODUCTION)
+        gSpecialVar_0x8005 = SHARPRISE_FLOOR_PRODUCTION;
+    else
+        gSpecialVar_0x8005 = SHARPRISE_FLOOR_LEAGUEOPS;
 }

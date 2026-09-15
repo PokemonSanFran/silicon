@@ -103,8 +103,6 @@ static EWRAM_DATA u8 sSlidingDoorNextFrameCounter = 0;
 static EWRAM_DATA u8 sSlidingDoorFrame = 0;
 static EWRAM_DATA u8 sTutorMoveAndElevatorWindowId = 0;
 static EWRAM_DATA u16 sLilycoveDeptStore_DefaultFloorChoice = 0;
-static EWRAM_DATA u16 sSharpriseSpire_NeverRead = 0; // siliconMerge
-static EWRAM_DATA u16 sSharpriseSpire_DefaultFloorChoice = 0; // siliconMerge
 static EWRAM_DATA struct ListMenuItem *sScrollableMultichoice_ListMenuItem = NULL;
 
 static EWRAM_DATA u16 sFrontierExchangeCorner_NeverRead = 0;
@@ -1913,86 +1911,6 @@ static const u16 sElevatorWindowTiles_Descending[ELEVATOR_WINDOW_HEIGHT][ELEVATO
         METATILE_BattleFrontier_Elevator_Bottom1
     },
 };
-
-//Start SharpriseSpire Elevator Scripts
-
-void SetSharpriseSpireFloor(void)
-{
-    u8 SharpriseSpireFloor = 0;
-
-/*
-    switch (gSaveBlock1Ptr->dynamicWarp.mapNum)
-    {
-        case MAP_NUM(SHARPRISE_SPIRE_1F):
-            SharpriseSpireFloor = SHARPRISESPIRE_FLOORNUM_1F;
-            break;
-        case MAP_NUM(SHARPRISE_SPIRE_2F):
-            SharpriseSpireFloor = SHARPRISESPIRE_FLOORNUM_2F;
-            break;
-        case MAP_NUM(SHARPRISE_SPIRE_5F):
-            SharpriseSpireFloor = SHARPRISESPIRE_FLOORNUM_5F;
-            break;
-        case MAP_NUM(SHARPRISE_SPIRE_10F):
-            SharpriseSpireFloor = SHARPRISESPIRE_FLOORNUM_10F;
-            break;
-        default:
-            SharpriseSpireFloor = SHARPRISESPIRE_FLOORNUM_1F;
-            break;
-    }
-    */
-    VarSet(VAR_DEPT_STORE_FLOOR, SharpriseSpireFloor); //TODO Change VAR_DEPT_STORE_FLOOR to one more suited to PSF
-}
-
-u16 GetTowerFloorDefaultFloorChoice(void)
-{
-    sSharpriseSpire_NeverRead = 0;
-    sSharpriseSpire_DefaultFloorChoice = 0;
-
-    /*
-    if (gSaveBlock1Ptr->dynamicWarp.mapGroup == MAP_GROUP(SHARPRISE_SPIRE_1F))
-    {
-        switch (gSaveBlock1Ptr->dynamicWarp.mapNum)
-        {
-            case MAP_NUM(SHARPRISE_SPIRE_10F):
-                sSharpriseSpire_NeverRead = 0;
-                sSharpriseSpire_DefaultFloorChoice = 0;
-                break;
-            case MAP_NUM(SHARPRISE_SPIRE_5F):
-                sSharpriseSpire_NeverRead = 0;
-                sSharpriseSpire_DefaultFloorChoice = 1;
-                break;
-            case MAP_NUM(SHARPRISE_SPIRE_2F):
-                sSharpriseSpire_NeverRead = 0;
-                sSharpriseSpire_DefaultFloorChoice = 2;
-                break;
-            case MAP_NUM(SHARPRISE_SPIRE_1F):
-                sSharpriseSpire_NeverRead = 0;
-                sSharpriseSpire_DefaultFloorChoice = 3;
-                break;
-        }
-    }
-*/
-
-    return sSharpriseSpire_DefaultFloorChoice;
-}
-
-void ShowSharpriseSpireElevatorFloorSelect(void)
-{
-    int xPos;
-
-    sTutorMoveAndElevatorWindowId = AddWindow(&sWindowTemplate_ElevatorFloor);
-    SetStandardWindowBorderStyle(sTutorMoveAndElevatorWindowId, 0);
-
-    xPos = GetStringCenterAlignXOffset(1, gText_ElevatorNowOn, 64);
-    AddTextPrinterParameterized(sTutorMoveAndElevatorWindowId, 1, gText_ElevatorNowOn, xPos, 1, TEXT_SKIP_DRAW, NULL);
-
-    xPos = GetStringCenterAlignXOffset(1, gSharpriseSpireFloorNames[gSpecialVar_0x8005], 64);
-    AddTextPrinterParameterized(sTutorMoveAndElevatorWindowId, 1, gSharpriseSpireFloorNames[gSpecialVar_0x8005], xPos, 17, TEXT_SKIP_DRAW, NULL);
-
-    PutWindowTilemap(sTutorMoveAndElevatorWindowId);
-    CopyWindowToVram(sTutorMoveAndElevatorWindowId, 3);
-}
-//End SharpriseSpire Elevator Scripts
 
 void SetDeptStoreFloor(void)
 {
@@ -6176,3 +6094,4 @@ bool8 CheckAddCoins(void)
     else
         return TRUE;
 }
+

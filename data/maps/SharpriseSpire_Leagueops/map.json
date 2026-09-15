@@ -101,6 +101,7 @@
       "dest_warp_id": "0"
     },
     {
+      "warp_id": "WARP_ID_SPIRE_ELEVATOR_TO_LEAGUEOPS",
       "x": 19,
       "y": 10,
       "elevation": 0,
