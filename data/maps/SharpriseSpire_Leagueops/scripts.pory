@@ -116,15 +116,6 @@ release
 end
 }
 
-script SharpriseSpire_Leagueops_Charlotte_Event_Script{
-    lock
-    faceplayer
-    call(ImIn_InteractCharlotteBattle_Script)
-    call(ImIn_PostCharlotteBattle_Interact_Dialogue)
-    closemessage
-
-}
-
 script SharpriseSpire_Leagueops_CheckRewardStatus_Script
 {
     callnative(Script_FalseTimeline_CheckRewardStatus)

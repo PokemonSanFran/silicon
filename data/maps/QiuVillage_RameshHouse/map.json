@@ -15,6 +15,7 @@
   "connections": 0,
   "object_events": [
     {
+      "local_id": "LOCALID_RAMESH_HOUSE_TALA",
       "graphics_id": "OBJ_EVENT_GFX_TALA",
       "x": 2,
       "y": 7,
@@ -28,6 +29,7 @@
       "flag": "FLAG_TEMP_1"
     },
     {
+      "local_id": "LOCALID_RAMESH_HOUSE_MAGNUS",
       "graphics_id": "OBJ_EVENT_GFX_MAGNUS",
       "x": 18,
       "y": 9,
@@ -41,6 +43,7 @@
       "flag": "FLAG_TEMP_1"
     },
     {
+      "local_id": "LOCALID_RAMESH_HOUSE_FRANK",
       "graphics_id": "OBJ_EVENT_GFX_FRANK",
       "x": 10,
       "y": 11,
@@ -54,6 +57,7 @@
       "flag": "FLAG_TEMP_1"
     },
     {
+      "local_id": "LOCALID_RAMESH_HOUSE_ELEANOR",
       "graphics_id": "OBJ_EVENT_GFX_ELEANOR",
       "x": 15,
       "y": 17,
@@ -67,6 +71,7 @@
       "flag": "FLAG_TEMP_1"
     },
     {
+      "local_id": "LOCALID_RAMESH_HOUSE_BAIYA",
       "graphics_id": "OBJ_EVENT_GFX_BAIYA",
       "x": 3,
       "y": 13,

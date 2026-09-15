@@ -1465,4 +1465,10 @@ enum
 #define ITEM_FRANK_MON_LEAD ITEM_LIFE_ORB
 #define ITEM_FRANK_MON_PARTNER ITEM_SITRUS_BERRY
 
+// ***********************************************************************
+// Cutscene: I'm In
+// ***********************************************************************
+
+#define BAIYA_MON_INDEX                    1
+
 #endif // GUARD_CONSTANTS_QUESTS_H

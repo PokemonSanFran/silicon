@@ -6544,3 +6544,38 @@ void Script_SetCurrentSpireFloor(void)
     else
         gSpecialVar_0x8005 = SHARPRISE_FLOOR_LEAGUEOPS;
 }
+
+// ***********************************************************************
+// Cutscene: I'm In
+// ***********************************************************************
+
+void ImIn_LoadBaiyaMon(void)
+{
+    u32 trainerId = TRAINER_BAIYA_LETSBURNTHISMOTHERDOWN;
+    u32 index = BAIYA_MON_INDEX;
+    index = Quest_Generic_GetIndexForMonTrainer(trainerId,index,&gTrainers[0][0],TRAINERS_COUNT);
+
+    Quest_Generic_LoadTrainersMonToOWVar(trainerId,index,VAR_OBJ_GFX_ID_0,&gTrainers[0][0],TRAINERS_COUNT);
+}
+
+void ImIn_BufferBaiyaMonName(void)
+{
+    u32 trainerId = TRAINER_BAIYA_LETSBURNTHISMOTHERDOWN;
+    u32 index = BAIYA_MON_INDEX;
+    index = Quest_Generic_GetIndexForMonTrainer(trainerId,index,&gTrainers[0][0],TRAINERS_COUNT);
+    const struct TrainerMon mon = Quest_Generic_GetMonFromTrainer(trainerId,index,&gTrainers[0][0],TRAINERS_COUNT);
+
+    StringCopy(gStringVar1,GetSpeciesName(mon.species));
+}
+
+void ImIn_GetBaiyaMonCry(void)
+{
+    u32 trainerId = TRAINER_BAIYA_LETSBURNTHISMOTHERDOWN;
+    u32 index = BAIYA_MON_INDEX;
+    index = Quest_Generic_GetIndexForMonTrainer(trainerId,index,&gTrainers[0][0],TRAINERS_COUNT);
+    const struct TrainerMon mon = Quest_Generic_GetMonFromTrainer(trainerId,index,&gTrainers[0][0],TRAINERS_COUNT);
+
+    enum Species species = (index == PARTY_SIZE) ? SPECIES_NONE : mon.species;
+    PlayCry_Script(species, CRY_MODE_ENCOUNTER);
+}
+

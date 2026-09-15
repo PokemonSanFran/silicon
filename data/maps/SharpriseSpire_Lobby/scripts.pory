@@ -1,12 +1,10 @@
-const FLAG_HIDE_GUARD = FLAG_TEMP_1
-
 mapscripts SharpriseSpire_Lobby_MapScripts
 {
     MAP_SCRIPT_ON_TRANSITION
     {
         call_if_gt(VAR_TOWER_RAID_STATE,FOUND_RAMESH_WARP_DOOR,SharpriseSpire_GuardRaidFloors_Script)
         call_if_ne(VAR_TOWER_RAID_STATE,RAMESH_WARP_DOOR_UNLOCKED,ImIn_Script_HideEntireRaidParty)
-        call_if_eq(VAR_TOWER_RAID_STATE,RAMESH_WARP_DOOR_UNLOCKED,ImIn_Script_HideSpecificRaidPartyMembers)
+        call_if_eq(VAR_TOWER_RAID_STATE,RAMESH_WARP_DOOR_UNLOCKED,ImIn_Script_HideSpireSpecificRaidPartyMembers)
     }
 
     MAP_SCRIPT_ON_FRAME_TABLE
@@ -17,5 +15,5 @@ mapscripts SharpriseSpire_Lobby_MapScripts
 
 script SharpriseSpire_GuardRaidFloors_Script
 {
-    setobjectflagfromlocalid(SHARPRISE_SPIRE_LOBBY_STAIRS_GUARD)
+    setobjectflagfromlocalid(LOCALID_SHARPRISE_SPIRE_LOBBY_STAIRS_GUARD)
 }
