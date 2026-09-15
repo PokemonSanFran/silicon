@@ -1,6 +1,6 @@
 {
-  "id": "MAP_SALESORCETOWER_ELEVATOR",
-  "name": "Salesorcetower_Elevator",
+  "id": "MAP_SHARPRISESPIRE_ELEVATOR",
+  "name": "SharpriseSpire_Elevator",
   "layout": "LAYOUT_SHARPRISESPIRE_ELEVATOR",
   "music": "MUS_RG_SILPH",
   "region_map_section": "MAPSEC_SHARPRISESPIRE",

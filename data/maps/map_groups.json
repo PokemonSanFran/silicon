@@ -408,6 +408,7 @@
   ],
   "gMapGroup_SharpriseSpire": [
     "SharpriseSpire_1F",
+    "SharpriseSpire_Elevator",
     "SharpriseSpire_Lobby",
     "SharpriseSpire_Arriba",
     "SharpriseSpire_Presto",
@@ -689,7 +690,6 @@
     "Route121_SafariZoneEntrance"
   ],
   "gMapGroup_Dungeons": [
-    "Salesorcetower_Elevator",
     "MeteorFalls_1F_1R",
     "MeteorFalls_1F_2R",
     "MeteorFalls_B1F_1R",

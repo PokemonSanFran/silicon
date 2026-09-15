@@ -10397,8 +10397,8 @@
       "border_height": 2,
       "primary_tileset": "gTileset_Building",
       "secondary_tileset": "gTileset_BattleFrontier",
-      "border_filepath": "data/layouts/Salesorcetower_Elevator/border.bin",
-      "blockdata_filepath": "data/layouts/Salesorcetower_Elevator/map.bin",
+      "border_filepath": "data/layouts/SharpriseSpire_Elevator/border.bin",
+      "blockdata_filepath": "data/layouts/SharpriseSpire_Elevator/map.bin",
       "layout_version": "emerald"
     },
     {

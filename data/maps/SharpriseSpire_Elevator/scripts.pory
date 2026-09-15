@@ -1,6 +1,6 @@
 const VAR_MAP = VAR_0x8005
 
-mapscripts Salesorcetower_Elevator_MapScripts
+mapscripts SharpriseSpire_Elevator_MapScripts
 {
     MAP_SCRIPT_ON_FRAME_TABLE
     [
