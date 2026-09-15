@@ -60,7 +60,7 @@ script WowYoureStrong_Dialogue_Intro
 
 script WowYoureStrong_Script_ShowTower
 {
-    buffermapname(STR_VAR_1,MAP_SHARPRISE_SPIRE_38F)
+    buffermapname(STR_VAR_1,MAP_SHARPRISE_SPIRE_LEAGUEOPS)
     buffermapname(STR_VAR_2,MAP_PERLACIA_CITY)
 
     specialvar(VAR_RESULT,GetCurrentMap)
