@@ -330,6 +330,101 @@ void MonSummary_Init(enum PokemonSummaryScreenMode mode, void *mons, u8 currIdx,
     SetMainCallback2(CB2_SummarySetup);
 }
 
+u32 MonSummary_CreateHPBarSprite(u32 tileTag, u32 palTag, s32 x, s32 y)
+{
+    const struct MonSummarySprite *config = SummarySprite_GetMainStruct(1);
+
+    LoadSpriteSheet(&(const struct SpriteSheet){
+        .tag = tileTag,
+        .data = gMiscBlank_Gfx,
+        .size = config->size,
+    });
+    LoadSpritePalette(&(const struct SpritePalette){
+        .data = sMonSummary_MainPalette,
+        .tag = palTag
+    });
+
+    return CreateSprite(&(const struct SpriteTemplate){
+        .tileTag = tileTag,
+        .paletteTag = palTag,
+        .oam = config->oam,
+        .anims = config->anims,
+        .affineAnims = gDummySpriteAffineAnimTable,
+    }, x, y, 0);
+}
+
+void MonSummary_InjectHpBar(struct Sprite *sprite, s32 currHp, s32 maxHp)
+{
+    struct WindowTemplate template = { .width = 8, .height  = 4 }; // 64x32
+    u32 windowId = AddWindow(&template);
+
+    u8 array[7];
+    const u8 *blit = sSummarySprite_HpBarAnims;
+    bool32 fill = CalcBarFilledPixels(maxHp, currHp, 0, &currHp, array, 7);
+    for (u32 i = 0; i < 7; i++)
+    {
+        u32 x, y;
+
+        if (currHp == maxHp && fill == 1)
+            x = 8;
+        else
+            x = array[i];
+
+        x *= 8;
+
+        if (i < 3)
+            y = 0;
+        else if (i == 3)
+            y = 1;
+        else
+            y = 2;
+
+        y *= 16;
+        BlitBitmapRectToWindow(windowId, blit, x, y, TILE_TO_PIXELS(9), TILE_TO_PIXELS(6), i * 8, 0, TILE_TO_PIXELS(1), TILE_TO_PIXELS(2));
+    }
+
+    enum MonSummaryHpBarColors color;
+    switch (GetHPBarLevel(currHp, maxHp))
+    {
+    case HP_BAR_FULL:
+    case HP_BAR_GREEN:
+        color = SUMMARY_HP_BAR_CLR_GREEN;
+        break;
+    case HP_BAR_YELLOW:
+        color = SUMMARY_HP_BAR_CLR_YELLOW;
+        break;
+    case HP_BAR_RED:
+    default:
+        if (maxHp > 1)
+            color = SUMMARY_HP_BAR_CLR_RED;
+        else
+            color = SUMMARY_HP_BAR_CLR_GREEN;
+        break;
+    }
+
+    // avoid copying onto the faded buffer as otherwise it'll pop up when the screen is still faded as black
+    CpuCopy16(&sSummarySprite_HpBarColors[1 + (color * 2)], &gPlttBufferUnfaded[OBJ_PLTT_ID(sprite->oam.paletteNum) + 6], PLTT_SIZEOF(2));
+
+    u32 fontId = FONT_OUTLINED;
+
+    ConvertUIntToDecimalStringN(gStringVar1, currHp, STR_CONV_MODE_RIGHT_ALIGN, 4);
+    u32 x = GetStringRightAlignXOffset(fontId, gStringVar1, TILE_TO_PIXELS(3) + 1);
+    SummaryPrint_AddText(windowId, fontId, x, 0, SUMMARY_FNTCLR_INTERFACE, gStringVar1);
+
+    x = TILE_TO_PIXELS(3) + 1;
+    SummaryPrint_AddText(windowId, fontId, x, 0, SUMMARY_FNTCLR_INTERFACE, COMPOUND_STRING("/"));
+
+    x = TILE_TO_PIXELS(4) - 2;
+    ConvertUIntToDecimalStringN(gStringVar1, maxHp, STR_CONV_MODE_LEFT_ALIGN, 4);
+    SummaryPrint_AddText(windowId, fontId, x, 0, SUMMARY_FNTCLR_INTERFACE, gStringVar1);
+
+    u8 *tileData = (u8 *)GetWindowAttribute(windowId, WINDOW_TILE_DATA);
+    u32 tileNum = TILE_OFFSET_4BPP(sprite->oam.tileNum);
+    CpuCopy32(tileData, (void *)(OBJ_VRAM0 + tileNum), TILE_OFFSET_4BPP(template.width * template.height));
+
+    RemoveWindow(windowId);
+}
+
 static void MonSummary_FadeAndExit(u8 taskId)
 {
     BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
@@ -1800,81 +1895,8 @@ static const struct MonSummarySprite *SummarySprite_GetMainStruct(u32 idx)
 
 static void SummarySprite_InjectHpBar(struct Sprite *sprite)
 {
-    struct WindowTemplate template = { .width = 8, .height  = 4 }; // 64x32
-    u32 windowId = AddWindow(&template);
-
     struct MonSummary *mon = SummaryMon_GetStruct();
-    s32 currHp = mon->currHp;
-    s32 maxHp = GetMonData(&sMonSummaryDataPtr->mon, MON_DATA_MAX_HP);
-
-    const u8 *blit = SummarySprite_GetMainStruct(SUMMARY_MAIN_SPRITE_HP_BAR)->gfx;
-    BlitBitmapToWindow(windowId, blit, 0, 0, TILE_TO_PIXELS(template.width), TILE_TO_PIXELS(template.height));
-
-    u8 array[7];
-    blit = sSummarySprite_HpBarAnims;
-
-    bool32 fill = CalcBarFilledPixels(maxHp, currHp, 0, &currHp, array, 7);
-    for (u32 i = 0; i < 7; i++)
-    {
-        u32 x, y;
-
-        if (currHp == maxHp && fill == 1)
-            x = 8;
-        else
-            x = array[i];
-
-        x *= 8;
-
-        if (i < 3)
-            y = 0;
-        else if (i == 3)
-            y = 1;
-        else
-            y = 2;
-
-        y *= 16;
-        BlitBitmapRectToWindow(windowId, blit, x, y, TILE_TO_PIXELS(9), TILE_TO_PIXELS(6), i * 8, 0, TILE_TO_PIXELS(1), TILE_TO_PIXELS(2));
-    }
-
-    enum MonSummaryHpBarColors color;
-    switch (GetHPBarLevel(currHp, maxHp))
-    {
-    case HP_BAR_FULL:
-    case HP_BAR_GREEN:
-        color = SUMMARY_HP_BAR_CLR_GREEN;
-        break;
-    case HP_BAR_YELLOW:
-        color = SUMMARY_HP_BAR_CLR_YELLOW;
-        break;
-    case HP_BAR_RED:
-    default:
-        if (maxHp > 1)
-            color = SUMMARY_HP_BAR_CLR_RED;
-        else
-            color = SUMMARY_HP_BAR_CLR_GREEN;
-        break;
-    }
-
-    LoadPalette(&sSummarySprite_HpBarColors[1 + (color * 2)], OBJ_PLTT_ID(sprite->oam.paletteNum) + 6, PLTT_SIZEOF(2));
-
-    u32 fontId = FONT_OUTLINED;
-
-    ConvertUIntToDecimalStringN(gStringVar1, currHp, STR_CONV_MODE_RIGHT_ALIGN, 4);
-    u32 x = GetStringRightAlignXOffset(fontId, gStringVar1, TILE_TO_PIXELS(3) + 1);
-    SummaryPrint_AddText(windowId, fontId, x, 0, SUMMARY_FNTCLR_INTERFACE, gStringVar1);
-
-    x = TILE_TO_PIXELS(3) + 1;
-    SummaryPrint_AddText(windowId, fontId, x, 0, SUMMARY_FNTCLR_INTERFACE, COMPOUND_STRING("/"));
-
-    x = TILE_TO_PIXELS(4) - 2;
-    ConvertUIntToDecimalStringN(gStringVar1, maxHp, STR_CONV_MODE_LEFT_ALIGN, 4);
-    SummaryPrint_AddText(windowId, fontId, x, 0, SUMMARY_FNTCLR_INTERFACE, gStringVar1);
-
-    u8 *tileData = (u8 *)GetWindowAttribute(windowId, WINDOW_TILE_DATA);
-    u32 tileNum = TILE_OFFSET_4BPP(sprite->oam.tileNum);
-    CpuCopy32(tileData, (void *)(OBJ_VRAM0 + tileNum), TILE_OFFSET_4BPP(template.width * template.height));
-
-    RemoveWindow(windowId);
+    MonSummary_InjectHpBar(sprite, mon->currHp, GetMonData(&sMonSummaryDataPtr->mon, MON_DATA_MAX_HP));
 }
 
 // the FillWindowPixelRect width calc can be improved
