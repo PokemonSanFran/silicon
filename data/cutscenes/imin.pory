@@ -22,8 +22,8 @@ const FLAG_HIDE_LUCREZIA = FLAG_TEMP_4
 const FLAG_HIDE_RAMESH = FLAG_TEMP_5
 const FLAG_HIDE_KEIYING = FLAG_TEMP_6
 
-script ImIn_HideObject_OutsideHouse_Script {
-
+script ImIn_HideObject_OutsideHouse_Script
+{
     setflag(FLAG_HIDE_PKMN)
         if (var(VAR_STORYLINE_STATE) != STORY_BEFORE_RAMESH_BREAKIN || var(VAR_TOWER_RAID_STATE) != 0){
             setflag(FLAG_HIDE_RAID)
@@ -70,7 +70,8 @@ script ImIn_DestroyWall_Script {
     return
 }
 
-script ImIn_CutsceneSetup_OutsideHouse_Script {
+script ImIn_CutsceneSetup_OutsideHouse_Script
+{
         clearflag(FLAG_HIDE_RAID)
 
         addobject(TALA)
@@ -331,12 +332,37 @@ const FRANK_B = 5
 const ELEANOR_B = 6
 const BAIYA_B = 7
 
-script ImIn_MakeRaidPartyVisible_Script
+script ImIn_Script_HideEntireRaidParty
 {
-    if (var(VAR_TOWER_RAID_STATE) > RAMESH_WARP_DOOR_UNLOCKED)
-    {
-        setflag(FLAG_HIDE_TOWER_RAID_PARTY)
-    }
+    setobjectflagfromlocalid(SHARPRISE_SPIRE_LOBBY_BAIYA)
+    call(ImIn_Script_HideFrank)
+    call(ImIn_Script_HideEleanor)
+    call(ImIn_Script_HideMagnus)
+    call(ImIn_Script_HideTala)
+}
+
+script ImIn_Script_HideFrank
+{
+    setobjectflagfromlocalid(SHARPRISE_SPIRE_LOBBY_FRANK)
+}
+script ImIn_Script_HideEleanor
+{
+    setobjectflagfromlocalid(SHARPRISE_SPIRE_LOBBY_ELEANOR)
+}
+script ImIn_Script_HideMagnus
+{
+    setobjectflagfromlocalid(SHARPRISE_SPIRE_LOBBY_MAGNUS)
+}
+script ImIn_Script_HideTala
+{
+    setobjectflagfromlocalid(SHARPRISE_SPIRE_LOBBY_TALA)
+}
+
+script ImIn_Script_HideSpecificRaidPartyMembers
+{
+    call_if_quest_not_complete(QUEST_PERSUASIVEPASSENGER,ImIn_Script_HideFrank)
+    call_if_quest_not_complete(QUEST_BREAKTHEINTERNET,ImIn_Script_HideTala)
+    call_if_quest_not_complete(QUEST_WAREHOUSEWARFARE,ImIn_Script_HideEleanor)
 }
 
 script ImIn_PostWarpSplit_Dialogue
@@ -354,8 +380,8 @@ script ImIn_PostWarpSplit_Dialogue
         msgbox(format("Magnus, let's go secure the studio."),,SPEAKER_FRANK)
         closemessage
 
-        applymovement(FRANK_B,ImIn_WalkAwayFromWarpA)
-        applymovement(MAGNUS_B,ImIn_WalkAwayFromWarpA)
+        applymovement(SHARPRISE_SPIRE_LOBBY_FRANK,ImIn_WalkAwayFromWarpA)
+        applymovement(SHARPRISE_SPIRE_LOBBY_MAGNUS,ImIn_WalkAwayFromWarpA)
 
         msgbox(format("This place is probably crawling with Trainers. Let's spread out."),,SPEAKER_KAREN)
 
@@ -364,17 +390,17 @@ script ImIn_PostWarpSplit_Dialogue
         msgbox(format("38th floor then, let's move!"),,SPEAKER_TALA)
         closemessage
 
-        applymovement(TALA_B,ImIn_WalkAwayFromWarpC)
-        applymovement(ELEANOR_B,ImIn_WalkAwayFromWarpC)
-        applymovement(BAIYA_B,ImIn_WalkAwayFromWarpC)
+        applymovement(SHARPRISE_SPIRE_LOBBY_TALA,ImIn_WalkAwayFromWarpC)
+        applymovement(SHARPRISE_SPIRE_LOBBY_ELEANOR,ImIn_WalkAwayFromWarpC)
+        applymovement(SHARPRISE_SPIRE_LOBBY_BAIYA,ImIn_WalkAwayFromWarpC)
         delay(30)
 
         fadescreen(FADE_TO_BLACK)
-        removeobject(TALA_B)
-        removeobject(MAGNUS_B)
-        removeobject(FRANK_B)
-        removeobject(ELEANOR_B)
-        removeobject(BAIYA_B)
+        removeobject(SHARPRISE_SPIRE_LOBBY_TALA)
+        removeobject(SHARPRISE_SPIRE_LOBBY_MAGNUS)
+        removeobject(SHARPRISE_SPIRE_LOBBY_FRANK)
+        removeobject(SHARPRISE_SPIRE_LOBBY_ELEANOR)
+        removeobject(SHARPRISE_SPIRE_LOBBY_BAIYA)
         fadescreen(FADE_FROM_BLACK)
         call(TryAutoSave)
         endcutscene
@@ -382,26 +408,8 @@ script ImIn_PostWarpSplit_Dialogue
         end
 }
 
-script ImIn_PreventPlayerProgress_Script {
-    if (var(VAR_TOWER_RAID_STATE) > SAVE_CHARLOTTE_SHARPRISESPIRE){
-        release
-            end
-    }
-    lock
-
-        applymovement(PLAYER,Common_Movement_FaceUp)
-        waitmovement(PLAYER)
-
-        msgbox(format("Lucrezia's office is on Floor 10."),MSGBOX_DEFAULT,SPEAKER_ALICIA)
-                closemessage
-
-        applymovement(PLAYER, moves(lock_facing_direction, walk_down, unlock_facing_direction, step_end))
-        waitmovement(PLAYER)
-        release
-        end
-}
-
-script ImIn_OfficeReveal_Dialogue{
+script ImIn_OfficeReveal_Dialogue
+{
     lock
         setvar(VAR_TOWER_RAID_STATE,SAVE_CHARLOTTE_SHARPRISESPIRE)
         playbgm(MUS_ENCOUNTER_MAY,TRUE)

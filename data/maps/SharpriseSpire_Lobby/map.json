@@ -15,19 +15,7 @@
   "connections": null,
   "object_events": [
     {
-      "graphics_id": "OBJ_EVENT_GFX_BLACK_BELT",
-      "x": 13,
-      "y": 2,
-      "elevation": 3,
-      "movement_type": "MOVEMENT_TYPE_NONE",
-      "movement_range_x": 0,
-      "movement_range_y": 0,
-      "trainer_type": "TRAINER_TYPE_NONE",
-      "trainer_sight_or_berry_tree_id": "0",
-      "script": "SharpriseSpire_BlockedStairs_Dialogue",
-      "flag": "FLAG_TEMP_1"
-    },
-    {
+      "local_id": "SHARPRISE_SPIRE_LOBBY_STAIRS_GUARD",
       "graphics_id": "OBJ_EVENT_GFX_BLACK_BELT",
       "x": 1,
       "y": 7,
@@ -41,6 +29,7 @@
       "flag": "FLAG_TEMP_1"
     },
     {
+      "local_id": "SHARPRISE_SPIRE_LOBBY_TALA",
       "graphics_id": "OBJ_EVENT_GFX_TALA",
       "x": 0,
       "y": 6,
@@ -51,9 +40,10 @@
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
       "script": "NULL",
-      "flag": "FLAG_TEMP_2"
+      "flag": "FLAG_TEMP_3"
     },
     {
+      "local_id": "SHARPRISE_SPIRE_LOBBY_MAGNUS",
       "graphics_id": "OBJ_EVENT_GFX_MAGNUS",
       "x": 0,
       "y": 5,
@@ -64,9 +54,10 @@
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
       "script": "NULL",
-      "flag": "FLAG_TEMP_2"
+      "flag": "FLAG_TEMP_4"
     },
     {
+      "local_id": "SHARPRISE_SPIRE_LOBBY_FRANK",
       "graphics_id": "OBJ_EVENT_GFX_FRANK",
       "x": 2,
       "y": 5,
@@ -77,9 +68,10 @@
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
       "script": "NULL",
-      "flag": "FLAG_TEMP_2"
+      "flag": "FLAG_TEMP_5"
     },
     {
+      "local_id": "SHARPRISE_SPIRE_LOBBY_ELEANOR",
       "graphics_id": "OBJ_EVENT_GFX_ELEANOR",
       "x": 2,
       "y": 6,
@@ -90,9 +82,10 @@
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
       "script": "NULL",
-      "flag": "FLAG_TEMP_2"
+      "flag": "FLAG_TEMP_6"
     },
     {
+      "local_id": "SHARPRISE_SPIRE_LOBBY_BAIYA",
       "graphics_id": "OBJ_EVENT_GFX_BAIYA",
       "x": 1,
       "y": 5,
