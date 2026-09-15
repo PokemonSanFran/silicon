@@ -125,11 +125,12 @@
   ],
   "warp_events": [
     {
+      "warp_id": "WARP_ID_PERLACIA_GYM_TO_MUSEUM",
       "x": 5,
       "y": 1,
       "elevation": 0,
       "dest_map": "MAP_PERLACIA_CITY_GYM_ENTRANCE",
-      "dest_warp_id": "0"
+      "dest_warp_id": "WARP_ID_PERLACIA_MUSEUM_TO_GYM"
     }
   ],
   "coord_events": [
