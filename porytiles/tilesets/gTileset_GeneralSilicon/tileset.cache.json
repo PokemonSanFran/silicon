@@ -1,12 +1,12 @@
 {
-  "data/tilesets/primary/general_silicon/porytiles_bin/metatile_attributes.bin": "c3b70f47bbe79ca21e1c982ebdd346d7",
-  "data/tilesets/primary/general_silicon/porytiles_bin/metatiles.bin": "5f40336f5f488d836e55d510a9aea6fe",
+  "data/tilesets/primary/general_silicon/porytiles_bin/metatile_attributes.bin": "4f29b4fade426f10dd680f8dc93815ff",
+  "data/tilesets/primary/general_silicon/porytiles_bin/metatiles.bin": "bc9065a410ef12732f19390552adfe08",
   "data/tilesets/primary/general_silicon/porytiles_bin/palettes/00.pal": "83865c76bb492cfc459ec7bec5bdb37e",
-  "data/tilesets/primary/general_silicon/porytiles_bin/palettes/01.pal": "2c7ceced7f67ffcd3fc83ae9c160d87f",
+  "data/tilesets/primary/general_silicon/porytiles_bin/palettes/01.pal": "3831f5f20d4524256edb139c66fc3294",
   "data/tilesets/primary/general_silicon/porytiles_bin/palettes/02.pal": "290b919fa9362810cfdc4eda9cfc73d6",
-  "data/tilesets/primary/general_silicon/porytiles_bin/palettes/03.pal": "6230f67463a068909b2177fa1db4d8e4",
+  "data/tilesets/primary/general_silicon/porytiles_bin/palettes/03.pal": "65dcb72e85da6cdf25e1c4b503c89b62",
   "data/tilesets/primary/general_silicon/porytiles_bin/palettes/04.pal": "c5373fe5971f5db03fdf2940a8292ed1",
-  "data/tilesets/primary/general_silicon/porytiles_bin/palettes/05.pal": "b616b5244259832d75cfa0d1eccd5414",
+  "data/tilesets/primary/general_silicon/porytiles_bin/palettes/05.pal": "147e84630b50ddd313d188a9695d3551",
   "data/tilesets/primary/general_silicon/porytiles_bin/palettes/06.pal": "43d19bfcf749c92ba698b4a91e2cda64",
   "data/tilesets/primary/general_silicon/porytiles_bin/palettes/07.pal": "43d19bfcf749c92ba698b4a91e2cda64",
   "data/tilesets/primary/general_silicon/porytiles_bin/palettes/08.pal": "43d19bfcf749c92ba698b4a91e2cda64",
@@ -17,9 +17,9 @@
   "data/tilesets/primary/general_silicon/porytiles_bin/palettes/13.pal": "59f83737350efeb148a299bdbf87e97f",
   "data/tilesets/primary/general_silicon/porytiles_bin/palettes/14.pal": "59f83737350efeb148a299bdbf87e97f",
   "data/tilesets/primary/general_silicon/porytiles_bin/palettes/15.pal": "59f83737350efeb148a299bdbf87e97f",
-  "data/tilesets/primary/general_silicon/porytiles_bin/tiles.png": "0c46e5c879ccc1330bdcd39178587d8a",
-  "data/tilesets/primary/general_silicon/porytiles_src/attributes.csv": "d7c8ea022fdcf2e59772003915918818",
-  "data/tilesets/primary/general_silicon/porytiles_src/bottom.png": "f4cad4ec2aaf1531999a1078cf4940e3",
-  "data/tilesets/primary/general_silicon/porytiles_src/middle.png": "15541afe43bc2ec7b304666ebf41ffa4",
-  "data/tilesets/primary/general_silicon/porytiles_src/top.png": "02a451698ae4dff4f84e0201a4344640"
+  "data/tilesets/primary/general_silicon/porytiles_bin/tiles.png": "c4fd22284e260b3c47fd909b5b7d2aa1",
+  "data/tilesets/primary/general_silicon/porytiles_src/attributes.csv": "247fafda557df036e6441d3de9e7ae84",
+  "data/tilesets/primary/general_silicon/porytiles_src/bottom.png": "6e0ab6e6ee250aeeeb7dad1d44b8ea81",
+  "data/tilesets/primary/general_silicon/porytiles_src/middle.png": "b76f7f858221ac126b6c2550ae8aa658",
+  "data/tilesets/primary/general_silicon/porytiles_src/top.png": "10317cbf6325b27c8da14b72a3de32b3"
 }
