@@ -4847,8 +4847,6 @@ void HousingProtest_BufferMostPowerfulAttackAndMove(void)
         if (SanitizeSpeciesId(mon.species) == SPECIES_NONE)
             break;
 
-        species = mon.species;
-
         for (u32 moveIndex = 0; moveIndex < MAX_MON_MOVES; moveIndex++)
         {
             u32 tempMove = mon.moves[moveIndex];
@@ -4860,6 +4858,7 @@ void HousingProtest_BufferMostPowerfulAttackAndMove(void)
             move = tempMove;
             movePower = tempMovePower;
             usedIndex = index;
+            species = mon.species;
         }
     }
 
@@ -6579,3 +6578,38 @@ void ImIn_GetBaiyaMonCry(void)
     PlayCry_Script(species, CRY_MODE_ENCOUNTER);
 }
 
+void ImIn_BufferMostPowerfulAttackAndMove(void)
+{
+    enum Move move = MOVE_BRICK_BREAK;
+    u32 movePower = GetMovePower(MOVE_NONE), usedIndex = 0, species = SPECIES_LOPUNNY, trainer = TRAINER_BAIYA_LETSBURNTHISMOTHERDOWN;
+
+    for (u32 index = 0; index < PARTY_SIZE; index++)
+    {
+        const struct TrainerMon mon = gTrainers[GetCurrentDifficultyLevel()][trainer].party[index];
+
+        if (SanitizeSpeciesId(mon.species) == SPECIES_NONE)
+            break;
+
+        for (u32 moveIndex = 0; moveIndex < MAX_MON_MOVES; moveIndex++)
+        {
+            u32 tempMove = mon.moves[moveIndex];
+            u32 tempMovePower = GetMovePower(tempMove);
+
+            if (GetMoveCategory(tempMove) != DAMAGE_CATEGORY_PHYSICAL)
+                continue;
+
+            if (tempMovePower <= movePower)
+                continue;
+
+            move = tempMove;
+            movePower = tempMovePower;
+            species = mon.species;
+            usedIndex = index;
+        }
+    }
+
+    VarSet(VAR_TEMP_0,species);
+    Quest_Generic_LoadTrainersMonToOWVar(trainer,usedIndex,VAR_OBJ_GFX_ID_0,&gTrainers[0][0],TRAINERS_COUNT);
+    StringCopy(gStringVar1,GetSpeciesName(species));
+    StringCopy(gStringVar2,GetMoveName(move));
+}
