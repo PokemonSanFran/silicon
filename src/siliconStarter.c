@@ -325,7 +325,7 @@ void AddStartersToBox(void)
 
 void Script_ShowSiliconStarter(void)
 {
-    u32 slot = GetSlotFromStarter(VarGet(VAR_CHOSEN_PSF_STARTER));
+    u32 slot = GetSlotFromStarter(VarGet(VAR_STARTER_MON));
     ShowSiliconStarter(slot);
 }
 
@@ -469,7 +469,7 @@ static void GiveDebugStarter(void)
 
 void MoveStarterToParty(void)
 {
-    u32 species = VarGet(VAR_CHOSEN_PSF_STARTER);
+    u32 species = VarGet(VAR_STARTER_MON);
     u32 starterSlot = GetSlotFromStarter(species);
     BoxMonAtToMon(0,starterSlot,&gParties[B_TRAINER_PLAYER][0]);
 

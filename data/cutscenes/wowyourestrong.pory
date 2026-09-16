@@ -70,9 +70,10 @@ script WowYoureStrong_Script_ShowTower
         bufferstring(STR_VAR_2,"this city")
     }
 
-    msgbox(format("You should come by once you're done exploring! My office is on the 38th floor of the {STR_VAR_2} in {STR_VAR_2}."),,SPEAKER_LUCREZIA_BEFORE)
+    msgbox(format("You should come by once you're done exploring! My office is on the 38th floor of the {STR_VAR_2} in {STR_VAR_2}. I'll make sure security allows you to come up."),,SPEAKER_LUCREZIA_BEFORE)
     closemessage
 
+    specialvar(VAR_RESULT,GetCurrentMap)
     if (var(VAR_RESULT) == MAP_PERLACIA_CITY)
     {
         call(WowYoureStrong_TakeCameraFromTower_Script)

@@ -1,5 +1,5 @@
 script ThereCanOnlyBeOne_LoadFromSave_Script{
-    switch(var(VAR_CHOSEN_PSF_STARTER))
+    switch(var(VAR_STARTER_MON))
     {
         case NO_STARTER_CHOSEN: goto(ThereCanOnlyBeOne_StarterSelectMenu_Script)
         case CUTSCENE_NOT_PLAYED: goto(Prolouge_NewPlayerCreation_Script)
@@ -32,7 +32,7 @@ script ThereCanOnlyBeOne_SetUpPlayer_Script
 script ThereCanOnlyBeOne_Narrator_Dialogue {
     msgbox(format("Due to the delicate ecosystem of the region, Trainers are permitted to bring one Pokémon from outside the region into the region with them. Please choose one Pokémon to accompany you on your adventure. You will not be able to access the others during your playthrough, so choose wisely."))
     closemessage
-    setvar(VAR_CHOSEN_PSF_STARTER, NO_STARTER_CHOSEN)
+    setvar(VAR_STARTER_MON, NO_STARTER_CHOSEN)
     startmenu_savescreen
     goto(ThereCanOnlyBeOne_StarterSelectMenu_Script)
 }
@@ -69,8 +69,8 @@ script ThereCanOnlyBeOne_StarterSelectMenu_Script{
 
 script ThereCanOnlyBeOne_HandleMenuOutput_Script{
 
-	copyvar(VAR_CHOSEN_PSF_STARTER, VAR_RESULT)
-	bufferspeciesname(STR_VAR_1, VAR_CHOSEN_PSF_STARTER)
+	copyvar(VAR_STARTER_MON, VAR_RESULT)
+	bufferspeciesname(STR_VAR_1, VAR_STARTER_MON)
 
     switch (var (VAR_RESULT))
 	{

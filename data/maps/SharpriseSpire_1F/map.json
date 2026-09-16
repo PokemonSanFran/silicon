@@ -39,6 +39,34 @@
       "dest_warp_id": "0"
     }
   ],
-  "coord_events": [],
+  "coord_events": [
+    {
+      "type": "trigger",
+      "x": 8,
+      "y": 3,
+      "elevation": 0,
+      "var": "VAR_ALWAYS_ZERO",
+      "var_value": "0",
+      "script": "SharpriseSpire_1F_Script_BlockPlayer"
+    },
+    {
+      "type": "trigger",
+      "x": 9,
+      "y": 2,
+      "elevation": 0,
+      "var": "VAR_ALWAYS_ZERO",
+      "var_value": "0",
+      "script": "SharpriseSpire_1F_Script_BlockPlayer"
+    },
+    {
+      "type": "trigger",
+      "x": 7,
+      "y": 2,
+      "elevation": 0,
+      "var": "VAR_ALWAYS_ZERO",
+      "var_value": "0",
+      "script": "SharpriseSpire_1F_Script_BlockPlayer"
+    }
+  ],
   "bg_events": []
 }

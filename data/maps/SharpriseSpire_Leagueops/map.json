@@ -15,32 +15,6 @@
   "connections": null,
   "object_events": [
     {
-      "graphics_id": "OBJ_EVENT_GFX_DEVELOPER_2",
-      "x": 21,
-      "y": 26,
-      "elevation": 3,
-      "movement_type": "MOVEMENT_TYPE_NONE",
-      "movement_range_x": 0,
-      "movement_range_y": 0,
-      "trainer_type": "TRAINER_TYPE_NONE",
-      "trainer_sight_or_berry_tree_id": "0",
-      "script": "NULL",
-      "flag": "FLAG_TEMP_1"
-    },
-    {
-      "graphics_id": "OBJ_EVENT_GFX_PRODUCT_MANAGER_1",
-      "x": 17,
-      "y": 26,
-      "elevation": 3,
-      "movement_type": "MOVEMENT_TYPE_NONE",
-      "movement_range_x": 0,
-      "movement_range_y": 0,
-      "trainer_type": "TRAINER_TYPE_NONE",
-      "trainer_sight_or_berry_tree_id": "0",
-      "script": "NULL",
-      "flag": "FLAG_TEMP_1"
-    },
-    {
       "local_id": "LOCALID_SHARPRISE_OLIVER",
       "graphics_id": "OBJ_EVENT_GFX_OLIVER",
       "x": 17,
@@ -55,6 +29,7 @@
       "flag": "FLAG_TEMP_2"
     },
     {
+      "local_id": "LOCALID_SHARPRISE_CHARLOTTE",
       "graphics_id": "OBJ_EVENT_GFX_RIVAL_MAY_NORMAL",
       "x": 17,
       "y": 28,
@@ -68,6 +43,7 @@
       "flag": "FLAG_TEMP_3"
     },
     {
+      "local_id": "LOCALID_SHARPRISE_LUCREZIA",
       "graphics_id": "OBJ_EVENT_GFX_LUCREZIA",
       "x": 19,
       "y": 25,
@@ -79,19 +55,6 @@
       "trainer_sight_or_berry_tree_id": "0",
       "script": "NULL",
       "flag": "FLAG_TEMP_4"
-    },
-    {
-      "graphics_id": "OBJ_EVENT_GFX_MART_EMPLOYEE",
-      "x": 21,
-      "y": 27,
-      "elevation": 3,
-      "movement_type": "MOVEMENT_TYPE_NONE",
-      "movement_range_x": 0,
-      "movement_range_y": 0,
-      "trainer_type": "TRAINER_TYPE_NONE",
-      "trainer_sight_or_berry_tree_id": "0",
-      "script": "NULL",
-      "flag": "FLAG_TEMP_1"
     },
     {
       "local_id": "LOCALID_LEAGUEOPS_RAMESH",
@@ -108,6 +71,7 @@
       "flag": "FLAG_TEMP_5"
     },
     {
+      "local_id": "LOCALID_LEAGUEOPS_KEIYING",
       "graphics_id": "OBJ_EVENT_GFX_KEIYING",
       "x": 20,
       "y": 35,

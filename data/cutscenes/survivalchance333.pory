@@ -56,7 +56,7 @@ script SurvivalChance333_ExplainPlan_Dialogue {
         waitmovement(0)
 
         delay(25)
-        msgbox(format("Here's the fuckin' plan. We're gonna -"),,SPEAKER_CHIEF,,EMOTE_SWEAT)
+        msgbox(format("Here's the fuckin' plan. We're gonna -"),,SPEAKER_CHIEF)
 
         msgbox(format("Is something wrong Chief?"),,SPEAKER_ALICIA)
 
@@ -68,7 +68,8 @@ script SurvivalChance333_ExplainPlan_Dialogue {
 
         msgbox(format("I think Charlotte missed the point and only heard that last part..."),,SPEAKER_ALICIA,TAIL_THOUGHT,EMOTE_SWEAT)
 
-        msgbox(format("Right, kids with zero operations experience who battled some foot soldiers and Garbador are supposedly tactical masterminds?"),,SPEAKER_CHIEF)
+        bufferspeciesname(STR_VAR_1,SPECIES_GARBODOR)
+        msgbox(format("Right, kids with zero operations experience who battled some foot soldiers and {STR_VAR_1} are supposedly tactical masterminds?"),,SPEAKER_CHIEF)
 
         msgbox(format("Hey, we didn't ask to be here! "),,SPEAKER_ALICIA)
 

@@ -8,6 +8,20 @@ script SharpriseSpire_BlockedStairs_Dialogue {
     end
 }
 
-text SharpriseSpireElevator_BlockedStairs_Text1 {
-    format("Sorry, this floor is employees only.")
+script SharpriseSpire_1F_Script_BlockPlayer
+{
+    if (var(VAR_SHARPRISESPIRE_CONFERENCE_STATE) >= POST_WOW_YOURE_STRONG)
+    {
+        release
+        end
+    }
+
+    lock
+    msgbox(format("Access is denied. Only authorized personnel may proceed."))
+    closemessage
+    applymovement(LOCALID_PLAYER,moves(walk_down))
+    waitmovement(LOCALID_PLAYER)
+    release
+    end
 }
+
