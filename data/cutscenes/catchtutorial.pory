@@ -27,11 +27,13 @@ script CatchTutorial_ProfIntro_Script
     lock
     startcutscene(JUMPPLAYER_CATCHTUTORIAL)
     playse(SE_PIN)
-    applymovement(LOCALID_ROUTE6_PROFESSORTRACHY,moves(emote_exclamation_mark, walk_left))
+    applymovement(LOCALID_ROUTE6_PROFESSORTRACHY,moves(emote_exclamation_mark,face_down))
+    waitmovement(LOCALID_ROUTE6_PROFESSORTRACHY)
+    moveobjecttocoords(LOCALID_ROUTE6_PROFESSORTRACHY,13,15,DIR_SOUTH)
     msgbox(format("Hey there!"),,SPEAKER_PROF_TRACHY)
     closemessage
-    moveobjecttocoords(LOCALID_PLAYER,12,19,DIR_EAST)
-    waitmovement(LOCALID_PLAYER)
+    moveobjecttocoords(LOCALID_PLAYER,13,16,DIR_NORTH)
+    waitmovement(LOCALID_ROUTE6_PROFESSORTRACHY)
     buffermapname(STR_VAR_1,MAP_CUCONU_TOWN)
     msgbox(format("I don't recognize you... and you're coming out of {STR_VAR_1} - you must be one of those SharpRise Trainers!"),,SPEAKER_PROF_TRACHY)
     msgbox(format("Yeah! How were you able to tell?"),,SPEAKER_ALICIA)
@@ -79,9 +81,13 @@ script CatchTutorial_AskPlayer_Script
 
 script CatchTutorial_StartCatchingScene_Script
 {
-    msgbox(format("Okay, let's see, you walk around here until one attacks..."),,SPEAKER_PROF_TRACHY)
+    moveobjecttocoords(LOCALID_ROUTE6_PROFESSORTRACHY,15,13,DIR_WEST)
+    moveobjecttocoords(LOCALID_PLAYER,14,13,DIR_EAST)
+    waitmovement(LOCALID_PLAYER)
     closemessage
-    applymovement(LOCALID_ROUTE6_PROFESSORTRACHY,Common_Movement_FaceAwayPlayer)
+    msgbox(format("Okay, let's see, you walk around the tall grass until one attacks..."),,SPEAKER_PROF_TRACHY)
+    closemessage
+    applymovement(LOCALID_ROUTE6_PROFESSORTRACHY,moves(walk_right, delay_16, walk_down, walk_up * 2, delay_16, face_down, delay_8, walk_left, delay_16, walk_down))
     waitmovement(LOCALID_ROUTE6_PROFESSORTRACHY)
     msgbox(format("Aha!"),,SPEAKER_PROF_TRACHY)
     closemessage
@@ -95,7 +101,8 @@ script CatchTutorial_StartCatchingScene_Script
 script CatchTutorial_PostCatching_Script
 {
     special(LoadPlayerParty)
-    applymovement(LOCALID_ROUTE6_PROFESSORTRACHY,Common_Movement_FacePlayer)
+    closemessage
+    moveobjecttocoords(LOCALID_ROUTE6_PROFESSORTRACHY,15,13,DIR_WEST)
     waitmovement(LOCALID_ROUTE6_PROFESSORTRACHY)
     msgbox(format("That's really it! Different Poké Balls will have more effective based on what Pokémon, or where you are... sometimes what time of day... it can be complicated."),,SPEAKER_PROF_TRACHY)
     call(CatchTutorial_GiveBallsSetFlag_Script)
@@ -127,6 +134,7 @@ script CatchTutorial_GiveBallsSetFlag_Script
     }
     msgbox(format("As a matter of fact, I've got a few types here. Here you go!"),,SPEAKER_PROF_TRACHY)
     closemessage
+    cueobjectplayer(LOCALID_ROUTE6_PROFESSORTRACHY)
     playfanfare(MUS_OBTAIN_ITEM)
     additem(ITEM_REPEAT_BALL,2)
     additem(ITEM_DUSK_BALL,1)
@@ -135,6 +143,7 @@ script CatchTutorial_GiveBallsSetFlag_Script
     msgbox(format("{PLAYER} obtained some Poké Balls!"))
     waitmessage
     waitfanfare
+    waitmovement(LOCALID_ROUTE6_PROFESSORTRACHY)
 }
 
 script CatchTutorial_RefuseCatching_Script
