@@ -1,13 +1,50 @@
 const LOCALID_IMIN_BAIYA_MON = LOCALID_CAMERA + 2
 const PLAYER = OBJ_EVENT_ID_PLAYER
 
+script ImIn_Script_HideElevatorAttendant
+{
+    setobjectflagfromlocalid(LOCALID_SPIRE_ELEVATOR_ATTENDANT)
+}
+
+script ImIn_Script_HideEntireRameshHouseRaidParty
+{
+    setobjectflagfromlocalid(LOCALID_RAMESH_HOUSE_BAIYA)
+    call(ImIn_Script_HideRameshHouseFrank)
+    call(ImIn_Script_HideRameshHouseEleanor)
+    call(ImIn_Script_HideRameshHouseMagnus)
+    call(ImIn_Script_HideRameshHouseTala)
+}
+
+script ImIn_Script_HideRameshHouseFrank
+{
+    setobjectflagfromlocalid(LOCALID_RAMESH_HOUSE_FRANK)
+}
+script ImIn_Script_HideRameshHouseEleanor
+{
+    setobjectflagfromlocalid(LOCALID_RAMESH_HOUSE_ELEANOR)
+}
+script ImIn_Script_HideRameshHouseMagnus
+{
+    setobjectflagfromlocalid(LOCALID_RAMESH_HOUSE_MAGNUS)
+}
+script ImIn_Script_HideRameshHouseTala
+{
+    setobjectflagfromlocalid(LOCALID_RAMESH_HOUSE_TALA)
+}
+
+script ImIn_Script_HideRameshHouseSpecificRaidPartyMembers
+{
+    call_if_quest_not_complete(QUEST_PERSUASIVEPASSENGER,ImIn_Script_HideRameshHouseFrank)
+    call_if_quest_not_complete(QUEST_BREAKTHEINTERNET,ImIn_Script_HideRameshHouseTala)
+    call_if_quest_not_complete(QUEST_WAREHOUSEWARFARE,ImIn_Script_HideRameshHouseEleanor)
+}
 script ImIn_Script_HideEntireQiuRaidParty
 {
     setobjectflagfromlocalid(LOCALID_QIU_BAIYA)
-    call(ImIn_Script_HideQiuFrank)
-    call(ImIn_Script_HideQiuEleanor)
-    call(ImIn_Script_HideQiuMagnus)
-    call(ImIn_Script_HideQiuTala)
+    call(ImIn_Script_HideRameshHouseFrank)
+    call(ImIn_Script_HideRameshHouseEleanor)
+    call(ImIn_Script_HideRameshHouseMagnus)
+    call(ImIn_Script_HideRameshHouseTala)
 }
 
 script ImIn_Script_HideQiuFrank
@@ -81,7 +118,8 @@ script ImIn_ReleaseFromBall_Script
     waitmoncry
 }
 
-script ImIn_ObjectSetUp_InsideHouse_Script {
+script ImIn_ObjectSetUp_InsideHouse_Script
+{
     setobjectxyperm(LOCALID_RAMESH_HOUSE_TALA,15,4)
     setobjectxyperm(LOCALID_RAMESH_HOUSE_MAGNUS,16,3)
     setobjectxyperm(LOCALID_RAMESH_HOUSE_FRANK,17,4)
@@ -89,27 +127,47 @@ script ImIn_ObjectSetUp_InsideHouse_Script {
     setobjectxyperm(LOCALID_RAMESH_HOUSE_BAIYA,19,3)
 }
 
-script ImIn_MoveObject_BeforeWarp_Script {
-    addobject(LOCALID_RAMESH_HOUSE_TALA)
-        addobject(LOCALID_RAMESH_HOUSE_MAGNUS)
-        addobject(LOCALID_RAMESH_HOUSE_FRANK)
-        addobject(LOCALID_RAMESH_HOUSE_ELEANOR)
-        addobject(LOCALID_RAMESH_HOUSE_BAIYA)
-
+script ImIn_Script_AddRameshHouseTala
+{
+        addobject(LOCALID_RAMESH_HOUSE_TALA)
         setobjectxy(LOCALID_RAMESH_HOUSE_TALA,10,3)
+        applymovement(LOCALID_RAMESH_HOUSE_TALA,Common_Movement_FaceRight)
+}
+
+script ImIn_Script_AddRameshHouseFrank
+{
+        addobject(LOCALID_RAMESH_HOUSE_FRANK)
         setobjectxy(LOCALID_RAMESH_HOUSE_FRANK,10,4)
+        applymovement(LOCALID_RAMESH_HOUSE_FRANK,Common_Movement_FaceRight)
+}
+
+script ImIn_Script_AddRameshHouseEleanor
+{
+        addobject(LOCALID_RAMESH_HOUSE_ELEANOR)
         setobjectxy(LOCALID_RAMESH_HOUSE_ELEANOR,12,3)
+        applymovement(LOCALID_RAMESH_HOUSE_ELEANOR,Common_Movement_FaceLeft)
+}
+
+script ImIn_Script_MoveRaidMembers
+{
+    call_if_quest_complete(QUEST_PERSUASIVEPASSENGER,ImIn_Script_AddRameshHouseFrank)
+    call_if_quest_complete(QUEST_BREAKTHEINTERNET,ImIn_Script_AddRameshHouseTala)
+    call_if_quest_complete(QUEST_WAREHOUSEWARFARE,ImIn_Script_AddRameshHouseEleanor)
+
+    addobject(LOCALID_RAMESH_HOUSE_MAGNUS)
+    addobject(LOCALID_RAMESH_HOUSE_BAIYA)
         setobjectxy(LOCALID_RAMESH_HOUSE_BAIYA,12,4)
         setobjectxy(LOCALID_RAMESH_HOUSE_MAGNUS,11,2)
+        applymovement(LOCALID_RAMESH_HOUSE_MAGNUS,Common_Movement_FaceDown)
+        applymovement(LOCALID_RAMESH_HOUSE_BAIYA,Common_Movement_FaceLeft)
+}
+
+script ImIn_MoveObject_BeforeWarp_Script {
+        call(ImIn_Script_MoveRaidMembers)
 
         setobjectxy(PLAYER,11,4)
         TeleportCamera(11,4)
 
-        applymovement(LOCALID_RAMESH_HOUSE_TALA,Common_Movement_FaceRight)
-        applymovement(LOCALID_RAMESH_HOUSE_FRANK,Common_Movement_FaceRight)
-        applymovement(LOCALID_RAMESH_HOUSE_ELEANOR,Common_Movement_FaceLeft)
-        applymovement(LOCALID_RAMESH_HOUSE_MAGNUS,Common_Movement_FaceDown)
-        applymovement(LOCALID_RAMESH_HOUSE_BAIYA,Common_Movement_FaceLeft)
         waitmovement(LOCALID_RAMESH_HOUSE_MAGNUS)
 }
 
@@ -134,7 +192,7 @@ script ImIn_StartHouseBreak_Script
 
     applymovement(LOCALID_QIU_FRANK,Common_Movement_FaceDown)
 
-    msgbox(format("We're certain nobody is home?"),,SPEAKER_FRANK)
+    msgbox(format("We're certain nobody is home?"),,SPEAKER_BAIYA_TIDE)
     msgbox(format("Ramesh hasn't left work early a day in their life. SharpRise Capital is led by monsters, but at least they're hard-working monsters."),,SPEAKER_MAGNUS)
     buffermapname(STR_VAR_1,MAP_PERLACIA_CITY)
     msgbox(format("We're in position at {STR_VAR_1}. Ready to mobilize this diversion when you are."),,SPEAKER_ADAORA,,,PHONE_ON)
@@ -152,15 +210,14 @@ script ImIn_StartHouseBreak_Script
 
     msgbox(format("The side door will definitely work, didn't see an alarm either."),,SPEAKER_BAIYA_TIDE)
 
-    msgbox(format("Let's move then!"),,SPEAKER_TALA)
+    msgbox(format("Let's move then!"),,SPEAKER_MAGNUS)
     closemessage
 
     applymovement(LOCALID_QIU_BAIYA, moves(walk_up * 4, face_down, step_end))
     waitmovement(LOCALID_QIU_BAIYA)
 
+    callnative(ImIn_BufferMostPowerfulAttackAndMove)
     call(ImIn_ReleaseFromBall_Script)
-
-    buffermovename(STR_VAR_2,MOVE_BRICK_BREAK)
     msgbox(format("{STR_VAR_1}, {STR_VAR_2}!"),,SPEAKER_BAIYA_TIDE)
     closemessage
 
@@ -205,7 +262,7 @@ script Imin_BeginHouseSearch_Script
 {
     lock
         setvar(VAR_TOWER_RAID_STATE,SEARCHING_RAMESH_HOUSE)
-        msgbox(format("Okay, spread out. We're looking for the warp panel. Use the walkies if you see anything."),,SPEAKER_TALA)
+        msgbox(format("Okay, spread out. We're looking for the warp panel. Use the walkies if you see anything."),,SPEAKER_MAGNUS)
         closemessage
 
         applymovement(LOCALID_RAMESH_HOUSE_TALA,ImIn_SpreadOutHouse)
@@ -349,22 +406,23 @@ script ImIn_PostWarpSplit_Dialogue
         setvar(VAR_TOWER_RAID_STATE,TEAM_ENTERED_SHARPRISESPIRE)
 
         applymovement(PLAYER,Common_Movement_WalkUp2)
+        waitmovement(PLAYER)
 
-        msgbox(format("We're all in."),,SPEAKER_FRANK)
+        msgbox(format("We're all in."),,SPEAKER_BAIYA_TIDE)
 
         msgbox(format("Let the march begin… good luck!"),,SPEAKER_ADAORA,,,PHONE_ON)
 
-        msgbox(format("Magnus, let's go secure the studio."),,SPEAKER_FRANK)
+        msgbox(format("I'll go secure the studio."),,SPEAKER_MAGNUS)
         closemessage
 
         applymovement(LOCALID_SHARPRISE_SPIRE_LOBBY_FRANK,ImIn_WalkAwayFromWarpA)
         applymovement(LOCALID_SHARPRISE_SPIRE_LOBBY_MAGNUS,ImIn_WalkAwayFromWarpA)
 
-        msgbox(format("This place is probably crawling with Trainers. Let's spread out."),,SPEAKER_KAREN)
+        msgbox(format("This place is probably crawling with Trainers. Let's spread out."),,SPEAKER_BAIYA_TIDE)
 
         msgbox(format("Lucrezia has an office on the 38th floor, I've been there myself."),MSGBOX_DEFAULT,SPEAKER_ALICIA)
 
-        msgbox(format("38th floor then, let's move!"),,SPEAKER_TALA)
+        msgbox(format("38th floor then, let's move!"),,SPEAKER_BAIYA_TIDE)
         closemessage
 
         applymovement(LOCALID_SHARPRISE_SPIRE_LOBBY_TALA,ImIn_WalkAwayFromWarpC)
@@ -397,7 +455,8 @@ script ImIn_OfficeReveal_Dialogue
     msgbox(format("Do you like my new office?"),,SPEAKER_CHARLOTTE_SHARPRISE)
     msgbox(format("Charlotte, what are you doing here?"),MSGBOX_DEFAULT,SPEAKER_ALICIA)
     msgbox(format("I chose not to align myself with ghetto trash. Turns out if you stick with the good guys, you get a well-paying job and a corner office."),,SPEAKER_CHARLOTTE_SHARPRISE)
-    msgbox(format("Wait, trash? Did you hear what these people did to HalaiIsland?"),MSGBOX_DEFAULT,SPEAKER_ALICIA)
+    buffermapname(STR_VAR_1,MAP_HALAI_ISLAND)
+    msgbox(format("Wait, trash? Did you hear what these people did to {STR_VAR_1}?"),MSGBOX_DEFAULT,SPEAKER_ALICIA)
     msgbox(format("The Tide was destroying this region with their idiocy. We wiped ‘em out. And you decided to help them? After everything SharpRise Capital did for you?"),,SPEAKER_CHARLOTTE_SHARPRISE)
     msgbox(format("So you just don't care that you work for murderers? What is wrong with you?"),MSGBOX_DEFAULT,SPEAKER_ALICIA)
     msgbox(format("All this helping people shit is nice and all, but I came here to the best. I don't care to get bogged down in all your allegations and melodrama. If I've done something wrong, I'll wrestle with it AFTER I reach the top. I'll donate to a homeless shelter or something."),,SPEAKER_CHARLOTTE_SHARPRISE)

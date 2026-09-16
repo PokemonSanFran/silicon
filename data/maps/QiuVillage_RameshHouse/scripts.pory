@@ -1,9 +1,11 @@
 mapscripts QiuVillage_RameshHouse_MapScripts {
     MAP_SCRIPT_ON_TRANSITION {
-        call_if_eq(VAR_TOWER_RAID_STATE,ImIn_ObjectSetUp_InsideHouse_Script)
+        call(ImIn_Script_HideRameshHouseSpecificRaidPartyMembers)
+        call_if_gt(VAR_TOWER_RAID_STATE,0,ImIn_ObjectSetUp_InsideHouse_Script)
+        call_if_ge(VAR_TOWER_RAID_STATE,TEAM_ENTERED_SHARPRISESPIRE,ImIn_Script_HideEntireRameshHouseRaidParty)
     }
     MAP_SCRIPT_ON_FRAME_TABLE [
-        VAR_TOWER_RAID_STATE,1:Imin_BeginHouseSearch_Script
+        VAR_TOWER_RAID_STATE,BROKEN_IN_RAMESH:Imin_BeginHouseSearch_Script
     ]
     MAP_SCRIPT_ON_LOAD {
         call_if_gt(VAR_TOWER_RAID_STATE,FOUND_RAMESH_WARP_DOOR,ImIn_UnlockDoor_Script)

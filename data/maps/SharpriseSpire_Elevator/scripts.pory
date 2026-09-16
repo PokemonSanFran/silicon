@@ -2,6 +2,11 @@ const VAR_MAP = VAR_0x8005
 
 mapscripts SharpriseSpire_Elevator_MapScripts
 {
+    MAP_SCRIPT_ON_TRANSITION
+    {
+        call_if_ge(VAR_TOWER_RAID_STATE,FOUND_RAMESH_CODE,ImIn_Script_HideElevatorAttendant)
+    }
+
     MAP_SCRIPT_ON_FRAME_TABLE
     [
         VAR_TEMP_1,0:SharpriseSpire_Dialogue_Elevator
@@ -60,14 +65,14 @@ script SharpriseSpire_Script_BufferElevatorFloor
 {
     callnative(Script_SetCurrentSpireFloor)
 
-    switch (var(VAR_0x8005))
+    switch (var(VAR_MAP))
     {
-        case SHARPRISE_FLOOR_FOYER: bufferstring(STR_VAR_1,format("1"))
-        case SHARPRISE_FLOOR_LOBBY: bufferstring(STR_VAR_1,format("30"))
-        case SHARPRISE_FLOOR_PARK: bufferstring(STR_VAR_1,format("34"))
-        case SHARPRISE_FLOOR_GIFTSHOP: bufferstring(STR_VAR_1,format("35"))
-        case SHARPRISE_FLOOR_PRODUCTION: bufferstring(STR_VAR_1,format("37"))
-        case SHARPRISE_FLOOR_LEAGUEOPS: bufferstring(STR_VAR_1,format("38"))
+        case SHARPRISE_FLOOR_FOYER: bufferstring(STR_VAR_2,format("1"))
+        case SHARPRISE_FLOOR_LOBBY: bufferstring(STR_VAR_2,format("30"))
+        case SHARPRISE_FLOOR_PARK: bufferstring(STR_VAR_2,format("34"))
+        case SHARPRISE_FLOOR_GIFTSHOP: bufferstring(STR_VAR_2,format("35"))
+        case SHARPRISE_FLOOR_PRODUCTION: bufferstring(STR_VAR_2,format("37"))
+        case SHARPRISE_FLOOR_LEAGUEOPS: bufferstring(STR_VAR_2,format("38"))
     }
 }
 
@@ -101,12 +106,14 @@ script SharpriseSpire_Script_Elevator
 
     playse(SE_ELEVATOR)
     waitse
-    playse(SE_DING_DONG)
 
-    applymovement(VAR_LAST_TALKED,moves(faceplayer))
+    playse(SE_DING_DONG)
+    waitse
+
+    applymovement(VAR_LAST_TALKED,moves(face_player))
     msgbox(format("Have a great day!"),,SPEAKER_ELEVATOR_ATTENDANT)
     closemessage
-    waitse
+    waitmovement(0)
     release
     end
 }

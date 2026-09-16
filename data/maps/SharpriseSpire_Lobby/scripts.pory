@@ -2,7 +2,7 @@ mapscripts SharpriseSpire_Lobby_MapScripts
 {
     MAP_SCRIPT_ON_TRANSITION
     {
-        call_if_gt(VAR_TOWER_RAID_STATE,FOUND_RAMESH_WARP_DOOR,SharpriseSpire_GuardRaidFloors_Script)
+        call_if_ge(VAR_TOWER_RAID_STATE,RAMESH_WARP_DOOR_UNLOCKED,SharpriseSpire_Script_HideLobbyGuard)
         call_if_ne(VAR_TOWER_RAID_STATE,RAMESH_WARP_DOOR_UNLOCKED,ImIn_Script_HideEntireRaidParty)
         call_if_eq(VAR_TOWER_RAID_STATE,RAMESH_WARP_DOOR_UNLOCKED,ImIn_Script_HideSpireSpecificRaidPartyMembers)
     }
@@ -13,7 +13,8 @@ mapscripts SharpriseSpire_Lobby_MapScripts
     ]
 }
 
-script SharpriseSpire_GuardRaidFloors_Script
+script SharpriseSpire_Script_HideLobbyGuard
 {
     setobjectflagfromlocalid(LOCALID_SHARPRISE_SPIRE_LOBBY_STAIRS_GUARD)
+    setobjectflagfromlocalid(LOCALID_SHARPRISE_SPIRE_LOBBY_WARP_GUARD)
 }

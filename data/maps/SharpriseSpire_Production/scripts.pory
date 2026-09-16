@@ -2,7 +2,7 @@ const FLAG_HIDE_RAMESH = FLAG_TEMP_2
 
 mapscripts SharpriseSpire_Production_MapScripts{
 	    MAP_SCRIPT_ON_TRANSITION{
-        call(SharpriseSpire_GuardRaidFloors_Script)
+        call_if_ge(VAR_TOWER_RAID_STATE,RAMESH_WARP_DOOR_UNLOCKED,SharpriseSpire_Script_HideProductionGuard)
         call(SharpriseSpire_Production_Ramesh_Visibility_Script)
     }
 }
@@ -42,4 +42,9 @@ script SharpriseSpire_Interact_Ramesh_Script{
         case QUEST_MENU_SET_REWARD: goto(Quest_Recruitlocalartists_CompleteQuest_Dialogue)
         default: goto(AlwaysWatchingWazowski_IgnoringPlayer_Dialogue)
     }
+}
+
+script SharpriseSpire_Script_HideProductionGuard
+{
+    setobjectflagfromlocalid(LOCALID_SHARPRISE_SPIRE_PRODUCTION_GUARD)
 }
