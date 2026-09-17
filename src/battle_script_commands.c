@@ -2180,7 +2180,7 @@ static void Cmd_getexp(void)
 
     gBattlerFainted = GetBattlerForBattleScript(cmd->battler);
 
-    enum Species faintedSpecies;
+        enum Species faintedSpecies;
     if (!gBattleMons[gBattlerFainted].volatiles.transformed)
         faintedSpecies = gBattleMons[gBattlerFainted].species;
     else if (GetConfig(B_TRANSFORM_BATTLE_REWARDS) == GEN_3 || GetConfig(B_TRANSFORM_BATTLE_REWARDS) == GEN_4)
@@ -2301,19 +2301,21 @@ static void Cmd_getexp(void)
                 gBattleScripting.getexpState = 5;
                 gBattleStruct->battlerExpReward = 0;
                 if (B_MAX_LEVEL_EV_GAINS >= GEN_5)
-                    // Start printMonEVs
-                {
-                    gBattleStruct->evsGiven = MonGainEVs(&gParties[B_TRAINER_PLAYER][*expMonId], gBattleMons[gBattlerFainted].species);
-                    PrintMonRecievedEffortValues(wasSentOut, expMonId);
+                // Start printEvs
                     //MonGainEVs(&gParties[B_TRAINER_PLAYER][*expMonId], faintedSpecies);
+                {
+                    gBattleStruct->evsGiven = MonGainEVs(&gParties[B_TRAINER_PLAYER][*expMonId], faintedSpecies);
+                    PrintMonRecievedEffortValues(wasSentOut, expMonId);
                 }
-                    // End printEVs
+                // End printEvs
             }
             else
             {
+                // Start printEVs
                 bool32 printBoosted = FALSE;
                 u32 stringId;
-                // Music change in a wild battle after fainting opposing pokemon.
+                // End printEVs
+                // Music change in a wild battle after fainting opposing Pokémon.
                 if (!(gBattleTypeFlags & BATTLE_TYPE_TRAINER)
                     && (gBattleMons[0].hp || (IsDoubleBattle() && gBattleMons[2].hp))
                     && !IsBattlerAlive(GetBattlerAtPosition(B_POSITION_OPPONENT_LEFT))
@@ -2356,13 +2358,14 @@ static void Cmd_getexp(void)
                     if (IsTradedMon(&gParties[B_TRAINER_PLAYER][*expMonId]))
                     {
                         /*
+                        // Start printEVs
+                            i = STRINGID_ABOOSTED;
                     }
                     else
                     {
                         i = STRINGID_EMPTYSTRING4;
                         */
-                        if (!(gBattleTypeFlags & BATTLE_TYPE_INGAME_PARTNER && *expMonId >= 3))
-                            printBoosted = TRUE;
+                        printBoosted = TRUE;
                         // End printEVs
                     }
 
@@ -2381,14 +2384,16 @@ static void Cmd_getexp(void)
                         stringId = PrintMonRecievedEffortAndExperience(expMonId,printBoosted);
                     // End printEVs
 
-// Start pointsMessage
+                    // Start pointsMessage
                     if (stringId < STRINGID_COUNT)
                     {
-// End pointsMessage
-                        // Start printEVs
+                    // End pointsMessage
+                    if (wasSentOut || holdEffect == HOLD_EFFECT_EXP_SHARE)
+                    {
+                    // Start printEVs
+                        PrepareStringBattle(stringId, 0);
                         //PrepareStringBattle(STRINGID_PKMNGAINEDEXP, 0);
-                        PrepareStringBattle(stringId, gBattleStruct->expGetterBattlerId);
-                        // End printEVs
+                    // End printEVs
                     }
                     else if (IsGen6ExpShareEnabled() && !gBattleStruct->teamGotExpMsgPrinted) // Print 'the rest of your team got exp' message once, when all of the sent-in mons were given experience
                     {
@@ -2400,7 +2405,10 @@ static void Cmd_getexp(void)
                         gBattleStruct->teamGotExpMsgPrinted = TRUE;
                     }
 
-                    //MonGainEVs(&gParties[B_TRAINER_PLAYER][*expMonId], faintedSpecies); // printEVs
+                    // Start pointsMessage
+                    }
+                    //MonGainEVs(&gParties[B_TRAINER_PLAYER][*expMonId], faintedSpecies);
+                    // End pointsMessage
                 }
                 gBattleScripting.getexpState++;
             }
@@ -2460,7 +2468,7 @@ static void Cmd_getexp(void)
         {
             if (gBattleResources->bufferB[0][0] == CONTROLLER_TWORETURNVALUES && gBattleResources->bufferB[0][1] == RET_VALUE_LEVELED_UP)
             {
-                // u16 temp = 0xFF; // midBattleEvolution
+                //u16 temp = 0xFF; // midBattleEvolution
                 enum BattlerId battler = GetBattlerFromPlayerPartyId(*expMonId);
                 if (gBattleTypeFlags & BATTLE_TYPE_TRAINER && battler != MAX_BATTLERS_COUNT)
                     HandleLowHpMusicChange(GetBattlerMon(battler), battler);
@@ -2470,10 +2478,10 @@ static void Cmd_getexp(void)
 
                 gLeveledUpInBattle |= 1 << *expMonId;
                 BattleScriptCall(BattleScript_LevelUp);
+                gBattleStruct->battlerExpReward = T1_READ_32(&gBattleResources->bufferB[0][2]);
 // Start midBattleEvolution
                 /*
-                gBattleStruct->battlerExpReward = T1_READ_32(&gBattleResources->bufferB[0][2]);
-                AdjustFriendship(&gParties[B_TRAINER_PLAYER][*expMonId], FRIENDSHIP_EVENT_GROW_LEVEL);
+                    AdjustFriendship(&gParties[B_TRAINER_PLAYER][*expMonId], FRIENDSHIP_EVENT_GROW_LEVEL);
 
                 // update battle mon structure after level up
                 if (battler != MAX_BATTLERS_COUNT)
@@ -2545,9 +2553,10 @@ static void Cmd_getexp(void)
                 }
             }
             gBattleScripting.getexpState = 6; // we're done
-
-            u32 pcMonsThatReceivedPoints = ApplyPointsBoxMons(gBattleStruct->expShareExpValue,gBattleMons[gBattlerFainted].species); // Battle Settings: Experience
-            PrintExpShareMessage(pcMonsThatReceivedPoints); // Battle Settings: Experience
+            // Start Battle Settings: Experience
+            u32 pcMonsThatReceivedPoints = ApplyPointsBoxMons(gBattleStruct->expShareExpValue,gBattleMons[gBattlerFainted].species); 
+            PrintExpShareMessage(pcMonsThatReceivedPoints);
+            // End Battle Settings: Experience
         }
         break;
     case 6: // increment instruction
