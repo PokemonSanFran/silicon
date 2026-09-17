@@ -39,7 +39,7 @@
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "SharpriseSpire_Leagueops_Charlotte_Event_Script",
+      "script": "ImIn_InteractCharlotte_Event_Script",
       "flag": "FLAG_TEMP_3"
     },
     {
@@ -101,10 +101,11 @@
       "dest_warp_id": "0"
     },
     {
+      "warp_id": "WARP_ID_SPIRE_ELEVATOR_TO_LEAGUEOPS",
       "x": 19,
       "y": 10,
       "elevation": 0,
-      "dest_map": "MAP_SALESORCETOWER_ELEVATOR",
+      "dest_map": "MAP_SHARPRISESPIRE_ELEVATOR",
       "dest_warp_id": "0"
     }
   ],

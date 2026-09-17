@@ -246,7 +246,7 @@ enum
 enum
 {
     STATE_QUEST_ANGELDELIVERY_QUEST_NOT_STARTED,
-    STATE_QUEST_ANGELDELIVERY_RECIEVED_BIKE,
+    STATE_QUEST_ANGELDELIVERY_RECEIVED_BIKE,
     STATE_QUEST_ANGELDELIVERY_ABOUT_TO_DELIVER_ITEM,
     STATE_QUEST_ANGELDELIVERY_DELIVERED_ITEM,
     STATE_QUEST_ANGELDELIVERY_BEFORE_BATTLE,
@@ -1464,5 +1464,11 @@ enum
 #define LEVEL_FRANK_MON_PARTNER 60
 #define ITEM_FRANK_MON_LEAD ITEM_LIFE_ORB
 #define ITEM_FRANK_MON_PARTNER ITEM_SITRUS_BERRY
+
+// ***********************************************************************
+// Cutscene: I'm In
+// ***********************************************************************
+
+#define BAIYA_MON_INDEX                    1
 
 #endif // GUARD_CONSTANTS_QUESTS_H

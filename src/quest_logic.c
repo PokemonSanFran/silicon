@@ -2529,7 +2529,7 @@ void DebugQuest_AngelDelivery(u8 state)
         case STATE_QUEST_ANGELDELIVERY_QUEST_NOT_STARTED:
             FlagSet(FLAG_SYS_STARTER_APPS_GET);
             break;
-        case STATE_QUEST_ANGELDELIVERY_RECIEVED_BIKE:
+        case STATE_QUEST_ANGELDELIVERY_RECEIVED_BIKE:
             QuestMenu_ScriptSetActive(QUEST_ANGELDELIVERY);
             AddBagItem(ITEM_QUEST_ANGELDELIVERY_1,1);
             AddBagItem(ITEM_QUEST_ANGELDELIVERY_2,1);
@@ -3991,7 +3991,7 @@ bool32 Quest_ManOfManyHats_ManOfManyHatsSeenAllJobs(void)
 {
     if (Quest_ManOfManyHats_GetVariable_SawBoba() == FALSE)
         return FALSE;
- 
+
     if (Quest_ManOfManyHats_GetVariable_SawFish() == FALSE)
          return FALSE;
 
@@ -4080,7 +4080,7 @@ void DebugQuest_ManOfManyHats(u8 state)
     {
         default:
         case STATE_QUEST_MANOFMANYHATS_NOT_STARTED:
-            FlagSet(FLAG_SYS_STARTER_APPS_GET);            
+            FlagSet(FLAG_SYS_STARTER_APPS_GET);
             JumpPlayerTo_YoungPadawan(JUMP_DEBUG);
             DebugQuest_InstallNatureProbes(STATE_QUEST_INSTALLNATUREPROBES_COMPLETE);
             break;
@@ -4562,7 +4562,7 @@ void DebugQuest_RestoreEsupleeOutskirtsGym(u8 state)
         case STATE_QUEST_RESTOREESPULEEGYM_NOT_STARTED:
             FlagSet(FLAG_SYS_STARTER_APPS_GET);
             JumpPlayerTo_LetsGrabLunch(JUMP_DEBUG);
-            FlagSet(FLAG_RECIEVED_NURSERY_EGG);
+            FlagSet(FLAG_RECEIVED_NURSERY_EGG);
             break;
         case STATE_QUEST_RESTOREESPULEEGYM_STARTED_QUEST:
             QuestMenu_ScriptSetActive(QUEST_RESTOREESPULEEGYM);
@@ -4847,8 +4847,6 @@ void HousingProtest_BufferMostPowerfulAttackAndMove(void)
         if (SanitizeSpeciesId(mon.species) == SPECIES_NONE)
             break;
 
-        species = mon.species;
-
         for (u32 moveIndex = 0; moveIndex < MAX_MON_MOVES; moveIndex++)
         {
             u32 tempMove = mon.moves[moveIndex];
@@ -4860,6 +4858,7 @@ void HousingProtest_BufferMostPowerfulAttackAndMove(void)
             move = tempMove;
             movePower = tempMovePower;
             usedIndex = index;
+            species = mon.species;
         }
     }
 
@@ -6520,4 +6519,97 @@ bool8 FalseTimeline_CheckRewardStatus(void)
 void Script_FalseTimeline_CheckRewardStatus(void)
 {
     gSpecialVar_Result = FalseTimeline_CheckRewardStatus();
+}
+
+// ***********************************************************************
+// Sharprise Elevator
+// ***********************************************************************
+
+void Script_SetCurrentSpireFloor(void)
+{
+    u32 currentMapGroup = gSaveBlock1Ptr->dynamicWarp.mapGroup;
+    u32 currentMapNum = gSaveBlock1Ptr->dynamicWarp.mapNum;
+
+    if ((currentMapNum | (currentMapGroup << 8)) == MAP_SHARPRISE_SPIRE_1F)
+        gSpecialVar_0x8005 = SHARPRISE_FLOOR_FOYER;
+    else if ((currentMapNum | (currentMapGroup << 8)) == MAP_SHARPRISE_SPIRE_LOBBY)
+        gSpecialVar_0x8005 = SHARPRISE_FLOOR_LOBBY;
+    else if ((currentMapNum | (currentMapGroup << 8)) == MAP_SHARPRISE_SPIRE_PARK)
+        gSpecialVar_0x8005 = SHARPRISE_FLOOR_PARK;
+    else if ((currentMapNum | (currentMapGroup << 8)) == MAP_SHARPRISE_SPIRE_GIFTSHOP)
+        gSpecialVar_0x8005 = SHARPRISE_FLOOR_GIFTSHOP;
+    else if ((currentMapNum | (currentMapGroup << 8)) == MAP_SHARPRISE_SPIRE_PRODUCTION)
+        gSpecialVar_0x8005 = SHARPRISE_FLOOR_PRODUCTION;
+    else
+        gSpecialVar_0x8005 = SHARPRISE_FLOOR_LEAGUEOPS;
+}
+
+// ***********************************************************************
+// Cutscene: I'm In
+// ***********************************************************************
+
+void ImIn_LoadBaiyaMon(void)
+{
+    u32 trainerId = TRAINER_BAIYA_LETSBURNTHISMOTHERDOWN;
+    u32 index = BAIYA_MON_INDEX;
+    index = Quest_Generic_GetIndexForMonTrainer(trainerId,index,&gTrainers[0][0],TRAINERS_COUNT);
+
+    Quest_Generic_LoadTrainersMonToOWVar(trainerId,index,VAR_OBJ_GFX_ID_0,&gTrainers[0][0],TRAINERS_COUNT);
+}
+
+void ImIn_BufferBaiyaMonName(void)
+{
+    u32 trainerId = TRAINER_BAIYA_LETSBURNTHISMOTHERDOWN;
+    u32 index = BAIYA_MON_INDEX;
+    index = Quest_Generic_GetIndexForMonTrainer(trainerId,index,&gTrainers[0][0],TRAINERS_COUNT);
+    const struct TrainerMon mon = Quest_Generic_GetMonFromTrainer(trainerId,index,&gTrainers[0][0],TRAINERS_COUNT);
+
+    StringCopy(gStringVar1,GetSpeciesName(mon.species));
+}
+
+void ImIn_GetBaiyaMonCry(void)
+{
+    u32 trainerId = TRAINER_BAIYA_LETSBURNTHISMOTHERDOWN;
+    u32 index = BAIYA_MON_INDEX;
+    index = Quest_Generic_GetIndexForMonTrainer(trainerId,index,&gTrainers[0][0],TRAINERS_COUNT);
+    const struct TrainerMon mon = Quest_Generic_GetMonFromTrainer(trainerId,index,&gTrainers[0][0],TRAINERS_COUNT);
+
+    enum Species species = (index == PARTY_SIZE) ? SPECIES_NONE : mon.species;
+    PlayCry_Script(species, CRY_MODE_ENCOUNTER);
+}
+
+void ImIn_BufferMostPowerfulAttackAndMove(void)
+{
+    enum Move move = MOVE_BRICK_BREAK;
+    u32 movePower = GetMovePower(MOVE_NONE), usedIndex = 0, species = SPECIES_LOPUNNY, trainer = TRAINER_BAIYA_LETSBURNTHISMOTHERDOWN;
+
+    for (u32 index = 0; index < PARTY_SIZE; index++)
+    {
+        const struct TrainerMon mon = gTrainers[GetCurrentDifficultyLevel()][trainer].party[index];
+
+        if (SanitizeSpeciesId(mon.species) == SPECIES_NONE)
+            break;
+
+        for (u32 moveIndex = 0; moveIndex < MAX_MON_MOVES; moveIndex++)
+        {
+            u32 tempMove = mon.moves[moveIndex];
+            u32 tempMovePower = GetMovePower(tempMove);
+
+            if (GetMoveCategory(tempMove) != DAMAGE_CATEGORY_PHYSICAL)
+                continue;
+
+            if (tempMovePower <= movePower)
+                continue;
+
+            move = tempMove;
+            movePower = tempMovePower;
+            species = mon.species;
+            usedIndex = index;
+        }
+    }
+
+    VarSet(VAR_TEMP_0,species);
+    Quest_Generic_LoadTrainersMonToOWVar(trainer,usedIndex,VAR_OBJ_GFX_ID_0,&gTrainers[0][0],TRAINERS_COUNT);
+    StringCopy(gStringVar1,GetSpeciesName(species));
+    StringCopy(gStringVar2,GetMoveName(move));
 }

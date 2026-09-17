@@ -378,7 +378,7 @@ const u8 *GetQuestDesc_RestoreEspuleeOutskirts(void)
     }
     else if (QuestMenu_GetSetSubquestState(QUEST_RESTOREESPULEEGYM,FLAG_GET_COMPLETED,SUB_QUEST_4))
     {
-        StringExpandPlaceholders(gStringVar4, COMPOUND_STRING("You recieved an Odd Egg, but will somebody want it?"));
+        StringExpandPlaceholders(gStringVar4, COMPOUND_STRING("You received an Odd Egg, but will somebody want it?"));
     }
     return gStringVar4;
 }

@@ -1040,7 +1040,7 @@ bool32 IsPointsMessagesOptionOn(void)
     return (GetPointsMessagesOption() == BATTLE_OPTION_POINTS_MESSAGES_ON);
 }
 
-void PrintMonRecievedEffortValues(bool32 wasSentOut, u8* expMonId)
+void PrintMonReceivedEffortValues(bool32 wasSentOut, u8* expMonId)
 {
     if (!IsPointsMessagesOptionOn())
         return;
@@ -1053,7 +1053,7 @@ void PrintMonRecievedEffortValues(bool32 wasSentOut, u8* expMonId)
     PrepareStringBattle(STRINGID_PKMNGAINEDEVS, gBattleStruct->expGetterBattlerId);
 }
 
-u32 PrintMonRecievedExperience(u8* expMonId, bool32 printBoosted)
+u32 PrintMonReceivedExperience(u8* expMonId, bool32 printBoosted)
 {
     if (!IsPointsMessagesOptionOn())
         return STRINGID_COUNT;
@@ -1064,7 +1064,7 @@ u32 PrintMonRecievedExperience(u8* expMonId, bool32 printBoosted)
     return STRINGID_PKMNGAINEDEXP;
 }
 
-u32 PrintMonRecievedEffortAndExperience(u8* expMonId, bool32 printBoosted)
+u32 PrintMonReceivedEffortAndExperience(u8* expMonId, bool32 printBoosted)
 {
     if (!IsPointsMessagesOptionOn())
         return STRINGID_COUNT;
@@ -1129,7 +1129,7 @@ bool32 IsLastUsedBallOptionAfterAndLastBallIsNone(void)
 static u32 GetBestBallForBattle(void)
 {
     u32 i;
-    struct BagPocket *ballsPocket = &gBagPockets[POCKET_POKE_BALLS - 1];
+    struct BagPocket *ballsPocket = &gBagPockets[POCKET_POKE_BALLS];
     u32 odds = 0, newOdds = 0, bestBall = ITEM_NONE, oldLastUsedItem = gLastUsedItem;
     u8 atkId = GetCatchingAttacker();
     u8 defId = GetCatchingBattler();
@@ -1141,14 +1141,11 @@ static u32 GetBestBallForBattle(void)
             u32 ball = ballsPocket->itemSlots[i].itemId;
 
             if (ball == ITEM_NONE)
-                break;
-
-            if (ball == ITEM_MASTER_BALL)
                 continue;
 
             gLastUsedItem = ball;
+            odds = (ball == ITEM_MASTER_BALL) ? 1 : ComputeCaptureOdds(defId,atkId);
 
-            odds = ComputeCaptureOdds(atkId,defId);
             if (odds > newOdds)
             {
                 newOdds = odds;

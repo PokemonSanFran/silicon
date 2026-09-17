@@ -139,14 +139,14 @@ void OptionsMenu_SetSavedOptions(u32 category, u32 setting, u32 value)
 void CopyTemporalDataToSaveBlockData()
 {
 	for(u32 i = 0 ;i < NUM_OF_PRESET_OPTIONS; i++)
-        for(u32 j = 0 ;j < NUM_OPTIONS_GAME_SETTINGS; j++)
+        for(u32 j = 0 ;j < NUM_OPTIONS_MAX_SETTINGS; j++)
             gSaveBlock2Ptr->options[i][j] = TemporalOptions[i][j];
 }
 
 void CopySaveBlockDataToTemporalData()
 {
 	for(u32 i = 0 ;i < NUM_OF_PRESET_OPTIONS; i++)
-        for(u32 j = 0 ;j < NUM_OPTIONS_GAME_SETTINGS; j++)
+        for(u32 j = 0 ;j < NUM_OPTIONS_MAX_SETTINGS; j++)
             TemporalOptions[i][j] = gSaveBlock2Ptr->options[i][j];
 }
 
@@ -1372,7 +1372,7 @@ static const struct OptionData Settings_Options[SETTINGS_COUNT][NUM_OPTIONS_MAX_
                 COMPOUND_STRING("Players forced to nickname a new Pokémon upon capture."),
                 COMPOUND_STRING("Players are not asked if they want to nickname a new Pokémon upon capture."),
             },
-            .numOptions = 3,
+            .numOptions = BATTLE_OPTION_NICKNAME_COUNT,
         },
         [BATTLE_OPTIONS_WHITEOUT] =
         {

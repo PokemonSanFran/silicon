@@ -3983,9 +3983,9 @@ const struct SideQuest sSideQuests[QUEST_COUNT] =
                 .x = 7,
                 .y = 17,
             },
-            [STATE_QUEST_ANGELDELIVERY_RECIEVED_BIKE] =
+            [STATE_QUEST_ANGELDELIVERY_RECEIVED_BIKE] =
             {
-                .name = COMPOUND_STRING("Recieved Bike"),
+                .name = COMPOUND_STRING("Received Bike"),
                 .setupFunc = DebugQuest_AngelDelivery,
                 side_quest_map(MAP_PIOCA_BRIDGE),
                 .warpId = WARP_ID_NONE,
