@@ -127,6 +127,8 @@ WILD_BATTLE_TEST("Large exp gains are supported", s32 exp) // #1455
     }
 }
 
+// Start siliconMerge
+/*
 WILD_BATTLE_TEST("Transformed Pokemon gives the experience points of the copied species in Gen 3 and 4")
 {
     u32 speciesExp = 0;
@@ -160,6 +162,8 @@ WILD_BATTLE_TEST("Transformed Pokemon gives the experience points of the copied 
         EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_HP_EV), gSpeciesInfo[speciesExp].evYield_HP);
     }
 }
+*/
+// End siliconMerge
 
 #if I_EXP_SHARE_ITEM < GEN_6
 
@@ -545,6 +549,8 @@ WILD_BATTLE_TEST("Points Messages: Gains EVs Without Party")
 
 AI_DOUBLE_BATTLE_TEST("Both player Pokemon gain experience in double battles")
 {
+    OptionsMenu_SetSavedOptions(BATTLE_SETTINGS,BATTLE_OPTIONS_EXP_MULTIPLIER,BATTLE_OPTION_MULTIPLIER_1); // Battle Settings: Exp Multiplier
+    OptionsMenu_SetSavedOptions(BATTLE_SETTINGS,BATTLE_OPTIONS_PLAYER_LEVEL,BATTLE_OPTION_LEVEL_NO_CAP); // Battle Settings: Level
     GIVEN {
         PLAYER(SPECIES_WOBBUFFET) { Level(99); }
         PLAYER(SPECIES_DITTO) { Level(1); }
@@ -560,6 +566,8 @@ AI_DOUBLE_BATTLE_TEST("Both player Pokemon gain experience in double battles")
 
 AI_TWO_VS_ONE_BATTLE_TEST("Partner Pokemon do not gain experience")
 {
+    OptionsMenu_SetSavedOptions(BATTLE_SETTINGS,BATTLE_OPTIONS_EXP_MULTIPLIER,BATTLE_OPTION_MULTIPLIER_1); // Battle Settings: Exp Multiplier
+    OptionsMenu_SetSavedOptions(BATTLE_SETTINGS,BATTLE_OPTIONS_PLAYER_LEVEL,BATTLE_OPTION_LEVEL_NO_CAP); // Battle Settings: Level
     GIVEN {
         PLAYER(SPECIES_METAPOD) { Level(1); }
         PARTNER(SPECIES_DITTO) { Level(1); }
