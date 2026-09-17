@@ -5,7 +5,7 @@ u32 AddMonToPartyOrBox(struct Pokemon pokemon);
 void UpdateSiliconDaycareStepCounter(void);
 void BufferUnhatchedMonEgg(void);
 void ClearSiliconDaycareData(void);
-void ApplyEffortValuePerk(struct Pokemon *temp, struct Pokemon *egg);
+void ApplyEffortValuePerk(struct Pokemon *egg);
 bool32 NoMoreRoomDaycareEggs(void);
 u32 GetEmptyEggIndex(void);
 void DebugPrintEggsAtDaycare(void);

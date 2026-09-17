@@ -306,9 +306,9 @@ void MarkMonForEffortValuePerk(struct Pokemon *egg)
     SetMonData(egg,MON_DATA_GETS_SILICON_BREEDING_PERKS,&getsPerk);
 }
 
-void ApplyEffortValuePerk(struct Pokemon *temp, struct Pokemon *egg)
+void ApplyEffortValuePerk(struct Pokemon *egg)
 {
-    if (!GetMonData(temp,MON_DATA_GETS_SILICON_BREEDING_PERKS))
+    if (!GetMonData(egg,MON_DATA_GETS_SILICON_BREEDING_PERKS))
         return;
 
     u32 species = GetMonData(egg,MON_DATA_SPECIES);
@@ -625,26 +625,9 @@ void ResetUnhatchedMonEgg(void)
 static void SetupEggMon(struct Pokemon *mon)
 {
     struct Pokemon *temp = &gParties[B_TRAINER_OPPONENT_A][1];
-    CreateHatchedMon(mon, temp);
-
-    bool32 isEgg = 0x46;
-    SetMonData(mon, MON_DATA_IS_EGG, &isEgg);
-
-    u8 name[POKEMON_NAME_LENGTH + 1];
-    u16 species = GetMonData(mon, MON_DATA_SPECIES);
-    StringCopy(name, GetSpeciesName(species));
-    SetMonData(mon, MON_DATA_NICKNAME, name);
-
-    GetMonNickname(mon, gStringVar1);
-
-    u16 metLevel = 0;
-    SetMonData(mon, MON_DATA_MET_LEVEL, &metLevel);
-
-    u8 metLocation = GetCurrentRegionMapSectionId();
-    SetMonData(mon, MON_DATA_MET_LOCATION, &metLocation);
-
-    MonRestorePP(mon);
-    CalculateMonStats(mon);
+    AddHatchedMonToParty(PARTY_SIZE + 1);
+    //struct DayCare *daycare = &gSaveBlock1Ptr->daycare;
+    CopyMon(mon,temp,sizeof(mon));
 }
 
 void BufferMonNicknameOrEggName(void)

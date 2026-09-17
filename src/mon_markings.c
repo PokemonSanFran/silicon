@@ -478,7 +478,7 @@ static void CreateMonMarkingsMenuSprites(s16 x, s16 y, u16 baseTileTag, u16 base
     // Create window sprites
     for (i = 0; i < ARRAY_COUNT(sMenu->windowSprites); i++)
     {
-        spriteId = CreateSprite(&template, x + 32, y + 32, 1);
+        spriteId = CreateSpriteUnchecked(&template, x + 32, y + 32, 1);
         if (spriteId != MAX_SPRITES)
         {
             sMenu->windowSprites[i] = &gSprites[spriteId];
@@ -500,7 +500,7 @@ static void CreateMonMarkingsMenuSprites(s16 x, s16 y, u16 baseTileTag, u16 base
     template.oam = &sOamData_8x8;
     for (i = 0; i < NUM_MON_MARKINGS; i++)
     {
-        spriteId = CreateSprite(&template, x + 32, y + 16 + 16 * i, 0);
+        spriteId = CreateSpriteUnchecked(&template, x + 32, y + 16 + 16 * i, 0);
         if (spriteId != MAX_SPRITES)
         {
             sMenu->markingSprites[i] = &gSprites[spriteId];
@@ -515,7 +515,7 @@ static void CreateMonMarkingsMenuSprites(s16 x, s16 y, u16 baseTileTag, u16 base
 
     // Create OK/Cancel text sprite
     template.callback = SpriteCallbackDummy;
-    spriteId = CreateSprite(&template, 0, 0, 0);
+    spriteId = CreateSpriteUnchecked(&template, 0, 0, 0);
     if (spriteId != MAX_SPRITES)
     {
         sMenu->textSprite = &gSprites[spriteId];
@@ -533,7 +533,7 @@ static void CreateMonMarkingsMenuSprites(s16 x, s16 y, u16 baseTileTag, u16 base
 
     // Create cursor sprite
     template.callback = SpriteCB_Cursor;
-    spriteId = CreateSprite(&template, x + 12, 0, 0);
+    spriteId = CreateSpriteUnchecked(&template, x + 12, 0, 0);
     if (spriteId != MAX_SPRITES)
     {
         sMenu->cursorSprite = &gSprites[spriteId];
@@ -603,7 +603,7 @@ static struct Sprite *CreateMarkingComboSprite(u16 tileTag, u16 paletteTag, cons
     LoadSpriteSheet(&sheet);
     LoadSpritePalette(&sprPalette);
 
-    spriteId = CreateSprite(&template, 0, 0, 0);
+    spriteId = CreateSpriteUnchecked(&template, 0, 0, 0);
     if (spriteId != MAX_SPRITES)
         return &gSprites[spriteId];
     else

@@ -125,12 +125,9 @@ void PreparePartyForLittleCupBattle(void)
     int i, j, k, l, participatingPokemonSlot = 0;
     u16 move, species, species2;
     u16 moves[4];
-    u16 speciesEggMoves[EGG_MOVES_ARRAY_COUNT] = {0};
     u8 partyCount = CalculatePlayerPartyCount();
-    u8 numEggMoves;
     bool8 pass, pass2;
     const struct LevelUpMove *learnset;
-
     SavePlayerParty();
 
     for (i = 0; i < partyCount; i++)
@@ -153,7 +150,13 @@ void PreparePartyForLittleCupBattle(void)
             {
                 EvolutionRenameMon(pokemon, species, species2);
                 learnset = GetSpeciesLevelUpLearnset(species2);
-                numEggMoves = GetEggMovesBySpecies(species2, speciesEggMoves);
+                const u16 *speciesEggMoves = GetSpeciesEggMoves(species2);
+                u32 numEggMoves = 0;
+                for (u32 j = 0; speciesEggMoves[j] != MOVE_UNAVAILABLE; j++)
+                {
+                    numEggMoves++;
+                }
+
                 k = 0;
                 pass = FALSE;
                 pass2 = FALSE;
@@ -167,11 +170,8 @@ void PreparePartyForLittleCupBattle(void)
                         k++;
                         continue;
                     }
-                    for (l = 0; l < MAX_LEVEL_UP_MOVES; l++)
+                    for (l = 0; learnset[l].move != LEVEL_UP_MOVE_END; l++)
                     {
-                        if (learnset[l].move == LEVEL_UP_MOVE_END)
-                            break;
-
                         if (learnset[l].move == move)
                         {
                             moves[k] = move;
@@ -195,7 +195,7 @@ void PreparePartyForLittleCupBattle(void)
                 // Replace incompatible moves with default moves
                 pass = FALSE;
 
-                for(j = MAX_LEVEL_UP_MOVES; j >= 0; j--)
+                for(j = MAX_u32 ; j >= 0; j--)
                 {
                     if (learnset[j].move == LEVEL_UP_MOVE_END)
                     {

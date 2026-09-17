@@ -3412,11 +3412,18 @@ static void Task_LoadPokemonSummary(u8 taskId)
     u32 selectedMon = GetCurrentTrainerColumn();
     enum ResidoTrainerIds trainerId = GetTrainerIdFromCurrentPosition();
 
-    u32 partySize = (CreateNPCTrainerPartyFromTrainer(party, &gTrainers[GetCurrentDifficultyLevel()][trainerId], TRUE, BATTLE_TYPE_TRAINER)) - 1;
+    u32 partyCount = 0;
+    CreateNPCTrainerPartyFromTrainer(party, &gTrainers[GetCurrentDifficultyLevel()][trainerId]);
+
+    while (partyCount < PARTY_SIZE
+        && GetMonData(&party[partyCount], MON_DATA_SPECIES) != SPECIES_NONE)
+        partyCount++;
+
+    partyCount--;
 
     DestroyTask(taskId);
     FreeAllWindowBuffers();
-    ShowPokemonSummaryScreen(SUMMARY_MODE_LOCK_MOVES, party, selectedMon, partySize, CB2_ReturnToTrainerScreen);
+    ShowPokemonSummaryScreen(SUMMARY_MODE_LOCK_MOVES, party, selectedMon, partyCount, CB2_ReturnToTrainerScreen);
 }
 
 void CB2_ReturnToTrainerScreen(void)

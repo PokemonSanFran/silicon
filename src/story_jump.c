@@ -1,5 +1,6 @@
 #include "global.h"
 #include "battle.h"
+#include "battle_setup.h"
 #include "coins.h"
 #include "credits.h"
 #include "data.h"
@@ -561,7 +562,7 @@ void GiveItems_Prologue_Intro(bool32 jumpType)
     VarSet(B_LEVEL_CAP_VARIABLE,27);
 
     FlagSet(FLAG_DISABLE_SCALING);
-    CreateNPCTrainerPartyFromTrainer(gParties[B_TRAINER_PLAYER], &gTrainers[GetCurrentDifficultyLevel()][TRAINER_CHAMPION_SHINJI], FALSE, BATTLE_TYPE_TRAINER);
+    CreateNPCTrainerPartyFromTrainer(gParties[B_TRAINER_PLAYER], &gTrainers[GetCurrentDifficultyLevel()][TRAINER_CHAMPION_SHINJI]);
     FlagClear(FLAG_DISABLE_SCALING);
 
     GivePlayerAllTechnicalMachines();

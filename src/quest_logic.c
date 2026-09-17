@@ -2418,10 +2418,6 @@ void DebugQuest_CutePokemon_GiveMon(void)
 #endif
     u32 numSidequests = sSideQuests[QUEST_CUTEPOKEMON].numSubquests;
     u32 species[numSidequests];
-    enum Move moves[MAX_MON_MOVES] = {MOVE_CELEBRATE,0,0,0};
-    u16 evs[NUM_STATS] = {0,0,0,0,0,0};
-    u16 ivs[NUM_STATS] = {0,0,0,0,0,0};
-
     if (!QuestMenu_GetSetQuestState(QUEST_CUTEPOKEMON,FLAG_GET_ACTIVE))
         return;
 
@@ -2452,8 +2448,25 @@ void DebugQuest_CutePokemon_GiveMon(void)
             break;
     }
 
+    struct PokemonTemplate monTemplate = 
+    {
+        .level = 50,
+        .heldItem = ITEM_NONE,
+        .ball = BALL_POKE,
+        .nature = NATURE_RANDOM,
+        .abilityNum = NUM_ABILITY_PERSONALITY,
+        .gender = MON_GENDER_RANDOM,
+        .isShiny = SHINY_MODE_RANDOM,
+        .moves= {MOVE_CELEBRATE,MOVE_NONE,MOVE_NONE,MOVE_NONE},
+        .evs = {0,0,0,0,0,0},
+        .ivs = {0,0,0,0,0,0},
+    };
+
     for (u32 monIndex = 0; monIndex < numSidequests; monIndex++)
-        ScriptGiveMonParameterized(B_SIDE_PLAYER,PARTY_SIZE,species[monIndex],50,ITEM_NONE,BALL_POKE,NATURE_RANDOM,NUM_ABILITY_PERSONALITY,MON_GENDER_RANDOM,evs,ivs,moves,SHINY_MODE_RANDOM,FALSE,NUMBER_OF_MON_TYPES,0);
+    {
+        monTemplate.species = species[monIndex];
+        ScriptGiveMonParameterized(B_SIDE_PLAYER,PARTY_SIZE,&monTemplate);
+    }
 }
 
 void DebugQuest_CutePokemon(u8 state)
@@ -2886,7 +2899,7 @@ void TransformHikoIntoJirachi(void)
 void StressCup_GivePlayerParty(void)
 {
     ZeroPlayerPartyMons();
-    CreateNPCTrainerPartyFromTrainer(gParties[B_TRAINER_PLAYER], &gTrainers[GetCurrentDifficultyLevel()][TRAINER_STRESSCUPORGNANIZER_PLAYER], FALSE, BATTLE_TYPE_TRAINER);
+    CreateNPCTrainerPartyFromTrainer(gParties[B_TRAINER_PLAYER], &gTrainers[GetCurrentDifficultyLevel()][TRAINER_STRESSCUPORGNANIZER_PLAYER]);
 }
 
 void DebugQuest_StressCup(u8 state)
@@ -3290,12 +3303,23 @@ void Quest_Psyop_TransformTarget(void)
 void DebugQuest_Psyop_GiveMon(u32 state)
 {
     u32 species[STATE_QUEST_PSYOP_COMPLETE+1] = {SPECIES_PANCHAM, SPECIES_QUEST_PSYOP_TARGET, SPECIES_QUEST_PSYOP_REWARD};
-    enum Move moves[MAX_MON_MOVES] = {MOVE_CELEBRATE,0,0,0};
-    u16 evs[NUM_STATS] = {85,85,85,85,85,85};
-    u16 ivs[NUM_STATS] = {0,0,0,0,0,0};
-    enum PokeBall ball = BALL_HEAL;
 
-    ScriptGiveMonParameterized(0,PARTY_SIZE,species[state],50,ITEM_NONE,ball,NUM_NATURES,NUM_ABILITY_PERSONALITY,MON_GENDERLESS,evs,ivs,moves,SHINY_MODE_RANDOM,FALSE,NUMBER_OF_MON_TYPES,0);
+    struct PokemonTemplate monTemplate = 
+    {
+        .species = species[state],
+        .level = 50,
+        .heldItem = ITEM_NONE,
+        .ball = BALL_HEAL,
+        .nature = NATURE_RANDOM,
+        .abilityNum = NUM_ABILITY_PERSONALITY,
+        .gender = MON_GENDER_RANDOM,
+        .isShiny = SHINY_MODE_RANDOM,
+        .moves= {MOVE_CELEBRATE,MOVE_NONE,MOVE_NONE,MOVE_NONE},
+        .evs = {85,85,85,85,85,85},
+        .ivs = {0,0,0,0,0,0},
+    };
+
+    ScriptGiveMonParameterized(0,PARTY_SIZE,&monTemplate);
 }
 
 void DebugQuest_Psyop(u8 state)
@@ -4600,10 +4624,21 @@ void DebugQuest_RestoreEsupleeOutskirtsGym(u8 state)
             QuestMenu_GetSetSubquestState(QUEST_RESTOREESPULEEGYM,FLAG_SET_COMPLETED,SUB_QUEST_5);
             break;
         case STATE_QUEST_RESTOREESPULEEGYM_BEFORE_TRADE_F:
-            u16 evs[NUM_STATS] = {0,0,0,0,0,0};
-            u16 ivs[NUM_STATS] = {0,0,0,0,0,0};
-            enum Move moves[MAX_MON_MOVES] = {MOVE_PSYSHIELD_BASH,0,0,0};
-            ScriptGiveMonParameterized(B_SIDE_PLAYER,PARTY_SIZE,SPECIES_QUEST_RESTOREESPULEEGYM_PREEVO,30,ITEM_NONE,BALL_POKE,NATURE_RANDOM,NUM_ABILITY_PERSONALITY,MON_GENDER_RANDOM,evs,ivs,moves,SHINY_MODE_RANDOM,FALSE,NUMBER_OF_MON_TYPES,0);
+            struct PokemonTemplate monTemplate = 
+            {
+                .species = SPECIES_QUEST_RESTOREESPULEEGYM_PREEVO,
+                .level = 30,
+                .heldItem = ITEM_NONE,
+                .ball = BALL_POKE,
+                .nature = NATURE_RANDOM,
+                .abilityNum = NUM_ABILITY_PERSONALITY,
+                .gender = MON_GENDER_RANDOM,
+                .isShiny = SHINY_MODE_RANDOM,
+                .evs = {0,0,0,0,0,0},
+                .ivs = {0,0,0,0,0,0},
+                .moves = {MOVE_CELEBRATE,MOVE_NONE,MOVE_NONE,MOVE_NONE},
+            };
+            ScriptGiveMonParameterized(B_SIDE_PLAYER,PARTY_SIZE,&monTemplate);
             break;
         case STATE_QUEST_RESTOREESPULEEGYM_AFTER_TRADE_F:
             RemoveBagItem(ITEM_QUEST_RESTOREESPULEEGYM_E,1);

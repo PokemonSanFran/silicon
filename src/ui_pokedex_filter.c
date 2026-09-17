@@ -2025,16 +2025,16 @@ static const u8 *const sAlolaTexts[] =
 static const u8 *const sDexColorTexts[] =
 {
     [BODY_COLOR_NONE] = COMPOUND_STRING("no color"),
-    [BODY_COLOR_RED] = gText_DexSearchColorRed,
-    [BODY_COLOR_BLUE] = gText_DexSearchColorBlue,
-    [BODY_COLOR_YELLOW] = gText_DexSearchColorYellow,
-    [BODY_COLOR_GREEN] = gText_DexSearchColorGreen,
-    [BODY_COLOR_BLACK] = gText_DexSearchColorBlack,
-    [BODY_COLOR_BROWN] = gText_DexSearchColorBrown,
-    [BODY_COLOR_PURPLE] = gText_DexSearchColorPurple,
-    [BODY_COLOR_GRAY] = gText_DexSearchColorGray,
-    [BODY_COLOR_WHITE] = gText_DexSearchColorWhite,
-    [BODY_COLOR_PINK] = gText_DexSearchColorPink,
+    [BODY_COLOR_RED] = COMPOUND_STRING("Red"),
+    [BODY_COLOR_BLUE] = COMPOUND_STRING("Blue"),
+    [BODY_COLOR_YELLOW] = COMPOUND_STRING("Yellow"),
+    [BODY_COLOR_GREEN] = COMPOUND_STRING("Green"),
+    [BODY_COLOR_BLACK] = COMPOUND_STRING("Black"),
+    [BODY_COLOR_BROWN] = COMPOUND_STRING("Brown"),
+    [BODY_COLOR_PURPLE] = COMPOUND_STRING("Purple"),
+    [BODY_COLOR_GRAY] = COMPOUND_STRING("Gray"),
+    [BODY_COLOR_WHITE] = COMPOUND_STRING("White"),
+    [BODY_COLOR_PINK] = COMPOUND_STRING("Pink"),
 };
 
 static const u8 *const SpeciesFilter_EditPage_GetStringForEntity(enum PokedexFilterList currentFilter, u32 optionIndex)

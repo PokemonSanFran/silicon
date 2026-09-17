@@ -216,7 +216,6 @@ script OkayLetsFixit_StartTimeTravel_Script
 
 	fadeblackandsetremovewarpfadeflag
 	warpsilent(MAP_PETAROSA_BOROUGH_SHARPRISE_COMPOUND_1F, 255, 9, 7)
-	callnative(m4aMPlayAllContinue)
 	waitstate
 }
 

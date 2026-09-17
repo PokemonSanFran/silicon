@@ -528,6 +528,7 @@ void UpdateSavedPos(void)
     gSaveBlock1Ptr->savedPos.y = gSaveBlock1Ptr->pos.y;
 }
 // siliconMerge
+
 void SetCameraPanningCallback(void (*callback)(void))
 {
     sFieldCameraPanningCallback = callback;

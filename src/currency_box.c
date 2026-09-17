@@ -237,10 +237,10 @@ static void CurrencyBox_PrintFromValue(u32 windowId, u32 y, u32 amount, u32 maxD
     width += TILE_TO_PIXELS(1);
     u32 x = GetStringRightAlignXOffset(fontId, strbuf, width);
     y += TILE_TO_PIXELS(1);
-    union TextColor clr = { .foreground = 2, .shadow = 3 };
+    const u8 clr1[] = {0,2,3};
     // end siliconBpBox
 
-    AddTextPrinterParameterized6(windowId, fontId, x, y, 0, 0, clr, TEXT_SKIP_DRAW, strbuf);
+    AddTextPrinterParameterized4(windowId, fontId, x, y, 0, 0, clr1, TEXT_SKIP_DRAW, strbuf);
 
     // start siliconBpBox
     u32 change = VarGet(VAR_TEMP_F);
@@ -255,13 +255,13 @@ static void CurrencyBox_PrintFromValue(u32 windowId, u32 y, u32 amount, u32 maxD
 
         ConvertIntToDecimalStringN(txtPtr, change, STR_CONV_MODE_LEFT_ALIGN, maxDigits);
 
-        clr.foreground = 2;
-        clr.shadow = 1;
+        const u8 clr2[] = {0,2,1};
+
         fontId = FONT_OUTLINED;
         x = GetStringRightAlignXOffset(fontId, strbuf, width);
         y += TILE_TO_PIXELS(1) + 2;
 
-        AddTextPrinterParameterized6(windowId, fontId, x, y, 0, 0, clr, TEXT_SKIP_DRAW, strbuf);
+        AddTextPrinterParameterized4(windowId, fontId, x, y, 0, 0, clr2, TEXT_SKIP_DRAW, strbuf);
 
         VarSet(VAR_TEMP_F, 0);
     }

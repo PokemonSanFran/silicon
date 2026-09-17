@@ -305,7 +305,6 @@ enum EffectItem GetItemBattleUsage(enum Item itemId);
 u32 GetItemSecondaryId(enum Item itemId);
 u32 GetItemFlingPower(enum Item itemId);
 u32 GetItemStatus1Mask(enum Item itemId);
-bool32 ItemHasVolatileFlag(enum Item itemId, enum Volatile volatile);
 u32 GetItemSellPrice(enum Item itemId);
 bool32 IsHoldEffectChoice(enum HoldEffect holdEffect);
 ShopCriteriaFunc GetItemShopCriteriaFunc(enum Item itemId);
@@ -317,6 +316,6 @@ enum ShopMenuCategories GetItemShopCategory(enum Item itemId);
 u32 GetItemShopCriteriaGoal(enum Item itemId);
 // End shopMenu
 enum ItemSortType GetItemSortType(enum Item itemId); // inventory
-ItemEligibilityFunc GetItemEligibilityFunc(enum Item itemId);
+ItemEligibilityFunc GetItemEligibilityFunc(enum Item itemId); // inventory
 
 #endif // GUARD_ITEM_H

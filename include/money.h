@@ -27,4 +27,8 @@ bool8 IsEnoughForCostInVar0x8005(void);
 void SubtractMoneyFromVar0x8005(void);
 void PrintMoneyAmount(u8 windowId, u8 x, u8 y, int amount, u8 speed);
 
+u32 CalculateMoneyTextHorizontalPosition(u32 amount);
+void AddMoneyLabelObject(u16 x, u16 y);
+void RemoveMoneyLabelObject(void);
+
 #endif // GUARD_MONEY_H

@@ -2,6 +2,7 @@
 #define GUARD_QUEST_FLAVOR_LOOKUP
 
 #include "constants/trainer_slide.h"
+#include "constants/comparison_operators.h"
 
 #define NUM_STRING_VARIABLES 4
 #define QUEST_FLAVOR_TEXT_CONDITION_MAX 10

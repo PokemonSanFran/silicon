@@ -1402,18 +1402,18 @@ static void Dexnav_LoadEncounterData(void)
 
     enum TimeOfDay timeOfDay = GetTimeOfDayForEncounters(headerId, WILD_AREA_LAND);
     const struct WildPokemonInfo *monsInfo = gWildMonHeaders[headerId].encounterTypes[timeOfDay].landMonsInfo;
-    u32 count = Dexnav_PopulateHabitat(monsInfo, LAND_WILD_COUNT, DEXNAV_HABITAT_LAND, 0);
+    u32 count = Dexnav_PopulateHabitat(monsInfo, NUM_LAND_MONS_ENCOUNTER_SLOTS, DEXNAV_HABITAT_LAND, 0);
     Dexnav_SaveNumberHabitatMons(DEXNAV_HABITAT_LAND, count);
 
     timeOfDay = GetTimeOfDayForEncounters(headerId, WILD_AREA_WATER);
     monsInfo = gWildMonHeaders[headerId].encounterTypes[timeOfDay].waterMonsInfo;
-    count = Dexnav_PopulateHabitat(monsInfo, WATER_WILD_COUNT, DEXNAV_HABITAT_WATER, 0);
+    count = Dexnav_PopulateHabitat(monsInfo, NUM_WATER_MONS_ENCOUNTER_SLOTS, DEXNAV_HABITAT_WATER, 0);
 
     if (QuestMenu_GetSetQuestState(QUEST_TEACHATRAINERTOFISH,FLAG_GET_INACTIVE) == FALSE)
     {
         timeOfDay = GetTimeOfDayForEncounters(headerId, WILD_AREA_FISHING);
         monsInfo = gWildMonHeaders[headerId].encounterTypes[timeOfDay].fishingMonsInfo;
-        count = Dexnav_PopulateHabitat(monsInfo, FISH_WILD_COUNT, DEXNAV_HABITAT_WATER, count);
+        count = Dexnav_PopulateHabitat(monsInfo, NUM_FISHING_MONS_ENCOUNTER_SLOTS, DEXNAV_HABITAT_WATER, count);
     }
     Dexnav_SaveNumberHabitatMons(DEXNAV_HABITAT_WATER, count);
 }
@@ -3274,8 +3274,13 @@ void Dexnav_GenerateMoveset(u32 species, u32 insight, u32 level, enum Move *move
     for (u32 i = 0; i < MAX_MON_MOVES; i++)
         moves[i] = GetMonData(&gParties[B_TRAINER_OPPONENT_A][0], MON_DATA_MOVE1 + i);
 
-    u16 eggMoveBuffer[EGG_MOVES_ARRAY_COUNT];
-    u32 numEggMoves = GetEggMoves(&gParties[B_TRAINER_OPPONENT_A][0], eggMoveBuffer);
+    const u16 *learnset = GetSpeciesEggMoves(species);
+
+    u32 numEggMoves = 0;
+    for (u32 j = 0; learnset[j] != MOVE_UNAVAILABLE; j++)
+    {
+        numEggMoves++;
+    }
 
     if (numEggMoves == 0)
         return;
@@ -3306,7 +3311,7 @@ void Dexnav_GenerateMoveset(u32 species, u32 insight, u32 level, enum Move *move
         return;
 
     Dexnav_SetMoveFlag();
-    moves[0] = eggMoveBuffer[Random() % numEggMoves];
+    moves[0] = learnset[Random() % numEggMoves];
 }
 
 u32 Dexnav_CalculateLevel(u32 species, enum EncounterType environment)

@@ -299,18 +299,27 @@ const struct StarterMonTemplate sStarterMonTable[] =
     },
 };
 
-
 static void ShowSiliconStarter(u32 species);
 static void GiveDebugStarter(void);
 
 void GenerateDummyPartyMembers(void)
 {
-    u16 evs[NUM_STATS] = {0,0,0,0,0,0};
-    u16 ivs[NUM_STATS] = {0,0,0,0,0,0};
-    u16 moves[4] = {MOVE_SLEEP_POWDER,MOVE_NONE,MOVE_NONE,MOVE_NONE};
+    struct PokemonTemplate monTemplate = 
+    {
+        .level = 1,
+        .heldItem = ITEM_NONE,
+        .ball = BALL_POKE,
+        .nature = NATURE_RANDOM,
+        .abilityNum = NUM_ABILITY_PERSONALITY,
+        .gender = MON_GENDER_RANDOM,
+        .isShiny = SHINY_MODE_RANDOM,
+        .evs = {0,0,0,0,0,0},
+        .ivs = {0,0,0,0,0,0},
+        .moves = {MOVE_SLEEP_POWDER,MOVE_NONE,MOVE_NONE,MOVE_NONE},
+    };
 
     for (u32 slot = 0; slot < PARTY_SIZE; slot++)
-        ScriptGiveMonParameterized(B_SIDE_PLAYER,slot,SPECIES_SCYTHER,1,ITEM_NONE,BALL_POKE,NATURE_RANDOM,0,0,evs,ivs,moves,SHINY_MODE_RANDOM,0,0,0);
+        ScriptGiveMonParameterized(B_SIDE_PLAYER,slot,&monTemplate);
 
     CompactPartySlots();
 }
@@ -409,36 +418,35 @@ static void RollForShiny(u32 boxId, u32 monSlot)
 void GiveSiliconStarter(enum SiliconStarters slot)
 {
     u32 boxSlot = 0;
-    const struct StarterMonTemplate *starter = &sStarterMonTable[slot];
 
+    const struct StarterMonTemplate *starter = &sStarterMonTable[slot];
     u16 species = starter->species;
     u8 level = starter->level;
-    enum Item item = starter->item;
-    enum PokeBall ball = starter->ball;
-    u8 nature = starter->nature;
-    u8 abilityNum = starter->abilityNum;
-    u8 gender = starter->gender;
-    u8 friendship = starter->friendship;
+    u32 friendship = starter->friendship;
+
+    struct PokemonTemplate monTemplate = 
+    {
+        .species = species,
+        .level = level,
+        .heldItem = starter->item,
+        .ball = starter->ball,
+        .nature = starter->nature,
+        .abilityNum = starter->abilityNum,
+        .gender = starter->gender,
+    };
+
     u8 nextExpPercent = starter->nextExpPercent;
-    u16 evs[NUM_STATS];
-    u16 ivs[NUM_STATS];
-    enum Move moves[MAX_MON_MOVES];
 
     for (u32 i = 0; i < NUM_STATS; i++)
     {
-        evs[i] = starter->evs[i];
-        ivs[i] = starter->ivs[i];
+        monTemplate.evs[i] = starter->evs[i];
+        monTemplate.ivs[i] = starter->ivs[i];
     }
 
     for (u32 i = 0; i < MAX_MON_MOVES; i++)
-        moves[i] = starter->moves[i];
+        monTemplate.moves[i] = starter->moves[i];
 
-    ScriptGiveMonParameterized(
-            B_SIDE_PLAYER, PARTY_SIZE, species, level, item, ball,
-            nature, abilityNum, gender,
-            evs, ivs, moves,
-            SHINY_MODE_RANDOM, FALSE, NUMBER_OF_MON_TYPES, 0
-            );
+    ScriptGiveMonParameterized(B_SIDE_PLAYER, PARTY_SIZE, &monTemplate);
 
     SetStarterExp(boxSlot, slot, species, level, nextExpPercent);
     SetStarterFriendship(boxSlot, slot, friendship);
@@ -456,15 +464,39 @@ static void GiveDebugStarter(void)
     return;
 #endif
 
-    u16 evs[NUM_STATS] = {0,0,0,0,0,0};
-    u16 ivs[NUM_STATS] = {31,31,31,31,31,31};
-    enum Move moves[2][4] = {
-        {MOVE_DIG,MOVE_SURF,0,0},
-        {MOVE_DRAIN_PUNCH,MOVE_BULLET_PUNCH,0,0}
-    };
+struct PokemonTemplate sDebugMonTable[] =
+{
+    [0] = 
+    {
+        .species = SPECIES_MUDKIP,
+        .level = 22,
+        .ball = BALL_PSYCHE,
+        .nature = NATURE_BOLD,
+        .abilityNum = 2,
+        .gender = MON_FEMALE,
+        .evs = {0,0,0,0,0,0},
+        .ivs = {31,31,31,31,31,31},
+        .moves = {MOVE_DIG,MOVE_SURF,MOVE_NONE,MOVE_NONE},
+        .isShiny = SHINY_MODE_RANDOM,
+    },
+    [1] = 
+    {
+        .species = SPECIES_PANGORO,
+        .level = 22,
+        .ball = BALL_VITALITY,
+        .nature = NATURE_ADAMANT,
+        .abilityNum = 2,
+        .gender = MON_MALE,
+        .evs = {0,0,0,0,0,0},
+        .ivs = {31,31,31,31,31,31},
+        .moves = {MOVE_DRAIN_PUNCH,MOVE_BULLET_PUNCH,MOVE_NONE,MOVE_NONE},
+        .isShiny = SHINY_MODE_ALWAYS,
+    },
+};
 
-    ScriptGiveMonParameterized(B_SIDE_PLAYER,PARTY_SIZE,SPECIES_MUDKIP,22,ITEM_NONE,BALL_CHERISH,NATURE_BOLD,2,MON_FEMALE,evs,ivs,moves[0],SHINY_MODE_RANDOM,FALSE,NUMBER_OF_MON_TYPES,0);
-    ScriptGiveMonParameterized(B_SIDE_PLAYER,PARTY_SIZE,SPECIES_PANGORO,22,ITEM_NONE,BALL_BEAST,NATURE_ADAMANT,2,MON_MALE,evs,ivs,moves[1],SHINY_MODE_ALWAYS,FALSE,NUMBER_OF_MON_TYPES,0);
+
+    for (u32 debugIndex = 0; debugIndex < 2; debugIndex++)
+        ScriptGiveMonParameterized(B_SIDE_PLAYER,PARTY_SIZE,&sDebugMonTable[debugIndex]);
 }
 
 void MoveStarterToParty(void)

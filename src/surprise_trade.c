@@ -252,14 +252,24 @@ static void AddTeachableMove(struct Pokemon *mon, u32 species, u32 *finalMoves)
 
 static void AddEggMove(struct Pokemon *mon, u32 species, u32 *finalMoves)
 {
-    u16 eggMoves[EGG_MOVES_ARRAY_COUNT];
-    u32 eggCount = GetEggMovesBySpecies(species, eggMoves);
-    u32 candidates[EGG_MOVES_ARRAY_COUNT];
     u32 count = 0;
+
+    const u16 *eggMoves = GetSpeciesEggMoves(species);
+
+    u32 eggCount = 0;
+    for (u32 j = 0; eggMoves[j] != MOVE_UNAVAILABLE; j++)
+    {
+        eggCount++;
+    }
+
+    u32 candidates[eggCount];
 
     for (u32 eggIndex = 0; eggIndex < eggCount; eggIndex++)
     {
         if (eggMoves[eggIndex] == MOVE_NONE)
+            continue;
+
+        if (eggMoves[eggIndex] == MOVE_UNAVAILABLE)
             continue;
 
         bool32 alreadyKnown = FALSE;

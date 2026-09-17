@@ -1136,7 +1136,7 @@ bool32 IsMoveInSilicon(u32 moveId)
 
 static void ProcessLevelUpMoves(const struct LevelUpMove *learnset, u32 *overallIndex)
 {
-    for (u32 moveIndex = 0; moveIndex < MAX_LEVEL_UP_MOVES; moveIndex++)
+    for (u32 moveIndex = 0; learnset[moveIndex].move != LEVEL_UP_MOVE_END; moveIndex++)
     {
         if (learnset[moveIndex].move == MOVE_NONE || learnset[moveIndex].move == MOVE_UNAVAILABLE)
             break;
@@ -1151,7 +1151,7 @@ static void ProcessLevelUpMoves(const struct LevelUpMove *learnset, u32 *overall
 
 static void ProcessEggMoves(const u16 *eggMoveLearnset, u32 *overallIndex)
 {
-    for (u32 moveIndex = 0; moveIndex < EGG_MOVES_ARRAY_COUNT; moveIndex++)
+    for (u32 moveIndex = 0; eggMoveLearnset[moveIndex != MOVE_UNAVAILABLE] ;moveIndex++)
     {
         if (eggMoveLearnset[moveIndex] == MOVE_NONE || eggMoveLearnset[moveIndex] == MOVE_UNAVAILABLE)
             break;
@@ -1960,7 +1960,7 @@ const u8 *const sMethodTexts[] =
 
 static enum MoveLearnMethods PageMoves_GetMoveMethod(u32 currentPosition)
 {
-    return sPokedexMovesPageData->moveList[currentPosition].method;
+    return sPokedexMovesPageData->moveList[currentPosition].method; 
 }
 
 static void PageMoves_SetMoveMethod(u32 currentPosition, enum MoveLearnMethods method)
@@ -2025,7 +2025,7 @@ void PageMoves_PrintLevelMethod(u32 species, u32 currentPosition, u32 fontId, u3
 
     x+=POKEDEX_PAGE_MOVES_LEARN_ICON_RIGHT_PADDING;
 
-    for (moveIndex = 0; moveIndex < MAX_LEVEL_UP_MOVES; moveIndex++)
+    for (moveIndex = 0; learnset[moveIndex].move != LEVEL_UP_MOVE_END; moveIndex++)
     {
         if (learnset[moveIndex].move != moveId)
             continue;
@@ -2110,7 +2110,7 @@ static bool32 IsValidParent(u32 parentMon, u32 targetSpecies, u32 moveId, u32 re
 
     const struct LevelUpMove *learnset = GetSpeciesLevelUpLearnset(parentMon);
 
-    for (u32 learnsetIndex = 0; learnsetIndex < MAX_LEVEL_UP_MOVES && learnset[learnsetIndex].move != LEVEL_UP_MOVE_END; learnsetIndex++)
+    for (u32 learnsetIndex = 0; learnset[learnsetIndex].move != LEVEL_UP_MOVE_END; learnsetIndex++)
         if (learnset[learnsetIndex].move == moveId)
         {
             PageMoves_SetParentMoveMethod(resultIndex,METHOD_LEVEL);
@@ -2125,7 +2125,7 @@ static bool32 IsValidParent(u32 parentMon, u32 targetSpecies, u32 moveId, u32 re
             PageMoves_SetParentMoveMethod(resultIndex,METHOD_MACHINE);
     }
 
-    if (SpeciesCanLearnEggMove(parentMon,moveId))
+    if (SpeciesHasEggMove(parentMon,moveId))
     {
         if (PageMoves_GetParentMoveMethod(resultIndex) == METHOD_LEVEL)
             PageMoves_SetParentMoveMethod(resultIndex,METHOD_LEVEL_EGG);
