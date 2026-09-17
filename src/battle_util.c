@@ -2570,17 +2570,6 @@ static inline bool32 SetStartingFieldTerrain(enum BattleTerrain terrain, u8 *tim
 }
 
 // Start bdHazards
-static bool32 ShouldApplyFieldStatus(u32 flag, u16 *timer, u16 time)
-{
-    if (!(gFieldStatuses & flag))
-        return TRUE;
-    if (time == 0 && *timer > 0)
-        return TRUE;
-    if (time > *timer)
-        return TRUE;
-    return FALSE;
-}
-
 static bool32 ShouldApplySideStatus(u32 flag, enum BattleSide side, u16 *timer, u16 time)
 {
     if (!(gSideStatuses[side] & flag))
