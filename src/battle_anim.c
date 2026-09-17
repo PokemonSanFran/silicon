@@ -343,10 +343,12 @@ void LaunchBattleAnimation(u32 animType, u32 animId)
 
         bool32 forceMoveAnim = FALSE;
         #if TESTING // Because gBattleTestRunnerState is not seen outside of test env.
-        && !gSiliconTestVariables.checkVramUse // silicon-specific-tests
         forceMoveAnim = gBattleTestRunnerState->forceMoveAnim;
         #endif
-        if (!forceMoveAnim)
+        // Start silicon-specific-tests
+        //if (!forceMoveAnim)
+        if (!forceMoveAnim && gSiliconTestVariables.checkVramUse) 
+        // End silicon-specific-tests
         {
             enum { DEFAULT, PLAY, SKIP } mode = DEFAULT;
             if (animType == ANIM_TYPE_MOVE)

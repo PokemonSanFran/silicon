@@ -7,6 +7,7 @@
 #include "malloc.h"
 #include "constants/characters.h"
 #include "test/overworld_script.h"
+#include "battle_setup.h"
 
 #define MON_TO_USE SPECIES_TSAREENA
 
@@ -1317,7 +1318,7 @@ TEST("OPTIONS (BATTLE): Trainer Scaling (Off)")
     OptionsMenu_SetSavedOptions(BATTLE_SETTINGS,BATTLE_OPTIONS_TRAINER_SCALING,BATTLE_OPTION_TRAINER_SCALING_OFF);
     struct Pokemon *testParty = Alloc(6 * sizeof(struct Pokemon));
     u32 currTrainer = 15;
-    CreateNPCTrainerPartyFromTrainer(testParty, GetTrainerStructFromId(currTrainer), TRUE, BATTLE_TYPE_TRAINER);
+    CreateNPCTrainerPartyFromTrainer(testParty, GetTrainerStructFromId(currTrainer));
 
     EXPECT_EQ(GetMonData(&testParty[0], MON_DATA_SPECIES), SPECIES_WYNAUT);
     EXPECT_EQ(GetMonData(&testParty[0], MON_DATA_LEVEL), 1);
@@ -1335,7 +1336,7 @@ TEST("OPTIONS (BATTLE): Trainer Scaling (Level)")
     OptionsMenu_SetSavedOptions(BATTLE_SETTINGS,BATTLE_OPTIONS_TRAINER_SCALING,BATTLE_OPTION_TRAINER_SCALING_LEVEL);
     struct Pokemon *testParty = Alloc(6 * sizeof(struct Pokemon));
     u32 currTrainer = 15;
-    CreateNPCTrainerPartyFromTrainer(testParty, GetTrainerStructFromId(currTrainer), TRUE, BATTLE_TYPE_TRAINER);
+    CreateNPCTrainerPartyFromTrainer(testParty, GetTrainerStructFromId(currTrainer));
 
     EXPECT_GT(GetMonData(&testParty[0], MON_DATA_LEVEL), 1);
     EXPECT_LT(GetMonData(&testParty[1], MON_DATA_LEVEL), 100);

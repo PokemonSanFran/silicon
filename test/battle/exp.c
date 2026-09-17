@@ -541,6 +541,7 @@ WILD_BATTLE_TEST("Points Messages: Gains EVs Without Party")
         else
             EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_HP_EV), bigEV + (gSpeciesInfo[SPECIES_CATERPIE].evYield_HP));
     }
+}
 
 AI_DOUBLE_BATTLE_TEST("Both player Pokemon gain experience in double battles")
 {
