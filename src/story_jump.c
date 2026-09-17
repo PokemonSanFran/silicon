@@ -709,13 +709,13 @@ void JumpPlayerTo_swagbag(bool32 jumpType)
 void FlagsVarWarp_ReadySetI()
 {
     VarSet(VAR_PLAYER_HOME_STATE, SLEPT_AFTER_SWAGBAG);
-    FlagSet(FLAG_RECIEVED_LEFTOVERS);
+    FlagSet(FLAG_RECEIVED_LEFTOVERS);
     SetWarpDestination(MAP_GROUP(MAP_CUCONU_TOWN_SHARPRISE_COMPOUND_1F), MAP_NUM(MAP_CUCONU_TOWN_SHARPRISE_COMPOUND_1F), 0, USE_WARP_ID, USE_WARP_ID);
 }
 
 void GiveItems_ReadySetI(bool32 jumpType)
 {
-    if (!FlagGet(FLAG_RECIEVED_LEFTOVERS))
+    if (!FlagGet(FLAG_RECEIVED_LEFTOVERS))
         AddBagItem(ITEM_LEFTOVERS, 1);
 }
 
@@ -2130,13 +2130,13 @@ void JumpPlayerTo_ExhibitionBattle(bool32 jumpType)
 
 void FlagsVarWarp_MaybeIFuckedUp()
 {
-    VarSet(VAR_STORYLINE_STATE, STORY_RECIEVED_BAMBOO_STAR);
+    VarSet(VAR_STORYLINE_STATE, STORY_RECEIVED_BAMBOO_STAR);
     SetWarpDestination(MAP_GROUP(MAP_ROUTE2),MAP_NUM(MAP_ROUTE2),1,USE_WARP_ID,USE_WARP_ID);
 }
 
 void GiveItems_MaybeIFuckedUp(bool32 jumpType)
 {
-    if (VarGet(VAR_STORYLINE_STATE) < STORY_RECIEVED_BAMBOO_STAR)
+    if (VarGet(VAR_STORYLINE_STATE) < STORY_RECEIVED_BAMBOO_STAR)
         AddBagItem(ITEM_WISH_TAG, 1);
 }
 

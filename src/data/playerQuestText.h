@@ -2324,7 +2324,7 @@ static const struct PlayerAdventureText playerAdventureText[] =
         .dataType = QUEST_FLAVOR_COMPARE_VAR,
         .dataAddress = VAR_STORYLINE_STATE,
         .compareOp = EQUAL,
-        .targetValue = STORY_RECIEVED_BAMBOO_STAR,
+        .targetValue = STORY_RECEIVED_BAMBOO_STAR,
       },
       {
         .dataType = QUEST_FLAVOR_COMPARE_FLAG,

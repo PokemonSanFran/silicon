@@ -2529,7 +2529,7 @@ void DebugQuest_AngelDelivery(u8 state)
         case STATE_QUEST_ANGELDELIVERY_QUEST_NOT_STARTED:
             FlagSet(FLAG_SYS_STARTER_APPS_GET);
             break;
-        case STATE_QUEST_ANGELDELIVERY_RECIEVED_BIKE:
+        case STATE_QUEST_ANGELDELIVERY_RECEIVED_BIKE:
             QuestMenu_ScriptSetActive(QUEST_ANGELDELIVERY);
             AddBagItem(ITEM_QUEST_ANGELDELIVERY_1,1);
             AddBagItem(ITEM_QUEST_ANGELDELIVERY_2,1);
@@ -4562,7 +4562,7 @@ void DebugQuest_RestoreEsupleeOutskirtsGym(u8 state)
         case STATE_QUEST_RESTOREESPULEEGYM_NOT_STARTED:
             FlagSet(FLAG_SYS_STARTER_APPS_GET);
             JumpPlayerTo_LetsGrabLunch(JUMP_DEBUG);
-            FlagSet(FLAG_RECIEVED_NURSERY_EGG);
+            FlagSet(FLAG_RECEIVED_NURSERY_EGG);
             break;
         case STATE_QUEST_RESTOREESPULEEGYM_STARTED_QUEST:
             QuestMenu_ScriptSetActive(QUEST_RESTOREESPULEEGYM);

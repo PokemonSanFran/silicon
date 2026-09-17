@@ -1040,7 +1040,7 @@ bool32 IsPointsMessagesOptionOn(void)
     return (GetPointsMessagesOption() == BATTLE_OPTION_POINTS_MESSAGES_ON);
 }
 
-void PrintMonRecievedEffortValues(bool32 wasSentOut, u8* expMonId)
+void PrintMonReceivedEffortValues(bool32 wasSentOut, u8* expMonId)
 {
     if (!IsPointsMessagesOptionOn())
         return;
@@ -1053,7 +1053,7 @@ void PrintMonRecievedEffortValues(bool32 wasSentOut, u8* expMonId)
     PrepareStringBattle(STRINGID_PKMNGAINEDEVS, gBattleStruct->expGetterBattlerId);
 }
 
-u32 PrintMonRecievedExperience(u8* expMonId, bool32 printBoosted)
+u32 PrintMonReceivedExperience(u8* expMonId, bool32 printBoosted)
 {
     if (!IsPointsMessagesOptionOn())
         return STRINGID_COUNT;
@@ -1064,7 +1064,7 @@ u32 PrintMonRecievedExperience(u8* expMonId, bool32 printBoosted)
     return STRINGID_PKMNGAINEDEXP;
 }
 
-u32 PrintMonRecievedEffortAndExperience(u8* expMonId, bool32 printBoosted)
+u32 PrintMonReceivedEffortAndExperience(u8* expMonId, bool32 printBoosted)
 {
     if (!IsPointsMessagesOptionOn())
         return STRINGID_COUNT;

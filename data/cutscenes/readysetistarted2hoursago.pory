@@ -47,7 +47,7 @@ script TwoHoursAgo_ExplainLeague_ObjectSetUp_Script {
 }
 
 script TwoHoursAgo_ExplainLeague_Script {
-        setflag(FLAG_RECIEVED_LEFTOVERS)
+        setflag(FLAG_RECEIVED_LEFTOVERS)
         setflag(FLAG_TEMP_1F)
         lockall
         msgbox(format("You're in a race against hundreds of other Pokémon Trainers, to see who can beat our 8 Gym Leaders first. The first 16 Trainers to do so, will qualify for the Championship Tournament, held in a few weeks."),,SPEAKER_OLIVER)
