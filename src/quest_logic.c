@@ -4113,6 +4113,9 @@ void DebugQuest_ManOfManyHats(u8 state)
 
 bool8 IsHalaiIslandUnderCrisis(void)
 {
+    if (gMapHeader.regionMapSectionId != MAP_HALAI_ISLAND)
+        return FALSE;
+
     if (VarGet(VAR_HALAI_ISLAND_STATE) < POST_EARTHQUAKE)
         return FALSE;
 

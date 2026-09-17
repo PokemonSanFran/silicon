@@ -2455,6 +2455,9 @@ enum StartMenuCellularSignals CellularSignal_GetCurrentStrength(void)
     if (IsHalaiIslandUnderCrisis())
         return START_SIGNAL_NONE;
 
+    if (GetCurrentMap() == MAP_CHASILLA_GYM)
+        return START_SIGNAL_NONE;
+
     return sCellularSignal_FilterByMapTypes[mapType];
 }
 
