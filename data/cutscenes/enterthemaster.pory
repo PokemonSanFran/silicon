@@ -425,6 +425,7 @@ script EnterTheMaster_CheckReward_Script
 	{
         goto(EnterTheMaster_Interact_Robot_Script)
 	}
+    closemessage
 	goto(EnterTheMaster_CompleteQuest_Script)
 }
 
