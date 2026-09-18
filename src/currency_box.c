@@ -136,11 +136,11 @@ void CurrencyBox_Update(union CurrencyBoxValues values)
     CopyWindowToVram(values.windowId, COPYWIN_GFX);
 }
 
-void CurrencyBox_Destroy(union CurrencyBoxValues values)
+union CurrencyBoxValues CurrencyBox_Destroy(union CurrencyBoxValues values)
 {
     assertf(values.active, "CurrencyBox is no longer active.")
     {
-        return;
+        return values;
     }
 
     // start siliconBpBox
@@ -149,6 +149,9 @@ void CurrencyBox_Destroy(union CurrencyBoxValues values)
     // end siliconBpBox
     RemoveWindow(values.windowId);
     CurrencyBox_DestroyLabelSprite(values.spriteId);
+    values.active = FALSE;
+
+    return values;
 }
 
 u32 CurrencyBox_CreateLabelSprite(enum CurrencyBoxTypes type, s32 x, s32 y)
