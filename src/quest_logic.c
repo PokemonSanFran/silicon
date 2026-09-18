@@ -6616,3 +6616,39 @@ void ImIn_BufferMostPowerfulAttackAndMove(void)
     StringCopy(gStringVar1,GetSpeciesName(species));
     StringCopy(gStringVar2,GetMoveName(move));
 }
+
+// ***********************************************************************
+// Cutscene: Why Are You Helping Them
+// ***********************************************************************
+
+void WhyAreYouHelpingThem_GetAdaoraMonCry(void)
+{
+    u32 trainerId = TRAINER_ADAORA_HOWDISAPPOINTING;
+    u32 index = CHARLOTTE_ADAORA_MON_INDEX;
+    index = Quest_Generic_GetIndexForMonTrainer(trainerId,index,&gTrainers[0][0],TRAINERS_COUNT);
+    const struct TrainerMon mon = Quest_Generic_GetMonFromTrainer(trainerId,index,&gTrainers[0][0],TRAINERS_COUNT);
+
+    enum Species species = (index == PARTY_SIZE) ? SPECIES_NONE : mon.species;
+    PlayCry_Script(species, CRY_MODE_ENCOUNTER);
+}
+
+void WhyAreYouHelpingThem_GetCharlotteMonCry(void)
+{
+    u32 trainerId = PARTNER_CHARLOTTE;
+    u32 index = CHARLOTTE_ADAORA_MON_INDEX;
+    index = Quest_Generic_GetIndexForMonTrainer(trainerId,index,&gBattlePartners[0][0],PARTNER_COUNT);
+    const struct TrainerMon mon = Quest_Generic_GetMonFromTrainer(trainerId,index,&gBattlePartners[0][0],PARTNER_COUNT);
+
+    enum Species species = (index == PARTY_SIZE) ? SPECIES_NONE : mon.species;
+    PlayCry_Script(species, CRY_MODE_ENCOUNTER);
+}
+
+void WhyAreYouHelpingThem_LoadAdaoraMon(void)
+{
+    Quest_Generic_LoadTrainersMonToOWVar(TRAINER_ADAORA_HOWDISAPPOINTING,CHARLOTTE_ADAORA_MON_INDEX,VAR_OBJ_GFX_ID_1,&gTrainers[0][0],TRAINERS_COUNT);
+}
+
+void WhyAreYouHelpingThem_LoadCharlotteMon(void)
+{
+    Quest_Generic_LoadTrainersMonToOWVar(PARTNER_CHARLOTTE,CHARLOTTE_ADAORA_MON_INDEX,VAR_OBJ_GFX_ID_0,&gBattlePartners[0][0],PARTNER_COUNT);
+}

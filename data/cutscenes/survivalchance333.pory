@@ -214,12 +214,10 @@ script SurvivalChance333_TacticalPlan_Cutscene_Script
     lock
     call(SurvivalChance333_MoveCameraFreeze_Script)
     msgbox(format("Those routes frozen over seals off a water escape…"),,SPEAKER_CHARLOTTE)
-
     closemessage
 
     call(SurvivalChance333_MoveCameraLava_Script)
     msgbox(format("Melting the bedrock prevents an underground escape…"),,SPEAKER_CHARLOTTE)
-
     closemessage
 
     fadescreenswapbuffers(FADE_TO_BLACK)
@@ -228,7 +226,6 @@ script SurvivalChance333_TacticalPlan_Cutscene_Script
     fadescreenswapbuffers(FADE_FROM_BLACK)
 
     msgbox(format("They'll blow the wall, and we'll dive in!"),,SPEAKER_CHARLOTTE)
-
     closemessage
 
     playse(SE_M_EXPLOSION)
@@ -242,7 +239,6 @@ script SurvivalChance333_TacticalPlan_Cutscene_Script
 
     call(SurvivalChance333_BlowOpenDoors)
     msgbox(format("Showtime!"),,SPEAKER_CHARLOTTE)
-
     closemessage
 
     applymovement(LOCALID_HALAI_CHIEF,moves(walk_up))

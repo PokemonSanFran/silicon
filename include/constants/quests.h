@@ -1471,4 +1471,10 @@ enum
 
 #define BAIYA_MON_INDEX                    1
 
+// ***********************************************************************
+// Cutscene: Why Are You Helping Them
+// ***********************************************************************
+
+#define CHARLOTTE_ADAORA_MON_INDEX                    2
+
 #endif // GUARD_CONSTANTS_QUESTS_H
