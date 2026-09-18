@@ -1,14 +1,13 @@
 const PLAYER = OBJ_EVENT_ID_PLAYER
-const BAIYA = 3
 
-const FLAG_HIDE_BAIYA = FLAG_TEMP_1
-const FLAG_HIDE_ADAORA = FLAG_TEMP_3
-const FLAG_HIDE_ELITE4 = FLAG_TEMP_4
-
-script AssholesHome_HideObject_Script {
-    setflag(FLAG_HIDE_BAIYA)
-    setflag(FLAG_HIDE_ADAORA)
-    setflag(FLAG_HIDE_ELITE4)
+script AssholesHome_HideObject_Script
+{
+    setobjectflagfromlocalid(LOCALID_HALAI_BAIYA)
+    setobjectflagfromlocalid(LOCALID_HALAI_ADAORA)
+    setobjectflagfromlocalid(LOCALID_HALAI_MAGNUS)
+    setobjectflagfromlocalid(LOCALID_HALAI_TALA)
+    setobjectflagfromlocalid(LOCALID_HALAI_FRANK)
+    setobjectflagfromlocalid(LOCALID_HALAI_ELEANOR)
 }
 
 script AssholesHome_WalkToPlayer_Script {
@@ -16,7 +15,7 @@ script AssholesHome_WalkToPlayer_Script {
         applymovement(PLAYER,Common_Movement_ExclamationMark)
         playse(SE_PIN)
         playbgm(MUS_ENCOUNTER_CHAMPION,TRUE)
-        applymovement(BAIYA, moves(walk_down * 2, step_end))
+        applymovement(LOCALID_HALAI_BAIYA, moves(walk_down * 2, step_end))
         waitmovement(0)
         applymovement(PLAYER,Common_Movement_FaceUp)
         goto(AssholesHome_Baiya_Dialogue)
@@ -71,10 +70,10 @@ script AssholesHome_PostBattle_Dialogue {
                 msgbox(format("(What a weird kid...)"),MSGBOX_DEFAULT,SPEAKER_ALICIA)
         }
         closemessage
-        applymovement(BAIYA, moves(walk_up * 4, step_end))
+        applymovement(LOCALID_HALAI_BAIYA, moves(walk_up * 4, step_end))
         waitmovement(0)
         fadedefaultbgm
-        removeobject(BAIYA)
+        removeobject(LOCALID_HALAI_BAIYA)
         call(TryAutoSave)
         endcutscene
         release
