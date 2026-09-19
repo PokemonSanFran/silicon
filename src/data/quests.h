@@ -925,54 +925,6 @@ static const struct SubQuest sTheBoyWhoCriesWithWolves_Sub[QUEST_THEBOYWHOCRIESW
             QUEST_SPRITE_TYPE_ITEM,
             COMPOUND_STRING("Found")
             ),
-    sub_quest(106,
-            gText_Quest_TheBoyWhoCriesWithWolves_Sub4_Name,
-            gText_Quest_TheBoyWhoCriesWithWolves_Sub4_Desc,
-            gText_Quest_TheBoyWhoCriesWithWolves_Sub4_Map,
-            ITEM_POKE_BALL,
-            QUEST_SPRITE_TYPE_ITEM,
-            COMPOUND_STRING("Found")
-            ),
-    sub_quest(107,
-            gText_Quest_TheBoyWhoCriesWithWolves_Sub5_Name,
-            gText_Quest_TheBoyWhoCriesWithWolves_Sub5_Desc,
-            gText_Quest_TheBoyWhoCriesWithWolves_Sub5_Map,
-            ITEM_POKE_BALL,
-            QUEST_SPRITE_TYPE_ITEM,
-            COMPOUND_STRING("Found")
-            ),
-    sub_quest(108,
-            gText_Quest_TheBoyWhoCriesWithWolves_Sub6_Name,
-            gText_Quest_TheBoyWhoCriesWithWolves_Sub6_Desc,
-            gText_Quest_TheBoyWhoCriesWithWolves_Sub6_Map,
-            ITEM_POKE_BALL,
-            QUEST_SPRITE_TYPE_ITEM,
-            COMPOUND_STRING("Found")
-            ),
-    sub_quest(109,
-            gText_Quest_TheBoyWhoCriesWithWolves_Sub7_Name,
-            gText_Quest_TheBoyWhoCriesWithWolves_Sub7_Desc,
-            gText_Quest_TheBoyWhoCriesWithWolves_Sub7_Map,
-            ITEM_POKE_BALL,
-            QUEST_SPRITE_TYPE_ITEM,
-            COMPOUND_STRING("Found")
-            ),
-    sub_quest(110,
-            gText_Quest_TheBoyWhoCriesWithWolves_Sub8_Name,
-            gText_Quest_TheBoyWhoCriesWithWolves_Sub8_Desc,
-            gText_Quest_TheBoyWhoCriesWithWolves_Sub8_Map,
-            ITEM_POKE_BALL,
-            QUEST_SPRITE_TYPE_ITEM,
-            COMPOUND_STRING("Found")
-            ),
-    sub_quest(111,
-            gText_Quest_TheBoyWhoCriesWithWolves_Sub9_Name,
-            gText_Quest_TheBoyWhoCriesWithWolves_Sub9_Desc,
-            gText_Quest_TheBoyWhoCriesWithWolves_Sub9_Map,
-            ITEM_POKE_BALL,
-            QUEST_SPRITE_TYPE_ITEM,
-            COMPOUND_STRING("Found")
-            ),
 };
 
 static const struct SubQuest sTaxicabturnaround_Sub[QUEST_TAXICABTURNAROUND_SUB_COUNT] = {

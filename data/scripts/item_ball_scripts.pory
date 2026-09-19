@@ -14,12 +14,6 @@ script Common_EventScript_StoryItem
         case ITEM_ROTOM_CATALOG: call(WajabiLake_Quest_Theboywhocrieswithwolves_EventScript_ItemStuff1)
         case ITEM_GRACIDEA: call(WajabiLake_Quest_Theboywhocrieswithwolves_EventScript_ItemStuff2)
         case ITEM_REVEAL_GLASS: call(WajabiLake_Quest_Theboywhocrieswithwolves_EventScript_ItemStuff3)
-        case ITEM_DNA_SPLICERS: call(WajabiLake_Quest_Theboywhocrieswithwolves_EventScript_ItemStuff4)
-        case ITEM_ZYGARDE_CUBE: call(WajabiLake_Quest_Theboywhocrieswithwolves_EventScript_ItemStuff5)
-        case ITEM_PRISON_BOTTLE: call(WajabiLake_Quest_Theboywhocrieswithwolves_EventScript_ItemStuff6)
-        case ITEM_N_SOLARIZER: call(WajabiLake_Quest_Theboywhocrieswithwolves_EventScript_ItemStuff7)
-        case ITEM_N_LUNARIZER: call(WajabiLake_Quest_Theboywhocrieswithwolves_EventScript_ItemStuff8)
-        case ITEM_REINS_OF_UNITY: call(WajabiLake_Quest_Theboywhocrieswithwolves_EventScript_ItemStuff9)
         case ITEM_PANNEN_JOURNAL_PAGE_1: call(Quest_Hiddengrottomapping_EventScript_Journal1)
         case ITEM_PANNEN_JOURNAL_PAGE_2: call(Quest_Hiddengrottomapping_EventScript_Journal2)
         case ITEM_PANNEN_JOURNAL_PAGE_3: call(Quest_Hiddengrottomapping_EventScript_Journal3)
@@ -47,42 +41,6 @@ script WajabiLake_Quest_Theboywhocrieswithwolves_EventScript_ItemStuff2
 script WajabiLake_Quest_Theboywhocrieswithwolves_EventScript_ItemStuff3
 {
     subquestmenu(QUEST_MENU_COMPLETE_QUEST,QUEST_THEBOYWHOCRIESWITHWOLVES,SUB_QUEST_3)
-    call(Quest_Theboywhocriedwithwolves_CheckSubquests_Script)
-}
-
-script WajabiLake_Quest_Theboywhocrieswithwolves_EventScript_ItemStuff4
-{
-    subquestmenu(QUEST_MENU_COMPLETE_QUEST,QUEST_THEBOYWHOCRIESWITHWOLVES,SUB_QUEST_4)
-    call(Quest_Theboywhocriedwithwolves_CheckSubquests_Script)
-}
-
-script WajabiLake_Quest_Theboywhocrieswithwolves_EventScript_ItemStuff5
-{
-    subquestmenu(QUEST_MENU_COMPLETE_QUEST,QUEST_THEBOYWHOCRIESWITHWOLVES,SUB_QUEST_5)
-    call(Quest_Theboywhocriedwithwolves_CheckSubquests_Script)
-}
-
-script WajabiLake_Quest_Theboywhocrieswithwolves_EventScript_ItemStuff6
-{
-    subquestmenu(QUEST_MENU_COMPLETE_QUEST,QUEST_THEBOYWHOCRIESWITHWOLVES,SUB_QUEST_6)
-    call(Quest_Theboywhocriedwithwolves_CheckSubquests_Script)
-}
-
-script WajabiLake_Quest_Theboywhocrieswithwolves_EventScript_ItemStuff7
-{
-    subquestmenu(QUEST_MENU_COMPLETE_QUEST,QUEST_THEBOYWHOCRIESWITHWOLVES,SUB_QUEST_7)
-    call(Quest_Theboywhocriedwithwolves_CheckSubquests_Script)
-}
-
-script WajabiLake_Quest_Theboywhocrieswithwolves_EventScript_ItemStuff8
-{
-    subquestmenu(QUEST_MENU_COMPLETE_QUEST,QUEST_THEBOYWHOCRIESWITHWOLVES,SUB_QUEST_8)
-    call(Quest_Theboywhocriedwithwolves_CheckSubquests_Script)
-}
-
-script WajabiLake_Quest_Theboywhocrieswithwolves_EventScript_ItemStuff9
-{
-    subquestmenu(QUEST_MENU_COMPLETE_QUEST,QUEST_THEBOYWHOCRIESWITHWOLVES,SUB_QUEST_9)
     call(Quest_Theboywhocriedwithwolves_CheckSubquests_Script)
 }
 

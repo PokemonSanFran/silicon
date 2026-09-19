@@ -742,26 +742,6 @@ const u8 gText_Quest_TheBoyWhoCriesWithWolves_Sub2_Name[] = _("Item 2");
 const u8 gText_Quest_TheBoyWhoCriesWithWolves_Sub2_Desc[] = _("Sub Lorem");
 const u8 gText_Quest_TheBoyWhoCriesWithWolves_Sub2_Map[] = _("WajabiLake");
 const u8 gText_Quest_TheBoyWhoCriesWithWolves_Sub3_Name[] = _("Item 3");
-const u8 gText_Quest_TheBoyWhoCriesWithWolves_Sub3_Desc[] = _("Sub Lorem");
-const u8 gText_Quest_TheBoyWhoCriesWithWolves_Sub3_Map[] = _("WajabiLake");
-const u8 gText_Quest_TheBoyWhoCriesWithWolves_Sub4_Name[] = _("Item 4");
-const u8 gText_Quest_TheBoyWhoCriesWithWolves_Sub4_Desc[] = _("Sub Lorem");
-const u8 gText_Quest_TheBoyWhoCriesWithWolves_Sub4_Map[] = _("WajabiLake");
-const u8 gText_Quest_TheBoyWhoCriesWithWolves_Sub5_Name[] = _("Item 5");
-const u8 gText_Quest_TheBoyWhoCriesWithWolves_Sub5_Desc[] = _("Sub Lorem");
-const u8 gText_Quest_TheBoyWhoCriesWithWolves_Sub5_Map[] = _("WajabiLake");
-const u8 gText_Quest_TheBoyWhoCriesWithWolves_Sub6_Name[] = _("Item 6");
-const u8 gText_Quest_TheBoyWhoCriesWithWolves_Sub6_Desc[] = _("Sub Lorem");
-const u8 gText_Quest_TheBoyWhoCriesWithWolves_Sub6_Map[] = _("WajabiLake");
-const u8 gText_Quest_TheBoyWhoCriesWithWolves_Sub7_Name[] = _("Item 7");
-const u8 gText_Quest_TheBoyWhoCriesWithWolves_Sub7_Desc[] = _("Sub Lorem");
-const u8 gText_Quest_TheBoyWhoCriesWithWolves_Sub7_Map[] = _("WajabiLake");
-const u8 gText_Quest_TheBoyWhoCriesWithWolves_Sub8_Name[] = _("Item 8");
-const u8 gText_Quest_TheBoyWhoCriesWithWolves_Sub8_Desc[] = _("Sub Lorem");
-const u8 gText_Quest_TheBoyWhoCriesWithWolves_Sub8_Map[] = _("WajabiLake");
-const u8 gText_Quest_TheBoyWhoCriesWithWolves_Sub9_Name[] = _("Item 9");
-const u8 gText_Quest_TheBoyWhoCriesWithWolves_Sub9_Desc[] = _("Sub Lorem");
-const u8 gText_Quest_TheBoyWhoCriesWithWolves_Sub9_Map[] = _("WajabiLake");
 
 
 const u8 gText_Quest_TaxicabturnaroundSea_Sub1_Name[] = _("Water 1");
