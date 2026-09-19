@@ -353,6 +353,26 @@ u32 MonSummary_CreateHPBarSprite(u32 tileTag, u32 palTag, s32 x, s32 y)
     }, x, y, 0);
 }
 
+u32 MonSummary_Create11x9TypeIcon(u32 tileTag, s32 x, s32 y)
+{
+    const struct MonSummarySprite *config = SummarySprite_GetMainStruct(4);
+
+    LoadCompressedSpriteSheet(&(const struct CompressedSpriteSheet){
+        .tag = tileTag,
+        .data = config->gfx,
+        .size = GetDecompressedDataSize(config->gfx),
+    });
+
+    // assume palette is already pre-loaded
+    return CreateSprite(&(const struct SpriteTemplate){
+        .tileTag = tileTag,
+        .paletteTag = TAG_NONE,
+        .oam = config->oam,
+        .anims = config->anims,
+        .affineAnims = gDummySpriteAffineAnimTable,
+    }, x, y, 0);
+}
+
 void MonSummary_InjectHpBar(struct Sprite *sprite, s32 currHp, s32 maxHp)
 {
     struct WindowTemplate template = { .width = 8, .height  = 4 }; // 64x32
@@ -2149,7 +2169,7 @@ static void SummarySprite_UpdateMonTypes(void)
 
 static u32 SummarySprite_GetTypePaletteTag(enum Type type)
 {
-    return TAG_SUMMARY_TYPE_1 + (type >= TYPE_MYSTERY);
+    return MonSummary_GetTypePaletteFromTag(TAG_SUMMARY_TYPE_1, type);
 }
 
 static void SummarySprite_MonMove(u32 idx, s32 x, s32 y)

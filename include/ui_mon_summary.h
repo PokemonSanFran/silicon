@@ -13,6 +13,12 @@ extern const struct SpriteTemplate gMonSummary_CursorArrowsSpriteTemplate;
 
 void MonSummary_Init(enum PokemonSummaryScreenMode, void *, u8, u8, bool32, MainCallback);
 u32 MonSummary_CreateHPBarSprite(u32, u32, s32, s32);
+u32 MonSummary_Create11x9TypeIcon(u32, s32, s32);
 void MonSummary_InjectHpBar(struct Sprite *, s32, s32);
+
+static inline u32 MonSummary_GetTypePaletteFromTag(u32 tag, enum Type type)
+{
+    return tag + (type >= TYPE_MYSTERY);
+}
 
 #endif // GUARD_UI_MON_SUMMARY_H
