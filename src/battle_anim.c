@@ -342,16 +342,13 @@ void LaunchBattleAnimation(u32 animType, u32 animId)
         TestRunner_Battle_RecordAnimation(animType, animId);
 
         bool32 forceMoveAnim = FALSE;
+        bool32 checkVramUse = FALSE; // silicon-specific-tests
         #if TESTING // Because gBattleTestRunnerState is not seen outside of test env.
         forceMoveAnim = gBattleTestRunnerState->forceMoveAnim;
+        checkVramUse = gSiliconTestVariables.checkVramUse; // silicon-specific-tests
         #endif
         // Start silicon-specific-tests
-        //if (!forceMoveAnim)
-        #if TESTING // Because gBattleTestRunnerState is not seen outside of test env.
-        if (!forceMoveAnim && gSiliconTestVariables.checkVramUse) 
-        #else
         if (!forceMoveAnim)
-        #endif
         // End silicon-specific-tests
         {
             enum { DEFAULT, PLAY, SKIP } mode = DEFAULT;
@@ -372,7 +369,7 @@ void LaunchBattleAnimation(u32 animType, u32 animId)
                     break;
                 }
             }
-            if ((mode == DEFAULT && gTestRunnerHeadless) || mode == SKIP)
+            if ((mode == DEFAULT && (!checkVramUse && gTestRunnerHeadless)) || mode == SKIP)
             {
                 gAnimScriptCallback = Nop;
                 gAnimScriptActive = FALSE;
@@ -2493,3 +2490,4 @@ static void Cmd_createdragondartsprite(void)
         subpriority) != MAX_SPRITES) // Don't increment the task count if the sprite couldn't be created(i.e. there are too many created sprites atm).
          gAnimVisualTaskCount++;
 }
+
