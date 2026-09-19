@@ -72,6 +72,7 @@
 #include "union_room.h"
 #include "ui_inventory.h" // inventory
 #include "window.h"
+#include "ui_battle_info.h" // battleInfo
 #include "constants/battle.h"
 #include "constants/battle_frontier.h"
 #include "constants/field_effects.h"
@@ -7711,7 +7712,12 @@ void OpenPartyMenuInBattle(u8 partyAction)
         if (partyAction == PARTY_ACTION_SEND_MON_TO_BOX)
             InitPartyMenu(PARTY_MENU_TYPE_IN_BATTLE, GetPartyLayoutFromBattleType(), partyAction, FALSE, PARTY_MSG_CHOOSE_MON_FOR_BOX, Task_HandleChooseMonInput, ReshowBlankBattleScreenAfterMenu);
         else
+        // start battleInfo
+        /*
             InitPartyMenu(PARTY_MENU_TYPE_IN_BATTLE, GetPartyLayoutFromBattleType(), partyAction, FALSE, PARTY_MSG_CHOOSE_MON, Task_HandleChooseMonInput, CB2_SetUpReshowBattleScreenAfterMenu);
+        */
+            OpenBattleInfo(CB2_SetUpReshowBattleScreenAfterMenu);
+        // end battleInfo
     }
     ReshowBattleScreenDummy();
     UpdatePartyToBattleOrder();
