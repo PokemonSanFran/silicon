@@ -8013,7 +8013,10 @@ static inline s32 DoFutureSightAttackDamageCalc(struct DamageContext *ctx)
 // The chance is 1/N for each stage.
 static const u32 sGen7CriticalHitOdds[] = {24,  8,  2,  1,   1}; // 1/X
 static const u32 sGen6CriticalHitOdds[] = {16,  8,  2,  1,   1}; // 1/X
-static const u32 sCriticalHitOdds[]     = {16,  8,  4,  3,   2}; // 1/X, Gens 3,4,5
+// start battleInfo
+//static const u32 sCriticalHitOdds[]     = {16,  8,  4,  3,   2}; // 1/X, Gens 3,4,5
+const u32 sCriticalHitOdds[5]           = {16,  8,  4,  3,   2}; // 1/X, Gens 3,4,5
+// end battleInfo
 static const u32 sGen2CriticalHitOdds[] = {17, 32, 64, 85, 128}; // X/256
 
 u32 GetCriticalHitOdds(u32 critChance)
@@ -8038,7 +8041,10 @@ static inline bool32 IsBattlerLeekAffected(enum BattlerId battler, enum HoldEffe
     return FALSE;
 }
 
-static inline u32 GetHoldEffectCritChanceIncrease(enum BattlerId battler, enum HoldEffect holdEffect)
+// start battleInfo
+//static inline u32 GetHoldEffectCritChanceIncrease(enum BattlerId battler, enum HoldEffect holdEffect)
+u32 GetHoldEffectCritChanceIncrease(enum BattlerId battler, enum HoldEffect holdEffect)
+// end battleInfo
 {
     u32 critStageIncrease = 0;
 
@@ -8063,6 +8069,24 @@ static inline u32 GetHoldEffectCritChanceIncrease(enum BattlerId battler, enum H
     return critStageIncrease;
 }
 
+// start battleInfo
+// passive as in, unaffected by a move
+u32 CalcBattlerPassiveCritChance(enum BattlerId battler, enum HoldEffect holdEffect, enum Ability ability)
+{
+    u32 critChance = (gBattleMons[battler].volatiles.focusEnergy != 0 ? 2 : 0)
+                   + (gBattleMons[battler].volatiles.dragonCheer != 0 ? 1 : 0)
+                   + GetHoldEffectCritChanceIncrease(battler, holdEffect)
+                   + ((B_AFFECTION_MECHANICS == TRUE && GetBattlerAffectionHearts(battler) == AFFECTION_FIVE_HEARTS) ? 2 : 0)
+                   + (ability == ABILITY_SUPER_LUCK ? 1 : 0)
+                   + gBattleMons[battler].volatiles.bonusCritStages;
+
+    if (critChance >= ARRAY_COUNT(sCriticalHitOdds))
+        critChance = ARRAY_COUNT(sCriticalHitOdds) - 1;
+
+    return critChance;
+}
+// end battleInfo
+
 s32 CalcCritChanceStage(struct DamageContext *ctx)
 {
     s32 critChance = 0;
@@ -8079,6 +8103,8 @@ s32 CalcCritChanceStage(struct DamageContext *ctx)
     }
     else
     {
+        // start battleInfo
+        /*
         critChance  = (gBattleMons[ctx->battlerAtk].volatiles.focusEnergy != 0 ? 2 : 0)
                     + (gBattleMons[ctx->battlerAtk].volatiles.dragonCheer != 0 ? 1 : 0)
                     + GetMoveCriticalHitStage(ctx->move)
@@ -8086,6 +8112,10 @@ s32 CalcCritChanceStage(struct DamageContext *ctx)
                     + ((B_AFFECTION_MECHANICS == TRUE && GetBattlerAffectionHearts(ctx->battlerAtk) == AFFECTION_FIVE_HEARTS) ? 2 : 0)
                     + (ctx->abilities[ctx->battlerAtk] == ABILITY_SUPER_LUCK ? 1 : 0)
                     + gBattleMons[ctx->battlerAtk].volatiles.bonusCritStages;
+        */
+        critChance = CalcBattlerPassiveCritChance(ctx->battlerAtk, ctx->holdEffects[ctx->battlerAtk], ctx->abilities[ctx->battlerAtk])
+                   + GetMoveCriticalHitStage(ctx->move);
+        // end battleInfo
 
         if (critChance >= ARRAY_COUNT(sCriticalHitOdds))
             critChance = ARRAY_COUNT(sCriticalHitOdds) - 1;
