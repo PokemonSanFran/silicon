@@ -121,6 +121,7 @@ static void VBlankCB_BattleInfo(void);
 
 static void Task_BattleInfo_WaitFade(u8);
 static void Task_BattleInfo_WaitInput(u8);
+static void Task_BattleInfo_MainModeInput(u8);
 static void Task_BattleInfo_Close(u8);
 
 static void SpriteCB_BattleInfo_MonIcon(struct Sprite *);
@@ -132,6 +133,9 @@ static void BattleInfoInit_Backgrounds(void);
 static void BattleInfoInit_Graphics(void);
 static void BattleInfoInit_Windows(void);
 static void BattleInfoInit_Sprites(void);
+
+static void BattleInfoMode_Set(enum BattleInfoModes);
+static void BattleInfoMode_Update(void);
 
 static void BattleInfoInput_UpdateGrid(s32, s32);
 static void BattleInfoInput_UpdateXPos(s32);
@@ -147,7 +151,7 @@ static void BattleInfoSprite_CreateCursor(void);
 
 static void BattleInfoText_UpdateHeader(void);
 static void BattleInfoText_UpdateStatStages(void);
-static void BattleInfoText_UpdateEnvironmentList(void);
+static void BattleInfoText_UpdateStatusList(void);
 static void BattleInfoText_UpdateFooter(void);
 
 static void BattleInfoHelper_UpdateEverything(void);
@@ -166,6 +170,7 @@ static const u16 sBattleInfo_MainPal[] = INCGFX_U16("graphics/ui_menus/battle_in
 static const u32 sBattleInfo_MainMap[] = INCGFX_U32("graphics/ui_menus/battle_info/main_tilemap.bin", ".smolTM");
 
 static const u8 sBattleInfo_StatStageBlit[] = INCGFX_U8("graphics/ui_menus/battle_info/stat_stage.png", ".4bpp");
+static const u8 sBattleInfo_StatusListBlit[] = INCGFX_U8("graphics/ui_menus/battle_info/status_list.png", ".4bpp");
 
 static const struct BgTemplate sBattleInfo_BgTemplates[NUM_BI_BACKGROUNDS] =
 {
@@ -260,11 +265,27 @@ static const u8 *const sBattleInfo_StatNames[] =
                       COMPOUND_STRING("CRIT:"),
 };
 
-static const u8 *const sBattleInfo_FooterTextByModes[NUM_BI_MODES] =
+static const struct {
+    const u8 *helpBarTxt;
+    void (*updateFunc)(void);
+    TaskFunc inputTask;
+} sBattleInfo_ModesInfo[] =
 {
-    [BI_MODE_MAIN]              = COMPOUND_STRING("{A_BUTTON} Options {B_BUTTON} Close"),
-    [BI_MODE_OPTIONS_LIST]      = COMPOUND_STRING("{A_BUTTON} Confirm {B_BUTTON} Return"),
-    [BI_MODE_STATUS_LIST]       = COMPOUND_STRING("{A_BUTTON} Summary {DPAD_UPDOWN} Navigate {B_BUTTON} Return"),
+    [BI_MODE_MAIN] =
+    {
+        .helpBarTxt = COMPOUND_STRING("{A_BUTTON} Options {B_BUTTON} Close"),
+        .updateFunc = BattleInfoText_UpdateStatusList,
+        .inputTask = Task_BattleInfo_MainModeInput,
+    },
+    [BI_MODE_OPTIONS_LIST] =
+    {
+        .helpBarTxt = COMPOUND_STRING("{A_BUTTON} Confirm {B_BUTTON} Return"),
+    },
+    [BI_MODE_STATUS_LIST] =
+    {
+        .helpBarTxt = COMPOUND_STRING("{A_BUTTON} Summary {DPAD_UPDOWN} Navigate {B_BUTTON} Return"),
+        .updateFunc = BattleInfoText_UpdateStatusList,
+    },
 };
 
 static const enum Stat sBattleInfo_StatOrder[] =
@@ -378,11 +399,24 @@ static void Task_BattleInfo_WaitFade(u8 taskId)
 
 static void Task_BattleInfo_WaitInput(u8 taskId)
 {
+    TaskFunc inputTask = sBattleInfo_ModesInfo[sBattleInfoDataPtr->mode].inputTask;
+    if (inputTask != NULL)
+        inputTask(taskId);
+}
+
+static void Task_BattleInfo_MainModeInput(u8 taskId)
+{
     if (JOY_NEW(B_BUTTON))
     {
         PlaySE(SE_RG_HELP_CLOSE);
         BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
         SetTaskFuncWithFollowupFunc(taskId, Task_BattleInfo_WaitFade, Task_BattleInfo_Close);
+        return;
+    }
+
+    if (JOY_NEW(A_BUTTON))
+    {
+        BattleInfoMode_Set(BI_MODE_OPTIONS_LIST);
         return;
     }
 
@@ -548,8 +582,8 @@ static void BattleInfoInit_Windows(void)
     FillWindowPixelBuffer(0, PIXEL_FILL(0));
     BattleInfoText_UpdateHeader();
     BattleInfoText_UpdateStatStages();
-    BattleInfoText_UpdateEnvironmentList();
     BattleInfoText_UpdateFooter();
+    BattleInfoMode_Update();
     PutWindowTilemap(0);
     CopyWindowToVram(0, COPYWIN_FULL);
 }
@@ -560,6 +594,20 @@ static void BattleInfoInit_Sprites(void)
     BattleInfoSprite_CreateHPBar();
     BattleInfoSprite_CreateTypeIcons();
     BattleInfoSprite_CreateCursor();
+}
+
+static void BattleInfoMode_Set(enum BattleInfoModes mode)
+{
+    PlaySE(SE_SELECT);
+    sBattleInfoDataPtr->mode = mode;
+    BattleInfoHelper_UpdateEverything();
+}
+
+static void BattleInfoMode_Update(void)
+{
+    void (*updateFunc)(void) = sBattleInfo_ModesInfo[sBattleInfoDataPtr->mode].updateFunc;
+    if (updateFunc != NULL)
+        updateFunc();
 }
 
 static void BattleInfoInput_UpdateGrid(s32 deltaX, s32 deltaY)
@@ -854,9 +902,24 @@ static void BattleInfoText_UpdateStatStages(void)
     }
 }
 
-static void BattleInfoText_UpdateEnvironmentList(void)
+static void BattleInfoText_UpdateStatusList(void)
 {
-    return;
+    if (!BattleInfoHelper_CanMonInfoBeShown())
+        return;
+
+    u32 windowId = 0;
+    BlitBitmapToWindow(windowId, sBattleInfo_StatusListBlit, 160, 8, 80, 80);
+
+    for (u32 i = 0, y = 4; i < 5; i++, y += 16)
+    {
+        const u8 *str = COMPOUND_STRING("Test");
+        u32 fontId = GetFontIdToFit(str, FONT_OUTLINED, 0, 72);
+        BattleInfoHelper_AddTextPrinter(
+            162, y,
+            fontId,
+            BI_TXTCLR_OUTLINED,
+            str);
+    }
 }
 
 static void BattleInfoText_UpdateFooter(void)
@@ -865,7 +928,7 @@ static void BattleInfoText_UpdateFooter(void)
         4, 81,
         FONT_SMALL,
         BI_TXTCLR_FOOTER,
-        sBattleInfo_FooterTextByModes[sBattleInfoDataPtr->mode]);
+        sBattleInfo_ModesInfo[sBattleInfoDataPtr->mode].helpBarTxt);
 }
 
 static void BattleInfoHelper_UpdateEverything(void)
@@ -873,8 +936,8 @@ static void BattleInfoHelper_UpdateEverything(void)
     FillWindowPixelBuffer(0, PIXEL_FILL(0));
     BattleInfoText_UpdateHeader();
     BattleInfoText_UpdateStatStages();
-    BattleInfoText_UpdateEnvironmentList();
     BattleInfoText_UpdateFooter();
+    BattleInfoMode_Update();
     CopyWindowToVram(0, COPYWIN_GFX);
 }
 
