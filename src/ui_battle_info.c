@@ -93,7 +93,7 @@ enum PACKED BattleInfoModes
 #define BI_TYPE_2_X 8 + (72)
 #define BI_TYPES_Y  8 + (82)
 
-#define sHPBar_PartySlotIdx     data[0]
+#define sPartySlotIdx           data[0]
 
 #define sTypeIcon_Type          data[0]
 #define sTypeIcon_Index         data[1]
@@ -460,15 +460,16 @@ static void Task_BattleInfo_Close(u8 taskId)
 
 static void SpriteCB_BattleInfo_MonIcon(struct Sprite *sprite)
 {
-    UpdateMonIconFrame(sprite);
+    if (sprite->sPartySlotIdx == sBattleInfoDataPtr->currPartySlot)
+        UpdateMonIconFrame(sprite);
 }
 
 static void SpriteCB_BattleInfo_HPBar(struct Sprite *sprite)
 {
     u32 slotIdx = sBattleInfoDataPtr->currPartySlot;
-    if (slotIdx == sprite->sHPBar_PartySlotIdx) return;
+    if (slotIdx == sprite->sPartySlotIdx) return;
 
-    sprite->sHPBar_PartySlotIdx = slotIdx;
+    sprite->sPartySlotIdx = slotIdx;
     struct Pokemon *mon = BattleInfoHelper_GetCurrMon();
     sprite->invisible = !BattleInfoHelper_CanMonInfoBeShown();
     MonSummary_InjectHpBar(sprite, GetMonData(mon, MON_DATA_HP, NULL), GetMonData(mon, MON_DATA_MAX_HP, NULL));
@@ -665,6 +666,7 @@ static u8 BattleInfoSprite_CreateMonIcon(enum BattleTrainer trainer, u32 idx, s3
         gSprites[spriteId].invisible = TRUE;
     }
 
+    gSprites[spriteId].sPartySlotIdx = idx + (PARTY_SIZE * (trainer == B_TRAINER_PLAYER));
     return spriteId;
 }
 
@@ -689,7 +691,7 @@ static void BattleInfoSprite_CreateHPBar(void)
         return;
 
     struct Sprite *sprite = &gSprites[*spriteId];
-    sprite->sHPBar_PartySlotIdx = -1;
+    sprite->sPartySlotIdx = -1;
     sprite->oam.objMode = ST_OAM_OBJ_BLEND;
     sprite->callback = SpriteCB_BattleInfo_HPBar;
 }
