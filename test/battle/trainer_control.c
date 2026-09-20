@@ -5,6 +5,7 @@
 #include "data.h"
 #include "malloc.h"
 #include "random.h"
+#include "trainer_util.h"
 #include "string_util.h"
 #include "trainer_pools.h"
 #include "constants/item.h"
@@ -33,11 +34,6 @@ TEST("CreateNPCTrainerPartyForTrainer generates customized Pokémon")
     u32 currTrainer = 3;
     u8 nickBuffer[20];
     CreateNPCTrainerPartyFromTrainer(testParty, GetTrainerStructFromId(currTrainer));
-// Start Battle Settings: Trainer Scaling
-    u32 expectedLevel[TrainerScalingGetPartySize(currTrainer)];
-    expectedLevel[0] = HandleScaledLevel(TrainerScalingGetLevel(currTrainer,0),TrainerScalingGetPartySize(currTrainer));
-    expectedLevel[1] = HandleScaledLevel(TrainerScalingGetLevel(currTrainer,1),TrainerScalingGetPartySize(currTrainer));
-// End Battle Settings: Trainer Scaling
     EXPECT(IsMonShiny(&testParty[0]));
     EXPECT(!IsMonShiny(&testParty[1]));
 
@@ -86,6 +82,9 @@ TEST("CreateNPCTrainerPartyForTrainer generates customized Pokémon")
     EXPECT(GetMonData(&testParty[1], MON_DATA_SPDEF_EV, 0) == 0);
 
     // Start Battle Settings: Trainer Scaling
+    u32 expectedLevel[TrainerScalingGetPartySize(currTrainer)];
+    expectedLevel[0] = HandleScaledLevel(TrainerScalingGetLevel(currTrainer,0),TrainerScalingGetPartySize(currTrainer));
+    expectedLevel[1] = HandleScaledLevel(TrainerScalingGetLevel(currTrainer,1),TrainerScalingGetPartySize(currTrainer));
     //EXPECT(GetMonData(&testParty[0], MON_DATA_LEVEL, 0) == 67);
     //EXPECT(GetMonData(&testParty[1], MON_DATA_LEVEL, 0) == 5);
     EXPECT(GetMonData(&testParty[0], MON_DATA_LEVEL, 0) == expectedLevel[0]);

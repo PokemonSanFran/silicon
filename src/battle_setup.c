@@ -2367,7 +2367,10 @@ void CreateNPCTrainerPartyFromTrainer(struct Pokemon *party, const struct Traine
     for (i = 0; i < monsCount; i++)
     {
         u32 monIndex = monIndices[i];
-        GenerateMonFromTrainerMon(&party[i], &trainer->party[monIndex], trainerGen);
+        // Start Battle Settings: Trainer Scaling
+        //GenerateMonFromTrainerMon(&party[i], &trainer->party[monIndex], trainerGen);
+        GenerateMonFromTrainerMon(&party[i], &trainer->party[monIndex], trainerGen, monsCount);
+        // End Battle Settings: Trainer Scaling
     }
     Free(trainerGen);
 }

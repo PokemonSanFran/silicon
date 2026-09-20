@@ -9,6 +9,7 @@
 
 #include "constants/battle_ai.h"
 #include "constants/pokeball.h"
+#include "options_battle.h" // Battle Settings: Trainer Scaling
 
 rng_value_t GeneratePartySeed(const struct Trainer *trainer)
 {
@@ -63,7 +64,10 @@ u32 GeneratePersonalityForGender(u32 gender, u32 species)
 
 const u8 sModuloLUT[25] = {0, 21, 17, 13, 9, 5, 1, 22, 18, 14, 10, 6, 2, 23, 19, 15, 11, 7, 3, 24, 20, 16, 12, 8, 4};
 
-static void ModifyPersonalityForNature(u32 *personality, s32 newNature)
+// Start Battle Settings: Trainer Scaling
+//static void ModifyPersonalityForNature(u32 *personality, s32 newNature)
+void ModifyPersonalityForNature(u32 *personality, s32 newNature)
+// End Battle Settings: Trainer Scaling
 {
     s32 nature = GetNatureFromPersonality(*personality);
     s32 diff = abs(newNature - nature);
@@ -120,7 +124,10 @@ void MakePartnerGenerator(struct TrainerGenerator *trainerGen, const struct Trai
     trainerGen->localRngState = LocalRandomSeed(otID);
 }
 
-void GenerateMonFromTrainerMon(struct Pokemon *mon, const struct TrainerMon *trainerMon, struct TrainerGenerator *trainer)
+// Start Battle Settings: Trainer Scaling
+//void GenerateMonFromTrainerMon(struct Pokemon *mon, const struct TrainerMon *trainerMon, struct TrainerGenerator *trainer)
+void GenerateMonFromTrainerMon(struct Pokemon *mon, const struct TrainerMon *trainerMon, struct TrainerGenerator *trainer, u32 monsCount)
+// End Battle Settings: Trainer Scaling
 {
     u32 data;
     u32 personality = (LocalRandom32(&trainer->localRngState) & 0xFFFFDF00) + 0x1000;
@@ -135,7 +142,7 @@ void GenerateMonFromTrainerMon(struct Pokemon *mon, const struct TrainerMon *tra
         errorf("Unkwown trainer mon gender value %d", trainerMon->gender);
     personality |= genderValue;
     ModifyPersonalityForNature(&personality, trainerMon->nature);
-    CreateMon(mon, trainerMon->species, trainerMon->lvl, personality, trainer->otID);
+    CreateMon(mon, trainerMon->species, HandleScaledLevel(trainerMon->lvl,monsCount), personality, trainer->otID);
     if (trainerMon->nickname != NULL)
         SetMonData(mon, MON_DATA_NICKNAME, trainerMon->nickname);
     if (trainerMon->ev) //ev in struct TrainerMon are stored in Showdown order not vanilla Emerald order

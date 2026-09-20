@@ -44,7 +44,10 @@ void FillPartnerParty(u16 trainerId)
             partnerGen.otID = OTID_STRUCT_PRESET(STEVEN_OTID);
         for (i = 0; i < lastIndex && i < partner->partySize; i++)
         {
-            GenerateMonFromTrainerMon(&gParties[B_TRAINER_PARTNER][i], &partner->party[i], &partnerGen);
+            // Start Battle Settings: Trainer Scaling
+            //GenerateMonFromTrainerMon(&gParties[B_TRAINER_PARTNER][i], &partner->party[i], &partnerGen);
+            GenerateMonFromTrainerMon(&gParties[B_TRAINER_PARTNER][i], &partner->party[i], &partnerGen,lastIndex);
+            // End Battle Settings: Trainer Scaling
         }
     }
     else if (trainerId == TRAINER_EREADER)

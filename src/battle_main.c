@@ -1921,6 +1921,8 @@ void CB2_QuitRecordedBattle(void)
     }
 }
 
+// Start Battle Settings: Trainer Scaling
+/*
 void ModifyPersonalityForNature(u32 *personality, u32 newNature)
 {
     u32 nature = GetNatureFromPersonality(*personality);
@@ -1933,6 +1935,8 @@ void ModifyPersonalityForNature(u32 *personality, u32 newNature)
     }
     *personality -= (diff * sign);
 }
+*/
+// End Battle Settings: Trainer Scaling
 
 void VBlankCB_Battle(void)
 {
