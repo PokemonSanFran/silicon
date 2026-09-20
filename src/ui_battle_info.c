@@ -328,6 +328,7 @@ static void CB2_BattleInfoInit(void)
         STATE_INIT_GFX,
         STATE_INIT_WIN,
         STATE_INIT_SPRITE,
+        STATE_INIT_PALETTES,
     } state = gMain.state;
 
     switch (state)
@@ -343,6 +344,7 @@ static void CB2_BattleInfoInit(void)
         ScanlineEffect_Stop();
         FreeAllSpritePalettes();
         ResetPaletteFade();
+        gPaletteFade.bufferTransferDisabled = TRUE;
         FreeAllWindowBuffers();
         ResetSpriteData();
         ResetTasks();
@@ -362,6 +364,10 @@ static void CB2_BattleInfoInit(void)
         break;
     case STATE_INIT_SPRITE:
         BattleInfoInit_Sprites();
+        gMain.state++;
+        break;
+    case STATE_INIT_PALETTES:
+        gPaletteFade.bufferTransferDisabled = FALSE;
         gMain.state++;
         break;
     default:
@@ -507,6 +513,9 @@ static void SpriteCB_BattleInfo_HPBar(struct Sprite *sprite)
     struct Pokemon *mon = BattleInfoHelper_GetCurrMon();
     sprite->invisible = !BattleInfoHelper_CanMonInfoBeShown();
     MonSummary_InjectHpBar(sprite, GetMonData(mon, MON_DATA_HP, NULL), GetMonData(mon, MON_DATA_MAX_HP, NULL));
+    // bullshit workaround bc the injected hp colors keeps showing up
+    if (FindTaskIdByFunc(Task_BattleInfo_WaitInput) == TASK_NONE)
+        BlendPalettes(1 << (16 + sprite->oam.paletteNum), 16, RGB_BLACK);
 }
 
 static void SpriteCB_BattleInfo_TypeIcon(struct Sprite *sprite)

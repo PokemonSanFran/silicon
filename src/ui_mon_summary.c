@@ -422,8 +422,7 @@ void MonSummary_InjectHpBar(struct Sprite *sprite, s32 currHp, s32 maxHp)
         break;
     }
 
-    // avoid copying onto the faded buffer as otherwise it'll pop up when the screen is still faded as black
-    CpuCopy16(&sSummarySprite_HpBarColors[1 + (color * 2)], &gPlttBufferUnfaded[OBJ_PLTT_ID(sprite->oam.paletteNum) + 6], PLTT_SIZEOF(2));
+    LoadPalette(&sSummarySprite_HpBarColors[1 + (color * 2)], OBJ_PLTT_ID(sprite->oam.paletteNum) + 6, PLTT_SIZEOF(2));
 
     u32 fontId = FONT_OUTLINED;
 
@@ -1917,6 +1916,9 @@ static void SummarySprite_InjectHpBar(struct Sprite *sprite)
 {
     struct MonSummary *mon = SummaryMon_GetStruct();
     MonSummary_InjectHpBar(sprite, mon->currHp, GetMonData(&sMonSummaryDataPtr->mon, MON_DATA_MAX_HP));
+    // bullshit workaround bc the injected hp colors keeps showing up
+    if (FindTaskIdByFunc(SummaryMode_GetInputFunc(SummaryMode_GetValue())) == TASK_NONE)
+        BlendPalettes(1 << (16 + sprite->oam.paletteNum), 16, RGB_BLACK);
 }
 
 // the FillWindowPixelRect width calc can be improved
