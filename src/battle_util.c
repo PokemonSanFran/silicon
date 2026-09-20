@@ -533,15 +533,14 @@ void HandleAction_UseMove(void)
         gCurrentMove = gChosenMove = gBattleMons[gBattlerAttacker].moves[gCurrMovePos];
     }
 
-    // Start siliconMerge
-	// PSF Move Healing
+    // Start Battle Settings: Move Healing
     if (!IsPlayerAllowedToUseHealingMoves(gBattlerAttacker, gCurrentMove))
     {
         gBattlescriptCurrInstr = BattleScript_FailedFromAtkCanceler;
         gCurrentActionFuncId = B_ACTION_EXEC_SCRIPT;
         return;
     }
-    // End siliconMerge
+    // End Battle Settings: Move Healing
     if (IsBattlerAlive(gBattlerAttacker))
     {
         if (IsOnPlayerSide(gBattlerAttacker))
@@ -1981,10 +1980,10 @@ bool32 HandleFaintedMonActions(void)
                 if (gBattleMons[gBattleStruct->eventState.faintedActionBattler].hp == 0
                  && !(gAbsentBattlerFlags & (1u << gBattleStruct->eventState.faintedActionBattler)))
                 {
-                    // Start siliconMerge
+                    // Start Battle Settings: Fainted Mon
                     if (IsOnPlayerSide(gBattlerFainted))
                         SetFaintedMonBit(&gParties[B_TRAINER_PLAYER][gBattlerPartyIndexes[gBattlerFainted]]);
-                    // End siliconMerge
+                    // End Battle Settings: Fainted Mon
                     BattleScriptExecute(BattleScript_HandleFaintedMon);
                     gBattleStruct->eventState.faintedAction = FAINTED_ACTIONS_HANDLE_NEXT_BATTLER;
                     return TRUE;
