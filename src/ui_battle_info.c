@@ -8,7 +8,6 @@
 #include "sprite.h"
 #include "text.h"
 #include "string_util.h"
-#include "international_string_util.h"
 #include "main.h"
 #include "malloc.h"
 #include "task.h"
@@ -29,9 +28,18 @@
 enum BattleInfoBackgrounds
 {
     BI_BG_TEXT,
+    BI_BG_TEXT_ALT,
     BI_BG_MAIN,
 
     NUM_BI_BACKGROUNDS
+};
+
+enum BattleInfoWindows
+{
+    BI_WIN_MAIN,
+    BI_WIN_OPTIONS_LIST,
+
+    NUM_BI_WINDOWS
 };
 
 enum BattleInfoSprites
@@ -40,6 +48,7 @@ enum BattleInfoSprites
     BI_SPRITE_TYPE_1,
     BI_SPRITE_TYPE_2,
     BI_SPRITE_CURSOR,
+    BI_SPRITE_OPTIONS_CURSOR,
 
     NUM_BI_SPRITES
 };
@@ -54,6 +63,13 @@ enum BattleInfoSpriteTags
     TAG_BI_MAIN,
 
     NUM_BI_TAGS
+};
+
+enum BattleInfoSubspriteEntries
+{
+    BI_SUBSPRITE_OPTIONS_CURSOR,
+
+    NUM_BI_SUBSPRITES
 };
 
 enum BattleInfoTextColors
@@ -72,6 +88,16 @@ enum PACKED BattleInfoModes
     BI_MODE_STATUS_LIST,
 
     NUM_BI_MODES
+};
+
+enum BattleInfoOptions
+{
+    BI_OPTION_SWAP,
+    BI_OPTION_SUMMARY,
+    BI_OPTION_STATUS,
+    BI_OPTION_CANCEL,
+
+    NUM_BI_OPTIONS
 };
 
 #define MOVE_BACK       -1
@@ -110,24 +136,38 @@ struct BattleInfoData
     u8 spriteIds[NUM_BI_SPRITES];
     u8 monIconIds[NUM_BI_MON_ICONS];
     u8 faintedIconIds[NUM_BI_MON_ICONS];
-    struct SpriteFrameImage iconPic;
+
+    // options prompt
+    u8 optionsCursor;
+    enum BattleInfoOptions optionsList[NUM_BI_OPTIONS];
+    u8 numOptions;
 };
 
 static EWRAM_DATA struct BattleInfoData *sBattleInfoDataPtr = NULL;
+static EWRAM_DATA struct
+{
+    enum BattleInfoModes mode:4;
+    u8 optionsCursor:4;
+    struct UCoords8 gridPos;
+    MainCallback trueCB;
+} sBattleInfoSavedState = {0};
 
 static void CB2_BattleInfoInit(void);
+static void CB2_ReloadBattleInfo(void);
 static void CB2_BattleInfo(void);
 static void VBlankCB_BattleInfo(void);
 
 static void Task_BattleInfo_WaitFade(u8);
 static void Task_BattleInfo_WaitInput(u8);
 static void Task_BattleInfo_MainModeInput(u8);
+static void Task_BattleInfo_OptionsModeInput(u8);
 static void Task_BattleInfo_Close(u8);
 
 static void SpriteCB_BattleInfo_MonIcon(struct Sprite *);
 static void SpriteCB_BattleInfo_HPBar(struct Sprite *);
 static void SpriteCB_BattleInfo_TypeIcon(struct Sprite *);
 static void SpriteCB_BattleInfo_Cursor(struct Sprite *);
+static void SpriteCB_BattleInfo_OptionsCursor(struct Sprite *);
 
 static void BattleInfoInit_Backgrounds(void);
 static void BattleInfoInit_Graphics(void);
@@ -140,6 +180,8 @@ static void BattleInfoMode_Update(void);
 static void BattleInfoInput_UpdateGrid(s32, s32);
 static void BattleInfoInput_UpdateXPos(s32);
 static void BattleInfoInput_UpdateYPos(s32);
+static void BattleInfoInput_UpdateOptionsCursor(s32);
+static void BattleInfoInput_SetGrid(u32, u32);
 
 static void BattleInfoSprite_CreateMonIcons(void);
 static u8 BattleInfoSprite_CreateMonIcon(enum BattleTrainer, u32, s32, s32);
@@ -148,10 +190,12 @@ static void BattleInfoSprite_CreateHPBar(void);
 static void BattleInfoSprite_CreateTypeIcons(void);
 static void BattleInfoSprite_CreateTypeIcon(enum BattleInfoSprites, enum Type);
 static void BattleInfoSprite_CreateCursor(void);
+static void BattleInfoSprite_CreateOptionsCursor(void);
 
 static void BattleInfoText_UpdateHeader(void);
 static void BattleInfoText_UpdateStatStages(void);
-static void BattleInfoText_UpdateStatusList(void);
+static void BattleInfoText_ShowMonStatusList(void);
+static void BattleInfoText_ShowOptionsPrompt(void);
 static void BattleInfoText_UpdateFooter(void);
 
 static void BattleInfoHelper_UpdateEverything(void);
@@ -161,8 +205,10 @@ static enum BattlerId BattleInfoHelper_GetCurrBattler(void);
 static enum BattleTrainer BattleInfoHelper_GetCurrTrainer(void);
 static u32 BattleInfoHelper_GetCurrPartySlot(void);
 static bool32 BattleInfoHelper_CanMonInfoBeShown(void);
+static void BattleInfoHelper_PopulateOptionsList(void);
 static u32 BattleInfoHelper_GetVolatileMaxValue(enum Volatile);
 static u32 BattleInfoHelper_GetTotalCrits(void);
+static void BattleInfoHelper_AddTextPrinterToWindow(u32, u32, u32, u32, enum BattleInfoTextColors, const u8 *);
 static void BattleInfoHelper_AddTextPrinter(u32, u32, u32, enum BattleInfoTextColors, const u8 *);
 
 static const u32 sBattleInfo_MainGfx[] = INCGFX_U32("graphics/ui_menus/battle_info/tiles.png", ".4bpp.smol");
@@ -171,6 +217,7 @@ static const u32 sBattleInfo_MainMap[] = INCGFX_U32("graphics/ui_menus/battle_in
 
 static const u8 sBattleInfo_StatStageBlit[] = INCGFX_U8("graphics/ui_menus/battle_info/stat_stage.png", ".4bpp");
 static const u8 sBattleInfo_StatusListBlit[] = INCGFX_U8("graphics/ui_menus/battle_info/status_list.png", ".4bpp");
+static const u8 sBattleInfo_OptionsPromptBlit[] = INCGFX_U8("graphics/ui_menus/battle_info/options_prompt.png", ".4bpp");
 
 static const struct BgTemplate sBattleInfo_BgTemplates[NUM_BI_BACKGROUNDS] =
 {
@@ -179,23 +226,36 @@ static const struct BgTemplate sBattleInfo_BgTemplates[NUM_BI_BACKGROUNDS] =
         .bg = BI_BG_TEXT,
         .charBaseIndex = 1,
         .mapBaseIndex = 30,
+        .priority = 1,
+    },
+    [BI_BG_TEXT_ALT] =
+    {
+        .bg = BI_BG_TEXT_ALT,
+        .charBaseIndex = 1,
+        .mapBaseIndex = 29,
         .priority = 0,
     },
     [BI_BG_MAIN] =
     {
         .bg = BI_BG_MAIN,
         .charBaseIndex = 0,
-        .mapBaseIndex = 29,
-        .priority = 1,
+        .mapBaseIndex = 28,
+        .priority = 2,
     },
 };
 
 static const struct WindowTemplate sBattleInfo_WindowTemplates[] =
 {
+    [BI_WIN_MAIN] =
     {
         .tilemapLeft = 0, .tilemapTop = 8,
         .width = DISPLAY_TILE_WIDTH, .height = 12,
-        .baseBlock = 1
+    },
+    [BI_WIN_OPTIONS_LIST] =
+    {
+        .bg = BI_BG_TEXT_ALT,
+        .tilemapLeft = 24, .tilemapTop = 10,
+        .width = 6, .height = 8,
     },
     DUMMY_WIN_TEMPLATE
 };
@@ -221,6 +281,7 @@ static const struct SpriteTemplate sBattleInfo_CursorSpriteTemplate =
             ANIMCMD_JUMP(0)
         },
     },
+    .callback = SpriteCB_BattleInfo_Cursor
 };
 
 static const struct SpriteTemplate sBattleInfo_FaintedIconSpriteTemplate =
@@ -245,6 +306,47 @@ static const struct SpriteTemplate sBattleInfo_FaintedIconSpriteTemplate =
         },
     },
 };
+
+static const struct SpriteTemplate sBattleInfo_OptionsCursorSpriteTemplate =
+{
+    .tileTag = TAG_NONE,
+    .paletteTag = TAG_BI_MAIN,
+    .oam = &(const struct OamData){
+        .shape = SPRITE_SHAPE(32x16),
+        .size = SPRITE_SIZE(32x16),
+        .objMode = ST_OAM_OBJ_BLEND,
+        .priority = 1
+    },
+    .images = &(const struct SpriteFrameImage){
+        .data = (const u8[])INCGFX_U8("graphics/ui_menus/battle_info/options_cursor.png", ".4bpp", "-mwidth 4 -mheight 2"),
+        .size = 64 * 16 / 2,
+        .relativeFrames = TRUE,
+    },
+    .anims = (const union AnimCmd *const[]){
+        (const union AnimCmd[]){
+            ANIMCMD_FRAME(0, 16),
+            ANIMCMD_FRAME(1, 16),
+            ANIMCMD_JUMP(0)
+        },
+    },
+    .callback = SpriteCB_BattleInfo_OptionsCursor
+};
+
+#define SUBSPRITE_ENTRY(l, t, dim, ...)     { .x = l, .y = t, .shape = SPRITE_SHAPE(dim), .size = SPRITE_SIZE(dim), __VA_ARGS__ }
+#define SUBSPRITE_TABLE_ENTRY(idx, entry)   [CAT(BI_SUBSPRITE_, idx)] = { ARRAY_COUNT(entry), entry }
+
+static const struct Subsprite sBattleInfo_OptionsCursorSubsprites[] =
+{
+    SUBSPRITE_ENTRY(0, 0, 32x16, .tileOffset=0), SUBSPRITE_ENTRY(32, 0, 32x16, .tileOffset=8),
+};
+
+static const struct SubspriteTable sBattleInfo_SubspritesTable[] =
+{
+    SUBSPRITE_TABLE_ENTRY(OPTIONS_CURSOR, sBattleInfo_OptionsCursorSubsprites),
+};
+
+#undef SUBSPRITE_ENTRY
+#undef SUBSPRITE_TABLE_ENTRY
 
 static const union TextColor sBattleInfo_TextColors[NUM_BI_TXTCLRS] =
 {
@@ -274,17 +376,19 @@ static const struct {
     [BI_MODE_MAIN] =
     {
         .helpBarTxt = COMPOUND_STRING("{A_BUTTON} Options {B_BUTTON} Close"),
-        .updateFunc = BattleInfoText_UpdateStatusList,
+        .updateFunc = BattleInfoText_ShowMonStatusList,
         .inputTask = Task_BattleInfo_MainModeInput,
     },
     [BI_MODE_OPTIONS_LIST] =
     {
         .helpBarTxt = COMPOUND_STRING("{A_BUTTON} Confirm {B_BUTTON} Return"),
+        .updateFunc = BattleInfoText_ShowOptionsPrompt,
+        .inputTask = Task_BattleInfo_OptionsModeInput,
     },
     [BI_MODE_STATUS_LIST] =
     {
         .helpBarTxt = COMPOUND_STRING("{A_BUTTON} Summary {DPAD_UPDOWN} Navigate {B_BUTTON} Return"),
-        .updateFunc = BattleInfoText_UpdateStatusList,
+        .updateFunc = BattleInfoText_ShowMonStatusList,
     },
 };
 
@@ -300,6 +404,14 @@ static const enum Stat sBattleInfo_StatOrder[] =
     STAT_EVASION + 1, // STAT_CRIT
 };
 
+static const u8 *sBattleInfo_OptionNames[] =
+{
+    [BI_OPTION_SWAP]     = COMPOUND_STRING("Swap"),
+    [BI_OPTION_SUMMARY]  = COMPOUND_STRING("Summary"),
+    [BI_OPTION_STATUS]   = COMPOUND_STRING("Status"),
+    [BI_OPTION_CANCEL]   = COMPOUND_STRING("Cancel"),
+};
+
 extern const u32 sCriticalHitOdds[5];
 
 void OpenBattleInfo(MainCallback savedCB)
@@ -313,6 +425,7 @@ void OpenBattleInfo(MainCallback savedCB)
 
     sBattleInfoDataPtr->savedCB = savedCB;
     sBattleInfoDataPtr->mode = BI_MODE_MAIN;
+    BattleInfoInput_SetGrid(gLastViewedMonIndex, TRUE);
     memset(sBattleInfoDataPtr->spriteIds, SPRITE_NONE, NUM_BI_SPRITES);
     memset(sBattleInfoDataPtr->monIconIds, SPRITE_NONE, NUM_BI_MON_ICONS);
 
@@ -378,6 +491,23 @@ static void CB2_BattleInfoInit(void)
         SetMainCallback2(CB2_BattleInfo);
         SetVBlankCallback(VBlankCB_BattleInfo);
         return;
+    }
+}
+
+static void CB2_ReloadBattleInfo(void)
+{
+    OpenBattleInfo(sBattleInfoSavedState.trueCB);
+    sBattleInfoDataPtr->mode = sBattleInfoSavedState.mode;
+
+    switch (sBattleInfoDataPtr->mode)
+    {
+    default:
+        break;
+    case BI_MODE_OPTIONS_LIST:
+        BattleInfoInput_SetGrid(sBattleInfoSavedState.gridPos.x, sBattleInfoSavedState.gridPos.y);
+        BattleInfoHelper_PopulateOptionsList();
+        sBattleInfoDataPtr->optionsCursor = sBattleInfoSavedState.optionsCursor;
+        break;
     }
 }
 
@@ -451,10 +581,54 @@ static void Task_BattleInfo_MainModeInput(u8 taskId)
     }
 }
 
+static void Task_BattleInfo_OptionsModeInput(u8 taskId)
+{
+    if (JOY_NEW(B_BUTTON))
+    {
+        BattleInfoMode_Set(BI_MODE_MAIN);
+        return;
+    }
+
+    if (JOY_NEW(A_BUTTON))
+    {
+        switch (sBattleInfoDataPtr->optionsList[sBattleInfoDataPtr->optionsCursor])
+        {
+        case BI_OPTION_SWAP:
+            // TODO
+            break;
+        case BI_OPTION_SUMMARY:
+            PlaySE(SE_RG_HELP_CLOSE);
+            BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
+            SetTaskFuncWithFollowupFunc(taskId, Task_BattleInfo_WaitFade, Task_BattleInfo_Close);
+            break;
+        case BI_OPTION_STATUS:
+            BattleInfoMode_Set(BI_MODE_STATUS_LIST);
+            break;
+        case BI_OPTION_CANCEL:
+            BattleInfoMode_Set(BI_MODE_MAIN);
+            break;
+        default:
+            break;
+        }
+
+        return;
+    }
+
+    if (JOY_REPEAT(DPAD_UP))
+    {
+        BattleInfoInput_UpdateOptionsCursor(MOVE_BACK);
+        return;
+    }
+
+    if (JOY_REPEAT(DPAD_DOWN))
+    {
+        BattleInfoInput_UpdateOptionsCursor(MOVE_FORWARD);
+        return;
+    }
+}
+
 static void Task_BattleInfo_Close(u8 taskId)
 {
-    RemoveWindow(0);
-
     u8 *spriteIds = sBattleInfoDataPtr->spriteIds;
     for (enum BattleInfoSprites idx = 0; idx < NUM_BI_SPRITES; idx++)
     {
@@ -485,7 +659,6 @@ static void Task_BattleInfo_Close(u8 taskId)
         FreeSpritePaletteByTag(tag);
     }
 
-    SetMainCallback2(sBattleInfoDataPtr->savedCB);
     UnsetBgTilemapBuffer(BI_BG_MAIN);
 
     FreeTempTileDataBuffersIfPossible();
@@ -493,6 +666,28 @@ static void Task_BattleInfo_Close(u8 taskId)
     FreeMonIconPalettes();
     ResetSpriteData();
     FreeAllWindowBuffers();
+
+    if (sBattleInfoDataPtr->mode == BI_MODE_OPTIONS_LIST)
+    {
+        sBattleInfoSavedState.trueCB = sBattleInfoDataPtr->savedCB;
+        sBattleInfoSavedState.mode = sBattleInfoDataPtr->mode;
+
+        switch (sBattleInfoDataPtr->optionsCursor)
+        {
+        default:
+            SetMainCallback2(sBattleInfoSavedState.trueCB);
+            break;
+        case BI_OPTION_SUMMARY:
+            sBattleInfoSavedState.gridPos = sBattleInfoDataPtr->gridPos;
+            sBattleInfoSavedState.optionsCursor = sBattleInfoDataPtr->optionsCursor;
+            MonSummary_Init(SUMMARY_MODE_LOCK_MOVES, BattleInfoHelper_GetCurrMon(), 0, 0, FALSE, CB2_ReloadBattleInfo);
+            break;
+        }
+    }
+    else
+    {
+        SetMainCallback2(sBattleInfoDataPtr->savedCB);
+    }
 
     FREE_AND_SET_NULL(sBattleInfoDataPtr);
     DestroyTask(taskId);
@@ -548,6 +743,15 @@ static void SpriteCB_BattleInfo_Cursor(struct Sprite *sprite)
     sprite->y2 = sBattleInfoDataPtr->gridPos.y * BI_MON_ICON_Y_PAD;
 }
 
+static void SpriteCB_BattleInfo_OptionsCursor(struct Sprite *sprite)
+{
+    if ((sprite->invisible = sBattleInfoDataPtr->mode != BI_MODE_OPTIONS_LIST))
+        return;
+
+    sprite->y2 = sBattleInfoDataPtr->optionsCursor * 16;
+    sprite->y2 += (NUM_BI_OPTIONS - sBattleInfoDataPtr->numOptions) * 16;
+}
+
 static void BattleInfoInit_Backgrounds(void)
 {
     ResetBgsAndClearDma3BusyFlags(0);
@@ -587,14 +791,18 @@ static void BattleInfoInit_Windows(void)
     InitWindows(sBattleInfo_WindowTemplates);
     DeactivateAllTextPrinters();
     ScheduleBgCopyTilemapToVram(BI_BG_TEXT);
+    ScheduleBgCopyTilemapToVram(BI_BG_TEXT_ALT);
 
-    FillWindowPixelBuffer(0, PIXEL_FILL(0));
-    BattleInfoText_UpdateHeader();
-    BattleInfoText_UpdateStatStages();
-    BattleInfoText_UpdateFooter();
-    BattleInfoMode_Update();
-    PutWindowTilemap(0);
-    CopyWindowToVram(0, COPYWIN_FULL);
+    for (u32 i = 0, baseBlock = 1; i < NUM_BI_WINDOWS; i++)
+    {
+        SetWindowAttribute(i, WINDOW_BASE_BLOCK, baseBlock);
+        FillWindowPixelBuffer(i, PIXEL_FILL(0));
+        PutWindowTilemap(i);
+
+        baseBlock += GetWindowAttribute(i, WINDOW_WIDTH) * GetWindowAttribute(i, WINDOW_HEIGHT);
+    }
+
+    BattleInfoHelper_UpdateEverything();
 }
 
 static void BattleInfoInit_Sprites(void)
@@ -603,12 +811,23 @@ static void BattleInfoInit_Sprites(void)
     BattleInfoSprite_CreateHPBar();
     BattleInfoSprite_CreateTypeIcons();
     BattleInfoSprite_CreateCursor();
+    BattleInfoSprite_CreateOptionsCursor();
 }
 
 static void BattleInfoMode_Set(enum BattleInfoModes mode)
 {
     PlaySE(SE_SELECT);
     sBattleInfoDataPtr->mode = mode;
+    switch (mode)
+    {
+    case BI_MODE_OPTIONS_LIST:
+        sBattleInfoDataPtr->optionsCursor = 0;
+        BattleInfoHelper_PopulateOptionsList();
+        break;
+    default:
+        break;
+    }
+
     BattleInfoHelper_UpdateEverything();
 }
 
@@ -664,6 +883,32 @@ static void BattleInfoInput_UpdateYPos(s32 delta)
         nextY = maxNum;
 
     sBattleInfoDataPtr->gridPos.y = nextY;
+}
+
+static void BattleInfoInput_UpdateOptionsCursor(s32 delta)
+{
+    u32 currPos = sBattleInfoDataPtr->optionsCursor;
+    s32 nextPos = currPos + delta;
+    u32 maxPos = sBattleInfoDataPtr->numOptions - 1;
+    bool32 additive = delta == 1;
+
+    if (additive && nextPos > maxPos)
+        nextPos = 0;
+    else if (!additive && nextPos < 0)
+        nextPos = maxPos;
+
+    if (currPos == nextPos)
+        return;
+
+    PlaySE(SE_SELECT);
+    sBattleInfoDataPtr->optionsCursor = nextPos;
+}
+
+static void BattleInfoInput_SetGrid(u32 x, u32 y)
+{
+    sBattleInfoDataPtr->gridPos.x = x;
+    sBattleInfoDataPtr->gridPos.y = y;
+    sBattleInfoDataPtr->currPartySlot = sBattleInfoDataPtr->gridPos.x + (sBattleInfoDataPtr->gridPos.y * PARTY_SIZE);
 }
 
 static void BattleInfoSprite_CreateMonIcons(void)
@@ -785,7 +1030,18 @@ static void BattleInfoSprite_CreateCursor(void)
 
     struct Sprite *sprite = &gSprites[*spriteId];
     sprite->oam.objMode = ST_OAM_OBJ_BLEND;
-    sprite->callback = SpriteCB_BattleInfo_Cursor;
+}
+
+static void BattleInfoSprite_CreateOptionsCursor(void)
+{
+    u8 *spriteId = &sBattleInfoDataPtr->spriteIds[BI_SPRITE_OPTIONS_CURSOR];
+    *spriteId = CreateSprite(&sBattleInfo_OptionsCursorSpriteTemplate, 177, 81, 0);
+    if (*spriteId == SPRITE_NONE)
+        return;
+
+    struct Sprite *sprite = &gSprites[*spriteId];
+    SetSubspriteTables(sprite, &sBattleInfo_SubspritesTable[BI_SUBSPRITE_OPTIONS_CURSOR]);
+    sprite->subspriteMode = SUBSPRITES_IGNORE_PRIORITY;
 }
 
 static void BattleInfoText_UpdateHeader(void)
@@ -906,17 +1162,17 @@ static void BattleInfoText_UpdateStatStages(void)
                     tileNum = TILE_OFFSET_4BPP(2);
             }
 
-            BlitBitmapToWindow(0, sBattleInfo_StatStageBlit + tileNum, x, y + 5, 8, 8);
+            BlitBitmapToWindow(BI_WIN_MAIN, sBattleInfo_StatStageBlit + tileNum, x, y + 5, 8, 8);
         }
     }
 }
 
-static void BattleInfoText_UpdateStatusList(void)
+static void BattleInfoText_ShowMonStatusList(void)
 {
     if (!BattleInfoHelper_CanMonInfoBeShown())
         return;
 
-    u32 windowId = 0;
+    u32 windowId = BI_WIN_MAIN;
     BlitBitmapToWindow(windowId, sBattleInfo_StatusListBlit, 160, 8, 80, 80);
 
     for (u32 i = 0, y = 4; i < 5; i++, y += 16)
@@ -931,6 +1187,51 @@ static void BattleInfoText_UpdateStatusList(void)
     }
 }
 
+static void BattleInfoText_PutOptionPromptTile(u32 tileNum, u32 x, u32 y)
+{
+    BlitBitmapToWindow(
+        BI_WIN_MAIN,
+        sBattleInfo_OptionsPromptBlit + TILE_OFFSET_4BPP(tileNum),
+        x, y,
+        8, 8);
+}
+
+static void BattleInfoText_ShowOptionsPrompt(void)
+{
+    u32 count = sBattleInfoDataPtr->numOptions;
+    u32 baseY = (NUM_BI_OPTIONS - count) * 16;
+
+    u32 topTilesY = baseY + 8;
+    BattleInfoText_PutOptionPromptTile(0, TILE_TO_PIXELS(22), topTilesY);
+    for (u32 i = 0; i < 7; i++)
+        BattleInfoText_PutOptionPromptTile(1, TILE_TO_PIXELS(23 + i), topTilesY);
+
+    for (u32 i = 0; i < count; i++)
+    {
+        u32 middleTilesY = 16 + baseY + i * 16;
+        BattleInfoText_PutOptionPromptTile(2, TILE_TO_PIXELS(22), middleTilesY);
+        BattleInfoText_PutOptionPromptTile(2, TILE_TO_PIXELS(22), middleTilesY + TILE_TO_PIXELS(1));
+        for (u32 i = 0; i < 7; i++)
+        {
+            BattleInfoText_PutOptionPromptTile(3, TILE_TO_PIXELS(23 + i), middleTilesY);
+            BattleInfoText_PutOptionPromptTile(3, TILE_TO_PIXELS(23 + i), middleTilesY + TILE_TO_PIXELS(1));
+        }
+
+        u32 baseTextY = baseY + i * 16;
+        BattleInfoHelper_AddTextPrinterToWindow(
+            BI_WIN_OPTIONS_LIST,
+            2, baseTextY,
+            FONT_OUTLINED,
+            BI_TXTCLR_OUTLINED,
+            sBattleInfo_OptionNames[sBattleInfoDataPtr->optionsList[i]]);
+    }
+
+    u32 bottomTilesY = 16 + baseY + count * 16;
+    BattleInfoText_PutOptionPromptTile(4, TILE_TO_PIXELS(22), bottomTilesY);
+    for (u32 i = 0; i < 7; i++)
+        BattleInfoText_PutOptionPromptTile(5, TILE_TO_PIXELS(23 + i), bottomTilesY);
+}
+
 static void BattleInfoText_UpdateFooter(void)
 {
     BattleInfoHelper_AddTextPrinter(
@@ -942,12 +1243,16 @@ static void BattleInfoText_UpdateFooter(void)
 
 static void BattleInfoHelper_UpdateEverything(void)
 {
-    FillWindowPixelBuffer(0, PIXEL_FILL(0));
+    FillWindowPixelBuffer(BI_WIN_MAIN, PIXEL_FILL(0));
+    FillWindowPixelBuffer(BI_WIN_OPTIONS_LIST, PIXEL_FILL(0));
+
     BattleInfoText_UpdateHeader();
     BattleInfoText_UpdateStatStages();
     BattleInfoText_UpdateFooter();
     BattleInfoMode_Update();
-    CopyWindowToVram(0, COPYWIN_GFX);
+
+    CopyWindowToVram(BI_WIN_MAIN, COPYWIN_GFX);
+    CopyWindowToVram(BI_WIN_OPTIONS_LIST, COPYWIN_GFX);
 }
 
 static struct Pokemon *BattleInfoHelper_GetCurrMon(void)
@@ -1021,6 +1326,25 @@ static bool32 BattleInfoHelper_CanMonInfoBeShown(void)
         && gBattleStruct->partyState[trainer][BattleInfoHelper_GetCurrPartySlot()].sentOut;
 }
 
+static void BattleInfoHelper_PopulateOptionsList(void)
+{
+    enum BattleTrainer trainer = BattleInfoHelper_GetCurrTrainer();
+    bool32 isOpponent = trainer != B_TRAINER_PLAYER;
+
+    sBattleInfoDataPtr->numOptions = 0;
+    #define ADD_OPT(num) sBattleInfoDataPtr->optionsList[sBattleInfoDataPtr->numOptions++] = CAT(BI_OPTION_, num);
+    if (!isOpponent && !BattleInfoHelper_GetCurrBattleMon())
+        ADD_OPT(SWAP);
+
+    if ((isOpponent && FlagGet(FLAG_SYS_APP_GOOGLE_GLASS_GET)) || !isOpponent)
+        ADD_OPT(SUMMARY);
+
+    ADD_OPT(STATUS);
+    ADD_OPT(CANCEL);
+
+    #undef ADD_OPT
+}
+
 UNUSED static u32 BattleInfoHelper_GetVolatileMaxValue(enum Volatile vol)
 {
     #define UNPACK_VOLATILE_MAX_SIZE(_enum, _fieldName, _typeMaxValue, ...) case _enum: return min(MAX_u16, GET_VOLATILE_MAXIMUM(_typeMaxValue));
@@ -1060,7 +1384,12 @@ static u32 BattleInfoHelper_GetTotalCrits(void)
     return CalcBattlerPassiveCritChance(battler, GetItemHoldEffect(batMon->item), batMon->ability);
 }
 
+static void BattleInfoHelper_AddTextPrinterToWindow(u32 windowId, u32 x, u32 y, u32 fontId, enum BattleInfoTextColors color, const u8 *str)
+{
+    AddTextPrinterParameterized6(windowId, fontId, x, y, 0, 0, sBattleInfo_TextColors[color], TEXT_SKIP_DRAW, str);
+}
+
 static void BattleInfoHelper_AddTextPrinter(u32 x, u32 y, u32 fontId, enum BattleInfoTextColors color, const u8 *str)
 {
-    AddTextPrinterParameterized6(0, fontId, x, y, 0, 0, sBattleInfo_TextColors[color], TEXT_SKIP_DRAW, str);
+    BattleInfoHelper_AddTextPrinterToWindow(BI_WIN_MAIN, x, y, fontId, color, str);
 }
