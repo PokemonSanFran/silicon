@@ -2279,7 +2279,14 @@ bool8 IsTrainerReadyForRematch(void)
     u32 originalTrainerId = TRAINER_BATTLE_PARAM.opponentA;
 
     TRAINER_BATTLE_PARAM.opponentA = GetPSFRematchTrainerId(GetTrainerIdFromLastTalked());
-    if (IsTrainerReadyForRematch_(gRematchTable,TRAINER_BATTLE_PARAM.opponentA);
+
+    if (TRAINER_BATTLE_PARAM.opponentA == TRAINER_NONE)
+    {
+        TRAINER_BATTLE_PARAM.opponentA = originalTrainerId;
+        return FALSE;
+    }
+
+    if (IsTrainerReadyForRematch_(gRematchTable,TRAINER_BATTLE_PARAM.opponentA));
         return TRUE;
 
     TRAINER_BATTLE_PARAM.opponentA = originalTrainerId;
