@@ -1,14 +1,4 @@
 const PLAYER = OBJ_EVENT_ID_PLAYER
-const CHARLOTTE = 1
-const ADAORA = 2
-const VIGRIM = 3
-const BAIYA = 4
-const PKMNA = 5
-const PKMNB = 6
-const FLAG_HIDE_POLICE = FLAG_TEMP_1
-const FLAG_HIDE_VIGRIM_ADAORA = FLAG_TEMP_2
-const FLAG_HIDE_BAIYA = FLAG_TEMP_3
-const FLAG_HIDE_CHARLOTTE = FLAG_TEMP_4
 
 const LOCALID_NAVAL_BASE_INTERIOR_POLICE_A = LOCALID_CAMERA + 1
 const LOCALID_NAVAL_BASE_INTERIOR_POLICE_B = LOCALID_CAMERA + 2
@@ -70,15 +60,17 @@ script WhyAreYouHelpingThem_ObjectSetUpPostSave_Script {
 
 script WhyAreYouHelpingThem_ObjectDebriefSetUp_Script
 {
-    setflag(FLAG_HIDE_POLICE)
-    setflag(FLAG_HIDE_BAIYA)
-    setflag(FLAG_HIDE_CHARLOTTE)
-    setobjectxyperm(4,26,4)
-    setobjectxyperm(5,25,6)
-    setobjectxyperm(6,27,6)
-    setobjectxyperm(7,25,7)
-    setobjectxyperm(8,27,7)
-    return
+    setobjectflagfromlocalid(LOCALID_HALAI_TALA)
+    setobjectflagfromlocalid(LOCALID_HALAI_FRANK)
+    setobjectflagfromlocalid(LOCALID_HALAI_ELEANOR)
+    setobjectflagfromlocalid(LOCALID_HALAI_MAGNUS)
+    setobjectflagfromlocalid(LOCALID_HALAI_ADAORA)
+    setobjectflagfromlocalid(LOCALID_HALAI_BAIYA)
+    setobjectxyperm(LOCALID_HALAI_CHIEF,26,4)
+    setobjectxyperm(LOCALID_HALAI_CHARLOTTE,25,6)
+    setobjectxyperm(LOCALID_HALAI_POLICE_A,27,6)
+    setobjectxyperm(LOCALID_HALAI_POLICE_B,25,7)
+    setobjectxyperm(LOCALID_HALAI_POLICE_C,27,7)
 }
 
 script WhyAreYouHelpingThem_BackAtCompound_ObjectSetUp_Script {
@@ -108,10 +100,10 @@ script WhyAreYouHelpingThem_StartRaid
     playse(SE_FAILURE)
     playse(SE_FAILURE)
     playse(SE_FAILURE)
-    applymovement(CHARLOTTE,moves(face_down))
-    applymovement(LOCALID_NAVAL_BASE_INTERIOR_POLICE_A,WhyAreYouHelpingThem_PoliceRunIn)
-    applymovement(LOCALID_NAVAL_BASE_INTERIOR_POLICE_B,WhyAreYouHelpingThem_PoliceRunIn)
-    applymovement(LOCALID_NAVAL_BASE_INTERIOR_POLICE_C,WhyAreYouHelpingThem_PoliceRunIn)
+    applymovement(SHARPRISE_COMPOUND_1F_CHARLOTTE,moves(face_down))
+    applymovement(LOCALID_NAVAL_BASE_INTERIOR_POLICE_A,moves(walk_left * 8))
+    applymovement(LOCALID_NAVAL_BASE_INTERIOR_POLICE_B,moves(walk_left * 8))
+    applymovement(LOCALID_NAVAL_BASE_INTERIOR_POLICE_C,moves(walk_left * 8))
     msgbox(format("STRUCTURAL BREACH DETECTED. BASE IS NOW SHIFTING TO DEFENSE MODE. EVACUATE IMMEDIATELY."),MSGBOX_AUTOCLOSE,SPEAKER_SPEAKER)
     waitmovement(LOCALID_NAVAL_BASE_INTERIOR_POLICE_C)
 
@@ -128,7 +120,7 @@ script WhyAreYouHelpingThem_StartRaid
     closemessage
 
     waitse
-    applymovement(CHARLOTTE,WhyAreYouHelpingThem_PoliceRunIn)
+    applymovement(SHARPRISE_COMPOUND_1F_CHARLOTTE,moves(walk_left * 8))
     waitmovement(LOCALID_NAVAL_BASE_INTERIOR_CHARLOTTE)
     removeobject(LOCALID_NAVAL_BASE_INTERIOR_POLICE_A)
     removeobject(LOCALID_NAVAL_BASE_INTERIOR_POLICE_B)
@@ -258,8 +250,8 @@ script WhyAreYouHelpingThem_PostBattleBoss_Dialogue{
 
         closemessage
 
-        applymovement(LOCALID_NAVAL_BASE_INTERIOR_VIGRIM,WhyAreYouHelpingThem_BeginEscape)
-        applymovement(LOCALID_NAVAL_BASE_INTERIOR_ADAORA,WhyAreYouHelpingThem_BeginEscape)
+        applymovement(LOCALID_NAVAL_BASE_INTERIOR_VIGRIM,moves(walk_right * 3))
+        applymovement(LOCALID_NAVAL_BASE_INTERIOR_ADAORA,moves(walk_right * 3))
         waitmovement(LOCALID_NAVAL_BASE_INTERIOR_ADAORA)
         goto(WhyAreYouHelpingThem_ExplodeWall_Script)
 }
@@ -332,19 +324,18 @@ script WhyAreYouHelpingThem_PostBattle_Dialogue
     msgbox(format("Why would it? You don't see what your bosses are doing to Resido. You don't see what you're doing to Resido."),,SPEAKER_BAIYA_TIDE)
 
     msgbox(format("{PLAYER}!"),,SPEAKER_CHARLOTTE)
-
     closemessage
 
-    applymovement(PLAYER,moves(face_left))
-    applymovement(LOCALID_NAVAL_BASE_INTERIOR_BAIYA, moves(walk_right * 6, walk_up * 2))
-    waitmovement(LOCALID_NAVAL_BASE_INTERIOR_BAIYA)
-    playse(SE_EXIT)
-    waitse
-    removeobject(LOCALID_NAVAL_BASE_INTERIOR_BAIYA)
     setobjectxyperm(LOCALID_NAVAL_BASE_INTERIOR_CHARLOTTE,1,8)
     addobject(LOCALID_NAVAL_BASE_INTERIOR_CHARLOTTE)
     applymovement(LOCALID_NAVAL_BASE_INTERIOR_CHARLOTTE, moves(walk_up * 5, walk_right * 3, step_end))
+    applymovement(PLAYER,moves(face_left))
+    applymovement(LOCALID_NAVAL_BASE_INTERIOR_BAIYA, moves(player_run_right * 6, player_run_up * 2))
+    waitmovement(LOCALID_NAVAL_BASE_INTERIOR_BAIYA)
+    playse(SE_EXIT)
+    removeobject(LOCALID_NAVAL_BASE_INTERIOR_BAIYA)
     waitmovement(LOCALID_NAVAL_BASE_INTERIOR_CHARLOTTE)
+    waitse
 
     msgbox(format("I got knocked out. Did you stop Vigrim?"),,SPEAKER_CHARLOTTE)
     msgbox(format("No, they got away."),,SPEAKER_ALICIA)
@@ -362,27 +353,27 @@ script WhyAreYouHelpingThem_MissionDebrief_Dialogue
     setvar(VAR_PLAYER_HOME_STATE,POST_NAVAL_BASE_RAID)
     applymovement(PLAYER,moves(face_up))
 
-    msgbox(format("Great work in there, team. Andre, what's the sitrep regarding The Tide leadership?"))
+    msgbox(format("Great work in there, team. Andre, what's the sitrep regarding The Tide leadership?"),,SPEAKER_CHIEF)
     closemessage
 
     applymovement(LOCALID_HALAI_POLICE_A,moves(walk_up))
     waitmovement(LOCALID_HALAI_POLICE_A)
 
     buffermovename(STR_VAR_1,MOVE_FLY)
-    msgbox(format("We spotted Vigrim and their lieutenant escaping on Pokemon using {STR_VAR_1}. We were unable to track them given our resources."))
+    msgbox(format("We spotted Vigrim and their lieutenant escaping on Pokemon using {STR_VAR_1}. We were unable to track them given our resources."),,SPEAKER_POLICE)
     closemessage
 
     applymovement(LOCALID_HALAI_POLICE_A, moves(lock_facing_direction, walk_down, unlock_facing_direction, step_end))
     waitmovement(LOCALID_HALAI_POLICE_A)
 
-    msgbox(format("A shame. Still, we've shut down their primary base of operations, and we arrested a bunch of these shitheads. This was an absolute win!"))
+    msgbox(format("A shame. Still, we've shut down their primary base of operations, and we arrested a bunch of these shitheads. This was an absolute win!"),,SPEAKER_CHIEF)
     closemessage
 
     applymovement(LOCALID_HALAI_CHIEF,moves(walk_down))
-    waitmovement(LOCALID_HALAI_POLICE_A)
+    waitmovement(LOCALID_HALAI_CHIEF)
 
     buffermapname(STR_VAR_1,MAP_CUCONU_TOWN_SHARPRISE_COMPOUND_1F)
-    msgbox(format("Not bad in there. Oliver wants you kids back at {STR_VAR_1}."))
+    msgbox(format("Not bad in there. Oliver wants you kids back at {STR_VAR_1}."),,SPEAKER_CHIEF)
     msgbox(format("{PLAYER}, I'm gonna head over. Wanna come?"),MSGBOX_YESNO,SPEAKER_CHARLOTTE)
     endcutscene
 
@@ -394,24 +385,40 @@ script WhyAreYouHelpingThem_MissionDebrief_Dialogue
     }
     else
     {
+        buffermapname(STR_VAR_1,MAP_CUCONU_TOWN_SHARPRISE_COMPOUND_1F)
+        msgbox(format("Suit yourself. See you in {STR_VAR_1}!"),,SPEAKER_CHARLOTTE)
         closemessage
+        applymovement(LOCALID_HALAI_CHIEF,moves(walk_down * 3))
+        applymovement(LOCALID_HALAI_POLICE_A,moves(walk_down * 3))
+        applymovement(LOCALID_HALAI_POLICE_B,moves(walk_down * 3))
+        applymovement(LOCALID_HALAI_POLICE_C,moves(walk_down * 3))
+        applymovement(LOCALID_HALAI_CHARLOTTE,moves(walk_down * 3))
+        fadescreenswapbuffers(FADE_TO_BLACK)
+        removeobject(LOCALID_HALAI_CHIEF)
+        removeobject(LOCALID_HALAI_POLICE_A)
+        removeobject(LOCALID_HALAI_POLICE_B)
+        removeobject(LOCALID_HALAI_POLICE_C)
+        removeobject(LOCALID_HALAI_CHARLOTTE)
+        fadescreenswapbuffers(FADE_FROM_BLACK)
         release
         end
     }
 }
 
-script WhyAreYouHelpingThem_BackAtCompound_Dialogue {
+script WhyAreYouHelpingThem_BackAtCompound_Dialogue
+{
         lock
         startcutscene(JUMPPLAYER_WHYAREYOUHELPINGTHEM)
         setvar(VAR_PLAYER_HOME_STATE,NEXT_DAY_CHAMPIONSHIP)
         applymovement(PLAYER, moves(walk_up * 3, step_end))
-        waitmovement(0)
+        waitmovement(PLAYER)
 
         msgbox(format("What… a day. I know that was a lot of pressure, but from what I hear, you were both fantastic. Thank you."),,SPEAKER_OLIVER)
-
         msgbox(format("…it was a day."),,SPEAKER_ALICIA)
 
-        msgbox(format("Good news - while you were training in LeaverraForest, construction on SharpRise Stadium finished up. The Group Stage will start in 3 days. Hopefully, that's enough time to rest up and get ready."),,SPEAKER_OLIVER)
+        buffermapname(STR_VAR_1,MAP_ESPULEE_OUTSKIRTS)
+        buffermapname(STR_VAR_2,MAP_SHARPRISE_STADIUM_ARENA)
+        msgbox(format("Good news - while you were training in {STR_VAR_1}, construction on {STR_VAR_2} finished up. The Group Stage will start in few days. Hopefully, that's enough time to rest up and get ready."),,SPEAKER_OLIVER)
 
         msgbox(format("Oh, that was fast. How did you…"),,SPEAKER_CHARLOTTE)
 
@@ -421,59 +428,43 @@ script WhyAreYouHelpingThem_BackAtCompound_Dialogue {
 
         closemessage
 
-        applymovement(2, moves(walk_right, walk_down * 4, walk_left, walk_in_place_down, face_down, step_end))
-        waitmovement(0)
+        applymovement(SHARPRISE_COMPOUND_1F_OLIVER, moves(walk_right, walk_down * 4, walk_left, walk_in_place_down, face_down, step_end))
+        waitmovement(SHARPRISE_COMPOUND_1F_OLIVER)
         playse(SE_EXIT)
+        removeobject(SHARPRISE_COMPOUND_1F_OLIVER)
         waitse
-        removeobject(2)
+
+        applymovement(SHARPRISE_COMPOUND_1F_CHARLOTTE,moves(face_left))
+        applymovement(PLAYER,moves(face_right))
+        waitmovement(SHARPRISE_COMPOUND_1F_CHARLOTTE)
 
         msgbox(format("We've all got some work to do! I'll see you around, {PLAYER}."),,SPEAKER_CHARLOTTE)
-
         closemessage
 
-        applymovement(CHARLOTTE, moves(walk_down * 3, step_end))
-        waitmovement(0)
+        applymovement(SHARPRISE_COMPOUND_1F_CHARLOTTE, moves(walk_down * 3, step_end))
+        waitmovement(SHARPRISE_COMPOUND_1F_CHARLOTTE)
         playse(SE_EXIT)
+        removeobject(SHARPRISE_COMPOUND_1F_CHARLOTTE)
         waitse
-        removeobject(1)
         endcutscene
         release
         end
 }
 
-script WhyAreYouHelpingThem_StartChampionship_Dialogue {
+script WhyAreYouHelpingThem_StartChampionship_Dialogue
+{
     msgbox(format("Are you ready to begin the Championship?"),MSGBOX_YESNO)
 
-        if (var(VAR_RESULT) == NO){
-            closemessage
-                return
-        } else {
-            setvar(VAR_STORYLINE_STATE,STORY_START_CHAMPIONSHIP)
-                fadescreen(FADE_TO_BLACK)
-                warpsilent(MAP_SHARPRISE_STADIUM_LOCKERS,9,6)
-			waitstate
-        }
+    if (var(VAR_RESULT) == NO)
+    {
+        closemessage
+        return
+    }
+    else
+    {
+        callnative(WhyAreYouHelpingThemTimeJump)
+        setvar(VAR_STORYLINE_STATE,STORY_START_CHAMPIONSHIP)
+        warpsilent(MAP_SHARPRISE_STADIUM_LOCKERS,9,6)
+        waitstate
+    }
 }
-
-movement WhyAreYouHelpingThem_PoliceRunIn {
-    walk_left * 8
-        step_end
-}
-
-movement WhyAreYouHelpingThem_BeginEscape {
-    walk_right * 3
-        step_end
-}
-
-movement WhyAreYouHelpingThem_ApproachBossAndPlayer {
-    walk_left
-        walk_up * 8
-        step_end
-}
-
-movement WhyAreYouHelpingThem_WalkToPlayerFormation {
-    walk_right
-        walk_down
-        step_end
-}
-

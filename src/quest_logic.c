@@ -6687,3 +6687,8 @@ void WhyAreYouHelpingThem_LoadCharlotteMon(void)
 {
     Quest_Generic_LoadTrainersMonToOWVar(PARTNER_CHARLOTTE,CHARLOTTE_ADAORA_MON_INDEX,VAR_OBJ_GFX_ID_0,&gBattlePartners[0][0],PARTNER_COUNT);
 }
+
+void WhyAreYouHelpingThemTimeJump(void)
+{
+    FakeRtc_AdvanceTimeBy(3,0,0,0);
+}
