@@ -273,7 +273,7 @@ static void Task_BattleStart(u8 taskId)
     case 0:
         if (!FldEffPoison_IsActive()) // is poison not active?
         {
-            ClearAllPhenomenonData();
+            ClearAllPhenomenonData(); // phenomenon
             BattleTransition_StartOnField(tTransition);
             ClearMirageTowerPulseBlendEffect();
             tState++; // go to case 1.
@@ -1225,7 +1225,7 @@ static void BattleSetup_ConfigureApproachingFacilityTrainerBattle(TrainerBattleP
     PUSH(EventSnippet_TrainerApproach)
     PUSH(EventSnippet_ShowTrainerIntroMsg)
 
-    if (gNoOfApproachingTrainers > 1) 
+    if (gNoOfApproachingTrainers > 1)
     {
         SetMapVarsToTrainerB();
 
@@ -1270,7 +1270,7 @@ static void BattleSetup_ConfigureApproachingTrainerBattle(TrainerBattleParameter
     PUSH       (EventSnippet_TrainerApproach)
     PUSH_IF_SET(EventSnippet_ShowTrainerIntroMsg, battleParams->params.introTextA)
 
-    if (gNoOfApproachingTrainers > 1) 
+    if (gNoOfApproachingTrainers > 1)
     {
         SetMapVarsToTrainerB();
 
@@ -1311,14 +1311,14 @@ static void BattleSetup_ConfigureTrainerBattle(TrainerBattleParameter *battlePar
     {
         gNoOfApproachingTrainers = 2;
     }
-    
+
 #if FREE_MATCH_CALL == FALSE
     if (battleParams->params.isRematch)
     {
         battleParams->params.opponentA = GetRematchTrainerId(battleParams->params.opponentA);
     }
 #endif //FREE_MATCH_CALL
-    
+
     PUSH_IF_SET(EventSnippet_PlayTrainerEncounterMusic, battleParams->params.playMusicA)
     PUSH_IF_SET(EventSnippet_SetTrainerFacingDirection, battleParams->params.facePlayer);
     PUSH_IF_SET(EventSnippet_ShowTrainerIntroMsg, battleParams->params.introTextA)
@@ -1377,7 +1377,7 @@ static void SetFacilityOpponent(u8 facility, u8 localId, bool8 isTrainerA)
             break;
         default:
             errorf("Invalid facility: %d", facility);
-    } 
+    }
 
     if (isTrainerA) {
         TRAINER_BATTLE_PARAM.opponentA = trainerId;
@@ -1386,7 +1386,7 @@ static void SetFacilityOpponent(u8 facility, u8 localId, bool8 isTrainerA)
         TRAINER_BATTLE_PARAM.opponentB = trainerId;
         TRAINER_BATTLE_PARAM.objEventLocalIdB = localId;
     }
-   
+
 }
 
 void ConfigureFacilityTrainerBattle(u8 facility, const u8* scriptEndPtr)
@@ -1417,16 +1417,16 @@ void ConfigureApproachingFacilityTrainerBattle(struct ApproachingTrainer *approa
 
     facility = *(approachingTrainer[0].trainerScriptPtr + FACILITYBATTLE_OPCODE_OFFSET);
     localId = gObjectEvents[approachingTrainer[0].objectEventId].localId;
-    scriptEndPtr = approachingTrainer[0].trainerScriptPtr + FACILITYBATTLE_OPCODE_OFFSET + 1; 
+    scriptEndPtr = approachingTrainer[0].trainerScriptPtr + FACILITYBATTLE_OPCODE_OFFSET + 1;
 
     SetFacilityOpponent(facility, localId, TRUE);
-    
+
     if (gNoOfApproachingTrainers > 1)
     {
         gApproachingTrainerId++;
         facility = *(approachingTrainer[1].trainerScriptPtr + FACILITYBATTLE_OPCODE_OFFSET);
         localId = gObjectEvents[approachingTrainer[1].objectEventId].localId;
-        scriptEndPtr = approachingTrainer[1].trainerScriptPtr + FACILITYBATTLE_OPCODE_OFFSET + 1; 
+        scriptEndPtr = approachingTrainer[1].trainerScriptPtr + FACILITYBATTLE_OPCODE_OFFSET + 1;
 
         SetFacilityOpponent(facility, localId, FALSE);
     }
@@ -2275,8 +2275,18 @@ bool8 ShouldTryRematchBattleForTrainerId(u16 trainerId)
 
 bool8 IsTrainerReadyForRematch(void)
 {
-    TRAINER_BATTLE_PARAM.opponentA = GetPSFRematchTrainerId(GetTrainerIdFromLastTalked()); // rematch_action
-    return IsTrainerReadyForRematch_(gRematchTable, TRAINER_BATTLE_PARAM.opponentA);
+    // Start rematch_action
+    u32 originalTrainerId = TRAINER_BATTLE_PARAM.opponentA;
+
+    TRAINER_BATTLE_PARAM.opponentA = GetPSFRematchTrainerId(GetTrainerIdFromLastTalked());
+    if (IsTrainerReadyForRematch_(gRematchTable,TRAINER_BATTLE_PARAM.opponentA);
+        return TRUE;
+
+    TRAINER_BATTLE_PARAM.opponentA = originalTrainerId;
+    return FALSE;
+    // End rematch_action
+
+    return IsTrainerReadyForRematch_(gRematchTable,TRAINER_BATTLE_PARAM.opponentA);
 }
 
 static void HandleRematchVarsOnBattleEnd(void)
