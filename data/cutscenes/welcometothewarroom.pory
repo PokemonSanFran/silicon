@@ -191,7 +191,8 @@ script WelcomeToTheWarRoom_ExplainSitaution_Dialogue
         endcutscene
         fadedefaultbgm
 
-        if (var(VAR_RESULT) == NO){
+        if (var(VAR_RESULT) == NO)
+        {
             msgbox(format("Okay, I'll meet you over there."),,SPEAKER_CHARLOTTE)
             closemessage
 
@@ -201,7 +202,9 @@ script WelcomeToTheWarRoom_ExplainSitaution_Dialogue
             fadescreen(FADE_FROM_BLACK)
             release
             end
-        } else {
+        }
+        else
+        {
             closemessage
 
             fadeblackandsetremovewarpfadeflag
