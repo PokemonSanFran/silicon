@@ -15,24 +15,29 @@
   "connections": [
     {
       "map": "MAP_GLAVEZ_HILL",
-      "offset": -9,
+      "offset": 6,
       "direction": "left"
     },
     {
       "map": "MAP_CURENO_PORT",
-      "offset": 57,
-      "direction": "up"
+      "offset": -25,
+      "direction": "right"
+    },
+    {
+      "map": "MAP_ROUTE6",
+      "offset": -23,
+      "direction": "down"
     }
   ],
   "object_events": [
     {
       "graphics_id": "OBJ_EVENT_GFX_MANIAC",
-      "x": 31,
-      "y": 6,
+      "x": 9,
+      "y": 18,
       "elevation": 3,
-      "movement_type": "MOVEMENT_TYPE_FACE_UP",
-      "movement_range_x": 0,
-      "movement_range_y": 0,
+      "movement_type": "MOVEMENT_TYPE_WANDER_AROUND",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
       "trainer_type": "TRAINER_TYPE_NORMAL",
       "trainer_sight_or_berry_tree_id": "3",
       "script": "Quest_ArtisanBalls2_TrainerA_Event_Script",
@@ -40,10 +45,10 @@
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_SCHOOL_KID_M",
-      "x": 5,
-      "y": 6,
+      "x": 27,
+      "y": 11,
       "elevation": 3,
-      "movement_type": "MOVEMENT_TYPE_WANDER_AROUND",
+      "movement_type": "MOVEMENT_TYPE_FACE_UP",
       "movement_range_x": 0,
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
@@ -53,8 +58,8 @@
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_BERRY_TREE",
-      "x": 74,
-      "y": 8,
+      "x": 27,
+      "y": 9,
       "elevation": 3,
       "movement_type": "MOVEMENT_TYPE_BERRY_TREE_GROWTH",
       "movement_range_x": 0,
@@ -66,8 +71,8 @@
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_BERRY_TREE",
-      "x": 73,
-      "y": 8,
+      "x": 28,
+      "y": 9,
       "elevation": 3,
       "movement_type": "MOVEMENT_TYPE_BERRY_TREE_GROWTH",
       "movement_range_x": 0,
@@ -80,36 +85,36 @@
     {
       "local_id": "LOCALID_BODEGABURNOUTDELIVERY_B",
       "graphics_id": "OBJ_EVENT_GFX_BODEGABURNOUTDELIVERY_B",
-      "x": 61,
-      "y": 6,
+      "x": 31,
+      "y": 14,
       "elevation": 0,
-      "movement_type": "MOVEMENT_TYPE_NONE",
-      "movement_range_x": 0,
-      "movement_range_y": 0,
-      "trainer_type": "TRAINER_TYPE_NONE",
-      "trainer_sight_or_berry_tree_id": "0",
+      "movement_type": "MOVEMENT_TYPE_WANDER_AROUND",
+      "movement_range_x": 2,
+      "movement_range_y": 2,
+      "trainer_type": "TRAINER_TYPE_NORMAL",
+      "trainer_sight_or_berry_tree_id": "3",
       "script": "Route1_Script_Interact_BodegaburnoutDeliveryB",
       "flag": "0"
     },
     {
       "local_id": "LOCALID_ROUTE1_RESTAURANTEXPANSIONHOSTESS",
       "graphics_id": "OBJ_EVENT_GFX_RESTAURANTEXPANSIONHOSTESS",
-      "x": 69,
-      "y": 7,
+      "x": 45,
+      "y": 20,
       "elevation": 0,
       "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
       "movement_range_x": 0,
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NORMAL",
-      "trainer_sight_or_berry_tree_id": "2",
+      "trainer_sight_or_berry_tree_id": "4",
       "script": "Route1_Script_Interact_Quest_Restaurantexpansionhostess",
       "flag": "FLAG_TEMP_1"
     },
     {
       "local_id": "LOCALID_ROUTE1_BD",
       "graphics_id": "OBJ_EVENT_GFX_BD",
-      "x": 52,
-      "y": 7,
+      "x": 11,
+      "y": 8,
       "elevation": 3,
       "movement_type": "MOVEMENT_TYPE_FACE_UP",
       "movement_range_x": 0,
@@ -118,12 +123,123 @@
       "trainer_sight_or_berry_tree_id": "0",
       "script": "Rematches_Script_BD",
       "flag": "FLAG_TEMP_3"
+    },
+    {
+      "graphics_id": "OBJ_EVENT_GFX_CUTTABLE_TREE",
+      "x": 4,
+      "y": 18,
+      "elevation": 0,
+      "movement_type": "MOVEMENT_TYPE_NONE",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "EventScript_CutTree",
+      "flag": "FLAG_TEMP_A"
+    },
+    {
+      "graphics_id": "OBJ_EVENT_GFX_CUTTABLE_TREE",
+      "x": 50,
+      "y": 9,
+      "elevation": 0,
+      "movement_type": "MOVEMENT_TYPE_NONE",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "EventScript_CutTree",
+      "flag": "FLAG_TEMP_B"
+    },
+    {
+      "graphics_id": "OBJ_EVENT_GFX_CUTTABLE_TREE",
+      "x": 32,
+      "y": 21,
+      "elevation": 0,
+      "movement_type": "MOVEMENT_TYPE_NONE",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "EventScript_CutTree",
+      "flag": "FLAG_TEMP_D"
+    },
+    {
+      "graphics_id": "OBJ_EVENT_GFX_POKE_BALL",
+      "x": 6,
+      "y": 11,
+      "elevation": 0,
+      "movement_type": "MOVEMENT_TYPE_NONE",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "NULL",
+      "flag": "0"
+    },
+    {
+      "graphics_id": "OBJ_EVENT_GFX_POKE_BALL",
+      "x": 6,
+      "y": 22,
+      "elevation": 0,
+      "movement_type": "MOVEMENT_TYPE_NONE",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "NULL",
+      "flag": "0"
+    },
+    {
+      "graphics_id": "OBJ_EVENT_GFX_POKE_BALL",
+      "x": 29,
+      "y": 21,
+      "elevation": 0,
+      "movement_type": "MOVEMENT_TYPE_NONE",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "NULL",
+      "flag": "0"
+    },
+    {
+      "graphics_id": "OBJ_EVENT_GFX_POKE_BALL",
+      "x": 48,
+      "y": 17,
+      "elevation": 0,
+      "movement_type": "MOVEMENT_TYPE_NONE",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "NULL",
+      "flag": "0"
+    },
+    {
+      "graphics_id": "OBJ_EVENT_GFX_POKE_BALL",
+      "x": 61,
+      "y": 11,
+      "elevation": 0,
+      "movement_type": "MOVEMENT_TYPE_NONE",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "NULL",
+      "flag": "0"
     }
   ],
   "warp_events": [
     {
-      "x": 72,
-      "y": 6,
+      "x": 50,
+      "y": 5,
+      "elevation": 3,
+      "dest_map": "MAP_ROUTE1_GROTTO",
+      "dest_warp_id": "0"
+    },
+    {
+      "x": 51,
+      "y": 5,
       "elevation": 3,
       "dest_map": "MAP_ROUTE1_GROTTO",
       "dest_warp_id": "0"
@@ -132,8 +248,8 @@
   "coord_events": [
     {
       "type": "trigger",
-      "x": 32,
-      "y": 4,
+      "x": 35,
+      "y": 10,
       "elevation": 0,
       "var": "VAR_TEMP_0",
       "var_value": "0",
@@ -144,7 +260,7 @@
     {
       "type": "sign",
       "x": 2,
-      "y": 7,
+      "y": 19,
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
       "script": "NULL"
@@ -152,7 +268,7 @@
     {
       "type": "sign",
       "x": 3,
-      "y": 7,
+      "y": 19,
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
       "script": "NULL"
@@ -160,7 +276,7 @@
     {
       "type": "sign",
       "x": 2,
-      "y": 8,
+      "y": 20,
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
       "script": "NULL"
@@ -168,26 +284,50 @@
     {
       "type": "sign",
       "x": 3,
-      "y": 8,
+      "y": 20,
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
       "script": "NULL"
     },
     {
       "type": "sign",
-      "x": 72,
-      "y": 5,
+      "x": 51,
+      "y": 4,
       "elevation": 3,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
       "script": "Hiddengrotto_EnterGrotto_Dialogue"
     },
     {
       "type": "sign",
-      "x": 72,
+      "x": 50,
       "y": 4,
       "elevation": 3,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
       "script": "Hiddengrotto_EnterGrotto_Dialogue"
+    },
+    {
+      "type": "sign",
+      "x": 2,
+      "y": 14,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_NORTH",
+      "script": "Route1_EventScript_Sign1"
+    },
+    {
+      "type": "sign",
+      "x": 69,
+      "y": 20,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_NORTH",
+      "script": "Route1_EventScript_Sign2"
+    },
+    {
+      "type": "sign",
+      "x": 31,
+      "y": 11,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_NORTH",
+      "script": "Route1_EventScript_SignSafeHouse"
     }
   ]
 }
