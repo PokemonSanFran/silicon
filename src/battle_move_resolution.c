@@ -2307,157 +2307,9 @@ static enum CancelerResult CancellerFog(struct BattleCalcValues *ctx)
         gBattleStruct->moveDamage[ctx->battlerDef] = CalculateMoveDamage(&dmgCtx);
         gBattlescriptCurrInstr = BattleScript_EmboldenedAttackedFromFog;
     }
-        return CANCELER_RESULT_SUCCESS;
-}
-// End fogBattle
-
-static bool32 ShouldSkipAccuracyCalcPastFirstHit(enum BattlerId battlerAtk, enum Ability abilityAtk, enum HoldEffect holdEffectAtk, u32 moveEffect)
-{
-    if (gSpecialStatuses[battlerAtk].parentalBondState == PARENTAL_BOND_2ND_HIT)
-        return TRUE;
-
-    if (!gSpecialStatuses[battlerAtk].multiHitOn)
-        return FALSE;
-
-    if (abilityAtk == ABILITY_SKILL_LINK || holdEffectAtk == HOLD_EFFECT_LOADED_DICE)
-        return TRUE;
-
-    if (moveEffect == EFFECT_TRIPLE_KICK || moveEffect == EFFECT_POPULATION_BOMB)
-        return FALSE;
-
-    return TRUE; // multiHitOn is set so skip Acc check for everything else
-}
-
-static bool32 ShouldSkipFRLGAccuracyCheck(void)
-{
-    if (!IS_FRLG)
-        return FALSE;
-
-    if ((gBattleTypeFlags & BATTLE_TYPE_FIRST_BATTLE
-     && (!BtlCtrl_OakOldMan_TestState2Flag(1) || !BtlCtrl_OakOldMan_TestState2Flag(2))
-     && GetMovePower(gCurrentMove) != 0
-     && GetBattlerSide(gBattlerAttacker) == B_SIDE_PLAYER))
-    {
-        return TRUE;
-    }
-
-    if (gBattleTypeFlags & BATTLE_TYPE_POKEDUDE)
-        return TRUE;
-
-    return FALSE;
-}
-
-static enum CancelerResult CancelerAccuracyCheck(struct BattleCalcValues *cv)
-{
-    enum SmartTargetState {
-        INITIAL_STATE,
-        MISSED_FIRST_TARGET,
-        TRY_SECOND_TARGET,
-    };
-
-    if (GetMovePower(cv->move) == 0) // for now only limited to damage moves
-        return CANCELER_RESULT_SUCCESS;
-
-    if (ShouldSkipFRLGAccuracyCheck()
-     || ShouldSkipAccuracyCalcPastFirstHit(cv->battlerAtk, cv->abilities[cv->battlerAtk], cv->holdEffects[cv->battlerAtk], cv->moveEffect)
-     || IsMaxMove(cv->move)
-     || IsZMove(cv->move))
-        return CANCELER_RESULT_SUCCESS;
-
-    enum SmartTargetState smartTargetState = INITIAL_STATE;
-    bool32 isSmartTarget = GetBattlerMoveTargetType(cv->battlerAtk, cv->move) == TARGET_SMART;
-    bool32 isMultiHitOn = gSpecialStatuses[cv->battlerAtk].multiHitOn;
-
-    while (gBattleStruct->eventState.atkCancelerBattler < gBattlersCount)
-    {
-        if (isSmartTarget)
-            cv->battlerDef = gBattlerTarget;
-        else
-            cv->battlerDef = GetTargetBySlot(cv->battlerAtk, gBattleStruct->eventState.atkCancelerBattler);
-
-        gBattleStruct->eventState.atkCancelerBattler++;
-
-        if (ShouldSkipFailureCheckOnBattler(cv->battlerAtk, cv->battlerDef))
-            continue;
-
-        if (DoesMoveMissTarget(cv))
-        {
-            gBattleStruct->moveResultFlags[cv->battlerDef] |= MOVE_RESULT_MISSED;
-
-            if (cv->holdEffects[cv->battlerAtk] == HOLD_EFFECT_BLUNDER_POLICY
-             && cv->moveEffect != EFFECT_OHKO
-             && !isMultiHitOn)
-                gBattleStruct->blunderPolicy = TRUE;
-
-            if (isSmartTarget
-             && smartTargetState == INITIAL_STATE
-             && !IsAffectedByFollowMe(cv->battlerAtk, GetBattlerSide(cv->battlerDef), cv->move)
-             && CanTargetPartner(cv->battlerAtk, cv->battlerDef)
-             && !IsBattlerUnaffectedByMove(GetPartnerBattler(cv->battlerDef)))
-            {
-                smartTargetState = MISSED_FIRST_TARGET;
-                gBattlerTarget = GetPartnerBattler(cv->battlerDef); // Smart target to partner if miss
-            }
-
-            if (!isMultiHitOn)
-            {
-                gLastLandedMoves[cv->battlerDef] = 0;
-                gLastHitByType[cv->battlerDef] = 0;
-            }
-
-            if (smartTargetState == MISSED_FIRST_TARGET) // Silent failure on first target.
-            {
-                smartTargetState = TRY_SECOND_TARGET;
-                continue;
-            }
-
-            if (isMultiHitOn)
-            {
-                gMultiHitCounter = 0;
-                gBattleStruct->moveDamage[gBattlerTarget] = 0;
-                gSpecialStatuses[gBattlerTarget].damagedByAttack = FALSE;
-                BattleScriptCall(BattleScript_BattlerAvoidedMultiHit);
-            }
-            else if (gBattleStruct->moveResultFlags[cv->battlerDef] & MOVE_RESULT_ONE_HIT_KO_STURDY)
-            {
-                gLastUsedAbility = ABILITY_STURDY;
-                gBattlerAbility = cv->battlerDef;
-                BattleScriptCall(BattleScript_SturdyPreventsOHKO);
-            }
-            else if (gBattleStruct->moveResultFlags[cv->battlerDef] & MOVE_RESULT_ONE_HIT_KO_NO_AFFECT)
-            {
-                BattleScriptCall(BattleScript_ItDoesntAffectScrTarget);
-            }
-            else if (cv->moveEffect == EFFECT_FLING)
-            {
-                BattleScriptCall(BattleScript_TargetAvoidsAttackConsumeFlingItem);
-            }
-            else
-            {
-                BattleScriptCall(BattleScript_BattlerAvoidedAttack);
-            }
-
-            if (gBattleStruct->moveResultFlags[cv->battlerDef] & (MOVE_RESULT_ONE_HIT_KO_NO_AFFECT | MOVE_RESULT_ONE_HIT_KO_STURDY))
-                gBattleStruct->moveResultFlags[cv->battlerDef] = (MOVE_RESULT_DOESNT_AFFECT_FOE | MOVE_RESULT_FAILED);
-
-            SetOrClearRageVolatile();
-            gBattleScripting.battler = cv->battlerDef;
-            return CANCELER_RESULT_RUN_SCRIPT;
-        }
-    }
-
-    cv->battlerDef = gBattlerTarget;
-    gBattleStruct->eventState.atkCancelerBattler = 0;
-
-    if (!IsAnyTargetAffected())
-    {
-        gBattlescriptCurrInstr = BattleScript_MoveEnd;
-        gBattleStruct->eventState.atkCanceler = CANCELER_END;
-        return CANCELER_RESULT_END;
-    }
-
     return CANCELER_RESULT_SUCCESS;
 }
+// End fogBattle
 
 static bool32 IsMoveParentalBondAffected(struct BattleCalcValues *cv)
 {
@@ -2596,6 +2448,154 @@ static enum CancelerResult CancelerSubstitute(struct BattleCalcValues *cv)
     if (!IsAnyTargetAffected())
     {
         gBattlescriptCurrInstr = BattleScript_ButItFailed;
+        gBattleStruct->eventState.atkCanceler = CANCELER_END;
+        return CANCELER_RESULT_END;
+    }
+
+    return CANCELER_RESULT_SUCCESS;
+}
+
+static bool32 ShouldSkipAccuracyCalcPastFirstHit(enum BattlerId battlerAtk, enum Ability abilityAtk, enum HoldEffect holdEffectAtk, u32 moveEffect)
+{
+    if (gSpecialStatuses[battlerAtk].parentalBondState == PARENTAL_BOND_2ND_HIT)
+        return TRUE;
+
+    if (!gSpecialStatuses[battlerAtk].multiHitOn)
+        return FALSE;
+
+    if (abilityAtk == ABILITY_SKILL_LINK || holdEffectAtk == HOLD_EFFECT_LOADED_DICE)
+        return TRUE;
+
+    if (moveEffect == EFFECT_TRIPLE_KICK || moveEffect == EFFECT_POPULATION_BOMB)
+        return FALSE;
+
+    return TRUE; // multiHitOn is set so skip Acc check for everything else
+}
+
+static bool32 ShouldSkipFRLGAccuracyCheck(void)
+{
+    if (!IS_FRLG)
+        return FALSE;
+
+    if ((gBattleTypeFlags & BATTLE_TYPE_FIRST_BATTLE
+     && (!BtlCtrl_OakOldMan_TestState2Flag(1) || !BtlCtrl_OakOldMan_TestState2Flag(2))
+     && GetMovePower(gCurrentMove) != 0
+     && GetBattlerSide(gBattlerAttacker) == B_SIDE_PLAYER))
+    {
+        return TRUE;
+    }
+
+    if (gBattleTypeFlags & BATTLE_TYPE_POKEDUDE)
+        return TRUE;
+
+    return FALSE;
+}
+
+static enum CancelerResult CancelerAccuracyCheck(struct BattleCalcValues *cv)
+{
+    if (IsStatChangeMove(cv->move))
+    {
+        gBattleStruct->eventState.atkCanceler = CANCELER_END;
+        return CANCELER_RESULT_END;
+    }
+
+    enum SmartTargetState {
+        INITIAL_STATE,
+        MISSED_FIRST_TARGET,
+        TRY_SECOND_TARGET,
+    };
+
+    if (ShouldSkipFRLGAccuracyCheck()
+     || ShouldSkipAccuracyCalcPastFirstHit(cv->battlerAtk, cv->abilities[cv->battlerAtk], cv->holdEffects[cv->battlerAtk], cv->moveEffect)
+     || IsMaxMove(cv->move)
+     || IsZMove(cv->move))
+        return CANCELER_RESULT_SUCCESS;
+
+    enum SmartTargetState smartTargetState = INITIAL_STATE;
+    bool32 isSmartTarget = GetBattlerMoveTargetType(cv->battlerAtk, cv->move) == TARGET_SMART;
+    bool32 isMultiHitOn = gSpecialStatuses[cv->battlerAtk].multiHitOn;
+
+    while (gBattleStruct->eventState.atkCancelerBattler < gBattlersCount)
+    {
+        cv->battlerDef = GetTargetBySlot(cv->battlerAtk, gBattleStruct->eventState.atkCancelerBattler);
+
+        gBattleStruct->eventState.atkCancelerBattler++;
+
+        if (ShouldSkipFailureCheckOnBattler(cv->battlerAtk, cv->battlerDef))
+            continue;
+
+        if (DoesMoveMissTarget(cv))
+        {
+            gBattleStruct->moveResultFlags[cv->battlerDef] |= MOVE_RESULT_MISSED;
+
+            if (cv->holdEffects[cv->battlerAtk] == HOLD_EFFECT_BLUNDER_POLICY
+             && cv->moveEffect != EFFECT_OHKO
+             && !isMultiHitOn)
+                gBattleStruct->blunderPolicy = TRUE;
+
+            if (isSmartTarget
+             && smartTargetState == INITIAL_STATE
+             && !IsAffectedByFollowMe(cv->battlerAtk, GetBattlerSide(cv->battlerDef), cv->move)
+             && CanTargetPartner(cv->battlerAtk, cv->battlerDef)
+             && !IsBattlerUnaffectedByMove(GetPartnerBattler(cv->battlerDef)))
+            {
+                smartTargetState = MISSED_FIRST_TARGET;
+                gBattlerTarget = GetPartnerBattler(cv->battlerDef); // Smart target to partner if miss
+            }
+
+            if (!isMultiHitOn)
+            {
+                gLastLandedMoves[cv->battlerDef] = 0;
+                gLastHitByType[cv->battlerDef] = 0;
+            }
+
+            if (smartTargetState == MISSED_FIRST_TARGET) // Silent failure on first target.
+            {
+                smartTargetState = TRY_SECOND_TARGET;
+                continue;
+            }
+
+            if (isMultiHitOn)
+            {
+                gMultiHitCounter = 0;
+                gBattleStruct->moveDamage[gBattlerTarget] = 0;
+                gSpecialStatuses[gBattlerTarget].damagedByAttack = FALSE;
+                BattleScriptCall(BattleScript_BattlerAvoidedMultiHit);
+            }
+            else if (gBattleStruct->moveResultFlags[cv->battlerDef] & MOVE_RESULT_ONE_HIT_KO_STURDY)
+            {
+                gLastUsedAbility = ABILITY_STURDY;
+                gBattlerAbility = cv->battlerDef;
+                BattleScriptCall(BattleScript_SturdyPreventsOHKO);
+            }
+            else if (gBattleStruct->moveResultFlags[cv->battlerDef] & MOVE_RESULT_ONE_HIT_KO_NO_AFFECT)
+            {
+                BattleScriptCall(BattleScript_ItDoesntAffectScrTarget);
+            }
+            else if (cv->moveEffect == EFFECT_FLING)
+            {
+                BattleScriptCall(BattleScript_TargetAvoidsAttackConsumeFlingItem);
+            }
+            else
+            {
+                BattleScriptCall(BattleScript_BattlerAvoidedAttack);
+            }
+
+            if (gBattleStruct->moveResultFlags[cv->battlerDef] & (MOVE_RESULT_ONE_HIT_KO_NO_AFFECT | MOVE_RESULT_ONE_HIT_KO_STURDY))
+                gBattleStruct->moveResultFlags[cv->battlerDef] = (MOVE_RESULT_DOESNT_AFFECT_FOE | MOVE_RESULT_FAILED);
+
+            SetOrClearRageVolatile();
+            gBattleScripting.battler = cv->battlerDef;
+            return CANCELER_RESULT_RUN_SCRIPT;
+        }
+    }
+
+    cv->battlerDef = gBattlerTarget;
+    gBattleStruct->eventState.atkCancelerBattler = 0;
+
+    if (!IsAnyTargetAffected())
+    {
+        gBattlescriptCurrInstr = BattleScript_MoveEnd;
         gBattleStruct->eventState.atkCanceler = CANCELER_END;
         return CANCELER_RESULT_END;
     }
@@ -3366,10 +3366,8 @@ static enum MoveEndResult MoveEndAbsorb(struct BattleCalcValues *cv)
     {
     case EFFECT_STRENGTH_SAP:
         // Start Battle Settings: Move Healing
-        // if (gBattleStruct->passiveHpUpdate[cv->battlerAtk] > 0 && !IsBattlerUnaffectedByMove(cv->battlerDef))
-        if (gBattleStruct->passiveHpUpdate[cv->battlerAtk] > 0
-         && !IsBattlerUnaffectedByMove(cv->battlerDef)
-         && IsBattlerAllowedToHeal(cv->battlerAtk))
+        //if (gBattleStruct->passiveHpUpdate[cv->battlerAtk] > 0 && !IsBattlerUnaffectedByMove(cv->battlerDef))
+        if ((gBattleStruct->passiveHpUpdate[cv->battlerAtk] > 0 && !IsBattlerUnaffectedByMove(cv->battlerDef) && IsBattlerAllowedToHeal(cv->battlerAtk)))
         // End Battle Settings: Move Healing
         {
             s32 healAmount = gBattleStruct->passiveHpUpdate[cv->battlerAtk];
