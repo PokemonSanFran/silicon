@@ -2452,7 +2452,7 @@ void DebugQuest_CutePokemon_GiveMon(void)
             break;
     }
 
-    struct PokemonTemplate monTemplate = 
+    struct PokemonTemplate monTemplate =
     {
         .level = 50,
         .heldItem = ITEM_NONE,
@@ -2464,6 +2464,7 @@ void DebugQuest_CutePokemon_GiveMon(void)
         .moves= {MOVE_CELEBRATE,MOVE_NONE,MOVE_NONE,MOVE_NONE},
         .evs = {0,0,0,0,0,0},
         .ivs = {0,0,0,0,0,0},
+        .origin = GIFTMON_ORIGIN,
     };
 
     for (u32 monIndex = 0; monIndex < numSidequests; monIndex++)
@@ -3308,7 +3309,7 @@ void DebugQuest_Psyop_GiveMon(u32 state)
 {
     u32 species[STATE_QUEST_PSYOP_COMPLETE+1] = {SPECIES_PANCHAM, SPECIES_QUEST_PSYOP_TARGET, SPECIES_QUEST_PSYOP_REWARD};
 
-    struct PokemonTemplate monTemplate = 
+    struct PokemonTemplate monTemplate =
     {
         .species = species[state],
         .level = 50,
@@ -3321,6 +3322,7 @@ void DebugQuest_Psyop_GiveMon(u32 state)
         .moves= {MOVE_CELEBRATE,MOVE_NONE,MOVE_NONE,MOVE_NONE},
         .evs = {85,85,85,85,85,85},
         .ivs = {0,0,0,0,0,0},
+        .origin = GIFTMON_ORIGIN,
     };
 
     ScriptGiveMonParameterized(0,PARTY_SIZE,&monTemplate);
@@ -4631,7 +4633,7 @@ void DebugQuest_RestoreEsupleeOutskirtsGym(u8 state)
             QuestMenu_GetSetSubquestState(QUEST_RESTOREESPULEEGYM,FLAG_SET_COMPLETED,SUB_QUEST_5);
             break;
         case STATE_QUEST_RESTOREESPULEEGYM_BEFORE_TRADE_F:
-            struct PokemonTemplate monTemplate = 
+            struct PokemonTemplate monTemplate =
             {
                 .species = SPECIES_QUEST_RESTOREESPULEEGYM_PREEVO,
                 .level = 30,
@@ -4644,6 +4646,7 @@ void DebugQuest_RestoreEsupleeOutskirtsGym(u8 state)
                 .evs = {0,0,0,0,0,0},
                 .ivs = {0,0,0,0,0,0},
                 .moves = {MOVE_CELEBRATE,MOVE_NONE,MOVE_NONE,MOVE_NONE},
+                .origin = GIFTMON_ORIGIN,
             };
             ScriptGiveMonParameterized(B_SIDE_PLAYER,PARTY_SIZE,&monTemplate);
             break;

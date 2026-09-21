@@ -304,8 +304,9 @@ static void GiveDebugStarter(void);
 
 void GenerateDummyPartyMembers(void)
 {
-    struct PokemonTemplate monTemplate = 
+    struct PokemonTemplate monTemplate =
     {
+        .species = SPECIES_NIDOKING,
         .level = 1,
         .heldItem = ITEM_NONE,
         .ball = BALL_POKE,
@@ -316,6 +317,7 @@ void GenerateDummyPartyMembers(void)
         .evs = {0,0,0,0,0,0},
         .ivs = {0,0,0,0,0,0},
         .moves = {MOVE_SLEEP_POWDER,MOVE_NONE,MOVE_NONE,MOVE_NONE},
+        .origin = GIFTMON_ORIGIN,
     };
 
     for (u32 slot = 0; slot < PARTY_SIZE; slot++)
@@ -424,7 +426,7 @@ void GiveSiliconStarter(enum SiliconStarters slot)
     u8 level = starter->level;
     u32 friendship = starter->friendship;
 
-    struct PokemonTemplate monTemplate = 
+    struct PokemonTemplate monTemplate =
     {
         .species = species,
         .level = level,
@@ -433,6 +435,7 @@ void GiveSiliconStarter(enum SiliconStarters slot)
         .nature = starter->nature,
         .abilityNum = starter->abilityNum,
         .gender = starter->gender,
+        .origin = GIFTMON_ORIGIN,
     };
 
     u8 nextExpPercent = starter->nextExpPercent;
@@ -466,7 +469,7 @@ static void GiveDebugStarter(void)
 
 struct PokemonTemplate sDebugMonTable[] =
 {
-    [0] = 
+    [0] =
     {
         .species = SPECIES_MUDKIP,
         .level = 22,
@@ -478,8 +481,9 @@ struct PokemonTemplate sDebugMonTable[] =
         .ivs = {31,31,31,31,31,31},
         .moves = {MOVE_DIG,MOVE_SURF,MOVE_NONE,MOVE_NONE},
         .isShiny = SHINY_MODE_RANDOM,
+        .origin = GIFTMON_ORIGIN,
     },
-    [1] = 
+    [1] =
     {
         .species = SPECIES_PANGORO,
         .level = 22,
@@ -491,6 +495,7 @@ struct PokemonTemplate sDebugMonTable[] =
         .ivs = {31,31,31,31,31,31},
         .moves = {MOVE_DRAIN_PUNCH,MOVE_BULLET_PUNCH,MOVE_NONE,MOVE_NONE},
         .isShiny = SHINY_MODE_ALWAYS,
+        .origin = GIFTMON_ORIGIN,
     },
 };
 
