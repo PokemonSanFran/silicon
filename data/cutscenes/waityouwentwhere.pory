@@ -30,35 +30,26 @@ script WaitYouWentWhere_ShowOliver_Script {
     clearobjectflagfromlocalid(LOCALID_POPIDORAPIER_OLIVER)
 }
 
-script WaitYouWentWhere_PlayerSetUp_Script {
-    lock
-        getplayerxy(VAR_TEMP_0,VAR_TEMP_1)
-
-        //If player is not standing on the right side, move player there
-        if (var(VAR_TEMP_1) == 1){
-            applymovement(PLAYER, moves(walk_right, walk_up, face_left, step_end))
-        } elif (var(VAR_TEMP_0) == 40){
-            applymovement(PLAYER, moves(walk_down, walk_right * 2, walk_up, face_left, step_end))
-        }
-}
-
 script WaitYouWentWhere_FirstInteract_Dialogue {
     lock
         startcutscene(JUMPPLAYER_WAITYOUWENTWHERE)
-        msgbox(format("Ah {PLAYER}, welcome back from Chasilla! I hear you defeated Pua, as expected from you."),MSGBOX_NPC,SPEAKER_OLIVER)
-        lock //MSGBOX_NPC turns off the earlier lock
+        buffermapname(STR_VAR_1,MAP_CHASILLA)
+        faceplayer
+        msgbox(format("Ah {PLAYER}, welcome back from {STR_VAR_1}! I hear you defeated Pua, as expected from you."),,SPEAKER_OLIVER)
         msgbox(format("Yeah, thanks for your help. Where are you going?"),,SPEAKER_ALICIA)
 
-        msgbox(format("I have some business to attend to in CapheCity. Let's walk together. What's interested you the most about Resido?"),,SPEAKER_OLIVER)
+        buffermapname(STR_VAR_1,MAP_CAPHE_CITY)
+        msgbox(format("I have some business to attend to in {STR_VAR_1}. Let's walk together."),,SPEAKER_OLIVER)
         closemessage
+        moveobjecttocoords(LOCALID_PLAYER,42,10,DIR_WEST)
+        waitmovement(LOCALID_PLAYER)
 
-        call(WaitYouWentWhere_PlayerSetUp_Script)
-        waitmovement(0)
+        moveobjecttocoords(LOCALID_PLAYER,0,10,DIR_NORTH)
+        moveobjecttocoords(LOCALID_POPIDORAPIER_OLIVER,0,9,DIR_SOUTH)
 
-        applymovement(PLAYER, moves(walk_left * 41, step_end))
-        applymovement(LOCALID_POPIDORAPIER_OLIVER, moves(walk_left * 41, face_right, step_end))
-
-        msgbox(format("Hmm... Actually, I thought Arantraz was really fascinating."),,SPEAKER_ALICIA)
+        msgbox(format("What's interested you the most about Resido?"),,SPEAKER_OLIVER)
+        buffermapname(STR_VAR_1,MAP_ARANTRAZ)
+        msgbox(format("Hmm... Actually, I thought {STR_VAR_1} was really fascinating."),,SPEAKER_ALICIA)
 
         msgbox(format("The pass we gave you doesn't let you go there…"),,SPEAKER_OLIVER)
 
@@ -73,6 +64,9 @@ script WaitYouWentWhere_FirstInteract_Dialogue {
         msgbox(format("Orre has a lot of double battles! They're not that bad."),,SPEAKER_ALICIA)
 
         msgbox(format("No offense - I'm sure they're fine, but certainly not fit for a world-class League!"),,SPEAKER_OLIVER)
+        closemessage
+        waitmovement(LOCALID_PLAYER)
+        waitmovement(LOCALID_POPIDORAPIER_OLIVER)
 
         msgbox(format("Well, time to hike this miserable hill. I'll save you the hassle.  Stay out of trouble, okay?"),,SPEAKER_OLIVER)
 
@@ -85,9 +79,4 @@ script WaitYouWentWhere_FirstInteract_Dialogue {
         release
         setvar(VAR_WAIT_YOU_WENT_WHERE,POST_WAITYOUWENTWHERE)
         end
-}
-
-movement WaitYouWentWhere_WalkSouth{
-    walk_down * 10
-        step_end
 }

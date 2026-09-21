@@ -3019,6 +3019,9 @@ bool32 CanThrowLastUsedBall(void)
         //return FALSE;
     if (IsLastUsedBallOptionAfterAndLastBallIsNone())
         return FALSE;
+
+    if (GetItemPocket(gBallToDisplay) != POCKET_POKE_BALLS)
+        return FALSE;
     // End last_used_ball
     if (!CanThrowBall())
         return FALSE;

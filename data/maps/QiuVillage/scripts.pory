@@ -7,7 +7,11 @@ mapscripts QiuVillage_MapScripts
     MAP_SCRIPT_ON_TRANSITION
     {
         call(Quest_Returndoll_Script_DollVisibility)
-        call(ImIn_HideObject_OutsideHouse_Script)
+
+        call_if_ne(VAR_STORYLINE_STATE,STORY_BEFORE_RAMESH_BREAKIN,ImIn_Script_HideEntireQiuRaidParty)
+        call_if_ne(VAR_TOWER_RAID_STATE,0,ImIn_Script_HideEntireQiuRaidParty)
+        call_if_eq(VAR_STORYLINE_STATE,STORY_BEFORE_RAMESH_BREAKIN,ImIn_Script_HideQiuSpecificRaidPartyMembers)
+
         call(Quest_StolenTrade_HideObjectA_Script)
         call(CutePokemon_Script_ControlMelissaQiuOutsideVisibility)
         call(Quest_ButOnlyIn_HideGunda_Script)
@@ -15,7 +19,7 @@ mapscripts QiuVillage_MapScripts
     }
     MAP_SCRIPT_ON_LOAD
     {
-        call(ImIn_DestroyWall_Script)
+        call_if_gt(VAR_TOWER_RAID_STATE,0,ImIn_DestroyWall_Script)
     }
     MAP_SCRIPT_ON_FRAME_TABLE
     [
@@ -33,7 +37,6 @@ script Ramesh_House_LockedDoor_Script
 script Waite_Interact_Script
 {
     msgbox(format("I can't believe this shit!"),,SPEAKER_WAITE,TAIL_WHISPER)
-    special(GetNumberOfBadges)
     goto_if_set(FLAG_BADGE05_GET,Quest_Foodtruckbureaucracy_Food_Interact_Script)
     end
 }

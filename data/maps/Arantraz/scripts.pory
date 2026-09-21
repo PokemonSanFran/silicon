@@ -66,3 +66,34 @@ script Route4_EventScript_0ED24EF1
     end
 }
 
+script Arantaz_Dialogue_Sign1
+{
+    buffermapname(STR_VAR_1,MAP_ARANTRAZ)
+    msgbox(format("{STR_VAR_1} was originally built as a prison for Resido's most dangerous criminals. {STR_VAR_1} Prison was nationally praised for its state of the art facilities, forward thinking approach to rehabilitation, and no escape attempts."),MSGBOX_SIGN)
+}
+
+script Arantaz_Dialogue_Sign2
+{
+    msgbox(format("The Resido criminal underbelly, using agents within the prison, staged a prison riot. The agents took guards hostage, and demanded that the government turn the island over to the prisoners. This occupation lasted for years, and the demands of the prisoners grew more unreasonable as time went on."),MSGBOX_SIGN)
+}
+
+script Arantaz_Dialogue_Sign3
+{
+    msgbox(format("The prisoners began to turn to the citizens of the region for support. One of their most vocal allies was Magnus, the strongest member of the Resido Elite Four. Magnus organized public rallies and marches, demanding for the release of the prisoners into society, citing the need for a different rehabilitation approach."),MSGBOX_SIGN)
+}
+
+script Arantaz_Dialogue_Sign4
+{
+    msgbox(format("As tensions between the prisoners, their sympathizers, and the government reached a fever pitch, disaster suddenly struck. An unprecedented earthquake ripped through the eastern seaboard of the region, destroying the structure of the prison. Hundreds were injured, and many were killed."),MSGBOX_SIGN)
+}
+
+script Arantaz_Dialogue_Sign5
+{
+    buffermapname(STR_VAR_1,MAP_ARANTRAZ)
+    msgbox(format("The natural disaster left the prisoners broken and defeated, and they quickly surrendered. The prisoners were charged with conspiracy and instigation, seperated, and sent to different prisons around the nation. {STR_VAR_1} was shut down."),MSGBOX_SIGN)
+}
+
+script Arantaz_Dialogue_Sign6
+{
+    msgbox(format("The Resido Parks and Recreation has dedicated this plaza to the guards who lost their lives in the disaster and the struggle that divided the region for so long. Late at night, some say you can hear their spirits, still fighting to this day to keep our region safe from criminals."),MSGBOX_SIGN)
+}

@@ -79,6 +79,7 @@
 #include "quest_logic.h"
 #include "quest_ow.h"
 // End siliconMerge
+#include "constants/songs.h"
 #include "currency_box.h"
 #include "constants/map_types.h"
 #include "constants/rgb.h"
@@ -3538,8 +3539,8 @@ void Script_GetOnOffBike(struct ScriptContext *ctx)
         SetPlayerAvatarTransitionFlags(bikeTransitionFlags);
         if (musSwap)
         {
-            Overworld_SetSavedMusic(GetBikeMusicFromOption());
-            Overworld_ChangeMusicTo(GetBikeMusicFromOption());
+            Overworld_SetSavedMusic(MUS_CYCLING);
+            Overworld_ChangeMusicTo(MUS_CYCLING);
         }
     }
 }

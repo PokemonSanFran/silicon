@@ -359,8 +359,8 @@
     {
       "id": "HEAL_LOCATION_ROUTE8",
       "map": "MAP_ROUTE8",
-      "x": 2,
-      "y": 11
+      "x": 3,
+      "y": 13
     },
     {
       "id": "HEAL_LOCATION_PSFROUTE7E17FDD1",
@@ -389,8 +389,8 @@
     {
       "id": "HEAL_LOCATION_ROUTE6",
       "map": "MAP_ROUTE6",
-      "x": 9,
-      "y": 11
+      "x": 13,
+      "y": 19
     },
     {
       "id": "HEAL_LOCATION_ROUTE3",

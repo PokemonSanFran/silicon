@@ -2305,7 +2305,7 @@ static void Cmd_getexp(void)
                     //MonGainEVs(&gParties[B_TRAINER_PLAYER][*expMonId], faintedSpecies);
                 {
                     gBattleStruct->evsGiven = MonGainEVs(&gParties[B_TRAINER_PLAYER][*expMonId], faintedSpecies);
-                    PrintMonRecievedEffortValues(wasSentOut, expMonId);
+                    PrintMonReceivedEffortValues(wasSentOut, expMonId);
                 }
                 // End printEvs
             }
@@ -2379,9 +2379,9 @@ static void Cmd_getexp(void)
                     gBattleStruct->evsGiven = MonGainEVs(&gParties[B_TRAINER_PLAYER][*expMonId], gBattleMons[gBattlerFainted].species);
                     gEffectBattler = gBattleStruct->evsGiven;
                     if (gBattleStruct->evsGiven == 0)
-                        stringId = PrintMonRecievedExperience(expMonId, printBoosted);
+                        stringId = PrintMonReceivedExperience(expMonId, printBoosted);
                     else
-                        stringId = PrintMonRecievedEffortAndExperience(expMonId,printBoosted);
+                        stringId = PrintMonReceivedEffortAndExperience(expMonId,printBoosted);
                     // End printEVs
 
                     // Start pointsMessage

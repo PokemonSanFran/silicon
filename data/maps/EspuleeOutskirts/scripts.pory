@@ -2,7 +2,6 @@ const PLAYER = OBJ_EVENT_ID_PLAYER
 const CHARLOTTE = 1
 const LIIDIA = 2
 const DIMU = 3
-const FLAG_HIDE_CHARLOTTE = FLAG_TEMP_3
 
 mapscripts EspuleeOutskirts_MapScripts {
 	MAP_SCRIPT_ON_RESUME
@@ -10,8 +9,6 @@ mapscripts EspuleeOutskirts_MapScripts {
 		callnative(WarpTaxiAfterCutscene)
 	}
     MAP_SCRIPT_ON_TRANSITION {
-        call(EspuleeOutskirts_HideCharlotte_Script)
-        call(IGuessWeShouldBeNiceNow_HidePopup_Script)
         callnative(LetsGrabLunch_IncrementStoryVariable)
         call(Quest_ManOfManyHats_CheckDoorLock_Script_Flags)
         call(Quest_Breaktheinternet_EspuleeOutskirtsGirl_Visibility_Script)
@@ -22,18 +19,12 @@ mapscripts EspuleeOutskirts_MapScripts {
 
     MAP_SCRIPT_ON_FRAME_TABLE [
         FLAG_VISITED_ESPULEE_OUTSKIRTS, FALSE: Generic_Mappreview
-        VAR_ESPULEE_OUTSKIRTS_STATE, ROBINWILLIAMSTUNNEL_PUZZLES_SOLVED: IGuessWeShouldBeNiceNow_ExitCave_Script
-            VAR_STORYLINE_STATE, STORY_RESTORATION_1_COMPLETE: YouRealizeWereEvilRight_PhoneCall_Dialogue
+        VAR_STORYLINE_STATE, STORY_RESTORATION_1_COMPLETE: YouRealizeWereEvilRight_PhoneCall_Dialogue
     ]
 
     MAP_SCRIPT_ON_LOAD{
         call(Quest_ManOfManyHats_CheckDoorLock_Script_Metatiles)
     }
-}
-
-script EspuleeOutskirts_HideCharlotte_Script {
-    setflag(FLAG_HIDE_CHARLOTTE)
-        return
 }
 
 script EspuleeOutskirts_RangerStationDoor_Script{
@@ -65,11 +56,6 @@ script EspuleeOutskirts_Stan_PostBattle_Script{
 
     release
         end
-}
-
-script EspuleeOutskirts_HideMapNamePopup_Script{
-    setflag(FLAG_HIDE_MAP_NAME_POPUP)
-        return
 }
 
 script EspuleeOutskirts_Script_InteractImelda

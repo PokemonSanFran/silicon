@@ -1942,7 +1942,7 @@ bool32 ShouldBaiyaCallPlayer(void)
 enum Type VSGarbodor_RandomlyChooseTypeFromStarter(void)
 {
     u32 typeIndex = (VarGet(VAR_INNER_CONSTRUCTION_SITE_STATE) == PLAYER_LEFT_SIDE) ? 0 : 1;
-    enum Species species = SanitizeSpeciesId(VarGet(VAR_CHOSEN_PSF_STARTER));
+    enum Species species = SanitizeSpeciesId(VarGet(VAR_STARTER_MON));
 
     return GetSpeciesType(species,typeIndex);
 }
@@ -2116,8 +2116,12 @@ bool32 CanMonMegaEvolve(u32 species)
         return FALSE;
 
     for (i = 0; formChangeTable[i].method != FORM_CHANGE_TERMINATOR; i++)
+    {
         if (formChangeTable[i].method != FORM_CHANGE_BATTLE_MEGA_EVOLUTION_ITEM)
             continue;
+
+        StringCopy(gStringVar2,GetItemName(formChangeTable[i].param1));
+    }
 
     return TRUE;
 }
@@ -2538,7 +2542,7 @@ void DebugQuest_AngelDelivery(u8 state)
         case STATE_QUEST_ANGELDELIVERY_QUEST_NOT_STARTED:
             FlagSet(FLAG_SYS_STARTER_APPS_GET);
             break;
-        case STATE_QUEST_ANGELDELIVERY_RECIEVED_BIKE:
+        case STATE_QUEST_ANGELDELIVERY_RECEIVED_BIKE:
             QuestMenu_ScriptSetActive(QUEST_ANGELDELIVERY);
             AddBagItem(ITEM_QUEST_ANGELDELIVERY_1,1);
             AddBagItem(ITEM_QUEST_ANGELDELIVERY_2,1);
@@ -4011,7 +4015,7 @@ bool32 Quest_ManOfManyHats_ManOfManyHatsSeenAllJobs(void)
 {
     if (Quest_ManOfManyHats_GetVariable_SawBoba() == FALSE)
         return FALSE;
- 
+
     if (Quest_ManOfManyHats_GetVariable_SawFish() == FALSE)
          return FALSE;
 
@@ -4100,7 +4104,7 @@ void DebugQuest_ManOfManyHats(u8 state)
     {
         default:
         case STATE_QUEST_MANOFMANYHATS_NOT_STARTED:
-            FlagSet(FLAG_SYS_STARTER_APPS_GET);            
+            FlagSet(FLAG_SYS_STARTER_APPS_GET);
             JumpPlayerTo_YoungPadawan(JUMP_DEBUG);
             DebugQuest_InstallNatureProbes(STATE_QUEST_INSTALLNATUREPROBES_COMPLETE);
             break;
@@ -4133,6 +4137,9 @@ void DebugQuest_ManOfManyHats(u8 state)
 
 bool8 IsHalaiIslandUnderCrisis(void)
 {
+    if (gMapHeader.regionMapSectionId != MAP_HALAI_ISLAND)
+        return FALSE;
+
     if (VarGet(VAR_HALAI_ISLAND_STATE) < POST_EARTHQUAKE)
         return FALSE;
 
@@ -4582,7 +4589,7 @@ void DebugQuest_RestoreEsupleeOutskirtsGym(u8 state)
         case STATE_QUEST_RESTOREESPULEEGYM_NOT_STARTED:
             FlagSet(FLAG_SYS_STARTER_APPS_GET);
             JumpPlayerTo_LetsGrabLunch(JUMP_DEBUG);
-            FlagSet(FLAG_RECIEVED_NURSERY_EGG);
+            FlagSet(FLAG_RECEIVED_NURSERY_EGG);
             break;
         case STATE_QUEST_RESTOREESPULEEGYM_STARTED_QUEST:
             QuestMenu_ScriptSetActive(QUEST_RESTOREESPULEEGYM);
@@ -4878,8 +4885,6 @@ void HousingProtest_BufferMostPowerfulAttackAndMove(void)
         if (SanitizeSpeciesId(mon.species) == SPECIES_NONE)
             break;
 
-        species = mon.species;
-
         for (u32 moveIndex = 0; moveIndex < MAX_MON_MOVES; moveIndex++)
         {
             u32 tempMove = mon.moves[moveIndex];
@@ -4891,6 +4896,7 @@ void HousingProtest_BufferMostPowerfulAttackAndMove(void)
             move = tempMove;
             movePower = tempMovePower;
             usedIndex = index;
+            species = mon.species;
         }
     }
 
@@ -6362,6 +6368,12 @@ void UpdateMusicForRave(void)
 // Cutscene: Enter The Master
 // ***********************************************************************
 
+void EnterTheMaster_BufferStarterMonName(void)
+{
+    enum Species species = VarGet(VAR_STARTER_MON);
+    StringCopy(gStringVar3,GetSpeciesName(species));
+}
+
 void EnterTheMaster_BufferPlayerPronouns(void)
 {
     StringCopy(gStringVar2,COMPOUND_STRING(""));
@@ -6415,17 +6427,18 @@ bool32 ShouldStartANewStrike(void)
     if (FlagGet(FLAG_CONSTRUCTION_BREAKING_NEWS) == FALSE)
         return FALSE;
 
+    ++(*GetVarPointer(VAR_ANEWSTRIKE_STEP_COUNTER));
 
     switch (gMapHeader.mapType)
     {
-    case MAP_TYPE_TOWN:
-    case MAP_TYPE_CITY:
-    case MAP_TYPE_ROUTE:
-    case MAP_TYPE_OCEAN_ROUTE:
-        return (++(*GetVarPointer(VAR_ANEWSTRIKE_STEP_COUNTER)) >= 250);
-        break;
-    default:
-        return FALSE;
+        case MAP_TYPE_TOWN:
+        case MAP_TYPE_CITY:
+        case MAP_TYPE_ROUTE:
+        case MAP_TYPE_OCEAN_ROUTE:
+            return ((VarGet(VAR_ANEWSTRIKE_STEP_COUNTER)) > 250);
+            break;
+        default:
+            return FALSE;
     }
     return FALSE;
 }
@@ -6437,4 +6450,240 @@ bool32 ShouldStartANewStrike(void)
 bool8 IsPlayerInSharpriseArena(void)
 {
     return (GetCurrentMap() == MAP_SHARPRISE_STADIUM_ARENA);
+}
+
+// ***********************************************************************
+// Cutscene: Old Asshole Appears
+// ***********************************************************************
+
+void BufferArribaDiscount(void)
+{
+    u32 difference = (FARE_DISCOUNT_ARRIBA_DENOMINATOR - FARE_DISCOUNT_ARRIBA_NUMERATOR);
+    ConvertIntToDecimalStringN(gStringVar1, difference, STR_CONV_MODE_LEFT_ALIGN, CountDigits(difference));
+}
+// ***********************************************************************
+// Cutscene: The Story So Far
+// ***********************************************************************
+
+u8 CountArantrazExhibitDefeated(void)
+{
+    u32 count = 0;
+    for(u32 trainerFlag = 0; trainerFlag < STORY_ARANTRAZ_EXHIBIT_TRAINERS_COUNT; trainerFlag++)
+        if (FlagGet(TRAINER_FLAGS_START + TRAINER_0D416B2C + trainerFlag))
+            count++;
+
+    return count;
+}
+
+void Script_CountArantrazExhibitDefeated(void)
+{
+    gSpecialVar_Result = CountArantrazExhibitDefeated();
+}
+
+void TryIncrementArantrazVariable(void)
+{
+    if (VarGet(VAR_ARANTRAZ_EXHIBIT_STATE) != ARANTRAZ_EXHIBIT_START)
+        return;
+
+    if (CountArantrazExhibitDefeated() == STORY_ARANTRAZ_EXHIBIT_TRAINERS_COUNT)
+        VarSet(VAR_ARANTRAZ_EXHIBIT_STATE,ARANTRAZ_EXHIBIT_FINISH);
+}
+
+void BufferNumberArantrazExhibitDefeated(void)
+{
+    u32 count = (STORY_ARANTRAZ_EXHIBIT_TRAINERS_COUNT - CountArantrazExhibitDefeated());
+    ConvertIntToDecimalStringN(gStringVar1, count, STR_CONV_MODE_LEFT_ALIGN, CountDigits(count));
+}
+
+// ***********************************************************************
+// Cutscene: Kei-Ying's Raison detre
+// ***********************************************************************
+
+void BufferTitleFromPossessivePronouns(void)
+{
+    StringCopy(gStringVar1,COMPOUND_STRING(""));
+    switch(gSaveBlock3Ptr->customizationValues[CUSTOMIZATION_POSSESIVE_PRONOUN])
+    {
+        case PRONOUN_POSSESSIVE_HIS: StringCopy(gStringVar1,COMPOUND_STRING("Lord"));
+                                     break;
+        case PRONOUN_POSSESSIVE_HER: StringCopy(gStringVar1,COMPOUND_STRING("Lady"));
+                                     break;
+        default:
+                                     break;
+    }
+}
+
+// ***********************************************************************
+// Cutscene: I Guess We Should Be Nice Now
+// ***********************************************************************
+
+void IGuessWeShouldBeNiceNow_LoadOverworldMons(void)
+{
+    enum Species species[] = {SPECIES_FRANK_MON_LEAD, SPECIES_FRANK_MON_PARTNER};
+    u32 level[] = {LEVEL_FRANK_MON_LEAD, LEVEL_FRANK_MON_PARTNER};
+    enum Item item[] = {ITEM_FRANK_MON_LEAD, ITEM_FRANK_MON_PARTNER};
+
+    FlagSet(FLAG_FORCE_NO_SHINY);
+    CreateScriptedDoubleWildMon(species[0], level[0], item[0], species[1], level[1], item[1]);
+    FlagClear(FLAG_FORCE_NO_SHINY);
+
+    for (u32 monIndex = 0; monIndex < 2; monIndex++)
+    {
+        struct Pokemon *mon = &gParties[B_TRAINER_OPPONENT_A][monIndex];
+        u32 female = (GetGenderFromSpeciesAndPersonality(species[monIndex],GetMonData(mon,MON_DATA_PERSONALITY)) == MON_FEMALE) ? OBJ_EVENT_MON_FEMALE : 0;
+        u32 shiny = GetMonData(mon,MON_DATA_IS_SHINY) ? OBJ_EVENT_MON_SHINY : 0;
+        VarSet((VAR_OBJ_GFX_ID_0+monIndex),(OBJ_EVENT_MON + species[monIndex] + female + shiny));
+    }
+}
+
+// ***********************************************************************
+// Cutscene: Congrats You're An Asshole
+// ***********************************************************************
+
+bool8 FalseTimeline_CheckRewardStatus(void)
+{
+    if (IsQuestRewardState(QUEST_LETSBURNTHISMOTHERDOWN))
+        return FALSE;
+
+    if (IsQuestRewardState(QUEST_HOWDISAPPOINTING))
+        return FALSE;
+
+    if (IsQuestRewardState(QUEST_MANHUNT))
+        return FALSE;
+
+    return TRUE;
+}
+
+void Script_FalseTimeline_CheckRewardStatus(void)
+{
+    gSpecialVar_Result = FalseTimeline_CheckRewardStatus();
+}
+
+// ***********************************************************************
+// Sharprise Elevator
+// ***********************************************************************
+
+void Script_SetCurrentSpireFloor(void)
+{
+    u32 currentMapGroup = gSaveBlock1Ptr->dynamicWarp.mapGroup;
+    u32 currentMapNum = gSaveBlock1Ptr->dynamicWarp.mapNum;
+
+    if ((currentMapNum | (currentMapGroup << 8)) == MAP_SHARPRISE_SPIRE_1F)
+        gSpecialVar_0x8005 = SHARPRISE_FLOOR_FOYER;
+    else if ((currentMapNum | (currentMapGroup << 8)) == MAP_SHARPRISE_SPIRE_LOBBY)
+        gSpecialVar_0x8005 = SHARPRISE_FLOOR_LOBBY;
+    else if ((currentMapNum | (currentMapGroup << 8)) == MAP_SHARPRISE_SPIRE_PARK)
+        gSpecialVar_0x8005 = SHARPRISE_FLOOR_PARK;
+    else if ((currentMapNum | (currentMapGroup << 8)) == MAP_SHARPRISE_SPIRE_GIFTSHOP)
+        gSpecialVar_0x8005 = SHARPRISE_FLOOR_GIFTSHOP;
+    else if ((currentMapNum | (currentMapGroup << 8)) == MAP_SHARPRISE_SPIRE_PRODUCTION)
+        gSpecialVar_0x8005 = SHARPRISE_FLOOR_PRODUCTION;
+    else
+        gSpecialVar_0x8005 = SHARPRISE_FLOOR_LEAGUEOPS;
+}
+
+// ***********************************************************************
+// Cutscene: I'm In
+// ***********************************************************************
+
+void ImIn_LoadBaiyaMon(void)
+{
+    u32 trainerId = TRAINER_BAIYA_LETSBURNTHISMOTHERDOWN;
+    u32 index = BAIYA_MON_INDEX;
+    index = Quest_Generic_GetIndexForMonTrainer(trainerId,index,&gTrainers[0][0],TRAINERS_COUNT);
+
+    Quest_Generic_LoadTrainersMonToOWVar(trainerId,index,VAR_OBJ_GFX_ID_0,&gTrainers[0][0],TRAINERS_COUNT);
+}
+
+void ImIn_BufferBaiyaMonName(void)
+{
+    u32 trainerId = TRAINER_BAIYA_LETSBURNTHISMOTHERDOWN;
+    u32 index = BAIYA_MON_INDEX;
+    index = Quest_Generic_GetIndexForMonTrainer(trainerId,index,&gTrainers[0][0],TRAINERS_COUNT);
+    const struct TrainerMon mon = Quest_Generic_GetMonFromTrainer(trainerId,index,&gTrainers[0][0],TRAINERS_COUNT);
+
+    StringCopy(gStringVar1,GetSpeciesName(mon.species));
+}
+
+void ImIn_GetBaiyaMonCry(void)
+{
+    u32 trainerId = TRAINER_BAIYA_LETSBURNTHISMOTHERDOWN;
+    u32 index = BAIYA_MON_INDEX;
+    index = Quest_Generic_GetIndexForMonTrainer(trainerId,index,&gTrainers[0][0],TRAINERS_COUNT);
+    const struct TrainerMon mon = Quest_Generic_GetMonFromTrainer(trainerId,index,&gTrainers[0][0],TRAINERS_COUNT);
+
+    enum Species species = (index == PARTY_SIZE) ? SPECIES_NONE : mon.species;
+    PlayCry_Script(species, CRY_MODE_ENCOUNTER);
+}
+
+void ImIn_BufferMostPowerfulAttackAndMove(void)
+{
+    enum Move move = MOVE_BRICK_BREAK;
+    u32 movePower = GetMovePower(MOVE_NONE), usedIndex = 0, species = SPECIES_LOPUNNY, trainer = TRAINER_BAIYA_LETSBURNTHISMOTHERDOWN;
+
+    for (u32 index = 0; index < PARTY_SIZE; index++)
+    {
+        const struct TrainerMon mon = gTrainers[GetCurrentDifficultyLevel()][trainer].party[index];
+
+        if (SanitizeSpeciesId(mon.species) == SPECIES_NONE)
+            break;
+
+        for (u32 moveIndex = 0; moveIndex < MAX_MON_MOVES; moveIndex++)
+        {
+            u32 tempMove = mon.moves[moveIndex];
+            u32 tempMovePower = GetMovePower(tempMove);
+
+            if (GetMoveCategory(tempMove) != DAMAGE_CATEGORY_PHYSICAL)
+                continue;
+
+            if (tempMovePower <= movePower)
+                continue;
+
+            move = tempMove;
+            movePower = tempMovePower;
+            species = mon.species;
+            usedIndex = index;
+        }
+    }
+
+    VarSet(VAR_TEMP_0,species);
+    Quest_Generic_LoadTrainersMonToOWVar(trainer,usedIndex,VAR_OBJ_GFX_ID_0,&gTrainers[0][0],TRAINERS_COUNT);
+    StringCopy(gStringVar1,GetSpeciesName(species));
+    StringCopy(gStringVar2,GetMoveName(move));
+}
+
+// ***********************************************************************
+// Cutscene: Why Are You Helping Them
+// ***********************************************************************
+
+void WhyAreYouHelpingThem_GetAdaoraMonCry(void)
+{
+    u32 trainerId = TRAINER_ADAORA_HOWDISAPPOINTING;
+    u32 index = CHARLOTTE_ADAORA_MON_INDEX;
+    index = Quest_Generic_GetIndexForMonTrainer(trainerId,index,&gTrainers[0][0],TRAINERS_COUNT);
+    const struct TrainerMon mon = Quest_Generic_GetMonFromTrainer(trainerId,index,&gTrainers[0][0],TRAINERS_COUNT);
+
+    enum Species species = (index == PARTY_SIZE) ? SPECIES_NONE : mon.species;
+    PlayCry_Script(species, CRY_MODE_ENCOUNTER);
+}
+
+void WhyAreYouHelpingThem_GetCharlotteMonCry(void)
+{
+    u32 trainerId = PARTNER_CHARLOTTE;
+    u32 index = CHARLOTTE_ADAORA_MON_INDEX;
+    index = Quest_Generic_GetIndexForMonTrainer(trainerId,index,&gBattlePartners[0][0],PARTNER_COUNT);
+    const struct TrainerMon mon = Quest_Generic_GetMonFromTrainer(trainerId,index,&gBattlePartners[0][0],PARTNER_COUNT);
+
+    enum Species species = (index == PARTY_SIZE) ? SPECIES_NONE : mon.species;
+    PlayCry_Script(species, CRY_MODE_ENCOUNTER);
+}
+
+void WhyAreYouHelpingThem_LoadAdaoraMon(void)
+{
+    Quest_Generic_LoadTrainersMonToOWVar(TRAINER_ADAORA_HOWDISAPPOINTING,CHARLOTTE_ADAORA_MON_INDEX,VAR_OBJ_GFX_ID_1,&gTrainers[0][0],TRAINERS_COUNT);
+}
+
+void WhyAreYouHelpingThem_LoadCharlotteMon(void)
+{
+    Quest_Generic_LoadTrainersMonToOWVar(PARTNER_CHARLOTTE,CHARLOTTE_ADAORA_MON_INDEX,VAR_OBJ_GFX_ID_0,&gBattlePartners[0][0],PARTNER_COUNT);
 }

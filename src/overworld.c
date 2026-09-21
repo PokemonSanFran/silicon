@@ -1457,25 +1457,6 @@ void Overworld_ResetMapMusic(void)
 {
     ResetMapMusic();
 }
-// Start siliconMerge
-u16 GetCorrectMusicForScenario(void)
-{
-    u16 music = GetCurrLocationDefaultMusic();
-    CorrectSavedMusic();
-
-    if (music != MUS_ABNORMAL_WEATHER && music != MUS_NONE)
-    {
-        if (gSaveBlock1Ptr->savedMusic)
-            music = gSaveBlock1Ptr->savedMusic;
-        else if (GetCurrentMapType() == MAP_TYPE_UNDERWATER)
-            music = MUS_UNDERWATER;
-        else if (TestPlayerAvatarFlags(PLAYER_AVATAR_FLAG_SURFING))
-            music = GetSurfMusicFromOption();
-    }
-
-    return music;
-}
-// End siliconMerge
 
 void Overworld_PlaySpecialMapMusic(void)
 {

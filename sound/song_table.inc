@@ -666,6 +666,10 @@ gSongTable::
 	song mus_victory_tournament, MUSIC_PLAYER_BGM, 0
 	song mus_obtain_key_item, MUSIC_PLAYER_SE2, 0
 	song mus_how_disappointing, MUSIC_PLAYER_BGM, 0
+	song mus_encounter_gamer_hodler_influencer, MUSIC_PLAYER_BGM, 0
+	song mus_halai_island_earthquake_night, MUSIC_PLAYER_BGM, 0
+	song mus_vigrim, MUSIC_PLAYER_BGM, 0
+	song mus_caphe_city_night, MUSIC_PLAYER_BGM, 0
 	song ph_trap_blend, MUSIC_PLAYER_SE2, 2
 	song ph_trap_held, MUSIC_PLAYER_SE2, 2
 	song ph_trap_solo, MUSIC_PLAYER_SE2, 2

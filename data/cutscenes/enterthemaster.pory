@@ -1,8 +1,4 @@
 const PLAYER = OBJ_EVENT_ID_PLAYER
-const FRANK = 2
-const FLAG_HIDE_FRANK = FLAG_TEMP_2
-const FLAG_HIDE_OLIVER = FLAG_TEMP_3
-const FLAG_HIDE_ROBOTS = FLAG_TEMP_4
 
 script EnterTheMaster_Script_HideCharlotteEntrance
 {
@@ -82,11 +78,11 @@ script EnterTheMaster_Ready_Dialogue
         msgbox(format("Thanks… dad?"),MSGBOX_DEFAULT,SPEAKER_ALICIA)
         closemessage
 
-        applymovement(LOCALID_LEAVERRA_CHARLOTTE,EnterTheMaster_WalkIntoWoods)
-        waitmovement(0)
+        moveobjecttocoords(LOCALID_LEAVERRA_CHARLOTTE,4,6,DIR_NORTH)
+        waitmovement(LOCALID_LEAVERRA_CHARLOTTE)
         playse(SE_EXIT)
-        waitse
         removeobject(LOCALID_LEAVERRA_CHARLOTTE)
+        waitse
         call(TryAutoSave)
         release
         end
@@ -147,8 +143,8 @@ script EnterTheMaster_CompleteMaze_Dialogue {
         lock
 		facefollowernpc
         msgbox(format("I don't think there's anywhere else for them to be… they've gotta be in here."),,SPEAKER_CHARLOTTE)
-
-        msgbox(format("You think they've just been alone in here, waiting for us for Dialga knows how long?"),MSGBOX_DEFAULT,SPEAKER_ALICIA)
+        bufferspeciesname(STR_VAR_1,SPECIES_DIALGA)
+        msgbox(format("You think they've just been alone in here, waiting for us for {STR_VAR_1} knows how long?"),MSGBOX_DEFAULT,SPEAKER_ALICIA)
 
         msgbox(format("They're getting paid. "),,SPEAKER_CHARLOTTE)
         closemessage
@@ -168,8 +164,8 @@ script EnterTheMaster_ClearingIntro_Dialogue
     setvar(VAR_LEAVERRA_FOREST_STATE,MET_FRANK)
         playbgm(MUS_ENCOUNTER_ELITE_FOUR,FALSE)
 
-        applymovement(PLAYER, moves(walk_up * 1, step_end))
-        waitmovement(0)
+        moveobjecttocoords(PLAYER,10,16,DIR_NORTH)
+        waitmovement(PLAYER)
 
     buffermapname(STR_VAR_1,MAP_LEAVERRA_FOREST)
 	msgbox(format("Charlotte and {PLAYER}! Welcome to the deepest part of {STR_VAR_1}."),,SPEAKER_FRANK)
@@ -179,12 +175,12 @@ script EnterTheMaster_ClearingIntro_Dialogue
         msgbox(format("Yeah! My notebook?"),,SPEAKER_FRANK)
         closemessage
 
-        applymovement(FRANK,Common_Movement_FaceLeft)
+        applymovement(LOCALID_LEAVERRA_FRANK,Common_Movement_FaceLeft)
         applymovement(LOCALID_LEAVERRA_CHARLOTTE, moves(walk_up, face_right, delay_16, walk_in_place_slow_right, step_end))
-        waitmovement(0)
+        waitmovement(LOCALID_LEAVERRA_CHARLOTTE)
 
-		bufferspeciesname(STR_VAR_1,SPECIES_HYDREIGON)
-		bufferspeciesname(STR_VAR_2,SPECIES_MAGMORTAR)
+		bufferspeciesname(STR_VAR_1,SPECIES_FRANK_MON_LEAD)
+		bufferspeciesname(STR_VAR_2,SPECIES_FRANK_MON_PARTNER)
         buffermapname(STR_VAR_3,MAP_LANJING_TUNNEL)
         msgbox(format("I hope {STR_VAR_1} and {STR_VAR_2} in {STR_VAR_3} weren't too much trouble. Getting 'em to battle without my direct commands was a challenge!"),,SPEAKER_FRANK)
 
@@ -196,10 +192,10 @@ script EnterTheMaster_ClearingIntro_Dialogue
         call(EnterTheMaster_StartEarthquake_Script)
 
         applymovement(LOCALID_LEAVERRA_CHARLOTTE, moves(walk_down, face_up, step_end))
-        waitmovement(0)
+        waitmovement(LOCALID_LEAVERRA_CHARLOTTE)
 
-        applymovement(FRANK, moves(walk_left * 2, walk_right *2, walk_left * 2, walk_right *2, face_down, step_end))
-        waitmovement(0)
+        applymovement(LOCALID_LEAVERRA_FRANK, moves(walk_left * 2, walk_right *2, walk_left * 2, walk_right *2, face_down, step_end))
+        waitmovement(LOCALID_LEAVERRA_FRANK)
 
         msgbox(format("Either of you familiar with Scott's Trainer Theory?"),,SPEAKER_FRANK)
 
@@ -219,10 +215,9 @@ script EnterTheMaster_ClearingIntro_Dialogue
 
         delay(16)
         fadescreenswapbuffers(FADE_TO_BLACK)
-        msgbox(format("One eternity later…"))
         applymovement(LOCALID_LEAVERRA_CHARLOTTE,Common_Movement_FaceUp)
         applymovement(PLAYER,Common_Movement_FaceUp)
-        waitmovement(0)
+        waitmovement(PLAYER)
         fadescreenswapbuffers(FADE_FROM_BLACK)
 
         msgbox(format("…and so concludes my theory on how your silly little tests correspond with each of Scott's 7 principles."),,SPEAKER_CHARLOTTE)
@@ -234,15 +229,17 @@ script EnterTheMaster_ClearingIntro_Dialogue
         bufferitemname(STR_VAR_1,ITEM_MEGA_RING)
         msgbox(format("{PLAYER}, you've probably seen other Trainers using Mega Evolution. SharpRise wants their Trainers have access to the most powerful techniques, so in addition to my fee, SharpRise has provided {PLAYER} with a {STR_VAR_1}. Charlotte, I know you've already started to get a handle on it, but {PLAYER} here..."),,SPEAKER_FRANK)
         closemessage
-        cueobjectplayer(FRANK)
+        cueobjectplayer(LOCALID_LEAVERRA_FRANK)
         giveitem(ITEM_MEGA_RING)
         msgbox(format("Charlotte, do you wanna - "),,SPEAKER_FRANK)
-        msgbox(format("When your Pokémon is holding its Mega Stone and you have a Key Stone, you can press {START_BUTTON} in battle to trigger a transformation! At the beginning of your turn, your Pokémon will Mega Evolve, which will juice their stats and sometimes give them a new type or ability."),,SPEAKER_CHARLOTTE)
+        bufferitemname(STR_VAR_1,ITEM_MEGA_RING)
+        msgbox(format("When your Pokémon is holding its Mega Stone and you have a {STR_VAR_1}, you can press {START_BUTTON} in battle to trigger a transformation! At the beginning of your turn, your Pokémon will Mega Evolve, which will juice their stats and sometimes give them a new type or ability."),,SPEAKER_CHARLOTTE)
+        bufferitemname(STR_VAR_1,ITEM_MEGA_RING)
         msgbox(format("Your {STR_VAR_1} will only work once per battle, and your Pokémon will revert back to normal after it faints or when the battle ends."),,SPEAKER_CHARLOTTE)
         call(EnterTheMaster_MegaEvolution_Dialogue)
         msgbox(format("Pretty much got all the basics."),,SPEAKER_FRANK)
         msgbox(format("If you go further back into the clearing, there's battle simulation bots there. The right side one is for {PLAYER} - they're calibrated specifically based on the battle data that SharpRise Capital gave me for both of you."),MSGBOX_DEFAULT,SPEAKER_FRANK)
-        goto(EnterTheMaster_ExplainRobots_Dialogue)
+        goto(EnterTheMaster_ExplainRobots_Dialogue_First)
 }
 
 script EnterTheMaster_StartEarthquake_Script
@@ -251,7 +248,7 @@ script EnterTheMaster_StartEarthquake_Script
 
     playse(SE_PIN)
     applymovement(PLAYER,Common_Movement_ExclamationMark)
-    applymovement(FRANK,Common_Movement_ExclamationMark)
+    applymovement(LOCALID_LEAVERRA_FRANK,Common_Movement_ExclamationMark)
     applymovement(LOCALID_LEAVERRA_CHARLOTTE,Common_Movement_ExclamationMark)
     waitmovement(LOCALID_LEAVERRA_CHARLOTTE)
 
@@ -273,21 +270,36 @@ script EnterTheMaster_MegaEvolution_Dialogue
     bufferpartymonnick(STR_VAR_1,VAR_0x8004)
     if (var(VAR_RESULT))
     {
-        msgbox(format("Your {STR_VAR_1} will be capable of Mega Evolution once it fully evolves, but it needs to be holding the right Mega Stone."),MSGBOX_DEFAULT,SPEAKER_CHARLOTTE)
+        msgbox(format("Your {STR_VAR_1} will be capable of Mega Evolution once it fully evolves, but it needs to be holding its corresponding Mega Stone, the {STR_VAR_2}."),MSGBOX_DEFAULT,SPEAKER_CHARLOTTE)
     }
     else
     {
-        msgbox(format("Your {STR_VAR_1} is capable of Mega Evolution, as long as its holding the right Mega Stone."),MSGBOX_DEFAULT,SPEAKER_CHARLOTTE)
+        msgbox(format("Your {STR_VAR_1} is capable of Mega Evolution, as long as its holding the correspond Mega Stone, the {STR_VAR_2}."),MSGBOX_DEFAULT,SPEAKER_CHARLOTTE)
     }
 }
 
-script EnterTheMaster_ExplainRobots_Dialogue{
-    msgbox(format("If you talk to 'em, they'll give you a refresher on how they work, but its pretty simple. The second stage of your training will be defeating the robot that is assigned to you."),MSGBOX_DEFAULT,SPEAKER_FRANK)
+script EnterTheMaster_Dialogue_InteractExplainRobots
+{
+    lock
+    call(EnterTheMaster_ExplainRobots_Dialogue)
+    closemessage
+    release
+    end
+}
+
+script EnterTheMaster_ExplainRobots_Dialogue
+{
+    msgbox(format("If you talk to 'em, the robots will give you a refresher on how they work, but its pretty simple."),MSGBOX_DEFAULT,SPEAKER_FRANK)
+    msgbox(format("The second stage of your training will be defeating the robot that is assigned to you."),MSGBOX_DEFAULT,SPEAKER_FRANK)
         msgbox(format("The first stage needed you to work together, but this time, you're on your own."),,SPEAKER_FRANK)
-        closemessage
+}
+
+script EnterTheMaster_ExplainRobots_Dialogue_First{
+        call(EnterTheMaster_ExplainRobots_Dialogue)
         msgbox(format("Okay, let's take a crack at these..."),,SPEAKER_CHARLOTTE)
         closemessage
-        applymovement(LOCALID_LEAVERRA_CHARLOTTE, moves(walk_up, walk_left * 5, walk_up * 6, step_end))
+        moveobjecttocoords(LOCALID_LEAVERRA_CHARLOTTE,7,10,DIR_NORTH)
+        delay(16)
         fadescreenswapbuffers(FADE_TO_BLACK)
         call(EnterTheMaster_RepositionCharlotteToRobot_Script)
         fadescreenswapbuffers(FADE_FROM_BLACK)
@@ -298,11 +310,6 @@ script EnterTheMaster_ExplainRobots_Dialogue{
         end
 }
 
-movement EnterTheMaster_WalkIntoWoods {
-    walk_up
-        step_end
-}
-
 script EnterTheMaster_Interact_Charlotte_Script{
     lock
     msgbox(format("Okay, what if I send out this Pokémon first..."),,SPEAKER_CHARLOTTE,TAIL_WHISPER)
@@ -310,29 +317,14 @@ script EnterTheMaster_Interact_Charlotte_Script{
     end
 }
 
-script EnterTheMaster_GiveMons_Script{
-    //special(SavePlayerParty)
-    return
-}
 
-script EnterTheMaster_ChooseMons_Script{
-    //choose_mons
-    //special(ReducePlayerPartyToSelectedMons)
-    return
-}
-
-script EnterTheMaster_Battle_Setup_Script{
-    call(EnterTheMaster_GiveMons_Script)
-    call(EnterTheMaster_ChooseMons_Script)
-    return
-}
-
-script EnterTheMaster_Interact_Robot_Script{
+script EnterTheMaster_Interact_Robot_Script
+{
     lock
     faceplayer
-    msgbox(format("Hello {PLAYER}. Which scenario would you like to run?"))
+    msgbox(format("Which scenario would you like to run?"),,SPEAKER_ROBOT)
 
-    dynmultichoice(1,1,TRUE,4,0,NULL,
+    dynmultichoice(0,0,FALSE,3,0,NULL,
         "Scenario 1",
         "Scenario 2",
         "Scenario 3",
@@ -340,23 +332,22 @@ script EnterTheMaster_Interact_Robot_Script{
         "Never mind.",
     )
 
-    switch (var(VAR_RESULT)){
+    switch (var(VAR_RESULT))
+    {
         case 0:goto(EnterTheMaster_Battle_Robot1_Script)
         case 1:goto(EnterTheMaster_Battle_Robot2_Script)
         case 2:goto(EnterTheMaster_Battle_Robot3_Script)
         case 3:goto(EnterTheMaster_Battle_Robot4_Script)
     }
+    closemessage
     release
     end
 }
 
-script EnterTheMaster_CheckTrainer_Script{
-    msgbox(format("You've already completed this puzzle. Are you going to try again?"),MSGBOX_YESNO,SPEAKER_OLIVER)
-
-    if (var(VAR_RESULT) == NO){
-        goto(EnterTheMaster_Interact_Robot_Script)
-    }
-    return
+script EnterTheMaster_CheckTrainer_Script
+{
+    msgbox(format("You've already completed this puzzle. Are you going to try again?"),MSGBOX_YESNO,SPEAKER_ROBOT)
+    goto_if_eq(VAR_RESULT,NO,EnterTheMaster_Interact_Robot_Script)
 }
 
 script EnterTheMaster_Battle_Robot1_Script{
@@ -365,10 +356,9 @@ script EnterTheMaster_Battle_Robot1_Script{
 		call(EnterTheMaster_CheckTrainer_Script)
 	}
 
-    setvar(VAR_TEMP_0,1)
-    call(EnterTheMaster_Battle_Setup_Script)
+    closemessage
     trainerbattle_continue_after_lose(TRAINER_FRANK_ROBOT_1,format("Robot 1 lose text."))
-    msgbox(format("Excellent work!"))
+    msgbox(format("Excellent work!"),,SPEAKER_ROBOT)
     call(EnterTheMaster_CheckReward_Script)
     release
     end
@@ -380,10 +370,9 @@ script EnterTheMaster_Battle_Robot2_Script{
 	{
 		call(EnterTheMaster_CheckTrainer_Script)
 	}
-    setvar(VAR_TEMP_0,2)
-    call(EnterTheMaster_Battle_Setup_Script)
+    closemessage
     trainerbattle_continue_after_lose(TRAINER_FRANK_ROBOT_2,format("Robot 2 lose text."))
-    msgbox(format("Excellent work!"))
+    msgbox(format("Excellent work!"),,SPEAKER_ROBOT)
     call(EnterTheMaster_CheckReward_Script)
     release
     end
@@ -396,10 +385,9 @@ script EnterTheMaster_Battle_Robot3_Script{
 		call(EnterTheMaster_CheckTrainer_Script)
 	}
 
-    setvar(VAR_TEMP_0,3)
-    call(EnterTheMaster_Battle_Setup_Script)
+    closemessage
     trainerbattle_continue_after_lose(TRAINER_FRANK_ROBOT_3,format("Robot 3 lose text."))
-    msgbox(format("Excellent work!"))
+    msgbox(format("Excellent work!"),,SPEAKER_ROBOT)
     call(EnterTheMaster_CheckReward_Script)
     release
     end
@@ -411,10 +399,9 @@ script EnterTheMaster_Battle_Robot4_Script{
 	{
 		call(EnterTheMaster_CheckTrainer_Script)
 	}
-    setvar(VAR_TEMP_0,4)
-    call(EnterTheMaster_Battle_Setup_Script)
+    closemessage
     trainerbattle_continue_after_lose(TRAINER_FRANK_ROBOT_4,format("Robot 4 lose text."))
-    msgbox(format("Excellent work!"))
+    msgbox(format("Excellent work!"),,SPEAKER_ROBOT)
     call(EnterTheMaster_CheckReward_Script)
     release
     end
@@ -424,37 +411,41 @@ script EnterTheMaster_CheckReward_Script
 {
 	if (!defeated(TRAINER_FRANK_ROBOT_1))
 	{
-		return
+        goto(EnterTheMaster_Interact_Robot_Script)
 	}
 	if (!defeated(TRAINER_FRANK_ROBOT_2))
 	{
-		return
+        goto(EnterTheMaster_Interact_Robot_Script)
 	}
 	if (!defeated(TRAINER_FRANK_ROBOT_3))
 	{
-		return
+        goto(EnterTheMaster_Interact_Robot_Script)
 	}
 	if (!defeated(TRAINER_FRANK_ROBOT_4))
 	{
-		return
+        goto(EnterTheMaster_Interact_Robot_Script)
 	}
+    closemessage
 	goto(EnterTheMaster_CompleteQuest_Script)
 }
 
 script EnterTheMaster_Interact_CharlotteRobot_Script{
     lock
-    msgbox(format("This robot is for Charlotte."),MSGBOX_AUTOCLOSE)
+    msgbox(format("This robot is for Charlotte."),MSGBOX_AUTOCLOSE,SPEAKER_ROBOT)
     release
     end
 }
 
 script EnterTheMaster_SetUpCompletion_Script{
     fadescreenswapbuffers(FADE_TO_BLACK)
+    adddays(7)
     setobjectxy(LOCALID_LEAVERRA_CHARLOTTE,9,16)
     setobjectxyperm(LOCALID_LEAVERRA_CHARLOTTE,9,16)
     setobjectxy(PLAYER,10,16)
     applymovement(PLAYER,Common_Movement_FaceUp)
     TeleportCamera(10,16)
+    applymovement(LOCALID_LEAVERRA_FRANK,Common_Movement_FaceDown)
+    waitmovement(LOCALID_LEAVERRA_FRANK)
     fadescreenswapbuffers(FADE_FROM_BLACK)
     return
 }
@@ -462,8 +453,6 @@ script EnterTheMaster_SetUpCompletion_Script{
 script EnterTheMaster_CompleteQuest_Script{
     call(EnterTheMaster_SetUpCompletion_Script)
     setvar(VAR_LEAVERRA_FOREST_STATE,FINISHED_FRANK_PUZZLES)
-    applymovement(FRANK,Common_Movement_FaceDown)
-    waitmovement(FRANK)
     msgbox(format("It's been quite a week. Impressed you were both able to clear those puzzles so quickly."),,SPEAKER_FRANK)
     msgbox(format("A week?!?"),,SPEAKER_CHARLOTTE,TAIL_SHOUT,EMOTE_SHOCK)
     msgbox(format("It feels like maybe a day at most!"),,SPEAKER_ALICIA,,EMOTE_SHOCK)
@@ -471,9 +460,4 @@ script EnterTheMaster_CompleteQuest_Script{
     msgbox(format("Either way, good job. Go ahead and rest -"),,SPEAKER_FRANK)
     closemessage
     end
-}
-
-movement EnterTheMaster_WalkAway{
-    walk_down * 2
-    step_end
 }

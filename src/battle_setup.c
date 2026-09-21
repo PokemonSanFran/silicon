@@ -67,6 +67,7 @@
 #include "ui_dexnav.h" // dexnav
 #include "fishing.h"
 #include "field_effect.h" // flyEncounters
+#include "options_game.h" // autoSave
 
 enum TransitionType
 {
@@ -548,6 +549,17 @@ void StartWallyTutorialBattle(void)
     CreateBattleStartTask(B_TRANSITION_SLICE, 0);
 }
 
+// Start siliconMerge
+void StartTrachyTutorialBattle(void)
+{
+    CreateMaleMon(&gParties[B_TRAINER_OPPONENT_A][0], SPECIES_ABRA, 17);
+    LockPlayerFieldControls();
+    gMain.savedCallback = CB2_ReturnToFieldContinueScriptPlayMapMusic;
+    gBattleTypeFlags = BATTLE_TYPE_CATCH_TUTORIAL;
+    CreateBattleStartTask(B_TRANSITION_SLICE, 0);
+}
+// End siliconMerge
+
 void StartOldManTutorialBattle(void)
 {
     CreateMaleMon(&gParties[B_TRAINER_OPPONENT_A][0], SPECIES_WEEDLE, 5);
@@ -758,7 +770,10 @@ static void CB2_EndWildBattle(void)
         IncrementFogVariable(); // fogBattle
         SetMainCallback2(CB2_ReturnToField);
         DowngradeBadPoison();
-        gFieldCallback = FieldCB_ReturnToFieldNoScriptCheckMusic;
+        // Start autoSave
+        //gFieldCallback = FieldCB_ReturnToFieldNoScriptCheckMusic;
+        gFieldCallback = FieldCB_ReturnToFieldPostWildBattleCheckMusic;
+        // End autoSave
     }
 }
 

@@ -246,7 +246,7 @@ enum
 enum
 {
     STATE_QUEST_ANGELDELIVERY_QUEST_NOT_STARTED,
-    STATE_QUEST_ANGELDELIVERY_RECIEVED_BIKE,
+    STATE_QUEST_ANGELDELIVERY_RECEIVED_BIKE,
     STATE_QUEST_ANGELDELIVERY_ABOUT_TO_DELIVER_ITEM,
     STATE_QUEST_ANGELDELIVERY_DELIVERED_ITEM,
     STATE_QUEST_ANGELDELIVERY_BEFORE_BATTLE,
@@ -1428,5 +1428,53 @@ enum
 // ***********************************************************************
 
 #define CHARLOTTE_MON_INDEX                    5
+//
+// ***********************************************************************
+// Cutscene: Group of Assholes
+// ***********************************************************************
+
+#define ITEM_GROUP_OF_ASSHOLES_REWARD ITEM_POTION
+//
+// ***********************************************************************
+// Cutscene: The Story So Far
+// ***********************************************************************
+
+#define STORY_ARANTRAZ_EXHIBIT_TRAINERS_COUNT 6
+#define ITEM_ARANTRAZ_EXHIBIT_REWARD ITEM_MACHO_BRACE
+
+// ***********************************************************************
+// Cutscene: The Story So Far
+// ***********************************************************************
+#define ITEM_GYM_REWARD_MERMEREZA ITEM_TM001
+#define ITEM_GYM_REWARD_TORA      ITEM_TM002
+#define ITEM_GYM_REWARD_PERLACIA  ITEM_TM003
+#define ITEM_GYM_REWARD_CHASILLA  ITEM_TM004
+#define ITEM_GYM_REWARD_FORT_YOBU ITEM_TM005
+#define ITEM_GYM_REWARD_HALERBA   ITEM_TM006
+#define ITEM_GYM_REWARD_TIRABUDIN ITEM_TM007
+#define ITEM_GYM_REWARD_IRISINA   ITEM_TM008
+
+// ***********************************************************************
+// Cutscene: I Guess We Should Be Nice Now
+// ***********************************************************************
+
+#define SPECIES_FRANK_MON_LEAD SPECIES_CENTISKORCH
+#define SPECIES_FRANK_MON_PARTNER SPECIES_SIZZLIPEDE
+#define LEVEL_FRANK_MON_LEAD 70
+#define LEVEL_FRANK_MON_PARTNER 60
+#define ITEM_FRANK_MON_LEAD ITEM_LIFE_ORB
+#define ITEM_FRANK_MON_PARTNER ITEM_SITRUS_BERRY
+
+// ***********************************************************************
+// Cutscene: I'm In
+// ***********************************************************************
+
+#define BAIYA_MON_INDEX                    1
+
+// ***********************************************************************
+// Cutscene: Why Are You Helping Them
+// ***********************************************************************
+
+#define CHARLOTTE_ADAORA_MON_INDEX                    2
 
 #endif // GUARD_CONSTANTS_QUESTS_H

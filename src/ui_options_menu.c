@@ -139,14 +139,14 @@ void OptionsMenu_SetSavedOptions(u32 category, u32 setting, u32 value)
 void CopyTemporalDataToSaveBlockData()
 {
 	for(u32 i = 0 ;i < NUM_OF_PRESET_OPTIONS; i++)
-        for(u32 j = 0 ;j < NUM_OPTIONS_GAME_SETTINGS; j++)
+        for(u32 j = 0 ;j < NUM_OPTIONS_MAX_SETTINGS; j++)
             gSaveBlock2Ptr->options[i][j] = TemporalOptions[i][j];
 }
 
 void CopySaveBlockDataToTemporalData()
 {
 	for(u32 i = 0 ;i < NUM_OF_PRESET_OPTIONS; i++)
-        for(u32 j = 0 ;j < NUM_OPTIONS_GAME_SETTINGS; j++)
+        for(u32 j = 0 ;j < NUM_OPTIONS_MAX_SETTINGS; j++)
             TemporalOptions[i][j] = gSaveBlock2Ptr->options[i][j];
 }
 
@@ -853,155 +853,21 @@ static const u8 Preset_Options[NUM_OF_PRESET_OPTIONS][NUM_MAX_SETTINGS][MAX_OPTI
     },
     [MUSIC_SETTINGS] =
     {
-        [MUSIC_OPTIONS_RESIDO]  = {
-            [MUSIC_OPTIONS_PRESET]           = MUSIC_OPTIONS_RESIDO,
+        [MUSIC_OPTIONS_UNMUTED]  = {
+            [MUSIC_OPTIONS_PRESET]           = MUSIC_OPTIONS_UNMUTED,
             [MUSIC_OPTIONS_SPEAKER]          = OPTIONS_SOUND_STEREO,
-            [MUSIC_OPTIONS_SURF]             = MUSIC_OPTION_SURF_RESIDO,
-            [MUSIC_OPTIONS_BIKE]             = MUSIC_OPTION_BIKE_RESIDO,
-            [MUSIC_OPTIONS_WILD]             = MUSIC_OPTION_BATTLE_WILD_RESIDO,
-            [MUSIC_OPTIONS_TRAINER]          = MUSIC_OPTION_BATTLE_TRAINER_RESIDO,
-            [MUSIC_OPTIONS_GYM]              = MUSIC_OPTION_BATTLE_GYM_RESIDO,
-            [MUSIC_OPTIONS_TOURNAMENT]       = MUSIC_OPTION_BATTLE_TOURNAMENT_RESIDO,
-            [MUSIC_OPTIONS_CHAMPION]         = MUSIC_OPTION_BATTLE_CHAMPION_RESIDO,
             [MUSIC_OPTIONS_MUTE_MUSIC]        = MUSIC_OPTIONS_UNMUTED,
             [MUSIC_OPTIONS_MUTE_SOUNDFX]      = MUSIC_OPTIONS_UNMUTED,
             [MUSIC_OPTIONS_MUTE_CRIES]        = MUSIC_OPTIONS_UNMUTED,
             [MUSIC_OPTIONS_MUTE_FANFARES]     = MUSIC_OPTIONS_UNMUTED,
         },
-        [MUSIC_OPTIONS_KANTO]  = {
-            [MUSIC_OPTIONS_PRESET]           = MUSIC_OPTIONS_KANTO,
+        [MUSIC_OPTIONS_MUTED]  = {
+            [MUSIC_OPTIONS_PRESET]           = MUSIC_OPTIONS_MUTED,
             [MUSIC_OPTIONS_SPEAKER]          = OPTIONS_SOUND_STEREO,
-            [MUSIC_OPTIONS_SURF]             = MUSIC_OPTION_SURF_TOHJO,
-            [MUSIC_OPTIONS_BIKE]             = MUSIC_OPTION_BIKE_KANTO,
-            [MUSIC_OPTIONS_WILD]             = MUSIC_OPTION_BATTLE_WILD_KANTO,
-            [MUSIC_OPTIONS_TRAINER]          = MUSIC_OPTION_BATTLE_TRAINER_KANTO,
-            [MUSIC_OPTIONS_GYM]              = MUSIC_OPTION_BATTLE_GYM_KANTO,
-            [MUSIC_OPTIONS_TOURNAMENT]       = MUSIC_OPTION_BATTLE_TOURNAMENT_TOHJO,
-            [MUSIC_OPTIONS_CHAMPION]         = MUSIC_OPTION_BATTLE_CHAMPION_KANTO_OLD,
-            [MUSIC_OPTIONS_MUTE_MUSIC]        = MUSIC_OPTIONS_UNMUTED,
-            [MUSIC_OPTIONS_MUTE_SOUNDFX]      = MUSIC_OPTIONS_UNMUTED,
-            [MUSIC_OPTIONS_MUTE_CRIES]        = MUSIC_OPTIONS_UNMUTED,
-            [MUSIC_OPTIONS_MUTE_FANFARES]     = MUSIC_OPTIONS_UNMUTED,
-        },
-        [MUSIC_OPTIONS_JOHTO]  = {
-            [MUSIC_OPTIONS_PRESET]           = MUSIC_OPTIONS_JOHTO,
-            [MUSIC_OPTIONS_SPEAKER]          = OPTIONS_SOUND_STEREO,
-            [MUSIC_OPTIONS_SURF]             = MUSIC_OPTION_SURF_TOHJO,
-            [MUSIC_OPTIONS_BIKE]             = MUSIC_OPTION_BIKE_JOHTO,
-            [MUSIC_OPTIONS_WILD]             = MUSIC_OPTION_BATTLE_WILD_JOHTO,
-            [MUSIC_OPTIONS_TRAINER]          = MUSIC_OPTION_BATTLE_TRAINER_JOHTO,
-            [MUSIC_OPTIONS_GYM]              = MUSIC_OPTION_BATTLE_GYM_JOHTO,
-            [MUSIC_OPTIONS_TOURNAMENT]       = MUSIC_OPTION_BATTLE_TOURNAMENT_TOHJO,
-            [MUSIC_OPTIONS_CHAMPION]         = MUSIC_OPTION_BATTLE_CHAMPION_KANTO_NEW,
-            [MUSIC_OPTIONS_MUTE_MUSIC]        = MUSIC_OPTIONS_UNMUTED,
-            [MUSIC_OPTIONS_MUTE_SOUNDFX]      = MUSIC_OPTIONS_UNMUTED,
-            [MUSIC_OPTIONS_MUTE_CRIES]        = MUSIC_OPTIONS_UNMUTED,
-            [MUSIC_OPTIONS_MUTE_FANFARES]     = MUSIC_OPTIONS_UNMUTED,
-        },
-        [MUSIC_OPTIONS_HOENN]  = {
-            [MUSIC_OPTIONS_PRESET]           = MUSIC_OPTIONS_HOENN,
-            [MUSIC_OPTIONS_SPEAKER]          = OPTIONS_SOUND_STEREO,
-            [MUSIC_OPTIONS_SURF]             = MUSIC_OPTION_SURF_HOENN,
-            [MUSIC_OPTIONS_BIKE]             = MUSIC_OPTION_BIKE_HOENN,
-            [MUSIC_OPTIONS_WILD]             = MUSIC_OPTION_BATTLE_WILD_HOENN,
-            [MUSIC_OPTIONS_TRAINER]          = MUSIC_OPTION_BATTLE_TRAINER_HOENN,
-            [MUSIC_OPTIONS_GYM]              = MUSIC_OPTION_BATTLE_GYM_HOENN,
-            [MUSIC_OPTIONS_TOURNAMENT]       = MUSIC_OPTION_BATTLE_TOURNAMENT_HOENN,
-            [MUSIC_OPTIONS_CHAMPION]         = MUSIC_OPTION_BATTLE_CHAMPION_HOENN,
-            [MUSIC_OPTIONS_MUTE_MUSIC]        = MUSIC_OPTIONS_UNMUTED,
-            [MUSIC_OPTIONS_MUTE_SOUNDFX]      = MUSIC_OPTIONS_UNMUTED,
-            [MUSIC_OPTIONS_MUTE_CRIES]        = MUSIC_OPTIONS_UNMUTED,
-            [MUSIC_OPTIONS_MUTE_FANFARES]     = MUSIC_OPTIONS_UNMUTED,
-        },
-        [MUSIC_OPTIONS_SINNOH]  = {
-            [MUSIC_OPTIONS_PRESET]           = MUSIC_OPTIONS_SINNOH,
-            [MUSIC_OPTIONS_SPEAKER]          = OPTIONS_SOUND_STEREO,
-            [MUSIC_OPTIONS_SURF]             = MUSIC_OPTION_SURF_SINNOH,
-            [MUSIC_OPTIONS_BIKE]             = MUSIC_OPTION_BIKE_SINNOH,
-            [MUSIC_OPTIONS_WILD]             = MUSIC_OPTION_BATTLE_WILD_SINNOH,
-            [MUSIC_OPTIONS_TRAINER]          = MUSIC_OPTION_BATTLE_TRAINER_SINNOH,
-            [MUSIC_OPTIONS_GYM]              = MUSIC_OPTION_BATTLE_GYM_SINNOH,
-            [MUSIC_OPTIONS_TOURNAMENT]       = MUSIC_OPTION_BATTLE_TOURNAMENT_SINNOH,
-            [MUSIC_OPTIONS_CHAMPION]         = MUSIC_OPTION_BATTLE_CHAMPION_SINNOH,
-            [MUSIC_OPTIONS_MUTE_MUSIC]        = MUSIC_OPTIONS_UNMUTED,
-            [MUSIC_OPTIONS_MUTE_SOUNDFX]      = MUSIC_OPTIONS_UNMUTED,
-            [MUSIC_OPTIONS_MUTE_CRIES]        = MUSIC_OPTIONS_UNMUTED,
-            [MUSIC_OPTIONS_MUTE_FANFARES]     = MUSIC_OPTIONS_UNMUTED,
-        },
-        [MUSIC_OPTIONS_UNOVA]  = {
-            [MUSIC_OPTIONS_PRESET]           = MUSIC_OPTIONS_UNOVA,
-            [MUSIC_OPTIONS_SPEAKER]          = OPTIONS_SOUND_STEREO,
-            [MUSIC_OPTIONS_SURF]             = MUSIC_OPTION_SURF_UNOVA,
-            [MUSIC_OPTIONS_BIKE]             = MUSIC_OPTION_BIKE_UNOVA,
-            [MUSIC_OPTIONS_WILD]             = MUSIC_OPTION_BATTLE_WILD_UNOVA,
-            [MUSIC_OPTIONS_TRAINER]          = MUSIC_OPTION_BATTLE_TRAINER_UNOVA,
-            [MUSIC_OPTIONS_GYM]              = MUSIC_OPTION_BATTLE_GYM_UNOVA,
-            [MUSIC_OPTIONS_TOURNAMENT]       = MUSIC_OPTION_BATTLE_TOURNAMENT_UNOVA,
-            [MUSIC_OPTIONS_CHAMPION]         = MUSIC_OPTION_BATTLE_CHAMPION_UNOVA_NEW,
-            [MUSIC_OPTIONS_MUTE_MUSIC]        = MUSIC_OPTIONS_UNMUTED,
-            [MUSIC_OPTIONS_MUTE_SOUNDFX]      = MUSIC_OPTIONS_UNMUTED,
-            [MUSIC_OPTIONS_MUTE_CRIES]        = MUSIC_OPTIONS_UNMUTED,
-            [MUSIC_OPTIONS_MUTE_FANFARES]     = MUSIC_OPTIONS_UNMUTED,
-        },
-        [MUSIC_OPTIONS_KALOS]  = {
-            [MUSIC_OPTIONS_PRESET]           = MUSIC_OPTIONS_KALOS,
-            [MUSIC_OPTIONS_SPEAKER]          = OPTIONS_SOUND_STEREO,
-            [MUSIC_OPTIONS_SURF]             = MUSIC_OPTION_SURF_KALOS,
-            [MUSIC_OPTIONS_BIKE]             = MUSIC_OPTION_BIKE_KALOS,
-            [MUSIC_OPTIONS_WILD]             = MUSIC_OPTION_BATTLE_WILD_KALOS,
-            [MUSIC_OPTIONS_TRAINER]          = MUSIC_OPTION_BATTLE_TRAINER_KALOS,
-            [MUSIC_OPTIONS_GYM]              = MUSIC_OPTION_BATTLE_GYM_KALOS,
-            [MUSIC_OPTIONS_TOURNAMENT]       = MUSIC_OPTION_BATTLE_TOURNAMENT_KALOS,
-            [MUSIC_OPTIONS_CHAMPION]         = MUSIC_OPTION_BATTLE_CHAMPION_KALOS,
-            [MUSIC_OPTIONS_MUTE_MUSIC]        = MUSIC_OPTIONS_UNMUTED,
-            [MUSIC_OPTIONS_MUTE_SOUNDFX]      = MUSIC_OPTIONS_UNMUTED,
-            [MUSIC_OPTIONS_MUTE_CRIES]        = MUSIC_OPTIONS_UNMUTED,
-            [MUSIC_OPTIONS_MUTE_FANFARES]     = MUSIC_OPTIONS_UNMUTED,
-        },
-        [MUSIC_OPTIONS_ALOLA]  = {
-            [MUSIC_OPTIONS_PRESET]           = MUSIC_OPTIONS_ALOLA,
-            [MUSIC_OPTIONS_SPEAKER]          = OPTIONS_SOUND_STEREO,
-            [MUSIC_OPTIONS_SURF]             = MUSIC_OPTION_SURF_ALOLA,
-            [MUSIC_OPTIONS_BIKE]             = MUSIC_OPTION_BIKE_ALOLA,
-            [MUSIC_OPTIONS_WILD]             = MUSIC_OPTION_BATTLE_WILD_ALOLA,
-            [MUSIC_OPTIONS_TRAINER]          = MUSIC_OPTION_BATTLE_TRAINER_ALOLA,
-            [MUSIC_OPTIONS_GYM]              = MUSIC_OPTION_BATTLE_GYM_ALOLA,
-            [MUSIC_OPTIONS_TOURNAMENT]       = MUSIC_OPTION_BATTLE_TOURNAMENT_ALOLA,
-            [MUSIC_OPTIONS_CHAMPION]         = MUSIC_OPTION_BATTLE_CHAMPION_ALOLA,
-            [MUSIC_OPTIONS_MUTE_MUSIC]        = MUSIC_OPTIONS_UNMUTED,
-            [MUSIC_OPTIONS_MUTE_SOUNDFX]      = MUSIC_OPTIONS_UNMUTED,
-            [MUSIC_OPTIONS_MUTE_CRIES]        = MUSIC_OPTIONS_UNMUTED,
-            [MUSIC_OPTIONS_MUTE_FANFARES]     = MUSIC_OPTIONS_UNMUTED,
-        },
-        [MUSIC_OPTIONS_GALAR]  = {
-            [MUSIC_OPTIONS_PRESET]           = MUSIC_OPTIONS_GALAR,
-            [MUSIC_OPTIONS_SPEAKER]          = OPTIONS_SOUND_STEREO,
-            [MUSIC_OPTIONS_SURF]             = MUSIC_OPTION_SURF_RESIDO,
-            [MUSIC_OPTIONS_BIKE]             = MUSIC_OPTION_BIKE_RESIDO,
-            [MUSIC_OPTIONS_WILD]             = MUSIC_OPTION_BATTLE_WILD_GALAR,
-            [MUSIC_OPTIONS_TRAINER]          = MUSIC_OPTION_BATTLE_TRAINER_GALAR,
-            [MUSIC_OPTIONS_GYM]              = MUSIC_OPTION_BATTLE_GYM_GALAR,
-            [MUSIC_OPTIONS_TOURNAMENT]       = MUSIC_OPTION_BATTLE_TOURNAMENT_GALAR,
-            [MUSIC_OPTIONS_CHAMPION]         = MUSIC_OPTION_BATTLE_CHAMPION_GALAR,
-            [MUSIC_OPTIONS_MUTE_MUSIC]        = MUSIC_OPTIONS_UNMUTED,
-            [MUSIC_OPTIONS_MUTE_SOUNDFX]      = MUSIC_OPTIONS_UNMUTED,
-            [MUSIC_OPTIONS_MUTE_CRIES]        = MUSIC_OPTIONS_UNMUTED,
-            [MUSIC_OPTIONS_MUTE_FANFARES]     = MUSIC_OPTIONS_UNMUTED,
-        },
-        [MUSIC_OPTIONS_PALDEA]  = {
-            [MUSIC_OPTIONS_PRESET]           = MUSIC_OPTIONS_PALDEA,
-            [MUSIC_OPTIONS_SPEAKER]          = OPTIONS_SOUND_STEREO,
-            [MUSIC_OPTIONS_SURF]             = MUSIC_OPTION_SURF_RESIDO,
-            [MUSIC_OPTIONS_BIKE]             = MUSIC_OPTION_BIKE_RESIDO,
-            [MUSIC_OPTIONS_WILD]             = MUSIC_OPTION_BATTLE_WILD_PALDEA,
-            [MUSIC_OPTIONS_TRAINER]          = MUSIC_OPTION_BATTLE_TRAINER_PALDEA,
-            [MUSIC_OPTIONS_GYM]              = MUSIC_OPTION_BATTLE_GYM_PALDEA,
-            [MUSIC_OPTIONS_TOURNAMENT]       = MUSIC_OPTION_BATTLE_TOURNAMENT_PALDEA,
-            [MUSIC_OPTIONS_CHAMPION]         = MUSIC_OPTION_BATTLE_CHAMPION_PALDEA,
-            [MUSIC_OPTIONS_MUTE_MUSIC]        = MUSIC_OPTIONS_UNMUTED,
-            [MUSIC_OPTIONS_MUTE_SOUNDFX]      = MUSIC_OPTIONS_UNMUTED,
-            [MUSIC_OPTIONS_MUTE_CRIES]        = MUSIC_OPTIONS_UNMUTED,
-            [MUSIC_OPTIONS_MUTE_FANFARES]     = MUSIC_OPTIONS_UNMUTED,
+            [MUSIC_OPTIONS_MUTE_MUSIC]        = MUSIC_OPTIONS_MUTED,
+            [MUSIC_OPTIONS_MUTE_SOUNDFX]      = MUSIC_OPTIONS_MUTED,
+            [MUSIC_OPTIONS_MUTE_CRIES]        = MUSIC_OPTIONS_MUTED,
+            [MUSIC_OPTIONS_MUTE_FANFARES]     = MUSIC_OPTIONS_MUTED,
         },
     },
     [RANDOM_SETTINGS] =
@@ -1506,7 +1372,7 @@ static const struct OptionData Settings_Options[SETTINGS_COUNT][NUM_OPTIONS_MAX_
                 COMPOUND_STRING("Players forced to nickname a new Pokémon upon capture."),
                 COMPOUND_STRING("Players are not asked if they want to nickname a new Pokémon upon capture."),
             },
-            .numOptions = 3,
+            .numOptions = BATTLE_OPTION_NICKNAME_COUNT,
         },
         [BATTLE_OPTIONS_WHITEOUT] =
         {
@@ -1856,29 +1722,13 @@ static const struct OptionData Settings_Options[SETTINGS_COUNT][NUM_OPTIONS_MAX_
         {
             .title = COMPOUND_STRING("Music Settings"),
             .options = {
-                COMPOUND_STRING("Resido"),
-                COMPOUND_STRING("Kanto"),
-                COMPOUND_STRING("Johto"),
-                COMPOUND_STRING("Hoenn"),
-                COMPOUND_STRING("Sinnoh"),
-                COMPOUND_STRING("Unova"),
-                COMPOUND_STRING("Kalos"),
-                COMPOUND_STRING("Alola"),
-                COMPOUND_STRING("Galar"),
-                COMPOUND_STRING("Paldea"),
+                COMPOUND_STRING("Unmuted"),
+                COMPOUND_STRING("Muted"),
                 COMPOUND_STRING("Custom"),
             },
             .optionDescription = {
-                COMPOUND_STRING("Surfing, biking, and select battles (Wild, Trainer, and more) use music from the Resido region."),
-                COMPOUND_STRING("Surfing, biking, and select battles (Wild, Trainer, and more) use music from the Kanto region."),
-                COMPOUND_STRING("Surfing, biking, and select battles (Wild, Trainer, and more) use music from the Johto region."),
-                COMPOUND_STRING("Surfing, biking, and select battles (Wild, Trainer, and more) use music from the Hoenn region."),
-                COMPOUND_STRING("Surfing, biking, and select battles (Wild, Trainer, and more) use music from the Sinnoh region."),
-                COMPOUND_STRING("Surfing, biking, and select battles (Wild, Trainer, and more) use music from the Unova region."),
-                COMPOUND_STRING("Surfing, biking, and select battles (Wild, Trainer, and more) use music from the Kalos region."),
-                COMPOUND_STRING("Surfing, biking, and select battles (Wild, Trainer, and more) use music from the Alola region."),
-                COMPOUND_STRING("Surfing, biking, and select battles (Wild, Trainer, and more) use music from the Galar region."),
-                COMPOUND_STRING("Surfing, biking, and select battles (Wild, Trainer, and more) use music from the Paldea region."),
+                COMPOUND_STRING("Music, sound effects, cries and fanfares play normally."),
+                COMPOUND_STRING("Music, sound effects, cries and fanfares are muted."),
                 COMPOUND_STRING(""),
             },
             .numOptions = MUSIC_PRESET_COUNT,
@@ -1897,216 +1747,6 @@ static const struct OptionData Settings_Options[SETTINGS_COUNT][NUM_OPTIONS_MAX_
                 COMPOUND_STRING("All audio is handled by the system's stereo audio mode."),
             },
             .numOptions = MUSIC_OPTIONS_SPEAKER_COUNT,
-        },
-        [MUSIC_OPTIONS_SURF] =
-        {
-            .title = COMPOUND_STRING("Surf"),
-            .options =
-            {
-                COMPOUND_STRING("Resido"),
-                COMPOUND_STRING("Tohjo"),
-                COMPOUND_STRING("Hoenn"),
-                COMPOUND_STRING("Sinnoh"),
-                COMPOUND_STRING("Unova"),
-                COMPOUND_STRING("Kalos"),
-                COMPOUND_STRING("Alola"),
-                COMPOUND_STRING("Mantine Surf"),
-            },
-            .optionDescription =
-            {
-                COMPOUND_STRING("While Surfing, you'll hear Resido's Surfing music."),
-                COMPOUND_STRING("While Surfing, you'll hear the Surfing music from Johto and Kanto."),
-                COMPOUND_STRING("While Surfing, you'll hear the Surfing music from Hoenn."),
-                COMPOUND_STRING("While Surfing, you'll hear the Surfing music from Sinnoh."),
-                COMPOUND_STRING("While Surfing, you'll hear the Surfing music from Unova."),
-                COMPOUND_STRING("While Surfing, you'll hear the Surfing music from Kalos."),
-                COMPOUND_STRING("While Surfing, you'll hear the Surfing music from Alola."),
-                COMPOUND_STRING("While Surfing, you'll hear the Surfing music from Alola's Mantine Surf."),
-
-            },
-            .numOptions = MUSIC_SURF_OPTIONS_COUNT,
-        },
-        [MUSIC_OPTIONS_BIKE] =
-        {
-            .title = COMPOUND_STRING("Bike"),
-            .options =
-            {
-                COMPOUND_STRING("Resido"),
-                COMPOUND_STRING("Kanto"),
-                COMPOUND_STRING("Johto"),
-                COMPOUND_STRING("Hoenn"),
-                COMPOUND_STRING("Sinnoh"),
-                COMPOUND_STRING("Unova"),
-                COMPOUND_STRING("Kalos"),
-                COMPOUND_STRING("Alola"),
-            },
-            .optionDescription =
-            {
-                COMPOUND_STRING("While riding a bicycle, you'll hear Resido's bicycle music."),
-                COMPOUND_STRING("While riding a bicycle, you'll hear the bicycle music from Kanto."),
-                COMPOUND_STRING("While riding a bicycle, you'll hear the bicycle music from Johto."),
-                COMPOUND_STRING("While riding a bicycle, you'll hear the bicycle music from Hoenn."),
-                COMPOUND_STRING("While riding a bicycle, you'll hear the bicycle music from Sinnoh."),
-                COMPOUND_STRING("While riding a bicycle, you'll hear the bicycle music from Unova."),
-                COMPOUND_STRING("While riding a bicycle, you'll hear the bicycle music from Kalos."),
-                COMPOUND_STRING("While riding a bicycle, you'll hear the bicycle music from Alola."),
-            },
-            .numOptions = MUSIC_BIKE_OPTIONS_COUNT,
-        },
-        [MUSIC_OPTIONS_WILD] =
-        {
-            .title = COMPOUND_STRING("Wild Battle"),
-            .options =
-            {
-                COMPOUND_STRING("Resido"),
-                COMPOUND_STRING("Kanto"),
-                COMPOUND_STRING("Johto"),
-                COMPOUND_STRING("Hoenn"),
-                COMPOUND_STRING("Sinnoh"),
-                COMPOUND_STRING("Unova"),
-                COMPOUND_STRING("Kalos"),
-                COMPOUND_STRING("Alola"),
-                COMPOUND_STRING("Galar"),
-                COMPOUND_STRING("Paldea"),
-            },
-            .optionDescription =
-            {
-                COMPOUND_STRING("While battling a wild Pokemon, you'll hear Resido's wild battle music."),
-                COMPOUND_STRING("While battling a wild Pokemon, you'll hear the wild battle music from Kanto."),
-                COMPOUND_STRING("While battling a wild Pokemon, you'll hear the wild battle music from Johto."),
-                COMPOUND_STRING("While battling a wild Pokemon, you'll hear the wild battle music from Hoenn."),
-                COMPOUND_STRING("While battling a wild Pokemon, you'll hear the wild battle music from Sinnoh."),
-                COMPOUND_STRING("While battling a wild Pokemon, you'll hear the wild battle music from Unova."),
-                COMPOUND_STRING("While battling a wild Pokemon, you'll hear the wild battle music from Kalos."),
-                COMPOUND_STRING("While battling a wild Pokemon, you'll hear the wild battle music from Alola."),
-                COMPOUND_STRING("While battling a wild Pokemon, you'll hear the wild battle music from Galar."),
-                COMPOUND_STRING("While battling a wild Pokemon, you'll hear the wild battle music from Paldea."),
-            },
-            .numOptions = MUSIC_BATTLE_WILD_OPTIONS_COUNT,
-        },
-        [MUSIC_OPTIONS_TRAINER] =
-        {
-            .title = COMPOUND_STRING("Trainer Battle"),
-            .options =
-            {
-                COMPOUND_STRING("Resido"),
-                COMPOUND_STRING("Kanto"),
-                COMPOUND_STRING("Johto"),
-                COMPOUND_STRING("Hoenn"),
-                COMPOUND_STRING("Sinnoh"),
-                COMPOUND_STRING("Unova"),
-                COMPOUND_STRING("Kalos"),
-                COMPOUND_STRING("Alola"),
-                COMPOUND_STRING("Galar"),
-                COMPOUND_STRING("Paldea"),
-            },
-            .optionDescription =
-            {
-                COMPOUND_STRING("While battling a Pokemon Trainer, you'll hear Resido's Trainer battle music."),
-                COMPOUND_STRING("While battling a Pokemon Trainer, you'll hear the Trainer battle music from Kanto."),
-                COMPOUND_STRING("While battling a Pokemon Trainer, you'll hear the Trainer battle music from Johto."),
-                COMPOUND_STRING("While battling a Pokemon Trainer, you'll hear the Trainer battle music from Hoenn."),
-                COMPOUND_STRING("While battling a Pokemon Trainer, you'll hear the Trainer battle music from Sinnoh."),
-                COMPOUND_STRING("While battling a Pokemon Trainer, you'll hear the Trainer battle music from Unova."),
-                COMPOUND_STRING("While battling a Pokemon Trainer, you'll hear the Trainer battle music from Kalos."),
-                COMPOUND_STRING("While battling a Pokemon Trainer, you'll hear the Trainer battle music from Alola."),
-                COMPOUND_STRING("While battling a Pokemon Trainer, you'll hear the Trainer battle music from Galar."),
-                COMPOUND_STRING("While battling a Pokemon Trainer, you'll hear the Trainer battle music from Paldea."),
-            },
-            .numOptions = MUSIC_BATTLE_TRAINER_OPTIONS_COUNT,
-        },
-        [MUSIC_OPTIONS_GYM] =
-        {
-            .title = COMPOUND_STRING("Gym Battle"),
-            .options =
-            {
-                COMPOUND_STRING("Resido"),
-                COMPOUND_STRING("Kanto"),
-                COMPOUND_STRING("Johto"),
-                COMPOUND_STRING("Hoenn"),
-                COMPOUND_STRING("Sinnoh"),
-                COMPOUND_STRING("Unova"),
-                COMPOUND_STRING("Kalos"),
-                COMPOUND_STRING("Alola"),
-                COMPOUND_STRING("Galar"),
-                COMPOUND_STRING("Paldea")
-            },
-            .optionDescription =
-            {
-                COMPOUND_STRING("While battling a Gym Leader, you'll hear Resido's Gym Battle music."),
-                COMPOUND_STRING("While battling a Gym Leader, you'll hear the Gym Battle music from Kanto."),
-                COMPOUND_STRING("While battling a Gym Leader, you'll hear the Gym Battle music from Johto."),
-                COMPOUND_STRING("While battling a Gym Leader, you'll hear the Gym Battle music from Hoenn."),
-                COMPOUND_STRING("While battling a Gym Leader, you'll hear the Gym Battle music from Sinnoh."),
-                COMPOUND_STRING("While battling a Gym Leader, you'll hear the Gym Battle music from Unova."),
-                COMPOUND_STRING("While battling a Gym Leader, you'll hear the Gym Battle music from Kalos."),
-                COMPOUND_STRING("While battling a Gym Leader, you'll hear the Kahuna Battle music from Alola."),
-                COMPOUND_STRING("While battling a Gym Leader, you'll hear the Gym Battle music from Galar."),
-                COMPOUND_STRING("While battling a Gym Leader, you'll hear the Gym Battle music from Paldea."),
-            },
-            .numOptions = MUSIC_BATTLE_GYM_OPTIONS_COUNT,
-        },
-        [MUSIC_OPTIONS_TOURNAMENT] =
-        {
-            .title = COMPOUND_STRING("Tournament Battle"),
-            .options =
-            {
-                COMPOUND_STRING("Resido"),
-                COMPOUND_STRING("Tohjo"),
-                COMPOUND_STRING("Hoenn"),
-                COMPOUND_STRING("Sinnoh"),
-                COMPOUND_STRING("Unova"),
-                COMPOUND_STRING("Kalos"),
-                COMPOUND_STRING("Alola"),
-                COMPOUND_STRING("Galar"),
-                COMPOUND_STRING("Paldea"),
-            },
-            .optionDescription =
-            {
-                COMPOUND_STRING("While battling in a tournament, you'll hear Resido's tournament Battle music."),
-                COMPOUND_STRING("While battling in a tournament, you'll hear the Elite Four music from Kanto and Johto."),
-                COMPOUND_STRING("While battling in a tournament, you'll hear the Elite Four music from Hoenn."),
-                COMPOUND_STRING("While battling in a tournament, you'll hear the Elite Four music from Sinnoh."),
-                COMPOUND_STRING("While battling in a tournament, you'll hear the Elite Four music from Unova."),
-                COMPOUND_STRING("While battling in a tournament, you'll hear the Elite Four music from Kalos."),
-                COMPOUND_STRING("While battling in a tournament, you'll hear the Elite Four music from Alola."),
-                COMPOUND_STRING("While battling in a tournament, you'll hear the tournament music from Galar."),
-                COMPOUND_STRING("While battling in a tournament, you'll hear the Elite Four music from Paldea."),
-            },
-            .numOptions = MUSIC_OPTION_BATTLE_TOURNAMENT_COUNT,
-        },
-        [MUSIC_OPTIONS_CHAMPION] =
-        {
-            .title = COMPOUND_STRING("Champion Battle"),
-            .options =
-            {
-                COMPOUND_STRING("Resido"),
-                COMPOUND_STRING("old Kanto"),
-                COMPOUND_STRING("new Kanto"),
-                COMPOUND_STRING("Hoenn"),
-                COMPOUND_STRING("Sinnoh"),
-                COMPOUND_STRING("old Unova"),
-                COMPOUND_STRING("new Unova"),
-                COMPOUND_STRING("Kalos"),
-                COMPOUND_STRING("Alola"),
-                COMPOUND_STRING("Galar"),
-                COMPOUND_STRING("Paldea"),
-            },
-            .optionDescription =
-            {
-                COMPOUND_STRING("While battling in the finals of a tournament, you'll hear Resido's tournament Battle music."),
-                COMPOUND_STRING("While battling in the finals of a tournament, you'll hear the Champion battle music from old Kanto."),
-                COMPOUND_STRING("While battling in the finals of a tournament, you'll hear the Champion battle music from new Kanto."),
-                COMPOUND_STRING("While battling in the finals of a tournament, you'll hear the Champion battle music from Hoenn."),
-                COMPOUND_STRING("While battling in the finals of a tournament, you'll hear the Champion battle music from Sinnoh."),
-                COMPOUND_STRING("While battling in the finals of a tournament, you'll hear the Champion battle music from old Unova."),
-                COMPOUND_STRING("While battling in the finals of a tournament, you'll hear the Champion battle music from new Unova."),
-                COMPOUND_STRING("While battling in the finals of a tournament, you'll hear the Champion battle music from Kalos."),
-                COMPOUND_STRING("While battling in the finals of a tournament, you'll hear the Champion battle music from Alola."),
-                COMPOUND_STRING("While battling in the finals of a tournament, you'll hear the Champion battle music from Galar."),
-                COMPOUND_STRING("While battling in the finals of a tournament, you'll hear the Champion battle music from Paldea."),
-            },
-            .numOptions = MUSIC_BATTLE_CHAMPION_OPTIONS_COUNT,
         },
         [MUSIC_OPTIONS_MUTE_MUSIC] =
         {
@@ -2614,7 +2254,6 @@ static void Task_MenuTurnOff(u8 taskId)
         SetGpuReg(REG_OFFSET_DISPCNT, DISPCNT_OBJ_1D_MAP | DISPCNT_OBJ_ON);
         SetGpuReg(REG_OFFSET_BLDCNT, 0);
         Menu_FreeResources();
-        ResetCurrentlyPlayingMusic();
         SetMainCallback2(sMenuDataPtr->savedCallback);
         DestroyTask(taskId);
     }
@@ -2691,7 +2330,6 @@ static void Task_MenuMain(u8 taskId)
                         TemporalOptions[MUSIC_SETTINGS][0]--;
                     else
                         TemporalOptions[MUSIC_SETTINGS][0] = Settings_Options[MUSIC_SETTINGS][0].numOptions - 2;
-                PreviewBGM(OptionsMenu_GetCurrentOptionId(), TemporalOptions[MUSIC_SETTINGS][OptionsMenu_GetCurrentOptionId()]);
                 break;
                 case RANDOM_SETTINGS:
                     if(TemporalOptions[RANDOM_SETTINGS][0] > 0)
@@ -2735,7 +2373,6 @@ static void Task_MenuMain(u8 taskId)
                         TemporalOptions[MUSIC_SETTINGS][OptionsMenu_GetCurrentOptionId()]--;
                     else
                         TemporalOptions[MUSIC_SETTINGS][OptionsMenu_GetCurrentOptionId()] = Settings_Options[MUSIC_SETTINGS][OptionsMenu_GetCurrentOptionId()].numOptions - 1;
-                    PreviewBGM(OptionsMenu_GetCurrentOptionId(), TemporalOptions[MUSIC_SETTINGS][OptionsMenu_GetCurrentOptionId()]);
                 break;
                 case RANDOM_SETTINGS:
                     if(TemporalOptions[RANDOM_SETTINGS][OptionsMenu_GetCurrentOptionId()] > 0)
@@ -2787,7 +2424,6 @@ static void Task_MenuMain(u8 taskId)
                         TemporalOptions[MUSIC_SETTINGS][0]++;
                     else
                         TemporalOptions[MUSIC_SETTINGS][0] = 0;
-                PreviewBGM(OptionsMenu_GetCurrentOptionId(), TemporalOptions[MUSIC_SETTINGS][OptionsMenu_GetCurrentOptionId()]);
                 break;
                 case RANDOM_SETTINGS:
                     if(TemporalOptions[RANDOM_SETTINGS][0] == Settings_Options[RANDOM_SETTINGS][0].numOptions - 2)
@@ -2837,7 +2473,6 @@ static void Task_MenuMain(u8 taskId)
                     else
                         TemporalOptions[MUSIC_SETTINGS][OptionsMenu_GetCurrentOptionId()] = 0;
 
-                    PreviewBGM(OptionsMenu_GetCurrentOptionId(), TemporalOptions[MUSIC_SETTINGS][OptionsMenu_GetCurrentOptionId()]);
                 break;
                 case RANDOM_SETTINGS:
                     if(TemporalOptions[RANDOM_SETTINGS][OptionsMenu_GetCurrentOptionId()] < Settings_Options[RANDOM_SETTINGS][OptionsMenu_GetCurrentOptionId()].numOptions - 1){

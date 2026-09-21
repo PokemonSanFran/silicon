@@ -70,7 +70,7 @@
 #define VAR_ALWAYS_ZERO                                             0x4020
 //#define VAR_REPEL_STEP_COUNT                                      0x4021
 //#define VAR_ICE_STEP_COUNT                                        0x4022
-#define VAR_SKY_BATTLE                                              0x4023
+//#define VAR_STARTER_MON                                           0x4023
 #define VAR_EARTHQUAKE_COUNT                                        0x4024
 #define VAR_EARTHQUAKE_STEP_COUNTER                                 0x4025
 #define VAR_DEXNAV_STEP_COUNTER                                     0x4026
@@ -113,7 +113,7 @@
 #define VAR_LEVEL_CAP                                               0x4039
 #define VAR_CURRENT_START_MENU_APP                                  0x403A
 #define VAR_FIRSTRUNEXPERIENCE                                      0x403B
-#define VAR_CHOSEN_PSF_STARTER                                      0x403C
+#define VAR_SKY_BATTLE                                              0x403C
 #define VAR_TAXI_DESTINATION                                        0x403D
 #define VAR_DEXNAV_SPECIES                                          0x403E
 //#define VAR_DAYS                                                  0x403F
@@ -177,8 +177,8 @@
 #define VAR_ESPULEE_OUTSKIRTS_STATE                                 0x4055
 #define VAR_TIRABUDIN_PLACE_STATE                                   0x4056
 #define VAR_NAVAL_BASE_STATE                                        0x4057
-#define VAR_GOLDENGATEBRIDGE_STATE                                  0x4058
-#define VAR_ROBINWILLIAMSTUNNEL_STATE                               0x4059
+#define VAR_PIOCABRIDGE_STATE                                  0x4058
+#define VAR_LANJINGTUNNEL_STATE                               0x4059
 #define VAR_ROUTE99_STATE                                           0x405A
 #define VAR_LEAVERRA_FOREST_STATE                                   0x405B
 #define VAR_PARC_STATE                                              0x405C

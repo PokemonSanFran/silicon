@@ -57,3 +57,17 @@ script Route6_EventScript_00E46F7D
     msgbox(format("You defeated me!"),MSGBOX_AUTOCLOSE)
     end
 }
+
+script Route6_EventScript_Sign1
+{
+    msgbox(format("▶ Route 6\n{UP_ARROW} Glavez Hill\n{DOWN_ARROW} Cuconu Town"), MSGBOX_SIGN)
+    closemessage
+    end
+}
+
+script Route6_EventScript_Sign2
+{
+    msgbox(format("▶ Glavez Hill\n{DOWN_ARROW} Route 6, Cuconu Town"), MSGBOX_SIGN)
+    closemessage
+    end
+}

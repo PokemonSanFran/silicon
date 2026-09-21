@@ -101,7 +101,7 @@ script Quest_ContractorPorygon_GivePorygon_Script{
     }
 
         playfanfare(MUS_OBTAIN_ITEM)
-        msgbox(format("You recieved a {STR_VAR_2}!"))
+        msgbox(format("You received a {STR_VAR_2}!"))
         waitmessage
         waitfanfare
 }
