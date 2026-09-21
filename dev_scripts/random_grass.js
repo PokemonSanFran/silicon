@@ -4,7 +4,7 @@ function randInt(min, max) {
     return Math.floor(Math.random() * (max - min)) + min;
 }
 
-const grassTiles = [0x009, 0x00A, 0x01F];
+const grassTiles = [0x009, 0x00A, 0x008];
 
 export function onBlockChanged(x, y, prevBlock, newBlock) {
 
