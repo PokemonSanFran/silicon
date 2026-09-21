@@ -63,12 +63,12 @@ upload_to_catbox:
         CATBOX_URL=$(curl -F "reqtype=fileupload" -F "short=6jsp6o" -F "userhash=$CATBOX_USER_HASH" -F "fileToUpload=@silicon.gba" https://catbox.moe/user/api.php)
         echo "Artifact uploaded to: $CATBOX_URL"
         export CATBOX_URL COMMIT_MESSAGE
-        if [ "$CI_PIPELINE_SOURCE" == "schedule" ]; then
-        TEMPLATE_FILE="weekly_discord_embed_template.json"
-        else
+        if [ "$CI_PIPELINE_SOURCE" == "push" ]; then
         TEMPLATE_FILE="discord_embed_template.json"
+        else
+        TEMPLATE_FILE="weekly_discord_embed_template.json"
         fi
-        envsubst < discord_embed_template.json > expanded.json
+        envsubst < $TEMPLATE_FILE > expanded.json
         curl -d @expanded.json -H "Content-Type: application/json" "$DISCORD_WEBHOOK_URL"
     rules:
       - if: '$CI_COMMIT_BRANCH == "main"'
