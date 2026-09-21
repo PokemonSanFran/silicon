@@ -20,6 +20,7 @@
 #include "random.h"
 #include "string_util.h"
 #include "config/battle.h"
+#include "options_battle.h" // Battle Settings: Move Healing
 
 static inline bool32 IgnoreTargetingForMoveEffect(enum MoveEffect moveEffect);
 static bool32 DoesSubstituteBlockMoveEffectOnTarget(enum BattlerId battlerAtk, enum BattlerId battlerDef, enum MoveEffect moveEffect);
@@ -102,6 +103,11 @@ static void HandleSetEffectFlinch(struct BattleCalcValues *cv, struct SetEffect 
 
 static void HandleSetEffectAbsorb(struct BattleCalcValues *cv, struct SetEffect *se)
 {
+    // Start Battle Settings: Move Healing
+    if (IsBattlerAllowedToHeal(cv->battlerAtk) == FALSE)
+        return;
+    // End Battle Settings: Move Healing
+
     if (gBattleStruct->moveDamage[cv->battlerDef] > 0
      && IsBattlerTurnDamaged(cv->battlerDef, INCLUDING_SUBSTITUTES)
      && IsBattlerAlive(cv->battlerAtk))
