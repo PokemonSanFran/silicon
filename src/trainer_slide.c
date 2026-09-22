@@ -390,7 +390,7 @@ static bool8 ShouldUseManhuntVigrim(u32 trainerId)
     if (trainerId != TRAINER_VIGRIM)
         return FALSE;
 
-    return (VarGet(VAR_MANHUNT_STATE) == SAVE_BEFORE_VIGRIM);
+    return (VarGet(VAR_MANHUNT_STATE) == SAVED_BEFORE_VIGRIM);
 }
 
 static const u8* const *GetTrainerSlideArray(enum DifficultyLevel difficulty, u32 trainerId, u32 slideId)
