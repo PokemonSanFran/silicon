@@ -86,7 +86,7 @@ u32 Quest_Generic_GetIndexForMonTrainer(enum ResidoTrainerIds trainer, u32 index
     return index;
 }
 
-void Quest_Generic_LoadTrainersMonToOWVar(enum ResidoTrainerIds trainer, u32 index, u32 var,const struct Trainer *trainers, u32 rows)
+void Quest_Generic_LoadTrainersMonToOWVar(u32 trainer, u32 index, u32 var,const struct Trainer *trainers, u32 rows)
 {
     index = Quest_Generic_GetIndexForMonTrainer(trainer,index,trainers,rows);
     const struct TrainerMon mon = Quest_Generic_GetMonFromTrainer(trainer,index,trainers,rows);
