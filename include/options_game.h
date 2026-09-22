@@ -15,6 +15,8 @@ void SkipCutscene(u32);
 
 // Game Settings: Save Behavior
 void Script_IsAutosaveTurnedOn(void);
-void CountAndTryAutoSave(void);
+bool8 ShouldAutoSaveOnReturnToField(void);
+void Task_ReturnToFieldAutosave(u8 taskId);
+void FieldCB_ReturnToFieldPostWildBattleCheckMusic(void);
 
 #endif // GUARD_OPTIONS_VISUAL_H

@@ -52,6 +52,7 @@ u32 CanHealPlayer(void);
 u32 GetTakeWildItemsOption(void);
 
 // Battle Settings: Move Healing
+bool32 IsBattlerAllowedToHeal(enum BattlerId battler);
 u32 IsPlayerAllowedToUseHealingMoves(u8 battlerId, u16 moveId);
 
 // Battle Settings: First Pokémon Catch
@@ -73,9 +74,9 @@ u32 HandleScaledSpecies(u32);
 
 // Battle Settings: Points Message
 bool32 IsPointsMessagesOptionOn(void);
-void PrintMonRecievedEffortValues(u32 wasSentOut,u8* expMonId);
-u32 PrintMonRecievedExperience(u8* expMonId, bool32 printBoosted);
-u32 PrintMonRecievedEffortAndExperience(u8* expMonId, bool32 printBoosted);
+void PrintMonReceivedEffortValues(u32 wasSentOut,u8* expMonId);
+u32 PrintMonReceivedExperience(u8* expMonId, bool32 printBoosted);
+u32 PrintMonReceivedEffortAndExperience(u8* expMonId, bool32 printBoosted);
 
 // Battle Settings: Points Summary
 bool32 IsPointsSummaryOff(void);

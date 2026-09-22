@@ -2045,9 +2045,8 @@ void MonStatus_InjectExpBarGraphics(struct Sprite *sprite, u8 level, u32 expPerc
 
 static void Inventory_LoadBackgroundPalette(void)
 {
-    u8 chosenBackgroundColor = gSaveBlock2Ptr->optionsVisual[VISUAL_OPTIONS_COLOR];
-
-    switch(chosenBackgroundColor){
+    switch(OptionsMenu_GetSavedOptions(VISUAL_SETTINGS,VISUAL_OPTIONS_COLOR))
+    {
         case VISUAL_OPTION_COLOR_BLACK:
             LoadPalette(sMenuPalette_Black, 0, 32);
             break;

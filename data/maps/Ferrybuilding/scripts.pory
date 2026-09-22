@@ -1,22 +1,17 @@
 const PLAYER = OBJ_EVENT_ID_PLAYER
 
-mapscripts Ferrybuilding_MapScripts {
-    MAP_SCRIPT_ON_TRANSITION {
-        goto(Ferrybuilding_MapScripts_OnTransition)
+mapscripts Ferrybuilding_MapScripts
+{
+    MAP_SCRIPT_ON_TRANSITION
+    {
+        call_if_lt(VAR_FERRYBUILDING_STATE,CHIEF_LEFT_WAR_ROOM,SurvivalChance333_HideObject_Script)
+        call_if_gt(VAR_FERRYBUILDING_STATE,SAVE_SURVIVAL_CHANCE_BATTLE,SurvivalChance333_HideObject_Script)
     }
 
-    MAP_SCRIPT_ON_FRAME_TABLE [
-                FLAG_VISITED_FERRYBUILDING, FALSE: Generic_Mappreview
-        VAR_FERRYBUILDING_STATE, CHIEF_LEFT_WAR_ROOM: SurvivalChance333_MovePlayerIntoPosition
-        VAR_FERRYBUILDING_STATE, PLAYER_READY_SURVIVAL_CHANCE_BATTLE: SurvivalChance333_ExplainPlan_Dialogue
+    MAP_SCRIPT_ON_FRAME_TABLE
+    [
+        VAR_FERRYBUILDING_STATE, CHIEF_LEFT_WAR_ROOM: SurvivalChance333_ExplainPlan_Dialogue
     ]
-}
-
-script Ferrybuilding_MapScripts_OnTransition {
-    switch (var(VAR_FERRYBUILDING_STATE)){
-        case CHIEF_LEFT_WAR_ROOM: return
-        default: goto(SurvivalChance333_HideObject_Script)
-}
 }
 
 script Ferrybuilding_InteractFerryAttendant_Script
@@ -28,9 +23,4 @@ script Ferrybuilding_InteractFerryAttendant_Script
         end
     }
     goto(Ferry_Interact_Dialogue)
-}
-
-text gText_Ferrybuilding_OutOfOrder
-{
-    format("Unfortunately, the ferry is currently out of order. Please come back later.")
 }

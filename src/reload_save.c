@@ -27,7 +27,7 @@ void ReloadSave(void)
     if (gSaveFileStatus == SAVE_STATUS_EMPTY || gSaveFileStatus == SAVE_STATUS_CORRUPT)
         Sav2_ClearSetDefault();
     // Start siliconMerge
-	SetPokemonCryStereo(gSaveBlock2Ptr->optionsMusic[MUSIC_OPTIONS_SPEAKER]);
+	SetPokemonCryStereo(OptionsMenu_GetSavedOptions(MUSIC_SETTINGS,MUSIC_OPTIONS_SPEAKER));
 	// SetPokemonCryStereo(gSaveBlock2Ptr->optionsSound);
 	// End siliconMerge
     InitHeap(gHeap, HEAP_SIZE);

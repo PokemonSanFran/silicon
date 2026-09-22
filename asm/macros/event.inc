@@ -2193,7 +2193,7 @@
 
 	@ Buffers the given text and calls the relevant standard message script (see gStdScripts).
 	@ Start siliconMerge
-	.macro msgbox text:req, type=MSGBOX_DEFAULT, speaker=SPEAKER_DEFAULT, tail=TAIL_DEFAULT, emote=EMOTE_DEFAULT, phone=PHONE_OFF
+	.macro msgbox text:req, type=MSGBOX_DEFAULT, speaker=SPEAKER_DEFAULT, tail=TAIL_TALK, emote=EMOTE_DEFAULT, phone=PHONE_OFF
 	setvar VAR_MSGBOX_SPEAKER, \speaker
 	setvar VAR_MSGBOX_TAIL, \tail
 	setvar VAR_MSGBOX_EMOTE, \emote
@@ -3874,3 +3874,11 @@
   .2byte \minutes
   .endm
   @ end timePrinting
+
+// Start siliconQuests
+	.macro debugprint str:req, numOrVar=65535
+	callnative ScrCmd_debugprint
+	.4byte \str
+	.2byte \numOrVar
+	.endm
+// End siliconQuests

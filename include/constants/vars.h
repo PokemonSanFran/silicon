@@ -70,7 +70,7 @@
 #define VAR_ALWAYS_ZERO                                             0x4020
 //#define VAR_REPEL_STEP_COUNT                                      0x4021
 //#define VAR_ICE_STEP_COUNT                                        0x4022
-#define VAR_SKY_BATTLE                                              0x4023
+//#define VAR_STARTER_MON                                           0x4023
 #define VAR_EARTHQUAKE_COUNT                                        0x4024
 #define VAR_EARTHQUAKE_STEP_COUNTER                                 0x4025
 #define VAR_DEXNAV_STEP_COUNTER                                     0x4026
@@ -113,7 +113,7 @@
 #define VAR_LEVEL_CAP                                               0x4039
 #define VAR_CURRENT_START_MENU_APP                                  0x403A
 #define VAR_FIRSTRUNEXPERIENCE                                      0x403B
-#define VAR_CHOSEN_PSF_STARTER                                      0x403C
+#define VAR_SKY_BATTLE                                              0x403C
 #define VAR_TAXI_DESTINATION                                        0x403D
 #define VAR_DEXNAV_SPECIES                                          0x403E
 //#define VAR_DAYS                                                  0x403F
@@ -145,9 +145,9 @@
 #define VAR_DIMU_STATE                                              0x4047
 #define VAR_BD_STATE                                                0x4048
 #define VAR_AMIARGENTO_STATE                                        0x4049
-#define VAR_PLAYER_HOME_STATE                                       0x404A
+//#define VAR_POKELOT_RND1                                          0x404A
 #define VAR_ROUTE10_STATE                                           0x404B
-#define VAR_CAPHE_CITY_STATE                                        0x404C
+//#define VAR_POKELOT_RND2                                          0x404C
 #define VAR_ANBEH_BEND_STATE                                        0x404D
 #define VAR_SHARPRISE_SPIRE_PRODUCTION_STATE                        0x404E
 #define VAR_POPIDORA_PIER_STATE                                     0x404F
@@ -177,8 +177,8 @@
 #define VAR_ESPULEE_OUTSKIRTS_STATE                                 0x4055
 #define VAR_TIRABUDIN_PLACE_STATE                                   0x4056
 #define VAR_NAVAL_BASE_STATE                                        0x4057
-#define VAR_GOLDENGATEBRIDGE_STATE                                  0x4058
-#define VAR_ROBINWILLIAMSTUNNEL_STATE                               0x4059
+#define VAR_PIOCABRIDGE_STATE                                  0x4058
+#define VAR_LANJINGTUNNEL_STATE                               0x4059
 #define VAR_ROUTE99_STATE                                           0x405A
 #define VAR_LEAVERRA_FOREST_STATE                                   0x405B
 #define VAR_PARC_STATE                                              0x405C
@@ -247,8 +247,8 @@
 #define VAR_HOWDISAPPOINTING_STATE                                  0x4077
 #define VAR_KEIYING_STATE                                           0x4078
 #define VAR_LETSBURNTHISMOTHERSTATE                                 0x4079
-#define VAR_SILICON_UNUSED_0x407A                                   0x407A
-#define VAR_SILICON_UNUSED_0x407B                                   0x407B
+#define VAR_PLAYER_HOME_STATE                                       0x407A
+#define VAR_CAPHE_CITY_STATE                                        0x407B
 #define VAR_SILICON_UNUSED_0x407C                                   0x407C
 #define VAR_SILICON_UNUSED_0x407D                                   0x407D
 #define VAR_SILICON_UNUSED_0x407E                                   0x407E

@@ -18,7 +18,7 @@
 #include "task.h"
 #include "trig.h"
 #include "gpu_regs.h"
-#include "field_effect.h" // siliconMerge
+#include "field_effect.h" // gGlobalFieldTintMode
 #include "field_camera.h"
 // start mapPreviews
 #include "map_preview_screen.h"
@@ -206,6 +206,7 @@ void StartWeather(void)
     {
         u8 index = AllocSpritePalette(PALTAG_WEATHER);
         CpuCopy32(gFogPalette, &gPlttBufferUnfaded[OBJ_PLTT_ID(index)], PLTT_SIZE_4BPP);
+        ApplyGlobalFieldPaletteTint(index); // gGlobalFieldTintMode
 
         sPaletteColorMapTypes = sBasePaletteColorMapTypes;
 

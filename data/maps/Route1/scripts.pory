@@ -34,3 +34,25 @@ script Route1_Script_Interact_BodegaburnoutDeliveryB
     release
     end
 }
+
+
+script Route1_EventScript_Sign1
+{
+    msgbox(format("▶ Route 1\n{RIGHT_ARROW} Cureno Port\n{LEFT_ARROW} Glavez Hill"), MSGBOX_SIGN)
+    closemessage
+    end
+}
+
+script Route1_EventScript_Sign2
+{
+    msgbox(format("▶ Route 1\n{LEFT_ARROW} Glavez Hill\n{RIGHT_ARROW} Cureno Port"), MSGBOX_SIGN)
+    closemessage
+    end
+}
+
+script Route1_EventScript_SignSafeHouse
+{
+    msgbox(format("House placeholder text."), MSGBOX_SIGN)
+    closemessage
+    end
+}

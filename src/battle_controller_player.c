@@ -52,7 +52,6 @@
 #include "pokedex.h"
 #include "test/battle.h"
 
-static void PlayerHandleMidBattleEvolution(enum BattlerId battler); // midBattleEvolution
 static void PlayerHandleLoadMonSprite(enum BattlerId battler);
 static void PlayerHandleDrawTrainerPic(enum BattlerId battler);
 static void PlayerHandleTrainerSlide(enum BattlerId battler);
@@ -247,7 +246,7 @@ static void HandleInputChooseAction(enum BattlerId battler)
 
 	// Start siliconMerge
 	//if (JOY_REPEAT(DPAD_ANY) && gSaveBlock2Ptr->optionsButtonMode == OPTIONS_BUTTON_MODE_L_EQUALS_A)
-    if (JOY_REPEAT(DPAD_ANY) && gSaveBlock2Ptr->optionsGame[GAME_OPTIONS_BUTTON_MODE] == OPTIONS_BUTTON_MODE_L_EQUALS_A)
+    if (JOY_REPEAT(DPAD_ANY) && (OptionsMenu_GetSavedOptions(GAME_SETTINGS,GAME_OPTIONS_BUTTON_MODE) == OPTIONS_BUTTON_MODE_L_EQUALS_A))
 	// End siliconMerge
         gPlayerDpadHoldFrames++;
     else
@@ -256,7 +255,7 @@ static void HandleInputChooseAction(enum BattlerId battler)
     if (B_LAST_USED_BALL == TRUE && B_LAST_USED_BALL_CYCLE == TRUE
 	// Start siliconMerge
     //&& !(B_LAST_USED_BALL_BUTTON == L_BUTTON && gSaveBlock2Ptr->optionsButtonMode == OPTIONS_BUTTON_MODE_L_EQUALS_A))
-    && !(B_LAST_USED_BALL_BUTTON == L_BUTTON && gSaveBlock2Ptr->optionsGame[GAME_OPTIONS_BUTTON_MODE] == OPTIONS_BUTTON_MODE_L_EQUALS_A))
+    && !(B_LAST_USED_BALL_BUTTON == L_BUTTON && (OptionsMenu_GetSavedOptions(GAME_SETTINGS,GAME_OPTIONS_BUTTON_MODE) == OPTIONS_BUTTON_MODE_L_EQUALS_A)))
 	// End siliconMerge
     {
         if (!gLastUsedBallMenuPresent)
@@ -456,7 +455,7 @@ void HandleInputChooseTarget(enum BattlerId battler)
 
 	// Start siliconMerge
 	//if (JOY_REPEAT(DPAD_ANY) && gSaveBlock2Ptr->optionsButtonMode == OPTIONS_BUTTON_MODE_L_EQUALS_A)
-    if (JOY_REPEAT(DPAD_ANY) && gSaveBlock2Ptr->optionsGame[GAME_OPTIONS_BUTTON_MODE] == OPTIONS_BUTTON_MODE_L_EQUALS_A)
+    if (JOY_REPEAT(DPAD_ANY) && (OptionsMenu_GetSavedOptions(GAME_SETTINGS,GAME_OPTIONS_BUTTON_MODE) == OPTIONS_BUTTON_MODE_L_EQUALS_A))
 	// End siliconMerge
         gPlayerDpadHoldFrames++;
     else
@@ -633,7 +632,7 @@ void HandleInputShowEntireFieldTargets(enum BattlerId battler)
 {
 	// Start siliconMerge
 	//if (JOY_REPEAT(DPAD_ANY) && gSaveBlock2Ptr->optionsButtonMode == OPTIONS_BUTTON_MODE_L_EQUALS_A)
-    if (JOY_REPEAT(DPAD_ANY) && gSaveBlock2Ptr->optionsGame[GAME_OPTIONS_BUTTON_MODE] == OPTIONS_BUTTON_MODE_L_EQUALS_A)
+    if (JOY_REPEAT(DPAD_ANY) && (OptionsMenu_GetSavedOptions(GAME_SETTINGS,GAME_OPTIONS_BUTTON_MODE) == OPTIONS_BUTTON_MODE_L_EQUALS_A))
 	// End siliconMerge
         gPlayerDpadHoldFrames++;
     else
@@ -664,7 +663,7 @@ void HandleInputShowTargets(enum BattlerId battler)
 {
 	// Start siliconMerge
 	//if (JOY_REPEAT(DPAD_ANY) && gSaveBlock2Ptr->optionsButtonMode == OPTIONS_BUTTON_MODE_L_EQUALS_A)
-    if (JOY_REPEAT(DPAD_ANY) && gSaveBlock2Ptr->optionsGame[GAME_OPTIONS_BUTTON_MODE] == OPTIONS_BUTTON_MODE_L_EQUALS_A)
+    if (JOY_REPEAT(DPAD_ANY) && (OptionsMenu_GetSavedOptions(GAME_SETTINGS,GAME_OPTIONS_BUTTON_MODE) == OPTIONS_BUTTON_MODE_L_EQUALS_A))
 	// End siliconMerge
         gPlayerDpadHoldFrames++;
     else
@@ -729,7 +728,7 @@ void HandleInputChooseMove(enum BattlerId battler)
 
 	// Start siliconMerge
 	//if (JOY_REPEAT(DPAD_ANY) && gSaveBlock2Ptr->optionsButtonMode == OPTIONS_BUTTON_MODE_L_EQUALS_A)
-    if (JOY_REPEAT(DPAD_ANY) && gSaveBlock2Ptr->optionsGame[GAME_OPTIONS_BUTTON_MODE] == OPTIONS_BUTTON_MODE_L_EQUALS_A)
+    if (JOY_REPEAT(DPAD_ANY) && (OptionsMenu_GetSavedOptions(GAME_SETTINGS,GAME_OPTIONS_BUTTON_MODE) == OPTIONS_BUTTON_MODE_L_EQUALS_A))
 	// End siliconMerge
         gPlayerDpadHoldFrames++;
     else
@@ -956,7 +955,7 @@ void HandleInputChooseMove(enum BattlerId battler)
     else if (JOY_NEW(B_MOVE_DESCRIPTION_BUTTON) &&
         // Start siliconMerge
         //!(B_MOVE_DESCRIPTION_BUTTON == L_BUTTON && gSaveBlock2Ptr->optionsButtonMode == OPTIONS_BUTTON_MODE_L_EQUALS_A))
-        !(B_MOVE_DESCRIPTION_BUTTON == L_BUTTON && gSaveBlock2Ptr->optionsGame[GAME_OPTIONS_BUTTON_MODE]== OPTIONS_BUTTON_MODE_L_EQUALS_A))
+        !(B_MOVE_DESCRIPTION_BUTTON == L_BUTTON && (OptionsMenu_GetSavedOptions(GAME_SETTINGS,GAME_OPTIONS_BUTTON_MODE) == OPTIONS_BUTTON_MODE_L_EQUALS_A)))
         // End siliconMerge
     {
         gBattleStruct->descriptionSubmenu = TRUE;
@@ -2443,11 +2442,13 @@ static void Controller_WaitForEvo(enum BattlerId battler)
         gBattleEnvironment = sSavedBattleEnvironment; // Evolution changes terrain.
         AllocateMonSpritesGfx(); // We need to allocate gfx for mons again
         UpdateStatsAfterLevelUp(sMidBattleEvolvedPartyId);
+        //  Update species in gBattleMons
+        gBattleMons[battler].species = GetMonData(&gParties[B_TRAINER_PLAYER][sMidBattleEvolvedPartyId], MON_DATA_SPECIES);
         ReshowBattleScreenAfterMenu();
     }
 }
 
-static void PlayerHandleMidBattleEvolution(enum BattlerId battler)
+void PlayerHandleMidBattleEvolution(enum BattlerId battler)
 {
     // Don't evolve abruptly, wait a couple of frames.
     if (++sMidBattleEvoFramesCount == 30)
@@ -2457,7 +2458,7 @@ static void PlayerHandleMidBattleEvolution(enum BattlerId battler)
 
         sMidBattleEvoFramesCount = 0;
         sSavedBattleEnvironment = gBattleEnvironment;
-        FreeAllWindowBuffers();
+        CloseMainBattleScreen();
 
         gCB2_AfterEvolution = BattleMainCB2;
         EvolutionScene(&gParties[B_TRAINER_PLAYER][monId], species, TRUE, monId);

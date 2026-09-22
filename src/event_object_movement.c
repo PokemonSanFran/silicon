@@ -2769,7 +2769,7 @@ void GetFollowerAction(struct ScriptContext *ctx) // Essentially a big switch fo
     //if (GetCurrentMapMusic() == MUS_GYM || GetCurrentMapMusic() == MUS_RG_GYM)
     if (GetCurrentMapMusic() == MUS_GYM
             || GetCurrentMapMusic() == MUS_RG_GYM
-            //|| GetCurrentMapMusic() == MUS_MERMEREZA_GYM
+            || GetCurrentMapMusic() == MUS_MERMEREZA_GYM
             || GetCurrentMapMusic() == MUS_TORA_GYM
             || GetCurrentMapMusic() == MUS_PERLACIA_GYM
             || GetCurrentMapMusic() == MUS_CHASILLA_GYM
@@ -3549,7 +3549,7 @@ void PatchObjectPalette(u16 paletteTag, u8 paletteSlot)
     u8 paletteIndex = FindObjectEventPaletteIndexByTag(paletteTag);
 
     LoadPalette(sObjectEventSpritePalettes[paletteIndex].data, OBJ_PLTT_ID(paletteSlot), PLTT_SIZE_4BPP);
-    ApplyGlobalFieldPaletteTint(paletteSlot); // siliconMerge
+    ApplyGlobalFieldPaletteTint(paletteSlot); // gGlobalFieldTintMode
 }
 
 void PatchObjectPaletteRange(const u16 *paletteTags, u8 minSlot, u8 maxSlot)
@@ -4047,10 +4047,13 @@ void InitObjectEventPalettes(u8 reflectionType)
     }
 }
 
+// Start gGlobalFieldTintMode
 void RemoveTintFromObjectEventPalettes()
 {
     PatchObjectPaletteRange(sObjectPaletteTagSets[sCurrentReflectionType], 0, 5);
 }
+// End gGlobalFieldTintMode
+
 u16 GetObjectPaletteTag(u8 palSlot)
 {
     u8 i;
@@ -10397,7 +10400,10 @@ bool8 IsElevationMismatchAt(u8 elevation, s16 x, s16 y)
 
     mapElevation = MapGridGetElevationAt(x, y);
 
-    if (mapElevation == ELEVATION_TRANSITION || mapElevation == ELEVATION_MULTI_LEVEL)
+// Start expandMetatileCount
+    //if (mapElevation == ELEVATION_TRANSITION || mapElevation == ELEVATION_MULTI_LEVEL)
+    if (mapElevation == ELEVATION_TRANSITION || mapElevation == ELEVATION_LEVEL_MAX)
+// End expandMetatileCount
         return FALSE;
 
     if (mapElevation != elevation)
@@ -10456,7 +10462,10 @@ void ObjectEventUpdateElevation(struct ObjectEvent *objEvent, struct Sprite *spr
     u8 curElevation = MapGridGetElevationAt(objEvent->currentCoords.x, objEvent->currentCoords.y);
     u8 prevElevation = MapGridGetElevationAt(objEvent->previousCoords.x, objEvent->previousCoords.y);
 
-    if (curElevation == ELEVATION_MULTI_LEVEL || prevElevation == ELEVATION_MULTI_LEVEL)
+// Start expandMetatileCount
+    //if (curElevation == ELEVATION_MULTI_LEVEL || prevElevation == ELEVATION_MULTI_LEVEL)
+    if (curElevation == ELEVATION_LEVEL_MAX || prevElevation == ELEVATION_LEVEL_MAX)
+// End expandMetatileCount
     {
         // Ignore subsprite priorities under bridges
         // so all subsprites will display below it
@@ -10467,7 +10476,10 @@ void ObjectEventUpdateElevation(struct ObjectEvent *objEvent, struct Sprite *spr
 
     objEvent->currentElevation = curElevation;
 
-    if (curElevation != ELEVATION_TRANSITION && curElevation != ELEVATION_MULTI_LEVEL)
+// Start expandMetatileCount
+    //if (curElevation != ELEVATION_TRANSITION && curElevation != ELEVATION_MULTI_LEVEL)
+    if (curElevation != ELEVATION_TRANSITION && curElevation != ELEVATION_LEVEL_MAX)
+// End expandMetatileCount
         objEvent->previousElevation = curElevation;
 }
 

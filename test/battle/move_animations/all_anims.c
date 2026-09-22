@@ -2260,7 +2260,7 @@ SINGLE_BATTLE_TEST("Move Animations work 1")
     u32 k = 0, variation = 0, variationsNumber;
     u32 friendship = 0, tempFriendship;
     u32 tempMove, tempSpecies;
-    gSaveBlock2Ptr->optionsBattle[BATTLE_OPTIONS_HP_SPEED] = BATTLE_OPTION_BAR_SPEED_FAST; // siliconMerge
+    OptionsMenu_SetSavedOptions(BATTLE_SETTINGS,BATTLE_OPTIONS_HP_SPEED,BATTLE_OPTION_BAR_SPEED_FAST); // siliconMerge
     FORCE_MOVE_ANIM(TRUE);
     for (; j <= ANIM_TEST_END_MOVE; j += 4) {
         variationsNumber = GetVariationsNumber(j, FALSE);
@@ -2309,7 +2309,7 @@ SINGLE_BATTLE_TEST("Move Animations work 2")
     u32 k = 0, variation = 0, variationsNumber;
     u32 friendship = 0, tempFriendship;
     u32 tempMove, tempSpecies;
-    gSaveBlock2Ptr->optionsBattle[BATTLE_OPTIONS_HP_SPEED] = BATTLE_OPTION_BAR_SPEED_FAST; // siliconMerge
+    OptionsMenu_SetSavedOptions(BATTLE_SETTINGS,BATTLE_OPTIONS_HP_SPEED,BATTLE_OPTION_BAR_SPEED_FAST); // siliconMerge
     FORCE_MOVE_ANIM(TRUE);
     for (; j <= ANIM_TEST_END_MOVE; j += 4) {
         variationsNumber = GetVariationsNumber(j, FALSE);
@@ -2358,7 +2358,7 @@ SINGLE_BATTLE_TEST("Move Animations work 3")
     u32 k = 0, variation = 0, variationsNumber;
     u32 friendship = 0, tempFriendship;
     u32 tempMove, tempSpecies;
-    gSaveBlock2Ptr->optionsBattle[BATTLE_OPTIONS_HP_SPEED] = BATTLE_OPTION_BAR_SPEED_FAST; // siliconMerge
+    OptionsMenu_SetSavedOptions(BATTLE_SETTINGS,BATTLE_OPTIONS_HP_SPEED,BATTLE_OPTION_BAR_SPEED_FAST); // siliconMerge
     FORCE_MOVE_ANIM(TRUE);
     for (; j <= ANIM_TEST_END_MOVE; j += 4) {
         variationsNumber = GetVariationsNumber(j, FALSE);
@@ -2407,7 +2407,7 @@ SINGLE_BATTLE_TEST("Move Animations work 4")
     u32 k = 0, variation = 0, variationsNumber;
     u32 friendship = 0, tempFriendship;
     u32 tempMove, tempSpecies;
-    gSaveBlock2Ptr->optionsBattle[BATTLE_OPTIONS_HP_SPEED] = BATTLE_OPTION_BAR_SPEED_FAST; // siliconMerge
+    OptionsMenu_SetSavedOptions(BATTLE_SETTINGS,BATTLE_OPTIONS_HP_SPEED,BATTLE_OPTION_BAR_SPEED_FAST); // siliconMerge
     FORCE_MOVE_ANIM(TRUE);
     for (; j <= ANIM_TEST_END_MOVE; j += 4) {
         variationsNumber = GetVariationsNumber(j, FALSE);

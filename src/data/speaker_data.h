@@ -385,6 +385,14 @@ static const struct SpeakerData sSpeakerData[NUM_SPEAKERS] =
         .speakerIcon = gSpeakerIcon_Kid,
         .speakerPal = sSpeakerPal_Kid,
     },
+    [SPEAKER_KEIYING_INTRO]
+    {
+        .name = COMPOUND_STRING("???"),
+        .title = COMPOUND_STRING("???"),
+        .gender = MALE,
+        .speakerIcon = gSpeakerIcon_Keiying,
+        .speakerPal = sSpeakerPal_Keiying,
+    },
     [SPEAKER_KEIYING] =
     {
         .name = COMPOUND_STRING("Kei-Ying"),
@@ -397,6 +405,14 @@ static const struct SpeakerData sSpeakerData[NUM_SPEAKERS] =
     {
         .name = COMPOUND_STRING("Keiying"),
         .title = COMPOUND_STRING("Ex-Gym Leader"),
+        .gender = MALE,
+        .speakerIcon = gSpeakerIcon_Keiying,
+        .speakerPal = sSpeakerPal_Keiying,
+    },
+    [SPEAKER_KEIYING_PROLOGUE] =
+    {
+        .name = COMPOUND_STRING("Keiying"),
+        .title = COMPOUND_STRING("Gym Leader"),
         .gender = MALE,
         .speakerIcon = gSpeakerIcon_Keiying,
         .speakerPal = sSpeakerPal_Keiying,
@@ -809,6 +825,14 @@ static const struct SpeakerData sSpeakerData[NUM_SPEAKERS] =
         .speakerIcon = gSpeakerIcon_Mom,
         .speakerPal = sSpeakerPal_Mom,
     },
+    [SPEAKER_USUL] =
+    {
+        .name = COMPOUND_STRING("{PLAYER}"),
+        .title = COMPOUND_STRING("Champion"),
+        .gender = MALE,
+        .speakerIcon = gSpeakerIcon_Mom,
+        .speakerPal = sSpeakerPal_Mom,
+    },
     [SPEAKER_CHARLOTTE] =
     {
         .name = COMPOUND_STRING("Charlotte"),
@@ -853,6 +877,14 @@ static const struct SpeakerData sSpeakerData[NUM_SPEAKERS] =
     {
         .name = COMPOUND_STRING("Tala"),
         .title = COMPOUND_STRING("Ex-Elite Four"),
+        .gender = FEMALE,
+        .speakerIcon = gSpeakerIcon_Will,
+        .speakerPal = sSpeakerPal_Will,
+    },
+    [SPEAKER_TALA_PROLOUGE] =
+    {
+        .name = COMPOUND_STRING("Tala"),
+        .title = COMPOUND_STRING("Elite Four"),
         .gender = FEMALE,
         .speakerIcon = gSpeakerIcon_Will,
         .speakerPal = sSpeakerPal_Will,
@@ -949,6 +981,14 @@ static const struct SpeakerData sSpeakerData[NUM_SPEAKERS] =
     {
         .name = COMPOUND_STRING("Frank"),
         .title = COMPOUND_STRING("Ex-Elite Four"),
+        .gender = MALE,
+        .speakerIcon = gSpeakerIcon_Bruno,
+        .speakerPal = sSpeakerPal_Bruno,
+    },
+    [SPEAKER_FRANK_PROLOUGE] =
+    {
+        .name = COMPOUND_STRING("Frank"),
+        .title = COMPOUND_STRING("Elite Four"),
         .gender = MALE,
         .speakerIcon = gSpeakerIcon_Bruno,
         .speakerPal = sSpeakerPal_Bruno,
@@ -1137,10 +1177,26 @@ static const struct SpeakerData sSpeakerData[NUM_SPEAKERS] =
         .speakerIcon = gSpeakerIcon_Steven,
         .speakerPal = sSpeakerPal_Steven,
     },
+    [SPEAKER_MAGNUS_PROLOUGE] =
+    {
+        .name = COMPOUND_STRING("Magnus"),
+        .title = COMPOUND_STRING("Elite Four"),
+        .gender = MALE,
+        .speakerIcon = gSpeakerIcon_Steven,
+        .speakerPal = sSpeakerPal_Steven,
+    },
     [SPEAKER_ELEANOR] =
     {
         .name = COMPOUND_STRING("Eleanor"),
         .title = COMPOUND_STRING("Ex-Elite Four"),
+        .gender = FEMALE,
+        .speakerIcon = gSpeakerIcon_Karen,
+        .speakerPal = sSpeakerPal_Karen,
+    },
+    [SPEAKER_ELEANOR_PROLOUGE] =
+    {
+        .name = COMPOUND_STRING("Eleanor"),
+        .title = COMPOUND_STRING("Elite Four"),
         .gender = FEMALE,
         .speakerIcon = gSpeakerIcon_Karen,
         .speakerPal = sSpeakerPal_Karen,
@@ -1209,10 +1265,26 @@ static const struct SpeakerData sSpeakerData[NUM_SPEAKERS] =
         .speakerIcon = gSpeakerIcon_Brock,
         .speakerPal = sSpeakerPal_Brock,
     },
+    [SPEAKER_DOYLE_PROLOUGE] =
+    {
+        .name = COMPOUND_STRING("Doyle"),
+        .title = COMPOUND_STRING("Gym Leader"),
+        .gender = MALE,
+        .speakerIcon = gSpeakerIcon_Brock,
+        .speakerPal = sSpeakerPal_Brock,
+    },
     [SPEAKER_IMELDA] =
     {
         .name = COMPOUND_STRING("Imelda"),
         .title = COMPOUND_STRING("Ex-Gym Leader"),
+        .gender = FEMALE,
+        .speakerIcon = gSpeakerIcon_Misty,
+        .speakerPal = sSpeakerPal_Misty,
+    },
+    [SPEAKER_IMELDA_PROLOGUE]
+    {
+        .name = COMPOUND_STRING("Imelda"),
+        .title = COMPOUND_STRING("Gym Leader"),
         .gender = FEMALE,
         .speakerIcon = gSpeakerIcon_Misty,
         .speakerPal = sSpeakerPal_Misty,
@@ -1360,6 +1432,14 @@ static const struct SpeakerData sSpeakerData[NUM_SPEAKERS] =
         .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Collector,
         .speakerPal = sSpeakerPal_Collector,
+    },
+    [SPEAKER_ELEVATOR_ATTENDANT] =
+    {
+        .name = COMPOUND_STRING("Exhibit Attendant"),
+        .title = COMPOUND_STRING("???"),
+        .gender = NON_HUMAN,
+        .speakerIcon = gSpeakerIcon_Woman,
+        .speakerPal = sSpeakerPal_Woman,
     },
     [SPEAKER_SPEAKER] =
     {
@@ -2078,30 +2158,6 @@ static const struct SpeakerData sSpeakerData[NUM_SPEAKERS] =
         .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Green,
         .speakerPal = sSpeakerPal_Green,
-    },
-    [SPEAKER_ADAM_UNKNOWN] =
-    {
-        .name = COMPOUND_STRING("???"),
-        .title= COMPOUND_STRING("???"),
-        .gender = MALE,
-        .speakerIcon = gSpeakerIcon_Ace_Trainer_M,
-        .speakerPal = sSpeakerPal_Ace_Trainer_M,
-    },
-    [SPEAKER_ELEANOR_PAST] =
-    {
-        .name = COMPOUND_STRING("Eleanor"),
-        .title = COMPOUND_STRING("Elite Four"),
-        .gender = FEMALE,
-        .speakerIcon = gSpeakerIcon_Karen,
-        .speakerPal = sSpeakerPal_Karen,
-    },
-    [SPEAKER_FRANK_PAST] =
-    {
-        .name = COMPOUND_STRING("Frank"),
-        .title = COMPOUND_STRING("Elite Four"),
-        .gender = MALE,
-        .speakerIcon = gSpeakerIcon_Bruno,
-        .speakerPal = sSpeakerPal_Bruno,
     },
     [SPEAKER_NOPOMOD] =
     {
@@ -3251,5 +3307,13 @@ static const struct SpeakerData sSpeakerData[NUM_SPEAKERS] =
         .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Blaine,
         .speakerPal = sSpeakerPal_Blaine,
+    },
+    [SPEAKER_ROBOT] =
+    {
+        .name = COMPOUND_STRING("Training Robot"),
+        .title = COMPOUND_STRING(""),
+        .gender = MALE,
+        .speakerIcon = gSpeakerIcon_Mom,
+        .speakerPal = sSpeakerPal_Mom,
     },
 };

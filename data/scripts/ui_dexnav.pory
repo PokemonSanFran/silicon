@@ -22,7 +22,7 @@ script EventScript_AskRestoreScript
 		waitse
 		waitbuttonpress
 	}
-	
+
 	hidemoneybox
 	callnative(Dexnav_ResetPreviousChain)
 	callnative(TryStartDexNavSearch)

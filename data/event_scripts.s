@@ -1662,7 +1662,7 @@ Common_EventScript_LegendaryFlewAway::
 	msgbox gText_LegendaryFlewAway, MSGBOX_DEFAULT
 	release
 	end
-@ Start siliconMerge
+@ Start gGlobalFieldTintMode
 Script_SetGrayscaleTint::
     setptr GLOBAL_FIELD_TINT_GRAYSCALE, gGlobalFieldTintMode
     callnative InitMapView
@@ -1678,7 +1678,7 @@ Script_RemoveTint::
     callnative RemoveTintFromObjectEvents
     callnative InitMapView
     return
-    @ End siliconMerge
+@ End gGlobalFieldTintMode
 
 EventScript_VsSeekerChargingDone::
 	special VsSeekerFreezeObjectsAfterChargeComplete
@@ -2172,27 +2172,9 @@ EventScript_PalletTown_PlayersHouse_2F_TurnOnPC::
 .include "data/maps/RouteD_Grotto/scripts.inc"
 .include "data/maps/RouteE/scripts.inc"
 .include "data/maps/RouteE_Grotto/scripts.inc"
-.include "data/maps/Salesorcetower_Elevator/scripts.inc"
+.include "data/maps/SharpriseSpire_Elevator/scripts.inc"
 .include "data/maps/SecretPath/scripts.inc"
-.include "data/maps/SharpriseSpire_10F/scripts.inc"
 .include "data/maps/SharpriseSpire_1F/scripts.inc"
-.include "data/maps/SharpriseSpire_2F/scripts.inc"
-.include "data/maps/SharpriseSpire_30F/scripts.inc"
-.include "data/maps/SharpriseSpire_31F/scripts.inc"
-.include "data/maps/SharpriseSpire_32F/scripts.inc"
-.include "data/maps/SharpriseSpire_33F/scripts.inc"
-.include "data/maps/SharpriseSpire_34F/scripts.inc"
-.include "data/maps/SharpriseSpire_35F/scripts.inc"
-.include "data/maps/SharpriseSpire_36F/scripts.inc"
-.include "data/maps/SharpriseSpire_37F/scripts.inc"
-.include "data/maps/SharpriseSpire_38F/scripts.inc"
-.include "data/maps/SharpriseSpire_3F/scripts.inc"
-.include "data/maps/SharpriseSpire_4F/scripts.inc"
-.include "data/maps/SharpriseSpire_5F/scripts.inc"
-.include "data/maps/SharpriseSpire_6F/scripts.inc"
-.include "data/maps/SharpriseSpire_7F/scripts.inc"
-.include "data/maps/SharpriseSpire_8F/scripts.inc"
-.include "data/maps/SharpriseSpire_9F/scripts.inc"
 .include "data/maps/SharpriseSpire_Arriba/scripts.inc"
 .include "data/maps/SharpriseSpire_Buzzr/scripts.inc"
 .include "data/maps/SharpriseSpire_Giftshop/scripts.inc"
@@ -2279,3 +2261,7 @@ EventScript_PalletTown_PlayersHouse_2F_TurnOnPC::
 	.include "data/maps/HodouCity_Cookie/scripts.inc"
 
 	.include "data/maps/HodouCity_Alley1/scripts.inc"
+
+	.include "data/maps/RegularIndoorTest/scripts.inc"
+
+	.include "data/maps/FancyIndoorTest/scripts.inc"

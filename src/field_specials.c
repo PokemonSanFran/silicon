@@ -103,8 +103,6 @@ static EWRAM_DATA u8 sSlidingDoorNextFrameCounter = 0;
 static EWRAM_DATA u8 sSlidingDoorFrame = 0;
 static EWRAM_DATA u8 sTutorMoveAndElevatorWindowId = 0;
 static EWRAM_DATA u16 sLilycoveDeptStore_DefaultFloorChoice = 0;
-static EWRAM_DATA u16 sSharpriseSpire_NeverRead = 0; // siliconMerge
-static EWRAM_DATA u16 sSharpriseSpire_DefaultFloorChoice = 0; // siliconMerge
 static EWRAM_DATA struct ListMenuItem *sScrollableMultichoice_ListMenuItem = NULL;
 
 static EWRAM_DATA u16 sFrontierExchangeCorner_NeverRead = 0;
@@ -1551,6 +1549,28 @@ void LoadWallyZigzagoon(void)
     SetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_MOVE4, &monData);
 }
 
+// Start siliconMerge
+void LoadTrachyMon(void)
+{
+    u16 monData;
+    CreateRandomMon(&gParties[B_TRAINER_PLAYER][0], SPECIES_PARASECT, 25);
+    monData = 0;
+    SetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_ABILITY_NUM, &monData);
+    monData = MOVE_SPORE;
+    SetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_MOVE1, &monData);
+    monData = MOVE_FALSE_SWIPE;
+    SetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_MOVE2, &monData);
+    monData = MOVE_ABSORB;
+    SetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_MOVE3, &monData);
+    monData = MOVE_STUN_SPORE;
+    SetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_MOVE4, &monData);
+    monData = MAX_PER_STAT_IVS;
+    SetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_SPEED_IV, &monData);
+    monData = MAX_PER_STAT_EVS;
+    SetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_SPEED_EV, &monData);
+}
+// End siliconMerge
+
 bool8 IsStarterInParty(void)
 {
     u8 i;
@@ -1891,86 +1911,6 @@ static const u16 sElevatorWindowTiles_Descending[ELEVATOR_WINDOW_HEIGHT][ELEVATO
         METATILE_BattleFrontier_Elevator_Bottom1
     },
 };
-
-//Start SharpriseSpire Elevator Scripts
-
-void SetSharpriseSpireFloor(void)
-{
-    u8 SharpriseSpireFloor = 0;
-
-/*
-    switch (gSaveBlock1Ptr->dynamicWarp.mapNum)
-    {
-        case MAP_NUM(SHARPRISE_SPIRE_1F):
-            SharpriseSpireFloor = SHARPRISESPIRE_FLOORNUM_1F;
-            break;
-        case MAP_NUM(SHARPRISE_SPIRE_2F):
-            SharpriseSpireFloor = SHARPRISESPIRE_FLOORNUM_2F;
-            break;
-        case MAP_NUM(SHARPRISE_SPIRE_5F):
-            SharpriseSpireFloor = SHARPRISESPIRE_FLOORNUM_5F;
-            break;
-        case MAP_NUM(SHARPRISE_SPIRE_10F):
-            SharpriseSpireFloor = SHARPRISESPIRE_FLOORNUM_10F;
-            break;
-        default:
-            SharpriseSpireFloor = SHARPRISESPIRE_FLOORNUM_1F;
-            break;
-    }
-    */
-    VarSet(VAR_DEPT_STORE_FLOOR, SharpriseSpireFloor); //TODO Change VAR_DEPT_STORE_FLOOR to one more suited to PSF
-}
-
-u16 GetTowerFloorDefaultFloorChoice(void)
-{
-    sSharpriseSpire_NeverRead = 0;
-    sSharpriseSpire_DefaultFloorChoice = 0;
-
-    /*
-    if (gSaveBlock1Ptr->dynamicWarp.mapGroup == MAP_GROUP(SHARPRISE_SPIRE_1F))
-    {
-        switch (gSaveBlock1Ptr->dynamicWarp.mapNum)
-        {
-            case MAP_NUM(SHARPRISE_SPIRE_10F):
-                sSharpriseSpire_NeverRead = 0;
-                sSharpriseSpire_DefaultFloorChoice = 0;
-                break;
-            case MAP_NUM(SHARPRISE_SPIRE_5F):
-                sSharpriseSpire_NeverRead = 0;
-                sSharpriseSpire_DefaultFloorChoice = 1;
-                break;
-            case MAP_NUM(SHARPRISE_SPIRE_2F):
-                sSharpriseSpire_NeverRead = 0;
-                sSharpriseSpire_DefaultFloorChoice = 2;
-                break;
-            case MAP_NUM(SHARPRISE_SPIRE_1F):
-                sSharpriseSpire_NeverRead = 0;
-                sSharpriseSpire_DefaultFloorChoice = 3;
-                break;
-        }
-    }
-*/
-
-    return sSharpriseSpire_DefaultFloorChoice;
-}
-
-void ShowSharpriseSpireElevatorFloorSelect(void)
-{
-    int xPos;
-
-    sTutorMoveAndElevatorWindowId = AddWindow(&sWindowTemplate_ElevatorFloor);
-    SetStandardWindowBorderStyle(sTutorMoveAndElevatorWindowId, 0);
-
-    xPos = GetStringCenterAlignXOffset(1, gText_ElevatorNowOn, 64);
-    AddTextPrinterParameterized(sTutorMoveAndElevatorWindowId, 1, gText_ElevatorNowOn, xPos, 1, TEXT_SKIP_DRAW, NULL);
-
-    xPos = GetStringCenterAlignXOffset(1, gSharpriseSpireFloorNames[gSpecialVar_0x8005], 64);
-    AddTextPrinterParameterized(sTutorMoveAndElevatorWindowId, 1, gSharpriseSpireFloorNames[gSpecialVar_0x8005], xPos, 17, TEXT_SKIP_DRAW, NULL);
-
-    PutWindowTilemap(sTutorMoveAndElevatorWindowId);
-    CopyWindowToVram(sTutorMoveAndElevatorWindowId, 3);
-}
-//End SharpriseSpire Elevator Scripts
 
 void SetDeptStoreFloor(void)
 {
@@ -3602,6 +3542,7 @@ void SetDeoxysRockPalette(void)
     LoadPalette(&sDeoxysRockPalettes[(u8)VarGet(VAR_DEOXYS_ROCK_LEVEL)], OBJ_PLTT_ID(paletteNum), PLTT_SIZEOF(4));
     // Set faded to all black, weather blending handled during fade-in
     CpuFill16(RGB_BLACK, &gPlttBufferFaded[OBJ_PLTT_ID(paletteNum)], PLTT_SIZE_4BPP);
+    ApplyGlobalFieldPaletteTint(paletteNum); // gGlobalFieldTintMode
 }
 
 void SetPCBoxToSendMon(u8 boxId)
@@ -4555,23 +4496,6 @@ u8 GetNumberOfBadges(void)
     return count;
 }
 
-#define NUM_ARANTRAZ_TRAINERS 6
-
-u8 CheckNumArantrazExhibitDefeated(void)
-{
-    u32 trainerFlag, count = 0;
-
-    for(trainerFlag = 0; trainerFlag < NUM_ARANTRAZ_TRAINERS; trainerFlag++)
-        if (FlagGet(TRAINER_FLAGS_START + TRAINER_0D416B2C + trainerFlag))
-            count++;
-
-    if (count == NUM_ARANTRAZ_TRAINERS)
-        VarSet(VAR_ARANTRAZ_EXHIBIT_STATE,ARANTRAZ_EXHIBIT_FINISH);
-
-    gSpecialVar_Result = count;
-    return count;
-}
-
 void CheckSpecies(void)
 {
     u8 i;
@@ -4970,7 +4894,13 @@ void EnterCode(void)
 void GetCodeFeedback(void)
 {
     static const u8 sText_SampleCode[] = _("SampleCode");
-    if (!StringCompare(gStringVar2, sText_SampleCode))
+    // Start siliconQuests
+    //if (!StringCompare(gStringVar2, sText_SampleCode))
+    static const u8 sText_RangerStationPassword[] = _("J4CKW41K3r");
+    if (!StringCompare(gStringVar2, sText_RangerStationPassword))
+        gSpecialVar_Result = QUEST_MANOFMANYHATS;
+    else if (!StringCompare(gStringVar2, sText_SampleCode))
+    // End siliconQuests
         gSpecialVar_Result = 1;
     else
         gSpecialVar_Result = 0;
@@ -6168,3 +6098,4 @@ bool8 CheckAddCoins(void)
     else
         return TRUE;
 }
+

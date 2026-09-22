@@ -103,11 +103,11 @@ Delete these quests
 ## Restore Espulee Gym ✅
 * Start with a red paper clip
 * Needs to be a combination of trading items and Pokemon, and evantually Pokemon holding specifici items
-* Needs to be written in a way where the hold item can only be recieved during this quest and has no sell value
+* Needs to be written in a way where the hold item can only be received during this quest and has no sell value
 * Need to have an infinite number of red paper clips in case player loses the item, and people along the quest line will always trade
 
 ## Neighborhood Cleanup ✅
-* Rent a cop near the arena has recieved orders to make sure unhoused people and vagrants aren't hanging around the Arena, scaring off tourists
+* Rent a cop near the arena has received orders to make sure unhoused people and vagrants aren't hanging around the Arena, scaring off tourists
 * Asks the player to help keep the area clear, involves engaging four unhoused people, battling them, and they leave the area
 * Cop thanks the player for their help
 

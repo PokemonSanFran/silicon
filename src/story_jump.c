@@ -560,7 +560,7 @@ void GiveItems_Prologue_Intro(bool32 jumpType)
     VarSet(B_LEVEL_CAP_VARIABLE,27);
 
     FlagSet(FLAG_DISABLE_SCALING);
-    CreateNPCTrainerPartyFromTrainer(gParties[B_TRAINER_PLAYER], &gTrainers[GetCurrentDifficultyLevel()][TRAINER_CHAMPION_SHINJI], FALSE, BATTLE_TYPE_TRAINER);
+    CreateNPCTrainerPartyFromTrainer(gParties[B_TRAINER_PLAYER], &gTrainers[GetCurrentDifficultyLevel()][TRAINER_CHAMPION_USUL], FALSE, BATTLE_TYPE_TRAINER);
     FlagClear(FLAG_DISABLE_SCALING);
 
     GivePlayerAllTechnicalMachines();
@@ -655,7 +655,7 @@ void GiveItems_StarterChoice(bool32 jumpType)
         return;
 
     u32 slot = Random() % SILICON_STARTER_COUNT;
-    VarSet(VAR_CHOSEN_PSF_STARTER,GetStarterFromSlot(slot));
+    VarSet(VAR_STARTER_MON,GetStarterFromSlot(slot));
     enum PlayerFavoriteFoods food = Random() % PLAYER_FAVORITE_FOOD_COUNT;
     VarSet(VAR_PLAYER_FAVORITE_FOOD,food);
 
@@ -708,13 +708,13 @@ void JumpPlayerTo_swagbag(bool32 jumpType)
 void FlagsVarWarp_ReadySetI()
 {
     VarSet(VAR_PLAYER_HOME_STATE, SLEPT_AFTER_SWAGBAG);
-    FlagSet(FLAG_RECIEVED_LEFTOVERS);
+    FlagSet(FLAG_RECEIVED_LEFTOVERS);
     SetWarpDestination(MAP_GROUP(MAP_CUCONU_TOWN_SHARPRISE_COMPOUND_1F), MAP_NUM(MAP_CUCONU_TOWN_SHARPRISE_COMPOUND_1F), 0, USE_WARP_ID, USE_WARP_ID);
 }
 
 void GiveItems_ReadySetI(bool32 jumpType)
 {
-    if (!FlagGet(FLAG_RECIEVED_LEFTOVERS))
+    if (!FlagGet(FLAG_RECEIVED_LEFTOVERS))
         AddBagItem(ITEM_LEFTOVERS, 1);
 }
 
@@ -768,7 +768,7 @@ void FlagsVarWarp_EnterFallkner()
 void GiveItems_EnterBelen(bool32 jumpType)
 {
     if (!FlagGet(FLAG_BADGE01_GET))
-        AddBagItem(ITEM_TM001, 1);
+        AddBagItem(ITEM_GYM_REWARD_MERMEREZA, 1);
 }
 
 void JumpPlayerTo_EnterBelen(bool32 jumpType)
@@ -802,7 +802,7 @@ void FlagsVarWarp_EnterShinzo()
 void GiveItems_EnterShinzo(bool32 jumpType)
 {
     if (!FlagGet(FLAG_BADGE02_GET))
-        AddBagItem(ITEM_TM002, 1);
+        AddBagItem(ITEM_GYM_REWARD_TORA, 1);
 }
 
 void JumpPlayerTo_EnterShinzo(bool32 jumpType)
@@ -817,7 +817,7 @@ void JumpPlayerTo_EnterShinzo(bool32 jumpType)
 void GiveItems_EnterEmrys(bool32 jumpType)
 {
     if (!FlagGet(FLAG_BADGE03_GET))
-        AddBagItem(ITEM_TM003,1);
+        AddBagItem(ITEM_GYM_REWARD_PERLACIA,1);
 }
 
 void FlagsVarWarp_EnterEmrys()
@@ -1117,7 +1117,7 @@ void FlagsVarWarp_EnterPua()
 void GiveItems_EnterPua(bool32 jumpType)
 {
     if (!FlagGet(FLAG_BADGE04_GET))
-        AddBagItem(ITEM_TM004, 1);
+        AddBagItem(ITEM_GYM_REWARD_CHASILLA, 1);
 }
 
 void JumpPlayerTo_EnterPua(bool32 jumpType)
@@ -1252,7 +1252,7 @@ void FlagsVarWarp_EnterNeriene()
 void GiveItems_EnterNeriene(bool32 jumpType)
 {
     if (!FlagGet(FLAG_BADGE05_GET))
-        AddBagItem(ITEM_TM005, 1);
+        AddBagItem(ITEM_GYM_REWARD_FORT_YOBU, 1);
 }
 
 void JumpPlayerTo_EnterNeriene(bool32 jumpType)
@@ -1317,7 +1317,7 @@ void JumpPlayerTo_BeachBattle(bool32 jumpType)
 void GiveItems_EnterDimu(bool32 jumpType)
 {
     if (!FlagGet(FLAG_BADGE06_GET))
-        AddBagItem(ITEM_TM006, 1);
+        AddBagItem(ITEM_GYM_REWARD_HALERBA, 1);
 }
 
 void FlagsVarWarp_EnterDimu()
@@ -1375,7 +1375,7 @@ void JumpPlayerTo_AndWeMarchOn(bool32 jumpType)
 void GiveItems_EnterBD(bool32 jumpType)
 {
     if (!FlagGet(FLAG_BADGE07_GET))
-        AddBagItem(ITEM_TM007, 1);
+        AddBagItem(ITEM_GYM_REWARD_TIRABUDIN, 1);
 }
 
 void FlagsVarWarp_EnterBD()
@@ -1426,7 +1426,7 @@ void JumpPlayerTo_Battle8(bool32 jumpType)
 void GiveItems_EnterAmiArgento(bool32 jumpType)
 {
     if (!FlagGet(FLAG_BADGE08_GET))
-        AddBagItem(ITEM_TM008, 1);
+        AddBagItem(ITEM_GYM_REWARD_IRISINA, 1);
 }
 
 void FlagsVarWarp_EnterAmiArgento()
@@ -1510,7 +1510,7 @@ void JumpPlayerTo_VSGarbodor(bool32 jumpType)
 
 void FlagsVarWarp_OffYouGo_Phone()
 {
-    VarSet(VAR_GOLDENGATEBRIDGE_STATE, CALLED_BY_CHARLOTTE);
+    VarSet(VAR_PIOCABRIDGE_STATE, CALLED_BY_CHARLOTTE);
     VarSet(VAR_STORYLINE_STATE, STORY_ASSIGNED_FRANK_QUESTS);
     SetWarpDestination(MAP_GROUP(MAP_CUCONU_TOWN_SHARPRISE_COMPOUND_2F),MAP_NUM(MAP_CUCONU_TOWN_SHARPRISE_COMPOUND_2F),0,USE_WARP_ID,USE_WARP_ID);
 
@@ -1527,9 +1527,9 @@ void JumpPlayerTo_OffYouGo_Phone(bool32 jumpType)
 void FlagsVarWarp_OffYouGo_Bridge(void)
 {
     FlagSet(FLAG_VISITED_PIOCA_BRIDGE);
-    VarSet(VAR_GOLDENGATEBRIDGE_STATE, POST_OFF_YOU_GO);
+    VarSet(VAR_PIOCABRIDGE_STATE, POST_OFF_YOU_GO);
     VarSet(VAR_STORYLINE_STATE, STORY_ASSIGNED_FRANK_QUESTS);
-    VarSet(VAR_ROBINWILLIAMSTUNNEL_STATE, CHARLOTTE_INSIDE_TUNNEL);
+    VarSet(VAR_LANJINGTUNNEL_STATE, CHARLOTTE_INSIDE_TUNNEL);
     SetWarpDestination(MAP_GROUP(MAP_PIOCA_BRIDGE),MAP_NUM(MAP_PIOCA_BRIDGE),0,USE_WARP_ID,USE_WARP_ID);
 
 }
@@ -1548,7 +1548,7 @@ void FlagsVarWarp_IGuessWeShouldBeNiceNow()
     FlagSet(FLAG_VISITED_ESPULEE_OUTSKIRTS);
     VarSet(VAR_LEAVERRA_FOREST_STATE, CHARLOTTE_WAITING_LEAVERRA_FOREST);
     VarSet(VAR_ESPULEE_OUTSKIRTS_STATE, CHARLOTTE_STUDYING);
-    VarSet(VAR_ROBINWILLIAMSTUNNEL_STATE, FRANK_BOSS_DEFEATED);
+    VarSet(VAR_LANJINGTUNNEL_STATE, FRANK_BOSS_DEFEATED);
     SetWarpDestination(MAP_GROUP(MAP_ESPULEE_OUTSKIRTS_KOMALA_CABIN_1F),MAP_NUM(MAP_ESPULEE_OUTSKIRTS_KOMALA_CABIN_1F),2,USE_WARP_ID,USE_WARP_ID);
 
 }
@@ -1900,7 +1900,7 @@ void GiveItems_YouRealizeTheyreEvilRight_Phone(bool32 jumpType)
     if (VarGet(VAR_ARANTRAZ_STATE) >= BAIYA_SUMMONED_ARANTRAZ)
         return;
 
-    AddBagItem(ITEM_TM345, 1);
+    AddBagItem(ITEM_TM_SURF, 1);
     AddBagItem(ITEM_SURF_TOOL, 1);
 }
 
@@ -2129,13 +2129,13 @@ void JumpPlayerTo_ExhibitionBattle(bool32 jumpType)
 
 void FlagsVarWarp_MaybeIFuckedUp()
 {
-    VarSet(VAR_STORYLINE_STATE, STORY_RECIEVED_BAMBOO_STAR);
+    VarSet(VAR_STORYLINE_STATE, STORY_RECEIVED_BAMBOO_STAR);
     SetWarpDestination(MAP_GROUP(MAP_ROUTE2),MAP_NUM(MAP_ROUTE2),1,USE_WARP_ID,USE_WARP_ID);
 }
 
 void GiveItems_MaybeIFuckedUp(bool32 jumpType)
 {
-    if (VarGet(VAR_STORYLINE_STATE) < STORY_RECIEVED_BAMBOO_STAR)
+    if (VarGet(VAR_STORYLINE_STATE) < STORY_RECEIVED_BAMBOO_STAR)
         AddBagItem(ITEM_WISH_TAG, 1);
 }
 

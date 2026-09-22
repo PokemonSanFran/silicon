@@ -199,7 +199,7 @@ const struct StarterMonTemplate sStarterMonTable[] =
         },
         .nature = NATURE_RELAXED,
         .ball = BALL_HEAL,
-        .moves = {MOVE_PROTECT, MOVE_ROAR, MOVE_ROCK_TOMB, MOVE_METAL_CLAW},
+        .moves = {MOVE_IRON_DEFENSE, MOVE_ROAR, MOVE_ROCK_TOMB, MOVE_METAL_CLAW},
         .friendship = 173,
         .nextExpPercent = 32,
         .species = SPECIES_ARON,
@@ -292,7 +292,7 @@ const struct StarterMonTemplate sStarterMonTable[] =
         },
         .nature = NATURE_CAREFUL,
         .ball = BALL_GREAT,
-        .moves = {MOVE_WORK_UP, MOVE_LOW_SWEEP, MOVE_TAUNT, MOVE_CIRCLE_THROW},
+        .moves = {MOVE_WORK_UP, MOVE_ARM_THRUST, MOVE_LOW_KICK, MOVE_LEER},
         .friendship = 124,
         .nextExpPercent = 55,
         .species = SPECIES_PANCHAM,
@@ -325,7 +325,7 @@ void AddStartersToBox(void)
 
 void Script_ShowSiliconStarter(void)
 {
-    u32 slot = GetSlotFromStarter(VarGet(VAR_CHOSEN_PSF_STARTER));
+    u32 slot = GetSlotFromStarter(VarGet(VAR_STARTER_MON));
     ShowSiliconStarter(slot);
 }
 
@@ -469,7 +469,7 @@ static void GiveDebugStarter(void)
 
 void MoveStarterToParty(void)
 {
-    u32 species = VarGet(VAR_CHOSEN_PSF_STARTER);
+    u32 species = VarGet(VAR_STARTER_MON);
     u32 starterSlot = GetSlotFromStarter(species);
     BoxMonAtToMon(0,starterSlot,&gParties[B_TRAINER_PLAYER][0]);
 

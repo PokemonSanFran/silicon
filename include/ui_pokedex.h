@@ -289,5 +289,6 @@ void Pokedex_FreeResources(void);
 void FreePokedexStructs(void);
 void SetAndSetUpCurrentPage(u8 taskId);
 bool32 IsMoveInSilicon(u32 moveId);
+enum Species GetRandomSpeciesInResidoDex(void);
 
 #endif // GUARD_UI_POKEDEX_H

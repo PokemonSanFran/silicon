@@ -1304,7 +1304,7 @@ static void StartSetup_Graphics(void)
     }
 
     // misc gfx that needs to be loaded manually
-    LoadPalette(sStartMenu_WallpaperPalettes[gSaveBlock2Ptr->optionsVisual[VISUAL_OPTIONS_COLOR]],
+    LoadPalette(sStartMenu_WallpaperPalettes[OptionsMenu_GetSavedOptions(VISUAL_SETTINGS,VISUAL_OPTIONS_COLOR)],
                 BG_PLTT_ID(0), PLTT_SIZE_4BPP);
     SetBackdropFromColor(RGB_BLACK);
 
@@ -2454,6 +2454,9 @@ enum StartMenuCellularSignals CellularSignal_GetCurrentStrength(void)
         mapType = (mapType % (MAP_TYPE_SECRET_BASE + 1));
 
     if (IsHalaiIslandUnderCrisis())
+        return START_SIGNAL_NONE;
+
+    if (GetCurrentMap() == MAP_CHASILLA_GYM)
         return START_SIGNAL_NONE;
 
     return sCellularSignal_FilterByMapTypes[mapType];

@@ -17,7 +17,7 @@ mapscripts SharpriseStadium_Skybox_MapScripts {
     }
     MAP_SCRIPT_ON_FRAME_TABLE [
         VAR_STORYLINE_STATE, STORY_CHAMPIONSHIP_EXPLAINED: WhyDidntYouRatMeOut_WatchCharlotteMatches
-            VAR_STORYLINE_STATE, STORY_WATCH_SEMIFINAL: WaitHeDidWhat_WatchOtherSemifinal_Dialogue 
+            VAR_STORYLINE_STATE, STORY_WATCH_SEMIFINAL: WaitHeDidWhat_WatchOtherSemifinal_Dialogue
             VAR_STORYLINE_STATE, STORY_THE_TIDE_FINISHED: ExhibitionBattle_PrepPlayer_Script
     ]
 }

@@ -267,7 +267,7 @@ bool8 AdjustQuantityAccordingToDPadInput(s16 *quantity, u16 max)
 u8 GetLRKeysPressed(void)
 {
     // Start siliconMerge
-	if (gSaveBlock2Ptr->optionsGame[GAME_OPTIONS_BUTTON_MODE] == OPTIONS_BUTTON_MODE_LR)
+    if (OptionsMenu_GetSavedOptions(GAME_SETTINGS,GAME_OPTIONS_BUTTON_MODE) == OPTIONS_BUTTON_MODE_LR)
     //if (gSaveBlock2Ptr->optionsButtonMode == OPTIONS_BUTTON_MODE_LR)
 	// End siliconMerge
     {
@@ -283,7 +283,7 @@ u8 GetLRKeysPressed(void)
 u8 GetLRKeysPressedAndHeld(void)
 {
     // Start siliconMerge
-	if (gSaveBlock2Ptr->optionsGame[GAME_OPTIONS_BUTTON_MODE] == OPTIONS_BUTTON_MODE_LR)
+    if (OptionsMenu_GetSavedOptions(GAME_SETTINGS,GAME_OPTIONS_BUTTON_MODE) == OPTIONS_BUTTON_MODE_LR)
 	//if (gSaveBlock2Ptr->optionsButtonMode == OPTIONS_BUTTON_MODE_LR)
 	// End siliconMerge
     {

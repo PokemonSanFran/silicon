@@ -8,7 +8,7 @@
 // ***********************************************************************
 enum optionVisualColor GetVisualColor(void)
 {
-    return gSaveBlock2Ptr->optionsVisual[VISUAL_OPTIONS_COLOR];
+    return OptionsMenu_GetSavedOptions(VISUAL_SETTINGS,VISUAL_OPTIONS_COLOR);
 }
 
 // ***********************************************************************
@@ -19,7 +19,7 @@ enum optionVisualColor GetVisualColor(void)
 
 static u32 GetFontSwitcherOption(void)
 {
-    return gSaveBlock2Ptr->optionsVisual[VISUAL_OPTIONS_FONT_SWITCHER];
+    return OptionsMenu_GetSavedOptions(VISUAL_SETTINGS,VISUAL_OPTIONS_FONT_SWITCHER);
 }
 
 u32 GetFontSwitcherFontId(u8 fontId)
@@ -36,7 +36,7 @@ u32 GetFontSwitcherFontId(u8 fontId)
 
 static u32 GetUnitsOption(void)
 {
-    return gSaveBlock2Ptr->optionsVisual[VISUAL_OPTIONS_UNITS];
+    return OptionsMenu_GetSavedOptions(VISUAL_SETTINGS,VISUAL_OPTIONS_UNITS);
 }
 
 static bool32 IsDecimalSeparatorPeriod(void)
@@ -63,7 +63,7 @@ u32 GetDecimalSeparatorChar(void)
 
 static u32 GetTimeOption(void)
 {
-    return gSaveBlock2Ptr->optionsVisual[VISUAL_OPTIONS_TIME];
+    return OptionsMenu_GetSavedOptions(VISUAL_SETTINGS,VISUAL_OPTIONS_TIME);
 }
 
 static bool32 IsTime24Hour(void)
@@ -88,5 +88,5 @@ void FormatGivenTimeForOutput(u8* txtPtr, u32 hours, u32 minutes)
 
 enum optionsVisualColorVariationValues GetColorVariationOption(void)
 {
-    return gSaveBlock2Ptr->optionsVisual[VISUAL_OPTIONS_COLOR_VARIATION];
+    return OptionsMenu_GetSavedOptions(VISUAL_SETTINGS,VISUAL_OPTIONS_COLOR_VARIATION);
 }

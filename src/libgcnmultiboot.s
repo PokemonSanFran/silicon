@@ -514,7 +514,7 @@ GcMbIntrHandler_CheckImageResponse:
 	adds r1, 0x8
 	lsls r1, 2
 	strh r1, [r3, OFFSET_REG_JOYSTAT - 0x120]
-	@ get the recieved uint32
+	@ get the received uint32
 	ldr r1, [r3, OFFSET_REG_JOY_RECV - 0x120]
 	@ put it in the current destination pointer and advance that pointer
 	stm r2!, {r1}

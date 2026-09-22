@@ -6,12 +6,13 @@
 #include "pokedex.h"
 #include "malloc.h"
 #include "constants/characters.h"
+#include "test/overworld_script.h"
 
 #define MON_TO_USE SPECIES_TSAREENA
 
 DOUBLE_BATTLE_TEST("OPTIONS (VISUAL): Pokémon Variation, None")
 {
-    gSaveBlock2Ptr->optionsVisual[VISUAL_OPTIONS_COLOR_VARIATION] = VISUAL_OPTION_COLOR_VARIATION_OFF;
+    OptionsMenu_SetSavedOptions(VISUAL_SETTINGS,VISUAL_OPTIONS_COLOR_VARIATION,VISUAL_OPTION_COLOR_VARIATION_OFF);
     GIVEN {
         PLAYER(MON_TO_USE) { Shiny(FALSE); }
         PLAYER(MON_TO_USE) { Shiny(TRUE); }
@@ -39,7 +40,7 @@ DOUBLE_BATTLE_TEST("OPTIONS (VISUAL): Pokémon Variation, None")
 
 DOUBLE_BATTLE_TEST("OPTIONS (VISUAL): Pokémon Variation, IVs")
 {
-    gSaveBlock2Ptr->optionsVisual[VISUAL_OPTIONS_COLOR_VARIATION] = VISUAL_OPTION_COLOR_VARIATION_INDIVIDUAL_VALUES;
+    OptionsMenu_SetSavedOptions(VISUAL_SETTINGS,VISUAL_OPTIONS_COLOR_VARIATION,VISUAL_OPTION_COLOR_VARIATION_INDIVIDUAL_VALUES);
     GIVEN {
         PLAYER(MON_TO_USE) { Shiny(FALSE); }
         PLAYER(MON_TO_USE) { Shiny(TRUE); }
@@ -79,7 +80,7 @@ DOUBLE_BATTLE_TEST("OPTIONS (VISUAL): Pokémon Variation, IVs")
 
 DOUBLE_BATTLE_TEST("OPTIONS (VISUAL): Pokémon Variation, Nickname")
 {
-    gSaveBlock2Ptr->optionsVisual[VISUAL_OPTIONS_COLOR_VARIATION] = VISUAL_OPTION_COLOR_VARIATION_NICKNAME;
+    OptionsMenu_SetSavedOptions(VISUAL_SETTINGS,VISUAL_OPTIONS_COLOR_VARIATION,VISUAL_OPTION_COLOR_VARIATION_NICKNAME);
     GIVEN {
         PLAYER(MON_TO_USE) { Shiny(FALSE); }
         PLAYER(MON_TO_USE) { Shiny(TRUE); }
@@ -119,7 +120,7 @@ DOUBLE_BATTLE_TEST("OPTIONS (VISUAL): Pokémon Variation, Nickname")
 
 DOUBLE_BATTLE_TEST("OPTIONS (VISUAL): Pokémon Variation, Personality")
 {
-    gSaveBlock2Ptr->optionsVisual[VISUAL_OPTIONS_COLOR_VARIATION] = VISUAL_OPTION_COLOR_VARIATION_PERSONALITY;
+    OptionsMenu_SetSavedOptions(VISUAL_SETTINGS,VISUAL_OPTIONS_COLOR_VARIATION,VISUAL_OPTION_COLOR_VARIATION_PERSONALITY);
     GIVEN {
         PLAYER(MON_TO_USE) { Shiny(FALSE); }
         PLAYER(MON_TO_USE) { Shiny(TRUE); }
@@ -161,7 +162,7 @@ DOUBLE_BATTLE_TEST("OPTIONS (VISUAL): Pokémon Variation, Personality")
 
 WILD_BATTLE_TEST("OPTIONS (BATTLE): Take Wild Items, Never")
 {
-    gSaveBlock2Ptr->optionsBattle[BATTLE_OPTIONS_TAKE_WILD_ITEMS] = BATTLE_OPTION_TAKE_WILD_ITEMS_NEVER;
+    OptionsMenu_SetSavedOptions(BATTLE_SETTINGS,BATTLE_OPTIONS_TAKE_WILD_ITEMS,BATTLE_OPTION_TAKE_WILD_ITEMS_NEVER);
     GIVEN {
         PLAYER(SPECIES_WOBBUFFET);
         OPPONENT(SPECIES_WOBBUFFET) { Item(ITEM_MASTER_BALL); }
@@ -174,7 +175,7 @@ WILD_BATTLE_TEST("OPTIONS (BATTLE): Take Wild Items, Never")
 
 WILD_BATTLE_TEST("OPTIONS (BATTLE): Take Wild Items, Ask (Yes)")
 {
-    gSaveBlock2Ptr->optionsBattle[BATTLE_OPTIONS_TAKE_WILD_ITEMS] = BATTLE_OPTION_TAKE_WILD_ITEMS_ASK;
+    OptionsMenu_SetSavedOptions(BATTLE_SETTINGS,BATTLE_OPTIONS_TAKE_WILD_ITEMS,BATTLE_OPTION_TAKE_WILD_ITEMS_ASK);
     GIVEN {
         gSiliconTestVariables.autoPressYes = TRUE;
         PLAYER(SPECIES_WOBBUFFET);
@@ -188,7 +189,7 @@ WILD_BATTLE_TEST("OPTIONS (BATTLE): Take Wild Items, Ask (Yes)")
 
 WILD_BATTLE_TEST("OPTIONS (BATTLE): Take Wild Items, Ask (No)")
 {
-    gSaveBlock2Ptr->optionsBattle[BATTLE_OPTIONS_TAKE_WILD_ITEMS] = BATTLE_OPTION_TAKE_WILD_ITEMS_ASK;
+    OptionsMenu_SetSavedOptions(BATTLE_SETTINGS,BATTLE_OPTIONS_TAKE_WILD_ITEMS,BATTLE_OPTION_TAKE_WILD_ITEMS_ASK);
     GIVEN {
         gSiliconTestVariables.autoPressNo = TRUE;
         PLAYER(SPECIES_WOBBUFFET);
@@ -202,7 +203,7 @@ WILD_BATTLE_TEST("OPTIONS (BATTLE): Take Wild Items, Ask (No)")
 
 WILD_BATTLE_TEST("OPTIONS (BATTLE): Take Wild Items, Always")
 {
-    gSaveBlock2Ptr->optionsBattle[BATTLE_OPTIONS_TAKE_WILD_ITEMS] = BATTLE_OPTION_TAKE_WILD_ITEMS_ALWAYS;
+    OptionsMenu_SetSavedOptions(BATTLE_SETTINGS,BATTLE_OPTIONS_TAKE_WILD_ITEMS,BATTLE_OPTION_TAKE_WILD_ITEMS_ALWAYS);
     GIVEN {
         PLAYER(SPECIES_WOBBUFFET);
         OPPONENT(SPECIES_WOBBUFFET) { Item(ITEM_MASTER_BALL); }
@@ -233,10 +234,11 @@ static void AddMonToBox(void)
 WILD_BATTLE_TEST("OPTIONS (BATTLE): Experience, All")
 {
     //  Necessry for exp to work
-    gSaveBlock2Ptr->optionsBattle[BATTLE_OPTIONS_PLAYER_LEVEL] = BATTLE_OPTION_LEVEL_NO_CAP;
-    gSaveBlock2Ptr->optionsBattle[BATTLE_OPTIONS_EXP_MULTIPLIER] = BATTLE_OPTION_MULTIPLIER_1;
+    OptionsMenu_SetSavedOptions(BATTLE_SETTINGS,BATTLE_OPTIONS_PLAYER_LEVEL,BATTLE_OPTION_LEVEL_NO_CAP);
+    OptionsMenu_SetSavedOptions(BATTLE_SETTINGS,BATTLE_OPTIONS_EXP_MULTIPLIER,BATTLE_OPTION_MULTIPLIER_1);
+;
 
-    gSaveBlock2Ptr->optionsBattle[BATTLE_OPTIONS_EXPERIENCE] = BATTLE_OPTION_EXPERIENCE_ALL;
+    OptionsMenu_SetSavedOptions(BATTLE_SETTINGS,BATTLE_OPTIONS_EXPERIENCE,BATTLE_OPTION_EXPERIENCE_ALL);
     GIVEN {
         PLAYER(SPECIES_TESTING_ERRATIC) { Level(LEVEL_TO_USE); }
         PLAYER(SPECIES_TESTING_ERRATIC) { Level(LEVEL_TO_USE); }
@@ -257,10 +259,11 @@ WILD_BATTLE_TEST("OPTIONS (BATTLE): Experience, All")
 WILD_BATTLE_TEST("OPTIONS (BATTLE): Experience, Party")
 {
     //  Necessry for exp to work
-    gSaveBlock2Ptr->optionsBattle[BATTLE_OPTIONS_PLAYER_LEVEL] = BATTLE_OPTION_LEVEL_NO_CAP;
-    gSaveBlock2Ptr->optionsBattle[BATTLE_OPTIONS_EXP_MULTIPLIER] = BATTLE_OPTION_MULTIPLIER_1;
+    OptionsMenu_SetSavedOptions(BATTLE_SETTINGS,BATTLE_OPTIONS_PLAYER_LEVEL,BATTLE_OPTION_LEVEL_NO_CAP);
+    OptionsMenu_SetSavedOptions(BATTLE_SETTINGS,BATTLE_OPTIONS_EXP_MULTIPLIER,BATTLE_OPTION_MULTIPLIER_1);
+;
 
-    gSaveBlock2Ptr->optionsBattle[BATTLE_OPTIONS_EXPERIENCE] = BATTLE_OPTION_EXPERIENCE_PARTY;
+    OptionsMenu_SetSavedOptions(BATTLE_SETTINGS,BATTLE_OPTIONS_EXPERIENCE,BATTLE_OPTION_EXPERIENCE_PARTY);
     GIVEN {
         PLAYER(SPECIES_TESTING_ERRATIC) { Level(LEVEL_TO_USE); }
         PLAYER(SPECIES_TESTING_ERRATIC) { Level(LEVEL_TO_USE); }
@@ -281,10 +284,11 @@ WILD_BATTLE_TEST("OPTIONS (BATTLE): Experience, Party")
 WILD_BATTLE_TEST("OPTIONS (BATTLE): Experience, Active (no switch)")
 {
     //  Necessry for exp to work
-    gSaveBlock2Ptr->optionsBattle[BATTLE_OPTIONS_PLAYER_LEVEL] = BATTLE_OPTION_LEVEL_NO_CAP;
-    gSaveBlock2Ptr->optionsBattle[BATTLE_OPTIONS_EXP_MULTIPLIER] = BATTLE_OPTION_MULTIPLIER_1;
+    OptionsMenu_SetSavedOptions(BATTLE_SETTINGS,BATTLE_OPTIONS_PLAYER_LEVEL,BATTLE_OPTION_LEVEL_NO_CAP);
+    OptionsMenu_SetSavedOptions(BATTLE_SETTINGS,BATTLE_OPTIONS_EXP_MULTIPLIER,BATTLE_OPTION_MULTIPLIER_1);
+;
 
-    gSaveBlock2Ptr->optionsBattle[BATTLE_OPTIONS_EXPERIENCE] = BATTLE_OPTION_EXPERIENCE_ACTIVE;
+    OptionsMenu_SetSavedOptions(BATTLE_SETTINGS,BATTLE_OPTIONS_EXPERIENCE,BATTLE_OPTION_EXPERIENCE_ACTIVE);
     GIVEN {
         PLAYER(SPECIES_TESTING_ERRATIC) { Level(LEVEL_TO_USE); }
         PLAYER(SPECIES_TESTING_ERRATIC) { Level(LEVEL_TO_USE); }
@@ -305,10 +309,11 @@ WILD_BATTLE_TEST("OPTIONS (BATTLE): Experience, Active (no switch)")
 WILD_BATTLE_TEST("OPTIONS (BATTLE): Experience, Active (switching)")
 {
     //  Necessry for exp to work
-    gSaveBlock2Ptr->optionsBattle[BATTLE_OPTIONS_PLAYER_LEVEL] = BATTLE_OPTION_LEVEL_NO_CAP;
-    gSaveBlock2Ptr->optionsBattle[BATTLE_OPTIONS_EXP_MULTIPLIER] = BATTLE_OPTION_MULTIPLIER_1;
+    OptionsMenu_SetSavedOptions(BATTLE_SETTINGS,BATTLE_OPTIONS_PLAYER_LEVEL,BATTLE_OPTION_LEVEL_NO_CAP);
+    OptionsMenu_SetSavedOptions(BATTLE_SETTINGS,BATTLE_OPTIONS_EXP_MULTIPLIER,BATTLE_OPTION_MULTIPLIER_1);
+;
 
-    gSaveBlock2Ptr->optionsBattle[BATTLE_OPTIONS_EXPERIENCE] = BATTLE_OPTION_EXPERIENCE_ACTIVE;
+    OptionsMenu_SetSavedOptions(BATTLE_SETTINGS,BATTLE_OPTIONS_EXPERIENCE,BATTLE_OPTION_EXPERIENCE_ACTIVE);
     GIVEN {
         PLAYER(SPECIES_TESTING_ERRATIC) { Level(LEVEL_TO_USE); }
         PLAYER(SPECIES_TESTING_ERRATIC) { Level(LEVEL_TO_USE); }
@@ -330,10 +335,11 @@ WILD_BATTLE_TEST("OPTIONS (BATTLE): Experience, Active (switching)")
 WILD_BATTLE_TEST("OPTIONS (BATTLE): Points Message, On")
 {
     //  Necessry for exp to work
-    gSaveBlock2Ptr->optionsBattle[BATTLE_OPTIONS_PLAYER_LEVEL] = BATTLE_OPTION_LEVEL_NO_CAP;
-    gSaveBlock2Ptr->optionsBattle[BATTLE_OPTIONS_EXP_MULTIPLIER] = BATTLE_OPTION_MULTIPLIER_1;
+    OptionsMenu_SetSavedOptions(BATTLE_SETTINGS,BATTLE_OPTIONS_PLAYER_LEVEL,BATTLE_OPTION_LEVEL_NO_CAP);
+    OptionsMenu_SetSavedOptions(BATTLE_SETTINGS,BATTLE_OPTIONS_EXP_MULTIPLIER,BATTLE_OPTION_MULTIPLIER_1);
+;
 
-    gSaveBlock2Ptr->optionsBattle[BATTLE_OPTIONS_POINTS_MESSAGES] = BATTLE_OPTION_POINTS_MESSAGES_ON;
+    OptionsMenu_SetSavedOptions(BATTLE_SETTINGS,BATTLE_OPTIONS_POINTS_MESSAGES,BATTLE_OPTION_POINTS_MESSAGES_ON);
     GIVEN {
         PLAYER(SPECIES_TESTING_ERRATIC) { Level(LEVEL_TO_USE); }
         OPPONENT(SPECIES_SUNKERN) { Level(1); }
@@ -351,10 +357,11 @@ WILD_BATTLE_TEST("OPTIONS (BATTLE): Points Message, On")
 WILD_BATTLE_TEST("OPTIONS (BATTLE): Points Message, Off")
 {
     //  Necessry for exp to work
-    gSaveBlock2Ptr->optionsBattle[BATTLE_OPTIONS_PLAYER_LEVEL] = BATTLE_OPTION_LEVEL_NO_CAP;
-    gSaveBlock2Ptr->optionsBattle[BATTLE_OPTIONS_EXP_MULTIPLIER] = BATTLE_OPTION_MULTIPLIER_1;
+    OptionsMenu_SetSavedOptions(BATTLE_SETTINGS,BATTLE_OPTIONS_PLAYER_LEVEL,BATTLE_OPTION_LEVEL_NO_CAP);
+    OptionsMenu_SetSavedOptions(BATTLE_SETTINGS,BATTLE_OPTIONS_EXP_MULTIPLIER,BATTLE_OPTION_MULTIPLIER_1);
+;
 
-    gSaveBlock2Ptr->optionsBattle[BATTLE_OPTIONS_POINTS_MESSAGES] = BATTLE_OPTION_POINTS_MESSAGES_OFF;
+    OptionsMenu_SetSavedOptions(BATTLE_SETTINGS,BATTLE_OPTIONS_POINTS_MESSAGES,BATTLE_OPTION_POINTS_MESSAGES_OFF);
     GIVEN {
         PLAYER(SPECIES_TESTING_ERRATIC) { Level(LEVEL_TO_USE); }
         OPPONENT(SPECIES_SUNKERN) { Level(1); }
@@ -372,9 +379,9 @@ WILD_BATTLE_TEST("OPTIONS (BATTLE): Points Message, Off")
 WILD_BATTLE_TEST("OPTIONS (BATTLE): Exp Multiplier, 0x")
 {
     //  Necessry for exp to work
-    gSaveBlock2Ptr->optionsBattle[BATTLE_OPTIONS_PLAYER_LEVEL] = BATTLE_OPTION_LEVEL_NO_CAP;
+    OptionsMenu_SetSavedOptions(BATTLE_SETTINGS,BATTLE_OPTIONS_PLAYER_LEVEL,BATTLE_OPTION_LEVEL_NO_CAP);
 
-    gSaveBlock2Ptr->optionsBattle[BATTLE_OPTIONS_EXP_MULTIPLIER] = BATTLE_OPTION_MULTIPLIER_0;
+    OptionsMenu_SetSavedOptions(BATTLE_SETTINGS,BATTLE_OPTIONS_EXP_MULTIPLIER,BATTLE_OPTION_MULTIPLIER_0);
 
     GIVEN {
         PLAYER(SPECIES_TESTING_ERRATIC) { Level(LEVEL_TO_USE); }
@@ -392,14 +399,14 @@ WILD_BATTLE_TEST("OPTIONS (BATTLE): Exp Multiplier, Non-zero", u32 exp)
 {
     enum optionBattleExpMultiplerValues multiplier;
     //  Necessry for exp to work
-    gSaveBlock2Ptr->optionsBattle[BATTLE_OPTIONS_PLAYER_LEVEL] = BATTLE_OPTION_LEVEL_NO_CAP;
+    OptionsMenu_SetSavedOptions(BATTLE_SETTINGS,BATTLE_OPTIONS_PLAYER_LEVEL,BATTLE_OPTION_LEVEL_NO_CAP);
 
     PARAMETRIZE { multiplier = BATTLE_OPTION_MULTIPLIER_1; }
     PARAMETRIZE { multiplier = BATTLE_OPTION_MULTIPLIER_2; }
 
 
     GIVEN {
-        gSaveBlock2Ptr->optionsBattle[BATTLE_OPTIONS_EXP_MULTIPLIER] = multiplier;
+        OptionsMenu_SetSavedOptions(BATTLE_SETTINGS,BATTLE_OPTIONS_EXP_MULTIPLIER,multiplier);
         PLAYER(SPECIES_TESTING_ERRATIC) { Level(LEVEL_TO_USE); }
         OPPONENT(SPECIES_SUNKERN) { Level(LEVEL_TO_USE); }
     } WHEN {
@@ -420,7 +427,7 @@ WILD_BATTLE_TEST("OPTIONS (BATTLE): Exp Multiplier, Non-zero", u32 exp)
 
 SINGLE_BATTLE_TEST("OPTIONS (BATTLE): Effort Values, Enabled")
 {
-    gSaveBlock2Ptr->optionsBattle[BATTLE_OPTIONS_EFFORT_VALUES] = BATTLE_OPTION_EFFORT_VALUES_ENABLED;
+    OptionsMenu_SetSavedOptions(BATTLE_SETTINGS,BATTLE_OPTIONS_EFFORT_VALUES,BATTLE_OPTION_EFFORT_VALUES_ENABLED);
 
     GIVEN {
         gSiliconTestVariables.overrideEVs = TRUE;
@@ -440,7 +447,7 @@ SINGLE_BATTLE_TEST("OPTIONS (BATTLE): Effort Values, Enabled")
 
 SINGLE_BATTLE_TEST("OPTIONS (BATTLE): Effort Values, Disabled")
 {
-    gSaveBlock2Ptr->optionsBattle[BATTLE_OPTIONS_EFFORT_VALUES] = BATTLE_OPTION_EFFORT_VALUES_DISABLED;
+    OptionsMenu_SetSavedOptions(BATTLE_SETTINGS,BATTLE_OPTIONS_EFFORT_VALUES,BATTLE_OPTION_EFFORT_VALUES_DISABLED);
 
     GIVEN {
         gSiliconTestVariables.overrideEVs = TRUE;
@@ -460,7 +467,7 @@ SINGLE_BATTLE_TEST("OPTIONS (BATTLE): Effort Values, Disabled")
 
 SINGLE_BATTLE_TEST("OPTIONS (BATTLE): Individual Values, Enabled")
 {
-    gSaveBlock2Ptr->optionsBattle[BATTLE_OPTIONS_INDIVIDUAL_VALUES] = BATTLE_OPTION_INDIVIDUAL_VALUES_ENABLED;
+    OptionsMenu_SetSavedOptions(BATTLE_SETTINGS,BATTLE_OPTIONS_INDIVIDUAL_VALUES,BATTLE_OPTION_INDIVIDUAL_VALUES_ENABLED);
 
     GIVEN {
         gSiliconTestVariables.overrideIVs = TRUE;
@@ -480,7 +487,7 @@ SINGLE_BATTLE_TEST("OPTIONS (BATTLE): Individual Values, Enabled")
 
 SINGLE_BATTLE_TEST("OPTIONS (BATTLE): Individual Values, Disabled")
 {
-    gSaveBlock2Ptr->optionsBattle[BATTLE_OPTIONS_INDIVIDUAL_VALUES] = BATTLE_OPTION_INDIVIDUAL_VALUES_DISABLED;
+    OptionsMenu_SetSavedOptions(BATTLE_SETTINGS,BATTLE_OPTIONS_INDIVIDUAL_VALUES,BATTLE_OPTION_INDIVIDUAL_VALUES_DISABLED);
 
     GIVEN {
         gSiliconTestVariables.overrideIVs = TRUE;
@@ -500,9 +507,10 @@ SINGLE_BATTLE_TEST("OPTIONS (BATTLE): Individual Values, Disabled")
 
 WILD_BATTLE_TEST("OPTIONS (BATTLE): Player level caps, Enabled (under cap)")
 {
-    gSaveBlock2Ptr->optionsBattle[BATTLE_OPTIONS_EXP_MULTIPLIER] = BATTLE_OPTION_MULTIPLIER_1;
+    OptionsMenu_SetSavedOptions(BATTLE_SETTINGS,BATTLE_OPTIONS_EXP_MULTIPLIER,BATTLE_OPTION_MULTIPLIER_1);
+;
 
-    gSaveBlock2Ptr->optionsBattle[BATTLE_OPTIONS_PLAYER_LEVEL] = BATTLE_OPTION_LEVEL_CAP;
+    OptionsMenu_SetSavedOptions(BATTLE_SETTINGS,BATTLE_OPTIONS_PLAYER_LEVEL,BATTLE_OPTION_LEVEL_CAP);
     u16 *var;
     GIVEN {
         var = GetVarPointer(B_LEVEL_CAP_VARIABLE);
@@ -518,9 +526,10 @@ WILD_BATTLE_TEST("OPTIONS (BATTLE): Player level caps, Enabled (under cap)")
 
 WILD_BATTLE_TEST("OPTIONS (BATTLE): Player level caps, Enabled (at cap)")
 {
-    gSaveBlock2Ptr->optionsBattle[BATTLE_OPTIONS_EXP_MULTIPLIER] = BATTLE_OPTION_MULTIPLIER_1;
+    OptionsMenu_SetSavedOptions(BATTLE_SETTINGS,BATTLE_OPTIONS_EXP_MULTIPLIER,BATTLE_OPTION_MULTIPLIER_1);
+;
 
-    gSaveBlock2Ptr->optionsBattle[BATTLE_OPTIONS_PLAYER_LEVEL] = BATTLE_OPTION_LEVEL_CAP;
+    OptionsMenu_SetSavedOptions(BATTLE_SETTINGS,BATTLE_OPTIONS_PLAYER_LEVEL,BATTLE_OPTION_LEVEL_CAP);
     u16 *var;
     GIVEN {
         var = GetVarPointer(B_LEVEL_CAP_VARIABLE);
@@ -536,9 +545,10 @@ WILD_BATTLE_TEST("OPTIONS (BATTLE): Player level caps, Enabled (at cap)")
 
 WILD_BATTLE_TEST("OPTIONS (BATTLE): Player level caps, Disabled")
 {
-    gSaveBlock2Ptr->optionsBattle[BATTLE_OPTIONS_EXP_MULTIPLIER] = BATTLE_OPTION_MULTIPLIER_1;
+    OptionsMenu_SetSavedOptions(BATTLE_SETTINGS,BATTLE_OPTIONS_EXP_MULTIPLIER,BATTLE_OPTION_MULTIPLIER_1);
+;
 
-    gSaveBlock2Ptr->optionsBattle[BATTLE_OPTIONS_PLAYER_LEVEL] = BATTLE_OPTION_LEVEL_NO_CAP;
+    OptionsMenu_SetSavedOptions(BATTLE_SETTINGS,BATTLE_OPTIONS_PLAYER_LEVEL,BATTLE_OPTION_LEVEL_NO_CAP);
     u16 *var;
     GIVEN {
         var = GetVarPointer(B_LEVEL_CAP_VARIABLE);
@@ -554,7 +564,7 @@ WILD_BATTLE_TEST("OPTIONS (BATTLE): Player level caps, Disabled")
 
 AI_SINGLE_BATTLE_TEST("OPTIONS (BATTLE): Switch Style (SHIFT)")
 {
-    gSaveBlock2Ptr->optionsBattle[BATTLE_OPTIONS_SWITCH_STYLE] = OPTIONS_BATTLE_STYLE_SHIFT;
+    OptionsMenu_SetSavedOptions(BATTLE_SETTINGS,BATTLE_OPTIONS_SWITCH_STYLE,OPTIONS_BATTLE_STYLE_SHIFT);
 
     GIVEN {
         gSiliconTestVariables.overrideSwitchMode = TRUE;
@@ -575,7 +585,7 @@ AI_SINGLE_BATTLE_TEST("OPTIONS (BATTLE): Switch Style (SHIFT)")
 
 AI_SINGLE_BATTLE_TEST("OPTIONS (BATTLE): Switch Style (SET)")
 {
-    gSaveBlock2Ptr->optionsBattle[BATTLE_OPTIONS_SWITCH_STYLE] = OPTIONS_BATTLE_STYLE_SET;
+    OptionsMenu_SetSavedOptions(BATTLE_SETTINGS,BATTLE_OPTIONS_SWITCH_STYLE,OPTIONS_BATTLE_STYLE_SET);
 
     GIVEN {
         gSiliconTestVariables.overrideSwitchMode = TRUE;
@@ -592,14 +602,15 @@ AI_SINGLE_BATTLE_TEST("OPTIONS (BATTLE): Switch Style (SET)")
     }
 }
 
-/*
-AI_SINGLE_BATTLE_TEST("OPTIONS (BATTLE): Mid Battle Evo (ON)")
+AI_SINGLE_BATTLE_TEST("OPTIONS (BATTLE): Mid Battle Evo (ON) (Level Up)")
 {
+    //  EVO_LEVEL
     //  Necessary for being able to get exp
-    gSaveBlock2Ptr->optionsBattle[BATTLE_OPTIONS_PLAYER_LEVEL] = BATTLE_OPTION_LEVEL_NO_CAP;
-    gSaveBlock2Ptr->optionsBattle[BATTLE_OPTIONS_EXP_MULTIPLIER] = BATTLE_OPTION_MULTIPLIER_1;
+    OptionsMenu_SetSavedOptions(BATTLE_SETTINGS,BATTLE_OPTIONS_PLAYER_LEVEL,BATTLE_OPTION_LEVEL_NO_CAP);
+    OptionsMenu_SetSavedOptions(BATTLE_SETTINGS,BATTLE_OPTIONS_EXP_MULTIPLIER,BATTLE_OPTION_MULTIPLIER_1);
+;
 
-    gSaveBlock2Ptr->optionsBattle[BATTLE_OPTIONS_MID_BATTLE_EVOLUTION] = BATTLE_OPTION_MID_BATTLE_EVOLUTION_ON;
+    OptionsMenu_SetSavedOptions(BATTLE_SETTINGS,BATTLE_OPTIONS_MID_BATTLE_EVOLUTION,BATTLE_OPTION_MID_BATTLE_EVOLUTION_ON);
 
     GIVEN {
         PLAYER(SPECIES_TESTING_PREEVO) { Level(1); }
@@ -608,13 +619,197 @@ AI_SINGLE_BATTLE_TEST("OPTIONS (BATTLE): Mid Battle Evo (ON)")
     } WHEN {
         TURN { }
         TURN { }
+    } THEN {
+        EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_SPECIES), SPECIES_TESTING_ERRATIC);
+        EXPECT_EQ(player->species, SPECIES_TESTING_ERRATIC);
     }
 }
-*/
+
+AI_SINGLE_BATTLE_TEST("OPTIONS (BATTLE): Mid Battle Evo (ON) (Level Up, Battle Only)")
+{
+    //  EVO_LEVEL_BATTLE_ONLY
+    //  Necessary for being able to get exp
+    OptionsMenu_SetSavedOptions(BATTLE_SETTINGS,BATTLE_OPTIONS_PLAYER_LEVEL,BATTLE_OPTION_LEVEL_NO_CAP);
+    OptionsMenu_SetSavedOptions(BATTLE_SETTINGS,BATTLE_OPTIONS_EXP_MULTIPLIER,BATTLE_OPTION_MULTIPLIER_1);
+
+
+    OptionsMenu_SetSavedOptions(BATTLE_SETTINGS,BATTLE_OPTIONS_MID_BATTLE_EVOLUTION,BATTLE_OPTION_MID_BATTLE_EVOLUTION_ON);
+
+    GIVEN {
+        PLAYER(SPECIES_TANDEMAUS) { Level(46); }
+        OPPONENT(SPECIES_WOBBUFFET) { Moves(MOVE_MEMENTO); }
+        OPPONENT(SPECIES_WOBBUFFET) { Moves(MOVE_CELEBRATE); }
+    } WHEN {
+        TURN { }
+        TURN { }
+    } THEN {
+        EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_SPECIES), SPECIES_MAUSHOLD_FOUR);
+        EXPECT_EQ(player->species, SPECIES_MAUSHOLD_FOUR);
+    }
+}
+
+AI_SINGLE_BATTLE_TEST("OPTIONS (BATTLE): Mid Battle Evo (ON) (Level Up, Weather)")
+{
+    //  EVO_LEVEL, IF_WEATHER
+    //  Necessary for being able to get exp
+    OptionsMenu_SetSavedOptions(BATTLE_SETTINGS,BATTLE_OPTIONS_PLAYER_LEVEL,BATTLE_OPTION_LEVEL_NO_CAP);
+    OptionsMenu_SetSavedOptions(BATTLE_SETTINGS,BATTLE_OPTIONS_EXP_MULTIPLIER,BATTLE_OPTION_MULTIPLIER_1);
+
+
+    OptionsMenu_SetSavedOptions(BATTLE_SETTINGS,BATTLE_OPTIONS_MID_BATTLE_EVOLUTION,BATTLE_OPTION_MID_BATTLE_EVOLUTION_ON);
+
+    GIVEN {
+        PLAYER(SPECIES_SLIGGOO) { Level(49); }
+        OPPONENT(SPECIES_CHANSEY) { Moves(MOVE_MEMENTO); }
+        OPPONENT(SPECIES_WOBBUFFET) { Moves(MOVE_CELEBRATE); }
+    } WHEN {
+        TURN { MOVE(player, MOVE_RAIN_DANCE); }
+        TURN { }
+    } THEN {
+        EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_SPECIES), SPECIES_GOODRA);
+        EXPECT_EQ(player->species, SPECIES_GOODRA);
+    }
+}
+
+AI_SINGLE_BATTLE_TEST("OPTIONS (BATTLE): Mid Battle Evo (ON) (Level Up, Knows Move)")
+{
+    //  EVO_LEVEL, IF_KNOWS_MOVE
+    //  Necessary for being able to get exp
+    OptionsMenu_SetSavedOptions(BATTLE_SETTINGS,BATTLE_OPTIONS_PLAYER_LEVEL,BATTLE_OPTION_LEVEL_NO_CAP);
+    OptionsMenu_SetSavedOptions(BATTLE_SETTINGS,BATTLE_OPTIONS_EXP_MULTIPLIER,BATTLE_OPTION_MULTIPLIER_1);
+
+
+    OptionsMenu_SetSavedOptions(BATTLE_SETTINGS,BATTLE_OPTIONS_MID_BATTLE_EVOLUTION,BATTLE_OPTION_MID_BATTLE_EVOLUTION_ON);
+
+    GIVEN {
+        PLAYER(SPECIES_GIRAFARIG) { Level(49); }
+        OPPONENT(SPECIES_CHANSEY) { Moves(MOVE_MEMENTO); }
+        OPPONENT(SPECIES_WOBBUFFET) { Moves(MOVE_CELEBRATE); }
+    } WHEN {
+        TURN { MOVE(player, MOVE_TWIN_BEAM); }
+        TURN { }
+    } THEN {
+        EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_SPECIES), SPECIES_FARIGIRAF);
+        EXPECT_EQ(player->species, SPECIES_FARIGIRAF);
+    }
+}
+
+AI_SINGLE_BATTLE_TEST("OPTIONS (BATTLE): Mid Battle Evo (ON) (Level Up, Type in party)")
+{
+    //  EVO_LEVEL, IF_TYPE_IN_PARTY
+    //  Necessary for being able to get exp
+    OptionsMenu_SetSavedOptions(BATTLE_SETTINGS,BATTLE_OPTIONS_PLAYER_LEVEL,BATTLE_OPTION_LEVEL_NO_CAP);
+    OptionsMenu_SetSavedOptions(BATTLE_SETTINGS,BATTLE_OPTIONS_EXP_MULTIPLIER,BATTLE_OPTION_MULTIPLIER_1);
+
+
+    OptionsMenu_SetSavedOptions(BATTLE_SETTINGS,BATTLE_OPTIONS_MID_BATTLE_EVOLUTION,BATTLE_OPTION_MID_BATTLE_EVOLUTION_ON);
+
+    GIVEN {
+        PLAYER(SPECIES_PANCHAM) { Level(44); }
+        PLAYER(SPECIES_ABSOL);
+        OPPONENT(SPECIES_CHANSEY) { Moves(MOVE_MEMENTO); }
+        OPPONENT(SPECIES_WOBBUFFET) { Moves(MOVE_CELEBRATE); }
+    } WHEN {
+        TURN { }
+        TURN { }
+    } THEN {
+        EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_SPECIES), SPECIES_PANGORO);
+        EXPECT_EQ(player->species, SPECIES_PANGORO);
+    }
+}
+
+AI_SINGLE_BATTLE_TEST("OPTIONS (BATTLE): Mid Battle Evo (ON) (Level Up, Use move X times)")
+{
+    //  EVO_LEVEL, _IF_USED_MOVE_X_TIMES
+    //  Had to edit the number of times the move needed to be used to fit within MAX_TURNS
+    //  Necessary for being able to get exp
+    OptionsMenu_SetSavedOptions(BATTLE_SETTINGS,BATTLE_OPTIONS_PLAYER_LEVEL,BATTLE_OPTION_LEVEL_NO_CAP);
+    OptionsMenu_SetSavedOptions(BATTLE_SETTINGS,BATTLE_OPTIONS_EXP_MULTIPLIER,BATTLE_OPTION_MULTIPLIER_1);
+
+
+    OptionsMenu_SetSavedOptions(BATTLE_SETTINGS,BATTLE_OPTIONS_MID_BATTLE_EVOLUTION,BATTLE_OPTION_MID_BATTLE_EVOLUTION_ON);
+
+    GIVEN {
+        PLAYER(SPECIES_PRIMEAPE) { Level(53); }
+        OPPONENT(SPECIES_GROUDON) { Moves(MOVE_CURSE, MOVE_MEMENTO); }
+        OPPONENT(SPECIES_WOBBUFFET) { Moves(MOVE_CELEBRATE); }
+    } WHEN {
+        TURN { MOVE(player, MOVE_RAGE_FIST); }
+        TURN { MOVE(player, MOVE_RAGE_FIST); }
+        TURN { MOVE(player, MOVE_RAGE_FIST); }
+        TURN { MOVE(player, MOVE_RAGE_FIST); }
+        TURN { MOVE(player, MOVE_RAGE_FIST); }
+        TURN { MOVE(player, MOVE_RAGE_FIST); }
+        TURN { MOVE(player, MOVE_RAGE_FIST); }
+        TURN { MOVE(player, MOVE_RAGE_FIST); }
+        TURN { MOVE(player, MOVE_RAGE_FIST); }
+        TURN { MOVE(player, MOVE_RAGE_FIST); }
+        TURN { }
+    } THEN {
+        EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_SPECIES), SPECIES_ANNIHILAPE);
+        EXPECT_EQ(player->species, SPECIES_ANNIHILAPE);
+    }
+}
+
+AI_SINGLE_BATTLE_TEST("OPTIONS (BATTLE): Mid Battle Evo (ON) (Shedinja)")
+{
+    //  EVO_SPLIT_FORM_EVO
+    //  Necessary for being able to get exp
+    OptionsMenu_SetSavedOptions(BATTLE_SETTINGS,BATTLE_OPTIONS_PLAYER_LEVEL,BATTLE_OPTION_LEVEL_NO_CAP);
+    OptionsMenu_SetSavedOptions(BATTLE_SETTINGS,BATTLE_OPTIONS_EXP_MULTIPLIER,BATTLE_OPTION_MULTIPLIER_1);
+
+
+    OptionsMenu_SetSavedOptions(BATTLE_SETTINGS,BATTLE_OPTIONS_MID_BATTLE_EVOLUTION,BATTLE_OPTION_MID_BATTLE_EVOLUTION_ON);
+
+    RUN_OVERWORLD_SCRIPT(
+        additem ITEM_POKE_BALL;
+    );
+
+    GIVEN {
+        PLAYER(SPECIES_NINCADA) { Level(40); }
+        OPPONENT(SPECIES_WOBBUFFET) { Moves(MOVE_MEMENTO); }
+        OPPONENT(SPECIES_WOBBUFFET) { Moves(MOVE_CELEBRATE); }
+    } WHEN {
+        TURN { }
+        TURN { }
+    } THEN {
+        EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_SPECIES), SPECIES_NINJASK);
+        EXPECT_EQ(player->species, SPECIES_NINJASK);
+        EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][1], MON_DATA_SPECIES), SPECIES_SHEDINJA);
+    }
+}
+
+AI_SINGLE_BATTLE_TEST("OPTIONS (BATTLE): Mid Battle Evo (ON) (Kingambit)")
+{
+    //  EVO_LEVEL + IF_DEFEAT_X_WITH_ITEMS
+    //  Necessary for being able to get exp
+    OptionsMenu_SetSavedOptions(BATTLE_SETTINGS,BATTLE_OPTIONS_PLAYER_LEVEL,BATTLE_OPTION_LEVEL_NO_CAP);
+    OptionsMenu_SetSavedOptions(BATTLE_SETTINGS,BATTLE_OPTIONS_EXP_MULTIPLIER,BATTLE_OPTION_MULTIPLIER_1);
+
+
+    OptionsMenu_SetSavedOptions(BATTLE_SETTINGS,BATTLE_OPTIONS_MID_BATTLE_EVOLUTION,BATTLE_OPTION_MID_BATTLE_EVOLUTION_ON);
+
+    GIVEN {
+        AI_FLAGS(AI_FLAG_SEQUENCE_SWITCHING);
+        PLAYER(SPECIES_BISHARP) { Level(71); Ability(ABILITY_PRESSURE); }
+        OPPONENT(SPECIES_BISHARP) { HP(1); Moves(MOVE_MEMENTO); Item(ITEM_LEADERS_CREST); }
+        OPPONENT(SPECIES_BISHARP) { HP(1); Moves(MOVE_MEMENTO); Item(ITEM_LEADERS_CREST); }
+        OPPONENT(SPECIES_BISHARP) { HP(1); Moves(MOVE_MEMENTO); Item(ITEM_LEADERS_CREST); }
+        OPPONENT(SPECIES_WOBBUFFET) { Moves(MOVE_CELEBRATE); }
+    } WHEN {
+        TURN { MOVE(player, MOVE_SCRATCH); }
+        TURN { MOVE(player, MOVE_SCRATCH); }
+        TURN { MOVE(player, MOVE_SCRATCH); }
+        TURN { }
+    } THEN {
+        EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_SPECIES), SPECIES_KINGAMBIT);
+        EXPECT_EQ(player->species, SPECIES_KINGAMBIT);
+    }
+}
 
 SINGLE_BATTLE_TEST("OPTIONS (BATTLE): Fainted mon (Allowed)")
 {
-    gSaveBlock2Ptr->optionsBattle[BATTLE_OPTIONS_FAINTED_MON] = BATTLE_OPTION_FAINTED_MON_ALLOWED;
+    OptionsMenu_SetSavedOptions(BATTLE_SETTINGS,BATTLE_OPTIONS_FAINTED_MON,BATTLE_OPTION_FAINTED_MON_ALLOWED);
 
     GIVEN {
         ZeroBoxMonAt(0, 0);
@@ -634,7 +829,7 @@ SINGLE_BATTLE_TEST("OPTIONS (BATTLE): Fainted mon (Allowed)")
 SINGLE_BATTLE_TEST("OPTIONS (BATTLE): Fainted mon (Box)")
 {
     //  Does not handle trying to withdraw mon from box
-    gSaveBlock2Ptr->optionsBattle[BATTLE_OPTIONS_FAINTED_MON] = BATTLE_OPTION_FAINTED_MON_BOX;
+    OptionsMenu_SetSavedOptions(BATTLE_SETTINGS,BATTLE_OPTIONS_FAINTED_MON,BATTLE_OPTION_FAINTED_MON_BOX);
 
     GIVEN {
         ZeroBoxMonAt(0, 0);
@@ -651,7 +846,7 @@ SINGLE_BATTLE_TEST("OPTIONS (BATTLE): Fainted mon (Box)")
 
 SINGLE_BATTLE_TEST("OPTIONS (BATTLE): Fainted mon (Release)")
 {
-    gSaveBlock2Ptr->optionsBattle[BATTLE_OPTIONS_FAINTED_MON] = BATTLE_OPTION_FAINTED_MON_RELEASE;
+    OptionsMenu_SetSavedOptions(BATTLE_SETTINGS,BATTLE_OPTIONS_FAINTED_MON,BATTLE_OPTION_FAINTED_MON_RELEASE);
 
     GIVEN {
         ZeroBoxMonAt(0, 0);
@@ -673,7 +868,7 @@ SINGLE_BATTLE_TEST("OPTIONS (Battle): HP Speed (Fast is faster than Normal)", u3
     PARAMETRIZE { speed = BATTLE_OPTION_BAR_SPEED_NORMAL; }
     PARAMETRIZE { speed = BATTLE_OPTION_BAR_SPEED_FAST; }
     GIVEN {
-        gSaveBlock2Ptr->optionsBattle[BATTLE_OPTIONS_HP_SPEED] = speed;
+        OptionsMenu_SetSavedOptions(BATTLE_SETTINGS,BATTLE_OPTIONS_HP_SPEED,speed);
         gSiliconTestVariables.counter = 0;
         gSiliconTestVariables.countHpBarMovement = TRUE;
         PLAYER(SPECIES_WOBBUFFET);
@@ -690,7 +885,7 @@ SINGLE_BATTLE_TEST("OPTIONS (Battle): HP Speed (Fast is faster than Normal)", u3
 SINGLE_BATTLE_TEST("OPTIONS (Battle): HP Speed (Instant)")
 {
     GIVEN {
-        gSaveBlock2Ptr->optionsBattle[BATTLE_OPTIONS_HP_SPEED] = BATTLE_OPTION_BAR_SPEED_INSTANT;
+        OptionsMenu_SetSavedOptions(BATTLE_SETTINGS,BATTLE_OPTIONS_HP_SPEED,BATTLE_OPTION_BAR_SPEED_INSTANT);
         gSiliconTestVariables.counter = 0;
         gSiliconTestVariables.countHpBarMovement = TRUE;
         PLAYER(SPECIES_WOBBUFFET);
@@ -705,14 +900,15 @@ SINGLE_BATTLE_TEST("OPTIONS (Battle): HP Speed (Instant)")
 WILD_BATTLE_TEST("OPTIONS (Battle): EXP Speed (Fast is faster than Normal)", u32 timeTaken)
 {
     //  Necessry for exp to work
-    gSaveBlock2Ptr->optionsBattle[BATTLE_OPTIONS_PLAYER_LEVEL] = BATTLE_OPTION_LEVEL_NO_CAP;
-    gSaveBlock2Ptr->optionsBattle[BATTLE_OPTIONS_EXP_MULTIPLIER] = BATTLE_OPTION_MULTIPLIER_1;
+    OptionsMenu_SetSavedOptions(BATTLE_SETTINGS,BATTLE_OPTIONS_PLAYER_LEVEL,BATTLE_OPTION_LEVEL_NO_CAP);
+    OptionsMenu_SetSavedOptions(BATTLE_SETTINGS,BATTLE_OPTIONS_EXP_MULTIPLIER,BATTLE_OPTION_MULTIPLIER_1);
+;
 
     enum optionaBattleHPExpSpeed speed;
     PARAMETRIZE { speed = BATTLE_OPTION_BAR_SPEED_NORMAL; }
     PARAMETRIZE { speed = BATTLE_OPTION_BAR_SPEED_FAST; }
     GIVEN {
-        gSaveBlock2Ptr->optionsBattle[BATTLE_OPTIONS_EXP_SPEED] = speed;
+        OptionsMenu_SetSavedOptions(BATTLE_SETTINGS,BATTLE_OPTIONS_EXP_SPEED,speed);
         gSiliconTestVariables.counter = 0;
         gSiliconTestVariables.countExpBarMovement = TRUE;
         //  Level is set to some amount that moves the Exp bar a decent amount
@@ -731,11 +927,12 @@ WILD_BATTLE_TEST("OPTIONS (Battle): EXP Speed (Fast is faster than Normal)", u32
 WILD_BATTLE_TEST("OPTIONS (Battle): EXP Speed (Instant)")
 {
     //  Necessry for exp to work
-    gSaveBlock2Ptr->optionsBattle[BATTLE_OPTIONS_PLAYER_LEVEL] = BATTLE_OPTION_LEVEL_NO_CAP;
-    gSaveBlock2Ptr->optionsBattle[BATTLE_OPTIONS_EXP_MULTIPLIER] = BATTLE_OPTION_MULTIPLIER_1;
+    OptionsMenu_SetSavedOptions(BATTLE_SETTINGS,BATTLE_OPTIONS_PLAYER_LEVEL,BATTLE_OPTION_LEVEL_NO_CAP);
+    OptionsMenu_SetSavedOptions(BATTLE_SETTINGS,BATTLE_OPTIONS_EXP_MULTIPLIER,BATTLE_OPTION_MULTIPLIER_1);
+;
 
     GIVEN {
-        gSaveBlock2Ptr->optionsBattle[BATTLE_OPTIONS_EXP_SPEED] = BATTLE_OPTION_BAR_SPEED_INSTANT;
+        OptionsMenu_SetSavedOptions(BATTLE_SETTINGS,BATTLE_OPTIONS_EXP_SPEED,BATTLE_OPTION_BAR_SPEED_INSTANT);
         gSiliconTestVariables.counter = 0;
         gSiliconTestVariables.countExpBarMovement = TRUE;
         //  Level is set to some amount that moves the Exp bar a decent amount
@@ -762,7 +959,7 @@ SINGLE_BATTLE_TEST("OPTIONS (VISUAL): Font Switcher", u32 checksum)
     PARAMETRIZE { font = VISUAL_OPTION_FONT_SWITCHER_EMERALD; }
     PARAMETRIZE { font = VISUAL_OPTION_FONT_SWITCHER_FIRERED; }
     GIVEN {
-        gSaveBlock2Ptr->optionsVisual[VISUAL_OPTIONS_FONT_SWITCHER] = font;
+        OptionsMenu_SetSavedOptions(VISUAL_SETTINGS,VISUAL_OPTIONS_FONT_SWITCHER,font);
         gSiliconTestVariables.counter = 0;
         gSiliconTestVariables.checkFontGraphics = TRUE;
         PLAYER(SPECIES_WOBBUFFET);
@@ -778,7 +975,7 @@ SINGLE_BATTLE_TEST("OPTIONS (VISUAL): Font Switcher", u32 checksum)
 
 TEST("OPTIONS (VISUAL): Units, distance (Metric, period)")
 {
-    gSaveBlock2Ptr->optionsVisual[VISUAL_OPTIONS_UNITS] = VISUAL_OPTION_UNITS_METRIC_PERIOD;
+    OptionsMenu_SetSavedOptions(VISUAL_SETTINGS,VISUAL_OPTIONS_UNITS,VISUAL_OPTION_UNITS_METRIC_PERIOD);
     u8 *str = ConvertMonHeightToString(123);
     bool32 found_m = FALSE;
     bool32 found_period = FALSE;
@@ -799,7 +996,7 @@ TEST("OPTIONS (VISUAL): Units, distance (Metric, period)")
 
 TEST("OPTIONS (VISUAL): Units, distance (Metric, comma)")
 {
-    gSaveBlock2Ptr->optionsVisual[VISUAL_OPTIONS_UNITS] = VISUAL_OPTION_UNITS_METRIC_COMMA;
+    OptionsMenu_SetSavedOptions(VISUAL_SETTINGS,VISUAL_OPTIONS_UNITS,VISUAL_OPTION_UNITS_METRIC_COMMA);
     u8 *str = ConvertMonHeightToString(123);
     bool32 found_m = FALSE;
     bool32 found_comma = FALSE;
@@ -820,7 +1017,7 @@ TEST("OPTIONS (VISUAL): Units, distance (Metric, comma)")
 
 TEST("OPTIONS (VISUAL): Units, mass (Metric, period)")
 {
-    gSaveBlock2Ptr->optionsVisual[VISUAL_OPTIONS_UNITS] = VISUAL_OPTION_UNITS_METRIC_PERIOD;
+    OptionsMenu_SetSavedOptions(VISUAL_SETTINGS,VISUAL_OPTIONS_UNITS,VISUAL_OPTION_UNITS_METRIC_PERIOD);
     u8 *str = ConvertMonWeightToString(123);
     bool32 found_kg = FALSE;
     bool32 found_period = FALSE;
@@ -841,7 +1038,7 @@ TEST("OPTIONS (VISUAL): Units, mass (Metric, period)")
 
 TEST("OPTIONS (VISUAL): Units, mass (Metric, comma)")
 {
-    gSaveBlock2Ptr->optionsVisual[VISUAL_OPTIONS_UNITS] = VISUAL_OPTION_UNITS_METRIC_COMMA;
+    OptionsMenu_SetSavedOptions(VISUAL_SETTINGS,VISUAL_OPTIONS_UNITS,VISUAL_OPTION_UNITS_METRIC_COMMA);
     u8 *str = ConvertMonWeightToString(123);
     bool32 found_kg = FALSE;
     bool32 found_comma = FALSE;
@@ -863,7 +1060,7 @@ TEST("OPTIONS (VISUAL): Units, mass (Metric, comma)")
 TEST("OPTIONS (VISUAL): Units, distance (Imperial, period)")
 {
     //  Comma isn't actually used when measuring distance with this accuracy
-    gSaveBlock2Ptr->optionsVisual[VISUAL_OPTIONS_UNITS] = VISUAL_OPTION_UNITS_IMPERIAL_PERIOD;
+    OptionsMenu_SetSavedOptions(VISUAL_SETTINGS,VISUAL_OPTIONS_UNITS,VISUAL_OPTION_UNITS_IMPERIAL_PERIOD);
     u8 *str = ConvertMonHeightToString(123);
     bool32 found_foot = FALSE;
     bool32 found_inch = FALSE;
@@ -885,7 +1082,7 @@ TEST("OPTIONS (VISUAL): Units, distance (Imperial, period)")
 TEST("OPTIONS (VISUAL): Units, distance (Imperial, comma)")
 {
     //  Comma isn't actually used when measuring distance with this accuracy
-    gSaveBlock2Ptr->optionsVisual[VISUAL_OPTIONS_UNITS] = VISUAL_OPTION_UNITS_IMPERIAL_COMMA;
+    OptionsMenu_SetSavedOptions(VISUAL_SETTINGS,VISUAL_OPTIONS_UNITS,VISUAL_OPTION_UNITS_IMPERIAL_COMMA);
     u8 *str = ConvertMonHeightToString(123);
     bool32 found_foot = FALSE;
     bool32 found_inch = FALSE;
@@ -906,7 +1103,7 @@ TEST("OPTIONS (VISUAL): Units, distance (Imperial, comma)")
 
 TEST("OPTIONS (VISUAL): Units, mass (Imperial, period)")
 {
-    gSaveBlock2Ptr->optionsVisual[VISUAL_OPTIONS_UNITS] = VISUAL_OPTION_UNITS_IMPERIAL_PERIOD;
+    OptionsMenu_SetSavedOptions(VISUAL_SETTINGS,VISUAL_OPTIONS_UNITS,VISUAL_OPTION_UNITS_IMPERIAL_PERIOD);
     u8 *str = ConvertMonWeightToString(123);
     bool32 found_lbs = FALSE;
     bool32 found_period = FALSE;
@@ -927,7 +1124,7 @@ TEST("OPTIONS (VISUAL): Units, mass (Imperial, period)")
 
 TEST("OPTIONS (VISUAL): Units, mass (Imperial, comma)")
 {
-    gSaveBlock2Ptr->optionsVisual[VISUAL_OPTIONS_UNITS] = VISUAL_OPTION_UNITS_IMPERIAL_COMMA;
+    OptionsMenu_SetSavedOptions(VISUAL_SETTINGS,VISUAL_OPTIONS_UNITS,VISUAL_OPTION_UNITS_IMPERIAL_COMMA);
     u8 *str = ConvertMonWeightToString(123);
     bool32 found_lbs = FALSE;
     bool32 found_comma = FALSE;
@@ -955,7 +1152,7 @@ SINGLE_BATTLE_TEST("OPTIONS (BATTLE): Animations", u32 lastTile)
     PARAMETRIZE { anims = TRUE; }
     GIVEN {
         FORCE_MOVE_ANIM(TRUE);
-        gSaveBlock2Ptr->optionsBattle[BATTLE_OPTIONS_ANIMATIONS] = anims;
+        OptionsMenu_SetSavedOptions(BATTLE_SETTINGS,BATTLE_OPTIONS_ANIMATIONS,anims);
         gSiliconTestVariables.checkVramUse = TRUE;
         gSiliconTestVariables.counter = 0;
         PLAYER(SPECIES_WOBBUFFET);
@@ -979,7 +1176,7 @@ SINGLE_BATTLE_TEST("OPTIONS (VISUAL): Text Speed", u32 frames)
     PARAMETRIZE { speed = VISUAL_OPTION_TEXTSPEED_FAST; }
     PARAMETRIZE { speed = VISUAL_OPTION_TEXTSPEED_INSTANT; }
     GIVEN {
-        gSaveBlock2Ptr->optionsVisual[VISUAL_OPTIONS_TEXT_SPEED] = speed;
+        OptionsMenu_SetSavedOptions(VISUAL_SETTINGS,VISUAL_OPTIONS_TEXT_SPEED,speed);
         gSiliconTestVariables.checkPrintSpeed = TRUE;
         gSiliconTestVariables.counter = 0;
         PLAYER(SPECIES_WOBBUFFET);
@@ -993,4 +1190,155 @@ SINGLE_BATTLE_TEST("OPTIONS (VISUAL): Text Speed", u32 frames)
         EXPECT_GT(results[1].frames, results[2].frames);
         EXPECT_GT(results[2].frames, results[3].frames);
     }
+}
+
+SINGLE_BATTLE_TEST("OPTIONS (BATTLE): Move Healing (Primary effect")
+{
+    GIVEN {
+        OptionsMenu_SetSavedOptions(BATTLE_SETTINGS,BATTLE_OPTIONS_MOVE_HEALING,BATTLE_OPTION_MOVE_HEALING_DISABLED);
+        PLAYER(SPECIES_WOBBUFFET) { HP(100); MaxHP(200); }
+        OPPONENT(SPECIES_WOBBUFFET) { HP(100); MaxHP(200); }
+    } WHEN {
+        TURN { MOVE(player, MOVE_RECOVER); MOVE(opponent, MOVE_RECOVER); }
+    } SCENE {
+        NONE_OF {
+            ANIMATION(ANIM_TYPE_MOVE, MOVE_RECOVER, player);
+            HP_BAR(player);
+        }
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_RECOVER, opponent);
+        HP_BAR(opponent);
+    } THEN {
+        EXPECT_EQ(player->hp, 100);
+        EXPECT_EQ(opponent->hp, 200);
+    }
+}
+
+SINGLE_BATTLE_TEST("OPTIONS (BATTLE): Move Healing (Secondary effect, Absorb)")
+{
+    GIVEN {
+        OptionsMenu_SetSavedOptions(BATTLE_SETTINGS,BATTLE_OPTIONS_MOVE_HEALING,BATTLE_OPTION_MOVE_HEALING_DISABLED);
+        PLAYER(SPECIES_WOBBUFFET) { HP(100); MaxHP(200); }
+        OPPONENT(SPECIES_WOBBUFFET) { HP(100); MaxHP(200); }
+    } WHEN {
+        TURN { MOVE(player, MOVE_ABSORB); MOVE(opponent, MOVE_ABSORB); }
+    } SCENE {
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_ABSORB, player);
+        HP_BAR(opponent);
+        NOT HP_BAR(player);
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_ABSORB, opponent);
+        HP_BAR(player);
+        HP_BAR(opponent);
+    } THEN {
+        EXPECT_GT(opponent->hp, player->hp);
+    }
+}
+
+SINGLE_BATTLE_TEST("OPTIONS (BATTLE): Move Healing (Secondary effect, Strength Sap)")
+{
+    GIVEN {
+        OptionsMenu_SetSavedOptions(BATTLE_SETTINGS,BATTLE_OPTIONS_MOVE_HEALING,BATTLE_OPTION_MOVE_HEALING_DISABLED);
+        PLAYER(SPECIES_WOBBUFFET) { HP(100); MaxHP(200); }
+        OPPONENT(SPECIES_WOBBUFFET) { HP(100); MaxHP(200); }
+    } WHEN {
+        TURN { MOVE(player, MOVE_STRENGTH_SAP); MOVE(opponent, MOVE_STRENGTH_SAP); }
+    } SCENE {
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_STRENGTH_SAP, player);
+        ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, opponent);
+        NOT HP_BAR(player);
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_STRENGTH_SAP, opponent);
+        ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, player);
+        HP_BAR(opponent);
+    } THEN {
+        EXPECT_GT(opponent->hp, player->hp);
+    }
+}
+
+SINGLE_BATTLE_TEST("OPTIONS (BATTLE): Move Healing (Secondary effect, Dream Eater)")
+{
+    GIVEN {
+        OptionsMenu_SetSavedOptions(BATTLE_SETTINGS,BATTLE_OPTIONS_MOVE_HEALING,BATTLE_OPTION_MOVE_HEALING_DISABLED);
+        PLAYER(SPECIES_KOMALA) { HP(100); MaxHP(200); }
+        OPPONENT(SPECIES_KOMALA) { HP(100); MaxHP(200); }
+    } WHEN {
+        TURN { MOVE(player, MOVE_SOAK); MOVE(opponent, MOVE_SOAK); }
+        TURN { MOVE(player, MOVE_DREAM_EATER); MOVE(opponent, MOVE_DREAM_EATER); }
+    } SCENE {
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_DREAM_EATER, player);
+        HP_BAR(opponent);
+        NOT HP_BAR(player);
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_DREAM_EATER, opponent);
+        HP_BAR(player);
+        HP_BAR(opponent);
+    } THEN {
+        EXPECT_GT(opponent->hp, player->hp);
+    }
+}
+
+AI_SINGLE_BATTLE_TEST("OPTIONS (BATTLE): Opponent Items (On)")
+{
+    GIVEN {
+        OptionsMenu_SetSavedOptions(BATTLE_SETTINGS,BATTLE_OPTIONS_OPPONENTS_ITEMS,BATTLE_OPTION_OPPONENTS_ITEMS_ALLOWED);
+        gSiliconTestVariables.opponentHasItems = TRUE;
+        AI_FLAGS(AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_CHECK_VIABILITY | AI_FLAG_TRY_TO_FAINT);
+        PLAYER(SPECIES_WOBBUFFET) { Moves(MOVE_CRUNCH, MOVE_CELEBRATE); }
+        OPPONENT(SPECIES_WOBBUFFET) { Moves(MOVE_CELEBRATE); HP(1); }
+    } WHEN {
+        TURN { MOVE(player, MOVE_CELEBRATE); }
+    } SCENE {
+        HP_BAR(opponent);
+    } THEN {
+        EXPECT_EQ(opponent->hp, opponent->maxHP);
+    }
+}
+
+AI_SINGLE_BATTLE_TEST("OPTIONS (BATTLE): Opponent Items (Off)")
+{
+    GIVEN {
+        OptionsMenu_SetSavedOptions(BATTLE_SETTINGS,BATTLE_OPTIONS_OPPONENTS_ITEMS,BATTLE_OPTION_OPPONENTS_ITEMS_DISABLED);
+        gSiliconTestVariables.opponentHasItems = TRUE;
+        AI_FLAGS(AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_CHECK_VIABILITY | AI_FLAG_TRY_TO_FAINT);
+        PLAYER(SPECIES_WOBBUFFET) { Moves(MOVE_CRUNCH, MOVE_CELEBRATE); }
+        OPPONENT(SPECIES_WOBBUFFET) { Moves(MOVE_CELEBRATE); HP(1); }
+    } WHEN {
+        TURN { MOVE(player, MOVE_CELEBRATE); }
+    } SCENE {
+        NOT HP_BAR(opponent);
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_CELEBRATE, opponent);
+    } THEN {
+        EXPECT_EQ(opponent->hp, 1);
+    }
+}
+
+TEST("OPTIONS (BATTLE): Trainer Scaling (Off)")
+{
+    RUN_OVERWORLD_SCRIPT(
+        givemon SPECIES_WOBBUFFET, 50
+    );
+    OptionsMenu_SetSavedOptions(BATTLE_SETTINGS,BATTLE_OPTIONS_TRAINER_SCALING,BATTLE_OPTION_TRAINER_SCALING_OFF);
+    struct Pokemon *testParty = Alloc(6 * sizeof(struct Pokemon));
+    u32 currTrainer = 15;
+    CreateNPCTrainerPartyFromTrainer(testParty, GetTrainerStructFromId(currTrainer), TRUE, BATTLE_TYPE_TRAINER);
+
+    EXPECT_EQ(GetMonData(&testParty[0], MON_DATA_SPECIES), SPECIES_WYNAUT);
+    EXPECT_EQ(GetMonData(&testParty[0], MON_DATA_LEVEL), 1);
+    EXPECT_EQ(GetMonData(&testParty[1], MON_DATA_SPECIES), SPECIES_WOBBUFFET);
+    EXPECT_EQ(GetMonData(&testParty[1], MON_DATA_LEVEL), 100);
+
+    Free(testParty);
+}
+
+TEST("OPTIONS (BATTLE): Trainer Scaling (Level)")
+{
+    RUN_OVERWORLD_SCRIPT(
+        givemon SPECIES_WOBBUFFET, 50
+    );
+    OptionsMenu_SetSavedOptions(BATTLE_SETTINGS,BATTLE_OPTIONS_TRAINER_SCALING,BATTLE_OPTION_TRAINER_SCALING_LEVEL);
+    struct Pokemon *testParty = Alloc(6 * sizeof(struct Pokemon));
+    u32 currTrainer = 15;
+    CreateNPCTrainerPartyFromTrainer(testParty, GetTrainerStructFromId(currTrainer), TRUE, BATTLE_TYPE_TRAINER);
+
+    EXPECT_GT(GetMonData(&testParty[0], MON_DATA_LEVEL), 1);
+    EXPECT_LT(GetMonData(&testParty[1], MON_DATA_LEVEL), 100);
+
+    Free(testParty);
 }

@@ -8,6 +8,7 @@
 #include "battle_stat_change.h"
 #include "battle_scripts.h"
 #include "item.h"
+#include "options_battle.h" // siliconTests
 #include "string_util.h"
 #include "data/hold_effects.h"
 #include "constants/berry.h"
@@ -530,7 +531,11 @@ static enum ItemEffect TryShellBell(enum BattlerId battlerAtk)
      && !gBattleStruct->battlerState[battlerAtk].redCardSwitched
      && !IsBattlerAtMaxHp(battlerAtk)
      && !IsFutureSightAttackerInParty(battlerAtk, gBattlerTarget, gCurrentMove)
-     && !(B_HEAL_BLOCKING >= GEN_5 && gBattleMons[battlerAtk].volatiles.healBlock))
+     // Start Item Healing
+     //&& !(B_HEAL_BLOCKING >= GEN_5 && gBattleMons[battlerAtk].volatiles.healBlock)
+     && !(B_HEAL_BLOCKING >= GEN_5 && gBattleMons[battlerAtk].volatiles.healBlock)
+     && IsBattlerAllowedToHeal(battlerAtk))
+     // End Item Healing
     {
         SetHealAmount(battlerAtk, gBattleScripting.savedDmg / GetBattlerHoldEffectParam(battlerAtk));
         BattleScriptCall(BattleScript_ItemHealHP_Ret);

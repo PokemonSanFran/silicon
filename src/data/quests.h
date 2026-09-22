@@ -3253,14 +3253,67 @@ const struct SideQuest sSideQuests[QUEST_COUNT] =
     },
     [QUEST_MANOFMANYHATS] =
     {
-        .name = gText_Quest_ManOfManyHats_Name,
-        .desc[FLAG_GET_ACTIVE] = gText_Quest_ManOfManyHats_Desc,
-        .desc[FLAG_GET_COMPLETED] = gText_Quest_ManOfManyHats_DoneDesc,
-        .map = gText_Quest_ManOfManyHats_Map,
-        .sprite = OBJ_EVENT_GFX_ARTIST,
+        .name = COMPOUND_STRING("Man Of Many Hats"),
+        .desc[FLAG_GET_ACTIVE] = COMPOUND_STRING("Bring the headphones from the {STR_VAR_1} Ranger Station to Installnatureprobesworker at {STR_VAR_2}. The door password is “J4CKW41K3r”."),
+        .desc[FLAG_GET_COMPLETED] = COMPOUND_STRING("Installnatureprobesworker got their headphones back."),
+        .descFunc = GetQuestDesc_Manofmanyhats,
+        .map = COMPOUND_STRING("ResidoRegion"),
+        .sprite = OBJ_EVENT_GFX_INSTALLNATUREPROBES_RANGER,
         .spritetype = QUEST_SPRITE_TYPE_OBJECT,
         .subquests = NULL,
-        .numSubquests = 0
+        .numSubquests = 0,
+        .states =
+        {
+            [STATE_QUEST_MANOFMANYHATS_NOT_STARTED] =
+            {
+                .name = COMPOUND_STRING("Not Started"),
+                .setupFunc = DebugQuest_ManOfManyHats,
+                side_quest_map(MAP_QUEST_MANOFMANYHATS),
+                .warpId = 0,
+            },
+            [STATE_QUEST_MANOFMANYHATS_BOBA_VISITED] =
+            {
+                .name = COMPOUND_STRING("Visited Waiter"),
+                .setupFunc = DebugQuest_ManOfManyHats,
+                side_quest_map(MAP_QUEST_MANOFMANYHATS_RESTAURANT),
+                .warpId = 0,
+            },
+            [STATE_QUEST_MANOFMANYHATS_FISH_VISITED] =
+            {
+                .name = COMPOUND_STRING("Visited Fisherman"),
+                .setupFunc = DebugQuest_ManOfManyHats,
+                side_quest_map(MAP_QUEST_MANOFMANYHATS_LAKE),
+                .warpId = 0,
+            },
+            [STATE_QUEST_MANOFMANYHATS_STARTED] =
+            {
+                .name = COMPOUND_STRING("Started"),
+                .setupFunc = DebugQuest_ManOfManyHats,
+                side_quest_map(MAP_QUEST_MANOFMANYHATS),
+                .warpId = 0,
+            },
+            [STATE_QUEST_MANOFMANYHATS_OUTPOST_VISITED] =
+            {
+                .name = COMPOUND_STRING("Visited Outpost"),
+                .setupFunc = DebugQuest_ManOfManyHats,
+                side_quest_map(MAP_QUEST_MANOFMANYHATS_TARGET),
+                .warpId = 0,
+            },
+            [STATE_QUEST_MANOFMANYHATS_HEADPHONES_PICKED_UP] =
+            {
+                .name = COMPOUND_STRING("Got the Headphones"),
+                .setupFunc = DebugQuest_ManOfManyHats,
+                side_quest_map(MAP_QUEST_MANOFMANYHATS),
+                .warpId = 0,
+            },
+            [STATE_QUEST_MANOFMANYHATS_COMPLETE] =
+            {
+                .name = COMPOUND_STRING("Complete"),
+                .setupFunc = DebugQuest_ManOfManyHats,
+                side_quest_map(MAP_QUEST_MANOFMANYHATS),
+                .warpId = 0,
+            }
+        },
     },
     [QUEST_RECRUITLOCALARTISTS] =
     {
@@ -3930,9 +3983,9 @@ const struct SideQuest sSideQuests[QUEST_COUNT] =
                 .x = 7,
                 .y = 17,
             },
-            [STATE_QUEST_ANGELDELIVERY_RECIEVED_BIKE] =
+            [STATE_QUEST_ANGELDELIVERY_RECEIVED_BIKE] =
             {
-                .name = COMPOUND_STRING("Recieved Bike"),
+                .name = COMPOUND_STRING("Received Bike"),
                 .setupFunc = DebugQuest_AngelDelivery,
                 side_quest_map(MAP_PIOCA_BRIDGE),
                 .warpId = WARP_ID_NONE,

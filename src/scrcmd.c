@@ -78,6 +78,7 @@
 #include "quest_logic.h"
 #include "quest_ow.h"
 // End siliconMerge
+#include "constants/songs.h"
 #include "currency_box.h"
 #include "constants/map_types.h"
 #include "constants/rgb.h"
@@ -3588,8 +3589,8 @@ void Script_GetOnOffBike(struct ScriptContext *ctx)
         SetPlayerAvatarTransitionFlags(bikeTransitionFlags);
         if (musSwap)
         {
-            Overworld_SetSavedMusic(GetBikeMusicFromOption());
-            Overworld_ChangeMusicTo(GetBikeMusicFromOption());
+            Overworld_SetSavedMusic(MUS_CYCLING);
+            Overworld_ChangeMusicTo(MUS_CYCLING);
         }
     }
 }
@@ -4047,3 +4048,25 @@ void ScrFunc_timeprintinggiven(struct ScriptContext *ctx)
 }
 // End timePrinting
 
+// Start siliconQuests
+bool8 ScrCmd_debugprint(struct ScriptContext *ctx)
+{
+    u16 num;
+    const u8 *str = (const u8*)ScriptReadWord(ctx);
+    u16 numOrVar = ScriptReadHalfword(ctx);
+
+    if (str != NULL)
+    {
+        if (numOrVar != 65535)
+        {
+            num = VarGet(numOrVar);
+            DebugPrintfLevel(MGBA_LOG_WARN, "%S, %u", str, num);
+        }
+        else
+        {
+            DebugPrintfLevel(MGBA_LOG_WARN, "%S", str);
+        }
+    }
+    return FALSE;
+}
+// End siliconQuests

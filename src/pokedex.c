@@ -3466,7 +3466,7 @@ static void Task_HandleInfoScreenInput(u8 taskId)
     }
     if ((JOY_NEW(DPAD_LEFT)
             // Start pokedex
-     || (JOY_NEW(L_BUTTON) && gSaveBlock2Ptr->optionsGame[GAME_OPTIONS_BUTTON_MODE] == OPTIONS_BUTTON_MODE_LR))
+     || (JOY_NEW(L_BUTTON) && OptionsMenu_GetSavedOptions(GAME_SETTINGS,GAME_OPTIONS_BUTTON_MODE) == OPTIONS_BUTTON_MODE_LR))
 //     || (JOY_NEW(L_BUTTON) && gSaveBlock2Ptr->optionsButtonMode == OPTIONS_BUTTON_MODE_LR))
 		    // End pokedex
      && sPokedexView->selectedScreen > 0)
@@ -3478,7 +3478,7 @@ static void Task_HandleInfoScreenInput(u8 taskId)
     }
     if ((JOY_NEW(DPAD_RIGHT)
             // Start pokedex
-     || (JOY_NEW(R_BUTTON) && gSaveBlock2Ptr->optionsGame[GAME_OPTIONS_BUTTON_MODE] == OPTIONS_BUTTON_MODE_LR))
+     || (JOY_NEW(R_BUTTON) && OptionsMenu_GetSavedOptions(GAME_SETTINGS,GAME_OPTIONS_BUTTON_MODE) == OPTIONS_BUTTON_MODE_LR))
 //	      || (JOY_NEW(R_BUTTON) && gSaveBlock2Ptr->optionsButtonMode == OPTIONS_BUTTON_MODE_LR))
 		    // End pokedex
      && sPokedexView->selectedScreen < CANCEL_SCREEN)
@@ -3745,7 +3745,7 @@ static void Task_HandleCryScreenInput(u8 taskId)
         }
         if (JOY_NEW(DPAD_LEFT)
              // Start pokedex
-		         || (JOY_NEW(L_BUTTON) && gSaveBlock2Ptr->optionsGame[GAME_OPTIONS_BUTTON_MODE] == OPTIONS_BUTTON_MODE_LR))
+		         || (JOY_NEW(L_BUTTON) && OptionsMenu_GetSavedOptions(GAME_SETTINGS,GAME_OPTIONS_BUTTON_MODE) == OPTIONS_BUTTON_MODE_LR))
 //         || (JOY_NEW(L_BUTTON) && gSaveBlock2Ptr->optionsButtonMode == OPTIONS_BUTTON_MODE_LR))
 		    // End pokedex
         {
@@ -3758,7 +3758,7 @@ static void Task_HandleCryScreenInput(u8 taskId)
         }
         if (JOY_NEW(DPAD_RIGHT)
             // Start pokedex
-         || (JOY_NEW(R_BUTTON) && gSaveBlock2Ptr->optionsGame[GAME_OPTIONS_BUTTON_MODE] == OPTIONS_BUTTON_MODE_LR))
+         || (JOY_NEW(R_BUTTON) && OptionsMenu_GetSavedOptions(GAME_SETTINGS,GAME_OPTIONS_BUTTON_MODE) == OPTIONS_BUTTON_MODE_LR))
 //         || (JOY_NEW(R_BUTTON) && gSaveBlock2Ptr->optionsButtonMode == OPTIONS_BUTTON_MODE_LR))
 		    // End pokedex
         {
@@ -3921,7 +3921,7 @@ static void Task_HandleSizeScreenInput(u8 taskId)
     }
     else if (JOY_NEW(DPAD_LEFT)
             // Start pokedex
-     || (JOY_NEW(L_BUTTON) && gSaveBlock2Ptr->optionsGame[GAME_OPTIONS_BUTTON_MODE] == OPTIONS_BUTTON_MODE_LR))
+     || (JOY_NEW(L_BUTTON) && OptionsMenu_GetSavedOptions(GAME_SETTINGS,GAME_OPTIONS_BUTTON_MODE) == OPTIONS_BUTTON_MODE_LR))
 //	      || (JOY_NEW(L_BUTTON) && gSaveBlock2Ptr->optionsButtonMode == OPTIONS_BUTTON_MODE_LR))
 		    // End pokedex
     {

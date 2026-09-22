@@ -529,7 +529,7 @@ void Waves_DoDailyPassiveIncrease(u32 daysSince)
     if (QuestMenu_GetSetQuestState(QUEST_MUTUALAIDFUND, FLAG_GET_COMPLETED))
         return;
 
-    while (--daysSince != 0xFFFF)
+    for (;daysSince != 0;daysSince--)
         Waves_AllPassiveIncrease();
 }
 

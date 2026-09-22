@@ -4431,7 +4431,10 @@ bool32 DoesMonMeetAdditionalConditions(struct Pokemon *mon, const struct Evoluti
         case IF_WEATHER:
             if (params[i].arg1 == WEATHER_RAIN)
             {
-                if (weather == WEATHER_RAIN || weather == WEATHER_RAIN_THUNDERSTORM || weather == WEATHER_DOWNPOUR)
+                // Start siliconMerge
+                //if (weather == WEATHER_RAIN || weather == WEATHER_RAIN_THUNDERSTORM || weather == WEATHER_DOWNPOUR)
+                if ((gBattleWeather & B_WEATHER_RAIN) || weather == WEATHER_RAIN || weather == WEATHER_RAIN_THUNDERSTORM || weather == WEATHER_DOWNPOUR)
+                // End siliconMerge
                     currentCondition = TRUE;
             }
             else if (params[i].arg1 == WEATHER_FOG)
@@ -5332,10 +5335,7 @@ u16 GetBattleBGM(void)
     }
     else if (gBattleTypeFlags & (BATTLE_TYPE_LINK | BATTLE_TYPE_RECORDED_LINK))
     {
-// Start siliconMerge
-        return GetTrainerBattleMusicFromOption();
-//		        return MUS_VS_TRAINER;
-// End siliconMerge
+        return MUS_VS_TRAINER;
     }
     else if (gBattleTypeFlags & BATTLE_TYPE_TRAINER)
     {
@@ -5359,29 +5359,17 @@ u16 GetBattleBGM(void)
         case TRAINER_CLASS_MAGMA_ADMIN:
             return MUS_VS_AQUA_MAGMA;
         case TRAINER_CLASS_LEADER:
-// Start siliconMerge
-        return GetGymBattleMusicFromOption();
-//			            return MUS_VS_GYM_LEADER;
-// End siliconMerge
+            return MUS_VS_GYM_LEADER;
         case TRAINER_CLASS_CHAMPION:
-// Start siliconMerge
-        return GetChampionBattleMusicFromOption();
-//			            return MUS_VS_CHAMPION;
-// End siliconMerge
+            return MUS_VS_CHAMPION;
         case TRAINER_CLASS_RIVAL:
             if (gBattleTypeFlags & BATTLE_TYPE_FRONTIER)
                 return MUS_VS_RIVAL;
             if (!StringCompare(GetTrainerNameFromId(TRAINER_BATTLE_PARAM.opponentA), gText_BattleWallyName))
-// Start siliconMerge
-        return GetTrainerBattleMusicFromOption();
-//				                return MUS_VS_TRAINER;
-// End siliconMerge
+                return MUS_VS_TRAINER;
             return MUS_VS_RIVAL;
         case TRAINER_CLASS_ELITE_FOUR:
-// Start siliconMerge
-        return GetTournamentBattleMusicFromOption();
-// End siliconMerge
-            //return MUS_VS_ELITE_FOUR;
+            return MUS_VS_ELITE_FOUR;
         case TRAINER_CLASS_CHAMPION_FRLG:
             return MUS_RG_VS_CHAMPION;
         case TRAINER_CLASS_LEADER_FRLG:
@@ -5407,15 +5395,14 @@ u16 GetBattleBGM(void)
             return MUS_VS_LUCREZIA;
         case TRAINER_CLASS_DIANTHA:
             return MUS_VS_DIANTHA;
+        case TRAINER_CLASS_THE_TIDE_LEADER:
+            return MUS_VS_VIGRIM;
 // End firstMusicUpdate
         default:
             if (GetCurrentRegion() == REGION_KANTO)
                 return MUS_RG_VS_TRAINER;
             else
-// Start siliconMerge
-                return GetTrainerBattleMusicFromOption();
-                //return MUS_VS_TRAINER;
-// End siliconMerge
+                return MUS_VS_TRAINER;
         }
     }
     else
@@ -5423,10 +5410,7 @@ u16 GetBattleBGM(void)
         if (GetCurrentRegion() == REGION_KANTO)
             return MUS_RG_VS_WILD;
         else
-// Start siliconMerge
-            return GetWildBattleMusicFromOption();
-            //return MUS_VS_WILD;
-// End siliconMerge
+            return MUS_VS_WILD;
     }
 }
 

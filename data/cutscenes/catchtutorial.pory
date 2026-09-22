@@ -1,13 +1,11 @@
 const PLAYER = OBJ_EVENT_ID_PLAYER
-const PROF = 4
-const FLAG_HIDE_PROF = FLAG_TEMP_2
 
 script CatchTutorial_HideProfessor_Script
 {
     getgamestat(GAME_STAT_POKEMON_CAPTURES)
     if (var(VAR_RESULT) > 0)
     {
-        setflag(FLAG_HIDE_PROF)
+        setobjectflagfromlocalid(LOCALID_ROUTE6_PROFESSORTRACHY)
     }
 }
 
@@ -28,14 +26,14 @@ script CatchTutorial_ProfIntro_Script
 {
     lock
     startcutscene(JUMPPLAYER_CATCHTUTORIAL)
-    playbgm(MUS_FOLLOW_ME,0)
     playse(SE_PIN)
-    applymovement(PROF,Common_Movement_ExclamationMark)
-    applymovement(PROF, moves(walk_left))
-    waitmovement(PROF)
-
+    applymovement(LOCALID_ROUTE6_PROFESSORTRACHY,moves(emote_exclamation_mark, walk_left))
     msgbox(format("Hey there!"),,SPEAKER_PROF_TRACHY)
-    msgbox(format("I don't recognize you... and you're coming out of CuconuTown - you must be one of those SharpRise Trainers!"),,SPEAKER_PROF_TRACHY)
+    closemessage
+    moveobjecttocoords(LOCALID_PLAYER,12,19,DIR_EAST)
+    waitmovement(LOCALID_PLAYER)
+    buffermapname(STR_VAR_1,MAP_CUCONU_TOWN)
+    msgbox(format("I don't recognize you... and you're coming out of {STR_VAR_1} - you must be one of those SharpRise Trainers!"),,SPEAKER_PROF_TRACHY)
     msgbox(format("Yeah! How were you able to tell?"),,SPEAKER_ALICIA)
     msgbox(format("It's usually easy to pick out transplants. You all have thi -"),,SPEAKER_PROF_TRACHY)
     closemessage
@@ -45,7 +43,7 @@ script CatchTutorial_ProfIntro_Script
     playse(SE_PIN)
     applymovement(PLAYER,Common_Movement_ExclamationMark)
     waitmovement(PLAYER)
-    applymovement(PROF,Common_Movement_ExclamationMark)
+    applymovement(LOCALID_ROUTE6_PROFESSORTRACHY,Common_Movement_ExclamationMark)
 
     call(Earthquake_Natural_Aftershock)
 
@@ -63,18 +61,12 @@ script CatchTutorial_InteractProf_Script
 {
     lock
     faceplayer
-    playbgm(MUS_FOLLOW_ME,0)
     goto(CatchTutorial_AskPlayer_Script)
 }
 
 script CatchTutorial_AskPlayer_Script
 {
     msgbox(format("Do you want me to teach you how to catch a Pokémon?"),MSGBOX_YESNO,SPEAKER_PROF_TRACHY)
-    goto(CatchTutorial_HandleAnswer_Script)
-}
-
-script CatchTutorial_HandleAnswer_Script
-{
     if (var(VAR_RESULT) == YES)
     {
         goto(CatchTutorial_StartCatchingScene_Script)
@@ -89,22 +81,23 @@ script CatchTutorial_StartCatchingScene_Script
 {
     msgbox(format("Okay, let's see, you walk around here until one attacks..."),,SPEAKER_PROF_TRACHY)
     closemessage
-    applymovement(PROF,Common_Movement_FaceAwayPlayer)
-    waitmovement(PROF)
+    applymovement(LOCALID_ROUTE6_PROFESSORTRACHY,Common_Movement_FaceAwayPlayer)
+    waitmovement(LOCALID_ROUTE6_PROFESSORTRACHY)
     msgbox(format("Aha!"),,SPEAKER_PROF_TRACHY)
     closemessage
     special(SavePlayerParty)
-    special(LoadWallyZigzagoon)
-    special(StartWallyTutorialBattle)
+    callnative(LoadTrachyMon)
+    callnative(StartTrachyTutorialBattle)
+    waitstate
     goto(CatchTutorial_PostCatching_Script)
 }
 
 script CatchTutorial_PostCatching_Script
 {
     special(LoadPlayerParty)
-    applymovement(PROF,Common_Movement_FacePlayer)
-    waitmovement(PROF)
-    msgbox(format("That's really it! Different Pokéballs will have more effective based on what Pokémon, or where you are... sometimes what time of day... it can be complicated."),,SPEAKER_PROF_TRACHY)
+    applymovement(LOCALID_ROUTE6_PROFESSORTRACHY,Common_Movement_FacePlayer)
+    waitmovement(LOCALID_ROUTE6_PROFESSORTRACHY)
+    msgbox(format("That's really it! Different Poké Balls will have more effective based on what Pokémon, or where you are... sometimes what time of day... it can be complicated."),,SPEAKER_PROF_TRACHY)
     call(CatchTutorial_GiveBallsSetFlag_Script)
     goto(CatchTutorial_End_Script)
 }
@@ -118,7 +111,6 @@ script CatchTutorial_SetFlagSave_Script
 script CatchTutorial_End_Script
 {
     closemessage
-    fadedefaultbgm
     msgbox(format("If you want me to show you in the future, just come to talk to me!"),,SPEAKER_PROF_TRACHY)
     closemessage
     call_if_unset(FLAG_PLAYED_CATCH_TUTORIAL,CatchTutorial_SetFlagSave_Script)
@@ -140,7 +132,7 @@ script CatchTutorial_GiveBallsSetFlag_Script
     additem(ITEM_DUSK_BALL,1)
     additem(ITEM_QUICK_BALL,1)
     additem(ITEM_DREAM_BALL,1)
-    msgbox(format("{PLAYER} obtained some PokéBalls!"))
+    msgbox(format("{PLAYER} obtained some Poké Balls!"))
     waitmessage
     waitfanfare
 }

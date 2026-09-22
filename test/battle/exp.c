@@ -30,8 +30,8 @@ WILD_BATTLE_TEST("Pokemon gain experience after catching a Pokemon (Gen6+)")
 WILD_BATTLE_TEST("Higher leveled Pokemon give more exp", s32 exp)
 {
     u8 level = 0;
-    gSaveBlock2Ptr->optionsBattle[BATTLE_OPTIONS_PLAYER_LEVEL] = BATTLE_OPTION_LEVEL_NO_CAP; // Battle Settings: Level
-    gSaveBlock2Ptr->optionsBattle[BATTLE_OPTIONS_EXP_MULTIPLIER] = BATTLE_OPTION_MULTIPLIER_1; // Battle Settings: Level
+    OptionsMenu_SetSavedOptions(BATTLE_SETTINGS,BATTLE_OPTIONS_PLAYER_LEVEL,BATTLE_OPTION_LEVEL_NO_CAP); // Battle Settings: Level
+    OptionsMenu_SetSavedOptions(BATTLE_SETTINGS,BATTLE_OPTIONS_EXP_MULTIPLIER,BATTLE_OPTION_MULTIPLIER_1); // Battle Settings: Level
 
     PARAMETRIZE { level = 5; }
     PARAMETRIZE { level = 10; }
@@ -76,8 +76,8 @@ WILD_BATTLE_TEST("Lucky Egg boosts gained exp points by 50%", s32 exp)
 WILD_BATTLE_TEST("Exp is scaled to player and opponent's levels", s32 exp)
 {
     u8 level = 0;
-    gSaveBlock2Ptr->optionsBattle[BATTLE_OPTIONS_PLAYER_LEVEL] = BATTLE_OPTION_LEVEL_NO_CAP; // Battle Settings: Level
-    gSaveBlock2Ptr->optionsBattle[BATTLE_OPTIONS_EXP_MULTIPLIER] = BATTLE_OPTION_MULTIPLIER_1; // Battle Settings: Level
+    OptionsMenu_SetSavedOptions(BATTLE_SETTINGS,BATTLE_OPTIONS_PLAYER_LEVEL,BATTLE_OPTION_LEVEL_NO_CAP); // Battle Settings: Level
+    OptionsMenu_SetSavedOptions(BATTLE_SETTINGS,BATTLE_OPTIONS_EXP_MULTIPLIER,BATTLE_OPTION_MULTIPLIER_1); // Battle Settings: Level
 
     PARAMETRIZE { level = 5; }
     PARAMETRIZE { level = 10; }
@@ -102,8 +102,8 @@ WILD_BATTLE_TEST("Large exp gains are supported", s32 exp) // #1455
 {
     u8 level = 0;
 
-    gSaveBlock2Ptr->optionsBattle[BATTLE_OPTIONS_PLAYER_LEVEL] = BATTLE_OPTION_LEVEL_NO_CAP; // Battle Settings: Level
-    gSaveBlock2Ptr->optionsBattle[BATTLE_OPTIONS_EXP_MULTIPLIER] = BATTLE_OPTION_MULTIPLIER_1; // Battle Settings: Experience
+    OptionsMenu_SetSavedOptions(BATTLE_SETTINGS,BATTLE_OPTIONS_PLAYER_LEVEL,BATTLE_OPTION_LEVEL_NO_CAP); // Battle Settings: Level
+    OptionsMenu_SetSavedOptions(BATTLE_SETTINGS,BATTLE_OPTIONS_EXP_MULTIPLIER,BATTLE_OPTION_MULTIPLIER_1); // Battle Settings: Experience
 
     PARAMETRIZE { level = 10; }
     PARAMETRIZE { level = 50; }
@@ -132,9 +132,9 @@ WILD_BATTLE_TEST("Large exp gains are supported", s32 exp) // #1455
 WILD_BATTLE_TEST("Exp Share(held) gives Experience to mons which did not participate in battle")
 {
     enum Item item = ITEM_NONE;
-    gSaveBlock2Ptr->optionsBattle[BATTLE_OPTIONS_PLAYER_LEVEL] = BATTLE_OPTION_LEVEL_NO_CAP; // Battle Settings: Level
-    gSaveBlock2Ptr->optionsBattle[BATTLE_OPTIONS_EXP_MULTIPLIER] = BATTLE_OPTION_MULTIPLIER_1; // Battle Settings: Exp Multiplier
-    gSaveBlock2Ptr->optionsBattle[BATTLE_OPTIONS_EXPERIENCE] = BATTLE_OPTION_EXPERIENCE_PARTY; // Battle Settings: Experience
+    OptionsMenu_SetSavedOptions(BATTLE_SETTINGS,BATTLE_OPTIONS_PLAYER_LEVEL,BATTLE_OPTION_LEVEL_NO_CAP); // Battle Settings: Level
+    OptionsMenu_SetSavedOptions(BATTLE_SETTINGS,BATTLE_OPTIONS_EXP_MULTIPLIER,BATTLE_OPTION_MULTIPLIER_1); // Battle Settings: Exp Multiplier
+    OptionsMenu_SetSavedOptions(BATTLE_SETTINGS,BATTLE_OPTIONS_EXPERIENCE,BATTLE_OPTION_EXPERIENCE_PARTY); // Battle Settings: Experience
 
     PARAMETRIZE { item = ITEM_NONE; }
     PARAMETRIZE { item = ITEM_EXP_SHARE; }
@@ -164,9 +164,9 @@ WILD_BATTLE_TEST("Exp Share(held) gives Experience to mons which did not partici
 WILD_BATTLE_TEST("Points Messages: Gains Exp With Party")
 {
     u32 bigEV = 0, item = 0, option = 0;
-    gSaveBlock2Ptr->optionsBattle[BATTLE_OPTIONS_PLAYER_LEVEL] = BATTLE_OPTION_LEVEL_NO_CAP; // Battle Settings: Level
-    gSaveBlock2Ptr->optionsBattle[BATTLE_OPTIONS_EXP_MULTIPLIER] = BATTLE_OPTION_MULTIPLIER_1; // Battle Settings: Exp Multiplier
-    gSaveBlock2Ptr->optionsBattle[BATTLE_OPTIONS_EXPERIENCE] = BATTLE_OPTION_EXPERIENCE_PARTY; // Battle Settings: Experience
+    OptionsMenu_SetSavedOptions(BATTLE_SETTINGS,BATTLE_OPTIONS_PLAYER_LEVEL,BATTLE_OPTION_LEVEL_NO_CAP); // Battle Settings: Level
+    OptionsMenu_SetSavedOptions(BATTLE_SETTINGS,BATTLE_OPTIONS_EXP_MULTIPLIER,BATTLE_OPTION_MULTIPLIER_1); // Battle Settings: Exp Multiplier
+    OptionsMenu_SetSavedOptions(BATTLE_SETTINGS,BATTLE_OPTIONS_EXPERIENCE,BATTLE_OPTION_EXPERIENCE_PARTY); // Battle Settings: Experience
 
     for (u32 j = 0; j < BATTLE_OPTION_POINTS_MESSAGE_COUNT; j++)
     {
@@ -175,7 +175,7 @@ WILD_BATTLE_TEST("Points Messages: Gains Exp With Party")
         PARAMETRIZE { bigEV = 25; item = ITEM_NONE; option = j;}
     }
     GIVEN {
-        gSaveBlock2Ptr->optionsBattle[BATTLE_OPTIONS_POINTS_MESSAGES] = option;
+        OptionsMenu_SetSavedOptions(BATTLE_SETTINGS,BATTLE_OPTIONS_POINTS_MESSAGES,option);
         PLAYER(SPECIES_WOBBUFFET) { Level(99); HPEV(bigEV); AttackEV(bigEV); DefenseEV(6); Item(item); }
         PLAYER(SPECIES_WOBBUFFET) { Level(99); HPEV(bigEV); AttackEV(bigEV); DefenseEV(6); Item(item); }
         OPPONENT(SPECIES_CATERPIE) { Level(10); HP(1); }
@@ -220,9 +220,9 @@ WILD_BATTLE_TEST("Points Messages: Gains Exp With Party")
 WILD_BATTLE_TEST("Points Messages: Gains Boosted Exp With Party")
 {
     u32 bigEV = 0, item = 0, option = 0;
-    gSaveBlock2Ptr->optionsBattle[BATTLE_OPTIONS_PLAYER_LEVEL] = BATTLE_OPTION_LEVEL_NO_CAP; // Battle Settings: Level
-    gSaveBlock2Ptr->optionsBattle[BATTLE_OPTIONS_EXP_MULTIPLIER] = BATTLE_OPTION_MULTIPLIER_1; // Battle Settings: Exp Multiplier
-    gSaveBlock2Ptr->optionsBattle[BATTLE_OPTIONS_EXPERIENCE] = BATTLE_OPTION_EXPERIENCE_PARTY; // Battle Settings: Experience
+    OptionsMenu_SetSavedOptions(BATTLE_SETTINGS,BATTLE_OPTIONS_PLAYER_LEVEL,BATTLE_OPTION_LEVEL_NO_CAP); // Battle Settings: Level
+    OptionsMenu_SetSavedOptions(BATTLE_SETTINGS,BATTLE_OPTIONS_EXP_MULTIPLIER,BATTLE_OPTION_MULTIPLIER_1); // Battle Settings: Exp Multiplier
+    OptionsMenu_SetSavedOptions(BATTLE_SETTINGS,BATTLE_OPTIONS_EXPERIENCE,BATTLE_OPTION_EXPERIENCE_PARTY); // Battle Settings: Experience
 
     for (u32 j = 0; j < BATTLE_OPTION_POINTS_MESSAGE_COUNT; j++)
     {
@@ -232,7 +232,7 @@ WILD_BATTLE_TEST("Points Messages: Gains Boosted Exp With Party")
     }
 
     GIVEN {
-        gSaveBlock2Ptr->optionsBattle[BATTLE_OPTIONS_POINTS_MESSAGES] = option;
+        OptionsMenu_SetSavedOptions(BATTLE_SETTINGS,BATTLE_OPTIONS_POINTS_MESSAGES,option);
         PLAYER(SPECIES_WOBBUFFET) { Level(99); HPEV(bigEV); AttackEV(bigEV); DefenseEV(6); OTName("Test"); Item(item); }
         PLAYER(SPECIES_WOBBUFFET) { Level(99); HPEV(bigEV); AttackEV(bigEV); DefenseEV(6); OTName("Test"); Item(item); }
         OPPONENT(SPECIES_CATERPIE) { Level(10); HP(1); }
@@ -277,9 +277,9 @@ WILD_BATTLE_TEST("Points Messages: Gains Boosted Exp With Party")
 WILD_BATTLE_TEST("Points Messages: Gains EVs With Party")
 {
     u32 bigEV = 0, item = 0, option = 0;
-    gSaveBlock2Ptr->optionsBattle[BATTLE_OPTIONS_PLAYER_LEVEL] = BATTLE_OPTION_LEVEL_NO_CAP; // Battle Settings: Level
-    gSaveBlock2Ptr->optionsBattle[BATTLE_OPTIONS_EXP_MULTIPLIER] = BATTLE_OPTION_MULTIPLIER_1; // Battle Settings: Exp Multiplier
-    gSaveBlock2Ptr->optionsBattle[BATTLE_OPTIONS_EXPERIENCE] = BATTLE_OPTION_EXPERIENCE_PARTY; // Battle Settings: Experience
+    OptionsMenu_SetSavedOptions(BATTLE_SETTINGS,BATTLE_OPTIONS_PLAYER_LEVEL,BATTLE_OPTION_LEVEL_NO_CAP); // Battle Settings: Level
+    OptionsMenu_SetSavedOptions(BATTLE_SETTINGS,BATTLE_OPTIONS_EXP_MULTIPLIER,BATTLE_OPTION_MULTIPLIER_1); // Battle Settings: Exp Multiplier
+    OptionsMenu_SetSavedOptions(BATTLE_SETTINGS,BATTLE_OPTIONS_EXPERIENCE,BATTLE_OPTION_EXPERIENCE_PARTY); // Battle Settings: Experience
 
     for (u32 j = 0; j < BATTLE_OPTION_POINTS_MESSAGE_COUNT; j++)
     {
@@ -289,7 +289,7 @@ WILD_BATTLE_TEST("Points Messages: Gains EVs With Party")
     }
 
     GIVEN {
-        gSaveBlock2Ptr->optionsBattle[BATTLE_OPTIONS_POINTS_MESSAGES] = option;
+        OptionsMenu_SetSavedOptions(BATTLE_SETTINGS,BATTLE_OPTIONS_POINTS_MESSAGES,option);
         PLAYER(SPECIES_WOBBUFFET) { Level(100); HPEV(bigEV); AttackEV(bigEV); DefenseEV(6); Item(item); }
         PLAYER(SPECIES_WYNAUT) { Level(100); HPEV(bigEV); AttackEV(bigEV); DefenseEV(6); Item(item); }
         OPPONENT(SPECIES_CATERPIE) { Level(10); HP(1); }
@@ -330,10 +330,10 @@ WILD_BATTLE_TEST("Points Messages: Gains EVs With Party")
 
 WILD_BATTLE_TEST("Points Messages: No message when winning through suicide attacks")
 {
-    gSaveBlock2Ptr->optionsBattle[BATTLE_OPTIONS_PLAYER_LEVEL] = BATTLE_OPTION_LEVEL_NO_CAP; // Battle Settings: Level
-    gSaveBlock2Ptr->optionsBattle[BATTLE_OPTIONS_EXP_MULTIPLIER] = BATTLE_OPTION_MULTIPLIER_1; // Battle Settings: Exp Multiplier
-    gSaveBlock2Ptr->optionsBattle[BATTLE_OPTIONS_EXPERIENCE] = BATTLE_OPTION_EXPERIENCE_PARTY; // Battle Settings: Experience
-    gSaveBlock2Ptr->optionsBattle[BATTLE_OPTIONS_POINTS_MESSAGES] = BATTLE_OPTION_POINTS_MESSAGES_ON;
+    OptionsMenu_SetSavedOptions(BATTLE_SETTINGS,BATTLE_OPTIONS_PLAYER_LEVEL,BATTLE_OPTION_LEVEL_NO_CAP); // Battle Settings: Level
+    OptionsMenu_SetSavedOptions(BATTLE_SETTINGS,BATTLE_OPTIONS_EXP_MULTIPLIER,BATTLE_OPTION_MULTIPLIER_1); // Battle Settings: Exp Multiplier
+    OptionsMenu_SetSavedOptions(BATTLE_SETTINGS,BATTLE_OPTIONS_EXPERIENCE,BATTLE_OPTION_EXPERIENCE_PARTY); // Battle Settings: Experience
+    OptionsMenu_SetSavedOptions(BATTLE_SETTINGS,BATTLE_OPTIONS_POINTS_MESSAGES,BATTLE_OPTION_POINTS_MESSAGES_ON);
 
     GIVEN {
         PLAYER(SPECIES_LOPUNNY) { Level(40);}
@@ -357,9 +357,9 @@ WILD_BATTLE_TEST("Points Messages: No message when winning through suicide attac
 WILD_BATTLE_TEST("Points Messages: Gains Exp Without Party")
 {
     u32 bigEV = 0, item = 0, option = 0;
-    gSaveBlock2Ptr->optionsBattle[BATTLE_OPTIONS_PLAYER_LEVEL] = BATTLE_OPTION_LEVEL_NO_CAP; // Battle Settings: Level
-    gSaveBlock2Ptr->optionsBattle[BATTLE_OPTIONS_EXP_MULTIPLIER] = BATTLE_OPTION_MULTIPLIER_1; // Battle Settings: Exp Multiplier
-    gSaveBlock2Ptr->optionsBattle[BATTLE_OPTIONS_EXPERIENCE] = BATTLE_OPTION_EXPERIENCE_PARTY; // Battle Settings: Experience
+    OptionsMenu_SetSavedOptions(BATTLE_SETTINGS,BATTLE_OPTIONS_PLAYER_LEVEL,BATTLE_OPTION_LEVEL_NO_CAP); // Battle Settings: Level
+    OptionsMenu_SetSavedOptions(BATTLE_SETTINGS,BATTLE_OPTIONS_EXP_MULTIPLIER,BATTLE_OPTION_MULTIPLIER_1); // Battle Settings: Exp Multiplier
+    OptionsMenu_SetSavedOptions(BATTLE_SETTINGS,BATTLE_OPTIONS_EXPERIENCE,BATTLE_OPTION_EXPERIENCE_PARTY); // Battle Settings: Experience
 
     for (u32 j = 0; j < BATTLE_OPTION_POINTS_MESSAGE_COUNT; j++)
     {
@@ -368,7 +368,7 @@ WILD_BATTLE_TEST("Points Messages: Gains Exp Without Party")
         PARAMETRIZE { bigEV = 25; item = ITEM_NONE; option = j;}
     }
     GIVEN {
-        gSaveBlock2Ptr->optionsBattle[BATTLE_OPTIONS_POINTS_MESSAGES] = option;
+        OptionsMenu_SetSavedOptions(BATTLE_SETTINGS,BATTLE_OPTIONS_POINTS_MESSAGES,option);
         PLAYER(SPECIES_WOBBUFFET) { Level(99); HPEV(bigEV); AttackEV(bigEV); DefenseEV(6); Item(item); }
         OPPONENT(SPECIES_CATERPIE) { Level(10); HP(1); }
     } WHEN {
@@ -410,9 +410,9 @@ WILD_BATTLE_TEST("Points Messages: Gains Exp Without Party")
 WILD_BATTLE_TEST("Points Messages: Gains Boosted Exp Without Party")
 {
     u32 bigEV = 0, item = 0, option = 0;
-    gSaveBlock2Ptr->optionsBattle[BATTLE_OPTIONS_PLAYER_LEVEL] = BATTLE_OPTION_LEVEL_NO_CAP; // Battle Settings: Level
-    gSaveBlock2Ptr->optionsBattle[BATTLE_OPTIONS_EXP_MULTIPLIER] = BATTLE_OPTION_MULTIPLIER_1; // Battle Settings: Exp Multiplier
-    gSaveBlock2Ptr->optionsBattle[BATTLE_OPTIONS_EXPERIENCE] = BATTLE_OPTION_EXPERIENCE_PARTY; // Battle Settings: Experience
+    OptionsMenu_SetSavedOptions(BATTLE_SETTINGS,BATTLE_OPTIONS_PLAYER_LEVEL,BATTLE_OPTION_LEVEL_NO_CAP); // Battle Settings: Level
+    OptionsMenu_SetSavedOptions(BATTLE_SETTINGS,BATTLE_OPTIONS_EXP_MULTIPLIER,BATTLE_OPTION_MULTIPLIER_1); // Battle Settings: Exp Multiplier
+    OptionsMenu_SetSavedOptions(BATTLE_SETTINGS,BATTLE_OPTIONS_EXPERIENCE,BATTLE_OPTION_EXPERIENCE_PARTY); // Battle Settings: Experience
 
     for (u32 j = 0; j < BATTLE_OPTION_POINTS_MESSAGE_COUNT; j++)
     {
@@ -422,7 +422,7 @@ WILD_BATTLE_TEST("Points Messages: Gains Boosted Exp Without Party")
     }
 
     GIVEN {
-        gSaveBlock2Ptr->optionsBattle[BATTLE_OPTIONS_POINTS_MESSAGES] = option;
+        OptionsMenu_SetSavedOptions(BATTLE_SETTINGS,BATTLE_OPTIONS_POINTS_MESSAGES,option);
         PLAYER(SPECIES_WOBBUFFET) { Level(99); HPEV(bigEV); AttackEV(bigEV); DefenseEV(6); OTName("Test"); Item(item); }
         OPPONENT(SPECIES_CATERPIE) { Level(10); HP(1); }
     } WHEN {
@@ -464,9 +464,9 @@ WILD_BATTLE_TEST("Points Messages: Gains Boosted Exp Without Party")
 WILD_BATTLE_TEST("Points Messages: Gains EVs Without Party")
 {
     u32 bigEV = 0, item = 0, option = 0;
-    gSaveBlock2Ptr->optionsBattle[BATTLE_OPTIONS_PLAYER_LEVEL] = BATTLE_OPTION_LEVEL_NO_CAP; // Battle Settings: Level
-    gSaveBlock2Ptr->optionsBattle[BATTLE_OPTIONS_EXP_MULTIPLIER] = BATTLE_OPTION_MULTIPLIER_1; // Battle Settings: Exp Multiplier
-    gSaveBlock2Ptr->optionsBattle[BATTLE_OPTIONS_EXPERIENCE] = BATTLE_OPTION_EXPERIENCE_PARTY; // Battle Settings: Experience
+    OptionsMenu_SetSavedOptions(BATTLE_SETTINGS,BATTLE_OPTIONS_PLAYER_LEVEL,BATTLE_OPTION_LEVEL_NO_CAP); // Battle Settings: Level
+    OptionsMenu_SetSavedOptions(BATTLE_SETTINGS,BATTLE_OPTIONS_EXP_MULTIPLIER,BATTLE_OPTION_MULTIPLIER_1); // Battle Settings: Exp Multiplier
+    OptionsMenu_SetSavedOptions(BATTLE_SETTINGS,BATTLE_OPTIONS_EXPERIENCE,BATTLE_OPTION_EXPERIENCE_PARTY); // Battle Settings: Experience
 
     for (u32 j = 0; j < BATTLE_OPTION_POINTS_MESSAGE_COUNT; j++)
     {
@@ -476,7 +476,7 @@ WILD_BATTLE_TEST("Points Messages: Gains EVs Without Party")
     }
 
     GIVEN {
-        gSaveBlock2Ptr->optionsBattle[BATTLE_OPTIONS_POINTS_MESSAGES] = option;
+        OptionsMenu_SetSavedOptions(BATTLE_SETTINGS,BATTLE_OPTIONS_POINTS_MESSAGES,option);
         PLAYER(SPECIES_WOBBUFFET) { Level(100); HPEV(bigEV); AttackEV(bigEV); DefenseEV(6); Item(item); }
         OPPONENT(SPECIES_CATERPIE) { Level(10); HP(1); }
     } WHEN {

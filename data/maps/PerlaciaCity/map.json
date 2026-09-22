@@ -158,35 +158,36 @@
   ],
   "warp_events": [
     {
-      "warp_id": "WARP_PERLACIA_CITY_TO_GYM_1",
+      "warp_id": "WARP_ID_PERLACIA_CITY_TO_GYM_1",
       "x": 27,
       "y": 23,
       "elevation": 0,
       "dest_map": "MAP_PERLACIA_CITY_GYM_ENTRANCE",
-      "dest_warp_id": "1"
+      "dest_warp_id": "WARP_ID_PERLACIA_GYM_TO_CITY_1"
     },
     {
+      "warp_id": "WARP_ID_PERLACIA_CITY_TO_STARTUP_1",
       "x": 4,
       "y": 36,
       "elevation": 0,
       "dest_map": "MAP_PERLACIA_CITY_STARTUP",
-      "dest_warp_id": "0"
+      "dest_warp_id": "WARP_ID_PERLACIA_STARTUP_TO_STARTUP_1"
     },
     {
-      "warp_id": "WARPI_ID_SHARPRISE_SPIRE_FROM_CITY_RIGHT",
+      "warp_id": "WARP_ID_SHARPRISE_SPIRE_FROM_CITY_RIGHT",
       "x": 6,
       "y": 10,
       "elevation": 0,
       "dest_map": "MAP_SHARPRISE_SPIRE_1F",
-      "dest_warp_id": "WARPI_ID_SHARPRISE_SPIRE_TO_CITY_LEFT"
+      "dest_warp_id": "WARP_ID_SHARPRISE_SPIRE_TO_CITY_LEFT"
     },
     {
-      "warp_id": "WARPI_ID_SHARPRISE_SPIRE_FROM_CITY_LEFT",
+      "warp_id": "WARP_ID_SHARPRISE_SPIRE_FROM_CITY_LEFT",
       "x": 4,
       "y": 10,
       "elevation": 0,
       "dest_map": "MAP_SHARPRISE_SPIRE_1F",
-      "dest_warp_id": "WARPI_ID_SHARPRISE_SPIRE_TO_CITY_LEFT"
+      "dest_warp_id": "WARP_ID_SHARPRISE_SPIRE_TO_CITY_LEFT"
     },
     {
       "warp_id": "WARP_ID_SHARPRISE_SPIRE_FROM_CITY_CENTER",
@@ -194,64 +195,58 @@
       "y": 10,
       "elevation": 0,
       "dest_map": "MAP_SHARPRISE_SPIRE_1F",
-      "dest_warp_id": "WARPI_ID_SHARPRISE_SPIRE_TO_CITY_LEFT"
+      "dest_warp_id": "WARP_ID_SHARPRISE_SPIRE_TO_CITY_LEFT"
     },
     {
-      "warp_id": "WARP_PERLACIA_CITY_TO_GYM_3",
+      "warp_id": "WARP_ID_PERLACIA_CITY_TO_GYM_3",
       "x": 29,
       "y": 23,
       "elevation": 0,
       "dest_map": "MAP_PERLACIA_CITY_GYM_ENTRANCE",
-      "dest_warp_id": "1"
+      "dest_warp_id": "WARP_ID_PERLACIA_GYM_TO_CITY_1"
     },
     {
-      "warp_id": "WARP_PERLACIA_CITY_TO_GYM_2",
+      "warp_id": "WARP_ID_PERLACIA_CITY_TO_GYM_2",
       "x": 28,
       "y": 23,
       "elevation": 0,
       "dest_map": "MAP_PERLACIA_CITY_GYM_ENTRANCE",
-      "dest_warp_id": "1"
+      "dest_warp_id": "WARP_ID_PERLACIA_GYM_TO_CITY_1"
     },
     {
-      "warp_id": "WARP_PERLACIA_CITY_TO_CENTER",
+      "warp_id": "WARP_ID_PERLACIA_CITY_TO_CENTER",
       "x": 25,
       "y": 30,
       "elevation": 0,
       "dest_map": "MAP_PERLACIA_CITY_POKEMON_CENTER_1F",
-      "dest_warp_id": "0"
+      "dest_warp_id": "WARP_ID_PERLACIA_CENTER_TO_CITY_1"
     },
     {
+      "warp_id": "WARP_ID_PERLACIA_CITY_TO_SANITATION",
       "x": 1,
       "y": 19,
       "elevation": 0,
       "dest_map": "MAP_PERLACIA_CITY_SANITATION",
-      "dest_warp_id": "0"
+      "dest_warp_id": "WARP_ID_PERLACIA_SANITATION_TO_CITY_1"
     },
     {
+      "warp_id": "WARP_ID_PERLACIA_CITY_TO_COFFEE_1",
       "x": 12,
       "y": 19,
       "elevation": 0,
       "dest_map": "MAP_PERLACIA_CITY_COFFEE",
-      "dest_warp_id": "0"
+      "dest_warp_id": "WARP_ID_PERLACIA_COFFEE_TO_CITY_1"
     },
     {
+      "warp_id": "WARP_ID_PERLACIA_CITY_TO_COFFEE_2",
       "x": 11,
       "y": 19,
       "elevation": 0,
       "dest_map": "MAP_PERLACIA_CITY_COFFEE",
-      "dest_warp_id": "0"
+      "dest_warp_id": "WARP_ID_PERLACIA_COFFEE_TO_CITY_1"
     }
   ],
   "coord_events": [
-    {
-      "type": "trigger",
-      "x": 16,
-      "y": 16,
-      "elevation": 0,
-      "var": "VAR_ALWAYS_ZERO",
-      "var_value": "0",
-      "script": "Quest_StopMugging_Trigger_Script"
-    },
     {
       "type": "trigger",
       "x": 24,
