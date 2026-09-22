@@ -760,6 +760,15 @@ struct RankingHall2P
     //u8 padding;
 };
 
+struct SiliconOptions
+{
+    u8 game[NUM_OPTIONS_GAME_SETTINGS];
+    u8 battle[NUM_OPTIONS_BATTLE_SETTINGS];
+    u8 visual[NUM_OPTIONS_VISUAL_SETTINGS];
+    bool8 music[NUM_OPTIONS_MUSIC_SETTINGS];
+    u8 random[NUM_OPTIONS_RANDOM_SETTINGS];
+};
+
 struct SaveBlock2
 {
     /*0x00*/ u8 playerName[PLAYER_NAME_LENGTH + 1];
@@ -801,7 +810,7 @@ struct SaveBlock2
     /*0x624*/ u16 contestLinkResults[CONTEST_CATEGORIES_COUNT][CONTESTANT_COUNT];
     struct BattleFrontier frontier;
     // Start siliconMerge
-    u8 options[SETTINGS_COUNT][NUM_OPTIONS_MAX_SETTINGS];
+    struct SiliconOptions options;
     struct Buzzr buzzr; //Buzzr Branch
 	// End siliconMerge
 	// Start dexNav

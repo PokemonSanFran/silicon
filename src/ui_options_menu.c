@@ -50,7 +50,7 @@
 //==========DEFINES==========//
 struct MenuResources
 {
-	MainCallback savedCallback;
+    MainCallback savedCallback;
     u8 spriteIds[OPTIONS_SPRITE_ID_ARROW_COUNT];
     bool8 shouldShowDiscardDialogue;
     u8 currentOptionId;
@@ -62,7 +62,7 @@ struct MenuResources
 
 enum WindowIds
 {
-	WINDOW_1,
+    WINDOW_1,
 };
 
 //==========EWRAM==========//
@@ -128,63 +128,148 @@ static void OptionsMenu_IncrementCurrentFirstOption(void);
 
 u8 OptionsMenu_GetSavedOptions(u32 category, u32 setting)
 {
-    return gSaveBlock2Ptr->options[category][setting];
+    switch (category)
+    {
+        default:
+        case GAME_SETTINGS:
+            return gSaveBlock2Ptr->options.game[setting];
+        case BATTLE_SETTINGS:
+            return gSaveBlock2Ptr->options.battle[setting];
+        case VISUAL_SETTINGS:
+            return gSaveBlock2Ptr->options.visual[setting];
+        case MUSIC_SETTINGS:
+            return gSaveBlock2Ptr->options.music[setting];
+        case RANDOM_SETTINGS:
+            return gSaveBlock2Ptr->options.random[setting];
+    }
 }
 
 void OptionsMenu_SetSavedOptions(u32 category, u32 setting, u32 value)
 {
-    gSaveBlock2Ptr->options[category][setting] = value;
+    switch (category)
+    {
+        default:
+        case GAME_SETTINGS:
+            gSaveBlock2Ptr->options.game[setting] = value;
+            break;
+        case BATTLE_SETTINGS:
+            gSaveBlock2Ptr->options.battle[setting] = value;
+            break;
+        case VISUAL_SETTINGS:
+            gSaveBlock2Ptr->options.visual[setting] = value;
+            break;
+        case MUSIC_SETTINGS:
+            gSaveBlock2Ptr->options.music[setting] = value;
+            break;
+        case RANDOM_SETTINGS:
+            gSaveBlock2Ptr->options.random[setting] = value;
+            break;
+    }
+}
+
+void CopyTemporalDataToSaveBlockDataPerCategory(enum OptionsIds category)
+{
+    switch (category)
+    {
+        default:
+        case GAME_SETTINGS:
+            for(u32 setting = 0; setting < NUM_OPTIONS_GAME_SETTINGS; setting++)
+                gSaveBlock2Ptr->options.game[setting] = TemporalOptions[category][setting];
+            break;
+        case BATTLE_SETTINGS:
+            for(u32 setting = 0; setting < NUM_OPTIONS_BATTLE_SETTINGS; setting++)
+                gSaveBlock2Ptr->options.battle[setting] = TemporalOptions[category][setting];
+            break;
+        case VISUAL_SETTINGS:
+            for(u32 setting = 0; setting < NUM_OPTIONS_VISUAL_SETTINGS; setting++)
+                gSaveBlock2Ptr->options.visual[setting] = TemporalOptions[category][setting];
+            break;
+        case MUSIC_SETTINGS:
+            for(u32 setting = 0; setting < NUM_OPTIONS_MUSIC_SETTINGS; setting++)
+                gSaveBlock2Ptr->options.music[setting] = TemporalOptions[category][setting];
+            break;
+        case RANDOM_SETTINGS:
+            for(u32 setting = 0; setting < NUM_OPTIONS_RANDOM_SETTINGS; setting++)
+                gSaveBlock2Ptr->options.random[setting] = TemporalOptions[category][setting];
+            break;
+    }
 }
 
 void CopyTemporalDataToSaveBlockData()
 {
-	for(u32 i = 0 ;i < NUM_OF_PRESET_OPTIONS; i++)
-        for(u32 j = 0 ;j < NUM_OPTIONS_MAX_SETTINGS; j++)
-            gSaveBlock2Ptr->options[i][j] = TemporalOptions[i][j];
+    for(u32 category = 0; category < SETTINGS_COUNT; category++)
+        CopyTemporalDataToSaveBlockDataPerCategory(category);
+}
+
+void CopySaveBlockDataToTemporalDataPerCategory(enum OptionsIds category)
+{
+    switch (category)
+    {
+        default:
+        case GAME_SETTINGS:
+            for(u32 setting = 0; setting < NUM_OPTIONS_GAME_SETTINGS; setting++)
+                TemporalOptions[category][setting] = gSaveBlock2Ptr->options.game[setting];
+            break;
+        case BATTLE_SETTINGS:
+            for(u32 setting = 0; setting < NUM_OPTIONS_BATTLE_SETTINGS; setting++)
+                TemporalOptions[category][setting] = gSaveBlock2Ptr->options.battle[setting];
+            break;
+        case VISUAL_SETTINGS:
+            for(u32 setting = 0; setting < NUM_OPTIONS_VISUAL_SETTINGS; setting++)
+                TemporalOptions[category][setting] = gSaveBlock2Ptr->options.visual[setting];
+            break;
+        case MUSIC_SETTINGS:
+            for(u32 setting = 0; setting < NUM_OPTIONS_MUSIC_SETTINGS; setting++)
+                TemporalOptions[category][setting] = gSaveBlock2Ptr->options.music[setting];
+            break;
+        case RANDOM_SETTINGS:
+            for(u32 setting = 0; setting < NUM_OPTIONS_RANDOM_SETTINGS; setting++)
+                TemporalOptions[category][setting] = gSaveBlock2Ptr->options.random[setting];
+            break;
+    }
 }
 
 void CopySaveBlockDataToTemporalData()
 {
-	for(u32 i = 0 ;i < NUM_OF_PRESET_OPTIONS; i++)
-        for(u32 j = 0 ;j < NUM_OPTIONS_MAX_SETTINGS; j++)
-            TemporalOptions[i][j] = gSaveBlock2Ptr->options[i][j];
+    for(u32 category = 0; category < SETTINGS_COUNT; category++)
+        CopySaveBlockDataToTemporalDataPerCategory(category);
 }
 
 //==========CONST=DATA==========//
 static const struct BgTemplate sMenuBgTemplates[] =
 {
-	{
-		.bg = 0,    // windows, etc
-		.charBaseIndex = 0,
-		.mapBaseIndex = 31,
-		.priority = 0,
-	},
-	{
-		.bg = 1,    // this bg loads the UI tilemap
-		.charBaseIndex = 2,
-		.mapBaseIndex = 25,
-		.priority = 1,
-	},
-	{
-		.bg = 2,    // this bg loads the UI tilemap
-		.charBaseIndex = 3,
-		.mapBaseIndex = 20,
-		.priority = 2,
-	}
+    {
+        .bg = 0,    // windows, etc
+        .charBaseIndex = 0,
+        .mapBaseIndex = 31,
+        .priority = 0,
+    },
+    {
+        .bg = 1,    // this bg loads the UI tilemap
+        .charBaseIndex = 2,
+        .mapBaseIndex = 25,
+        .priority = 1,
+    },
+    {
+        .bg = 2,    // this bg loads the UI tilemap
+        .charBaseIndex = 3,
+        .mapBaseIndex = 20,
+        .priority = 2,
+    }
 };
 
 static const struct WindowTemplate sMenuWindowTemplates[] =
 {
-	[WINDOW_1] =
-	{
-		.bg = 0,            // which bg to print text on
-		.tilemapLeft = 0,   // position from left (per 8 pixels)
-		.tilemapTop = 0,    // position from top (per 8 pixels)
-		.width = 30,        // width (per 8 pixels)
-		.height = 20,       // height (per 8 pixels)
-		.paletteNum = 0,    // palette index to use for text
-		.baseBlock = 1,     // tile start in VRAM
-	},
+    [WINDOW_1] =
+    {
+        .bg = 0,            // which bg to print text on
+        .tilemapLeft = 0,   // position from left (per 8 pixels)
+        .tilemapTop = 0,    // position from top (per 8 pixels)
+        .width = 30,        // width (per 8 pixels)
+        .height = 20,       // height (per 8 pixels)
+        .paletteNum = 0,    // palette index to use for text
+        .baseBlock = 1,     // tile start in VRAM
+    },
     DUMMY_WIN_TEMPLATE
 };
 
@@ -214,17 +299,17 @@ static const u16 sMenuPalette_White[]    = INCGFX_U16("graphics/ui_menus/options
 static const u16 sMenuPalette_Yellow[]   = INCGFX_U16("graphics/ui_menus/options_menu/palettes/yellow.pal", ".gbapal");
 enum Colors
 {
-	FONT_BLACK,
-	FONT_WHITE,
-	FONT_RED,
-	FONT_BLUE,
+    FONT_BLACK,
+    FONT_WHITE,
+    FONT_RED,
+    FONT_BLUE,
 };
 static const u8 sMenuWindowFontColors[][3] =
 {
-	[FONT_BLACK]    = {TEXT_COLOR_TRANSPARENT,  TEXT_COLOR_DARK_GRAY,   TEXT_COLOR_TRANSPARENT},
-	[FONT_WHITE]    = {TEXT_COLOR_TRANSPARENT,  TEXT_COLOR_WHITE,       TEXT_COLOR_TRANSPARENT},
-	[FONT_RED]      = {TEXT_COLOR_TRANSPARENT,  TEXT_COLOR_RED,         TEXT_COLOR_TRANSPARENT},
-	[FONT_BLUE]     = {TEXT_COLOR_TRANSPARENT,  TEXT_COLOR_BLUE,        TEXT_COLOR_TRANSPARENT},
+    [FONT_BLACK]    = {TEXT_COLOR_TRANSPARENT,  TEXT_COLOR_DARK_GRAY,   TEXT_COLOR_TRANSPARENT},
+    [FONT_WHITE]    = {TEXT_COLOR_TRANSPARENT,  TEXT_COLOR_WHITE,       TEXT_COLOR_TRANSPARENT},
+    [FONT_RED]      = {TEXT_COLOR_TRANSPARENT,  TEXT_COLOR_RED,         TEXT_COLOR_TRANSPARENT},
+    [FONT_BLUE]     = {TEXT_COLOR_TRANSPARENT,  TEXT_COLOR_BLUE,        TEXT_COLOR_TRANSPARENT},
 };
 
 //==========FUNCTIONS==========//
@@ -243,16 +328,16 @@ void CB2_InitUiOptionMenuFromDevLetter(void)
 
 void SetUpMainMenuFromOutsideGame(void)
 {
-	s32 i;
+    s32 i;
 
-	ResetSpriteData();
-	FreeAllSpritePalettes();
-	ResetTasks();
-	ResetBgsAndClearDma3BusyFlags(0);
-	DeactivateAllTextPrinters();
+    ResetSpriteData();
+    FreeAllSpritePalettes();
+    ResetTasks();
+    ResetBgsAndClearDma3BusyFlags(0);
+    DeactivateAllTextPrinters();
 
-	for (i = 0; i < 2; i++)
-		FillWindowPixelBuffer(i, PIXEL_FILL(0));
+    for (i = 0; i < 2; i++)
+        FillWindowPixelBuffer(i, PIXEL_FILL(0));
 
     FillBgTilemapBufferRect_Palette0(0, 0, 0, 0, DISPLAY_TILE_WIDTH, DISPLAY_TILE_HEIGHT);
     LoadUserWindowBorderGfx(0, 1u, 0xD0u);
@@ -277,27 +362,27 @@ void CB2_InitUIOptionMenuFromMainMenu(void)
 // This is our main initialization function if you want to call the menu from elsewhere
 void Options_Menu_Init(MainCallback callback)
 {
-	if ((sMenuDataPtr = AllocZeroed(sizeof(struct MenuResources))) == NULL)
-	{
-		SetMainCallback2(callback);
-		return;
-	}
+    if ((sMenuDataPtr = AllocZeroed(sizeof(struct MenuResources))) == NULL)
+    {
+        SetMainCallback2(callback);
+        return;
+    }
 
-	// initialize stuff
-	sMenuDataPtr->savedCallback = callback;
+    // initialize stuff
+    sMenuDataPtr->savedCallback = callback;
 
-	SetMainCallback2(Menu_RunSetup);
+    SetMainCallback2(Menu_RunSetup);
 }
 
 static void Menu_RunSetup(void)
 {
-	while (1)
-	{
-		CopySaveBlockDataToTemporalData();
+    while (1)
+    {
+        CopySaveBlockDataToTemporalData();
 
-		if (Menu_DoGfxSetup() == TRUE)
-			break;
-	}
+        if (Menu_DoGfxSetup() == TRUE)
+            break;
+    }
 }
 
 static void SetBackgroundTransparency(void)
@@ -310,73 +395,73 @@ static void SetBackgroundTransparency(void)
 
 static void Menu_MainCB(void)
 {
-	RunTasks();
-	AnimateSprites();
-	BuildOamBuffer();
-	DoScheduledBgTilemapCopiesToVram();
-	UpdatePaletteFade();
+    RunTasks();
+    AnimateSprites();
+    BuildOamBuffer();
+    DoScheduledBgTilemapCopiesToVram();
+    UpdatePaletteFade();
 }
 
 static void Menu_VBlankCB(void)
 {
-	LoadOam();
-	ProcessSpriteCopyRequests();
-	TransferPlttBuffer();
+    LoadOam();
+    ProcessSpriteCopyRequests();
+    TransferPlttBuffer();
 }
 
 static bool8 Menu_DoGfxSetup(void)
 {
-	switch (gMain.state)
-	{
-		case 0:
-			DmaClearLarge16(3, (void *)VRAM, VRAM_SIZE, 0x1000)
-            SetVBlankHBlankCallbacksToNull();
-			ClearScheduledBgCopiesToVram();
-			gMain.state++;
-			break;
-		case 1:
-			ScanlineEffect_Stop();
+    switch (gMain.state)
+    {
+        case 0:
+            DmaClearLarge16(3, (void *)VRAM, VRAM_SIZE, 0x1000)
+                SetVBlankHBlankCallbacksToNull();
+            ClearScheduledBgCopiesToVram();
+            gMain.state++;
+            break;
+        case 1:
+            ScanlineEffect_Stop();
             ResetPaletteFade();
             ResetTasks();
             ResetSpriteData();
             FreeSpriteTileRanges();
             FreeAllSpritePalettes();
             ClearDma3Requests();
-			gMain.state++;
-			break;
-		case 2:
+            gMain.state++;
+            break;
+        case 2:
             InitializeBackgroundsAndLoadBackgroundGraphics();
             gMain.state++;
-			break;
-		case 3:
+            break;
+        case 3:
             gMain.state++;
-			break;
-		case 4:
-			//LoadMessageBoxAndBorderGfx();
-			Menu_InitWindows();
-			gMain.state++;
-			break;
-		case 5:
-			PrintToWindow(WINDOW_1, FONT_WHITE);
-			CreateTask(Task_MenuWaitFadeIn, 0);
-			//BlendPalettes(0xFFFFFFFF, 16, RGB_BLACK);
-			gMain.state++;
-			break;
-		case 6:
+            break;
+        case 4:
+            //LoadMessageBoxAndBorderGfx();
+            Menu_InitWindows();
+            gMain.state++;
+            break;
+        case 5:
+            PrintToWindow(WINDOW_1, FONT_WHITE);
+            CreateTask(Task_MenuWaitFadeIn, 0);
+            //BlendPalettes(0xFFFFFFFF, 16, RGB_BLACK);
+            gMain.state++;
+            break;
+        case 6:
             ResetAllSpriteIds();
             CreateUpArrowSprite();
             CreateDownArrowSprite();
             CreateLeftArrowSprite();
             CreateRightArrowSprite();
-			BeginNormalPaletteFade(PALETTES_ALL, 0, 16, 0, RGB_BLACK);
-			gMain.state++;
-			break;
-		default:
-			SetVBlankCallback(Menu_VBlankCB);
-			SetMainCallback2(Menu_MainCB);
-			return TRUE;
-	}
-	return FALSE;
+            BeginNormalPaletteFade(PALETTES_ALL, 0, 16, 0, RGB_BLACK);
+            gMain.state++;
+            break;
+        default:
+            SetVBlankCallback(Menu_VBlankCB);
+            SetMainCallback2(Menu_MainCB);
+            return TRUE;
+    }
+    return FALSE;
 }
 
 static void Menu_FreeResources(void)
@@ -397,31 +482,31 @@ static void Menu_FreeResources(void)
 
 static void Task_MenuWaitFadeAndBail(u8 taskId)
 {
-	if (!gPaletteFade.active)
-	{
-		SetMainCallback2(sMenuDataPtr->savedCallback);
-		Menu_FreeResources();
-		DestroyTask(taskId);
-	}
+    if (!gPaletteFade.active)
+    {
+        SetMainCallback2(sMenuDataPtr->savedCallback);
+        Menu_FreeResources();
+        DestroyTask(taskId);
+    }
 }
 
 static void Menu_FadeAndBail(void)
 {
-	BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB_BLACK);
-	CreateTask(Task_MenuWaitFadeAndBail, 0);
-	SetVBlankCallback(Menu_VBlankCB);
-	SetMainCallback2(Menu_MainCB);
+    BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB_BLACK);
+    CreateTask(Task_MenuWaitFadeAndBail, 0);
+    SetVBlankCallback(Menu_VBlankCB);
+    SetMainCallback2(Menu_MainCB);
 }
 
 static bool8 Menu_InitBgs(void)
 {
-	ResetAllBgsCoordinates();
+    ResetAllBgsCoordinates();
     if(!AllocZeroedTilemapBuffers())
         return FALSE;
 
     HandleAndShowBgs();
 
-	return TRUE;
+    return TRUE;
 }
 
 static bool32 AllocZeroedTilemapBuffers(void)
@@ -508,13 +593,13 @@ static void Menu_LoadGraphics(void)
 
 static void Menu_InitWindows(void)
 {
-	InitWindows(sMenuWindowTemplates);
-	DeactivateAllTextPrinters();
+    InitWindows(sMenuWindowTemplates);
+    DeactivateAllTextPrinters();
 
-	FillWindowPixelBuffer(WINDOW_1, 0);
-	LoadUserWindowBorderGfx(WINDOW_1, 720, 14 * 16);
-	PutWindowTilemap(WINDOW_1);
-	CopyWindowToVram(WINDOW_1, 3);
+    FillWindowPixelBuffer(WINDOW_1, 0);
+    LoadUserWindowBorderGfx(WINDOW_1, 720, 14 * 16);
+    PutWindowTilemap(WINDOW_1);
+    CopyWindowToVram(WINDOW_1, 3);
 }
 
 static const u8 screenOptionNumber[] =
@@ -550,57 +635,57 @@ static u8 GetCurrentScreenOptionNumber(){
 
 static u8 GetCurrentSlotOption(u8 option)
 {
-	return OptionsMenu_GetCurrentFirstOption() + option;
+    return OptionsMenu_GetCurrentFirstOption() + option;
 }
 
 static u8 GetCursorPosition()
 {
-	return OptionsMenu_GetCurrentOptionId() - OptionsMenu_GetCurrentFirstOption();
+    return OptionsMenu_GetCurrentOptionId() - OptionsMenu_GetCurrentFirstOption();
 }
 
 static void PressedDownButton(){
-	u8 halfScreen = ((NUM_OF_POSSIBLE_OPTIONS_THAT_FIT_ON_SCREEN) - 1) / 2;
-	u8 finalhalfScreen = GetCurrentScreenOptionNumber() - halfScreen;
+    u8 halfScreen = ((NUM_OF_POSSIBLE_OPTIONS_THAT_FIT_ON_SCREEN) - 1) / 2;
+    u8 finalhalfScreen = GetCurrentScreenOptionNumber() - halfScreen;
 
-	if(OptionsMenu_GetCurrentOptionId() < halfScreen){
-		OptionsMenu_IncrementCurrentOptionId();
-	}
-	else if(OptionsMenu_GetCurrentOptionId() >= (GetCurrentScreenOptionNumber() - 1)){ //If you are in the last option go to the first one
-		OptionsMenu_SetCurrentOptionId(0);
-		OptionsMenu_SetCurrentFirstOption(0);
-	}
-	else if(OptionsMenu_GetCurrentOptionId() >= (finalhalfScreen - 1)){
-		OptionsMenu_IncrementCurrentOptionId();
-	}
-	else{
-		OptionsMenu_IncrementCurrentOptionId();
-		OptionsMenu_IncrementCurrentFirstOption();
-	}
+    if(OptionsMenu_GetCurrentOptionId() < halfScreen){
+        OptionsMenu_IncrementCurrentOptionId();
+    }
+    else if(OptionsMenu_GetCurrentOptionId() >= (GetCurrentScreenOptionNumber() - 1)){ //If you are in the last option go to the first one
+        OptionsMenu_SetCurrentOptionId(0);
+        OptionsMenu_SetCurrentFirstOption(0);
+    }
+    else if(OptionsMenu_GetCurrentOptionId() >= (finalhalfScreen - 1)){
+        OptionsMenu_IncrementCurrentOptionId();
+    }
+    else{
+        OptionsMenu_IncrementCurrentOptionId();
+        OptionsMenu_IncrementCurrentFirstOption();
+    }
 }
 
 static void PressedUpButton(){
-	u8 halfScreen = ((NUM_OF_POSSIBLE_OPTIONS_THAT_FIT_ON_SCREEN) - 1) / 2;
-	u8 finalhalfScreen = GetCurrentScreenOptionNumber() - halfScreen;
+    u8 halfScreen = ((NUM_OF_POSSIBLE_OPTIONS_THAT_FIT_ON_SCREEN) - 1) / 2;
+    u8 finalhalfScreen = GetCurrentScreenOptionNumber() - halfScreen;
 
-	if(OptionsMenu_GetCurrentOptionId() > halfScreen && OptionsMenu_GetCurrentOptionId() <= (finalhalfScreen - 1)){
-		OptionsMenu_DecrementCurrentOptionId();
-		OptionsMenu_DecrementCurrentFirstOption();
-	}
-	else if(OptionsMenu_GetCurrentOptionId() == 0){ //If you are in the first option go to the last one
+    if(OptionsMenu_GetCurrentOptionId() > halfScreen && OptionsMenu_GetCurrentOptionId() <= (finalhalfScreen - 1)){
+        OptionsMenu_DecrementCurrentOptionId();
+        OptionsMenu_DecrementCurrentFirstOption();
+    }
+    else if(OptionsMenu_GetCurrentOptionId() == 0){ //If you are in the first option go to the last one
         OptionsMenu_SetCurrentOptionId(GetCurrentScreenOptionNumber() - 1);
         OptionsMenu_SetCurrentFirstOption(GetCurrentScreenOptionNumber() - NUM_OF_POSSIBLE_OPTIONS_THAT_FIT_ON_SCREEN);
-	}
-	else{
-		OptionsMenu_DecrementCurrentOptionId();
-	}
+    }
+    else{
+        OptionsMenu_DecrementCurrentOptionId();
+    }
 }
 
 struct OptionData
 {
-	const u8* title;
-	const u8* options[MAX_OPTIONS_PER_SETTING];
-	const u8* optionDescription[MAX_OPTIONS_PER_SETTING];
-	const u8 numOptions;
+    const u8* title;
+    const u8* options[MAX_OPTIONS_PER_SETTING];
+    const u8* optionDescription[MAX_OPTIONS_PER_SETTING];
+    const u8 numOptions;
 };
 
 //Graphics
@@ -678,9 +763,9 @@ static const u8 Preset_Options[NUM_OF_PRESET_OPTIONS][NUM_MAX_SETTINGS][MAX_OPTI
             [BATTLE_OPTIONS_BAG_ITEMS]              = BATTLE_OPTION_BAG_ITEMS_NO_BOSS,
             [BATTLE_OPTIONS_OPPONENTS_ITEMS]        = BATTLE_OPTION_OPPONENTS_ITEMS_ALLOWED,
             /*
-            [BATTLE_OPTIONS_BASE_STAT_EQUALIZER]    = 0,
-            [BATTLE_OPTIONS_ONE_TYPE_CHALLENGE]     = 0,
-            */
+               [BATTLE_OPTIONS_BASE_STAT_EQUALIZER]    = 0,
+               [BATTLE_OPTIONS_ONE_TYPE_CHALLENGE]     = 0,
+               */
             [BATTLE_OPTIONS_TYPE_ICONS]             = 0,
             [BATTLE_OPTIONS_ANIMATIONS]             = 0,
             [BATTLE_OPTIONS_INTRO]                  = 1,
@@ -713,9 +798,9 @@ static const u8 Preset_Options[NUM_OF_PRESET_OPTIONS][NUM_MAX_SETTINGS][MAX_OPTI
             [BATTLE_OPTIONS_BAG_ITEMS]              = BATTLE_OPTION_BAG_ITEMS_NO_TRAINER,
             [BATTLE_OPTIONS_OPPONENTS_ITEMS]        = BATTLE_OPTION_OPPONENTS_ITEMS_ALLOWED,
             /*
-            [BATTLE_OPTIONS_BASE_STAT_EQUALIZER]    = 0,
-            [BATTLE_OPTIONS_ONE_TYPE_CHALLENGE]     = 0,
-            */
+               [BATTLE_OPTIONS_BASE_STAT_EQUALIZER]    = 0,
+               [BATTLE_OPTIONS_ONE_TYPE_CHALLENGE]     = 0,
+               */
             [BATTLE_OPTIONS_TYPE_ICONS]             = 0,
             [BATTLE_OPTIONS_ANIMATIONS]             = 1,
             [BATTLE_OPTIONS_INTRO]                  = 1,
@@ -748,9 +833,9 @@ static const u8 Preset_Options[NUM_OF_PRESET_OPTIONS][NUM_MAX_SETTINGS][MAX_OPTI
             [BATTLE_OPTIONS_BAG_ITEMS]              = BATTLE_OPTION_BAG_ITEMS_NO_BOSS,
             [BATTLE_OPTIONS_OPPONENTS_ITEMS]        = BATTLE_OPTION_OPPONENTS_ITEMS_ALLOWED,
             /*
-            [BATTLE_OPTIONS_BASE_STAT_EQUALIZER]    = 0,
-            [BATTLE_OPTIONS_ONE_TYPE_CHALLENGE]     = 0,
-            */
+               [BATTLE_OPTIONS_BASE_STAT_EQUALIZER]    = 0,
+               [BATTLE_OPTIONS_ONE_TYPE_CHALLENGE]     = 0,
+               */
             [BATTLE_OPTIONS_TYPE_ICONS]             = 0,
             [BATTLE_OPTIONS_ANIMATIONS]             = 1,
             [BATTLE_OPTIONS_INTRO]                  = 1,
@@ -783,9 +868,9 @@ static const u8 Preset_Options[NUM_OF_PRESET_OPTIONS][NUM_MAX_SETTINGS][MAX_OPTI
             [BATTLE_OPTIONS_BAG_ITEMS]              = BATTLE_OPTION_BAG_ITEMS_NO_BOSS,
             [BATTLE_OPTIONS_OPPONENTS_ITEMS]        = BATTLE_OPTION_OPPONENTS_ITEMS_ALLOWED,
             /*
-            [BATTLE_OPTIONS_BASE_STAT_EQUALIZER]    = 0,
-            [BATTLE_OPTIONS_ONE_TYPE_CHALLENGE]     = 0,
-            */
+               [BATTLE_OPTIONS_BASE_STAT_EQUALIZER]    = 0,
+               [BATTLE_OPTIONS_ONE_TYPE_CHALLENGE]     = 0,
+               */
             [BATTLE_OPTIONS_TYPE_ICONS]             = 0,
             [BATTLE_OPTIONS_ANIMATIONS]             = 0,
             [BATTLE_OPTIONS_INTRO]                  = 0,
@@ -818,9 +903,9 @@ static const u8 Preset_Options[NUM_OF_PRESET_OPTIONS][NUM_MAX_SETTINGS][MAX_OPTI
             [BATTLE_OPTIONS_BAG_ITEMS]              = BATTLE_OPTION_BAG_ITEMS_NO_ITEMS,
             [BATTLE_OPTIONS_OPPONENTS_ITEMS]        = BATTLE_OPTION_OPPONENTS_ITEMS_ALLOWED,
             /*
-            [BATTLE_OPTIONS_BASE_STAT_EQUALIZER]    = 0,
-            [BATTLE_OPTIONS_ONE_TYPE_CHALLENGE]     = 0,
-            */
+               [BATTLE_OPTIONS_BASE_STAT_EQUALIZER]    = 0,
+               [BATTLE_OPTIONS_ONE_TYPE_CHALLENGE]     = 0,
+               */
             [BATTLE_OPTIONS_TYPE_ICONS]             = 1,
             [BATTLE_OPTIONS_ANIMATIONS]             = 0,
             [BATTLE_OPTIONS_INTRO]                  = 0,
@@ -958,7 +1043,26 @@ void HandlePresetData()
 
     if(AreYouOnCustomPresetData()){
         for (u32 i = 1; i < maxNumber; i++)
-            TemporalOptions[settings][i] = gSaveBlock2Ptr->options[settings][i];
+        {
+            switch (settings)
+            {
+                case GAME_SETTINGS:
+                    TemporalOptions[settings][i] = gSaveBlock2Ptr->options.game[i];
+                    break;
+                case BATTLE_SETTINGS:
+                    TemporalOptions[settings][i] = gSaveBlock2Ptr->options.battle[i];
+                    break;
+                case VISUAL_SETTINGS:
+                    TemporalOptions[settings][i] = gSaveBlock2Ptr->options.visual[i];
+                    break;
+                case MUSIC_SETTINGS:
+                    TemporalOptions[settings][i] = gSaveBlock2Ptr->options.music[i];
+                    break;
+                case RANDOM_SETTINGS:
+                    TemporalOptions[settings][i] = gSaveBlock2Ptr->options.random[i];
+                    break;
+            }
+        }
     }
     else{
         for (u32 i = 1; i < maxNumber; i++)
@@ -976,15 +1080,6 @@ void ChangeCurrentScreenPresetDataToCustom()
 {
     u32 settings = OptionsMenu_GetCurrentScreenId();
     TemporalOptions[settings][0] = GetCustomPresetValueFromScreenId();
-}
-
-void UNUSED ChangePresetDataToCustom()
-{
-	gSaveBlock2Ptr->options[GAME_SETTINGS][0] = GAME_PRESET_CUSTOM;
-	gSaveBlock2Ptr->options[BATTLE_SETTINGS][0] = BATTLE_PRESET_CUSTOM;
-	gSaveBlock2Ptr->options[VISUAL_SETTINGS][0] = VISUAL_PRESET_CUSTOM;
-	gSaveBlock2Ptr->options[MUSIC_SETTINGS][0] = MUSIC_PRESET_CUSTOM;
-	gSaveBlock2Ptr->options[RANDOM_SETTINGS][0] = RANDOM_PRESET_CUSTOM;
 }
 
 // For Game Settings
@@ -2077,75 +2172,75 @@ static const struct OptionData Settings_Options[SETTINGS_COUNT][NUM_OPTIONS_MAX_
 
 static void PrintToWindow(u8 windowId, u8 colorIdx)
 {
-	u8 i;
-	u8 x = 1;
-	u8 y = 1;
+    u8 i;
+    u8 x = 1;
+    u8 y = 1;
 
-	FillWindowPixelBuffer(windowId, PIXEL_FILL(TEXT_COLOR_TRANSPARENT));
+    FillWindowPixelBuffer(windowId, PIXEL_FILL(TEXT_COLOR_TRANSPARENT));
 
-	// Selector Sprite --------------------------------------------------------------------------------------------------------------------
-	x = 0;
-	if((OptionsMenu_GetAreYouNotOnSettingsHub() == FALSE))
-		y = 2 + (OptionsMenu_GetCurrentScreenId() * 2);
-	else
-		y = 2 + (GetCursorPosition() * 2);
+    // Selector Sprite --------------------------------------------------------------------------------------------------------------------
+    x = 0;
+    if((OptionsMenu_GetAreYouNotOnSettingsHub() == FALSE))
+        y = 2 + (OptionsMenu_GetCurrentScreenId() * 2);
+    else
+        y = 2 + (GetCursorPosition() * 2);
 
-	BlitBitmapToWindow(windowId, sOptionMenuSelector, (x*8) + 5, (y*8), 104, 24);
+    BlitBitmapToWindow(windowId, sOptionMenuSelector, (x*8) + 5, (y*8), 104, 24);
 
-	// Settings Icons --------------------------------------------------------------------------------------------------------------------
-	// Only gets displayed you are on the Settings Hub
-	if((OptionsMenu_GetAreYouNotOnSettingsHub() == FALSE)){
-		x = 1;
-		y = 2;
+    // Settings Icons --------------------------------------------------------------------------------------------------------------------
+    // Only gets displayed you are on the Settings Hub
+    if((OptionsMenu_GetAreYouNotOnSettingsHub() == FALSE)){
+        x = 1;
+        y = 2;
 
-		for(i = 0; i < NUM_OF_POSSIBLE_OPTIONS_THAT_FIT_ON_SCREEN; i++){
+        for(i = 0; i < NUM_OF_POSSIBLE_OPTIONS_THAT_FIT_ON_SCREEN; i++){
             BlitBitmapToWindow(windowId, sOptionMenuIcons[i], (x*8) + 2, (y*8) + 5, 16, 16);
 
-			y = y + 2;
-		}
-	}
-	// Current Setting Icon --------------------------------------------------------------------------------------------------------------------
-	// Only gets displayed you have a selected settings
-	if(OptionsMenu_GetAreYouNotOnSettingsHub()){
-		x = 0;
-		y = 0;
+            y = y + 2;
+        }
+    }
+    // Current Setting Icon --------------------------------------------------------------------------------------------------------------------
+    // Only gets displayed you have a selected settings
+    if(OptionsMenu_GetAreYouNotOnSettingsHub()){
+        x = 0;
+        y = 0;
 
         BlitBitmapToWindow(windowId, sOptionMenuIcons[OptionsMenu_GetCurrentScreenId()], (x*8), (y*8), 16, 16);
-	}
+    }
 
-	// Settings Hub Text --------------------------------------------------------------------------------------------------------------------
-	// Only gets displayed you are on the Settings Hub
-	if((OptionsMenu_GetAreYouNotOnSettingsHub() == FALSE)){
-		x = 0;
-		y = 0;
+    // Settings Hub Text --------------------------------------------------------------------------------------------------------------------
+    // Only gets displayed you are on the Settings Hub
+    if((OptionsMenu_GetAreYouNotOnSettingsHub() == FALSE)){
+        x = 0;
+        y = 0;
 
-		AddTextPrinterParameterized4(windowId, 8, (x*8) + 4, (y*8), 0, 0, sMenuWindowFontColors[FONT_WHITE], 0xFF, COMPOUND_STRING("Settings Hub"));
-	}
+        AddTextPrinterParameterized4(windowId, 8, (x*8) + 4, (y*8), 0, 0, sMenuWindowFontColors[FONT_WHITE], 0xFF, COMPOUND_STRING("Settings Hub"));
+    }
 
-	// Current Settings Title --------------------------------------------------------------------------------------------------------------------
-	// Only gets displayed you have a selected settings
-	if(OptionsMenu_GetAreYouNotOnSettingsHub()){
-		x = 2;
-		y = 0;
+    // Current Settings Title --------------------------------------------------------------------------------------------------------------------
+    // Only gets displayed you have a selected settings
+    if(OptionsMenu_GetAreYouNotOnSettingsHub()){
+        x = 2;
+        y = 0;
 
-		AddTextPrinterParameterized4(windowId, 8, (x*8) + 4, (y*8), 0, 0, sMenuWindowFontColors[FONT_WHITE], 0xFF,  Settings_Options[OptionsMenu_GetCurrentScreenId()][0].title);
-	}
+        AddTextPrinterParameterized4(windowId, 8, (x*8) + 4, (y*8), 0, 0, sMenuWindowFontColors[FONT_WHITE], 0xFF,  Settings_Options[OptionsMenu_GetCurrentScreenId()][0].title);
+    }
 
-	// Settings Names --------------------------------------------------------------------------------------------------------------------
-	if((OptionsMenu_GetAreYouNotOnSettingsHub() == FALSE)){
-		x = 3;
-		y = 2;
-		for(i = 0; i < NUM_OF_POSSIBLE_OPTIONS_THAT_FIT_ON_SCREEN; i++){
+    // Settings Names --------------------------------------------------------------------------------------------------------------------
+    if((OptionsMenu_GetAreYouNotOnSettingsHub() == FALSE)){
+        x = 3;
+        y = 2;
+        for(i = 0; i < NUM_OF_POSSIBLE_OPTIONS_THAT_FIT_ON_SCREEN; i++){
             StringExpandPlaceholders(gStringVar1,Settings_Options[i][0].title);
             u32 fontId = FONT_OPTION_DESC;
             u32 letterSpacing = GetFontAttribute(fontId,FONTATTR_LETTER_SPACING);
             u32 lineSpacing = GetFontAttribute(fontId,FONTATTR_LINE_SPACING);
             u32 windowWidth = 90;
             fontId = GetFontIdToFit(gStringVar1,FONT_OPTION_DESC,letterSpacing,windowWidth);
-			AddTextPrinterParameterized4(windowId, 8, (x*8) + 4, (y*8) + 4, letterSpacing, lineSpacing, sMenuWindowFontColors[FONT_WHITE], TEXT_SKIP_DRAW, gStringVar1);
-			y = y + 2;
-		}
-	}
+            AddTextPrinterParameterized4(windowId, 8, (x*8) + 4, (y*8) + 4, letterSpacing, lineSpacing, sMenuWindowFontColors[FONT_WHITE], TEXT_SKIP_DRAW, gStringVar1);
+            y = y + 2;
+        }
+    }
     else{
         x = 1;
         y = 2;
@@ -2161,13 +2256,13 @@ static void PrintToWindow(u8 windowId, u8 colorIdx)
         }
     }
 
-	// Current Settings --------------------------------------------------------------------------------------------------------------------
-	// Only gets displayed you are on the Settings Hub
-	if((OptionsMenu_GetAreYouNotOnSettingsHub() == FALSE)){
-		x = 21;
-		y = 2;
+    // Current Settings --------------------------------------------------------------------------------------------------------------------
+    // Only gets displayed you are on the Settings Hub
+    if((OptionsMenu_GetAreYouNotOnSettingsHub() == FALSE)){
+        x = 21;
+        y = 2;
 
-		for(i = 0; i < NUM_OF_POSSIBLE_OPTIONS_THAT_FIT_ON_SCREEN; i++){
+        for(i = 0; i < NUM_OF_POSSIBLE_OPTIONS_THAT_FIT_ON_SCREEN; i++){
             StringExpandPlaceholders(gStringVar1,Settings_Options[i][0].options[TemporalOptions[i][0]]);
             u32 fontId = FONT_OPTION_DESC;
             u32 letterSpacing = GetFontAttribute(fontId,FONTATTR_LETTER_SPACING);
@@ -2175,15 +2270,15 @@ static void PrintToWindow(u8 windowId, u8 colorIdx)
             u32 windowWidth = 48;
             fontId = GetFontIdToFit(gStringVar1,FONT_OPTION_DESC,letterSpacing,windowWidth);
             AddTextPrinterParameterized4(windowId, fontId, (x*8) + 6, (y*8) + 4, letterSpacing, lineSpacing, sMenuWindowFontColors[FONT_WHITE], TEXT_SKIP_DRAW, gStringVar1);
-			y = y + 2;
-		}
-	}
-	else{
-		x = 21;
-		y = 2;
+            y = y + 2;
+        }
+    }
+    else{
+        x = 21;
+        y = 2;
 
 
-		for(i = 0; i < NUM_OF_POSSIBLE_OPTIONS_THAT_FIT_ON_SCREEN; i++){
+        for(i = 0; i < NUM_OF_POSSIBLE_OPTIONS_THAT_FIT_ON_SCREEN; i++){
             StringExpandPlaceholders(gStringVar1,Settings_Options[OptionsMenu_GetCurrentScreenId()][GetCurrentSlotOption(i)].options[TemporalOptions[OptionsMenu_GetCurrentScreenId()][GetCurrentSlotOption(i)]]);
             u32 fontId = FONT_OPTION_DESC;
             u32 letterSpacing = GetFontAttribute(fontId,FONTATTR_LETTER_SPACING);
@@ -2191,18 +2286,18 @@ static void PrintToWindow(u8 windowId, u8 colorIdx)
             u32 windowWidth = 48;
             fontId = GetFontIdToFit(gStringVar1,FONT_OPTION_DESC,letterSpacing,windowWidth);
             AddTextPrinterParameterized4(windowId, fontId, (x*8) + 6, (y*8) + 4, letterSpacing, lineSpacing, sMenuWindowFontColors[FONT_WHITE], TEXT_SKIP_DRAW, gStringVar1);
-			y = y + 2;
-		}
-	}
+            y = y + 2;
+        }
+    }
 
-	// Option Description --------------------------------------------------------------------------------------------------------------------
-	// Only gets displayed you are on the Settings Hub
-	x = 0;
-	y = 14;
-	if(OptionsMenu_GetShouldShowDiscardDialogue()){
-		AddTextPrinterParameterized4(windowId, 8, (x*8)+4, (y*8), 0, 0, sMenuWindowFontColors[FONT_WHITE], 0xFF, COMPOUND_STRING("Are you sure you want to leave without\nsaving the changes?"));
-	}
-	else if((OptionsMenu_GetAreYouNotOnSettingsHub() == FALSE)){
+    // Option Description --------------------------------------------------------------------------------------------------------------------
+    // Only gets displayed you are on the Settings Hub
+    x = 0;
+    y = 14;
+    if(OptionsMenu_GetShouldShowDiscardDialogue()){
+        AddTextPrinterParameterized4(windowId, 8, (x*8)+4, (y*8), 0, 0, sMenuWindowFontColors[FONT_WHITE], 0xFF, COMPOUND_STRING("Are you sure you want to leave without\nsaving the changes?"));
+    }
+    else if((OptionsMenu_GetAreYouNotOnSettingsHub() == FALSE)){
         StringExpandPlaceholders(gStringVar1,Settings_Options[OptionsMenu_GetCurrentScreenId()][0].optionDescription[TemporalOptions[OptionsMenu_GetCurrentScreenId()][0]]);
         u32 halfTile = (TILE_SIZE_1BPP / 2);
         u32 fontId = FONT_OPTION_DESC;
@@ -2210,7 +2305,7 @@ static void PrintToWindow(u8 windowId, u8 colorIdx)
         u32 lineSpacing = GetFontAttribute(fontId,FONTATTR_LINE_SPACING);
         BreakStringNaive(gStringVar1,OPTION_DESC_PIXEL_WIDTH,OPTION_DESC_LINES_COUNT,fontId, HIDE_SCROLL_PROMPT);
         AddTextPrinterParameterized4(windowId, fontId, halfTile, 108, letterSpacing, lineSpacing, sMenuWindowFontColors[FONT_WHITE], TEXT_SKIP_DRAW, gStringVar1);
-	}
+    }
     else
     {
         StringExpandPlaceholders(gStringVar1,Settings_Options[OptionsMenu_GetCurrentScreenId()][OptionsMenu_GetCurrentOptionId()].optionDescription[TemporalOptions[OptionsMenu_GetCurrentScreenId()][OptionsMenu_GetCurrentOptionId()]]);
@@ -2222,11 +2317,11 @@ static void PrintToWindow(u8 windowId, u8 colorIdx)
         AddTextPrinterParameterized4(windowId, fontId, halfTile, 108, letterSpacing, lineSpacing, sMenuWindowFontColors[FONT_WHITE], TEXT_SKIP_DRAW, gStringVar1);
     }
 
-	// Help Bar --------------------------------------------------------------------------------------------------------------------
-	x = 0;
-	y = 18;
+    // Help Bar --------------------------------------------------------------------------------------------------------------------
+    x = 0;
+    y = 18;
 
-//Text
+    //Text
     if(OptionsMenu_GetShouldShowDiscardDialogue()){
         AddTextPrinterParameterized4(windowId, 8, (x*8)+4, (y*8), 0, 0, sMenuWindowFontColors[FONT_WHITE], 0xFF, COMPOUND_STRING("{A_BUTTON} Yes {B_BUTTON} Cancel {START_BUTTON} Save"));
     }
@@ -2236,15 +2331,15 @@ static void PrintToWindow(u8 windowId, u8 colorIdx)
     else{
         AddTextPrinterParameterized4(windowId, 8, (x*8)+4, (y*8), 0, 0, sMenuWindowFontColors[FONT_WHITE], 0xFF, COMPOUND_STRING("{DPAD_LEFTRIGHT} Change {B_BUTTON} Discard {START_BUTTON} Save {L_BUTTON}{R_BUTTON} Next Page"));
     }
-	// --------------------------------------------------------------------------------------------------------------------
-	PutWindowTilemap(windowId);
-	CopyWindowToVram(windowId, 3);
+    // --------------------------------------------------------------------------------------------------------------------
+    PutWindowTilemap(windowId);
+    CopyWindowToVram(windowId, 3);
 }
 
 static void Task_MenuWaitFadeIn(u8 taskId)
 {
-	if (!gPaletteFade.active)
-		gTasks[taskId].func = Task_MenuMain;
+    if (!gPaletteFade.active)
+        gTasks[taskId].func = Task_MenuMain;
 }
 
 static void Task_MenuTurnOff(u8 taskId)
@@ -2260,7 +2355,7 @@ static void Task_MenuTurnOff(u8 taskId)
 }
 
 static void RecolorWindow(){
-	FreeAllSpritePalettes();
+    FreeAllSpritePalettes();
     LoadPalette(sOptionsMenuPalettesLUT[TemporalOptions[VISUAL_SETTINGS][VISUAL_OPTIONS_COLOR]], 0, PLTT_SIZE_4BPP);
 }
 
@@ -2284,8 +2379,8 @@ static void Task_MenuMain(u8 taskId)
         PrintToWindow(WINDOW_1, FONT_BLACK);
     }
 
-	if(JOY_NEW(DPAD_DOWN) && (OptionsMenu_GetShouldShowDiscardDialogue() == FALSE))
-	{
+    if(JOY_NEW(DPAD_DOWN) && (OptionsMenu_GetShouldShowDiscardDialogue() == FALSE))
+    {
         if((OptionsMenu_GetAreYouNotOnSettingsHub() == FALSE)){
             if(OptionsMenu_GetCurrentScreenId() < NUM_OF_POSSIBLE_OPTIONS_THAT_FIT_ON_SCREEN-1){
                 OptionsMenu_IncrementCurrentScreenId();
@@ -2299,10 +2394,10 @@ static void Task_MenuMain(u8 taskId)
         }
         PlaySoundEffectBasedOnTemporalMute(SE_SELECT);
         PrintToWindow(WINDOW_1, FONT_BLACK);
-	}
+    }
 
-	if(JOY_NEW(DPAD_LEFT) && (OptionsMenu_GetShouldShowDiscardDialogue() == FALSE))
-	{
+    if(JOY_NEW(DPAD_LEFT) && (OptionsMenu_GetShouldShowDiscardDialogue() == FALSE))
+    {
         if((OptionsMenu_GetAreYouNotOnSettingsHub() == FALSE) || OptionsMenu_GetCurrentOptionId() == 0){
             //For Presets
             switch(OptionsMenu_GetCurrentScreenId()){
@@ -2312,84 +2407,84 @@ static void Task_MenuMain(u8 taskId)
                     else
                         TemporalOptions[GAME_SETTINGS][0] = Settings_Options[GAME_SETTINGS][0].numOptions - 2;
 
-                break;
+                    break;
                 case BATTLE_SETTINGS:
                     if(TemporalOptions[BATTLE_SETTINGS][0] > 0)
                         TemporalOptions[BATTLE_SETTINGS][0]--;
                     else
                         TemporalOptions[BATTLE_SETTINGS][0] = Settings_Options[BATTLE_SETTINGS][0].numOptions - 2;
-                break;
+                    break;
                 case VISUAL_SETTINGS:
                     if(TemporalOptions[VISUAL_SETTINGS][0] > 0)
                         TemporalOptions[VISUAL_SETTINGS][0]--;
                     else
                         TemporalOptions[VISUAL_SETTINGS][0] = Settings_Options[VISUAL_SETTINGS][0].numOptions - 2;
-                break;
+                    break;
                 case MUSIC_SETTINGS:
                     if(TemporalOptions[MUSIC_SETTINGS][0] > 0)
                         TemporalOptions[MUSIC_SETTINGS][0]--;
                     else
                         TemporalOptions[MUSIC_SETTINGS][0] = Settings_Options[MUSIC_SETTINGS][0].numOptions - 2;
-                break;
+                    break;
                 case RANDOM_SETTINGS:
                     if(TemporalOptions[RANDOM_SETTINGS][0] > 0)
                         TemporalOptions[RANDOM_SETTINGS][0]--;
                     else
                         TemporalOptions[RANDOM_SETTINGS][0] = Settings_Options[RANDOM_SETTINGS][0].numOptions - 2;
-                break;
+                    break;
             }
 
-			HandlePresetData();
-			if(OptionsMenu_GetCurrentScreenId() == VISUAL_SETTINGS)
-				RecolorWindow();
-		}
-		else{
-			// For Other Options
-			switch(OptionsMenu_GetCurrentScreenId()){
-				case GAME_SETTINGS:
-					if(TemporalOptions[GAME_SETTINGS][OptionsMenu_GetCurrentOptionId()] > 0){
-						TemporalOptions[GAME_SETTINGS][OptionsMenu_GetCurrentOptionId()]--;
-					}
-					else
-						TemporalOptions[GAME_SETTINGS][OptionsMenu_GetCurrentOptionId()] = Settings_Options[GAME_SETTINGS][OptionsMenu_GetCurrentOptionId()].numOptions - 1;
-					break;
-				case BATTLE_SETTINGS:
-					if(TemporalOptions[BATTLE_SETTINGS][OptionsMenu_GetCurrentOptionId()] > 0)
-						TemporalOptions[BATTLE_SETTINGS][OptionsMenu_GetCurrentOptionId()]--;
-					else
-						TemporalOptions[BATTLE_SETTINGS][OptionsMenu_GetCurrentOptionId()] = Settings_Options[BATTLE_SETTINGS][OptionsMenu_GetCurrentOptionId()].numOptions - 1;
-					break;
-				case VISUAL_SETTINGS:
-					if(TemporalOptions[VISUAL_SETTINGS][OptionsMenu_GetCurrentOptionId()] > 0)
-						TemporalOptions[VISUAL_SETTINGS][OptionsMenu_GetCurrentOptionId()]--;
-					else
-						TemporalOptions[VISUAL_SETTINGS][OptionsMenu_GetCurrentOptionId()] = Settings_Options[VISUAL_SETTINGS][OptionsMenu_GetCurrentOptionId()].numOptions - 1;
+            HandlePresetData();
+            if(OptionsMenu_GetCurrentScreenId() == VISUAL_SETTINGS)
+                RecolorWindow();
+        }
+        else{
+            // For Other Options
+            switch(OptionsMenu_GetCurrentScreenId()){
+                case GAME_SETTINGS:
+                    if(TemporalOptions[GAME_SETTINGS][OptionsMenu_GetCurrentOptionId()] > 0){
+                        TemporalOptions[GAME_SETTINGS][OptionsMenu_GetCurrentOptionId()]--;
+                    }
+                    else
+                        TemporalOptions[GAME_SETTINGS][OptionsMenu_GetCurrentOptionId()] = Settings_Options[GAME_SETTINGS][OptionsMenu_GetCurrentOptionId()].numOptions - 1;
+                    break;
+                case BATTLE_SETTINGS:
+                    if(TemporalOptions[BATTLE_SETTINGS][OptionsMenu_GetCurrentOptionId()] > 0)
+                        TemporalOptions[BATTLE_SETTINGS][OptionsMenu_GetCurrentOptionId()]--;
+                    else
+                        TemporalOptions[BATTLE_SETTINGS][OptionsMenu_GetCurrentOptionId()] = Settings_Options[BATTLE_SETTINGS][OptionsMenu_GetCurrentOptionId()].numOptions - 1;
+                    break;
+                case VISUAL_SETTINGS:
+                    if(TemporalOptions[VISUAL_SETTINGS][OptionsMenu_GetCurrentOptionId()] > 0)
+                        TemporalOptions[VISUAL_SETTINGS][OptionsMenu_GetCurrentOptionId()]--;
+                    else
+                        TemporalOptions[VISUAL_SETTINGS][OptionsMenu_GetCurrentOptionId()] = Settings_Options[VISUAL_SETTINGS][OptionsMenu_GetCurrentOptionId()].numOptions - 1;
 
                     if(OptionsMenu_GetCurrentOptionId() == VISUAL_OPTIONS_COLOR)
                         RecolorWindow();
-                break;
+                    break;
                 case MUSIC_SETTINGS:
                     if(TemporalOptions[MUSIC_SETTINGS][OptionsMenu_GetCurrentOptionId()] > 0)
                         TemporalOptions[MUSIC_SETTINGS][OptionsMenu_GetCurrentOptionId()]--;
                     else
                         TemporalOptions[MUSIC_SETTINGS][OptionsMenu_GetCurrentOptionId()] = Settings_Options[MUSIC_SETTINGS][OptionsMenu_GetCurrentOptionId()].numOptions - 1;
-                break;
+                    break;
                 case RANDOM_SETTINGS:
                     if(TemporalOptions[RANDOM_SETTINGS][OptionsMenu_GetCurrentOptionId()] > 0)
                         TemporalOptions[RANDOM_SETTINGS][OptionsMenu_GetCurrentOptionId()]--;
                     else
                         TemporalOptions[RANDOM_SETTINGS][OptionsMenu_GetCurrentOptionId()] = Settings_Options[RANDOM_SETTINGS][OptionsMenu_GetCurrentOptionId()].numOptions - 1;
-                break;
+                    break;
             }
 
             ChangeCurrentScreenPresetDataToCustom();
         }
         PlaySoundEffectBasedOnTemporalMute(SE_SELECT);
         PrintToWindow(WINDOW_1, FONT_BLACK);
-	}
+    }
 
-	if(JOY_NEW(DPAD_RIGHT) && (OptionsMenu_GetShouldShowDiscardDialogue() == FALSE))
-	{
+    if(JOY_NEW(DPAD_RIGHT) && (OptionsMenu_GetShouldShowDiscardDialogue() == FALSE))
+    {
         if((OptionsMenu_GetAreYouNotOnSettingsHub() == FALSE) || OptionsMenu_GetCurrentOptionId() == 0){
             //For Presets
             switch(OptionsMenu_GetCurrentScreenId()){
@@ -2400,72 +2495,72 @@ static void Task_MenuMain(u8 taskId)
                         TemporalOptions[GAME_SETTINGS][0]++;
                     else
                         TemporalOptions[GAME_SETTINGS][0] = 0;
-                break;
+                    break;
                 case BATTLE_SETTINGS:
                     if(TemporalOptions[BATTLE_SETTINGS][0] == Settings_Options[BATTLE_SETTINGS][0].numOptions - 2)
                         TemporalOptions[BATTLE_SETTINGS][0] = 0;
-                else if(TemporalOptions[BATTLE_SETTINGS][0] < Settings_Options[BATTLE_SETTINGS][0].numOptions - 1)
+                    else if(TemporalOptions[BATTLE_SETTINGS][0] < Settings_Options[BATTLE_SETTINGS][0].numOptions - 1)
                         TemporalOptions[BATTLE_SETTINGS][0]++;
                     else
                         TemporalOptions[BATTLE_SETTINGS][0] = 0;
-                break;
+                    break;
                 case VISUAL_SETTINGS:
                     if(TemporalOptions[VISUAL_SETTINGS][0] == Settings_Options[VISUAL_SETTINGS][0].numOptions - 2)
                         TemporalOptions[VISUAL_SETTINGS][0] = 0;
-                else if(TemporalOptions[VISUAL_SETTINGS][0] < Settings_Options[VISUAL_SETTINGS][0].numOptions - 1)
+                    else if(TemporalOptions[VISUAL_SETTINGS][0] < Settings_Options[VISUAL_SETTINGS][0].numOptions - 1)
                         TemporalOptions[VISUAL_SETTINGS][0]++;
                     else
                         TemporalOptions[VISUAL_SETTINGS][0] = 0;
-                break;
+                    break;
                 case MUSIC_SETTINGS:
                     if(TemporalOptions[MUSIC_SETTINGS][0] == Settings_Options[MUSIC_SETTINGS][0].numOptions - 2)
                         TemporalOptions[MUSIC_SETTINGS][0] = 0;
-                else if(TemporalOptions[MUSIC_SETTINGS][0] < Settings_Options[MUSIC_SETTINGS][0].numOptions - 1)
+                    else if(TemporalOptions[MUSIC_SETTINGS][0] < Settings_Options[MUSIC_SETTINGS][0].numOptions - 1)
                         TemporalOptions[MUSIC_SETTINGS][0]++;
                     else
                         TemporalOptions[MUSIC_SETTINGS][0] = 0;
-                break;
+                    break;
                 case RANDOM_SETTINGS:
                     if(TemporalOptions[RANDOM_SETTINGS][0] == Settings_Options[RANDOM_SETTINGS][0].numOptions - 2)
                         TemporalOptions[RANDOM_SETTINGS][0] = 0;
-                else if(TemporalOptions[RANDOM_SETTINGS][0] < Settings_Options[RANDOM_SETTINGS][0].numOptions - 1)
+                    else if(TemporalOptions[RANDOM_SETTINGS][0] < Settings_Options[RANDOM_SETTINGS][0].numOptions - 1)
                         TemporalOptions[RANDOM_SETTINGS][0]++;
                     else
                         TemporalOptions[RANDOM_SETTINGS][0] = 0;
-                break;
+                    break;
             }
 
-			HandlePresetData();
-			if(OptionsMenu_GetCurrentScreenId() == VISUAL_SETTINGS)
-				RecolorWindow();
-		}
-		else{
-			//For other Options
-			switch(OptionsMenu_GetCurrentScreenId()){
-				case GAME_SETTINGS:
-					if(TemporalOptions[GAME_SETTINGS][OptionsMenu_GetCurrentOptionId()] < Settings_Options[GAME_SETTINGS][OptionsMenu_GetCurrentOptionId()].numOptions - 1){
-						TemporalOptions[GAME_SETTINGS][OptionsMenu_GetCurrentOptionId()]++;
-					}
-					else
-						TemporalOptions[GAME_SETTINGS][OptionsMenu_GetCurrentOptionId()] = 0;
-					break;
-				case BATTLE_SETTINGS:
-					if(TemporalOptions[BATTLE_SETTINGS][OptionsMenu_GetCurrentOptionId()] < Settings_Options[BATTLE_SETTINGS][OptionsMenu_GetCurrentOptionId()].numOptions - 1){
-						TemporalOptions[BATTLE_SETTINGS][OptionsMenu_GetCurrentOptionId()]++;
-					}
-					else
-						TemporalOptions[BATTLE_SETTINGS][OptionsMenu_GetCurrentOptionId()] = 0;
-					break;
-				case VISUAL_SETTINGS:
-					if(TemporalOptions[VISUAL_SETTINGS][OptionsMenu_GetCurrentOptionId()] < Settings_Options[VISUAL_SETTINGS][OptionsMenu_GetCurrentOptionId()].numOptions - 1){
-						TemporalOptions[VISUAL_SETTINGS][OptionsMenu_GetCurrentOptionId()]++;
-					}
-					else
-						TemporalOptions[VISUAL_SETTINGS][OptionsMenu_GetCurrentOptionId()] = 0;
+            HandlePresetData();
+            if(OptionsMenu_GetCurrentScreenId() == VISUAL_SETTINGS)
+                RecolorWindow();
+        }
+        else{
+            //For other Options
+            switch(OptionsMenu_GetCurrentScreenId()){
+                case GAME_SETTINGS:
+                    if(TemporalOptions[GAME_SETTINGS][OptionsMenu_GetCurrentOptionId()] < Settings_Options[GAME_SETTINGS][OptionsMenu_GetCurrentOptionId()].numOptions - 1){
+                        TemporalOptions[GAME_SETTINGS][OptionsMenu_GetCurrentOptionId()]++;
+                    }
+                    else
+                        TemporalOptions[GAME_SETTINGS][OptionsMenu_GetCurrentOptionId()] = 0;
+                    break;
+                case BATTLE_SETTINGS:
+                    if(TemporalOptions[BATTLE_SETTINGS][OptionsMenu_GetCurrentOptionId()] < Settings_Options[BATTLE_SETTINGS][OptionsMenu_GetCurrentOptionId()].numOptions - 1){
+                        TemporalOptions[BATTLE_SETTINGS][OptionsMenu_GetCurrentOptionId()]++;
+                    }
+                    else
+                        TemporalOptions[BATTLE_SETTINGS][OptionsMenu_GetCurrentOptionId()] = 0;
+                    break;
+                case VISUAL_SETTINGS:
+                    if(TemporalOptions[VISUAL_SETTINGS][OptionsMenu_GetCurrentOptionId()] < Settings_Options[VISUAL_SETTINGS][OptionsMenu_GetCurrentOptionId()].numOptions - 1){
+                        TemporalOptions[VISUAL_SETTINGS][OptionsMenu_GetCurrentOptionId()]++;
+                    }
+                    else
+                        TemporalOptions[VISUAL_SETTINGS][OptionsMenu_GetCurrentOptionId()] = 0;
 
                     if(OptionsMenu_GetCurrentOptionId() == VISUAL_OPTIONS_COLOR)
-                            RecolorWindow();
-                break;
+                        RecolorWindow();
+                    break;
                 case MUSIC_SETTINGS:
                     if(TemporalOptions[MUSIC_SETTINGS][OptionsMenu_GetCurrentOptionId()] < Settings_Options[MUSIC_SETTINGS][OptionsMenu_GetCurrentOptionId()].numOptions - 1){
                         TemporalOptions[MUSIC_SETTINGS][OptionsMenu_GetCurrentOptionId()]++;
@@ -2473,33 +2568,33 @@ static void Task_MenuMain(u8 taskId)
                     else
                         TemporalOptions[MUSIC_SETTINGS][OptionsMenu_GetCurrentOptionId()] = 0;
 
-                break;
+                    break;
                 case RANDOM_SETTINGS:
                     if(TemporalOptions[RANDOM_SETTINGS][OptionsMenu_GetCurrentOptionId()] < Settings_Options[RANDOM_SETTINGS][OptionsMenu_GetCurrentOptionId()].numOptions - 1){
                         TemporalOptions[RANDOM_SETTINGS][OptionsMenu_GetCurrentOptionId()]++;
                     }
                     else
                         TemporalOptions[RANDOM_SETTINGS][OptionsMenu_GetCurrentOptionId()] = 0;
-                break;
+                    break;
             }
 
             ChangeCurrentScreenPresetDataToCustom();
         }
         PlaySoundEffectBasedOnTemporalMute(SE_SELECT);
         PrintToWindow(WINDOW_1, FONT_BLACK);
-	}
+    }
 
-	if (JOY_NEW(A_BUTTON))
-	{
-		if((OptionsMenu_GetAreYouNotOnSettingsHub() == FALSE) && (OptionsMenu_GetShouldShowDiscardDialogue() == FALSE)){
+    if (JOY_NEW(A_BUTTON))
+    {
+        if((OptionsMenu_GetAreYouNotOnSettingsHub() == FALSE) && (OptionsMenu_GetShouldShowDiscardDialogue() == FALSE)){
             OptionsMenu_ToggleAreYouNotOnSettingsHub();
-			HandlePresetData();
-			OptionsMenu_SetCurrentOptionId(0);
-			OptionsMenu_SetCurrentFirstOption(0);
+            HandlePresetData();
+            OptionsMenu_SetCurrentOptionId(0);
+            OptionsMenu_SetCurrentFirstOption(0);
 
-			if(OptionsMenu_GetCurrentScreenId() == VISUAL_SETTINGS){
-				RecolorWindow();
-			}
+            if(OptionsMenu_GetCurrentScreenId() == VISUAL_SETTINGS){
+                RecolorWindow();
+            }
 
             PrintToWindow(WINDOW_1, FONT_BLACK);
         }
@@ -2533,12 +2628,12 @@ static void Task_MenuMain(u8 taskId)
             OptionsMenu_SetCurrentFirstOption(0);
         }
 
-		PrintToWindow(WINDOW_1, FONT_BLACK);
-	}
+        PrintToWindow(WINDOW_1, FONT_BLACK);
+    }
 
-	if (JOY_NEW(START_BUTTON))
-	{
-		OptionsMenu_SetShouldShowDiscardDialogue(FALSE);
+    if (JOY_NEW(START_BUTTON))
+    {
+        OptionsMenu_SetShouldShowDiscardDialogue(FALSE);
 
         if((OptionsMenu_GetAreYouNotOnSettingsHub() == FALSE)){
             CopyTemporalDataToSaveBlockData();
@@ -2555,37 +2650,37 @@ static void Task_MenuMain(u8 taskId)
         }
     }
 
-	if (JOY_NEW(L_BUTTON) && (OptionsMenu_GetShouldShowDiscardDialogue() == FALSE))
-	{
-		if(OptionsMenu_GetAreYouNotOnSettingsHub()){
-			if(OptionsMenu_GetCurrentScreenId() > 0){
-				OptionsMenu_DecrementCurrentScreenId();
-			}
-			else{
+    if (JOY_NEW(L_BUTTON) && (OptionsMenu_GetShouldShowDiscardDialogue() == FALSE))
+    {
+        if(OptionsMenu_GetAreYouNotOnSettingsHub()){
+            if(OptionsMenu_GetCurrentScreenId() > 0){
+                OptionsMenu_DecrementCurrentScreenId();
+            }
+            else{
                 OptionsMenu_SetCurrentScreenId(NUM_OF_POSSIBLE_OPTIONS_THAT_FIT_ON_SCREEN - 1);
-			}
+            }
 
-			OptionsMenu_SetCurrentOptionId(0);
-			OptionsMenu_SetCurrentFirstOption(0);
-			PrintToWindow(WINDOW_1, FONT_BLACK);
-		}
-	}
+            OptionsMenu_SetCurrentOptionId(0);
+            OptionsMenu_SetCurrentFirstOption(0);
+            PrintToWindow(WINDOW_1, FONT_BLACK);
+        }
+    }
 
-	if (JOY_NEW(R_BUTTON) && (OptionsMenu_GetShouldShowDiscardDialogue() == FALSE))
-	{
-		if(OptionsMenu_GetAreYouNotOnSettingsHub()){
-			if(OptionsMenu_GetCurrentScreenId() < NUM_OF_POSSIBLE_OPTIONS_THAT_FIT_ON_SCREEN-1){
-				OptionsMenu_IncrementCurrentScreenId();
-			}
-			else{
-				OptionsMenu_SetCurrentScreenId(0);
-			}
+    if (JOY_NEW(R_BUTTON) && (OptionsMenu_GetShouldShowDiscardDialogue() == FALSE))
+    {
+        if(OptionsMenu_GetAreYouNotOnSettingsHub()){
+            if(OptionsMenu_GetCurrentScreenId() < NUM_OF_POSSIBLE_OPTIONS_THAT_FIT_ON_SCREEN-1){
+                OptionsMenu_IncrementCurrentScreenId();
+            }
+            else{
+                OptionsMenu_SetCurrentScreenId(0);
+            }
 
-			OptionsMenu_SetCurrentOptionId(0);
-			OptionsMenu_SetCurrentFirstOption(0);
-			PrintToWindow(WINDOW_1, FONT_BLACK);
-		}
-	}
+            OptionsMenu_SetCurrentOptionId(0);
+            OptionsMenu_SetCurrentFirstOption(0);
+            PrintToWindow(WINDOW_1, FONT_BLACK);
+        }
+    }
 }
 
 static u32 OptionMenu_FadeWhiteIfMainMenu(void)
@@ -2595,71 +2690,71 @@ static u32 OptionMenu_FadeWhiteIfMainMenu(void)
 
 void OptionMenu_ResetAllToDefault(void)
 {
-	u32 i = 0;
+    u32 i = 0;
 
-	for (i = 0; i < NUM_OPTIONS_GAME_SETTINGS; i++)
-	{
-		gSaveBlock2Ptr->options[GAME_SETTINGS][i] = Preset_Options[GAME_SETTINGS][GAME_PRESET_DEFAULT][i];
-	}
+    for (i = 0; i < NUM_OPTIONS_GAME_SETTINGS; i++)
+    {
+        gSaveBlock2Ptr->options.game[i] = Preset_Options[GAME_SETTINGS][GAME_PRESET_DEFAULT][i];
+    }
 
-	for (i = 0; i < NUM_OPTIONS_BATTLE_SETTINGS; i++)
-	{
-		gSaveBlock2Ptr->options[BATTLE_SETTINGS][i] = Preset_Options[BATTLE_SETTINGS][BATTLE_PRESET_DEFAULT][i];
-	}
-	for (i = 0; i < NUM_OPTIONS_MUSIC_SETTINGS; i++)
-	{
-		gSaveBlock2Ptr->options[MUSIC_SETTINGS][i] = Preset_Options[MUSIC_SETTINGS][MUSIC_PRESET_DEFAULT][i];
-	}
+    for (i = 0; i < NUM_OPTIONS_BATTLE_SETTINGS; i++)
+    {
+        gSaveBlock2Ptr->options.battle[i] = Preset_Options[BATTLE_SETTINGS][BATTLE_PRESET_DEFAULT][i];
+    }
+    for (i = 0; i < NUM_OPTIONS_MUSIC_SETTINGS; i++)
+    {
+        gSaveBlock2Ptr->options.music[i] = Preset_Options[MUSIC_SETTINGS][MUSIC_PRESET_DEFAULT][i];
+    }
 
-	for (i = 0; i < NUM_OPTIONS_RANDOM_SETTINGS; i++)
-	{
-		gSaveBlock2Ptr->options[RANDOM_SETTINGS][i] = Preset_Options[RANDOM_SETTINGS][RANDOM_PRESET_DEFAULT][i];
-	}
-	for (i = 0; i < NUM_OPTIONS_VISUAL_SETTINGS; i++)
-	{
-		gSaveBlock2Ptr->options[VISUAL_SETTINGS][i] = Preset_Options[VISUAL_SETTINGS][VISUAL_PRESET_DEFAULT][i];
-	}
+    for (i = 0; i < NUM_OPTIONS_RANDOM_SETTINGS; i++)
+    {
+        gSaveBlock2Ptr->options.random[i] = Preset_Options[RANDOM_SETTINGS][RANDOM_PRESET_DEFAULT][i];
+    }
+    for (i = 0; i < NUM_OPTIONS_VISUAL_SETTINGS; i++)
+    {
+        gSaveBlock2Ptr->options.visual[i] = Preset_Options[VISUAL_SETTINGS][VISUAL_PRESET_DEFAULT][i];
+    }
 }
 
 bool32 HaveSettingsChanged(void)
 {
-	u8 i, j;
+    u8 i, j;
 
-	for(i = 0 ;i < NUM_OF_PRESET_OPTIONS; i++){
-		switch(i){
-			case GAME_SETTINGS:
-				for(j = 0 ;j < NUM_OPTIONS_GAME_SETTINGS; j++){
-					if (gSaveBlock2Ptr->options[GAME_SETTINGS][j] != TemporalOptions[GAME_SETTINGS][j])
-						return TRUE;
-				}
-				break;
-			case BATTLE_SETTINGS:
-				for(j = 0 ;j < NUM_OPTIONS_BATTLE_SETTINGS; j++){
-					if (gSaveBlock2Ptr->options[BATTLE_SETTINGS][j] != TemporalOptions[BATTLE_SETTINGS][j])
-						return TRUE;
-				}
-				break;
-			case VISUAL_SETTINGS:
-				for(j = 0 ;j < NUM_OPTIONS_VISUAL_SETTINGS; j++){
-					if (gSaveBlock2Ptr->options[VISUAL_SETTINGS][j] != TemporalOptions[VISUAL_SETTINGS][j])
-						return TRUE;
-				}
-				break;
-			case MUSIC_SETTINGS:
-				for(j = 0 ;j < NUM_OPTIONS_MUSIC_SETTINGS; j++){
-					if (gSaveBlock2Ptr->options[MUSIC_SETTINGS][j] != TemporalOptions[MUSIC_SETTINGS][j])
-						return TRUE;
-				}
-				break;
-			case RANDOM_SETTINGS:
-				for(j = 0 ;j < NUM_OPTIONS_RANDOM_SETTINGS; j++){
-					if (gSaveBlock2Ptr->options[RANDOM_SETTINGS][j] != TemporalOptions[RANDOM_SETTINGS][j])
-						return TRUE;
-				}
-				break;
-		}
-	}
-	return FALSE;
+    for(i = 0 ;i < NUM_OF_PRESET_OPTIONS; i++){
+        switch(i){
+            case GAME_SETTINGS:
+                for(j = 0 ;j < NUM_OPTIONS_GAME_SETTINGS; j++){
+                    if (gSaveBlock2Ptr->options.game[j] != TemporalOptions[GAME_SETTINGS][j])
+                        return TRUE;
+                }
+                break;
+            case BATTLE_SETTINGS:
+                for(j = 0 ;j < NUM_OPTIONS_BATTLE_SETTINGS; j++){
+                    if (gSaveBlock2Ptr->options.battle[j] != TemporalOptions[BATTLE_SETTINGS][j])
+                        return TRUE;
+                }
+                break;
+            case VISUAL_SETTINGS:
+                for(j = 0 ;j < NUM_OPTIONS_VISUAL_SETTINGS; j++){
+                    if (gSaveBlock2Ptr->options.visual[j] != TemporalOptions[VISUAL_SETTINGS][j])
+                        return TRUE;
+                }
+                break;
+            case MUSIC_SETTINGS:
+                for(j = 0 ;j < NUM_OPTIONS_MUSIC_SETTINGS; j++){
+                    if (gSaveBlock2Ptr->options.music[j] != TemporalOptions[MUSIC_SETTINGS][j])
+                        return TRUE;
+                }
+                break;
+            case RANDOM_SETTINGS:
+                for(j = 0 ;j < NUM_OPTIONS_RANDOM_SETTINGS; j++){
+                    if (gSaveBlock2Ptr->options.random[j] != TemporalOptions[RANDOM_SETTINGS][j])
+                        return TRUE;
+                }
+                break;
+        }
+    }
+    return FALSE;
 }
 
 void PlaySoundEffectBasedOnTemporalMute(u16 songNum)
@@ -2682,7 +2777,7 @@ static void SpriteCallback_UpArrow(struct Sprite *sprite)
     sprite->y2 = gSineTable[val] / 128;
     sprite->data[0] += 8;
 
-	if(((OptionsMenu_GetAreYouNotOnSettingsHub() == FALSE) && OptionsMenu_GetCurrentScreenId() != 0) || (OptionsMenu_GetAreYouNotOnSettingsHub() && OptionsMenu_GetCurrentFirstOption() != 0))
+    if(((OptionsMenu_GetAreYouNotOnSettingsHub() == FALSE) && OptionsMenu_GetCurrentScreenId() != 0) || (OptionsMenu_GetAreYouNotOnSettingsHub() && OptionsMenu_GetCurrentFirstOption() != 0))
     {
         sprite->invisible = FALSE;
     }
@@ -2716,8 +2811,8 @@ static void SpriteCallback_DownArrow(struct Sprite *sprite)
     sprite->y2 = gSineTable[val] / 128;
     sprite->data[0] += 8;
 
-	if(((OptionsMenu_GetAreYouNotOnSettingsHub() == FALSE) && OptionsMenu_GetCurrentScreenId() != (NUM_OF_SCREENS - 1)) ||
-			(OptionsMenu_GetAreYouNotOnSettingsHub() && (OptionsMenu_GetCurrentFirstOption() + NUM_OF_POSSIBLE_OPTIONS_THAT_FIT_ON_SCREEN) <= (GetCurrentScreenOptionNumber() - 1)))
+    if(((OptionsMenu_GetAreYouNotOnSettingsHub() == FALSE) && OptionsMenu_GetCurrentScreenId() != (NUM_OF_SCREENS - 1)) ||
+            (OptionsMenu_GetAreYouNotOnSettingsHub() && (OptionsMenu_GetCurrentFirstOption() + NUM_OF_POSSIBLE_OPTIONS_THAT_FIT_ON_SCREEN) <= (GetCurrentScreenOptionNumber() - 1)))
     {
         sprite->invisible = FALSE;
     }
@@ -2921,16 +3016,16 @@ static void OptionsMenu_SetCurrentFirstOption(u8 value)
 }
 
 /*
-static u16 OptionsMenu_GetTemporalOptions(enum OptionsIds setting, u32 option)
-{
-    return sMenuDataPtr->TemporalOptions[setting][option];
-}
+   static u16 OptionsMenu_GetTemporalOptions(enum OptionsIds setting, u32 option)
+   {
+   return sMenuDataPtr->TemporalOptions[setting][option];
+   }
 
-static void OptionsMenu_SetTemporalOptions(enum OptionsIds setting, u32 option, u8 value)
-{
-    sMenuDataPtr->TemporalOptions[setting][option] = value;
-}
-*/
+   static void OptionsMenu_SetTemporalOptions(enum OptionsIds setting, u32 option, u8 value)
+   {
+   sMenuDataPtr->TemporalOptions[setting][option] = value;
+   }
+   */
 
 static void OptionsMenu_IncrementCurrentFirstOption(void)
 {
