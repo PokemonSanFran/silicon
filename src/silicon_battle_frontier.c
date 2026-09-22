@@ -238,7 +238,12 @@ static enum Type SiliconFrontier_ConvertSparringTypeToMonType(enum SiliconFronti
 
 void SiliconFrontier_GetLastChallengeStreakLength(void)
 {
+    gSpecialVar_Result = 0;
     enum SiliconFrontierFacility facility = SiliconFrontier_GetFacilityFromMap();
+
+    if (facility == SILICON_FACILITY_SPARRING)
+        return;
+
     enum SiliconFrontierChallengeType challengeType = SiliconFrontier_GetLastChallengeTypeFromCurrentFacility();
     enum SiliconFrontierSparringTypes sparringType = SiliconFrontier_GetCurrentChallengeSparringType();
 
