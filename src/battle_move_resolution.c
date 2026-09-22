@@ -2304,10 +2304,10 @@ static enum CancelerResult CancellerFog(struct BattleCalcValues *ctx)
         dmgCtx.randomFactor = FALSE;
         dmgCtx.updateFlags = TRUE;
         dmgCtx.fixedBasePower = 255;
-        gBattleStruct->moveDamage[ctx->battlerDef] = CalculateMoveDamage(&dmgCtx);
+        gBattleStruct->passiveHpUpdate[ctx->battlerDef] = CalculateMoveDamage(&dmgCtx);
         gBattlescriptCurrInstr = BattleScript_EmboldenedAttackedFromFog;
+        return CANCELER_RESULT_FAILURE;
     }
-    return CANCELER_RESULT_SUCCESS;
 }
 // End fogBattle
 
