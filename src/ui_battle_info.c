@@ -1596,8 +1596,13 @@ static void BattleInfoHelper_PopulateOptionsList(void)
     if (!isOpponent)
         ADD_OPT(SWAP);
 
-    if ((isOpponent && FlagGet(FLAG_SYS_APP_GOOGLE_GLASS_GET)) || !isOpponent)
+    if ((isOpponent
+         && FlagGet(FLAG_SYS_APP_GOOGLE_GLASS_GET)
+         && (gBattleTypeFlags & BATTLE_TYPE_TRAINER))
+     || !isOpponent)
+    {
         ADD_OPT(SUMMARY);
+    }
 
     ADD_OPT(STATUS);
     ADD_OPT(CANCEL);
