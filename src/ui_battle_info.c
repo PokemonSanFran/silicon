@@ -38,6 +38,7 @@ enum BattleInfoWindows
 {
     BI_WIN_MAIN,
     BI_WIN_OPTIONS_LIST,
+    BI_WIN_TEXTBOX,
 
     NUM_BI_WINDOWS
 };
@@ -119,6 +120,8 @@ enum BattleInfoOptions
 #define BI_TYPE_2_X 8 + (72)
 #define BI_TYPES_Y  8 + (82)
 
+#define BI_STD_WIN_PALETTE_OFFSET   BG_PLTT_ID(1)
+
 #define sPartySlotIdx           data[0]
 
 #define sTypeIcon_Type          data[0]
@@ -131,6 +134,7 @@ struct BattleInfoData
     MainCallback savedCB;
     struct UCoords8 gridPos;
     u8 currPartySlot:6;
+    u16 textboxTileNum;
     enum BattleInfoModes mode:2;
     u16 tilemapBuf[BG_SCREEN_SIZE / 2];
     u8 spriteIds[NUM_BI_SPRITES];
@@ -196,6 +200,7 @@ static void BattleInfoText_UpdateHeader(void);
 static void BattleInfoText_UpdateStatStages(void);
 static void BattleInfoText_ShowMonStatusList(void);
 static void BattleInfoText_ShowOptionsPrompt(void);
+static void BattleInfoText_ShowTextbox(void);
 static void BattleInfoText_UpdateFooter(void);
 
 static void BattleInfoHelper_UpdateEverything(void);
@@ -256,6 +261,12 @@ static const struct WindowTemplate sBattleInfo_WindowTemplates[] =
         .bg = BI_BG_TEXT_ALT,
         .tilemapLeft = 24, .tilemapTop = 10,
         .width = 6, .height = 8,
+    },
+    [BI_WIN_TEXTBOX] =
+    {
+        .bg = BI_BG_TEXT_ALT,
+        .tilemapLeft = 1, .tilemapTop = 13,
+        .width = 18, .height = 4,
     },
     DUMMY_WIN_TEMPLATE
 };
@@ -793,7 +804,8 @@ static void BattleInfoInit_Windows(void)
     ScheduleBgCopyTilemapToVram(BI_BG_TEXT);
     ScheduleBgCopyTilemapToVram(BI_BG_TEXT_ALT);
 
-    for (u32 i = 0, baseBlock = 1; i < NUM_BI_WINDOWS; i++)
+    u32 baseBlock = 1;
+    for (u32 i = 0; i < NUM_BI_WINDOWS; i++)
     {
         SetWindowAttribute(i, WINDOW_BASE_BLOCK, baseBlock);
         FillWindowPixelBuffer(i, PIXEL_FILL(0));
@@ -801,6 +813,9 @@ static void BattleInfoInit_Windows(void)
 
         baseBlock += GetWindowAttribute(i, WINDOW_WIDTH) * GetWindowAttribute(i, WINDOW_HEIGHT);
     }
+
+    LoadUserWindowBorderGfx(BI_WIN_TEXTBOX, baseBlock, BI_STD_WIN_PALETTE_OFFSET);
+    sBattleInfoDataPtr->textboxTileNum = baseBlock;
 
     BattleInfoHelper_UpdateEverything();
 }
@@ -1232,6 +1247,17 @@ static void BattleInfoText_ShowOptionsPrompt(void)
         BattleInfoText_PutOptionPromptTile(5, TILE_TO_PIXELS(23 + i), bottomTilesY);
 }
 
+static void BattleInfoText_ShowTextbox(void)
+{
+    enum BattleInfoWindows win = BI_WIN_TEXTBOX;
+    FillWindowPixelBuffer(win, PIXEL_FILL(0));
+
+    DrawStdFrameWithCustomTileAndPalette(win, FALSE, sBattleInfoDataPtr->textboxTileNum, BI_STD_WIN_PALETTE_OFFSET);
+    BattleInfoHelper_AddTextPrinterToWindow(win, 0, 0, FONT_SMALL, BI_TXTCLR_CONTENT, gStringVar4);
+
+    CopyWindowToVram(win, COPYWIN_FULL);
+}
+
 static void BattleInfoText_UpdateFooter(void)
 {
     BattleInfoHelper_AddTextPrinter(
@@ -1243,16 +1269,17 @@ static void BattleInfoText_UpdateFooter(void)
 
 static void BattleInfoHelper_UpdateEverything(void)
 {
-    FillWindowPixelBuffer(BI_WIN_MAIN, PIXEL_FILL(0));
-    FillWindowPixelBuffer(BI_WIN_OPTIONS_LIST, PIXEL_FILL(0));
+    ClearStdWindowAndFrameToTransparent(BI_WIN_TEXTBOX, FALSE);
+    for (enum BattleInfoWindows win = 0; win < NUM_BI_WINDOWS; win++)
+        FillWindowPixelBuffer(win, PIXEL_FILL(0));
 
     BattleInfoText_UpdateHeader();
     BattleInfoText_UpdateStatStages();
     BattleInfoText_UpdateFooter();
     BattleInfoMode_Update();
 
-    CopyWindowToVram(BI_WIN_MAIN, COPYWIN_GFX);
-    CopyWindowToVram(BI_WIN_OPTIONS_LIST, COPYWIN_GFX);
+    for (enum BattleInfoWindows win = 0; win < NUM_BI_WINDOWS; win++)
+        CopyWindowToVram(win, COPYWIN_FULL);
 }
 
 static struct Pokemon *BattleInfoHelper_GetCurrMon(void)
