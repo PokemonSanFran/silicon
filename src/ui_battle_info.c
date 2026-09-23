@@ -802,8 +802,11 @@ static void SpriteCB_BattleInfo_HPBar(struct Sprite *sprite)
 
 static void SpriteCB_BattleInfo_TypeIcon(struct Sprite *sprite)
 {
-    if (sBattleInfoDataPtr->mode != BI_MODE_MAIN)
+    if (sBattleInfoDataPtr->mode != BI_MODE_MAIN
+     && sprite->sTypeIcon_Type != -1)
+    {
         return;
+    }
 
     struct Pokemon *mon = BattleInfoHelper_GetCurrMon();
     enum Type type = GetSpeciesType(GetMonData(mon, MON_DATA_SPECIES, NULL), sprite->sTypeIcon_Index);
