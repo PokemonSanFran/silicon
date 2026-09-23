@@ -17,13 +17,16 @@
 #include "pokemon.h"
 #include "pokemon_icon.h"
 #include "event_data.h"
+#include "text_window.h"
 #include "battle.h"
 #include "party_menu.h"
+#include "strings.h"
 #include "battle_controllers.h"
 #include "ui_mon_summary.h"
 #include "ui_battle_info.h"
 #include "constants/rgb.h"
 #include "constants/songs.h"
+#include "constants/party_menu.h"
 
 enum BattleInfoBackgrounds
 {
@@ -134,17 +137,18 @@ struct BattleInfoData
     MainCallback savedCB;
     struct UCoords8 gridPos;
     u8 currPartySlot:6;
-    u16 textboxTileNum;
     enum BattleInfoModes mode:2;
+    u16 textboxTileNum;
     u16 tilemapBuf[BG_SCREEN_SIZE / 2];
     u8 spriteIds[NUM_BI_SPRITES];
     u8 monIconIds[NUM_BI_MON_ICONS];
     u8 faintedIconIds[NUM_BI_MON_ICONS];
 
     // options prompt
-    u8 optionsCursor;
+    u8 optionsCursor:4;
+    u8 numOptions:4;
     enum BattleInfoOptions optionsList[NUM_BI_OPTIONS];
-    u8 numOptions;
+    u8 switchInResult;
 };
 
 static EWRAM_DATA struct BattleInfoData *sBattleInfoDataPtr = NULL;
@@ -166,6 +170,7 @@ static void Task_BattleInfo_WaitInput(u8);
 static void Task_BattleInfo_MainModeInput(u8);
 static void Task_BattleInfo_OptionsModeInput(u8);
 static void Task_BattleInfo_Close(u8);
+static void Task_BattleInfo_WaitTextboxInput(u8);
 
 static void SpriteCB_BattleInfo_MonIcon(struct Sprite *);
 static void SpriteCB_BattleInfo_HPBar(struct Sprite *);
@@ -200,7 +205,7 @@ static void BattleInfoText_UpdateHeader(void);
 static void BattleInfoText_UpdateStatStages(void);
 static void BattleInfoText_ShowMonStatusList(void);
 static void BattleInfoText_ShowOptionsPrompt(void);
-static void BattleInfoText_ShowTextbox(void);
+static void BattleInfoText_ShowTextbox(u32);
 static void BattleInfoText_UpdateFooter(void);
 
 static void BattleInfoHelper_UpdateEverything(void);
@@ -209,6 +214,11 @@ static struct BattlePokemon *BattleInfoHelper_GetCurrBattleMon(void);
 static enum BattlerId BattleInfoHelper_GetCurrBattler(void);
 static enum BattleTrainer BattleInfoHelper_GetCurrTrainer(void);
 static u32 BattleInfoHelper_GetCurrPartySlot(void);
+static u32 BattleInfoHelper_TrySwitchInMon(void);
+static void BattleInfoHelper_SwapPartyMons(struct Pokemon *, struct Pokemon *);
+static u32 BattleInfoHelper_SlotToBattlePartyOrder(enum BattlerId battler, u32 slot);
+static void BattleInfoHelper_ReorderPartyToInfoLayout(void);
+static void BattleInfoHelper_ReorderPartyToBattleLayout(void);
 static bool32 BattleInfoHelper_CanMonInfoBeShown(void);
 static void BattleInfoHelper_PopulateOptionsList(void);
 static u32 BattleInfoHelper_GetVolatileMaxValue(enum Volatile);
@@ -427,6 +437,7 @@ extern const u32 sCriticalHitOdds[5];
 
 void OpenBattleInfo(MainCallback savedCB)
 {
+    gPartyMenuUseExitCallback = FALSE;
     sBattleInfoDataPtr = AllocZeroed(sizeof(*sBattleInfoDataPtr));
     assertf(sBattleInfoDataPtr != NULL, "[BATTLE INFO] failed to allocate necessary menu data")
     {
@@ -436,9 +447,11 @@ void OpenBattleInfo(MainCallback savedCB)
 
     sBattleInfoDataPtr->savedCB = savedCB;
     sBattleInfoDataPtr->mode = BI_MODE_MAIN;
+    sBattleInfoDataPtr->switchInResult = NO_SWITCH;
     BattleInfoInput_SetGrid(gLastViewedMonIndex, TRUE);
     memset(sBattleInfoDataPtr->spriteIds, SPRITE_NONE, NUM_BI_SPRITES);
     memset(sBattleInfoDataPtr->monIconIds, SPRITE_NONE, NUM_BI_MON_ICONS);
+    BattleInfoHelper_ReorderPartyToInfoLayout();
 
     SetMainCallback2(CB2_BattleInfoInit);
 }
@@ -496,7 +509,6 @@ static void CB2_BattleInfoInit(void)
         break;
     default:
         BeginNormalPaletteFade(PALETTES_ALL, 0, 16, 0, RGB_BLACK);
-        PlaySE(SE_RG_HELP_OPEN);
         u32 taskId = CreateTask(TaskDummy, 0);
         SetTaskFuncWithFollowupFunc(taskId, Task_BattleInfo_WaitFade, Task_BattleInfo_WaitInput);
         SetMainCallback2(CB2_BattleInfo);
@@ -507,6 +519,7 @@ static void CB2_BattleInfoInit(void)
 
 static void CB2_ReloadBattleInfo(void)
 {
+    BattleInfoHelper_ReorderPartyToBattleLayout();
     OpenBattleInfo(sBattleInfoSavedState.trueCB);
     sBattleInfoDataPtr->mode = sBattleInfoSavedState.mode;
 
@@ -555,7 +568,7 @@ static void Task_BattleInfo_MainModeInput(u8 taskId)
 {
     if (JOY_NEW(B_BUTTON))
     {
-        PlaySE(SE_RG_HELP_CLOSE);
+        PlaySE(SE_SELECT);
         BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
         SetTaskFuncWithFollowupFunc(taskId, Task_BattleInfo_WaitFade, Task_BattleInfo_Close);
         return;
@@ -563,7 +576,16 @@ static void Task_BattleInfo_MainModeInput(u8 taskId)
 
     if (JOY_NEW(A_BUTTON))
     {
-        BattleInfoMode_Set(BI_MODE_OPTIONS_LIST);
+        if (BattleInfoHelper_CanMonInfoBeShown())
+        {
+            PlaySE(SE_SELECT);
+            BattleInfoMode_Set(BI_MODE_OPTIONS_LIST);
+        }
+        else
+        {
+            PlaySE(SE_FAILURE);
+        }
+
         return;
     }
 
@@ -596,6 +618,7 @@ static void Task_BattleInfo_OptionsModeInput(u8 taskId)
 {
     if (JOY_NEW(B_BUTTON))
     {
+        PlaySE(SE_SELECT);
         BattleInfoMode_Set(BI_MODE_MAIN);
         return;
     }
@@ -605,17 +628,34 @@ static void Task_BattleInfo_OptionsModeInput(u8 taskId)
         switch (sBattleInfoDataPtr->optionsList[sBattleInfoDataPtr->optionsCursor])
         {
         case BI_OPTION_SWAP:
-            // TODO
-            break;
+            {
+                sBattleInfoDataPtr->switchInResult = BattleInfoHelper_TrySwitchInMon();
+                switch (sBattleInfoDataPtr->switchInResult)
+                {
+                case NO_SWITCH:
+                case SAME_SWITCH:
+                    PlaySE(SE_FAILURE);
+                    BattleInfoText_ShowTextbox(taskId);
+                    // fallthrough
+                default:
+                    return;
+                case CAN_SWITCH:
+                    PlaySE(SE_SELECT);
+                    break;
+                }
+            }
+            // fallthrough
         case BI_OPTION_SUMMARY:
-            PlaySE(SE_RG_HELP_CLOSE);
+            PlaySE(SE_SELECT);
             BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
             SetTaskFuncWithFollowupFunc(taskId, Task_BattleInfo_WaitFade, Task_BattleInfo_Close);
             break;
         case BI_OPTION_STATUS:
+            PlaySE(SE_SELECT);
             BattleInfoMode_Set(BI_MODE_STATUS_LIST);
             break;
         case BI_OPTION_CANCEL:
+            PlaySE(SE_SELECT);
             BattleInfoMode_Set(BI_MODE_MAIN);
             break;
         default:
@@ -678,21 +718,30 @@ static void Task_BattleInfo_Close(u8 taskId)
     ResetSpriteData();
     FreeAllWindowBuffers();
 
+    BattleInfoHelper_ReorderPartyToBattleLayout();
     if (sBattleInfoDataPtr->mode == BI_MODE_OPTIONS_LIST)
     {
         sBattleInfoSavedState.trueCB = sBattleInfoDataPtr->savedCB;
         sBattleInfoSavedState.mode = sBattleInfoDataPtr->mode;
 
-        switch (sBattleInfoDataPtr->optionsCursor)
+        switch (sBattleInfoDataPtr->optionsList[sBattleInfoDataPtr->optionsCursor])
         {
         default:
-            SetMainCallback2(sBattleInfoSavedState.trueCB);
+            SetMainCallback2(sBattleInfoDataPtr->savedCB);
             break;
         case BI_OPTION_SUMMARY:
-            sBattleInfoSavedState.gridPos = sBattleInfoDataPtr->gridPos;
-            sBattleInfoSavedState.optionsCursor = sBattleInfoDataPtr->optionsCursor;
-            MonSummary_Init(SUMMARY_MODE_LOCK_MOVES, BattleInfoHelper_GetCurrMon(), 0, 0, FALSE, CB2_ReloadBattleInfo);
-            break;
+            {
+                sBattleInfoSavedState.gridPos = sBattleInfoDataPtr->gridPos;
+                sBattleInfoSavedState.optionsCursor = sBattleInfoDataPtr->optionsCursor;
+                BattleInfoHelper_ReorderPartyToInfoLayout();
+
+                enum BattleTrainer trainer = BattleInfoHelper_GetCurrTrainer();
+                struct Pokemon *party = GetTrainerParty(trainer);
+                u32 partySlot = BattleInfoHelper_GetCurrPartySlot();
+
+                MonSummary_Init(SUMMARY_MODE_LOCK_MOVES, party, partySlot, gPartiesCount[trainer] - 1, FALSE, CB2_ReloadBattleInfo);
+                break;
+            }
         }
     }
     else
@@ -702,6 +751,31 @@ static void Task_BattleInfo_Close(u8 taskId)
 
     FREE_AND_SET_NULL(sBattleInfoDataPtr);
     DestroyTask(taskId);
+}
+
+static void Task_BattleInfo_WaitTextboxInput(u8 taskId)
+{
+    if (!RunTextPrintersRetIsActive(BI_WIN_TEXTBOX))
+    {
+        switch (sBattleInfoDataPtr->mode)
+        {
+        case BI_MODE_OPTIONS_LIST:
+            if (sBattleInfoDataPtr->switchInResult == SAME_SWITCH)
+            {
+                BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
+                SetTaskFuncWithFollowupFunc(taskId, Task_BattleInfo_WaitFade, Task_BattleInfo_Close);
+                return;
+            }
+            else // NO_SWITCH
+            {
+                BattleInfoMode_Set(BI_MODE_MAIN);
+            }
+            // fallthrough
+        default:
+            SwitchTaskToFollowupFunc(taskId);
+            break;
+        }
+    }
 }
 
 static void SpriteCB_BattleInfo_MonIcon(struct Sprite *sprite)
@@ -726,6 +800,9 @@ static void SpriteCB_BattleInfo_HPBar(struct Sprite *sprite)
 
 static void SpriteCB_BattleInfo_TypeIcon(struct Sprite *sprite)
 {
+    if (sBattleInfoDataPtr->mode != BI_MODE_MAIN)
+        return;
+
     struct Pokemon *mon = BattleInfoHelper_GetCurrMon();
     enum Type type = GetSpeciesType(GetMonData(mon, MON_DATA_SPECIES, NULL), sprite->sTypeIcon_Index);
 
@@ -831,7 +908,6 @@ static void BattleInfoInit_Sprites(void)
 
 static void BattleInfoMode_Set(enum BattleInfoModes mode)
 {
-    PlaySE(SE_SELECT);
     sBattleInfoDataPtr->mode = mode;
     switch (mode)
     {
@@ -946,13 +1022,14 @@ static void BattleInfoSprite_CreateMonIcons(void)
 static u8 BattleInfoSprite_CreateMonIcon(enum BattleTrainer trainer, u32 idx, s32 x, s32 y)
 {
     enum BattlerId battler = 0;
-    for (; battler < MAX_BATTLERS_COUNT; battler++)
+    for (; battler < gBattlersCount; battler++)
         if (GetBattlerTrainer(battler) == trainer)
             break;
 
     struct Pokemon *mon = &gParties[trainer][idx];
     enum Species species = GetMonData(mon, MON_DATA_SPECIES, NULL);
     if (!IsOnPlayerSide(battler)
+     && !FlagGet(FLAG_SYS_APP_GOOGLE_GLASS_GET)
      && !gBattleStruct->partyState[trainer][idx].sentOut)
     {
         species = SPECIES_NONE;
@@ -960,13 +1037,16 @@ static u8 BattleInfoSprite_CreateMonIcon(enum BattleTrainer trainer, u32 idx, s3
 
     u32 spriteId = CreateMonIcon(
         species,
-        SpriteCB_MonIcon,
+        NULL,
         x, y, 0,
         GetMonData(mon, MON_DATA_PERSONALITY, NULL));
 
-    for (battler = 0; battler < MAX_BATTLERS_COUNT; battler++)
+    for (battler = 0; battler < gBattlersCount; battler++)
     {
-        if (idx == gBattlerPartyIndexes[battler] || species == SPECIES_NONE)
+        if ((IsBattlerAlive(battler)
+         && &GetBattlerParty(battler)[idx] == mon
+         && BattleInfoHelper_SlotToBattlePartyOrder(battler, idx) == gBattlerPartyIndexes[battler])
+         || species == SPECIES_NONE)
         {
             gSprites[spriteId].oam.objMode = ST_OAM_OBJ_BLEND;
             break;
@@ -975,15 +1055,17 @@ static u8 BattleInfoSprite_CreateMonIcon(enum BattleTrainer trainer, u32 idx, s3
 
     if (idx < gPartiesCount[trainer])
     {
-        if (species != SPECIES_NONE)
+        if (species != SPECIES_NONE && GetMonData(mon, MON_DATA_HP, NULL) > 0)
+        {
+            gSprites[spriteId].sPartySlotIdx = idx + (PARTY_SIZE * (trainer == B_TRAINER_PLAYER));
             gSprites[spriteId].callback = SpriteCB_BattleInfo_MonIcon;
+        }
     }
     else
     {
         gSprites[spriteId].invisible = TRUE;
     }
 
-    gSprites[spriteId].sPartySlotIdx = idx + (PARTY_SIZE * (trainer == B_TRAINER_PLAYER));
     return spriteId;
 }
 
@@ -1103,7 +1185,7 @@ static void BattleInfoText_UpdateHeader(void)
     BattleInfoHelper_AddTextPrinter(74, 28, FONT_OUTLINED, BI_TXTCLR_OUTLINED, strbuf);
 
     // do not reveal opponent data w/o google glass
-    if (sBattleInfoDataPtr->currPartySlot < PARTY_SIZE
+    if (BattleInfoHelper_GetCurrTrainer() != B_TRAINER_PLAYER
      && !FlagGet(FLAG_SYS_APP_GOOGLE_GLASS_GET))
     {
         return;
@@ -1247,15 +1329,17 @@ static void BattleInfoText_ShowOptionsPrompt(void)
         BattleInfoText_PutOptionPromptTile(5, TILE_TO_PIXELS(23 + i), bottomTilesY);
 }
 
-static void BattleInfoText_ShowTextbox(void)
+static void BattleInfoText_ShowTextbox(u32 taskId)
 {
     enum BattleInfoWindows win = BI_WIN_TEXTBOX;
-    FillWindowPixelBuffer(win, PIXEL_FILL(0));
 
     DrawStdFrameWithCustomTileAndPalette(win, FALSE, sBattleInfoDataPtr->textboxTileNum, BI_STD_WIN_PALETTE_OFFSET);
-    BattleInfoHelper_AddTextPrinterToWindow(win, 0, 0, FONT_SMALL, BI_TXTCLR_CONTENT, gStringVar4);
-
+    // typically i'd use TEXT_SKIP_DRAW here but for some ???? reason it keeps playing SE_SELECT when printed
+    // this does NOT happen when using a proper text speed. it's so bizzare
+    AddTextPrinterParameterized6(win, FONT_SMALL, 0, 0, 0, 0, sBattleInfo_TextColors[BI_TXTCLR_CONTENT], GetPlayerTextSpeedDelay(), gStringVar4);
     CopyWindowToVram(win, COPYWIN_FULL);
+
+    SetTaskFuncWithFollowupFunc(taskId, Task_BattleInfo_WaitTextboxInput, Task_BattleInfo_WaitInput);
 }
 
 static void BattleInfoText_UpdateFooter(void)
@@ -1284,11 +1368,6 @@ static void BattleInfoHelper_UpdateEverything(void)
 
 static struct Pokemon *BattleInfoHelper_GetCurrMon(void)
 {
-    // try getting accurate mon data
-    enum BattlerId battler = BattleInfoHelper_GetCurrBattler();
-    if (battler != MAX_BATTLERS_COUNT)
-        return GetBattlerMon(battler);
-
     return &gParties[BattleInfoHelper_GetCurrTrainer()][BattleInfoHelper_GetCurrPartySlot()];
 }
 
@@ -1306,12 +1385,12 @@ static enum BattlerId BattleInfoHelper_GetCurrBattler(void)
     bool32 isOpponent = sBattleInfoDataPtr->currPartySlot < PARTY_SIZE;
     u32 partySlot = sBattleInfoDataPtr->currPartySlot - (PARTY_SIZE * !isOpponent);
 
-    for (enum BattlerId battler = 0; battler < MAX_BATTLERS_COUNT; battler++)
+    for (enum BattlerId battler = 0; battler < gBattlersCount; battler++)
     {
         if (!IsBattlerAlive(battler))
             continue;
 
-        if (gBattlerPartyIndexes[battler] != partySlot)
+        if (GetPartyIdFromBattlePartyId(gBattlerPartyIndexes[battler]) != partySlot)
             continue;
 
         if ((isOpponent && !IsOnPlayerSide(battler))
@@ -1340,17 +1419,166 @@ static u32 BattleInfoHelper_GetCurrPartySlot(void)
     return currPartySlot - (PARTY_SIZE * isPlayer);
 }
 
+static u32 BattleInfoHelper_TrySwitchInMon(void)
+{
+    struct Pokemon *party = gParties[B_TRAINER_PLAYER];
+    u32 newPartySlot = BattleInfoHelper_GetCurrPartySlot();
+    u32 battlePartyId = BattleInfoHelper_SlotToBattlePartyOrder(gBattlerInMenuId, newPartySlot);
+
+    if (GetMonData(&party[newPartySlot], MON_DATA_HP) == 0)
+    {
+        GetMonNickname(&party[newPartySlot], gStringVar1);
+        StringExpandPlaceholders(gStringVar4, gText_PkmnHasNoEnergy);
+        return NO_SWITCH;
+    }
+
+    for (enum BattlerId i = 0; i < gBattlersCount; i++)
+    {
+        if (IsOnPlayerSide(i)
+         && GetBattlerParty(i) == party
+         && battlePartyId == gBattlerPartyIndexes[i])
+        {
+            GetMonNickname(&party[newPartySlot], gStringVar1);
+            StringExpandPlaceholders(gStringVar4, gText_PkmnAlreadyInBattle);
+            return SAME_SWITCH;
+        }
+    }
+
+    if (GetMonData(&party[newPartySlot], MON_DATA_IS_EGG))
+    {
+        StringExpandPlaceholders(gStringVar4, gText_EggCantBattle);
+        return NO_SWITCH;
+    }
+
+    if (battlePartyId == gBattleStruct->prevSelectedPartySlot)
+    {
+        GetMonNickname(&party[newPartySlot], gStringVar1);
+        StringExpandPlaceholders(gStringVar4, gText_PkmnAlreadySelected);
+        return NO_SWITCH;
+    }
+
+    switch (gPartyMenu.action)
+    {
+    case PARTY_ACTION_ABILITY_PREVENTS:
+        SetMonPreventsSwitchingString();
+        return NO_SWITCH;
+    case PARTY_ACTION_CANT_SWITCH:
+        GetMonNickname(&party[newPartySlot], gStringVar1);
+        StringExpandPlaceholders(gStringVar4, gText_PkmnCantSwitchOut);
+        return NO_SWITCH;
+    default:
+        break;
+    }
+
+    gSelectedMonPartyId = battlePartyId;
+    gPartyMenuUseExitCallback = TRUE;
+
+    u32 currBattlerPartySlot = GetPartyIdFromBattlePartyId(gBattlerPartyIndexes[gBattlerInMenuId]);
+    SwitchPartyMonSlots(currBattlerPartySlot, newPartySlot);
+    BattleInfoHelper_SwapPartyMons(&party[currBattlerPartySlot], &party[newPartySlot]);
+
+    return CAN_SWITCH;
+}
+
+static void BattleInfoHelper_SwapPartyMons(struct Pokemon *currMon, struct Pokemon *nextMon)
+{
+    struct Pokemon *temp = Alloc(sizeof(struct Pokemon));
+
+    *temp = *currMon;
+    *currMon = *nextMon;
+    *nextMon = *temp;
+
+    Free(temp);
+}
+
+static u32 BattleInfoHelper_SlotToBattlePartyOrder(enum BattlerId battler, u32 slot)
+{
+    bool32 oddNumber = slot & 1;
+    slot /= 2;
+
+    u8 *order;
+    if (GetBattlerTrainer(battler) == B_TRAINER_PLAYER)
+        order = gBattlePartyCurrentOrder;
+    else
+        order = gBattleStruct->battlerPartyOrders[battler];
+
+    if (oddNumber)
+        return order[slot] & 0xF;
+    else
+        return order[slot] >> 4;
+}
+
+static void BattleInfoHelper_ReorderPartyToInfoLayout(void)
+{
+    struct Pokemon *partyBuffer = Alloc(sizeof(gParties[B_TRAINER_PLAYER]));
+    u8 flag = 0;
+
+    for (enum BattlerId battler = 0; battler < gBattlersCount; battler++)
+    {
+        enum BattleTrainer trainer = GetBattlerTrainer(battler);
+        if (flag & (1 << trainer))
+            continue;
+
+        flag |= 1 << trainer;
+        struct Pokemon *partyTarget = gParties[trainer];
+
+        for (u32 i = 0; i < PARTY_SIZE; i++)
+            memcpy(&partyBuffer[i], &partyTarget[BattleInfoHelper_SlotToBattlePartyOrder(battler, i)], sizeof(struct Pokemon));
+
+        for (u32 i = 0; i < PARTY_SIZE; i++)
+            memcpy(&partyTarget[i], &partyBuffer[i], sizeof(struct Pokemon));
+
+        CalculatePartyCount(trainer);
+    }
+
+    Free(partyBuffer);
+}
+
+static void BattleInfoHelper_ReorderPartyToBattleLayout(void)
+{
+    struct Pokemon *partyBuffer = Alloc(sizeof(gParties[B_TRAINER_PLAYER]));
+    u8 flag = 0;
+
+    for (enum BattlerId battler = 0; battler < gBattlersCount; battler++)
+    {
+        enum BattleTrainer trainer = GetBattlerTrainer(battler);
+        if (flag & (1 << trainer))
+            continue;
+
+        flag |= 1 << trainer;
+        struct Pokemon *partyTarget = gParties[trainer];
+
+        for (u32 i = 0; i < PARTY_SIZE; i++)
+            memcpy(&partyBuffer[i], &partyTarget[i], sizeof(struct Pokemon));
+
+        for (u32 i = 0; i < PARTY_SIZE; i++)
+            memcpy(&partyTarget[BattleInfoHelper_SlotToBattlePartyOrder(battler, i)], &partyBuffer[i], sizeof(struct Pokemon));
+
+        CalculatePartyCount(trainer);
+    }
+
+    Free(partyBuffer);
+}
+
 static bool32 BattleInfoHelper_CanMonInfoBeShown(void)
 {
     if (GetMonData(BattleInfoHelper_GetCurrMon(), MON_DATA_MAX_HP, NULL) == 0)
         return FALSE;
 
     enum BattleTrainer trainer = BattleInfoHelper_GetCurrTrainer();
-    if (trainer == B_TRAINER_PLAYER)
+    if (trainer == B_TRAINER_PLAYER
+     || FlagGet(FLAG_SYS_APP_GOOGLE_GLASS_GET))
+    {
         return TRUE;
+    }
+
+    enum BattlerId battler = BattleInfoHelper_GetCurrBattler();
+    u32 infoPartySlot = BattleInfoHelper_GetCurrPartySlot();
+    if (battler != MAX_BATTLERS_COUNT)
+        infoPartySlot = BattleInfoHelper_SlotToBattlePartyOrder(battler, infoPartySlot);
 
     return trainer == B_TRAINER_OPPONENT_A
-        && gBattleStruct->partyState[trainer][BattleInfoHelper_GetCurrPartySlot()].sentOut;
+        && gBattleStruct->partyState[trainer][infoPartySlot].sentOut;
 }
 
 static void BattleInfoHelper_PopulateOptionsList(void)
@@ -1360,7 +1588,7 @@ static void BattleInfoHelper_PopulateOptionsList(void)
 
     sBattleInfoDataPtr->numOptions = 0;
     #define ADD_OPT(num) sBattleInfoDataPtr->optionsList[sBattleInfoDataPtr->numOptions++] = CAT(BI_OPTION_, num);
-    if (!isOpponent && !BattleInfoHelper_GetCurrBattleMon())
+    if (!isOpponent)
         ADD_OPT(SWAP);
 
     if ((isOpponent && FlagGet(FLAG_SYS_APP_GOOGLE_GLASS_GET)) || !isOpponent)
@@ -1396,16 +1624,11 @@ static u32 BattleInfoHelper_GetTotalCrits(void)
     struct BattlePokemon *batMon = BattleInfoHelper_GetCurrBattleMon();
 
     if (batMon == NULL)
-    {
         return 0;
-    }
     else if (batMon->volatiles.laserFocus)
-    {
         return ARRAY_COUNT(sCriticalHitOdds) - 1;
-    }
 
     enum BattlerId battler = BattleInfoHelper_GetCurrBattler();
-    u32 GetHoldEffectCritChanceIncrease(enum BattlerId battler, enum HoldEffect holdEffect);
     u32 CalcBattlerPassiveCritChance(enum BattlerId battler, enum HoldEffect holdEffect, enum Ability ability);
 
     return CalcBattlerPassiveCritChance(battler, GetItemHoldEffect(batMon->item), batMon->ability);
