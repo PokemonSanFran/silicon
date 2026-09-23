@@ -15,6 +15,7 @@ enum FieldMoveUnlockType
     CANT_UNLOCK,
     ALWAYS_UNLOCKED,
     BADGE_UNLOCK,
+    QUEST_UNLOCK,
     FIELD_MOVE_UNLOCK_COUNT
 };
 
@@ -26,6 +27,7 @@ struct FieldMoveInfo
     u32 partyMsgID:7;
     u32 arg:8;
     u32 hideIfLocked:1;
+    enum QuestIdList quest;
     u32 padding:3;
 };
 

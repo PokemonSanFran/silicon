@@ -24,6 +24,11 @@ static bool32 HasBadgeForFieldMove(enum FieldMove fieldMove)
     return FlagGet(gFieldMoveInfo[fieldMove].arg + FLAG_BADGE01_GET);
 }
 
+static bool32 HasQuestForFieldMove(enum FieldMove fieldMove)
+{
+    return (IsQuestInactiveState(gFieldMoveInfo[fieldMove].quest) == FALSE);
+}
+
 const struct FieldMoveUnlock gFieldMoveUnlocks[FIELD_MOVE_UNLOCK_COUNT] =
 {
     [CANT_UNLOCK] =
@@ -41,6 +46,13 @@ const struct FieldMoveUnlock gFieldMoveUnlocks[FIELD_MOVE_UNLOCK_COUNT] =
         .isUnlockedFunc = HasBadgeForFieldMove,
         .lockedMessage = gText_CantUseUntilNewBadge,
     },
+    // Start siliconMerge
+    [QUEST_UNLOCK] = 
+    {
+        .isUnlockedFunc = HasQuestForFieldMove,
+        .lockedMessage = COMPOUND_STRING("You need somebody to teach you!"),
+    },
+    // End siliconMerge
 };
 
 #define FLAG_TO_BADGE(flag) flag - FLAG_BADGE01_GET
@@ -50,16 +62,17 @@ const struct FieldMoveInfo gFieldMoveInfo[FIELD_MOVES_COUNT] =
     [FIELD_MOVE_CUT] =
     {
         .fieldMoveFunc = SetUpFieldMove_Cut,
-        .unlockType = BADGE_UNLOCK,
+        .unlockType = QUEST_UNLOCK,
         .moveID = MOVE_CUT,
         .partyMsgID = PARTY_MSG_NOTHING_TO_CUT,
         .arg = IS_FRLG ? FLAG_TO_BADGE(FLAG_BADGE02_GET) : FLAG_TO_BADGE(FLAG_BADGE01_GET),
+        .quest = QUEST_WILDFIRERISK,
     },
 
     [FIELD_MOVE_FLASH] =
     {
         .fieldMoveFunc = SetUpFieldMove_Flash,
-        .unlockType = BADGE_UNLOCK,
+        .unlockType = CANT_UNLOCK,
         .moveID = MOVE_FLASH,
         .partyMsgID = PARTY_MSG_CANT_USE_HERE,
         .arg = IS_FRLG ? FLAG_TO_BADGE(FLAG_BADGE01_GET) : FLAG_TO_BADGE(FLAG_BADGE02_GET),
@@ -68,52 +81,57 @@ const struct FieldMoveInfo gFieldMoveInfo[FIELD_MOVES_COUNT] =
     [FIELD_MOVE_ROCK_SMASH] =
     {
         .fieldMoveFunc = SetUpFieldMove_RockSmash,
-        .unlockType = BADGE_UNLOCK,
+        .unlockType = QUEST_UNLOCK,
         .moveID = MOVE_ROCK_SMASH,
         .partyMsgID = PARTY_MSG_CANT_USE_HERE,
         .arg = IS_FRLG ? FLAG_TO_BADGE(FLAG_BADGE06_GET) : FLAG_TO_BADGE(FLAG_BADGE03_GET),
+        .quest = QUEST_VSDEOXYS,
     },
 
     [FIELD_MOVE_STRENGTH] =
     {
         .fieldMoveFunc = SetUpFieldMove_Strength,
-        .unlockType = BADGE_UNLOCK,
+        .unlockType = QUEST_UNLOCK,
         .moveID = MOVE_STRENGTH,
         .partyMsgID = PARTY_MSG_CANT_USE_HERE,
         .arg = FLAG_TO_BADGE(FLAG_BADGE04_GET),
+        .quest = QUEST_HUNKYJESUS,
     },
 
     [FIELD_MOVE_SURF] =
     {
         .fieldMoveFunc = SetUpFieldMove_Surf,
-        .unlockType = BADGE_UNLOCK,
+        .unlockType = QUEST_UNLOCK,
         .moveID = MOVE_SURF,
         .partyMsgID = PARTY_MSG_CANT_SURF_HERE,
         .arg = FLAG_TO_BADGE(FLAG_BADGE05_GET),
+        .quest = QUEST_HANG20,
     },
 
     [FIELD_MOVE_FLY] =
     {
         .fieldMoveFunc = SetUpFieldMove_Fly,
-        .unlockType = BADGE_UNLOCK,
+        .unlockType = QUEST_UNLOCK,
         .moveID = MOVE_FLY,
         .partyMsgID = PARTY_MSG_CANT_USE_HERE,
         .arg = IS_FRLG ? FLAG_TO_BADGE(FLAG_BADGE03_GET) : FLAG_TO_BADGE(FLAG_BADGE06_GET),
+        .quest = QUEST_IBELIEVEICANFLY,
     },
 
     [FIELD_MOVE_DIVE] =
     {
         .fieldMoveFunc = SetUpFieldMove_Dive,
-        .unlockType = BADGE_UNLOCK,
+        .unlockType = QUEST_UNLOCK,
         .moveID = MOVE_DIVE,
         .partyMsgID = PARTY_MSG_CANT_USE_HERE,
         .arg = FLAG_TO_BADGE(FLAG_BADGE07_GET),
+        .quest = QUEST_ALLTHATGLITTERSMIGHTBEGOLD,
     },
 
     [FIELD_MOVE_WATERFALL] =
     {
         .fieldMoveFunc = SetUpFieldMove_Waterfall,
-        .unlockType = BADGE_UNLOCK,
+        .unlockType = CANT_UNLOCK,
         .moveID = MOVE_WATERFALL,
         .partyMsgID = PARTY_MSG_CANT_USE_HERE,
         .arg = IS_FRLG ? FLAG_TO_BADGE(FLAG_BADGE07_GET) : FLAG_TO_BADGE(FLAG_BADGE08_GET),
@@ -138,7 +156,7 @@ const struct FieldMoveInfo gFieldMoveInfo[FIELD_MOVES_COUNT] =
     [FIELD_MOVE_SECRET_POWER] =
     {
         .fieldMoveFunc = SetUpFieldMove_SecretPower,
-        .unlockType = ALWAYS_UNLOCKED,
+        .unlockType = CANT_UNLOCK,
         .moveID = MOVE_SECRET_POWER,
         .partyMsgID = PARTY_MSG_CANT_USE_HERE,
     },
@@ -190,4 +208,15 @@ const struct FieldMoveInfo gFieldMoveInfo[FIELD_MOVES_COUNT] =
         .partyMsgID = PARTY_MSG_CANT_USE_HERE,
         .hideIfLocked = TRUE,
     },
+    // Start siliconMerge
+    [FIELD_MOVE_WHIRLPOOL] = 
+    {
+        .fieldMoveFunc = SetUpFieldMove_Defog,
+        .unlockType = QUEST_UNLOCK,
+        .moveID = MOVE_WHIRLPOOL,
+        .partyMsgID = PARTY_MSG_CANT_USE_HERE,
+        .hideIfLocked = TRUE,
+        .quest = QUEST_WHIRLPOOLFERRY,
+    },
+    // Start siliconMerge
 };
