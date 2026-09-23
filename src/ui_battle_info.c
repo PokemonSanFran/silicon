@@ -152,13 +152,15 @@ struct BattleInfoData
 };
 
 static EWRAM_DATA struct BattleInfoData *sBattleInfoDataPtr = NULL;
-static EWRAM_DATA struct
+static EWRAM_INIT struct
 {
     enum BattleInfoModes mode:4;
     u8 optionsCursor:4;
     struct UCoords8 gridPos;
     MainCallback trueCB;
-} sBattleInfoSavedState = {0};
+} sBattleInfoSavedState = {
+    .gridPos = { 0, 1 },
+};
 
 static void CB2_BattleInfoInit(void);
 static void CB2_ReloadBattleInfo(void);
@@ -448,7 +450,7 @@ void OpenBattleInfo(MainCallback savedCB)
     sBattleInfoDataPtr->savedCB = savedCB;
     sBattleInfoDataPtr->mode = BI_MODE_MAIN;
     sBattleInfoDataPtr->switchInResult = NO_SWITCH;
-    BattleInfoInput_SetGrid(gLastViewedMonIndex, TRUE);
+    BattleInfoInput_SetGrid(sBattleInfoSavedState.gridPos.x, sBattleInfoSavedState.gridPos.y);
     memset(sBattleInfoDataPtr->spriteIds, SPRITE_NONE, NUM_BI_SPRITES);
     memset(sBattleInfoDataPtr->monIconIds, SPRITE_NONE, NUM_BI_MON_ICONS);
     BattleInfoHelper_ReorderPartyToInfoLayout();
@@ -528,7 +530,7 @@ static void CB2_ReloadBattleInfo(void)
     default:
         break;
     case BI_MODE_OPTIONS_LIST:
-        BattleInfoInput_SetGrid(sBattleInfoSavedState.gridPos.x, sBattleInfoSavedState.gridPos.y);
+        BattleInfoInput_SetGrid(gLastViewedMonIndex, TRUE);
         BattleInfoHelper_PopulateOptionsList();
         sBattleInfoDataPtr->optionsCursor = sBattleInfoSavedState.optionsCursor;
         break;
@@ -718,6 +720,7 @@ static void Task_BattleInfo_Close(u8 taskId)
     ResetSpriteData();
     FreeAllWindowBuffers();
 
+    sBattleInfoSavedState.gridPos = sBattleInfoDataPtr->gridPos;
     BattleInfoHelper_ReorderPartyToBattleLayout();
     if (sBattleInfoDataPtr->mode == BI_MODE_OPTIONS_LIST)
     {
@@ -731,7 +734,6 @@ static void Task_BattleInfo_Close(u8 taskId)
             break;
         case BI_OPTION_SUMMARY:
             {
-                sBattleInfoSavedState.gridPos = sBattleInfoDataPtr->gridPos;
                 sBattleInfoSavedState.optionsCursor = sBattleInfoDataPtr->optionsCursor;
                 BattleInfoHelper_ReorderPartyToInfoLayout();
 
