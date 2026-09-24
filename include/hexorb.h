@@ -12,5 +12,6 @@ void Hexorb_ConstructSuccessMessage(struct Pokemon*, u32);
 void Hexorb_ConstructAbilityFailureMessage(struct Pokemon*, u32);
 void Hexorb_ConstructTypeFailureMessage(struct Pokemon*, u32, enum HexorbResultCodes);
 void Task_UseHexorbFromField(u8);
+bool32 Hexorb_DoesTypeBlockStatus(u32 species, u32 typeIndex, u32 status);
 
 #endif // GUARD_HEXORB_H

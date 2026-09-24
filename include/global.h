@@ -609,6 +609,15 @@ struct FacilityRecords
     u8 longestStreakPartner;
 };
 
+// Start siliconFrontier
+struct ArcadeCursorData
+{
+    u8 speed:3;
+    u8 position:5;
+    bool8 isRandom;
+}__attribute__((packed));
+// End siliconFrontier
+
 struct BattleFrontier
 {
 #if FREE_EMERALD_BATTLE_FRONTIER == FALSE
@@ -712,6 +721,7 @@ struct BattleFrontier
     struct SiliconCurrentChallenge currentChallenge;
     struct SiliconLastChallenge lastChallenge[SILICON_FACILITY_COUNT];
     u16 battlePoints;
+    struct ArcadeCursorData arcadeCursorData;
 #endif // siliconFrontier
 };
 

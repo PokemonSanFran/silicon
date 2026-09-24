@@ -283,11 +283,11 @@ void ReducePlayerPartyToSelectedMons(void)
 }
 
 // Start siliconMerge
-void LevelAllPokemonToX(u32 level)
+void LevelAllPokemonToX(enum BattleTrainer battleTrainer, u32 level)
 {
     for (u32 i = 0; i < PARTY_SIZE; i++)
     {
-        struct Pokemon *pokemon = &gParties[B_TRAINER_PLAYER][i];
+        struct Pokemon *pokemon = &gParties[battleTrainer][i];
         enum Species species = GetMonData(pokemon, MON_DATA_SPECIES, NULL);
         if (species == SPECIES_NONE)
             continue;
@@ -303,7 +303,7 @@ void LevelAllPokemonToX(u32 level)
 
 void LevelUpAllPokemonForFrontier(void)
 {
-    LevelAllPokemonToX(SILICON_FRONTIER_LEVEL);
+    LevelAllPokemonToX(B_TRAINER_PLAYER,SILICON_FRONTIER_LEVEL);
 }
 // End siliconMerge
 void CanHyperTrain(struct ScriptContext *ctx)

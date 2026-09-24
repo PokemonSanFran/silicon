@@ -1821,6 +1821,7 @@ EventScript_PalletTown_PlayersHouse_2F_TurnOnPC::
 .include "data/scripts/silicon_frontier/text_restricted_sparring.inc" @ siliconFrontier
 .include "data/scripts/silicon_frontier/movement_restricted_sparring.inc" @ siliconFrontier
 .include "data/scripts/silicon_frontier/restricted_sparring.inc" @ siliconFrontier
+.include "data/scripts/silicon_frontier/battle_studio.inc" @ siliconFrontier
 .include "data/scripts/silicon_frontier/text_general.inc" @ siliconFrontier
 .include "data/scripts/save.inc" @ autoSave
 .include "data/scripts/phenomenon.inc" @ autoSave

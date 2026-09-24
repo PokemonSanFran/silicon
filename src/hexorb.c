@@ -93,7 +93,7 @@ static void Hexorb_BufferStatusAfflictionText(u32 status)
     }
 }
 
-static bool32 Hexorb_DoesTypeBlockStatus(u32 species, u32 typeIndex, u32 status)
+bool32 Hexorb_DoesTypeBlockStatus(u32 species, u32 typeIndex, u32 status)
 {
     u32 type = gSpeciesInfo[species].types[typeIndex];
     switch (status)

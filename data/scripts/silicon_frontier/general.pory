@@ -196,6 +196,7 @@ script SiliconFrontier_Script_StartBattle
     callnative(SiliconFrontier_SetPartnerDamage)
 
     call(SiliconFrontier_Script_RefreshOpponentObjects)
+    call(SiliconFrontier_Script_DoGameBoardSequence)
     call(SiliconFrontier_Movement_MoveOpponentsIntoPosition)
     callnative(SiliconFrontier_SetUpTextA)
     msgbox(format("{STR_VAR_1}"))
@@ -220,6 +221,7 @@ script SiliconFrontier_Script_WonBattle
 {
     lock
     callnative(SiliconFrontier_TryIncrementWinStreakAndRecord)
+    callnative(ArcadeBattleCleanup)
     showbpbox
     callnative(SiliconFrontier_BufferBP)
     variableaddbp(VAR_0x8007,TRUE)

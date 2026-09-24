@@ -45,4 +45,8 @@ struct SiliconFrontierData
     mapsec_s16_t mapsec;
 };
 
+bool8 SiliconFroniter_IsCurrentChallengeTypeMulti(void);
+void SiliconFrontier_ResetSketchedMoves(void);
+u32 SiliconFroniter_GetPartySizeFromCurrentChallenge(void);
+
 #endif // GUARD_SILICON_BATTLE_FRONTIER_H

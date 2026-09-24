@@ -1,5 +1,6 @@
 #include "global.h"
 #include "event_data.h"
+#include "battle_arcade.h"
 #include "pokedex.h"
 #include "ui_pokedex.h"
 #include "constants/nameplate.h"
@@ -28,7 +29,6 @@ enum SiliconFrontierChallengeType SiliconFrontier_GetLastChallengeTypeFromCurren
 u32 SiliconFrontier_GetNumberAllBattles(void);
 void SiliconFrontier_ResetRemainingHeals(void);
 void SiliconFrontier_DecreaseRemainingHeals(void);
-void SiliconFrontier_SetFacilityToVarFromMap(void);
 u8 SiliconFrontier_GetFacilityMilestoneRequirement(enum SiliconFrontierFacility facility,  enum BossPhases phase);
 u16 SiliconFrontier_GetFacilityBadge(enum SiliconFrontierFacility facility,  enum BossPhases phase);
 const u8* SiliconFrontier_GetFacilityBadgeName(enum SiliconFrontierFacility facility,  enum BossPhases phase);
@@ -44,7 +44,6 @@ void SiliconFrontier_SetLastChallengeFromCurrentChallenge(void);
 void Script_SiliconFrontier_GetLastChallengeTypeFromCurrentFacility(void);
 void BufferLastChallengeType(void);
 void SiliconFrontier_ResetLastChallenge(void);
-static u32 SiliconFroniter_GetPartySizeFromCurrentChallenge(void);
 void SiliconFrontier_SetPartyScreenPickAmount(void);
 void SiliconFrontier_SetSelectedMons(void);
 void SiliconFrontier_ResetPartyIndexVars(void);
@@ -69,7 +68,6 @@ enum SiliconFrontierTrainerIds SiliconFrontier_GetNextGenericBoss(u32 currentStr
 enum SiliconFrontierTrainerIds SiliconFrontier_GetBossFromCurrentFacility(enum BossPhases phase);
 enum SiliconFrontierTrainerIds SiliconFrontier_GenerateOpponent(void);
 bool8 SiliconFroniter_IsCurrentChallengeTypeDouble(void);
-bool8 SiliconFroniter_IsCurrentChallengeTypeMulti(void);
 bool8 SiliconFroniter_IsCurrentChallengeTypeLinkMulti(void);
 void SiliconFrontier_SetAllOpponents(void);
 const u16 SiliconFrontier_GetObjectGfxId(enum SiliconFrontierTrainerIds trainerId);
@@ -112,7 +110,6 @@ void Script_BufferGoldBadgeAndStreak(void);
 void SiliconFrontier_ResetCurrentStreak(void);
 void SiliconFrontier_DebugChoosePartner(void);
 void SiliconFrontier_ResetCurrentPartner(void);
-void Script_SiliconFrontier_GetTypeFromCurrentChallenge(void);
 bool8 SiliconFrontier_CountPartnerNonFaintedMons(void);
 void SiliconFrontier_SwapFaintedMons(u32 first, u32 second);
 void SiliconFrontier_SwapBeforeFaintedMons(void);
@@ -312,7 +309,7 @@ const u8 SiliconFrontier_PartySizes[SILICON_FRONTIER_CHALLENGE_TYPE_COUNT] =
     [SILICON_FRONTIER_CHALLENGE_TYPE_LINK_MULTI] = FRONTIER_MULTI_PARTY_SIZE,
 };
 
-static u32 SiliconFroniter_GetPartySizeFromCurrentChallenge(void)
+u32 SiliconFroniter_GetPartySizeFromCurrentChallenge(void)
 {
     enum SiliconFrontierChallengeType type = SiliconFrontier_GetTypeFromCurrentChallenge();
     return SiliconFrontier_PartySizes[type];
@@ -1398,4 +1395,72 @@ bool8 SiliconFrontier_CountPartnerNonFaintedMons(void)
             count++;
     }
     return count;
+}
+
+void SiliconFrontier_DeletePlayerHeldItems(void)
+{
+    for (u32 partyIndex = 0; partyIndex < PARTY_SIZE; partyIndex++)
+    {
+        enum Item item = ITEM_NONE;
+        SetMonData(&gParties[B_TRAINER_PARTNER][partyIndex],MON_DATA_HELD_ITEM,&item);
+        SetMonData(&gParties[B_TRAINER_PLAYER][partyIndex],MON_DATA_HELD_ITEM,&item);
+    }
+}
+
+void SiliconFrontier_DeleteEnemyHeldItems(void)
+{
+    for (u32 partyIndex = 0; partyIndex < PARTY_SIZE; partyIndex++)
+    {
+        enum Item item = ITEM_NONE;
+        SetMonData(&gParties[B_TRAINER_OPPONENT_A][partyIndex],MON_DATA_HELD_ITEM,&item);
+        SetMonData(&gParties[B_TRAINER_OPPONENT_B][partyIndex],MON_DATA_HELD_ITEM,&item);
+    }
+}
+
+void SiliconFrontier_DeleteAllHeldItems(void)
+{
+}
+
+void SiliconFrontier_ResetArcadeData(void)
+{
+    enum SiliconFrontierFacility facility = SiliconFrontier_GetFacilityFromCurrentChallenge();
+    enum SiliconFrontierChallengeType challengeType = SiliconFrontier_GetTypeFromCurrentChallenge();
+    enum SiliconFrontierSparringTypes sparringType = SiliconFrontier_GetCurrentChallengeSparringType();
+
+    s32 value = SiliconFrontier_GetCurrentStreak(facility,challengeType, sparringType);
+    value--;
+
+    if (value == -1)
+        value = 0;
+
+    if ((value % SILICON_FRONTIER_STREAK_LENGTH_BOSS) != 0)
+        return;
+
+    BattleArcade_ResetPerformancePoints();
+    BattleArcade_ResetCursorPositionOnSaveblock();
+    BattleArcade_ResetCursorSpeed();
+    BattleArcade_GenerateItemsToBeGiven();
+}
+
+void SiliconFrontier_ResetSketchedMoves(void)
+{
+    for (u32 i = 0; i < MAX_FRONTIER_PARTY_SIZE; i++)
+    {
+        u32 monId = gSaveBlock2Ptr->frontier.selectedPartyMons[i] - 1;
+
+        if (monId >= PARTY_SIZE)
+            continue;
+
+        struct Pokemon *frontierMon = &gSaveBlock1Ptr->playerParty[monId];
+        struct Pokemon *playerMon = &gParties[B_TRAINER_PLAYER][i];
+
+        for (u32 j = 0; j < MAX_MON_MOVES; j++)
+        {
+            if (MonKnowsMove(frontierMon, GetMonData(playerMon, MON_DATA_MOVE1+j, NULL)))
+                continue;
+
+            SetMonMoveSlot(playerMon, MOVE_SKETCH, j);
+            break;
+        }
+    }
 }
