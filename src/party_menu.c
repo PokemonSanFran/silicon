@@ -338,7 +338,10 @@ static void HandleChooseMonSelection(u8, s8 *);
 static u16 PartyMenuButtonHandler(s8 *);
 static s8 *GetCurrentPartySlotPtr(void);
 static bool8 IsSelectedMonNotEgg(u8 *);
-static bool8 DoesSelectedMonKnowHM(u8 *);
+// start battleInfo
+//static bool8 DoesSelectedMonKnowHM(u8 *);
+bool8 DoesSelectedMonKnowHM(u8 *);
+// end battleInfo
 static void PartyMenuRemoveWindow(u8 *);
 static void CB2_SetUpExitToBattleScreen(void);
 static void Task_ClosePartyMenuAfterText(u8);
@@ -1712,7 +1715,10 @@ static bool8 IsSelectedMonNotEgg(u8 *slotPtr)
     return TRUE;
 }
 
-static bool8 DoesSelectedMonKnowHM(u8 *slotPtr)
+// start battleInfo
+//static bool8 DoesSelectedMonKnowHM(u8 *slotPtr)
+bool8 DoesSelectedMonKnowHM(u8 *slotPtr)
+// end battleInfo
 {
     if (B_CATCH_SWAP_CHECK_HMS == FALSE)
         return FALSE;
@@ -7709,15 +7715,16 @@ void OpenPartyMenuInBattle(u8 partyAction)
     }
     else
     {
+        // start battleInfo
+        /*
         if (partyAction == PARTY_ACTION_SEND_MON_TO_BOX)
             InitPartyMenu(PARTY_MENU_TYPE_IN_BATTLE, GetPartyLayoutFromBattleType(), partyAction, FALSE, PARTY_MSG_CHOOSE_MON_FOR_BOX, Task_HandleChooseMonInput, ReshowBlankBattleScreenAfterMenu);
         else
-        // start battleInfo
-        /*
             InitPartyMenu(PARTY_MENU_TYPE_IN_BATTLE, GetPartyLayoutFromBattleType(), partyAction, FALSE, PARTY_MSG_CHOOSE_MON, Task_HandleChooseMonInput, CB2_SetUpReshowBattleScreenAfterMenu);
         */
         {
-            OpenBattleInfo(CB2_SetUpReshowBattleScreenAfterMenu);
+            MainCallback cb = partyAction == PARTY_ACTION_SEND_MON_TO_BOX ? ReshowBlankBattleScreenAfterMenu : CB2_SetUpReshowBattleScreenAfterMenu;
+            BattleInfo_Init(partyAction, cb);
             return;
         }
         // end battleInfo

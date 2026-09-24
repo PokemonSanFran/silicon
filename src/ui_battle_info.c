@@ -158,6 +158,7 @@ static EWRAM_INIT struct
     u8 optionsCursor:4;
     struct UCoords8 gridPos;
     MainCallback trueCB;
+    u8 partyAction;
 } sBattleInfoSavedState = {
     .gridPos = { 0, 1 },
 };
@@ -228,6 +229,8 @@ static u32 BattleInfoHelper_GetVolatileMaxValue(enum Volatile);
 static u32 BattleInfoHelper_GetTotalCrits(void);
 static void BattleInfoHelper_AddTextPrinterToWindow(u32, u32, u32, u32, enum BattleInfoTextColors, const u8 *);
 static void BattleInfoHelper_AddTextPrinter(u32, u32, u32, enum BattleInfoTextColors, const u8 *);
+
+bool8 DoesSelectedMonKnowHM(u8 *slotPtr);
 
 static const u32 sBattleInfo_MainGfx[] = INCGFX_U32("graphics/ui_menus/battle_info/tiles.png", ".4bpp.smol");
 static const u16 sBattleInfo_MainPal[] = INCGFX_U16("graphics/ui_menus/battle_info/tiles.png", ".gbapal");
@@ -438,8 +441,9 @@ static const u8 *sBattleInfo_OptionNames[] =
 
 extern const u32 sCriticalHitOdds[5];
 
-void OpenBattleInfo(MainCallback savedCB)
+void BattleInfo_Init(u32 partyAction, MainCallback savedCB)
 {
+    sBattleInfoSavedState.partyAction = partyAction;
     gPartyMenuUseExitCallback = FALSE;
     sBattleInfoDataPtr = AllocZeroed(sizeof(*sBattleInfoDataPtr));
     assertf(sBattleInfoDataPtr != NULL, "[BATTLE INFO] failed to allocate necessary menu data")
@@ -523,7 +527,7 @@ static void CB2_BattleInfoInit(void)
 static void CB2_ReloadBattleInfo(void)
 {
     BattleInfoHelper_ReorderPartyToBattleLayout();
-    OpenBattleInfo(sBattleInfoSavedState.trueCB);
+    BattleInfo_Init(sBattleInfoSavedState.partyAction, sBattleInfoSavedState.trueCB);
     sBattleInfoDataPtr->mode = sBattleInfoSavedState.mode;
 
     switch (sBattleInfoDataPtr->mode)
@@ -571,8 +575,23 @@ static void Task_BattleInfo_MainModeInput(u8 taskId)
 {
     if (JOY_NEW(B_BUTTON))
     {
-        PlaySE(SE_SELECT);
-        BattleInfoHelper_Exit(taskId);
+        switch (sBattleInfoSavedState.partyAction)
+        {
+        case PARTY_ACTION_SEND_MON_TO_BOX:
+            PlaySE(SE_SELECT);
+            gSelectedMonPartyId = PARTY_SIZE + 1;
+            BattleInfoHelper_Exit(taskId);
+            break;
+        case PARTY_ACTION_SEND_OUT:
+        case PARTY_ACTION_CHOOSE_FAINTED_MON:
+            PlaySE(SE_FAILURE);
+            break;
+        default:
+            PlaySE(SE_SELECT);
+            BattleInfoHelper_Exit(taskId);
+            break;
+        }
+
         return;
     }
 
@@ -580,8 +599,27 @@ static void Task_BattleInfo_MainModeInput(u8 taskId)
     {
         if (BattleInfoHelper_CanMonInfoBeShown())
         {
-            PlaySE(SE_SELECT);
-            BattleInfoMode_Set(BI_MODE_OPTIONS_LIST);
+            if (sBattleInfoSavedState.partyAction == PARTY_ACTION_SEND_MON_TO_BOX)
+            {
+                u8 currPartySlot = BattleInfoHelper_GetCurrPartySlot();
+                if (DoesSelectedMonKnowHM(&currPartySlot))
+                {
+                    PlaySE(SE_FAILURE);
+                    StringCopy(gStringVar4, COMPOUND_STRING("Cannot send that mon to the box,\nbecause it knows a HM move.{PAUSE_UNTIL_PRESS}"));
+                    BattleInfoText_ShowTextbox(taskId);
+                }
+                else
+                {
+                    PlaySE(SE_SELECT);
+                    gSelectedMonPartyId = BattleInfoHelper_SlotToBattlePartyOrder(gBattlerInMenuId, currPartySlot);
+                    BattleInfoHelper_Exit(taskId);
+                }
+            }
+            else
+            {
+                PlaySE(SE_SELECT);
+                BattleInfoMode_Set(BI_MODE_OPTIONS_LIST);
+            }
         }
         else
         {
@@ -763,8 +801,16 @@ static void Task_BattleInfo_WaitTextboxInput(u8 taskId)
         case BI_MODE_OPTIONS_LIST:
             if (sBattleInfoDataPtr->switchInResult == SAME_SWITCH)
             {
-                BattleInfoHelper_Exit(taskId);
-                return;
+                switch (sBattleInfoSavedState.partyAction)
+                {
+                case PARTY_ACTION_SEND_OUT:
+                case PARTY_ACTION_CHOOSE_FAINTED_MON:
+                    BattleInfoMode_Set(BI_MODE_MAIN);
+                    break;
+                default:
+                    BattleInfoHelper_Exit(taskId);
+                    return;
+                }
             }
             else // NO_SWITCH
             {
@@ -1347,11 +1393,23 @@ static void BattleInfoText_ShowTextbox(u32 taskId)
 
 static void BattleInfoText_UpdateFooter(void)
 {
-    BattleInfoHelper_AddTextPrinter(
-        4, 81,
-        FONT_SMALL,
-        BI_TXTCLR_FOOTER,
-        sBattleInfo_ModesInfo[sBattleInfoDataPtr->mode].helpBarTxt);
+    const u8 *str = sBattleInfo_ModesInfo[sBattleInfoDataPtr->mode].helpBarTxt;
+
+    switch (sBattleInfoSavedState.partyAction)
+    {
+    case PARTY_ACTION_CHOOSE_FAINTED_MON:
+    case PARTY_ACTION_SEND_OUT:
+        if (sBattleInfoDataPtr->mode == BI_MODE_MAIN)
+            str = COMPOUND_STRING("{A_BUTTON} Options");
+        break;
+    case PARTY_ACTION_SEND_MON_TO_BOX:
+        str = COMPOUND_STRING("{A_BUTTON} Send to Box {B_BUTTON} Cancel");
+        break;
+    default:
+        break;
+    }
+
+    BattleInfoHelper_AddTextPrinter(4, 81, FONT_SMALL, BI_TXTCLR_FOOTER, str);
 }
 
 static void BattleInfoHelper_Exit(u8 taskId)

@@ -3,6 +3,6 @@
 
 #include "main.h"
 
-void OpenBattleInfo(MainCallback);
+void BattleInfo_Init(u32, MainCallback);
 
 #endif // GUARD_BATTLE_INFO_H
