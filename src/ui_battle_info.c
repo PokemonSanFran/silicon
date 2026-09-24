@@ -210,6 +210,7 @@ static void BattleInfoText_ShowOptionsPrompt(void);
 static void BattleInfoText_ShowTextbox(u32);
 static void BattleInfoText_UpdateFooter(void);
 
+static void BattleInfoHelper_Exit(u8);
 static void BattleInfoHelper_UpdateEverything(void);
 static struct Pokemon *BattleInfoHelper_GetCurrMon(void);
 static struct BattlePokemon *BattleInfoHelper_GetCurrBattleMon(void);
@@ -571,8 +572,7 @@ static void Task_BattleInfo_MainModeInput(u8 taskId)
     if (JOY_NEW(B_BUTTON))
     {
         PlaySE(SE_SELECT);
-        BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
-        SetTaskFuncWithFollowupFunc(taskId, Task_BattleInfo_WaitFade, Task_BattleInfo_Close);
+        BattleInfoHelper_Exit(taskId);
         return;
     }
 
@@ -649,8 +649,7 @@ static void Task_BattleInfo_OptionsModeInput(u8 taskId)
             // fallthrough
         case BI_OPTION_SUMMARY:
             PlaySE(SE_SELECT);
-            BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
-            SetTaskFuncWithFollowupFunc(taskId, Task_BattleInfo_WaitFade, Task_BattleInfo_Close);
+            BattleInfoHelper_Exit(taskId);
             break;
         case BI_OPTION_STATUS:
             PlaySE(SE_SELECT);
@@ -764,8 +763,7 @@ static void Task_BattleInfo_WaitTextboxInput(u8 taskId)
         case BI_MODE_OPTIONS_LIST:
             if (sBattleInfoDataPtr->switchInResult == SAME_SWITCH)
             {
-                BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
-                SetTaskFuncWithFollowupFunc(taskId, Task_BattleInfo_WaitFade, Task_BattleInfo_Close);
+                BattleInfoHelper_Exit(taskId);
                 return;
             }
             else // NO_SWITCH
@@ -1354,6 +1352,12 @@ static void BattleInfoText_UpdateFooter(void)
         FONT_SMALL,
         BI_TXTCLR_FOOTER,
         sBattleInfo_ModesInfo[sBattleInfoDataPtr->mode].helpBarTxt);
+}
+
+static void BattleInfoHelper_Exit(u8 taskId)
+{
+    BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
+    SetTaskFuncWithFollowupFunc(taskId, Task_BattleInfo_WaitFade, Task_BattleInfo_Close);
 }
 
 static void BattleInfoHelper_UpdateEverything(void)
