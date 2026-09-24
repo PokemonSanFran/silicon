@@ -24,7 +24,7 @@ script OkayLetsFixit_ReachTop_Script
         }
 
     lock
-        playbgm(MUS_OKAY_LETS_FIX_IT,FALSE)
+        playbgm(MUS_OKAY_LETS_FIX_IT,TRUE)
 		setvar(VAR_TIME_TRAVEL_STATE,TIME_TRAVEL_START_CUTSCENE)
         applymovement(LOCALID_PLAYER, moves(walk_up * 4, walk_left * 7, step_end))
         waitmovement(LOCALID_PLAYER)
@@ -66,7 +66,6 @@ script OkayLetsFixit_ReachTop_Script
 script OkayLetsFixit_StartFlashback_Script
 {
     lock
-        playbgm(MUS_OKAY_LETS_FIX_IT,TRUE)
 		setvar(VAR_TIME_TRAVEL_STATE,TIME_TRAVEL_FIRST_RETURN)
         msgbox(format("This was the night I decided to help SharpRise Capital."),,SPEAKER_ALICIA)
 
@@ -94,13 +93,23 @@ script OkayLetsFixit_StartFlashback_Script
 script OkayLetsFixit_ReturnToPeak_Script
 {
     lock
-        playbgm(MUS_OKAY_LETS_FIX_IT,FALSE)
+	fadenewbgm(MUS_OKAY_LETS_FIX_IT)
         clearflag(FLAG_TEMP_1)
 
         applymovement(LOCALID_PLAYER, Common_Movement_FaceLeft)
         waitmovement(LOCALID_PLAYER)
 
 		goto(OkayLetsFixit_ChooseMon_Dialogue)
+}
+
+script OkayLetsFixit_Dialogue_InteractChooseMon
+{
+	playbgm(MUS_OKAY_LETS_FIX_IT,FALSE)
+	lock
+	moveobjecttocoords(LOCALID_PLAYER,17,43,DIR_WEST)
+	waitmovement(LOCALID_PLAYER)
+	faceplayer
+	goto(OkayLetsFixit_ChooseMon_Dialogue)
 }
 
 script OkayLetsFixit_ChooseMon_Dialogue
@@ -150,6 +159,7 @@ script OkayLetsFixit_ChooseMon_Script
 script OkayLetsFixit_NotReady_Dialogue
 {
 	msgbox(format("Until you are ready, we have nothing more to discuss."),,SPEAKER_HIKO)
+	fadedefaultbgm
 	closemessage
 	release
 	end
@@ -185,8 +195,9 @@ script OkayLetsFixit_AskConfirm_Script
 
 script OkayLetsFixit_StartTimeTravel_Script
 {
-	fadeoutbgm(1)
+	fadenewbgm(MUS_DUMMY)
 	closemessage
+
 	applymovement(LOCALID_PLAYER, moves(delay_16 * 5, face_up, walk_right, walk_up * 4, step_end))
 	applymovement(LOCALID_TORGEOT_HIKO, moves(walk_up, walk_right * 3, walk_up * 7, step_end))
 	special(SpawnCameraObject)
@@ -194,6 +205,7 @@ script OkayLetsFixit_StartTimeTravel_Script
 	waitmovement(CAMERA)
 	waitmovement(LOCALID_TORGEOT_HIKO)
 	waitmovement(LOCALID_PLAYER)
+
 
 	call(OkayLetsFixit_TimelineReset_Script)
 	msgbox(format("I hope you make the right decision this time, {PLAYER}."),,SPEAKER_HIKO)
@@ -211,12 +223,13 @@ script OkayLetsFixit_StartTimeTravel_Script
 	setvar(VAR_RESULT,4)
 	playse(SE_ORB)
 	special(DoOrbEffect)
-	waitstate
-	waitse
-
-	fadeblackandsetremovewarpfadeflag
+	setflag(FLAG_HIDE_MAP_NAME_POPUP)
+	setflag(FLAG_REMOVE_WARP_FADE_OUT)
+	delay(100)
+	fadescreenswapbuffers(FADE_TO_BLACK)
 	warpsilent(MAP_PETAROSA_BOROUGH_SHARPRISE_COMPOUND_1F, 255, 9, 7)
 	waitstate
+	end
 }
 
 script OkayLetsFixit_TimelineReset_Script {

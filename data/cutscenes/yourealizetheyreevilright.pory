@@ -376,7 +376,6 @@ script YouRealizeTheyreEvilRight_CantSleep_Dialogue {
 }
 
 script YouRealizeTheyreEvilRight_NoIdea_Dialogue {
-    fadescreen(FADE_FROM_BLACK)
     setvar(VAR_STORYLINE_STATE,STORY_MORNING_OF_TIMELINE_SPLIT)
 
     applymovement(PLAYER, moves(walk_down, walk_left * 2, walk_right * 2, step_end))
