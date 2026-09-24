@@ -169,16 +169,27 @@ string generate_map_header_text(Json map_data, Json layouts_data) {
          << "\t.byte "  << json_to_string(map_data, "weather") << "\n"
          << "\t.byte "  << json_to_string(map_data, "map_type") << "\n";
 
+    // Start siliconMerge
+    if (!map_data["night_music"].is_null())
+        text << "\t.2byte " << json_to_string(map_data, "night_music") << "\n";
+    else
+        text << "\t.2byte MUS_NONE\n";
+    // End siliconMerge
+
     string floor_number = json_to_string(map_data, "floor_number", true);
     if (floor_number.empty())
         text << "\t.byte 0\n";
     else
         text << "\t.byte " << floor_number << "\n";
 
+    // Start siliconMerge
+    /*
     if (!map_data["night_music"].is_null())
         text << "\t.2byte " << json_to_string(map_data, "night_music") << "\n";
     else
         text << "\t.2byte MUS_NONE\n";
+    */
+    // End siliconMerge
 
     if (version == "ruby")
         text << "\t.byte " << json_to_string(map_data, "show_map_name") << "\n";
@@ -196,14 +207,8 @@ string generate_map_header_text(Json map_data, Json layouts_data) {
         text << "requires_flash=" << json_to_string(map_data, "requires_flash") << "\n";
     }
 
-    if (version == "firered")
-        text << "\t.byte " << json_to_string(map_data, "floor_number") << "\n";
-
-  // Start siliconMerge
-     //text << "\t.byte " << json_to_string(map_data, "battle_scene") << "\n\n";
      text << "\t.byte " << json_to_string(map_data, "battle_scene") << "\n\n";
     text << "\t.space 3" << "\n\n";
-  // End siliconMerge
 
     return text.str();
 }
@@ -821,21 +826,23 @@ string generate_layout_headers_text(Json layouts_data) {
             text << "\t.byte FALSE\n";
 
         // Start siliconMerge
-      /*
+        /*
         if (layout_version == "frlg")
         {
-      */
+        */
+        // End siliconMerge
             text << "\t.byte " << json_to_string(layout, "border_width") << "\n"
                  << "\t.byte " << json_to_string(layout, "border_height") << "\n"
                  << "\t.byte 0\n";
-      /*
+        // Start siliconMerge
+        /*
         }
         else
         {
             text << "\t.2byte 0\n"
                  << "\t.byte 0\n";
         }
-      */
+        */
         // End siliconMerge
         text << "\n";
     }
