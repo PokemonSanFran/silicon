@@ -422,7 +422,7 @@ static bool32 Accept_InitializeBackgrounds(bool32 isFirst)
 
 static bool32 AreTilesOrTilemapEmpty(u32 backgroundId)
 {
-    return (sAcceptTilesLUT[backgroundId] == NULL || sAcceptTilesLUT[backgroundId] == NULL);
+    return (sAcceptTilesLUT[backgroundId] == NULL || sAcceptTilemapLUT[backgroundId] == NULL);
 }
 
 static bool32 DebugShouldSkipBg(u32 bg)
