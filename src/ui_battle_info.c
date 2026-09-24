@@ -1241,11 +1241,12 @@ static void BattleInfoText_UpdateHeader(void)
     }
 
     // ability
+    enum Ability ability = GetSpeciesAbility(species, GetMonData(mon, MON_DATA_ABILITY_NUM, NULL));
     BattleInfoHelper_AddTextPrinter(
         4, 26,
         fontId,
         BI_TXTCLR_CONTENT,
-        gAbilitiesInfo[GetSpeciesAbility(species, GetMonData(mon, MON_DATA_ABILITY_NUM, NULL))].name);
+        GetAbilityName(ability));
 
     // held item
     enum Item item = GetMonData(mon, MON_DATA_HELD_ITEM, NULL);
