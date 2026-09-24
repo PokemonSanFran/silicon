@@ -64,9 +64,3 @@ script HaveYouSeenTheNews_Dialogue_Deputized
 	release
 	end
 }
-
-movement HaveYouSeenTheNews_LeaveClearingA {
-    walk_down * 3
-    step_end
-}
-

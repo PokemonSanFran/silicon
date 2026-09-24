@@ -30,18 +30,20 @@
   ],
   "warp_events": [
     {
+      "warp_id": "WARP_ID_PERLACIA_COFFEE_TO_CITY_1",
       "x": 4,
       "y": 10,
       "elevation": 0,
       "dest_map": "MAP_PERLACIA_CITY",
-      "dest_warp_id": "11"
+      "dest_warp_id": "WARP_ID_PERLACIA_CITY_TO_COFFEE_1"
     },
     {
+      "warp_id": "WARP_ID_PERLACIA_COFFEE_TO_CITY_2",
       "x": 5,
       "y": 10,
       "elevation": 0,
       "dest_map": "MAP_PERLACIA_CITY",
-      "dest_warp_id": "11"
+      "dest_warp_id": "WARP_ID_PERLACIA_CITY_TO_COFFEE_1"
     }
   ],
   "coord_events": [

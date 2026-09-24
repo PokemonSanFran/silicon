@@ -60,12 +60,14 @@ script Route6_EventScript_00E46F7D
 
 script Route6_EventScript_Sign1
 {
-    msgbox(format("ROUTE 6"), MSGBOX_SIGN)
+    msgbox(format("▶ Route 6\n{UP_ARROW} Glavez Hill\n{DOWN_ARROW} Cuconu Town"), MSGBOX_SIGN)
+    closemessage
     end
 }
 
 script Route6_EventScript_Sign2
 {
-    msgbox(format("GLAVEZ HILL"), MSGBOX_SIGN)
+    msgbox(format("▶ Glavez Hill\n{DOWN_ARROW} Route 6, Cuconu Town"), MSGBOX_SIGN)
+    closemessage
     end
 }

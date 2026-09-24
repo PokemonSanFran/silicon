@@ -44,7 +44,7 @@ script Oliver_CuconuTown_Compound_1F_InteractScript
     lock
     faceplayer
     goto_if_lt(VAR_PLAYER_HOME_STATE,SLEPT_AFTER_SWAGBAG,swagbag_HelpPlayer_Script)
-    goto_if_unset(FLAG_RECIEVED_LEFTOVERS,TwoHoursAgo_TheyreEager_Dialogue)
+    goto_if_unset(FLAG_RECEIVED_LEFTOVERS,TwoHoursAgo_TheyreEager_Dialogue)
     call_if_set(FLAG_TEMP_1F,TwoHoursAgo_ExplainLeftovers_Dialouge)
     call_if_unset(FLAG_TEMP_1F,swagbag_HelpPlayer_Script)
     closemessage

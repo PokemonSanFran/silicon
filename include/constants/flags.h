@@ -158,8 +158,8 @@
 #define FLAG_RECOVERED_DEVON_GOODS                                   0x5E
 #define FLAG_RETURNED_DEVON_GOODS                                    0x5F
 
-#define FLAG_RECIEVED_LEFTOVERS                                      0x50
-#define FLAG_RECIEVED_NURSERY_EGG                                    0x51
+#define FLAG_RECEIVED_LEFTOVERS                                      0x50
+#define FLAG_RECEIVED_NURSERY_EGG                                    0x51
 #define FLAG_TIMELINE_FALSE                                          0x52
 #define FLAG_TIMELINE_TIMETRAVEL                                     0x53
 #define FLAG_TIMELINE_TRUE                                           0x54

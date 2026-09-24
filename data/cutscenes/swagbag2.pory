@@ -31,7 +31,7 @@ script swagbag2_Intro_Dialogue {
     applymovement(OLIVER, swagbag2_LookAwayAndBack)
     waitmovement(0)
 
-    if (flag(FLAG_RECIEVED_NURSERY_EGG)){
+    if (flag(FLAG_RECEIVED_NURSERY_EGG)){
         goto(swagbag2_DiscussCosts_Dialogue)
     } elif (flag(FLAG_RECEIVED_BREEDING_CENTER_WELCOME_KIT)) {
         goto(swagbag2_DiscussCosts_Dialogue)

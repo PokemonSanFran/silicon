@@ -16,7 +16,7 @@
   "object_events": [],
   "warp_events": [
     {
-      "warp_id": "WARPI_ID_SHARPRISE_SPIRE_TO_CITY_RIGHT",
+      "warp_id": "WARP_ID_SHARPRISE_SPIRE_TO_CITY_RIGHT",
       "x": 15,
       "y": 8,
       "elevation": 0,
@@ -24,7 +24,7 @@
       "dest_warp_id": "WARP_ID_SHARPRISE_SPIRE_FROM_CITY_CENTER"
     },
     {
-      "warp_id": "WARPI_ID_SHARPRISE_SPIRE_TO_CITY_LEFT",
+      "warp_id": "WARP_ID_SHARPRISE_SPIRE_TO_CITY_LEFT",
       "x": 14,
       "y": 8,
       "elevation": 0,
@@ -32,10 +32,11 @@
       "dest_warp_id": "WARP_ID_SHARPRISE_SPIRE_FROM_CITY_CENTER"
     },
     {
+      "warp_id": "WARP_ID_SPIRE_ELEVATOR_TO_FOYER",
       "x": 8,
       "y": 2,
       "elevation": 0,
-      "dest_map": "MAP_SALESORCETOWER_ELEVATOR",
+      "dest_map": "MAP_SHARPRISESPIRE_ELEVATOR",
       "dest_warp_id": "0"
     }
   ],

@@ -1433,6 +1433,14 @@ static const struct SpeakerData sSpeakerData[NUM_SPEAKERS] =
         .speakerIcon = gSpeakerIcon_Collector,
         .speakerPal = sSpeakerPal_Collector,
     },
+    [SPEAKER_ELEVATOR_ATTENDANT] =
+    {
+        .name = COMPOUND_STRING("Exhibit Attendant"),
+        .title = COMPOUND_STRING("???"),
+        .gender = NON_HUMAN,
+        .speakerIcon = gSpeakerIcon_Woman,
+        .speakerPal = sSpeakerPal_Woman,
+    },
     [SPEAKER_SPEAKER] =
     {
         .name = COMPOUND_STRING("Speaker"),

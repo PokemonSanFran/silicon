@@ -4762,6 +4762,8 @@ static void DebugAction_Quest_SelectState(u8 taskId)
     X(MUS_ENCOUNTER_GAMER_HODLER_INFLUENCER) \
     X(MUS_HALAI_ISLAND_EARTHQUAKE_NIGHT) \
     X(MUS_VIGRIM) \
+    X(MUS_CAPHE_CITY_NIGHT) \
+    X(MUS_CHARLOTTE) \
 
 #define SOUND_LIST_SE               \
     X(SE_USE_ITEM)                  \
