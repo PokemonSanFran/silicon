@@ -730,6 +730,7 @@ script BreedingCenter_Script_AskPlayerGene
     closemessage
     fadescreen(FADE_TO_BLACK)
     callnative(EditPokemonIndividualValues)
+	waitstate
     callnative(CompareOldNewIndividualValues)
     goto(BreedingCenter_Script_ChargeForStatChanges)
 }
