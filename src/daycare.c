@@ -1554,7 +1554,6 @@ void GenerateAndStoreEgg(struct DayCare *daycare, u32 eggIndex)
     if (P_INCENSE_BREEDING < GEN_9)
         AlterEggSpeciesWithIncenseItem(&species, daycare);
     SetInitialEggData(&egg, species, daycare);
-    daycare->offspringPersonality = 0;
     InheritIVs(&egg, daycare);
     MarkMonForEffortValuePerk(&egg);
     InheritPokeball(&egg, daycare);
