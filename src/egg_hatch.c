@@ -326,7 +326,7 @@ void AddHatchedMonToParty(u8 id)
     if (id < PARTY_SIZE)
         mon = &gParties[B_TRAINER_PLAYER][id];
     else
-        mon = &gParties[B_TRAINER_OPPONENT_A][(id - PARTY_SIZE)];
+        mon = &gParties[B_TRAINER_OPPONENT_A][0];
     // End daycare
 
     bool32 isEgg = FALSE;
