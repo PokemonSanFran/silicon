@@ -2767,8 +2767,8 @@ bool32 ShouldAskUnhoused(void)
 
 void ShowGarbodor(void)
 {
-    struct DayCare *daycare = &gSaveBlock1Ptr->daycare;
-    //struct Pokemon *mon = &daycare->viewMon;
+
+    struct Pokemon *new = &gParties[B_TRAINER_OPPONENT_A][0];
     struct Pokemon mon;
     u16 species = SPECIES_GARBODOR;
     u8 level = 40;
@@ -2786,9 +2786,9 @@ void ShowGarbodor(void)
     CalculateMonStats(&mon);
     GiveMonInitialMoveset(&mon);
 
-    CopyMon(&daycare->viewMon,&mon,sizeof(struct Pokemon));
+    CopyMon(new,&mon,sizeof(struct Pokemon));
 
-    ShowPokemonSummaryScreen(SUMMARY_MODE_LOCK_MOVES, &daycare->viewMon, 0, 0, CB2_ReturnToFieldContinueScriptPlayMapMusic);
+    ShowPokemonSummaryScreen(SUMMARY_MODE_LOCK_MOVES, new, 0, 0, CB2_ReturnToFieldContinueScriptPlayMapMusic);
 }
 
 // ***********************************************************************

@@ -1016,7 +1016,6 @@ struct DayCare
     struct DaycareMon mons[DAYCARE_MON_COUNT];
 // Start siliconDaycare
     struct DaycareEgg daycareEgg[SILICON_DAYCARE_EGG_MAX];
-    struct Pokemon viewMon;
 // End siliconDaycare
     u32 offspringPersonality;
     u32 stepCounter;
