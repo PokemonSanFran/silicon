@@ -573,11 +573,11 @@ void EditEggContents(void)
 static void LoadEggContents(u32 mode)
 {
     struct DayCare *daycare = &gSaveBlock1Ptr->daycare;
-    struct Pokemon *mon = &daycare->viewMon;
+    struct Pokemon *mon = &gParties[B_TRAINER_OPPONENT_A][0];
 
     ZeroMonData(mon);
     BoxMonToMon(&daycare->daycareEgg[GetFirstPopulatedEggIndex()].egg, mon);
-    SetupEggMon(mon);
+    AddHatchedMonToParty(PARTY_SIZE);
 
     ShowPokemonSummaryScreen(mode, mon, 0, 0, CB2_ReturnToFieldContinueScriptPlayMapMusic);
 }
