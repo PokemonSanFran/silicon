@@ -4764,6 +4764,8 @@ static void DebugAction_Quest_SelectState(u8 taskId)
     X(MUS_VIGRIM) \
     X(MUS_CAPHE_CITY_NIGHT) \
     X(MUS_CHARLOTTE) \
+    X(MUS_VS_SILICON_GYM_LEADER) \
+    X(MUS_HALERBA_CITY_NIGHT) \
 
 #define SOUND_LIST_SE               \
     X(SE_USE_ITEM)                  \
