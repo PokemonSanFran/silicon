@@ -229,7 +229,7 @@ static void ResetWeatherPostBattle(void);
 
 static struct GameBoardState *sGameBoardState = NULL;
 static u8 *sBgTilemapBuffer[BG_BOARD_COUNT] = {NULL};
-static struct GameResult *sGameBoard[ARCADE_GAME_BOARD_SPACES] = {NULL};
+static struct GameResult sGameBoard[ARCADE_GAME_BOARD_SPACES] = {{0}};
 
 static const u32 sArcadePerformanceTable[IMPACT_PERFORMANCE_TABLE_SIZE][3] =
 {
@@ -599,40 +599,39 @@ static const u32 sBackgroundTilemap[] = INCBIN_U32("graphics/battle_frontier/bat
 static const u32 sLogobackgroundTiles[] = INCGFX_U32("graphics/battle_frontier/battle_arcade/game/backgrounds/logobackground.png", ".4bpp.smol");
 static const u32 sLogobackgroundTilemap[] = INCBIN_U32("graphics/battle_frontier/battle_arcade/game/backgrounds/logobackground.bin.smolTM");
 
-static const u32 sCountdownTile1[] = INCGFX_U32("graphics/battle_frontier/battle_arcade/game/panels/countdown/1.png",".4bpp.smol");
-static const u32 sCountdownTile2[] = INCGFX_U32("graphics/battle_frontier/battle_arcade/game/panels/countdown/2.png",".4bpp.smol");
-static const u32 sCountdownTile3[] = INCGFX_U32("graphics/battle_frontier/battle_arcade/game/panels/countdown/3.png",".4bpp.smol");
+static const u32 sCountdownTile1[] = INCBIN_U32("graphics/battle_frontier/battle_arcade/game/panels/countdown/1.4bpp");
+static const u32 sCountdownTile2[] = INCBIN_U32("graphics/battle_frontier/battle_arcade/game/panels/countdown/2.4bpp");
+static const u32 sCountdownTile3[] = INCBIN_U32("graphics/battle_frontier/battle_arcade/game/panels/countdown/3.4bpp");
 
-static const u32 sEventBurn[] = INCGFX_U32("graphics/battle_frontier/battle_arcade/game/panels/event/burn.png", ".4bpp.smol");
-static const u32 sEventFog[] = INCGFX_U32("graphics/battle_frontier/battle_arcade/game/panels/event/fog.png", ".4bpp.smol");
-static const u32 sEventFreeze[] = INCGFX_U32("graphics/battle_frontier/battle_arcade/game/panels/event/freeze.png", ".4bpp.smol");
-static const u32 sEventGiveBerry[] = INCGFX_U32("graphics/battle_frontier/battle_arcade/game/panels/event/give_berry.png", ".4bpp.smol");
-static const u32 sEventGiveBpBig[] = INCGFX_U32("graphics/battle_frontier/battle_arcade/game/panels/event/give_bp_big.png", ".4bpp.smol");
-static const u32 sEventGiveBpSmall[] = INCGFX_U32("graphics/battle_frontier/battle_arcade/game/panels/event/give_bp_small.png", ".4bpp.smol");
-static const u32 sEventGiveItem[] = INCGFX_U32("graphics/battle_frontier/battle_arcade/game/panels/event/give_item.png", ".4bpp.smol");
-static const u32 sEventHail[] = INCGFX_U32("graphics/battle_frontier/battle_arcade/game/panels/event/hail.png", ".4bpp.smol");
-static const u32 sEventLevelUp[] = INCGFX_U32("graphics/battle_frontier/battle_arcade/game/panels/event/level_up.png", ".4bpp.smol");
-static const u32 sEventLowerHp[] = INCGFX_U32("graphics/battle_frontier/battle_arcade/game/panels/event/lower_hp.png", ".4bpp.smol");
-static const u32 sEventNoBattle[] = INCGFX_U32("graphics/battle_frontier/battle_arcade/game/panels/event/no_battle.png", ".4bpp.smol");
-static const u32 sEventParalyze[] = INCGFX_U32("graphics/battle_frontier/battle_arcade/game/panels/event/paralyze.png", ".4bpp.smol");
-static const u32 sEventPoison[] = INCGFX_U32("graphics/battle_frontier/battle_arcade/game/panels/event/poison.png", ".4bpp.smol");
-static const u32 sEventRain[] = INCGFX_U32("graphics/battle_frontier/battle_arcade/game/panels/event/rain.png", ".4bpp.smol");
-static const u32 sEventRandom[] = INCGFX_U32("graphics/battle_frontier/battle_arcade/game/panels/event/random.png", ".4bpp.smol");
-static const u32 sEventSand[] = INCGFX_U32("graphics/battle_frontier/battle_arcade/game/panels/event/sand.png", ".4bpp.smol");
-static const u32 sEventSleep[] = INCGFX_U32("graphics/battle_frontier/battle_arcade/game/panels/event/sleep.png", ".4bpp.smol");
-static const u32 sEventSpeedDown[] = INCGFX_U32("graphics/battle_frontier/battle_arcade/game/panels/event/speed_down.png", ".4bpp.smol");
-static const u32 sEventSpeedUp[] = INCGFX_U32("graphics/battle_frontier/battle_arcade/game/panels/event/speed_up.png", ".4bpp.smol");
-static const u32 sEventSun[] = INCGFX_U32("graphics/battle_frontier/battle_arcade/game/panels/event/sun.png", ".4bpp.smol");
-static const u32 sEventSwap[] = INCGFX_U32("graphics/battle_frontier/battle_arcade/game/panels/event/swap.png", ".4bpp.smol");
-static const u32 sEventTrickRoom[] = INCGFX_U32("graphics/battle_frontier/battle_arcade/game/panels/event/trick_room.png", ".4bpp.smol");
-static const u32 sEventNoEvent[] = INCGFX_U32("graphics/battle_frontier/battle_arcade/game/panels/event/no_event.png", ".4bpp.smol");
+static const u32 sEventBurn[] = INCBIN_U32("graphics/battle_frontier/battle_arcade/game/panels/event/burn.4bpp.lz");
+static const u32 sEventFog[] = INCBIN_U32("graphics/battle_frontier/battle_arcade/game/panels/event/fog.4bpp.lz");
+static const u32 sEventFreeze[] = INCBIN_U32("graphics/battle_frontier/battle_arcade/game/panels/event/freeze.4bpp.lz");
+static const u32 sEventGiveBerry[] = INCBIN_U32("graphics/battle_frontier/battle_arcade/game/panels/event/give_berry.4bpp.lz");
+static const u32 sEventGiveBpBig[] = INCBIN_U32("graphics/battle_frontier/battle_arcade/game/panels/event/give_bp_big.4bpp.lz");
+static const u32 sEventGiveBpSmall[] = INCBIN_U32("graphics/battle_frontier/battle_arcade/game/panels/event/give_bp_small.4bpp.lz");
+static const u32 sEventGiveItem[] = INCBIN_U32("graphics/battle_frontier/battle_arcade/game/panels/event/give_item.4bpp.lz");
+static const u32 sEventHail[] = INCBIN_U32("graphics/battle_frontier/battle_arcade/game/panels/event/hail.4bpp.lz");
+static const u32 sEventLevelUp[] = INCBIN_U32("graphics/battle_frontier/battle_arcade/game/panels/event/level_up.4bpp.lz");
+static const u32 sEventLowerHp[] = INCBIN_U32("graphics/battle_frontier/battle_arcade/game/panels/event/lower_hp.4bpp.lz");
+static const u32 sEventNoBattle[] = INCBIN_U32("graphics/battle_frontier/battle_arcade/game/panels/event/no_battle.4bpp.lz");
+static const u32 sEventParalyze[] = INCBIN_U32("graphics/battle_frontier/battle_arcade/game/panels/event/paralyze.4bpp.lz");
+static const u32 sEventPoison[] = INCBIN_U32("graphics/battle_frontier/battle_arcade/game/panels/event/poison.4bpp.lz");
+static const u32 sEventRain[] = INCBIN_U32("graphics/battle_frontier/battle_arcade/game/panels/event/rain.4bpp.lz");
+static const u32 sEventRandom[] = INCBIN_U32("graphics/battle_frontier/battle_arcade/game/panels/event/random.4bpp.lz");
+static const u32 sEventSand[] = INCBIN_U32("graphics/battle_frontier/battle_arcade/game/panels/event/sand.4bpp.lz");
+static const u32 sEventSleep[] = INCBIN_U32("graphics/battle_frontier/battle_arcade/game/panels/event/sleep.4bpp.lz");
+static const u32 sEventSpeedDown[] = INCBIN_U32("graphics/battle_frontier/battle_arcade/game/panels/event/speed_down.4bpp.lz");
+static const u32 sEventSpeedUp[] = INCBIN_U32("graphics/battle_frontier/battle_arcade/game/panels/event/speed_up.4bpp.lz");
+static const u32 sEventSun[] = INCBIN_U32("graphics/battle_frontier/battle_arcade/game/panels/event/sun.4bpp.lz");
+static const u32 sEventSwap[] = INCBIN_U32("graphics/battle_frontier/battle_arcade/game/panels/event/swap.4bpp.lz");
+static const u32 sEventTrickRoom[] = INCBIN_U32("graphics/battle_frontier/battle_arcade/game/panels/event/trick_room.4bpp.lz");
+static const u32 sEventNoEvent[] = INCBIN_U32("graphics/battle_frontier/battle_arcade/game/panels/event/no_event.4bpp.lz");
 
-static const u32 sGameCursor[] = INCGFX_U32("graphics/battle_frontier/battle_arcade/game/cursor.png", ".4bpp.smol");
+static const u32 sGameCursor[] = INCBIN_U32("graphics/battle_frontier/battle_arcade/game/cursor.4bpp.lz");
 
-static const u16 sArcadeEventPlayer_Pal[] = INCGFX_U16("graphics/battle_frontier/battle_arcade/game/palettes/event_player.pal", ".gbapal");
-static const u16 sArcadeEventOpponent_Pal[] = INCGFX_U16("graphics/battle_frontier/battle_arcade/game/palettes/event_opponent.pal", ".gbapal");
-static const u16 sGameBoardPalette_Pal[] = INCGFX_U16("graphics/battle_frontier/battle_arcade/game/palettes/background.pal", ".gbapal");
-
+const u16 sArcadeEventPlayer_Pal[] = INCBIN_U16("graphics/battle_frontier/battle_arcade/game/palettes/event_player.gbapal");
+const u16 sArcadeEventOpponent_Pal[] = INCBIN_U16("graphics/battle_frontier/battle_arcade/game/palettes/event_opponent.gbapal");
+const u16 sGameBoardPalette_Pal[] = INCBIN_U16("graphics/battle_frontier/battle_arcade/game/palettes/background.gbapal");
 static const struct SpritePalette sArcadePalettes[] =
 {
     {sArcadeEventOpponent_Pal, ARCADE_PALTAG_OPPONENT},
@@ -855,6 +854,28 @@ static bool32 AreTilesOrTilemapEmpty(u32 backgroundId)
     return (sArcadeTilesLUT[backgroundId] == NULL || sArcadeTilemapLUT[backgroundId] == NULL);
 }
 
+static GameBoard_LoadSprites(void)
+{
+    for (ArcadeSpriteIds spriteId = 0; spriteId < ARCADE_SPRITEID_COUNT; spriteId++)
+    {
+        if (sDexnavSpriteSheets[spriteId].spriteSheet.tag == 0)
+            continue;
+
+        if (sDexnavSpriteSheets[spriteId].spriteSheet.tag == DEXNAV_SPRITETAG_OVERWORLD)
+            continue;
+
+        LoadSpriteSheet(&sDexnavSpriteSheets[spriteId].spriteSheet);
+
+        if (sDexnavSpriteSheets[spriteId].palette.tag == 0)
+            continue;
+
+        if (sDexnavSpriteSheets[spriteId].spriteSheet.tag == DEXNAV_PALTAG_OVERWORLD)
+            continue;
+
+        LoadSpritePalette(&sDexnavSpriteSheets[spriteId].palette);
+    }
+}
+
 static bool8 GameBoard_LoadGraphics(void)
 {
     switch (sGameBoardState->loadState)
@@ -873,6 +894,7 @@ static bool8 GameBoard_LoadGraphics(void)
             sGameBoardState->loadState++;
             break;
         case 1:
+            GameBoard_LoadSprites();
             sGameBoardState->loadState++;
             break;
         case 2:
@@ -912,22 +934,10 @@ static void LoadEventPalettes(void)
 
 static void GenerateGameBoard(void)
 {
-    for (u32 event = 0; event < ARCADE_EVENT_COUNT; event++)
-    {
-        sGameBoard[event] = AllocZeroed(sizeof(struct GameResult));
-
-        if (sGameBoard[event] == NULL)
-        {
-            SetMainCallback2(sGameBoardState->savedCallback);
-            GameBoard_FreeResources();
-            return;
-        }
-    }
-
     for (u32 space = 0; space < ARCADE_GAME_BOARD_SPACES; space++)
     {
-        sGameBoard[space]->impact = GenerateImpact();
-        sGameBoard[space]->event = GenerateEvent(sGameBoard[space]->impact);
+        sGameBoard[space].impact = GenerateImpact();
+        sGameBoard[space].event = GenerateEvent(sGameBoard[space].impact);
 
     }
 }
@@ -1105,10 +1115,15 @@ static void Task_GameBoard_Countdown(u8 taskId)
             break;
         case 0:
             IncrementGameBoardMode();
+            DebugPrintf("0");
             PopulateEventSprites();
+            DebugPrintf("1");
             PrintHelpBar();
+            DebugPrintf("2");
             StartGame();
+            DebugPrintf("3");
             DestroyTask(taskId);
+            DebugPrintf("4");
             break;
         default:
             break;
@@ -1117,27 +1132,12 @@ static void Task_GameBoard_Countdown(u8 taskId)
 
 static void PopulateEventSprites(void)
 {
-    u32 space, x, y;
+    u32 x, y;
 
-    LoadTileSpriteSheets();
-    LoadEventPalettes();
-
-    for (space = 0; space < (ARCADE_GAME_BOARD_ROWS * ARCADE_GAME_BOARD_COLUMNS); space++)
+    for (u32 space = 0; space < (ARCADE_GAME_BOARD_ROWS * ARCADE_GAME_BOARD_COLUMNS); space++)
     {
         CalculatePanelPosition(space,&x,&y);
         sGameBoardState->eventIconSpriteId[space] = CreateEventSprite(x, y, space);
-    }
-}
-
-static void LoadTileSpriteSheets(void)
-{
-    u32 i;
-    for (i = 0; i < ARCADE_GAME_BOARD_SPACES; i++)
-    {
-        u16 TileTag = GetTileTag(i);
-        const u32 *gfx = GetEventGfx(sGameBoard[i]->event);
-        struct CompressedSpriteSheet sSpriteSheet_EventSpace = {gfx, 0x0200, TileTag};
-        LoadCompressedSpriteSheet(&sSpriteSheet_EventSpace);
     }
 }
 
@@ -1176,7 +1176,7 @@ static u8 CreateEventSprite(u32 x, u32 y, u32 space)
 {
     u32 spriteId;
     u16 TileTag = GetTileTag(space);
-    u32 impact = (sGameBoard[space]->impact == ARCADE_IMPACT_PLAYER) ? ARCADE_IMPACT_PLAYER : ARCADE_IMPACT_OPPONENT;
+    u32 impact = (sGameBoard[space].impact == ARCADE_IMPACT_PLAYER) ? ARCADE_IMPACT_PLAYER : ARCADE_IMPACT_OPPONENT;
 
     struct SpriteTemplate TempSpriteTemplate = gDummySpriteTemplate;
     TempSpriteTemplate.tileTag = TileTag;
@@ -1194,7 +1194,7 @@ static u8 CreateEventSprite(u32 x, u32 y, u32 space)
 
 static const u16 GetTileTag(u32 space)
 {
-    return (sGameBoard[space]->event) + ARCADE_GFXTAG_EVENT;
+    return (sGameBoard[space].event) + ARCADE_GFXTAG_EVENT;
 }
 
 static void StartGame(void)
@@ -1386,8 +1386,8 @@ static void SelectGameBoardSpace(u32 *impact, u32 *event)
 {
     u32 space = GetCursorPosition();
 
-    *impact = sGameBoard[space]->impact;
-    *event = sGameBoard[space]->event;
+    *impact = sGameBoard[space].impact;
+    *event = sGameBoard[space].event;
 }
 
 static void HandleGameBoardResult(u32 impact, u32 event)
@@ -1418,8 +1418,8 @@ static void SetGameBoardToChosenEvent(u32 impact, u32 event)
     u32 i;
     for (i = 0; i < ARCADE_GAME_BOARD_SPACES; i++)
     {
-        sGameBoard[i]->impact = impact;
-        sGameBoard[i]->event = event;
+        sGameBoard[i].impact = impact;
+        sGameBoard[i].event = event;
     }
 }
 

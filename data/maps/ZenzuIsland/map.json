@@ -98,11 +98,20 @@
       "dest_warp_id": "0"
     },
     {
+      "warp_id": "WARP_ID_ZENZU_ISLAND_TO_SKILL_LIBRARY",
       "x": 19,
       "y": 21,
       "elevation": 0,
       "dest_map": "MAP_ZENZU_ISLAND_SKILL_LIBRARY",
       "dest_warp_id": "0"
+    },
+    {
+      "warp_id": "WARP_ID_ZENZU_ISLAND_TO_GYM",
+      "x": 5,
+      "y": 12,
+      "elevation": 0,
+      "dest_map": "MAP_ZENZU_ISLAND_GYM",
+      "dest_warp_id": "WARP_ID_ZENZU_GYM_TO_ISLAND_RIGHT"
     }
   ],
   "coord_events": [

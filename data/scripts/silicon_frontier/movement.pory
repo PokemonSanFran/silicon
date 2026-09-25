@@ -8,6 +8,7 @@ script SiliconFrontier_Movement_MovePlayerIntoBattlePosition
         case SILICON_FACILITY_TOWER:
             call(BattleJam_Movement_MovePlayerIntoBattlePosition)
         case SILICON_FACILITY_ARCADE:
+            call(BattleStudio_Movement_MovePlayerIntoBattlePosition)
         case SILICON_FACILITY_FACTORY:
     }
 }
@@ -22,6 +23,7 @@ script SiliconFrontier_Movement_MoveOpponentsIntoPosition
         case SILICON_FACILITY_TOWER:
             call(BattleJam_Movement_MoveOpponentsIntoPosition)
         case SILICON_FACILITY_ARCADE:
+            call(BattleStudio_Movement_MoveOpponentsIntoPosition)
         case SILICON_FACILITY_FACTORY:
     }
 }
@@ -36,6 +38,7 @@ script SiliconFrontier_Movement_MoveBattlersIntoBattle
         case SILICON_FACILITY_TOWER:
             call(BattleJam_Movement_MoveBattlersIntoBattle)
         case SILICON_FACILITY_ARCADE:
+            call(BattleStudio_Movement_MoveBattlersIntoBattle)
         case SILICON_FACILITY_FACTORY:
     }
 }
@@ -50,6 +53,7 @@ script SiliconFrontier_Movement_MoveBattlersOutOfBattle
         case SILICON_FACILITY_TOWER:
             call(BattleJam_Movement_MoveBattlersOutOfBattle)
         case SILICON_FACILITY_ARCADE:
+            call(BattleStudio_Movement_MoveBattlersOutOfBattle)
         case SILICON_FACILITY_FACTORY:
     }
 }
@@ -64,6 +68,7 @@ script SiliconFrontier_Movement_LeaveForBattleRoom
         case SILICON_FACILITY_TOWER:
             call(BattleJam_Movement_LeaveForBattleRoom)
         case SILICON_FACILITY_ARCADE:
+            call(BattleStudio_Movement_LeaveForBattleRoom)
         case SILICON_FACILITY_FACTORY:
     }
 }
@@ -78,6 +83,7 @@ script SiliconFrontier_Script_RefreshOpponentObjects
         case SILICON_FACILITY_TOWER:
             call(BattleJam_Script_RefreshOpponentObjects)
         case SILICON_FACILITY_ARCADE:
+            call(BattleStudio_Script_RefreshOpponentObjects)
         case SILICON_FACILITY_FACTORY:
     }
 }
@@ -92,6 +98,7 @@ script SiliconFrontier_Movement_CueAttendant
         case SILICON_FACILITY_TOWER:
             call(BattleJam_Movement_CueAttendant)
         case SILICON_FACILITY_ARCADE:
+            call(BattleStudio_Movement_CueAttendant)
         case SILICON_FACILITY_FACTORY:
     }
 }

@@ -13549,6 +13549,18 @@
       "secondary_tileset": "gTileset_FancyIndoors",
       "border_filepath": "data/layouts/FancyIndoorTest/border.bin",
       "blockdata_filepath": "data/layouts/FancyIndoorTest/map.bin"
+    },
+    {
+      "id": "LAYOUT_ZENZU_ISLAND_GYM",
+      "name": "ZenzuIsland_Gym_Layout",
+      "width": 10,
+      "height": 10,
+      "border_width": 2,
+      "border_height": 2,
+      "primary_tileset": "gTileset_Building",
+      "secondary_tileset": "gTileset_BattlePike",
+      "border_filepath": "data/layouts/ZenzuIsland_Gym/border.bin",
+      "blockdata_filepath": "data/layouts/ZenzuIsland_Gym/map.bin"
     }
   ]
 }

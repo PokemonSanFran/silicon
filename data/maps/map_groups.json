@@ -399,7 +399,8 @@
   ],
   "gMapGroup_IndoorZenzuIsland": [
     "ZenzuIsland_PokemonCenter_1F",
-    "ZenzuIsland_SkillLibrary"
+    "ZenzuIsland_SkillLibrary",
+    "ZenzuIsland_Gym"
   ],
   "gMapGroup_IndoorHalaiIsland": [
     "HalaiIsland_Baiya",
