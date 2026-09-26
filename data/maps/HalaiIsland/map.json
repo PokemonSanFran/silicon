@@ -396,5 +396,6 @@
       "script": "Earthquake_Script_PreventPlayerLeaving"
     }
   ],
-  "bg_events": []
+  "bg_events": [],
+  "night_music": "MUS_HALAI_ISLAND_NIGHT"
 }
