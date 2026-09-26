@@ -2,7 +2,7 @@
   "id": "MAP_OROLAND",
   "name": "Oroland",
   "layout": "LAYOUT_OROLAND",
-  "music": "MUS_GSC_PEWTER",
+  "music": "MUS_OROLAND",
   "region_map_section": "MAPSEC_OROLAND",
   "requires_flash": false,
   "weather": "WEATHER_NONE",
@@ -209,5 +209,6 @@
     }
   ],
   "coord_events": [],
-  "bg_events": []
+  "bg_events": [],
+  "night_music": "MUS_OROLAND_NIGHT"
 }
