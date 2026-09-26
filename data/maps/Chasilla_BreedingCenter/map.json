@@ -72,5 +72,6 @@
     }
   ],
   "coord_events": [],
-  "bg_events": []
+  "bg_events": [],
+  "night_music": "MUS_CHASILLA_NIGHT"
 }
