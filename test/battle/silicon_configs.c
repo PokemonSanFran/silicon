@@ -4,6 +4,8 @@
 #include "load_save.h"
 #include "event_data.h"
 #include "pokedex.h"
+#include "ui_pokedex.h"
+#include "constants/ui_pokedex.h"
 #include "malloc.h"
 #include "constants/characters.h"
 #include "test/overworld_script.h"
@@ -1343,4 +1345,67 @@ TEST("OPTIONS (BATTLE): Trainer Scaling (Level)")
     EXPECT_LT(GetMonData(&testParty[1], MON_DATA_LEVEL), 100);
 
     Free(testParty);
+}
+
+TEST("Ensure MAX_LEVEL_UP_MOVES matches the reality of Resido mons")
+{
+    u32 totalLevel = 0;
+
+    for (enum Species species =0; species < NUM_SPECIES; species++)
+    {
+        enum ResidoDexNumbers residoId = ConvertSpeciesIdToResidoDex(species);
+
+        if (residoId == RESIDO_DEX_NONE || residoId == RESIDO_DEX_COUNT)
+            continue;
+
+        u32 tempLevel = 0;
+        const struct LevelUpMove *learnset = GetSpeciesLevelUpLearnset(species);
+        for (u32 i = 0; learnset[i].move != LEVEL_UP_MOVE_END; i++)
+            tempLevel++;
+
+        totalLevel = max(totalLevel,tempLevel);
+    }
+    EXPECT_EQ(totalLevel,MAX_LEVEL_UP_MOVES);
+}
+
+TEST("Ensure EGG_MOVES_ARRAY_COUNT matches the reality of Resido mons")
+{
+    u32 totalEgg = 0;
+
+    for (enum Species species =0; species < NUM_SPECIES; species++)
+    {
+        enum ResidoDexNumbers residoId = ConvertSpeciesIdToResidoDex(species);
+
+        if (residoId == RESIDO_DEX_NONE || residoId == RESIDO_DEX_COUNT)
+            continue;
+
+        u32 tempEgg = 0;
+        const u16 *eggMoves = GetSpeciesEggMoves(species);
+        for (u32 i = 0; eggMoves[i] != MOVE_UNAVAILABLE; i++)
+            tempEgg++;
+
+        totalEgg = max(totalEgg,tempEgg);
+    }
+    EXPECT_EQ(totalEgg,EGG_MOVES_ARRAY_COUNT);
+}
+
+TEST("Ensure MAX_TEACHABLE_MOVES matches the reality of Resido mons")
+{
+    u32 totalTeachable = 0;
+
+    for (enum Species species =0; species < NUM_SPECIES; species++)
+    {
+        enum ResidoDexNumbers residoId = ConvertSpeciesIdToResidoDex(species);
+
+        if (residoId == RESIDO_DEX_NONE || residoId == RESIDO_DEX_COUNT)
+            continue;
+
+        u32 tempTeachable = 0;
+        const u16 *teachables = GetSpeciesTeachableLearnset(species);
+        for (u32 i = 0; teachables[i] != MOVE_UNAVAILABLE; i++)
+            tempTeachable++;
+
+        totalTeachable = max(totalTeachable,tempTeachable);
+    }
+    EXPECT_EQ(totalTeachable,MAX_TEACHABLE_MOVES);
 }
