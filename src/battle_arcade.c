@@ -65,20 +65,18 @@
 
 struct GameResult
 {
-    u8 impact:2;
-    u8 event:5;
+    enum ArcadeImpactTypes impact;
+    enum ArcadeEvents event:5;
 };
 
 struct GameBoardState
 {
     MainCallback savedCallback;
     u8 loadState;
-    u8 gameMode;
-    u8 monIconSpriteId[2][MAX_FRONTIER_PARTY_SIZE];
+    enum ArcadeBoardModes gameMode;
     u16 timer;
     u8 cursorPosition;
-    u8 eventIconSpriteId[ARCADE_GAME_BOARD_SPACES];
-    u8 countdownPanelSpriteId[ARCADE_GAME_BOARD_SPACES];
+    u8 spriteId[ARCADE_SPRITEID_COUNT];
     u8 cursorPaletteNum[2];
 };
 
@@ -133,13 +131,11 @@ static void MainCB(void);
 static void StartCountdown(void);
 static void SetTimerForCountdown(void);
 static void SetTimer(u32);
-static void PopulateCountdownSprites(void);
 static void CalculatePanelPosition(u32, u32*, u32*);
 static u32 CreateCountdownPanel(u32, u32);
 static void Task_GameBoard_Countdown(u8);
 static void PopulateEventSprites(void);
 static void LoadTileSpriteSheets(void);
-static const u32* GetEventGfx(u32);
 static u8 CreateEventSprite(u32, u32, u32);
 static const u16 GetTileTag(u32);
 static void StartGame(void);
@@ -546,19 +542,19 @@ static const struct BgTemplate sGameBoardBgTemplates[] =
         .bg = BG_BOARD_HELP_BAR,
         .charBaseIndex = 0,
         .mapBaseIndex = 31,
-        .priority = 1
+        .priority = 0
     },
     {
         .bg = BG_BOARD_EVENTS,
         .charBaseIndex = 3,
         .mapBaseIndex = 30,
-        .priority = 2
+        .priority = 1
     },
     {
         .bg = BG_BOARD_BACKGROUND,
         .charBaseIndex = 2,
         .mapBaseIndex = 29,
-        .priority = 0
+        .priority = 2,
     },
     {
         .bg = BG_BOARD_BACKBOARD,
@@ -577,20 +573,15 @@ static const struct WindowTemplate sGameBoardWinTemplates[] =
         .tilemapTop = 18,
         .width = 30,
         .height = 2,
-        .paletteNum = 15,
+        .paletteNum = 1,
         .baseBlock = 1,
     },
     DUMMY_WIN_TEMPLATE
 };
 
-static const u8 sGameBoardWindowFontColors[][3] =
+static const u8 sGameBoardWindowFontColors[3] =
 {
-    [TEXT_COLOR_WHITE]  =
-    {
-        TEXT_COLOR_TRANSPARENT,
-        TEXT_COLOR_WHITE,
-        TEXT_COLOR_DARK_GRAY
-    },
+    0,  1,  0,
 };
 
 static const u32 sBackgroundTiles[] = INCGFX_U32("graphics/battle_frontier/battle_arcade/game/backgrounds/background.png", ".4bpp.smol");
@@ -599,91 +590,14 @@ static const u32 sBackgroundTilemap[] = INCBIN_U32("graphics/battle_frontier/bat
 static const u32 sLogobackgroundTiles[] = INCGFX_U32("graphics/battle_frontier/battle_arcade/game/backgrounds/logobackground.png", ".4bpp.smol");
 static const u32 sLogobackgroundTilemap[] = INCBIN_U32("graphics/battle_frontier/battle_arcade/game/backgrounds/logobackground.bin.smolTM");
 
-static const u32 sCountdownTile1[] = INCBIN_U32("graphics/battle_frontier/battle_arcade/game/panels/countdown/1.4bpp");
-static const u32 sCountdownTile2[] = INCBIN_U32("graphics/battle_frontier/battle_arcade/game/panels/countdown/2.4bpp");
-static const u32 sCountdownTile3[] = INCBIN_U32("graphics/battle_frontier/battle_arcade/game/panels/countdown/3.4bpp");
-
-static const u32 sEventBurn[] = INCBIN_U32("graphics/battle_frontier/battle_arcade/game/panels/event/burn.4bpp.lz");
-static const u32 sEventFog[] = INCBIN_U32("graphics/battle_frontier/battle_arcade/game/panels/event/fog.4bpp.lz");
-static const u32 sEventFreeze[] = INCBIN_U32("graphics/battle_frontier/battle_arcade/game/panels/event/freeze.4bpp.lz");
-static const u32 sEventGiveBerry[] = INCBIN_U32("graphics/battle_frontier/battle_arcade/game/panels/event/give_berry.4bpp.lz");
-static const u32 sEventGiveBpBig[] = INCBIN_U32("graphics/battle_frontier/battle_arcade/game/panels/event/give_bp_big.4bpp.lz");
-static const u32 sEventGiveBpSmall[] = INCBIN_U32("graphics/battle_frontier/battle_arcade/game/panels/event/give_bp_small.4bpp.lz");
-static const u32 sEventGiveItem[] = INCBIN_U32("graphics/battle_frontier/battle_arcade/game/panels/event/give_item.4bpp.lz");
-static const u32 sEventHail[] = INCBIN_U32("graphics/battle_frontier/battle_arcade/game/panels/event/hail.4bpp.lz");
-static const u32 sEventLevelUp[] = INCBIN_U32("graphics/battle_frontier/battle_arcade/game/panels/event/level_up.4bpp.lz");
-static const u32 sEventLowerHp[] = INCBIN_U32("graphics/battle_frontier/battle_arcade/game/panels/event/lower_hp.4bpp.lz");
-static const u32 sEventNoBattle[] = INCBIN_U32("graphics/battle_frontier/battle_arcade/game/panels/event/no_battle.4bpp.lz");
-static const u32 sEventParalyze[] = INCBIN_U32("graphics/battle_frontier/battle_arcade/game/panels/event/paralyze.4bpp.lz");
-static const u32 sEventPoison[] = INCBIN_U32("graphics/battle_frontier/battle_arcade/game/panels/event/poison.4bpp.lz");
-static const u32 sEventRain[] = INCBIN_U32("graphics/battle_frontier/battle_arcade/game/panels/event/rain.4bpp.lz");
-static const u32 sEventRandom[] = INCBIN_U32("graphics/battle_frontier/battle_arcade/game/panels/event/random.4bpp.lz");
-static const u32 sEventSand[] = INCBIN_U32("graphics/battle_frontier/battle_arcade/game/panels/event/sand.4bpp.lz");
-static const u32 sEventSleep[] = INCBIN_U32("graphics/battle_frontier/battle_arcade/game/panels/event/sleep.4bpp.lz");
-static const u32 sEventSpeedDown[] = INCBIN_U32("graphics/battle_frontier/battle_arcade/game/panels/event/speed_down.4bpp.lz");
-static const u32 sEventSpeedUp[] = INCBIN_U32("graphics/battle_frontier/battle_arcade/game/panels/event/speed_up.4bpp.lz");
-static const u32 sEventSun[] = INCBIN_U32("graphics/battle_frontier/battle_arcade/game/panels/event/sun.4bpp.lz");
-static const u32 sEventSwap[] = INCBIN_U32("graphics/battle_frontier/battle_arcade/game/panels/event/swap.4bpp.lz");
-static const u32 sEventTrickRoom[] = INCBIN_U32("graphics/battle_frontier/battle_arcade/game/panels/event/trick_room.4bpp.lz");
-static const u32 sEventNoEvent[] = INCBIN_U32("graphics/battle_frontier/battle_arcade/game/panels/event/no_event.4bpp.lz");
-
-static const u32 sGameCursor[] = INCBIN_U32("graphics/battle_frontier/battle_arcade/game/cursor.4bpp.lz");
-
 const u16 sArcadeEventPlayer_Pal[] = INCBIN_U16("graphics/battle_frontier/battle_arcade/game/palettes/event_player.gbapal");
 const u16 sArcadeEventOpponent_Pal[] = INCBIN_U16("graphics/battle_frontier/battle_arcade/game/palettes/event_opponent.gbapal");
 const u16 sGameBoardPalette_Pal[] = INCBIN_U16("graphics/battle_frontier/battle_arcade/game/palettes/background.gbapal");
+const u16 sGameBoardText_Pal[] = INCBIN_U16("graphics/battle_frontier/battle_arcade/game/palettes/text.gbapal");
 static const struct SpritePalette sArcadePalettes[] =
 {
     {sArcadeEventOpponent_Pal, ARCADE_PALTAG_OPPONENT},
     {sArcadeEventPlayer_Pal,   ARCADE_PALTAG_PLAYER},
-};
-
-static const union AnimCmd sCountdownPanelAnim[] =
-{
-    ANIMCMD_FRAME(0, ARCADE_BOARD_COUNTDOWN_TIMER / 3),
-    ANIMCMD_FRAME(1, ARCADE_BOARD_COUNTDOWN_TIMER / 3),
-    ANIMCMD_FRAME(2, ARCADE_BOARD_COUNTDOWN_TIMER / 3),
-    ANIMCMD_FRAME(2, 10),
-    ANIMCMD_END
-};
-
-static const union AnimCmd *const sCountdownAnims[] =
-{
-    [ARCADE_COUNTDOWN_ANIM] = sCountdownPanelAnim
-};
-
-static const struct SpriteFrameImage sCountdownPanelPicTable[] =
-{
-    obj_frame_tiles(sCountdownTile3),
-    obj_frame_tiles(sCountdownTile2),
-    obj_frame_tiles(sCountdownTile1),
-};
-
-static const struct OamData CountdownPanelOam =
-{
-    .y = 0,
-    .affineMode = ST_OAM_AFFINE_OFF,
-    .objMode = ST_OAM_OBJ_NORMAL,
-    .mosaic = FALSE,
-    .bpp = ST_OAM_4BPP,
-    .shape = SPRITE_SHAPE(32x32),
-    .x = 0,
-    .matrixNum = 0,
-    .size = SPRITE_SIZE(32x32),
-    .tileNum = 0,
-    .priority = 1,
-    .paletteNum = 0,
-    .affineParam = 0,
-};
-
-static const struct SpriteTemplate sCountdownPanelSpriteTemplate =
-{
-    .tileTag = TAG_NONE,
-    .paletteTag = ARCADE_PALTAG_OPPONENT,
-    .oam = &CountdownPanelOam,
-    .anims = sCountdownAnims,
-    .images = sCountdownPanelPicTable,
-    .callback = SpriteCallbackDummy,
 };
 
 void Task_OpenGameBoard(u8 taskId)
@@ -837,16 +751,16 @@ static const u32* const sArcadeTilesLUT[] =
 {
     [BG_BOARD_HELP_BAR] = NULL,
     [BG_BOARD_EVENTS] = NULL,
-    [BG_BOARD_BACKGROUND] = sBackgroundTiles,
-    [BG_BOARD_BACKBOARD] = sLogobackgroundTiles,
+    [BG_BOARD_BACKGROUND] = sLogobackgroundTiles,
+    [BG_BOARD_BACKBOARD] = sBackgroundTiles,
 };
 
 static const u32* const sArcadeTilemapLUT[] =
 {
     [BG_BOARD_HELP_BAR] = NULL,
     [BG_BOARD_EVENTS] = NULL,
-    [BG_BOARD_BACKGROUND] = sBackgroundTilemap,
-    [BG_BOARD_BACKBOARD] = sLogobackgroundTilemap,
+    [BG_BOARD_BACKGROUND] = sLogobackgroundTilemap,
+    [BG_BOARD_BACKBOARD] = sBackgroundTilemap,
 };
 
 static bool32 AreTilesOrTilemapEmpty(u32 backgroundId)
@@ -854,26 +768,74 @@ static bool32 AreTilesOrTilemapEmpty(u32 backgroundId)
     return (sArcadeTilesLUT[backgroundId] == NULL || sArcadeTilemapLUT[backgroundId] == NULL);
 }
 
-static GameBoard_LoadSprites(void)
+static const struct ArcadeSpriteSheet sArcadeSpriteSheets[ARCADE_SPRITEID_COUNT] =
 {
-    for (ArcadeSpriteIds spriteId = 0; spriteId < ARCADE_SPRITEID_COUNT; spriteId++)
     {
-        if (sDexnavSpriteSheets[spriteId].spriteSheet.tag == 0)
-            continue;
+        {
+            .data = (const u16[])INCBIN_U16("graphics/battle_frontier/battle_arcade/game/panels/events.4bpp"),
+            .size = TILE_OFFSET_4BPP(416),
+            .tag = ARCADE_SPRITETAG_PANELS,
+        },
+        {
+            .data = (const u16[])INCBIN_U16("graphics/battle_frontier/battle_arcade/game/panels/events.gbapal"),
+            .tag = ARCADE_PALTAG_PANELS,
+        },
+    },
+    {
+        {
+            .data = (const u16[])INCBIN_U16("graphics/battle_frontier/battle_arcade/game/cursor.4bpp"),
+            .size = TILE_OFFSET_4BPP(16),
+            .tag = ARCADE_SPRITETAG_CURSOR,
+        },
+        {
+            .data = (const u16[])INCBIN_U16("graphics/battle_frontier/battle_arcade/game/cursor.gbapal"),
+            .tag = ARCADE_PALTAG_CURSOR,
+        },
+    },
+    /*
+    {
+        {
+            .data = (const u16[])INCBIN_U16("graphics/battle_frontier/battle_arcade/game/shadow.4bpp"),
+            .size = TILE_OFFSET_4BPP(8),
+            .tag = ARCADE_SPRITETAG_CURSOR,
+        },
+        {
+            .data = (const u16[])INCBIN_U16("graphics/battle_frontier/battle_arcade/game/shadow.gbapal"),
+            .tag = ARCADE_PALTAG_SHADOW,
+        },
+    },
+    {
+        .palette =
+        {
+            .data = (const u16[])INCBIN_U16("graphics/battle_frontier/battle_arcade/game/shadow.gbapal"),
+            .tag = ARCADE_PALTAG_SHADOW,
+        },
+    },
+    {
+        .palette =
+        {
+            .data = (const u16[])INCBIN_U16("graphics/battle_frontier/battle_arcade/game/shadow.gbapal"),
+            .tag = ARCADE_PALTAG_SHADOW,
+        },
+    },
+    */
+};
 
-        if (sDexnavSpriteSheets[spriteId].spriteSheet.tag == DEXNAV_SPRITETAG_OVERWORLD)
-            continue;
+static void GameBoard_LoadSprites(void)
+{
+    for (enum ArcadeSpriteIds spriteId = 0; spriteId < ARCADE_SPRITEID_COUNT; spriteId++)
+    {
+        if (sArcadeSpriteSheets[spriteId].spriteSheet.tag != 0)
+        {
+            LoadSpriteSheet(&sArcadeSpriteSheets[spriteId].spriteSheet);
+        }
 
-        LoadSpriteSheet(&sDexnavSpriteSheets[spriteId].spriteSheet);
-
-        if (sDexnavSpriteSheets[spriteId].palette.tag == 0)
-            continue;
-
-        if (sDexnavSpriteSheets[spriteId].spriteSheet.tag == DEXNAV_PALTAG_OVERWORLD)
-            continue;
-
-        LoadSpritePalette(&sDexnavSpriteSheets[spriteId].palette);
+        if (sArcadeSpriteSheets[spriteId].palette.tag != 0)
+        {
+            LoadSpritePalette(&sArcadeSpriteSheets[spriteId].palette);
+        }
     }
+    LoadEventPalettes();
 }
 
 static bool8 GameBoard_LoadGraphics(void)
@@ -899,6 +861,7 @@ static bool8 GameBoard_LoadGraphics(void)
             break;
         case 2:
             LoadPalette(sGameBoardPalette_Pal, BG_PLTT_ID(0), PLTT_SIZE_4BPP);
+            LoadPalette(sGameBoardText_Pal, BG_PLTT_ID(1), PLTT_SIZE_4BPP);
             sGameBoardState->loadState++;
         default:
             sGameBoardState->loadState = 0;
@@ -956,17 +919,20 @@ static void PrintPartyIcons(u32 side)
 {
     u32 x = GetHorizontalPositionFromSide(side);
     u32 y = 33;
-    u32 i;
     struct Pokemon *party = LoadSideParty(side);
+    u32 structSpriteId = (side == ARCADE_IMPACT_OPPONENT) ? ARCADE_SPRITEID_OPPONENT_SIDE_MON_0 : ARCADE_SPRITEID_PLAYER_SIDE_MON_0;
 
-    for (i = 0; i < FRONTIER_PARTY_SIZE; i++)
+    for (u32 i = 0; i < FRONTIER_PARTY_SIZE; i++)
     {
         if (!GetMonData(&party[i], MON_DATA_SANITY_HAS_SPECIES))
             break;
 
-        sGameBoardState->monIconSpriteId[side][i] = CreateMonIcon(GetMonData(&party[i], MON_DATA_SPECIES),SpriteCallbackDummy, x, y, 4, GetMonData(&party[i],MON_DATA_PERSONALITY));
-        gSprites[sGameBoardState->monIconSpriteId[side][i]].oam.priority = 0;
+        u32 spriteId = CreateMonIcon(GetMonData(&party[i], MON_DATA_SPECIES),SpriteCallbackDummy, x, y, 4, GetMonData(&party[i],MON_DATA_PERSONALITY));
+        sGameBoardState->spriteId[structSpriteId] = spriteId;
+        gSprites[spriteId].oam.priority = 0;
+
         y += 30;
+        structSpriteId++;
     }
 }
 
@@ -989,7 +955,8 @@ static void PrintHelpBar(void)
     u32 fontId = FONT_NARROW;
 
     FillWindowPixelBuffer(windowId, PIXEL_FILL(TEXT_COLOR_TRANSPARENT));
-    AddTextPrinterParameterized4(windowId, fontId, 4, 1, GetFontAttribute(fontId, FONTATTR_LETTER_SPACING), GetFontAttribute(fontId, FONTATTR_LINE_SPACING), sGameBoardWindowFontColors[TEXT_COLOR_WHITE], TEXT_SKIP_DRAW, GetHelpBarText());
+
+    AddTextPrinterParameterized4(windowId, fontId, 4, 1, GetFontAttribute(fontId, FONTATTR_LETTER_SPACING), GetFontAttribute(fontId, FONTATTR_LINE_SPACING), sGameBoardWindowFontColors, TEXT_SKIP_DRAW, GetHelpBarText());
 
     CopyWindowToVram(windowId, COPYWIN_GFX);
 }
@@ -1063,8 +1030,8 @@ static void StartCountdown(void)
     HideBg(BG_BOARD_BACKGROUND);
     IncrementGameBoardMode();
     SetTimerForCountdown();
-    PopulateCountdownSprites();
     PrintHelpBar();
+    PopulateEventSprites();
     CreateTask(Task_GameBoard_Countdown, 0);
 }
 
@@ -1078,29 +1045,12 @@ static void SetTimer(u32 value)
     sGameBoardState->timer = value;
 }
 
-static void PopulateCountdownSprites(void)
-{
-    u32 space, x, y;
-
-    LoadEventPalettes();
-    for (space = 0; space < (ARCADE_GAME_BOARD_ROWS * ARCADE_GAME_BOARD_COLUMNS); space++)
-    {
-        CalculatePanelPosition(space,&x,&y);
-        sGameBoardState->countdownPanelSpriteId[space] = CreateCountdownPanel(x+12,y+12);
-    }
-}
-
 static void CalculatePanelPosition(u32 space, u32* x, u32* y)
 {
     u32 rowIndex = space / ARCADE_GAME_BOARD_COLUMNS;
     u32 columnIndex = space % ARCADE_GAME_BOARD_COLUMNS;
     *x = 65 + columnIndex * 32;
     *y = 17 + rowIndex * 32;
-}
-
-static u32 CreateCountdownPanel(u32 x, u32 y)
-{
-    return CreateSprite(&sCountdownPanelSpriteTemplate, x, y, 0);
 }
 
 static void Task_GameBoard_Countdown(u8 taskId)
@@ -1115,15 +1065,9 @@ static void Task_GameBoard_Countdown(u8 taskId)
             break;
         case 0:
             IncrementGameBoardMode();
-            DebugPrintf("0");
-            PopulateEventSprites();
-            DebugPrintf("1");
             PrintHelpBar();
-            DebugPrintf("2");
             StartGame();
-            DebugPrintf("3");
             DestroyTask(taskId);
-            DebugPrintf("4");
             break;
         default:
             break;
@@ -1134,56 +1078,245 @@ static void PopulateEventSprites(void)
 {
     u32 x, y;
 
-    for (u32 space = 0; space < (ARCADE_GAME_BOARD_ROWS * ARCADE_GAME_BOARD_COLUMNS); space++)
+    for (enum ArcadeSpriteIds space = ARCADE_SPRITEID_EVENT_0; space < (ARCADE_SPRITEID_EVENT_15 + 1); space++)
     {
         CalculatePanelPosition(space,&x,&y);
-        sGameBoardState->eventIconSpriteId[space] = CreateEventSprite(x, y, space);
+        sGameBoardState->spriteId[space] = CreateEventSprite(x, y, space);
+
+        if (GetGameBoardMode() != ARCADE_BOARD_MODE_GAME_FINISH)
+            continue;
+
+        u32 spriteId = sGameBoardState->spriteId[space];
+        SeekSpriteAnim(&gSprites[spriteId],3);
     }
 }
 
-static const u32* GetEventGfx(u32 event)
+static const union AnimCmd sAnim_Panel_Burn[] =
 {
-    switch (event)
-    {
-        case ARCADE_EVENT_LOWER_HP: return sEventLowerHp;
-        case ARCADE_EVENT_POISON: return sEventPoison;
-        case ARCADE_EVENT_PARALYZE: return sEventParalyze;
-        case ARCADE_EVENT_BURN: return sEventBurn;
-        case ARCADE_EVENT_SLEEP: return sEventSleep;
-        case ARCADE_EVENT_FREEZE: return sEventFreeze;
-        case ARCADE_EVENT_GIVE_BERRY: return sEventGiveBerry;
-        case ARCADE_EVENT_GIVE_ITEM: return sEventGiveItem;
-        case ARCADE_EVENT_LEVEL_UP: return sEventLevelUp;
-        case ARCADE_EVENT_SUN: return sEventSun;
-        case ARCADE_EVENT_RAIN: return sEventRain;
-        case ARCADE_EVENT_SAND: return sEventSand;
-        case ARCADE_EVENT_HAIL: return sEventHail;
-        case ARCADE_EVENT_FOG: return sEventFog;
-        case ARCADE_EVENT_TRICK_ROOM: return sEventTrickRoom;
-        case ARCADE_EVENT_SWAP: return sEventSwap;
-        case ARCADE_EVENT_SPEED_UP: return sEventSpeedUp;
-        case ARCADE_EVENT_SPEED_DOWN: return sEventSpeedDown;
-        case ARCADE_EVENT_RANDOM: return sEventRandom;
-        case ARCADE_EVENT_GIVE_BP_SMALL: return sEventGiveBpSmall;
-        case ARCADE_EVENT_NO_BATTLE: return sEventNoBattle;
-        case ARCADE_EVENT_GIVE_BP_BIG: return sEventGiveBpBig;
-        default:
-        case ARCADE_EVENT_NO_EVENT: return sEventNoEvent;
-    }
-}
+    ANIMCMD_FRAME(ARCADE_PANEL_COUNTDOWN_3_FRAME, ARCADE_BOARD_COUNTDOWN_TIMER / 3),
+    ANIMCMD_FRAME(ARCADE_PANEL_COUNTDOWN_2_FRAME, ARCADE_BOARD_COUNTDOWN_TIMER / 3),
+    ANIMCMD_FRAME(ARCADE_PANEL_COUNTDOWN_1_FRAME, ARCADE_BOARD_COUNTDOWN_TIMER / 3),
+    ANIMCMD_FRAME(ARCADE_EVENT_BURN_FRAME, 0),
+    ANIMCMD_END
+};
+static const union AnimCmd sAnim_Panel_Fog[] =
+{
+    ANIMCMD_FRAME(ARCADE_PANEL_COUNTDOWN_3_FRAME, ARCADE_BOARD_COUNTDOWN_TIMER / 3),
+    ANIMCMD_FRAME(ARCADE_PANEL_COUNTDOWN_2_FRAME, ARCADE_BOARD_COUNTDOWN_TIMER / 3),
+    ANIMCMD_FRAME(ARCADE_PANEL_COUNTDOWN_1_FRAME, ARCADE_BOARD_COUNTDOWN_TIMER / 3),
+    ANIMCMD_FRAME(ARCADE_EVENT_FOG_FRAME, 0),
+    ANIMCMD_END
+};
+static const union AnimCmd sAnim_Panel_Freeze[] =
+{
+    ANIMCMD_FRAME(ARCADE_PANEL_COUNTDOWN_3_FRAME, ARCADE_BOARD_COUNTDOWN_TIMER / 3),
+    ANIMCMD_FRAME(ARCADE_PANEL_COUNTDOWN_2_FRAME, ARCADE_BOARD_COUNTDOWN_TIMER / 3),
+    ANIMCMD_FRAME(ARCADE_PANEL_COUNTDOWN_1_FRAME, ARCADE_BOARD_COUNTDOWN_TIMER / 3),
+    ANIMCMD_FRAME(ARCADE_EVENT_FREEZE_FRAME, 0),
+    ANIMCMD_END
+};
+static const union AnimCmd sAnim_Panel_Give_Berry[] =
+{
+    ANIMCMD_FRAME(ARCADE_PANEL_COUNTDOWN_3_FRAME, ARCADE_BOARD_COUNTDOWN_TIMER / 3),
+    ANIMCMD_FRAME(ARCADE_PANEL_COUNTDOWN_2_FRAME, ARCADE_BOARD_COUNTDOWN_TIMER / 3),
+    ANIMCMD_FRAME(ARCADE_PANEL_COUNTDOWN_1_FRAME, ARCADE_BOARD_COUNTDOWN_TIMER / 3),
+    ANIMCMD_FRAME(ARCADE_EVENT_GIVE_BERRY_FRAME, 0),
+    ANIMCMD_END
+};
+static const union AnimCmd sAnim_Panel_Give_Bp_Big[] =
+{
+    ANIMCMD_FRAME(ARCADE_PANEL_COUNTDOWN_3_FRAME, ARCADE_BOARD_COUNTDOWN_TIMER / 3),
+    ANIMCMD_FRAME(ARCADE_PANEL_COUNTDOWN_2_FRAME, ARCADE_BOARD_COUNTDOWN_TIMER / 3),
+    ANIMCMD_FRAME(ARCADE_PANEL_COUNTDOWN_1_FRAME, ARCADE_BOARD_COUNTDOWN_TIMER / 3),
+    ANIMCMD_FRAME(ARCADE_EVENT_GIVE_BP_BIG_FRAME, 0),
+    ANIMCMD_END
+};
+static const union AnimCmd sAnim_Panel_Give_Bp_Small[] =
+{
+    ANIMCMD_FRAME(ARCADE_PANEL_COUNTDOWN_3_FRAME, ARCADE_BOARD_COUNTDOWN_TIMER / 3),
+    ANIMCMD_FRAME(ARCADE_PANEL_COUNTDOWN_2_FRAME, ARCADE_BOARD_COUNTDOWN_TIMER / 3),
+    ANIMCMD_FRAME(ARCADE_PANEL_COUNTDOWN_1_FRAME, ARCADE_BOARD_COUNTDOWN_TIMER / 3),
+    ANIMCMD_FRAME(ARCADE_EVENT_GIVE_BP_SMALL_FRAME, 0),
+    ANIMCMD_END
+};
+static const union AnimCmd sAnim_Panel_Give_Item[] =
+{
+    ANIMCMD_FRAME(ARCADE_PANEL_COUNTDOWN_3_FRAME, ARCADE_BOARD_COUNTDOWN_TIMER / 3),
+    ANIMCMD_FRAME(ARCADE_PANEL_COUNTDOWN_2_FRAME, ARCADE_BOARD_COUNTDOWN_TIMER / 3),
+    ANIMCMD_FRAME(ARCADE_PANEL_COUNTDOWN_1_FRAME, ARCADE_BOARD_COUNTDOWN_TIMER / 3),
+    ANIMCMD_FRAME(ARCADE_EVENT_GIVE_ITEM_FRAME, 0),
+    ANIMCMD_END
+};
+static const union AnimCmd sAnim_Panel_Hail[] =
+{
+    ANIMCMD_FRAME(ARCADE_PANEL_COUNTDOWN_3_FRAME, ARCADE_BOARD_COUNTDOWN_TIMER / 3),
+    ANIMCMD_FRAME(ARCADE_PANEL_COUNTDOWN_2_FRAME, ARCADE_BOARD_COUNTDOWN_TIMER / 3),
+    ANIMCMD_FRAME(ARCADE_PANEL_COUNTDOWN_1_FRAME, ARCADE_BOARD_COUNTDOWN_TIMER / 3),
+    ANIMCMD_FRAME(ARCADE_EVENT_HAIL_FRAME, 0),
+    ANIMCMD_END
+};
+static const union AnimCmd sAnim_Panel_Level_Up[] =
+{
+    ANIMCMD_FRAME(ARCADE_PANEL_COUNTDOWN_3_FRAME, ARCADE_BOARD_COUNTDOWN_TIMER / 3),
+    ANIMCMD_FRAME(ARCADE_PANEL_COUNTDOWN_2_FRAME, ARCADE_BOARD_COUNTDOWN_TIMER / 3),
+    ANIMCMD_FRAME(ARCADE_PANEL_COUNTDOWN_1_FRAME, ARCADE_BOARD_COUNTDOWN_TIMER / 3),
+    ANIMCMD_FRAME(ARCADE_EVENT_LEVEL_UP_FRAME, 0),
+    ANIMCMD_END
+};
+static const union AnimCmd sAnim_Panel_Lower_Hp[] =
+{
+    ANIMCMD_FRAME(ARCADE_PANEL_COUNTDOWN_3_FRAME, ARCADE_BOARD_COUNTDOWN_TIMER / 3),
+    ANIMCMD_FRAME(ARCADE_PANEL_COUNTDOWN_2_FRAME, ARCADE_BOARD_COUNTDOWN_TIMER / 3),
+    ANIMCMD_FRAME(ARCADE_PANEL_COUNTDOWN_1_FRAME, ARCADE_BOARD_COUNTDOWN_TIMER / 3),
+    ANIMCMD_FRAME(ARCADE_EVENT_LOWER_HP_FRAME, 0),
+    ANIMCMD_END
+};
+static const union AnimCmd sAnim_Panel_No_Battle[] =
+{
+    ANIMCMD_FRAME(ARCADE_PANEL_COUNTDOWN_3_FRAME, ARCADE_BOARD_COUNTDOWN_TIMER / 3),
+    ANIMCMD_FRAME(ARCADE_PANEL_COUNTDOWN_2_FRAME, ARCADE_BOARD_COUNTDOWN_TIMER / 3),
+    ANIMCMD_FRAME(ARCADE_PANEL_COUNTDOWN_1_FRAME, ARCADE_BOARD_COUNTDOWN_TIMER / 3),
+    ANIMCMD_FRAME(ARCADE_EVENT_NO_BATTLE_FRAME, 0),
+    ANIMCMD_END
+};
+static const union AnimCmd sAnim_Panel_No_Event[] =
+{
+    ANIMCMD_FRAME(ARCADE_PANEL_COUNTDOWN_3_FRAME, ARCADE_BOARD_COUNTDOWN_TIMER / 3),
+    ANIMCMD_FRAME(ARCADE_PANEL_COUNTDOWN_2_FRAME, ARCADE_BOARD_COUNTDOWN_TIMER / 3),
+    ANIMCMD_FRAME(ARCADE_PANEL_COUNTDOWN_1_FRAME, ARCADE_BOARD_COUNTDOWN_TIMER / 3),
+    ANIMCMD_FRAME(ARCADE_EVENT_NO_EVENT_FRAME, 0),
+    ANIMCMD_END
+};
+static const union AnimCmd sAnim_Panel_Paralyze[] =
+{
+    ANIMCMD_FRAME(ARCADE_PANEL_COUNTDOWN_3_FRAME, ARCADE_BOARD_COUNTDOWN_TIMER / 3),
+    ANIMCMD_FRAME(ARCADE_PANEL_COUNTDOWN_2_FRAME, ARCADE_BOARD_COUNTDOWN_TIMER / 3),
+    ANIMCMD_FRAME(ARCADE_PANEL_COUNTDOWN_1_FRAME, ARCADE_BOARD_COUNTDOWN_TIMER / 3),
+    ANIMCMD_FRAME(ARCADE_EVENT_PARALYZE_FRAME, 0),
+    ANIMCMD_END
+};
+static const union AnimCmd sAnim_Panel_Poison[] =
+{
+    ANIMCMD_FRAME(ARCADE_PANEL_COUNTDOWN_3_FRAME, ARCADE_BOARD_COUNTDOWN_TIMER / 3),
+    ANIMCMD_FRAME(ARCADE_PANEL_COUNTDOWN_2_FRAME, ARCADE_BOARD_COUNTDOWN_TIMER / 3),
+    ANIMCMD_FRAME(ARCADE_PANEL_COUNTDOWN_1_FRAME, ARCADE_BOARD_COUNTDOWN_TIMER / 3),
+    ANIMCMD_FRAME(ARCADE_EVENT_POISON_FRAME, 0),
+    ANIMCMD_END
+};
+static const union AnimCmd sAnim_Panel_Rain[] =
+{
+    ANIMCMD_FRAME(ARCADE_PANEL_COUNTDOWN_3_FRAME, ARCADE_BOARD_COUNTDOWN_TIMER / 3),
+    ANIMCMD_FRAME(ARCADE_PANEL_COUNTDOWN_2_FRAME, ARCADE_BOARD_COUNTDOWN_TIMER / 3),
+    ANIMCMD_FRAME(ARCADE_PANEL_COUNTDOWN_1_FRAME, ARCADE_BOARD_COUNTDOWN_TIMER / 3),
+    ANIMCMD_FRAME(ARCADE_EVENT_RAIN_FRAME, 0),
+    ANIMCMD_END
+};
+static const union AnimCmd sAnim_Panel_Random[] =
+{
+    ANIMCMD_FRAME(ARCADE_PANEL_COUNTDOWN_3_FRAME, ARCADE_BOARD_COUNTDOWN_TIMER / 3),
+    ANIMCMD_FRAME(ARCADE_PANEL_COUNTDOWN_2_FRAME, ARCADE_BOARD_COUNTDOWN_TIMER / 3),
+    ANIMCMD_FRAME(ARCADE_PANEL_COUNTDOWN_1_FRAME, ARCADE_BOARD_COUNTDOWN_TIMER / 3),
+    ANIMCMD_FRAME(ARCADE_EVENT_RANDOM_FRAME, 0),
+    ANIMCMD_END
+};
+static const union AnimCmd sAnim_Panel_Sand[] =
+{
+    ANIMCMD_FRAME(ARCADE_PANEL_COUNTDOWN_3_FRAME, ARCADE_BOARD_COUNTDOWN_TIMER / 3),
+    ANIMCMD_FRAME(ARCADE_PANEL_COUNTDOWN_2_FRAME, ARCADE_BOARD_COUNTDOWN_TIMER / 3),
+    ANIMCMD_FRAME(ARCADE_PANEL_COUNTDOWN_1_FRAME, ARCADE_BOARD_COUNTDOWN_TIMER / 3),
+    ANIMCMD_FRAME(ARCADE_EVENT_SAND_FRAME, 0),
+    ANIMCMD_END
+};
+static const union AnimCmd sAnim_Panel_Sleep[] =
+{
+    ANIMCMD_FRAME(ARCADE_PANEL_COUNTDOWN_3_FRAME, ARCADE_BOARD_COUNTDOWN_TIMER / 3),
+    ANIMCMD_FRAME(ARCADE_PANEL_COUNTDOWN_2_FRAME, ARCADE_BOARD_COUNTDOWN_TIMER / 3),
+    ANIMCMD_FRAME(ARCADE_PANEL_COUNTDOWN_1_FRAME, ARCADE_BOARD_COUNTDOWN_TIMER / 3),
+    ANIMCMD_FRAME(ARCADE_EVENT_SLEEP_FRAME, 0),
+    ANIMCMD_END
+};
+static const union AnimCmd sAnim_Panel_Speed_Down[] =
+{
+    ANIMCMD_FRAME(ARCADE_PANEL_COUNTDOWN_3_FRAME, ARCADE_BOARD_COUNTDOWN_TIMER / 3),
+    ANIMCMD_FRAME(ARCADE_PANEL_COUNTDOWN_2_FRAME, ARCADE_BOARD_COUNTDOWN_TIMER / 3),
+    ANIMCMD_FRAME(ARCADE_PANEL_COUNTDOWN_1_FRAME, ARCADE_BOARD_COUNTDOWN_TIMER / 3),
+    ANIMCMD_FRAME(ARCADE_EVENT_SPEED_DOWN_FRAME, 0),
+    ANIMCMD_END
+};
+static const union AnimCmd sAnim_Panel_Speed_Up[] =
+{
+    ANIMCMD_FRAME(ARCADE_PANEL_COUNTDOWN_3_FRAME, ARCADE_BOARD_COUNTDOWN_TIMER / 3),
+    ANIMCMD_FRAME(ARCADE_PANEL_COUNTDOWN_2_FRAME, ARCADE_BOARD_COUNTDOWN_TIMER / 3),
+    ANIMCMD_FRAME(ARCADE_PANEL_COUNTDOWN_1_FRAME, ARCADE_BOARD_COUNTDOWN_TIMER / 3),
+    ANIMCMD_FRAME(ARCADE_EVENT_SPEED_UP_FRAME, 0),
+    ANIMCMD_END
+};
+static const union AnimCmd sAnim_Panel_Sun[] =
+{
+    ANIMCMD_FRAME(ARCADE_PANEL_COUNTDOWN_3_FRAME, ARCADE_BOARD_COUNTDOWN_TIMER / 3),
+    ANIMCMD_FRAME(ARCADE_PANEL_COUNTDOWN_2_FRAME, ARCADE_BOARD_COUNTDOWN_TIMER / 3),
+    ANIMCMD_FRAME(ARCADE_PANEL_COUNTDOWN_1_FRAME, ARCADE_BOARD_COUNTDOWN_TIMER / 3),
+    ANIMCMD_FRAME(ARCADE_EVENT_SUN_FRAME, 0),
+    ANIMCMD_END
+};
+static const union AnimCmd sAnim_Panel_Swap[] =
+{
+    ANIMCMD_FRAME(ARCADE_PANEL_COUNTDOWN_3_FRAME, ARCADE_BOARD_COUNTDOWN_TIMER / 3),
+    ANIMCMD_FRAME(ARCADE_PANEL_COUNTDOWN_2_FRAME, ARCADE_BOARD_COUNTDOWN_TIMER / 3),
+    ANIMCMD_FRAME(ARCADE_PANEL_COUNTDOWN_1_FRAME, ARCADE_BOARD_COUNTDOWN_TIMER / 3),
+    ANIMCMD_FRAME(ARCADE_EVENT_SWAP_FRAME, 0),
+    ANIMCMD_END
+};
+static const union AnimCmd sAnim_Panel_Trick_Room[] =
+{
+    ANIMCMD_FRAME(ARCADE_PANEL_COUNTDOWN_3_FRAME, ARCADE_BOARD_COUNTDOWN_TIMER / 3),
+    ANIMCMD_FRAME(ARCADE_PANEL_COUNTDOWN_2_FRAME, ARCADE_BOARD_COUNTDOWN_TIMER / 3),
+    ANIMCMD_FRAME(ARCADE_PANEL_COUNTDOWN_1_FRAME, ARCADE_BOARD_COUNTDOWN_TIMER / 3),
+    ANIMCMD_FRAME(ARCADE_EVENT_TRICK_ROOM_FRAME, 0),
+    ANIMCMD_END
+};
+
+
+static const union AnimCmd * const sSpriteAnimTable_Panels[] =
+{
+    sAnim_Panel_Burn,
+    sAnim_Panel_Fog,
+    sAnim_Panel_Freeze,
+    sAnim_Panel_Give_Berry,
+    sAnim_Panel_Give_Bp_Big,
+    sAnim_Panel_Give_Bp_Small,
+    sAnim_Panel_Give_Item,
+    sAnim_Panel_Hail,
+    sAnim_Panel_Level_Up,
+    sAnim_Panel_Lower_Hp,
+    sAnim_Panel_No_Battle,
+    sAnim_Panel_No_Event,
+    sAnim_Panel_Paralyze,
+    sAnim_Panel_Poison,
+    sAnim_Panel_Rain,
+    sAnim_Panel_Random,
+    sAnim_Panel_Sand,
+    sAnim_Panel_Sleep,
+    sAnim_Panel_Speed_Down,
+    sAnim_Panel_Speed_Up,
+    sAnim_Panel_Sun,
+    sAnim_Panel_Swap,
+    sAnim_Panel_Trick_Room,
+};
 
 static u8 CreateEventSprite(u32 x, u32 y, u32 space)
 {
-    u32 spriteId;
-    u16 TileTag = GetTileTag(space);
+    u16 TileTag = ARCADE_SPRITETAG_PANELS;
+    enum ArcadeEvents event = sGameBoard[space].event;
     u32 impact = (sGameBoard[space].impact == ARCADE_IMPACT_PLAYER) ? ARCADE_IMPACT_PLAYER : ARCADE_IMPACT_OPPONENT;
 
     struct SpriteTemplate TempSpriteTemplate = gDummySpriteTemplate;
     TempSpriteTemplate.tileTag = TileTag;
-    TempSpriteTemplate.paletteTag = ARCADE_PALTAG_EVENT + impact;
+    TempSpriteTemplate.paletteTag = ARCADE_PALTAG_OPPONENT + impact;
     TempSpriteTemplate.callback = SpriteCallbackDummy;
+    TempSpriteTemplate.anims = &sSpriteAnimTable_Panels[event];
 
-    spriteId = CreateSprite(&TempSpriteTemplate,x,y, 0);
+    u32 spriteId = CreateSprite(&TempSpriteTemplate,x,y, 0);
 
     gSprites[spriteId].oam.shape = SPRITE_SHAPE(32x32);
     gSprites[spriteId].oam.size = SPRITE_SIZE(32x32);
@@ -1192,17 +1325,11 @@ static u8 CreateEventSprite(u32 x, u32 y, u32 space)
     return spriteId;
 }
 
-static const u16 GetTileTag(u32 space)
-{
-    return (sGameBoard[space].event) + ARCADE_GFXTAG_EVENT;
-}
-
 static void StartGame(void)
 {
     SetTimerForGame();
     InitCursorPositionFromSaveblock();
     CreateGameBoardCursor();
-    DestroyCountdownPanels();
     CreateTask(Task_GameBoard_Game, 0);
 }
 
@@ -1218,13 +1345,10 @@ static void InitCursorPositionFromSaveblock(void)
 
 static void CreateGameBoardCursor(void)
 {
-    u16 TileTag = ARCADE_GFXTAG_CURSOR;
+    u16 TileTag = ARCADE_SPRITETAG_CURSOR;
     u32 spriteId;
 
-    struct CompressedSpriteSheet sSpriteSheet_Cursor = {sGameCursor, 0x0800, TileTag};
     struct SpriteTemplate TempSpriteTemplate = gDummySpriteTemplate;
-
-    LoadCompressedSpriteSheet(&sSpriteSheet_Cursor);
 
     TempSpriteTemplate.tileTag = TileTag;
     TempSpriteTemplate.paletteTag = ARCADE_PALTAG_CURSOR;
@@ -1265,17 +1389,6 @@ static void ChangeCursorSpritePosition(struct Sprite *sprite)
     CalculatePanelPosition(GetCursorPosition(),&x,&y);
     sprite->x2 = x - 50;
     sprite->y2 = y - 10;
-}
-
-static void DestroyCountdownPanels(void)
-{
-    u32 space;
-
-    for (space = 0; space < ARCADE_GAME_BOARD_SPACES; space++)
-    {
-        DestroySpriteAndFreeResources(&gSprites[sGameBoardState->countdownPanelSpriteId[space]]);
-        sGameBoardState->countdownPanelSpriteId[space] = 0;
-    }
 }
 
 static void Task_GameBoard_Game(u8 taskId)
@@ -1439,8 +1552,8 @@ static void DestroyEventSprites(void)
 
     for (space = 0; space < ARCADE_GAME_BOARD_SPACES; space++)
     {
-        DestroySpriteAndFreeResources(&gSprites[sGameBoardState->eventIconSpriteId[space]]);
-        sGameBoardState->eventIconSpriteId[space] = 0;
+        DestroySpriteAndFreeResources(&gSprites[sGameBoardState->spriteId[space]]);
+        sGameBoardState->spriteId[space] = 0;
     }
 }
 
