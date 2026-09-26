@@ -96,5 +96,6 @@
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
       "script": "EspuleeOutskirts_Shorttermrental_WatchInterview_Script"
     }
-  ]
+  ],
+  "night_music": "MUS_ESPULEE_OUTSKIRTS_NIGHT"
 }

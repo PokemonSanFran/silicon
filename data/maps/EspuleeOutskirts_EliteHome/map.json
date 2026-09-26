@@ -62,5 +62,6 @@
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
       "script": "EspuleeOutskirts_EliteHome_PictureFrame_Dialogue"
     }
-  ]
+  ],
+  "night_music": "MUS_ESPULEE_OUTSKIRTS_NIGHT"
 }
