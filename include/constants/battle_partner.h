@@ -19,8 +19,9 @@
 #define PARTNER_SHINZO 14
 #define PARTNER_OLIVER 15
 #define PARTNER_CHARLOTTE 16
-#define PARTNER_RED 17
-#define PARTNER_COUNT 18
+#define PARTNER_AMIARGENTO 17
+#define PARTNER_RED 18
+#define PARTNER_COUNT 19
 //Tests need PARTNER_COUNT to be at least 3 so we add a dummy partner
 
 #endif  // GUARD_CONSTANTS_BATTLE_PARTNERS_H

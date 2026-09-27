@@ -274,6 +274,9 @@ $(OBJEVENTGFXDIR)/people/pua/walking.4bpp: %.4bpp: %.png
 $(OBJEVENTGFXDIR)/people/keiying.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
+$(OBJEVENTGFXDIR)/people/amiargento.4bpp: %.4bpp: %.png
+	$(GFX) $< $@ -mwidth 4 -mheight 4
+
 $(OBJEVENTGFXDIR)/people/magnus/running.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 

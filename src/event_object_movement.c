@@ -568,6 +568,7 @@ static const struct SpritePalette sObjectEventSpritePalettes[] = {
     {gObjectEventPal_CharlotteNormal,             OBJ_EVENT_PAL_TAG_CHARLOTTE},
     {gObjectEventPal_Trachy,             OBJ_EVENT_PAL_TAG_TRACHY},
     {gObjectEventPal_Shinji,             OBJ_EVENT_PAL_TAG_SHINJI},
+    {gObjectEventPal_AmiArgento,             OBJ_EVENT_PAL_TAG_AMIARGENTO},
     {gObjectEventPal_UnknownNormal,         OBJ_EVENT_PAL_TAG_UNKNOWN},
     {gObjectEventPal_AdaoraWalking,         OBJ_EVENT_PAL_TAG_ADAORA},
     {gObjectEventPal_VigrimWalking,        OBJ_EVENT_PAL_TAG_VIGRIM},

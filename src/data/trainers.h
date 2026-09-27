@@ -1846,11 +1846,11 @@
     [DIFFICULTY_NORMAL][TRAINER_AMIARGENTO] =
     {
 #line 858
-        .trainerName = _("AmiArgento"),
+        .trainerName = _("Ami Argento"),
 #line 862
         .trainerClass = TRAINER_CLASS_LEADER,
 #line 859
-        .trainerPic = TRAINER_PIC_AMI,
+        .trainerPic = TRAINER_PIC_AMIARGENTO,
 #line 860
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 861

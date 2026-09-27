@@ -855,8 +855,8 @@ Adamant Nature
 - Taunt
 
 === TRAINER_AMIARGENTO ===
-Name: AmiArgento
-Pic: Ami
+Name: Ami Argento
+Pic: AmiArgento
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 Reveal: Ami
 Class: Leader

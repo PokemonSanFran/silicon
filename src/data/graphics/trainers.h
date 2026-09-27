@@ -525,6 +525,9 @@ const u16 gTrainerFrontPalette_Shinzo[] = INCGFX_U16("graphics/trainers/front_pi
 const u32 gTrainerFrontPic_Charlotte[] = INCGFX_U32("graphics/trainers/front_pics/charlotte.png", ".4bpp.smol");
 const u16 gTrainerFrontPalette_Charlotte[] = INCGFX_U16("graphics/trainers/front_pics/charlotte.png", ".gbapal");
 
+const u32 gTrainerFrontPic_AmiArgento[] = INCGFX_U32("graphics/trainers/front_pics/amiargento.png", ".4bpp.smol");
+const u16 gTrainerFrontPalette_AmiArgento[] = INCGFX_U16("graphics/trainers/front_pics/amiargento.png", ".gbapal");
+
 const u8 gTrainerBackPic_SiliconPlayerM1[] = INCGFX_U8("graphics/trainers/back_pics/siliconPlayerM1.png", ".4bpp");
 const u8 gTrainerBackPic_SiliconPlayerM2[] = INCGFX_U8("graphics/trainers/back_pics/siliconPlayerM2.png", ".4bpp");
 const u8 gTrainerBackPic_SiliconPlayerM3[] = INCGFX_U8("graphics/trainers/back_pics/siliconPlayerM3.png", ".4bpp");
@@ -549,6 +552,7 @@ const u8 gTrainerBackPic_Magnus[] = INCGFX_U8("graphics/trainers/back_pics/magnu
 const u8 gTrainerBackPic_Neriene[] = INCGFX_U8("graphics/trainers/back_pics/neriene.png", ".4bpp");
 const u8 gTrainerBackPic_Shinzo[] = INCGFX_U8("graphics/trainers/back_pics/shinzo.png", ".4bpp");
 const u8 gTrainerBackPic_Charlotte[] = INCGFX_U8("graphics/trainers/back_pics/charlotte.png", ".4bpp");
+const u8 gTrainerBackPic_AmiArgento[] = INCGFX_U8("graphics/trainers/back_pics/amiargento.png", ".4bpp");
 const u8 gTrainerBackPic_Shinji[] = INCGFX_U8("graphics/trainers/back_pics/shinji.png", ".4bpp");
 const u8 gTrainerBackPic_Trachy[] = INCGFX_U8("graphics/trainers/back_pics/trachy.png", ".4bpp");
 
@@ -567,6 +571,7 @@ const u16 gTrainerBackPicPalette_Magnus[] = INCGFX_U16("graphics/trainers/palett
 const u16 gTrainerBackPicPalette_Neriene[] = INCGFX_U16("graphics/trainers/palettes/neriene.pal", ".gbapal");
 const u16 gTrainerBackPicPalette_Shinzo[] = INCGFX_U16("graphics/trainers/back_pics/shinzo.png", ".gbapal");
 const u16 gTrainerBackPicPalette_Charlotte[] = INCGFX_U16("graphics/trainers/back_pics/charlotte.png", ".gbapal");
+const u16 gTrainerBackPicPalette_AmiArgento[] = INCGFX_U16("graphics/trainers/back_pics/amiargento.png", ".gbapal");
 const u16 gTrainerBackPicPalette_Shinji[] = INCGFX_U16("graphics/trainers/back_pics/shinji.png", ".gbapal");
 const u16 gTrainerBackPicPalette_Trachy[] = INCGFX_U16("graphics/trainers/back_pics/trachy.png", ".gbapal");
 // End silicon
@@ -1468,10 +1473,10 @@ const struct TrainerPicInfo gTrainerPicInfo[TRAINER_PIC_COUNT] =
         .frontPic = TRAINER_FRONT_PIC(gTrainerFrontPic_LadyFrlg, gTrainerPalette_LadyFrlg),
         .backPic = TRAINER_BACK_PIC(5, gTrainerBackPic_Red, gTrainerBackPicPalette_Red, sBackAnims_Kanto),
     },
-    [TRAINER_PIC_AMI] =
+    [TRAINER_PIC_AMIARGENTO] =
     {
-        .frontPic = TRAINER_FRONT_PIC(gTrainerFrontPic_LadyFrlg, gTrainerPalette_LadyFrlg),
-        .backPic = TRAINER_BACK_PIC(5, gTrainerBackPic_Red, gTrainerBackPicPalette_Red, sBackAnims_Kanto),
+        .frontPic = TRAINER_FRONT_PIC(gTrainerFrontPic_AmiArgento, gTrainerFrontPalette_AmiArgento),
+        .backPic = TRAINER_BACK_PIC(5, gTrainerBackPic_AmiArgento, gTrainerBackPicPalette_AmiArgento, sBackAnims_Kanto),
     },
     [TRAINER_PIC_FRANK] =
     {

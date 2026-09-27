@@ -924,3 +924,37 @@
             },
         },
     },
+#line 328
+    [DIFFICULTY_NORMAL][PARTNER_AMIARGENTO] =
+    {
+#line 329
+        .trainerName = _("Ami Argento"),
+#line 330
+        .trainerClass = TRAINER_CLASS_LEADER,
+#line 331
+        .trainerPic = TRAINER_PIC_AMIARGENTO,
+#line 332
+        .gender = TRAINER_GENDER_FEMALE,
+#line 333
+        .encounterMusic = TRAINER_ENCOUNTER_MUSIC_FEMALE,
+#line 0
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
+        .partySize = 1,
+        .party = (const struct TrainerMon[])
+        {
+            {
+#line 335
+            .species = SPECIES_PORYGON_Z,
+            .gender = TRAINER_MON_RANDOM_GENDER,
+#line 335
+            .heldItem = ITEM_LAGGING_TAIL,
+#line 337
+            .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
+#line 336
+            .lvl = 100,
+            .ball = POKEBALL_COUNT,
+            .nature = NATURE_HARDY,
+            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            },
+        },
+    },

@@ -592,6 +592,8 @@ const u16 gObjectEventPal_Trachy[] = INCGFX_U16("graphics/object_events/pics/peo
 const u32 gObjectEventPic_Shinji[] = INCBIN_U32("graphics/object_events/pics/people/shinji/walking.4bpp", "graphics/object_events/pics/people/shinji/running.4bpp");
 const u16 gObjectEventPal_Shinji[] = INCGFX_U16("graphics/object_events/pics/people/shinji/running.png", ".gbapal");
 
+const u32 gObjectEventPic_AmiArgento[] = INCBIN_U32("graphics/object_events/pics/people/amiargento.4bpp", "graphics/object_events/pics/people/amiargento.4bpp");
+const u16 gObjectEventPal_AmiArgento[] = INCGFX_U16("graphics/object_events/pics/people/amiargento.png", ".gbapal");
 // End silicon
 const u16 gObjectEventPal_HoOh[] = INCGFX_U16("graphics/object_events/palettes/ho_oh.pal", ".gbapal");
 const u16 gObjectEventPal_Lugia[] = INCGFX_U16("graphics/object_events/palettes/lugia.pal", ".gbapal");
