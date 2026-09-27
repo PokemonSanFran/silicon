@@ -277,10 +277,10 @@ gSongTable::
 	song se_pike_curtain_close, MUSIC_PLAYER_SE1, 1
 	song se_pike_curtain_open, MUSIC_PLAYER_SE1, 1
 	song se_sudowoodo_shake, MUSIC_PLAYER_SE1, 1
-	song se_sudowoodo_shake, MUSIC_PLAYER_SE4, 4 @ copy on a different sound player for phenomena
-	song se_lavaridge_fall_warp, MUSIC_PLAYER_SE4, 4 @ copy on a different sound player for phenomena
-	song se_m_bubble, MUSIC_PLAYER_SE4, 4 @ copy on a different sound player for phenomena
-	song dummy_song_header, MUSIC_PLAYER_BGM, 0
+	song se_shaking_grass, MUSIC_PLAYER_SE4, 4
+	song se_rippling_water, MUSIC_PLAYER_SE4, 4
+	song se_flapping_wings, MUSIC_PLAYER_SE4, 4
+	song se_cave_dust, MUSIC_PLAYER_SE4, 4
 	song dummy_song_header, MUSIC_PLAYER_BGM, 0
 	song dummy_song_header, MUSIC_PLAYER_BGM, 0
 	song dummy_song_header, MUSIC_PLAYER_BGM, 0

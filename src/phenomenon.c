@@ -41,14 +41,14 @@
 #include "constants/map_types.h"
 #include "constants/metatile_behaviors.h"
 
-u8 IsThereAPhenomenonOnCords(s16 coordX, s16 coordXY);
-u16 getFieldEffectForPhenomenon(u16 slot);
-static u32 CalculateDistanceBetweenPoints(s16 x1, s16 y1, s16 x2, s16 y2);
+static u8 IsThereAPhenomenonOnCords(s16 coordX, s16 coordXY);
+static u16 getFieldEffectForPhenomenon(void);
 static inline unsigned int GetPhenomenonVolume(void);
 static void Task_UpdatePhenomenonVolume(u8 taskId);
 
 struct Phenomenon{
     u8 fldEffSpriteId;
+    u16 volume;
     int coordX;
     int coordY;
     u8 phenomenonType;
@@ -60,7 +60,7 @@ struct Phenomenon{
     bool8 active;
 };
 
-EWRAM_DATA struct Phenomenon sPhenomenonData[NUM_MAX_PHENOMENONS] = {0};
+EWRAM_DATA struct Phenomenon sPhenomenonData = {0};
 
 static bool8 MetatileBehavior_IsBridgeTile(u16 tileBehaviour){
     switch(tileBehaviour){
@@ -225,9 +225,9 @@ u16 GetPhenomenonWildMon(void)
     return phenomenonMonsInfo->wildPokemon[ChooseWildMonIndex_Land()].species;
 }
 
-static void GenerateWildPokemonForPhenomenon(u8 numPhenomenon){
+static void GenerateWildPokemonForPhenomenon(void){
 
-    u8 environment        = sPhenomenonData[numPhenomenon].environment;
+    u8 environment        = sPhenomenonData.environment;
     u16 species           = SPECIES_NONE;
     u16 level             = 5;
     u16 wildEnviroment    = NUM_PHENOMENON_ENVIROMENTS;
@@ -278,11 +278,11 @@ static void GenerateWildPokemonForPhenomenon(u8 numPhenomenon){
 
     level = GetPhenomenonEncounterLevelFromMapData(species, wildEnviroment);
 
-    sPhenomenonData[numPhenomenon].argument  = species;
-    sPhenomenonData[numPhenomenon].argument2 = level;
+    sPhenomenonData.argument  = species;
+    sPhenomenonData.argument2 = level;
 }
 
-static bool8 GeneratePhenomenonTile(u8 numPhenomenon)
+static bool8 GeneratePhenomenonTile(void)
 {
     s16 i, randomXOffset, randomYOffset;
     u16 tileBehaviour, environment, encounterRate = 0;
@@ -390,45 +390,45 @@ static bool8 GeneratePhenomenonTile(u8 numPhenomenon)
 
         if (foundCorrectTile)
         {
-            if ((Random() % 100) < encounterRate && !MapGridGetCollisionAt(tileX, tileY) && IsThereAPhenomenonOnCords(tileX, tileY) == NUM_MAX_PHENOMENONS)
+            if ((Random() % 100) < encounterRate && !MapGridGetCollisionAt(tileX, tileY) && !IsThereAPhenomenonOnCords(tileX, tileY))
             {
-                sPhenomenonData[numPhenomenon].coordX         = tileX;
-                sPhenomenonData[numPhenomenon].coordY         = tileY;
-                sPhenomenonData[numPhenomenon].tileBehaviour  = tileBehaviour;
-                sPhenomenonData[numPhenomenon].phenomenonType = GeneratePhenomenonType(tileBehaviour);
-                sPhenomenonData[numPhenomenon].environment    = environment;
+                sPhenomenonData.coordX         = tileX;
+                sPhenomenonData.coordY         = tileY;
+                sPhenomenonData.tileBehaviour  = tileBehaviour;
+                sPhenomenonData.phenomenonType = GeneratePhenomenonType(tileBehaviour);
+                sPhenomenonData.environment    = environment;
 
-                switch(sPhenomenonData[numPhenomenon].phenomenonType){
+                switch(sPhenomenonData.phenomenonType){
                     case PHENOMENON_TYPE_ENCOUNTER:
-                        GenerateWildPokemonForPhenomenon(numPhenomenon);
-                        if(sPhenomenonData[numPhenomenon].argument2 == MON_LEVEL_NONEXISTENT){
+                        GenerateWildPokemonForPhenomenon();
+                        if(sPhenomenonData.argument2 == MON_LEVEL_NONEXISTENT){
                             //DebugPrintfLevel(MGBA_LOG_WARN, "GeneratePhenomenonTile Failed to find level for species: %d", numPhenomenon, sPhenomenonData[numPhenomenon].argument);
                             return FALSE;
                         }
                     break;
                     case PHENOMENON_TYPE_ITEM:
-                        sPhenomenonData[numPhenomenon].argument  = GenerateItemForPhenomenon(tileBehaviour);
-                        sPhenomenonData[numPhenomenon].argument2 = 1;
+                        sPhenomenonData.argument  = GenerateItemForPhenomenon(tileBehaviour);
+                        sPhenomenonData.argument2 = 1;
                     break;
                 }
 
                 //DebugPrintfLevel(MGBA_LOG_WARN, "GeneratePhenomenonTile numPhenomenon: %d Cord(%d, %d)", numPhenomenon, sPhenomenonData[numPhenomenon].coordX, sPhenomenonData[numPhenomenon].coordY);
 
                 return TRUE;
-                DebugPrintfLevel(MGBA_LOG_WARN, "GeneratePhenomenonTile X: %d Y: %d numPhenomenon: %d, tileBehaviour: %d, randomXOffset: %d, randomYOffset: %d", tileX, tileY, numPhenomenon, tileBehaviour, randomXOffset, randomYOffset);
+                //DebugPrintfLevel(MGBA_LOG_WARN, "GeneratePhenomenonTile X: %d Y: %d numPhenomenon: %d, tileBehaviour: %d, randomXOffset: %d, randomYOffset: %d", tileX, tileY, numPhenomenon, tileBehaviour, randomXOffset, randomYOffset);
             }
         }
     }
     return FALSE;
 }
 
-bool8 GeneratePhenomenonFieldEffectAt(u8 numPhenomenon, u8 fldEffId){
+bool8 GeneratePhenomenonFieldEffectAt(u8 fldEffId){
     u16 fldEffSpriteId = MAX_SPRITES;
-    int Phenomenon_X  = sPhenomenonData[numPhenomenon].coordX;
-    int Phenomenon_Y  = sPhenomenonData[numPhenomenon].coordY;
+    int phenomenon_X  = sPhenomenonData.coordX;
+    int phenomenon_Y  = sPhenomenonData.coordY;
 
-    gFieldEffectArguments[0] = Phenomenon_X + MAP_OFFSET;
-    gFieldEffectArguments[1] = Phenomenon_Y + MAP_OFFSET;
+    gFieldEffectArguments[0] = phenomenon_X + MAP_OFFSET;
+    gFieldEffectArguments[1] = phenomenon_Y + MAP_OFFSET;
     gFieldEffectArguments[2] = 0xFF;
     gFieldEffectArguments[3] = 2;
     fldEffSpriteId = FieldEffectStart(fldEffId);
@@ -437,61 +437,45 @@ bool8 GeneratePhenomenonFieldEffectAt(u8 numPhenomenon, u8 fldEffId){
     if (fldEffSpriteId == MAX_SPRITES)
         return FALSE;
 
-    sPhenomenonData[numPhenomenon].fldEffSpriteId = fldEffSpriteId;
-    sPhenomenonData[numPhenomenon].fldEffId       = fldEffId;
+    sPhenomenonData.fldEffSpriteId = fldEffSpriteId;
+    sPhenomenonData.fldEffId       = fldEffId;
 
 
     return TRUE;
 }
 
-void InitializePhenomenonData(u8 numPhenomenon){
-    if(numPhenomenon < NUM_MAX_PHENOMENONS){
-        sPhenomenonData[numPhenomenon].coordX         = 0;
-        sPhenomenonData[numPhenomenon].coordY         = 0;
-        sPhenomenonData[numPhenomenon].phenomenonType = PHENOMENON_TYPES;
-        sPhenomenonData[numPhenomenon].fldEffSpriteId = MAX_SPRITES;
-        sPhenomenonData[numPhenomenon].active         = FALSE;
-        sPhenomenonData[numPhenomenon].argument       = 0;
-        sPhenomenonData[numPhenomenon].argument2      = 0;
-        sPhenomenonData[numPhenomenon].fldEffId       = 0;
-    }
-}
-
-static u8 FindInactivePhenomenonSlot(void){
-    u8 i;
-
-    for(i = 0; i < NUM_MAX_PHENOMENONS; i++){
-        if(!sPhenomenonData[i].active)
-            return i;
-    }
-
-    return NUM_MAX_PHENOMENONS;
+void InitializePhenomenonData(void){
+    sPhenomenonData.coordX         = 0;
+    sPhenomenonData.coordY         = 0;
+    sPhenomenonData.phenomenonType = PHENOMENON_TYPES;
+    sPhenomenonData.fldEffSpriteId = MAX_SPRITES;
+    sPhenomenonData.active         = FALSE;
+    sPhenomenonData.argument       = 0;
+    sPhenomenonData.argument2      = 0;
+    sPhenomenonData.fldEffId       = 0;
+    sPhenomenonData.volume         = 0;
 }
 
 void TryCreatingPhenomenon(void){
-    u8 emptyPhenomenonSlot = FindInactivePhenomenonSlot();
-    InitializePhenomenonData(emptyPhenomenonSlot);
+    InitializePhenomenonData();
 
-    if(emptyPhenomenonSlot < NUM_MAX_PHENOMENONS){
-
-        if(GeneratePhenomenonTile(emptyPhenomenonSlot)){
-
-            if(GeneratePhenomenonFieldEffectAt(emptyPhenomenonSlot, getFieldEffectForPhenomenon(emptyPhenomenonSlot))){
-                u8 taskId;
-                sPhenomenonData[emptyPhenomenonSlot].active = TRUE;
-                emptyPhenomenonSlot++;
-                taskId = CreateTask(Task_UpdatePhenomenonVolume, 64);
-                gTasks[taskId].data[0] = (u16)GetPhenomenonVolume();
-            }
+    if(GeneratePhenomenonTile()){
+        if(GeneratePhenomenonFieldEffectAt(getFieldEffectForPhenomenon())){
+            u8 taskId;
+            u16 volume = (u16)GetPhenomenonVolume();
+            sPhenomenonData.active = TRUE;
+            sPhenomenonData.volume = volume;
+            taskId = CreateTask(Task_UpdatePhenomenonVolume, 64);
+            gTasks[taskId].data[0] = volume;
         }
     }
 }
 
-u16 getFieldEffectForPhenomenon(u16 slot){
+u16 getFieldEffectForPhenomenon(void){
     u8 currMapType = GetCurrentMapType();
     u8 fldEffId = FLDEFF_CAVE_DUST;
-    u16 metatileBehaviour = sPhenomenonData[slot].tileBehaviour;
-    u16 environment = sPhenomenonData[slot].environment;
+    u16 metatileBehaviour = sPhenomenonData.tileBehaviour;
+    u16 environment = sPhenomenonData.environment;
 
     switch (environment)
     {
@@ -535,7 +519,7 @@ u16 getFieldEffectForPhenomenon(u16 slot){
     return fldEffId;
 }
 
-u8 IsPlayerOnPhenomenon(void)
+bool8 IsPlayerOnPhenomenon(void)
 {
     int playerX = gSaveBlock1Ptr->pos.x;
     int playerY = gSaveBlock1Ptr->pos.y;
@@ -543,16 +527,12 @@ u8 IsPlayerOnPhenomenon(void)
     return IsThereAPhenomenonOnCords(playerX, playerY);
 }
 
-u8 IsThereAPhenomenonOnCords(s16 coordX, s16 coordXY)
+bool8 IsThereAPhenomenonOnCords(s16 coordX, s16 coordY)
 {
-    u8 i;
+    if(coordX == sPhenomenonData.coordX && coordY == sPhenomenonData.coordY && sPhenomenonData.active)
+        return TRUE;
 
-    for(i = 0; i < NUM_MAX_PHENOMENONS; i++){
-        if(coordX == sPhenomenonData[i].coordX && coordXY == sPhenomenonData[i].coordY && sPhenomenonData[i].active)
-            return i;
-    }
-
-    return NUM_MAX_PHENOMENONS;
+    return FALSE;
 }
 
 bool8 IsPlayerOnCoordinate(s16 x, s16 y)
@@ -566,39 +546,27 @@ bool8 IsPlayerOnCoordinate(s16 x, s16 y)
     return FALSE;
 }
 
-static void ClearPhenomenonData(u8 id){
-    u16 fldEffSpriteId = sPhenomenonData[id].fldEffSpriteId;
-    u16 fldEffId       = sPhenomenonData[id].fldEffId;
+void ClearPhenomenonData(void){
+    u16 fldEffSpriteId = sPhenomenonData.fldEffSpriteId;
+    u16 fldEffId       = sPhenomenonData.fldEffId;
 
     if(fldEffSpriteId != MAX_SPRITES && fldEffId != 0){
         //DebugPrintfLevel(MGBA_LOG_WARN, "ClearPhenomenonData fldEffSpriteId: %d fldEffId: %d", fldEffSpriteId, fldEffId);
         FieldEffectStop(&gSprites[fldEffSpriteId], fldEffId);
-        InitializePhenomenonData(id);
-    }
-}
-
-void ClearAllPhenomenonData(void){
-    u8 i;
-
-    for(i = 0; i < NUM_MAX_PHENOMENONS; i++){
-        if(sPhenomenonData[i].active){
-            ClearPhenomenonData(i);
-        }
+        InitializePhenomenonData();
     }
 }
 
 void TryToCleanPhenomenonDataFromScript(void){
     if(!FlagGet(FLAG_CHECKING_PHENOMENON))
-        ClearAllPhenomenonData();
+        ClearPhenomenonData();
 
     FlagClear(FLAG_CHECKING_PHENOMENON);
 }
 
 void CheckForNPCSteppingIntoPhenomenon(s16 npcX, s16 npcY){
-    u8 phenomenonID = IsThereAPhenomenonOnCords(npcX, npcY);
-
-    if(phenomenonID != NUM_MAX_PHENOMENONS)
-        ClearPhenomenonData(phenomenonID);
+    if (IsThereAPhenomenonOnCords(npcX, npcY))
+        ClearPhenomenonData();
 }
 
 void CheckForNPCPhenomenonFromObjectEvent(struct ObjectEvent *objectEvent){
@@ -624,6 +592,8 @@ void CheckForNPCPhenomenon(void){
 }
 
 static bool8 ShouldCreateAPhenomenon(void){
+    if (sPhenomenonData.active)
+        return FALSE;
     return (Random() % 100) < (PHENOMENON_CHANCE_PER_STEP + 1);
 }
 
@@ -631,54 +601,46 @@ u16 GetCurrentPhenomenonArgument(void){
     return VarGet(VAR_PHENOMENON_ARGUMENT);
 }
 
-static void CreatePhenomenonWildPokemon(u8 playerPhenomenon){
-    u16 species = sPhenomenonData[playerPhenomenon].argument;
-    u16 level   = sPhenomenonData[playerPhenomenon].argument2;
+static void CreatePhenomenonWildPokemon(void){
+    u16 species = sPhenomenonData.argument;
+    u16 level   = sPhenomenonData.argument2;
     u16 item    = ITEM_NONE;
 
     CreateScriptedWildMon(species, level, item);
     //sIsScriptedWildDouble = FALSE;
 }
 
-static void SavePhenomenonArgumentIntoVar(u8 playerPhenomenon){
-    VarSet(VAR_PHENOMENON_ARGUMENT, sPhenomenonData[playerPhenomenon].argument);
+static void SavePhenomenonArgumentIntoVar(void){
+    VarSet(VAR_PHENOMENON_ARGUMENT, sPhenomenonData.argument);
 }
 
 bool8 CheckForPhenomenon(void){
-    u8 playerPhenomenon         = IsPlayerOnPhenomenon();
-    u8 isThereAnEmptyPhenomenon = FindInactivePhenomenonSlot() != NUM_MAX_PHENOMENONS;
+    bool8 playerPhenomenon = IsPlayerOnPhenomenon();
 
     if(B_FLAG_ENABLE_PHENOMENON != 0 && !FlagGet(B_FLAG_ENABLE_PHENOMENON))
         return FALSE;
 
-    if(playerPhenomenon != NUM_MAX_PHENOMENONS){
-        VarSet(VAR_PHENOMENON_TYPE, sPhenomenonData[playerPhenomenon].phenomenonType);
-        switch(sPhenomenonData[playerPhenomenon].phenomenonType){
+    if(playerPhenomenon){
+        VarSet(VAR_PHENOMENON_TYPE, sPhenomenonData.phenomenonType);
+        switch(sPhenomenonData.phenomenonType){
             case PHENOMENON_TYPE_ENCOUNTER:
-                CreatePhenomenonWildPokemon(playerPhenomenon);
+                CreatePhenomenonWildPokemon();
             break;
             default:
-                SavePhenomenonArgumentIntoVar(playerPhenomenon);
+                SavePhenomenonArgumentIntoVar();
             break;
         }
         FlagSet(FLAG_CHECKING_PHENOMENON);
-        ClearAllPhenomenonData();
+        ClearPhenomenonData();
         return TRUE;
     }
     else{
-        if(isThereAnEmptyPhenomenon && ShouldCreateAPhenomenon())
+        if(ShouldCreateAPhenomenon()) {
             TryCreatingPhenomenon();
-
+        }
     }
 
     return FALSE;
-}
-
-static u32 CalculateDistanceBetweenPoints(s16 x1, s16 y1, s16 x2, s16 y2)
-{
-    s32 horizontal = max(x1,x2) - min(x1,x2);
-    s32 vertical = max(y1,y2) - min(y1,y2);
-    return Sqrt((horizontal * horizontal) + (vertical * vertical));
 }
 
 #define sWaitFldEff  data[0]
@@ -692,8 +654,8 @@ bool8 IsFieldEffectForPhenomenon(u32 fieldEffectId)
 static inline unsigned int GetPhenomenonVolume(void)
 {
     s16 distance;
-    s16 phenomenonX = sPhenomenonData[0].coordX + MAP_OFFSET;
-    s16 phenomenonY = sPhenomenonData[0].coordY + MAP_OFFSET;
+    s16 phenomenonX = sPhenomenonData.coordX + MAP_OFFSET;
+    s16 phenomenonY = sPhenomenonData.coordY + MAP_OFFSET;
     distance = GetCurrentDistanceFromPlayer(phenomenonX, phenomenonY);
     
     if (distance < 4)
@@ -721,7 +683,7 @@ static void Task_UpdatePhenomenonVolume(u8 taskId)
     unsigned int targetVolume = 0;
     task = &gTasks[taskId];
 
-    if (sPhenomenonData[0].active == FALSE)
+    if (!sPhenomenonData.active)
     {
         DestroyTask(taskId);
         return;
@@ -729,8 +691,8 @@ static void Task_UpdatePhenomenonVolume(u8 taskId)
 
     targetVolume = ModulatePhenomenonVolume(task->data[0], GetPhenomenonVolume());
     task->data[0] = targetVolume;
+    sPhenomenonData.volume = targetVolume;
     m4aMPlayVolumeControl(&gMPlayInfo_SE4, TRACKS_ALL, (u16)targetVolume);
-    DebugPrintf("Volume: %d\n", (u16)targetVolume);
 }
 
 void SpriteCB_PlayFieldEffectSound(struct Sprite *sprite)
@@ -749,17 +711,21 @@ void SpriteCB_PlayFieldEffectSound(struct Sprite *sprite)
         default:
         case FLDEFF_SHAKING_GRASS:
         case FLDEFF_SHAKING_LONG_GRASS:
-            sound = SE_SUDOWOODO_SHAKE_2;
+            sound = SE_SHAKING_GRASS;
             delay = PHENOMENON_SOUND_DELAY_GRASS;
             break;
         case FLDEFF_SAND_HOLE:
         case FLDEFF_CAVE_DUST:
-            sound = SE_LAVARIDGE_FALL_WARP_2;
+            sound = SE_CAVE_DUST;
             delay = PHENOMENON_SOUND_DELAY_DUST;
             break;
         case FLDEFF_WATER_SURFACING:
-            sound = SE_M_BUBBLE_2;
+            sound = SE_RIPPLING_WATER;
             delay = PHENOMENON_SOUND_DELAY_WATER;
+            break;
+        case FLDEFF_SHADOW: // bridge, unused currently
+            sound = SE_FLAPPING_WINGS;
+            delay = PHENOMENON_SOUND_DELAY_BRIDGE;
             break;
     }
 
@@ -768,9 +734,8 @@ void SpriteCB_PlayFieldEffectSound(struct Sprite *sprite)
 
     if (sprite->sSoundEffectDelay == delay)
     {
-        PlaySE(sound);
+        PlaySE4WithVolume(sound, (u16)sPhenomenonData.volume);
         sprite->sSoundEffectDelay = 1;
-        DebugPrintf("SE Played!\n");
     }
     else
     {
@@ -780,16 +745,8 @@ void SpriteCB_PlayFieldEffectSound(struct Sprite *sprite)
 
 void RestartPhenomenon(void)
 {
-    for (u32 phenomenonID = 0; phenomenonID < NUM_MAX_PHENOMENONS; phenomenonID++)
-    {
-        if(sPhenomenonData[phenomenonID].active == FALSE)
-            continue;
+    if(sPhenomenonData.active == FALSE || FieldEffectActiveListContains(sPhenomenonData.fldEffId))
+        return;
 
-        u32 fldEffId = sPhenomenonData[phenomenonID].fldEffId;
-
-        if (FieldEffectActiveListContains(fldEffId))
-            continue;
-
-        GeneratePhenomenonFieldEffectAt(phenomenonID,fldEffId);
-    }
+    GeneratePhenomenonFieldEffectAt(sPhenomenonData.fldEffId);
 }
