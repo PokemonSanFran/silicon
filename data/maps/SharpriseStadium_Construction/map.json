@@ -337,5 +337,6 @@
       "script": "VSGarbodor_PreventCrossingSides_Script"
     }
   ],
-  "bg_events": []
+  "bg_events": [],
+  "night_music": "MUS_ROUTE4_ROUTE2_NIGHT"
 }
