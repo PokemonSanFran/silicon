@@ -325,5 +325,6 @@
       "script": "AndWeMarchOn_Script_MovePlayerFromEast"
     }
   ],
-  "bg_events": []
+  "bg_events": [],
+  "night_music": "MUS_TIRABUDIN_PLACE_NIGHT"
 }
