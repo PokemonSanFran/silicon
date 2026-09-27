@@ -12,13 +12,13 @@ script RPS_Script_SaveAndDeleteParty
 script RPS_Script_GiveRiggedMon
 {
     call(RPS_Script_SaveAndDeleteParty)
-    givemon(species=SPECIES_HITMONCHAN,level=20,item=0,abilityNum=2,shinyMode=SHINY_MODE_ALWAYS,hpIv=7,atkIv=9,defIv=1,spAtkIv=9,spDefIv=3,move1=MOVE_UPPER_HAND,move2=MOVE_MACH_PUNCH,move3=MOVE_FOCUS_PUNCH)
+    givemon(species=SPECIES_HITMONCHAN,level=20,item=0,abilityNum=2,shinyMode=SHINY_MODE_ALWAYS,hpIv=7,atkIv=9,defIv=1,spAtkIv=9,spDefIv=3,move1=MOVE_UPPER_HAND,move2=MOVE_MACH_PUNCH,move3=MOVE_FOCUS_PUNCH,move4=MOVE_NONE)
 }
 
 script RPS_Script_GiveFairMon
 {
     call(RPS_Script_SaveAndDeleteParty)
-    givemon(species=SPECIES_HITMONCHAN,level=20,item=ITEM_PUNCHING_GLOVE,abilityNum=1,shinyMode=SHINY_MODE_ALWAYS,hpIv=31,atkIv=31,defIv=31,spAtkIv=31,spDefIv=31,move1=MOVE_UPPER_HAND,move2=MOVE_MACH_PUNCH,move3=MOVE_FOCUS_PUNCH,nature=NATURE_JOLLY,hpEv=16,atkEv=236,speedEv=248)
+    givemon(species=SPECIES_HITMONCHAN,level=20,item=ITEM_PUNCHING_GLOVE,abilityNum=1,shinyMode=SHINY_MODE_ALWAYS,hpIv=31,atkIv=31,defIv=31,spAtkIv=31,spDefIv=31,move1=MOVE_UPPER_HAND,move2=MOVE_MACH_PUNCH,move3=MOVE_FOCUS_PUNCH,nature=NATURE_JOLLY,hpEv=16,atkEv=236,speedEv=248,move4=MOVE_NONE)
 }
 
 script RPS_Script_ResetPlayer
@@ -49,44 +49,52 @@ script RPS_Script_GetWager
 
 script RPS_Script_QuestInactive
 {
-    call_if_quest_inactive(QUEST_RPS,RPS_Dialogue_StartQuest)
-    call_if_quest_active(QUEST_RPS,RPS_Script_InteractMontyQuestActive)
-    call_if_quest_active(QUEST_RESTOREZENZUGYM,RestoreZenzuIsland_Dialogue_RecruitMonty)
-    call_if_quest_complete(QUEST_RPS,RPS_Dialogue_PostQuestInteract)
+    goto_if_quest_inactive(QUEST_RPS,RPS_Dialogue_StartQuest)
+    goto_if_quest_active(QUEST_RPS,RPS_Script_InteractMontyQuestActive)
+    goto_if_quest_active(QUEST_RESTOREZENZUGYM,RestoreZenzuIsland_Dialogue_RecruitMonty)
+    goto_if_quest_complete(QUEST_RPS,RPS_Dialogue_PostQuestInteract)
 }
 
 script RPS_Dialogue_StartQuest
 {
     msgbox(format("You beat me again Monty! I can't keep losing money like this. My wife will have my head!"),MSGBOX_DEFAULT,SPEAKER_MONTYOPP)
-    msgbox(format("Hueh heuh heuh, don't worry, you'll taste victory soon enough MontyOpp. Just come back when your pockets are a little heavier."),MSGBOX_AUTOCLOSE, SPEAKER_MONTY)
-    call (RPS_Script_MontyOppLeaveScreen)
-    waitmovement(LOCALID_RPS_MONTY)
+    msgbox(format("Hueh heuh heuh, don't worry, you'll taste victory soon enough MontyOpp. Just come back when your pockets are a little heavier."),, SPEAKER_MONTY)
+	closemessage
+    call(RPS_Script_MontyOppLeaveScreen)
     applymovement(LOCALID_RPS_MONTY, moves(face_player, step_end))
-    msgbox(format("Heyo! You there! New around these parts?"),MSGBOX_AUTOCLOSE,SPEAKER_MONTY)
-    msgbox(format("Who, me?"),MSGBOX_AUTOCLOSE,SPEAKER_PLAYER)
-    msgbox(format("Hueh heuh heuh, yeah you!"),MSGBOX_AUTOCLOSE,SPEAKER_MONTY)
-    msgbox(format("You ever hear of Monty's Mach-Focus-Hand?"),MSGBOX_AUTOCLOSE,SPEAKER_MONTY)
-    msgbox(format("No, can't say that I have!"),MSGBOX_AUTOCLOSE,SPEAKER_PLAYER)
-    msgbox(format("Hueh heuh heuh, well I'm Monty, and I made it up. of course you haven't."),MSGBOX_AUTOCLOSE,SPEAKER_MONTY)
-    msgbox(format("Or learned it in Kanto..."),MSGBOX_AUTOCLOSE,SPEAKER_MONTY,TAIL_WHISPER)
+    msgbox(format("Heyo! You there! New around these parts?"),,SPEAKER_MONTY)
+    msgbox(format("Who, me?"),,SPEAKER_PLAYER)
+    msgbox(format("Hueh heuh heuh, yeah you!"),,SPEAKER_MONTY)
+    msgbox(format("You ever hear of Monty's Mach-Focus-Hand?"),,SPEAKER_MONTY)
+    msgbox(format("No, can't say that I have!"),,SPEAKER_PLAYER)
+    msgbox(format("Hueh heuh heuh, well I'm Monty, and I made it up. of course you haven't."),,SPEAKER_MONTY)
+    msgbox(format("Or learned it in Kanto..."),,SPEAKER_MONTY,TAIL_WHISPER)
     closemessage
     startquest(QUEST_RPS)
+	goto(RPS_Script_MontyQuestActive)
 }
 
 script RPS_Script_InteractMontyQuestActive
 {
     lock
+	faceplayer
+	goto(RPS_Script_MontyQuestActive)
+}
+
+script RPS_Script_MontyQuestActive
+{
     showmoneybox(0,0)
     call(RPS_Script_GetWager)
     buffernumberstring(STR_VAR_2 ,VAR_0x8004)
-    msgbox(format("Ready to give it a shot?"), MSGBOX_NPC, SPEAKER_MONTY)
+	variablecheckmoney(VAR_0x8004)
+    msgbox(format("Ready to give it a shot?"),, SPEAKER_MONTY)
 
-    if(!var(VAR_RESULT))
+    if(var(VAR_RESULT) == FALSE)
     {
         goto(RPS_Dialogue_NotEnoughMoney)
     }
 
-    msgbox(format("Let's put some stakes on it. ¥{STR_VAR_2}, winner takes the pot."),MSGBOX_AUTOCLOSE, SPEAKER_MONTY)
+    msgbox(format("Let's put some stakes on it. ¥{STR_VAR_2}, winner takes the pot."),, SPEAKER_MONTY)
     msgbox(format("Hueh hueh hueh, I know a hotshot Trainer like you has ¥{STR_VAR_2} laying around, right?"),MSGBOX_DEFAULT,SPEAKER_MONTY)
     msgbox(format("Here's the lowdown:"),MSGBOX_DEFAULT,SPEAKER_MONTY)
 
@@ -106,12 +114,12 @@ script RPS_Script_InteractMontyQuestActive
     msgbox(format("Easy, yeah? Let's see how lucky you are. You can even use my lucky {STR_VAR_1}!"),MSGBOX_DEFAULT,SPEAKER_MONTY)
     closemessage
     trainerbattle_continue_after_lose(TRAINER_MONTY,format("Hueh hueh hueh, sometimes you just have to make your own luck."))
-    call(RPS_Script_JudgeBattleOutcome)
+    goto(RPS_Script_JudgeBattleOutcome)
 }
 
 script RPS_Dialogue_NotEnoughMoney
 {
-    msgbox(format("Ah, it's no fun without a little wager. Come back with ¥{STR_VAR_2}"), , SPEAKER_MONTY)
+    msgbox(format("Ah, it's no fun without a little wager. Come back with ¥{STR_VAR_2}."), , SPEAKER_MONTY)
     closemessage
     hidemoneybox
     releaseall
@@ -133,12 +141,12 @@ script RPS_Dialogue_QuestComplete
     msgbox(format("My luck ran out. I'm shocked."), MSGBOX_DEFAULT, SPEAKER_MONTY)
     msgbox(format("You weren't ever lucky to begin with!"), MSGBOX_DEFAULT, SPEAKER_PLAYER)
     msgbox(format("He? watch your mouth, what are you implying..."), MSGBOX_DEFAULT, SPEAKER_MONTY)
-    bufferitemname(STR_VAR_1,ITEM_PUNCHING_GLOVE)
+    bufferitemname(STR_VAR_2,ITEM_PUNCHING_GLOVE)
     bufferstring(STR_VAR_1,format("Google Glass"))
-    msgbox(format("My {STR_VAR_2} can see everything about your Pokémon. I can see that your Pokémon was stronger than mine and holding {STR_VAR_1}."), MSGBOX_DEFAULT, SPEAKER_PLAYER)
+    msgbox(format("My {STR_VAR_1} can see everything about your Pokémon. I can see that your Pokémon was stronger than mine and holding a {STR_VAR_2}."), MSGBOX_DEFAULT, SPEAKER_PLAYER)
     msgbox(format("..."), MSGBOX_DEFAULT, SPEAKER_MONTY)
     msgbox(format("You got me! Hueh hueh hueh, kids these days are too high tech to fool. Maybe I need to target a... less savvy demographic."), MSGBOX_DEFAULT SPEAKER_MONTY)
-    msgbox(format("Wait,you tageted me specifically?"), MSGBOX_DEFAULT, SPEAKER_PLAYER)
+    msgbox(format("Wait,you targeted me specifically?"), MSGBOX_DEFAULT, SPEAKER_PLAYER)
     msgbox(format("Hueh hueh hueh, of course! I don't want to con region natives, but I have no problem ripping off techie transplants. You're so gullible!"), MSGBOX_DEFAULT, SPEAKER_MONTY)
     msgbox(format("You know, when I started hustling, I was just trying to get my house back. But now? I'm just good at getting people to hand over their cash!"), MSGBOX_DEFAULT, SPEAKER_MONTY)
     msgbox(format("But for now, I'm not goin anywhere. {PLAYER}, anytime you want a rematch, I'll be here."), MSGBOX_DEFAULT, SPEAKER_MONTY)
@@ -147,7 +155,6 @@ script RPS_Dialogue_QuestComplete
     addmoney(QUEST_RPS_BASE_WAGER,TRUE)
     msgbox(format("Next time, I'll play fair, hueh hueh hueh."), , SPEAKER_MONTY)
 	waitse
-    waitbuttonpress
     hidemoneybox
     closemessage
     completequest(QUEST_RPS)
@@ -222,7 +229,7 @@ script RPS_Dialogue_AskFirstStreak
 
 script RPS_Dialogue_CannotAffordWager
 {
-    msgbox(format("Hueh hueh hueh, you look more broke than me! Come back when your luck has changed."), MSGBOX_AUTOCLOSE, SPEAKER_MONTY)
+    msgbox(format("Hueh hueh hueh, you look more broke than me! Come back when your luck has changed."), , SPEAKER_MONTY)
     closemessage
     releaseall
     end
@@ -242,22 +249,22 @@ script RPS_Script_JudgeWagerBattleOutcome
 script RPS_Script_StartWagerBattle
 {
     call (RPS_Script_GiveFairMon)
-    msgbox(format("Hueh hueh hueh, all right! Mach! Focus! Hand!"), MSGBOX_DEFAULT, SPEAKER_MONTY)
+    msgbox(format("Hueh hueh hueh, all right! Mach! Focus! Hand!"), , SPEAKER_MONTY)
     closemessage
     trainerbattle_continue_after_lose(TRAINER_MONTY,format("Well what do you know? Luck has finally turned against me."))
-    call(RPS_Script_JudgeWagerBattleOutcome)
+    goto(RPS_Script_JudgeWagerBattleOutcome)
 }
 
 script RPS_Dialogue_WonWagerBattle
 {
     call(RPS_Script_IncrementStreak)
-    call(RPS_Script_JudgeStreak)
+    goto(RPS_Script_JudgeStreak)
 }
 
 script RPS_Dialogue_LostWagerBattle
 {
     call(RPS_Script_GetWager)
-    call (RPS_Script_StreakReset)
+    call(RPS_Script_StreakReset)
     msgbox(format("Hueh hueh hueh, victory is mine this time!"), , SPEAKER_MONTY)
     showmoneybox(0,0)
     playse(SE_SHOP)
@@ -273,7 +280,7 @@ script RPS_Dialogue_LostWagerBattle
 
 script RPS_Dialogue_DenyFirstWagerBattle
 {
-    msgbox(format("I promise I'm playing it straight this time!"), MSGBOX_AUTOCLOSE, SPEAKER_MONTY)
+    msgbox(format("I promise I'm playing it straight this time!"), , SPEAKER_MONTY)
     hidemoneybox
     closemessage
     releaseall
@@ -282,7 +289,7 @@ script RPS_Dialogue_DenyFirstWagerBattle
 
 script RPS_Script_MontyOppLeaveScreen
 {
-    applymovement(LOCALID_RPS_MONTYOPP, moves(face_up, walk_fast_up *2, walk_fast_left *3, walk_fast_up *4, step_end))
+	moveobjecttocoords(LOCALID_RPS_MONTYOPP,7,12,DIR_NORTH)
     waitmovement(LOCALID_RPS_MONTYOPP)
     removeobject(LOCALID_RPS_MONTYOPP)
     return
@@ -307,11 +314,9 @@ script RPS_Script_DenyWagerBattle
 {
     call(RPS_Script_DecrementStreak)
     msgbox(format("You're no fun!"), , SPEAKER_MONTY)
-    showmoneybox(0,0)
-    callnative(Quest_RPS_PayWager)
-    waitbuttonpress
+	callnative(Quest_RPS_PayWager)
     playse(SE_SHOP)
-    updatemoneybox
+	variableaddmoney(VAR_RESULT,TRUE)
     msgbox(format("Come back if you change your mind."), , SPEAKER_MONTY)
     hidemoneybox
     closemessage
@@ -335,6 +340,8 @@ script RPS_Dialogue_CheckRewardSpace
 
 script RPS_Dialogue_GiveItem
 {
+    call(RPS_Script_IncrementStreak)
+	cueobjectplayer(LOCALID_RPS_MONTY)
     giveitem(ITEM_LOADED_DICE)
         call (RPS_Script_IncrementStreak)
         msgbox(format("They're not exactly lucky, but they're a gift from me."), MSGBOX_DEFAULT, SPEAKER_MONTY)
@@ -351,30 +358,16 @@ script RPS_Dialogue_CompletedStreak
     msgbox(format("Okay okay, I'm tapped out, you got me."),,SPEAKER_MONTYOPP)
     showmoneybox(0,0)
     callnative(Quest_RPS_PayWager)
-    waitbuttonpress
+	variableaddmoney(VAR_RESULT,TRUE)
     playse(SE_SHOP)
-    updatemoneybox
     msgbox(format("Maybe it's time I hung up my hustler's hat."),,SPEAKER_MONTYOPP)
     hidemoneybox
     closemessage
-    call(RPS_Script_StreakReset)
     goto(RPS_Dialogue_CheckRewardSpace)
 }
 
 script RPS_Dialogue_PostStreak
 {
     goto_if_quest_active(QUEST_RESTOREZENZUGYM,RestoreZenzuIsland_Dialogue_RecruitMonty)
-    msgbox(format("Might be done with Mach-Focus-Hand... I think I need to find a bigger hustle, something more fufilling."),MSGBOX_AUTOCLOSE,SPEAKER_MONTYOPP)
+    msgbox(format("Might be done with Mach-Focus-Hand... I think I need to find a bigger hustle, something more fufilling."),,SPEAKER_MONTYOPP)
 }
-
-movement Monty_FacePlayer
-{
-    face_player
-}
-
-movement Monty_Opp_Left
-{
-    face_left
-    step_end
-}
-

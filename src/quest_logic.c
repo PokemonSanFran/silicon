@@ -2222,7 +2222,7 @@ void Quest_RPS_CheckWager(void)
 
 void Quest_RPS_PayWager(void)
 {
-    AddMoney(&gSaveBlock1Ptr->money,Quest_RPS_CalculateWager());
+    VarSet(VAR_RESULT,Quest_RPS_CalculateWager());
 }
 
 void Quest_RPS_StopMoneyLoss(void)
@@ -2275,12 +2275,6 @@ void DebugQuest_RPS(u8 state)
             VarSet(VAR_QUEST_RPS_STREAK_COUNT,7);
             break;
         case STATE_QUEST_RPS_STREAK_8:
-            VarSet(VAR_QUEST_RPS_STREAK_COUNT,8);
-            break;
-        case STATE_QUEST_RPS_STREAK_9:
-            VarSet(VAR_QUEST_RPS_STREAK_COUNT,9);
-            break;
-        case STATE_QUEST_RPS_STREAK_10:
             VarSet(VAR_QUEST_RPS_STREAK_COUNT,QUEST_RPS_MAX_STREAK_LENGTH);
             Quest_RPS_PayWager();
             break;
