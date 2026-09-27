@@ -114,7 +114,6 @@ static void GameBoard_FadeAndBail(void);
 static void Task_GameBoardWaitFadeAndBail(u8);
 static bool8 GameBoard_LoadGraphics(void);
 static void GameBoard_InitWindows(void);
-static void LoadEventPalettes(void);
 static void GenerateGameBoard(void);
 static void PrintEnemyParty(void);
 static void PrintPlayerParty(void);
@@ -132,12 +131,10 @@ static void StartCountdown(void);
 static void SetTimerForCountdown(void);
 static void SetTimer(u32);
 static void CalculatePanelPosition(u32, u32*, u32*);
-static u32 CreateCountdownPanel(u32, u32);
 static void Task_GameBoard_Countdown(u8);
 static void PopulateEventSprites(void);
 static void LoadTileSpriteSheets(void);
 static u8 CreateEventSprite(u32, u32, u32);
-static const u16 GetTileTag(u32);
 static void StartGame(void);
 static void SetTimerForGame(void);
 static void InitCursorPositionFromSaveblock(void);
@@ -146,7 +143,6 @@ static void SpriteCB_Cursor(struct Sprite*);
 static void ChangeCursorColor(struct Sprite*);
 static u32 ReturnNextCursorPalette(u32);
 static void ChangeCursorSpritePosition(struct Sprite*);
-static void DestroyCountdownPanels(void);
 static void Task_GameBoard_Game(u8);
 static u32 GetGameBoardTimer(void);
 static void IncrementGameBoardMode(void);
@@ -590,15 +586,8 @@ static const u32 sBackgroundTilemap[] = INCBIN_U32("graphics/battle_frontier/bat
 static const u32 sLogobackgroundTiles[] = INCGFX_U32("graphics/battle_frontier/battle_arcade/game/backgrounds/logobackground.png", ".4bpp.smol");
 static const u32 sLogobackgroundTilemap[] = INCBIN_U32("graphics/battle_frontier/battle_arcade/game/backgrounds/logobackground.bin.smolTM");
 
-const u16 sArcadeEventPlayer_Pal[] = INCBIN_U16("graphics/battle_frontier/battle_arcade/game/palettes/event_player.gbapal");
-const u16 sArcadeEventOpponent_Pal[] = INCBIN_U16("graphics/battle_frontier/battle_arcade/game/palettes/event_opponent.gbapal");
 const u16 sGameBoardPalette_Pal[] = INCBIN_U16("graphics/battle_frontier/battle_arcade/game/palettes/background.gbapal");
 const u16 sGameBoardText_Pal[] = INCBIN_U16("graphics/battle_frontier/battle_arcade/game/palettes/text.gbapal");
-static const struct SpritePalette sArcadePalettes[] =
-{
-    {sArcadeEventOpponent_Pal, ARCADE_PALTAG_OPPONENT},
-    {sArcadeEventPlayer_Pal,   ARCADE_PALTAG_PLAYER},
-};
 
 void Task_OpenGameBoard(u8 taskId)
 {
@@ -768,7 +757,7 @@ static bool32 AreTilesOrTilemapEmpty(u32 backgroundId)
     return (sArcadeTilesLUT[backgroundId] == NULL || sArcadeTilemapLUT[backgroundId] == NULL);
 }
 
-static const struct ArcadeSpriteSheet sArcadeSpriteSheets[ARCADE_SPRITEID_COUNT] =
+static const struct ArcadeSpriteSheet sArcadeSpriteSheets[] =
 {
     {
         {
@@ -792,18 +781,23 @@ static const struct ArcadeSpriteSheet sArcadeSpriteSheets[ARCADE_SPRITEID_COUNT]
             .tag = ARCADE_PALTAG_CURSOR,
         },
     },
-    /*
     {
         {
-            .data = (const u16[])INCBIN_U16("graphics/battle_frontier/battle_arcade/game/shadow.4bpp"),
-            .size = TILE_OFFSET_4BPP(8),
-            .tag = ARCADE_SPRITETAG_CURSOR,
         },
         {
-            .data = (const u16[])INCBIN_U16("graphics/battle_frontier/battle_arcade/game/shadow.gbapal"),
-            .tag = ARCADE_PALTAG_SHADOW,
+            .data = (const u16[])INCBIN_U16("graphics/battle_frontier/battle_arcade/game/palettes/event_player.gbapal"),
+            .tag = ARCADE_PALTAG_PLAYER,
         },
     },
+    {
+        {
+        },
+        {
+            .data = (const u16[])INCBIN_U16("graphics/battle_frontier/battle_arcade/game/palettes/event_opponent.gbapal"),
+            .tag = ARCADE_PALTAG_OPPONENT,
+        },
+    },
+    /*
     {
         .palette =
         {
@@ -823,7 +817,7 @@ static const struct ArcadeSpriteSheet sArcadeSpriteSheets[ARCADE_SPRITEID_COUNT]
 
 static void GameBoard_LoadSprites(void)
 {
-    for (enum ArcadeSpriteIds spriteId = 0; spriteId < ARCADE_SPRITEID_COUNT; spriteId++)
+    for (enum ArcadeSpriteIds spriteId = 0; spriteId < ARRAY_COUNT(sArcadeSpriteSheets); spriteId++)
     {
         if (sArcadeSpriteSheets[spriteId].spriteSheet.tag != 0)
         {
@@ -832,10 +826,14 @@ static void GameBoard_LoadSprites(void)
 
         if (sArcadeSpriteSheets[spriteId].palette.tag != 0)
         {
-            LoadSpritePalette(&sArcadeSpriteSheets[spriteId].palette);
+            u32 palId = LoadSpritePalette(&sArcadeSpriteSheets[spriteId].palette);
+
+            if (sArcadeSpriteSheets[spriteId].palette.tag == ARCADE_PALTAG_PLAYER)
+                sGameBoardState->cursorPaletteNum[0] = palId;
+            else if (sArcadeSpriteSheets[spriteId].palette.tag == ARCADE_PALTAG_OPPONENT)
+                sGameBoardState->cursorPaletteNum[1] = palId;
         }
     }
-    LoadEventPalettes();
 }
 
 static bool8 GameBoard_LoadGraphics(void)
@@ -885,14 +883,6 @@ static void GameBoard_InitWindows(void)
         PutWindowTilemap(windowId);
         CopyWindowToVram(windowId, COPYWIN_FULL);
     }
-}
-
-static void LoadEventPalettes(void)
-{
-    u32 i = 0;
-
-    for (i = 0; i < sizeof(sArcadePalettes); i++)
-        sGameBoardState->cursorPaletteNum[i] = LoadSpritePalette(&sArcadePalettes[i]);
 }
 
 static void GenerateGameBoard(void)
