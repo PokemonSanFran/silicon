@@ -67,5 +67,6 @@
   ],
   "warp_events": [],
   "coord_events": [],
-  "bg_events": []
+  "bg_events": [],
+  "night_music": "MUS_PINTILLION_ROUTE_14_16_NIGHT"
 }

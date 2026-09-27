@@ -627,7 +627,7 @@ gSongTable::
 	song mus_route6_night, MUSIC_PLAYER_BGM, 0
 	song mus_gym_halerba, MUSIC_PLAYER_BGM, 0
 	song mus_route_1_5_7_night, MUSIC_PLAYER_BGM, 0
-	song mus_pintillion_route_14_16, MUSIC_PLAYER_BGM, 0
+	song mus_pintillion_route_14_16_night, MUSIC_PLAYER_BGM, 0
 	song mus_warehouse_rave, MUSIC_PLAYER_BGM, 0
 	song mus_baker_cook_street_vendor_barista, MUSIC_PLAYER_BGM, 0
 	song mus_ramesh_house, MUSIC_PLAYER_BGM, 0
