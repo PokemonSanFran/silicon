@@ -295,5 +295,6 @@
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
       "script": "Ramesh_House_LockedDoor_Script"
     }
-  ]
+  ],
+  "night_music": "MUS_QIU_VILLAGE_NIGHT"
 }
