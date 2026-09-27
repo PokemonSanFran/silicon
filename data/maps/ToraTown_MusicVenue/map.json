@@ -107,5 +107,6 @@
       "script": "Quest_LastMusicVenue_Debug_Script"
     }
   ],
-  "bg_events": []
+  "bg_events": [],
+  "night_music": "MUS_TORA_TOWN_NIGHT"
 }
