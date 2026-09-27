@@ -2403,8 +2403,8 @@ bool8 ScrCmd_hidemoneybox(struct ScriptContext *ctx)
 
 
     union CurrencyBoxValues values = { .asU32 = ctx->data[3] };
-    CurrencyBox_Destroy(values);
     //HideMoneyBox(); // siliconMerge
+    ctx->data[3] = CurrencyBox_Destroy(values).asU32;
     return FALSE;
 }
 
@@ -2452,7 +2452,7 @@ bool8 ScrCmd_hidecoinsbox(struct ScriptContext *ctx)
     Script_RequestEffects(SCREFF_V1 | SCREFF_HARDWARE);
 
     union CurrencyBoxValues values = { .asU32 = ctx->data[2] };
-    CurrencyBox_Destroy(values);
+    ctx->data[2] = CurrencyBox_Destroy(values).asU32;
     return FALSE;
 }
 

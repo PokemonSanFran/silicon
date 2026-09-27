@@ -3151,9 +3151,8 @@ static void DisplayCurrentMoneyWindow(void)
 
 static void RemoveMoneyWindow(void)
 {
-    CurrencyBox_Destroy(gBagMenu->moneyBox);
+    gBagMenu->moneyBox = CurrencyBox_Destroy(gBagMenu->moneyBox);
     gBagMenu->windowIds[ITEMWIN_MONEY] = WINDOW_NONE;
-    gBagMenu->moneyBox.asU32 = 0;
     ScheduleBgCopyTilemapToVram(1);
 }
 
