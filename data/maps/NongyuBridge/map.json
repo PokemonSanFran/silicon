@@ -125,5 +125,6 @@
   ],
   "warp_events": [],
   "coord_events": [],
-  "bg_events": []
+  "bg_events": [],
+  "night_music": "MUS_ZENZU_ROUTE_11_13_100_NIGHT"
 }
