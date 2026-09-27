@@ -108,7 +108,7 @@
 //                                                                      //
 // Write 0xFFFF to SOUNDCNT_H (DMA sound control register), then read   //
 // back.                                                                //
-// On real HW / mGBA: bits 4-7 are unused (read 0) and bits 11 and      // 
+// On real HW / mGBA: bits 4-7 are unused (read 0) and bits 11 and      //
 // 15 (FIFO A/B reset) are write-only (read 0), so result is 0x770F.    //
 // Inaccurate emulators may return 0xFFFF (no masking) or 0x0000.       //
 //                                                                      //

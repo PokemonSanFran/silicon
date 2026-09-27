@@ -28,14 +28,14 @@ SINGLE_BATTLE_TEST("Meloetta reverts to Aria Form upon switching out")
     PARAMETRIZE { trial = 0; }
     PARAMETRIZE { trial = 1; }
     PARAMETRIZE { trial = 2; }
-    
+
     GIVEN {
         PLAYER(SPECIES_MELOETTA_ARIA);
         PLAYER(SPECIES_WOBBUFFET);
         OPPONENT(SPECIES_HONCHKROW) { Ability(ABILITY_INSOMNIA); }
     } WHEN {
         TURN { MOVE(player, MOVE_RELIC_SONG); }
-        TURN { 
+        TURN {
             switch (trial)
             {
             case 0:

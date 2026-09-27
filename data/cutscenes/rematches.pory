@@ -82,7 +82,7 @@ script Rematches_Script_InteractKeiYing
     faceplayer
     goto_if_subquest_not_complete(QUEST_DIGGINGUPADAORASDIRT,SUB_QUEST_4,Quest_Diggingupadaorasdirt_Dialogue_ExplainAdaora)
     goto_if_eq(VAR_KEIYING_STATE,STATE_KEIYING_TALKED_IN_HODOU,Rematches_Dialogue_FirstKeiYingBattle)
-    goto_if_lt(VAR_KEIYING_STATE,STATE_KEIYING_SCROLLS_RECIEVED,Rematches_Script_GiveKubfu)
+    goto_if_lt(VAR_KEIYING_STATE,STATE_KEIYING_SCROLLS_RECEIVED,Rematches_Script_GiveKubfu)
     goto(Rematches_Script_DailyRematchKeiying)
 }
 
@@ -104,12 +104,12 @@ script Rematches_Script_GiveKubfu
     {
         case STATE_KEIYING_BATTLE_WON:
             goto(Rematches_Script_GiveKubfu1)
-        case STATE_KEIYING_KUBFU_RECIEVED_1:
+        case STATE_KEIYING_KUBFU_RECEIVED_1:
             goto(Rematches_Script_GiveKubfu2)
-        case STATE_KEIYING_KUBFU_RECIEVED_2:
+        case STATE_KEIYING_KUBFU_RECEIVED_2:
             goto(Rematches_Script_GiveScrolls)
         default:
-        case STATE_KEIYING_SCROLLS_RECIEVED:
+        case STATE_KEIYING_SCROLLS_RECEIVED:
             goto(Rematches_Dialogue_AfterKubfu)
     }
 }
@@ -120,7 +120,7 @@ script Rematches_Script_GaveKubfu
     bufferspeciesname(STR_VAR_1,SPECIES_KUBFU)
     bufferspeciesname(STR_VAR_2,SPECIES_KUBFU)
     playfanfare(MUS_OBTAIN_ITEM)
-    msgbox(format("{PLAYER} recieved a {STR_VAR_1}!"))
+    msgbox(format("{PLAYER} received a {STR_VAR_1}!"))
     waitmessage
     waitfanfare
     msgbox(gText_NicknameThisPokemon,MSGBOX_YESNO)
@@ -158,7 +158,7 @@ script Rematches_Script_GiveKubfu1
         release
         end
     }
-    setvar(VAR_KEIYING_STATE,STATE_KEIYING_KUBFU_RECIEVED_1)
+    setvar(VAR_KEIYING_STATE,STATE_KEIYING_KUBFU_RECEIVED_1)
     goto(Rematches_Script_GaveKubfu)
 }
 
@@ -176,7 +176,7 @@ script Rematches_Script_GiveKubfu2
         release
         end
     }
-    setvar(VAR_KEIYING_STATE,STATE_KEIYING_KUBFU_RECIEVED_2)
+    setvar(VAR_KEIYING_STATE,STATE_KEIYING_KUBFU_RECEIVED_2)
     goto(Rematches_Script_GaveKubfu)
 }
 
@@ -190,7 +190,7 @@ script Rematches_Script_GiveScrolls
         release
         end
     }
-    setvar(VAR_KEIYING_STATE,STATE_KEIYING_SCROLLS_RECIEVED)
+    setvar(VAR_KEIYING_STATE,STATE_KEIYING_SCROLLS_RECEIVED)
     msgbox(format("And these items will help you train those Kubfu to their best potential."),,SPEAKER_KEIYING,TAIL_TALK)
     closemessage
     giveitem(ITEM_SCROLL_OF_DARKNESS,1)

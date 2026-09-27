@@ -26,20 +26,20 @@
 `VAR_QUEST_GORGONZOLA_FOUNDATION_JAMIL` >= `HAS_MET_JAMIL`
 
 ### Has Given Gold Potion
-`VAR_QUEST_GORGONZOLA_FOUNDATION_JAMIL` >= `HAS_RECIEVED_GOLD_POTION`
+`VAR_QUEST_GORGONZOLA_FOUNDATION_JAMIL` >= `HAS_RECEIVED_GOLD_POTION`
 
 ### Has Finished Corsola Quest
 `VAR_CUTE_POKEMON_GUESS` >= `VAR_CUTE_POKEMON_BATTLE_CRESALTA_COMPLETE`
 
 ## Variables / Flags
 ### `VAR_QUEST_GORGONZOLA_FOUNDATION_JAMIL`
-A variable for tracking if the Player has met Jamil and/or recieved the Gold Potion from them.
+A variable for tracking if the Player has met Jamil and/or received the Gold Potion from them.
 
 | Value | Constant | Description |
 | :---- | :---- | :---- |
 | 0  | `HAS_NOT_MET_JAMIL` | Default State |
 | 1 | `HAS_MET_JAMIL` | Has Met Jamil in Gym |
-| 2  | `HAS_RECIEVED_GOLD_POTION` | Recieved Gold Potion from Jamil |
+| 2  | `HAS_RECEIVED_GOLD_POTION` | Received Gold Potion from Jamil |
 
 # Involved Instances
 

@@ -179,7 +179,7 @@ static u32 GetRematchGameProgessVariable(void)
 
     for (rematchIndex = (REMATCHES_COUNT - 1); rematchIndex < REMATCHES_COUNT; rematchIndex--)
     {
-        if (rematchIndex == 0) 
+        if (rematchIndex == 0)
             break;
 
         if (storylineState >= gameProgressMarkers[rematchIndex])

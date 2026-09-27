@@ -2166,7 +2166,7 @@ static void HandlePlayerInput(void)
     {
         // Start siliconMerge
 		//if (gSaveBlock2Ptr->optionsButtonMode == OPTIONS_BUTTON_MODE_L_EQUALS_A && JOY_NEW(A_BUTTON))
-		if (gSaveBlock2Ptr->optionsGame[GAME_OPTIONS_BUTTON_MODE] == OPTIONS_BUTTON_MODE_L_EQUALS_A && JOY_NEW(A_BUTTON))
+        if ((OptionsMenu_GetSavedOptions(GAME_SETTINGS,GAME_OPTIONS_BUTTON_MODE) == OPTIONS_BUTTON_MODE_L_EQUALS_A) && JOY_NEW(A_BUTTON))
         // End siliconMerge
         {
             if (JOY_HELD_RAW(A_BUTTON | L_BUTTON) != (A_BUTTON | L_BUTTON))

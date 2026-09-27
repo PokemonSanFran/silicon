@@ -1,278 +1,265 @@
 const PLAYER = OBJ_EVENT_ID_PLAYER
-const CHARLOTTE = 4
-const CHIEF = 3
+const LOCALID_TEMP_POLICE_MON = LOCALID_CAMERA + 1
+const LOCALID_TEMP_POLICE = LOCALID_CAMERA + 2
 
-const FLAG_HIDE_BAIYA = FLAG_TEMP_1
-const FLAG_HIDE_ADAORA = FLAG_TEMP_3
-const FLAG_HIDE_ELITE4 = FLAG_TEMP_4
-
-script SurvivalChance333_HideObject_Script {
-    setflag(FLAG_TEMP_1)
+script SurvivalChance333_HideObject_Script
+{
+    setobjectflagfromlocalid(LOCALID_FERRYBUILDING_CHARLOTTE)
+    setobjectflagfromlocalid(LOCALID_FERRYBUILDING_CHIEF)
 }
 
-script SurvivalChance333_HideObject_HalaiIsland_Script {
-    setflag(FLAG_TEMP_2)
-        setflag(FLAG_TEMP_3)
-        setflag(FLAG_TEMP_4)
+script SurvivalChance333_HideObject_HalaiIsland_Script
+{
+    setobjectflagfromlocalid(LOCALID_HALAI_POLICE_A)
+    setobjectflagfromlocalid(LOCALID_HALAI_POLICE_B)
+    setobjectflagfromlocalid(LOCALID_HALAI_POLICE_C)
+    setobjectflagfromlocalid(LOCALID_HALAI_CHARLOTTE)
+    setobjectflagfromlocalid(LOCALID_HALAI_ADAORA)
+    setobjectflagfromlocalid(LOCALID_HALAI_BAIYA)
+    setobjectflagfromlocalid(LOCALID_HALAI_MAGNUS)
+    setobjectflagfromlocalid(LOCALID_HALAI_TALA)
+    setobjectflagfromlocalid(LOCALID_HALAI_FRANK)
+    setobjectflagfromlocalid(LOCALID_HALAI_ELEANOR)
 }
 
-script SurvivalChance333_MovePlayerIntoPosition {
-    lock
-        setvar(VAR_FERRYBUILDING_STATE,PLAYER_READY_SURVIVAL_CHANCE_BATTLE)
-        getplayerxy(VAR_TEMP_0,VAR_TEMP_1)
-
-        if (var(VAR_TEMP_0) != 12){
-            applymovement(PLAYER, moves(walk_right, walk_up * 2, step_end))
-                waitmovement(0)
-        }
+script SurvivalChance333_SetUpRaidObject_Script
+{
+    setobjectxyperm(LOCALID_HALAI_CHIEF,18,12)
+    setobjectxyperm(LOCALID_HALAI_CHARLOTTE,21,12)
+    setobjectxyperm(LOCALID_HALAI_POLICE_A,22,12)
+    setobjectxyperm(LOCALID_HALAI_POLICE_B,23,12)
+    setobjectxyperm(LOCALID_HALAI_POLICE_C,19,12)
+    setobjectxy(LOCALID_HALAI_CHIEF,18,12)
+    setobjectxy(LOCALID_HALAI_CHARLOTTE,21,12)
+    setobjectxy(LOCALID_HALAI_POLICE_A,22,12)
+    setobjectxy(LOCALID_HALAI_POLICE_B,23,12)
+    setobjectxy(LOCALID_HALAI_POLICE_C,19,12)
+    setobjectxy(OBJ_EVENT_ID_PLAYER,24,11)
+    setobjectmovementtype(LOCALID_HALAI_CHIEF,MOVEMENT_TYPE_FACE_UP)
+    turnobject(OBJ_EVENT_ID_PLAYER,DIR_WEST)
 }
 
-script SurvivalChance333_SetUpRaidObject_Script {
-    setobjectxyperm(4,18,12)
-        setobjectxyperm(5,21,12)
-        setobjectxyperm(6,22,12)
-        setobjectxyperm(7,23,12)
-        setobjectxyperm(8,19,12)
-        setobjectxy(4,18,12)
-        setobjectxy(5,21,12)
-        setobjectxy(6,22,12)
-        setobjectxy(7,23,12)
-        setobjectxy(8,19,12)
-        setobjectxy(OBJ_EVENT_ID_PLAYER,24,11)
-        setobjectmovementtype(4,MOVEMENT_TYPE_FACE_UP)
-        turnobject(OBJ_EVENT_ID_PLAYER,DIR_WEST)
-}
-
-script SurvivalChance333_BlowOpenDoors {
+script SurvivalChance333_BlowOpenDoors
+{
     setmetatile(22,11,0x0A7,FALSE)
-        setmetatile(18,11,0x0A7,FALSE)
-        special(DrawWholeMapView)
+    setmetatile(18,11,0x0A7,FALSE)
+    special(DrawWholeMapView)
 }
 
-script SurvivalChance333_ExplainPlan_Dialogue {
+script SurvivalChance333_Script_MovePlayerIntoPosition
+{
     lock
-
-        applymovement(PLAYER,Common_Movement_FaceUp)
-        waitmovement(0)
-
-        delay(25)
-        msgbox(format("Here's the fuckin' plan. We're gonna -"),,SPEAKER_CHIEF,,EMOTE_SWEAT)
-
-        msgbox(format("Is something wrong Chief?"),,SPEAKER_ALICIA)
-
-        msgbox(format("First off, I spent 15 years in the military, dedicated my life to tactical warfare and I've never run a failed operation… and now somehow I'm doing the dirty work for some tech bros."),,SPEAKER_CHIEF,,EMOTE_ANGRY)
-        msgbox(format("Next, I've got the same tech bros who won a contract for 'special defense operations in the public interest' telling me how to do my job..."),,SPEAKER_CHIEF,,EMOTE_ANGRY)
-        msgbox(format("And the cherry on top: I have to babysit two hotshots from nowhere as I try to infiltrate a terrorist organization."),,SPEAKER_CHIEF,TAIL_SHOUT,EMOTE_ANGRY)
-
-        msgbox(format("Woah, we're plenty tough! You don't need to babysit us!"),,SPEAKER_CHARLOTTE)
-
-        msgbox(format("I think Charlotte missed the point and only heard that last part..."),,SPEAKER_ALICIA,TAIL_THOUGHT,EMOTE_SWEAT)
-
-        msgbox(format("Right, kids with zero operations experience who battled some foot soldiers and Garbador are supposedly tactical masterminds?"),,SPEAKER_CHIEF)
-
-        msgbox(format("Hey, we didn't ask to be here! "),,SPEAKER_ALICIA)
-
-        msgbox(format("And I didn't ask for you. But here we are."),,SPEAKER_CHIEF)
-        msgbox(format("I'll prove it then. Battle me."),,SPEAKER_CHARLOTTE)
-        closemessage
-        setvar(VAR_FERRYBUILDING_STATE,SAVE_SURVIVAL_CHANCE_BATTLE)
-        startmenu_savescreen
-        goto(SurvivalChance333_Battle_Script)
+    moveobjecttocoords(LOCALID_PLAYER,12,12,DIR_NORTH)
+    waitmovement(LOCALID_PLAYER)
 }
 
-script SurvivalChance333_Battle_Script {
-        msgbox(format("Won't even be a fair fight. I could take both of you at the same time, with my eyes closed."),,SPEAKER_CHIEF)
-        closemessage
-        multi_2_vs_1(TRAINER_POLICECHIEF,format("Hmph!"),PARTNER_CHARLOTTE)
-        call(Silicon_Script_WhiteoutIfPlayerLostMulti)
-        goto(SurvivalChance333_PostBattle_Script)
+script SurvivalChance333_ExplainPlan_Dialogue
+{
+    call(SurvivalChance333_Script_MovePlayerIntoPosition)
+    setvar(VAR_FERRYBUILDING_STATE,PLAYER_READY_SURVIVAL_CHANCE_BATTLE)
+    msgbox(format("Here's the fuckin' plan. We're gonna -"),,SPEAKER_CHIEF)
+
+    msgbox(format("Is something wrong Chief?"),,SPEAKER_ALICIA)
+
+    msgbox(format("First off, I spent 15 years in the military, dedicated my life to tactical warfare and I've never run a failed operation… and now somehow I'm doing the dirty work for some tech bros."),,SPEAKER_CHIEF,,EMOTE_ANGRY)
+    msgbox(format("Next, I've got the same tech bros who won a contract for 'special defense operations in the public interest' telling me how to do my job..."),,SPEAKER_CHIEF,,EMOTE_ANGRY)
+    msgbox(format("And the cherry on top: I have to babysit two hotshots from nowhere as I try to infiltrate a terrorist organization."),,SPEAKER_CHIEF,TAIL_SHOUT,EMOTE_ANGRY)
+
+    msgbox(format("Woah, we're plenty tough! You don't need to babysit us!"),,SPEAKER_CHARLOTTE)
+
+    msgbox(format("I think Charlotte missed the point and only heard that last part..."),,SPEAKER_ALICIA,TAIL_THOUGHT,EMOTE_SWEAT)
+
+    bufferspeciesname(STR_VAR_1,SPECIES_GARBODOR)
+    msgbox(format("Right, kids with zero operations experience who battled some foot soldiers and {STR_VAR_1} are supposedly tactical masterminds?"),,SPEAKER_CHIEF)
+
+    msgbox(format("Hey, we didn't ask to be here! "),,SPEAKER_ALICIA)
+
+    msgbox(format("And I didn't ask for you. But here we are."),,SPEAKER_CHIEF)
+    msgbox(format("I'll prove it then. Battle me."),,SPEAKER_CHARLOTTE)
+    closemessage
+    setvar(VAR_FERRYBUILDING_STATE,SAVE_SURVIVAL_CHANCE_BATTLE)
+    startmenu_savescreen
+    goto(SurvivalChance333_Battle_Script)
 }
 
-script SurvivalChance333_PostBattle_Script {
+script SurvivalChance333_Battle_Script
+{
+    call(SurvivalChance333_Script_MovePlayerIntoPosition)
+    msgbox(format("Won't even be a fair fight. I could take both of you at the same time, with my eyes closed."),,SPEAKER_CHIEF)
+    closemessage
+    multi_2_vs_1(TRAINER_POLICECHIEF,format("Hmph!"),PARTNER_CHARLOTTE)
+    call(Silicon_Script_WhiteoutIfPlayerLostMulti)
+    goto(SurvivalChance333_PostBattle_Script)
+}
+
+script SurvivalChance333_PostBattle_Script
+{
     startcutscene(JUMPPLAYER_SURVIVALCHANCE333)
     setvar(VAR_FERRYBUILDING_STATE,DEFEATED_SURVIVAL_CHANCE_BATTLE)
-        msgbox(format("Do you get it now? We're the real deal."),,SPEAKER_CHARLOTTE)
+    msgbox(format("Do you get it now? We're the real deal."),,SPEAKER_CHARLOTTE)
 
-        msgbox(format("…look. You're a pair of kids that are in way over your heads, with absolutely no place in a police raid. But I'm stuck with you, and you're both obviously tough as all hell. Let's make the most of it."),,SPEAKER_CHIEF)
-        closemessage
-        setvar(VAR_HALAI_ISLAND_STATE,START_SURVIVAL_CHANCE)
-        fadeblackandsetremovewarpfadeflag
-        warpsilent(MAP_HALAI_ISLAND,255,21,24)
-		waitstate
+    msgbox(format("…look. You're a pair of kids that are in way over your heads, with absolutely no place in a police raid. But I'm stuck with you, and you're both obviously tough as all hell. Let's make the most of it."),,SPEAKER_CHIEF)
+    closemessage
+    setvar(VAR_HALAI_ISLAND_STATE,START_SURVIVAL_CHANCE)
+    fadeblackandsetremovewarpfadeflag
+    warpsilent(MAP_HALAI_ISLAND,255,21,24)
+    waitstate
 }
 
-script SurvivalChance333_MoveCameraFreeze_Script {
+script SurvivalChance333_MoveCameraFreeze_Script
+{
     fadescreenswapbuffers(FADE_TO_BLACK)
-        setvar(VAR_0x8004, 38)
-        setvar(VAR_0x8005, 11)
-        special(TeleportCamera)
-        delay(16)
-        addobject(10)
-        addobject(9)
-        fadescreenswapbuffers(FADE_FROM_BLACK)
-        goto(SurvivalChance333_FreezeIce)
+    setvar(VAR_0x8004, 38)
+    setvar(VAR_0x8005, 11)
+    special(TeleportCamera)
+    delay(16)
+    spawnobject(OBJ_EVENT_GFX_MYSTERY_GIFT_MAN,LOCALID_TEMP_POLICE,38,11,MOVEMENT_TYPE_FACE_RIGHT)
+    spawnobject(OBJ_EVENT_GFX_SPECIES(MAMOSWINE),LOCALID_TEMP_POLICE_MON,38,12,MOVEMENT_TYPE_FACE_RIGHT)
+    fadescreenswapbuffers(FADE_FROM_BLACK)
+    goto(SurvivalChance333_FreezeIce)
 }
 
-script SurvivalChance333_FreezeIce {
+script SurvivalChance333_FreezeIce
+{
     setmetatile(39,12,0x0C5,TRUE)
-        setmetatile(39,11,0x0C5,TRUE)
-        special(DrawWholeMapView)
-        delay(16)
-        setmetatile(38,10,0x0C5,TRUE)
-        setmetatile(39,10,0x0C5,TRUE)
-        setmetatile(38,9,0x0C5,TRUE)
-        special(DrawWholeMapView)
-        delay(16)
-        setmetatile(39,9,0x0C5,TRUE)
-        setmetatile(37,8,0x0C5,TRUE)
-        setmetatile(38,8,0x0C5,TRUE)
-        setmetatile(39,8,0x0C5,TRUE)
-        special(DrawWholeMapView)
-        delay(16)
-        setmetatile(37,7,0x0C5,TRUE)
-        setmetatile(38,7,0x0C5,TRUE)
-        setmetatile(39,7,0x0C5,TRUE)
-        special(DrawWholeMapView)
+    setmetatile(39,11,0x0C5,TRUE)
+    special(DrawWholeMapView)
+    delay(16)
+    setmetatile(38,10,0x0C5,TRUE)
+    setmetatile(39,10,0x0C5,TRUE)
+    setmetatile(38,9,0x0C5,TRUE)
+    special(DrawWholeMapView)
+    delay(16)
+    setmetatile(39,9,0x0C5,TRUE)
+    setmetatile(37,8,0x0C5,TRUE)
+    setmetatile(38,8,0x0C5,TRUE)
+    setmetatile(39,8,0x0C5,TRUE)
+    special(DrawWholeMapView)
+    delay(16)
+    setmetatile(37,7,0x0C5,TRUE)
+    setmetatile(38,7,0x0C5,TRUE)
+    setmetatile(39,7,0x0C5,TRUE)
+    special(DrawWholeMapView)
 }
 
-script SurvivalChance333_MoveCameraLava_Script {
+script SurvivalChance333_MoveCameraLava_Script
+{
     fadescreenswapbuffers(FADE_TO_BLACK)
-        special(ReturnCameraToPlayer)
-        setvar(VAR_0x8004, 12)
-        setvar(VAR_0x8005, 8)
-        special(TeleportCamera)
-        delay(16)
-        addobject(12)
-        addobject(11)
-        fadescreenswapbuffers(FADE_FROM_BLACK)
-        goto(SurvivalChance333_SetLava)
+    removeobject(LOCALID_TEMP_POLICE)
+    removeobject(LOCALID_TEMP_POLICE_MON)
+    special(ReturnCameraToPlayer)
+    setvar(VAR_0x8004, 12)
+    setvar(VAR_0x8005, 8)
+    special(TeleportCamera)
+    delay(16)
+    spawnobject(OBJ_EVENT_GFX_MYSTERY_GIFT_MAN,LOCALID_TEMP_POLICE,12,8,MOVEMENT_TYPE_FACE_LEFT)
+    spawnobject(OBJ_EVENT_GFX_SPECIES(CAMERUPT),LOCALID_TEMP_POLICE_MON,12,9,MOVEMENT_TYPE_FACE_LEFT)
+    fadescreenswapbuffers(FADE_FROM_BLACK)
+    goto(SurvivalChance333_SetLava)
 }
 
-script SurvivalChance333_SetLava {
+script SurvivalChance333_SetLava
+{
     setmetatile(11,9,0x333,TRUE)
-        special(DrawWholeMapView)
-        delay(16)
-        setmetatile(11,8,0x333,TRUE)
-        setmetatile(11,10,0x333,TRUE)
-        special(DrawWholeMapView)
-        delay(16)
-        setmetatile(11,7,0x333,TRUE)
-        setmetatile(11,11,0x333,TRUE)
-        setmetatile(11,6,0x333,TRUE)
-        setmetatile(11,12,0x333,TRUE)
-        special(DrawWholeMapView)
-        delay(16)
-        setmetatile(11,3,0x333,TRUE)
-        setmetatile(11,4,0x333,TRUE)
-        setmetatile(11,5,0x333,TRUE)
-        setmetatile(11,13,0x333,TRUE)
-        setmetatile(30,4,0x333,TRUE)
-        setmetatile(30,5,0x333,TRUE)
-        setmetatile(30,6,0x333,TRUE)
-        setmetatile(30,7,0x333,TRUE)
-        setmetatile(30,8,0x333,TRUE)
-        setmetatile(30,9,0x333,TRUE)
-        setmetatile(30,10,0x333,TRUE)
-        setmetatile(30,11,0x333,TRUE)
-        setmetatile(30,12,0x333,TRUE)
-        setmetatile(30,13,0x333,TRUE)
-        setmetatile(30,14,0x333,TRUE)
-        setmetatile(30,15,0x333,TRUE)
-        setmetatile(30,16,0x333,TRUE)
-        special(DrawWholeMapView)
+    special(DrawWholeMapView)
+    delay(16)
+    setmetatile(11,8,0x333,TRUE)
+    setmetatile(11,10,0x333,TRUE)
+    special(DrawWholeMapView)
+    delay(16)
+    setmetatile(11,7,0x333,TRUE)
+    setmetatile(11,11,0x333,TRUE)
+    setmetatile(11,6,0x333,TRUE)
+    setmetatile(11,12,0x333,TRUE)
+    special(DrawWholeMapView)
+    delay(16)
+    setmetatile(11,3,0x333,TRUE)
+    setmetatile(11,4,0x333,TRUE)
+    setmetatile(11,5,0x333,TRUE)
+    setmetatile(11,13,0x333,TRUE)
+    setmetatile(30,4,0x333,TRUE)
+    setmetatile(30,5,0x333,TRUE)
+    setmetatile(30,6,0x333,TRUE)
+    setmetatile(30,7,0x333,TRUE)
+    setmetatile(30,8,0x333,TRUE)
+    setmetatile(30,9,0x333,TRUE)
+    setmetatile(30,10,0x333,TRUE)
+    setmetatile(30,11,0x333,TRUE)
+    setmetatile(30,12,0x333,TRUE)
+    setmetatile(30,13,0x333,TRUE)
+    setmetatile(30,14,0x333,TRUE)
+    setmetatile(30,15,0x333,TRUE)
+    setmetatile(30,16,0x333,TRUE)
+    special(DrawWholeMapView)
 }
 
-script SurvivalChance333_ExplainOperation {
+script SurvivalChance333_ExplainOperation
+{
     lock
-        setvar(VAR_HALAI_ISLAND_STATE,POST_SURVIVAL_CHANCE)
-        applymovement(PLAYER,Common_Movement_FaceUp)
-        waitmovement(0)
+    setvar(VAR_HALAI_ISLAND_STATE,POST_SURVIVAL_CHANCE)
+    applymovement(PLAYER,Common_Movement_FaceUp)
+    waitmovement(0)
 
-        msgbox(format("So that's the plan. Any questions?"),,SPEAKER_CHIEF)
+    msgbox(format("So that's the plan. Any questions?"),,SPEAKER_CHIEF)
 
-        msgbox(format("NO sir."),,SPEAKER_POLICE)
+    msgbox(format("NO sir."),,SPEAKER_POLICE)
 
-        msgbox(format("Let's get this party started."),,SPEAKER_CHIEF)
-        closemessage
-        goto(SurvivalChance333_TacticalPlan_Cutscene_Script)
+    msgbox(format("Let's get this party started."),,SPEAKER_CHIEF)
+    closemessage
+    goto(SurvivalChance333_TacticalPlan_Cutscene_Script)
 }
 
-script SurvivalChance333_TacticalPlan_Cutscene_Script {
+script SurvivalChance333_TacticalPlan_Cutscene_Script
+{
     lock
-        call(SurvivalChance333_MoveCameraFreeze_Script)
-        msgbox(format("Those routes frozen over seals off a water escape…"),,SPEAKER_CHARLOTTE)
+    call(SurvivalChance333_MoveCameraFreeze_Script)
+    msgbox(format("Those routes frozen over seals off a water escape…"),,SPEAKER_CHARLOTTE)
+    closemessage
 
-        closemessage
+    call(SurvivalChance333_MoveCameraLava_Script)
+    msgbox(format("Melting the bedrock prevents an underground escape…"),,SPEAKER_CHARLOTTE)
+    closemessage
 
-        call(SurvivalChance333_MoveCameraLava_Script)
-        msgbox(format("Melting the bedrock prevents an underground escape…"),,SPEAKER_CHARLOTTE)
+    fadescreenswapbuffers(FADE_TO_BLACK)
+    call(SurvivalChance333_SetUpRaidObject_Script)
+    TeleportCamera(24,11)
+    fadescreenswapbuffers(FADE_FROM_BLACK)
 
-        closemessage
+    msgbox(format("They'll blow the wall, and we'll dive in!"),,SPEAKER_CHARLOTTE)
+    closemessage
 
-        fadescreenswapbuffers(FADE_TO_BLACK)
-        call(SurvivalChance333_SetUpRaidObject_Script)
-        TeleportCamera(24,11)
-        fadescreenswapbuffers(FADE_FROM_BLACK)
+    playse(SE_M_EXPLOSION)
+    waitse
+    setvar(VAR_0x8004,1)
+    setvar(VAR_0x8005,2)
+    setvar(VAR_0x8006,8)
+    setvar(VAR_0x8007,5)
+    special(ShakeCamera)
+    waitstate
 
-        msgbox(format("They'll blow the wall, and we'll dive in!"),,SPEAKER_CHARLOTTE)
+    call(SurvivalChance333_BlowOpenDoors)
+    msgbox(format("Showtime!"),,SPEAKER_CHARLOTTE)
+    closemessage
 
-        closemessage
-
-        playse(SE_M_EXPLOSION)
-        waitse
-        setvar(VAR_0x8004,1)
-        setvar(VAR_0x8005,2)
-        setvar(VAR_0x8006,8)
-        setvar(VAR_0x8007,5)
-        special(ShakeCamera)
-        waitstate
-
-        call(SurvivalChance333_BlowOpenDoors)
-        msgbox(format("Showtime!"),,SPEAKER_CHARLOTTE)
-
-        closemessage
-
-        applymovement(4,SurvivalChance333_RunInsideA)
-        applymovement(5, moves(walk_right, walk_up, step_end))
-        applymovement(6,SurvivalChance333_RunInsideA)
-        applymovement(7,SurvivalChance333_RunInsideC)
-        applymovement(8,SurvivalChance333_RunInsideC)
-        playse(SE_EXIT)
-        playse(SE_EXIT)
-        playse(SE_EXIT)
-        playse(SE_EXIT)
-        playse(SE_EXIT)
-        waitse
-        removeobject(4)
-        removeobject(5)
-        removeobject(6)
-        removeobject(7)
-        removeobject(8)
-        call(TryAutoSave)
-        endcutscene
-        release
-        end
+    applymovement(LOCALID_HALAI_CHIEF,moves(walk_up))
+    applymovement(LOCALID_HALAI_CHARLOTTE, moves(walk_right, walk_up, step_end))
+    applymovement(LOCALID_HALAI_POLICE_A,moves(walk_up))
+    applymovement(LOCALID_HALAI_POLICE_B,moves(walk_left,walk_up))
+    applymovement(LOCALID_HALAI_POLICE_C,moves(walk_left,walk_up))
+    playse(SE_EXIT)
+    playse(SE_EXIT)
+    playse(SE_EXIT)
+    playse(SE_EXIT)
+    playse(SE_EXIT)
+    waitse
+    removeobject(LOCALID_HALAI_CHIEF)
+    removeobject(LOCALID_HALAI_CHARLOTTE)
+    removeobject(LOCALID_HALAI_POLICE_A)
+    removeobject(LOCALID_HALAI_POLICE_B)
+    removeobject(LOCALID_HALAI_POLICE_C)
+    call(TryAutoSave)
+    endcutscene
+    release
+    end
 }
 
-movement SurvivalChance333_GiveTM{
-    walk_down * 2
-        face_left
-        walk_in_place_slow_left
-        step_end
-}
-
-movement SurvivalChance333_BackToPosition {
-    walk_up *2
-        step_end
-}
-
-movement SurvivalChance333_RunInsideA {
-    walk_up
-        step_end
-}
-
-movement SurvivalChance333_RunInsideC {
-    walk_left
-        walk_up
-        step_end
-}

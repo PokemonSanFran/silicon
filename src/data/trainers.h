@@ -35346,10 +35346,10 @@
         },
     },
 #line 12071
-    [DIFFICULTY_NORMAL][TRAINER_CHAMPION_SHINJI] =
+    [DIFFICULTY_NORMAL][TRAINER_CHAMPION_USUL] =
     {
 #line 12072
-        .trainerName = _("Shinji"),
+        .trainerName = _("Usul"),
 #line 12073
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 12074

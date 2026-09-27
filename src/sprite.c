@@ -1660,7 +1660,7 @@ u32 LoadSpritePalette(const struct SpritePalette *palette)
                     break;
             }
         }
-        
+
         if (index == 0xFF)
             return 0xFF;
     }

@@ -474,13 +474,13 @@ script Breaktheinternet_GiveGift_Script {
 
 }
 script Breaktheinternet_SendGiftToParty_Script {
-    call(Breaktheinternet_RecievedGiftFanfare)
+    call(Breaktheinternet_ReceivedGiftFanfare)
     call(EventScript_TryToNicknamePokemon)
     return
 }
 
 script Breaktheinternet_SendGiftToPC_Script {
-        call(Breaktheinternet_RecievedGiftFanfare)
+        call(Breaktheinternet_ReceivedGiftFanfare)
         msgbox(gText_NicknameThisPokemon,MSGBOX_YESNO)
 
         if (var(VAR_RESULT) == YES){
@@ -490,7 +490,7 @@ script Breaktheinternet_SendGiftToPC_Script {
     return
 }
 
-script Breaktheinternet_RecievedGiftFanfare {
+script Breaktheinternet_ReceivedGiftFanfare {
         bufferspeciesname(STR_VAR_2,SPECIES_SLURPUFF)
         removeobject(WAREHOUSE_SLURPUFF)
         playfanfare(MUS_OBTAIN_ITEM)

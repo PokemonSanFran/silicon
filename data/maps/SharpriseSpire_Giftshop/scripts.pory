@@ -1,6 +1,11 @@
 mapscripts SharpriseSpire_Giftshop_MapScripts{
 	    MAP_SCRIPT_ON_TRANSITION{
-        call(SharpriseSpire_GuardRaidFloors_Script)
+        call_if_ge(VAR_TOWER_RAID_STATE,RAMESH_WARP_DOOR_UNLOCKED,SharpriseSpire_Script_HideGiftShopGuard)
     }
 
+}
+
+script SharpriseSpire_Script_HideGiftShopGuard
+{
+    setobjectflagfromlocalid(LOCALID_SHARPRISE_SPIRE_GIFTSHOP_GUARD)
 }

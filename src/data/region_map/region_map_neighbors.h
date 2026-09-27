@@ -348,7 +348,7 @@ static struct RegionMapNeighbors regionMapNeighbors[] =
     {
         .mapA = MAPSEC_PETAROSA_BOROUGH,
         .mapB = MAPSEC_CRESALTA_VISTA,
-        .destination = MAPSEC_ROUTE13, 
+        .destination = MAPSEC_ROUTE13,
     },
     {
         .mapA = MAPSEC_HALAI_ISLAND,

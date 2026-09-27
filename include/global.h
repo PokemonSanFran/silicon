@@ -741,11 +741,7 @@ struct SaveBlock2
     /*0x624*/ u16 contestLinkResults[CONTEST_CATEGORIES_COUNT][CONTESTANT_COUNT];
     /*0x64C*/ struct BattleFrontier frontier;
     // Start siliconMerge
-	u8 optionsGame[NUM_OPTIONS_GAME_SETTINGS];
-    u8 optionsBattle[NUM_OPTIONS_BATTLE_SETTINGS];
-    u8 optionsVisual[NUM_OPTIONS_VISUAL_SETTINGS];
-    u8 optionsMusic[NUM_OPTIONS_MUSIC_SETTINGS];
-    u8 optionsRandom[NUM_OPTIONS_RANDOM_SETTINGS];
+    u8 options[SETTINGS_COUNT][NUM_OPTIONS_MAX_SETTINGS];
     struct Buzzr buzzr; //Buzzr Branch
 	// End siliconMerge
 	// Start dexNav

@@ -43,6 +43,7 @@ script EventScript_ObtainNewApp
     message(gText_AppObtained)
     waitfanfare
     waitbuttonpress
+    closemessage
     return
 }
 

@@ -8,7 +8,7 @@ enum DifficultyLevel
     DIFFICULTY_HARD,
 #if TESTING
     DIFFICULTY_TEST,
-#endif 
+#endif
     DIFFICULTY_COUNT,
 };
 

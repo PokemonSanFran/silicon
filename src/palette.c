@@ -347,7 +347,7 @@ static u32 UpdateNormalPaletteFade(void)
         paletteOffset += 16;
     }
 
-    
+
 
     if (gPaletteFade.y == gPaletteFade.targetY)
     {

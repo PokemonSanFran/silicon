@@ -325,7 +325,7 @@ const struct RevealCharacterStruct sRevealCharacters[REVEAL_COUNT] =
         .trainerId = TRAINER_RAMESH_IMIN,
         .buzzrId = BUZZR_USER_RAMESH,
         .quote = COMPOUND_STRING("Security, Marketing, Production - there's nothing I can't execute."),
-        .bio = COMPOUND_STRING("- Ramesh looks bored when talking to me.\n - He's holding multiple phones."),
+        .bio = COMPOUND_STRING("- Ramesh looks bored when talking to me.\n- He's holding multiple phones."),
         .accentColor = RGB(27,30,4),
     },
     [REVEAL_LUCREZIA] =
@@ -348,7 +348,7 @@ const struct RevealCharacterStruct sRevealCharacters[REVEAL_COUNT] =
     {
         .trainerId = TRAINER_ADAORA_HOWDISAPPOINTING,
         .buzzrId = BUZZR_USER_ADAORA,
-        .quote = COMPOUND_STRING("The ocean's tide is unforgiving, swift, and powerful... and so are we!"),
+        .quote = COMPOUND_STRING("The ocean's tide is swift, and powerful - as are we!"),
         .bio = COMPOUND_STRING("- She seems extremely passionate about everything.\n- People seem afraid of her..."),
         .accentColor = RGB(22,15,17),
     },

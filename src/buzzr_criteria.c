@@ -665,7 +665,7 @@ void ZapCriteria_TideFinished(void)
 
 void ZapCriteria_GotWishTag(void)
 {
-    gSpecialVar_Result = VarGet(VAR_STORYLINE_STATE) >= STORY_RECIEVED_BAMBOO_STAR;
+    gSpecialVar_Result = VarGet(VAR_STORYLINE_STATE) >= STORY_RECEIVED_BAMBOO_STAR;
 }
 
 void ZapCriteria_VisitedTorgeot(void)

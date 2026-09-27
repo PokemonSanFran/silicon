@@ -3434,7 +3434,7 @@ u32 GetWarpPriceAtMapSecByMapType(u16 mapSecId)
 
     u32 fare = (fareTable[type][FARE_BASE] + (distance * (fareTable[type][FARE_DISTANCE])));
 
-    if (type != MAP_MODE_ARRIBA)
+    if (type != MAP_MODE_ARRIBA && type != MAP_MODE_TROLLEY)
         return fare;
 
     bool32 hasArribaDiscount = (VarGet(VAR_ANBEH_BEND_STATE) >= DEFEATED_CHARLOTTE_LOMBARD);

@@ -47,11 +47,11 @@ script PerlaciaCity_Gym_EventScript_0C0A9B2F
     end
 }
 
-script Emrys_Event_Script 
+script Emrys_Event_Script
 {
     lockall
 	goto_if_quest_complete(QUEST_BUILDINGANEXHIBIT,Rematches_Script_Emrys)
-    switch (var (VAR_GYM_3_STATE)) 
+    switch (var (VAR_GYM_3_STATE))
 	{
 		default: goto(EnterEmrys_MuseumArrangement_Dialogue)
 		case PERLACIA_GYM_SAVE_BEFORE_BATTLE: goto(EnterEmrys_StartBattle_Script)

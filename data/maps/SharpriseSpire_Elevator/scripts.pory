@@ -1,0 +1,119 @@
+const VAR_MAP = VAR_0x8005
+
+mapscripts SharpriseSpire_Elevator_MapScripts
+{
+    MAP_SCRIPT_ON_TRANSITION
+    {
+        call_if_ge(VAR_TOWER_RAID_STATE,FOUND_RAMESH_CODE,ImIn_Script_HideElevatorAttendant)
+    }
+
+    MAP_SCRIPT_ON_FRAME_TABLE
+    [
+        VAR_TEMP_1,0:SharpriseSpire_Dialogue_Elevator
+    ]
+}
+
+script SharpriseSpire_Dialogue_Elevator
+{
+    addvar(VAR_TEMP_1,1)
+    if (var(VAR_TOWER_RAID_STATE) < FOUND_RAMESH_CODE)
+    {
+        end
+    }
+
+    lock
+    msgbox(format("The elevator won't move without an attendant... I guess we'll have to take the stairs."),,SPEAKER_PLAYER)
+    closemessage
+    release
+    end
+}
+
+script SharpriseSpire_Script_BuildElevatorMenu
+{
+    callnative(Script_SetCurrentSpireFloor)
+
+    if (var(VAR_MAP) != SHARPRISE_FLOOR_FOYER)
+    {
+        dynmultipush("Floor 1: Foyer",SHARPRISE_FLOOR_FOYER)
+    }
+    if (var(VAR_MAP) != SHARPRISE_FLOOR_LOBBY)
+    {
+        dynmultipush("Floor 30: Lobby",SHARPRISE_FLOOR_LOBBY)
+    }
+    if (var(VAR_MAP) != SHARPRISE_FLOOR_PARK)
+    {
+        dynmultipush("Floor 34: Park",SHARPRISE_FLOOR_PARK)
+    }
+    if (var(VAR_MAP) != SHARPRISE_FLOOR_GIFTSHOP)
+    {
+        dynmultipush("Floor 35: Gift Shop",SHARPRISE_FLOOR_GIFTSHOP)
+    }
+    if (var(VAR_MAP) != SHARPRISE_FLOOR_PRODUCTION)
+    {
+        dynmultipush("Floor 37: Production",SHARPRISE_FLOOR_PRODUCTION)
+    }
+    if (var(VAR_MAP) != SHARPRISE_FLOOR_LEAGUEOPS)
+    {
+        dynmultipush("Floor 38: League Ops",SHARPRISE_FLOOR_LEAGUEOPS)
+    }
+
+    dynmultipush("Never mind.",MULTI_B_PRESSED)
+    dynmultistack(0,0,FALSE,3,TRUE,0,FALSE)
+}
+
+script SharpriseSpire_Script_BufferElevatorFloor
+{
+    callnative(Script_SetCurrentSpireFloor)
+
+    switch (var(VAR_MAP))
+    {
+        case SHARPRISE_FLOOR_FOYER: bufferstring(STR_VAR_2,format("1"))
+        case SHARPRISE_FLOOR_LOBBY: bufferstring(STR_VAR_2,format("30"))
+        case SHARPRISE_FLOOR_PARK: bufferstring(STR_VAR_2,format("34"))
+        case SHARPRISE_FLOOR_GIFTSHOP: bufferstring(STR_VAR_2,format("35"))
+        case SHARPRISE_FLOOR_PRODUCTION: bufferstring(STR_VAR_2,format("37"))
+        case SHARPRISE_FLOOR_LEAGUEOPS: bufferstring(STR_VAR_2,format("38"))
+    }
+}
+
+script SharpriseSpire_Script_Elevator
+{
+    lock
+    faceplayer
+    buffermapname(STR_VAR_1,MAP_SHARPRISE_SPIRE_1F)
+    call(SharpriseSpire_Script_BufferElevatorFloor)
+    msgbox(format("We are on Floor {STR_VAR_2} of {STR_VAR_1}.\pWhat floor would you like to go to?"),,SPEAKER_ELEVATOR_ATTENDANT)
+    call(SharpriseSpire_Script_BuildElevatorMenu)
+    closemessage
+
+    if (var(VAR_RESULT) == MULTI_B_PRESSED)
+    {
+        release
+        end
+    }
+    switch (var(VAR_RESULT))
+    {
+        case SHARPRISE_FLOOR_FOYER: setdynamicwarp(MAP_SHARPRISE_SPIRE_1F,WARP_ID_SPIRE_ELEVATOR_TO_FOYER)
+        case SHARPRISE_FLOOR_LOBBY: setdynamicwarp(MAP_SHARPRISE_SPIRE_LOBBY,WARP_ID_SPIRE_ELEVATOR_TO_LOBBY)
+        case SHARPRISE_FLOOR_PARK: setdynamicwarp(MAP_SHARPRISE_SPIRE_PARK,WARP_ID_SPIRE_ELEVATOR_TO_PARK)
+        case SHARPRISE_FLOOR_GIFTSHOP: setdynamicwarp(MAP_SHARPRISE_SPIRE_GIFTSHOP,WARP_ID_SPIRE_ELEVATOR_TO_GIFTSHOP)
+        case SHARPRISE_FLOOR_PRODUCTION: setdynamicwarp(MAP_SHARPRISE_SPIRE_PRODUCTION,WARP_ID_SPIRE_ELEVATOR_TO_PRODUCTION)
+        case SHARPRISE_FLOOR_LEAGUEOPS: setdynamicwarp(MAP_SHARPRISE_SPIRE_LEAGUEOPS,WARP_ID_SPIRE_ELEVATOR_TO_LEAGUEOPS)
+    }
+
+    applymovement(VAR_LAST_TALKED,moves(walk_in_place_left))
+    waitmovement(VAR_LAST_TALKED)
+
+    playse(SE_ELEVATOR)
+    waitse
+
+    playse(SE_DING_DONG)
+    waitse
+
+    applymovement(VAR_LAST_TALKED,moves(face_player))
+    msgbox(format("Have a great day!"),,SPEAKER_ELEVATOR_ATTENDANT)
+    closemessage
+    waitmovement(0)
+    release
+    end
+}

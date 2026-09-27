@@ -92,7 +92,7 @@ script LetsFinishThis_Debrief_Dialogue
         goto(LetsFinishThis_GoToFlashback_Script)
 }
 
-script LetsFinishThis_GoToFlashback_Script 
+script LetsFinishThis_GoToFlashback_Script
 {
 	fadescreen(FADE_TO_BLACK)
 	call(KeiyingRaisonDetre_Dialogue_ExplainWarpPanels)

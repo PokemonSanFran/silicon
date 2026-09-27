@@ -117,7 +117,7 @@ TEST("DoesPartyMemberHaveAbilityEffect returns TRUE no matter the party position
                 givemon SPECIES_CHARMANDER 100, abilityNum=0;
             );
         }
-    
+
     }
     EXPECT_EQ(DoesPartyMemberHaveAbilityEffect(abilityArray), TRUE);
 }

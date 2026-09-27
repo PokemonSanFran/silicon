@@ -161,8 +161,8 @@ static const struct CaptureStar sCaptureStars[] =
 #define TAG_PARTICLES_BEAST_BALL   65056
 #define TAG_PARTICLES_CHERISH_BALL 65057
 
-enum 
-{  
+enum
+{
     TAG_PARTICLES_VITALITY_BALL = (TAG_PARTICLES_CHERISH_BALL + 1),
     TAG_PARTICLES_PSYCHE_BALL,
     TAG_PARTICLES_MINERAL_BALL,
@@ -472,7 +472,7 @@ static const struct PokeBallParticles sBallParticles[POKEBALL_COUNT] =
         .particleAnimationFunc = MasterBallOpenParticleAnimation,
     },
 
-    [BALL_VITALITY] = 
+    [BALL_VITALITY] =
     {
         POKE_BALL_ANIMATION(TAG_PARTICLES_VITALITY_BALL, gBattleAnimSpriteGfx_Particles, gBattleAnimSpritePal_CircleImpact),
         .openFadeColor = RGB(31, 17, 10),
@@ -480,7 +480,7 @@ static const struct PokeBallParticles sBallParticles[POKEBALL_COUNT] =
         .particleAnimationFunc = DiveBallOpenParticleAnimation,
     },
 
-    [BALL_PSYCHE] = 
+    [BALL_PSYCHE] =
     {
         POKE_BALL_ANIMATION(TAG_PARTICLES_PSYCHE_BALL, gBattleAnimSpriteGfx_Particles, gBattleAnimSpritePal_CircleImpact),
         .openFadeColor = RGB(7, 11, 20),
@@ -488,7 +488,7 @@ static const struct PokeBallParticles sBallParticles[POKEBALL_COUNT] =
         .particleAnimationFunc = SafariBallOpenParticleAnimation,
     },
 
-    [BALL_MINERAL] = 
+    [BALL_MINERAL] =
     {
         POKE_BALL_ANIMATION(TAG_PARTICLES_MINERAL_BALL, gBattleAnimSpriteGfx_Particles2, gBattleAnimSpritePal_Particles2),
         .openFadeColor = RGB(31, 24, 16),
@@ -496,7 +496,7 @@ static const struct PokeBallParticles sBallParticles[POKEBALL_COUNT] =
         .particleAnimationFunc = GreatBallOpenParticleAnimation,
     },
 
-    [BALL_ELECTRO] = 
+    [BALL_ELECTRO] =
     {
         POKE_BALL_ANIMATION(TAG_PARTICLES_ELECTRO_BALL, gBattleAnimSpriteGfx_Particles2, gBattleAnimSpritePal_Particles2),
         .openFadeColor = RGB(29, 30, 30),
@@ -504,7 +504,7 @@ static const struct PokeBallParticles sBallParticles[POKEBALL_COUNT] =
         .particleAnimationFunc = GreatBallOpenParticleAnimation,
     },
 
-    [BALL_BOG] = 
+    [BALL_BOG] =
     {
         POKE_BALL_ANIMATION(TAG_PARTICLES_BOG_BALL, gBattleAnimSpriteGfx_Particles, gBattleAnimSpritePal_CircleImpact),
         .openFadeColor = RGB(25, 4, 3),
@@ -512,7 +512,7 @@ static const struct PokeBallParticles sBallParticles[POKEBALL_COUNT] =
         .particleAnimationFunc = PokeBallOpenParticleAnimation,
     },
 
-    [BALL_JETSTREAM] = 
+    [BALL_JETSTREAM] =
     {
         POKE_BALL_ANIMATION(TAG_PARTICLES_JETSTREAM_BALL, gBattleAnimSpriteGfx_Particles, gBattleAnimSpritePal_CircleImpact),
         .openFadeColor = RGB(12, 25, 30),
@@ -520,7 +520,7 @@ static const struct PokeBallParticles sBallParticles[POKEBALL_COUNT] =
         .particleAnimationFunc = GreatBallOpenParticleAnimation,
     },
 
-    [BALL_FABLE] = 
+    [BALL_FABLE] =
     {
         POKE_BALL_ANIMATION(TAG_PARTICLES_FABLE_BALL, gBattleAnimSpriteGfx_Particles, gBattleAnimSpritePal_CircleImpact),
         .openFadeColor = RGB(31, 23, 27),
@@ -528,7 +528,7 @@ static const struct PokeBallParticles sBallParticles[POKEBALL_COUNT] =
         .particleAnimationFunc = PremierBallOpenParticleAnimation,
     },
 
-    [BALL_PARADOX] = 
+    [BALL_PARADOX] =
     {
         POKE_BALL_ANIMATION(TAG_PARTICLES_PARADOX_BALL, gBattleAnimSpriteGfx_Particles2, gBattleAnimSpritePal_Particles2),
         .openFadeColor = RGB(7, 1, 13),

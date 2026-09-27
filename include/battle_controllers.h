@@ -430,6 +430,8 @@ void HandleInputShowTargets(enum BattlerId battler);
 void HandleMoveSwitching(enum BattlerId battler);
 void HandleChooseMoveAfterDma3(enum BattlerId battler);
 
+void PlayerHandleMidBattleEvolution(enum BattlerId battler); // siliconTests
+
 // recorded player controller
 void SetControllerToRecordedPlayer(enum BattlerId battler);
 void RecordedPlayerBufferExecCompleted(enum BattlerId battler);

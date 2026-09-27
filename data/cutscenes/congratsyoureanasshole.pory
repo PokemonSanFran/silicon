@@ -1,35 +1,20 @@
 const PLAYER = OBJ_EVENT_ID_PLAYER
-const ARNAV = 1
-const TECHIE = 2
-const OLIVER = 3
-const CHARLOTTE = 4
-const LUCREZIA = 5
-const CHIEF = 6
-const RAMESH = 7
-const KEIYING = 8
-
-const FLAG_HIDE_NERDS_COPS = FLAG_TEMP_1
-const FLAG_HIDE_OLIVER = FLAG_TEMP_2
-const FLAG_HIDE_CHARLOTTE = FLAG_TEMP_3
-const FLAG_HIDE_LUCREZIA = FLAG_TEMP_4
-const FLAG_HIDE_RAMESH = FLAG_TEMP_5
-const FLAG_HIDE_KEIYING = FLAG_TEMP_6
 
 script CongratsYoureanAsshole_ObjectCleanUp_Script
 {
     call(SharpriseSpire_Leagueops_CheckRewardStatus_Script)
 
-    setobjectxy(KEIYING,34,56)
-    setobjectxyperm(KEIYING,34,56)
-    setobjectmovementtype(KEIYING,MOVEMENT_TYPE_FACE_UP)
+    setobjectxy(LOCALID_LEAGUEOPS_KEIYING,34,56)
+    setobjectxyperm(LOCALID_LEAGUEOPS_KEIYING,34,56)
+    setobjectmovementtype(LOCALID_LEAGUEOPS_KEIYING,MOVEMENT_TYPE_FACE_UP)
 
-    setobjectxy(OLIVER,33,2)
-    setobjectxyperm(OLIVER,33,2)
-    setobjectmovementtype(OLIVER,MOVEMENT_TYPE_FACE_DOWN)
+    setobjectxy(LOCALID_SHARPRISE_OLIVER,33,2)
+    setobjectxyperm(LOCALID_SHARPRISE_OLIVER,33,2)
+    setobjectmovementtype(LOCALID_SHARPRISE_OLIVER,MOVEMENT_TYPE_FACE_DOWN)
 
-    setobjectxy(RAMESH,5,2)
-    setobjectxyperm(RAMESH,5,2)
-    setobjectmovementtype(RAMESH,MOVEMENT_TYPE_FACE_DOWN)
+    setobjectxy(LOCALID_LEAGUEOPS_RAMESH,5,2)
+    setobjectxyperm(LOCALID_LEAGUEOPS_RAMESH,5,2)
+    setobjectmovementtype(LOCALID_LEAGUEOPS_RAMESH,MOVEMENT_TYPE_FACE_DOWN)
 }
 
 script CongratsYoureAnAsshole_Intro_Dialogue
@@ -47,8 +32,8 @@ script CongratsYoureAnAsshole_Intro_Dialogue
     closemessage
     msgbox(format("We’d like you to signal boost that statement online as soon as it’s posted. A public condemnation from the most powerful Trainer will send a strong message."),MSGBOX_DEFAULT,SPEAKER_KEIYING)
 
-    applymovement(KEIYING,Common_Movement_WalkInPlaceLeft)
-    waitmovement(KEIYING)
+    applymovement(LOCALID_LEAGUEOPS_KEIYING,Common_Movement_WalkInPlaceLeft)
+    waitmovement(LOCALID_LEAGUEOPS_KEIYING)
 
     msgbox(format("There’s no turning back from this- once the statement is out the region natives aren’t going to be so friendly to you. If there’s anything you need to do before sending the message, handle it now. Come back and talk to me when you’re ready."),MSGBOX_DEFAULT,SPEAKER_KEIYING)
     closemessage

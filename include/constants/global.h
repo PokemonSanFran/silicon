@@ -274,6 +274,8 @@ enum Connection
     CONNECTION_EMERGE
 };
 
+#define STIPEND_MONEY 50000  // siliconMerge
+
 #if TESTING
 #include "config/test.h"
 #endif

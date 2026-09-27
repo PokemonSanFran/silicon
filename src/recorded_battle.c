@@ -354,9 +354,9 @@ bool32 MoveRecordedBattleToSaveData(void)
     battleSave->frontierFacility = sFrontierFacility;
     battleSave->frontierBrainSymbol = sFrontierBrainSymbol;
     // Start siliconMerge
-	battleSave->battleScene = gSaveBlock2Ptr->optionsBattle[BATTLE_OPTIONS_ANIMATIONS];
+	battleSave->battleScene = OptionsMenu_GetSavedOptions(BATTLE_SETTINGS,BATTLE_OPTIONS_ANIMATIONS);
     //battleSave->battleScene = gSaveBlock2Ptr->optionsBattleSceneOff;
-    battleSave->textSpeed = gSaveBlock2Ptr->optionsVisual[VISUAL_OPTIONS_TEXT_SPEED];
+    battleSave->textSpeed = OptionsMenu_GetSavedOptions(VISUAL_SETTINGS,VISUAL_OPTIONS_TEXT_SPEED);
     //battleSave->textSpeed = gSaveBlock2Ptr->optionsTextSpeed;
 	// End siliconMerge
 

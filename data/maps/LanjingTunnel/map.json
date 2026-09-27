@@ -64,6 +64,34 @@
       "dest_warp_id": "0"
     }
   ],
-  "coord_events": [],
+  "coord_events": [
+    {
+      "type": "trigger",
+      "x": 28,
+      "y": 16,
+      "elevation": 0,
+      "var": "VAR_ESPULEE_OUTSKIRTS_STATE",
+      "var_value": "LANJINGTUNNEL_PUZZLES_SOLVED",
+      "script": "IGuessWeShouldBeNiceNow_ExitCave_Script"
+    },
+    {
+      "type": "trigger",
+      "x": 30,
+      "y": 16,
+      "elevation": 0,
+      "var": "VAR_ESPULEE_OUTSKIRTS_STATE",
+      "var_value": "LANJINGTUNNEL_PUZZLES_SOLVED",
+      "script": "IGuessWeShouldBeNiceNow_ExitCave_Script"
+    },
+    {
+      "type": "trigger",
+      "x": 29,
+      "y": 15,
+      "elevation": 0,
+      "var": "VAR_ESPULEE_OUTSKIRTS_STATE",
+      "var_value": "LANJINGTUNNEL_PUZZLES_SOLVED",
+      "script": "IGuessWeShouldBeNiceNow_ExitCave_Script"
+    }
+  ],
   "bg_events": []
 }

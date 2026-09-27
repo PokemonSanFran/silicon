@@ -568,7 +568,6 @@ void ViewEggContents(void)
 void EditEggContents(void)
 {
     LoadEggContents(SUMMARY_MODE_LOCK_MOVES);
-    //Debug_RandomizeBoxMonInidividualValues(&gSaveBlock1Ptr->daycare.daycareEgg[GetFirstPopulatedEggIndex()].egg);
 }
 
 static void LoadEggContents(u32 mode)

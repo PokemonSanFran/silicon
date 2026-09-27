@@ -12,7 +12,7 @@ mapscripts LeaverraForest_Inner_MapScripts
     ]
 }
 
-script LeaverraForest_Frank_Interact_Script 
+script LeaverraForest_Frank_Interact_Script
 {
     lock
     faceplayer

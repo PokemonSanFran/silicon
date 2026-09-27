@@ -1321,10 +1321,10 @@ const struct Zap gZaps[] =
         .dislikeCount = COMPOUND_STRING("3"),
         .likeCount = COMPOUND_STRING("6"),
     },
-    [ZAP_SHINJI_BUDGET] =
+    [ZAP_USUL_BUDGET] =
     {
         .userId = BUZZR_USER_PLACEHOLDER,
-        .content = COMPOUND_STRING("Has anyone else ever heard that Champion Shinji walked away from Resido because Sharprise cut the budget for his celebration party? I don't know if that's true but if so, good riddance I guess LOL"),
+        .content = COMPOUND_STRING("Has anyone else ever heard that Champion Usul walked away from Resido because Sharprise cut the budget for his celebration party? I don't know if that's true but if so, good riddance I guess LOL"),
         .isPrivate = FALSE,
         .criteria = ZapCriteria_RegularZap,
         .quest = 0,

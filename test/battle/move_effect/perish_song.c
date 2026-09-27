@@ -41,10 +41,10 @@ DOUBLE_BATTLE_TEST("Perish Song ignores protect")
         OPPONENT(SPECIES_WOBBUFFET);
         OPPONENT(SPECIES_WYNAUT);
     } WHEN {
-        TURN { 
-            MOVE(playerLeft, MOVE_PROTECT); 
-            MOVE(opponentLeft, MOVE_PROTECT); 
-            MOVE(playerRight, MOVE_PERISH_SONG); 
+        TURN {
+            MOVE(playerLeft, MOVE_PROTECT);
+            MOVE(opponentLeft, MOVE_PROTECT);
+            MOVE(playerRight, MOVE_PERISH_SONG);
         }
         TURN {}
         TURN {}

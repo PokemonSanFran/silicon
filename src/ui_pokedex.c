@@ -3224,6 +3224,33 @@ void Pokedex_InitFromDexnav(struct DexnavSavedData savedData, u8 taskId)
     SetAndSetUpCurrentPage(taskId);
 }
 
+enum Species GetRandomSpeciesInResidoDex(void)
+{
+    enum Species species = SPECIES_NONE;
+
+    while (species == SPECIES_NONE)
+    {
+        species = Random() % NUM_SPECIES;
+        enum ResidoDexNumbers residoDexNum = ConvertSpeciesIdToResidoDex(species);
+
+        if (residoDexNum == RESIDO_DEX_NONE)
+        {
+            species = SPECIES_NONE;
+            continue;
+        }
+
+        u32 base = GET_BASE_SPECIES_ID(species);
+
+        if (species != base)
+        {
+            species = SPECIES_NONE;
+            continue;
+        }
+    }
+
+    return species;
+}
+
 /*
  * TODO for pages
     POKEDEX_PAGE_LOCATION,

@@ -368,7 +368,7 @@ text gText_RestoredTower_ItsAlways{
 }
 
 text gText_RestoredTower_RecivedBadge{
-    format("{PLAYER} recieved the {STR_VAR_1} Badge!")
+    format("{PLAYER} received the {STR_VAR_1} Badge!")
 }
 text gText_RestoredTower_TakeThisBadge{
     format("Take this badge!")

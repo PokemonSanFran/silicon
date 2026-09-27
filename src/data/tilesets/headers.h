@@ -1541,3 +1541,47 @@ const struct Tileset gTileset_HallOfFame =
 };
 
 #endif // IS_FRLG
+
+const struct Tileset gTileset_GeneralSilicon =
+{
+    .isCompressed = TRUE,
+    .isSecondary = FALSE,
+    .tiles = gTilesetTiles_PorytilesManaged_GeneralSilicon,
+    .palettes = gTilesetPalettes_PorytilesManaged_GeneralSilicon,
+    .metatiles = gMetatiles_PorytilesManaged_GeneralSilicon,
+    .metatileAttributes = gMetatileAttributes_PorytilesManaged_GeneralSilicon,
+    .callback = NULL,
+};
+
+const struct Tileset gTileset_BuildingSilicon =
+{
+    .isCompressed = TRUE,
+    .isSecondary = FALSE,
+    .tiles = gTilesetTiles_PorytilesManaged_BuildingSilicon,
+    .palettes = gTilesetPalettes_PorytilesManaged_BuildingSilicon,
+    .metatiles = gMetatiles_PorytilesManaged_BuildingSilicon,
+    .metatileAttributes = gMetatileAttributes_PorytilesManaged_BuildingSilicon,
+    .callback = NULL,
+};
+
+const struct Tileset gTileset_RegularIndoors =
+{
+    .isCompressed = TRUE,
+    .isSecondary = TRUE,
+    .tiles = gTilesetTiles_PorytilesManaged_RegularIndoors,
+    .palettes = gTilesetPalettes_PorytilesManaged_RegularIndoors,
+    .metatiles = gMetatiles_PorytilesManaged_RegularIndoors,
+    .metatileAttributes = gMetatileAttributes_PorytilesManaged_RegularIndoors,
+    .callback = NULL,
+};
+
+const struct Tileset gTileset_FancyIndoors =
+{
+    .isCompressed = TRUE,
+    .isSecondary = TRUE,
+    .tiles = gTilesetTiles_PorytilesManaged_FancyIndoors,
+    .palettes = gTilesetPalettes_PorytilesManaged_FancyIndoors,
+    .metatiles = gMetatiles_PorytilesManaged_FancyIndoors,
+    .metatileAttributes = gMetatileAttributes_PorytilesManaged_FancyIndoors,
+    .callback = NULL,
+};

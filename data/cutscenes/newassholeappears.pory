@@ -92,8 +92,8 @@ script NewAssholeAppears_BaiyaExit_Script{
 	fadescreenswapbuffers(FADE_FROM_BLACK)
     addvar(VAR_STORYLINE_STATE,1)
     setvar(VAR_TEMP_0,0)
-    call(TryAutoSave)
     call(AaandWereBack_Monologue)
+    call(TryAutoSave)
     releaseall
     end
 }

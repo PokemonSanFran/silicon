@@ -223,7 +223,7 @@ static s32 mini_itoa_bin(u32 value, char *buffer)
     do
     {
         *(pbuffer++) = '0' + (value & 1);
-        value /= 2;   
+        value /= 2;
     } while (value > 0);
 
     *(pbuffer) = '\0';

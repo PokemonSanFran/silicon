@@ -1,19 +1,4 @@
 const PLAYER = OBJ_EVENT_ID_PLAYER
-const ARNAV = 1
-const TECHIE = 2
-const OLIVER = 3
-const CHARLOTTE = 4
-const LUCREZIA = 5
-const CHIEF = 6
-const RAMESH = 7
-const KEIYING = 8
-
-const FLAG_HIDE_NERDS_COPS = FLAG_TEMP_1
-const FLAG_HIDE_OLIVER = FLAG_TEMP_2
-const FLAG_HIDE_CHARLOTTE = FLAG_TEMP_3
-const FLAG_HIDE_LUCREZIA = FLAG_TEMP_4
-const FLAG_HIDE_RAMESH = FLAG_TEMP_5
-const FLAG_HIDE_KEIYING = FLAG_TEMP_6
 
 const BAIYA = 5
 const CHARLOTTE_ARANTRAZ = 6
@@ -290,9 +275,9 @@ script LetsBurnThisMotherDown_PostBattle_Dialogue
 
 script LetsBurnThisMotherDown_ShowLucrezia_Script
 {
-    setobjectxy(LUCREZIA,33,5)
-    setobjectxyperm(LUCREZIA,33,5)
-    setobjectmovementtype(LUCREZIA,MOVEMENT_TYPE_FACE_RIGHT)
+    setobjectxy(LOCALID_SHARPRISE_LUCREZIA,33,5)
+    setobjectxyperm(LOCALID_SHARPRISE_LUCREZIA,33,5)
+    setobjectmovementtype(LOCALID_SHARPRISE_LUCREZIA,MOVEMENT_TYPE_FACE_RIGHT)
 }
 
 script LetsBurnThisMotherDown_MissionComplete_Dialogue
@@ -343,7 +328,7 @@ script LetsBurnThisMotherDown_MissionComplete_Dialogue
     closemessage
 
     applymovement(PLAYER,Common_Movement_FaceUp)
-    applymovement(LUCREZIA,Common_Movement_FaceUp)
+    applymovement(LOCALID_SHARPRISE_LUCREZIA,Common_Movement_FaceUp)
 
     msgbox(format("Police Chief Bill sent me an email with their current plan - they're going to treat the entire island as a crime scene and see if they can find anything else regarding The Tide."),,SPEAKER_LUCREZIA)
 
@@ -357,8 +342,8 @@ script LetsBurnThisMotherDown_MissionComplete_Dialogue
 
     closemessage
     addvar(VAR_STORYLINE_STATE,1)
-    applymovement(LUCREZIA, moves(walk_down * 6))
-    waitmovement(LUCREZIA)
+    applymovement(LOCALID_SHARPRISE_LUCREZIA, moves(walk_down * 6))
+    waitmovement(LOCALID_SHARPRISE_LUCREZIA)
     call(SharpriseSpire_Leagueops_ClearSecondaryCharacters_Script)
     completequest(QUEST_LETSBURNTHISMOTHERDOWN)
     setvar(VAR_LETSBURNTHISMOTHERSTATE,BURN_MOTHER_COMPLETE)

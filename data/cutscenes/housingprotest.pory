@@ -180,7 +180,7 @@ script HousingProtest_LandlordTalkToCrowd_Dialogue {
     applymovement(PLAYER, moves(walk_left * 3, face_down, step_end))
     applymovement(LANDLORD, moves(walk_left, face_down, step_end))
     waitmovement(0)
-    msgbox(format("Every time I see you guys, you're attacking innocent people. Don't you have something more productive to do?"),MSGBOX_DEFAULT,SPEAKER_ALICIA)
+    msgbox(format("Every time I see you guys, you're attacking innocent people. Don't you have something more productive to do?"),MSGBOX_DEFAULT,SPEAKER_ALICIA,,EMOTE_ANGRY)
         msgbox(format("Innocent? These clowns?! Damn, you transplants really got it twisted."),,SPEAKER_RABIA)
     msgbox(format("This ain't your business. You should un-involve yourself."),,SPEAKER_VITOMIR)
     msgbox(format("I can take both of you. Leave him alone, or you're going through me."),MSGBOX_DEFAULT,SPEAKER_ALICIA)

@@ -4,7 +4,7 @@ mapscripts TirabudinPlace_Gym_MapScripts {
     MAP_SCRIPT_ON_TRANSITION {
         call(Quest_Inversehallucinogenic_ControlTrainerVisibility_Script)
 		call_if_defeated(TRAINER_BD,TirabudinPlace_Gym_Leader_Visibility)
-        call(TirabudinPlace_Gym_MapScripts_OnTransition)
+        call_if_eq(VAR_GYM_7_STATE,3,EnterBD_StartBattle_ObjectSetup_Script)
     }
     MAP_SCRIPT_ON_FRAME_TABLE [
         VAR_TEMP_0, 0: Quest_Inversehallucinogenic_ScreenDistortion_Script
@@ -14,12 +14,6 @@ mapscripts TirabudinPlace_Gym_MapScripts {
 script TirabudinPlace_Gym_Leader_Visibility
 {
 	call_if_quest_not_complete(QUEST_SHUTDOWNMEDICINEMAN,Quest_Restoretirabudinplace_Leader_Visibility_Script)
-}
-
-script TirabudinPlace_Gym_MapScripts_OnTransition {
-    switch (var (VAR_GYM_7_STATE)) {
-        case 3: goto(EnterBD_StartBattle_ObjectSetup_Script)
-    }
 }
 
 script TirabudinPlace_Gym_EventScript_Merril{

@@ -248,10 +248,10 @@ static void DrawMetatileAt(const struct MapLayout *mapLayout, u16 offset, int x,
 static void DrawMetatile(s32 metatileLayerType, const u16 *tiles, u16 offset)
 {
     // Start siliconMerge
-	if (metatileLayerType == 0xFF) 
+	if (metatileLayerType == 0xFF)
 	    //switch (metatileLayerType)
 		// case METATILE_LAYER_TYPE_SPLIT:
-	// End siliconMerge	
+	// End siliconMerge
     {
         // A door metatile shall be drawn, we use covered behavior // siliconMerge
         // Draw metatile's bottom layer to the bottom background layer.

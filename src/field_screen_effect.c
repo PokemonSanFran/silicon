@@ -554,11 +554,13 @@ bool8 FieldCB_ReturnToFieldOpenStartMenu(void)
     return FALSE;
 }
 
-static void Task_ReturnToFieldNoScript(u8 taskId)
+// Start autoSave
+//static void Task_ReturnToFieldNoScript(u8 taskId)
+void Task_ReturnToFieldNoScript(u8 taskId)
+// End autoSave
 {
     if (WaitForWeatherFadeIn() == 1)
     {
-        CountAndTryAutoSave(); //autoSave
         UnlockPlayerFieldControls();
         DestroyTask(taskId);
         ScriptUnfreezeObjectEvents();

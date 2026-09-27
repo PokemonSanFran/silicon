@@ -547,13 +547,9 @@ gSpecials::
 	def_special ScriptSetTotemBoost
     def_special TeleportCamera
     def_special ReturnCameraToPlayer
-	def_special SetSharpriseSpireFloor
-	def_special GetTowerFloorDefaultFloorChoice
-    def_special ShowSharpriseSpireElevatorFloorSelect
     def_special GetNumberOfBadges
     def_special GetPartySlotIfMonCanMegaEvolve
     def_special SetObjectMovementType
-    def_special CheckNumArantrazExhibitDefeated
     def_special GetCurrentMap
 // End siliconMerge
 	def_special TrySpecialOverworldEvo

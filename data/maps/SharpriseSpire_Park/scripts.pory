@@ -1,10 +1,16 @@
 const FLAG_HIDE_GUARD = FLAG_TEMP_1
 
 mapscripts SharpriseSpire_Park_MapScripts{
-    MAP_SCRIPT_ON_TRANSITION{
-        call(SharpriseSpire_GuardRaidFloors_Script)
+    MAP_SCRIPT_ON_TRANSITION
+    {
+        call_if_ge(VAR_TOWER_RAID_STATE,RAMESH_WARP_DOOR_UNLOCKED,SharpriseSpire_Script_HideParkGuard)
     }
 
     MAP_SCRIPT_ON_FRAME_TABLE[
     ]
+}
+
+script SharpriseSpire_Script_HideParkGuard
+{
+    setobjectflagfromlocalid(LOCALID_SHARPRISE_SPIRE_PARK_GUARD)
 }

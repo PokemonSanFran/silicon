@@ -378,7 +378,7 @@ const u8 *GetQuestDesc_RestoreEspuleeOutskirts(void)
     }
     else if (QuestMenu_GetSetSubquestState(QUEST_RESTOREESPULEEGYM,FLAG_GET_COMPLETED,SUB_QUEST_4))
     {
-        StringExpandPlaceholders(gStringVar4, COMPOUND_STRING("You recieved an Odd Egg, but will somebody want it?"));
+        StringExpandPlaceholders(gStringVar4, COMPOUND_STRING("You received an Odd Egg, but will somebody want it?"));
     }
     return gStringVar4;
 }
@@ -656,4 +656,38 @@ const u8 *GetQuestDesc_Letsburnthismotherdown(void)
 
     return gStringVar4;
 }
+
+const u8 *GetQuestDesc_Manofmanyhats(void)
+{
+
+    enum QuestCases flag = ReturnQuestState(QUEST_MANOFMANYHATS);
+    if (flag == FLAG_GET_ACTIVE)
+    {
+        GetMapName(gStringVar1,Overworld_GetMapHeaderByGroupAndId(MAP_GROUP(MAP_ESPULEE_OUTSKIRTS_RANGER),MAP_NUM(MAP_ESPULEE_OUTSKIRTS_RANGER))->regionMapSectionId,0);
+
+        u32 map = 0;
+        if (Quest_ManOfManyHats_ShouldStayBoba())
+        {
+            map = MAP_QUEST_MANOFMANYHATS_RESTAURANT;
+            GetMapName(gStringVar2,Overworld_GetMapHeaderByGroupAndId(MAP_GROUP(map),MAP_NUM(map))->regionMapSectionId,0);
+            StringAppend(gStringVar2,COMPOUND_STRING(" Boba Shop"));
+        }
+        else if (Quest_ManOfManyHats_ShouldStayFish())
+        {
+            map = MAP_QUEST_MANOFMANYHATS_LAKE;
+            GetMapName(gStringVar2,Overworld_GetMapHeaderByGroupAndId(MAP_GROUP(map),MAP_NUM(map))->regionMapSectionId,0);
+        }
+        else
+        {
+            map = MAP_QUEST_MANOFMANYHATS_ARCADE;
+            GetMapName(gStringVar2,Overworld_GetMapHeaderByGroupAndId(MAP_GROUP(map),MAP_NUM(map))->regionMapSectionId,0);
+            StringAppend(gStringVar2,COMPOUND_STRING(" Arcade"));
+        }
+
+    }
+
+    StringExpandPlaceholders(gStringVar4,sSideQuests[QUEST_MANOFMANYHATS].desc[flag]);
+    return gStringVar4;
+}
+
 

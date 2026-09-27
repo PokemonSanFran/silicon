@@ -15,12 +15,12 @@
   "connections": [
     {
       "map": "MAP_ROUTE6",
-      "offset": 0,
+      "offset": -3,
       "direction": "down"
     },
     {
       "map": "MAP_ROUTE1",
-      "offset": 9,
+      "offset": -6,
       "direction": "right"
     },
     {
@@ -30,19 +30,6 @@
     }
   ],
   "object_events": [
-    {
-      "graphics_id": "OBJ_EVENT_GFX_SCHOOL_KID_M",
-      "x": 13,
-      "y": 3,
-      "elevation": 3,
-      "movement_type": "MOVEMENT_TYPE_NONE",
-      "movement_range_x": 0,
-      "movement_range_y": 0,
-      "trainer_type": "TRAINER_TYPE_NONE",
-      "trainer_sight_or_berry_tree_id": "0",
-      "script": "Quest_GardenCleanUp_Event_Script",
-      "flag": "FLAG_TEMP_2"
-    },
     {
       "graphics_id": "OBJ_EVENT_GFX_MAN_2",
       "x": 14,
@@ -188,7 +175,7 @@
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_BERRY_TREE",
-      "x": 15,
+      "x": 8,
       "y": 1,
       "elevation": 3,
       "movement_type": "MOVEMENT_TYPE_BERRY_TREE_GROWTH",
@@ -201,7 +188,7 @@
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_BERRY_TREE",
-      "x": 15,
+      "x": 8,
       "y": 2,
       "elevation": 3,
       "movement_type": "MOVEMENT_TYPE_BERRY_TREE_GROWTH",
@@ -215,8 +202,8 @@
   ],
   "warp_events": [
     {
-      "x": 17,
-      "y": 3,
+      "x": 16,
+      "y": 4,
       "elevation": 0,
       "dest_map": "MAP_GLAVEZ_HILL_POKEMON_CENTER_1F",
       "dest_warp_id": "0"

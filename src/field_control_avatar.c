@@ -940,12 +940,12 @@ static bool8 TryStartStepCountScript(u16 metatileBehavior)
         }
         if (ShouldDoScottBattleFrontierCall() == TRUE)
         {
-            ScriptContext_SetupScript(LittlerootTown_ProfessorBirchsLab_EventScript_ScottAboardSSTidalCall); 
+            ScriptContext_SetupScript(LittlerootTown_ProfessorBirchsLab_EventScript_ScottAboardSSTidalCall);
             return TRUE;
         }
         if (ShouldDoRoxanneCall() == TRUE)
         {
-            ScriptContext_SetupScript(RustboroCity_Gym_EventScript_RegisterRoxanne); 
+            ScriptContext_SetupScript(RustboroCity_Gym_EventScript_RegisterRoxanne);
             return TRUE;
         }
         if (ShouldDoRivalRayquazaCall() == TRUE)
@@ -1463,7 +1463,7 @@ int SetCableClubWarp(void)
 extern const u8 EventScript_ToggleRunBehavior_Message[];
 static bool32 ToggleRunBehavior(void)
 {
-    if (gSaveBlock2Ptr->optionsGame[GAME_OPTIONS_RUN] != GAME_OPTION_RUN_TOGGLE)
+    if (OptionsMenu_GetSavedOptions(GAME_SETTINGS,GAME_OPTIONS_RUN) != GAME_OPTION_RUN_TOGGLE)
         return FALSE;
 
     PlaySE(SE_SELECT);

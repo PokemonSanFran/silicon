@@ -28,9 +28,12 @@
 #define RGB_LIME_GREEN  RGB2GBA(222, 230, 49)
 
 // Start gGlobalFieldTintMode
-#define GLOBAL_FIELD_TINT_NONE              0
-#define GLOBAL_FIELD_TINT_GRAYSCALE         1
-#define GLOBAL_FIELD_TINT_SEPIA             2
+enum GlobalFieldTintModes
+{
+  GLOBAL_FIELD_TINT_NONE,
+  GLOBAL_FIELD_TINT_GRAYSCALE,
+  GLOBAL_FIELD_TINT_SEPIA,
+};
 // End gGlobalFieldTintMode
 
 #endif // GUARD_RGB_H

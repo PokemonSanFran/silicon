@@ -1,18 +1,4 @@
 const PLAYER = OBJ_EVENT_ID_PLAYER
-const ARNAV = 1
-const TECHIE = 2
-const OLIVER = 3
-const CHARLOTTE = 4
-const LUCREZIA = 5
-const CHIEF = 6
-const RAMESH = 7
-
-const FLAG_HIDE_NERDS_COPS = FLAG_TEMP_1
-const FLAG_HIDE_OLIVER = FLAG_TEMP_2
-const FLAG_HIDE_CHARLOTTE = FLAG_TEMP_3
-const FLAG_HIDE_LUCREZIA = FLAG_TEMP_4
-const FLAG_HIDE_RAMESH = FLAG_TEMP_5
-const FLAG_HIDE_KEIYING = FLAG_TEMP_6
 
 mapscripts SharpriseSpire_Leagueops_MapScripts{
     MAP_SCRIPT_ON_TRANSITION
@@ -51,6 +37,10 @@ mapscripts SharpriseSpire_Leagueops_MapScripts{
     MAP_SCRIPT_ON_LOAD {
         call(ImIn_RevealLucreziaWarp_Script)
     }
+    MAP_SCRIPT_ON_WARP_INTO_MAP_TABLE
+    [
+        VAR_SHARPRISESPIRE_CONFERENCE_STATE,PRE_WELCOME_TO_THE_WAR_ROOM: WelcomeToTheWarRoom_Object_Setup_Script
+    ]
 }
 
 script SharpriseSpire_Leagueops_TrueTimeline_Objects_Script{
@@ -63,13 +53,11 @@ script SharpriseSpire_Leagueops_TrueTimeline_Objects_Script{
 }
 
 script SharpriseSpire_Leagueops_EmptyConferenceRoomOffices{
-        setflag(FLAG_HIDE_NERDS_COPS)
-        setflag(FLAG_HIDE_OLIVER)
-        setflag(FLAG_HIDE_CHARLOTTE)
-        setflag(FLAG_HIDE_LUCREZIA)
-        setflag(FLAG_HIDE_RAMESH)
-        setflag(FLAG_HIDE_KEIYING)
-        return
+        setobjectflagfromlocalid(LOCALID_SHARPRISE_OLIVER)
+        setobjectflagfromlocalid(LOCALID_SHARPRISE_CHARLOTTE)
+        setobjectflagfromlocalid(LOCALID_SHARPRISE_LUCREZIA)
+        setobjectflagfromlocalid(LOCALID_LEAGUEOPS_RAMESH)
+        setobjectflagfromlocalid(LOCALID_LEAGUEOPS_KEIYING)
 }
 script SharpriseSpire_Leagueops_MovePlayerIntoPosition_Script{
     lock
@@ -128,50 +116,18 @@ release
 end
 }
 
-script SharpriseSpire_Leagueops_Charlotte_Event_Script{
-    lock
-    faceplayer
-    call(ImIn_InteractCharlotteBattle_Script)
-    call(ImIn_PostCharlotteBattle_Interact_Dialogue)
-    closemessage
-
+script SharpriseSpire_Leagueops_CheckRewardStatus_Script
+{
+    callnative(Script_FalseTimeline_CheckRewardStatus)
+    call_if_eq(VAR_RESULT,TRUE,SharpriseSpire_Leagueops_ClearSecondaryCharacters_Script)
 }
 
-script SharpriseSpire_Leagueops_CheckRewardStatus_Script{
-    setvar(VAR_TEMP_1,0)
-
-    questmenu(QUEST_MENU_CHECK_REWARD,QUEST_LETSBURNTHISMOTHERDOWN)
-
-    if(var(VAR_RESULT)){
-        addvar(VAR_TEMP_1,1)
-    }
-    questmenu(QUEST_MENU_CHECK_REWARD,QUEST_HOWDISAPPOINTING)
-
-    if(var(VAR_RESULT)){
-        addvar(VAR_TEMP_1,1)
-    }
-    questmenu(QUEST_MENU_CHECK_REWARD,QUEST_MANHUNT)
-
-    if(var(VAR_RESULT)){
-        addvar(VAR_TEMP_1,1)
-    }
-
-    if (var(VAR_TEMP_1) == 0){
-        call(SharpriseSpire_Leagueops_ClearSecondaryCharacters_Script)
-    }
-    return
-}
-
-script SharpriseSpire_Leagueops_ClearSecondaryCharacters_Script{
-    removeobject(ARNAV)
-    removeobject(TECHIE)
-    removeobject(CHARLOTTE)
-    removeobject(CHIEF)
-    removeobject(LUCREZIA)
-    setflag(FLAG_HIDE_NERDS_COPS)
-    setflag(FLAG_HIDE_CHARLOTTE)
-    setflag(FLAG_HIDE_LUCREZIA)
-    return
+script SharpriseSpire_Leagueops_ClearSecondaryCharacters_Script
+{
+    removeobject(LOCALID_SHARPRISE_CHARLOTTE)
+    removeobject(LOCALID_SHARPRISE_LUCREZIA)
+    setobjectflagfromlocalid(LOCALID_SHARPRISE_CHARLOTTE)
+    setobjectflagfromlocalid(LOCALID_SHARPRISE_LUCREZIA)
 }
 
 script LeagueOps_LucreziaComputer_Script

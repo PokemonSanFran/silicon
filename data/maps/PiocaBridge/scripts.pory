@@ -2,8 +2,8 @@ mapscripts PiocaBridge_MapScripts
 {
     MAP_SCRIPT_ON_TRANSITION
     {
-        call(OffYouGo_ObjectCleanUp_Script)
         call(AngelDelivery_Script_HideBikers)
+        call_if_ne(VAR_PIOCABRIDGE_STATE,CALLED_BY_CHARLOTTE,OffYouGo_Script_HideCharlotteOliver)
         call_if_quest_reward(QUEST_FINDTHEGUILTY,Quest_Findtheguilty_Script_HidePiocaFindtheguilityplantH)
         call_if_quest_complete(QUEST_FINDTHEGUILTY,Quest_Findtheguilty_Script_HidePiocaFindtheguilityplantH)
     }

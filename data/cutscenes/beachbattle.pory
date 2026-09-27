@@ -35,10 +35,10 @@ script BeachBattle_CharlotteWalkToPlayer
         addobject(CHARLOTTE)
 
         applymovement(PLAYER, moves(emote_exclamation_mark, face_down, step_end))
-        waitmovement(0)
+        waitmovement(PLAYER)
         playbgm(MUS_ENCOUNTER_BRENDAN,TRUE)
-        applymovement(CHARLOTTE, moves(walk_up * 2, walk_right * 2, walk_up * 2, walk_right * 2, walk_up * 2, walk_right * 2, face_up, step_end))
-        waitmovement(0)
+        moveobjecttocoords(CHARLOTTE,10,24,DIR_NORTH)
+        waitmovement(CHARLOTTE)
         goto(BeachBattle_Approach_Dialogue)
 }
 
@@ -111,7 +111,8 @@ script BeachBattle_PostBattle_Dialogue
 
         msgbox(format("Ugh, I should be stronger than that."),,SPEAKER_CHARLOTTE)
 
-        if (flag(FLAG_BADGE05_GET)){
+        if (flag(FLAG_BADGE05_GET))
+        {
             msgbox(format("If it takes a team as good as yours to beat Neriene, then I might need to rethink things…"),,SPEAKER_CHARLOTTE,TAIL_WHISPER)
         }
 
@@ -120,7 +121,7 @@ script BeachBattle_PostBattle_Dialogue
         closemessage
 
         applymovement(CHARLOTTE, moves(walk_down * 7, step_end))
-        waitmovement(0)
+        waitmovement(CHARLOTTE)
         fadedefaultbgm
         removeobject(CHARLOTTE)
         call(TryAutoSave)

@@ -1456,7 +1456,7 @@ static void ItemStorage_TossItemYes(u8 taskId)
 
 static void ItemStorage_TossItemNo(u8 taskId)
 {
-    //ItemStorage_PrintMessage(GetItemDescription(gSaveBlock1Ptr->pcItems[gPlayerPCItemPageInfo.itemsAbove + gPlayerPCItemPageInfo.cursorPos].itemId)); // disable player pc 
+    //ItemStorage_PrintMessage(GetItemDescription(gSaveBlock1Ptr->pcItems[gPlayerPCItemPageInfo.itemsAbove + gPlayerPCItemPageInfo.cursorPos].itemId)); // disable player pc
     ItemStorage_PrintMessage(GetItemDescription(gSaveBlock1Ptr->pcItems[0].itemId)); // disable player pc
     ItemStorage_ReturnToListInput(taskId);
 }

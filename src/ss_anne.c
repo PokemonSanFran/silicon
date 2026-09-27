@@ -27,13 +27,13 @@ static const u16 sWakeSmokePalette[] = INCGFX_U16("graphics/ss_anne/wake.png", "
 
 static const struct SpriteSheet sSpriteSheets[] = {
     {
-        .data = (const void *)sWakeTiles, 
-        .size = sizeof(sWakeTiles), 
+        .data = (const void *)sWakeTiles,
+        .size = sizeof(sWakeTiles),
         .tag = SPRITE_TAG_WAKE,
     },
     {
-        .data = (const void *)sSmokeTiles, 
-        .size = sizeof(sSmokeTiles), 
+        .data = (const void *)sSmokeTiles,
+        .size = sizeof(sSmokeTiles),
         .tag = SPRITE_TAG_SMOKE,
     },
     {
@@ -43,7 +43,7 @@ static const struct SpriteSheet sSpriteSheets[] = {
 
 static const struct SpritePalette sSpritePalettes[] = {
     {
-        .data = (const void *)sWakeSmokePalette, 
+        .data = (const void *)sWakeSmokePalette,
         .tag = PALTAG_SMOKE_WAKE
     },
     {

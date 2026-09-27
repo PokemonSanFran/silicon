@@ -217,6 +217,7 @@
       "dest_warp_id": "0"
     },
     {
+      "warp_id": "WARP_ID_ROUTE4_TO_FERRY_BUILDING",
       "x": 18,
       "y": 89,
       "elevation": 0,

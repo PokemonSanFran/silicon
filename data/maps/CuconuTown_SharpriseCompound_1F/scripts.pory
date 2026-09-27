@@ -41,18 +41,12 @@ script Charlotte_CuconuTown_Compound_1F_InteractScript
 
 script Oliver_CuconuTown_Compound_1F_InteractScript
 {
-    lockall
-    call_if_ne(VAR_PLAYER_HOME_STATE,SLEPT_AFTER_SWAGBAG,swagbag_HelpPlayer_Script)
-    call_if_unset(FLAG_RECIEVED_LEFTOVERS,TwoHoursAgo_TheyreEager_Dialogue)
-
-    if(flag(FLAG_TEMP_1F))
-    {
-        call(TwoHoursAgo_ExplainLeftovers_Dialouge)
-    }
-    else
-    {
-        call(swagbag_HelpPlayer_Script)
-    }
+    lock
+    faceplayer
+    goto_if_lt(VAR_PLAYER_HOME_STATE,SLEPT_AFTER_SWAGBAG,swagbag_HelpPlayer_Script)
+    goto_if_unset(FLAG_RECEIVED_LEFTOVERS,TwoHoursAgo_TheyreEager_Dialogue)
+    call_if_set(FLAG_TEMP_1F,TwoHoursAgo_ExplainLeftovers_Dialouge)
+    call_if_unset(FLAG_TEMP_1F,swagbag_HelpPlayer_Script)
     closemessage
     releaseall
     end
@@ -65,16 +59,16 @@ script CuconuTown_SharpriseCompound_1F_Dialogue_CharlotteFood
 	{
 		case PLAYER_HOME_STATE_NONE:
 		case HAS_NOT_MET_CHARLOTTE:
-		case HAS_MET_CHARLOTTE: 
+		case HAS_MET_CHARLOTTE:
 		case CHECKED_OUT_BEDROOM:
-		case POST_SWAGBAG: 
+		case POST_SWAGBAG:
 		msgbox(format("Charlotte's partially eaten truffle burger is on a decorated plate. She's a very clean eater."))
 
 		case SLEPT_AFTER_SWAGBAG: msgbox(format("Oliver's breakfast is strewn all over the table. It appears to be a combination of beef jerky and energy drinks."))
 
 		default:
-		case FINISHED_1_1: 
-		case POST_NAVAL_BASE_RAID: 
+		case FINISHED_1_1:
+		case POST_NAVAL_BASE_RAID:
 		case NEXT_DAY_CHAMPIONSHIP:msgbox(format("The table is empty, aside from your food."))
 	}
 	closemessage
@@ -86,7 +80,7 @@ script CuconuTown_SharpriseCompound_1F_Dialogue_FavoriteFood
 {
 	lock
 	callnative(BufferFavoriteFood)
-	msgbox(format("There is a plate with {STR_VAR_1}. It smells delicious and is the perfect temperature!"))
+	msgbox(format("There is a plate with {STR_VAR_1}.\nIt smells delicious and is the perfect temperature!"))
 	switch (var(VAR_PLAYER_HOME_STATE))
 	{
 		default:
@@ -97,7 +91,7 @@ script CuconuTown_SharpriseCompound_1F_Dialogue_FavoriteFood
 		case CHECKED_OUT_BEDROOM:
 		case POST_SWAGBAG: msgbox(format("Wait, wasn't this food here earlier too? How is it still fresh?"),,SPEAKER_ALICIA,TAIL_THOUGHT,EMOTE_SHOCK)
 
-		case SLEPT_AFTER_SWAGBAG: msgbox(format("I was going to get food once I was on the road but..."),,SPEAKER_ALICIA,TAIL_THOUGHT)  
+		case SLEPT_AFTER_SWAGBAG: msgbox(format("I was going to get food once I was on the road but..."),,SPEAKER_ALICIA,TAIL_THOUGHT)
 		case FINISHED_1_1: msgbox(format("How is this always here? Is this somebody's entire job?"),,SPEAKER_ALICIA,TAIL_THOUGHT,EMOTE_CONFUSE)
 		case POST_NAVAL_BASE_RAID: msgbox(format("Was somebody here cooking while we were at the raid?"),,SPEAKER_ALICIA,TAIL_THOUGHT,EMOTE_CONFUSE)
 		case NEXT_DAY_CHAMPIONSHIP: msgbox(format("I'm impressed how consistent this is!"),,SPEAKER_ALICIA,TAIL_THOUGHT,EMOTE_SHOCK)

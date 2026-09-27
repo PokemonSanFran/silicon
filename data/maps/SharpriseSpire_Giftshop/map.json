@@ -15,6 +15,7 @@
   "connections": null,
   "object_events": [
     {
+      "local_id": "LOCALID_SHARPRISE_SPIRE_GIFTSHOP_GUARD",
       "graphics_id": "OBJ_EVENT_GFX_BLACK_BELT",
       "x": 8,
       "y": 2,
@@ -44,10 +45,11 @@
       "dest_warp_id": "0"
     },
     {
+      "warp_id": "WARP_ID_SPIRE_ELEVATOR_TO_GIFTSHOP",
       "x": 4,
       "y": 2,
       "elevation": 0,
-      "dest_map": "MAP_SALESORCETOWER_ELEVATOR",
+      "dest_map": "MAP_SHARPRISESPIRE_ELEVATOR",
       "dest_warp_id": "0"
     }
   ],

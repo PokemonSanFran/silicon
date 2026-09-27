@@ -12,9 +12,10 @@
   "allow_running": true,
   "show_map_name": true,
   "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
-  "connections": 0,
+  "connections": null,
   "object_events": [
     {
+      "local_id": "LOCALID_RAMESH_HOUSE_TALA",
       "graphics_id": "OBJ_EVENT_GFX_TALA",
       "x": 2,
       "y": 7,
@@ -28,6 +29,7 @@
       "flag": "FLAG_TEMP_1"
     },
     {
+      "local_id": "LOCALID_RAMESH_HOUSE_MAGNUS",
       "graphics_id": "OBJ_EVENT_GFX_MAGNUS",
       "x": 18,
       "y": 9,
@@ -38,9 +40,10 @@
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
       "script": "NULL",
-      "flag": "FLAG_TEMP_1"
+      "flag": "FLAG_TEMP_2"
     },
     {
+      "local_id": "LOCALID_RAMESH_HOUSE_FRANK",
       "graphics_id": "OBJ_EVENT_GFX_FRANK",
       "x": 10,
       "y": 11,
@@ -51,9 +54,10 @@
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
       "script": "NULL",
-      "flag": "FLAG_TEMP_1"
+      "flag": "FLAG_TEMP_3"
     },
     {
+      "local_id": "LOCALID_RAMESH_HOUSE_ELEANOR",
       "graphics_id": "OBJ_EVENT_GFX_ELEANOR",
       "x": 15,
       "y": 17,
@@ -64,9 +68,10 @@
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
       "script": "NULL",
-      "flag": "FLAG_TEMP_1"
+      "flag": "FLAG_TEMP_4"
     },
     {
+      "local_id": "LOCALID_RAMESH_HOUSE_BAIYA",
       "graphics_id": "OBJ_EVENT_GFX_BAIYA",
       "x": 3,
       "y": 13,
@@ -77,7 +82,7 @@
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
       "script": "NULL",
-      "flag": "FLAG_TEMP_1"
+      "flag": "FLAG_TEMP_5"
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
@@ -109,9 +114,7 @@
       "dest_warp_id": "2"
     }
   ],
-  "coord_events": [
-
-  ],
+  "coord_events": [],
   "bg_events": [
     {
       "type": "sign",

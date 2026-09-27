@@ -109,7 +109,8 @@ struct SiliconExtraTestVariables
     bool32 checkFontGraphics:1;
     bool32 checkVramUse:1;
     bool32 checkPrintSpeed:1;
-    bool32 temp:21;
+    bool32 opponentHasItems:1;
+    bool32 temp:20;
     u32 manualPersonality;
     u32 counter;
 };

@@ -275,12 +275,12 @@ script Quest_StealTheAxe_HasAxe_Dialogue{
 }
 
 script Quest_StealTheAxe_SendGiftToParty_Script {
-    call(Quest_StealTheAxe_RecievedGiftFanfare)
+    call(Quest_StealTheAxe_ReceivedGiftFanfare)
     call(EventScript_TryToNicknamePokemon)
 }
 
 script Quest_StealTheAxe_SendGiftToPC_Script {
-    call(Quest_StealTheAxe_RecievedGiftFanfare)
+    call(Quest_StealTheAxe_ReceivedGiftFanfare)
         msgbox(gText_NicknameThisPokemon,MSGBOX_YESNO)
 
         if (var(VAR_RESULT) == YES){
@@ -289,7 +289,7 @@ script Quest_StealTheAxe_SendGiftToPC_Script {
     call(Common_EventScript_TransferredToPC)
 }
 
-script Quest_StealTheAxe_RecievedGiftFanfare {
+script Quest_StealTheAxe_ReceivedGiftFanfare {
     bufferspeciesname(STR_VAR_2,SPECIES_STUFFUL)
         playfanfare(MUS_OBTAIN_ITEM)
         msgbox(format("{PLAYER} traded the {STR_VAR_3} for a Shiny {STR_VAR_2}."))

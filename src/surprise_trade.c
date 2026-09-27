@@ -375,7 +375,7 @@ static u32 GenerateSurpriseTradeAbility(u32 species)
         abilityChance[1] = 8;
         abilityChance[2] = 10;
     }
-    else 
+    else
     {
         abilityChance[0] = 4;
         abilityChance[1] = 8;

@@ -15,6 +15,7 @@
   "connections": null,
   "object_events": [
     {
+      "local_id": "LOCALID_HALAI_FERRY",
       "graphics_id": "OBJ_EVENT_GFX_SS_TIDAL",
       "x": 3,
       "y": 18,
@@ -28,6 +29,7 @@
       "flag": "0"
     },
     {
+      "local_id": "LOCALID_FERRY_ATTENDANT",
       "graphics_id": "OBJ_EVENT_GFX_FAT_MAN",
       "x": 3,
       "y": 16,
@@ -41,6 +43,7 @@
       "flag": "FLAG_TEMP_1F"
     },
     {
+      "local_id": "LOCALID_HALAI_BAIYA",
       "graphics_id": "OBJ_EVENT_GFX_BAIYA",
       "x": 20,
       "y": 9,
@@ -54,6 +57,7 @@
       "flag": "FLAG_TEMP_1"
     },
     {
+      "local_id": "LOCALID_HALAI_CHIEF",
       "graphics_id": "OBJ_EVENT_GFX_MART_EMPLOYEE",
       "x": 20,
       "y": 20,
@@ -67,6 +71,7 @@
       "flag": "FLAG_TEMP_2"
     },
     {
+      "local_id": "LOCALID_HALAI_CHARLOTTE",
       "graphics_id": "OBJ_EVENT_GFX_CHARLOTTE",
       "x": 19,
       "y": 24,
@@ -80,6 +85,7 @@
       "flag": "FLAG_TEMP_2"
     },
     {
+      "local_id": "LOCALID_HALAI_POLICE_A",
       "graphics_id": "OBJ_EVENT_GFX_MYSTERY_GIFT_MAN",
       "x": 18,
       "y": 22,
@@ -93,6 +99,7 @@
       "flag": "FLAG_TEMP_2"
     },
     {
+      "local_id": "LOCALID_HALAI_POLICE_B",
       "graphics_id": "OBJ_EVENT_GFX_MYSTERY_GIFT_MAN",
       "x": 20,
       "y": 22,
@@ -106,6 +113,7 @@
       "flag": "FLAG_TEMP_2"
     },
     {
+      "local_id": "LOCALID_HALAI_POLICE_C",
       "graphics_id": "OBJ_EVENT_GFX_MYSTERY_GIFT_MAN",
       "x": 22,
       "y": 22,
@@ -119,58 +127,7 @@
       "flag": "FLAG_TEMP_2"
     },
     {
-      "graphics_id": "OBJ_EVENT_GFX_AZUMARILL",
-      "x": 38,
-      "y": 12,
-      "elevation": 3,
-      "movement_type": "MOVEMENT_TYPE_FACE_RIGHT",
-      "movement_range_x": 0,
-      "movement_range_y": 0,
-      "trainer_type": "TRAINER_TYPE_NONE",
-      "trainer_sight_or_berry_tree_id": "0",
-      "script": "NULL",
-      "flag": "FLAG_TEMP_2"
-    },
-    {
-      "graphics_id": "OBJ_EVENT_GFX_MYSTERY_GIFT_MAN",
-      "x": 38,
-      "y": 11,
-      "elevation": 3,
-      "movement_type": "MOVEMENT_TYPE_FACE_RIGHT",
-      "movement_range_x": 0,
-      "movement_range_y": 0,
-      "trainer_type": "TRAINER_TYPE_NONE",
-      "trainer_sight_or_berry_tree_id": "0",
-      "script": "NULL",
-      "flag": "FLAG_TEMP_2"
-    },
-    {
-      "graphics_id": "OBJ_EVENT_GFX_MYSTERY_GIFT_MAN",
-      "x": 12,
-      "y": 8,
-      "elevation": 3,
-      "movement_type": "MOVEMENT_TYPE_FACE_LEFT",
-      "movement_range_x": 0,
-      "movement_range_y": 0,
-      "trainer_type": "TRAINER_TYPE_NONE",
-      "trainer_sight_or_berry_tree_id": "0",
-      "script": "NULL",
-      "flag": "FLAG_TEMP_2"
-    },
-    {
-      "graphics_id": "OBJ_EVENT_GFX_SUDOWOODO",
-      "x": 12,
-      "y": 9,
-      "elevation": 3,
-      "movement_type": "MOVEMENT_TYPE_FACE_LEFT",
-      "movement_range_x": 0,
-      "movement_range_y": 0,
-      "trainer_type": "TRAINER_TYPE_NONE",
-      "trainer_sight_or_berry_tree_id": "0",
-      "script": "NULL",
-      "flag": "FLAG_TEMP_2"
-    },
-    {
+      "local_id": "LOCALID_HALAI_ADAORA",
       "graphics_id": "OBJ_EVENT_GFX_ADAORA",
       "x": 21,
       "y": 32,
@@ -197,6 +154,7 @@
       "flag": "0"
     },
     {
+      "local_id": "LOCALID_HALAI_TALA",
       "graphics_id": "OBJ_EVENT_GFX_TALA",
       "x": 32,
       "y": 14,
@@ -207,9 +165,10 @@
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
       "script": "NULL",
-      "flag": "FLAG_TEMP_4"
+      "flag": "FLAG_TEMP_A"
     },
     {
+      "local_id": "LOCALID_HALAI_MAGNUS",
       "graphics_id": "OBJ_EVENT_GFX_MAGNUS",
       "x": 31,
       "y": 14,
@@ -220,9 +179,10 @@
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
       "script": "NULL",
-      "flag": "FLAG_TEMP_4"
+      "flag": "FLAG_TEMP_B"
     },
     {
+      "local_id": "LOCALID_HALAI_FRANK",
       "graphics_id": "OBJ_EVENT_GFX_FRANK",
       "x": 31,
       "y": 13,
@@ -233,9 +193,10 @@
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
       "script": "NULL",
-      "flag": "FLAG_TEMP_4"
+      "flag": "FLAG_TEMP_C"
     },
     {
+      "local_id": "LOCALID_HALAI_ELEANOR",
       "graphics_id": "OBJ_EVENT_GFX_ELEANOR",
       "x": 33,
       "y": 14,
@@ -246,7 +207,7 @@
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
       "script": "NULL",
-      "flag": "FLAG_TEMP_4"
+      "flag": "FLAG_TEMP_D"
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_GIRL_1",
@@ -262,6 +223,7 @@
       "flag": "0"
     },
     {
+      "local_id": "LOCALID_HALAI_TAXI",
       "graphics_id": "OBJ_EVENT_GFX_TRUCK",
       "x": 10,
       "y": 22,
@@ -275,6 +237,7 @@
       "flag": "FLAG_TEMP_1F"
     },
     {
+      "local_id": "LOCALID_HALAI_NERIENE",
       "graphics_id": "OBJ_EVENT_GFX_NERIENE",
       "x": 26,
       "y": 11,

@@ -2666,7 +2666,7 @@ static void InfosPageMisc_PrintTextBox(void)
 
     if (!SummaryInput_IsWithinSubMode() && IsTradedMon(&sMonSummaryDataPtr->mon))
     {
-        StringExpandPlaceholders(gStringVar4, COMPOUND_STRING("Recieved in a trade."));
+        StringExpandPlaceholders(gStringVar4, COMPOUND_STRING("Received in a trade."));
         SummaryPrint_AddText(SUMMARY_MAIN_WIN_PAGE_TEXT, FONT_NORMAL, x, y, color, gStringVar4);
     }
     else if (!SummaryInput_IsWithinSubMode())

@@ -193,10 +193,12 @@ BattleScript_SuccessBallThrow::
 BattleScript_TryPrintCaughtMonInfo:
 	jumpifbattletype BATTLE_TYPE_RECORDED, BattleScript_GiveCaughtMonEnd
 	trysetcaughtmondexflags BattleScript_TryNicknameCaughtMon
-	printstring STRINGID_PKMNDATAADDEDTODEX
-	waitstate
+    @ Start Battle Settings: Nickname
+	@ printstring STRINGID_PKMNDATAADDEDTODEX
+	@ waitstate
+    @ End Battle Settings: Nickname
 	setbyte gBattleCommunication, 0
-	displaydexinfo
+	@ displaydexinfo @ Battle Settings: Nickname
 BattleScript_TryNicknameCaughtMon::
     @ Start Battle Settings: Nickname
     jumpifcantnickname BattleScript_PostNamingScreen

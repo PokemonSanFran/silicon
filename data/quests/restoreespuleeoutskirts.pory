@@ -588,7 +588,7 @@ script Quest_Restoreespuleeoutskirts_Dialogue_InteractEspuleetradepersonD
 {
     lock
     faceplayer
-    goto_if_unset(FLAG_RECIEVED_NURSERY_EGG,Quest_Restoreespuleeoutskirts_Dialogue_EspuleetradepersonD_FirstEggOffer)
+    goto_if_unset(FLAG_RECEIVED_NURSERY_EGG,Quest_Restoreespuleeoutskirts_Dialogue_EspuleetradepersonD_FirstEggOffer)
     goto_if_subquest_not_complete(QUEST_RESTOREESPULEEGYM,SUB_QUEST_4,Quest_Restoreespuleeoutskirts_EspuleetradepersonD_Incomplete)
     goto_if_subquest_complete(QUEST_RESTOREESPULEEGYM,SUB_QUEST_4,Quest_Restoreespuleeoutskirts_EspuleetradepersonD_Complete)
 }
@@ -625,13 +625,13 @@ script Quest_Restoreespuleeoutskirts_EspuleetradepersonD_FirstEggAccept
     startmenu_savescreen
     callnative(Script_GenerateAndGiveOddEgg)
     copyvar(VAR_TEMP_3,VAR_RESULT)
-    setflag(FLAG_RECIEVED_NURSERY_EGG)
+    setflag(FLAG_RECEIVED_NURSERY_EGG)
     goto_if_eq(VAR_RESULT,MON_CANT_GIVE,Quest_Restoreespuleeoutskirts_EspuleetradepersonD_NoRoomForEgg)
     msgbox(format("Wonderful! How nice it is to see this egg get a happy home."),,SPEAKER_ESPULEETRADEPERSOND)
     closemessage
     cueobjectplayer(LOCALID_CHASILLA_BREEDING_ESPUELEETRADEPERSOND)
     playfanfare(MUS_OBTAIN_ITEM)
-    msgbox(format("{PLAYER} recieved an Egg!"))
+    msgbox(format("{PLAYER} received an Egg!"))
     waitmessage
     waitfanfare
     call_if_eq(VAR_TEMP_3,MON_GIVEN_TO_PC,BreedingCenter_Text_EggTransferredToPC)
@@ -681,7 +681,7 @@ script Quest_Restoreespuleeoutskirts_EspuleetradepersonD_TradeItem
     closemessage
     cueobjectplayer(LOCALID_CHASILLA_BREEDING_ESPUELEETRADEPERSOND)
     playfanfare(MUS_OBTAIN_ITEM)
-    msgbox(format("{PLAYER} recieved an Egg!"))
+    msgbox(format("{PLAYER} received an Egg!"))
     waitmessage
     waitfanfare
     call_if_eq(VAR_TEMP_3,MON_GIVEN_TO_PC,BreedingCenter_Text_EggTransferredToPC)

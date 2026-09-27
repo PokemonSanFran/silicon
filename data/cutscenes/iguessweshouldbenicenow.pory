@@ -1,203 +1,205 @@
 const PLAYER = OBJ_EVENT_ID_PLAYER
-const CHARLOTTE = 1
-const BOSSPKMNA = 2
-const BOSSPKMNB = 3
-const BOSSPKMNC = 6
-const FLAG_HIDE_CHARLOTTE = FLAG_TEMP_1
+const LOCALID_ESPULEE_CHARLOTTE = LOCALID_CAMERA + 1
 
-script IGuessWeShouldBeNiceNow_HideObject_Script {
-    setflag(FLAG_TEMP_1)
-    setflag(FLAG_TEMP_2)
+script IGuessWeShouldBeNiceNow_HideObject_Script
+{
+    setobjectflagfromlocalid(LOCALID_LANJINGTUNNEL_CHARLOTTE)
+    setobjectflagfromlocalid(LOCALID_LANJINGTUNNEL_FRANK_LEAD_MON)
 }
 
-script IGuessWeShouldBeNiceNow_ObjectSetup_Script {
-    setflag(FLAG_TEMP_2)
+script IGuessWeShouldBeNiceNow_ObjectSetup_Script
+{
+    setobjectflagfromlocalid(LOCALID_LANJINGTUNNEL_FRANK_LEAD_MON)
 }
-        script IGuessWeShouldBeNiceNow_PuzzlePrepareObject_Script{
-            setobjectxy(CHARLOTTE,8,23)
-            setobjectxyperm(CHARLOTTE,8,23)
-            setflag(FLAG_TEMP_2)
-        }
-        script IGuessWeShouldBeNiceNow_PuzzleStartObject_Script{
-            setobjectxy(CHARLOTTE,15,19)
-            setobjectxyperm(CHARLOTTE,15,19)
-            setflag(FLAG_TEMP_2)
-        }
-        script IGuessWeShouldBeNiceNow_PuzzleBSolvedObject_Script{
-            setobjectxy(CHARLOTTE,8,6)
-            setobjectxyperm(CHARLOTTE,8,6)
-            setobjectmovementtype(CHARLOTTE,MOVEMENT_TYPE_FACE_UP)
-            setobjectxy(5,7,9)
-            setobjectxyperm(5,7,9)
-        }
-        script IGuessWeShouldBeNiceNow_PostCleanUp_Script{
-            setflag(FLAG_TEMP_4)
-            setflag(FLAG_TEMP_2)
-            setflag(FLAG_TEMP_1)
-            setobjectxy(5,7,9)
-            setobjectxyperm(5,7,9)
-        }
+
+script IGuessWeShouldBeNiceNow_PuzzlePrepareObject_Script
+{
+    setobjectxy(LOCALID_LANJINGTUNNEL_CHARLOTTE,8,23)
+    setobjectxyperm(LOCALID_LANJINGTUNNEL_CHARLOTTE,8,23)
+    clearobjectflagfromlocalid(LOCALID_LANJINGTUNNEL_FRANK_LEAD_MON)
+}
+
+script IGuessWeShouldBeNiceNow_PuzzleStartObject_Script
+{
+    setobjectxy(LOCALID_LANJINGTUNNEL_CHARLOTTE,15,19)
+    setobjectxyperm(LOCALID_LANJINGTUNNEL_CHARLOTTE,15,19)
+    clearobjectflagfromlocalid(LOCALID_LANJINGTUNNEL_FRANK_LEAD_MON)
+}
+
+script IGuessWeShouldBeNiceNow_PuzzleBSolvedObject_Script
+{
+    setobjectxy(LOCALID_LANJINGTUNNEL_CHARLOTTE,9,6)
+    setobjectxyperm(LOCALID_LANJINGTUNNEL_CHARLOTTE,9,6)
+    setobjectmovementtype(LOCALID_LANJINGTUNNEL_CHARLOTTE,MOVEMENT_TYPE_FACE_UP)
+    setobjectxy(LOCALID_LANJINGTUNNEL_DEBUG_BOULDER,7,9)
+    setobjectxyperm(LOCALID_LANJINGTUNNEL_DEBUG_BOULDER,7,9)
+}
+
+script IGuessWeShouldBeNiceNow_PostCleanUp_Script
+{
+    setobjectflagfromlocalid(LOCALID_LANJINGTUNNEL_FRANK_JOURNAL)
+    call(IGuessWeShouldBeNiceNow_HideObject_Script)
+    setobjectxy(LOCALID_LANJINGTUNNEL_DEBUG_BOULDER,7,9)
+    setobjectxyperm(LOCALID_LANJINGTUNNEL_DEBUG_BOULDER,7,9)
+}
 
 script IGuessWeShouldBeNiceNow_CharlotteInteract_Event_Script {
     lock
     faceplayer
-    switch (var(VAR_ROBINWILLIAMSTUNNEL_STATE)){
-        case CHARLOTTE_EXPLAINED_PUZZLE: goto(IGuessWeShouldBeNiceNow_AskPlayer_Script)
+    switch (var(VAR_LANJINGTUNNEL_STATE)){
         case PUZZLE_2_SOLVED: goto(IGuessWeShouldBeNiceNow_ReadyPlayer_Dialogue)
     }
 }
 
 script IGuessWeShouldBeNiceNow_FirstEnterMaze_Dialogue {
     lock
+    setvar(VAR_LANJINGTUNNEL_STATE,CHARLOTTE_EXPLAINED_PUZZLE)
     applymovement(PLAYER,Common_Movement_FaceRight)
-    applymovement(CHARLOTTE, moves(walk_down, face_left, step_end))
-        waitmovement(0)
+    applymovement(LOCALID_LANJINGTUNNEL_CHARLOTTE, moves(walk_down, face_left, step_end))
+    waitmovement(0)
 
     msgbox(format("Charl-"),,SPEAKER_ALICIA)
     msgbox(format("There you are! Took you long enough."),,SPEAKER_CHARLOTTE)
     msgbox(format("Oliver was telling me that we-"),,SPEAKER_ALICIA)
     msgbox(format("I guess it doesn’t matter. I’ve been taking a look at the puzzle Frank set up and I figured out how this works. "),,SPEAKER_CHARLOTTE)
-    msgbox(format("Once the quest info is decided and completed, come back in and fill in dialogue. Charlotte will explain how she figured out the puzzle and how."),,SPEAKER_LUCREZIA)
+    msgbox(format("Once the quest info is decided and completed, come back in and fill in dialogue. Charlotte will explain how she figured out the puzzle and how."))
     msgbox(format("So, unfortunately, I’ll need your help to get through this."),,SPEAKER_CHARLOTTE)
     msgbox(format("Unfortunately? That’s a little rude…."),,SPEAKER_ALICIA)
-    msgbox(format("Working with people is tedious and the results are mixed so I prefer to do things myself so then I know they’ll be done right, but if I don’t have a choice, you’re not a horrible option."),,SPEAKER_CHARLOTTE)
+    msgbox(format("Working with people is tedious and the results are mixed, so I prefer to do things myself so then I know they’ll be done right. But if I don’t have any other choice, you’re not a horrible option."),,SPEAKER_CHARLOTTE)
     msgbox(format("…thanks. I guess?"),,SPEAKER_ALICIA)
     msgbox(format("You’re welcome. Now go step on that panel over there and I’ll head through first. "),,SPEAKER_CHARLOTTE)
-    msgbox(format("Pick your battles, {PLAYER}, pick your battles"),,SPEAKER_ALICIA)
-
-        setvar(VAR_ROBINWILLIAMSTUNNEL_STATE,CHARLOTTE_EXPLAINED_PUZZLE)
-        goto (IGuessWeShouldBeNiceNow_AskPlayer_Script)
+    msgbox(format("Pick your battles, {PLAYER}, pick your battles..."),,SPEAKER_ALICIA,TAIL_THOUGHT)
+       closemessage
+    goto(IGuessWeShouldBeNiceNow_StartPuzzle_Script)
 }
 
-script IGuessWeShouldBeNiceNow_AskPlayer_Script {
+script IGuessWeShouldBeNiceNow_StartPuzzle_Script
+{
         lock
-
-        if (var(VAR_RESULT) == NO) {
-            goto(IGuessWeShouldBeNiceNow_PreparePlayer_Dialogue)
-        } else {
-            goto(IGuessWeShouldBeNiceNow_StartPuzzle_Script)
-        }
-}
-
-script IGuessWeShouldBeNiceNow_PreparePlayer_Dialogue {
-        end
-}
-
-script IGuessWeShouldBeNiceNow_StartPuzzle_Script {
-        setvar(VAR_ROBINWILLIAMSTUNNEL_STATE,PUZZLE_1_UNSOLVED)
-        lock
-                closemessage
-        applymovement(CHARLOTTE, moves(walk_up, walk_left, walk_up * 3, walk_right * 8, step_end))
-        waitmovement(0)
-            setobjectxy(CHARLOTTE,15,19)
-            setobjectxyperm(CHARLOTTE,15,19)
-
+        setvar(VAR_LANJINGTUNNEL_STATE,PUZZLE_1_UNSOLVED)
+        closemessage
+        applymovement(PLAYER,Common_Movement_FaceUp)
+        moveobjecttocoords(LOCALID_LANJINGTUNNEL_CHARLOTTE,15,19,DIR_WEST)
+        waitmovement(LOCALID_LANJINGTUNNEL_CHARLOTTE)
+        setobjectxy(LOCALID_LANJINGTUNNEL_CHARLOTTE,15,19)
+        setobjectxyperm(LOCALID_LANJINGTUNNEL_CHARLOTTE,15,19)
         release
         end
 }
 
 script IGuessWeShouldBeNiceNow_SolvedPuzzleA {
-        setvar(VAR_ROBINWILLIAMSTUNNEL_STATE,PUZZLE_1_SOLVED)
+        setvar(VAR_LANJINGTUNNEL_STATE,PUZZLE_1_SOLVED)
         playse(SE_SWITCH)
         waitse
 }
 
 script IGuessWeShouldBeNiceNow_SolvedPuzzleB {
-        setvar(VAR_ROBINWILLIAMSTUNNEL_STATE,PUZZLE_2_SOLVED)
-        playse(SE_SWITCH)
-        waitse
-        fadescreen(FADE_TO_BLACK)
-        setvar(VAR_0x8004, 8)
-        setvar(VAR_0x8005, 9)
-        special(TeleportCamera)
-        fadescreen(FADE_FROM_BLACK)
+    setvar(VAR_LANJINGTUNNEL_STATE,PUZZLE_2_SOLVED)
+    playse(SE_SWITCH)
+    waitse
+    fadescreen(FADE_TO_BLACK)
+    setvar(VAR_0x8004, 8)
+    setvar(VAR_0x8005, 9)
+    special(TeleportCamera)
+    fadescreen(FADE_FROM_BLACK)
 
-        applymovement(5,Common_Movement_WalkLeft)
-        waitmovement(0)
+    applymovement(5,Common_Movement_WalkLeft)
+    waitmovement(0)
 
-        fadescreen(FADE_TO_BLACK)
-        turnobject(CHARLOTTE, DIR_NORTH)
-        setobjectxy(CHARLOTTE,9,12)
-        setobjectxyperm(CHARLOTTE,9,12)
-        special(ReturnCameraToPlayer)
-        fadescreen(FADE_FROM_BLACK)
-        applymovement(PLAYER, moves(walk_right * 4, step_end))
-        waitmovement(0)
+    fadescreen(FADE_TO_BLACK)
+    turnobject(LOCALID_LANJINGTUNNEL_CHARLOTTE, DIR_NORTH)
+    setobjectxy(LOCALID_LANJINGTUNNEL_CHARLOTTE,9,12)
+    setobjectxyperm(LOCALID_LANJINGTUNNEL_CHARLOTTE,9,12)
+    special(ReturnCameraToPlayer)
+    fadescreen(FADE_FROM_BLACK)
+    moveobjecttocoords(PLAYER,8,12,DIR_EAST)
+    waitmovement(PLAYER)
 
-        msgbox(format("The girls complete the puzzle. Will likely need to update dialogue during puzzle later"),,SPEAKER_LUCREZIA)
+    msgbox(format("The pair complete the puzzle. Will likely need to update dialogue during puzzle later"),,SPEAKER_LUCREZIA)
     msgbox(format("That was amazing, Charlotte!"),,SPEAKER_ALICIA)
-    msgbox(format("Of course. I’m happy you didn’t suck at finishing the puzzle"),,SPEAKER_CHARLOTTE)
+    msgbox(format("Of course. I’m happy you didn’t suck at finishing the puzzle."),,SPEAKER_CHARLOTTE)
     msgbox(format("…anyway. There’s the book. Let’s grab it and get out of here."),,SPEAKER_ALICIA)
-    msgbox(format("It’s definitely not that easy. If I was a crusty old man bored out his mind in the middle of nowhere, I would definitely have something guarding this thing. "),,SPEAKER_CHARLOTTE)
+    msgbox(format("It’s definitely not that easy. If I was a crusty old man bored out his mind in the middle of nowhere, I would definitely have something guarding this thing."),,SPEAKER_CHARLOTTE)
+    closemessage
 
-        applymovement(PLAYER, moves(walk_up * 5, walk_left, face_up, step_end))
-        applymovement(CHARLOTTE, moves(walk_left, walk_up * 5, face_up, step_end))
-        waitmovement(0)
+    applymovement(PLAYER, moves(walk_up * 5, walk_left, face_up, step_end))
+    applymovement(LOCALID_LANJINGTUNNEL_CHARLOTTE, moves(walk_left, walk_up * 5, walk_right, face_up, step_end))
+    waitmovement(0)
 
-msgbox(format("ROAR"))
+    msgbox(format("ROAR"))
 
-goto(IGuessWeShouldBeNiceNow_BossProtectBook_Script)
+    goto(IGuessWeShouldBeNiceNow_BossProtectBook_Script)
 }
-script IGuessWeShouldBeNiceNow_BossProtectBook_Script {
-    playmoncry(SPECIES_CENTISKORCH, CRY_MODE_ENCOUNTER)
-        playmoncry(SPECIES_CHANDELURE, CRY_MODE_ENCOUNTER)
-        waitse
 
-        clearflag(FLAG_TEMP_2)
-        addobject(BOSSPKMNA)
-        addobject(BOSSPKMNB)
-        addobject(BOSSPKMNC)
+script IGuessWeShouldBeNiceNow_Script_PlayMonCries
+{
+    playmoncry(SPECIES_FRANK_MON_LEAD, CRY_MODE_ENCOUNTER)
+    playmoncry(SPECIES_FRANK_MON_PARTNER, CRY_MODE_ENCOUNTER)
+}
 
-       msgbox(format("Guard Pokemon appear in front of the book"),,SPEAKER_LUCREZIA)
-    msgbox(format("Bingo! Alright, let’s see what I can do here"),,SPEAKER_CHARLOTTE)
+script IGuessWeShouldBeNiceNow_BossProtectBook_Script
+{
+    call(IGuessWeShouldBeNiceNow_Script_PlayMonCries)
+    clearobjectflagfromlocalid(LOCALID_LANJINGTUNNEL_FRANK_LEAD_MON)
+    callnative(IGuessWeShouldBeNiceNow_LoadOverworldMons)
+    waitmoncry
+    addobject(LOCALID_LANJINGTUNNEL_FRANK_LEAD_MON)
+    addobject(LOCALID_LANJINGTUNNEL_FRANK_PARTNER_MON)
+    waitmoncry
+
+    msgbox(format("Guard Pokemon appear in front of the book"),,SPEAKER_LUCREZIA)
+    msgbox(format("Bingo! Alright, let’s see what I can do here!"),,SPEAKER_CHARLOTTE)
     msgbox(format("Uh Charlotte? I’m right here!"),,SPEAKER_ALICIA)
-    msgbox(format("Fine, you can help. But don’t slow me down. "),,SPEAKER_CHARLOTTE)
-                applymovement(PLAYER,Common_Movement_WalkUp)
-            waitmovement(0)
-        startmenu_savescreen
-        goto(IGuessWeShouldBeNiceNow_CoreEncounter_Script)
+    msgbox(format("Fine, you can help. But don’t slow me down."),,SPEAKER_CHARLOTTE)
+    closemessage
+    applymovement(PLAYER,Common_Movement_WalkUp)
+    waitmovement(LOCALID_PLAYER)
+    startmenu_savescreen
+    goto(IGuessWeShouldBeNiceNow_CoreEncounter_Script)
 }
 
-script IGuessWeShouldBeNiceNow_CoreEncounter_Script {
-        setwildbattle(SPECIES_CENTISKORCH,60,ITEM_LIFE_ORB,SPECIES_SIZZLIPEDE,70,ITEM_ORAN_BERRY)
-        playmoncry(SPECIES_CENTISKORCH, CRY_MODE_ENCOUNTER)
-        delay(40)
-        waitmoncry
-        setflag(FLAG_SYS_CTRL_OBJ_DELETE)
-        multi_fixed_wild(PARTNER_CHARLOTTE)
-        clearflag(FLAG_SYS_CTRL_OBJ_DELETE)
-        specialvar(VAR_RESULT, GetBattleOutcome)
-        switch (var (VAR_RESULT)) {
-            case B_OUTCOME_WON:
-                goto(IGuessWeShouldBeNiceNow_ClearBossPokemon_Script)
-        }
+script IGuessWeShouldBeNiceNow_Script_InteractMons
+{
+    callnative(IGuessWeShouldBeNiceNow_LoadOverworldMons)
+    goto(IGuessWeShouldBeNiceNow_CoreEncounter_Script)
+}
+
+script IGuessWeShouldBeNiceNow_CoreEncounter_Script
+{
+    call(IGuessWeShouldBeNiceNow_Script_PlayMonCries)
+    setflag(FLAG_SYS_CTRL_OBJ_DELETE)
+    multi_fixed_wild(PARTNER_CHARLOTTE)
+    clearflag(FLAG_SYS_CTRL_OBJ_DELETE)
+    specialvar(VAR_RESULT, GetBattleOutcome)
+    goto_if_eq(VAR_RESULT,B_OUTCOME_WON,IGuessWeShouldBeNiceNow_ClearBossPokemon_Script)
     release
-        end
+    end
 }
 
 script IGuessWeShouldBeNiceNow_ReadyPlayer_Dialogue {
     lock
-            applymovement(CHARLOTTE,Common_Movement_FaceUp)
+            applymovement(LOCALID_LANJINGTUNNEL_CHARLOTTE,Common_Movement_FaceUp)
     waitmovement(0)
     release
     end
 }
 
 script IGuessWeShouldBeNiceNow_ClearBossPokemon_Script {
-        setvar(VAR_ROBINWILLIAMSTUNNEL_STATE,FRANK_BOSS_DEFEATED)
+        setvar(VAR_LANJINGTUNNEL_STATE,FRANK_BOSS_DEFEATED)
     lock
         closemessage
-        fadescreenswapbuffers(FADE_TO_BLACK)
-        removeobject(BOSSPKMNA)
-        removeobject(BOSSPKMNB)
-        removeobject(BOSSPKMNC)
-        fadescreenswapbuffers(FADE_FROM_BLACK)
+        fadescreen(FADE_TO_BLACK)
+        removeobject(LOCALID_LANJINGTUNNEL_FRANK_LEAD_MON)
+        removeobject(LOCALID_LANJINGTUNNEL_FRANK_PARTNER_MON)
+        fadescreen(FADE_FROM_BLACK)
         goto(IGuessWeShouldBeNiceNow_PostBoss_Dialogue)
 }
 
 script IGuessWeShouldBeNiceNow_PostBoss_Dialogue {
-    applymovement(CHARLOTTE,Common_Movement_FaceLeft)
+        setvar(VAR_ESPULEE_OUTSKIRTS_STATE,LANJINGTUNNEL_PUZZLES_SOLVED)
+    moveobjecttocoords(LOCALID_LANJINGTUNNEL_CHARLOTTE,9,6,DIR_WEST)
     applymovement(PLAYER,Common_Movement_FaceRight)
+    waitmovement(LOCALID_LANJINGTUNNEL_CHARLOTTE)
         msgbox(format("Okay, I'm starting to understand the training now…A little."),,SPEAKER_CHARLOTTE)
 
         msgbox(format("What am I missing?"),MSGBOX_DEFAULT,SPEAKER_ALICIA)
@@ -213,98 +215,80 @@ script IGuessWeShouldBeNiceNow_PostBoss_Dialogue {
         msgbox(format("Or, trying at least. I'll grab this…"),,SPEAKER_CHARLOTTE)
                 closemessage
 
-        applymovement(CHARLOTTE, moves(walk_up * 2, walk_in_place_faster_up, step_end))
-        waitmovement(0)
+        moveobjecttocoords(LOCALID_LANJINGTUNNEL_CHARLOTTE,8,4,DIR_NORTH)
         applymovement(PLAYER,Common_Movement_FaceUp)
-        waitmovement(0)
-        removeobject(4)
+        waitmovement(LOCALID_LANJINGTUNNEL_CHARLOTTE)
+        removeobject(LOCALID_LANJINGTUNNEL_FRANK_JOURNAL)
+        buffermapname(STR_VAR_1,MAP_LEAVERRA_FOREST)
+        msgbox(format("There's a note on the the back cover."),,SPEAKER_CHARLOTTE)
+        msgbox(format("“Bring to the deepest part of {STR_VAR_1}.”"),,SPEAKER_CHARLOTTE)
 
-        msgbox(format("Says on the back cover, “Bring to the deepest part of LeaverraForest."),,SPEAKER_CHARLOTTE)
+        applymovement(LOCALID_LANJINGTUNNEL_CHARLOTTE, moves(face_left, delay_16, delay_16, delay_16, face_right, delay_16, delay_16, delay_16, face_down, step_end))
+        waitmovement(LOCALID_LANJINGTUNNEL_CHARLOTTE)
 
-        applymovement(CHARLOTTE, moves(face_left, delay_16, delay_16, delay_16, face_right, delay_16, delay_16, delay_16, face_down, step_end))
-        waitmovement(0)
-
-        buffermapname(STR_VAR_1,MAP_ESPULEE_OUTSKIRTS)
-        msgbox(format("Whew, that was exhausting. How about we crash at my place nearby in {STR_VAR_1} and then tackle the forest tomorrow?"),MSGBOX_YESNO,SPEAKER_CHARLOTTE)
-        setvar(VAR_ESPULEE_OUTSKIRTS_STATE,ROBINWILLIAMSTUNNEL_PUZZLES_SOLVED)
-
-        if (var(VAR_RESULT) == YES) {
-            msgbox(format("Great, see you in EspuleeOutskirts!"),,SPEAKER_CHARLOTTE)
-        } else {
-            msgbox(format("Well, the challenges need both of us… and I'm tired. So I'm going to crash - you're welcome to try LeaverraForest by yourself though."),,SPEAKER_CHARLOTTE)
-        }
+        buffermapname(STR_VAR_1,MAP_LANJING_TUNNEL)
+        msgbox(format("{PLAYER}, I saw something interesing back there - I'll meet you at the exit of {STR_VAR_1}, okay?"),,SPEAKER_CHARLOTTE)
         closemessage
 
-        applymovement(CHARLOTTE, moves(walk_down * 7, step_end))
-        waitmovement(0)
-        removeobject(CHARLOTTE)
+        moveobjecttocoords(LOCALID_LANJINGTUNNEL_CHARLOTTE,8,12,DIR_SOUTH)
+        waitmovement(LOCALID_LANJINGTUNNEL_CHARLOTTE)
+        removeobject(LOCALID_LANJINGTUNNEL_CHARLOTTE)
         call(TryAutoSave)
         release
         end
 }
 
-script IGuessWeShouldBeNiceNow_HidePopup_Script{
-    if (var(VAR_ESPULEE_OUTSKIRTS_STATE) == ROBINWILLIAMSTUNNEL_PUZZLES_SOLVED){
-        call(EspuleeOutskirts_HideMapNamePopup_Script)
-    }
-}
-
 script IGuessWeShouldBeNiceNow_ExitCave_Script {
     lock
     setvar(VAR_ESPULEE_OUTSKIRTS_STATE,CHARLOTTE_INVITED_KOMALACABIN)
-    playse(SE_EXIT)
-    waitse
-    clearflag(FLAG_TEMP_3)
-    addobject(CHARLOTTE)
-    applymovement(PLAYER,Common_Movement_WalkRight)
-    applymovement(CHARLOTTE, moves(walk_down * 2, walk_right * 2, walk_up, face_left, step_end))
-    waitmovement(0)
+    spawnobject(OBJ_EVENT_GFX_CHARLOTTE,LOCALID_ESPULEE_CHARLOTTE,29,8,MOVEMENT_TYPE_FACE_DOWN,3)
+    msgbox(format("Cool, perfect timing."),,SPEAKER_CHARLOTTE)
+    closemessage
+    moveobjecttocoords(PLAYER,29,15,DIR_NORTH)
+    delay(16)
+    moveobjecttocoords(LOCALID_ESPULEE_CHARLOTTE,29,14,DIR_SOUTH)
+    waitmovement(LOCALID_ESPULEE_CHARLOTTE)
     goto(IGuessWeShouldBeNiceNow_End_Dialogue)
 }
 
-script IGuessWeShouldBeNiceNow_End_Dialogue {
-        setvar(VAR_ESPULEE_OUTSKIRTS_STATE,CHARLOTTE_STUDYING)
+script IGuessWeShouldBeNiceNow_End_Dialogue
+{
+    setvar(VAR_ESPULEE_OUTSKIRTS_STATE,CHARLOTTE_STUDYING)
+    msgbox(format("What took you so long? You're usually in front."),MSGBOX_DEFAULT,SPEAKER_ALICIA)
 
-        msgbox(format("Cool, perfect timing."),,SPEAKER_CHARLOTTE)
+    msgbox(format("I spotted an interesting Pokémon while we were working on the puzzles, so I went back and caught it! It was actually my first time catching something."),,SPEAKER_CHARLOTTE)
 
-        msgbox(format("What took you so long? You're usually in front."),MSGBOX_DEFAULT,SPEAKER_ALICIA)
+    msgbox(format("Wait, what?"),MSGBOX_DEFAULT,SPEAKER_ALICIA)
 
-        msgbox(format("I spotted an interesting Pokémon while we were working on the puzzles, so I went back and caught it! It was actually my first time catching something."),,SPEAKER_CHARLOTTE)
+    msgbox(format("All of my Pokémon are normally bred in Unova and sent to me. But I wanted to try raising one from scratch, just to see how it compares."),,SPEAKER_CHARLOTTE)
 
-        msgbox(format("Wait, what?"),MSGBOX_DEFAULT,SPEAKER_ALICIA)
+    msgbox(format("I didn't know you could DO that."),MSGBOX_DEFAULT,SPEAKER_ALICIA,TAIL_THOUGHT,EMOTE_SHOCK)
+    msgbox(format("Oh, well… congrats!"),MSGBOX_DEFAULT,SPEAKER_ALICIA)
 
-        msgbox(format("All of my Pokémon are normally bred in Unova and sent to me. But I wanted to try raising one from scratch, just to see how it compares."),,SPEAKER_CHARLOTTE)
+    buffermapname(STR_VAR_1,MAP_ESPULEE_OUTSKIRTS)
+    msgbox(format("Daddy owns a KomalaCabin in {STR_VAR_1}. I'll have him kick out the people that are staying there, so it should be good for us now."),,SPEAKER_CHARLOTTE)
 
-        msgbox(format("(I didn't know you could DO that.) Oh, well… congrats!"),MSGBOX_DEFAULT,SPEAKER_ALICIA)
+    msgbox(format("Wait what? I thought SharpRise Capital-"),MSGBOX_DEFAULT,SPEAKER_ALICIA)
 
-        msgbox(format("Daddy owns a KomalaCabin out here. I called him earlier and had him kick out the people that were staying there, so it should be good for us now."),,SPEAKER_CHARLOTTE)
+    msgbox(format("Yeah, Daddy's place is way nicer than some motel or whatever."),,SPEAKER_CHARLOTTE)
+            closemessage
 
-        msgbox(format("Wait what? I thought SharpRise Capital-"),MSGBOX_DEFAULT,SPEAKER_ALICIA)
+    applymovement(LOCALID_ESPULEE_CHARLOTTE, moves(face_right, delay_16, delay_16, face_left, step_end))
+    waitmovement(LOCALID_ESPULEE_CHARLOTTE)
+    msgbox(format("I'm actually going to go study for the Championship... but the door will be open. Its on the north end of town."),,SPEAKER_CHARLOTTE)
+    closemessage
 
-        msgbox(format("Yeah, Daddy's place is way nicer than some motel or whatever."),,SPEAKER_CHARLOTTE)
-                closemessage
-
-        applymovement(CHARLOTTE, moves(face_right, delay_16, delay_16, face_left, step_end))
-        waitmovement(0)
-
-        msgbox(format("I'm actually going to go study for the Championship... but the door will be open. Its on the north end of town."),,SPEAKER_CHARLOTTE)
-                closemessage
-
-        applymovement(CHARLOTTE, moves(walk_right * 3, walk_up * 6, step_end))
-        waitmovement(CHARLOTTE)
-        removeobject(CHARLOTTE)
-
-        clearflag(FLAG_HIDE_MAP_NAME_POPUP)
-        fadeblackandsetremovewarpfadeflag
-        warpsilent(MAP_ESPULEE_OUTSKIRTS,6,33)
-		waitstate
-        release
-        end
+    moveobjecttocoords(LOCALID_ESPULEE_CHARLOTTE,29,16,DIR_SOUTH)
+    waitmovement(LOCALID_ESPULEE_CHARLOTTE)
+    playse(SE_EXIT)
+    removeobject(LOCALID_ESPULEE_CHARLOTTE)
+    waitse
+    release
+    end
 }
 
 script IGuessWeShouldBeNice_AddNotesToTable_Script
 {
-
 	if (var(VAR_ESPULEE_OUTSKIRTS_STATE) < CHARLOTTE_STUDYING)
 	{
 		return
@@ -317,12 +301,12 @@ script IGuessWeShouldBeNiceNow_CharlotteRentalVisibility_Script
 
 	if (var(VAR_ESPULEE_OUTSKIRTS_STATE) < CHARLOTTE_INVITED_KOMALACABIN)
 	{
-		setflag(FLAG_HIDE_CHARLOTTE)
+        setobjectflagfromlocalid(LOCALID_KOMALACABIN_CHARLOTTE)
 	}
 
 	if (var(VAR_LEAVERRA_FOREST_STATE) > 0)
 	{
-		setflag(FLAG_HIDE_CHARLOTTE)
+        setobjectflagfromlocalid(LOCALID_KOMALACABIN_CHARLOTTE)
 	}
 }
 
@@ -351,14 +335,14 @@ script IGuessWeShoudlBeNiceNow_Shorttermrental_Dialogue
 	msgbox(format("There was never any doubt that I was going to get to this point - now to just finish the job."),,SPEAKER_CHARLOTTE)
 	msgbox(format("The dossiers on the far side of the table are ones I'm done with. You can read them if you want."),,SPEAKER_CHARLOTTE)
 	closemessage
-	applymovement(CHARLOTTE,Common_Movement_FaceLeft)
-	waitmovement(CHARLOTTE)
+	applymovement(LOCALID_KOMALACABIN_CHARLOTTE,Common_Movement_FaceLeft)
+	waitmovement(LOCALID_KOMALACABIN_CHARLOTTE)
 	delay(30)
-	applymovement(CHARLOTTE,Common_Movement_FaceUp)
+	applymovement(LOCALID_KOMALACABIN_CHARLOTTE,Common_Movement_FaceUp)
 	msgbox(format("Oh, and the interviews that we did before the League started are playing on the TV are there, if you wanted to watch."),,SPEAKER_CHARLOTTE)
 	closemessage
-	applymovement(CHARLOTTE,Common_Movement_FaceLeft)
-	waitmovement(CHARLOTTE)
+	applymovement(LOCALID_KOMALACABIN_CHARLOTTE,Common_Movement_FaceLeft)
+	waitmovement(LOCALID_KOMALACABIN_CHARLOTTE)
 	setvar(VAR_ESPULEE_OUTSKIRTS_STATE,CHARLOTTE_DEEP_STUDYING)
 	release
 	end
