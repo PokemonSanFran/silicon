@@ -297,9 +297,9 @@ script VSGarbodor_Negotiating_Dialogue
     msgbox(format("Now, I think you two should head back to the Compound and get some rest."),,SPEAKER_LUCREZIA)
     closemessage
 
-    moveobjecttocoords(LOCALID_ROUTE2_LUCREZIA,13,21,DIR_SOUTH)
+    moveobjecttocoords(LOCALID_ROUTE2_LUCREZIA,12,21,DIR_SOUTH)
     delay(16)
-    moveobjecttocoords(LOCALID_ROUTE2_OLIVER,13,20,DIR_SOUTH)
+    moveobjecttocoords(LOCALID_ROUTE2_OLIVER,12,20,DIR_SOUTH)
     delay(16)
     moveobjecttocoords(LOCALID_ROUTE2_CHARLOTTE,20,21,DIR_SOUTH)
     delay(16)
