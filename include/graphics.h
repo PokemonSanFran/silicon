@@ -109,7 +109,6 @@ extern const u16 gPokeblockGold_Pal[];
 extern const u32 gPokeblock_Gfx[];
 
 extern const u32 gItemIcon_QuestionMark[];
-extern const u32 gItemIcon_NoItem[]; // siliconMerge
 extern const u16 gItemIconPalette_QuestionMark[];
 
 // Decorations
