@@ -2522,13 +2522,13 @@ bool8 ObjectMovingOnRockStairs(struct ObjectEvent *objectEvent, enum Direction d
     // End pathfinder
         s16 x = objectEvent->currentCoords.x;
         s16 y = objectEvent->currentCoords.y;
+    // Start pathfinder
         MoveCoords(DIR_SOUTH, &x, &y);
         nextBehavior = MapGridGetMetatileBehaviorAt(x,y);
     }
     return ObjectMovingOnRockStairsWithBehaviors(objectEvent, direction, objectEvent->currentMetatileBehavior, nextBehavior);
 }
 
-// Start pathfinder
 bool8 ObjectMovingOnRockStairsWithBehaviors(struct ObjectEvent *objectEvent, u8 direction,  u8 currentBehavior, u8 nextBehavior)
 {
     #if SLOW_MOVEMENT_ON_STAIRS == TRUE

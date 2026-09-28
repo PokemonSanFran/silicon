@@ -204,8 +204,11 @@ u8 GetWalkInPlaceNormalMovementAction(u32);
 u8 GetWalkInPlaceSlowMovementAction(u32);
 enum Collision GetCollisionAtCoords(struct ObjectEvent *objectEvent, s16 x, s16 y, enum Direction dir);
 // Start pathfinder
+// bool8 IsMetatileDirectionallyImpassable(struct ObjectEvent *objectEvent, s16 x, s16 y, enum Direction direction);
 //u32 GetObjectObjectCollidesWith(struct ObjectEvent *objectEvent, s16 x, s16 y, bool32 addCoords);
+enum Collision GetNodeCollisionAtCoords(struct ObjectEvent *objectEvent, s16 x, s16 y, u8 elevation, enum Direction dir, u8 currentBehavior, u8 nextBehavior);
 u32 GetObjectObjectCollidesWith(struct ObjectEvent *objectEvent, s16 x, s16 y, u8 elevation, bool32 addCoords);
+bool8 IsMetatileDirectionallyImpassable(struct ObjectEvent *objectEvent, u8 nextBehavior, enum Direction direction);
 // End pathfinder
 void MoveCoords(enum Direction direction, s16 *x, s16 *y);
 bool8 ObjectEventIsHeldMovementActive(struct ObjectEvent *objectEvent);
@@ -270,6 +273,7 @@ u8 GetMoveDirectionFastAnimNum(enum Direction direction);
 u8 GetMoveDirectionFasterAnimNum(enum Direction direction);
 u8 GetMoveDirectionFastestAnimNum(enum Direction direction);
 enum Direction GetLedgeJumpDirection(s16 x, s16 y, enum Direction direction);
+enum Direction GetLedgeJumpDirectionWithBehavior(enum Direction direction, u8 nextBehavior); // pathfinder
 void CameraObjectSetFollowedSpriteId(u8 objectId);
 void UpdateObjectEventSpriteInvisibility(struct Sprite *sprite, bool8 invisible);
 s16 GetFigure8XOffset(s16 idx);
@@ -620,10 +624,6 @@ u8 MovementType_OverworldWildEncounter_Despawn_Step8(struct ObjectEvent *objectE
 u8 MovementType_OverworldWildEncounter_Despawn_Step10(struct ObjectEvent *objectEvent, struct Sprite *sprite);
 u8 MovementType_OverworldWildEncounter_Despawn_Step11(struct ObjectEvent *objectEvent, struct Sprite *sprite);
 
-// Start pathfinder
-u8 GetCollisionWithBehaviorsAtCoords(struct ObjectEvent *objectEvent, s16 x, s16 y, u8 elevation, u32 dir, u8 currentBehavior, u8 nextBehavior);
-u8 GetLedgeJumpDirectionWithBehavior(enum Direction direction, u8 nextBehavior);
-// End pathfinder
 // Start storyActionItems
 void Task_ObjectTransformation(u8 taskId);
 void TransformObjectByLocalIdIntoGraphicsId(u32 localId, u32 graphicsId);

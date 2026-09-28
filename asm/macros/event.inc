@@ -3680,7 +3680,7 @@
 	.endm
 
 @ Start pathfinder
-  @ Creates a movement script to the given coords by using Weighted A*.
+	@ Creates a movement script to the given coords by using Weighted A*.
 	@ This is meant to be used to remove branching in scripts,
 	@ since the algorithm can be slow.
 	.macro moveobjecttocoords localId:req, x:req, y:req, facingDirection:req, speed=1, maxnodes=256

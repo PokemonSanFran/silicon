@@ -1633,7 +1633,7 @@ static void Task_OWEApproachForBattle(u8 taskId)
             MoveCoords(OWE->movementDirection, &x, &y);
 // Start pathfinder
             //collidingObject = GetObjectObjectCollidesWith(OWE, x, y, FALSE);
-            collidingObject = GetObjectObjectCollidesWith(OWE, x, y, followerNPC->currentElevation, FALSE);
+            collidingObject = GetObjectObjectCollidesWith(OWE, x, y, OWE->currentElevation, FALSE);
 // End pathfinder
 
             if (collidingObject == GetObjectEventIdByLocalId(followerMon->localId) && followerMon != NULL && !followerMon->invisible)
