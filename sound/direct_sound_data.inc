@@ -10781,7 +10781,7 @@ crown_xyloc6:
     .align 2
 crown_xyloc7:
 	.incbin "sound/direct_sound_samples/crown_xyloc7.bin"
-@ Start pathfinder
+@ Start phenomenon
 
 	.align 2
 DirectSoundWaveData_se_phen_grass:
@@ -10798,4 +10798,4 @@ DirectSoundWaveData_se_phen_bridge:
 	.align 2
 DirectSoundWaveData_se_phen_cave:
 	.incbin "sound/direct_sound_samples/se_phen_cave.bin"
-@ End pathfinder
+@ End phenomenon

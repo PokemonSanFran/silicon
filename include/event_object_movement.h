@@ -629,5 +629,5 @@ void Task_ObjectTransformation(u8 taskId);
 void TransformObjectByLocalIdIntoGraphicsId(u32 localId, u32 graphicsId);
 // End storyActionItems
 u32 GetObjectFlagFromLocalId(u32 localId); // siliconQuests
-u16 GetCurrentDistanceFromPlayer(u8 x, u8 y); // pathfinder
+u16 GetCurrentDistanceFromPlayer(u8 x, u8 y); // phenomenon
 #endif //GUARD_EVENT_OBJECT_MOVEMENT_H

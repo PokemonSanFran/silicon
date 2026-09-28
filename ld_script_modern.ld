@@ -1,9 +1,9 @@
 ENTRY(Start)
 
-/* Start pathfinder */
+/* Start phenomenon */
 /* gNumMusicPlayers = 4; */
 gNumMusicPlayers = 5;
-/* End pathfinder */
+/* End phenomenon */
 gMaxLines = 0;
 gInitialMainCB2 = CB2_InitCopyrightScreenAfterBootup;
 

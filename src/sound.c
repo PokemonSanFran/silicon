@@ -587,7 +587,7 @@ void PlaySE(u16 songNum)
         m4aSongNumStart(songNum);
 }
 
-// Start pathfinder
+// Start phenomenon
 void PlaySE4WithVolume(u16 songNum, u16 volume)
 {
 	if (AreSoundEffectsMuted())
@@ -605,7 +605,7 @@ void PlaySE4WithVolume(u16 songNum, u16 volume)
         m4aMPlayVolumeControl(&gMPlayInfo_SE4, TRACKS_ALL, volume);
     }
 }
-// End pathfinder
+// End phenomenon
 
 void PlaySE12WithPanning(u16 songNum, s8 pan)
 {

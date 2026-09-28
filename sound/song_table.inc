@@ -2,7 +2,7 @@
 	.equiv MUSIC_PLAYER_SE1,1
 	.equiv MUSIC_PLAYER_SE2,2
 	.equiv MUSIC_PLAYER_SE3,3
-	.equiv MUSIC_PLAYER_SE4,4 @ pathfinder
+	.equiv MUSIC_PLAYER_SE4,4 @ phenomenon
  
 	.align 2
 
@@ -277,12 +277,12 @@ gSongTable::
 	song se_pike_curtain_close, MUSIC_PLAYER_SE1, 1
 	song se_pike_curtain_open, MUSIC_PLAYER_SE1, 1
 	song se_sudowoodo_shake, MUSIC_PLAYER_SE1, 1
-  @ Start pathfinder
+  @ Start phenomenon
 	song se_shaking_grass, MUSIC_PLAYER_SE4, 4
 	song se_rippling_water, MUSIC_PLAYER_SE4, 4
 	song se_flapping_wings, MUSIC_PLAYER_SE4, 4
 	song se_cave_dust, MUSIC_PLAYER_SE4, 4
-  @ End pathfinder
+  @ End phenomenon
 	song dummy_song_header, MUSIC_PLAYER_BGM, 0
 	song dummy_song_header, MUSIC_PLAYER_BGM, 0
 	song dummy_song_header, MUSIC_PLAYER_BGM, 0
