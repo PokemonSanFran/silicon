@@ -3,6 +3,11 @@ script RPS_Script_HideMontyopp
     setobjectflagfromlocalid(LOCALID_RPS_MONTYOPP)
 }
 
+script RPS_Script_HideMonty
+{
+    setobjectflagfromlocalid(LOCALID_RPS_MONTY)
+}
+
 script RPS_Script_SaveAndDeleteParty
 {
     special(SavePlayerParty)
