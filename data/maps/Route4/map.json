@@ -32,6 +32,11 @@
       "map": "MAP_ROUTE_D",
       "offset": -44,
       "direction": "up"
+    },
+    {
+      "map": "MAP_NONGYU_BRIDGE",
+      "offset": 27,
+      "direction": "right"
     }
   ],
   "object_events": [

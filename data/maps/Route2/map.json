@@ -19,11 +19,6 @@
       "direction": "up"
     },
     {
-      "map": "MAP_NONGYU_BRIDGE",
-      "offset": 2,
-      "direction": "right"
-    },
-    {
       "map": "MAP_CURENO_PORT",
       "offset": -8,
       "direction": "down"
@@ -33,7 +28,7 @@
     {
       "graphics_id": "OBJ_EVENT_GFX_CAMERAMAN",
       "x": 15,
-      "y": 37,
+      "y": 24,
       "elevation": 3,
       "movement_type": "MOVEMENT_TYPE_FACE_RIGHT",
       "movement_range_x": 0,
@@ -47,7 +42,7 @@
       "local_id": "LOCALID_ROUTE2_CROWD_C",
       "graphics_id": "OBJ_EVENT_GFX_REPORTER_F",
       "x": 16,
-      "y": 37,
+      "y": 24,
       "elevation": 3,
       "movement_type": "MOVEMENT_TYPE_FACE_LEFT",
       "movement_range_x": 0,
@@ -61,7 +56,7 @@
       "local_id": "LOCALID_ROUTE2_CROWD_A",
       "graphics_id": "OBJ_EVENT_GFX_MAN_1",
       "x": 16,
-      "y": 35,
+      "y": 22,
       "elevation": 3,
       "movement_type": "MOVEMENT_TYPE_WANDER_LEFT_AND_RIGHT",
       "movement_range_x": 0,
@@ -74,7 +69,7 @@
     {
       "graphics_id": "OBJ_EVENT_GFX_MAN_2",
       "x": 5,
-      "y": 22,
+      "y": 9,
       "elevation": 3,
       "movement_type": "MOVEMENT_TYPE_FACE_UP",
       "movement_range_x": 0,
@@ -87,7 +82,7 @@
     {
       "graphics_id": "OBJ_EVENT_GFX_FISHERMAN",
       "x": 7,
-      "y": 25,
+      "y": 12,
       "elevation": 3,
       "movement_type": "MOVEMENT_TYPE_WANDER_AROUND",
       "movement_range_x": 0,
@@ -100,7 +95,7 @@
     {
       "graphics_id": "OBJ_EVENT_GFX_CAMPER",
       "x": 8,
-      "y": 26,
+      "y": 13,
       "elevation": 3,
       "movement_type": "MOVEMENT_TYPE_WANDER_AROUND",
       "movement_range_x": 0,
@@ -113,7 +108,7 @@
     {
       "graphics_id": "OBJ_EVENT_GFX_BEAUTY",
       "x": 9,
-      "y": 27,
+      "y": 14,
       "elevation": 3,
       "movement_type": "MOVEMENT_TYPE_WANDER_AROUND",
       "movement_range_x": 0,
@@ -126,7 +121,7 @@
     {
       "graphics_id": "OBJ_EVENT_GFX_GIRL_1",
       "x": 10,
-      "y": 28,
+      "y": 15,
       "elevation": 3,
       "movement_type": "MOVEMENT_TYPE_WANDER_AROUND",
       "movement_range_x": 0,
@@ -139,7 +134,7 @@
     {
       "graphics_id": "OBJ_EVENT_GFX_MYSTERY_GIFT_MAN",
       "x": 24,
-      "y": 29,
+      "y": 16,
       "elevation": 3,
       "movement_type": "MOVEMENT_TYPE_NONE",
       "movement_range_x": 0,
@@ -152,7 +147,7 @@
     {
       "graphics_id": "OBJ_EVENT_GFX_REPORTER_M",
       "x": 24,
-      "y": 36,
+      "y": 23,
       "elevation": 3,
       "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
       "movement_range_x": 0,
@@ -165,7 +160,7 @@
     {
       "graphics_id": "OBJ_EVENT_GFX_CAMERAMAN",
       "x": 24,
-      "y": 37,
+      "y": 24,
       "elevation": 3,
       "movement_type": "MOVEMENT_TYPE_FACE_UP",
       "movement_range_x": 0,
@@ -179,7 +174,7 @@
       "local_id": "LOCALID_ROUTE2_CROWD_B",
       "graphics_id": "OBJ_EVENT_GFX_WOMAN_3",
       "x": 27,
-      "y": 36,
+      "y": 23,
       "elevation": 3,
       "movement_type": "MOVEMENT_TYPE_WANDER_LEFT_AND_RIGHT",
       "movement_range_x": 0,
@@ -192,7 +187,7 @@
     {
       "graphics_id": "OBJ_EVENT_GFX_GENTLEMAN",
       "x": 7,
-      "y": 32,
+      "y": 19,
       "elevation": 0,
       "movement_type": "MOVEMENT_TYPE_NONE",
       "movement_range_x": 0,
@@ -205,7 +200,7 @@
     {
       "graphics_id": "OBJ_EVENT_GFX_GENTLEMAN",
       "x": 12,
-      "y": 32,
+      "y": 19,
       "elevation": 0,
       "movement_type": "MOVEMENT_TYPE_NONE",
       "movement_range_x": 0,
@@ -218,7 +213,7 @@
     {
       "graphics_id": "OBJ_EVENT_GFX_BERRY_TREE",
       "x": 6,
-      "y": 34,
+      "y": 21,
       "elevation": 3,
       "movement_type": "MOVEMENT_TYPE_BERRY_TREE_GROWTH",
       "movement_range_x": 0,
@@ -231,7 +226,7 @@
     {
       "graphics_id": "OBJ_EVENT_GFX_BERRY_TREE",
       "x": 6,
-      "y": 36,
+      "y": 23,
       "elevation": 3,
       "movement_type": "MOVEMENT_TYPE_BERRY_TREE_GROWTH",
       "movement_range_x": 0,
@@ -245,7 +240,7 @@
       "local_id": "LOCALID_BODEGABURNOUTRESCUE_K",
       "graphics_id": "OBJ_EVENT_GFX_BODEGABURNOUTRESCUE_K",
       "x": 15,
-      "y": 26,
+      "y": 13,
       "elevation": 0,
       "movement_type": "MOVEMENT_TYPE_NONE",
       "movement_range_x": 0,
@@ -259,7 +254,7 @@
       "local_id": "LOCALID_DIGGINGTIMEMEMBERA",
       "graphics_id": "OBJ_EVENT_GFX_DIGGINGTIDEMEMBERA",
       "x": 12,
-      "y": 21,
+      "y": 8,
       "elevation": 0,
       "movement_type": "MOVEMENT_TYPE_LOOK_AROUND",
       "movement_range_x": 0,
@@ -273,21 +268,21 @@
   "warp_events": [
     {
       "x": 21,
-      "y": 31,
+      "y": 18,
       "elevation": 0,
       "dest_map": "MAP_SHARPRISE_STADIUM_CONSTRUCTION",
       "dest_warp_id": "0"
     },
     {
       "x": 21,
-      "y": 30,
+      "y": 17,
       "elevation": 0,
       "dest_map": "MAP_SHARPRISE_STADIUM_ENTRANCE",
       "dest_warp_id": "0"
     },
     {
       "x": 5,
-      "y": 31,
+      "y": 18,
       "elevation": 0,
       "dest_map": "MAP_ROUTE2_GROTTO",
       "dest_warp_id": "0"
@@ -298,7 +293,7 @@
     {
       "type": "sign",
       "x": 5,
-      "y": 30,
+      "y": 17,
       "elevation": 3,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
       "script": "Hiddengrotto_EnterGrotto_Dialogue"
@@ -306,7 +301,7 @@
     {
       "type": "sign",
       "x": 5,
-      "y": 29,
+      "y": 16,
       "elevation": 3,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
       "script": "Hiddengrotto_EnterGrotto_Dialogue"

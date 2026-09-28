@@ -19,14 +19,14 @@
       "direction": "right"
     },
     {
-      "map": "MAP_ROUTE2",
-      "offset": -2,
-      "direction": "left"
-    },
-    {
       "map": "MAP_ZENZU_ISLAND",
       "offset": 25,
       "direction": "up"
+    },
+    {
+      "map": "MAP_ROUTE4",
+      "offset": -27,
+      "direction": "left"
     }
   ],
   "object_events": [
