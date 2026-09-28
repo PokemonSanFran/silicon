@@ -12709,3 +12709,19 @@ bool8 MovementType_OverworldWildEncounter_Despawn_Step11(struct ObjectEvent *obj
 }
 
 #undef sDespawnTimer
+
+// Start pathfinder
+#define tPlayerX gObjectEvents[gPlayerAvatar.objectEventId].currentCoords.x
+#define tPlayerY gObjectEvents[gPlayerAvatar.objectEventId].currentCoords.y
+u16 GetCurrentDistanceFromPlayer(u8 x, u8 y)
+{
+    unsigned int xDistance, yDistance;
+
+    xDistance = abs(tPlayerX - x);
+    yDistance = abs(tPlayerY - y);
+
+    return max(xDistance, yDistance);
+}
+#undef tPlayerX
+#undef tPlayerY
+// End pathfinder

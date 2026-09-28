@@ -857,7 +857,7 @@ static void SetUpDexNavSearch(void)
         DexNavDrawIcons();
         DexNavUpdateSearchWindow(sDexNavSearchDataPtr->proximity, searchLevel);
     }
-    ClearAllPhenomenonData(); // phenomenon
+    ClearPhenomenonData(); // phenomenon
 
     gPlayerAvatar.creeping = TRUE;  //initialize as true in case mon appears beside you
     sDexNavSearchDataPtr->proximity = gSprites[gPlayerAvatar.spriteId].x;

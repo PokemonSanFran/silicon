@@ -273,7 +273,7 @@ static void Task_BattleStart(u8 taskId)
     case 0:
         if (!FldEffPoison_IsActive()) // is poison not active?
         {
-            ClearAllPhenomenonData(); // phenomenon
+            ClearPhenomenonData(); // phenomenon
             BattleTransition_StartOnField(tTransition);
             ClearMirageTowerPulseBlendEffect();
             tState++; // go to case 1.

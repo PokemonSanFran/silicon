@@ -10781,3 +10781,21 @@ crown_xyloc6:
     .align 2
 crown_xyloc7:
 	.incbin "sound/direct_sound_samples/crown_xyloc7.bin"
+@ Start pathfinder
+
+	.align 2
+DirectSoundWaveData_se_phen_grass:
+	.incbin "sound/direct_sound_samples/se_phen_grass.bin"
+
+	.align 2
+DirectSoundWaveData_se_phen_water:
+	.incbin "sound/direct_sound_samples/se_phen_water.bin"
+
+	.align 2
+DirectSoundWaveData_se_phen_bridge:
+	.incbin "sound/direct_sound_samples/se_phen_bridge.bin"
+
+	.align 2
+DirectSoundWaveData_se_phen_cave:
+	.incbin "sound/direct_sound_samples/se_phen_cave.bin"
+@ End pathfinder

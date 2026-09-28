@@ -1,6 +1,9 @@
 ENTRY(Start)
 
-gNumMusicPlayers = 4;
+/* Start pathfinder */
+/* gNumMusicPlayers = 4; */
+gNumMusicPlayers = 5;
+/* End pathfinder */
 gMaxLines = 0;
 gInitialMainCB2 = CB2_InitCopyrightScreenAfterBootup;
 

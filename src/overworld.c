@@ -1026,7 +1026,7 @@ void LoadMapFromCameraTransition(u8 mapGroup, u8 mapNum)
     WaterBerriesIfRaining(); // autoWater
     ResetFieldTasksArgs();
     RunOnResumeMapScript();
-    ClearAllPhenomenonData(); // phenomenon
+    ClearPhenomenonData(); // phenomenon
 
     // Start mapPreviews
     if (ShouldRunOutdoorMapPreview())
@@ -2796,7 +2796,7 @@ static void ResumeMap(bool32 a1)
     WaterBerriesIfRaining(); // autoWater
     RunOnResumeMapScript();
     TryStartMirageTowerPulseBlendEffect();
-    ClearAllPhenomenonData(); // phenomenon
+    ClearPhenomenonData(); // phenomenon
 }
 
 static void InitObjectEventsLink(void)
