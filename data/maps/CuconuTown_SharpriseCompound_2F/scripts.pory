@@ -84,3 +84,34 @@ script BedScript_AdvanceStory_Script
         end
 }
 
+script CuconuTown_SharpriseCompound_2F_Dialogue_Light
+{
+    lock
+    msgbox(format("Maybe I should turn this on."), MSGBOX_DEFAULT)
+    closemessage
+    delay(8)
+    playse(SE_CLICK)
+    waitse
+    delay(16)
+    playse(SE_M_MEGA_KICK)  
+    fadescreen(FADE_TO_WHITE)
+    waitse
+    playse(SE_CLICK)
+    waitse
+    delay(8)    
+    fadescreen(FADE_FROM_WHITE)
+    delay(16)
+    msgbox(format("Too bright!"), MSGBOX_DEFAULT)
+    closemessage
+    release
+    end
+
+}
+
+script CuconuTown_SharpriseCompound_2F_PC_Placeholder
+{
+    msgbox(format("PC placeholder."))
+    closemessage
+    release
+    end
+}

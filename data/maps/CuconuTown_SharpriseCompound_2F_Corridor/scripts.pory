@@ -1,0 +1,21 @@
+mapscripts CuconuTown_SharpriseCompound_2F_Corridor_MapScripts
+{
+}
+
+script CuconuTown_SharpriseCompound_2F_Dialogue_Statue
+{
+	lock
+	msgbox(format("A statue of a regal-looking Pokémon."), MSGBOX_DEFAULT)
+	closemessage
+	release
+	end
+}
+
+script CuconuTown_SharpriseCompound_2F_Dialogue_Bookcase
+{
+	lock
+	msgbox(format("It's full of book about Pokémon.\nAnd also, about how to invest in cryptocurrencies."), MSGBOX_DEFAULT)
+	closemessage
+	release
+	end
+}

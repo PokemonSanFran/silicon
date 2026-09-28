@@ -1,8 +1,10 @@
 script Swagbag_ObjectSetUp {
-    turnobject(SHARPRISE_COMPOUND_1F_OLIVER, DIR_WEST)
     setobjectmovementtype(SHARPRISE_COMPOUND_1F_CHARLOTTE,MOVEMENT_TYPE_FACE_RIGHT)
-    setobjectxy(SHARPRISE_COMPOUND_1F_CHARLOTTE,6,4)
-    setobjectxyperm(SHARPRISE_COMPOUND_1F_CHARLOTTE,6,4)
+    setobjectmovementtype(SHARPRISE_COMPOUND_1F_OLIVER,MOVEMENT_TYPE_FACE_LEFT)
+    setobjectxy(SHARPRISE_COMPOUND_1F_CHARLOTTE,5,5)
+    setobjectxyperm(SHARPRISE_COMPOUND_1F_CHARLOTTE,5,5)
+    setobjectxy(SHARPRISE_COMPOUND_1F_OLIVER,6,5)
+    setobjectxyperm(SHARPRISE_COMPOUND_1F_OLIVER,6,5)
 }
 script Swagbag_IncrementState_Script{
     setvar(VAR_PLAYER_HOME_STATE,CHECKED_OUT_BEDROOM)
@@ -11,10 +13,10 @@ script Swagbag_IncrementState_Script{
 
 script swagbag_ObjectHide_Script
 {
-    setobjectmovementtype(SHARPRISE_COMPOUND_1F_OLIVER, MOVEMENT_TYPE_FACE_RIGHT)
-    turnobject(SHARPRISE_COMPOUND_1F_OLIVER,DIR_EAST)
-    setobjectxy(SHARPRISE_COMPOUND_1F_OLIVER,8,6)
-    setobjectxyperm(SHARPRISE_COMPOUND_1F_OLIVER,8,6)
+    setobjectmovementtype(SHARPRISE_COMPOUND_1F_OLIVER, MOVEMENT_TYPE_FACE_LEFT)
+    turnobject(SHARPRISE_COMPOUND_1F_OLIVER,DIR_WEST)
+    setobjectxy(SHARPRISE_COMPOUND_1F_OLIVER,10,6)
+    setobjectxyperm(SHARPRISE_COMPOUND_1F_OLIVER,10,6)
     setobjectflagfromlocalid(SHARPRISE_COMPOUND_1F_CHARLOTTE)
 }
 
@@ -24,16 +26,19 @@ script Swagbag_WelcomeToResido_Dialogue {
     setvar(VAR_PLAYER_HOME_STATE,POST_SWAGBAG)
     playse(SE_PIN)
     playbgm(MUS_RG_FOLLOW_ME,TRUE)
-    applymovement(SHARPRISE_COMPOUND_1F_OLIVER,Common_Movement_ExclamationMark)
+    applymovement(SHARPRISE_COMPOUND_1F_OLIVER, moves(emote_exclamation_mark, delay_16))
     waitmovement(0)
-    applymovement(SHARPRISE_COMPOUND_1F_OLIVER, moves(face_up, walk_up, delay_16, step_end))
+    special(SpawnCameraObject)
+    applymovement(LOCALID_CAMERA, moves(walk_down))
+    applymovement(SHARPRISE_COMPOUND_1F_OLIVER, moves(walk_up, delay_16, step_end))
+    waitmovement(SHARPRISE_COMPOUND_1F_OLIVER)
     msgbox(format("{PLAYER}! Welcome to Resido! How was your flight?"),,SPEAKER_OLIVER)
     reveal(REVEAL_OLIVER)
     msgbox(format("Great! The fancy car pickup from the airport was a surprise, but everything was super smooth, thanks!"),,SPEAKER_ALICIA)
     msgbox(format("Excellent. You've already seen the house, so we can skip the tour... I have some presents!"),,SPEAKER_OLIVER)
 
         closemessage
-        applymovement(SHARPRISE_COMPOUND_1F_CHARLOTTE, moves(walk_up * 2, face_down, step_end))
+        applymovement(SHARPRISE_COMPOUND_1F_CHARLOTTE, moves(walk_up*2, face_down, step_end))
         waitmovement(SHARPRISE_COMPOUND_1F_CHARLOTTE)
         goto(Swagbag_LeagueStipend_Dialogue)
         end
@@ -90,9 +95,10 @@ script Swagbag_DontLeaveCuconuTown_Dialogue {
         msgbox(format("{PLAYER}, feel free to explore {STR_VAR_1}. Just don't leave!"),,SPEAKER_OLIVER)
         msgbox(format("Got it. Thanks for all the help, Oliver! I'm still so stoked for the opportunity and the Challenge!"),,SPEAKER_ALICIA)
         closemessage
-
-        applymovement(SHARPRISE_COMPOUND_1F_OLIVER, moves(walk_down * 3, walk_right, step_end))
-        waitmovement(0)
+        applymovement(LOCALID_CAMERA, moves(walk_up))
+        applymovement(SHARPRISE_COMPOUND_1F_OLIVER, moves(walk_right * 4, walk_down*2, face_left, step_end))
+        waitmovement(SHARPRISE_COMPOUND_1F_OLIVER)
+        special(RemoveCameraObject)
         fadedefaultbgm
         startquest(QUEST_PLAYERSADVENTURE)
         endcutscene

@@ -2257,3 +2257,5 @@ EventScript_PalletTown_PlayersHouse_2F_TurnOnPC::
 	.include "data/maps/RegularIndoorTest/scripts.inc"
 
 	.include "data/maps/FancyIndoorTest/scripts.inc"
+
+	.include "data/maps/CuconuTown_SharpriseCompound_2F_Corridor/scripts.inc"

@@ -106,3 +106,40 @@ script CuconuTown_SharpriseCompound_1F_Dialogue_FavoriteFood
 	releaseall
 	end
 }
+
+
+script CuconuTown_SharpriseCompound_1F_Dialogue_FancyTV
+{
+	lock
+	msgbox(format("It's a flat-screen TV.\nFancy."), MSGBOX_DEFAULT)
+	closemessage
+	release
+	end
+}
+
+script CuconuTown_SharpriseCompound_1F_Dialogue_Fridge
+{
+	lock
+	msgbox(format("The fridge is well-stocked."), MSGBOX_DEFAULT)
+	closemessage
+	release
+	end
+}
+
+script CuconuTown_SharpriseCompound_1F_Dialogue_Sink
+{
+	lock
+	msgbox(format("I don't need to wash my hands right now."), MSGBOX_DEFAULT)
+	closemessage
+	release
+	end
+}
+
+script CuconuTown_SharpriseCompound_Dialogue_Bin
+{
+	lock
+	msgbox(format("Empty."), MSGBOX_DEFAULT)
+	closemessage
+	release
+	end
+}
