@@ -15,6 +15,7 @@
   "connections": null,
   "object_events": [
     {
+      "local_id": "LOCALID_SHARPRISE_CONSTRUCTION_TIDE_LEFT_A",
       "graphics_id": "OBJ_EVENT_GFX_COMRADE_6",
       "x": 5,
       "y": 6,
@@ -28,6 +29,7 @@
       "flag": "TRAINER_FLAGS_START+TRAINER_FAKEROCKET_A"
     },
     {
+      "local_id": "LOCALID_SHARPRISE_CONSTRUCTION_TIDE_LEFT_B",
       "graphics_id": "OBJ_EVENT_GFX_COMRADE_6",
       "x": 2,
       "y": 13,
@@ -41,6 +43,7 @@
       "flag": "TRAINER_FLAGS_START+TRAINER_FAKEROCKET_B"
     },
     {
+      "local_id": "LOCALID_SHARPRISE_CONSTRUCTION_TIDE_RIGHT_A",
       "graphics_id": "OBJ_EVENT_GFX_COMRADE_6",
       "x": 19,
       "y": 6,
@@ -54,6 +57,7 @@
       "flag": "TRAINER_FLAGS_START+TRAINER_FAKEROCKET_A"
     },
     {
+      "local_id": "LOCALID_SHARPRISE_CONSTRUCTION_TIDE_RIGHT_B",
       "graphics_id": "OBJ_EVENT_GFX_COMRADE_6",
       "x": 23,
       "y": 13,
@@ -67,19 +71,7 @@
       "flag": "TRAINER_FLAGS_START+TRAINER_FAKEROCKET_B"
     },
     {
-      "graphics_id": "OBJ_EVENT_MON+SPECIES_GARBODOR",
-      "x": 4,
-      "y": 5,
-      "elevation": 3,
-      "movement_type": "MOVEMENT_TYPE_NONE",
-      "movement_range_x": 0,
-      "movement_range_y": 0,
-      "trainer_type": "TRAINER_TYPE_NONE",
-      "trainer_sight_or_berry_tree_id": "0",
-      "script": "VS_Garbodor_CoreEncounter_Script",
-      "flag": "FLAG_DEFEATED_CONSTRUCTION_MON_B"
-    },
-    {
+      "local_id": "LOCALID_SHARPRISE_CONSTRUCTION_MON_LEFT_B",
       "graphics_id": "OBJ_EVENT_MON+SPECIES_GARBODOR",
       "x": 3,
       "y": 12,
@@ -90,9 +82,24 @@
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
       "script": "VS_Garbodor_CoreEncounter_Script",
+      "flag": "FLAG_DEFEATED_CONSTRUCTION_MON_B"
+    },
+    {
+      "local_id": "LOCALID_SHARPRISE_CONSTRUCTION_MON_LEFT_A",
+      "graphics_id": "OBJ_EVENT_MON+SPECIES_GARBODOR",
+      "x": 4,
+      "y": 5,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_NONE",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "VS_Garbodor_CoreEncounter_Script",
       "flag": "FLAG_DEFEATED_CONSTRUCTION_MON_A"
     },
     {
+      "local_id": "LOCALID_SHARPRISE_CONSTRUCTION_MON_RIGHT_B",
       "graphics_id": "OBJ_EVENT_MON+SPECIES_GARBODOR",
       "x": 22,
       "y": 12,
@@ -106,6 +113,7 @@
       "flag": "FLAG_DEFEATED_CONSTRUCTION_MON_A"
     },
     {
+      "local_id": "LOCALID_SHARPRISE_CONSTRUCTION_MON_RIGHT_A",
       "graphics_id": "OBJ_EVENT_MON+SPECIES_GARBODOR",
       "x": 18,
       "y": 5,
