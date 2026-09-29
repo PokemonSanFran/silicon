@@ -1,13 +1,11 @@
 const PLAYER = OBJ_EVENT_ID_PLAYER
-const CHARLOTTE = 1
-const OLIVER = 2
-const FLAG_HIDE_CHARLOTTE = FLAG_TEMP_1
-const FLAG_HIDE_OLIVER = FLAG_TEMP_2
 
 script TwoHoursAgo_ObjectSetUp
 {
+    setobjectxy(SHARPRISE_COMPOUND_1F_OLIVER,11,4)
+    setobjectxyperm(SHARPRISE_COMPOUND_1F_OLIVER,11,4)
     setobjectflagfromlocalid(SHARPRISE_COMPOUND_1F_CHARLOTTE)
-    setobjectmovementtype(OLIVER,MOVEMENT_TYPE_WANDER_AROUND)
+    setobjectmovementtype(SHARPRISE_COMPOUND_1F_OLIVER,MOVEMENT_TYPE_FACE_UP)
     special(GetNumberOfBadges)
     if (var(VAR_RESULT) > 0)
     {
@@ -37,9 +35,9 @@ script TwoHoursAgo_TheyreEager_Dialogue {
 script TwoHoursAgo_ExplainLeague_ObjectSetUp_Script {
         lock
         fadescreen(FADE_TO_BLACK)
-        setobjectxy(OLIVER, 4, 6)
-        turnobject(OLIVER, DIR_WEST)
-        setobjectnewmovementtype(OLIVER, MOVEMENT_TYPE_FACE_LEFT)
+        setobjectxy(SHARPRISE_COMPOUND_1F_OLIVER, 4, 6)
+        turnobject(SHARPRISE_COMPOUND_1F_OLIVER, DIR_WEST)
+        setobjectnewmovementtype(SHARPRISE_COMPOUND_1F_OLIVER, MOVEMENT_TYPE_FACE_LEFT)
         setobjectxy(PLAYER, 1, 6)
         turnobject(PLAYER, DIR_EAST)
         call(TwoHoursAgo_CameraToPlayer_Script)
@@ -78,7 +76,7 @@ script TwoHoursAgo_ExplainLeftovers_Dialouge
     msgbox(format("Your {STR_VAR_1} can hold those {STR_VAR_2} to restore HP during battle."),,SPEAKER_OLIVER,TAIL_TALK)
     msgbox(format("Now, you should get a move on! Don't let Charlotte get too far ahead of you!"),,SPEAKER_OLIVER,TAIL_TALK)
     closemessage
-    applymovement(OLIVER,moves(face_left))
-    waitmovement(OLIVER)
+    applymovement(SHARPRISE_COMPOUND_1F_OLIVER,moves(face_left))
+    waitmovement(SHARPRISE_COMPOUND_1F_OLIVER)
 }
 

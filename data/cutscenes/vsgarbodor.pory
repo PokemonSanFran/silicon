@@ -326,7 +326,7 @@ script VSGarbodor_Negotiating_Dialogue
         msgbox(format("Let's bounce."),,SPEAKER_CHARLOTTE)
         closemessage
         fadeblackandsetremovewarpfadeflag
-        warpsilent(MAP_CUCONU_TOWN_SHARPRISE_COMPOUND_1F, 7, 3)
+        warpsilent(MAP_CUCONU_TOWN_SHARPRISE_COMPOUND_1F, 6, 4)
         waitstate
     }
     release
@@ -346,18 +346,21 @@ script VSGarbodor_FlyWithoutPlayer_Script {
 
 script VSGarbodor_ReturnToTheCompound_ObjectSetUp
 {
-    setobjectxy(SHARPRISE_COMPOUND_1F_CHARLOTTE,7,2)
-    setobjectxyperm(SHARPRISE_COMPOUND_1F_CHARLOTTE,7,2)
+    setobjectxy(SHARPRISE_COMPOUND_1F_CHARLOTTE,6,3)
+    setobjectxyperm(SHARPRISE_COMPOUND_1F_CHARLOTTE,6,3)
     setobjectmovementtype(SHARPRISE_COMPOUND_1F_CHARLOTTE,MOVEMENT_ACTION_FACE_DOWN)
     setobjectflagfromlocalid(SHARPRISE_COMPOUND_1F_OLIVER)
+}
+
+script VSGarbodor_ReturnToTheCompound_Script_TurnPlayer
+{
+    turnobject(LOCALID_PLAYER,DIR_NORTH)
 }
 
 script VSGarbodor_ReturnToTheCompound_Dialogue
 {
     setvar(VAR_STORYLINE_STATE,STORY_NEED_SLEEP_BEFORE_FRANK)
-    moveobjecttocoords(PLAYER,7,3,DIR_NORTH)
-    applymovement(PLAYER,Common_Movement_FaceUp)
-    waitmovement(0)
+    moveobjecttocoords(PLAYER,6,4,DIR_NORTH)
     msgbox(format("I'm gonna get some sleep. Good shit on finishing your Badges. Can't wait to kick your ass at the Championship… whenever that is."),,SPEAKER_CHARLOTTE)
     msgbox(format("Heh, we'll see. Good night."),,SPEAKER_ALICIA)
     closemessage
