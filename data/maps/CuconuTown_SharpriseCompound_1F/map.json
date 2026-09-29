@@ -45,18 +45,20 @@
   ],
   "warp_events": [
     {
+      "warp_id": "WARP_ID_COMPOUND_TO_CUCONU_LEFT",
       "x": 5,
       "y": 9,
       "elevation": 0,
       "dest_map": "MAP_CUCONU_TOWN",
-      "dest_warp_id": "0"
+      "dest_warp_id": "WARP_ID_CUCONU_TO_COMPOUND"
     },
     {
+      "warp_id": "WARP_ID_COMPOUND_TO_CUCONU_RIGHT",
       "x": 6,
       "y": 9,
       "elevation": 0,
       "dest_map": "MAP_CUCONU_TOWN",
-      "dest_warp_id": "0"
+      "dest_warp_id": "WARP_ID_CUCONU_TO_COMPOUND"
     },
     {
       "x": 6,
@@ -66,18 +68,19 @@
       "dest_warp_id": "0"
     },
     {
+      "warp_id": "WARP_ID_COMPOUND_1F_TO_2F",
       "x": 6,
       "y": 2,
       "elevation": 0,
       "dest_map": "MAP_CUCONU_TOWN_SHARPRISE_COMPOUND_2F_CORRIDOR",
-      "dest_warp_id": "0"
+      "dest_warp_id": "WARP_ID_COMPOUND_2F_TO_1F"
     }
   ],
   "coord_events": [
     {
       "type": "trigger",
       "x": 5,
-      "y": 9,
+      "y": 8,
       "elevation": 0,
       "var": "VAR_PLAYER_HOME_STATE",
       "var_value": "2",
@@ -86,7 +89,7 @@
     {
       "type": "trigger",
       "x": 6,
-      "y": 9,
+      "y": 8,
       "elevation": 0,
       "var": "VAR_PLAYER_HOME_STATE",
       "var_value": "2",
