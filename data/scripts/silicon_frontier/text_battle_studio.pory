@@ -182,3 +182,79 @@ script BattleStudio_Dialogue_EligibilityItem
 {
     msgbox(format("Each item held in your registered party must be a unique item. {STR_VAR_1} is holding {STR_VAR_2}, which is already held by another member of your registered party."),,SPEAKER_BATTLE_STUDIO)
 }
+
+script BattleStudio_Dialogue_LetsSeeEvent
+{
+    msgbox(format("Let's run the roulette board!"),,SPEAKER_BATTLE_STUDIO)
+}
+
+script BattleStudio_Dialogue_AnnounceNextBattleSuccess
+{
+    switch(var(LOCAL_VAR_GAME_BOARD_EVENT))
+    {
+        case ARCADE_EVENT_LOWER_HP:
+            msgbox(format("The match will commence with the Pokémon on {STR_VAR_1}’s side without full HP!"))
+        case ARCADE_EVENT_POISON:
+            msgbox(format("The match will commence with the Pokémon on {STR_VAR_1}’s side poisoned!"))
+        case ARCADE_EVENT_PARALYZE:
+            msgbox(format("The match will commence with the Pokémon on {STR_VAR_1}’s side paralyzed!"))
+        case ARCADE_EVENT_BURN:
+            msgbox(format("The match will commence with the Pokémon on {STR_VAR_1}’s side burned!"))
+        case ARCADE_EVENT_SLEEP:
+            msgbox(format("The match will commence with the Pokémon on {STR_VAR_1}’s side asleep!"))
+        case ARCADE_EVENT_FREEZE:
+            msgbox(format("The match will commence with the Pokémon on {STR_VAR_1}’s side frozen!"))
+        case ARCADE_EVENT_GIVE_BERRY:
+        caseARCADE_EVENT_GIVE_ITEM:
+            msgbox(format("The Pokémon on {STR_VAR_1}’s side will be loaned the {STR_VAR_3}."))
+        case ARCADE_EVENT_LEVEL_UP:
+            msgbox(format("The match will commence with the Pokémon on {STR_VAR_1}’s side leveled up!"))
+        case ARCADE_EVENT_SUN:
+            msgbox(format("This match will be conducted under harsh sunlight."))
+        case ARCADE_EVENT_RAIN:
+            msgbox(format("This match will be conducted under a steady rainfall."))
+        case ARCADE_EVENT_SAND:
+            msgbox(format("This match will be conducted under a raging sandstorm."))
+        case ARCADE_EVENT_SNOW:
+            msgbox(format("This match will be conducted under snow."))
+        case ARCADE_EVENT_FOG:
+            msgbox(format("This match will be conducted in a dense fog."))
+        case ARCADE_EVENT_TRICK_ROOM:
+            msgbox(format("This match will be conducted on a floor where time and space are distorted."))
+        case ARCADE_EVENT_SWAP:
+            msgbox(format("The Pokémon on each side will be switched with the other side's for this match."))
+        case ARCADE_EVENT_SPEED_UP:
+            msgbox(format("From the next game on, the game board’s speed will be increased."))
+        case ARCADE_EVENT_SPEED_DOWN:
+            msgbox(format("From the next game on, the game board’s speed will be decreased."))
+        case ARCADE_EVENT_RANDOM:
+            msgbox(format("For the next game, the game board’s motion will become random."))
+        case ARCADE_EVENT_GIVE_BP_SMALL:
+        case ARCADE_EVENT_GIVE_BP_BIG:
+            msgbox(format("{PLAYER} will receive an extra {STR_VAR_3} BP for winning this battle!"))
+        case ARCADE_EVENT_NO_BATTLE:
+            msgbox(format("Oh! Lucky! You can skip the battle!"))
+        default:
+        case ARCADE_EVENT_NO_EVENT:
+            msgbox(format("Too bad! There is no event this time!"))
+    }
+}
+
+script BattleStudio_Dialogue_AnnounceNextBattleFailure
+{
+    switch(var(LOCAL_VAR_GAME_BOARD_EVENT))
+    {
+        case ARCADE_EVENT_POISON:
+            msgbox(format("The Pokémon on {STR_VAR_1}’s side will enter the match poisoned... Oh! A lucky break! {STR_VAR_1}'s side has no Pokémon that can be poisoned!"))
+        case ARCADE_EVENT_PARALYZE:
+            msgbox(format("The Pokémon on {STR_VAR_1}’s side will enter the match paralyzed... Oh! A lucky break! {STR_VAR_1}'s side has no Pokémon that can be paralyzed!"))
+        case ARCADE_EVENT_BURN:
+            msgbox(format("The Pokémon on {STR_VAR_1}’s side will enter the match burned... Oh! A lucky break! {STR_VAR_1}'s side has no Pokémon that can be burned!"))
+        case ARCADE_EVENT_SLEEP:
+            msgbox(format("The Pokémon on {STR_VAR_1}’s side will enter the match asleep... Oh! A lucky break! {STR_VAR_1}'s side has no Pokémon that can be made to sleep!"))
+        default:
+        case ARCADE_EVENT_FREEZE:
+            msgbox(format("The Pokémon on {STR_VAR_1}’s Pokémon will enter the match frozen... Oh! A lucky break! {STR_VAR_1}'s side has no Pokémon that can be frozen!"))
+    }
+}
+

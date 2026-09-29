@@ -196,8 +196,8 @@ script SiliconFrontier_Script_StartBattle
     callnative(SiliconFrontier_SetPartnerDamage)
 
     call(SiliconFrontier_Script_RefreshOpponentObjects)
-    call(SiliconFrontier_Script_DoGameBoardSequence)
     call(SiliconFrontier_Movement_MoveOpponentsIntoPosition)
+    call(SiliconFrontier_Script_DoGameBoardSequence)
     callnative(SiliconFrontier_SetUpTextA)
     msgbox(format("{STR_VAR_1}"))
     callnative(Script_SiliconFrontier_GetTypeFromCurrentChallenge)

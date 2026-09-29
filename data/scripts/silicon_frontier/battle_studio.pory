@@ -1,16 +1,17 @@
 script SiliconFrontier_Script_DoGameBoardSequence
 {
-    callnative(SiliconFrontier_ResetArcadeData)
     callnative(Script_SiliconFrontier_GetFacilityFromCurrentChallenge)
     if (var(VAR_TEMP_F) != SILICON_FACILITY_ARCADE)
     {
         return
     }
 
+    callnative(SiliconFrontier_ResetArcadeData)
+    call(BattleStudio_Movement_MoveMCToGameBoard)
+    call(BattleStudio_Dialogue_LetsSeeEvent)
+    closemessage
     callnative(SiliconFrontier_DeleteAllHeldItems)
     callnative(StartArcadeGameBoardFromOverworld)
-    // start gameboard
-    //
     goto(SiliconFroniter_Script_HandleGameResults)
 }
 
@@ -18,10 +19,16 @@ script SiliconFrontier_Script_DoGameBoardSequence
 script SiliconFroniter_Script_HandleGameResults
 {
     //apply overworld effect if any
-    // MC to face the impacted side
-    // announce impact
-    // give items
-    // return MC to original position
+    call(BattleStudio_Movement_FaceImpact)
+    if (var(LOCAL_VAR_GAME_BOARD_SUCCESS) == TRUE)
+    {
+        call(BattleStudio_Dialogue_AnnounceNextBattleSuccess)
+    }
+    else
+    {
+        call(BattleStudio_Dialogue_AnnounceNextBattleFailure)
+    }
+    closemessage
     // instead of skip battle, increment the counter by 1 and contnue ahead here
     return
 }

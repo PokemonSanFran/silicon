@@ -95,6 +95,7 @@
 #include "constants/ui_adventure_guide.h" @ adventureGuide
 #include "constants/ui_map_system.h"
 #include "constants/silicon_battle_frontier.h" @ siliconFrontier
+#include "constants/battle_arcade.h" @ siliconFrontier
 @ End siliconMerge
 #include "constants/fly_encounter.h" @ flyEncounters
 #include "constants/speaker_names.h"

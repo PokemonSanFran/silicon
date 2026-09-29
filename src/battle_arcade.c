@@ -48,7 +48,6 @@
 #include "text_window.h"
 #include "tv.h"
 #include "window.h"
-#include "constants/battle_arcade.h"
 #include "constants/battle_frontier.h"
 #include "constants/field_specials.h"
 #include "constants/frontier_util.h"
@@ -80,144 +79,141 @@ struct GameBoardState
     u8 cursorPaletteNum[2];
 };
 
-// Arcade Challenge Functions
-static void SetCursorPosition(u32);
+void BattleArcade_ResetCursorPositionOnSaveblock(void);
+static void SetCursorPosition(u32 value);
 static void SaveCursorPositionToSaveblock(void);
 static u32 GetCursorPosition(void);
+void BattleArcade_ResetCursorSpeed(void);
 static void ClearCursorRandomMode(void);
+void BattleArcade_GenerateItemsToBeGiven(void);
 static u32 GenerateItemOrBerry(enum ArcadeEvents type);
-static u32 GetCategorySize(u32);
+static const enum Item (*GetCategoryGroups(u32 type))[ARCADE_ITEM_GROUP_SIZE];
+static u32 GetCategorySize(u32 type);
 static u32 GetGroupIdFromStreak(void);
-static const enum Item (*GetCategoryGroups(u32))[ARCADE_ITEM_GROUP_SIZE];
-static void ReturnPartyToOwner(void);
-static bool32 HaveMonsBeenSwapped(void);
-static void ResetLevelsToOriginal(void);
-void ConvertFacilityFromArcadeToPike(u32*);
-u32 GetArcadePrintCount(void);
-void ShowArcadeRecordsFromOverworld(void);
-void DoArcadeTrainerBattle(void);
-static u32 GetPerformancePoints(void);
+static bool32 IsMonFainted(struct Pokemon *mon);
+static bool32 DoesMonHaveStatus(struct Pokemon *mon);
+u32 GetPerformancePoints(void);
+void SetPerformancePoints(u32 points);
+void BattleArcade_ResetPerformancePoints(void);
 void CalculateAndSetPerformancePoints(void);
-void ResetPerformancePoints(void);
-void SetPerformancePoints(u32);
 static u32 CalculatePerformancePoints(void);
-
-// Arcade Game Board Front End
-static void Task_OpenGameBoard(u8);
-static void GameBoard_Init(MainCallback);
+void ArcadeBattleCleanup(void);
+static void ResetWeatherPostBattle(void);
+static void ReturnPartyToOwner(void);
+static void ResetLevelsToOriginal(void);
+void StartArcadeGameBoardFromOverworld(void);
+void Task_OpenGameBoard(u8 taskId);
+void GameBoard_Init(MainCallback callback);
 static void GameBoard_SetupCB(void);
 static bool8 GameBoard_InitBgs(void);
 static bool32 BattleArcade_AllocTilemapBuffers(void);
 static void GameBoard_HandleAndShowBgs(void);
-static void SetScheduleShowBgs(u32);
+static void SetScheduleShowBgs(u32 backgroundId);
 static void GameBoard_FadeAndBail(void);
-static void Task_GameBoardWaitFadeAndBail(u8);
+static void Task_GameBoardWaitFadeAndBail(u8 taskId);
+static bool32 AreTilesOrTilemapEmpty(u32 backgroundId);
+static void GameBoard_LoadSprites(void);
 static bool8 GameBoard_LoadGraphics(void);
 static void GameBoard_InitWindows(void);
 static void GenerateGameBoard(void);
 static void PrintEnemyParty(void);
 static void PrintPlayerParty(void);
-static void PrintPartyIcons(u32);
-static u32 GetHorizontalPositionFromSide(u32);
-static struct Pokemon* LoadSideParty(u32);
+static void PrintPartyIcons(u32 side);
+static u32 GetHorizontalPositionFromSide(u32 side);
+static struct Pokemon *LoadSideParty(enum ArcadeImpactTypes impact);
 static void PrintHelpBar(void);
-static const u8* GetHelpBarText(void);
+static const u8 *GetHelpBarText(void);
 static u32 GetGameBoardMode(void);
-static void Task_GameBoardWaitFadeIn(u8);
-static void Task_GameBoardMainInput(u8);
+static void Task_GameBoardWaitFadeIn(u8 taskId);
+static void Task_GameBoardMainInput(u8 taskId);
 static void VBlankCB(void);
 static void MainCB(void);
 static void StartCountdown(void);
 static void SetTimerForCountdown(void);
-static void SetTimer(u32);
-static void CalculatePanelPosition(u32, u32*, u32*);
-static void Task_GameBoard_Countdown(u8);
+static void SetTimer(u32 value);
+static void CalculatePanelPosition(u32 space, u32* x, u32* y);
+static void Task_GameBoard_Countdown(u8 taskId);
 static void PopulateEventSprites(void);
-static void LoadTileSpriteSheets(void);
-static u8 CreateEventSprite(u32, u32, u32);
+static u8 CreateEventSprite(u32 x, u32 y, u32 space);
 static void StartGame(void);
 static void SetTimerForGame(void);
 static void InitCursorPositionFromSaveblock(void);
 static void CreateGameBoardCursor(void);
-static void SpriteCB_Cursor(struct Sprite*);
-static void ChangeCursorColor(struct Sprite*);
-static u32 ReturnNextCursorPalette(u32);
-static void ChangeCursorSpritePosition(struct Sprite*);
-static void Task_GameBoard_Game(u8);
+static void SpriteCB_Cursor(struct Sprite *sprite);
+static void ChangeCursorColor(struct Sprite *sprite);
+static u32 ReturnNextCursorPalette(u32 paletteNum);
+static void ChangeCursorSpritePosition(struct Sprite *sprite);
+static void Task_GameBoard_Game(u8 taskId);
 static u32 GetGameBoardTimer(void);
 static void IncrementGameBoardMode(void);
-static bool32 ShouldCursorMove(u32);
-static u32 ReturnCursorWait(u32);
+static bool32 ShouldCursorMove(u32 timer);
+u32 ReturnCursorWait(u32 speed);
 static void ChangeCursorPosition(void);
 static bool32 IsCursorInRandomMode(void);
 static bool32 IsGameBoardTimerEmpty(void);
 static void DecrementGameBoardTimer(void);
-static void HandleFinishMode(void);
+static void HandleFinishMode();
 static void SetTimerForFinish(void);
-static void SelectGameBoardSpace(u32*, u32*);
-static void HandleGameBoardResult(u32, u32);
-static void BufferImpactedName(u8*, u32);
-static u32 GetImpactedTrainerId(u32);
-static void SetGameBoardToChosenEvent(u32, u32);
-static void StoreEventToVar(u32);
-static void StoreImpactedSideToVar(u32);
+static void SelectGameBoardSpace(enum ArcadeImpactTypes *impact, enum ArcadeEvents *event);
+static void HandleGameBoardResult(enum ArcadeImpactTypes impact, enum ArcadeEvents event);
+static void BufferImpactedName(u8 *dest, enum ArcadeImpactTypes impact);
+static u32 GetImpactedTrainerId(enum ArcadeImpactTypes impact);
+static void SetGameBoardToChosenEvent(enum ArcadeImpactTypes impact, enum ArcadeEvents event);
+static void StoreEventToVar(enum ArcadeEvents event);
+static void StoreImpactedSideToVar(enum ArcadeImpactTypes impact);
 static void DestroyEventSprites(void);
-static void Task_GameBoard_CleanUp(u8);
-static void Task_GameBoardWaitFadeAndExitGracefully(u8);
+static void Task_GameBoard_CleanUp(u8 taskId);
+static void Task_GameBoardWaitFadeAndExitGracefully(u8 taskId);
 static void GameBoard_FreeResources(void);
-
-// Arcade Game Board Back End Init
 static u32 GenerateImpact(void);
 static u32 ConvertPerformanceToImpactBracket(void);
-static u32 GenerateEvent(u32);
-static u32 GenerateRandomBetweenBounds(u32);
-static s32 GetPanelUpperBound(u32);
-static s32 GetPanelLowerBound(u32);
-static bool32 IsEventValidDuringBattleOrStreak(u32, u32);
-static bool32 IsEventBanned(u32);
-static bool32 IsEventValidDuringCurrentBattle(u32);
-static bool32 IsEventValidDuringCurrentStreak(u32);
+static u32 GenerateEvent(enum ArcadeImpactTypes impact);
+static u32 GenerateRandomBetweenBounds(enum ArcadeImpactTypes impact);
+static s32 GetPanelUpperBound(enum ArcadeImpactTypes impact);
+static s32 GetPanelLowerBound(enum ArcadeImpactTypes impact);
+static bool32 IsEventValidDuringBattleOrStreak(enum ArcadeEvents event, enum ArcadeImpactTypes impact);
+static bool32 IsEventBanned(enum ArcadeEvents event);
+static bool32 IsEventValidDuringCurrentBattle(enum ArcadeEvents event);
+static bool32 IsEventValidDuringCurrentStreak(enum ArcadeEvents event);
 static u32 GetChallengeNumIndex(void);
 static u32 GetChallengeNum(void);
-
-// Arcade Game Board Back End Resolve
-static bool32 DoGameBoardResult(u32, u32);
-static bool32 BattleArcade_DoLowerHP(u32);
-static bool32 BattleArcade_DoPoison(u32);
-static bool32 BattleArcade_DoParalyze(u32);
-static bool32 BattleArcade_DoBurn(u32);
-static bool32 BattleArcade_DoSleep(u32);
-static bool32 BattleArcade_DoFreeze(u32);
-static bool32 BattleArcade_DoStatusAilment(u32, u32);
-static void InitalizePartyIndex(u32*);
-static bool32 IsStatusSleepOrFreeze(u32);
-static void ShufflePartyIndex(u32*);
-static bool32 BattleArcade_DoGiveBerry(u32);
-static bool32 BattleArcade_DoGiveItem(u32);
-static bool32 BattleArcade_DoGive(u32, u32);
-static void BufferGiveString(u32);
-static bool32 BattleArcade_DoLevelUp(u32);
-static u32 CalculateAndSaveNewLevel(u32);
+static bool32 DoGameBoardResult(enum ArcadeEvents event, enum ArcadeImpactTypes impact);
+static bool32 BattleArcade_DoLowerHP(enum ArcadeImpactTypes impact);
+static bool32 BattleArcade_DoPoison(enum ArcadeImpactTypes impact);
+static bool32 BattleArcade_DoParalyze(enum ArcadeImpactTypes impact);
+static bool32 BattleArcade_DoBurn(enum ArcadeImpactTypes impact);
+static bool32 BattleArcade_DoSleep(enum ArcadeImpactTypes impact);
+static bool32 BattleArcade_DoFreeze(enum ArcadeImpactTypes impact);
+static bool32 BattleArcade_DoStatusAilment(enum ArcadeImpactTypes impact, u32 status);
+static void InitalizePartyIndex(u32 *newIndex);
+static bool32 IsStatusSleepOrFreeze(u32 status);
+static void ShufflePartyIndex(u32 *newIndex);
+static bool32 BattleArcade_DoGiveBerry(enum ArcadeImpactTypes impact);
+static bool32 BattleArcade_DoGiveItem(enum ArcadeImpactTypes impact);
+static bool32 BattleArcade_DoGive(enum ArcadeImpactTypes impact, enum Item item);
+static void BufferGiveString(enum Item item);
+static bool32 BattleArcade_DoLevelUp(enum ArcadeImpactTypes impact);
+static u32 CalculateAndSaveNewLevel(u32 origLevel);
+static bool32 HaveMonsBeenSwapped(void);
 static bool32 BattleArcade_DoSun(void);
 static bool32 BattleArcade_DoRain(void);
 static bool32 BattleArcade_DoSand(void);
-static bool32 BattleArcade_DoHail(void);
+static bool32 BattleArcade_DoSnow(void);
 static bool32 BattleArcade_DoFog(void);
-static bool32 BattleArcade_DoWeather(u32);
+static bool32 BattleArcade_DoWeather(u32 weather);
 static bool32 BattleArcade_DoTrickRoom(void);
 static bool32 BattleArcade_DoSwap(void);
 static bool32 BattleArcade_DoSpeedUp(void);
 static bool32 BattleArcade_DoSpeedDown(void);
-static bool32 BattleArcade_ChangeSpeed(u32);
+static bool32 BattleArcade_ChangeSpeed(u32 mode);
 static u32 GetCursorSpeed(void);
-static void SetCursorSpeed(u32);
+static void SetCursorSpeed(u32 speed);
 static bool32 BattleArcade_DoRandom(void);
 static void SetCursorRandomMode(void);
 static bool32 BattleArcade_DoGiveBPSmall(void);
 static bool32 BattleArcade_DoGiveBPBig(void);
 static bool32 BattleArcade_DoNoBattle(void);
 static bool32 BattleArcade_DoNoEvent(void);
-static void ResetWeatherPostBattle(void);
 
 static struct GameBoardState *sGameBoardState = NULL;
 static u8 *sBgTilemapBuffer[BG_BOARD_COUNT] = {NULL};
@@ -931,7 +927,7 @@ static u32 GetHorizontalPositionFromSide(u32 side)
     return (side == ARCADE_IMPACT_OPPONENT) ? 215 : 22;
 }
 
-static struct Pokemon *LoadSideParty(u32 impact)
+static struct Pokemon *LoadSideParty(enum ArcadeImpactTypes impact)
 {
     if (impact == ARCADE_IMPACT_PLAYER)
         return gParties[B_TRAINER_PLAYER];
@@ -1137,12 +1133,12 @@ static const union AnimCmd sAnim_Panel_Give_Item[] =
     ANIMCMD_FRAME(ARCADE_EVENT_GIVE_ITEM_FRAME, 0),
     ANIMCMD_END
 };
-static const union AnimCmd sAnim_Panel_Hail[] =
+static const union AnimCmd sAnim_Panel_Snow[] =
 {
     ANIMCMD_FRAME(ARCADE_PANEL_COUNTDOWN_3_FRAME, ARCADE_BOARD_COUNTDOWN_TIMER / 3),
     ANIMCMD_FRAME(ARCADE_PANEL_COUNTDOWN_2_FRAME, ARCADE_BOARD_COUNTDOWN_TIMER / 3),
     ANIMCMD_FRAME(ARCADE_PANEL_COUNTDOWN_1_FRAME, ARCADE_BOARD_COUNTDOWN_TIMER / 3),
-    ANIMCMD_FRAME(ARCADE_EVENT_HAIL_FRAME, 0),
+    ANIMCMD_FRAME(ARCADE_EVENT_SNOW_FRAME, 0),
     ANIMCMD_END
 };
 static const union AnimCmd sAnim_Panel_Level_Up[] =
@@ -1276,7 +1272,7 @@ static const union AnimCmd * const sSpriteAnimTable_Panels[] =
     sAnim_Panel_Give_Bp_Big,
     sAnim_Panel_Give_Bp_Small,
     sAnim_Panel_Give_Item,
-    sAnim_Panel_Hail,
+    sAnim_Panel_Snow,
     sAnim_Panel_Level_Up,
     sAnim_Panel_Lower_Hp,
     sAnim_Panel_No_Battle,
@@ -1298,7 +1294,7 @@ static u8 CreateEventSprite(u32 x, u32 y, u32 space)
 {
     u16 TileTag = ARCADE_SPRITETAG_PANELS;
     enum ArcadeEvents event = sGameBoard[space].event;
-    u32 impact = (sGameBoard[space].impact == ARCADE_IMPACT_PLAYER) ? ARCADE_IMPACT_PLAYER : ARCADE_IMPACT_OPPONENT;
+    enum ArcadeImpactTypes impact = (sGameBoard[space].impact == ARCADE_IMPACT_PLAYER) ? ARCADE_IMPACT_PLAYER : ARCADE_IMPACT_OPPONENT;
 
     struct SpriteTemplate TempSpriteTemplate = gDummySpriteTemplate;
     TempSpriteTemplate.tileTag = TileTag;
@@ -1465,7 +1461,8 @@ static void DecrementGameBoardTimer(void)
 
 static void HandleFinishMode()
 {
-    u32 impact = 0, event = 0;
+    enum ArcadeImpactTypes impact = 0;
+    enum ArcadeEvents event = 0;
 
     IncrementGameBoardMode();
     DestroyTask(FindTaskIdByFunc(Task_GameBoard_Game));
@@ -1485,7 +1482,7 @@ static void SetTimerForFinish(void)
     SetTimer(ARCADE_BOARD_FINISH_TIMER);
 }
 
-static void SelectGameBoardSpace(u32 *impact, u32 *event)
+static void SelectGameBoardSpace(enum ArcadeImpactTypes *impact, enum ArcadeEvents *event)
 {
     u32 space = GetCursorPosition();
 
@@ -1493,9 +1490,9 @@ static void SelectGameBoardSpace(u32 *impact, u32 *event)
     *event = sGameBoard[space].event;
 }
 
-static void HandleGameBoardResult(u32 impact, u32 event)
+static void HandleGameBoardResult(enum ArcadeImpactTypes impact, enum ArcadeEvents event)
 {
-    LOCAL_VAR_GAME_BOARD_SUCCESS = DoGameBoardResult(event, impact);
+    VarSet(LOCAL_VAR_GAME_BOARD_SUCCESS,DoGameBoardResult(event,impact));
     BufferImpactedName(gStringVar1,impact);
 
     SetGameBoardToChosenEvent(impact,event);
@@ -1503,7 +1500,7 @@ static void HandleGameBoardResult(u32 impact, u32 event)
     StoreImpactedSideToVar(impact);
 }
 
-static void BufferImpactedName(u8 *dest, u32 impact)
+static void BufferImpactedName(u8 *dest, enum ArcadeImpactTypes impact)
 {
     if (impact == ARCADE_IMPACT_PLAYER)
         StringCopy_PlayerName(dest, gSaveBlock2Ptr->playerName);
@@ -1511,12 +1508,12 @@ static void BufferImpactedName(u8 *dest, u32 impact)
         GetFrontierTrainerName(dest, GetImpactedTrainerId(impact));
 }
 
-static u32 GetImpactedTrainerId(u32 impact)
+static u32 GetImpactedTrainerId(enum ArcadeImpactTypes impact)
 {
     return (impact == ARCADE_IMPACT_PLAYER) ? TRAINER_PLAYER : TRAINER_BATTLE_PARAM.opponentA;
 }
 
-static void SetGameBoardToChosenEvent(u32 impact, u32 event)
+static void SetGameBoardToChosenEvent(enum ArcadeImpactTypes impact, enum ArcadeEvents event)
 {
     u32 i;
     for (i = 0; i < ARCADE_GAME_BOARD_SPACES; i++)
@@ -1526,14 +1523,14 @@ static void SetGameBoardToChosenEvent(u32 impact, u32 event)
     }
 }
 
-static void StoreEventToVar(u32 event)
+static void StoreEventToVar(enum ArcadeEvents event)
 {
-    LOCAL_VAR_GAME_BOARD_EVENT = event;
+    VarSet(LOCAL_VAR_GAME_BOARD_EVENT,event);
 }
 
-static void StoreImpactedSideToVar(u32 impact)
+static void StoreImpactedSideToVar(enum ArcadeImpactTypes impact)
 {
-    LOCAL_VAR_GAME_BOARD_IMPACT = impact;
+    VarSet(LOCAL_VAR_GAME_BOARD_IMPACT,impact);
 }
 
 static void DestroyEventSprites(void)
@@ -1600,9 +1597,9 @@ static u32 GenerateImpact(void)
         [ARCADE_PERFORMANCE_BRACKET_21_PLUS] = {15, 15, 40, 30},
     };
 
-    u32 impactThreshold = 0, impactIndex = 0;
+    enum ArcadeImpactTypes impactThreshold = 0, impactIndex = 0;
     u32 randImpact = Random() % 100;
-    u32 impactBracket = ConvertPerformanceToImpactBracket();
+    enum ArcadeImpactTypes impactBracket = ConvertPerformanceToImpactBracket();
 
     for (impactIndex = 0; impactIndex < ARCADE_IMPACT_COUNT; impactIndex++)
     {
@@ -1624,9 +1621,9 @@ static u32 ConvertPerformanceToImpactBracket(void)
         ARCADE_PERFORMANCE_BRACKET_21_PLUS;
 }
 
-static u32 GenerateEvent(u32 impact)
+static u32 GenerateEvent(enum ArcadeImpactTypes impact)
 {
-    u32 event = GenerateRandomBetweenBounds(impact);
+    enum ArcadeEvents event = GenerateRandomBetweenBounds(impact);
 
     do
     {
@@ -1636,7 +1633,7 @@ static u32 GenerateEvent(u32 impact)
     return event;
 }
 
-static u32 GenerateRandomBetweenBounds(u32 impact)
+static u32 GenerateRandomBetweenBounds(enum ArcadeImpactTypes impact)
 {
     u32 upper = GetPanelUpperBound(impact);
     u32 lower = GetPanelLowerBound(impact);
@@ -1644,7 +1641,7 @@ static u32 GenerateRandomBetweenBounds(u32 impact)
     return (lower + Random() % (upper - lower + 1));
 }
 
-static s32 GetPanelUpperBound(u32 impact)
+static s32 GetPanelUpperBound(enum ArcadeImpactTypes impact)
 {
     //Not Inclusive
     switch (impact)
@@ -1660,7 +1657,7 @@ static s32 GetPanelUpperBound(u32 impact)
     }
 }
 
-static s32 GetPanelLowerBound(u32 impact)
+static s32 GetPanelLowerBound(enum ArcadeImpactTypes impact)
 {
     //Inclusive
     switch (impact)
@@ -1676,7 +1673,7 @@ static s32 GetPanelLowerBound(u32 impact)
     }
 }
 
-static bool32 IsEventValidDuringBattleOrStreak(u32 event, u32 impact)
+static bool32 IsEventValidDuringBattleOrStreak(enum ArcadeEvents event, enum ArcadeImpactTypes impact)
 {
     if (IsEventBanned(event))
         return FALSE;
@@ -1688,7 +1685,7 @@ static bool32 IsEventValidDuringBattleOrStreak(u32 event, u32 impact)
     return TRUE;
 }
 
-static bool32 IsEventBanned(u32 event)
+static bool32 IsEventBanned(enum ArcadeEvents event)
 {
 #ifndef RHH_EXPANSION
     if ((event == ARCADE_EVENT_TRICK_ROOM) || (event == ARCADE_EVENT_FOG))
@@ -1697,7 +1694,7 @@ static bool32 IsEventBanned(u32 event)
     return FALSE;
 }
 
-static bool32 IsEventValidDuringCurrentBattle(u32 event)
+static bool32 IsEventValidDuringCurrentBattle(enum ArcadeEvents event)
 {
     static const u32 SpecialPanelTable[ARCADE_EVENT_COUNT][SILICON_FRONTIER_STREAK_LENGTH_BOSS] =
     {
@@ -1726,7 +1723,7 @@ static bool32 IsEventValidDuringCurrentBattle(u32 event)
     return TRUE;
 }
 
-static bool32 IsEventValidDuringCurrentStreak(u32 event)
+static bool32 IsEventValidDuringCurrentStreak(enum ArcadeEvents event)
 {
     static const u32 PanelStreakTable[ARCADE_EVENT_COUNT][ARCADE_STREAK_NUM_COUNT] =
     {                           //Streak 1  2  3  4  5  6  7  8  9  10
@@ -1742,7 +1739,7 @@ static bool32 IsEventValidDuringCurrentStreak(u32 event)
         [ARCADE_EVENT_SUN]           =  {0, 1, 1, 1, 0, 0, 0, 0, 0, 1},
         [ARCADE_EVENT_RAIN]          =  {0, 1, 1, 1, 0, 0, 0, 0, 0, 1},
         [ARCADE_EVENT_SAND]          =  {0, 1, 1, 1, 0, 0, 0, 0, 0, 1},
-        [ARCADE_EVENT_HAIL]          =  {0, 1, 1, 1, 0, 0, 0, 0, 0, 1},
+        [ARCADE_EVENT_SNOW]          =  {0, 1, 1, 1, 0, 0, 0, 0, 0, 1},
         [ARCADE_EVENT_FOG]           =  {0, 0, 0, 0, 1, 1, 0, 0, 1, 1},
         [ARCADE_EVENT_TRICK_ROOM]    =  {0, 0, 0, 0, 1, 1, 0, 0, 1, 1},
         [ARCADE_EVENT_SWAP]          =  {1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
@@ -1786,7 +1783,7 @@ static u32 GetChallengeNum(void)
 }
 
 // Arcade Game Board Back End Resolution
-static bool32 DoGameBoardResult(u32 event, u32 impact)
+static bool32 DoGameBoardResult(enum ArcadeEvents event, enum ArcadeImpactTypes impact)
 {
     switch (event)
     {
@@ -1802,7 +1799,7 @@ static bool32 DoGameBoardResult(u32 event, u32 impact)
         case ARCADE_EVENT_SUN: return BattleArcade_DoSun();
         case ARCADE_EVENT_RAIN: return BattleArcade_DoRain();
         case ARCADE_EVENT_SAND: return BattleArcade_DoSand();
-        case ARCADE_EVENT_HAIL: return BattleArcade_DoHail();
+        case ARCADE_EVENT_SNOW: return BattleArcade_DoSnow();
         case ARCADE_EVENT_FOG: return BattleArcade_DoFog();
         case ARCADE_EVENT_TRICK_ROOM: return BattleArcade_DoTrickRoom();
         case ARCADE_EVENT_SWAP: return BattleArcade_DoSwap();
@@ -1818,7 +1815,7 @@ static bool32 DoGameBoardResult(u32 event, u32 impact)
     return TRUE;
 }
 
-static bool32 BattleArcade_DoLowerHP(u32 impact)
+static bool32 BattleArcade_DoLowerHP(enum ArcadeImpactTypes impact)
 {
     struct Pokemon *party = LoadSideParty(impact);
 
@@ -1834,31 +1831,31 @@ static bool32 BattleArcade_DoLowerHP(u32 impact)
     return TRUE;
 }
 
-static bool32 BattleArcade_DoPoison(u32 impact)
+static bool32 BattleArcade_DoPoison(enum ArcadeImpactTypes impact)
 {
     return BattleArcade_DoStatusAilment(impact, STATUS1_TOXIC_POISON);
 }
-static bool32 BattleArcade_DoParalyze(u32 impact)
+static bool32 BattleArcade_DoParalyze(enum ArcadeImpactTypes impact)
 {
     return BattleArcade_DoStatusAilment(impact, STATUS1_PARALYSIS);
 }
-static bool32 BattleArcade_DoBurn(u32 impact)
+static bool32 BattleArcade_DoBurn(enum ArcadeImpactTypes impact)
 {
     return BattleArcade_DoStatusAilment(impact, STATUS1_BURN);
 }
-static bool32 BattleArcade_DoSleep(u32 impact)
+static bool32 BattleArcade_DoSleep(enum ArcadeImpactTypes impact)
 {
     return BattleArcade_DoStatusAilment(impact, STATUS1_SLEEP);
 }
-static bool32 BattleArcade_DoFreeze(u32 impact)
+static bool32 BattleArcade_DoFreeze(enum ArcadeImpactTypes impact)
 {
     return BattleArcade_DoStatusAilment(impact, STATUS1_FREEZE);
 }
 
-static bool32 BattleArcade_DoStatusAilment(u32 impact, u32 status)
+static bool32 BattleArcade_DoStatusAilment(enum ArcadeImpactTypes impact, u32 status)
 {
     struct Pokemon *party = LoadSideParty(impact);
-    u32 impactedCount = 0;
+    enum ArcadeImpactTypes impactedCount = 0;
     u32 newIndex[MAX_FRONTIER_PARTY_SIZE];
 
     InitalizePartyIndex(newIndex);
@@ -1912,19 +1909,19 @@ static void ShufflePartyIndex(u32 *newIndex)
         SWAP(newIndex[i], newIndex[Random() % (i +1)], temp);
 }
 
-static bool32 BattleArcade_DoGiveBerry(u32 impact)
+static bool32 BattleArcade_DoGiveBerry(enum ArcadeImpactTypes impact)
 {
-    u32 item = VarGet(VAR_ARCADE_BERRY);
+    enum Item item = VarGet(VAR_ARCADE_BERRY);
     return BattleArcade_DoGive(impact, item);
 }
 
-static bool32 BattleArcade_DoGiveItem(u32 impact)
+static bool32 BattleArcade_DoGiveItem(enum ArcadeImpactTypes impact)
 {
-    u32 item = VarGet(VAR_ARCADE_ITEM);
+    enum Item item = VarGet(VAR_ARCADE_ITEM);
     return BattleArcade_DoGive(impact, item);
 }
 
-static bool32 BattleArcade_DoGive(u32 impact, u32 item)
+static bool32 BattleArcade_DoGive(enum ArcadeImpactTypes impact, enum Item item)
 {
     struct Pokemon *party = LoadSideParty(impact);
 
@@ -1940,12 +1937,12 @@ static bool32 BattleArcade_DoGive(u32 impact, u32 item)
     return TRUE;
 }
 
-static void BufferGiveString(u32 item)
+static void BufferGiveString(enum Item item)
 {
     CopyItemName(item,gStringVar3);
 }
 
-static bool32 BattleArcade_DoLevelUp(u32 impact)
+static bool32 BattleArcade_DoLevelUp(enum ArcadeImpactTypes impact)
 {
     struct Pokemon *party = LoadSideParty(impact);
 
@@ -2000,7 +1997,7 @@ static bool32 BattleArcade_DoSand(void)
 {
     return BattleArcade_DoWeather(WEATHER_SANDSTORM);
 }
-static bool32 BattleArcade_DoHail(void)
+static bool32 BattleArcade_DoSnow(void)
 {
     return BattleArcade_DoWeather(WEATHER_SNOW);
 }
@@ -2104,13 +2101,11 @@ static void SetCursorRandomMode(void)
 
 static bool32 BattleArcade_DoGiveBPSmall(void)
 {
-    GiveFrontierBattlePoints(ARCADE_BP_SMALL);
     return TRUE;
 }
 
 static bool32 BattleArcade_DoGiveBPBig(void)
 {
-    GiveFrontierBattlePoints(ARCADE_BP_BIG);
     return TRUE;
 }
 
@@ -2122,4 +2117,21 @@ static bool32 BattleArcade_DoNoBattle(void)
 static bool32 BattleArcade_DoNoEvent(void)
 {
     return TRUE;
+}
+
+u32 BattleArcade_CalculateBonus(enum SiliconFrontierFacility facility)
+{
+    u32 bonus = 0;
+
+    if (facility != SILICON_FACILITY_ARCADE)
+        return bonus;
+
+    if (VarGet(LOCAL_VAR_GAME_BOARD_EVENT) == ARCADE_EVENT_GIVE_BP_SMALL)
+        bonus = ARCADE_BP_SMALL;
+
+    if (VarGet(LOCAL_VAR_GAME_BOARD_EVENT) == ARCADE_EVENT_GIVE_BP_BIG)
+        bonus = ARCADE_BP_BIG;
+
+    VarSet(LOCAL_VAR_GAME_BOARD_EVENT,ARCADE_EVENT_COUNT);
+    return bonus;
 }

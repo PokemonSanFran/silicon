@@ -117,3 +117,23 @@ script BattleStudio_Movement_CueAttendant
 {
     cueobjectplayer(LOCALID_ZENZU_ISLAND_GYM_ATTENDANT)
 }
+
+script BattleStudio_Movement_MoveMCToGameBoard
+{
+    moveobjecttocoords(LOCALID_ZENZU_ISLAND_GYM_ATTENDANT,4,1,DIR_SOUTH)
+    waitmovement(LOCALID_ZENZU_ISLAND_GYM_ATTENDANT)
+}
+
+script BattleStudio_Movement_FaceImpact
+{
+    switch(var(LOCAL_VAR_GAME_BOARD_IMPACT))
+    {
+        case ARCADE_IMPACT_OPPONENT:
+            applymovement(LOCALID_ZENZU_ISLAND_GYM_ATTENDANT,moves(walk_in_place_right))
+        case ARCADE_IMPACT_PLAYER:
+            applymovement(LOCALID_ZENZU_ISLAND_GYM_ATTENDANT,moves(walk_in_place_left))
+        default:
+            applymovement(LOCALID_ZENZU_ISLAND_GYM_ATTENDANT,moves(walk_in_place_down))
+    }
+    waitmovement(LOCALID_ZENZU_ISLAND_GYM_ATTENDANT)
+}

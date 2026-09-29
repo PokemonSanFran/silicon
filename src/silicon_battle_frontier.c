@@ -1000,21 +1000,22 @@ u32 SiliconFrontier_CalculateStreakBP(void)
     enum SiliconFrontierFacility facility = SiliconFrontier_GetFacilityFromCurrentChallenge();
     enum SiliconFrontierChallengeType challengeType = SiliconFrontier_GetTypeFromCurrentChallenge();
     enum SiliconFrontierSparringTypes sparringType = SiliconFrontier_GetCurrentChallengeSparringType();
+    u32 bonus = BattleArcade_CalculateBonus(facility);
 
     u32 currentStreak = SiliconFrontier_GetCurrentStreak(facility,challengeType, sparringType);
 
     if (((currentStreak) % SILICON_FRONTIER_STREAK_LENGTH_BOSS) != 0)
     {
         u32 points = (currentStreak / SILICON_FRONTIER_BP_REWARD_BASE_MAX) + SILICON_FRONTIER_BP_REWARD_BASE;
-        return (points > SILICON_FRONTIER_BP_REWARD_BASE_MAX) ? SILICON_FRONTIER_BP_REWARD_BASE_MAX : points;
+        return (points > SILICON_FRONTIER_BP_REWARD_BASE_MAX) ? (bonus + SILICON_FRONTIER_BP_REWARD_BASE_MAX) : (bonus + points);
     }
 
     if (currentStreak == SILICON_FRONTIER_STREAK_LENGTH_SILVER)
-        return SILICON_FRONTIER_BP_REWARD_BOSS_MILESTONE;
+        return SILICON_FRONTIER_BP_REWARD_BOSS_MILESTONE + bonus;
     else if (currentStreak == SILICON_FRONTIER_STREAK_LENGTH_GOLD)
-        return SILICON_FRONTIER_BP_REWARD_BOSS_MILESTONE;
+        return SILICON_FRONTIER_BP_REWARD_BOSS_MILESTONE + bonus;
 
-    return SILICON_FRONTIER_BP_REWARD_BASE_MAX;
+    return SILICON_FRONTIER_BP_REWARD_BASE_MAX + bonus;
 }
 
 void SiliconFrontier_BufferBP(void)
