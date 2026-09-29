@@ -16,11 +16,12 @@
   "object_events": [],
   "warp_events": [
     {
+      "warp_id": "WARP_ID_COMPOUND_BEDROOM_TO_2F",
       "x": 7,
       "y": 2,
       "elevation": 0,
       "dest_map": "MAP_CUCONU_TOWN_SHARPRISE_COMPOUND_2F_CORRIDOR",
-      "dest_warp_id": "1"
+      "dest_warp_id": "WARP_ID_COMPOUND_2F_TO_BEDROOM"
     }
   ],
   "coord_events": [

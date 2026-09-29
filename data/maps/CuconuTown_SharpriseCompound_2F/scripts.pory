@@ -87,21 +87,21 @@ script BedScript_AdvanceStory_Script
 script CuconuTown_SharpriseCompound_2F_Dialogue_Light
 {
     lock
-    msgbox(format("Maybe I should turn this on."), MSGBOX_DEFAULT)
+    msgbox(format("Maybe I should turn this on."), MSGBOX_DEFAULT,SPEAKER_PLAYER,TAIL_THOUGHT)
     closemessage
     delay(8)
     playse(SE_CLICK)
     waitse
     delay(16)
-    playse(SE_M_MEGA_KICK)  
+    playse(SE_M_MEGA_KICK)
     fadescreen(FADE_TO_WHITE)
     waitse
     playse(SE_CLICK)
     waitse
-    delay(8)    
+    delay(8)
     fadescreen(FADE_FROM_WHITE)
     delay(16)
-    msgbox(format("Too bright!"), MSGBOX_DEFAULT)
+    msgbox(format("Too bright!"), MSGBOX_DEFAULT,SPEAKER_PLAYER,TAIL_THOUGHT,EMOTE_SHOCK)
     closemessage
     release
     end
@@ -110,7 +110,8 @@ script CuconuTown_SharpriseCompound_2F_Dialogue_Light
 
 script CuconuTown_SharpriseCompound_2F_PC_Placeholder
 {
-    msgbox(format("PC placeholder."))
+	lock
+    msgbox(format("All of your information is seamlessly synchronized between your phone and this computer."))
     closemessage
     release
     end
