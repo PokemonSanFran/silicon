@@ -4873,7 +4873,7 @@ void DebugQuest_RestoreHodouCityGym(u8 state)
 void HousingProtest_BufferMostPowerfulAttackAndMove(void)
 {
     enum Move move = MOVE_FLAMETHROWER;
-    u32 movePower = GetMovePower(MOVE_NONE), usedIndex = 0, species = SPECIES_ARCANINE, trainer = TRAINER_HOUSINGPROTEST_B;
+    u32 movePower = GetMovePower(MOVE_NONE), usedIndex = 0, species = SPECIES_MAGMAR, trainer = TRAINER_HOUSINGPROTEST_B;
 
     for (u32 index = 0; index < PARTY_SIZE; index++)
     {
