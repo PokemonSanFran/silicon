@@ -19,7 +19,7 @@ mapscripts Route2_MapScripts {
     ]
     MAP_SCRIPT_ON_WARP_INTO_MAP_TABLE [
         VAR_CONSTRUCTION_STRIKE_STATE,STRIKE_HAS_BEGUN:TheStrikeStrikesBack_Script_AddOliverCharlotte
-        VAR_CONSTRUCTION_STRIKE_STATE,DEFEATED_GARBODOR:TheStrikeStrikesBack_Script_AddSharpriseCharlotteTide
+        VAR_CONSTRUCTION_STRIKE_STATE,DEFEATED_GARBODOR:TheStrikeStrikesBack_Script_AddTurnCharlotteAndSharpriseNorth
     ]
 }
 

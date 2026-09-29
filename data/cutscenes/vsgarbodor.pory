@@ -208,6 +208,7 @@ script VSGarbodor_MoveCharlotte_Script {
     lock
     startcutscene(JUMPPLAYER_VSGARBODOR)
     call(VsGarbodor_Script_AddCharlotteMiddle)
+	fadescreenswapbuffers(FADE_FROM_BLACK)
 
     if (var(VAR_INNER_CONSTRUCTION_SITE_STATE) == PLAYER_LEFT_SIDE)
     {
@@ -379,5 +380,20 @@ script VSGarbodor_ReturnToTheCompound_Dialogue
 movement VSGarbodor_PerpWalk {
     walk_left * 15
         step_end
+}
+
+script TheStrikeStrikesBack_Script_AddTurnCharlotteAndSharpriseNorth
+{
+	call(TheStrikeStrikesBack_Script_AddSharpriseCharlotteTide)
+    turnobject(LOCALID_PLAYER,DIR_NORTH)
+    turnobject(LOCALID_ROUTE2_CHARLOTTE,DIR_NORTH)
+    turnobject(LOCALID_ROUTE2_LUCREZIA,DIR_NORTH)
+    turnobject(LOCALID_ROUTE2_OLIVER,DIR_NORTH)
+
+	turnobject(LOCALID_ROUTE2_POLICE_A,DIR_WEST)
+	turnobject(LOCALID_ROUTE2_POLICE_B,DIR_WEST)
+	turnobject(LOCALID_ROUTE2_VIGRIM,DIR_WEST)
+	turnobject(LOCALID_ROUTE2_TIDE_B,DIR_WEST)
+	turnobject(LOCALID_ROUTE2_TIDE_A,DIR_WEST)
 }
 
