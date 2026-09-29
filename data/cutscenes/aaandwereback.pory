@@ -72,7 +72,7 @@ script AaandWereBack_Charlotte_Dialogue {
         msgbox(format("Yeah, that busted ferry sucks. I'm going to challenge the {STR_VAR_1} and {STR_VAR_2} Gyms tomorrow, and the ferry will definately be fixed after that, so {STR_VAR_3} Gym will be last."),MSGBOX_DEFAULT,SPEAKER_CHARLOTTE)
         bufferitemname(STR_VAR_2,ITEM_GO_GOGGLES)
         msgbox(format("I need to figure out how to get some {STR_VAR_2} too..."),MSGBOX_DEFAULT,SPEAKER_ALICIA)
-        msgbox(format("They're hard to come by right now. I only got these because Daddys knows the manufactuer over in Kanto."),MSGBOX_DEFAULT,SPEAKER_CHARLOTTE)
+        msgbox(format("They're hard to come by right now. I only got these because Daddy knows the manufactuer over in Kanto."),MSGBOX_DEFAULT,SPEAKER_CHARLOTTE)
         msgbox(format("I'm sure I'll figure something out."),MSGBOX_DEFAULT,SPEAKER_ALICIA)
         closemessage
 }

@@ -10239,8 +10239,8 @@
       "height": 10,
       "border_width": 2,
       "border_height": 2,
-      "primary_tileset": "gTileset_Building",
-      "secondary_tileset": "gTileset_GenericBuilding",
+      "primary_tileset": "gTileset_BuildingSilicon",
+      "secondary_tileset": "gTileset_FancyIndoors",
       "border_filepath": "data/layouts/CuconuTown_SharpriseCompound_1F/border.bin",
       "blockdata_filepath": "data/layouts/CuconuTown_SharpriseCompound_1F/map.bin",
       "layout_version": "emerald"
@@ -10248,12 +10248,12 @@
     {
       "id": "LAYOUT_CUCONU_TOWN_COMPOUND_2F",
       "name": "CuconuTown_Compound_2F_Layout",
-      "width": 12,
+      "width": 10,
       "height": 12,
       "border_width": 2,
       "border_height": 2,
-      "primary_tileset": "gTileset_Building",
-      "secondary_tileset": "gTileset_BrendansMaysHouse",
+      "primary_tileset": "gTileset_BuildingSilicon",
+      "secondary_tileset": "gTileset_FancyIndoors",
       "border_filepath": "data/layouts/CuconuTown_SharpriseCompound_2F/border.bin",
       "blockdata_filepath": "data/layouts/CuconuTown_SharpriseCompound_2F/map.bin",
       "layout_version": "emerald"
@@ -13549,6 +13549,18 @@
       "secondary_tileset": "gTileset_FancyIndoors",
       "border_filepath": "data/layouts/FancyIndoorTest/border.bin",
       "blockdata_filepath": "data/layouts/FancyIndoorTest/map.bin"
+    },
+    {
+      "id": "LAYOUT_CUCONU_TOWN_SHARPRISE_COMPOUND_2F_CORRIDOR",
+      "name": "CuconuTown_SharpriseCompound_2F_Corridor_Layout",
+      "width": 16,
+      "height": 7,
+      "border_width": 2,
+      "border_height": 2,
+      "primary_tileset": "gTileset_BuildingSilicon",
+      "secondary_tileset": "gTileset_FancyIndoors",
+      "border_filepath": "data/layouts/CuconuTown_SharpriseCompound_2F_Corridor/border.bin",
+      "blockdata_filepath": "data/layouts/CuconuTown_SharpriseCompound_2F_Corridor/map.bin"
     }
   ]
 }
