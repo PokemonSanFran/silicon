@@ -32,6 +32,8 @@ script Swagbag_WelcomeToResido_Dialogue {
     applymovement(LOCALID_CAMERA, moves(walk_down))
     applymovement(SHARPRISE_COMPOUND_1F_OLIVER, moves(walk_up, delay_16, step_end))
     waitmovement(SHARPRISE_COMPOUND_1F_OLIVER)
+    waitmovement(LOCALID_CAMERA)
+    special(RemoveCameraObject)
     msgbox(format("{PLAYER}! Welcome to Resido! How was your flight?"),,SPEAKER_OLIVER)
     reveal(REVEAL_OLIVER)
     msgbox(format("Great! The fancy car pickup from the airport was a surprise, but everything was super smooth, thanks!"),,SPEAKER_ALICIA)
@@ -95,10 +97,12 @@ script Swagbag_DontLeaveCuconuTown_Dialogue {
         msgbox(format("{PLAYER}, feel free to explore {STR_VAR_1}. Just don't leave!"),,SPEAKER_OLIVER)
         msgbox(format("Got it. Thanks for all the help, Oliver! I'm still so stoked for the opportunity and the Challenge!"),,SPEAKER_ALICIA)
         closemessage
+    special(SpawnCameraObject)
         applymovement(LOCALID_CAMERA, moves(walk_up))
         applymovement(SHARPRISE_COMPOUND_1F_OLIVER, moves(walk_right * 4, walk_down*2, face_left, step_end))
         waitmovement(SHARPRISE_COMPOUND_1F_OLIVER)
-        special(RemoveCameraObject)
+        waitmovement(LOCALID_CAMERA)
+    special(RemoveCameraObject)
         fadedefaultbgm
         startquest(QUEST_PLAYERSADVENTURE)
         endcutscene
@@ -114,9 +118,8 @@ script swagbag_HelpPlayer_Script
     msgbox(format("The Adventure Guide app also has lots of information on training Pokemon, using apps, or traversing Resido."),,SPEAKER_OLIVER,TAIL_TALK)
     msgbox(format("Our team worked hard on those, so make sure you read them!"),,SPEAKER_OLIVER,TAIL_TALK,EMOTE_SWEAT)
     closemessage
-    applymovement(SHARPRISE_COMPOUND_1F_OLIVER,Common_Movement_FaceRight)
-    waitmovement(0)
-    return
+    applymovement(SHARPRISE_COMPOUND_1F_OLIVER,moves(face_left))
+    waitmovement(SHARPRISE_COMPOUND_1F_OLIVER)
 }
 
 script swagbag_PreventPlayerLeavingCuconuTown_Event_Script {
