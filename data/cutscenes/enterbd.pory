@@ -1,7 +1,8 @@
 const PLAYER = OBJ_EVENT_ID_PLAYER
 const BD = 1
 
-script EnterBD_StartBattle_ObjectSetup_Script {
+script EnterBD_StartBattle_ObjectSetup_Script 
+{
     setobjectxyperm(BD,3,5)
     setobjectmovementtype(BD, MOVEMENT_TYPE_FACE_RIGHT)
 }

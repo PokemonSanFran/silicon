@@ -15,7 +15,6 @@ script SurvivalChance333_HideObject_HalaiIsland_Script
     setobjectflagfromlocalid(LOCALID_HALAI_POLICE_C)
     setobjectflagfromlocalid(LOCALID_HALAI_CHARLOTTE)
     setobjectflagfromlocalid(LOCALID_HALAI_ADAORA)
-    setobjectflagfromlocalid(LOCALID_HALAI_BAIYA)
     setobjectflagfromlocalid(LOCALID_HALAI_MAGNUS)
     setobjectflagfromlocalid(LOCALID_HALAI_TALA)
     setobjectflagfromlocalid(LOCALID_HALAI_FRANK)

@@ -44,7 +44,7 @@ script BeachBattle_CharlotteWalkToPlayer
 
 script BeachBattle_Interact_Script
 {
-        playbgm(MUS_ENCOUNTER_BRENDAN,TRUE)
+        playbgm(MUS_CHARLOTTE,TRUE)
         faceplayer
         goto(BeachBattle_StartBattle_Script)
 }
