@@ -16,18 +16,20 @@
   "object_events": [],
   "warp_events": [
     {
+      "warp_id": "WARP_ID_COMPOUND_2F_TO_1F",
       "x": 14,
       "y": 2,
       "elevation": 0,
       "dest_map": "MAP_CUCONU_TOWN_SHARPRISE_COMPOUND_1F",
-      "dest_warp_id": "2"
+      "dest_warp_id": "WARP_ID_COMPOUND_1F_TO_2F"
     },
     {
+      "warp_id": "WARP_ID_COMPOUND_2F_TO_BEDROOM",
       "x": 6,
       "y": 2,
       "elevation": 0,
       "dest_map": "MAP_CUCONU_TOWN_SHARPRISE_COMPOUND_2F",
-      "dest_warp_id": "0"
+      "dest_warp_id": "WARP_ID_COMPOUND_BEDROOM_TO_2F"
     }
   ],
   "coord_events": [],
@@ -79,6 +81,22 @@
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
       "script": "CuconuTown_SharpriseCompound_2F_Dialogue_Bookcase"
+    },
+    {
+      "type": "sign",
+      "x": 2,
+      "y": 2,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "CuconuTown_SharpriseCompound_2F_Dialogue_CharlotteDoor"
+    },
+    {
+      "type": "sign",
+      "x": 10,
+      "y": 2,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "CuconuTown_SharpriseCompound_2F_Dialogue_LockDoor"
     }
   ]
 }

@@ -11,10 +11,28 @@ script CuconuTown_SharpriseCompound_2F_Dialogue_Statue
 	end
 }
 
+script CuconuTown_SharpriseCompound_2F_Dialogue_CharlotteDoor
+{
+	lock
+	msgbox(format("The door is slightly ajar. It's probably Charlotte's. You shouldn't go in."), MSGBOX_DEFAULT)
+	closemessage
+	release
+	end
+}
+
+script CuconuTown_SharpriseCompound_2F_Dialogue_LockDoor
+{
+	lock
+	msgbox(format("The door is firmly locked."), MSGBOX_DEFAULT)
+	closemessage
+	release
+	end
+}
+
 script CuconuTown_SharpriseCompound_2F_Dialogue_Bookcase
 {
 	lock
-	msgbox(format("It's full of book about Pokémon.\nAnd also, about how to invest in cryptocurrencies."), MSGBOX_DEFAULT)
+	msgbox(format("It's full of books about Pokémon battling.\nAnd also, about how to invest in cryptocurrencies."), MSGBOX_DEFAULT)
 	closemessage
 	release
 	end
