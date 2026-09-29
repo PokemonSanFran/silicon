@@ -15,6 +15,11 @@ mapscripts CuconuTown_SharpriseCompound_1F_MapScripts
         call_if_eq(VAR_PLAYER_HOME_STATE,NEXT_DAY_CHAMPIONSHIP,AaandWereBack_ObjectHide_Script)
     }
 
+    MAP_SCRIPT_ON_WARP_INTO_MAP_TABLE
+    [
+        VAR_STORYLINE_STATE,STORY_DEFEATED_GARBODOR:VSGarbodor_ReturnToTheCompound_Script_TurnPlayer
+    ]
+
     MAP_SCRIPT_ON_FRAME_TABLE
     [
         VAR_PLAYER_HOME_STATE, HAS_NOT_MET_CHARLOTTE: ImProbablyBetterThanYou_CharlotteIntro_Dialogue
@@ -129,7 +134,7 @@ script CuconuTown_SharpriseCompound_1F_Dialogue_Fridge
 script CuconuTown_SharpriseCompound_1F_Dialogue_Sink
 {
 	lock
-	msgbox(format("I don't need to wash my hands right now."), MSGBOX_DEFAULT)
+	msgbox(format("I don't need to wash my hands right now."), MSGBOX_DEFAULT,SPEAKER_PLAYER,TAIL_THOUGHT)
 	closemessage
 	release
 	end
