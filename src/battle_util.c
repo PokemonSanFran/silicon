@@ -41,6 +41,7 @@
 #include "pokedex.h"
 #include "mail.h"
 #include "field_weather.h"
+#include "silicon_battle_status_criteria.h" // battleInfo
 #include "constants/abilities.h"
 #include "constants/battle_anim.h"
 #include "constants/battle_move_effects.h"
@@ -2186,6 +2187,8 @@ enum WeatherFailure TryChangeBattleWeather(enum BattlerId battler, u32 battleWea
             gBattleStruct->weatherDuration = 8;
         else
             gBattleStruct->weatherDuration = 5;
+
+        gRecordedMaxBattleStatusValues.weatherDuration = gBattleStruct->weatherDuration; // battleInfo
     }
 
     if (ability != ABILITY_NONE) // Weather started by Ability

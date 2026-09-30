@@ -23,6 +23,7 @@
 #include "strings.h"
 #include "battle_controllers.h"
 #include "ui_mon_summary.h"
+#include "silicon_battle_status_criteria.h"
 #include "ui_battle_info.h"
 #include "constants/rgb.h"
 #include "constants/songs.h"
@@ -149,6 +150,12 @@ struct BattleInfoData
     u8 numOptions:4;
     enum BattleInfoOptions optionsList[NUM_BI_OPTIONS];
     u8 switchInResult;
+
+    // status conditions list
+    u8 statusCursor;
+    u8 topLeftStatus;
+    u8 numStatuses;
+    enum SiliconBattleStatuses *statusList;
 };
 
 static EWRAM_DATA struct BattleInfoData *sBattleInfoDataPtr = NULL;
@@ -225,7 +232,7 @@ static void BattleInfoHelper_ReorderPartyToInfoLayout(void);
 static void BattleInfoHelper_ReorderPartyToBattleLayout(void);
 static bool32 BattleInfoHelper_CanMonInfoBeShown(void);
 static void BattleInfoHelper_PopulateOptionsList(void);
-static u32 BattleInfoHelper_GetVolatileMaxValue(enum Volatile);
+static void BattleInfoHelper_PopulateStatusList(void);
 static u32 BattleInfoHelper_GetTotalCrits(void);
 static void BattleInfoHelper_AddTextPrinterToWindow(u32, u32, u32, u32, enum BattleInfoTextColors, const u8 *);
 static void BattleInfoHelper_AddTextPrinter(u32, u32, u32, enum BattleInfoTextColors, const u8 *);
@@ -452,6 +459,14 @@ void BattleInfo_Init(u32 partyAction, MainCallback savedCB)
         return;
     }
 
+    sBattleInfoDataPtr->statusList = AllocZeroed(sizeof(enum SiliconBattleStatuses) * BattleStatusCriteria_GetMaxTotalListItems());
+    assertf(sBattleInfoDataPtr->statusList != NULL, "[BATTLE INFO] failed to allocate necessary status list data")
+    {
+        FREE_AND_SET_NULL(sBattleInfoDataPtr);
+        SetMainCallback2(savedCB);
+        return;
+    }
+
     sBattleInfoDataPtr->savedCB = savedCB;
     sBattleInfoDataPtr->mode = BI_MODE_MAIN;
     sBattleInfoDataPtr->switchInResult = NO_SWITCH;
@@ -503,6 +518,7 @@ static void CB2_BattleInfoInit(void)
         gMain.state++;
         break;
     case STATE_INIT_WIN:
+        BattleInfoHelper_PopulateStatusList();
         BattleInfoInit_Windows();
         gMain.state++;
         break;
@@ -788,6 +804,7 @@ static void Task_BattleInfo_Close(u8 taskId)
         SetMainCallback2(sBattleInfoDataPtr->savedCB);
     }
 
+    Free(sBattleInfoDataPtr->statusList);
     FREE_AND_SET_NULL(sBattleInfoDataPtr);
     DestroyTask(taskId);
 }
@@ -992,6 +1009,7 @@ static void BattleInfoInput_UpdateGrid(s32 deltaX, s32 deltaY)
 
     PlaySE(SE_SELECT);
     sBattleInfoDataPtr->currPartySlot = nextPartySlot;
+    BattleInfoHelper_PopulateStatusList();
     BattleInfoHelper_UpdateEverything();
 }
 
@@ -1316,21 +1334,27 @@ static void BattleInfoText_UpdateStatStages(void)
 
 static void BattleInfoText_ShowMonStatusList(void)
 {
-    if (!BattleInfoHelper_CanMonInfoBeShown())
+    if (!BattleInfoHelper_CanMonInfoBeShown() || sBattleInfoDataPtr->numStatuses == 0)
         return;
 
     u32 windowId = BI_WIN_MAIN;
+    FillWindowPixelRect(windowId, PIXEL_FILL(0), 160, 8, 80, 80);
     BlitBitmapToWindow(windowId, sBattleInfo_StatusListBlit, 160, 8, 80, 80);
 
-    for (u32 i = 0, y = 4; i < 5; i++, y += 16)
+    u32 count = sBattleInfoDataPtr->numStatuses;
+    if (count > 5) count = 5;
+
+    for (u32 i = 0, y = 4; i < count; i++)
     {
-        const u8 *str = COMPOUND_STRING("Test");
+        enum SiliconBattleStatuses status = sBattleInfoDataPtr->statusList[sBattleInfoDataPtr->topLeftStatus + i];
+        const u8 *str = BattleStatusCriteria_GetFormattedName(BattleInfoHelper_GetCurrBattler(), status);
         u32 fontId = GetFontIdToFit(str, FONT_OUTLINED, 0, 72);
         BattleInfoHelper_AddTextPrinter(
             162, y,
             fontId,
             BI_TXTCLR_OUTLINED,
             str);
+        y += 16;
     }
 }
 
@@ -1673,23 +1697,9 @@ static void BattleInfoHelper_PopulateOptionsList(void)
     #undef ADD_OPT
 }
 
-UNUSED static u32 BattleInfoHelper_GetVolatileMaxValue(enum Volatile vol)
+static void BattleInfoHelper_PopulateStatusList(void)
 {
-    #define UNPACK_VOLATILE_MAX_SIZE(_enum, _fieldName, _typeMaxValue, ...) case _enum: return min(MAX_u16, GET_VOLATILE_MAXIMUM(_typeMaxValue));
-
-    switch (vol)
-    {
-    VOLATILE_DEFINITIONS(UNPACK_VOLATILE_MAX_SIZE)
-    /* Expands to the following:
-        * case VOLATILE_CONFUSION:
-            return MAX_BITS(3); // Max value 7
-        * case VOLATILE_FLINCHED:
-            return MAX_BITS(1); // Max value 1
-        * ...etc.
-        */
-    default:
-        return 0;
-    }
+    sBattleInfoDataPtr->numStatuses = BattleStatusCriteria_CompileListForBattler(BattleInfoHelper_GetCurrBattler(), sBattleInfoDataPtr->statusList);
 }
 
 static u32 BattleInfoHelper_GetTotalCrits(void)

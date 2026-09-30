@@ -55,6 +55,7 @@
 #include "data.h"
 #include "config_changes.h"
 #include "move.h"
+#include "silicon_battle_status_criteria.h" // battleInfo
 #include "constants/abilities.h"
 #include "constants/battle_anim.h"
 #include "constants/battle_move_effects.h"
@@ -4525,6 +4526,7 @@ static void Cmd_setgravity(void)
     {
         gFieldStatuses |= STATUS_FIELD_GRAVITY;
         gFieldTimers.gravityTimer = 5;
+        gRecordedMaxBattleStatusValues.gravityDuration = gFieldTimers.gravityTimer; // battleInfo
         gBattlescriptCurrInstr = cmd->nextInstr;
     }
 }
@@ -6513,6 +6515,7 @@ static void Cmd_settailwind(void)
     {
         gSideStatuses[side] |= SIDE_STATUS_TAILWIND;
         gSideTimers[side].tailwindTimer = (GetConfig(B_TAILWIND_TURNS) >= GEN_5 ? 4 : 3);
+        gRecordedMaxBattleStatusValues.tailwindDuration = gSideTimers[side].tailwindTimer; // battleInfo
         gBattlescriptCurrInstr = cmd->nextInstr;
     }
     else
@@ -7462,12 +7465,15 @@ static void Cmd_setroom(void)
     {
     case EFFECT_TRICK_ROOM:
         HandleRoomMove(STATUS_FIELD_TRICK_ROOM, &gFieldTimers.trickRoomTimer, 0);
+        gRecordedMaxBattleStatusValues.trickRoomDuration = gFieldTimers.trickRoomTimer; // battleInfo
         break;
     case EFFECT_WONDER_ROOM:
         HandleRoomMove(STATUS_FIELD_WONDER_ROOM, &gFieldTimers.wonderRoomTimer, 2);
+        gRecordedMaxBattleStatusValues.wonderRoomDuration = gFieldTimers.wonderRoomTimer; // battleInfo
         break;
     case EFFECT_MAGIC_ROOM:
         HandleRoomMove(STATUS_FIELD_MAGIC_ROOM, &gFieldTimers.magicRoomTimer, 4);
+        gRecordedMaxBattleStatusValues.magicRoomDuration = gFieldTimers.magicRoomTimer; // battleInfo
         break;
     default:
         gBattleCommunication[MULTISTRING_CHOOSER] = 6;
