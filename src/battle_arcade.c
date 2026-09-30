@@ -134,29 +134,6 @@ static void SetTimer(u32 value);
 static void CalculatePanelPosition(u32 space, u32* x, u32* y);
 static void Task_GameBoard_Countdown(u8 taskId);
 static void PopulateEventSprites(void);
-static const union AnimCmd sAnim_Panel_Burn[];
-static const union AnimCmd sAnim_Panel_Fog[];
-static const union AnimCmd sAnim_Panel_Freeze[];
-static const union AnimCmd sAnim_Panel_Give_Berry[];
-static const union AnimCmd sAnim_Panel_Give_Bp_Big[];
-static const union AnimCmd sAnim_Panel_Give_Bp_Small[];
-static const union AnimCmd sAnim_Panel_Give_Item[];
-static const union AnimCmd sAnim_Panel_Snow[];
-static const union AnimCmd sAnim_Panel_Level_Up[];
-static const union AnimCmd sAnim_Panel_Lower_Hp[];
-static const union AnimCmd sAnim_Panel_No_Battle[];
-static const union AnimCmd sAnim_Panel_No_Event[];
-static const union AnimCmd sAnim_Panel_Paralyze[];
-static const union AnimCmd sAnim_Panel_Poison[];
-static const union AnimCmd sAnim_Panel_Rain[];
-static const union AnimCmd sAnim_Panel_Random[];
-static const union AnimCmd sAnim_Panel_Sand[];
-static const union AnimCmd sAnim_Panel_Sleep[];
-static const union AnimCmd sAnim_Panel_Speed_Down[];
-static const union AnimCmd sAnim_Panel_Speed_Up[];
-static const union AnimCmd sAnim_Panel_Sun[];
-static const union AnimCmd sAnim_Panel_Swap[];
-static const union AnimCmd sAnim_Panel_Trick_Room[];
 static u8 CreateEventSprite(u32 x, u32 y, u32 space);
 static void StartGame(void);
 static void SetTimerForGame(void);
@@ -238,6 +215,40 @@ static struct GameBoardState *sGameBoardState = NULL;
 static u8 *sBgTilemapBuffer[BG_BOARD_COUNT] = {NULL};
 static struct GameResult sGameBoard[ARCADE_GAME_BOARD_SPACES] = {{0}};
 
+#define DEFINE_ARCADE_EVENT_ANIM(event) \
+static const union AnimCmd sAnim_Panel_##event[] = \
+{ \
+    ANIMCMD_FRAME(ARCADE_PANEL_COUNTDOWN_3_FRAME, ARCADE_BOARD_COUNTDOWN_TIMER / 3), \
+    ANIMCMD_FRAME(ARCADE_PANEL_COUNTDOWN_2_FRAME, ARCADE_BOARD_COUNTDOWN_TIMER / 3), \
+    ANIMCMD_FRAME(ARCADE_PANEL_COUNTDOWN_1_FRAME, ARCADE_BOARD_COUNTDOWN_TIMER / 3), \
+    ANIMCMD_FRAME(event * 16, 0), \
+    ANIMCMD_END \
+};
+
+DEFINE_ARCADE_EVENT_ANIM(ARCADE_EVENT_LOWER_HP)
+DEFINE_ARCADE_EVENT_ANIM(ARCADE_EVENT_POISON)
+DEFINE_ARCADE_EVENT_ANIM(ARCADE_EVENT_PARALYZE)
+DEFINE_ARCADE_EVENT_ANIM(ARCADE_EVENT_BURN)
+DEFINE_ARCADE_EVENT_ANIM(ARCADE_EVENT_SLEEP)
+DEFINE_ARCADE_EVENT_ANIM(ARCADE_EVENT_FREEZE)
+DEFINE_ARCADE_EVENT_ANIM(ARCADE_EVENT_GIVE_BERRY)
+DEFINE_ARCADE_EVENT_ANIM(ARCADE_EVENT_GIVE_ITEM)
+DEFINE_ARCADE_EVENT_ANIM(ARCADE_EVENT_LEVEL_UP)
+DEFINE_ARCADE_EVENT_ANIM(ARCADE_EVENT_SUN)
+DEFINE_ARCADE_EVENT_ANIM(ARCADE_EVENT_RAIN)
+DEFINE_ARCADE_EVENT_ANIM(ARCADE_EVENT_SAND)
+DEFINE_ARCADE_EVENT_ANIM(ARCADE_EVENT_SNOW)
+DEFINE_ARCADE_EVENT_ANIM(ARCADE_EVENT_FOG)
+DEFINE_ARCADE_EVENT_ANIM(ARCADE_EVENT_TRICK_ROOM)
+DEFINE_ARCADE_EVENT_ANIM(ARCADE_EVENT_SWAP)
+DEFINE_ARCADE_EVENT_ANIM(ARCADE_EVENT_SPEED_UP)
+DEFINE_ARCADE_EVENT_ANIM(ARCADE_EVENT_SPEED_DOWN)
+DEFINE_ARCADE_EVENT_ANIM(ARCADE_EVENT_RANDOM)
+DEFINE_ARCADE_EVENT_ANIM(ARCADE_EVENT_GIVE_BP_SMALL)
+DEFINE_ARCADE_EVENT_ANIM(ARCADE_EVENT_NO_BATTLE)
+DEFINE_ARCADE_EVENT_ANIM(ARCADE_EVENT_GIVE_BP_BIG)
+DEFINE_ARCADE_EVENT_ANIM(ARCADE_EVENT_NO_EVENT)
+
 const struct ArcadeEventInfo arcadeEventInfo[ARCADE_EVENT_COUNT] =
 {
     [ARCADE_EVENT_LOWER_HP] =
@@ -245,7 +256,7 @@ const struct ArcadeEventInfo arcadeEventInfo[ARCADE_EVENT_COUNT] =
         .name = COMPOUND_STRING("Lower HP"),
         .eventFunc = BattleArcade_DoLowerHP,
         .type = ARCADE_IMPACT_EITHER_SIDE,
-        .animTable = sAnim_Panel_Lower_Hp,
+        .animTable = sAnim_Panel_ARCADE_EVENT_LOWER_HP,
         .streakEligibility =
         {
             [0] = TRUE,
@@ -278,7 +289,7 @@ const struct ArcadeEventInfo arcadeEventInfo[ARCADE_EVENT_COUNT] =
         .name = COMPOUND_STRING("Poison"),
         .eventFunc = BattleArcade_DoPoison,
         .type = ARCADE_IMPACT_EITHER_SIDE,
-        .animTable = sAnim_Panel_Poison,
+        .animTable = sAnim_Panel_ARCADE_EVENT_POISON,
         .streakEligibility =
         {
             [0] = TRUE,
@@ -311,7 +322,7 @@ const struct ArcadeEventInfo arcadeEventInfo[ARCADE_EVENT_COUNT] =
         .name = COMPOUND_STRING("Paralyze"),
         .eventFunc = BattleArcade_DoParalyze,
         .type = ARCADE_IMPACT_EITHER_SIDE,
-        .animTable = sAnim_Panel_Paralyze,
+        .animTable = sAnim_Panel_ARCADE_EVENT_PARALYZE,
         .streakEligibility =
         {
             [0] = TRUE,
@@ -344,7 +355,7 @@ const struct ArcadeEventInfo arcadeEventInfo[ARCADE_EVENT_COUNT] =
         .name = COMPOUND_STRING("Burn"),
         .eventFunc = BattleArcade_DoBurn,
         .type = ARCADE_IMPACT_EITHER_SIDE,
-        .animTable = sAnim_Panel_Burn,
+        .animTable = sAnim_Panel_ARCADE_EVENT_BURN,
         .streakEligibility =
         {
             [0] = TRUE,
@@ -377,7 +388,7 @@ const struct ArcadeEventInfo arcadeEventInfo[ARCADE_EVENT_COUNT] =
         .name = COMPOUND_STRING("Sleep"),
         .eventFunc = BattleArcade_DoSleep,
         .type = ARCADE_IMPACT_EITHER_SIDE,
-        .animTable = sAnim_Panel_Sleep,
+        .animTable = sAnim_Panel_ARCADE_EVENT_SLEEP,
         .streakEligibility =
         {
             [0] = TRUE,
@@ -410,7 +421,7 @@ const struct ArcadeEventInfo arcadeEventInfo[ARCADE_EVENT_COUNT] =
         .name = COMPOUND_STRING("Freeze"),
         .eventFunc = BattleArcade_DoFreeze,
         .type = ARCADE_IMPACT_EITHER_SIDE,
-        .animTable = sAnim_Panel_Freeze,
+        .animTable = sAnim_Panel_ARCADE_EVENT_FREEZE,
         .streakEligibility =
         {
             [0] = TRUE,
@@ -443,7 +454,7 @@ const struct ArcadeEventInfo arcadeEventInfo[ARCADE_EVENT_COUNT] =
         .name = COMPOUND_STRING("Give Berry"),
         .eventFunc = BattleArcade_DoGiveBerry,
         .type = ARCADE_IMPACT_EITHER_SIDE,
-        .animTable = sAnim_Panel_Give_Berry,
+        .animTable = sAnim_Panel_ARCADE_EVENT_GIVE_BERRY,
         .streakEligibility =
         {
             [0] = TRUE,
@@ -476,7 +487,7 @@ const struct ArcadeEventInfo arcadeEventInfo[ARCADE_EVENT_COUNT] =
         .name = COMPOUND_STRING("Give Item"),
         .eventFunc = BattleArcade_DoGiveItem,
         .type = ARCADE_IMPACT_EITHER_SIDE,
-        .animTable = sAnim_Panel_Give_Item,
+        .animTable = sAnim_Panel_ARCADE_EVENT_GIVE_ITEM,
         .streakEligibility =
         {
             [0] = TRUE,
@@ -509,7 +520,7 @@ const struct ArcadeEventInfo arcadeEventInfo[ARCADE_EVENT_COUNT] =
         .name = COMPOUND_STRING("Level Up"),
         .eventFunc = BattleArcade_DoLevelUp,
         .type = ARCADE_IMPACT_EITHER_SIDE,
-        .animTable = sAnim_Panel_Level_Up,
+        .animTable = sAnim_Panel_ARCADE_EVENT_LEVEL_UP,
         .streakEligibility =
         {
             [0] = TRUE,
@@ -542,7 +553,7 @@ const struct ArcadeEventInfo arcadeEventInfo[ARCADE_EVENT_COUNT] =
         .name = COMPOUND_STRING("Sun"),
         .eventFunc = BattleArcade_DoSun,
         .type = ARCADE_IMPACT_ALL,
-        .animTable = sAnim_Panel_Sun,
+        .animTable =sAnim_Panel_ARCADE_EVENT_SUN ,
         .streakEligibility =
         {
             [0] = TRUE,
@@ -575,7 +586,7 @@ const struct ArcadeEventInfo arcadeEventInfo[ARCADE_EVENT_COUNT] =
         .name = COMPOUND_STRING("Rain"),
         .eventFunc = BattleArcade_DoRain,
         .type = ARCADE_IMPACT_ALL,
-        .animTable = sAnim_Panel_Rain,
+        .animTable = sAnim_Panel_ARCADE_EVENT_RAIN,
         .streakEligibility =
         {
             [0] = TRUE,
@@ -608,7 +619,7 @@ const struct ArcadeEventInfo arcadeEventInfo[ARCADE_EVENT_COUNT] =
         .name = COMPOUND_STRING("Sand"),
         .eventFunc = BattleArcade_DoSand,
         .type = ARCADE_IMPACT_ALL,
-        .animTable = sAnim_Panel_Sand,
+        .animTable = sAnim_Panel_ARCADE_EVENT_SAND,
         .streakEligibility =
         {
             [0] = TRUE,
@@ -641,7 +652,7 @@ const struct ArcadeEventInfo arcadeEventInfo[ARCADE_EVENT_COUNT] =
         .name = COMPOUND_STRING("Snow"),
         .eventFunc = BattleArcade_DoSnow,
         .type = ARCADE_IMPACT_ALL,
-        .animTable = sAnim_Panel_Snow,
+        .animTable = sAnim_Panel_ARCADE_EVENT_SNOW,
         .streakEligibility =
         {
             [0] = TRUE,
@@ -674,7 +685,7 @@ const struct ArcadeEventInfo arcadeEventInfo[ARCADE_EVENT_COUNT] =
         .name = COMPOUND_STRING("Fog"),
         .eventFunc = BattleArcade_DoFog,
         .type = ARCADE_IMPACT_ALL,
-        .animTable = sAnim_Panel_Fog,
+        .animTable =sAnim_Panel_ARCADE_EVENT_FOG ,
         .streakEligibility =
         {
             [0] = TRUE,
@@ -707,7 +718,7 @@ const struct ArcadeEventInfo arcadeEventInfo[ARCADE_EVENT_COUNT] =
         .name = COMPOUND_STRING("Trick Room"),
         .eventFunc = BattleArcade_DoTrickRoom,
         .type = ARCADE_IMPACT_ALL,
-        .animTable = sAnim_Panel_Trick_Room,
+        .animTable = sAnim_Panel_ARCADE_EVENT_TRICK_ROOM,
         .streakEligibility =
         {
             [0] = TRUE,
@@ -740,7 +751,7 @@ const struct ArcadeEventInfo arcadeEventInfo[ARCADE_EVENT_COUNT] =
         .name = COMPOUND_STRING("Swap"),
         .eventFunc = BattleArcade_DoSwap,
         .type = ARCADE_IMPACT_SPECIAL,
-        .animTable = sAnim_Panel_Swap,
+        .animTable = sAnim_Panel_ARCADE_EVENT_SWAP,
         .streakEligibility =
         {
             [0] = TRUE,
@@ -773,7 +784,7 @@ const struct ArcadeEventInfo arcadeEventInfo[ARCADE_EVENT_COUNT] =
         .name = COMPOUND_STRING("Speed Up"),
         .eventFunc = BattleArcade_DoSpeedUp,
         .type = ARCADE_IMPACT_SPECIAL,
-        .animTable = sAnim_Panel_Speed_Up,
+        .animTable = sAnim_Panel_ARCADE_EVENT_SPEED_UP,
         .streakEligibility =
         {
             [0] = TRUE,
@@ -806,7 +817,7 @@ const struct ArcadeEventInfo arcadeEventInfo[ARCADE_EVENT_COUNT] =
         .name = COMPOUND_STRING("Speed Down"),
         .eventFunc = BattleArcade_DoSpeedDown,
         .type = ARCADE_IMPACT_SPECIAL,
-        .animTable = sAnim_Panel_Speed_Down,
+        .animTable = sAnim_Panel_ARCADE_EVENT_SPEED_DOWN,
         .streakEligibility =
         {
             [0] = TRUE,
@@ -839,7 +850,7 @@ const struct ArcadeEventInfo arcadeEventInfo[ARCADE_EVENT_COUNT] =
         .name = COMPOUND_STRING("Random"),
         .eventFunc = BattleArcade_DoRandom,
         .type = ARCADE_IMPACT_SPECIAL,
-        .animTable = sAnim_Panel_Random,
+        .animTable = sAnim_Panel_ARCADE_EVENT_RANDOM,
         .streakEligibility =
         {
             [0] = FALSE,
@@ -872,7 +883,7 @@ const struct ArcadeEventInfo arcadeEventInfo[ARCADE_EVENT_COUNT] =
         .name = COMPOUND_STRING("BP Small"),
         .eventFunc = BattleArcade_DoGiveBPSmall,
         .type = ARCADE_IMPACT_SPECIAL,
-        .animTable = sAnim_Panel_Give_Bp_Small,
+        .animTable = sAnim_Panel_ARCADE_EVENT_GIVE_BP_SMALL,
         .streakEligibility =
         {
             [0] = FALSE,
@@ -905,7 +916,7 @@ const struct ArcadeEventInfo arcadeEventInfo[ARCADE_EVENT_COUNT] =
         .name = COMPOUND_STRING("No Battle"),
         .eventFunc = BattleArcade_DoNoBattle,
         .type = ARCADE_IMPACT_SPECIAL,
-        .animTable = sAnim_Panel_No_Battle,
+        .animTable = sAnim_Panel_ARCADE_EVENT_NO_BATTLE,
         .streakEligibility =
         {
             [0] = FALSE,
@@ -938,7 +949,7 @@ const struct ArcadeEventInfo arcadeEventInfo[ARCADE_EVENT_COUNT] =
         .name = COMPOUND_STRING("Give BP Big"),
         .eventFunc = BattleArcade_DoGiveBPBig,
         .type = ARCADE_IMPACT_SPECIAL,
-        .animTable = sAnim_Panel_Give_Bp_Big,
+        .animTable = sAnim_Panel_ARCADE_EVENT_GIVE_BP_BIG,
         .streakEligibility =
         {
             [0] = FALSE,
@@ -971,7 +982,7 @@ const struct ArcadeEventInfo arcadeEventInfo[ARCADE_EVENT_COUNT] =
         .name = COMPOUND_STRING("No Event"),
         .eventFunc = BattleArcade_DoNoEvent,
         .type = ARCADE_IMPACT_SPECIAL,
-        .animTable = sAnim_Panel_No_Event,
+        .animTable = sAnim_Panel_ARCADE_EVENT_NO_EVENT,
         .streakEligibility =
         {
             [0] = TRUE,
@@ -1829,191 +1840,6 @@ static void PopulateEventSprites(void)
         SeekSpriteAnim(&gSprites[spriteId],3);
     }
 }
-
-static const union AnimCmd sAnim_Panel_Burn[] =
-{
-    ANIMCMD_FRAME(ARCADE_PANEL_COUNTDOWN_3_FRAME, ARCADE_BOARD_COUNTDOWN_TIMER / 3),
-    ANIMCMD_FRAME(ARCADE_PANEL_COUNTDOWN_2_FRAME, ARCADE_BOARD_COUNTDOWN_TIMER / 3),
-    ANIMCMD_FRAME(ARCADE_PANEL_COUNTDOWN_1_FRAME, ARCADE_BOARD_COUNTDOWN_TIMER / 3),
-    ANIMCMD_FRAME(ARCADE_EVENT_BURN_FRAME, 0),
-    ANIMCMD_END
-};
-static const union AnimCmd sAnim_Panel_Fog[] =
-{
-    ANIMCMD_FRAME(ARCADE_PANEL_COUNTDOWN_3_FRAME, ARCADE_BOARD_COUNTDOWN_TIMER / 3),
-    ANIMCMD_FRAME(ARCADE_PANEL_COUNTDOWN_2_FRAME, ARCADE_BOARD_COUNTDOWN_TIMER / 3),
-    ANIMCMD_FRAME(ARCADE_PANEL_COUNTDOWN_1_FRAME, ARCADE_BOARD_COUNTDOWN_TIMER / 3),
-    ANIMCMD_FRAME(ARCADE_EVENT_FOG_FRAME, 0),
-    ANIMCMD_END
-};
-static const union AnimCmd sAnim_Panel_Freeze[] =
-{
-    ANIMCMD_FRAME(ARCADE_PANEL_COUNTDOWN_3_FRAME, ARCADE_BOARD_COUNTDOWN_TIMER / 3),
-    ANIMCMD_FRAME(ARCADE_PANEL_COUNTDOWN_2_FRAME, ARCADE_BOARD_COUNTDOWN_TIMER / 3),
-    ANIMCMD_FRAME(ARCADE_PANEL_COUNTDOWN_1_FRAME, ARCADE_BOARD_COUNTDOWN_TIMER / 3),
-    ANIMCMD_FRAME(ARCADE_EVENT_FREEZE_FRAME, 0),
-    ANIMCMD_END
-};
-static const union AnimCmd sAnim_Panel_Give_Berry[] =
-{
-    ANIMCMD_FRAME(ARCADE_PANEL_COUNTDOWN_3_FRAME, ARCADE_BOARD_COUNTDOWN_TIMER / 3),
-    ANIMCMD_FRAME(ARCADE_PANEL_COUNTDOWN_2_FRAME, ARCADE_BOARD_COUNTDOWN_TIMER / 3),
-    ANIMCMD_FRAME(ARCADE_PANEL_COUNTDOWN_1_FRAME, ARCADE_BOARD_COUNTDOWN_TIMER / 3),
-    ANIMCMD_FRAME(ARCADE_EVENT_GIVE_BERRY_FRAME, 0),
-    ANIMCMD_END
-};
-static const union AnimCmd sAnim_Panel_Give_Bp_Big[] =
-{
-    ANIMCMD_FRAME(ARCADE_PANEL_COUNTDOWN_3_FRAME, ARCADE_BOARD_COUNTDOWN_TIMER / 3),
-    ANIMCMD_FRAME(ARCADE_PANEL_COUNTDOWN_2_FRAME, ARCADE_BOARD_COUNTDOWN_TIMER / 3),
-    ANIMCMD_FRAME(ARCADE_PANEL_COUNTDOWN_1_FRAME, ARCADE_BOARD_COUNTDOWN_TIMER / 3),
-    ANIMCMD_FRAME(ARCADE_EVENT_GIVE_BP_BIG_FRAME, 0),
-    ANIMCMD_END
-};
-static const union AnimCmd sAnim_Panel_Give_Bp_Small[] =
-{
-    ANIMCMD_FRAME(ARCADE_PANEL_COUNTDOWN_3_FRAME, ARCADE_BOARD_COUNTDOWN_TIMER / 3),
-    ANIMCMD_FRAME(ARCADE_PANEL_COUNTDOWN_2_FRAME, ARCADE_BOARD_COUNTDOWN_TIMER / 3),
-    ANIMCMD_FRAME(ARCADE_PANEL_COUNTDOWN_1_FRAME, ARCADE_BOARD_COUNTDOWN_TIMER / 3),
-    ANIMCMD_FRAME(ARCADE_EVENT_GIVE_BP_SMALL_FRAME, 0),
-    ANIMCMD_END
-};
-static const union AnimCmd sAnim_Panel_Give_Item[] =
-{
-    ANIMCMD_FRAME(ARCADE_PANEL_COUNTDOWN_3_FRAME, ARCADE_BOARD_COUNTDOWN_TIMER / 3),
-    ANIMCMD_FRAME(ARCADE_PANEL_COUNTDOWN_2_FRAME, ARCADE_BOARD_COUNTDOWN_TIMER / 3),
-    ANIMCMD_FRAME(ARCADE_PANEL_COUNTDOWN_1_FRAME, ARCADE_BOARD_COUNTDOWN_TIMER / 3),
-    ANIMCMD_FRAME(ARCADE_EVENT_GIVE_ITEM_FRAME, 0),
-    ANIMCMD_END
-};
-static const union AnimCmd sAnim_Panel_Snow[] =
-{
-    ANIMCMD_FRAME(ARCADE_PANEL_COUNTDOWN_3_FRAME, ARCADE_BOARD_COUNTDOWN_TIMER / 3),
-    ANIMCMD_FRAME(ARCADE_PANEL_COUNTDOWN_2_FRAME, ARCADE_BOARD_COUNTDOWN_TIMER / 3),
-    ANIMCMD_FRAME(ARCADE_PANEL_COUNTDOWN_1_FRAME, ARCADE_BOARD_COUNTDOWN_TIMER / 3),
-    ANIMCMD_FRAME(ARCADE_EVENT_SNOW_FRAME, 0),
-    ANIMCMD_END
-};
-static const union AnimCmd sAnim_Panel_Level_Up[] =
-{
-    ANIMCMD_FRAME(ARCADE_PANEL_COUNTDOWN_3_FRAME, ARCADE_BOARD_COUNTDOWN_TIMER / 3),
-    ANIMCMD_FRAME(ARCADE_PANEL_COUNTDOWN_2_FRAME, ARCADE_BOARD_COUNTDOWN_TIMER / 3),
-    ANIMCMD_FRAME(ARCADE_PANEL_COUNTDOWN_1_FRAME, ARCADE_BOARD_COUNTDOWN_TIMER / 3),
-    ANIMCMD_FRAME(ARCADE_EVENT_LEVEL_UP_FRAME, 0),
-    ANIMCMD_END
-};
-static const union AnimCmd sAnim_Panel_Lower_Hp[] =
-{
-    ANIMCMD_FRAME(ARCADE_PANEL_COUNTDOWN_3_FRAME, ARCADE_BOARD_COUNTDOWN_TIMER / 3),
-    ANIMCMD_FRAME(ARCADE_PANEL_COUNTDOWN_2_FRAME, ARCADE_BOARD_COUNTDOWN_TIMER / 3),
-    ANIMCMD_FRAME(ARCADE_PANEL_COUNTDOWN_1_FRAME, ARCADE_BOARD_COUNTDOWN_TIMER / 3),
-    ANIMCMD_FRAME(ARCADE_EVENT_LOWER_HP_FRAME, 0),
-    ANIMCMD_END
-};
-static const union AnimCmd sAnim_Panel_No_Battle[] =
-{
-    ANIMCMD_FRAME(ARCADE_PANEL_COUNTDOWN_3_FRAME, ARCADE_BOARD_COUNTDOWN_TIMER / 3),
-    ANIMCMD_FRAME(ARCADE_PANEL_COUNTDOWN_2_FRAME, ARCADE_BOARD_COUNTDOWN_TIMER / 3),
-    ANIMCMD_FRAME(ARCADE_PANEL_COUNTDOWN_1_FRAME, ARCADE_BOARD_COUNTDOWN_TIMER / 3),
-    ANIMCMD_FRAME(ARCADE_EVENT_NO_BATTLE_FRAME, 0),
-    ANIMCMD_END
-};
-static const union AnimCmd sAnim_Panel_No_Event[] =
-{
-    ANIMCMD_FRAME(ARCADE_PANEL_COUNTDOWN_3_FRAME, ARCADE_BOARD_COUNTDOWN_TIMER / 3),
-    ANIMCMD_FRAME(ARCADE_PANEL_COUNTDOWN_2_FRAME, ARCADE_BOARD_COUNTDOWN_TIMER / 3),
-    ANIMCMD_FRAME(ARCADE_PANEL_COUNTDOWN_1_FRAME, ARCADE_BOARD_COUNTDOWN_TIMER / 3),
-    ANIMCMD_FRAME(ARCADE_EVENT_NO_EVENT_FRAME, 0),
-    ANIMCMD_END
-};
-static const union AnimCmd sAnim_Panel_Paralyze[] =
-{
-    ANIMCMD_FRAME(ARCADE_PANEL_COUNTDOWN_3_FRAME, ARCADE_BOARD_COUNTDOWN_TIMER / 3),
-    ANIMCMD_FRAME(ARCADE_PANEL_COUNTDOWN_2_FRAME, ARCADE_BOARD_COUNTDOWN_TIMER / 3),
-    ANIMCMD_FRAME(ARCADE_PANEL_COUNTDOWN_1_FRAME, ARCADE_BOARD_COUNTDOWN_TIMER / 3),
-    ANIMCMD_FRAME(ARCADE_EVENT_PARALYZE_FRAME, 0),
-    ANIMCMD_END
-};
-static const union AnimCmd sAnim_Panel_Poison[] =
-{
-    ANIMCMD_FRAME(ARCADE_PANEL_COUNTDOWN_3_FRAME, ARCADE_BOARD_COUNTDOWN_TIMER / 3),
-    ANIMCMD_FRAME(ARCADE_PANEL_COUNTDOWN_2_FRAME, ARCADE_BOARD_COUNTDOWN_TIMER / 3),
-    ANIMCMD_FRAME(ARCADE_PANEL_COUNTDOWN_1_FRAME, ARCADE_BOARD_COUNTDOWN_TIMER / 3),
-    ANIMCMD_FRAME(ARCADE_EVENT_POISON_FRAME, 0),
-    ANIMCMD_END
-};
-static const union AnimCmd sAnim_Panel_Rain[] =
-{
-    ANIMCMD_FRAME(ARCADE_PANEL_COUNTDOWN_3_FRAME, ARCADE_BOARD_COUNTDOWN_TIMER / 3),
-    ANIMCMD_FRAME(ARCADE_PANEL_COUNTDOWN_2_FRAME, ARCADE_BOARD_COUNTDOWN_TIMER / 3),
-    ANIMCMD_FRAME(ARCADE_PANEL_COUNTDOWN_1_FRAME, ARCADE_BOARD_COUNTDOWN_TIMER / 3),
-    ANIMCMD_FRAME(ARCADE_EVENT_RAIN_FRAME, 0),
-    ANIMCMD_END
-};
-static const union AnimCmd sAnim_Panel_Random[] =
-{
-    ANIMCMD_FRAME(ARCADE_PANEL_COUNTDOWN_3_FRAME, ARCADE_BOARD_COUNTDOWN_TIMER / 3),
-    ANIMCMD_FRAME(ARCADE_PANEL_COUNTDOWN_2_FRAME, ARCADE_BOARD_COUNTDOWN_TIMER / 3),
-    ANIMCMD_FRAME(ARCADE_PANEL_COUNTDOWN_1_FRAME, ARCADE_BOARD_COUNTDOWN_TIMER / 3),
-    ANIMCMD_FRAME(ARCADE_EVENT_RANDOM_FRAME, 0),
-    ANIMCMD_END
-};
-static const union AnimCmd sAnim_Panel_Sand[] =
-{
-    ANIMCMD_FRAME(ARCADE_PANEL_COUNTDOWN_3_FRAME, ARCADE_BOARD_COUNTDOWN_TIMER / 3),
-    ANIMCMD_FRAME(ARCADE_PANEL_COUNTDOWN_2_FRAME, ARCADE_BOARD_COUNTDOWN_TIMER / 3),
-    ANIMCMD_FRAME(ARCADE_PANEL_COUNTDOWN_1_FRAME, ARCADE_BOARD_COUNTDOWN_TIMER / 3),
-    ANIMCMD_FRAME(ARCADE_EVENT_SAND_FRAME, 0),
-    ANIMCMD_END
-};
-static const union AnimCmd sAnim_Panel_Sleep[] =
-{
-    ANIMCMD_FRAME(ARCADE_PANEL_COUNTDOWN_3_FRAME, ARCADE_BOARD_COUNTDOWN_TIMER / 3),
-    ANIMCMD_FRAME(ARCADE_PANEL_COUNTDOWN_2_FRAME, ARCADE_BOARD_COUNTDOWN_TIMER / 3),
-    ANIMCMD_FRAME(ARCADE_PANEL_COUNTDOWN_1_FRAME, ARCADE_BOARD_COUNTDOWN_TIMER / 3),
-    ANIMCMD_FRAME(ARCADE_EVENT_SLEEP_FRAME, 0),
-    ANIMCMD_END
-};
-static const union AnimCmd sAnim_Panel_Speed_Down[] =
-{
-    ANIMCMD_FRAME(ARCADE_PANEL_COUNTDOWN_3_FRAME, ARCADE_BOARD_COUNTDOWN_TIMER / 3),
-    ANIMCMD_FRAME(ARCADE_PANEL_COUNTDOWN_2_FRAME, ARCADE_BOARD_COUNTDOWN_TIMER / 3),
-    ANIMCMD_FRAME(ARCADE_PANEL_COUNTDOWN_1_FRAME, ARCADE_BOARD_COUNTDOWN_TIMER / 3),
-    ANIMCMD_FRAME(ARCADE_EVENT_SPEED_DOWN_FRAME, 0),
-    ANIMCMD_END
-};
-static const union AnimCmd sAnim_Panel_Speed_Up[] =
-{
-    ANIMCMD_FRAME(ARCADE_PANEL_COUNTDOWN_3_FRAME, ARCADE_BOARD_COUNTDOWN_TIMER / 3),
-    ANIMCMD_FRAME(ARCADE_PANEL_COUNTDOWN_2_FRAME, ARCADE_BOARD_COUNTDOWN_TIMER / 3),
-    ANIMCMD_FRAME(ARCADE_PANEL_COUNTDOWN_1_FRAME, ARCADE_BOARD_COUNTDOWN_TIMER / 3),
-    ANIMCMD_FRAME(ARCADE_EVENT_SPEED_UP_FRAME, 0),
-    ANIMCMD_END
-};
-static const union AnimCmd sAnim_Panel_Sun[] =
-{
-    ANIMCMD_FRAME(ARCADE_PANEL_COUNTDOWN_3_FRAME, ARCADE_BOARD_COUNTDOWN_TIMER / 3),
-    ANIMCMD_FRAME(ARCADE_PANEL_COUNTDOWN_2_FRAME, ARCADE_BOARD_COUNTDOWN_TIMER / 3),
-    ANIMCMD_FRAME(ARCADE_PANEL_COUNTDOWN_1_FRAME, ARCADE_BOARD_COUNTDOWN_TIMER / 3),
-    ANIMCMD_FRAME(ARCADE_EVENT_SUN_FRAME, 0),
-    ANIMCMD_END
-};
-static const union AnimCmd sAnim_Panel_Swap[] =
-{
-    ANIMCMD_FRAME(ARCADE_PANEL_COUNTDOWN_3_FRAME, ARCADE_BOARD_COUNTDOWN_TIMER / 3),
-    ANIMCMD_FRAME(ARCADE_PANEL_COUNTDOWN_2_FRAME, ARCADE_BOARD_COUNTDOWN_TIMER / 3),
-    ANIMCMD_FRAME(ARCADE_PANEL_COUNTDOWN_1_FRAME, ARCADE_BOARD_COUNTDOWN_TIMER / 3),
-    ANIMCMD_FRAME(ARCADE_EVENT_SWAP_FRAME, 0),
-    ANIMCMD_END
-};
-static const union AnimCmd sAnim_Panel_Trick_Room[] =
-{
-    ANIMCMD_FRAME(ARCADE_PANEL_COUNTDOWN_3_FRAME, ARCADE_BOARD_COUNTDOWN_TIMER / 3),
-    ANIMCMD_FRAME(ARCADE_PANEL_COUNTDOWN_2_FRAME, ARCADE_BOARD_COUNTDOWN_TIMER / 3),
-    ANIMCMD_FRAME(ARCADE_PANEL_COUNTDOWN_1_FRAME, ARCADE_BOARD_COUNTDOWN_TIMER / 3),
-    ANIMCMD_FRAME(ARCADE_EVENT_TRICK_ROOM_FRAME, 0),
-    ANIMCMD_END
-};
 
 static u8 CreateEventSprite(u32 x, u32 y, u32 space)
 {
