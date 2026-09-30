@@ -205,7 +205,8 @@ script BattleStudio_Dialogue_AnnounceNextBattleSuccess
         case ARCADE_EVENT_FREEZE:
             msgbox(format("The match will commence with the Pokémon on {STR_VAR_1}’s side frozen!"))
         case ARCADE_EVENT_GIVE_BERRY:
-        caseARCADE_EVENT_GIVE_ITEM:
+            msgbox(format("The Pokémon on {STR_VAR_1}’s side will be loaned the {STR_VAR_3}."))
+        case ARCADE_EVENT_GIVE_ITEM:
             msgbox(format("The Pokémon on {STR_VAR_1}’s side will be loaned the {STR_VAR_3}."))
         case ARCADE_EVENT_LEVEL_UP:
             msgbox(format("The match will commence with the Pokémon on {STR_VAR_1}’s side leveled up!"))
@@ -230,6 +231,7 @@ script BattleStudio_Dialogue_AnnounceNextBattleSuccess
         case ARCADE_EVENT_RANDOM:
             msgbox(format("For the next game, the game board’s motion will become random."))
         case ARCADE_EVENT_GIVE_BP_SMALL:
+            msgbox(format("{PLAYER} will receive an extra {STR_VAR_3} BP for winning this battle!"))
         case ARCADE_EVENT_GIVE_BP_BIG:
             msgbox(format("{PLAYER} will receive an extra {STR_VAR_3} BP for winning this battle!"))
         case ARCADE_EVENT_NO_BATTLE:
