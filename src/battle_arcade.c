@@ -134,6 +134,29 @@ static void SetTimer(u32 value);
 static void CalculatePanelPosition(u32 space, u32* x, u32* y);
 static void Task_GameBoard_Countdown(u8 taskId);
 static void PopulateEventSprites(void);
+static const union AnimCmd sAnim_Panel_Burn[];
+static const union AnimCmd sAnim_Panel_Fog[];
+static const union AnimCmd sAnim_Panel_Freeze[];
+static const union AnimCmd sAnim_Panel_Give_Berry[];
+static const union AnimCmd sAnim_Panel_Give_Bp_Big[];
+static const union AnimCmd sAnim_Panel_Give_Bp_Small[];
+static const union AnimCmd sAnim_Panel_Give_Item[];
+static const union AnimCmd sAnim_Panel_Snow[];
+static const union AnimCmd sAnim_Panel_Level_Up[];
+static const union AnimCmd sAnim_Panel_Lower_Hp[];
+static const union AnimCmd sAnim_Panel_No_Battle[];
+static const union AnimCmd sAnim_Panel_No_Event[];
+static const union AnimCmd sAnim_Panel_Paralyze[];
+static const union AnimCmd sAnim_Panel_Poison[];
+static const union AnimCmd sAnim_Panel_Rain[];
+static const union AnimCmd sAnim_Panel_Random[];
+static const union AnimCmd sAnim_Panel_Sand[];
+static const union AnimCmd sAnim_Panel_Sleep[];
+static const union AnimCmd sAnim_Panel_Speed_Down[];
+static const union AnimCmd sAnim_Panel_Speed_Up[];
+static const union AnimCmd sAnim_Panel_Sun[];
+static const union AnimCmd sAnim_Panel_Swap[];
+static const union AnimCmd sAnim_Panel_Trick_Room[];
 static u8 CreateEventSprite(u32 x, u32 y, u32 space);
 static void StartGame(void);
 static void SetTimerForGame(void);
@@ -168,11 +191,7 @@ static void GameBoard_FreeResources(void);
 static u32 GenerateImpact(void);
 static u32 ConvertPerformanceToImpactBracket(void);
 static u32 GenerateEvent(enum ArcadeImpactTypes impact);
-static u32 GenerateRandomBetweenBounds(enum ArcadeImpactTypes impact);
-static s32 GetPanelUpperBound(enum ArcadeImpactTypes impact);
-static s32 GetPanelLowerBound(enum ArcadeImpactTypes impact);
-static bool32 IsEventValidDuringBattleOrStreak(enum ArcadeEvents event, enum ArcadeImpactTypes impact);
-static bool32 IsEventBanned(enum ArcadeEvents event);
+static bool32 IsEventValidDuringBattleOrStreak(enum ArcadeEvents event);
 static bool32 IsEventValidDuringCurrentBattle(enum ArcadeEvents event);
 static bool32 IsEventValidDuringCurrentStreak(enum ArcadeEvents event);
 static u32 GetChallengeNumIndex(void);
@@ -195,29 +214,792 @@ static void BufferGiveString(enum Item item);
 static bool32 BattleArcade_DoLevelUp(enum ArcadeImpactTypes impact);
 static u32 CalculateAndSaveNewLevel(u32 origLevel);
 static bool32 HaveMonsBeenSwapped(void);
-static bool32 BattleArcade_DoSun(void);
-static bool32 BattleArcade_DoRain(void);
-static bool32 BattleArcade_DoSand(void);
-static bool32 BattleArcade_DoSnow(void);
-static bool32 BattleArcade_DoFog(void);
+static bool32 BattleArcade_DoSun(enum ArcadeImpactTypes impact);
+static bool32 BattleArcade_DoRain(enum ArcadeImpactTypes impact);
+static bool32 BattleArcade_DoSand(enum ArcadeImpactTypes impact);
+static bool32 BattleArcade_DoSnow(enum ArcadeImpactTypes impact);
+static bool32 BattleArcade_DoFog(enum ArcadeImpactTypes impact);
 static bool32 BattleArcade_DoWeather(u32 weather);
-static bool32 BattleArcade_DoTrickRoom(void);
-static bool32 BattleArcade_DoSwap(void);
-static bool32 BattleArcade_DoSpeedUp(void);
-static bool32 BattleArcade_DoSpeedDown(void);
+static bool32 BattleArcade_DoTrickRoom(enum ArcadeImpactTypes impact);
+static bool32 BattleArcade_DoSwap(enum ArcadeImpactTypes impact);
+static bool32 BattleArcade_DoSpeedUp(enum ArcadeImpactTypes impact);
+static bool32 BattleArcade_DoSpeedDown(enum ArcadeImpactTypes impact);
 static bool32 BattleArcade_ChangeSpeed(u32 mode);
 static u32 GetCursorSpeed(void);
 static void SetCursorSpeed(u32 speed);
-static bool32 BattleArcade_DoRandom(void);
+static bool32 BattleArcade_DoRandom(enum ArcadeImpactTypes impact);
 static void SetCursorRandomMode(void);
-static bool32 BattleArcade_DoGiveBPSmall(void);
-static bool32 BattleArcade_DoGiveBPBig(void);
-static bool32 BattleArcade_DoNoBattle(void);
-static bool32 BattleArcade_DoNoEvent(void);
+static bool32 BattleArcade_DoGiveBPSmall(enum ArcadeImpactTypes impact);
+static bool32 BattleArcade_DoGiveBPBig(enum ArcadeImpactTypes impact);
+static bool32 BattleArcade_DoNoBattle(enum ArcadeImpactTypes impact);
+static bool32 BattleArcade_DoNoEvent(enum ArcadeImpactTypes impact);
 
 static struct GameBoardState *sGameBoardState = NULL;
 static u8 *sBgTilemapBuffer[BG_BOARD_COUNT] = {NULL};
 static struct GameResult sGameBoard[ARCADE_GAME_BOARD_SPACES] = {{0}};
+
+const struct ArcadeEventInfo arcadeEventInfo[ARCADE_EVENT_COUNT] =
+{
+    [ARCADE_EVENT_LOWER_HP] =
+    {
+        .name = COMPOUND_STRING("Lower HP"),
+        .eventFunc = BattleArcade_DoLowerHP,
+        .type = ARCADE_IMPACT_EITHER_SIDE,
+        .animTable = sAnim_Panel_Lower_Hp,
+        .streakEligibility =
+        {
+            [0] = TRUE,
+            [1] = TRUE,
+            [2] = TRUE,
+            [3] = TRUE,
+            [4] = TRUE,
+            [5] = TRUE,
+            [6] = TRUE,
+            [7] = TRUE,
+            [8] = TRUE,
+            [9] = TRUE,
+        },
+        .battleEligibility =
+        {
+            [0] = TRUE,
+            [1] = TRUE,
+            [2] = TRUE,
+            [3] = TRUE,
+            [4] = TRUE,
+            [5] = TRUE,
+            [6] = TRUE,
+            [7] = TRUE,
+            [8] = TRUE,
+            [9] = TRUE,
+        },
+    },
+    [ARCADE_EVENT_POISON] =
+    {
+        .name = COMPOUND_STRING("Poison"),
+        .eventFunc = BattleArcade_DoPoison,
+        .type = ARCADE_IMPACT_EITHER_SIDE,
+        .animTable = sAnim_Panel_Poison,
+        .streakEligibility =
+        {
+            [0] = TRUE,
+            [1] = TRUE,
+            [2] = TRUE,
+            [3] = TRUE,
+            [4] = TRUE,
+            [5] = TRUE,
+            [6] = TRUE,
+            [7] = TRUE,
+            [8] = TRUE,
+            [9] = TRUE,
+        },
+        .battleEligibility =
+        {
+            [0] = TRUE,
+            [1] = TRUE,
+            [2] = TRUE,
+            [3] = TRUE,
+            [4] = TRUE,
+            [5] = TRUE,
+            [6] = TRUE,
+            [7] = TRUE,
+            [8] = TRUE,
+            [9] = TRUE,
+        },
+    },
+    [ARCADE_EVENT_PARALYZE] =
+    {
+        .name = COMPOUND_STRING("Paralyze"),
+        .eventFunc = BattleArcade_DoParalyze,
+        .type = ARCADE_IMPACT_EITHER_SIDE,
+        .animTable = sAnim_Panel_Paralyze,
+        .streakEligibility =
+        {
+            [0] = TRUE,
+            [1] = TRUE,
+            [2] = TRUE,
+            [3] = TRUE,
+            [4] = TRUE,
+            [5] = TRUE,
+            [6] = TRUE,
+            [7] = TRUE,
+            [8] = TRUE,
+            [9] = TRUE,
+        },
+        .battleEligibility =
+        {
+            [0] = TRUE,
+            [1] = TRUE,
+            [2] = TRUE,
+            [3] = TRUE,
+            [4] = TRUE,
+            [5] = TRUE,
+            [6] = TRUE,
+            [7] = TRUE,
+            [8] = TRUE,
+            [9] = TRUE,
+        },
+    },
+    [ARCADE_EVENT_BURN] =
+    {
+        .name = COMPOUND_STRING("Burn"),
+        .eventFunc = BattleArcade_DoBurn,
+        .type = ARCADE_IMPACT_EITHER_SIDE,
+        .animTable = sAnim_Panel_Burn,
+        .streakEligibility =
+        {
+            [0] = TRUE,
+            [1] = TRUE,
+            [2] = TRUE,
+            [3] = TRUE,
+            [4] = TRUE,
+            [5] = TRUE,
+            [6] = TRUE,
+            [7] = TRUE,
+            [8] = TRUE,
+            [9] = TRUE,
+        },
+        .battleEligibility =
+        {
+            [0] = TRUE,
+            [1] = TRUE,
+            [2] = TRUE,
+            [3] = TRUE,
+            [4] = TRUE,
+            [5] = TRUE,
+            [6] = TRUE,
+            [7] = TRUE,
+            [8] = TRUE,
+            [9] = TRUE,
+        },
+    },
+    [ARCADE_EVENT_SLEEP] =
+    {
+        .name = COMPOUND_STRING("Sleep"),
+        .eventFunc = BattleArcade_DoSleep,
+        .type = ARCADE_IMPACT_EITHER_SIDE,
+        .animTable = sAnim_Panel_Sleep,
+        .streakEligibility =
+        {
+            [0] = TRUE,
+            [1] = TRUE,
+            [2] = TRUE,
+            [3] = TRUE,
+            [4] = TRUE,
+            [5] = TRUE,
+            [6] = TRUE,
+            [7] = TRUE,
+            [8] = TRUE,
+            [9] = TRUE,
+        },
+        .battleEligibility =
+        {
+            [0] = TRUE,
+            [1] = TRUE,
+            [2] = TRUE,
+            [3] = TRUE,
+            [4] = TRUE,
+            [5] = TRUE,
+            [6] = TRUE,
+            [7] = TRUE,
+            [8] = TRUE,
+            [9] = TRUE,
+        },
+    },
+    [ARCADE_EVENT_FREEZE] =
+    {
+        .name = COMPOUND_STRING("Freeze"),
+        .eventFunc = BattleArcade_DoFreeze,
+        .type = ARCADE_IMPACT_EITHER_SIDE,
+        .animTable = sAnim_Panel_Freeze,
+        .streakEligibility =
+        {
+            [0] = TRUE,
+            [1] = TRUE,
+            [2] = TRUE,
+            [3] = TRUE,
+            [4] = TRUE,
+            [5] = TRUE,
+            [6] = TRUE,
+            [7] = TRUE,
+            [8] = TRUE,
+            [9] = TRUE,
+        },
+        .battleEligibility =
+        {
+            [0] = FALSE,
+            [1] = FALSE,
+            [2] = FALSE,
+            [3] = FALSE,
+            [4] = FALSE,
+            [5] = FALSE,
+            [6] = TRUE,
+            [7] = TRUE,
+            [8] = TRUE,
+            [9] = TRUE,
+        },
+    },
+    [ARCADE_EVENT_GIVE_BERRY] =
+    {
+        .name = COMPOUND_STRING("Give Berry"),
+        .eventFunc = BattleArcade_DoGiveBerry,
+        .type = ARCADE_IMPACT_EITHER_SIDE,
+        .animTable = sAnim_Panel_Give_Berry,
+        .streakEligibility =
+        {
+            [0] = TRUE,
+            [1] = TRUE,
+            [2] = TRUE,
+            [3] = TRUE,
+            [4] = TRUE,
+            [5] = TRUE,
+            [6] = TRUE,
+            [7] = TRUE,
+            [8] = TRUE,
+            [9] = TRUE,
+        },
+        .battleEligibility =
+        {
+            [0] = TRUE,
+            [1] = TRUE,
+            [2] = TRUE,
+            [3] = TRUE,
+            [4] = TRUE,
+            [5] = TRUE,
+            [6] = TRUE,
+            [7] = TRUE,
+            [8] = TRUE,
+            [9] = TRUE,
+        },
+    },
+    [ARCADE_EVENT_GIVE_ITEM] =
+    {
+        .name = COMPOUND_STRING("Give Item"),
+        .eventFunc = BattleArcade_DoGiveItem,
+        .type = ARCADE_IMPACT_EITHER_SIDE,
+        .animTable = sAnim_Panel_Give_Item,
+        .streakEligibility =
+        {
+            [0] = TRUE,
+            [1] = TRUE,
+            [2] = TRUE,
+            [3] = TRUE,
+            [4] = TRUE,
+            [5] = TRUE,
+            [6] = TRUE,
+            [7] = TRUE,
+            [8] = TRUE,
+            [9] = TRUE,
+        },
+        .battleEligibility =
+        {
+            [0] = TRUE,
+            [1] = TRUE,
+            [2] = TRUE,
+            [3] = TRUE,
+            [4] = TRUE,
+            [5] = TRUE,
+            [6] = TRUE,
+            [7] = TRUE,
+            [8] = TRUE,
+            [9] = TRUE,
+        },
+    },
+    [ARCADE_EVENT_LEVEL_UP] =
+    {
+        .name = COMPOUND_STRING("Level Up"),
+        .eventFunc = BattleArcade_DoLevelUp,
+        .type = ARCADE_IMPACT_EITHER_SIDE,
+        .animTable = sAnim_Panel_Level_Up,
+        .streakEligibility =
+        {
+            [0] = TRUE,
+            [1] = TRUE,
+            [2] = TRUE,
+            [3] = TRUE,
+            [4] = TRUE,
+            [5] = TRUE,
+            [6] = TRUE,
+            [7] = TRUE,
+            [8] = TRUE,
+            [9] = TRUE,
+        },
+        .battleEligibility =
+        {
+            [0] = TRUE,
+            [1] = TRUE,
+            [2] = TRUE,
+            [3] = TRUE,
+            [4] = TRUE,
+            [5] = TRUE,
+            [6] = TRUE,
+            [7] = TRUE,
+            [8] = TRUE,
+            [9] = TRUE,
+        },
+    },
+    [ARCADE_EVENT_SUN] =
+    {
+        .name = COMPOUND_STRING("Sun"),
+        .eventFunc = BattleArcade_DoSun,
+        .type = ARCADE_IMPACT_ALL,
+        .animTable = sAnim_Panel_Sun,
+        .streakEligibility =
+        {
+            [0] = TRUE,
+            [1] = TRUE,
+            [2] = TRUE,
+            [3] = TRUE,
+            [4] = TRUE,
+            [5] = TRUE,
+            [6] = TRUE,
+            [7] = TRUE,
+            [8] = TRUE,
+            [9] = TRUE,
+        },
+        .battleEligibility =
+        {
+            [0] = TRUE,
+            [1] = TRUE,
+            [2] = TRUE,
+            [3] = TRUE,
+            [4] = TRUE,
+            [5] = TRUE,
+            [6] = TRUE,
+            [7] = TRUE,
+            [8] = TRUE,
+            [9] = TRUE,
+        },
+    },
+    [ARCADE_EVENT_RAIN] =
+    {
+        .name = COMPOUND_STRING("Rain"),
+        .eventFunc = BattleArcade_DoRain,
+        .type = ARCADE_IMPACT_ALL,
+        .animTable = sAnim_Panel_Rain,
+        .streakEligibility =
+        {
+            [0] = TRUE,
+            [1] = TRUE,
+            [2] = TRUE,
+            [3] = TRUE,
+            [4] = TRUE,
+            [5] = TRUE,
+            [6] = TRUE,
+            [7] = TRUE,
+            [8] = TRUE,
+            [9] = TRUE,
+        },
+        .battleEligibility =
+        {
+            [0] = TRUE,
+            [1] = TRUE,
+            [2] = TRUE,
+            [3] = TRUE,
+            [4] = TRUE,
+            [5] = TRUE,
+            [6] = TRUE,
+            [7] = TRUE,
+            [8] = TRUE,
+            [9] = TRUE,
+        },
+    },
+    [ARCADE_EVENT_SAND] =
+    {
+        .name = COMPOUND_STRING("Sand"),
+        .eventFunc = BattleArcade_DoSand,
+        .type = ARCADE_IMPACT_ALL,
+        .animTable = sAnim_Panel_Sand,
+        .streakEligibility =
+        {
+            [0] = TRUE,
+            [1] = TRUE,
+            [2] = TRUE,
+            [3] = TRUE,
+            [4] = TRUE,
+            [5] = TRUE,
+            [6] = TRUE,
+            [7] = TRUE,
+            [8] = TRUE,
+            [9] = TRUE,
+        },
+        .battleEligibility =
+        {
+            [0] = TRUE,
+            [1] = TRUE,
+            [2] = TRUE,
+            [3] = TRUE,
+            [4] = TRUE,
+            [5] = TRUE,
+            [6] = TRUE,
+            [7] = TRUE,
+            [8] = TRUE,
+            [9] = TRUE,
+        },
+    },
+    [ARCADE_EVENT_SNOW] =
+    {
+        .name = COMPOUND_STRING("Snow"),
+        .eventFunc = BattleArcade_DoSnow,
+        .type = ARCADE_IMPACT_ALL,
+        .animTable = sAnim_Panel_Snow,
+        .streakEligibility =
+        {
+            [0] = TRUE,
+            [1] = TRUE,
+            [2] = TRUE,
+            [3] = TRUE,
+            [4] = TRUE,
+            [5] = TRUE,
+            [6] = TRUE,
+            [7] = TRUE,
+            [8] = TRUE,
+            [9] = TRUE,
+        },
+        .battleEligibility =
+        {
+            [0] = TRUE,
+            [1] = TRUE,
+            [2] = TRUE,
+            [3] = TRUE,
+            [4] = TRUE,
+            [5] = TRUE,
+            [6] = TRUE,
+            [7] = TRUE,
+            [8] = TRUE,
+            [9] = TRUE,
+        },
+    },
+    [ARCADE_EVENT_FOG] =
+    {
+        .name = COMPOUND_STRING("Fog"),
+        .eventFunc = BattleArcade_DoFog,
+        .type = ARCADE_IMPACT_ALL,
+        .animTable = sAnim_Panel_Fog,
+        .streakEligibility =
+        {
+            [0] = TRUE,
+            [1] = TRUE,
+            [2] = TRUE,
+            [3] = TRUE,
+            [4] = TRUE,
+            [5] = TRUE,
+            [6] = TRUE,
+            [7] = TRUE,
+            [8] = TRUE,
+            [9] = TRUE,
+        },
+        .battleEligibility =
+        {
+            [0] = TRUE,
+            [1] = TRUE,
+            [2] = TRUE,
+            [3] = TRUE,
+            [4] = TRUE,
+            [5] = TRUE,
+            [6] = TRUE,
+            [7] = TRUE,
+            [8] = TRUE,
+            [9] = TRUE,
+        },
+    },
+    [ARCADE_EVENT_TRICK_ROOM] =
+    {
+        .name = COMPOUND_STRING("Trick Room"),
+        .eventFunc = BattleArcade_DoTrickRoom,
+        .type = ARCADE_IMPACT_ALL,
+        .animTable = sAnim_Panel_Trick_Room,
+        .streakEligibility =
+        {
+            [0] = TRUE,
+            [1] = TRUE,
+            [2] = TRUE,
+            [3] = TRUE,
+            [4] = TRUE,
+            [5] = TRUE,
+            [6] = TRUE,
+            [7] = TRUE,
+            [8] = TRUE,
+            [9] = TRUE,
+        },
+        .battleEligibility =
+        {
+            [0] = TRUE,
+            [1] = TRUE,
+            [2] = TRUE,
+            [3] = TRUE,
+            [4] = TRUE,
+            [5] = TRUE,
+            [6] = TRUE,
+            [7] = TRUE,
+            [8] = TRUE,
+            [9] = TRUE,
+        },
+    },
+    [ARCADE_EVENT_SWAP] =
+    {
+        .name = COMPOUND_STRING("Swap"),
+        .eventFunc = BattleArcade_DoSwap,
+        .type = ARCADE_IMPACT_SPECIAL,
+        .animTable = sAnim_Panel_Swap,
+        .streakEligibility =
+        {
+            [0] = TRUE,
+            [1] = TRUE,
+            [2] = TRUE,
+            [3] = TRUE,
+            [4] = TRUE,
+            [5] = TRUE,
+            [6] = TRUE,
+            [7] = TRUE,
+            [8] = TRUE,
+            [9] = TRUE,
+        },
+        .battleEligibility =
+        {
+            [0] = TRUE,
+            [1] = TRUE,
+            [2] = TRUE,
+            [3] = TRUE,
+            [4] = TRUE,
+            [5] = TRUE,
+            [6] = TRUE,
+            [7] = TRUE,
+            [8] = TRUE,
+            [9] = FALSE,
+        },
+    },
+    [ARCADE_EVENT_SPEED_UP] =
+    {
+        .name = COMPOUND_STRING("Speed Up"),
+        .eventFunc = BattleArcade_DoSpeedUp,
+        .type = ARCADE_IMPACT_SPECIAL,
+        .animTable = sAnim_Panel_Speed_Up,
+        .streakEligibility =
+        {
+            [0] = TRUE,
+            [1] = TRUE,
+            [2] = TRUE,
+            [3] = TRUE,
+            [4] = FALSE,
+            [5] = FALSE,
+            [6] = FALSE,
+            [7] = FALSE,
+            [8] = FALSE,
+            [9] = TRUE,
+        },
+        .battleEligibility =
+        {
+            [0] = TRUE,
+            [1] = TRUE,
+            [2] = TRUE,
+            [3] = TRUE,
+            [4] = TRUE,
+            [5] = TRUE,
+            [6] = TRUE,
+            [7] = TRUE,
+            [8] = TRUE,
+            [9] = FALSE,
+        },
+    },
+    [ARCADE_EVENT_SPEED_DOWN] =
+    {
+        .name = COMPOUND_STRING("Speed Down"),
+        .eventFunc = BattleArcade_DoSpeedDown,
+        .type = ARCADE_IMPACT_SPECIAL,
+        .animTable = sAnim_Panel_Speed_Down,
+        .streakEligibility =
+        {
+            [0] = TRUE,
+            [1] = TRUE,
+            [2] = TRUE,
+            [3] = TRUE,
+            [4] = TRUE,
+            [5] = TRUE,
+            [6] = TRUE,
+            [7] = TRUE,
+            [8] = TRUE,
+            [9] = TRUE,
+        },
+        .battleEligibility =
+        {
+            [0] = TRUE,
+            [1] = TRUE,
+            [2] = TRUE,
+            [3] = TRUE,
+            [4] = TRUE,
+            [5] = TRUE,
+            [6] = TRUE,
+            [7] = TRUE,
+            [8] = TRUE,
+            [9] = FALSE,
+        },
+    },
+    [ARCADE_EVENT_RANDOM] =
+    {
+        .name = COMPOUND_STRING("Random"),
+        .eventFunc = BattleArcade_DoRandom,
+        .type = ARCADE_IMPACT_SPECIAL,
+        .animTable = sAnim_Panel_Random,
+        .streakEligibility =
+        {
+            [0] = FALSE,
+            [1] = FALSE,
+            [2] = FALSE,
+            [3] = FALSE,
+            [4] = FALSE,
+            [5] = FALSE,
+            [6] = TRUE,
+            [7] = TRUE,
+            [8] = TRUE,
+            [9] = TRUE,
+        },
+        .battleEligibility =
+        {
+            [0] = TRUE,
+            [1] = TRUE,
+            [2] = TRUE,
+            [3] = TRUE,
+            [4] = TRUE,
+            [5] = TRUE,
+            [6] = TRUE,
+            [7] = TRUE,
+            [8] = TRUE,
+            [9] = FALSE,
+        },
+    },
+    [ARCADE_EVENT_GIVE_BP_SMALL] =
+    {
+        .name = COMPOUND_STRING("BP Small"),
+        .eventFunc = BattleArcade_DoGiveBPSmall,
+        .type = ARCADE_IMPACT_SPECIAL,
+        .animTable = sAnim_Panel_Give_Bp_Small,
+        .streakEligibility =
+        {
+            [0] = FALSE,
+            [1] = FALSE,
+            [2] = FALSE,
+            [3] = FALSE,
+            [4] = TRUE,
+            [5] = TRUE,
+            [6] = TRUE,
+            [7] = TRUE,
+            [8] = TRUE,
+            [9] = TRUE,
+        },
+        .battleEligibility =
+        {
+            [0] = TRUE,
+            [1] = FALSE,
+            [2] = TRUE,
+            [3] = FALSE,
+            [4] = TRUE,
+            [5] = FALSE,
+            [6] = TRUE,
+            [7] = FALSE,
+            [8] = FALSE,
+            [9] = FALSE,
+        },
+    },
+    [ARCADE_EVENT_NO_BATTLE] =
+    {
+        .name = COMPOUND_STRING("No Battle"),
+        .eventFunc = BattleArcade_DoNoBattle,
+        .type = ARCADE_IMPACT_SPECIAL,
+        .animTable = sAnim_Panel_No_Battle,
+        .streakEligibility =
+        {
+            [0] = FALSE,
+            [1] = FALSE,
+            [2] = FALSE,
+            [3] = FALSE,
+            [4] = FALSE,
+            [5] = FALSE,
+            [6] = TRUE,
+            [7] = TRUE,
+            [8] = TRUE,
+            [9] = TRUE,
+        },
+        .battleEligibility =
+        {
+            [0] = TRUE,
+            [1] = FALSE,
+            [2] = TRUE,
+            [3] = FALSE,
+            [4] = TRUE,
+            [5] = FALSE,
+            [6] = TRUE,
+            [7] = FALSE,
+            [8] = TRUE,
+            [9] = FALSE,
+        },
+    },
+    [ARCADE_EVENT_GIVE_BP_BIG] =
+    {
+        .name = COMPOUND_STRING("Give BP Big"),
+        .eventFunc = BattleArcade_DoGiveBPBig,
+        .type = ARCADE_IMPACT_SPECIAL,
+        .animTable = sAnim_Panel_Give_Bp_Big,
+        .streakEligibility =
+        {
+            [0] = FALSE,
+            [1] = FALSE,
+            [2] = FALSE,
+            [3] = FALSE,
+            [4] = FALSE,
+            [5] = FALSE,
+            [6] = FALSE,
+            [7] = FALSE,
+            [8] = FALSE,
+            [9] = TRUE,
+        },
+        .battleEligibility =
+        {
+            [0] = TRUE,
+            [1] = FALSE,
+            [2] = TRUE,
+            [3] = FALSE,
+            [4] = TRUE,
+            [5] = FALSE,
+            [6] = TRUE,
+            [7] = FALSE,
+            [8] = TRUE,
+            [9] = FALSE,
+        },
+    },
+    [ARCADE_EVENT_NO_EVENT] =
+    {
+        .name = COMPOUND_STRING("No Event"),
+        .eventFunc = BattleArcade_DoNoEvent,
+        .type = ARCADE_IMPACT_SPECIAL,
+        .animTable = sAnim_Panel_No_Event,
+        .streakEligibility =
+        {
+            [0] = TRUE,
+            [1] = TRUE,
+            [2] = TRUE,
+            [3] = TRUE,
+            [4] = TRUE,
+            [5] = TRUE,
+            [6] = TRUE,
+            [7] = TRUE,
+            [8] = TRUE,
+            [9] = TRUE,
+        },
+        .battleEligibility =
+        {
+            [0] = TRUE,
+            [1] = TRUE,
+            [2] = TRUE,
+            [3] = TRUE,
+            [4] = TRUE,
+            [5] = TRUE,
+            [6] = TRUE,
+            [7] = TRUE,
+            [8] = TRUE,
+            [9] = TRUE,
+        },
+    },
+};
 
 static const u32 sArcadePerformanceTable[IMPACT_PERFORMANCE_TABLE_SIZE][3] =
 {
@@ -296,11 +1078,23 @@ static u32 GetCategorySize(u32 type)
 
 static u32 GetGroupIdFromStreak(void)
 {
-    u32 challengeNum = GetChallengeNum();
+    u32 challengeIndex = GetChallengeNumIndex();
 
-    return challengeNum <= ARCADE_CHALLENGE_ITEM_GROUP_1_CHALLENGE_THRESHOLD ? ARCADE_BERRY_GROUP_1:
-        challengeNum <= ARCADE_CHALLENGE_ITEM_GROUP_2_CHALLENGE_THRESHOLD ? ARCADE_BERRY_GROUP_2:
-        ARCADE_BERRY_GROUP_3;
+    u8 groupToStreaks[] =
+    {
+        ARCADE_ITEM_GROUP_1,
+        ARCADE_ITEM_GROUP_1,
+        ARCADE_ITEM_GROUP_1,
+        ARCADE_ITEM_GROUP_2,
+        ARCADE_ITEM_GROUP_2,
+        ARCADE_ITEM_GROUP_2,
+        ARCADE_ITEM_GROUP_2,
+        ARCADE_ITEM_GROUP_3,
+        ARCADE_ITEM_GROUP_3,
+        ARCADE_ITEM_GROUP_3,
+    };
+
+    return groupToStreaks[challengeIndex];
 }
 
 static const enum Item (*GetCategoryGroups(u32 type))[ARCADE_ITEM_GROUP_SIZE]
@@ -337,32 +1131,6 @@ static const enum Item (*GetCategoryGroups(u32 type))[ARCADE_ITEM_GROUP_SIZE]
             ITEM_LANSAT_BERRY,
             ITEM_STARF_BERRY,
         },
-        [ARCADE_ITEM_GROUP_4] =
-        {
-            ITEM_PERSIM_BERRY,
-            ITEM_SITRUS_BERRY,
-            ITEM_LUM_BERRY,
-            ITEM_LIECHI_BERRY,
-            ITEM_GANLON_BERRY,
-            ITEM_SALAC_BERRY,
-            ITEM_PETAYA_BERRY,
-            ITEM_APICOT_BERRY,
-            ITEM_LANSAT_BERRY,
-            ITEM_STARF_BERRY,
-        },
-        [ARCADE_ITEM_GROUP_5] =
-        {
-            ITEM_PERSIM_BERRY,
-            ITEM_SITRUS_BERRY,
-            ITEM_LUM_BERRY,
-            ITEM_LIECHI_BERRY,
-            ITEM_GANLON_BERRY,
-            ITEM_SALAC_BERRY,
-            ITEM_PETAYA_BERRY,
-            ITEM_APICOT_BERRY,
-            ITEM_LANSAT_BERRY,
-            ITEM_STARF_BERRY,
-        },
     };
 
     static const enum Item gameItems[ARCADE_ITEM_GROUP_COUNT][ARCADE_ITEM_GROUP_SIZE] =
@@ -382,20 +1150,6 @@ static const enum Item (*GetCategoryGroups(u32 type))[ARCADE_ITEM_GROUP_SIZE]
             ITEM_SCOPE_LENS,
         },
         [ARCADE_ITEM_GROUP_3] =
-        {
-            ITEM_FOCUS_BAND,
-            ITEM_LEFTOVERS,
-            ITEM_SCOPE_LENS,
-            ITEM_CHOICE_BAND
-        },
-        [ARCADE_ITEM_GROUP_4] =
-        {
-            ITEM_FOCUS_BAND,
-            ITEM_LEFTOVERS,
-            ITEM_SCOPE_LENS,
-            ITEM_CHOICE_BAND
-        },
-        [ARCADE_ITEM_GROUP_5] =
         {
             ITEM_FOCUS_BAND,
             ITEM_LEFTOVERS,
@@ -512,7 +1266,7 @@ static void ReturnPartyToOwner(void)
     if (!HaveMonsBeenSwapped())
         return;
 
-    BattleArcade_DoSwap();
+    BattleArcade_DoSwap(0);
 }
 
 static void ResetLevelsToOriginal(void)
@@ -887,7 +1641,6 @@ static void GenerateGameBoard(void)
     {
         sGameBoard[space].impact = GenerateImpact();
         sGameBoard[space].event = GenerateEvent(sGameBoard[space].impact);
-
     }
 }
 
@@ -1069,7 +1822,7 @@ static void PopulateEventSprites(void)
         CalculatePanelPosition(space,&x,&y);
         sGameBoardState->spriteId[space] = CreateEventSprite(x, y, space);
 
-        if (GetGameBoardMode() != ARCADE_BOARD_MODE_GAME_FINISH)
+        if ((GetGameBoardMode() != ARCADE_BOARD_MODE_GAME_FINISH) && (GetGameBoardMode() != ARCADE_BOARD_MODE_CLEANUP))
             continue;
 
         u32 spriteId = sGameBoardState->spriteId[space];
@@ -1262,34 +2015,6 @@ static const union AnimCmd sAnim_Panel_Trick_Room[] =
     ANIMCMD_END
 };
 
-
-static const union AnimCmd * const sSpriteAnimTable_Panels[] =
-{
-    sAnim_Panel_Burn,
-    sAnim_Panel_Fog,
-    sAnim_Panel_Freeze,
-    sAnim_Panel_Give_Berry,
-    sAnim_Panel_Give_Bp_Big,
-    sAnim_Panel_Give_Bp_Small,
-    sAnim_Panel_Give_Item,
-    sAnim_Panel_Snow,
-    sAnim_Panel_Level_Up,
-    sAnim_Panel_Lower_Hp,
-    sAnim_Panel_No_Battle,
-    sAnim_Panel_No_Event,
-    sAnim_Panel_Paralyze,
-    sAnim_Panel_Poison,
-    sAnim_Panel_Rain,
-    sAnim_Panel_Random,
-    sAnim_Panel_Sand,
-    sAnim_Panel_Sleep,
-    sAnim_Panel_Speed_Down,
-    sAnim_Panel_Speed_Up,
-    sAnim_Panel_Sun,
-    sAnim_Panel_Swap,
-    sAnim_Panel_Trick_Room,
-};
-
 static u8 CreateEventSprite(u32 x, u32 y, u32 space)
 {
     u16 TileTag = ARCADE_SPRITETAG_PANELS;
@@ -1300,7 +2025,7 @@ static u8 CreateEventSprite(u32 x, u32 y, u32 space)
     TempSpriteTemplate.tileTag = TileTag;
     TempSpriteTemplate.paletteTag = ARCADE_PALTAG_OPPONENT + impact;
     TempSpriteTemplate.callback = SpriteCallbackDummy;
-    TempSpriteTemplate.anims = &sSpriteAnimTable_Panels[event];
+    TempSpriteTemplate.anims = &arcadeEventInfo[event].animTable;
 
     u32 spriteId = CreateSprite(&TempSpriteTemplate,x,y, 0);
 
@@ -1433,7 +2158,9 @@ static void ChangeCursorPosition(void)
     u32 newPosition = GetCursorPosition() + 1;
 
     if (IsCursorInRandomMode())
-        SetCursorPosition(Random() % ARCADE_GAME_BOARD_SPACES);
+    {
+        SetCursorPosition(RandomUniform(RNG_RANDOM_SILICON_FRONTIER_ARCADE_SPACE,0,(ARCADE_GAME_BOARD_SPACES - 1)));
+    }
     else
     {
         if (newPosition >= ARCADE_GAME_BOARD_SPACES)
@@ -1587,27 +2314,47 @@ static void GameBoard_FreeResources(void)
 
 static u32 GenerateImpact(void)
 {
-    static const u32 ImpactTable[][ARCADE_IMPACT_COUNT] =
+    u8 ImpactTable[ARCADE_PERFORMANCE_BRACKET_COUNT][ARCADE_IMPACT_COUNT] =
     {
-        //Opponent, Player, All, Special
-        [ARCADE_PERFORMANCE_BRACKET_0_4]     = {10, 75, 10, 5},
-        [ARCADE_PERFORMANCE_BRACKET_5_10]    = {25, 40, 30, 5},
-        [ARCADE_PERFORMANCE_BRACKET_11_15]   = {30, 30, 35, 5},
-        [ARCADE_PERFORMANCE_BRACKET_16_20]   = {35, 20, 30, 15},
-        [ARCADE_PERFORMANCE_BRACKET_21_PLUS] = {15, 15, 40, 30},
+        [ARCADE_PERFORMANCE_BRACKET_0_4] =
+        {
+            [ARCADE_IMPACT_OPPONENT] = 10,
+            [ARCADE_IMPACT_PLAYER]   = 75,
+            [ARCADE_IMPACT_ALL]      = 10,
+            [ARCADE_IMPACT_SPECIAL]  = 5,
+        },
+        [ARCADE_PERFORMANCE_BRACKET_5_10] =
+        {
+            [ARCADE_IMPACT_OPPONENT] = 25,
+            [ARCADE_IMPACT_PLAYER]   = 40,
+            [ARCADE_IMPACT_ALL]      = 30,
+            [ARCADE_IMPACT_SPECIAL]  = 5,
+        },
+        [ARCADE_PERFORMANCE_BRACKET_11_15] =
+        {
+            [ARCADE_IMPACT_OPPONENT] = 30,
+            [ARCADE_IMPACT_PLAYER]   = 30,
+            [ARCADE_IMPACT_ALL]      = 35,
+            [ARCADE_IMPACT_SPECIAL]  = 5,
+        },
+        [ARCADE_PERFORMANCE_BRACKET_16_20] =
+        {
+            [ARCADE_IMPACT_OPPONENT] = 35,
+            [ARCADE_IMPACT_PLAYER]   = 20,
+            [ARCADE_IMPACT_ALL]      = 30,
+            [ARCADE_IMPACT_SPECIAL]  = 15,
+        },
+        [ARCADE_PERFORMANCE_BRACKET_21_PLUS] =
+        {
+            [ARCADE_IMPACT_OPPONENT] = 15,
+            [ARCADE_IMPACT_PLAYER]   = 15,
+            [ARCADE_IMPACT_ALL]      = 40,
+            [ARCADE_IMPACT_SPECIAL]  = 30,
+        },
     };
 
-    enum ArcadeImpactTypes impactThreshold = 0, impactIndex = 0;
-    u32 randImpact = Random() % 100;
     enum ArcadeImpactTypes impactBracket = ConvertPerformanceToImpactBracket();
-
-    for (impactIndex = 0; impactIndex < ARCADE_IMPACT_COUNT; impactIndex++)
-    {
-        impactThreshold += ImpactTable[impactBracket][impactIndex];
-        if (randImpact < impactThreshold)
-            return impactIndex;
-    }
-    return ARCADE_IMPACT_PLAYER;
+    return RandomWeightedIndex(ImpactTable[impactBracket],ARCADE_IMPACT_COUNT);
 }
 
 static u32 ConvertPerformanceToImpactBracket(void)
@@ -1623,150 +2370,62 @@ static u32 ConvertPerformanceToImpactBracket(void)
 
 static u32 GenerateEvent(enum ArcadeImpactTypes impact)
 {
-    enum ArcadeEvents event = GenerateRandomBetweenBounds(impact);
+    u8 eventTable[ARCADE_EVENT_COUNT];
 
-    do
+    for (enum ArcadeEvents event = 0; event < ARCADE_EVENT_COUNT; event++)
     {
-        event = GenerateRandomBetweenBounds(impact);
-    } while (!IsEventValidDuringBattleOrStreak(event,impact));
+        eventTable[event] = FALSE;
 
-    return event;
-}
+        if (impact == ARCADE_IMPACT_SPECIAL || impact == ARCADE_IMPACT_ALL)
+        {
+            if (impact != arcadeEventInfo[event].type)
+                continue;
+        }
 
-static u32 GenerateRandomBetweenBounds(enum ArcadeImpactTypes impact)
-{
-    u32 upper = GetPanelUpperBound(impact);
-    u32 lower = GetPanelLowerBound(impact);
+        if (impact == ARCADE_IMPACT_OPPONENT || impact == ARCADE_IMPACT_PLAYER)
+        {
+            if (arcadeEventInfo[event].type != ARCADE_IMPACT_EITHER_SIDE)
+                continue;
+        }
 
-    return (lower + Random() % (upper - lower + 1));
-}
-
-static s32 GetPanelUpperBound(enum ArcadeImpactTypes impact)
-{
-    //Not Inclusive
-    switch (impact)
-    {
-        case ARCADE_IMPACT_PLAYER:
-        case ARCADE_IMPACT_OPPONENT:
-            return ARCADE_EVENT_WEATHER_START;
-        case ARCADE_IMPACT_ALL:
-            return ARCADE_EVENT_SPECIAL_START;
-        default:
-        case ARCADE_IMPACT_SPECIAL:
-            return ARCADE_EVENT_COUNT;
+        eventTable[event] = IsEventValidDuringBattleOrStreak(event);
     }
+
+    return RandomWeightedIndex(eventTable,ARCADE_EVENT_COUNT);
 }
 
-static s32 GetPanelLowerBound(enum ArcadeImpactTypes impact)
+static bool32 IsEventValidDuringBattleOrStreak(enum ArcadeEvents event)
 {
-    //Inclusive
-    switch (impact)
-    {
-        case ARCADE_IMPACT_PLAYER:
-        case ARCADE_IMPACT_OPPONENT:
-            return ARCADE_EVENT_INDIVIDUAL_START;
-        case ARCADE_IMPACT_ALL:
-            return ARCADE_EVENT_WEATHER_START;
-        default:
-        case ARCADE_IMPACT_SPECIAL:
-            return ARCADE_EVENT_SPECIAL_START;
-    }
-}
+    if (IsEventValidDuringCurrentStreak(event) == FALSE)
+        return FALSE;
 
-static bool32 IsEventValidDuringBattleOrStreak(enum ArcadeEvents event, enum ArcadeImpactTypes impact)
-{
-    if (IsEventBanned(event))
-        return FALSE;
-    if (!IsEventValidDuringCurrentStreak(event))
-        return FALSE;
-    if (!IsEventValidDuringCurrentBattle(event))
+    if (IsEventValidDuringCurrentBattle(event) == FALSE)
         return FALSE;
 
     return TRUE;
 }
 
-static bool32 IsEventBanned(enum ArcadeEvents event)
-{
-#ifndef RHH_EXPANSION
-    if ((event == ARCADE_EVENT_TRICK_ROOM) || (event == ARCADE_EVENT_FOG))
-        return TRUE;
-#endif
-    return FALSE;
-}
-
 static bool32 IsEventValidDuringCurrentBattle(enum ArcadeEvents event)
 {
-    static const u32 SpecialPanelTable[ARCADE_EVENT_COUNT][SILICON_FRONTIER_STREAK_LENGTH_BOSS] =
-    {
-        //Battle 1  2  3  4  5  6  7  8  9  10
-        [ARCADE_EVENT_SWAP]          = {1, 1, 1, 1, 1, 1, 1, 1, 1, 0},
-        [ARCADE_EVENT_SPEED_UP]      = {1, 1, 1, 1, 1, 1, 1, 1, 1, 0},
-        [ARCADE_EVENT_SPEED_DOWN]    = {1, 1, 1, 1, 1, 1, 1, 1, 1, 0},
-        [ARCADE_EVENT_RANDOM]        = {1, 1, 1, 1, 1, 1, 1, 1, 1, 0},
-        [ARCADE_EVENT_GIVE_BP_SMALL] = {1, 0, 1, 0, 1, 0, 1, 0, 0, 0},
-        [ARCADE_EVENT_NO_BATTLE]     = {1, 0, 1, 0, 1, 0, 1, 0, 1, 0},
-        [ARCADE_EVENT_GIVE_BP_BIG]   = {1, 0, 1, 0, 1, 0, 1, 0, 1, 0},
-        [ARCADE_EVENT_NO_EVENT]      = {1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
-    };
-
-    if (event < ARCADE_EVENT_SPECIAL_START)
-        return TRUE;
-
     enum SiliconFrontierFacility facility = SiliconFrontier_GetFacilityFromCurrentChallenge();
     enum SiliconFrontierChallengeType challengeType = SiliconFrontier_GetTypeFromCurrentChallenge();
     enum SiliconFrontierSparringTypes sparringType = SiliconFrontier_GetCurrentChallengeSparringType();
     u32 currentStreak = SiliconFrontier_GetCurrentStreak(facility,challengeType, sparringType);
 
-    if (!SpecialPanelTable[event][1+(currentStreak % SILICON_FRONTIER_STREAK_LENGTH_BOSS)])
-        return FALSE;
-
-    return TRUE;
+    return (arcadeEventInfo[event].battleEligibility[currentStreak % SILICON_FRONTIER_STREAK_LENGTH_BOSS]);
 }
 
 static bool32 IsEventValidDuringCurrentStreak(enum ArcadeEvents event)
 {
-    static const u32 PanelStreakTable[ARCADE_EVENT_COUNT][ARCADE_STREAK_NUM_COUNT] =
-    {                           //Streak 1  2  3  4  5  6  7  8  9  10
-        [ARCADE_EVENT_LOWER_HP]      =  {0, 1, 1, 1, 1, 1, 1, 1, 1, 1},
-        [ARCADE_EVENT_POISON]        =  {1, 0, 0, 1, 0, 0, 0, 0, 0, 1},
-        [ARCADE_EVENT_PARALYZE]      =  {1, 0, 0, 1, 0, 0, 0, 0, 0, 1},
-        [ARCADE_EVENT_BURN]          =  {1, 0, 0, 1, 0, 0, 0, 0, 0, 1},
-        [ARCADE_EVENT_SLEEP]         =  {0, 0, 0, 0, 0, 0, 1, 1, 1, 1},
-        [ARCADE_EVENT_FREEZE]        =  {0, 0, 0, 0, 0, 0, 1, 1, 1, 1},
-        [ARCADE_EVENT_GIVE_BERRY]    =  {1, 1, 1, 1, 0, 0, 0, 0, 0, 1},
-        [ARCADE_EVENT_GIVE_ITEM]     =  {0, 0, 0, 0, 1, 1, 1, 1, 1, 1},
-        [ARCADE_EVENT_LEVEL_UP]      =  {0, 1, 1, 1, 1, 1, 1, 1, 1, 1},
-        [ARCADE_EVENT_SUN]           =  {0, 1, 1, 1, 0, 0, 0, 0, 0, 1},
-        [ARCADE_EVENT_RAIN]          =  {0, 1, 1, 1, 0, 0, 0, 0, 0, 1},
-        [ARCADE_EVENT_SAND]          =  {0, 1, 1, 1, 0, 0, 0, 0, 0, 1},
-        [ARCADE_EVENT_SNOW]          =  {0, 1, 1, 1, 0, 0, 0, 0, 0, 1},
-        [ARCADE_EVENT_FOG]           =  {0, 0, 0, 0, 1, 1, 0, 0, 1, 1},
-        [ARCADE_EVENT_TRICK_ROOM]    =  {0, 0, 0, 0, 1, 1, 0, 0, 1, 1},
-        [ARCADE_EVENT_SWAP]          =  {1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
-        [ARCADE_EVENT_SPEED_UP]      =  {1, 1, 1, 1, 0, 0, 0, 0, 0, 1},
-        [ARCADE_EVENT_SPEED_DOWN]    =  {1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
-        [ARCADE_EVENT_RANDOM]        =  {0, 0, 0, 0, 0, 0, 1, 1, 1, 1},
-        [ARCADE_EVENT_GIVE_BP_SMALL] =  {0, 0, 0, 0, 1, 1, 1, 1, 1, 1},
-        [ARCADE_EVENT_NO_BATTLE]     =  {0, 0, 0, 0, 0, 0, 1, 1, 1, 1},
-        [ARCADE_EVENT_GIVE_BP_BIG]   =  {0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-        [ARCADE_EVENT_NO_EVENT]      =  {1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
-    };
-
-    if (event < ARCADE_EVENT_SPECIAL_START)
-        return TRUE;
-
-    if (!PanelStreakTable[event][GetChallengeNumIndex()])
-        return FALSE;
-
-    return TRUE;
+    return arcadeEventInfo[event].streakEligibility[GetChallengeNumIndex()];
 }
 
 static u32 GetChallengeNumIndex(void)
 {
     u32 challengeNum = GetChallengeNum();
 
-    if (challengeNum > ARCADE_STREAK_NUM_MAX)
-        return ARCADE_STREAK_NUM_MAX;
+    if (challengeNum >= ARCADE_STREAK_NUM_MAX)
+        return (ARCADE_STREAK_NUM_MAX - 1);
     else
         return challengeNum;
 }
@@ -1796,21 +2455,21 @@ static bool32 DoGameBoardResult(enum ArcadeEvents event, enum ArcadeImpactTypes 
         case ARCADE_EVENT_GIVE_BERRY: return BattleArcade_DoGiveBerry(impact);
         case ARCADE_EVENT_GIVE_ITEM: return BattleArcade_DoGiveItem(impact);
         case ARCADE_EVENT_LEVEL_UP: return BattleArcade_DoLevelUp(impact);
-        case ARCADE_EVENT_SUN: return BattleArcade_DoSun();
-        case ARCADE_EVENT_RAIN: return BattleArcade_DoRain();
-        case ARCADE_EVENT_SAND: return BattleArcade_DoSand();
-        case ARCADE_EVENT_SNOW: return BattleArcade_DoSnow();
-        case ARCADE_EVENT_FOG: return BattleArcade_DoFog();
-        case ARCADE_EVENT_TRICK_ROOM: return BattleArcade_DoTrickRoom();
-        case ARCADE_EVENT_SWAP: return BattleArcade_DoSwap();
-        case ARCADE_EVENT_SPEED_UP: return BattleArcade_DoSpeedUp();
-        case ARCADE_EVENT_SPEED_DOWN: return BattleArcade_DoSpeedDown();
-        case ARCADE_EVENT_RANDOM: return BattleArcade_DoRandom();
-        case ARCADE_EVENT_GIVE_BP_SMALL: return BattleArcade_DoGiveBPSmall();
-        case ARCADE_EVENT_GIVE_BP_BIG: return BattleArcade_DoGiveBPBig();
-        case ARCADE_EVENT_NO_BATTLE: return BattleArcade_DoNoBattle();
+        case ARCADE_EVENT_SUN: return BattleArcade_DoSun(impact);
+        case ARCADE_EVENT_RAIN: return BattleArcade_DoRain(impact);
+        case ARCADE_EVENT_SAND: return BattleArcade_DoSand(impact);
+        case ARCADE_EVENT_SNOW: return BattleArcade_DoSnow(impact);
+        case ARCADE_EVENT_FOG: return BattleArcade_DoFog(impact);
+        case ARCADE_EVENT_TRICK_ROOM: return BattleArcade_DoTrickRoom(impact);
+        case ARCADE_EVENT_SWAP: return BattleArcade_DoSwap(impact);
+        case ARCADE_EVENT_SPEED_UP: return BattleArcade_DoSpeedUp(impact);
+        case ARCADE_EVENT_SPEED_DOWN: return BattleArcade_DoSpeedDown(impact);
+        case ARCADE_EVENT_RANDOM: return BattleArcade_DoRandom(impact);
+        case ARCADE_EVENT_GIVE_BP_SMALL: return BattleArcade_DoGiveBPSmall(impact);
+        case ARCADE_EVENT_GIVE_BP_BIG: return BattleArcade_DoGiveBPBig(impact);
+        case ARCADE_EVENT_NO_BATTLE: return BattleArcade_DoNoBattle(impact);
         default:
-        case ARCADE_EVENT_NO_EVENT: return BattleArcade_DoNoEvent();
+        case ARCADE_EVENT_NO_EVENT: return BattleArcade_DoNoEvent(impact);
     }
     return TRUE;
 }
@@ -1985,23 +2644,23 @@ static bool32 HaveMonsBeenSwapped(void)
     return FALSE;
 }
 
-static bool32 BattleArcade_DoSun(void)
+static bool32 BattleArcade_DoSun(enum ArcadeImpactTypes impact)
 {
     return BattleArcade_DoWeather(WEATHER_DROUGHT);
 }
-static bool32 BattleArcade_DoRain(void)
+static bool32 BattleArcade_DoRain(enum ArcadeImpactTypes impact)
 {
     return BattleArcade_DoWeather(WEATHER_DOWNPOUR);
 }
-static bool32 BattleArcade_DoSand(void)
+static bool32 BattleArcade_DoSand(enum ArcadeImpactTypes impact)
 {
     return BattleArcade_DoWeather(WEATHER_SANDSTORM);
 }
-static bool32 BattleArcade_DoSnow(void)
+static bool32 BattleArcade_DoSnow(enum ArcadeImpactTypes impact)
 {
     return BattleArcade_DoWeather(WEATHER_SNOW);
 }
-static bool32 BattleArcade_DoFog(void)
+static bool32 BattleArcade_DoFog(enum ArcadeImpactTypes impact)
 {
     return BattleArcade_DoWeather(WEATHER_FOG_HORIZONTAL);
 }
@@ -2013,13 +2672,13 @@ static bool32 BattleArcade_DoWeather(u32 weather)
     return TRUE;
 }
 
-static bool32 BattleArcade_DoTrickRoom(void)
+static bool32 BattleArcade_DoTrickRoom(enum ArcadeImpactTypes impact)
 {
     SetStartingStatus(STARTING_STATUS_TRICK_ROOM_TEMPORARY);
     return TRUE;
 }
 
-static bool32 BattleArcade_DoSwap(void)
+static bool32 BattleArcade_DoSwap(enum ArcadeImpactTypes impact)
 {
     struct Pokemon tempParty[MAX_FRONTIER_PARTY_SIZE];
 
@@ -2039,13 +2698,13 @@ static bool32 BattleArcade_DoSwap(void)
     return TRUE;
 }
 
-static bool32 BattleArcade_DoSpeedUp(void)
+static bool32 BattleArcade_DoSpeedUp(enum ArcadeImpactTypes impact)
 {
     BattleArcade_ChangeSpeed(ARCADE_EVENT_SPEED_UP);
     return TRUE;
 }
 
-static bool32 BattleArcade_DoSpeedDown(void)
+static bool32 BattleArcade_DoSpeedDown(enum ArcadeImpactTypes impact)
 {
     BattleArcade_ChangeSpeed(ARCADE_EVENT_SPEED_DOWN);
     return TRUE;
@@ -2088,7 +2747,7 @@ static void SetCursorSpeed(u32 speed)
     gSaveBlock2Ptr->frontier.arcadeCursorData.speed = speed;
 }
 
-static bool32 BattleArcade_DoRandom(void)
+static bool32 BattleArcade_DoRandom(enum ArcadeImpactTypes impact)
 {
     SetCursorRandomMode();
     return TRUE;
@@ -2099,22 +2758,24 @@ static void SetCursorRandomMode(void)
     gSaveBlock2Ptr->frontier.arcadeCursorData.isRandom = TRUE;
 }
 
-static bool32 BattleArcade_DoGiveBPSmall(void)
+static bool32 BattleArcade_DoGiveBPSmall(enum ArcadeImpactTypes impact)
+{
+    ConvertIntToDecimalStringN(gStringVar3,ARCADE_BP_SMALL,STR_CONV_MODE_LEFT_ALIGN,CountDigits(ARCADE_BP_SMALL));
+    return TRUE;
+}
+
+static bool32 BattleArcade_DoGiveBPBig(enum ArcadeImpactTypes impact)
+{
+    ConvertIntToDecimalStringN(gStringVar3,ARCADE_BP_BIG,STR_CONV_MODE_LEFT_ALIGN,CountDigits(ARCADE_BP_BIG));
+    return TRUE;
+}
+
+static bool32 BattleArcade_DoNoBattle(enum ArcadeImpactTypes impact)
 {
     return TRUE;
 }
 
-static bool32 BattleArcade_DoGiveBPBig(void)
-{
-    return TRUE;
-}
-
-static bool32 BattleArcade_DoNoBattle(void)
-{
-    return TRUE;
-}
-
-static bool32 BattleArcade_DoNoEvent(void)
+static bool32 BattleArcade_DoNoEvent(enum ArcadeImpactTypes impact)
 {
     return TRUE;
 }
@@ -2135,3 +2796,5 @@ u32 BattleArcade_CalculateBonus(enum SiliconFrontierFacility facility)
     VarSet(LOCAL_VAR_GAME_BOARD_EVENT,ARCADE_EVENT_COUNT);
     return bonus;
 }
+
+
