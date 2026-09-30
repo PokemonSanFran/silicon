@@ -1082,7 +1082,7 @@ void SiliconFrontier_BufferAwardSpeech(void)
     enum SiliconFrontierSparringTypes sparringType = SiliconFrontier_GetCurrentChallengeSparringType();
 
     u32 streak = SiliconFrontier_GetCurrentStreak(facility,challengeType, sparringType);
-    u32 phase = streak / SILICON_FRONTIER_STREAK_LENGTH_SILVER;
+    u32 phase = (streak / SILICON_FRONTIER_STREAK_LENGTH_SILVER) - 1;
 
     enum SiliconFrontierTrainerIds trainer = SiliconFrontier_GetFacilityBoss(facility,phase);
     GetFrontierTrainerName(gStringVar1,trainer);
