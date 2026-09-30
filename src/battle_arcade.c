@@ -2444,34 +2444,10 @@ static u32 GetChallengeNum(void)
 // Arcade Game Board Back End Resolution
 static bool32 DoGameBoardResult(enum ArcadeEvents event, enum ArcadeImpactTypes impact)
 {
-    switch (event)
-    {
-        case ARCADE_EVENT_LOWER_HP: return BattleArcade_DoLowerHP(impact);
-        case ARCADE_EVENT_POISON: return BattleArcade_DoPoison(impact);
-        case ARCADE_EVENT_PARALYZE: return BattleArcade_DoParalyze(impact);
-        case ARCADE_EVENT_BURN: return BattleArcade_DoBurn(impact);
-        case ARCADE_EVENT_SLEEP: return BattleArcade_DoSleep(impact);
-        case ARCADE_EVENT_FREEZE: return BattleArcade_DoFreeze(impact);
-        case ARCADE_EVENT_GIVE_BERRY: return BattleArcade_DoGiveBerry(impact);
-        case ARCADE_EVENT_GIVE_ITEM: return BattleArcade_DoGiveItem(impact);
-        case ARCADE_EVENT_LEVEL_UP: return BattleArcade_DoLevelUp(impact);
-        case ARCADE_EVENT_SUN: return BattleArcade_DoSun(impact);
-        case ARCADE_EVENT_RAIN: return BattleArcade_DoRain(impact);
-        case ARCADE_EVENT_SAND: return BattleArcade_DoSand(impact);
-        case ARCADE_EVENT_SNOW: return BattleArcade_DoSnow(impact);
-        case ARCADE_EVENT_FOG: return BattleArcade_DoFog(impact);
-        case ARCADE_EVENT_TRICK_ROOM: return BattleArcade_DoTrickRoom(impact);
-        case ARCADE_EVENT_SWAP: return BattleArcade_DoSwap(impact);
-        case ARCADE_EVENT_SPEED_UP: return BattleArcade_DoSpeedUp(impact);
-        case ARCADE_EVENT_SPEED_DOWN: return BattleArcade_DoSpeedDown(impact);
-        case ARCADE_EVENT_RANDOM: return BattleArcade_DoRandom(impact);
-        case ARCADE_EVENT_GIVE_BP_SMALL: return BattleArcade_DoGiveBPSmall(impact);
-        case ARCADE_EVENT_GIVE_BP_BIG: return BattleArcade_DoGiveBPBig(impact);
-        case ARCADE_EVENT_NO_BATTLE: return BattleArcade_DoNoBattle(impact);
-        default:
-        case ARCADE_EVENT_NO_EVENT: return BattleArcade_DoNoEvent(impact);
-    }
-    return TRUE;
+    if (arcadeEventInfo[event].eventFunc == NULL)
+        return TRUE;
+
+    return arcadeEventInfo[event].eventFunc(impact);
 }
 
 static bool32 BattleArcade_DoLowerHP(enum ArcadeImpactTypes impact)
