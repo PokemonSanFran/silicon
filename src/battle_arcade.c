@@ -1745,13 +1745,13 @@ static void Task_GameBoardMainInput(u8 taskId)
     if (!JOY_NEW(A_BUTTON))
         return;
 
-    PlaySE(SE_SELECT);
     switch (GetGameBoardMode())
     {
         case ARCADE_BOARD_MODE_WAIT:
             StartCountdown();
             break;
         case ARCADE_BOARD_MODE_GAME_START:
+            PlaySE(SE_SELECT);
             HandleFinishMode();
             break;
         default:
@@ -1779,6 +1779,7 @@ static void StartCountdown(void)
 {
     HideBg(BG_BOARD_BACKGROUND);
     IncrementGameBoardMode();
+    PlaySE(SE_NOTE_C);
     SetTimerForCountdown();
     PrintHelpBar();
     PopulateEventSprites();
@@ -1811,9 +1812,11 @@ static void Task_GameBoard_Countdown(u8 taskId)
     {
         case ARCADE_COUNTDOWN_SHOW_FRAMES_2:
         case ARCADE_COUNTDOWN_SHOW_FRAMES_1:
+            PlaySE(SE_NOTE_D);
             IncrementGameBoardMode();
             break;
         case 0:
+            PlaySE(SE_NOTE_E);
             IncrementGameBoardMode();
             PrintHelpBar();
             StartGame();
@@ -1994,7 +1997,7 @@ static void ChangeCursorPosition(void)
         else
             SetCursorPosition(newPosition);
     }
-
+    PlaySE(SE_CONTEST_HEART);
 }
 
 static bool32 IsCursorInRandomMode(void)
@@ -2017,6 +2020,7 @@ static void HandleFinishMode()
     enum ArcadeImpactTypes impact = 0;
     enum ArcadeEvents event = 0;
 
+    PlaySE(SE_RG_HELP_OPEN);
     IncrementGameBoardMode();
     DestroyTask(FindTaskIdByFunc(Task_GameBoard_Game));
     PrintHelpBar();
@@ -2467,6 +2471,12 @@ static bool32 BattleArcade_DoFog(enum ArcadeImpactTypes impact)
     return BattleArcade_DoWeather(WEATHER_FOG_HORIZONTAL);
 }
 
+static bool32 BattleArcade_DoMistyTerrain(enum ArcadeImpactTypes impact)
+{
+    SetStartingStatus(STARTING_STATUS_MISTY_TERRAIN);
+    return TRUE;
+}
+
 static bool32 BattleArcade_DoWeather(u32 weather)
 {
     SetSavedWeather(weather);
@@ -2476,7 +2486,7 @@ static bool32 BattleArcade_DoWeather(u32 weather)
 
 static bool32 BattleArcade_DoTrickRoom(enum ArcadeImpactTypes impact)
 {
-    SetStartingStatus(STARTING_STATUS_TRICK_ROOM_TEMPORARY);
+    SetStartingStatus(STARTING_STATUS_TRICK_ROOM);
     return TRUE;
 }
 
@@ -2599,4 +2609,12 @@ u32 BattleArcade_CalculateBonus(enum SiliconFrontierFacility facility)
     return bonus;
 }
 
+bool8 ShouldUseNormalFogForArcade(void)
+{
+    enum SiliconFrontierFacility facility = SiliconFrontier_GetFacilityFromCurrentChallenge();
+    if (facility != SILICON_FACILITY_ARCADE)
+        return FALSE;
+
+    return (VarGet(LOCAL_VAR_GAME_BOARD_EVENT) == ARCADE_EVENT_FOG);
+}
 

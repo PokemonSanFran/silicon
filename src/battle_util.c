@@ -2,6 +2,7 @@
 #include "battle.h"
 #include "battle_anim.h"
 #include "battle_arena.h"
+#include "battle_arcade.h" // siliconFrontier
 #include "battle_environment.h"
 #include "battle_pyramid.h"
 #include "battle_util.h"
@@ -2914,6 +2915,7 @@ bool32 TryFieldEffects(enum FieldEffectCases caseId)
             effect = TRUE;
         }
         else if (B_OVERWORLD_FOG >= GEN_8
+              && (ShouldUseNormalFogForArcade() == FALSE) // siliconFrontier
               && (GetCurrentWeather() == WEATHER_FOG_HORIZONTAL || GetCurrentWeather() == WEATHER_FOG_DIAGONAL)
               && !IsFogBattle() // fogBattle
               && !(gFieldStatuses & STATUS_FIELD_MISTY_TERRAIN))
@@ -2974,7 +2976,10 @@ bool32 TryFieldEffects(enum FieldEffectCases caseId)
                 break;
             case WEATHER_FOG_DIAGONAL:
             case WEATHER_FOG_HORIZONTAL:
-                if (B_OVERWORLD_FOG == GEN_4 && !(gBattleWeather & B_WEATHER_FOG))
+                // Start siliconFrontier
+                //if (B_OVERWORLD_FOG == GEN_4 && !(gBattleWeather & B_WEATHER_FOG))
+                if ((B_OVERWORLD_FOG == GEN_4 && !(gBattleWeather & B_WEATHER_FOG)) || ShouldUseNormalFogForArcade())
+                // End siliconFrontier
                 {
                     gBattleWeather = B_WEATHER_FOG;
                     gBattleScripting.animArg1 = B_ANIM_FOG_CONTINUES;
