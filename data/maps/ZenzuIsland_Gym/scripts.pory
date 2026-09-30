@@ -1,7 +1,7 @@
 mapscripts ZenzuIsland_Gym_MapScripts{
     MAP_SCRIPT_ON_WARP_INTO_MAP_TABLE
     [
-        VAR_SILICON_FACILITY_CHALLENGE_STATUS,SILICON_FRONTIER_CHALLENGE_ENDED: SiliconFrontier_Script_FacePlayerUp
+        VAR_SILICON_FACILITY_CHALLENGE_STATUS,SILICON_FRONTIER_CHALLENGE_ENDED: SiliconFrontier_BattleStudio_Script_FacePlayerAttendant
     ]
     MAP_SCRIPT_ON_FRAME_TABLE[
         VAR_SILICON_FACILITY_CHALLENGE_STATUS,SILICON_FRONTIER_CHALLENGE_IN_PROGRESS: SiliconFrontier_Dialogue_Disqualified
@@ -14,3 +14,4 @@ mapscripts ZenzuIsland_Gym_MapScripts{
         callnative(SiliconFrontier_SetPartnerObject)
     }
 }
+

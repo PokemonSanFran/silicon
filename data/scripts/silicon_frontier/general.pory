@@ -373,6 +373,7 @@ script SiliconFrontier_Script_LeaveBattleRoom
         case SILICON_FACILITY_TOWER:
             warpsilent(MAP_TIRABUDIN_PLACE_GYM_LOBBY,4,5)
         case SILICON_FACILITY_ARCADE:
+            warpsilent(MAP_ZENZU_ISLAND_GYM,5,9)
         case SILICON_FACILITY_FACTORY:
     }
     waitstate

@@ -34,3 +34,9 @@ script SiliconFroniter_Script_HandleGameResults
     // instead of skip battle, increment the counter by 1 and contnue ahead here
     return
 }
+
+script SiliconFrontier_BattleStudio_Script_FacePlayerAttendant
+{
+    turnobject(LOCALID_PLAYER,DIR_EAST)
+    turnobject(LOCALID_ZENZU_ISLAND_GYM_ATTENDANT,DIR_WEST)
+}
