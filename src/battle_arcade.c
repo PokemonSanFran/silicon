@@ -2144,7 +2144,7 @@ static void GameBoard_FreeResources(void)
 
 static u32 GenerateImpact(void)
 {
-    u8 ImpactTable[ARCADE_PERFORMANCE_BRACKET_COUNT][ARCADE_IMPACT_COUNT] =
+    u16 ImpactTable[ARCADE_PERFORMANCE_BRACKET_COUNT][ARCADE_IMPACT_COUNT] =
     {
         [ARCADE_PERFORMANCE_BRACKET_0_4] =
         {
@@ -2184,7 +2184,12 @@ static u32 GenerateImpact(void)
     };
 
     enum ArcadeImpactTypes impactBracket = ConvertPerformanceToImpactBracket();
-    return RandomWeightedIndex(ImpactTable[impactBracket],ARCADE_IMPACT_COUNT);
+
+    u32 sum = 0;
+    for (u32 index = 0; index < ARCADE_IMPACT_COUNT; index++)
+        sum += ImpactTable[impactBracket][index];
+
+    return RandomWeightedArray(RNG_NONE,sum,ARCADE_IMPACT_COUNT,ImpactTable[impactBracket]);
 }
 
 static u32 ConvertPerformanceToImpactBracket(void)
@@ -2200,15 +2205,16 @@ static u32 ConvertPerformanceToImpactBracket(void)
 
 static u32 GenerateEvent(enum ArcadeImpactTypes impact)
 {
-    u8 eventTable[ARCADE_EVENT_COUNT];
+    u16 eventTable[ARCADE_EVENT_COUNT];
+    u32 sum = 0;
 
     for (enum ArcadeEvents event = 0; event < ARCADE_EVENT_COUNT; event++)
     {
         eventTable[event] = FALSE;
 
-        if (impact == ARCADE_IMPACT_SPECIAL || impact == ARCADE_IMPACT_ALL)
+        if ((impact == ARCADE_IMPACT_SPECIAL) || (impact == ARCADE_IMPACT_ALL))
         {
-            if (impact != arcadeEventInfo[event].type)
+            if ((arcadeEventInfo[event].type) != impact)
                 continue;
         }
 
@@ -2218,10 +2224,13 @@ static u32 GenerateEvent(enum ArcadeImpactTypes impact)
                 continue;
         }
 
-        eventTable[event] = IsEventValidDuringBattleOrStreak(event);
+        bool32 valid = IsEventValidDuringBattleOrStreak(event);
+
+        sum += valid;
+        eventTable[event] = valid;
     }
 
-    return RandomWeightedIndex(eventTable,ARCADE_EVENT_COUNT);
+    return RandomWeightedArray(RNG_NONE,sum,ARCADE_EVENT_COUNT,eventTable);
 }
 
 static bool32 IsEventValidDuringBattleOrStreak(enum ArcadeEvents event)
