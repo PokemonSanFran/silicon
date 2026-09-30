@@ -12,6 +12,7 @@ script SiliconFrontier_Script_DoGameBoardSequence
     closemessage
     callnative(SiliconFrontier_DeleteAllHeldItems)
     callnative(StartArcadeGameBoardFromOverworld)
+    waitstate
     goto(SiliconFroniter_Script_HandleGameResults)
 }
 
@@ -29,6 +30,7 @@ script SiliconFroniter_Script_HandleGameResults
         call(BattleStudio_Dialogue_AnnounceNextBattleFailure)
     }
     closemessage
+    call(BattleStudio_Movement_MoveMCToGameBoard)
     // instead of skip battle, increment the counter by 1 and contnue ahead here
     return
 }
