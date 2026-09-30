@@ -5,9 +5,16 @@ const LOCALID_LEAGUEOPS_CHIEF = LOCALID_CAMERA + 6
 
 script WelcomeToTheWarRoom_Object_Setup_Script
 {
-    spawnobject(OBJ_EVENT_GFX_DEVELOPER_2,LOCALID_LEAGUEOPS_ARNAV,21,26,DIR_SOUTH,3)
-    spawnobject(OBJ_EVENT_GFX_PRODUCT_MANAGER_1,LOCALID_LEAGUEOPS_TECHIE,17,26,DIR_SOUTH,3)
-    spawnobject(OBJ_EVENT_GFX_MART_EMPLOYEE,LOCALID_LEAGUEOPS_CHIEF,21,27,DIR_SOUTH,3)
+    spawnobject(OBJ_EVENT_GFX_DEVELOPER_2,LOCALID_LEAGUEOPS_ARNAV,21,26,MOVEMENT_TYPE_FACE_UP,3)
+    spawnobject(OBJ_EVENT_GFX_PRODUCT_MANAGER_1,LOCALID_LEAGUEOPS_TECHIE,17,26,MOVEMENT_TYPE_FACE_UP,3)
+    spawnobject(OBJ_EVENT_GFX_MART_EMPLOYEE,LOCALID_LEAGUEOPS_CHIEF,21,27,MOVEMENT_TYPE_FACE_UP,3)
+	turnobject(LOCALID_LEAGUEOPS_CHIEF,DIR_NORTH)
+	turnobject(LOCALID_LEAGUEOPS_ARNAV,DIR_NORTH)
+	turnobject(LOCALID_LEAGUEOPS_TECHIE,DIR_NORTH)
+	turnobject(LOCALID_SHARPRISE_OLIVER,DIR_NORTH)
+	turnobject(LOCALID_SHARPRISE_LUCREZIA,DIR_NORTH)
+	turnobject(LOCALID_SHARPRISE_CHARLOTTE,DIR_NORTH)
+	turnobject(LOCALID_PLAYER,DIR_NORTH)
     setobjectflagfromlocalid(LOCALID_LEAGUEOPS_RAMESH)
     setobjectflagfromlocalid(LOCALID_LEAGUEOPS_KEIYING)
 }
@@ -19,16 +26,6 @@ script WelcomeToTheWarRoom_Object_Hide_Script{
     setobjectflagfromlocalid(LOCALID_LEAGUEOPS_RAMESH)
     setobjectxy(LOCALID_SHARPRISE_OLIVER,34,2)
     setobjectmovementtype(LOCALID_SHARPRISE_OLIVER,MOVEMENT_TYPE_FACE_DOWN)
-}
-
-script WelcomeToTheWarRoom_FaceSpeakerLucrezia {
-    applymovement(LOCALID_LEAGUEOPS_TECHIE,Common_Movement_FaceUp)
-    applymovement(LOCALID_LEAGUEOPS_ARNAV,Common_Movement_FaceUp)
-    applymovement(LOCALID_LEAGUEOPS_CHIEF,Common_Movement_FaceUp)
-    applymovement(LOCALID_SHARPRISE_OLIVER,Common_Movement_FaceUp)
-    applymovement(LOCALID_SHARPRISE_CHARLOTTE,Common_Movement_FaceUp)
-    applymovement(PLAYER,Common_Movement_FaceUp)
-    waitmovement(0)
 }
 
 script WelcomeToTheWarRoom_FaceSpeakerArnav {
@@ -86,15 +83,27 @@ script WelcomeToTheWarRoom_FaceSpeakerOliver {
     waitmovement(0)
 }
 
+script WelcomeToTheWarRoom_Script_StartMusic
+{
+	playbgm(MUS_WELCOME_TO_THE_WAR_ROOM,TRUE)
+}
+
+script WelcomeToTheWarRoom_FaceSpeakerLucrezia {
+    applymovement(LOCALID_LEAGUEOPS_TECHIE,Common_Movement_FaceUp)
+    applymovement(LOCALID_LEAGUEOPS_ARNAV,Common_Movement_FaceUp)
+    applymovement(LOCALID_LEAGUEOPS_CHIEF,Common_Movement_FaceUp)
+    applymovement(LOCALID_SHARPRISE_OLIVER,Common_Movement_FaceUp)
+    applymovement(LOCALID_SHARPRISE_CHARLOTTE,Common_Movement_FaceUp)
+    applymovement(PLAYER,Common_Movement_FaceUp)
+    waitmovement(0)
+}
 script WelcomeToTheWarRoom_ExplainSitaution_Dialogue
 {
     lock
     startcutscene(JUMPPLAYER_WELCOMETOTHEWARROOM)
-    playbgm(MUS_WELCOME_TO_THE_WAR_ROOM,FALSE)
     setvar(VAR_SHARPRISESPIRE_CONFERENCE_STATE,POST_WELCOME_TO_THE_WAR_ROOM)
     setvar(VAR_FERRYBUILDING_STATE,CHIEF_LEFT_WAR_ROOM)
 
-    call(WelcomeToTheWarRoom_FaceSpeakerLucrezia)
         applymovement(LOCALID_SHARPRISE_LUCREZIA, moves(walk_left * 2, walk_right *2, walk_left * 2, walk_right *2, face_down, step_end))
         waitmovement(0)
 
