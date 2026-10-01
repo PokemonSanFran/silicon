@@ -119,7 +119,6 @@ static void GenerateGameBoard(void);
 static void PrintEnemyParty(void);
 static void PrintPlayerParty(void);
 static void PrintPartyIcons(u32 side);
-static u32 GetHorizontalPositionFromSide(u32 side);
 static struct Pokemon *LoadSideParty(enum ArcadeImpactTypes impact);
 static void PrintHelpBar(void);
 static const u8 *GetHelpBarText(void);
@@ -1641,12 +1640,14 @@ static void PrintPlayerParty(void)
 
 static void PrintPartyIcons(u32 side)
 {
-    u32 x = GetHorizontalPositionFromSide(side);
-    u32 y = 33;
+    u32 size = SiliconFroniter_GetPartySizeFromCurrentChallenge();
+    u32 x = (side == ARCADE_IMPACT_OPPONENT) ? 215 : 22;
+    u32 y =  (size != FRONTIER_PARTY_SIZE) ? 18 : 33;
     struct Pokemon *party = LoadSideParty(side);
     u32 structSpriteId = (side == ARCADE_IMPACT_OPPONENT) ? ARCADE_SPRITEID_OPPONENT_SIDE_MON_0 : ARCADE_SPRITEID_PLAYER_SIDE_MON_0;
+    bool32 flag = FALSE;
 
-    for (u32 i = 0; i < FRONTIER_PARTY_SIZE; i++)
+    for (u32 i = 0; i < size; i++)
     {
         if (!GetMonData(&party[i], MON_DATA_SANITY_HAS_SPECIES))
             break;
@@ -1657,12 +1658,17 @@ static void PrintPartyIcons(u32 side)
 
         y += 30;
         structSpriteId++;
-    }
-}
 
-static u32 GetHorizontalPositionFromSide(u32 side)
-{
-    return (side == ARCADE_IMPACT_OPPONENT) ? 215 : 22;
+        if (i == (size - 1) && SiliconFroniter_IsCurrentChallengeTypeMulti() == TRUE)
+        {
+            if (flag == TRUE)
+                break;
+            party = (side == ARCADE_IMPACT_OPPONENT) ? gParties[B_TRAINER_OPPONENT_B] : gParties[B_TRAINER_PARTNER];
+            i = 0;
+            flag = TRUE;
+            continue;
+        }
+    }
 }
 
 static struct Pokemon *LoadSideParty(enum ArcadeImpactTypes impact)
@@ -1857,114 +1863,50 @@ static void InitCursorPositionFromSaveblock(void)
     sGameBoardState->cursorPosition = gSaveBlock2Ptr->frontier.arcadeCursorData.position;
 }
 
+static const union AnimCmd sAnim_ShadowPlayer[] =
+{
+    ANIMCMD_FRAME(B_SIDE_PLAYER * 8, 0),
+    ANIMCMD_END
+};
+
+static const union AnimCmd sAnim_ShadowOpponent[] =
+{
+    ANIMCMD_FRAME(B_SIDE_OPPONENT * 8, 0),
+    ANIMCMD_END
+};
+
+static const union AnimCmd * const sSpriteAnimTable_Shadow[NUM_BATTLE_SIDES] =
+{
+    [B_SIDE_PLAYER] = sAnim_ShadowPlayer,
+    [B_SIDE_OPPONENT] = sAnim_ShadowOpponent,
+};
+
 static void CreateGameBoardShadows(void)
 {
-    u8 const sShadowPosition[SILICON_FRONTIER_CHALLENGE_TYPE_COUNT][MAX_BATTLE_TRAINERS][MAX_FRONTIER_PARTY_SIZE][AXIS_COUNT] =
-    {
-        [SILICON_FRONTIER_CHALLENGE_TYPE_SINGLE] =
-        {
-            [B_TRAINER_PLAYER] =
-            {
-                {16, 47},
-                {16, 78},
-                {16, 108},
-            },
-            [B_TRAINER_OPPONENT_A] =
-            {
-                {208, 47},
-                {208, 78},
-                {208, 108},
-            },
-        },
-        [SILICON_FRONTIER_CHALLENGE_TYPE_DOUBLE] =
-        {
-            [B_TRAINER_PLAYER] =
-            {
-                {11, 11},
-                {11, 11},
-                {11, 11},
-                {11, 11},
-
-            },
-            [B_TRAINER_OPPONENT_A] =
-            {
-                {61, 61},
-                {61, 61},
-                {61, 61},
-                {61, 61},
-            },
-        },
-        [SILICON_FRONTIER_CHALLENGE_TYPE_MULTI] =
-        {
-            [B_TRAINER_PLAYER] =
-            {
-                {11, 11},
-                {11, 11},
-            },
-            [B_TRAINER_OPPONENT_A] =
-            {
-                {61, 61},
-                {61, 61},
-            },
-            [B_TRAINER_PARTNER] =
-            {
-                {21, 21},
-                {21, 21},
-            },
-            [B_TRAINER_OPPONENT_B] =
-            {
-                {81, 81},
-                {81, 81},
-            },
-        },
-        [SILICON_FRONTIER_CHALLENGE_TYPE_LINK_MULTI] =
-        {
-            [B_TRAINER_PLAYER] =
-            {
-                {11, 11},
-                {11, 11},
-            },
-            [B_TRAINER_OPPONENT_A] =
-            {
-                {61, 61},
-                {61, 61},
-            },
-            [B_TRAINER_PARTNER] =
-            {
-                {21, 21},
-                {21, 21},
-            },
-            [B_TRAINER_OPPONENT_B] =
-            {
-                {81, 81},
-                {81, 81},
-            },
-        },
-    };
-
     u32 size = SiliconFroniter_GetPartySizeFromCurrentChallenge();
-    enum SiliconFrontierChallengeType type = SiliconFrontier_GetTypeFromCurrentChallenge();
+    if (SiliconFroniter_IsCurrentChallengeTypeMulti())
+        size = FRONTIER_DOUBLES_PARTY_SIZE;
 
-    for (u32 battler = 0; battler < MAX_BATTLE_TRAINERS; battler++)
+    for (enum BattleSide side = 0; side < NUM_BATTLE_SIDES; side++)
     {
-        if ((SiliconFroniter_IsCurrentChallengeTypeMulti() == FALSE) && (battler > B_TRAINER_OPPONENT_A))
-            continue;
+        u32 x = (side == B_SIDE_PLAYER) ? 16 : 209;
+        u32 y = (size > FRONTIER_PARTY_SIZE) ? 32 : 47;
 
-        for (u32 monIndex = 0; monIndex < MAX_FRONTIER_PARTY_SIZE; monIndex++)
+        for (u32 monIndex = 0; monIndex < size; monIndex++)
         {
-            if (monIndex >= size)
-                continue;
-
             struct SpriteTemplate TempSpriteTemplate = gDummySpriteTemplate;
 
             TempSpriteTemplate.tileTag = ARCADE_SPRITETAG_SHADOW;
             TempSpriteTemplate.paletteTag = ARCADE_PALTAG_SHADOW;
+            TempSpriteTemplate.anims = sSpriteAnimTable_Shadow;
 
-            u32 spriteId = CreateSprite(&TempSpriteTemplate,sShadowPosition[type][battler][monIndex][AXIS_X],sShadowPosition[type][battler][monIndex][AXIS_Y], 0);
+            u32 spriteId = CreateSprite(&TempSpriteTemplate,x,y,0);
 
             gSprites[spriteId].oam.shape = SPRITE_SHAPE(32x8);
             gSprites[spriteId].oam.size = SPRITE_SIZE(32x8);
             gSprites[spriteId].oam.priority = 1;
+            StartSpriteAnim(&gSprites[spriteId],side);
+            y += 30;
         }
     }
 }
