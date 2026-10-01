@@ -1275,7 +1275,7 @@ static void ResetWeatherPostBattle(void)
 
 static void ReturnPartyToOwner(void)
 {
-    if (!HaveMonsBeenSwapped())
+    if (HaveMonsBeenSwapped() == FALSE)
         return;
 
     BattleArcade_DoSwap(0);
@@ -1640,35 +1640,31 @@ static void PrintPlayerParty(void)
 
 static void PrintPartyIcons(u32 side)
 {
+    enum BattleTrainer battler = (side == ARCADE_IMPACT_OPPONENT) ? B_TRAINER_OPPONENT_A : B_TRAINER_PLAYER;
     u32 size = SiliconFroniter_GetPartySizeFromCurrentChallenge();
     u32 x = (side == ARCADE_IMPACT_OPPONENT) ? 215 : 22;
     u32 y =  (size != FRONTIER_PARTY_SIZE) ? 18 : 33;
-    struct Pokemon *party = LoadSideParty(side);
-    u32 structSpriteId = (side == ARCADE_IMPACT_OPPONENT) ? ARCADE_SPRITEID_OPPONENT_SIDE_MON_0 : ARCADE_SPRITEID_PLAYER_SIDE_MON_0;
-    bool32 flag = FALSE;
 
-    for (u32 i = 0; i < size; i++)
+    for (;battler < MAX_BATTLE_TRAINERS; battler++)
     {
-        if (!GetMonData(&party[i], MON_DATA_SANITY_HAS_SPECIES))
-            break;
+        struct Pokemon *party = gParties[battler];
+        u32 structSpriteId = (side == ARCADE_IMPACT_OPPONENT) ? ARCADE_SPRITEID_OPPONENT_SIDE_MON_0 : ARCADE_SPRITEID_PLAYER_SIDE_MON_0;
 
-        u32 spriteId = CreateMonIcon(GetMonData(&party[i], MON_DATA_SPECIES),SpriteCallbackDummy, x, y, 4, GetMonData(&party[i],MON_DATA_PERSONALITY));
-        sGameBoardState->spriteId[structSpriteId] = spriteId;
-        gSprites[spriteId].oam.priority = 0;
-
-        y += 30;
-        structSpriteId++;
-
-        if (i == (size - 1) && SiliconFroniter_IsCurrentChallengeTypeMulti() == TRUE)
+        for (u32 i = 0; i < size; i++)
         {
-            if (flag == TRUE)
+            if (!GetMonData(&party[i], MON_DATA_SANITY_HAS_SPECIES))
                 break;
-            party = (side == ARCADE_IMPACT_OPPONENT) ? gParties[B_TRAINER_OPPONENT_B] : gParties[B_TRAINER_PARTNER];
-            i = 0;
-            flag = TRUE;
-            continue;
+
+            u32 spriteId = CreateMonIcon(GetMonData(&party[i], MON_DATA_SPECIES),SpriteCallbackDummy, x, y, 4, GetMonData(&party[i],MON_DATA_PERSONALITY));
+            sGameBoardState->spriteId[structSpriteId] = spriteId;
+            gSprites[spriteId].oam.priority = 0;
+
+            y += 30;
+            structSpriteId++;
         }
+        battler++;
     }
+
 }
 
 static struct Pokemon *LoadSideParty(enum ArcadeImpactTypes impact)
@@ -2467,7 +2463,8 @@ static u32 CalculateAndSaveNewLevel(u32 origLevel)
 
 static bool32 HaveMonsBeenSwapped(void)
 {
-    for (u32 i = 0; i < MAX_FRONTIER_PARTY_SIZE; i++)
+    u32 size = SiliconFroniter_GetPartySizeFromCurrentChallenge();
+    for (u32 i = 0; i < size; i++)
     {
         u32 monId = gSaveBlock2Ptr->frontier.selectedPartyMons[i] - 1;
         if (monId >= PARTY_SIZE)
