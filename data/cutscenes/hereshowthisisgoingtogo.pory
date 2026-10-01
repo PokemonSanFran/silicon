@@ -133,6 +133,7 @@ call(HeresHowThisIsGoingToGo_CleanUpVObjects_Script)
 fadescreenswapbuffers(FADE_FROM_BLACK)
 applymovement(BAIYA, moves(walk_down, walk_left * 7, walk_up * 2, step_end))
 waitmovement(BAIYA)
+	fadedefaultbgm
     call(TryAutoSave)
     endcutscene
     releaseall
