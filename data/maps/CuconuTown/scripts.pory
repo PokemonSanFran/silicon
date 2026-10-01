@@ -43,8 +43,8 @@ script Champion_LockFrontDoor_Script
     {
         return
     }
-    setmetatile(3,9,0x239,TRUE)
-    setmetatile(3,8,0x239,TRUE)
+    setmetatile(3,9,0x839,TRUE)
+    setmetatile(3,8,0x839,TRUE)
 }
 
 text gText_RemindPlayerNewHome {

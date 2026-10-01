@@ -133,7 +133,7 @@ script CulturalPurity_Dialogue_AskDonation_BackroomguardA
 
 script CulturalPurity_Script_RevealBackroomA
 {
-    setmetatile(4,1,0x251,FALSE)
+    setmetatile(4,1,0x851,FALSE)
     special(DrawWholeMapView)
 }
 
@@ -488,7 +488,7 @@ script CulturalPurity_Dialogue_ShinzoDiscussLeavingB
 
 script CulturalPurity_Script_RevealBackroomB
 {
-    setmetatile(4,1,0x251,FALSE)
+    setmetatile(4,1,0x851,FALSE)
     special(DrawWholeMapView)
 }
 

@@ -293,7 +293,7 @@ script IGuessWeShouldBeNice_AddNotesToTable_Script
 	{
 		return
 	}
-	setmetatile(6,4,0x249,TRUE)
+	setmetatile(6,4,0x849,TRUE)
 }
 
 script IGuessWeShouldBeNiceNow_CharlotteRentalVisibility_Script

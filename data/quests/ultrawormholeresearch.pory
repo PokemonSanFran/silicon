@@ -36,7 +36,7 @@ script Quest_Ultrawormholeresearch_HiddenElevator_Script{
 }
 
 script Quest_Ultrawormholeresearch_ShowWarp_Script{
-    setmetatile(0,2,0x2DF,FALSE)
+    setmetatile(0,2,0x8DF,FALSE)
     special(DrawWholeMapView)
     return
 }

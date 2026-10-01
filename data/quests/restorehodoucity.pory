@@ -30,7 +30,7 @@ script Quest_Restorehodoucity_HidePokemnon_Script
 
 script Quest_Restorehodoucity_LockGymDoor_Script
 {
-    setmetatile(22,3,0x2B7,TRUE)
+    setmetatile(22,3,0x8B7,TRUE)
     special(DrawWholeMapView)
 }
 
@@ -139,7 +139,7 @@ script Quest_Restorehodoucity_PewfatWalkInside_Script
     closedoor(22,3)
     waitdooranim
     startquest(QUEST_RESTOREHODOUGYM)
-    setmetatile(22,3,0x2A1,FALSE)
+    setmetatile(22,3,0x8A1,FALSE)
     special(DrawWholeMapView)
     release
     end
