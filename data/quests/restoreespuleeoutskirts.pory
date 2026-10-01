@@ -14,7 +14,7 @@ script Quest_Restoreespuleeoutskirts_Script_MoveImelda
 
 script Quest_Restoreespuleeoutskirts_Script_StartQuest
 {
-    msgbox(format("Hello. Kai said you'd be along."),,SPEAKER_IMELDA)
+    msgbox(format("Hello. Baiya said you'd be along."),,SPEAKER_IMELDA)
     checkitemspace(ITEM_QUEST_RESTOREESPULEEGYM_START,1)
     if (var(VAR_RESULT) == FALSE)
     {
@@ -23,17 +23,17 @@ script Quest_Restoreespuleeoutskirts_Script_StartQuest
         release
         end
     }
-    msgbox(format("Hi! Imelda, right? I'm helping Kai with his project."),,SPEAKER_PLAYER)
+    msgbox(format("Hi! Imelda, right? I'm helping Baiya with his project."),,SPEAKER_PLAYER)
     buffermapname(STR_VAR_1,MAP_ESPULEE_OUTSKIRTS)
     msgbox(format("The very same! Once the leader of the {STR_VAR_1} gym and owner of its most revered antique shop!"),,SPEAKER_IMELDA)
     closemessage
     reveal(REVEAL_IMELDA)
     msgbox(format("But - that doesn't matter right now."),,SPEAKER_IMELDA)
-    msgbox(format("I was quite serious about what I told Kai. I'm happy to help on the strict condition that there's a plan to return the Resido League to what it was before the SharpRise acquisition."),,SPEAKER_IMELDA)
+    msgbox(format("I was quite serious about what I told Baiya. I'm happy to help on the strict condition that there's a plan to return the Resido League to what it was before the SharpRise acquisition."),,SPEAKER_IMELDA)
     msgbox(format("Oh, uh - I think we wanted to improve the current system certainly -"),,SPEAKER_PLAYER)
     msgbox(format("Building on top of SharpRise's monstrosity won't be progress at all. A crude sort of bricolage without any of the grace."),,SPEAKER_IMELDA)
     msgbox(format("Y-you wouldn't want to just start helping as soon as possible?"),,SPEAKER_PLAYER)
-    msgbox(format("Kai has a plan to help trainers today!"),,SPEAKER_PLAYER)
+    msgbox(format("Baiya has a plan to help trainers today!"),,SPEAKER_PLAYER)
     msgbox(format("I know we can make it happen with or without you, but I think your help would go a long way."),,SPEAKER_PLAYER)
     closemessage
     applymovement(LOCALID_ESPULEE_OUTSKIRTS_IMELDA,moves(face_left))
@@ -73,7 +73,7 @@ script Quest_Restoreespuleeoutskirts_Script_StartQuest
 script Quest_Restoreespuleeoutskirts_Dialogue_DiscussSwap
 {
     msgbox(format("The trainers in Petarosa do a similar thing! It seems to have worked out well for them!"),,SPEAKER_PLAYER)
-    msgbox(format("I'm aware of them, but running a small community theatre is one thing - what Kai suggests is something else entirely."),,SPEAKER_IMELDA)
+    msgbox(format("I'm aware of them, but running a small community theatre is one thing - what Baiya suggests is something else entirely."),,SPEAKER_IMELDA)
 }
 
 script Quest_Restoreespuleeoutskirts_Script_ImeldaActive
@@ -1077,9 +1077,7 @@ script Quest_Restoreespuleeoutskirts_EspuleetradepersonF_Dialogue_CompleteStartE
     buffermovename(STR_VAR_3,MOVE_QUEST_RESTOREESPULEEGYM_REQUIREMENT)
     msgbox(format("Excellent. This {STR_VAR_2} can use {STR_VAR_3}… Thus I shall now plant the Seed Of Mastery within {STR_VAR_1}."),,SPEAKER_ESPULEETRADEPERSONF)
     closemessage
-    //tryspecialevo(EVO_SCRIPT_TRIGGER,FALSE,FALSE)
-    //waitstate
-    callnative(Script_DebugQuest_RestoreEspuleeOutskirtsGymEvolveMon) // remove this once tryspecialevo is fixed
+    tryspecialevo(EVO_TRIGGER_TUTOR,FALSE,FALSE)
     bufferitemnameplural(STR_VAR_3,ITEM_QUEST_RESTOREESPULEEGYM_E,2)
     buffermovename(STR_VAR_1,MOVE_QUEST_RESTOREESPULEEGYM_REQUIREMENT)
     msgbox(format("Alas…{STR_VAR_3} no longer excite me."),,SPEAKER_ESPULEETRADEPERSONF)

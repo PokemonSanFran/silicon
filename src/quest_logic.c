@@ -4572,11 +4572,6 @@ static void DebugQuest_ResstoreEspuleeOutskirtsGymEvolveStantlerIfFound(void)
     DebugQuest_EvolveMon(SPECIES_QUEST_RESTOREESPULEEGYM_PREEVO,SPECIES_QUEST_RESTOREESPULEEGYM_TARGET);
 }
 
-void Script_DebugQuest_RestoreEspuleeOutskirtsGymEvolveMon(void)
-{
-    DebugQuest_EvolveMon(SPECIES_QUEST_RESTOREESPULEEGYM_PREEVO,SPECIES_QUEST_RESTOREESPULEEGYM_TARGET);
-}
-
 void DebugQuest_RestoreEsupleeOutskirtsGym(u8 state)
 {
     switch (state)
