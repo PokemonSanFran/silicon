@@ -138,6 +138,7 @@ static u8 CreateEventSprite(u32 x, u32 y, u32 space);
 static void StartGame(void);
 static void SetTimerForGame(void);
 static void InitCursorPositionFromSaveblock(void);
+static void CreateGameBoardShadows(void);
 static void CreateGameBoardCursor(void);
 static void SpriteCB_Cursor(struct Sprite *sprite);
 static void ChangeCursorColor(struct Sprite *sprite);
@@ -1411,6 +1412,7 @@ static void GameBoard_SetupCB(void)
             GenerateGameBoard();
             PrintEnemyParty();
             PrintPlayerParty();
+            CreateGameBoardShadows();
             PrintHelpBar();
             gMain.state++;
             break;
@@ -1546,22 +1548,17 @@ static const struct ArcadeSpriteSheet sArcadeSpriteSheets[] =
             .tag = ARCADE_PALTAG_OPPONENT,
         },
     },
-    /*
     {
-        .palette =
+        {
+            .data = (const u16[])INCBIN_U16("graphics/battle_frontier/battle_arcade/game/shadow.4bpp"),
+            .size = TILE_OFFSET_4BPP(16),
+            .tag = ARCADE_SPRITETAG_SHADOW,
+        },
         {
             .data = (const u16[])INCBIN_U16("graphics/battle_frontier/battle_arcade/game/shadow.gbapal"),
             .tag = ARCADE_PALTAG_SHADOW,
         },
     },
-    {
-        .palette =
-        {
-            .data = (const u16[])INCBIN_U16("graphics/battle_frontier/battle_arcade/game/shadow.gbapal"),
-            .tag = ARCADE_PALTAG_SHADOW,
-        },
-    },
-    */
 };
 
 static void GameBoard_LoadSprites(void)
@@ -1858,6 +1855,118 @@ static void SetTimerForGame(void)
 static void InitCursorPositionFromSaveblock(void)
 {
     sGameBoardState->cursorPosition = gSaveBlock2Ptr->frontier.arcadeCursorData.position;
+}
+
+static void CreateGameBoardShadows(void)
+{
+    u8 const sShadowPosition[SILICON_FRONTIER_CHALLENGE_TYPE_COUNT][MAX_BATTLE_TRAINERS][MAX_FRONTIER_PARTY_SIZE][AXIS_COUNT] =
+    {
+        [SILICON_FRONTIER_CHALLENGE_TYPE_SINGLE] =
+        {
+            [B_TRAINER_PLAYER] =
+            {
+                {16, 47},
+                {16, 78},
+                {16, 108},
+            },
+            [B_TRAINER_OPPONENT_A] =
+            {
+                {208, 47},
+                {208, 78},
+                {208, 108},
+            },
+        },
+        [SILICON_FRONTIER_CHALLENGE_TYPE_DOUBLE] =
+        {
+            [B_TRAINER_PLAYER] =
+            {
+                {11, 11},
+                {11, 11},
+                {11, 11},
+                {11, 11},
+
+            },
+            [B_TRAINER_OPPONENT_A] =
+            {
+                {61, 61},
+                {61, 61},
+                {61, 61},
+                {61, 61},
+            },
+        },
+        [SILICON_FRONTIER_CHALLENGE_TYPE_MULTI] =
+        {
+            [B_TRAINER_PLAYER] =
+            {
+                {11, 11},
+                {11, 11},
+            },
+            [B_TRAINER_OPPONENT_A] =
+            {
+                {61, 61},
+                {61, 61},
+            },
+            [B_TRAINER_PARTNER] =
+            {
+                {21, 21},
+                {21, 21},
+            },
+            [B_TRAINER_OPPONENT_B] =
+            {
+                {81, 81},
+                {81, 81},
+            },
+        },
+        [SILICON_FRONTIER_CHALLENGE_TYPE_LINK_MULTI] =
+        {
+            [B_TRAINER_PLAYER] =
+            {
+                {11, 11},
+                {11, 11},
+            },
+            [B_TRAINER_OPPONENT_A] =
+            {
+                {61, 61},
+                {61, 61},
+            },
+            [B_TRAINER_PARTNER] =
+            {
+                {21, 21},
+                {21, 21},
+            },
+            [B_TRAINER_OPPONENT_B] =
+            {
+                {81, 81},
+                {81, 81},
+            },
+        },
+    };
+
+    u32 size = SiliconFroniter_GetPartySizeFromCurrentChallenge();
+    enum SiliconFrontierChallengeType type = SiliconFrontier_GetTypeFromCurrentChallenge();
+
+    for (u32 battler = 0; battler < MAX_BATTLE_TRAINERS; battler++)
+    {
+        if ((SiliconFroniter_IsCurrentChallengeTypeMulti() == FALSE) && (battler > B_TRAINER_OPPONENT_A))
+            continue;
+
+        for (u32 monIndex = 0; monIndex < MAX_FRONTIER_PARTY_SIZE; monIndex++)
+        {
+            if (monIndex >= size)
+                continue;
+
+            struct SpriteTemplate TempSpriteTemplate = gDummySpriteTemplate;
+
+            TempSpriteTemplate.tileTag = ARCADE_SPRITETAG_SHADOW;
+            TempSpriteTemplate.paletteTag = ARCADE_PALTAG_SHADOW;
+
+            u32 spriteId = CreateSprite(&TempSpriteTemplate,sShadowPosition[type][battler][monIndex][AXIS_X],sShadowPosition[type][battler][monIndex][AXIS_Y], 0);
+
+            gSprites[spriteId].oam.shape = SPRITE_SHAPE(32x8);
+            gSprites[spriteId].oam.size = SPRITE_SIZE(32x8);
+            gSprites[spriteId].oam.priority = 1;
+        }
+    }
 }
 
 static void CreateGameBoardCursor(void)
