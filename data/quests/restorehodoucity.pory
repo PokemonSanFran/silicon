@@ -477,7 +477,7 @@ script Quest_Restorehodoucity_Reward_Dialogue
     msgbox(format("I want to help Trainers keep up their momentum and drive even when their resources are totally depleted. I found this cool group online practicing battles in a unique way."),,SPEAKER_JOHNNY)
     call_if_quest_not_inactive(QUEST_COMPULSIVEHEALINGPEERSUPPORTGROUP,Restorehodoucity_Dialogue_NoPoReference)
     msgbox(format("Hopefully you come back and try it out!"),,SPEAKER_JOHNNY)
-    msgbox(forma("Come talk to me or Zac when you’re ready."),,SPEAKER_KEVIN)
+    msgbox(format("Come talk to me or Zac when you’re ready."),,SPEAKER_KEVIN)
     closemessage
     moveobjecttocoords(LOCALID_HODOU_CITY_GYM_KEVIN,3,9,DIR_EAST)
     moveobjecttocoords(LOCALID_HODOU_CITY_GYM_ZAC,6,9,DIR_WEST)
