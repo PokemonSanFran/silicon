@@ -48,5 +48,6 @@ struct SiliconFrontierData
 bool8 SiliconFroniter_IsCurrentChallengeTypeMulti(void);
 void SiliconFrontier_ResetSketchedMoves(void);
 u32 SiliconFroniter_GetPartySizeFromCurrentChallenge(void);
+void SiliconFrontier_ResetArcadeData(void);
 
 #endif // GUARD_SILICON_BATTLE_FRONTIER_H

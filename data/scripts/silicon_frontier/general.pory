@@ -162,6 +162,7 @@ script SiliconFrontier_Script_ChoosePartyMons
     }
     call(SiliconFrontier_Dialogue_YourPartyHas)
     setvar(VAR_SILICON_FACILITY_CHALLENGE_STATUS,SILICON_FRONTIER_CHALLENGE_STARTED)
+    callnative(SiliconFrontier_ResetArcadeData)
     startmenu_savescreen
     goto_if_unset(FLAG_SYS_SAVE_SUCCESSFUL,SiliconFrontier_Script_NeedToSave)
     special(ReducePlayerPartyToSelectedMons)
@@ -234,7 +235,7 @@ script SiliconFrontier_Script_WonBattle
     callnative(SiliconFrontier_TryAwardBadge)
     call_if_ne(VAR_RESULT,SILICON_FRONTIER_BOSS_PHASE_COUNT,SiliconFrontier_Dialogue_AwardBadge)
     clearflag(FLAG_TEMP_12)
-    goto(SiliconFrontier_Script_BattleMenu)
+    goto(SiliconFrontier_Script_BattleMenu_PlayHealSound)
 }
 
 script SiliconFrontier_Script_HealOrRecordDamage
@@ -246,6 +247,15 @@ script SiliconFrontier_Script_HealOrRecordDamage
     else
     {
         callnative(SiliconFrontier_RecordPartnerDamage)
+    }
+}
+
+script SiliconFrontier_Script_TryShowRouletteData
+{
+    callnative(Script_SiliconFrontier_GetFacilityFromCurrentChallenge)
+    if (var(VAR_TEMP_F) == SILICON_FACILITY_ARCADE)
+    {
+        dynmultipush("Roulette Info",SILICON_FACILITY_STREAK_MENU_ROULETTE)
     }
 }
 
@@ -287,13 +297,19 @@ script SiliconFrontier_Script_TryShowRecord
     }
 }
 
-script SiliconFrontier_Script_BattleMenu
+script SiliconFrontier_Script_BattleMenu_PlayHealSound
 {
     playse(SE_USE_ITEM)
+    goto(SiliconFrontier_Script_BattleMenu)
+}
+
+script SiliconFrontier_Script_BattleMenu
+{
     callnative(SiliconFrontier_BufferCurrentStreakString)
     call(SiliconFrontier_Dialogue_YourPartyHasBeenHealed)
     waitse
     dynmultipush("Continue",SILICON_FACILITY_STREAK_MENU_CONTINUE)
+    call(SiliconFrontier_Script_TryShowRouletteData)
     call(SiliconFrontier_Script_TryShowQuitMenuOption)
     call(SiliconFrontier_Script_TryShowHeal)
     call(SiliconFrontier_Script_TryShowRecord)
@@ -312,6 +328,8 @@ script SiliconFrontier_Script_BattleMenu
             goto(RestrictedSparring_Script_AskQuit)
         case SILICON_FACILITY_STREAK_MENU_HEAL:
             goto(RestrictedSparring_Script_AskHeal)
+        case SILICON_FACILITY_STREAK_MENU_ROULETTE:
+            goto(BattleStudio_Script_DescribeRoulette)
     }
 }
 
@@ -327,7 +345,7 @@ script SiliconFroniter_Script_RecordBattle
         playse(SE_SAVE)
         call(SiliconFrontier_Dialogue_YourBattleWasRecorded)
     }
-    goto(SiliconFrontier_Script_BattleMenu)
+    goto(SiliconFrontier_Script_BattleMenu_PlayHealSound)
 }
 
 script SiliconFrontier_Dialogue_AwardBadge

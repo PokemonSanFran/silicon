@@ -1,10 +1,6 @@
 #include "global.h"
 #include "battle.h"
 #include "battle_arcade.h"
-#include "field_specials.h"
-#include "hexorb.h"
-#include "give_native_item.h"
-#include "silicon_battle_frontier.h"
 #include "battle_dome.h"
 #include "battle_pike.h"
 #include "battle_records.h"
@@ -16,13 +12,17 @@
 #include "decompress.h"
 #include "event_data.h"
 #include "field_poison.h"
+#include "field_specials.h"
 #include "field_weather.h"
+#include "frontier_pass.h"
 #include "frontier_util.h"
 #include "gba/defines.h"
 #include "gba/macro.h"
 #include "gba/types.h"
+#include "give_native_item.h"
 #include "gpu_regs.h"
 #include "graphics.h"
+#include "hexorb.h"
 #include "international_string_util.h"
 #include "item.h"
 #include "main.h"
@@ -37,8 +37,9 @@
 #include "random.h"
 #include "scanline_effect.h"
 #include "script.h"
-#include "silicon_frontier_accessors.h"
 #include "script_pokemon_util.h"
+#include "silicon_battle_frontier.h"
+#include "silicon_frontier_accessors.h"
 #include "sound.h"
 #include "sprite.h"
 #include "string_util.h"
@@ -71,7 +72,6 @@ struct GameResult
 struct GameBoardState
 {
     MainCallback savedCallback;
-    u8 loadState;
     enum ArcadeBoardModes gameMode;
     u16 timer;
     u8 cursorPosition;
@@ -113,7 +113,7 @@ static void GameBoard_FadeAndBail(void);
 static void Task_GameBoardWaitFadeAndBail(u8 taskId);
 static bool32 AreTilesOrTilemapEmpty(u32 backgroundId);
 static void GameBoard_LoadSprites(void);
-static bool8 GameBoard_LoadGraphics(void);
+static void GameBoard_LoadGraphics(void);
 static void GameBoard_InitWindows(void);
 static void GenerateGameBoard(void);
 static void PrintEnemyParty(void);
@@ -1012,24 +1012,6 @@ const struct ArcadeEventInfo arcadeEventInfo[ARCADE_EVENT_COUNT] =
     },
 };
 
-static const u32 sArcadePerformanceTable[IMPACT_PERFORMANCE_TABLE_SIZE][3] =
-{
-    [0] = { 8, 6 },
-    [1] = { 6, 4 },
-    [2] = { 4, 2 },
-    [3] = { 0, 0 },
-    [4] = { 0, 0 },
-};
-
-static const u8 sArcadeTurnPointTable[IMPACT_PERFORMANCE_TABLE_SIZE][2] =
-{
-    { 3, 10 },
-    { 5,  6 },
-    { 7,  4 },
-    { 9,  2 },
-    { 10, 0 },
-};
-
 void BattleArcade_ResetCursorPositionOnSaveblock(void)
 {
     SetCursorPosition(0);
@@ -1202,6 +1184,24 @@ void CalculateAndSetPerformancePoints(void)
     SetPerformancePoints(CalculatePerformancePoints());
 }
 
+static const u32 sArcadePerformanceTable[IMPACT_PERFORMANCE_TABLE_SIZE][3] =
+{
+    [0] = { 8, 6 },
+    [1] = { 6, 4 },
+    [2] = { 4, 2 },
+    [3] = { 0, 0 },
+    [4] = { 0, 0 },
+};
+
+static const u8 sArcadeTurnPointTable[IMPACT_PERFORMANCE_TABLE_SIZE][2] =
+{
+    { 3, 10 },
+    { 5,  6 },
+    { 7,  4 },
+    { 9,  2 },
+    { 10, 0 },
+};
+
 static u32 CalculatePerformancePoints(void)
 {
     u32 faintedCount = 0;
@@ -1265,6 +1265,7 @@ void ArcadeBattleCleanup(void)
     ResetLevelsToOriginal();
     SiliconFrontier_ResetSketchedMoves();
     CalculateAndSetPerformancePoints();
+    SiliconFrontier_ResetArcadeData();
 }
 
 static void ResetWeatherPostBattle(void)
@@ -1370,9 +1371,7 @@ void GameBoard_Init(MainCallback callback)
         return;
     }
 
-    sGameBoardState->loadState = 0;
     sGameBoardState->savedCallback = callback;
-
     SetMainCallback2(GameBoard_SetupCB);
 }
 
@@ -1381,6 +1380,7 @@ static void GameBoard_SetupCB(void)
     switch (gMain.state)
     {
         case 0:
+            ResetGpuRegsAndBgs();
             DmaClearLarge16(3, (void *)VRAM, VRAM_SIZE, 0x1000);
             SetVBlankHBlankCallbacksToNull();
             ClearScheduledBgCopiesToVram();
@@ -1388,16 +1388,16 @@ static void GameBoard_SetupCB(void)
             break;
         case 1:
             ScanlineEffect_Stop();
-            FreeAllSpritePalettes();
             ResetPaletteFade();
-            ResetSpriteData();
             ResetTasks();
+            FreeAllSpritePalettes();
+            ResetSpriteData();
             gMain.state++;
             break;
         case 2:
             if (GameBoard_InitBgs())
             {
-                sGameBoardState->loadState = 0;
+                GameBoard_LoadGraphics();
                 gMain.state++;
             }
             else
@@ -1407,28 +1407,16 @@ static void GameBoard_SetupCB(void)
             }
             break;
         case 3:
-            if (GameBoard_LoadGraphics() == TRUE)
-                gMain.state++;
-            break;
-        case 4:
             GameBoard_InitWindows();
-            gMain.state++;
-            break;
-        case 5:
-            FreeMonIconPalettes();
-            LoadMonIconPalettes();
             GenerateGameBoard();
             PrintEnemyParty();
             PrintPlayerParty();
             PrintHelpBar();
+            gMain.state++;
+            break;
+        case 4:
             CreateTask(Task_GameBoardWaitFadeIn, 0);
-            gMain.state++;
-            break;
-        case 6:
             BeginNormalPaletteFade(PALETTES_ALL, 0, 16, 0, RGB_BLACK);
-            gMain.state++;
-            break;
-        case 7:
             SetVBlankCallback(VBlankCB);
             SetMainCallback2(MainCB);
             break;
@@ -1595,38 +1583,27 @@ static void GameBoard_LoadSprites(void)
                 sGameBoardState->cursorPaletteNum[1] = palId;
         }
     }
+    LoadMonIconPalettes();
+    CpuFill32(RGB_BLACK, gPlttBufferFaded, PLTT_SIZE);
 }
 
-static bool8 GameBoard_LoadGraphics(void)
+static void GameBoard_LoadGraphics(void)
 {
-    switch (sGameBoardState->loadState)
+    ResetTempTileDataBuffers();
+
+    for (enum GameBoard_BackgroundIds backgroundId = BG_BOARD_BACKGROUND; backgroundId < BG_BOARD_COUNT; backgroundId++)
     {
-        case 0:
-            ResetTempTileDataBuffers();
+        if (AreTilesOrTilemapEmpty(backgroundId))
+            continue;
 
-            for (u32 backgroundId = BG_BOARD_BACKGROUND; backgroundId < BG_BOARD_COUNT; backgroundId++)
-            {
-                if (AreTilesOrTilemapEmpty(backgroundId))
-                    continue;
-
-                DecompressAndLoadBgGfxUsingHeap(backgroundId, sArcadeTilesLUT[backgroundId], 0, 0, 0);
-                CopyToBgTilemapBuffer(backgroundId, sArcadeTilemapLUT[backgroundId],0,0);
-            }
-            sGameBoardState->loadState++;
-            break;
-        case 1:
-            GameBoard_LoadSprites();
-            sGameBoardState->loadState++;
-            break;
-        case 2:
-            LoadPalette(sGameBoardPalette_Pal, BG_PLTT_ID(0), PLTT_SIZE_4BPP);
-            LoadPalette(sGameBoardText_Pal, BG_PLTT_ID(1), PLTT_SIZE_4BPP);
-            sGameBoardState->loadState++;
-        default:
-            sGameBoardState->loadState = 0;
-            return TRUE;
+        DecompressAndLoadBgGfxUsingHeap(backgroundId, sArcadeTilesLUT[backgroundId], 0, 0, 0);
+        CopyToBgTilemapBuffer(backgroundId, sArcadeTilemapLUT[backgroundId],0,0);
     }
-    return FALSE;
+
+    LoadPalette(sGameBoardPalette_Pal, BG_PLTT_ID(0), PLTT_SIZE_4BPP);
+    LoadPalette(sGameBoardText_Pal, BG_PLTT_ID(1), PLTT_SIZE_4BPP);
+
+    GameBoard_LoadSprites();
 }
 
 static void GameBoard_InitWindows(void)
@@ -2627,3 +2604,47 @@ bool8 ShouldUseNormalFogForArcade(void)
     return (VarGet(LOCAL_VAR_GAME_BOARD_EVENT) == ARCADE_EVENT_FOG);
 }
 
+void Script_Buffer_GetCursorSpeed(void)
+{
+    VarSet(LOCAL_VAR_ROULETTE_DATA,GetCursorSpeed());
+
+    switch (VarGet(LOCAL_VAR_ROULETTE_DATA))
+    {
+        case ARCADE_SPEED_LEVEL_0:
+            StringCopy(gStringVar1,COMPOUND_STRING("-4"));
+            break;
+        case ARCADE_SPEED_LEVEL_1:
+            StringCopy(gStringVar1,COMPOUND_STRING("-3"));
+            break;
+        case ARCADE_SPEED_LEVEL_2:
+            StringCopy(gStringVar1,COMPOUND_STRING("-2"));
+            break;
+        case ARCADE_SPEED_LEVEL_3:
+            StringCopy(gStringVar1,COMPOUND_STRING("-1"));
+            break;
+        default:
+        case ARCADE_SPEED_LEVEL_4:
+            StringCopy(gStringVar1,COMPOUND_STRING("0"));
+            break;
+        case ARCADE_SPEED_LEVEL_5:
+            StringCopy(gStringVar1,COMPOUND_STRING("+1"));
+            break;
+        case ARCADE_SPEED_LEVEL_6:
+            StringCopy(gStringVar1,COMPOUND_STRING("+2"));
+            break;
+        case ARCADE_SPEED_LEVEL_7:
+            StringCopy(gStringVar1,COMPOUND_STRING("+3"));
+            break;
+    }
+}
+
+void Script_IsCursorRandom(void)
+{
+    VarSet(LOCAL_VAR_ROULETTE_DATA,IsCursorInRandomMode());
+}
+
+void Script_GetBerryItemArcade(void)
+{
+    CopyItemNameHandlePlural(VarGet(VAR_ARCADE_BERRY), gStringVar1, 3);
+    CopyItemNameHandlePlural(VarGet(VAR_ARCADE_ITEM), gStringVar2, 3);
+}

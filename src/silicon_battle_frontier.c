@@ -1425,14 +1425,14 @@ void SiliconFrontier_DeleteAllHeldItems(void)
 void SiliconFrontier_ResetArcadeData(void)
 {
     enum SiliconFrontierFacility facility = SiliconFrontier_GetFacilityFromCurrentChallenge();
+
+    if (facility != SILICON_FACILITY_ARCADE)
+        return;
+
     enum SiliconFrontierChallengeType challengeType = SiliconFrontier_GetTypeFromCurrentChallenge();
     enum SiliconFrontierSparringTypes sparringType = SiliconFrontier_GetCurrentChallengeSparringType();
 
     s32 value = SiliconFrontier_GetCurrentStreak(facility,challengeType, sparringType);
-    value--;
-
-    if (value == -1)
-        value = 0;
 
     if ((value % SILICON_FRONTIER_STREAK_LENGTH_BOSS) != 0)
         return;

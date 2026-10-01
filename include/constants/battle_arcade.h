@@ -155,6 +155,7 @@ enum ArcadeStreakBrackets
 #define ARCADE_RECORD_HEADER_Y_POSITION         4
 #define ARCADE_RECORD_STREAK_INDEX_COUNT        2
 
+#define LOCAL_VAR_ROULETTE_DATA                 VAR_0x8006
 #define LOCAL_VAR_GAME_BOARD_EVENT              VAR_0x8007
 #define LOCAL_VAR_GAME_BOARD_IMPACT             VAR_0x8008
 #define LOCAL_VAR_GAME_BOARD_SUCCESS            VAR_0x8009
