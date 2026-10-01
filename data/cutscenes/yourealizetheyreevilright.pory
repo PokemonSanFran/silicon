@@ -79,6 +79,7 @@ script YouRealizeTheyreEvilRight_CallPlayer_Dialogue {
 
         questmenu(QUEST_MENU_CHECK_INACTIVE,QUEST_HANG20)
         if (var(VAR_RESULT)){
+			buffermovename(STR_VAR_1,MOVE_SURF)
             msgbox(format("I wanna show you but you'll need to cross some water to get here. You know how to use {STR_VAR_1}, right? No? You can learn pretty quickly at the Cresalta Vista beach, and then meet me on Arantraz."),,SPEAKER_BAIYA_TIDE,,,PHONE_ON)
         } else {
             msgbox(format("I wanna show you instead. Come to Arantraz."),,SPEAKER_BAIYA_TIDE,,,PHONE_ON)
@@ -189,7 +190,7 @@ script YouRealizeTheyreEvilRight_PlayerArrived2F_Dialogue {
         startcutscene(JUMPPLAYER_YOUREALIZETHEYREEVILRIGHT_ISLAND)
         applymovement(PLAYER, moves(walk_right * 2, walk_up, step_end))
         waitmovement(0)
-        bufferspeciesname(STR_VAR_1,SPECIES_DIALGA)
+        bufferspeciesname(STR_VAR_1,SPECIES_ARCEUS)
         msgbox(format("The Champion has arrived! A pleasure to meet at last. I'm Magnus, Leader of the Resido Elite Four. Or, at least I was. Now? {STR_VAR_1} knows what I even do…"),,SPEAKER_MAGNUS)
         reveal(REVEAL_MAGNUS)
 
@@ -387,13 +388,16 @@ script YouRealizeTheyreEvilRight_NoIdea_Dialogue {
             msgbox(format("Was that real? I sided with SharpRise Capital and... made things worse? Yeah, that was worse. It was just a dream... but it felt so real!"),,SPEAKER_ALICIA,TAIL_THOUGHT,EMOTE_SHOCK)
             msgbox(format("That regret felt so real though. I was so disappointed. I was so wrong. It was all wrong!"),,SPEAKER_ALICIA,TAIL_THOUGHT,EMOTE_SAD)
             msgbox(format("I remember I yelled at Baiya. I told him he couldn't hack it. I called them thugs. And I left. I was disguisting. Is he still there now?"),,SPEAKER_ALICIA,TAIL_THOUGHT)
+closemessage
     }else{
 
         msgbox(format("I can't believe I almost fell for that stunt. Me? Siding with The Tide? After everything I've been through? And all that stuff, just because the battling is a little different?"),,SPEAKER_ALICIA,TAIL_THOUGHT)
             msgbox(format("And they claim they want to do better for region? SharpRise Capital is making jobs! And bringing people like me! And stopping terrorists."),,SPEAKER_ALICIA,TAIL_THOUGHT,EMOTE_ANGRY)
             msgbox(format("I'm going to be on the right side of history."),,SPEAKER_ALICIA,TAIL_THOUGHT,EMOTE_SHOCK)
+			closemessage
+			fadcescreen(FADE_FROM_BLACK)
+
     }
-closemessage
         call(TryAutoSave)
     release
     end
