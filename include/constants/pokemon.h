@@ -363,6 +363,7 @@ enum EvoTriggerVersion {
     EVO_TRIGGER_TABLET_CURSE,
     EVO_TRIGGER_DARK_SCROLL,
     EVO_TRIGGER_WATER_SCROLL,
+    EVO_TRIGGER_TUTOR, // siliconMerge
 };
 
 enum EvolutionEventResult {
