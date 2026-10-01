@@ -37,7 +37,6 @@
 static void CB2_ReturnFromChooseHalfParty(void);
 static void CB2_ReturnFromChooseBattleFrontierParty(void);
 static void HealPlayerBoxes(void);
-static UNUSED void FaintPlayerBoxes(void);
 
 void HealPlayerParty(void)
 {
@@ -78,22 +77,6 @@ static void HealPlayerBoxes(void)
             boxMon = &gPokemonStoragePtr->boxes[boxId][boxPosition];
             if (GetBoxMonData(boxMon, MON_DATA_SANITY_HAS_SPECIES))
                 HealBoxPokemon(boxMon);
-        }
-    }
-}
-
-static UNUSED void FaintPlayerBoxes(void)
-{
-    int boxId, boxPosition;
-    struct BoxPokemon *boxMon;
-
-    for (boxId = 0; boxId < TOTAL_BOXES_COUNT; boxId++)
-    {
-        for (boxPosition = 0; boxPosition < IN_BOX_COUNT; boxPosition++)
-        {
-            boxMon = &gPokemonStoragePtr->boxes[boxId][boxPosition];
-            if (GetBoxMonData(boxMon, MON_DATA_SANITY_HAS_SPECIES))
-                FaintBoxPokemon(boxMon);
         }
     }
 }
