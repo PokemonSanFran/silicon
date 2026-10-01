@@ -5154,6 +5154,7 @@ u16 GetBattleBGM(void)
     }
     else if (gBattleTypeFlags & BATTLE_TYPE_TRAINER)
     {
+
         enum TrainerClassID trainerClass;
 
         if (gBattleTypeFlags & BATTLE_TYPE_FRONTIER)
@@ -5162,6 +5163,9 @@ u16 GetBattleBGM(void)
             trainerClass = TRAINER_CLASS_EXPERT;
         else
             trainerClass = GetTrainerClassFromId(TRAINER_BATTLE_PARAM.opponentA);
+
+        if (GetCurrentMap() == MAP_SHARPRISE_STADIUM_ARENA && trainerClass != TRAINER_CLASS_FINALIST)
+            return MUS_VS_ELITE_FOUR;
 
         switch (trainerClass)
         {
@@ -5174,6 +5178,7 @@ u16 GetBattleBGM(void)
         case TRAINER_CLASS_MAGMA_ADMIN:
             return MUS_VS_AQUA_MAGMA;
         case TRAINER_CLASS_LEADER:
+        case TRAINER_CLASS_EX_LEADER:
             return MUS_VS_SILICON_GYM_LEADER;
             //return MUS_VS_GYM_LEADER;
         case TRAINER_CLASS_CHAMPION:
