@@ -16,7 +16,7 @@ mapscripts SharpriseSpire_Leagueops_MapScripts{
             case START_FALSE_TIMELINE:
                 call(CongratsYoureanAsshole_ObjectCleanUp_Script)
                 call(YouHaveYourOrders_ObjectSetUp_Script)
-                call(LetsBurnThisMotherDown_ShowLucrezia_Script)
+                call_if_quest_reward(QUEST_LETSBURNTHISMOTHERDOWN,LetsBurnThisMotherDown_ShowLucrezia_Script)
                 call_if_quest_complete(QUEST_MANHUNT,Manhunt_Script_HideRamesh)
             case TRUE_RAID_START:
                   call(SharpriseSpire_Leagueops_TrueTimeline_Objects_Script)
@@ -40,6 +40,8 @@ mapscripts SharpriseSpire_Leagueops_MapScripts{
     MAP_SCRIPT_ON_WARP_INTO_MAP_TABLE
     [
         VAR_SHARPRISESPIRE_CONFERENCE_STATE,PRE_WELCOME_TO_THE_WAR_ROOM: WelcomeToTheWarRoom_Object_Setup_Script
+        VAR_HOWDISAPPOINTING_STATE,DEFEATED_ADAORA_HODOU_CITY: YouHaveYourOrders_Script_AddChief
+			
     ]
 }
 
