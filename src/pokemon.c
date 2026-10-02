@@ -5164,8 +5164,18 @@ u16 GetBattleBGM(void)
         else
             trainerClass = GetTrainerClassFromId(TRAINER_BATTLE_PARAM.opponentA);
 
-        if (GetCurrentMap() == MAP_SHARPRISE_STADIUM_ARENA && trainerClass != TRAINER_CLASS_FINALIST)
-            return MUS_VS_ELITE_FOUR;
+        if (GetCurrentMap() == MAP_SHARPRISE_STADIUM_ARENA)
+        {
+            switch(trainerClass)
+            {
+                case TRAINER_CLASS_DIANTHA:
+                    return MUS_VS_DIANTHA;
+                default:
+                    return MUS_VS_ELITE_FOUR;
+                case TRAINER_CLASS_FINALIST:
+                    return MUS_VS_CHAMPION;
+            }
+        }
 
         switch (trainerClass)
         {
