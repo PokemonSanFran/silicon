@@ -395,7 +395,7 @@ closemessage
             msgbox(format("And they claim they want to do better for region? SharpRise Capital is making jobs! And bringing people like me! And stopping terrorists."),,SPEAKER_ALICIA,TAIL_THOUGHT,EMOTE_ANGRY)
             msgbox(format("I'm going to be on the right side of history."),,SPEAKER_ALICIA,TAIL_THOUGHT,EMOTE_SHOCK)
 			closemessage
-			fadcescreen(FADE_FROM_BLACK)
+			fadescreen(FADE_FROM_BLACK)
 
     }
         call(TryAutoSave)
