@@ -1,6 +1,7 @@
 #include "global.h"
 #include "battle.h"
 #include "battle_arcade.h"
+#include "item_icon.h"
 #include "battle_dome.h"
 #include "battle_pike.h"
 #include "battle_records.h"
@@ -134,6 +135,8 @@ static void CalculatePanelPosition(u32 space, u32* x, u32* y);
 static void Task_GameBoard_Countdown(u8 taskId);
 static void PopulateEventSprites(void);
 static u8 CreateEventSprite(u32 x, u32 y, u32 space);
+static void AddItemSprite(u32 x, u32 y, u32 space);
+static void SpriteCB_Item(struct Sprite *sprite);
 static void StartGame(void);
 static void SetTimerForGame(void);
 static void InitCursorPositionFromSaveblock(void);
@@ -1644,11 +1647,27 @@ static void PrintPartyIcons(u32 side)
     u32 size = SiliconFroniter_GetPartySizeFromCurrentChallenge();
     u32 x = (side == ARCADE_IMPACT_OPPONENT) ? 215 : 22;
     u32 y =  (size != FRONTIER_PARTY_SIZE) ? 18 : 33;
+    u32 structSpriteId = 0;
 
     for (;battler < MAX_BATTLE_TRAINERS; battler++)
     {
         struct Pokemon *party = gParties[battler];
-        u32 structSpriteId = (side == ARCADE_IMPACT_OPPONENT) ? ARCADE_SPRITEID_OPPONENT_SIDE_MON_0 : ARCADE_SPRITEID_PLAYER_SIDE_MON_0;
+        switch(battler)
+        {
+            default:
+            case B_TRAINER_OPPONENT_A:
+                structSpriteId = ARCADE_SPRITEID_OPPONENT_SIDE_MON_0;
+                break;
+            case B_TRAINER_OPPONENT_B:
+                structSpriteId = ARCADE_SPRITEID_OPPONENT_SIDE_MON_2;
+                break;
+            case B_TRAINER_PLAYER:
+                structSpriteId = ARCADE_SPRITEID_PLAYER_SIDE_MON_0;
+                break;
+            case B_TRAINER_PARTNER:
+                structSpriteId = ARCADE_SPRITEID_PLAYER_SIDE_MON_2;
+                break;
+        }
 
         for (u32 i = 0; i < size; i++)
         {
@@ -1656,11 +1675,10 @@ static void PrintPartyIcons(u32 side)
                 break;
 
             u32 spriteId = CreateMonIcon(GetMonData(&party[i], MON_DATA_SPECIES),SpriteCallbackDummy, x, y, 4, GetMonData(&party[i],MON_DATA_PERSONALITY));
-            sGameBoardState->spriteId[structSpriteId] = spriteId;
+            sGameBoardState->spriteId[structSpriteId++] = spriteId;
             gSprites[spriteId].oam.priority = 0;
 
             y += 30;
-            structSpriteId++;
         }
         battler++;
     }
@@ -1811,6 +1829,7 @@ static void PopulateEventSprites(void)
     {
         CalculatePanelPosition(space,&x,&y);
         sGameBoardState->spriteId[space] = CreateEventSprite(x, y, space);
+        AddItemSprite(x,y,space);
 
         if ((GetGameBoardMode() != ARCADE_BOARD_MODE_GAME_FINISH) && (GetGameBoardMode() != ARCADE_BOARD_MODE_CLEANUP))
             continue;
@@ -1836,9 +1855,51 @@ static u8 CreateEventSprite(u32 x, u32 y, u32 space)
 
     gSprites[spriteId].oam.shape = SPRITE_SHAPE(32x32);
     gSprites[spriteId].oam.size = SPRITE_SIZE(32x32);
-    gSprites[spriteId].oam.priority = 0;
+    gSprites[spriteId].oam.priority = 1;
 
     return spriteId;
+}
+
+static void AddItemSprite(u32 x, u32 y, u32 space)
+{
+    enum ArcadeEvents event = sGameBoard[space].event;
+    u32 item = 0, spriteTag = 0, palTag = 0;
+
+    if (event == ARCADE_EVENT_GIVE_BERRY)
+    {
+        item = VarGet(VAR_ARCADE_BERRY);
+        spriteTag = ARCADE_SPRITETAG_BERRY;
+        palTag = ARCADE_PALTAG_BERRY;
+    }
+    else if (event == ARCADE_EVENT_GIVE_ITEM)
+    {
+        item = VarGet(VAR_ARCADE_ITEM);
+        spriteTag = ARCADE_SPRITETAG_ITEM;
+        palTag = ARCADE_PALTAG_ITEM;
+    }
+    else
+    {
+        return;
+    }
+
+    u32 iconSpriteId = AddItemIconSprite(spriteTag, palTag, item);
+    gSprites[iconSpriteId].x2 = x+10;
+    gSprites[iconSpriteId].y2 = y+10;
+    gSprites[iconSpriteId].oam.priority = 0;
+    gSprites[iconSpriteId].callback = SpriteCB_Item;
+    sGameBoardState->spriteId[ARCADE_SPRITEID_ITEM_0+space] = iconSpriteId;
+}
+
+static void SpriteCB_Item(struct Sprite *sprite)
+{
+    enum ArcadeBoardModes mode = GetGameBoardMode();
+
+    if (mode < ARCADE_BOARD_MODE_GAME_START)
+        sprite->invisible = TRUE;
+    else if (mode >= ARCADE_BOARD_MODE_GAME_FINISH)
+        sprite->invisible = TRUE;
+    else
+        sprite->invisible = FALSE;
 }
 
 static void StartGame(void)
@@ -2116,12 +2177,10 @@ static void StoreImpactedSideToVar(enum ArcadeImpactTypes impact)
 
 static void DestroyEventSprites(void)
 {
-    u32 space;
-
-    for (space = 0; space < ARCADE_GAME_BOARD_SPACES; space++)
+    for (u32 space = 0; space < ARCADE_GAME_BOARD_SPACES; space++)
     {
         DestroySpriteAndFreeResources(&gSprites[sGameBoardState->spriteId[space]]);
-        sGameBoardState->spriteId[space] = 0;
+        sGameBoardState->spriteId[space] = SPRITE_NONE;
     }
 }
 
