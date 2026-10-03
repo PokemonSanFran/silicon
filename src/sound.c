@@ -593,6 +593,24 @@ void PlaySE(u16 songNum)
         m4aSongNumStart(songNum);
 }
 
+void PlaySE4WithVolume(u16 songNum, u16 volume)
+{
+	if (AreSoundEffectsMuted())
+		m4aSongNumStop(songNum);
+	else
+    {
+		m4aSongNumStart(songNum);
+        m4aMPlayImmInit(&gMPlayInfo_SE4);
+        m4aMPlayVolumeControl(&gMPlayInfo_SE4, TRACKS_ALL, volume);
+    }
+    if (gDisableMapMusicChangeOnMapLoad == MUSIC_DISABLE_OFF)
+    {
+        m4aSongNumStart(songNum);
+        m4aMPlayImmInit(&gMPlayInfo_SE4);
+        m4aMPlayVolumeControl(&gMPlayInfo_SE4, TRACKS_ALL, volume);
+    }
+}
+
 void PlaySE12WithPanning(u16 songNum, s8 pan)
 {
 	// Start siliconMerge
