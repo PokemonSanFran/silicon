@@ -184,16 +184,13 @@ static bool32 BattleArcade_DoBurn(enum ArcadeImpactTypes impact);
 static bool32 BattleArcade_DoSleep(enum ArcadeImpactTypes impact);
 static bool32 BattleArcade_DoFreeze(enum ArcadeImpactTypes impact);
 static bool32 BattleArcade_DoStatusAilment(enum ArcadeImpactTypes impact, u32 status);
-static void InitalizePartyIndex(u32 *newIndex);
 static bool32 IsStatusSleepOrFreeze(u32 status);
-static void ShufflePartyIndex(u32 *newIndex);
 static bool32 BattleArcade_DoGiveBerry(enum ArcadeImpactTypes impact);
 static bool32 BattleArcade_DoGiveItem(enum ArcadeImpactTypes impact);
 static bool32 BattleArcade_DoGive(enum ArcadeImpactTypes impact, enum Item item);
 static void BufferGiveString(enum Item item);
 static bool32 BattleArcade_DoLevelUp(enum ArcadeImpactTypes impact);
 static u32 CalculateAndSaveNewLevel(u32 origLevel);
-static bool32 HaveMonsBeenSwapped(void);
 static bool32 BattleArcade_DoSun(enum ArcadeImpactTypes impact);
 static bool32 BattleArcade_DoRain(enum ArcadeImpactTypes impact);
 static bool32 BattleArcade_DoSand(enum ArcadeImpactTypes impact);
@@ -1278,10 +1275,15 @@ static void ResetWeatherPostBattle(void)
 
 static void ReturnPartyToOwner(void)
 {
-    if (HaveMonsBeenSwapped() == FALSE)
-        return;
+    ZeroPlayerPartyMons();
+    u32 size = SiliconFroniter_GetPartySizeFromCurrentChallenge();
+    for (u32 i = 0; i < size; i++)
+    {
+        struct Pokemon *frontierMon = &gSaveBlock1Ptr->playerParty[i];
+        struct Pokemon *playerMon = &gParties[B_TRAINER_PLAYER][i];
 
-    BattleArcade_DoSwap(0);
+        CopyMon(playerMon,frontierMon,sizeof(struct Pokemon));
+    }
 }
 
 static void ResetLevelsToOriginal(void)
@@ -2130,6 +2132,8 @@ static void SelectGameBoardSpace(enum ArcadeImpactTypes *impact, enum ArcadeEven
 
     *impact = sGameBoard[space].impact;
     *event = sGameBoard[space].event;
+    *impact = ARCADE_IMPACT_ALL;
+    *event = ARCADE_EVENT_SWAP;
 }
 
 static void HandleGameBoardResult(enum ArcadeImpactTypes impact, enum ArcadeEvents event)
@@ -2363,6 +2367,18 @@ static u32 GetChallengeNum(void)
     return (currentStreak / SILICON_FRONTIER_STREAK_LENGTH_BOSS);
 }
 
+static enum BattleSide ConvertBattleTrainerToBattleSide(enum BattleTrainer battleTrainer)
+{
+    switch(battleTrainer)
+    {
+        case B_TRAINER_PLAYER: return B_SIDE_PLAYER;
+        case B_TRAINER_OPPONENT_A: return B_SIDE_OPPONENT;
+        case B_TRAINER_PARTNER: return B_SIDE_PLAYER;
+        case B_TRAINER_OPPONENT_B: return B_SIDE_OPPONENT;
+        default: return NUM_BATTLE_SIDES;
+    }
+}
+
 // Arcade Game Board Back End Resolution
 static bool32 DoGameBoardResult(enum ArcadeEvents event, enum ArcadeImpactTypes impact)
 {
@@ -2374,16 +2390,22 @@ static bool32 DoGameBoardResult(enum ArcadeEvents event, enum ArcadeImpactTypes 
 
 static bool32 BattleArcade_DoLowerHP(enum ArcadeImpactTypes impact)
 {
-    struct Pokemon *party = LoadSideParty(impact);
-
-    for (u32 i = 0; i < MAX_FRONTIER_PARTY_SIZE; i++)
+    for (enum BattleTrainer trainer = B_TRAINER_PLAYER; trainer < MAX_BATTLE_TRAINERS; trainer++)
     {
-        if (!GetMonData(&party[i], MON_DATA_SANITY_HAS_SPECIES))
-            break;
+        if (ConvertBattleTrainerToBattleSide(trainer) != (enum BattleSide)impact)
+            continue;
 
-        u32 maxHP = GetMonData(&party[i], MON_DATA_MAX_HP);
-        u32 reducedHP = maxHP - (maxHP * 200 / 1000);
-        SetMonData(&party[i], MON_DATA_HP, &reducedHP);
+        struct Pokemon *party = GetTrainerParty(trainer);
+
+        for (u32 i = 0; i < MAX_FRONTIER_PARTY_SIZE; i++)
+        {
+            if (!GetMonData(&party[i], MON_DATA_SANITY_HAS_SPECIES))
+                break;
+
+            u32 maxHP = GetMonData(&party[i], MON_DATA_MAX_HP);
+            u32 reducedHP = maxHP - (maxHP * 200 / 1000);
+            SetMonData(&party[i], MON_DATA_HP, &reducedHP);
+        }
     }
     return TRUE;
 }
@@ -2411,59 +2433,46 @@ static bool32 BattleArcade_DoFreeze(enum ArcadeImpactTypes impact)
 
 static bool32 BattleArcade_DoStatusAilment(enum ArcadeImpactTypes impact, u32 status)
 {
-    struct Pokemon *party = LoadSideParty(impact);
-    enum ArcadeImpactTypes impactedCount = 0;
-    u32 newIndex[MAX_FRONTIER_PARTY_SIZE];
+    u32 size = SiliconFroniter_GetPartySizeFromCurrentChallenge();
+    u32 impactedCount = 0;
 
-    InitalizePartyIndex(newIndex);
-
-    if (IsStatusSleepOrFreeze(status))
-        ShufflePartyIndex(newIndex);
-
-    for (u32 i = 0; i < MAX_FRONTIER_PARTY_SIZE; i++)
+    for (enum BattleTrainer trainer = B_TRAINER_PLAYER; trainer < MAX_BATTLE_TRAINERS; trainer++)
     {
-        struct Pokemon *mon = &party[newIndex[i]];
-
-        if (!GetMonData(mon,MON_DATA_SANITY_HAS_SPECIES))
+        if (ConvertBattleTrainerToBattleSide(trainer) != (enum BattleSide)impact)
             continue;
 
-        if (DoesAbilityPreventStatus(mon, status))
-            continue;
+        struct Pokemon *party = GetTrainerParty(trainer);
 
-        if (Hexorb_DoesTypeBlockStatus(GetMonData(mon,MON_DATA_SPECIES), 0, status))
-            continue;
+        for (u32 i = 0; i < size; i++)
+        {
+            u32 index = (IsStatusSleepOrFreeze(status)) ? Random() % size : i;
+            struct Pokemon *mon = &party[index];
 
-        if (Hexorb_DoesTypeBlockStatus(GetMonData(mon,MON_DATA_SPECIES), 1, status))
-            continue;
+            if (!GetMonData(mon,MON_DATA_SANITY_HAS_SPECIES))
+                continue;
 
-        SetMonData(mon, MON_DATA_STATUS, &status);
-        impactedCount++;
+            if (DoesAbilityPreventStatus(mon, status))
+                continue;
 
-        if (!IsStatusSleepOrFreeze(status))
-            continue;
+            if (Hexorb_DoesTypeBlockStatus(GetMonData(mon,MON_DATA_SPECIES), 0, status))
+                continue;
 
-        return TRUE;
+            if (Hexorb_DoesTypeBlockStatus(GetMonData(mon,MON_DATA_SPECIES), 1, status))
+                continue;
+
+            SetMonData(mon, MON_DATA_STATUS, &status);
+            impactedCount++;
+
+            if (IsStatusSleepOrFreeze(status))
+                break;
+        }
     }
     return (impactedCount > 0);
-}
-
-static void InitalizePartyIndex(u32 *newIndex)
-{
-    for (u32 i = 0; i < MAX_FRONTIER_PARTY_SIZE; i++)
-        newIndex[i] = i;
 }
 
 static bool32 IsStatusSleepOrFreeze(u32 status)
 {
     return ((status == STATUS1_FREEZE) || (status == STATUS1_SLEEP));
-}
-
-static void ShufflePartyIndex(u32 *newIndex)
-{
-    u32 temp;
-
-    for (u32 i = 0; i < MAX_FRONTIER_PARTY_SIZE; i++)
-        SWAP(newIndex[i], newIndex[Random() % (i +1)], temp);
 }
 
 static bool32 BattleArcade_DoGiveBerry(enum ArcadeImpactTypes impact)
@@ -2480,16 +2489,21 @@ static bool32 BattleArcade_DoGiveItem(enum ArcadeImpactTypes impact)
 
 static bool32 BattleArcade_DoGive(enum ArcadeImpactTypes impact, enum Item item)
 {
-    struct Pokemon *party = LoadSideParty(impact);
-
-    for (u32 i = 0; i < MAX_FRONTIER_PARTY_SIZE; i++)
+    for (enum BattleTrainer trainer = B_TRAINER_PLAYER; trainer < MAX_BATTLE_TRAINERS; trainer++)
     {
-        if (GetMonData(&party[i], MON_DATA_SPECIES, NULL) == SPECIES_NONE)
-            break;
+        if (ConvertBattleTrainerToBattleSide(trainer) != (enum BattleSide)impact)
+            continue;
 
-        SetMonData(&party[i], MON_DATA_HELD_ITEM, &item);
+        struct Pokemon *party = GetTrainerParty(trainer);
+
+        for (u32 i = 0; i < MAX_FRONTIER_PARTY_SIZE; i++)
+        {
+            if (!GetMonData(&party[i], MON_DATA_SANITY_HAS_SPECIES))
+                break;
+
+            SetMonData(&party[i], MON_DATA_HELD_ITEM, &item);
+        }
     }
-
     BufferGiveString(item);
     return TRUE;
 }
@@ -2501,15 +2515,21 @@ static void BufferGiveString(enum Item item)
 
 static bool32 BattleArcade_DoLevelUp(enum ArcadeImpactTypes impact)
 {
-    struct Pokemon *party = LoadSideParty(impact);
-
-    for (u32 i = 0; i < MAX_FRONTIER_PARTY_SIZE; i++)
+    for (enum BattleTrainer trainer = B_TRAINER_PLAYER; trainer < MAX_BATTLE_TRAINERS; trainer++)
     {
-        if (!GetMonData(&party[i], MON_DATA_SANITY_HAS_SPECIES))
-            break;
+        if (ConvertBattleTrainerToBattleSide(trainer) != (enum BattleSide)impact)
+            continue;
 
-        u32 newLevel = CalculateAndSaveNewLevel(GetMonData(&party[i], MON_DATA_LEVEL));
-        SetMonData(&party[i], MON_DATA_LEVEL, &newLevel);
+        struct Pokemon *party = GetTrainerParty(trainer);
+
+        for (u32 i = 0; i < MAX_FRONTIER_PARTY_SIZE; i++)
+        {
+            if (!GetMonData(&party[i], MON_DATA_SANITY_HAS_SPECIES))
+                break;
+
+            u32 newLevel = CalculateAndSaveNewLevel(GetMonData(&party[i], MON_DATA_LEVEL));
+            SetMonData(&party[i], MON_DATA_LEVEL, &newLevel);
+        }
     }
     return TRUE;
 }
@@ -2518,29 +2538,6 @@ static u32 CalculateAndSaveNewLevel(u32 origLevel)
 {
     u32 newLevel = (origLevel + ARCADE_EVENT_LEVEL_INCREASE);
     return (newLevel >= MAX_LEVEL) ? MAX_LEVEL : newLevel;
-}
-
-static bool32 HaveMonsBeenSwapped(void)
-{
-    u32 size = SiliconFroniter_GetPartySizeFromCurrentChallenge();
-    for (u32 i = 0; i < size; i++)
-    {
-        u32 monId = gSaveBlock2Ptr->frontier.selectedPartyMons[i] - 1;
-        if (monId >= PARTY_SIZE)
-            continue;
-
-        struct Pokemon *frontierMon = &gSaveBlock1Ptr->playerParty[monId];
-        struct Pokemon *playerMon = &gParties[B_TRAINER_PLAYER][i];
-
-        u32 playerMonPersonality = GetMonData(playerMon, MON_DATA_PERSONALITY,NULL);
-        u32 frontierMonPersonality = GetMonData(frontierMon, MON_DATA_PERSONALITY,NULL);
-
-        if (playerMonPersonality == frontierMonPersonality)
-            continue;
-
-        return TRUE;
-    }
-    return FALSE;
 }
 
 static bool32 BattleArcade_DoSun(enum ArcadeImpactTypes impact)
@@ -2585,20 +2582,22 @@ static bool32 BattleArcade_DoTrickRoom(enum ArcadeImpactTypes impact)
 
 static bool32 BattleArcade_DoSwap(enum ArcadeImpactTypes impact)
 {
-    struct Pokemon tempParty[MAX_FRONTIER_PARTY_SIZE];
+    u32 size = SiliconFroniter_GetPartySizeFromCurrentChallenge();
+    struct Pokemon tempMon;
 
-    for (u32 i = 0; i < MAX_FRONTIER_PARTY_SIZE; i++)
+    for (enum BattleTrainer trainer = B_TRAINER_PLAYER; trainer < MAX_BATTLE_TRAINERS; trainer++)
     {
-        CopyMon(&tempParty[i],&gParties[B_TRAINER_PLAYER][i],sizeof(gParties[B_TRAINER_PLAYER][i]));
-        CopyMon(&gParties[B_TRAINER_PLAYER][i],&gParties[B_TRAINER_OPPONENT_A][i],sizeof(gParties[B_TRAINER_OPPONENT_A][i]));
-        CopyMon(&gParties[B_TRAINER_OPPONENT_A][i],&tempParty[i],sizeof(tempParty[i]));
+        if (ConvertBattleTrainerToBattleSide(trainer) != B_SIDE_PLAYER)
+            continue;
 
-        if (SiliconFroniter_IsCurrentChallengeTypeMulti() == FALSE)
-            break;
+        struct Pokemon *partyA = GetTrainerParty(trainer);
+        struct Pokemon *partyB = GetTrainerParty(trainer+1);
 
-        CopyMon(&tempParty[i],&gParties[B_TRAINER_PARTNER][i],sizeof(gParties[B_TRAINER_PARTNER][i]));
-        CopyMon(&gParties[B_TRAINER_PARTNER][i],&gParties[B_TRAINER_OPPONENT_A][i],sizeof(gParties[B_TRAINER_OPPONENT_A][i]));
-        CopyMon(&gParties[B_TRAINER_OPPONENT_A][i],&tempParty[i],sizeof(tempParty[i]));
+        u32 i = Random() % size;
+
+        CopyMon(&tempMon,&partyA[i],sizeof(partyA[i]));
+        CopyMon(&partyA[i],&partyB[i],sizeof(partyB[i]));
+        CopyMon(&partyB[i],&tempMon,sizeof(tempMon));
     }
     return TRUE;
 }
