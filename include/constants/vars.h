@@ -413,7 +413,7 @@
 #define VAR_ARCADE_BERRY                                            0x40D0 // Unused Var
 #define VAR_ARCADE_ITEM                                             0x40D1 // Unused Var
 #define VAR_ARCADE_PERFORMANCE_POINTS                               0x40D2 // Unused Var
-#define VAR_SILICON_UNUSED_0x40D3                                   0x40D3 // Unused Var
+#define VAR_ARCADE_GIVE_EVENT                                       0x40D3 // Unused Var
 #define VAR_SILICON_UNUSED_0x40D4                                   0x40D4 // Unused Var
 #define VAR_SILICON_UNUSED_0x40D5                                   0x40D5 // Unused Var
 

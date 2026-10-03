@@ -10,6 +10,7 @@ void BattleArcade_ResetPerformancePoints(void);
 void BattleArcade_GenerateItemsToBeGiven(void);
 u32 BattleArcade_CalculateBonus(enum SiliconFrontierFacility facility);
 bool8 ShouldUseNormalFogForArcade(void);
+void BattleArcade_ResetGiveEvent(void);
 
 struct ArcadeSpriteSheet
 {

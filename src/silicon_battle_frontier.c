@@ -1441,6 +1441,7 @@ void SiliconFrontier_ResetArcadeData(void)
     BattleArcade_ResetCursorPositionOnSaveblock();
     BattleArcade_ResetCursorSpeed();
     BattleArcade_GenerateItemsToBeGiven();
+    BattleArcade_ResetGiveEvent();
 }
 
 void SiliconFrontier_ResetSketchedMoves(void)
@@ -1465,3 +1466,4 @@ void SiliconFrontier_ResetSketchedMoves(void)
         }
     }
 }
+

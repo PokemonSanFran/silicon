@@ -210,6 +210,9 @@ static bool32 BattleArcade_DoGiveBPSmall(enum ArcadeImpactTypes impact);
 static bool32 BattleArcade_DoGiveBPBig(enum ArcadeImpactTypes impact);
 static bool32 BattleArcade_DoNoBattle(enum ArcadeImpactTypes impact);
 static bool32 BattleArcade_DoNoEvent(enum ArcadeImpactTypes impact);
+void BattleArcade_HandleHeldItems(void);
+void BattleArcade_RemoveHeldItems(void);
+void BattleArcade_RestoreEventHeldItem(void);
 
 static struct GameBoardState *sGameBoardState = NULL;
 static u8 *sBgTilemapBuffer[BG_BOARD_COUNT] = {NULL};
@@ -2132,8 +2135,6 @@ static void SelectGameBoardSpace(enum ArcadeImpactTypes *impact, enum ArcadeEven
 
     *impact = sGameBoard[space].impact;
     *event = sGameBoard[space].event;
-    *impact = ARCADE_IMPACT_ALL;
-    *event = ARCADE_EVENT_SWAP;
 }
 
 static void HandleGameBoardResult(enum ArcadeImpactTypes impact, enum ArcadeEvents event)
@@ -2477,12 +2478,14 @@ static bool32 IsStatusSleepOrFreeze(u32 status)
 
 static bool32 BattleArcade_DoGiveBerry(enum ArcadeImpactTypes impact)
 {
+    VarSet(VAR_ARCADE_GIVE_EVENT,ARCADE_EVENT_GIVE_BERRY);
     enum Item item = VarGet(VAR_ARCADE_BERRY);
     return BattleArcade_DoGive(impact, item);
 }
 
 static bool32 BattleArcade_DoGiveItem(enum ArcadeImpactTypes impact)
 {
+    VarSet(VAR_ARCADE_GIVE_EVENT,ARCADE_EVENT_GIVE_ITEM);
     enum Item item = VarGet(VAR_ARCADE_ITEM);
     return BattleArcade_DoGive(impact, item);
 }
@@ -2753,4 +2756,36 @@ void Script_GetBerryItemArcade(void)
 {
     CopyItemNameHandlePlural(VarGet(VAR_ARCADE_BERRY), gStringVar1, 3);
     CopyItemNameHandlePlural(VarGet(VAR_ARCADE_ITEM), gStringVar2, 3);
+}
+
+void BattleArcade_HandleHeldItems(void)
+{
+    if (SiliconFrontier_GetFacilityFromCurrentChallenge() != SILICON_FACILITY_ARCADE)
+        return FALSE;
+
+    BattleArcade_RemoveHeldItems();
+    BattleArcade_RestoreEventHeldItem();
+}
+
+void BattleArcade_RemoveHeldItems(void)
+{
+    for (enum ArcadeImpactTypes impact = 0; impact < ARCADE_IMPACT_ALL; impact++)
+        BattleArcade_DoGive(impact,ITEM_NONE);
+}
+
+void BattleArcade_RestoreEventHeldItem(void)
+{
+    enum ArcadeEvents event = VarGet(VAR_ARCADE_GIVE_EVENT);
+
+    if (event == ARCADE_EVENT_GIVE_BERRY)
+        BattleArcade_DoGive(ARCADE_IMPACT_PLAYER,VarGet(VAR_ARCADE_BERRY));
+    else if (event == ARCADE_EVENT_GIVE_ITEM)
+        BattleArcade_DoGive(ARCADE_IMPACT_PLAYER,VarGet(VAR_ARCADE_ITEM));
+    else
+        return;
+}
+
+void BattleArcade_ResetGiveEvent(void)
+{
+    VarSet(VAR_ARCADE_GIVE_EVENT,ARCADE_EVENT_COUNT);
 }
