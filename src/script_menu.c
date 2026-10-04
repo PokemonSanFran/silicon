@@ -239,7 +239,7 @@ static void MultichoiceDynamicEventShowArcadeEvent_OnSelectionChanged(struct Dyn
     if (sItemSpriteId != MAX_SPRITES)
     {
         FreeSpriteTilesByTag(ARCADE_SPRITETAG_PANELS);
-        FreeSpritePaletteByTag(ARCADE_PALTAG_OPPONENT);
+        FreeSpritePaletteByTag(ARCADE_PALTAG_PANELS);
         DestroySprite(&gSprites[sItemSpriteId]);
     }
 
