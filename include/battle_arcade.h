@@ -11,6 +11,7 @@ void BattleArcade_GenerateItemsToBeGiven(void);
 u32 BattleArcade_CalculateBonus(enum SiliconFrontierFacility facility);
 bool8 ShouldUseNormalFogForArcade(void);
 void BattleArcade_ResetGiveEvent(void);
+u32 Script_BattleArcade_LoadEventTilesAndCreateSprite(u32 x, u32 y, enum ArcadeEvents event);
 
 struct ArcadeSpriteSheet
 {

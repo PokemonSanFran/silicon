@@ -1875,7 +1875,7 @@ static const struct ArcadeSpriteSheet sArcadeSpriteSheets[] =
         },
         {
             .data = (const u16[])INCBIN_U16("graphics/battle_frontier/battle_arcade/game/panels/events.gbapal"),
-            .tag = ARCADE_PALTAG_PANELS,
+            .tag = ARCADE_PALTAG_OPPONENT,
         },
     },
     {
@@ -2186,14 +2186,10 @@ static void PopulateEventSprites(void)
     }
 }
 
-static u8 CreateEventSprite(u32 x, u32 y, u32 space)
+static u8 CreateEventSprite_(u32 x, u32 y, enum ArcadeEvents event, enum ArcadeImpactTypes impact)
 {
-    u16 TileTag = ARCADE_SPRITETAG_PANELS;
-    enum ArcadeEvents event = sGameBoard[space].event;
-    enum ArcadeImpactTypes impact = (sGameBoard[space].impact == ARCADE_IMPACT_PLAYER) ? ARCADE_IMPACT_PLAYER : ARCADE_IMPACT_OPPONENT;
-
     struct SpriteTemplate TempSpriteTemplate = gDummySpriteTemplate;
-    TempSpriteTemplate.tileTag = TileTag;
+    TempSpriteTemplate.tileTag = ARCADE_SPRITETAG_PANELS;
     TempSpriteTemplate.paletteTag = ARCADE_PALTAG_OPPONENT + impact;
     TempSpriteTemplate.callback = SpriteCallbackDummy;
     TempSpriteTemplate.anims = &arcadeEventInfo[event].animTable;
@@ -2206,6 +2202,23 @@ static u8 CreateEventSprite(u32 x, u32 y, u32 space)
 
     return spriteId;
 }
+
+static u8 CreateEventSprite(u32 x, u32 y, u32 space)
+{
+    enum ArcadeEvents event = sGameBoard[space].event;
+    enum ArcadeImpactTypes impact = (sGameBoard[space].impact == ARCADE_IMPACT_PLAYER) ? ARCADE_IMPACT_PLAYER : ARCADE_IMPACT_OPPONENT;
+    return CreateEventSprite_(x,y,event,impact);
+}
+
+u32 Script_BattleArcade_LoadEventTilesAndCreateSprite(u32 x, u32 y, enum ArcadeEvents event)
+{
+    LoadSpriteSheet(&sArcadeSpriteSheets[0].spriteSheet);
+    LoadSpritePalette(&sArcadeSpriteSheets[0].palette);
+    enum ArcadeImpactTypes impact = 0;
+
+    return CreateEventSprite_(x,y,event,impact);
+}
+
 
 static void AddItemSprite(u32 x, u32 y, u32 space)
 {

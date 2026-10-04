@@ -79,7 +79,7 @@ script BattleStudio_Script_AskRoulette
 script BattleStudio_Script_ShowEventList
 {
     msgbox(format("Which event would you like to learn about?"),,SPEAKER_BATTLE_STUDIO)
-    dynmultichoice(0,0,FALSE,3,0,NULL,
+    dynmultichoice(0,0,FALSE,3,0,DYN_MULTICHOICE_CB_SHOW_ARCADE_EVENT,
             "Lower HP",
             "Poison",
             "Paralyze",

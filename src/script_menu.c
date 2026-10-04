@@ -1,6 +1,7 @@
 #include "global.h"
 #include "main.h"
 #include "event_data.h"
+#include "battle_arcade.h" // siliconFrontier
 #include "field_effect.h"
 #include "field_specials.h"
 #include "item.h"
@@ -68,6 +69,10 @@ static void MultichoiceDynamicEventDebug_OnDestroy(struct DynamicListMenuEventAr
 static void MultichoiceDynamicEventShowItem_OnInit(struct DynamicListMenuEventArgs *eventArgs);
 static void MultichoiceDynamicEventShowItem_OnSelectionChanged(struct DynamicListMenuEventArgs *eventArgs);
 static void MultichoiceDynamicEventShowItem_OnDestroy(struct DynamicListMenuEventArgs *eventArgs);
+// Start siliconFrontier
+static void MultichoiceDynamicEventShowArcadeEvent_OnSelectionChanged(struct DynamicListMenuEventArgs *eventArgs);
+static void MultichoiceDynamicEventShowItem_OnInitBattleArcade(struct DynamicListMenuEventArgs *eventArgs);
+// End siliconFrontier
 
 static const struct DynamicListMenuEventCollection sDynamicListMenuEventCollections[] =
 {
@@ -82,7 +87,15 @@ static const struct DynamicListMenuEventCollection sDynamicListMenuEventCollecti
         .OnInit = MultichoiceDynamicEventShowItem_OnInit,
         .OnSelectionChanged = MultichoiceDynamicEventShowItem_OnSelectionChanged,
         .OnDestroy = MultichoiceDynamicEventShowItem_OnDestroy
+// Start siliconFrontier
+    },
+    [DYN_MULTICHOICE_CB_SHOW_ARCADE_EVENT] =
+    {
+        .OnInit = MultichoiceDynamicEventShowItem_OnInitBattleArcade,
+        .OnSelectionChanged = MultichoiceDynamicEventShowArcadeEvent_OnSelectionChanged,
+        .OnDestroy = MultichoiceDynamicEventShowItem_OnDestroy
     }
+// End siliconFrontier
 };
 
 static const struct ListMenuTemplate sScriptableListMenuTemplate =
@@ -206,6 +219,42 @@ static void MultichoiceDynamicEventShowItem_OnDestroy(struct DynamicListMenuEven
         DestroySprite(&gSprites[sItemSpriteId]);
     }
 }
+
+// Start siliconFrontier
+static void MultichoiceDynamicEventShowItem_OnInitBattleArcade(struct DynamicListMenuEventArgs *eventArgs)
+{
+    struct WindowTemplate *template = &gWindows[eventArgs->windowId].window;
+    u32 baseBlock = template->baseBlock + template->width * template->height;
+    struct WindowTemplate auxTemplate = CreateWindowTemplate(0, template->tilemapLeft + template->width + 2, template->tilemapTop, 3, 3, 15, baseBlock);
+    u32 auxWindowId = AddWindow(&auxTemplate);
+    SetStandardWindowBorderStyle(auxWindowId, FALSE);
+    FillWindowPixelBuffer(auxWindowId, 0x11);
+    CopyWindowToVram(auxWindowId, COPYWIN_FULL);
+    sAuxWindowId = auxWindowId;
+    sItemSpriteId = MAX_SPRITES;
+}
+
+static void MultichoiceDynamicEventShowArcadeEvent_OnSelectionChanged(struct DynamicListMenuEventArgs *eventArgs)
+{
+    if (sItemSpriteId != MAX_SPRITES)
+    {
+        FreeSpriteTilesByTag(ARCADE_SPRITETAG_PANELS);
+        FreeSpritePaletteByTag(ARCADE_PALTAG_OPPONENT);
+        DestroySprite(&gSprites[sItemSpriteId]);
+    }
+
+    if (eventArgs->selectedItem == ARCADE_EVENT_COUNT)
+        return;
+
+    struct WindowTemplate *template = &gWindows[eventArgs->windowId].window;
+    u32 x = (template->tilemapLeft * 8 + template->width * 8) + 21;
+    u32 y = template->tilemapTop * 8 + 5;
+
+    sItemSpriteId = Script_BattleArcade_LoadEventTilesAndCreateSprite(x,y,eventArgs->selectedItem);
+    gSprites[sItemSpriteId].oam.priority = 0;
+    SeekSpriteAnim(&gSprites[sItemSpriteId],3);
+}
+// End siliconFrontier
 
 #undef sAuxWindowId
 #undef sItemSpriteId
