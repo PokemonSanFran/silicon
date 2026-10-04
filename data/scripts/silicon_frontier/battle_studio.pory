@@ -9,7 +9,6 @@ script SiliconFrontier_Script_DoGameBoardSequence
     call(BattleStudio_Movement_MoveMCToGameBoard)
     call(BattleStudio_Dialogue_LetsSeeEvent)
     closemessage
-    callnative(SiliconFrontier_DeleteAllHeldItems)
     callnative(StartArcadeGameBoardFromOverworld)
     waitstate
     goto(SiliconFroniter_Script_HandleGameResults)
@@ -19,6 +18,7 @@ script SiliconFrontier_Script_DoGameBoardSequence
 script SiliconFroniter_Script_HandleGameResults
 {
     //apply overworld effect if any
+    callnative(BattleArcade_HandleHeldItems)
     call(BattleStudio_Movement_FaceImpact)
     if (var(LOCAL_VAR_GAME_BOARD_SUCCESS) == TRUE)
     {
@@ -30,8 +30,8 @@ script SiliconFroniter_Script_HandleGameResults
     }
     closemessage
     call(BattleStudio_Movement_MoveMCToGameBoard)
+    goto_if_eq(LOCAL_VAR_GAME_BOARD_EVENT,ARCADE_EVENT_NO_BATTLE,SiliconFrontier_Script_WonBattle)
     // instead of skip battle, increment the counter by 1 and contnue ahead here
-    return
 }
 
 script SiliconFrontier_BattleStudio_Script_FacePlayerAttendant
@@ -78,6 +78,7 @@ script BattleStudio_Script_AskRoulette
 
 script BattleStudio_Script_ShowEventList
 {
+    msgbox(format("Which event would you like to learn about?"),,SPEAKER_BATTLE_STUDIO)
     dynmultichoice(0,0,FALSE,3,0,NULL,
             "Lower HP",
             "Poison",
@@ -102,6 +103,16 @@ script BattleStudio_Script_ShowEventList
             "No Battle",
             "Give BP Big",
             "No Event",
+            "Inverse",
+            "Gravity",
+            "Misty Terrain",
+            "Electric Terrain",
+            "Grassy Terrain",
+            "Psychic Terrain",
+            "Rainbow",
+            "Swamp",
+            "Sea of Fire",
+            "Original Item",
             "Never mind.")
 
     switch(var(VAR_RESULT))
@@ -152,6 +163,26 @@ script BattleStudio_Script_ShowEventList
         msgbox(format("The battle will award 3 extra Battle Points."),,SPEAKER_BATTLE_STUDIO)
     case ARCADE_EVENT_NO_EVENT:
         msgbox(format("The battle occurs as normal."),,SPEAKER_BATTLE_STUDIO)
+    case ARCADE_EVENT_INVERSE:
+        msgbox(format("The battle has the type matchups reversed."),,SPEAKER_BATTLE_STUDIO)
+    case ARCADE_EVENT_GRAVITY:
+        msgbox(format("The battle will be conducted under permanently increasded gravity."),,SPEAKER_BATTLE_STUDIO)
+    case ARCADE_EVENT_MISTY:
+        msgbox(format("The battle will be conducted in permanent Misty Terrain."),,SPEAKER_BATTLE_STUDIO)
+    case ARCADE_EVENT_ELECTRIC:
+        msgbox(format("The battle will be conducted in permanent Electric Terrain."),,SPEAKER_BATTLE_STUDIO)
+    case ARCADE_EVENT_GRASSY:
+        msgbox(format("The battle will be conducted in permanent Grassy Terrain."),,SPEAKER_BATTLE_STUDIO)
+    case ARCADE_EVENT_PSYCHIC:
+        msgbox(format("The battle will be conducted in permanent Psychic Terrain."),,SPEAKER_BATTLE_STUDIO)
+    case ARCADE_EVENT_RAINBOW:
+        msgbox(format("The Pokemon of the given side will battle under the effects of a rainbow."),,SPEAKER_BATTLE_STUDIO)
+    case ARCADE_EVENT_SWAMP:
+        msgbox(format("The Pokemon of the given side will battle under the effects of a swamp."),,SPEAKER_BATTLE_STUDIO)
+    case ARCADE_EVENT_FIRE:
+        msgbox(format("The Pokemon of the given side will battle under the effects of a sea of fire."),,SPEAKER_BATTLE_STUDIO)
+    case ARCADE_EVENT_GIVE_HELD_ITEM:
+        msgbox(format("The battle will be conducted with the Pokemon of the given side recieving their original held items."),,SPEAKER_BATTLE_STUDIO)
     case ARCADE_EVENT_COUNT:
         goto(SiliconFrontier_Script_BattleMenu)
     case MULTI_B_PRESSED:

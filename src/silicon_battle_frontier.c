@@ -1418,10 +1418,6 @@ void SiliconFrontier_DeleteEnemyHeldItems(void)
     }
 }
 
-void SiliconFrontier_DeleteAllHeldItems(void)
-{
-}
-
 void SiliconFrontier_ResetArcadeData(void)
 {
     enum SiliconFrontierFacility facility = SiliconFrontier_GetFacilityFromCurrentChallenge();

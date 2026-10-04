@@ -239,8 +239,29 @@ script BattleStudio_Dialogue_AnnounceNextBattleSuccess
         default:
         case ARCADE_EVENT_NO_EVENT:
             msgbox(format("Too bad! There is no event this time!"),,SPEAKER_BATTLE_STUDIO)
+        case ARCADE_EVENT_INVERSE:
+            msgbox(format("This match will be played with the type matchups reversed!"),,SPEAKER_BATTLE_STUDIO)
+        case ARCADE_EVENT_GRAVITY:
+            msgbox(format("This match will be played under increased gravity!"),,SPEAKER_BATTLE_STUDIO)
+        case ARCADE_EVENT_MISTY:
+            msgbox(format("This match will be played with Misty Terrain!"),,SPEAKER_BATTLE_STUDIO)
+        case ARCADE_EVENT_ELECTRIC:
+            msgbox(format("This match will be played with Electric Terrain!"),,SPEAKER_BATTLE_STUDIO)
+        case ARCADE_EVENT_GRASSY:
+            msgbox(format("This match will be played with Grassy Terrain!"),,SPEAKER_BATTLE_STUDIO)
+        case ARCADE_EVENT_PSYCHIC:
+            msgbox(format("This match will be played with Psychic Terrain!"),,SPEAKER_BATTLE_STUDIO)
+        case ARCADE_EVENT_RAINBOW:
+            msgbox(format("The match will commence with the Pokémon on {STR_VAR_1}’s side under a rainbow!"),,SPEAKER_BATTLE_STUDIO)
+        case ARCADE_EVENT_SWAMP:
+            msgbox(format("The match will commence with the Pokémon on {STR_VAR_1}’s side in a swammp!"),,SPEAKER_BATTLE_STUDIO)
+        case ARCADE_EVENT_FIRE:
+            msgbox(format("The match will commence with the Pokémon on {STR_VAR_1}’s side in a sea of fire!"),,SPEAKER_BATTLE_STUDIO)
+        case ARCADE_EVENT_GIVE_HELD_ITEM:
+            msgbox(format("The match will commence with the Pokémon on {STR_VAR_1}’s side getting their original held items!"),,SPEAKER_BATTLE_STUDIO)
     }
 }
+
 
 script BattleStudio_Dialogue_AnnounceNextBattleFailure
 {
