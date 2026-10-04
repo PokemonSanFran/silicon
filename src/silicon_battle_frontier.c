@@ -1239,9 +1239,8 @@ void SiliconFrontier_ResetCurrentStreak(void)
 
 void SiliconFrontier_DebugChoosePartner(void)
 {
-    enum SiliconFrontierTrainerIds trainer = Random() % SILICON_FRONTIER_TRAINER_BOSS_END;
+    enum SiliconFrontierTrainerIds trainer = RandomUniform(0, SILICON_FRONTIER_TRAINER_BOSS_START,SILICON_FRONTIER_TRAINER_BOSS_END);
     u32 partner = SiliconFrontier_GetPartnerFromTrainer(trainer);
-
     SiliconFrontier_SetCurrentPartner(partner);
 }
 
