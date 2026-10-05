@@ -140,6 +140,8 @@ enum BattleInfoOptions
 
 #define MAX_SHOWN_BI_STATUS_ITEMS   5
 
+#define BI_STATUS_LIST_TIMER_LIMIT  120
+
 struct BattleInfoData
 {
     MainCallback savedCB;
@@ -164,6 +166,8 @@ struct BattleInfoData
     u8 visualStatusCursor:7;
     u8 toggleStatusDesc:1;
     u8 numStatuses;
+    u8 statusPagination;
+    u8 statusUpdateTimer;
     enum SiliconBattleStatuses *statusList;
 };
 
@@ -297,7 +301,7 @@ static const struct WindowTemplate sBattleInfo_WindowTemplates[] =
     {
         .bg = BI_BG_TEXT_ALT,
         .tilemapLeft = 20, .tilemapTop = 8,
-        .width = 9, .height = 10
+        .width = 9, .height = 11
     },
     [BI_WIN_OPTIONS_LIST] =
     {
@@ -637,6 +641,18 @@ static void Task_BattleInfo_WaitInput(u8 taskId)
 
 static void Task_BattleInfo_MainModeInput(u8 taskId)
 {
+    if (++sBattleInfoDataPtr->statusUpdateTimer == BI_STATUS_LIST_TIMER_LIMIT)
+    {
+        sBattleInfoDataPtr->statusUpdateTimer = 0;
+        sBattleInfoDataPtr->statusPagination += MAX_SHOWN_BI_STATUS_ITEMS;
+        if (sBattleInfoDataPtr->statusPagination >= sBattleInfoDataPtr->numStatuses)
+            sBattleInfoDataPtr->statusPagination = 0;
+
+        BattleInfoMode_Update();
+        CopyWindowToVram(BI_WIN_MAIN, COPYWIN_FULL);
+        CopyWindowToVram(BI_WIN_STATUS_LIST, COPYWIN_FULL);
+    }
+
     if (JOY_NEW(B_BUTTON))
     {
         switch (sBattleInfoSavedState.partyAction)
@@ -1111,6 +1127,8 @@ static void BattleInfoInput_UpdateGrid(s32 deltaX, s32 deltaY)
 
     PlaySE(SE_SELECT);
     sBattleInfoDataPtr->currPartySlot = nextPartySlot;
+    sBattleInfoDataPtr->statusUpdateTimer = 0;
+    sBattleInfoDataPtr->statusPagination = 0;
     BattleInfoHelper_PopulateStatusList();
     BattleInfoHelper_UpdateEverything();
 }
@@ -1529,8 +1547,18 @@ static void BattleInfoText_ShowMonStatusList(void)
         return;
     }
 
-    u32 count = sBattleInfoDataPtr->numStatuses;
-    if (count > MAX_SHOWN_BI_STATUS_ITEMS) count = MAX_SHOWN_BI_STATUS_ITEMS;
+    u32 count = 0;
+    if (sBattleInfoDataPtr->mode == BI_MODE_MAIN)
+    {
+        while ((sBattleInfoDataPtr->statusPagination + count) < sBattleInfoDataPtr->numStatuses)
+            count++;
+    }
+    else
+    {
+        count = sBattleInfoDataPtr->numStatuses;
+        if (count > MAX_SHOWN_BI_STATUS_ITEMS)
+            count = MAX_SHOWN_BI_STATUS_ITEMS;
+    }
 
     windowId = BI_WIN_STATUS_LIST;
     FillWindowPixelBuffer(windowId, PIXEL_FILL(0));
@@ -1540,6 +1568,8 @@ static void BattleInfoText_ShowMonStatusList(void)
         u32 idx = i;
         if (sBattleInfoDataPtr->mode == BI_MODE_STATUS_LIST)
             idx += sBattleInfoDataPtr->topLeftStatus;
+        else // BI_MODE_MAIN
+            idx += sBattleInfoDataPtr->statusPagination;
 
         enum SiliconBattleStatuses status = sBattleInfoDataPtr->statusList[idx];
         const u8 *str = BattleStatusCriteria_GetFormattedName(BattleInfoHelper_GetCurrBattler(), status);

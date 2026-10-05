@@ -249,6 +249,7 @@ u32 BattleStatusCriteria_CompileListForBattler(enum BattlerId battler, enum Sili
             list[count++] = status;
     }
 
+    list[count] = NUM_BATTLE_STATUSES;
     return count;
 }
 
