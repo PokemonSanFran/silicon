@@ -1736,7 +1736,7 @@ static enum BattlerId BattleInfoHelper_GetCurrBattler(void)
         if (!IsBattlerAlive(battler))
             continue;
 
-        if (GetPartyIdFromBattlePartyId(gBattlerPartyIndexes[battler]) != partySlot)
+        if (BattleInfoHelper_SlotToBattlePartyOrder(battler, partySlot) != gBattlerPartyIndexes[battler])
             continue;
 
         if ((isOpponent && !IsOnPlayerSide(battler))
