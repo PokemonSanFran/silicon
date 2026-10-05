@@ -19,11 +19,6 @@
       "direction": "up"
     },
     {
-      "map": "MAP_NONGYU_BRIDGE",
-      "offset": 2,
-      "direction": "right"
-    },
-    {
       "map": "MAP_CURENO_PORT",
       "offset": -8,
       "direction": "down"
@@ -311,5 +306,6 @@
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
       "script": "Hiddengrotto_EnterGrotto_Dialogue"
     }
-  ]
+  ],
+  "night_music": "MUS_ROUTE4_ROUTE2_NIGHT"
 }

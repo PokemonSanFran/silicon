@@ -204,3 +204,4 @@
 
 .include "sound/voicegroups/voicegroup191.inc"
 .include "sound/voicegroups/voicegroup192.inc"
+.include "sound/voicegroups/phenomenon_sfx.inc" @ phenomenon

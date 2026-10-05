@@ -39,8 +39,8 @@ static bool32 CheckPyramidBagHasSpace(enum Item itemId, u16 count);
 static const u8 *GetItemPluralName(enum Item);
 static bool32 DoesItemHavePluralName(enum Item);
 static void NONNULL BagPocket_CompactItems(struct BagPocket *pocket);
-static u16 SanitizeItemId(enum Item itemId);
-static u16 SanitizeBagItemId(enum Item itemId);
+static enum Item SanitizeItemId(enum Item itemId);
+static enum Item SanitizeBagItemId(enum Item itemId);
 
 EWRAM_DATA struct BagPocket gBagPockets[POCKETS_COUNT] = {0};
 
@@ -665,7 +665,7 @@ u16 CountTotalItemQuantityInBag(enum Item itemId)
 static bool32 CheckPyramidBagHasItem(enum Item itemId, u16 count)
 {
     u8 i;
-    u16 *items = gSaveBlock2Ptr->frontier.pyramidBag.itemId[gSaveBlock2Ptr->frontier.lvlMode];
+    enum Item *items = gSaveBlock2Ptr->frontier.pyramidBag.itemId[gSaveBlock2Ptr->frontier.lvlMode];
 #if MAX_PYRAMID_BAG_ITEM_CAPACITY > 255
     u16 *quantities = gSaveBlock2Ptr->frontier.pyramidBag.quantity[gSaveBlock2Ptr->frontier.lvlMode];
 #else
@@ -691,7 +691,7 @@ static bool32 CheckPyramidBagHasItem(enum Item itemId, u16 count)
 static bool32 CheckPyramidBagHasSpace(enum Item itemId, u16 count)
 {
     u8 i;
-    u16 *items = gSaveBlock2Ptr->frontier.pyramidBag.itemId[gSaveBlock2Ptr->frontier.lvlMode];
+    enum Item *items = gSaveBlock2Ptr->frontier.pyramidBag.itemId[gSaveBlock2Ptr->frontier.lvlMode];
 #if MAX_PYRAMID_BAG_ITEM_CAPACITY > 255
     u16 *quantities = gSaveBlock2Ptr->frontier.pyramidBag.quantity[gSaveBlock2Ptr->frontier.lvlMode];
 #else
@@ -718,7 +718,7 @@ bool32 AddPyramidBagItem(enum Item itemId, u16 count)
 {
     u16 i;
 
-    u16 *items = gSaveBlock2Ptr->frontier.pyramidBag.itemId[gSaveBlock2Ptr->frontier.lvlMode];
+    enum Item *items = gSaveBlock2Ptr->frontier.pyramidBag.itemId[gSaveBlock2Ptr->frontier.lvlMode];
     u16 *newItems = Alloc(PYRAMID_BAG_ITEMS_COUNT * sizeof(*newItems));
 
 #if MAX_PYRAMID_BAG_ITEM_CAPACITY > 255
@@ -796,7 +796,7 @@ bool32 RemovePyramidBagItem(enum Item itemId, u16 count)
 {
     u16 i;
 
-    u16 *items = gSaveBlock2Ptr->frontier.pyramidBag.itemId[gSaveBlock2Ptr->frontier.lvlMode];
+    enum Item *items = gSaveBlock2Ptr->frontier.pyramidBag.itemId[gSaveBlock2Ptr->frontier.lvlMode];
 #if MAX_PYRAMID_BAG_ITEM_CAPACITY > 255
     u16 *quantities = gSaveBlock2Ptr->frontier.pyramidBag.quantity[gSaveBlock2Ptr->frontier.lvlMode];
 #else
@@ -863,7 +863,7 @@ bool32 RemovePyramidBagItem(enum Item itemId, u16 count)
     }
 }
 
-static u16 SanitizeItemId(enum Item itemId)
+static enum Item SanitizeItemId(enum Item itemId)
 {
     assertf(itemId < ITEMS_COUNT, "invalid item: %d", itemId)
     {
@@ -873,7 +873,7 @@ static u16 SanitizeItemId(enum Item itemId)
     return itemId;
 }
 
-static u16 SanitizeBagItemId(enum Item itemId)
+static enum Item SanitizeBagItemId(enum Item itemId)
 {
     itemId = SanitizeItemId(itemId);
 
@@ -918,7 +918,7 @@ const u8 *GetItemEffect(enum Item itemId)
     #if FREE_ENIGMA_BERRY == FALSE
         return gSaveBlock1Ptr->enigmaBerry.itemEffect;
     #else
-        return 0;
+        return NULL;
     #endif //FREE_ENIGMA_BERRY
     else
         return gItemsInfo[SanitizeItemId(itemId)].effect;
@@ -926,7 +926,14 @@ const u8 *GetItemEffect(enum Item itemId)
 
 enum HoldEffect GetItemHoldEffect(enum Item itemId)
 {
-    return gItemsInfo[SanitizeItemId(itemId)].holdEffect;
+    if (itemId == ITEM_ENIGMA_BERRY_E_READER)
+    #if FREE_ENIGMA_BERRY == FALSE
+        return gSaveBlock1Ptr->enigmaBerry.holdEffect;
+    #else
+        return HOLD_EFFECT_NONE;
+    #endif //FREE_ENIGMA_BERRY
+    else
+        return gItemsInfo[SanitizeItemId(itemId)].holdEffect;
 }
 
 u32 GetItemHoldEffectParam(enum Item itemId)
@@ -1046,20 +1053,6 @@ u32 GetItemStatus1Mask(enum Item itemId)
         return STATUS1_ANY | STATUS1_TOXIC_COUNTER;
     }
     return 0;
-}
-
-bool32 ItemHasVolatileFlag(enum Item itemId, enum Volatile _volatile)
-{
-    const u8 *effect = GetItemEffect(itemId);
-    switch (_volatile)
-    {
-    case VOLATILE_CONFUSION:
-        return (effect[3] & ITEM3_STATUS_ALL) || (effect[3] & ITEM3_CONFUSION);
-    case VOLATILE_INFATUATION:
-        return (effect[3] & ITEM3_STATUS_ALL) || (effect[0] & ITEM0_INFATUATION);
-    default:
-        return FALSE;
-    }
 }
 
 u32 GetItemSellPrice(enum Item itemId)

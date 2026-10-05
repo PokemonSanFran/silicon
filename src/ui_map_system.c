@@ -3860,7 +3860,7 @@ static u8 HandleWarpCloseMenu(void)
             switch(questException)
             {
                 case EXCEPTION_1:
-                    SetWarpDestination(MAP_GROUP(MAP_ARRIBA_CAR_INTERIOR), MAP_NUM(MAP_ARRIBA_CAR_INTERIOR), WARP_ID_NONE, 20, 15);
+                    SetWarpDestination(MAP_GROUP(MAP_ARRIBA_CAR_INTERIOR), MAP_NUM(MAP_ARRIBA_CAR_INTERIOR), WARP_ID_NONE, 20, 3);
                     VarSet(VAR_UBER_QUEST_EXCEPTION_DESTINATION, healLocation);
                     break;
                 case EXCEPTION_2:

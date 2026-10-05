@@ -3,8 +3,15 @@
 
 extern const struct SpritePalette gMonIconPaletteTable[];
 
+enum SpeciesIconType {
+    NORMAL_ICON,
+    FEMALE_ICON,
+    EGG_ICON
+};
+
 const u8 *GetMonIconTiles(enum Species species, u32 personality);
 const u8 *GetMonIconTilesIsEgg(enum Species species, u32 personality, bool32 isEgg);
+const u8 *GetMonIconTilesByIconType(enum Species species, enum SpeciesIconType iconType);
 void TryLoadAllMonIconPalettesAtOffset(u16 offset);
 u8 GetValidMonIconPalIndex(enum Species species);
 const u8 *GetMonIconPtr(enum Species species, u32 personality);
@@ -32,4 +39,5 @@ void SafeFreeMonIconPalette(enum Species species);
 u8 LoadMonIconPaletteWithAilment(enum Species species, u32 personality, u32 ailment, u16 currentHP, u8 paletteNum); // inventory
 u8 LoadMonIconPaletteWithRGBValue(enum Species species, u32 personality, u32 blendColor, u16 currentHP, u8 paletteNum); // inventory
 
+u8 CreateTaggedMonIcon(u32 tileTag, u32 paletteTag, enum Species species);
 #endif // GUARD_POKEMON_ICON_H

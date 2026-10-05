@@ -36,7 +36,7 @@ script BeachBattle_CharlotteWalkToPlayer
 
         applymovement(PLAYER, moves(emote_exclamation_mark, face_down, step_end))
         waitmovement(PLAYER)
-        playbgm(MUS_ENCOUNTER_BRENDAN,TRUE)
+        playbgm(MUS_CHARLOTTE,TRUE)
         moveobjecttocoords(CHARLOTTE,10,24,DIR_NORTH)
         waitmovement(CHARLOTTE)
         goto(BeachBattle_Approach_Dialogue)
@@ -44,7 +44,7 @@ script BeachBattle_CharlotteWalkToPlayer
 
 script BeachBattle_Interact_Script
 {
-        playbgm(MUS_ENCOUNTER_BRENDAN,TRUE)
+        playbgm(MUS_CHARLOTTE,TRUE)
         faceplayer
         goto(BeachBattle_StartBattle_Script)
 }

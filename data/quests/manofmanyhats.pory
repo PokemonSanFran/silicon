@@ -249,7 +249,7 @@ script Quest_ManOfManyHats_CheckDoorLock_Script_Metatiles{
 	}
 	else
 	{
-		setmetatile(13,8,0x23b,TRUE)
+		setmetatile(13,8,0x83b,TRUE)
 	}
 }
 

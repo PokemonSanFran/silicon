@@ -44,7 +44,7 @@ script WhyAreYouHelpingThem_MoveObjectAdaora_Script {
 }
 
 script WhyAreYouHelpingThem_BlowHoleWall {
-    setmetatile(12,1,0x3F2,FALSE)
+    setmetatile(12,1,0x9F2,FALSE)
     special(DrawWholeMapView)
 }
 

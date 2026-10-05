@@ -1,35 +1,18 @@
 const PLAYER = OBJ_EVENT_ID_PLAYER
-const ARNAV = 1
-const TECHIE = 2
-const OLIVER = 3
-const CHARLOTTE = 4
-const LUCREZIA = 5
-const CHIEF = 6
-const RAMESH = 7
-const KEIYING = 8
 
-const FLAG_HIDE_NERDS_COPS = FLAG_TEMP_1
-const FLAG_HIDE_OLIVER = FLAG_TEMP_2
-const FLAG_HIDE_CHARLOTTE = FLAG_TEMP_3
-const FLAG_HIDE_LUCREZIA = FLAG_TEMP_4
-const FLAG_HIDE_RAMESH = FLAG_TEMP_5
-const FLAG_HIDE_KEIYING = FLAG_TEMP_6
-
-script YouRealizeWereEvilRight_Object_Setup_Script {
-setflag(FLAG_HIDE_CHARLOTTE)
-setflag(FLAG_HIDE_LUCREZIA)
-setflag(FLAG_HIDE_NERDS_COPS)
-return
+script YouRealizeWereEvilRight_Object_Setup_Script 
+{
+	setobjectflagfromlocalid(LOCALID_SHARPRISE_CHARLOTTE)
+	setobjectflagfromlocalid(LOCALID_SHARPRISE_LUCREZIA)
 }
 
-script YouRealizeWereEvilRight_Object_Cleanup_Script {
-setflag(FLAG_HIDE_CHARLOTTE)
-setflag(FLAG_HIDE_LUCREZIA)
-setflag(FLAG_HIDE_NERDS_COPS)
+script YouRealizeWereEvilRight_Object_Cleanup_Script 
+{
+	setobjectflagfromlocalid(LOCALID_SHARPRISE_CHARLOTTE)
+	setobjectflagfromlocalid(LOCALID_SHARPRISE_LUCREZIA)
 
-setobjectxy(KEIYING,21,29)
-setobjectxyperm(KEIYING,21,29)
-return
+	setobjectxy(LOCALID_LEAGUEOPS_KEIYING,21,29)
+	setobjectxyperm(LOCALID_LEAGUEOPS_KEIYING,21,29)
 }
 
 script YouRealizeWereEvilRight_PhoneCall_Dialogue {
@@ -83,10 +66,10 @@ script YouRealizeWereEvilRight_Open_Dialogue {
 
         closemessage
 
-        applymovement(KEIYING, moves(walk_up * 3, walk_right, walk_up * 3, face_left))
-        waitmovement(KEIYING)
-        setobjectxy(KEIYING,21,29)
-        setobjectxyperm(KEIYING,21,29)
+        applymovement(LOCALID_LEAGUEOPS_KEIYING, moves(walk_up * 3, walk_right, walk_up * 3, face_left))
+        waitmovement(LOCALID_LEAGUEOPS_KEIYING)
+        setobjectxy(LOCALID_LEAGUEOPS_KEIYING,21,29)
+        setobjectxyperm(LOCALID_LEAGUEOPS_KEIYING,21,29)
 
         msgbox(format("Excellent timing."),,SPEAKER_OLIVER)
 
@@ -98,8 +81,8 @@ script YouRealizeWereEvilRight_Open_Dialogue {
 
         closemessage
 
-        applymovement(OLIVER, moves(walk_left, walk_up, walk_down * 2, walk_up, face_right))
-        waitmovement(OLIVER)
+        applymovement(LOCALID_SHARPRISE_OLIVER, moves(walk_left, walk_up, walk_down * 2, walk_up, face_right))
+        waitmovement(LOCALID_SHARPRISE_OLIVER)
 
         msgbox(format("Why do you think Vigrim hides behind a mask? It's because they know their operation is completely illegal!"),,SPEAKER_OLIVER)
 

@@ -34,5 +34,6 @@
       "script": "CuconuTown_Compound_2F_Bed_Script"
     }
   ],
-  "bg_events": []
+  "bg_events": [],
+  "night_music": "MUS_ESPULEE_OUTSKIRTS_NIGHT"
 }

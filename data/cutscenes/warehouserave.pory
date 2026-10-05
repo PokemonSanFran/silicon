@@ -47,9 +47,9 @@ script WarehouseRave_ControlExits_Script
 
 script WarehouseRave_PostSaveUnlock
 {
-    setmetatile(9,6,0x208,FALSE)
-        setmetatile(9,7,0x210,FALSE)
-        setmetatile(9,8,0x218,FALSE)
+    setmetatile(9,6,0x808,FALSE)
+        setmetatile(9,7,0x810,FALSE)
+        setmetatile(9,8,0x818,FALSE)
         special(DrawWholeMapView)
 
         if(defeated(TRAINER_KEI_YING_WAREHOUSE_RAVE))
@@ -67,9 +67,9 @@ script WarehouseRave_MakeExplosionHole_Script
 
 script WarehouseRave_LockDoors_Script
 {
-    setmetatile(9,6,0x214,FALSE)
-        setmetatile(9,7,0x214,FALSE)
-        setmetatile(9,8,0x214,FALSE)
+    setmetatile(9,6,0x814,FALSE)
+        setmetatile(9,7,0x814,FALSE)
+        setmetatile(9,8,0x814,FALSE)
         special(DrawWholeMapView)
         playse(SE_SLIDING_DOOR)
         waitse

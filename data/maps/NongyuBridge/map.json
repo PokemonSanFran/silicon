@@ -19,14 +19,14 @@
       "direction": "right"
     },
     {
-      "map": "MAP_ROUTE2",
-      "offset": -2,
-      "direction": "left"
-    },
-    {
       "map": "MAP_ZENZU_ISLAND",
       "offset": 25,
       "direction": "up"
+    },
+    {
+      "map": "MAP_ROUTE4",
+      "offset": -27,
+      "direction": "left"
     }
   ],
   "object_events": [
@@ -125,5 +125,6 @@
   ],
   "warp_events": [],
   "coord_events": [],
-  "bg_events": []
+  "bg_events": [],
+  "night_music": "MUS_ZENZU_ROUTE_11_13_100_NIGHT"
 }

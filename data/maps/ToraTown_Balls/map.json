@@ -114,5 +114,6 @@
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
       "script": "Quest_ArtisanBalls_ReadBook_Dialogue"
     }
-  ]
+  ],
+  "night_music": "MUS_TORA_TOWN_NIGHT"
 }

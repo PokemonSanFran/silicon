@@ -1,5 +1,6 @@
 script EventScript_InstallWavesOfChangeApp
 {
+    setflag(FLAG_SYS_APP_WAVES_OF_CHANGE_GET)
     bufferstring(STR_VAR_1,"Waves of Change")
     call(EventScript_ObtainNewApp)
     return
@@ -31,7 +32,7 @@ script EventScript_InstallDexnavApp
 
 script EventScript_InstallGlassApp
 {
-    setflag(FLAG_SYS_APP_TRAINER_CARD_GET)
+    setflag(FLAG_SYS_APP_GOOGLE_GLASS_GET)
     bufferstring(STR_VAR_1,"Google Glass")
     call(EventScript_ObtainNewApp)
     return

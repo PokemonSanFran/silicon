@@ -1,21 +1,20 @@
 const PLAYER = OBJ_EVENT_ID_PLAYER
 const CAMERA = OBJ_EVENT_ID_CAMERA
-const BAIYA_HOUSE = 1
-const BAIYA = 3 //outside house
-const ADAORA = 13
-const GRUNTA = 15
-const GRUNTB = 16
-const GRUNTC = 17
+const LOCALID_HALAI_GRUNTA = LOCALID_CAMERA + 1
+const LOCALID_HALAI_GRUNTB = LOCALID_CAMERA + 2
+const LOCALID_HALAI_GRUNTC = LOCALID_CAMERA + 3
 
-const FLAG_HIDE_BAIYA_HOUSE = FLAG_TEMP_1
-
-const FLAG_HIDE_TRANSPORT = FLAG_TEMP_1F
-
-script Earthquake_HideObject_Script {
-        setflag(FLAG_TEMP_4)
-        setflag(FLAG_TEMP_2)
-        setobjectxyperm(BAIYA,28,33)
-        turnobject(BAIYA,DIR_NORTH)
+script Earthquake_HideObject_Script 
+{
+	setobjectxyperm(LOCALID_HALAI_BAIYA,28,33)
+	turnobject(LOCALID_HALAI_BAIYA,DIR_NORTH)
+	setobjectflagfromlocalid(LOCALID_HALAI_NERIENE)
+	setobjectflagfromlocalid(LOCALID_HALAI_POLICE_C)
+	setobjectflagfromlocalid(LOCALID_HALAI_FRANK)
+	setobjectflagfromlocalid(LOCALID_HALAI_MAGNUS)
+	setobjectflagfromlocalid(LOCALID_HALAI_TALA)
+	setobjectflagfromlocalid(LOCALID_HALAI_ELEANOR)
+	setobjectflagfromlocalid(LOCALID_HALAI_NERIENE)
 }
 
 script Earthquake_Script_PlayCrisisMusic
@@ -30,36 +29,32 @@ script Earthquake_Script_PlayCrisisMusic
 script Earthquake_HideTransport_Script
 {
     callnative(Script_IsHalaiIslandUnderCrisis)
-    if (var(VAR_RESULT))
+    if (var(VAR_RESULT) == TRUE)
     {
-        setflag(FLAG_HIDE_TRANSPORT)
+		setobjectflagfromlocalid(LOCALID_HALAI_FERRY)	
     }
 }
 
-script Earthquake_PostRescue_Objects_Script {
-    clearflag(FLAG_TEMP_1)
-    clearflag(FLAG_TEMP_3)
-    clearflag(FLAG_TEMP_4)
+script Earthquake_PostRescue_Objects_Script 
+{
+	addobject(LOCALID_HALAI_BAIYA)
+	addobject(LOCALID_HALAI_ADAORA)
 
-        addobject(BAIYA)
-        addobject(ADAORA)
+	createvobject(OBJ_EVENT_GFX_COMRADE_4,LOCALID_HALAI_GRUNTA,32,10)
+	createvobject(OBJ_EVENT_GFX_COMRADE_2,LOCALID_HALAI_GRUNTB,31,12)
+	createvobject(OBJ_EVENT_GFX_COMRADE_8,LOCALID_HALAI_GRUNTC,31,11)
+	turnvobject(LOCALID_HALAI_GRUNTB,DIR_EAST)
+	turnvobject(LOCALID_HALAI_GRUNTC,DIR_EAST)
 
-        createvobject(OBJ_EVENT_GFX_COMRADE_4,15,32,10)
-        createvobject(OBJ_EVENT_GFX_COMRADE_2,16,31,12)
-        createvobject(OBJ_EVENT_GFX_COMRADE_8,17,31,11)
+	setobjectxy(PLAYER,32,13)
+	setobjectxy(LOCALID_HALAI_BAIYA,33,12)
+	setobjectxy(LOCALID_HALAI_ADAORA,33,11)
+	turnobject(PLAYER,DIR_NORTH)
 
-        turnvobject(16,DIR_EAST)
-        turnvobject(17,DIR_EAST)
+	applymovement(LOCALID_HALAI_ADAORA,Common_Movement_FaceLeft)
+	turnobject(LOCALID_HALAI_BAIYA,DIR_WEST)
 
-        setobjectxy(PLAYER,32,13)
-        setobjectxy(BAIYA,33,12)
-        setobjectxy(ADAORA,33,11)
-        turnobject(PLAYER,DIR_NORTH)
-
-        applymovement(ADAORA,Common_Movement_FaceLeft)
-        turnobject(BAIYA,DIR_WEST)
-
-        TeleportCamera(32,13)
+	TeleportCamera(32,13)
 }
 
 script Earthquake_ThatNight_Dialogue
@@ -67,10 +62,10 @@ script Earthquake_ThatNight_Dialogue
 	fwdtime(1,0)
     startcutscene(JUMPPLAYER_EARTHQUAKE_INSIDE)
 
-    clearflag(FLAG_HIDE_BAIYA_HOUSE)
-    addobject(BAIYA_HOUSE)
-    applymovement(BAIYA_HOUSE,Common_Movement_FaceDown)
-    waitmovement(BAIYA_HOUSE)
+	clearobjectflagfromlocalid(LOCALID_HALAI_HOME_BAIYA)
+    addobject(LOCALID_HALAI_HOME_BAIYA)
+    applymovement(LOCALID_HALAI_HOME_BAIYA,Common_Movement_FaceDown)
+    waitmovement(LOCALID_HALAI_HOME_BAIYA)
 
     msgbox(format("That night…"))
     closemessage
@@ -93,17 +88,17 @@ script Earthquake_ThatNight_Dialogue
     msgbox(format("I'm fine. Do you hear people screaming?"),MSGBOX_DEFAULT,SPEAKER_ALICIA)
     closemessage
 
-    applymovement(BAIYA_HOUSE, moves(walk_up * 2, step_end))
-    waitmovement(BAIYA_HOUSE)
+    applymovement(LOCALID_HALAI_HOME_BAIYA, moves(walk_up * 2, step_end))
+    waitmovement(LOCALID_HALAI_HOME_BAIYA)
 
     msgbox(format("The power's dead. This… isn't good."),MSGBOX_DEFAULT,SPEAKER_BAIYA_TIDE)
     closemessage
 
-    applymovement(BAIYA_HOUSE, moves(player_run_right, player_run_up, step_end))
-    waitmovement(BAIYA_HOUSE)
+    applymovement(LOCALID_HALAI_HOME_BAIYA, moves(player_run_right, player_run_up, step_end))
+    waitmovement(LOCALID_HALAI_HOME_BAIYA)
     playse(SE_EXIT)
     waitse
-    removeobject(BAIYA_HOUSE)
+    removeobject(LOCALID_HALAI_HOME_BAIYA)
 
     applymovement(PLAYER, moves(player_run_right * 5, player_run_up * 3, step_end))
     waitmovement(PLAYER)
@@ -146,10 +141,10 @@ script Earthquake_StartRescue_Dialogue {
 
     special(RemoveCameraObject)
 
-        addobject(ADAORA)
+        addobject(LOCALID_HALAI_ADAORA)
 
-        applymovement(ADAORA, moves(walk_right * 5, walk_down * 2, walk_right * 3, face_up, step_end))
-        waitmovement(ADAORA)
+        applymovement(LOCALID_HALAI_ADAORA, moves(walk_right * 5, walk_down * 2, walk_right * 3, face_up, step_end))
+        waitmovement(LOCALID_HALAI_ADAORA)
 
         msgbox(format("Oh, you're okay!"),MSGBOX_DEFAULT,SPEAKER_ADAORA)
 
@@ -164,12 +159,12 @@ script Earthquake_StartRescue_Dialogue {
         msgbox(format("Of course. Let's meet back in the town center in a bit."),MSGBOX_DEFAULT,SPEAKER_BAIYA_TIDE)
         closemessage
 
-        applymovement(BAIYA, moves(walk_left, walk_up * 6, step_end))
-        applymovement(ADAORA, moves(walk_left * 2, walk_up * 7, step_end))
-        waitmovement(BAIYA)
-        waitmovement(ADAORA)
-        removeobject(BAIYA)
-        removeobject(ADAORA)
+        applymovement(LOCALID_HALAI_BAIYA, moves(walk_left, walk_up * 6, step_end))
+        applymovement(LOCALID_HALAI_ADAORA, moves(walk_left * 2, walk_up * 7, step_end))
+        waitmovement(LOCALID_HALAI_BAIYA)
+        waitmovement(LOCALID_HALAI_ADAORA)
+        removeobject(LOCALID_HALAI_BAIYA)
+        removeobject(LOCALID_HALAI_ADAORA)
 
         setvar(VAR_HALAI_ISLAND_STATE,START_EARTHQUAKE_RESCUE)
 
@@ -193,8 +188,8 @@ script Earthquake_PostRescue_Dialogue {
         msgbox(format("We've managed to re-establish cell communications. The authorities claim they're on their way… Who knows how useful they'll actually be. Ina reports that our ranks suffered heavy casualties in the quake. Mark says our supply caches were also hit hard."),MSGBOX_DEFAULT,SPEAKER_ADAORA)
                 closemessage
 
-        applymovement(ADAORA, moves(walk_right, walk_up * 2, walk_down * 2, walk_up * 2, walk_down * 2, step_end))
-        waitmovement(ADAORA)
+        applymovement(LOCALID_HALAI_ADAORA, moves(walk_right, walk_up * 2, walk_down * 2, walk_up * 2, walk_down * 2, step_end))
+        waitmovement(LOCALID_HALAI_ADAORA)
 
         msgbox(format("I really don't know how The Tide is going to hold up under this stress."),MSGBOX_DEFAULT,SPEAKER_ADAORA)
 
@@ -216,13 +211,13 @@ script Earthquake_PostRescue_Dialogue {
         msgbox(format("Shit, we never got a chance to tell you."),MSGBOX_DEFAULT,SPEAKER_BAIYA_TIDE)
                 closemessage
 
-        applymovement(BAIYA,Common_Movement_FaceUp)
-        waitmovement(BAIYA)
+        applymovement(LOCALID_HALAI_BAIYA,Common_Movement_FaceUp)
+        waitmovement(LOCALID_HALAI_BAIYA)
 
         msgbox(format("Baiya and I got a message from that account a few days ago. I went to a warehouse in Cureno Port, and Kei-ying trapped me there and attacked me."),MSGBOX_DEFAULT,SPEAKER_ALICIA)
 
-        applymovement(ADAORA,Earthquake_TurnToPlayer)
-        waitmovement(ADAORA)
+        applymovement(LOCALID_HALAI_ADAORA,Earthquake_TurnToPlayer)
+        waitmovement(LOCALID_HALAI_ADAORA)
 
         msgbox(format("Wait what?"),MSGBOX_DEFAULT,SPEAKER_ADAORA,,EMOTE_SHOCK)
 
@@ -238,8 +233,8 @@ script Earthquake_PostRescue_Dialogue {
         msgbox(format("…I don't think so. Kei-ying was really trying to help me. Even when I had dinner with him, their energy was different from everybody else in SharpRise Capital."),MSGBOX_DEFAULT,SPEAKER_ALICIA)
                 closemessage
 
-        applymovement(BAIYA,Common_Movement_FaceDown)
-        waitmovement(BAIYA)
+        applymovement(LOCALID_HALAI_BAIYA,Common_Movement_FaceDown)
+        waitmovement(LOCALID_HALAI_BAIYA)
 
         msgbox(format("How can you trust them after ALL of this?"),MSGBOX_DEFAULT,SPEAKER_BAIYA_TIDE,,EMOTE_SHOCK)
 
@@ -250,8 +245,8 @@ script Earthquake_PostRescue_Dialogue {
         msgbox(format("I think it's on the mainland, by Route4. Let's take a small team to go investigate."),MSGBOX_DEFAULT,SPEAKER_ADAORA)
                 closemessage
 
-        applymovement(BAIYA,Common_Movement_FaceUp)
-        waitmovement(BAIYA)
+        applymovement(LOCALID_HALAI_BAIYA,Common_Movement_FaceUp)
+        waitmovement(LOCALID_HALAI_BAIYA)
 
         msgbox(format("Fine. The three of us and maybe a few more… nobody can take all of us at once."),MSGBOX_DEFAULT,SPEAKER_BAIYA_TIDE)
                 closemessage
@@ -262,8 +257,8 @@ script Earthquake_PostRescue_Dialogue {
 }
 
 script Earthquake_AskPlayerWarp_Script {
-    applymovement(BAIYA,Earthquake_TurnToPlayer)
-        waitmovement(BAIYA)
+    applymovement(LOCALID_HALAI_BAIYA,Earthquake_TurnToPlayer)
+        waitmovement(LOCALID_HALAI_BAIYA)
 
         msgbox(format("I'm gonna head over to Route4 right now. Want to come with me?"),MSGBOX_YESNO,SPEAKER_BAIYA_TIDE)
         closemessage
@@ -278,11 +273,11 @@ script Earthquake_AskPlayerWarp_Script {
                         }
 
     fadescreenswapbuffers(FADE_TO_BLACK)
-        removeobject(GRUNTA)
-        removeobject(GRUNTB)
-        removeobject(GRUNTC)
-        removeobject(BAIYA)
-        removeobject(ADAORA)
+        removeobject(LOCALID_HALAI_GRUNTA)
+        removeobject(LOCALID_HALAI_GRUNTB)
+        removeobject(LOCALID_HALAI_GRUNTC)
+        removeobject(LOCALID_HALAI_BAIYA)
+        removeobject(LOCALID_HALAI_ADAORA)
         fadescreenswapbuffers(FADE_FROM_BLACK)
 
         call(TryAutoSave)

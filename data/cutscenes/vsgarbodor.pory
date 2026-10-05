@@ -98,7 +98,8 @@ script VSGarbodor_The_TideGrunt1_Battle_Script
 {
     trainerbattle_single(TRAINER_FAKEROCKET_B, format("Heh, we're The Tide! Screw this stadium and screw SharpRise Capital!"), format("Damn, they were right, you're strong…"), VSGarbodor_The_TideGrunt1_Battle_Script)
         msgbox(format("Welp, I did what I could! Good luck with that stinky shit."), MSGBOX_AUTOCLOSE,SPEAKER_ROCKET_MEMBER_B)
-        goto(VSGarbodor_RemoveGrunt)
+		setvar(VAR_LAST_TALKED,LOCALID_SHARPRISE_CONSTRUCTION_TIDE_LEFT_B)
+        goto(VSGarbodor_RemoveLastTalked)
         end
 }
 
@@ -106,7 +107,8 @@ script VSGarbodor_The_TideGrunt2_Battle_Script
 {
     trainerbattle_single(TRAINER_FAKEROCKET_A, format("Right on cue, here come the heroes…"), format("Hmm, I guess I get to be the bad guy today!"), VSGarbodor_The_TideGrunt2_Battle_Script)
         msgbox(format("Being bad was fun for a day!"), MSGBOX_AUTOCLOSE,SPEAKER_ROCKET_MEMBER_A)
-        goto(VSGarbodor_RemoveGrunt)
+		setvar(VAR_LAST_TALKED,LOCALID_SHARPRISE_CONSTRUCTION_TIDE_LEFT_A)
+        goto(VSGarbodor_RemoveLastTalked)
         end
 }
 
@@ -115,7 +117,8 @@ script VSGarbodor_The_TideGrunt3_Battle_Script
     trainerbattle_single(TRAINER_FAKEROCKET_B, format("The Tide is the name, and shutting this shit down is our game!"), format("They didn't prepare us for this!"), VSGarbodor_The_TideGrunt3_Battle_Script)
         bufferspeciesname(STR_VAR_1,SPECIES_GIRATINA)
         msgbox(format("Oh thank {STR_VAR_1}, I can go back to the office now…"), MSGBOX_AUTOCLOSE,SPEAKER_ROCKET_MEMBER_B)
-        goto(VSGarbodor_RemoveGrunt)
+		setvar(VAR_LAST_TALKED,LOCALID_SHARPRISE_CONSTRUCTION_TIDE_RIGHT_B)
+        goto(VSGarbodor_RemoveLastTalked)
         end
 }
 
@@ -123,12 +126,12 @@ script VSGarbodor_The_TideGrunt4_Battle_Script
 {
     trainerbattle_single(TRAINER_FAKEROCKET_A, format("Look at you, thinking you're making any difference!"), format("That's right, dance puppets!"), VSGarbodor_The_TideGrunt4_Battle_Script)
         msgbox(format("Have fun cleaning up after us, kid."), MSGBOX_AUTOCLOSE,SPEAKER_ROCKET_MEMBER_A)
-        goto(VSGarbodor_RemoveGrunt)
+		setvar(VAR_LAST_TALKED,LOCALID_SHARPRISE_CONSTRUCTION_TIDE_RIGHT_A)
+        goto(VSGarbodor_RemoveLastTalked)
         end
 }
 
 script VS_Garbodor_CoreEncounter_Script {
-//goto(PathfinderDebug)
     startmenu_savescreen
         faceplayer
         setwildbattle(SPECIES_GARBODOR, 40, ITEM_NORMAL_GEM)
@@ -143,21 +146,22 @@ script VS_Garbodor_CoreEncounter_Script {
         switch (var (VAR_RESULT)) {
             case B_OUTCOME_CAUGHT:
             case B_OUTCOME_WON:
-                goto(VSGarbodor_RemoveGrunt)
+                goto(VSGarbodor_RemoveLastTalked)
         }
     release
         end
 }
 
-script VSGarbodor_RemoveGrunt {
+script VSGarbodor_RemoveLastTalked 
+{
     lock
-        closemessage
-        fadescreenswapbuffers(FADE_TO_BLACK)
-        removeobject(VAR_LAST_TALKED)
-        fadescreenswapbuffers(FADE_FROM_BLACK)
-        call(VSGarbodor_CheckDefeated_Script)
-        release
-        end
+	closemessage
+	fadescreenswapbuffers(FADE_TO_BLACK)
+	removeobject(VAR_LAST_TALKED)
+	call(VSGarbodor_CheckDefeated_Script)
+	fadescreenswapbuffers(FADE_FROM_BLACK)
+	release
+	end
 }
 
 script VSGarbodor_CheckDefeated_Script
@@ -204,6 +208,7 @@ script VSGarbodor_MoveCharlotte_Script {
     lock
     startcutscene(JUMPPLAYER_VSGARBODOR)
     call(VsGarbodor_Script_AddCharlotteMiddle)
+	fadescreenswapbuffers(FADE_FROM_BLACK)
 
     if (var(VAR_INNER_CONSTRUCTION_SITE_STATE) == PLAYER_LEFT_SIDE)
     {
@@ -297,9 +302,9 @@ script VSGarbodor_Negotiating_Dialogue
     msgbox(format("Now, I think you two should head back to the Compound and get some rest."),,SPEAKER_LUCREZIA)
     closemessage
 
-    moveobjecttocoords(LOCALID_ROUTE2_LUCREZIA,13,21,DIR_SOUTH)
+    moveobjecttocoords(LOCALID_ROUTE2_LUCREZIA,12,21,DIR_SOUTH)
     delay(16)
-    moveobjecttocoords(LOCALID_ROUTE2_OLIVER,13,20,DIR_SOUTH)
+    moveobjecttocoords(LOCALID_ROUTE2_OLIVER,12,20,DIR_SOUTH)
     delay(16)
     moveobjecttocoords(LOCALID_ROUTE2_CHARLOTTE,20,21,DIR_SOUTH)
     delay(16)
@@ -375,5 +380,20 @@ script VSGarbodor_ReturnToTheCompound_Dialogue
 movement VSGarbodor_PerpWalk {
     walk_left * 15
         step_end
+}
+
+script TheStrikeStrikesBack_Script_AddTurnCharlotteAndSharpriseNorth
+{
+	call(TheStrikeStrikesBack_Script_AddSharpriseCharlotteTide)
+    turnobject(LOCALID_PLAYER,DIR_NORTH)
+    turnobject(LOCALID_ROUTE2_CHARLOTTE,DIR_NORTH)
+    turnobject(LOCALID_ROUTE2_LUCREZIA,DIR_NORTH)
+    turnobject(LOCALID_ROUTE2_OLIVER,DIR_NORTH)
+
+	turnobject(LOCALID_ROUTE2_POLICE_A,DIR_WEST)
+	turnobject(LOCALID_ROUTE2_POLICE_B,DIR_WEST)
+	turnobject(LOCALID_ROUTE2_VIGRIM,DIR_WEST)
+	turnobject(LOCALID_ROUTE2_TIDE_B,DIR_WEST)
+	turnobject(LOCALID_ROUTE2_TIDE_A,DIR_WEST)
 }
 

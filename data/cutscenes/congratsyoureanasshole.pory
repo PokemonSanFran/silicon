@@ -61,6 +61,7 @@ script CongratsYoureanAsshole_FalseTimelineSplit_Script
 
         fadescreen(FADE_TO_BLACK)
         showzap(ZAP_STORY_FALSETIMELINE)
+        showzap(ZAP_STORY_FALSETIMELINE_2)
         fadescreen(FADE_FROM_BLACK)
 
         msgbox(format("Thank you for that… worldwide, our message is getting positive reception, but within the region, there is still some negativity."),MSGBOX_DEFAULT,SPEAKER_RAMESH)

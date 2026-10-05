@@ -205,5 +205,6 @@
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
       "script": "Hiddengrotto_EnterGrotto_Dialogue"
     }
-  ]
+  ],
+  "night_music": "MUS_ZENZU_ROUTE_11_13_100_NIGHT"
 }

@@ -314,7 +314,7 @@ const struct Zap gZaps[] =
     [ZAP_STORY_FALSETIMELINE] =
     {
         .userId = BUZZR_USER_SHARPRISECAPTIAL,
-        .content = COMPOUND_STRING("Our operations at Sharprise have long been hindered by the criminal actions of The Tide - as have, we believe, the wellbeing and prosperity of Resido. (1/1)"),
+        .content = COMPOUND_STRING("Our operations at Sharprise have long been hindered by the criminal actions of The Tide - as have, we believe, the wellbeing and prosperity of Resido. (1/2)"),
         .isPrivate = FALSE,
         .criteria = NULL,
         .quest = 0,
