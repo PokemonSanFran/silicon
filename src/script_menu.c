@@ -73,6 +73,7 @@ static void MultichoiceDynamicEventShowItem_OnSelectionChanged(struct DynamicLis
 static void MultichoiceDynamicEventShowArcadeEvent_OnSelectionChanged(struct DynamicListMenuEventArgs *eventArgs);
 static void MultichoiceDynamicEventShowItem_OnInitBattleArcade(struct DynamicListMenuEventArgs *eventArgs);
 // End siliconFrontier
+static void MultichoiceDynamicEventShowPkmn_OnSelectionChanged(struct DynamicListMenuEventArgs *eventArgs);
 static void MultichoiceDynamicEventShowSprite_OnDestroy(struct DynamicListMenuEventArgs *eventArgs);
 
 static const struct DynamicListMenuEventCollection sDynamicListMenuEventCollections[] =
@@ -88,15 +89,21 @@ static const struct DynamicListMenuEventCollection sDynamicListMenuEventCollecti
         .OnInit = MultichoiceDynamicEventShowSprite_OnInit,
         .OnSelectionChanged = MultichoiceDynamicEventShowItem_OnSelectionChanged,
         .OnDestroy = MultichoiceDynamicEventShowSprite_OnDestroy
-// Start siliconFrontier
+    },
+    [DYN_MULTICHOICE_CB_SHOW_PKMN] =
+    {
+        .OnInit = MultichoiceDynamicEventShowSprite_OnInit,
+        .OnSelectionChanged = MultichoiceDynamicEventShowPkmn_OnSelectionChanged,
+        .OnDestroy = MultichoiceDynamicEventShowSprite_OnDestroy
+    // Start siliconFrontier
     },
     [DYN_MULTICHOICE_CB_SHOW_ARCADE_EVENT] =
     {
         .OnInit = MultichoiceDynamicEventShowItem_OnInitBattleArcade,
         .OnSelectionChanged = MultichoiceDynamicEventShowArcadeEvent_OnSelectionChanged,
         .OnDestroy = MultichoiceDynamicEventShowSprite_OnDestroy
+    // End siliconFrontier
     }
-// End siliconFrontier
 };
 
 static const struct ListMenuTemplate sScriptableListMenuTemplate =
@@ -217,6 +224,16 @@ static void MultichoiceDynamicEventShowItem_OnSelectionChanged(struct DynamicLis
     if (sSpriteId != MAX_SPRITES)
     {
         ChangeSpriteOnSelection(eventArgs, 36, 20);
+    }
+}
+
+static void MultichoiceDynamicEventShowPkmn_OnSelectionChanged(struct DynamicListMenuEventArgs *eventArgs)
+{
+    FreeSpriteIfUsed();
+    sSpriteId = CreateTaggedMonIcon(TAG_CB_SPRITE_ICON, TAG_CB_SPRITE_ICON, eventArgs->selectedItem);
+    if (sSpriteId != MAX_SPRITES)
+    {
+        ChangeSpriteOnSelection(eventArgs, 32, 14);
     }
 }
 
