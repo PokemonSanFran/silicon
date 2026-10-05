@@ -6562,7 +6562,8 @@ static enum Collision GetVanillaCollision(struct ObjectEvent *objectEvent, s16 x
         return COLLISION_OUTSIDE_RANGE;
 // Start pathfinder
     // else if (MapGridGetCollisionAt(x, y) || GetMapBorderIdAt(x, y) == CONNECTION_INVALID || IsMetatileDirectionallyImpassable(objectEvent, x, y, direction))
-    else if (MapGridGetCollisionAt(x, y) || GetMapBorderIdAt(x, y) == CONNECTION_INVALID || IsMetatileDirectionallyImpassable(objectEvent, nextBehavior, direction))
+    // else if (MapGridGetCollisionAt(x, y) || GetMapBorderIdAt(x, y) == CONNECTION_INVALID || IsMetatileDirectionallyImpassable(objectEvent, nextBehavior, direction)) // nicoRoute10
+     else if (MapGridGetCollisionAt(x, y) || GetMapBorderIdAt(x, y) == CONNECTION_INVALID || IsMetatileDirectionallyImpassable(objectEvent, nextBehavior, direction, objectEvent->currentElevation)) // nicoRoute10
 // End pathfinder
         return COLLISION_IMPASSABLE;
     else if (objectEvent->trackedByCamera && !CanCameraMoveInDirection(direction))
@@ -6739,7 +6740,10 @@ enum Collision GetNodeCollisionAtCoords(struct ObjectEvent *objectEvent, s16 x, 
     enum Collision collision = COLLISION_NONE;
 
     // Similar to GetVanillaCollision() but without Outside movement range check.
-    if (MapGridGetCollisionAt(x, y) || GetMapBorderIdAt(x, y) == CONNECTION_INVALID || IsMetatileDirectionallyImpassable(objectEvent, nextBehavior, dir))
+    // Start nicoRoute10
+    //if (MapGridGetCollisionAt(x, y) || GetMapBorderIdAt(x, y) == CONNECTION_INVALID || IsMetatileDirectionallyImpassable(objectEvent, nextBehavior, dir))
+    if (MapGridGetCollisionAt(x, y) || GetMapBorderIdAt(x, y) == CONNECTION_INVALID || IsMetatileDirectionallyImpassable(objectEvent, nextBehavior, dir, objectEvent->currentElevation))
+    // End nicoRoute10
         collision = COLLISION_IMPASSABLE;
     else if (objectEvent->trackedByCamera && !CanCameraMoveInDirection(dir))
         collision = COLLISION_IMPASSABLE;
@@ -6777,7 +6781,10 @@ u8 GetCollisionFlagsAtCoords(struct ObjectEvent *objectEvent, s16 x, s16 y, enum
         flags |= 1 << (COLLISION_OUTSIDE_RANGE - 1);
 // Start pathfinder
     //if (MapGridGetCollisionAt(x, y) || GetMapBorderIdAt(x, y) == CONNECTION_INVALID || IsMetatileDirectionallyImpassable(objectEvent, x, y, direction) || (objectEvent->trackedByCamera && !CanCameraMoveInDirection(direction)))
-    if (IsMetatileDirectionallyImpassable(objectEvent, nextBehavior, direction) || MapGridGetCollisionAt(x, y) || GetMapBorderIdAt(x, y) == CONNECTION_INVALID || (objectEvent->trackedByCamera && !CanCameraMoveInDirection(direction)))
+    // Start nicoRoute10
+    //if (IsMetatileDirectionallyImpassable(objectEvent, nextBehavior, direction) || MapGridGetCollisionAt(x, y) || GetMapBorderIdAt(x, y) == CONNECTION_INVALID || (objectEvent->trackedByCamera && !CanCameraMoveInDirection(direction)))
+    if (IsMetatileDirectionallyImpassable(objectEvent, nextBehavior, direction, objectEvent->currentElevation) || MapGridGetCollisionAt(x, y) || GetMapBorderIdAt(x, y) == CONNECTION_INVALID || (objectEvent->trackedByCamera && !CanCameraMoveInDirection(direction)))
+    // End nicoRoute10
 // End pathfinder
         flags |= 1 << (COLLISION_IMPASSABLE - 1);
     if (IsElevationMismatchAt(objectEvent->currentElevation, x, y))
@@ -6818,7 +6825,8 @@ static bool8 IsCoordOutsideObjectEventMovementRange(struct ObjectEvent *objectEv
 
 //Start pathfinder
 //bool8 IsMetatileDirectionallyImpassable(struct ObjectEvent *objectEvent, s16 x, s16 y, enum Direction direction)
-bool8 IsMetatileDirectionallyImpassable(struct ObjectEvent *objectEvent, u8 nextBehavior, enum Direction direction)
+//bool8 IsMetatileDirectionallyImpassable(struct ObjectEvent *objectEvent, u8 nextBehavior, enum Direction direction)  // nicoRoute10
+bool8 IsMetatileDirectionallyImpassable(struct ObjectEvent *objectEvent, u8 nextBehavior, enum Direction direction, u8 elevation) // nicoRoute10
 //End pathfinder
 {
 //Start pathfinder
@@ -6826,8 +6834,16 @@ bool8 IsMetatileDirectionallyImpassable(struct ObjectEvent *objectEvent, u8 next
         //|| gDirectionBlockedMetatileFuncs[direction - 1](MapGridGetMetatileBehaviorAt(x, y)))
     if (gOppositeDirectionBlockedMetatileFuncs[direction](objectEvent->currentMetatileBehavior)
         || gDirectionBlockedMetatileFuncs[direction](nextBehavior))
+       // Start nicoRoute10 
+        {
+            if(elevation == 6)
+                return FALSE;
+            else
+                return TRUE;
+        }
+       // End nicoRoute10 
 //End pathfinder
-        return TRUE;
+        // return TRUE; // nicoRoute10
 
     return FALSE;
 }
