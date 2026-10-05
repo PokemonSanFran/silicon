@@ -28,6 +28,7 @@ static const u8 *FormatStatusName_Freeze(enum BattlerId);
 static bool32 IsStatusActive_Paralyzed(enum BattlerId);
 static const u8 *FormatStatusName_Paralyzed(enum BattlerId);
 static bool32 IsStatusActive_Poisoned(enum BattlerId);
+static bool32 IsStatusActive_BadlyPoisoned(enum BattlerId);
 static const u8 *FormatStatusName_Poisoned(enum BattlerId);
 static bool32 IsStatusActive_Asleep(enum BattlerId);
 static const u8 *FormatStatusName_Asleep(enum BattlerId);
@@ -143,79 +144,84 @@ static const u8 *FormatStatusName_Thrashing(enum BattlerId);
 static bool32 IsStatusActive_Transformed(enum BattlerId);
 static const u8 *FormatStatusName_Transformed(enum BattlerId);
 
+static const u8 sBattleStatusCriteria_HarshSunDesc[] = _("Boosts the damage dealt by Fire-type moves by 50% and halves the damage dealt by Water-type moves.");
+static const u8 sBattleStatusCriteria_Rain[] = _("Boosts the damage dealt by Water-type moves by 50% and halves the damage dealt by Fire-type moves.");
+
 static const struct {
     enum SiliconBattleStatuses status;
     IsStatusActiveFunc isActive;
     FormatStatusNameFunc formatName;
+    const u8 *desc;
 } sBattleStatusCriteria_StatusInfo[] =
 {
     //{ BATTLE_STATUS_, IsStatusActive_, FormatStatusName_ },
     { BATTLE_STATUS_MEGA_EVOLVE,                    IsStatusActive_MegaEvolve,            FormatStatusName_MegaEvolve },
     { BATTLE_STATUS_DYNAMAX,                        IsStatusActive_Dynamax,               FormatStatusName_Dynamax },
 
-    { BATTLE_STATUS_BURN,                           IsStatusActive_Burn,                  FormatStatusName_Burn },
-    { BATTLE_STATUS_FREEZE,                         IsStatusActive_Freeze,                FormatStatusName_Freeze },
-    { BATTLE_STATUS_PARALYZED,                      IsStatusActive_Paralyzed,             FormatStatusName_Paralyzed },
-    { BATTLE_STATUS_POISONED,                       IsStatusActive_Poisoned,              FormatStatusName_Poisoned },
-    { BATTLE_STATUS_ASLEEP,                         IsStatusActive_Asleep,                FormatStatusName_Asleep },
+    { BATTLE_STATUS_BURN,                           IsStatusActive_Burn,                  FormatStatusName_Burn, COMPOUND_STRING("The Pokémon takes damage equal to 1/16 of its max HP at the end of every turn. The damage dealt by its physical moves is also halved. Fire-type Pokémon are unaffected.") },
+    { BATTLE_STATUS_FREEZE,                         IsStatusActive_Freeze,                FormatStatusName_Freeze, COMPOUND_STRING("The Pokémon can’t use almost any moves but has a 25% chance of being cured each time it tries to do so. The Pokémon will be cured on its third turn after becoming frozen or if it takes damage from a Fire-type move or certain other moves. Ice-type Pokémon are unaffected.") },
+    { BATTLE_STATUS_PARALYZED,                      IsStatusActive_Paralyzed,             FormatStatusName_Paralyzed, COMPOUND_STRING("The Pokémon has a 12.5% chance of being unable to use moves. Its Speed stat is also halved. Electric-type Pokémon are unaffected.") },
+    { BATTLE_STATUS_POISONED,                       IsStatusActive_Poisoned,              FormatStatusName_Poisoned, COMPOUND_STRING("The Pokémon takes damage equal to 1/8 of its max HP at the end of every turn. Poison- and Steel-type Pokémon are unaffected.") },
+    { BATTLE_STATUS_BADLY_POISONED, IsStatusActive_BadlyPoisoned, FormatStatusName_Poisoned, COMPOUND_STRING("The Pokémon takes increasing poison damage at the end of every turn, starting at 1/16 of the Pokémon’s max HP, then 2/16, then 3/16, and so on. If the Pokémon switches out and reenters battle, the damage restarts at 1/16 of its max HP. Poison- and Steel-type Pokémon are unaffected.") },
+    { BATTLE_STATUS_ASLEEP,                         IsStatusActive_Asleep,                FormatStatusName_Asleep, COMPOUND_STRING("The Pokémon can’t use moves other than Snore or Sleep Talk. After a Pokémon is put to sleep, it will remain asleep on its first turn, it will have a 1-in-3 chance of being cured on its second turn, and it will be cured on its third turn. A Pokémon that used the move Rest has no chance of being cured until its third turn.") },
 
-    { BATTLE_STATUS_ELECTRIC_TERRAIN,               IsStatusActive_ElectricTerrain,       FormatStatusName_ElectricTerrain },
-    { BATTLE_STATUS_GRASSY_TERRAIN,                 IsStatusActive_GrassyTerrain,         FormatStatusName_GrassyTerrain },
-    { BATTLE_STATUS_MISTY_TERRAIN,                  IsStatusActive_MistyTerrain,          FormatStatusName_MistyTerrain },
-    { BATTLE_STATUS_PSYCHIC_TERRAIN,                IsStatusActive_PsychicTerrain,        FormatStatusName_PsychicTerrain },
-    { BATTLE_STATUS_HARSH_SUN,                      IsStatusActive_HarshSun,              FormatStatusName_HarshSun },
-    { BATTLE_STATUS_RAIN,                           IsStatusActive_Rain,                  FormatStatusName_Rain },
-    { BATTLE_STATUS_SANDSTORM,                      IsStatusActive_Sandstorm,             FormatStatusName_Sandstorm },
-    { BATTLE_STATUS_SNOW,                           IsStatusActive_Snow,                  FormatStatusName_Snow },
+    { BATTLE_STATUS_ELECTRIC_TERRAIN,               IsStatusActive_ElectricTerrain,       FormatStatusName_ElectricTerrain, COMPOUND_STRING("Pokémon on the ground have the power of their Electric-type moves boosted by 30% and they cannot fall asleep.") },
+    { BATTLE_STATUS_GRASSY_TERRAIN,                 IsStatusActive_GrassyTerrain,         FormatStatusName_GrassyTerrain, COMPOUND_STRING("Pokémon on the ground have the power of their Grass-type moves boosted by 30% and they have 1/16 of their max HP restored at the end of every turn.") },
+    { BATTLE_STATUS_MISTY_TERRAIN,                  IsStatusActive_MistyTerrain,          FormatStatusName_MistyTerrain, COMPOUND_STRING("Halves the damage dealt by Dragon-type moves used against Pokémon on the ground. Pokémon on the ground are also immune to status conditions and cannot become confused.") },
+    { BATTLE_STATUS_PSYCHIC_TERRAIN,                IsStatusActive_PsychicTerrain,        FormatStatusName_PsychicTerrain, COMPOUND_STRING("Pokémon on the ground have the power of their Psychic-type moves boosted by 30% and they are immune to priority moves.") },
+    { BATTLE_STATUS_HARSH_SUN,                      IsStatusActive_HarshSun,              FormatStatusName_HarshSun, sBattleStatusCriteria_HarshSunDesc },
+    { BATTLE_STATUS_RAIN,                           IsStatusActive_Rain,                  FormatStatusName_Rain, sBattleStatusCriteria_Rain },
+    { BATTLE_STATUS_SANDSTORM,                      IsStatusActive_Sandstorm,             FormatStatusName_Sandstorm, COMPOUND_STRING("Pokémon that are not Rock, Ground, or Steel types take damage equal to 1/16 of their max HP at the end of every turn. Boosts the Sp. Def stats of Rock-type Pokémon by 50%.") },
+    { BATTLE_STATUS_SNOW,                           IsStatusActive_Snow,                  FormatStatusName_Snow, COMPOUND_STRING("Boosts the Defense stats of Ice-type Pokémon by 50%.") },
     { BATTLE_STATUS_FOG,                            IsStatusActive_Fog,                   FormatStatusName_Fog },
-    { BATTLE_STATUS_VERY_HARSH_SUN,                 IsStatusActive_HarshSun,              FormatStatusName_HarshSun },
-    { BATTLE_STATUS_HEAVY_RAIN,                     IsStatusActive_Rain,                  FormatStatusName_Rain },
+    { BATTLE_STATUS_VERY_HARSH_SUN,                 IsStatusActive_HarshSun,              FormatStatusName_HarshSun, sBattleStatusCriteria_HarshSunDesc },
+    { BATTLE_STATUS_HEAVY_RAIN,                     IsStatusActive_Rain,                  FormatStatusName_Rain, sBattleStatusCriteria_Rain },
     { BATTLE_STATUS_STRONG_WINDS,                   IsStatusActive_StrongWinds,           FormatStatusName_StrongWinds },
-    { BATTLE_STATUS_SPIKES,                         IsStatusActive_Spikes,                FormatStatusName_Spikes },
-    { BATTLE_STATUS_STEALTH_ROCK,                   IsStatusActive_StealthRock,           FormatStatusName_StealthRock },
-    { BATTLE_STATUS_TOXIC_SPIKES,                   IsStatusActive_ToxicSpikes,           FormatStatusName_ToxicSpikes },
-    { BATTLE_STATUS_STICKY_WEB,                     IsStatusActive_StickyWeb,             FormatStatusName_StickyWeb },
+    { BATTLE_STATUS_SPIKES,                         IsStatusActive_Spikes,                FormatStatusName_Spikes, COMPOUND_STRING("Pokémon that switch into battle will take damage equal to 1/8 of their max HP. This damage will increase if 2 layers of Spikes are set, and again if 3 layers are set. Pokémon such as Flying types or ones with the Levitate Ability are unaffected.") },
+    { BATTLE_STATUS_STEALTH_ROCK,                   IsStatusActive_StealthRock,           FormatStatusName_StealthRock, COMPOUND_STRING("Pokémon that switch into battle will take damage equal to 1/8 of their max HP. This damage differs depending on the Pokémon’s type matchup with the Rock type.") },
+    { BATTLE_STATUS_TOXIC_SPIKES,                   IsStatusActive_ToxicSpikes,           FormatStatusName_ToxicSpikes, COMPOUND_STRING("Pokémon that switch into battle will be poisoned or, if 2 layers of Toxic Spikes are set, badly poisoned. Pokémon such as Flying types or ones with the Levitate Ability are unaffected. This status is removed if a Poison-type Pokémon enters battle.") },
+    { BATTLE_STATUS_STICKY_WEB,                     IsStatusActive_StickyWeb,             FormatStatusName_StickyWeb, COMPOUND_STRING("Pokémon that switch into battle will have their Speed stats lowered by 1 stage. Pokémon such as Flying types or ones with the Levitate Ability are unaffected.") },
     { BATTLE_STATUS_SHARP_STEEL,                    IsStatusActive_SharpSteel,            FormatStatusName_SharpSteel },
-    { BATTLE_STATUS_MAGIC_ROOM,                     IsStatusActive_MagicRoom,             FormatStatusName_MagicRoom },
-    { BATTLE_STATUS_WONDER_ROOM,                    IsStatusActive_WonderRoom,            FormatStatusName_WonderRoom },
-    { BATTLE_STATUS_GRAVITY,                        IsStatusActive_Gravity,               FormatStatusName_Gravity },
-    { BATTLE_STATUS_TRICK_ROOM,                     IsStatusActive_TrickRoom,             FormatStatusName_TrickRoom },
-    { BATTLE_STATUS_TAILWIND,                       IsStatusActive_Tailwind,              FormatStatusName_Tailwind },
+    { BATTLE_STATUS_MAGIC_ROOM,                     IsStatusActive_MagicRoom,             FormatStatusName_MagicRoom, COMPOUND_STRING("Most held items do not work.") },
+    { BATTLE_STATUS_WONDER_ROOM,                    IsStatusActive_WonderRoom,            FormatStatusName_WonderRoom, COMPOUND_STRING("    Pokémon’s Defense and Sp. Def stats are swapped.") },
+    { BATTLE_STATUS_GRAVITY,                        IsStatusActive_Gravity,               FormatStatusName_Gravity, COMPOUND_STRING("Boosts the accuracy of moves by 67%. Pokémon such as Flying types or ones with the Levitate Ability become grounded. Moves that involve flying or leaping cannot be used.") },
+    { BATTLE_STATUS_TRICK_ROOM,                     IsStatusActive_TrickRoom,             FormatStatusName_TrickRoom, COMPOUND_STRING("Pokémon with lower Speed stats move first.") },
+    { BATTLE_STATUS_TAILWIND,                       IsStatusActive_Tailwind,              FormatStatusName_Tailwind, COMPOUND_STRING("Doubles the Pokémon’s Speed stat.") },
 
-    { BATTLE_STATUS_VOLATILE_WRAPPED,               IsStatusActive_Bound,                 FormatStatusName_Bound },
-    { BATTLE_STATUS_VOLATILE_ESCAPE_PREVENTION,     IsStatusActive_Trapped,               FormatStatusName_Trapped },
-    { BATTLE_STATUS_VOLATILE_CONFUSION,             IsStatusActive_Confused,              FormatStatusName_Confused },
-    { BATTLE_STATUS_VOLATILE_CURSED,                IsStatusActive_Cursed,                FormatStatusName_Cursed },
-    { BATTLE_STATUS_VOLATILE_YAWN,                  IsStatusActive_Drowsy,                FormatStatusName_Drowsy },
+    { BATTLE_STATUS_VOLATILE_WRAPPED,               IsStatusActive_Bound,                 FormatStatusName_Bound, COMPOUND_STRING("For 4-5 turns, the Pokémon takes damage equal to 1/8 of its max HP at the end of every turn. It cannot be switched out of battle.") },
+    { BATTLE_STATUS_VOLATILE_ESCAPE_PREVENTION,     IsStatusActive_Trapped,               FormatStatusName_Trapped, COMPOUND_STRING("The Pokémon cannot be switched out of battle. Ghost-type Pokémon are unaffected.") },
+    { BATTLE_STATUS_VOLATILE_CONFUSION,             IsStatusActive_Confused,              FormatStatusName_Confused, COMPOUND_STRING("For 1-4 turns, the Pokémon has a 1-in-3 chance of hurting itself.") },
+    { BATTLE_STATUS_VOLATILE_CURSED,                IsStatusActive_Cursed,                FormatStatusName_Cursed, COMPOUND_STRING("The Pokémon loses 1/4 of its max HP at the end of every turn.") },
+    { BATTLE_STATUS_VOLATILE_YAWN,                  IsStatusActive_Drowsy,                FormatStatusName_Drowsy, COMPOUND_STRING("The Pokémon will fall asleep at the end of the next turn after becoming drowsy.") },
     { BATTLE_STATUS_VOLATILE_EMBARGO,               IsStatusActive_Embargo,               FormatStatusName_Embargo },
-    { BATTLE_STATUS_VOLATILE_ENCORE_TIMER,          IsStatusActive_Encore,                FormatStatusName_Encore },
-    { BATTLE_STATUS_VOLATILE_HEAL_BLOCK,            IsStatusActive_HealBlock,             FormatStatusName_HealBlock },
+    { BATTLE_STATUS_VOLATILE_ENCORE_TIMER,          IsStatusActive_Encore,                FormatStatusName_Encore, COMPOUND_STRING("The Pokémon can only use whichever move it last used before gaining the Encore status.") },
+    { BATTLE_STATUS_VOLATILE_HEAL_BLOCK,            IsStatusActive_HealBlock,             FormatStatusName_HealBlock, COMPOUND_STRING("The Pokémon is unable to restore HP through moves, Abilities, or held items.") },
     { BATTLE_STATUS_VOLATILE_FORESIGHT,             IsStatusActive_Identified,            FormatStatusName_Identified },
-    { BATTLE_STATUS_VOLATILE_INFATUATION,           IsStatusActive_Infatuated,            FormatStatusName_Infatuated },
-    { BATTLE_STATUS_VOLATILE_LEECH_SEED,            IsStatusActive_LeechSeed,             FormatStatusName_LeechSeed },
+    { BATTLE_STATUS_VOLATILE_INFATUATION,           IsStatusActive_Infatuated,            FormatStatusName_Infatuated, COMPOUND_STRING("The Pokémon has a 50% chance of being unable to use its moves while the Pokémon that gave it the Infatuated status is on the field.") },
+    { BATTLE_STATUS_VOLATILE_LEECH_SEED,            IsStatusActive_LeechSeed,             FormatStatusName_LeechSeed, COMPOUND_STRING("The Pokémon takes damage equal to 1/8 of its max HP at the end of every turn. The Pokémon in the spot of the Pokémon that caused the Leech Seeded status has its HP restored by the same amount. Grass-type Pokémon are unaffected.") },
     { BATTLE_STATUS_VOLATILE_NIGHTMARE,             IsStatusActive_Nightmare,             FormatStatusName_Nightmare },
-    { BATTLE_STATUS_VOLATILE_PERISH_SONG,           IsStatusActive_PerishSong,            FormatStatusName_PerishSong },
-    { BATTLE_STATUS_VOLATILE_TAUNT_TIMER,           IsStatusActive_Taunt,                 FormatStatusName_Taunt },
+    { BATTLE_STATUS_VOLATILE_PERISH_SONG,           IsStatusActive_PerishSong,            FormatStatusName_PerishSong, COMPOUND_STRING("The Pokémon will faint 3 turns after gaining the Perishing status.") },
+    { BATTLE_STATUS_VOLATILE_TAUNT_TIMER,           IsStatusActive_Taunt,                 FormatStatusName_Taunt, COMPOUND_STRING("The Pokémon can use only attacks.") },
     { BATTLE_STATUS_VOLATILE_TELEKINESIS,           IsStatusActive_Telekinesis,           FormatStatusName_Telekinesis },
-    { BATTLE_STATUS_VOLATILE_TORMENT,               IsStatusActive_Torment,               FormatStatusName_Torment },
+    { BATTLE_STATUS_VOLATILE_TORMENT,               IsStatusActive_Torment,               FormatStatusName_Torment, COMPOUND_STRING("The Pokémon cannot use the same move twice in a row.") },
 
-    { BATTLE_STATUS_VOLATILE_AQUA_RING,             IsStatusActive_AquaRing,              FormatStatusName_AquaRing },
+    { BATTLE_STATUS_VOLATILE_AQUA_RING,             IsStatusActive_AquaRing,              FormatStatusName_AquaRing, COMPOUND_STRING("The Pokémon has 1/16 of its max HP restored at the end of every turn.") },
     { BATTLE_STATUS_VOLATILE_ENDURED,               IsStatusActive_Bracing,               FormatStatusName_Bracing },
     { BATTLE_STATUS_VOLATILE_CHARGE_TIMER,          IsStatusActive_Charging,              FormatStatusName_Charging },
     { BATTLE_STATUS_CENTER_ATTENTION,               IsStatusActive_CenterAttention,       FormatStatusName_CenterAttention },
     { BATTLE_STATUS_VOLATILE_DEFENSE_CURL,          IsStatusActive_DefenseCurl,           FormatStatusName_DefenseCurl },
-    { BATTLE_STATUS_VOLATILE_ROOT,                  IsStatusActive_Rooted,                FormatStatusName_Rooted },
+    { BATTLE_STATUS_VOLATILE_ROOT,                  IsStatusActive_Rooted,                FormatStatusName_Rooted, COMPOUND_STRING("The Pokémon has 1/16 of its max HP restored at the end of every turn. It also becomes grounded and cannot be switched out of battle.") },
     { BATTLE_STATUS_MAGIC_COAT,                     IsStatusActive_MagicCoat,             FormatStatusName_MagicCoat },
-    { BATTLE_STATUS_VOLATILE_MAGNET_RISE,           IsStatusActive_MagneticLevitation,    FormatStatusName_MagneticLevitation },
+    { BATTLE_STATUS_VOLATILE_MAGNET_RISE,           IsStatusActive_MagneticLevitation,    FormatStatusName_MagneticLevitation, COMPOUND_STRING("The Pokémon floats off the ground, making it immune to Ground-type moves, as well as the Spikes, Toxic Spikes, and Sticky Web statuses.") },
     { BATTLE_STATUS_VOLATILE_MINIMIZE,              IsStatusActive_Minimized,             FormatStatusName_Minimized },
     { BATTLE_STATUS_PROTECTION,                     IsStatusActive_Protection,            FormatStatusName_Protection },
-    { BATTLE_STATUS_VOLATILE_RECHARGE_TIMER,        IsStatusActive_Recharging,            FormatStatusName_Recharging },
-    { BATTLE_STATUS_UNDERGROUND,                    IsStatusActive_Underground,           FormatStatusName_Underground },
-    { BATTLE_STATUS_HIGH_FLIGHT,                    IsStatusActive_HighFlight,            FormatStatusName_HighFlight },
-    { BATTLE_STATUS_UNDERWATER,                     IsStatusActive_Underwater,            FormatStatusName_Underwater },
-    { BATTLE_STATUS_IN_SHADOWS,                     IsStatusActive_InShadows,             FormatStatusName_InShadows },
-    { BATTLE_STATUS_VOLATILE_LOCK_ON,               IsStatusActive_TakingAim,             FormatStatusName_TakingAim },
-    { BATTLE_STATUS_VOLATILE_RAMPAGE_TURNS,         IsStatusActive_Thrashing,             FormatStatusName_Thrashing },
+    { BATTLE_STATUS_VOLATILE_RECHARGE_TIMER,        IsStatusActive_Recharging,            FormatStatusName_Recharging, COMPOUND_STRING("The Pokémon cannot take any actions for 1 turn.") },
+    { BATTLE_STATUS_UNDERGROUND,                    IsStatusActive_Underground,           FormatStatusName_Underground, COMPOUND_STRING("The Pokémon cannot be hit by most moves, but Earthquake will hit and will deal double damage. The Pokémon is also unaffected by the terrain.") },
+    { BATTLE_STATUS_HIGH_FLIGHT,                    IsStatusActive_HighFlight,            FormatStatusName_HighFlight, COMPOUND_STRING("The Pokémon cannot be hit by most moves, excluding moves such as Thunder, Hurricane, and Smack Down. The Pokémon is also unaffected by the terrain.") },
+    { BATTLE_STATUS_UNDERWATER,                     IsStatusActive_Underwater,            FormatStatusName_Underwater, COMPOUND_STRING("The Pokémon cannot be hit by most moves, but Surf and Whirlpool will hit and will deal double damage. The Pokémon is also unaffected by the terrain.") },
+    { BATTLE_STATUS_IN_SHADOWS,                     IsStatusActive_InShadows,             FormatStatusName_InShadows, COMPOUND_STRING("The Pokémon cannot be hit by moves and is unaffected by the terrain.") },
+    { BATTLE_STATUS_VOLATILE_LOCK_ON,               IsStatusActive_TakingAim,             FormatStatusName_TakingAim, COMPOUND_STRING("On the next turn after gaining the Locked On status, the Pokémon’s move will not miss if targeting the Pokémon that was locked onto.") },
+    { BATTLE_STATUS_VOLATILE_RAMPAGE_TURNS,         IsStatusActive_Thrashing,             FormatStatusName_Thrashing, COMPOUND_STRING("For 2-3 turns, the Pokémon continues its attack and is unable to take any other actions. After that, it becomes confused.") },
     { BATTLE_STATUS_VOLATILE_TRANSFORMED,           IsStatusActive_Transformed,           FormatStatusName_Transformed },
     { NUM_BATTLE_STATUSES,                          NULL,                                 NULL },
 };
@@ -406,7 +412,12 @@ static const u8 *FormatStatusName_Paralyzed(enum BattlerId battler)
 
 static bool32 IsStatusActive_Poisoned(enum BattlerId battler)
 {
-    return BattleStatusCriteria_BattlerHasStatus1(battler, STATUS1_PSN_ANY);
+    return BattleStatusCriteria_BattlerHasStatus1(battler, STATUS1_POISON);
+}
+
+static bool32 IsStatusActive_BadlyPoisoned(enum BattlerId battler)
+{
+    return BattleStatusCriteria_BattlerHasStatus1(battler, STATUS1_TOXIC_POISON);
 }
 
 static const u8 *FormatStatusName_Poisoned(enum BattlerId battler)
