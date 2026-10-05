@@ -15,7 +15,6 @@ void FadeOutAndFadeInNewMapMusic(u16 songNum, u8 fadeOutSpeed, u8 fadeInSpeed);
 bool8 IsNotWaitingForBGMStop(void);
 void PlayFanfareByFanfareNum(u8 fanfareNum);
 bool8 WaitFanfare(bool8 stop);
-void StopFanfareByFanfareNum(u8 fanfareNum);
 void PlayFanfare(u16 songNum);
 bool8 IsFanfareTaskInactive(void);
 void FadeInNewBGM(u16 songNum, u8 speed);
@@ -38,6 +37,7 @@ bool8 IsCryPlayingOrClearCrySongs(void);
 bool8 IsCryPlaying(void);
 void PlayBGM(u16 songNum);
 void PlaySE(u16 songNum);
+void PlaySE4WithVolume(u16 songNum, u16 volume); // phenomenon
 void PlaySE12WithPanning(u16 songNum, s8 pan);
 void PlaySE1WithPanning(u16 songNum, s8 pan);
 void PlaySE2WithPanning(u16 songNum, s8 pan);

@@ -171,5 +171,6 @@
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
       "script": "LeaverraForest_HillSign_Script"
     }
-  ]
+  ],
+  "night_music": "MUS_HALERBA_WILDS_LEAVERRA_FOREST_NIGHT"
 }

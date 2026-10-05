@@ -70,7 +70,7 @@ script WowYoureStrong_Script_ShowTower
         bufferstring(STR_VAR_2,"this city")
     }
 
-    msgbox(format("You should come by once you're done exploring! My office is on the 38th floor of the {STR_VAR_2} in {STR_VAR_2}. I'll make sure security allows you to come up."),,SPEAKER_LUCREZIA_BEFORE)
+    msgbox(format("You should come by once you're done exploring! My office is on the 38th floor of the {STR_VAR_1} in {STR_VAR_2}. I'll make sure security allows you to come up."),,SPEAKER_LUCREZIA_BEFORE)
     closemessage
 
     specialvar(VAR_RESULT,GetCurrentMap)

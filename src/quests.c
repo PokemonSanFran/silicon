@@ -1827,11 +1827,7 @@ bool8 IsQuestRewardState(s32 questId)
 
 bool8 IsQuestInactiveState(s32 questId)
 {
-    if (!QuestMenu_GetSetQuestState(questId, FLAG_GET_ACTIVE)) {
-        return TRUE;
-    } else {
-        return FALSE;
-    }
+    return (QuestMenu_GetSetQuestState(questId, FLAG_GET_INACTIVE));
 }
 
 bool8 IsQuestActiveState(s32 questId)

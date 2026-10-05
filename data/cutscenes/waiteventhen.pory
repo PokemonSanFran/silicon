@@ -7,14 +7,14 @@ const PKMNC = 6
 const FLAG_HIDE_SEARCH = FLAG_TEMP_1
 
 script WaitEvenThen_TurnOnMachine_Script {
-    setmetatile(32, 2, 0x2D8, TRUE)
-        setmetatile(33, 2, 0x2D9, TRUE)
-        setmetatile(34, 2, 0x2DA, TRUE)
-        setmetatile(35, 2, 0x2DB, TRUE)
-        setmetatile(32, 3, 0x2E0, TRUE)
-        setmetatile(33, 3, 0x2E1, TRUE)
-        setmetatile(34, 3, 0x2E2, TRUE)
-        setmetatile(35, 3, 0x2E3, TRUE)
+    setmetatile(32, 2, 0x8D8, TRUE)
+        setmetatile(33, 2, 0x8D9, TRUE)
+        setmetatile(34, 2, 0x8DA, TRUE)
+        setmetatile(35, 2, 0x8DB, TRUE)
+        setmetatile(32, 3, 0x8E0, TRUE)
+        setmetatile(33, 3, 0x8E1, TRUE)
+        setmetatile(34, 3, 0x8E2, TRUE)
+        setmetatile(35, 3, 0x8E3, TRUE)
         special(DrawWholeMapView)
 }
 

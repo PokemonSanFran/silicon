@@ -11,12 +11,13 @@ script Quest_Persuasivepassenger_CEO_Visbility_Script{
     return
 }
 
-script Quest_Persuasivepassenger_InteractLeader_Script{
+script Quest_Persuasivepassenger_InteractLeader_Script
+{
     lock
     faceplayer
-	goto(Quest_Persuasivepassenger_Event_Script)
-
+	call(Quest_Persuasivepassenger_Event_Script)
     msgbox(format("Welcome to the union of taxi drivers!"),MSGBOX_NPC)
+	closemessage
     end
 }
 
@@ -29,7 +30,6 @@ script Quest_Persuasivepassenger_Event_Script{
     if (var(VAR_RESULT)){
     goto(Quest_Persuasivepassenger_StartQuest_Script)
 	}
-	return
 }
 
 script Quest_Persuasivepassenger_StartQuest_Script{
@@ -146,10 +146,10 @@ script Quest_Persuasivepassenger_Driver2_Event_Script{
         goto(Quest_Persuasivepassenger_Driver2_DefeatedLandlord_Dialogue)
     }
 
-    msgbox(format("My brother's landlord jacked up his rent by some insane amount...like three times! So he's out on the street of MermerezaCity now."),,SPEAKER_ARRIBA_DRIVER2)
-    msgbox(format("So, I'm trying to pick some shifts"),,SPEAKER_ARRIBA_DRIVER2)
+    msgbox(format("My brother's landlord jacked up his rent by some insane amount...like three times!"),,SPEAKER_ARRIBA_DRIVER2)
+    msgbox(format("So, I'm trying to pick some shifts."),,SPEAKER_ARRIBA_DRIVER2)
     msgbox(format("Wait, three times the rent?!"),,SPEAKER_ALICIA)
-    msgbox(format("Yeah, so my brother is out on the streets... somewhere in the MermerezaCity."),,SPEAKER_ARRIBA_DRIVER2)
+    msgbox(format("Yeah, so my brother is out on the streets... His apartment was all the way on Halai Island!"),,SPEAKER_ARRIBA_DRIVER2)
     msgbox(format("Thanks for listening though, appreciate it."),,SPEAKER_ARRIBA_DRIVER2)
 
     goto(Quest_Persuasivepassenger_Driver2_End_Dialogue)
@@ -209,6 +209,14 @@ script Quest_Persuasivepassenger_PostBattle_Dialogue{
     fadescreenswapbuffers(FADE_FROM_BLACK)
     release
     end
+}
+
+script Quest_Persuasivepassenger_Dialogue_ExplainUnhoused
+{
+	buffermapname(STR_VAR_1,MAP_HALAI_ISLAND)
+	msgbox(format("Damn, my landlord in {STR_VAR_1} tripled my rent and I had to move out. This is... awful!"))
+   goto_if_defeated(TRAINER_PERSUASIVE_LANDLORD,Quest_Persuasivepassenger_Sibling_Dialogue)
+	closemessage
 }
 
 script Quest_Persuasivepassenger_Sibling_Dialogue{

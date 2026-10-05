@@ -1,6 +1,9 @@
 ENTRY(Start)
 
-gNumMusicPlayers = 4;
+/* Start phenomenon */
+/* gNumMusicPlayers = 4; */
+gNumMusicPlayers = 5;
+/* End phenomenon */
 gMaxLines = 0;
 gInitialMainCB2 = CB2_InitCopyrightScreenAfterBootup;
 
@@ -70,7 +73,7 @@ SECTIONS {
     script_data :
     ALIGN(4)
     {
-		data/*.o(script_data);
+        data/*.o(script_data);
     } > ROM =0
 
     .rodata.compound_string :

@@ -25,7 +25,7 @@
     },
     {
       "map": "MAP_ROUTE10",
-      "offset": 3,
+      "offset": -9,
       "direction": "up"
     },
     {
@@ -199,5 +199,6 @@
     }
   ],
   "coord_events": [],
-  "bg_events": []
+  "bg_events": [],
+  "night_music": "MUS_MERMEREZA_CITY_NIGHT"
 }

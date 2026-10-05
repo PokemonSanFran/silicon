@@ -18,6 +18,7 @@
 #include "constants/apricorn_tree.h"
 #include "constants/berry.h"
 #include "constants/maps.h"
+#include "constants/mass_outbreak.h"
 #include "constants/pokemon.h"
 #include "constants/easy_chat.h"
 #include "constants/trainer_hill.h"
@@ -1094,7 +1095,6 @@ struct DayCare
     struct DaycareMon mons[DAYCARE_MON_COUNT];
 // Start siliconDaycare
     struct DaycareEgg daycareEgg[SILICON_DAYCARE_EGG_MAX];
-    struct Pokemon viewMon;
 // End siliconDaycare
     u32 offspringPersonality;
     u32 stepCounter;

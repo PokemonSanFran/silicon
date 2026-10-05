@@ -1,13 +1,9 @@
 const PLAYER = OBJ_EVENT_ID_PLAYER
-const ORI = 12
-const FLAG_HIDE_ORI = FLAG_TEMP_6
+const LOCALID_ORI = LOCALID_CAMERA + 5
 
 script MaybeIFuckedUp_ShowOri_Script
 {
-    if (var(VAR_STORYLINE_STATE) != STORY_CONGRATULATED_BY_LUCREZIA)
-    {
-        setflag(FLAG_HIDE_ORI)
-    }
+	spawnobject(OBJ_EVENT_GFX_OLD_WOMAN,LOCALID_ORI,18,17,MOVEMENT_TYPE_FACE_DOWN)
 }
 
 script MaybeIFuckedUp_Dialogue
@@ -15,12 +11,11 @@ script MaybeIFuckedUp_Dialogue
     lock
     startcutscene(JUMPPLAYER_MAYBEIFUCKEDUP)
     setvar(VAR_STORYLINE_STATE,STORY_RECEIVED_BAMBOO_STAR)
-
-    applymovement(ORI, moves(walk_down * 3, walk_right * 3, face_up, step_end))
-    waitmovement(0)
-    msgbox(format("Excuse me!."),,SPEAKER_ORI)
+	moveobjecttocoords(LOCALID_ORI,21,20,DIR_NORTH)
+    waitmovement(LOCALID_ORI)
+    msgbox(format("Excuse me!"),,SPEAKER_ORI)
     closemessage
-    applymovement(ORI,Common_Movement_WalkUp)
+    applymovement(LOCALID_ORI,Common_Movement_WalkUp)
     waitmovement(0)
 
     msgbox(format("Oh hi!"),,SPEAKER_ALICIA)
@@ -40,9 +35,9 @@ script MaybeIFuckedUp_Dialogue
     closemessage
 
     applymovement(PLAYER, moves(delay_16, delay_16, delay_16, face_right, step_end))
-    applymovement(ORI, moves(walk_right * 8, step_end))
-    waitmovement(ORI)
-    removeobject(ORI)
+    applymovement(LOCALID_ORI, moves(walk_right * 8, step_end))
+    waitmovement(LOCALID_ORI)
+    removeobject(LOCALID_ORI)
 
     msgbox(format("...what the hell was that?"),,SPEAKER_ALICIA)
 

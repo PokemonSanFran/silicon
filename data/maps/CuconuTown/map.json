@@ -89,11 +89,12 @@
   ],
   "warp_events": [
     {
+      "warp_id": "WARP_ID_CUCONU_TO_COMPOUND",
       "x": 3,
       "y": 9,
       "elevation": 0,
       "dest_map": "MAP_CUCONU_TOWN_SHARPRISE_COMPOUND_1F",
-      "dest_warp_id": "0"
+      "dest_warp_id": "WARP_ID_COMPOUND_TO_CUCONU_RIGHT"
     },
     {
       "x": 10,

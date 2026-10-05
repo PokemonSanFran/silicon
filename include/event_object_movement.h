@@ -148,7 +148,6 @@ u8 GetFirstInactiveObjectEventId(void);
 u8 GetObjectEventIdByLocalId(u8);
 void RemoveObjectEvent(struct ObjectEvent *objectEvent);
 void RemoveObjectEventByLocalIdAndMap(u8 localId, u8 mapNum, u8 mapGroup);
-void LoadSpecialObjectReflectionPalette(u16 tag, u8 slot);
 void TryMoveObjectEventToMapCoords(u8 localId, u8 mapNum, u8 mapGroup, s16 x, s16 y);
 void PatchObjectPalette(u16 paletteTag, u8 paletteSlot);
 void SpawnObjectEventsOnReturnToField(s16 x, s16 y);
@@ -205,8 +204,14 @@ u8 GetWalkInPlaceNormalMovementAction(u32);
 u8 GetWalkInPlaceSlowMovementAction(u32);
 enum Collision GetCollisionAtCoords(struct ObjectEvent *objectEvent, s16 x, s16 y, enum Direction dir);
 // Start pathfinder
+// bool8 IsMetatileDirectionallyImpassable(struct ObjectEvent *objectEvent, s16 x, s16 y, enum Direction direction);
 //u32 GetObjectObjectCollidesWith(struct ObjectEvent *objectEvent, s16 x, s16 y, bool32 addCoords);
+enum Collision GetNodeCollisionAtCoords(struct ObjectEvent *objectEvent, s16 x, s16 y, u8 elevation, enum Direction dir, u8 currentBehavior, u8 nextBehavior);
 u32 GetObjectObjectCollidesWith(struct ObjectEvent *objectEvent, s16 x, s16 y, u8 elevation, bool32 addCoords);
+// Start nicoRoute10
+//bool8 IsMetatileDirectionallyImpassable(struct ObjectEvent *objectEvent, u8 nextBehavior, enum Direction direction);
+bool8 IsMetatileDirectionallyImpassable(struct ObjectEvent *objectEvent, u8 nextBehavior, enum Direction direction, u8 elevation); // nicoRoute10
+// End nicoRoute10
 // End pathfinder
 void MoveCoords(enum Direction direction, s16 *x, s16 *y);
 bool8 ObjectEventIsHeldMovementActive(struct ObjectEvent *objectEvent);
@@ -271,8 +276,8 @@ u8 GetMoveDirectionFastAnimNum(enum Direction direction);
 u8 GetMoveDirectionFasterAnimNum(enum Direction direction);
 u8 GetMoveDirectionFastestAnimNum(enum Direction direction);
 enum Direction GetLedgeJumpDirection(s16 x, s16 y, enum Direction direction);
+enum Direction GetLedgeJumpDirectionWithBehavior(enum Direction direction, u8 nextBehavior); // pathfinder
 void CameraObjectSetFollowedSpriteId(u8 objectId);
-u16 GetObjectPaletteTag(u8 palSlot);
 void UpdateObjectEventSpriteInvisibility(struct Sprite *sprite, bool8 invisible);
 s16 GetFigure8XOffset(s16 idx);
 s16 GetFigure8YOffset(s16 idx);
@@ -283,7 +288,7 @@ bool8 IsBerryTreeSparkling(u8 localId, u8 mapNum, u8 mapGroup);
 const struct ObjectEventTemplate *GetObjectEventTemplateByLocalIdAndMap(u8 localId, u8 mapNum, u8 mapGroup);
 u16 LoadSheetGraphicsInfo(const struct ObjectEventGraphicsInfo *info, u16 uuid, struct Sprite *sprite);
 u8 TrySpawnObjectEventTemplate(const struct ObjectEventTemplate *objectEventTemplate, u8 mapNum, u8 mapGroup, s16 cameraX, s16 cameraY);
-bool8 GetFollowerInfo(u32 *species, bool32 *shiny, bool32 *female);
+bool8 GetFollowerInfo(enum Species *species, bool32 *shiny, bool32 *female);
 const struct ObjectEventGraphicsInfo *SpeciesToGraphicsInfo(enum Species species, bool32 shiny, bool32 female);
 u16 GetObjectEventFlagIdByLocalIdAndMap(u8 localId, u8 mapNum, u8 mapGroup);
 void CopyObjectGraphicsInfoToSpriteTemplate(u16 graphicsId, void (*callback)(struct Sprite *), struct SpriteTemplate *spriteTemplate, const struct SubspriteTable **subspriteTables);
@@ -511,14 +516,12 @@ u8 MovementType_FollowPlayer_Moving(struct ObjectEvent *objectEvent, struct Spri
 void StartSpriteAnimInDirection(struct ObjectEvent *objectEvent, struct Sprite *sprite, enum Direction direction, u8 animNum);
 
 bool8 FollowablePlayerMovement_Idle(struct ObjectEvent *objectEvent, struct Sprite *sprite, enum Direction, bool8 tileCallback(u8));
-bool8 FollowablePlayerMovement_FaceDirection(struct ObjectEvent *objectEvent, struct Sprite *sprite, enum Direction, bool8 tileCallback(u8));
 bool8 FollowablePlayerMovement_Step(struct ObjectEvent *objectEvent, struct Sprite *sprite, enum Direction, bool8 tileCallback(u8));
 bool8 FollowablePlayerMovement_GoSpeed1(struct ObjectEvent *objectEvent, struct Sprite *sprite, enum Direction, bool8 tileCallback(u8));
 bool8 FollowablePlayerMovement_GoSpeed2(struct ObjectEvent *objectEvent, struct Sprite *sprite, enum Direction, bool8 tileCallback(u8));
 bool8 FollowablePlayerMovement_Slide(struct ObjectEvent *objectEvent, struct Sprite *sprite, enum Direction, bool8 tileCallback(u8));
 bool8 FollowablePlayerMovement_JumpInPlace(struct ObjectEvent *objectEvent, struct Sprite *sprite, enum Direction, bool8 tileCallback(u8));
 bool8 FollowablePlayerMovement_GoSpeed4(struct ObjectEvent *objectEvent, struct Sprite *sprite, enum Direction, bool8 tileCallback(u8));
-bool8 FollowablePlayerMovement_Jump(struct ObjectEvent *objectEvent, struct Sprite *sprite, enum Direction, bool8 tileCallback(u8));
 bool8 CopyablePlayerMovement_Jump2(struct ObjectEvent *objectEvent, struct Sprite *sprite, enum Direction, bool8 tileCallback(u8));
 u8 MovementType_CopyPlayerInGrass_Step1(struct ObjectEvent *objectEvent, struct Sprite *sprite);
 u8 MovementType_Buried_Step0(struct ObjectEvent *objectEvent, struct Sprite *sprite);
@@ -551,7 +554,6 @@ bool8 MovementAction_EmoteX_Step0(struct ObjectEvent *, struct Sprite *);
 bool8 MovementAction_EmoteDoubleExclamationMark_Step0(struct ObjectEvent *, struct Sprite *);
 const struct ObjectEventTemplate *GetObjectEventTemplateByLocalIdAndMap(u8, u8, u8); //rematch_action
 u8 GetObjectEventIdByLocalId(u8); // cueobject
-bool8 PlayerIsUnderWaterfall(struct ObjectEvent *objectEvent);
 
 const struct SpritePalette *GetObjectEventSpritePaletteByTag(u16 tag); // startMenu
 u8 GetObjectEventApricornTreeId(u8 objectEventId);
@@ -625,13 +627,10 @@ u8 MovementType_OverworldWildEncounter_Despawn_Step8(struct ObjectEvent *objectE
 u8 MovementType_OverworldWildEncounter_Despawn_Step10(struct ObjectEvent *objectEvent, struct Sprite *sprite);
 u8 MovementType_OverworldWildEncounter_Despawn_Step11(struct ObjectEvent *objectEvent, struct Sprite *sprite);
 
-// Start pathfinder
-u8 GetCollisionWithBehaviorsAtCoords(struct ObjectEvent *objectEvent, s16 x, s16 y, u8 elevation, u32 dir, u8 currentBehavior, u8 nextBehavior);
-u8 GetLedgeJumpDirectionWithBehavior(enum Direction direction, u8 nextBehavior);
-// End pathfinder
 // Start storyActionItems
 void Task_ObjectTransformation(u8 taskId);
 void TransformObjectByLocalIdIntoGraphicsId(u32 localId, u32 graphicsId);
 // End storyActionItems
 u32 GetObjectFlagFromLocalId(u32 localId); // siliconQuests
+u16 GetCurrentDistanceFromPlayer(u8 x, u8 y); // phenomenon
 #endif //GUARD_EVENT_OBJECT_MOVEMENT_H

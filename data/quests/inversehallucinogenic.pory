@@ -36,9 +36,12 @@ script Quest_Inversehallucinogenic_ControlLeaderVisibilityOutside_Script{
 script Quest_Inversehallucinogenic_ControlTrainerVisibility_Script{
 
     questmenu(QUEST_MENU_CHECK_ACTIVE,QUEST_INVERSEHALLUCINOGENIC)
-        if (var(VAR_RESULT)){
+        if (var(VAR_RESULT))
+		{
             setflag(FLAG_HIDE_GYM_TRAINERS)
-        }else{
+        }
+		else
+		{
             setflag(FLAG_HIDE_DRUG_TRAINERS)
         }
     return

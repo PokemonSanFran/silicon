@@ -114,5 +114,6 @@
     }
   ],
   "coord_events": [],
-  "bg_events": []
+  "bg_events": [],
+  "night_music": "MUS_HALERBA_WILDS_LEAVERRA_FOREST_NIGHT"
 }

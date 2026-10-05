@@ -18,14 +18,22 @@ script EnterAdaora_ObjectCleanUp_Script {
     return
 }
 
-script EnterAdaora_SetConeTiles_Script {
-        if (var(VAR_CAPHE_CITY_STATE) > LINE_IS_BLOCKING)
+script EnterAdaora_SetConeTiles_Script 
 {
-            setmetatile(4,37,0x344,TRUE)
-            setmetatile(4,43,0x344,TRUE)
-            special(DrawWholeMapView)
-        }
-    return
+	call(EnterAdaora_Script_SetNorthCone)
+	call(EnterAdaora_Script_SetSouthCone)
+}
+
+script EnterAdaora_Script_SetNorthCone
+{
+	setmetatile(4,37,0x944,TRUE)
+	special(DrawWholeMapView)
+}
+
+script EnterAdaora_Script_SetSouthCone
+{
+	setmetatile(4,43,0x944,TRUE)
+	special(DrawWholeMapView)
 }
 
 script EnterAdaora_InteractSiarl_Script {
@@ -161,16 +169,13 @@ script EnterAdaora_ExplainHope_Dialogue{
         msgbox(format("Wait, but you're helping people! Why isn't the city supporting you?"),MSGBOX_DEFAULT,SPEAKER_ALICIA)
         msgbox(format("Clearly, you're not from here, are you? I can't remember a point in my lifetime where the city helped people, {PLAYER}."),MSGBOX_DEFAULT,SPEAKER_ADAORA_FIRST_INTRO)
                 closemessage
-        //Debug_Cones:
         applymovement(ADAORA, moves(walk_right, walk_up * 2, face_left, walk_in_place_left, step_end))
         waitmovement(ADAORA)
-            setmetatile(4,37,0x344,TRUE)
-        special(DrawWholeMapView)
+	call(EnterAdaora_Script_SetNorthCone)
         applymovement(PLAYER, moves(face_right, face_up, delay_16 * 2, face_down, step_end))
         applymovement(ADAORA, moves(walk_down * 6, face_left, walk_in_place_left, step_end))
         waitmovement(ADAORA)
-            setmetatile(4,43,0x344,TRUE)
-        special(DrawWholeMapView)
+	call(EnterAdaora_Script_SetSouthCone)
         applymovement(ADAORA, moves(walk_up * 4, face_left, step_end))
         waitmovement(ADAORA)
         msgbox(format("Yo, clear a path between the cones."),MSGBOX_DEFAULT,SPEAKER_ADAORA_FIRST_INTRO)

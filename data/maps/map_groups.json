@@ -273,6 +273,7 @@
   "gMapGroup_IndoorCuconuTown": [
     "CuconuTown_SharpriseCompound_1F",
     "CuconuTown_SharpriseCompound_2F",
+    "CuconuTown_SharpriseCompound_2F_Corridor",
     "CuconuTown_PokemonCenter_1F",
     "CuconuTown_Cafe"
   ],
@@ -281,7 +282,6 @@
     "PerlaciaCity_PokemonCenter_1F",
     "PerlaciaCity_Sanitation",
     "PerlaciaCity_Gym",
-    "Oroland_Newspaper",
     "PerlaciaCity_Gym_Entrance",
     "Perlacia_City_Coffee"
   ],
@@ -362,6 +362,7 @@
   "gMapGroup_IndoorCurenoPort": [
     "CurenoPort_PokemonCenter_1F",
     "CurenoPort_GearGrindGangHouse",
+    "Oroland_Warehouse",
     "Arriba_B1F",
     "Arriba_1F",
     "Arriba_2F"
@@ -387,7 +388,7 @@
   ],
   "gMapGroup_IndoorOroland": [
     "Oroland_PokemonCenter_1F",
-    "Oroland_Warehouse"
+    "Oroland_Newspaper"
   ],
   "gMapGroup_IndoorEspuleeOutskirts": [
     "EspuleeOutskirts_Ranger",

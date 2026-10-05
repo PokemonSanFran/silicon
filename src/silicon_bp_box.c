@@ -44,8 +44,7 @@ void ScrFunc_hidebpbox(struct ScriptContext *ctx)
     Script_RequestEffects(SCREFF_V1 | SCREFF_HARDWARE);
 
     union CurrencyBoxValues bpBox = { .asU32 = ctx->data[1] };
-    CurrencyBox_Destroy(bpBox);
-    ctx->data[1] = 0;
+    ctx->data[1] = CurrencyBox_Destroy(bpBox).asU32;
 }
 
 void ScrFunc_removebp(struct ScriptContext *ctx)

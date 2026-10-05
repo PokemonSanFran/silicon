@@ -8,7 +8,7 @@ script Common_EventScript_FindItem
 
 script Common_EventScript_StoryItem
 {
-    switch(var(VAR_RESULT))
+    switch(var(VAR_0x8006))
     {
         case ITEM_RANGER_HEADPHONES: call(EspuleeOutskirts_Ranger_Quest_ManOfManyHats_EventScript_ItemHeadphones)
         case ITEM_ROTOM_CATALOG: call(WajabiLake_Quest_Theboywhocrieswithwolves_EventScript_ItemStuff1)

@@ -14,6 +14,7 @@ const FLAG_HIDE_GRUNTB = FLAG_TEMP_7
 const FLAG_HIDE_ADAORA = FLAG_TEMP_9
 
 const LOCALID_ADAORA_FAINTED = (LOCALID_CAMERA + 1)
+const LOCALID_LEAGUEOPS_CHIEF = LOCALID_CAMERA + 6
 
 script HowDisappointing_ManageObject_Script
 {
@@ -175,26 +176,26 @@ script HowDisappointing_StartRaid_Dialogue
   startcutscene(JUMPPLAYER_HOWDISAPPOINTING_RAID)
   call(HowDisappointing_DeterminePlayerPath_Script)
 
-  msgbox(format("Thanks for joining us {PLAYER}. Now, this operation is going to be pretty straightforward. We’re walking in, warrant in hand, and arresting terrorists on sight. We suspect there’s a hidden room or something, and they’ll start running out of there as soon as we show up. That’s where our Champion comes into play."))
+  msgbox(format("Thanks for joining us {PLAYER}. Now, this operation is going to be pretty straightforward. We’re walking in, warrant in hand, and arresting terrorists on sight. We suspect there’s a hidden room or something, and they’ll start running out of there as soon as we show up. That’s where our Champion comes into play."),,SPEAKER_CHIEF)
 
-  msgbox(format("Once they try to give us the slip, you’ll be in charge of hunting down the escaped members. We suspect they’ll flee into the city, and that's where you get after 'em. You don’t have to perform any arrests, just subdue them long enough for an officer to grab ‘em. Make sense, ya’ll?"))
+  msgbox(format("Once they try to give us the slip, you’ll be in charge of hunting down the escaped members. We suspect they’ll flee into the city, and that's where you get after 'em. You don’t have to perform any arrests, just subdue them long enough for an officer to grab ‘em. Make sense, ya’ll?"),,SPEAKER_CHIEF)
   closemessage
 
 applymovement(POLICEA,Common_Movement_WalkInPlaceUp)
 applymovement(POLICEB,Common_Movement_WalkInPlaceUp)
 applymovement(POLICE_MON,Common_Movement_WalkInPlaceUp)
-msgbox(format("Yes sir!"))
+msgbox(format("Yes sir!"),,SPEAKER_POLICEMAN)
 waitmovement(POLICE_MON)
 
-msgbox(format("Oh, and Champion?"))
+msgbox(format("Oh, and Champion?"),,SPEAKER_CHIEF)
 
 msgbox(format("Yeah?"),MSGBOX_DEFAULT,SPEAKER_ALICIA)
 
-msgbox(format("Try to not let the leaders go this time, okay?"))
+msgbox(format("Try to not let the leaders go this time, okay?"),,SPEAKER_CHIEF)
 
 msgbox(format("…yeah."),MSGBOX_DEFAULT,SPEAKER_ALICIA)
 
-msgbox(format("Hehehehehe."))
+msgbox(format("Hehehehehe."),,SPEAKER_POLICEMAN)
 closemessage
 goto(HowDisappointing_RaidMovement_Script)
 }
@@ -365,8 +366,6 @@ script HowDisappointing_ArrestScene_Dialogue
     waitstate
 }
 
-const CHIEF2 = 6
-
 script HowDisappointing_MissionComplete_Dialogue
 {
     lock
@@ -377,12 +376,13 @@ script HowDisappointing_MissionComplete_Dialogue
 
     closemessage
     applymovement(LOCALID_SHARPRISE_CHARLOTTE,Common_Movement_WalkUp)
-    applymovement(CHIEF2,Common_Movement_WalkUp)
+    applymovement(LOCALID_LEAGUEOPS_CHIEF,Common_Movement_WalkUp)
     applymovement(LOCALID_SHARPRISE_LUCREZIA,Common_Movement_WalkRight)
 
     fadescreenswapbuffers(FADE_TO_BLACK)
     delay(30)
     call(SharpriseSpire_Leagueops_ClearSecondaryCharacters_Script)
+	removeobject(LOCALID_LEAGUEOPS_CHIEF)
     fadescreenswapbuffers(FADE_FROM_BLACK)
     completequest(QUEST_HOWDISAPPOINTING)
     call(HowDisappointing_HandleDebrief_Dialogue)
@@ -460,12 +460,12 @@ script HowDisappointing_GiveNextDirection_Script
     if (flag(FLAG_HIDE_ADAORA))
 
    {
-        msgbox(format("I saw another one heading {STR_VAR_1}, are you on it?"))
+        msgbox(format("I saw another one heading {STR_VAR_1}, are you on it?"),,SPEAKER_POLICEMAN)
     }
     else
 
    {
-        msgbox(format("We got a call that the leader was trying to flee near the city entrance. Get after 'em!"))
+        msgbox(format("We got a call that the leader was trying to flee near the city entrance. Get after 'em!"),,SPEAKER_POLICEMAN)
     }
     closemessage
     return

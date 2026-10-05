@@ -252,9 +252,16 @@ enum StdString
 
 // Dynamic Multichoice Callbacks
 
-#define DYN_MULTICHOICE_CB_DEBUG      0
-#define DYN_MULTICHOICE_CB_SHOW_ITEM  1
-#define DYN_MULTICHOICE_CB_SHOW_ARCADE_EVENT 2 // siliconFroniter
-#define DYN_MULTICHOICE_CB_NONE       255
+enum
+{
+    DYN_MULTICHOICE_CB_DEBUG,
+    DYN_MULTICHOICE_CB_SHOW_ITEM,
+    DYN_MULTICHOICE_CB_SHOW_PKMN,
+    //add new callback choices after this comment!
+    DYN_MULTICHOICE_CB_SHOW_ARCADE_EVENT, // siliconFroniter
+
+    DYN_MULTICHOICE_CB_NONE,
+};
+
 
 #endif //GUARD_SCRIPT_MENU_CONSTANTS_H

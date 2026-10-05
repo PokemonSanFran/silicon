@@ -966,7 +966,15 @@ static void SetInventorySortVar(u8 pocket, u8 type){
 }
 
 static u16 GetInventorySortValue(u8 pocket){
-    return VarGet(sInventorySortVars[pocket]);
+    enum Silicon_BagSortOptions sort = VarGet(sInventorySortVars[pocket]);
+    
+    if (sort > ITEM_SORT_BY_NUMBER)
+    {
+        sort = ITEM_SORT_DEFAULT;
+        VarSet(sInventorySortVars[pocket],sort);
+    }
+
+    return sort;
 }
 
 void SortWholeInventory(void){

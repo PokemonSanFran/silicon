@@ -15,7 +15,7 @@
   "connections": [
     {
       "map": "MAP_ROUTE10",
-      "offset": 8,
+      "offset": -7,
       "direction": "down"
     },
     {
@@ -402,5 +402,6 @@
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
       "script": "EnterAdaora_InteractSiarl_Script"
     }
-  ]
+  ],
+  "night_music": "MUS_CAPHE_CITY_NIGHT"
 }

@@ -717,11 +717,11 @@ bool32 CanMonEverLearnMove(u32 species, u32 move)
 
     const struct LevelUpMove *learnset = GetSpeciesLevelUpLearnset(species);
 
-    for (learnsetIndex = 0; learnsetIndex < MAX_LEVEL_UP_MOVES && learnset[learnsetIndex].move != LEVEL_UP_MOVE_END; learnsetIndex++)
+    for (learnsetIndex = 0; learnset[learnsetIndex].move != LEVEL_UP_MOVE_END; learnsetIndex++)
         if (learnset[learnsetIndex].move == move)
             return TRUE;
 
-    if (SpeciesCanLearnEggMove(species, move))
+    if (SpeciesHasEggMove(species, move))
         return TRUE;
 
     return (CanLearnTeachableMove(species, move));

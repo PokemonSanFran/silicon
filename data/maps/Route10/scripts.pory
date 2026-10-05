@@ -113,3 +113,9 @@ script Route10_EventScript_070F6125
     end
 }
 
+script Route10_EventScript_Sign1
+{
+    msgbox(format("▶ Route 10\n{UP_ARROW} Caphe City\n{DOWN_ARROW} Mermereza City"))
+    closemessage
+    end
+}

@@ -1,7 +1,6 @@
 mapscripts Route2_MapScripts {
     MAP_SCRIPT_ON_TRANSITION {
         call(Quest_NeighborhoodCleanUp_ObjectVisibility_Script)
-        call(MaybeIFuckedUp_ShowOri_Script)
         call(Quest_Ultrawormholeresearch_ControlTotemVisibility)
         call_if_subquest_complete(QUEST_BODEGABURNOUT,SUB_QUEST_15,Quest_Bodegaburnout_Script_Hide_BodegaburnoutRescueK)
     }
@@ -19,7 +18,8 @@ mapscripts Route2_MapScripts {
     ]
     MAP_SCRIPT_ON_WARP_INTO_MAP_TABLE [
         VAR_CONSTRUCTION_STRIKE_STATE,STRIKE_HAS_BEGUN:TheStrikeStrikesBack_Script_AddOliverCharlotte
-        VAR_CONSTRUCTION_STRIKE_STATE,DEFEATED_GARBODOR:TheStrikeStrikesBack_Script_AddSharpriseCharlotteTide
+        VAR_CONSTRUCTION_STRIKE_STATE,DEFEATED_GARBODOR:TheStrikeStrikesBack_Script_AddTurnCharlotteAndSharpriseNorth
+		VAR_STORYLINE_STATE,STORY_CONGRATULATED_BY_LUCREZIA: MaybeIFuckedUp_ShowOri_Script
     ]
 }
 
