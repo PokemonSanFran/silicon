@@ -224,12 +224,6 @@ bool8 WaitFanfare(bool8 stop)
     }
 }
 
-// Unused
-void StopFanfareByFanfareNum(u8 fanfareNum)
-{
-    m4aSongNumStop(sFanfares[fanfareNum].songNum);
-}
-
 void PlayFanfare(u16 songNum)
 {
     s32 i;
@@ -592,6 +586,26 @@ void PlaySE(u16 songNum)
     if (gDisableMapMusicChangeOnMapLoad == MUSIC_DISABLE_OFF)
         m4aSongNumStart(songNum);
 }
+
+// Start phenomenon
+void PlaySE4WithVolume(u16 songNum, u16 volume)
+{
+	if (AreSoundEffectsMuted())
+		m4aSongNumStop(songNum);
+	else
+    {
+		m4aSongNumStart(songNum);
+        m4aMPlayImmInit(&gMPlayInfo_SE4);
+        m4aMPlayVolumeControl(&gMPlayInfo_SE4, TRACKS_ALL, volume);
+    }
+    if (gDisableMapMusicChangeOnMapLoad == MUSIC_DISABLE_OFF)
+    {
+        m4aSongNumStart(songNum);
+        m4aMPlayImmInit(&gMPlayInfo_SE4);
+        m4aMPlayVolumeControl(&gMPlayInfo_SE4, TRACKS_ALL, volume);
+    }
+}
+// End phenomenon
 
 void PlaySE12WithPanning(u16 songNum, s8 pan)
 {

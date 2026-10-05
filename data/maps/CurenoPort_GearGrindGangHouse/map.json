@@ -184,5 +184,6 @@
     }
   ],
   "coord_events": [],
-  "bg_events": []
+  "bg_events": [],
+  "night_music": "MUS_CURENO_PORT_NIGHT"
 }

@@ -41,7 +41,7 @@ script OldAssholeAppears_MoveCharlotteIntoPosition_Script
 
 script OldAssholeAppears_MoveCharlotteToPlayer
 {
-    playbgm(MUS_ENCOUNTER_BRENDAN, TRUE)
+    playbgm(MUS_CHARLOTTE, TRUE)
     applymovement(CHARLOTTE, moves(walk_right * 7))
     waitmovement(CHARLOTTE)
 }

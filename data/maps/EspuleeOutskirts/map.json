@@ -186,5 +186,6 @@
       "script": "NULL"
     }
   ],
-  "bg_events": []
+  "bg_events": [],
+  "night_music": "MUS_ESPULEE_OUTSKIRTS_NIGHT"
 }

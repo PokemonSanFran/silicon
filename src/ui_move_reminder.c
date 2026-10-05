@@ -828,7 +828,7 @@ static void MovePool_ProcessEggLearnset(u32 species, u32 *numMoves)
         if (!IsMoveInSilicon(move))
             continue;
 
-        if (!SpeciesCanLearnEggMove(species, move))
+        if (!SpeciesHasEggMove(species, move))
             continue;
 
         u32 existingIdx = MovePool_GetIdxFromMove(move);

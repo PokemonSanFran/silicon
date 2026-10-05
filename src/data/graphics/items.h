@@ -1,7 +1,10 @@
-const u32 gItemIcon_QuestionMark[] = INCGFX_U32("graphics/items/icons/question_mark.png", ".4bpp.smol");
-const u16 gItemIconPalette_QuestionMark[] = INCGFX_U16("graphics/items/icon_palettes/question_mark.pal", ".gbapal");
+// Start siliconMerge
+//const u32 gItemIcon_QuestionMark[] = INCGFX_U32("graphics/items/icons/question_mark.png", ".4bpp.smol");
+//const u16 gItemIconPalette_QuestionMark[] = INCGFX_U16("graphics/items/icon_palettes/question_mark.pal", ".gbapal");
+const u32 gItemIcon_QuestionMark[] = INCGFX_U32("graphics/items/icons/blue_parcel.png", ".4bpp.smol");
+const u16 gItemIconPalette_QuestionMark[] = INCGFX_U16("graphics/items/icons/blue_parcel.png", ".gbapal");
+// End siliconMerge
 
-const u32 gItemIcon_NoItem[] = INCGFX_U32("graphics/items/icons/no_item.png", ".4bpp.smol"); // siliconMerge
 const u32 gItemIcon_ReturnToFieldArrow[] = INCGFX_U32("graphics/items/icons/return_to_field_arrow.png", ".4bpp.smol");
 const u16 gItemIconPalette_ReturnToFieldArrow[] = INCGFX_U16("graphics/items/icon_palettes/return_to_field_arrow.pal", ".gbapal");
 

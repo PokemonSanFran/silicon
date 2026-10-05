@@ -149,7 +149,10 @@ static bool32 DoesTableIdHaveRematch(u32 tableId)
 
 u16 GetPSFRematchTrainerId(u16 trainerId)
 {
-    u32 tableId = FirstBattleTrainerIdToRematchTableId(gRematchTable, trainerId);
+    s32 tableId = FirstBattleTrainerIdToRematchTableId(gRematchTable, trainerId);
+    if (tableId == -1)
+        return TRAINER_NONE;
+
     u32 rematchTrainerIdx = GetRematchGameProgessVariable();
 
     while (!HasTrainerBeenFought(gRematchTable[tableId].trainerIds[rematchTrainerIdx-1]))

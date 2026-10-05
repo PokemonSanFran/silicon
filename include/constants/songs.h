@@ -273,7 +273,14 @@ enum
     SE_PIKE_CURTAIN_CLOSE,
     SE_PIKE_CURTAIN_OPEN,
     SE_SUDOWOODO_SHAKE,
-    END_SE = SE_SUDOWOODO_SHAKE,
+    // Start phenomenon
+    SE_SHAKING_GRASS,
+    SE_RIPPLING_WATER,
+    SE_FLAPPING_WINGS,
+    SE_CAVE_DUST,
+    END_SE = SE_CAVE_DUST,
+    //END_SE = SE_SUDOWOODO_SHAKE,
+    // End phenomenon
     START_MUS = 350,
     MUS_LITTLEROOT_TEST = START_MUS,
     MUS_GSC_ROUTE38,
@@ -546,7 +553,7 @@ enum
     MUS_ROUTE6_NIGHT,
     MUS_GYM_HALERBA,
     MUS_ROUTE_1_5_7_NIGHT,
-    MUS_PINTILLION_ROUTE_14_16,
+    MUS_PINTILLION_ROUTE_14_16_NIGHT,
     MUS_WAREHOUSE_RAVE,
     MUS_BAKER_COOK_STREET_VENDOR_BARISTA,
     MUS_RAMESH_HOUSE,
@@ -590,6 +597,9 @@ enum
     MUS_VIGRIM,
     MUS_CAPHE_CITY_NIGHT,
     MUS_CHARLOTTE,
+    MUS_VS_SILICON_GYM_LEADER,
+    MUS_HALERBA_CITY_NIGHT,
+    MUS_HODOU_CITY_NIGHT,
     MUS_LAST,
 };
 #define END_MUS (MUS_LAST - 1)
@@ -873,6 +883,8 @@ enum
 #define SE_SUDOWOODO_SHAKE          269 // SE_USSOKI
 
 // Music
+#define START_MUS                   350
+
 #define MUS_LITTLEROOT_TEST         350 // MUS_TETSUJI          // Unused, likely a test track.
 #define MUS_GSC_ROUTE38             351 // MUS_FIELD13          // Unused, likely a test track.
 #define MUS_CAUGHT                  352 // MUS_KACHI22
@@ -1145,6 +1157,8 @@ enum
 #define MUS_HALAI_ISLAND 620
 #define END_MUS                             MUS_HALAI_ISLAND
 */
+
+//#define END_MUS                     558 // siliconMusic
 
 // These PH_* constants are phoneme sounds used by the "bard" NPC (see src/bard_music.c and src/mauville_old_man.c).
 // Each comes in a triplet of PH_*_BLEND, PH_*_HELD, and PH_*_SOLO, and the name of each triplet incorporates the English phonetic sound it represents.

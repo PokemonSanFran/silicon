@@ -125,5 +125,6 @@
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
       "script": "ZenzuIsland_Movies_Dialogue"
     }
-  ]
+  ],
+  "night_music": "MUS_ZENZU_ROUTE_11_13_100_NIGHT"
 }

@@ -97,10 +97,10 @@ script ThisIsntRandom_UnlockDoor_Dialogue
 
 script ThisIsntRandom_UnlockElectronicDoor_Script
 {
-    setmetatile(7,0,0x269,TRUE)
-        setmetatile(7,1,0x271,TRUE)
-        setmetatile(7,2,0x22F,FALSE)
-        setmetatile(7,3,0x242,FALSE)
+    setmetatile(7,0,0x869,TRUE)
+        setmetatile(7,1,0x871,TRUE)
+        setmetatile(7,2,0x82F,FALSE)
+        setmetatile(7,3,0x842,FALSE)
         special(DrawWholeMapView)
 }
 

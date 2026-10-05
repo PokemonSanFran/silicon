@@ -2579,24 +2579,6 @@ const struct SideQuest sSideQuests[QUEST_COUNT] =
                 .x = 9,
                 .y = 19,
             },
-            [STATE_QUEST_RPS_STREAK_9] =
-            {
-                .name = COMPOUND_STRING("Streak 9"),
-                .setupFunc = DebugQuest_RPS,
-                side_quest_map(MAP_CAPHE_CITY),
-                .warpId = WARP_ID_NONE,
-                .x = 9,
-                .y = 19,
-            },
-            [STATE_QUEST_RPS_STREAK_10] =
-            {
-                .name = COMPOUND_STRING("Streak 10"),
-                .setupFunc = DebugQuest_RPS,
-                side_quest_map(MAP_CAPHE_CITY),
-                .warpId = WARP_ID_NONE,
-                .x = 9,
-                .y = 19,
-            },
             [STATE_QUEST_RPS_REWARD] =
             {
                 .name = COMPOUND_STRING("Ready For Dice"),

@@ -1,18 +1,4 @@
 const PLAYER = OBJ_EVENT_ID_PLAYER
-const ARNAV = 1
-const TECHIE = 2
-const CHARLOTTE = 4
-const LUCREZIA = 5
-const CHIEF = 6
-const RAMESH = 7
-const KEIYING = 8
-
-const FLAG_HIDE_NERDS_COPS = FLAG_TEMP_1
-const FLAG_HIDE_OLIVER = FLAG_TEMP_2
-const FLAG_HIDE_CHARLOTTE = FLAG_TEMP_3
-const FLAG_HIDE_LUCREZIA = FLAG_TEMP_4
-const FLAG_HIDE_RAMESH = FLAG_TEMP_5
-const FLAG_HIDE_KEIYING = FLAG_TEMP_6
 
 script TheGangsAllHere_ObjectCleanUp_Script
 {
@@ -31,12 +17,11 @@ script TheGangsAllHere_MidMission_Object_Script
 
 script TheGangsAllHere_ObjectSetup_Script
 {
-    setflag(FLAG_HIDE_NERDS_COPS)
-    setflag(FLAG_HIDE_CHARLOTTE)
-    setflag(FLAG_HIDE_RAMESH)
-    setflag(FLAG_HIDE_KEIYING)
-    setobjectxy(LUCREZIA,5,56)
-    setobjectxyperm(LUCREZIA,5,56)
+	setobjectflagfromlocalid(LOCALID_SHARPRISE_CHARLOTTE)
+	setobjectflagfromlocalid(LOCALID_LEAGUEOPS_RAMESH)
+	setobjectflagfromlocalid(LOCALID_LEAGUEOPS_KEIYING)
+    setobjectxy(LOCALID_SHARPRISE_LUCREZIA,5,56)
+    setobjectxyperm(LOCALID_SHARPRISE_LUCREZIA,5,56)
 }
 
 script TheGangsAllHere_MoveOliverToStairs_Script
@@ -168,13 +153,13 @@ script TheGangsAllHere_ComeOnIn_Dialogue
 
     waitmovement(OBJ_EVENT_ID_NPC_FOLLOWER)
     waitmovement(PLAYER)
-    applymovement(LUCREZIA,Common_Movement_ExclamationMark)
-    waitmovement(LUCREZIA)
-    applymovement(LUCREZIA, moves(walk_right * 2, walk_up * 3, walk_left, face_up, step_end))
+    applymovement(LOCALID_SHARPRISE_LUCREZIA,Common_Movement_ExclamationMark)
+    waitmovement(LOCALID_SHARPRISE_LUCREZIA)
+    applymovement(LOCALID_SHARPRISE_LUCREZIA, moves(walk_right * 2, walk_up * 3, walk_left, face_up, step_end))
 
     msgbox(format("{PLAYER}! Oliver! I just finished an email! Glad you're both here, and excellent timing that you ran into each other."),,SPEAKER_LUCREZIA_BEFORE)
     closemessage
-    waitmovement(LUCREZIA)
+    waitmovement(LOCALID_SHARPRISE_LUCREZIA)
 
     msgbox(format("As you asked, I have your package from Emrys."),,SPEAKER_OLIVER)
     closemessage
@@ -217,8 +202,8 @@ script TheGangsAllHere_NotIntentionally_Dialogue{
 
 script TheGangsAllHere_GivePrestoApp_Script{
     applymovement(PLAYER,Common_Movement_FaceDown)
-    applymovement(LUCREZIA, moves(walk_left, face_up, walk_in_place_up, step_end))
-    waitmovement(LUCREZIA)
+    applymovement(LOCALID_SHARPRISE_LUCREZIA, moves(walk_left, face_up, walk_in_place_up, step_end))
+    waitmovement(LOCALID_SHARPRISE_LUCREZIA)
     call(EventScript_InstallPrestoApp)
     goto(TheGangsAllHere_GivePrestoApp_Dialogue)
     end
@@ -262,11 +247,11 @@ script TheGangsAllHere_EndScene_Dialogue{
     closemessage
 
     applymovement(PLAYER, moves(delay_16 * 2, face_up, step_end))
-    applymovement(LUCREZIA, moves(walk_right, walk_up * 8, step_end))
+    applymovement(LOCALID_SHARPRISE_LUCREZIA, moves(walk_right, walk_up * 8, step_end))
     applymovement(OBJ_EVENT_ID_NPC_FOLLOWER, moves(walk_up * 8, step_end))
     waitmovement(OBJ_EVENT_ID_NPC_FOLLOWER)
     fadedefaultbgm
-    removeobject(LUCREZIA)
+    removeobject(LOCALID_SHARPRISE_LUCREZIA)
     destroyfollowernpc
     addvar(VAR_STORYLINE_STATE,1)
     setvar(VAR_TEMP_0,0)

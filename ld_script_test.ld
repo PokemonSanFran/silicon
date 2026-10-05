@@ -1,6 +1,9 @@
 ENTRY(Start)
 
-gNumMusicPlayers = 4;
+/* Start phenomenon */
+/* gNumMusicPlayers = 4; */
+gNumMusicPlayers = 5;
+/* End phenomenon */
 gMaxLines = 0;
 gInitialMainCB2 = CB2_TestRunner;
 

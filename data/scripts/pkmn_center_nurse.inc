@@ -3,10 +3,12 @@ Common_EventScript_PkmnCenterNurse::
 	faceplayer
     copyvar VAR_0x8004, VAR_LAST_TALKED // siliconMerge
 	setvar VAR_0x8004, 0
+.if !IS_FRLG
 	specialvar VAR_RESULT, CountPlayerTrainerStars
 	goto_if_eq VAR_RESULT, 4, EventScript_PkmnCenterNurse_GoldCard
+.endif
     // Start Speedy Nurse
-	//msgbox gText_WouldYouLikeToRestYourPkmn, MSGBOX_YESNO, SPEAKER_NURSE
+	//msgbox gText_WouldYouLikeToRestYourPkmn, MSGBOX_YESNO 
     setvar VAR_RESULT, YES
     // End Speedy Nurse
 	goto_if_eq VAR_RESULT, YES, EventScript_PkmnCenterNurse_HealPkmn

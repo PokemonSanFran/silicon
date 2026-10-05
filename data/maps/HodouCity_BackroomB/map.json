@@ -76,5 +76,6 @@
     }
   ],
   "coord_events": [],
-  "bg_events": []
+  "bg_events": [],
+  "night_music": "MUS_HODOU_CITY_NIGHT"
 }

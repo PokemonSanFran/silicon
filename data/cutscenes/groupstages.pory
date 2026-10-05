@@ -33,7 +33,7 @@ script GroupStages_Skybox_ObjectSetup_Script {
 
 script GroupStages_GreetBeforeStart_Dialogue {
     lock
-        playbgm(MUS_ENCOUNTER_BRENDAN,TRUE)
+        playbgm(MUS_CHARLOTTE,TRUE)
         applymovement(CHARLOTTE, moves(walk_down * 6, face_left, step_end))
         waitmovement(CHARLOTTE)
         applymovement(PLAYER,Common_Movement_FaceRight)

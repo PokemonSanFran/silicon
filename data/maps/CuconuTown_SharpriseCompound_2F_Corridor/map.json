@@ -1,0 +1,102 @@
+{
+  "id": "MAP_CUCONU_TOWN_SHARPRISE_COMPOUND_2F_CORRIDOR",
+  "name": "CuconuTown_SharpriseCompound_2F_Corridor",
+  "layout": "LAYOUT_CUCONU_TOWN_SHARPRISE_COMPOUND_2F_CORRIDOR",
+  "music": "MUS_CUCUNO_TOWN",
+  "region_map_section": "MAPSEC_CUCONU_TOWN",
+  "requires_flash": false,
+  "weather": "WEATHER_NONE",
+  "map_type": "MAP_TYPE_NONE",
+  "allow_cycling": false,
+  "allow_escaping": false,
+  "allow_running": false,
+  "show_map_name": false,
+  "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
+  "connections": null,
+  "object_events": [],
+  "warp_events": [
+    {
+      "warp_id": "WARP_ID_COMPOUND_2F_TO_1F",
+      "x": 14,
+      "y": 2,
+      "elevation": 0,
+      "dest_map": "MAP_CUCONU_TOWN_SHARPRISE_COMPOUND_1F",
+      "dest_warp_id": "WARP_ID_COMPOUND_1F_TO_2F"
+    },
+    {
+      "warp_id": "WARP_ID_COMPOUND_2F_TO_BEDROOM",
+      "x": 6,
+      "y": 2,
+      "elevation": 0,
+      "dest_map": "MAP_CUCONU_TOWN_SHARPRISE_COMPOUND_2F",
+      "dest_warp_id": "WARP_ID_COMPOUND_BEDROOM_TO_2F"
+    }
+  ],
+  "coord_events": [],
+  "bg_events": [
+    {
+      "type": "sign",
+      "x": 4,
+      "y": 3,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "CuconuTown_SharpriseCompound_2F_Dialogue_Statue"
+    },
+    {
+      "type": "sign",
+      "x": 5,
+      "y": 3,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "CuconuTown_SharpriseCompound_2F_Dialogue_Statue"
+    },
+    {
+      "type": "sign",
+      "x": 11,
+      "y": 3,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "CuconuTown_SharpriseCompound_2F_Dialogue_Statue"
+    },
+    {
+      "type": "sign",
+      "x": 12,
+      "y": 3,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "CuconuTown_SharpriseCompound_2F_Dialogue_Statue"
+    },
+    {
+      "type": "sign",
+      "x": 0,
+      "y": 2,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "CuconuTown_SharpriseCompound_2F_Dialogue_Bookcase"
+    },
+    {
+      "type": "sign",
+      "x": 1,
+      "y": 2,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "CuconuTown_SharpriseCompound_2F_Dialogue_Bookcase"
+    },
+    {
+      "type": "sign",
+      "x": 2,
+      "y": 2,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "CuconuTown_SharpriseCompound_2F_Dialogue_CharlotteDoor"
+    },
+    {
+      "type": "sign",
+      "x": 10,
+      "y": 2,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "CuconuTown_SharpriseCompound_2F_Dialogue_LockDoor"
+    }
+  ]
+}

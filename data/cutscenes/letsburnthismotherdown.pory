@@ -217,7 +217,7 @@ script LetsBurnThisMotherDown_PostBattle_Dialogue
 
     clearflag(FLAG_HIDE_CHARLOTTE_ARANTRAZ)
     addobject(CHARLOTTE_ARANTRAZ)
-    playbgm(MUS_ENCOUNTER_BRENDAN,TRUE)
+    playbgm(MUS_CHARLOTTE,TRUE)
     applymovement(6, moves(walk_down * 4))
     waitmovement(0)
 

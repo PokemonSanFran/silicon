@@ -49,5 +49,6 @@
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_NORTH",
       "script": "HodouCity_Racisthouse_Scroll_Script"
     }
-  ]
+  ],
+  "night_music": "MUS_HODOU_CITY_NIGHT"
 }

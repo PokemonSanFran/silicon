@@ -1,33 +1,25 @@
 const PLAYER = OBJ_EVENT_ID_PLAYER
-const ARNAV = 1
-const TECHIE = 2
-const OLIVER = 3
-const CHARLOTTE = 4
-const LUCREZIA = 5
-const CHIEF = 6
-const RAMESH = 7
-const KEIYING = 8
+const LOCALID_LEAGUEOPS_CHIEF = LOCALID_CAMERA + 6
 
-const FLAG_HIDE_NERDS_COPS = FLAG_TEMP_1
-const FLAG_HIDE_OLIVER = FLAG_TEMP_2
-const FLAG_HIDE_CHARLOTTE = FLAG_TEMP_3
-const FLAG_HIDE_LUCREZIA = FLAG_TEMP_4
-const FLAG_HIDE_RAMESH = FLAG_TEMP_5
-const FLAG_HIDE_KEIYING = FLAG_TEMP_6
+script YouHaveYourOrders_Script_MoveLucreziaToKeiyingOffice
+{
+	setobjectxy(LOCALID_SHARPRISE_LUCREZIA,35,56)
+	setobjectxyperm(LOCALID_SHARPRISE_LUCREZIA,35,56)
+	setobjectmovementtype(LOCALID_SHARPRISE_LUCREZIA,MOVEMENT_TYPE_FACE_UP)
+}
+
+script YouHaveYourOrders_Script_AddChief
+{
+    spawnobject(OBJ_EVENT_GFX_MART_EMPLOYEE,LOCALID_LEAGUEOPS_CHIEF,34,53,MOVEMENT_TYPE_FACE_DOWN,3)
+}
 
 script YouHaveYourOrders_ObjectSetUp_Script
 {
-        setobjectxy(CHIEF,34,53)
-        setobjectxyperm(CHIEF,34,53)
-        setobjectmovementtype(CHIEF,MOVEMENT_TYPE_FACE_DOWN)
+	call_if_quest_reward(QUEST_HOWDISAPPOINTING,YouHaveYourOrders_Script_MoveLucreziaToKeiyingOffice)
 
-        setobjectxy(LUCREZIA,35,56)
-        setobjectxyperm(LUCREZIA,35,56)
-        setobjectmovementtype(LUCREZIA,MOVEMENT_TYPE_FACE_UP)
-
-        setobjectxy(CHARLOTTE,33,53)
-        setobjectxyperm(CHARLOTTE,33,53)
-        setobjectmovementtype(CHARLOTTE,MOVEMENT_TYPE_FACE_DOWN)
+	setobjectxy(LOCALID_SHARPRISE_CHARLOTTE,33,53)
+	setobjectxyperm(LOCALID_SHARPRISE_CHARLOTTE,33,53)
+	setobjectmovementtype(LOCALID_SHARPRISE_CHARLOTTE,MOVEMENT_TYPE_FACE_DOWN)
 }
 
 script YouHaveYourOrders_Interact_Keiying_Script
@@ -76,7 +68,7 @@ script YouHaveYourOrders_Assignment_Dialogue
       }
     closemessage
 
-    applymovement(KEIYING, moves(walk_left * 2, walk_right * 2, walk_left * 2, walk_right * 2, face_player))
+    applymovement(LOCALID_LEAGUEOPS_KEIYING, moves(walk_left * 2, walk_right * 2, walk_left * 2, walk_right * 2, face_player))
     waitmovement(0)
 
     msgbox(format("Law enforcement has confirmed the old Gyms have been repurposed as The Tide recruitment and training centers.The city has loaned us enough officers to perform three simultaneous raids."),,SPEAKER_KEIYING)
@@ -98,7 +90,7 @@ script YouHaveYourOrders_Assignment_Dialogue
 
       call_if_quest_complete(QUEST_RESTORETIRABUDINGYM,YouHaveYourOrders_GymQuestionDialogue)
 
-    applymovement(KEIYING,Common_Movement_FaceDown)
+    applymovement(LOCALID_LEAGUEOPS_KEIYING,Common_Movement_FaceDown)
         waitmovement(0)
 
         msgbox(format("Thank you, as usual. I sometimes wonder who is actually benefiting from this relationship."),,SPEAKER_KEIYING)
@@ -107,7 +99,7 @@ script YouHaveYourOrders_Assignment_Dialogue
 
         closemessage
 
-        applymovement(KEIYING,Common_Movement_FacePlayer)
+        applymovement(LOCALID_LEAGUEOPS_KEIYING,Common_Movement_FacePlayer)
 
         msgbox(format("In case you haven't already heard, I used to be the leader of the HodouCity Gym."),,SPEAKER_KEIYING)
 
@@ -125,7 +117,7 @@ script YouHaveYourOrders_Assignment_Dialogue
 
         msgbox(format("At the time? No. I believed - I believe I did the right thing. But it is a piece of my past that I miss. I left it behind to pursue something bigger, and there's a little bit of guilt there, you know?"),,SPEAKER_KEIYING)
 
-        applymovement(KEIYING,Common_Movement_FaceDown)
+        applymovement(LOCALID_LEAGUEOPS_KEIYING,Common_Movement_FaceDown)
         waitmovement(0)
 
       msgbox(format("I could go shut down that Gym, but I'm a coward. I don't have the Nuggets to go and destroy what I helped create."),,SPEAKER_KEIYING)

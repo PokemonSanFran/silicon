@@ -34,7 +34,6 @@ static u32 CalculateEggPickupCost(void);
 static void LoadEggContents(u32 mode);
 static u32 CountChangedIndividualValues(void);
 static u32 CalculateStatChangeCost(void);
-static void SetupEggMon(struct Pokemon *mon);
 
 bool32 DoesPlayerHaveSpaceForWelcomeKit(void)
 {
@@ -306,9 +305,9 @@ void MarkMonForEffortValuePerk(struct Pokemon *egg)
     SetMonData(egg,MON_DATA_GETS_SILICON_BREEDING_PERKS,&getsPerk);
 }
 
-void ApplyEffortValuePerk(struct Pokemon *temp, struct Pokemon *egg)
+void ApplyEffortValuePerk(struct Pokemon *egg)
 {
-    if (!GetMonData(temp,MON_DATA_GETS_SILICON_BREEDING_PERKS))
+    if (!GetMonData(egg,MON_DATA_GETS_SILICON_BREEDING_PERKS))
         return;
 
     u32 species = GetMonData(egg,MON_DATA_SPECIES);
@@ -476,15 +475,14 @@ void Script_GetGeneEditingCostCode(void)
 
 void EditPokemonIndividualValues(void)
 {
-    struct DayCare *daycare = &gSaveBlock1Ptr->daycare;
-    struct Pokemon *mon = &daycare->viewMon;
     struct Pokemon *old = &gParties[B_TRAINER_PLAYER][gSpecialVar_0x8004];
+    struct Pokemon *mon = &gParties[B_TRAINER_OPPONENT_A][0];
 
     ZeroMonData(mon);
     CopyMon(mon,old,sizeof(struct Pokemon));
 
-    if (GetMonData(mon,MON_DATA_IS_EGG) == TRUE)
-        SetupEggMon(mon);
+    if (GetMonData(old,MON_DATA_IS_EGG) == TRUE)
+        AddHatchedMonToParty(PARTY_SIZE);
 
     ShowPokemonSummaryScreen(SUMMARY_MODE_EDIT_IVS, mon, 0, 0, CB2_ReturnToFieldContinueScriptPlayMapMusic);
 }
@@ -492,10 +490,8 @@ void EditPokemonIndividualValues(void)
 void CompareOldNewIndividualValues(void)
 {
     u32 changedCount = 0;
-    struct DayCare *daycare = &gSaveBlock1Ptr->daycare;
-    struct Pokemon *mon = &daycare->viewMon;
+    struct Pokemon *mon = &gParties[B_TRAINER_OPPONENT_A][0];
     struct Pokemon *old = &gParties[B_TRAINER_PLAYER][gSpecialVar_0x8004];
-    //Debug_RandomizeMonInidividualValues(mon);
 
     for (u32 statIndex = 0; statIndex < NUM_STATS; statIndex++)
     {
@@ -516,8 +512,7 @@ void CompareOldNewIndividualValues(void)
 
 void FinalizeIndividualValueChanges(void)
 {
-    struct DayCare *daycare = &gSaveBlock1Ptr->daycare;
-    struct Pokemon *new = &daycare->viewMon;
+    struct Pokemon *new = &gParties[B_TRAINER_OPPONENT_A][0];
     struct Pokemon *old = &gParties[B_TRAINER_PLAYER][gSpecialVar_0x8004];
 
     for (u32 statIndex = 0; statIndex < NUM_STATS; statIndex++)
@@ -573,11 +568,11 @@ void EditEggContents(void)
 static void LoadEggContents(u32 mode)
 {
     struct DayCare *daycare = &gSaveBlock1Ptr->daycare;
-    struct Pokemon *mon = &daycare->viewMon;
+    struct Pokemon *mon = &gParties[B_TRAINER_OPPONENT_A][0];
 
     ZeroMonData(mon);
     BoxMonToMon(&daycare->daycareEgg[GetFirstPopulatedEggIndex()].egg, mon);
-    SetupEggMon(mon);
+    AddHatchedMonToParty(PARTY_SIZE);
 
     ShowPokemonSummaryScreen(mode, mon, 0, 0, CB2_ReturnToFieldContinueScriptPlayMapMusic);
 }
@@ -620,31 +615,6 @@ void ResetUnhatchedMonEgg(void)
          stat = daycare->daycareEgg[eggIndex].originalIv[statIndex];
          SetBoxMonData(mon,MON_DATA_HP_IV + statIndex, &stat);
     }
-}
-
-static void SetupEggMon(struct Pokemon *mon)
-{
-    struct Pokemon *temp = &gParties[B_TRAINER_OPPONENT_A][1];
-    CreateHatchedMon(mon, temp);
-
-    bool32 isEgg = 0x46;
-    SetMonData(mon, MON_DATA_IS_EGG, &isEgg);
-
-    u8 name[POKEMON_NAME_LENGTH + 1];
-    u16 species = GetMonData(mon, MON_DATA_SPECIES);
-    StringCopy(name, GetSpeciesName(species));
-    SetMonData(mon, MON_DATA_NICKNAME, name);
-
-    GetMonNickname(mon, gStringVar1);
-
-    u16 metLevel = 0;
-    SetMonData(mon, MON_DATA_MET_LEVEL, &metLevel);
-
-    u8 metLocation = GetCurrentRegionMapSectionId();
-    SetMonData(mon, MON_DATA_MET_LOCATION, &metLocation);
-
-    MonRestorePP(mon);
-    CalculateMonStats(mon);
 }
 
 void BufferMonNicknameOrEggName(void)

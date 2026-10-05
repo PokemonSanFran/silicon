@@ -16,7 +16,7 @@ script TheStrikeStrikesBack_Script_AddOliverCharlotte
 
 script TheStrikeStrikesBack_UnblockConstruction_Script
 {
-    setmetatile(21,19,0x211,FALSE)
+    setmetatile(21,19,0x811,FALSE)
     special(DrawWholeMapView)
 }
 
@@ -115,6 +115,9 @@ script TheStrikeStrikesBack_Intro_Dialogue
             applymovement(LOCALID_ROUTE2_VIGRIM,TheStrikeStrikesBack_WalkOutFrame)
             applymovement(LOCALID_ROUTE2_TIDE_A,TheStrikeStrikesBack_WalkOutFrame)
             applymovement(LOCALID_ROUTE2_TIDE_B,TheStrikeStrikesBack_WalkOutFrame)
+            removeobject(LOCALID_ROUTE2_VIGRIM)
+            removeobject(LOCALID_ROUTE2_TIDE_A)
+            removeobject(LOCALID_ROUTE2_TIDE_B)
             applymovement(LOCALID_ROUTE2_CHARLOTTE,Common_Movement_FaceLeft)
             applymovement(PLAYER,Common_Movement_FaceDown)
             applymovement(LOCALID_ROUTE2_POLICE_A,Common_Movement_FaceDown)

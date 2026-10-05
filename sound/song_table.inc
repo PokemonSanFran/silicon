@@ -2,7 +2,8 @@
 	.equiv MUSIC_PLAYER_SE1,1
 	.equiv MUSIC_PLAYER_SE2,2
 	.equiv MUSIC_PLAYER_SE3,3
-
+	.equiv MUSIC_PLAYER_SE4,4 @ phenomenon
+ 
 	.align 2
 
 gSongTable::
@@ -276,10 +277,12 @@ gSongTable::
 	song se_pike_curtain_close, MUSIC_PLAYER_SE1, 1
 	song se_pike_curtain_open, MUSIC_PLAYER_SE1, 1
 	song se_sudowoodo_shake, MUSIC_PLAYER_SE1, 1
-	song dummy_song_header, MUSIC_PLAYER_BGM, 0
-	song dummy_song_header, MUSIC_PLAYER_BGM, 0
-	song dummy_song_header, MUSIC_PLAYER_BGM, 0
-	song dummy_song_header, MUSIC_PLAYER_BGM, 0
+  @ Start phenomenon
+	song se_shaking_grass, MUSIC_PLAYER_SE4, 4
+	song se_rippling_water, MUSIC_PLAYER_SE4, 4
+	song se_flapping_wings, MUSIC_PLAYER_SE4, 4
+	song se_cave_dust, MUSIC_PLAYER_SE4, 4
+  @ End phenomenon
 	song dummy_song_header, MUSIC_PLAYER_BGM, 0
 	song dummy_song_header, MUSIC_PLAYER_BGM, 0
 	song dummy_song_header, MUSIC_PLAYER_BGM, 0
@@ -627,7 +630,7 @@ gSongTable::
 	song mus_route6_night, MUSIC_PLAYER_BGM, 0
 	song mus_gym_halerba, MUSIC_PLAYER_BGM, 0
 	song mus_route_1_5_7_night, MUSIC_PLAYER_BGM, 0
-	song mus_pintillion_route_14_16, MUSIC_PLAYER_BGM, 0
+	song mus_pintillion_route_14_16_night, MUSIC_PLAYER_BGM, 0
 	song mus_warehouse_rave, MUSIC_PLAYER_BGM, 0
 	song mus_baker_cook_street_vendor_barista, MUSIC_PLAYER_BGM, 0
 	song mus_ramesh_house, MUSIC_PLAYER_BGM, 0
@@ -671,6 +674,9 @@ gSongTable::
 	song mus_vigrim, MUSIC_PLAYER_BGM, 0
 	song mus_caphe_city_night, MUSIC_PLAYER_BGM, 0
 	song mus_charlotte, MUSIC_PLAYER_BGM, 0
+	song mus_vs_silicon_gym_leader, MUSIC_PLAYER_BGM, 0
+	song mus_halerba_city_night, MUSIC_PLAYER_BGM, 0
+	song mus_hodou_city_night, MUSIC_PLAYER_BGM, 0
 	song ph_trap_blend, MUSIC_PLAYER_SE2, 2
 	song ph_trap_held, MUSIC_PLAYER_SE2, 2
 	song ph_trap_solo, MUSIC_PLAYER_SE2, 2

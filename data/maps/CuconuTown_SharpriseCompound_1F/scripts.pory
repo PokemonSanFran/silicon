@@ -15,6 +15,11 @@ mapscripts CuconuTown_SharpriseCompound_1F_MapScripts
         call_if_eq(VAR_PLAYER_HOME_STATE,NEXT_DAY_CHAMPIONSHIP,AaandWereBack_ObjectHide_Script)
     }
 
+    MAP_SCRIPT_ON_WARP_INTO_MAP_TABLE
+    [
+        VAR_STORYLINE_STATE,STORY_DEFEATED_GARBODOR:VSGarbodor_ReturnToTheCompound_Script_TurnPlayer
+    ]
+
     MAP_SCRIPT_ON_FRAME_TABLE
     [
         VAR_PLAYER_HOME_STATE, HAS_NOT_MET_CHARLOTTE: ImProbablyBetterThanYou_CharlotteIntro_Dialogue
@@ -104,5 +109,42 @@ script CuconuTown_SharpriseCompound_1F_Dialogue_FavoriteFood
 	msgbox(format("You and your Pokemon thought the food was delicious!"))
 	closemessage
 	releaseall
+	end
+}
+
+
+script CuconuTown_SharpriseCompound_1F_Dialogue_FancyTV
+{
+	lock
+	msgbox(format("It's a flat-screen TV.\nFancy."), MSGBOX_DEFAULT)
+	closemessage
+	release
+	end
+}
+
+script CuconuTown_SharpriseCompound_1F_Dialogue_Fridge
+{
+	lock
+	msgbox(format("The fridge is well-stocked."), MSGBOX_DEFAULT)
+	closemessage
+	release
+	end
+}
+
+script CuconuTown_SharpriseCompound_1F_Dialogue_Sink
+{
+	lock
+	msgbox(format("I don't need to wash my hands right now."), MSGBOX_DEFAULT,SPEAKER_PLAYER,TAIL_THOUGHT)
+	closemessage
+	release
+	end
+}
+
+script CuconuTown_SharpriseCompound_Dialogue_Bin
+{
+	lock
+	msgbox(format("Empty."), MSGBOX_DEFAULT)
+	closemessage
+	release
 	end
 }

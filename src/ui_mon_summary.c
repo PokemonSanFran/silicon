@@ -2673,7 +2673,12 @@ static void InfosPageMisc_PrintTextBox(void)
     {
         ConvertUIntToDecimalStringN(gStringVar1, mon->metLevel, STR_CONV_MODE_LEFT_ALIGN, CountDigits(MAX_LEVEL));
         GetMapName(gStringVar2, mon->metLocation, 0);
-        StringExpandPlaceholders(gStringVar4, COMPOUND_STRING("Met at {LV} {STR_VAR_1}, {STR_VAR_2}."));
+        if (mon->metLevel != 0)
+            StringExpandPlaceholders(gStringVar4, COMPOUND_STRING("Met at {LV} {STR_VAR_1}, {STR_VAR_2}."));
+        else if (mon->isEgg == TRUE)
+            StringExpandPlaceholders(gStringVar4, COMPOUND_STRING("Received as an unhatched egg."));
+        else 
+            StringExpandPlaceholders(gStringVar4, COMPOUND_STRING("Hatched at {STR_VAR_2}."));
         SummaryPrint_AddText(SUMMARY_MAIN_WIN_PAGE_TEXT, FONT_NORMAL, x, y, color, gStringVar4);
     }
     else

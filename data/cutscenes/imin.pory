@@ -96,7 +96,7 @@ script ImIn_SaveCharlotte_Object_Script{
 
 script ImIn_RevealLucreziaWarp_Script{
     if (var(VAR_TOWER_RAID_STATE) > SAVE_CHARLOTTE_SHARPRISESPIRE){
-        setmetatile(10,55,0x2DF,FALSE)
+        setmetatile(10,55,0x8DF,FALSE)
         special(DrawWholeMapView)
     }
     return
@@ -254,7 +254,7 @@ script ImIn_StartHouseBreak_Script
 
 script ImIn_UnlockDoor_Script
 {
-    setmetatile(11,6,0x228,TRUE)
+    setmetatile(11,6,0x828,TRUE)
     special(DrawWholeMapView)
 }
 

@@ -36,7 +36,7 @@ script ImProbablyBetterThanYou_CharlotteIntro_Dialogue {
         applymovement(PLAYER,Common_Movement_WalkUp)
         waitmovement(0)
         lock
-        playbgm(MUS_ENCOUNTER_BRENDAN,TRUE)
+        playbgm(MUS_CHARLOTTE,TRUE)
         playse(SE_PIN)
         applymovement(SHARPRISE_COMPOUND_1F_CHARLOTTE,Common_Movement_ExclamationMark)
         waitmovement(0)

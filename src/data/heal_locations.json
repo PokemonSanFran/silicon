@@ -377,7 +377,7 @@
     {
       "id": "HEAL_LOCATION_ROUTE5",
       "map": "MAP_ROUTE5",
-      "x": 10,
+      "x": 30,
       "y": 8
     },
     {
@@ -521,8 +521,8 @@
     {
       "id": "HEAL_LOCATION_ROUTE10",
       "map": "MAP_ROUTE10",
-      "x": 5,
-      "y": 10
+      "x": 14,
+      "y": 36
     },
     {
       "id": "HEAL_LOCATION_PERLACIA_CITY",
@@ -539,8 +539,8 @@
     {
       "id": "HEAL_LOCATION_CUCONU_TOWN_COMPOUND_2F",
       "map": "MAP_CUCONU_TOWN_SHARPRISE_COMPOUND_1F",
-      "x": 8,
-      "y": 2
+      "x": 6,
+      "y": 6
     },
     {
       "id": "HEAL_LOCATION_QIU_VILLAGE",
@@ -773,8 +773,8 @@
     {
       "id": "HEAL_LOCATION_ROUTE10_FRLG",
       "map": "MAP_ROUTE10",
-      "x": 13,
-      "y": 21,
+      "x": 14,
+      "y": 36,
       "respawn_map": "MAP_ROUTE10_POKEMON_CENTER_1F",
       "respawn_npc": "LOCALID_ROUTE10_NURSE"
     },
