@@ -43,42 +43,28 @@ script SiliconFrontier_BattleStudio_Script_FacePlayerAttendant
 script BattleStudio_Script_DescribeRoulette
 {
     callnative(Script_Buffer_GetCursorSpeed)
-    msgbox(format("The roulette's current speed is {STR_VAR_1}."),,SPEAKER_BATTLE_STUDIO)
-    if (var(LOCAL_VAR_ROULETTE_DATA) == ARCADE_SPEED_LEVEL_MIN)
-    {
-        msgbox(format("This is the lowest speed."),,SPEAKER_BATTLE_STUDIO)
-    }
-    if (var(LOCAL_VAR_ROULETTE_DATA) == ARCADE_SPEED_LEVEL_4)
-    {
-        msgbox(format("This is the default speed."),,SPEAKER_BATTLE_STUDIO)
-    }
-    if (var(LOCAL_VAR_ROULETTE_DATA) == ARCADE_SPEED_LEVEL_MAX)
-    {
-        msgbox(format("This is the fastest speed."),,SPEAKER_BATTLE_STUDIO)
-    }
+    call(BattleStudio_Dialogue_DescribeRouletteSpeed)
 
     callnative(Script_IsCursorRandom)
-    if (var(LOCAL_VAR_ROULETTE_DATA) == TRUE)
-    {
-        msgbox(format("The cursor is in Random mode, meaning it will randomly move around the Game Board."),,SPEAKER_BATTLE_STUDIO)
-    }
+    call_if_eq(LOCAL_VAR_ROULETTE_DATA,TRUE,BattleStudio_Dialogue_DescribeRouletteRandom)
+
     callnative(Script_GetBerryItemArcade)
-    msgbox(format("If the roulette event is Give Berry, the recieving side will be loaned {STR_VAR_1}. If the roulette event is Give Item, the recieving side will be loaned {STR_VAR_2}."),,SPEAKER_BATTLE_STUDIO)
-    buffernumberstring(STR_VAR_1,SILICON_FRONTIER_STREAK_LENGTH_BOSS)
-    msgbox(format("The roulette's properties are reset every {STR_VAR_1} battles."),,SPEAKER_BATTLE_STUDIO)
+    buffernumberstring(STR_VAR_3,SILICON_FRONTIER_STREAK_LENGTH_BOSS)
+    call(BattleStudio_Dialogue_DescribeItemBerry)
+
     goto(BattleStudio_Script_AskRoulette)
 }
 
 script BattleStudio_Script_AskRoulette
 {
-    msgbox(format("Would you like to learn about specific Roulette Events?"),MSGBOX_YESNO,SPEAKER_BATTLE_STUDIO)
+    call(BattleStudio_Dialogue_AskRoulette)
     goto_if_eq(VAR_RESULT,NO,SiliconFrontier_Script_BattleMenu)
     goto(BattleStudio_Script_ShowEventList)
 }
 
 script BattleStudio_Script_ShowEventList
 {
-    msgbox(format("Which event would you like to learn about?"),,SPEAKER_BATTLE_STUDIO)
+    call(BattleStudio_Dialogue_AskEventList)
     dynmultichoice(0,0,FALSE,3,0,DYN_MULTICHOICE_CB_SHOW_ARCADE_EVENT,
             "Lower HP",
             "Poison",
@@ -114,79 +100,6 @@ script BattleStudio_Script_ShowEventList
             "Sea of Fire",
             "Original Item",
             "Never mind.")
-
-    switch(var(VAR_RESULT))
-    {
-    case ARCADE_EVENT_LOWER_HP:
-        msgbox(format("All of the Pokemon of the given side will lose 20% of their HP."),,SPEAKER_BATTLE_STUDIO)
-    case ARCADE_EVENT_POISON:
-        msgbox(format("All of the Pokemon of the given side will be poisoned."),,SPEAKER_BATTLE_STUDIO)
-    case ARCADE_EVENT_PARALYZE:
-        msgbox(format("All of the Pokemon of the given side will be laralyzed."),,SPEAKER_BATTLE_STUDIO)
-    case ARCADE_EVENT_BURN:
-        msgbox(format("All of the Pokemon of the given side will be burned."),,SPEAKER_BATTLE_STUDIO)
-    case ARCADE_EVENT_SLEEP:
-        msgbox(format("One randomly chosen Pokemon from each party of the given side will be asleep. If the randomly chosen Pokemon cannot be put to sleep, nothing happens! "),,SPEAKER_BATTLE_STUDIO)
-    case ARCADE_EVENT_FREEZE:
-        msgbox(format("One randomly chosen Pokemon from each party of the given side will be frozen. If the randomly chosen Pokemon cannot be put to sleep, nothing happens!"),,SPEAKER_BATTLE_STUDIO)
-    case ARCADE_EVENT_GIVE_BERRY:
-        msgbox(format("Every 10 battles, a berry is randomly chosen based on the length of your streak. When this event is selected, all of the Pokemon of the given side will be side will be given that berry. Every 10 battles, the berry is removed."),,SPEAKER_BATTLE_STUDIO)
-    case ARCADE_EVENT_GIVE_ITEM:
-        msgbox(format("Every 10 battles, an item is randomly chosen based on the length of your streak. When this event is selected, all of the Pokemon of the given side will be side will be given that item. Every 10 battles, the item is removed."),,SPEAKER_BATTLE_STUDIO)
-    case ARCADE_EVENT_LEVEL_UP:
-        msgbox(format("All of the Pokemon of the given side will gain 3 levels."),,SPEAKER_BATTLE_STUDIO)
-    case ARCADE_EVENT_SUN:
-        msgbox(format("The battle will be conducted under permanent harsh sunlight."),,SPEAKER_BATTLE_STUDIO)
-    case ARCADE_EVENT_RAIN:
-        msgbox(format("The battle will be conducted under permanent rain."),,SPEAKER_BATTLE_STUDIO)
-    case ARCADE_EVENT_SAND:
-        msgbox(format("The battle will be conducted under permanent sandstorm."),,SPEAKER_BATTLE_STUDIO)
-    case ARCADE_EVENT_SNOW:
-        msgbox(format("The battle will be conducted under permanent snow."),,SPEAKER_BATTLE_STUDIO)
-    case ARCADE_EVENT_FOG:
-        msgbox(format("The battle will be conducted under permanent fog."),,SPEAKER_BATTLE_STUDIO)
-    case ARCADE_EVENT_TRICK_ROOM:
-        msgbox(format("The battle will be conducted under permanent Trick Room."),,SPEAKER_BATTLE_STUDIO)
-    case ARCADE_EVENT_SWAP:
-        msgbox(format("One randomly chosen Pokemon from each party will be swapped with a Pokemon on the opposing side."),,SPEAKER_BATTLE_STUDIO)
-    case ARCADE_EVENT_SPEED_UP:
-        msgbox(format("The roulette speed will increase by one level."),,SPEAKER_BATTLE_STUDIO)
-    case ARCADE_EVENT_SPEED_DOWN:
-        msgbox(format("The roulette speed will decrease by one level."),,SPEAKER_BATTLE_STUDIO)
-    case ARCADE_EVENT_RANDOM:
-        msgbox(format("The roulette will randomly move between events."),,SPEAKER_BATTLE_STUDIO)
-    case ARCADE_EVENT_GIVE_BP_SMALL:
-        msgbox(format("The battle will award 1 extra Battle Point."),,SPEAKER_BATTLE_STUDIO)
-    case ARCADE_EVENT_NO_BATTLE:
-        msgbox(format("The battle is skipped."),,SPEAKER_BATTLE_STUDIO)
-    case ARCADE_EVENT_GIVE_BP_BIG:
-        msgbox(format("The battle will award 3 extra Battle Points."),,SPEAKER_BATTLE_STUDIO)
-    case ARCADE_EVENT_NO_EVENT:
-        msgbox(format("The battle occurs as normal."),,SPEAKER_BATTLE_STUDIO)
-    case ARCADE_EVENT_INVERSE:
-        msgbox(format("The battle has the type matchups reversed."),,SPEAKER_BATTLE_STUDIO)
-    case ARCADE_EVENT_GRAVITY:
-        msgbox(format("The battle will be conducted under permanently increasded gravity."),,SPEAKER_BATTLE_STUDIO)
-    case ARCADE_EVENT_MISTY:
-        msgbox(format("The battle will be conducted in permanent Misty Terrain."),,SPEAKER_BATTLE_STUDIO)
-    case ARCADE_EVENT_ELECTRIC:
-        msgbox(format("The battle will be conducted in permanent Electric Terrain."),,SPEAKER_BATTLE_STUDIO)
-    case ARCADE_EVENT_GRASSY:
-        msgbox(format("The battle will be conducted in permanent Grassy Terrain."),,SPEAKER_BATTLE_STUDIO)
-    case ARCADE_EVENT_PSYCHIC:
-        msgbox(format("The battle will be conducted in permanent Psychic Terrain."),,SPEAKER_BATTLE_STUDIO)
-    case ARCADE_EVENT_RAINBOW:
-        msgbox(format("The Pokemon of the given side will battle under the effects of a rainbow."),,SPEAKER_BATTLE_STUDIO)
-    case ARCADE_EVENT_SWAMP:
-        msgbox(format("The Pokemon of the given side will battle under the effects of a swamp."),,SPEAKER_BATTLE_STUDIO)
-    case ARCADE_EVENT_FIRE:
-        msgbox(format("The Pokemon of the given side will battle under the effects of a sea of fire."),,SPEAKER_BATTLE_STUDIO)
-    case ARCADE_EVENT_GIVE_HELD_ITEM:
-        msgbox(format("The battle will be conducted with the Pokemon of the given side recieving their original held items."),,SPEAKER_BATTLE_STUDIO)
-    case ARCADE_EVENT_COUNT:
-        goto(SiliconFrontier_Script_BattleMenu)
-    case MULTI_B_PRESSED:
-        goto(SiliconFrontier_Script_BattleMenu)
-    }
+    call(BattleStudio_Dialogue_DescribeEvent)
     goto(BattleStudio_Script_ShowEventList)
 }
