@@ -65,5 +65,6 @@ extern EWRAM_DATA struct MaxBattleStatusValues gRecordedMaxBattleStatusValues;
 u32 BattleStatusCriteria_CompileListForBattler(enum BattlerId, enum SiliconBattleStatuses *);
 u32 BattleStatusCriteria_GetMaxTotalListItems(void);
 const u8 *BattleStatusCriteria_GetFormattedName(enum BattlerId, enum SiliconBattleStatuses);
+const u8 *BattleStatusCriteria_GetDescription(enum SiliconBattleStatuses);
 
 #endif // GUARD_SILICON_BATTLE_STATUS_CRITERIA_H

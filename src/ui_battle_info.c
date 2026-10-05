@@ -14,6 +14,7 @@
 #include "task.h"
 #include "menu.h"
 #include "menu_helpers.h"
+#include "line_break.h"
 #include "item.h"
 #include "pokemon.h"
 #include "pokemon_icon.h"
@@ -160,7 +161,8 @@ struct BattleInfoData
     // status conditions list
     u8 statusCursor;
     u8 topLeftStatus;
-    u8 visualStatusCursor;
+    u8 visualStatusCursor:7;
+    u8 toggleStatusDesc:1;
     u8 numStatuses;
     enum SiliconBattleStatuses *statusList;
 };
@@ -225,6 +227,7 @@ static void BattleInfoSprite_CreateStatusCursor(void);
 static void BattleInfoText_UpdateHeader(void);
 static void BattleInfoText_UpdateStatStages(void);
 static void BattleInfoText_ShowMonStatusList(void);
+static void BattleInfoText_ShowStatusDescription(void);
 static void BattleInfoText_ShowOptionsPrompt(void);
 static void BattleInfoText_ShowTextbox(u32);
 static void BattleInfoText_UpdateFooter(void);
@@ -305,8 +308,8 @@ static const struct WindowTemplate sBattleInfo_WindowTemplates[] =
     [BI_WIN_TEXTBOX] =
     {
         .bg = BI_BG_TEXT_ALT,
-        .tilemapLeft = 1, .tilemapTop = 13,
-        .width = 18, .height = 4,
+        .tilemapLeft = 1, .tilemapTop = 11,
+        .width = 18, .height = 6,
     },
     DUMMY_WIN_TEMPLATE
 };
@@ -795,6 +798,14 @@ static void Task_BattleInfo_StatusListModeInput(u8 taskId)
         return;
     }
 
+    if (JOY_NEW(A_BUTTON))
+    {
+        PlaySE(SE_SELECT);
+        sBattleInfoDataPtr->toggleStatusDesc ^= 1;
+        BattleInfoText_ShowStatusDescription();
+        return;
+    }
+
     if (JOY_REPEAT(DPAD_UP))
     {
         BattleInfoInput_UpdateStatusCursor(MOVE_BACK);
@@ -1070,6 +1081,7 @@ static void BattleInfoMode_Set(enum BattleInfoModes mode)
         sBattleInfoDataPtr->statusCursor = 0;
         sBattleInfoDataPtr->topLeftStatus = 0;
         sBattleInfoDataPtr->visualStatusCursor = 0;
+        sBattleInfoDataPtr->toggleStatusDesc = 0;
         break;
     default:
         break;
@@ -1208,8 +1220,7 @@ static void BattleInfoInput_UpdateStatusCursor(s32 delta)
     sBattleInfoDataPtr->visualStatusCursor = visualPos;
 
     BattleInfoMode_Update();
-    CopyWindowToVram(BI_WIN_STATUS_LIST, COPYWIN_FULL);
-    CopyWindowToVram(BI_WIN_MAIN, COPYWIN_FULL);
+    BattleInfoText_ShowStatusDescription();
 }
 
 static void BattleInfoInput_SetGrid(u32 x, u32 y)
@@ -1309,6 +1320,7 @@ static void BattleInfoSprite_CreateHPBar(void)
     struct Sprite *sprite = &gSprites[*spriteId];
     sprite->sPartySlotIdx = -1;
     sprite->oam.objMode = ST_OAM_OBJ_BLEND;
+    sprite->oam.priority = 1;
     sprite->callback = SpriteCB_BattleInfo_HPBar;
 }
 
@@ -1332,6 +1344,7 @@ static void BattleInfoSprite_CreateTypeIcon(enum BattleInfoSprites id, enum Type
     sprite->sTypeIcon_Index = id == BI_SPRITE_TYPE_2; // either 0 or 1
     sprite->sTypeIcon_Type = -1;
     sprite->oam.objMode = ST_OAM_OBJ_BLEND;
+    sprite->oam.priority = 1;
     sprite->callback = SpriteCB_BattleInfo_TypeIcon;
 }
 
@@ -1542,6 +1555,23 @@ static void BattleInfoText_ShowMonStatusList(void)
     PutWindowTilemap(windowId);
 }
 
+static void BattleInfoText_ShowStatusDescription(void)
+{
+    if (!sBattleInfoDataPtr->toggleStatusDesc)
+    {
+        ClearStdWindowAndFrameToTransparent(BI_WIN_TEXTBOX, COPYWIN_FULL);
+    }
+    else
+    {
+        StringCopy(gStringVar4, BattleStatusCriteria_GetDescription(sBattleInfoDataPtr->statusList[sBattleInfoDataPtr->statusCursor]));
+        BreakStringAutomatic(gStringVar4, WindowWidthPx(BI_WIN_TEXTBOX), 3, FONT_SMALL, HIDE_SCROLL_PROMPT);
+        BattleInfoText_ShowTextbox(TASK_NONE);
+    }
+
+    CopyWindowToVram(BI_WIN_STATUS_LIST, COPYWIN_FULL);
+    CopyWindowToVram(BI_WIN_MAIN, COPYWIN_FULL);
+}
+
 static void BattleInfoText_PutOptionPromptTile(u32 tileNum, u32 x, u32 y)
 {
     BlitBitmapToWindow(
@@ -1596,10 +1626,15 @@ static void BattleInfoText_ShowTextbox(u32 taskId)
     DrawStdFrameWithCustomTileAndPalette(win, FALSE, sBattleInfoDataPtr->textboxTileNum, BI_STD_WIN_PALETTE_OFFSET);
     // typically i'd use TEXT_SKIP_DRAW here but for some ???? reason it keeps playing SE_SELECT when printed
     // this does NOT happen when using a proper text speed. it's so bizzare
-    AddTextPrinterParameterized6(win, FONT_SMALL, 0, 0, 0, 0, sBattleInfo_TextColors[BI_TXTCLR_CONTENT], GetPlayerTextSpeedDelay(), gStringVar4);
+    u32 speedDelay = GetPlayerTextSpeedDelay();
+    if (taskId == TASK_NONE)
+        speedDelay = TEXT_SKIP_DRAW;
+
+    AddTextPrinterParameterized6(win, FONT_SMALL, 0, 0, 0, 0, sBattleInfo_TextColors[BI_TXTCLR_CONTENT], speedDelay, gStringVar4);
     CopyWindowToVram(win, COPYWIN_FULL);
 
-    SetTaskFuncWithFollowupFunc(taskId, Task_BattleInfo_WaitTextboxInput, Task_BattleInfo_WaitInput);
+    if (taskId != TASK_NONE)
+        SetTaskFuncWithFollowupFunc(taskId, Task_BattleInfo_WaitTextboxInput, Task_BattleInfo_WaitInput);
 }
 
 static void BattleInfoText_UpdateFooter(void)

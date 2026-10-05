@@ -264,6 +264,19 @@ const u8 *BattleStatusCriteria_GetFormattedName(enum BattlerId battler, enum Sil
     return func(battler);
 }
 
+const u8 *BattleStatusCriteria_GetDescription(enum SiliconBattleStatuses status)
+{
+    u32 idx = BattleStatusCriteria_StatusToIdx(status);
+    const u8 *desc = sBattleStatusCriteria_StatusInfo[idx].desc;
+    if (status == NUM_BATTLE_STATUSES
+     || desc == NULL)
+    {
+        return COMPOUND_STRING("No description for this status found.");
+    }
+
+    return desc;
+}
+
 static u32 BattleStatusCriteria_StatusToIdx(enum SiliconBattleStatuses status)
 {
     u32 idx = 0;
