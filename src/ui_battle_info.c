@@ -2154,7 +2154,28 @@ static void BattleInfoHelper_PopulateOptionsList(void)
 
 static void BattleInfoHelper_PopulateStatusList(void)
 {
-    sBattleInfoDataPtr->numStatuses = BattleStatusCriteria_CompileListForBattler(BattleInfoHelper_GetCurrBattler(), sBattleInfoDataPtr->statusList);
+    enum BattlerId battler = BattleInfoHelper_GetCurrBattler();
+    enum SiliconBattleStatuses *list = sBattleInfoDataPtr->statusList;
+    sBattleInfoDataPtr->numStatuses = BattleStatusCriteria_CompileListForBattler(battler, list);
+    if (sBattleInfoDataPtr->numStatuses != 0)
+        return;
+
+    // try get status1 for benched mon
+    u32 status1 = GetMonData(BattleInfoHelper_GetCurrMon(), MON_DATA_STATUS);
+    if (status1 & STATUS1_SLEEP)
+        list[0] = BATTLE_STATUS_ASLEEP;
+    else if (status1 & STATUS1_PSN_ANY)
+        list[0] = BATTLE_STATUS_POISONED;
+    else if (status1 & STATUS1_BURN)
+        list[0] = BATTLE_STATUS_BURN;
+    else if (status1 & STATUS1_FREEZE)
+        list[0] = BATTLE_STATUS_FREEZE;
+    else if (status1 & STATUS1_PARALYSIS)
+        list[0] = BATTLE_STATUS_PARALYZED;
+    else
+        return;
+
+    sBattleInfoDataPtr->numStatuses = 1;
 }
 
 static u32 BattleInfoHelper_GetTotalCrits(void)
