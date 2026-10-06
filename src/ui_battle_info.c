@@ -129,9 +129,32 @@ enum BattleInfoOptions
 #define BI_HPBAR_X  32 + (3)
 #define BI_HPBAR_Y  16 + (TILE_TO_PIXELS(10) - 2)
 
-#define BI_TYPE_1_X 8 + (60)
-#define BI_TYPE_2_X 8 + (72)
-#define BI_TYPES_Y  8 + (82)
+#define BI_TYPE_1_X 8 + (TILE_TO_PIXELS(8) - 4)
+#define BI_TYPE_2_X 8 + (TILE_TO_PIXELS(9))
+#define BI_TYPES_Y  8 + (TILE_TO_PIXELS(10) + 2)
+
+#define BI_OPTIONS_CURSOR_X     (TILE_TO_PIXELS(22) + 1)
+#define BI_OPTIONS_CURSOR_Y     (TILE_TO_PIXELS(10) + 1)
+
+#define BI_STATUS_CURSOR_X      (TILE_TO_PIXELS(18))
+#define BI_STATUS_CURSOR_Y      (TILE_TO_PIXELS(9) - 3)
+
+#define BI_PARTY_VIEW_LEFT_X    8 + (0)
+#define BI_PARTY_VIEW_RIGHT_X   8 + (DISPLAY_WIDTH - TILE_TO_PIXELS(2))
+#define BI_PARTY_VIEW_Y         8 + (TILE_TO_PIXELS(2))
+#define BI_PARTY_VIEW_Y_PAD (TILE_TO_PIXELS(4))
+
+#define BI_PARTY_FREQUENCY  4
+
+#define BI_SPECIES_NAME_X       2
+#define BI_SPECIES_NAME_Y       3
+
+#define BI_GENDER_SYMBOL_X      TILE_TO_PIXELS(9) + 2
+#define BI_GENDER_SYMBOL_Y      TILE_TO_PIXELS(3) + 4
+
+#define BI_HEADER_TEXT_X        4
+#define BI_HEADER_TEXT_Y        TILE_TO_PIXELS(3) + 2
+#define BI_HEADER_TEXT_Y_PAD    TILE_TO_PIXELS(2)
 
 #define BI_STD_WIN_PALETTE_OFFSET   BG_PLTT_ID(1)
 
@@ -139,6 +162,8 @@ enum BattleInfoOptions
 
 #define sTypeIcon_Type          data[0]
 #define sTypeIcon_Index         data[1]
+
+#define sPartyView_SineIdx      data[0]
 
 #define NUM_BI_MON_ICONS        (PARTY_SIZE * 2)
 
@@ -736,7 +761,8 @@ static void Task_BattleInfo_MainModeInput(u8 taskId)
                 if (DoesSelectedMonKnowHM(&currPartySlot))
                 {
                     PlaySE(SE_FAILURE);
-                    StringCopy(gStringVar4, COMPOUND_STRING("Cannot send that mon to the box,\nbecause it knows a HM move.{PAUSE_UNTIL_PRESS}"));
+                    StringCopy(gStringVar4, COMPOUND_STRING("Cannot send that mon to the box, because it knows a HM move.{PAUSE_UNTIL_PRESS}"));
+                    BreakStringAutomatic(gStringVar4, WindowWidthPx(BI_WIN_TEXTBOX), 3, FONT_SMALL, HIDE_SCROLL_PROMPT);
                     BattleInfoText_ShowTextbox(taskId);
                 }
                 else
@@ -1035,7 +1061,7 @@ static void SpriteCB_BattleInfo_TypeIcon(struct Sprite *sprite)
     }
     else
     {
-        sprite->invisible = !BattleInfoHelper_CanMonInfoBeShown();
+        sprite->invisible = type == TYPE_NONE || !BattleInfoHelper_CanMonInfoBeShown();
     }
 
     if (type == sprite->sTypeIcon_Type)
@@ -1075,13 +1101,13 @@ static void SpriteCB_BattleInfo_PartyIndicator(struct Sprite *sprite)
         return;
 
     sprite->invisible = !BattleInfoHelper_DoesCurrTrainerHaveAPartner();
-    sprite->x2 = gSineTable[(u8)(sprite->data[0])] / 128;
+    sprite->x2 = gSineTable[(u8)(sprite->sPartyView_SineIdx)] / 128;
     if (sprite->animNum)
-        sprite->data[0] += 4;
+        sprite->sPartyView_SineIdx += BI_PARTY_FREQUENCY;
     else
-        sprite->data[0] += -4;
+        sprite->sPartyView_SineIdx += -BI_PARTY_FREQUENCY;
 
-    sprite->y2 = sBattleInfoDataPtr->gridPos.y * 32;
+    sprite->y2 = sBattleInfoDataPtr->gridPos.y * BI_PARTY_VIEW_Y_PAD;
 }
 
 static void BattleInfoInit_Backgrounds(void)
@@ -1488,7 +1514,7 @@ static void BattleInfoSprite_CreateCursor(void)
 static void BattleInfoSprite_CreateOptionsCursor(void)
 {
     u8 *spriteId = &sBattleInfoDataPtr->spriteIds[BI_SPRITE_OPTIONS_CURSOR];
-    *spriteId = CreateSprite(&sBattleInfo_OptionsCursorSpriteTemplate, 177, 81, 0);
+    *spriteId = CreateSprite(&sBattleInfo_OptionsCursorSpriteTemplate, BI_OPTIONS_CURSOR_X, BI_OPTIONS_CURSOR_Y, 0);
     if (*spriteId == SPRITE_NONE)
         return;
 
@@ -1500,7 +1526,7 @@ static void BattleInfoSprite_CreateOptionsCursor(void)
 static void BattleInfoSprite_CreateStatusCursor(void)
 {
     u8 *spriteId = &sBattleInfoDataPtr->spriteIds[BI_SPRITE_STATUS_CURSOR];
-    *spriteId = CreateSprite(&sBattleInfo_StatusCursorSpriteTemplate, 144, 69, 0);
+    *spriteId = CreateSprite(&sBattleInfo_StatusCursorSpriteTemplate, BI_STATUS_CURSOR_X, BI_STATUS_CURSOR_Y, 0);
     if (*spriteId == SPRITE_NONE)
         return;
 
@@ -1513,7 +1539,7 @@ static void BattleInfoSprite_CreatePartyIndicators(void)
 {
     u8 *spriteId = &sBattleInfoDataPtr->spriteIds[BI_SPRITE_INDICATOR_LEFT];
     struct Sprite *sprite;
-    *spriteId = CreateSprite(&sBattleInfo_PartyIndicatorSpriteTemplate, 8 + 0, 8 + 16, 0);
+    *spriteId = CreateSprite(&sBattleInfo_PartyIndicatorSpriteTemplate, BI_PARTY_VIEW_LEFT_X, BI_PARTY_VIEW_Y, 0);
     if (*spriteId != SPRITE_NONE)
     {
         sprite = &gSprites[*spriteId];
@@ -1521,7 +1547,7 @@ static void BattleInfoSprite_CreatePartyIndicators(void)
     }
 
     spriteId++; // BI_DPRITE_INDICATOR_RIGHT's slot
-    *spriteId = CreateSprite(&sBattleInfo_PartyIndicatorSpriteTemplate, 8 + (DISPLAY_WIDTH - 16), 8 + 16, 0);
+    *spriteId = CreateSprite(&sBattleInfo_PartyIndicatorSpriteTemplate, BI_PARTY_VIEW_RIGHT_X, BI_PARTY_VIEW_Y, 0);
     if (*spriteId != SPRITE_NONE)
     {
         sprite = &gSprites[*spriteId];
@@ -1557,7 +1583,7 @@ static void BattleInfoText_UpdateHeader(void)
 
     // species
     BattleInfoHelper_AddTextPrinter(
-        2, 3,
+        BI_SPECIES_NAME_X, BI_SPECIES_NAME_Y,
         FONT_OUTLINED,
         BI_TXTCLR_OUTLINED,
         GetSpeciesName(species));
@@ -1587,21 +1613,21 @@ static void BattleInfoText_UpdateHeader(void)
         break;
     }
 
-    BattleInfoHelper_AddTextPrinter(74, 28, FONT_OUTLINED, BI_TXTCLR_OUTLINED, strbuf);
+    BattleInfoHelper_AddTextPrinter(BI_GENDER_SYMBOL_X, BI_GENDER_SYMBOL_Y, FONT_OUTLINED, BI_TXTCLR_OUTLINED, strbuf);
 
     bool32 isOnPlayerSide = BattleInfoHelper_IsTrainerOnPlayerSide();
-    u32 y = 26;
+    u32 y = BI_HEADER_TEXT_Y;
 
     // trainer owner
     if (isOnPlayerSide
      || (!isOnPlayerSide && (gBattleTypeFlags & BATTLE_TYPE_TRAINER)))
     {
         BattleInfoHelper_AddTextPrinter(
-            4, y,
+            BI_HEADER_TEXT_X, y,
             fontId,
             BI_TXTCLR_CONTENT,
             BattleInfoHelper_GetTrainerName());
-        y += 16;
+        y += BI_HEADER_TEXT_Y_PAD;
     }
 
     // do not reveal opponent data w/o google glass
@@ -1611,11 +1637,11 @@ static void BattleInfoText_UpdateHeader(void)
     // ability
     enum Ability ability = GetSpeciesAbility(species, GetMonData(mon, MON_DATA_ABILITY_NUM, NULL));
     BattleInfoHelper_AddTextPrinter(
-        4, y,
+        BI_HEADER_TEXT_X, y,
         fontId,
         BI_TXTCLR_CONTENT,
         GetAbilityName(ability));
-    y += 16;
+    y += BI_HEADER_TEXT_Y_PAD;
 
     // held item
     enum Item item = GetMonData(mon, MON_DATA_HELD_ITEM, NULL);
@@ -1624,7 +1650,7 @@ static void BattleInfoText_UpdateHeader(void)
     else
         strbuf = COMPOUND_STRING("No Held Item");
     BattleInfoHelper_AddTextPrinter(
-        4, y,
+        BI_HEADER_TEXT_X, y,
         fontId,
         BI_TXTCLR_CONTENT,
         strbuf);
