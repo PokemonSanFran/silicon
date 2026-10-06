@@ -1844,7 +1844,9 @@ static void BattleInfoText_ShowTextbox(u32 taskId)
     if (taskId == TASK_NONE)
         speedDelay = TEXT_SKIP_DRAW;
 
-    AddTextPrinterParameterized6(win, FONT_SMALL, 0, 0, 0, 0, sBattleInfo_TextColors[BI_TXTCLR_CONTENT], speedDelay, gStringVar4);
+    const union TextColor *ptr = &sBattleInfo_TextColors[BI_TXTCLR_CONTENT];
+    const u8 colors[3] = { ptr->background, ptr->foreground, ptr->shadow };
+    AddTextPrinterParameterized3(win, FONT_SMALL, 0, 0, colors, speedDelay, gStringVar4);
     CopyWindowToVram(win, COPYWIN_FULL);
 
     if (taskId != TASK_NONE)
@@ -1952,7 +1954,7 @@ static u32 BattleInfoHelper_DoesCurrTrainerHaveAPartner(void)
 {
     enum BattleTrainer currTrainer = BattleInfoHelper_GetCurrTrainer();
     for (enum BattleTrainer trainer = 0; trainer < MAX_BATTLE_TRAINERS; trainer++)
-        if (trainer == BATTLE_PARTNER(currTrainer) && trainer != currTrainer) // is unique ...
+        if (trainer == (currTrainer ^ BIT_FLANK) && trainer != currTrainer) // is unique ...
             for (enum BattlerId battler = 0; battler < gBattlersCount; battler++)
                 if (GetBattlerTrainer(battler) == trainer) // but is it a real trainer?
                     return TRUE;
@@ -2108,8 +2110,12 @@ static void BattleInfoHelper_ReorderPartyToBattleLayout(void)
 
 static bool32 BattleInfoHelper_CanMonInfoBeShown(void)
 {
-    if (GetMonData(BattleInfoHelper_GetCurrMon(), MON_DATA_MAX_HP, NULL) == 0)
+    struct Pokemon *mon = BattleInfoHelper_GetCurrMon();
+    if (GetMonData(mon, MON_DATA_MAX_HP, NULL) == 0
+     || GetMonData(mon, MON_DATA_SPECIES, NULL) == 0)
+    {
         return FALSE;
+    }
 
     if (BattleInfoHelper_IsTrainerOnPlayerSide() || FlagGet(FLAG_SYS_APP_GOOGLE_GLASS_GET))
         return TRUE;
@@ -2157,7 +2163,7 @@ static u32 BattleInfoHelper_GetTotalCrits(void)
 
     if (batMon == NULL)
         return 0;
-    else if (batMon->volatiles.laserFocus)
+    else if (batMon->volatiles.laserFocusTimer)
         return ARRAY_COUNT(sCriticalHitOdds) - 1;
 
     enum BattlerId battler = BattleInfoHelper_GetCurrBattler();
@@ -2168,7 +2174,9 @@ static u32 BattleInfoHelper_GetTotalCrits(void)
 
 static void BattleInfoHelper_AddTextPrinterToWindow(u32 windowId, u32 x, u32 y, u32 fontId, enum BattleInfoTextColors color, const u8 *str)
 {
-    AddTextPrinterParameterized6(windowId, fontId, x, y, 0, 0, sBattleInfo_TextColors[color], TEXT_SKIP_DRAW, str);
+    const union TextColor *ptr = &sBattleInfo_TextColors[color];
+    const u8 colors[3] = { ptr->background, ptr->foreground, ptr->shadow };
+    AddTextPrinterParameterized3(windowId, fontId, x, y, colors, TEXT_SKIP_DRAW, str);
 }
 
 static void BattleInfoHelper_AddTextPrinter(u32 x, u32 y, u32 fontId, enum BattleInfoTextColors color, const u8 *str)

@@ -193,9 +193,9 @@ static const struct {
     { BATTLE_STATUS_VOLATILE_CONFUSION,             IsStatusActive_Confused,              FormatStatusName_Confused, COMPOUND_STRING("For 1-4 turns, the Pokémon has a 1-in-3 chance of hurting itself.") },
     { BATTLE_STATUS_VOLATILE_CURSED,                IsStatusActive_Cursed,                FormatStatusName_Cursed, COMPOUND_STRING("The Pokémon loses 1/4 of its max HP at the end of every turn.") },
     { BATTLE_STATUS_VOLATILE_YAWN,                  IsStatusActive_Drowsy,                FormatStatusName_Drowsy, COMPOUND_STRING("The Pokémon will fall asleep at the end of the next turn after becoming drowsy.") },
-    { BATTLE_STATUS_VOLATILE_EMBARGO,               IsStatusActive_Embargo,               FormatStatusName_Embargo },
+    { BATTLE_STATUS_VOLATILE_EMBARGO_TIMER,         IsStatusActive_Embargo,               FormatStatusName_Embargo },
     { BATTLE_STATUS_VOLATILE_ENCORE_TIMER,          IsStatusActive_Encore,                FormatStatusName_Encore, COMPOUND_STRING("The Pokémon can only use whichever move it last used before gaining the Encore status.") },
-    { BATTLE_STATUS_VOLATILE_HEAL_BLOCK,            IsStatusActive_HealBlock,             FormatStatusName_HealBlock, COMPOUND_STRING("The Pokémon is unable to restore HP through moves, Abilities, or held items.") },
+    { BATTLE_STATUS_VOLATILE_HEAL_BLOCK_TIMER,      IsStatusActive_HealBlock,             FormatStatusName_HealBlock, COMPOUND_STRING("The Pokémon is unable to restore HP through moves, Abilities, or held items.") },
     { BATTLE_STATUS_VOLATILE_FORESIGHT,             IsStatusActive_Identified,            FormatStatusName_Identified },
     { BATTLE_STATUS_VOLATILE_INFATUATION,           IsStatusActive_Infatuated,            FormatStatusName_Infatuated, COMPOUND_STRING("The Pokémon has a 50% chance of being unable to use its moves while the Pokémon that gave it the Infatuated status is on the field.") },
     { BATTLE_STATUS_VOLATILE_LEECH_SEED,            IsStatusActive_LeechSeed,             FormatStatusName_LeechSeed, COMPOUND_STRING("The Pokémon takes damage equal to 1/8 of its max HP at the end of every turn. The Pokémon in the spot of the Pokémon that caused the Leech Seeded status has its HP restored by the same amount. Grass-type Pokémon are unaffected.") },
@@ -212,7 +212,7 @@ static const struct {
     { BATTLE_STATUS_VOLATILE_DEFENSE_CURL,          IsStatusActive_DefenseCurl,           FormatStatusName_DefenseCurl },
     { BATTLE_STATUS_VOLATILE_ROOT,                  IsStatusActive_Rooted,                FormatStatusName_Rooted, COMPOUND_STRING("The Pokémon has 1/16 of its max HP restored at the end of every turn. It also becomes grounded and cannot be switched out of battle.") },
     { BATTLE_STATUS_MAGIC_COAT,                     IsStatusActive_MagicCoat,             FormatStatusName_MagicCoat },
-    { BATTLE_STATUS_VOLATILE_MAGNET_RISE,           IsStatusActive_MagneticLevitation,    FormatStatusName_MagneticLevitation, COMPOUND_STRING("The Pokémon floats off the ground, making it immune to Ground-type moves, as well as the Spikes, Toxic Spikes, and Sticky Web statuses.") },
+    { BATTLE_STATUS_VOLATILE_MAGNET_RISE_TIMER,     IsStatusActive_MagneticLevitation,    FormatStatusName_MagneticLevitation, COMPOUND_STRING("The Pokémon floats off the ground, making it immune to Ground-type moves, as well as the Spikes, Toxic Spikes, and Sticky Web statuses.") },
     { BATTLE_STATUS_VOLATILE_MINIMIZE,              IsStatusActive_Minimized,             FormatStatusName_Minimized },
     { BATTLE_STATUS_PROTECTION,                     IsStatusActive_Protection,            FormatStatusName_Protection },
     { BATTLE_STATUS_VOLATILE_RECHARGE_TIMER,        IsStatusActive_Recharging,            FormatStatusName_Recharging, COMPOUND_STRING("The Pokémon cannot take any actions for 1 turn.") },
@@ -441,7 +441,7 @@ static const u8 *FormatStatusName_Asleep(enum BattlerId battler)
 
 static bool32 IsStatusActive_ElectricTerrain(enum BattlerId battler)
 {
-    return gFieldStatuses & STATUS_FIELD_ELECTRIC_TERRAIN;
+    return gFieldTimers.terrain == B_TERRAIN_ELECTRIC;
 }
 
 static const u8 *FormatStatusName_ElectricTerrain(enum BattlerId battler)
@@ -451,7 +451,7 @@ static const u8 *FormatStatusName_ElectricTerrain(enum BattlerId battler)
 
 static bool32 IsStatusActive_GrassyTerrain(enum BattlerId battler)
 {
-    return gFieldStatuses & STATUS_FIELD_GRASSY_TERRAIN;
+    return gFieldTimers.terrain == B_TERRAIN_GRASSY;
 }
 
 static const u8 *FormatStatusName_GrassyTerrain(enum BattlerId battler)
@@ -461,7 +461,7 @@ static const u8 *FormatStatusName_GrassyTerrain(enum BattlerId battler)
 
 static bool32 IsStatusActive_MistyTerrain(enum BattlerId battler)
 {
-    return gFieldStatuses & STATUS_FIELD_MISTY_TERRAIN;
+    return gFieldTimers.terrain == B_TERRAIN_MISTY;
 }
 
 static const u8 *FormatStatusName_MistyTerrain(enum BattlerId battler)
@@ -471,7 +471,7 @@ static const u8 *FormatStatusName_MistyTerrain(enum BattlerId battler)
 
 static bool32 IsStatusActive_PsychicTerrain(enum BattlerId battler)
 {
-    return gFieldStatuses & STATUS_FIELD_PSYCHIC_TERRAIN;
+    return gFieldTimers.terrain == B_TERRAIN_PSYCHIC;
 }
 
 static const u8 *FormatStatusName_PsychicTerrain(enum BattlerId battler)
@@ -669,7 +669,7 @@ static const u8 *FormatStatusName_Trapped(enum BattlerId battler)
 
 static bool32 IsStatusActive_Confused(enum BattlerId battler)
 {
-    return gBattleMons[battler].volatiles.confusionTurns || gBattleMons[battler].volatiles.infiniteConfusion;
+    return gBattleMons[battler].volatiles.confusionTimer;
 }
 
 static const u8 *FormatStatusName_Confused(enum BattlerId battler)
@@ -699,7 +699,7 @@ static const u8 *FormatStatusName_Drowsy(enum BattlerId battler)
 
 static bool32 IsStatusActive_Embargo(enum BattlerId battler)
 {
-    return gBattleMons[battler].volatiles.embargo;
+    return gBattleMons[battler].volatiles.embargoTimer;
 }
 
 static const u8 *FormatStatusName_Embargo(enum BattlerId battler)
@@ -719,7 +719,7 @@ static const u8 *FormatStatusName_Encore(enum BattlerId battler)
 
 static bool32 IsStatusActive_HealBlock(enum BattlerId battler)
 {
-    return gBattleMons[battler].volatiles.healBlock;
+    return gBattleMons[battler].volatiles.healBlockTimer;
 }
 
 static const u8 *FormatStatusName_HealBlock(enum BattlerId battler)
@@ -880,7 +880,7 @@ static const u8 *FormatStatusName_MagicCoat(enum BattlerId battler)
 
 static bool32 IsStatusActive_MagneticLevitation(enum BattlerId battler)
 {
-    return gBattleMons[battler].volatiles.magnetRise;
+    return gBattleMons[battler].volatiles.magnetRiseTimer;
 }
 
 static const u8 *FormatStatusName_MagneticLevitation(enum BattlerId battler)
