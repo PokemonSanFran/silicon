@@ -9,6 +9,7 @@
 #include "text.h"
 #include "string_util.h"
 #include "international_string_util.h"
+#include "trig.h"
 #include "main.h"
 #include "malloc.h"
 #include "task.h"
@@ -21,6 +22,7 @@
 #include "event_data.h"
 #include "text_window.h"
 #include "battle.h"
+#include "battle_setup.h"
 #include "party_menu.h"
 #include "strings.h"
 #include "battle_controllers.h"
@@ -58,6 +60,8 @@ enum BattleInfoSprites
     BI_SPRITE_CURSOR,
     BI_SPRITE_OPTIONS_CURSOR,
     BI_SPRITE_STATUS_CURSOR,
+    BI_SPRITE_INDICATOR_LEFT,
+    BI_SPRITE_INDICATOR_RIGHT,
 
     NUM_BI_SPRITES
 };
@@ -142,11 +146,24 @@ enum BattleInfoOptions
 
 #define BI_STATUS_LIST_TIMER_LIMIT  120
 
+// normally, return either B_TRAINER_PLAYER or B_TRAINER_OPPONENT_A
+// sBattleInfoDataPtr->viewPartnerParty contains a bitfield that uses
+// those two constants for shifting (1st bit for player and 2nd for opp)
+// so, if sBattleInfoDataPtr->viewPartnerParty & trainer yields anything
+// but 0, it'll jump to its partner trainer's constants (B_TRAINER_PARTNER/OPPONENT_B)
+// the bitfield is only set if
+// 1. inside a battle w/ at least 3 trainers and,
+// 2. either the player or the opp has a partner on their side
+// so we shouldn't worry to add an edge case here
+#define BI_SET_PARTY_VIEW_TRAINER(_t)  (1 << (_t))
+#define BI_GET_TRUE_TRAINER(_t)        (_t + (!!(sBattleInfoDataPtr->viewPartnerParty & (_t + 1)) * NUM_BATTLE_SIDES))
+
 struct BattleInfoData
 {
     MainCallback savedCB;
     struct UCoords8 gridPos;
-    u8 currPartySlot:6;
+    bool8 viewPartnerParty:2; // 1st bit = player 2nd bit = opponent
+    u8 pad:4;
     enum BattleInfoModes mode:2;
     u16 textboxTileNum;
     u16 tilemapBuf[BG_SCREEN_SIZE / 2];
@@ -178,7 +195,8 @@ static EWRAM_INIT struct
     u8 optionsCursor:4;
     struct UCoords8 gridPos;
     MainCallback trueCB;
-    u8 partyAction;
+    u8 partyAction:6;
+    u8 partyView:2;
 } sBattleInfoSavedState = {
     .gridPos = { 0, 1 },
 };
@@ -202,6 +220,7 @@ static void SpriteCB_BattleInfo_TypeIcon(struct Sprite *);
 static void SpriteCB_BattleInfo_Cursor(struct Sprite *);
 static void SpriteCB_BattleInfo_OptionsCursor(struct Sprite *);
 static void SpriteCB_BattleInfo_StatusCursor(struct Sprite *);
+static void SpriteCB_BattleInfo_PartyIndicator(struct Sprite *);
 
 static void BattleInfoInit_Backgrounds(void);
 static void BattleInfoInit_Graphics(void);
@@ -219,6 +238,7 @@ static void BattleInfoInput_UpdateStatusCursor(s32);
 static void BattleInfoInput_SetGrid(u32, u32);
 
 static void BattleInfoSprite_CreateMonIcons(void);
+static void BattleInfoSprite_RecreateMonIcons(void);
 static u8 BattleInfoSprite_CreateMonIcon(enum BattleTrainer, u32, s32, s32);
 static u32 BattleInfoSprite_CreateFaintedIcon(enum BattleTrainer, u32, s32, s32);
 static void BattleInfoSprite_CreateHPBar(void);
@@ -227,6 +247,7 @@ static void BattleInfoSprite_CreateTypeIcon(enum BattleInfoSprites, enum Type);
 static void BattleInfoSprite_CreateCursor(void);
 static void BattleInfoSprite_CreateOptionsCursor(void);
 static void BattleInfoSprite_CreateStatusCursor(void);
+static void BattleInfoSprite_CreatePartyIndicators(void);
 
 static void BattleInfoText_UpdateHeader(void);
 static void BattleInfoText_UpdateStatStages(void);
@@ -242,6 +263,9 @@ static struct Pokemon *BattleInfoHelper_GetCurrMon(void);
 static struct BattlePokemon *BattleInfoHelper_GetCurrBattleMon(void);
 static enum BattlerId BattleInfoHelper_GetCurrBattler(void);
 static enum BattleTrainer BattleInfoHelper_GetCurrTrainer(void);
+static bool32 BattleInfoHelper_IsTrainerOnPlayerSide(void);
+static u32 BattleInfoHelper_GetCombinedCursorValue(void);
+static u32 BattleInfoHelper_DoesCurrTrainerHaveAPartner(void);
 static u32 BattleInfoHelper_GetCurrPartySlot(void);
 static u32 BattleInfoHelper_TrySwitchInMon(void);
 static void BattleInfoHelper_SwapPartyMons(struct Pokemon *, struct Pokemon *);
@@ -408,6 +432,33 @@ static const struct SpriteTemplate sBattleInfo_StatusCursorSpriteTemplate =
     },
     .anims = sBattleInfo_GenericCursorAnims,
     .callback = SpriteCB_BattleInfo_StatusCursor
+};
+
+static const struct SpriteTemplate sBattleInfo_PartyIndicatorSpriteTemplate =
+{
+    .tileTag = TAG_NONE,
+    .paletteTag = TAG_BI_MAIN,
+    .oam = &(const struct OamData){
+        .shape = SPRITE_SHAPE(16x16),
+        .size = SPRITE_SIZE(16x16),
+        .objMode = ST_OAM_OBJ_BLEND,
+    },
+    .images = &(const struct SpriteFrameImage){
+        .data = (const u8[])INCGFX_U8("graphics/ui_menus/battle_info/party_switch_indicator.png", ".4bpp"),
+        .size = 16 * 16 / 2,
+        .relativeFrames = TRUE,
+    },
+    .anims = (const union AnimCmd *const[]){
+        (const union AnimCmd[]){
+            ANIMCMD_FRAME(0, 1),
+            ANIMCMD_END,
+        },
+        (const union AnimCmd[]){
+            ANIMCMD_FRAME(1, 1),
+            ANIMCMD_END,
+        },
+    },
+    .callback = SpriteCB_BattleInfo_PartyIndicator
 };
 
 #define SUBSPRITE_ENTRY(l, t, dim, ...)     { .x = l, .y = t, .shape = SPRITE_SHAPE(dim), .size = SPRITE_SIZE(dim), __VA_ARGS__ }
@@ -876,7 +927,9 @@ static void Task_BattleInfo_Close(u8 taskId)
     FreeAllWindowBuffers();
 
     sBattleInfoSavedState.gridPos = sBattleInfoDataPtr->gridPos;
+    sBattleInfoSavedState.partyView = sBattleInfoDataPtr->viewPartnerParty;
     BattleInfoHelper_ReorderPartyToBattleLayout();
+
     if (sBattleInfoDataPtr->mode == BI_MODE_OPTIONS_LIST)
     {
         sBattleInfoSavedState.trueCB = sBattleInfoDataPtr->savedCB;
@@ -945,13 +998,13 @@ static void Task_BattleInfo_WaitTextboxInput(u8 taskId)
 
 static void SpriteCB_BattleInfo_MonIcon(struct Sprite *sprite)
 {
-    if (sprite->sPartySlotIdx == sBattleInfoDataPtr->currPartySlot)
+    if (sprite->sPartySlotIdx == BattleInfoHelper_GetCombinedCursorValue())
         UpdateMonIconFrame(sprite);
 }
 
 static void SpriteCB_BattleInfo_HPBar(struct Sprite *sprite)
 {
-    u32 slotIdx = sBattleInfoDataPtr->currPartySlot;
+    u32 slotIdx = BattleInfoHelper_GetCombinedCursorValue();
     if (slotIdx == sprite->sPartySlotIdx) return;
 
     sprite->sPartySlotIdx = slotIdx;
@@ -1016,6 +1069,21 @@ static void SpriteCB_BattleInfo_StatusCursor(struct Sprite *sprite)
     sprite->y2 = sBattleInfoDataPtr->visualStatusCursor * 16;
 }
 
+static void SpriteCB_BattleInfo_PartyIndicator(struct Sprite *sprite)
+{
+    if ((sprite->invisible = sBattleInfoDataPtr->mode != BI_MODE_MAIN))
+        return;
+
+    sprite->invisible = !BattleInfoHelper_DoesCurrTrainerHaveAPartner();
+    sprite->x2 = gSineTable[(u8)(sprite->data[0])] / 128;
+    if (sprite->animNum)
+        sprite->data[0] += 4;
+    else
+        sprite->data[0] += -4;
+
+    sprite->y2 = sBattleInfoDataPtr->gridPos.y * 32;
+}
+
 static void BattleInfoInit_Backgrounds(void)
 {
     ResetBgsAndClearDma3BusyFlags(0);
@@ -1075,12 +1143,16 @@ static void BattleInfoInit_Windows(void)
 
 static void BattleInfoInit_Sprites(void)
 {
+    SetGpuReg(REG_OFFSET_BLDCNT, BLDCNT_EFFECT_DARKEN | BLDCNT_TGT1_OBJ);
+    SetGpuReg(REG_OFFSET_BLDY, 9);
+
     BattleInfoSprite_CreateMonIcons();
     BattleInfoSprite_CreateHPBar();
     BattleInfoSprite_CreateTypeIcons();
     BattleInfoSprite_CreateCursor();
     BattleInfoSprite_CreateOptionsCursor();
     BattleInfoSprite_CreateStatusCursor();
+    BattleInfoSprite_CreatePartyIndicators();
 }
 
 static void BattleInfoMode_Set(enum BattleInfoModes mode)
@@ -1115,18 +1187,15 @@ static void BattleInfoMode_Update(void)
 
 static void BattleInfoInput_UpdateGrid(s32 deltaX, s32 deltaY)
 {
-    u32 currPartySlot = sBattleInfoDataPtr->currPartySlot;
+    u32 currPartyView = sBattleInfoDataPtr->viewPartnerParty;
 
     BattleInfoInput_UpdateXPos(deltaX);
     BattleInfoInput_UpdateYPos(deltaY);
 
-    u32 nextPartySlot = sBattleInfoDataPtr->gridPos.x + (sBattleInfoDataPtr->gridPos.y * PARTY_SIZE);
-
-    if (nextPartySlot == currPartySlot)
-        return;
+    if (sBattleInfoDataPtr->viewPartnerParty != currPartyView)
+        BattleInfoSprite_RecreateMonIcons();
 
     PlaySE(SE_SELECT);
-    sBattleInfoDataPtr->currPartySlot = nextPartySlot;
     sBattleInfoDataPtr->statusUpdateTimer = 0;
     sBattleInfoDataPtr->statusPagination = 0;
     BattleInfoHelper_PopulateStatusList();
@@ -1139,11 +1208,16 @@ static void BattleInfoInput_UpdateXPos(s32 delta)
     s32 nextX = currX + delta;
     u32 maxNum = PARTY_SIZE - 1;
     bool32 additive = delta == 1;
+    bool32 shouldBleed = FALSE;
+    bool32 hasPartner = BattleInfoHelper_DoesCurrTrainerHaveAPartner();
 
     if (additive && nextX > maxNum)
-        nextX = 0;
+        nextX = 0, shouldBleed = TRUE;
     else if (!additive && nextX < 0)
-        nextX = maxNum;
+        nextX = maxNum, shouldBleed = TRUE;
+
+    if (hasPartner && shouldBleed)
+        sBattleInfoDataPtr->viewPartnerParty ^= BI_SET_PARTY_VIEW_TRAINER(B_TRAINER_OPPONENT_A - sBattleInfoDataPtr->gridPos.y);
 
     sBattleInfoDataPtr->gridPos.x = nextX;
 }
@@ -1245,23 +1319,57 @@ static void BattleInfoInput_SetGrid(u32 x, u32 y)
 {
     sBattleInfoDataPtr->gridPos.x = x;
     sBattleInfoDataPtr->gridPos.y = y;
-    sBattleInfoDataPtr->currPartySlot = sBattleInfoDataPtr->gridPos.x + (sBattleInfoDataPtr->gridPos.y * PARTY_SIZE);
+    sBattleInfoDataPtr->viewPartnerParty = sBattleInfoSavedState.partyView;
 }
 
 static void BattleInfoSprite_CreateMonIcons(void)
 {
     u8 *spriteIds = sBattleInfoDataPtr->monIconIds;
 
-    SetGpuReg(REG_OFFSET_BLDCNT, BLDCNT_EFFECT_DARKEN | BLDCNT_TGT1_OBJ);
-    SetGpuReg(REG_OFFSET_BLDY, 9);
-
     for (u32 i = 0, x = BI_MON_ICON_X; i < PARTY_SIZE; i++, x += BI_MON_ICON_X_PAD)
     {
-        spriteIds[i] = BattleInfoSprite_CreateMonIcon(B_TRAINER_PLAYER, i, x, BI_MON_ICON_Y + BI_MON_ICON_Y_PAD);
-        sBattleInfoDataPtr->faintedIconIds[i] = BattleInfoSprite_CreateFaintedIcon(B_TRAINER_PLAYER, i, x, BI_MON_ICON_Y + BI_MON_ICON_Y_PAD + 2);
+        spriteIds[i] = BattleInfoSprite_CreateMonIcon(
+            BI_GET_TRUE_TRAINER(B_TRAINER_PLAYER), i,
+            x, BI_MON_ICON_Y + BI_MON_ICON_Y_PAD);
+        sBattleInfoDataPtr->faintedIconIds[i] = BattleInfoSprite_CreateFaintedIcon(
+            BI_GET_TRUE_TRAINER(B_TRAINER_PLAYER), i,
+            x, BI_MON_ICON_Y + BI_MON_ICON_Y_PAD + 2);
 
-        spriteIds[i + PARTY_SIZE] = BattleInfoSprite_CreateMonIcon(B_TRAINER_OPPONENT_A, i, x, BI_MON_ICON_Y);
-        sBattleInfoDataPtr->faintedIconIds[i + PARTY_SIZE] = BattleInfoSprite_CreateFaintedIcon(B_TRAINER_OPPONENT_A, i, x, BI_MON_ICON_Y + 2);
+        spriteIds[i + PARTY_SIZE] = BattleInfoSprite_CreateMonIcon(
+            BI_GET_TRUE_TRAINER(B_TRAINER_OPPONENT_A), i,
+            x, BI_MON_ICON_Y);
+        sBattleInfoDataPtr->faintedIconIds[i + PARTY_SIZE] = BattleInfoSprite_CreateFaintedIcon(
+            BI_GET_TRUE_TRAINER(B_TRAINER_OPPONENT_A), i,
+            x, BI_MON_ICON_Y + 2);
+    }
+}
+
+static void BattleInfoSprite_RecreateMonIcons(void)
+{
+    for (u32 i = 0, x = BI_MON_ICON_X; i < PARTY_SIZE; i++, x += BI_MON_ICON_X_PAD)
+    {
+        u8 *spriteIds = sBattleInfoDataPtr->monIconIds;
+        bool32 isOnPlayerSide = BattleInfoHelper_IsTrainerOnPlayerSide();
+        u32 idx = i + (!isOnPlayerSide * PARTY_SIZE);
+
+        if (spriteIds[idx] != SPRITE_NONE)
+        {
+            struct Sprite *sprite = &gSprites[spriteIds[idx]];
+            FreeAndDestroyMonIconSprite(sprite);
+        }
+
+        enum BattleTrainer trainer = BattleInfoHelper_GetCurrTrainer();
+        u32 yPos = BI_MON_ICON_Y + (isOnPlayerSide * BI_MON_ICON_Y_PAD);
+        spriteIds[idx] = BattleInfoSprite_CreateMonIcon(trainer, i, x, yPos);
+
+        spriteIds = sBattleInfoDataPtr->faintedIconIds;
+        if (spriteIds[idx] != SPRITE_NONE)
+        {
+            struct Sprite *sprite = &gSprites[spriteIds[idx]];
+            DestroySprite(sprite);
+        }
+
+        spriteIds[idx] = BattleInfoSprite_CreateFaintedIcon(trainer, i, x, yPos + 2);
     }
 }
 
@@ -1303,7 +1411,7 @@ static u8 BattleInfoSprite_CreateMonIcon(enum BattleTrainer trainer, u32 idx, s3
     {
         if (species != SPECIES_NONE && GetMonData(mon, MON_DATA_HP, NULL) > 0)
         {
-            gSprites[spriteId].sPartySlotIdx = idx + (PARTY_SIZE * (trainer == B_TRAINER_PLAYER));
+            gSprites[spriteId].sPartySlotIdx = idx + (PARTY_SIZE * !(trainer % NUM_BATTLE_SIDES));
             gSprites[spriteId].callback = SpriteCB_BattleInfo_MonIcon;
         }
     }
@@ -1401,6 +1509,43 @@ static void BattleInfoSprite_CreateStatusCursor(void)
     sprite->subspriteMode = SUBSPRITES_IGNORE_PRIORITY;
 }
 
+static void BattleInfoSprite_CreatePartyIndicators(void)
+{
+    u8 *spriteId = &sBattleInfoDataPtr->spriteIds[BI_SPRITE_INDICATOR_LEFT];
+    struct Sprite *sprite;
+    *spriteId = CreateSprite(&sBattleInfo_PartyIndicatorSpriteTemplate, 8 + 0, 8 + 16, 0);
+    if (*spriteId != SPRITE_NONE)
+    {
+        sprite = &gSprites[*spriteId];
+        StartSpriteAnim(sprite, FALSE);
+    }
+
+    spriteId++; // BI_DPRITE_INDICATOR_RIGHT's slot
+    *spriteId = CreateSprite(&sBattleInfo_PartyIndicatorSpriteTemplate, 8 + (DISPLAY_WIDTH - 16), 8 + 16, 0);
+    if (*spriteId != SPRITE_NONE)
+    {
+        sprite = &gSprites[*spriteId];
+        StartSpriteAnim(sprite, TRUE);
+    }
+}
+
+static const u8 *BattleInfoHelper_GetTrainerName(void)
+{
+    switch (BattleInfoHelper_GetCurrTrainer())
+    {
+    default:
+        return gText_EmptyString3;
+    case B_TRAINER_PLAYER:
+        return gSaveBlock2Ptr->playerName;
+    case B_TRAINER_PARTNER:
+        return GetTrainerNameFromId(gPartnerTrainerId);
+    case B_TRAINER_OPPONENT_A:
+        return GetTrainerNameFromId(TRAINER_BATTLE_PARAM.opponentA);
+    case B_TRAINER_OPPONENT_B:
+        return GetTrainerNameFromId(TRAINER_BATTLE_PARAM.opponentB);
+    }
+}
+
 static void BattleInfoText_UpdateHeader(void)
 {
     if (!BattleInfoHelper_CanMonInfoBeShown())
@@ -1444,20 +1589,33 @@ static void BattleInfoText_UpdateHeader(void)
 
     BattleInfoHelper_AddTextPrinter(74, 28, FONT_OUTLINED, BI_TXTCLR_OUTLINED, strbuf);
 
-    // do not reveal opponent data w/o google glass
-    if (BattleInfoHelper_GetCurrTrainer() != B_TRAINER_PLAYER
-     && !FlagGet(FLAG_SYS_APP_GOOGLE_GLASS_GET))
+    bool32 isOnPlayerSide = BattleInfoHelper_IsTrainerOnPlayerSide();
+    u32 y = 26;
+
+    // trainer owner
+    if (isOnPlayerSide
+     || (!isOnPlayerSide && (gBattleTypeFlags & BATTLE_TYPE_TRAINER)))
     {
-        return;
+        BattleInfoHelper_AddTextPrinter(
+            4, y,
+            fontId,
+            BI_TXTCLR_CONTENT,
+            BattleInfoHelper_GetTrainerName());
+        y += 16;
     }
+
+    // do not reveal opponent data w/o google glass
+    if (!isOnPlayerSide && !FlagGet(FLAG_SYS_APP_GOOGLE_GLASS_GET))
+        return;
 
     // ability
     enum Ability ability = GetSpeciesAbility(species, GetMonData(mon, MON_DATA_ABILITY_NUM, NULL));
     BattleInfoHelper_AddTextPrinter(
-        4, 26,
+        4, y,
         fontId,
         BI_TXTCLR_CONTENT,
         GetAbilityName(ability));
+    y += 16;
 
     // held item
     enum Item item = GetMonData(mon, MON_DATA_HELD_ITEM, NULL);
@@ -1466,7 +1624,7 @@ static void BattleInfoText_UpdateHeader(void)
     else
         strbuf = COMPOUND_STRING("No Held Item");
     BattleInfoHelper_AddTextPrinter(
-        4, 42,
+        4, y,
         fontId,
         BI_TXTCLR_CONTENT,
         strbuf);
@@ -1728,8 +1886,8 @@ static struct BattlePokemon *BattleInfoHelper_GetCurrBattleMon(void)
 
 static enum BattlerId BattleInfoHelper_GetCurrBattler(void)
 {
-    bool32 isOpponent = sBattleInfoDataPtr->currPartySlot < PARTY_SIZE;
-    u32 partySlot = sBattleInfoDataPtr->currPartySlot - (PARTY_SIZE * !isOpponent);
+    bool32 isOpponent = !BattleInfoHelper_IsTrainerOnPlayerSide();
+    u32 partySlot = BattleInfoHelper_GetCurrPartySlot();
 
     for (enum BattlerId battler = 0; battler < gBattlersCount; battler++)
     {
@@ -1751,18 +1909,34 @@ static enum BattlerId BattleInfoHelper_GetCurrBattler(void)
 
 static enum BattleTrainer BattleInfoHelper_GetCurrTrainer(void)
 {
-    if (sBattleInfoDataPtr->currPartySlot < PARTY_SIZE)
-        return B_TRAINER_OPPONENT_A;
-    else
-        return B_TRAINER_PLAYER;
+    return BI_GET_TRUE_TRAINER(B_TRAINER_OPPONENT_A - sBattleInfoDataPtr->gridPos.y);
+}
+
+static bool32 BattleInfoHelper_IsTrainerOnPlayerSide(void)
+{
+    return (BattleInfoHelper_GetCurrTrainer() % NUM_BATTLE_SIDES) == B_SIDE_PLAYER;
+}
+
+static u32 BattleInfoHelper_GetCombinedCursorValue(void)
+{
+    return sBattleInfoDataPtr->gridPos.x + (sBattleInfoDataPtr->gridPos.y * PARTY_SIZE);
+}
+
+static u32 BattleInfoHelper_DoesCurrTrainerHaveAPartner(void)
+{
+    enum BattleTrainer currTrainer = BattleInfoHelper_GetCurrTrainer();
+    for (enum BattleTrainer trainer = 0; trainer < MAX_BATTLE_TRAINERS; trainer++)
+        if (trainer == BATTLE_PARTNER(currTrainer) && trainer != currTrainer) // is unique ...
+            for (enum BattlerId battler = 0; battler < gBattlersCount; battler++)
+                if (GetBattlerTrainer(battler) == trainer) // but is it a real trainer?
+                    return TRUE;
+
+    return FALSE;
 }
 
 static u32 BattleInfoHelper_GetCurrPartySlot(void)
 {
-    u32 currPartySlot = sBattleInfoDataPtr->currPartySlot;
-    bool32 isPlayer = currPartySlot >= PARTY_SIZE;
-
-    return currPartySlot - (PARTY_SIZE * isPlayer);
+    return sBattleInfoDataPtr->gridPos.x;
 }
 
 static u32 BattleInfoHelper_TrySwitchInMon(void)
@@ -1911,36 +2085,31 @@ static bool32 BattleInfoHelper_CanMonInfoBeShown(void)
     if (GetMonData(BattleInfoHelper_GetCurrMon(), MON_DATA_MAX_HP, NULL) == 0)
         return FALSE;
 
-    enum BattleTrainer trainer = BattleInfoHelper_GetCurrTrainer();
-    if (trainer == B_TRAINER_PLAYER
-     || FlagGet(FLAG_SYS_APP_GOOGLE_GLASS_GET))
-    {
+    if (BattleInfoHelper_IsTrainerOnPlayerSide() || FlagGet(FLAG_SYS_APP_GOOGLE_GLASS_GET))
         return TRUE;
-    }
 
     enum BattlerId battler = BattleInfoHelper_GetCurrBattler();
     u32 infoPartySlot = BattleInfoHelper_GetCurrPartySlot();
     if (battler != MAX_BATTLERS_COUNT)
         infoPartySlot = BattleInfoHelper_SlotToBattlePartyOrder(battler, infoPartySlot);
 
-    return trainer == B_TRAINER_OPPONENT_A
-        && gBattleStruct->partyState[trainer][infoPartySlot].sentOut;
+    enum BattleTrainer trainer = BattleInfoHelper_GetCurrTrainer();
+    return gBattleStruct->partyState[trainer][infoPartySlot].sentOut;
 }
 
 static void BattleInfoHelper_PopulateOptionsList(void)
 {
-    enum BattleTrainer trainer = BattleInfoHelper_GetCurrTrainer();
-    bool32 isOpponent = trainer != B_TRAINER_PLAYER;
+    bool32 isOnPlayerSide = BattleInfoHelper_IsTrainerOnPlayerSide();
 
     sBattleInfoDataPtr->numOptions = 0;
     #define ADD_OPT(num) sBattleInfoDataPtr->optionsList[sBattleInfoDataPtr->numOptions++] = CAT(BI_OPTION_, num);
-    if (!isOpponent)
+    if (BattleInfoHelper_GetCurrTrainer() == B_TRAINER_PLAYER)
         ADD_OPT(SWAP);
 
-    if ((isOpponent
+    if ((!isOnPlayerSide
          && FlagGet(FLAG_SYS_APP_GOOGLE_GLASS_GET)
          && (gBattleTypeFlags & BATTLE_TYPE_TRAINER))
-     || !isOpponent)
+     || isOnPlayerSide)
     {
         ADD_OPT(SUMMARY);
     }
