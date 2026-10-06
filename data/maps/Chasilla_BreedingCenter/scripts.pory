@@ -11,14 +11,12 @@ script BreedingCenter_Script_StartMonManagement
 {
     lock
     faceplayer
-    call_if_unset(FLAG_RECEIVED_BREEDING_CENTER_WELCOME_KIT,BreedingCenter_Dialogue_IntroPackage)
     if (!flag(FLAG_TEMP_11))
     {
-        msgbox(format("Welcome back to the Chasilla Breeding Center, {PLAYER}!"),,SPEAKER_BREEDINGPARENT)
-        closemessage
+        msgbox(format("Welcome to the Chasilla Breeding Center, {PLAYER}!"),,SPEAKER_BREEDINGPARENT)
     }
 
-    goto(BreedingCenter_Script_BuildCoreMenu)
+    goto(BreedingCenter_Script_HandleMainMenu)
     release
     end
 }
@@ -31,6 +29,7 @@ script BreedingCenter_Script_HandleMainMenu
 
 script BreedingCenter_Script_BuildCoreMenu
 {
+    msgbox(format("How can we help you?"),,SPEAKER_BREEDINGPARENT)
     specialvar(VAR_RESULT,GetDaycareState)
     switch(var(VAR_RESULT))
     {
@@ -61,7 +60,6 @@ script BreedingCenter_Script_HandleCoreMenu
     call(BreedingCenter_Script_AddNeverMindToMenu)
     call(BreedingCenter_Script_AddInfoToMenu)
     dynmultistack(0, 0, FALSE, 3, TRUE, 0, NULL)
-    msgbox(format("What can we help you with today?"),,SPEAKER_BREEDINGPARENT)
 
     switch (var(VAR_RESULT))
     {
@@ -73,34 +71,32 @@ script BreedingCenter_Script_HandleCoreMenu
     }
 }
 
-script BreedingCenter_Dialogue_IntroPackage
+script BreedingCenter_Script_TryGiveWelcomeKit
 {
-    msgbox(format("Welcome to the Chasilla Breeding Center! Our state of the art Pokémon breeding facilities are open to the public."),,SPEAKER_BREEDINGPARENT)
-    msgbox(format("Since its your first visit, we have a welcome package for you!"),,SPEAKER_BREEDINGPARENT)
-
-    call(BreedingCenter_Script_CheckSpaceAndErrorMessage)
-    msgbox(format("Hopefully this welcome helps you breed the best Pokémon possible!"),,SPEAKER_BREEDINGPARENT)
-    closemessage
-    call(BreedingCenter_Script_GiveWelcomeKit)
-    msgbox(format("If you need more info, any of the staff here is happy to help."),,SPEAKER_BREEDINGPARENT)
-    goto(BreedingCenter_Script_StartMonManagement)
+    lock
+    faceplayer
+    msgbox(format("There is a box on the table labeled “FREE”.The contents seem to be old and used but still functional. Do you want to take it?"),MSGBOX_YESNO)
+    if (var(VAR_RESULT) == YES)
+    {
+        callnative(DoesPlayerHaveSpaceForWelcomeKit)
+        call_if_eq(VAR_RESULT,FALSE,BreedingCenter_Dialogue_NotEnoughRoom)
+        call_if_ne(VAR_RESULT,FALSE,BreedingCenter_Script_GiveWelcomeKit)
+    }
+    release
+    end
 }
 
-script BreedingCenter_Script_CheckSpaceAndErrorMessage
+script BreedingCenter_Dialogue_NotEnoughRoom
 {
-    callnative(DoesPlayerHaveSpaceForWelcomeKit)
-    if (var(VAR_RESULT) == FALSE)
-    {
-        msgbox(format("Our welcome kit has a quite a bit in it, and your bag appears to be full. Come back once you've made some room!"),,SPEAKER_BREEDINGPARENT)
-        closemessage
-        end
-    }
-    setflag(FLAG_RECEIVED_BREEDING_CENTER_WELCOME_KIT)
-    setflag(FLAG_TEMP_11)
+    msgbox(format("I need to make more room in my {STR_VAR_1} and {STR_VAR_2} pockets..."),,SPEAKER_PLAYER,TAIL_THOUGHT)
+    closemessage
 }
 
 script BreedingCenter_Script_GiveWelcomeKit
 {
+    closemessage
+    cueobjecttalking(LOCALID_PLAYER)
+    removeobject(LOCALID_CHASILLA_BREEDING_WELCOME_KIT)
     giveitem(ITEM_EVERSTONE, 2)
     giveitem(ITEM_DESTINY_KNOT, 2)
     giveitem(ITEM_POWER_WEIGHT,2)
@@ -113,8 +109,6 @@ script BreedingCenter_Script_GiveWelcomeKit
 
 script BreedingCenter_Script_ShowNoMonsMenu
 {
-    msgbox(format("Are you ready to get started?"),,SPEAKER_BREEDINGPARENT)
-
     dynmultichoice(0,0,FALSE,3,0,NULL,
         "Deposit",
         "Info",
@@ -165,8 +159,6 @@ script BreedingCenter_Script_DepositMonAtDaycare
     incrementgamestat(GAME_STAT_USED_DAYCARE)
 
     goto(BreedingCenter_Script_HandleMainMenu)
-    //call(BreedingCenter_Dialogue_PostDepositMessage)
-    //call(BreedingCenter_Dialogue_AskDepositAgain)
 }
 
 script BreedingCenter_Dialogue_AskDepositAgain
@@ -282,6 +274,11 @@ script BreedingCenter_Script_StartEggManagement
 {
     lock
     faceplayer
+    if (flag(FLAG_TEMP_11) == FALSE)
+    {
+        setflag(FLAG_TEMP_11)
+        msgbox(format("I'm the Egg Manager here!"),,SPEAKER_BREEDINGEGG)
+    }
     goto(BreedingCenter_Script_BuildEggMenu)
     release
     end
@@ -299,7 +296,6 @@ script BreedingCenter_Script_BuildEggMenu
         case DAYCARE_TWO_MONS:
             call(BreedingCenter_Script_AddCheckParentsToMenu)
     }
-    msgbox(format("I'm the Egg Manager here!"),,SPEAKER_BREEDINGEGG)
     goto(BreedingCenter_Script_HandleEggManagement)
 }
 
