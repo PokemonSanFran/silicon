@@ -7,7 +7,7 @@ mapscripts Chasilla_MapScripts{
         VAR_CHASILLA_STATE, DEFEATED_PUA: SorryAboutMyFriends_Adaora_Visible_Script
     ]
     MAP_SCRIPT_ON_TRANSITION {
-        call(BreedingCenter_Script_SignifyEggReady)
+        call_if_set(FLAG_PENDING_DAYCARE_EGG,BreedingCenter_Script_SignifyEggReady)
         call(swagbag2_SetUp_Object_Script)
         call(Quest_StealTheAxe_UnlockDoor_Script)
     }

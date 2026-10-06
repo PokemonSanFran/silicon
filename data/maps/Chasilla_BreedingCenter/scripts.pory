@@ -1,21 +1,17 @@
-const BREEDINGEGG = 11
-
 mapscripts Chasilla_BreedingCenter_MapScripts
 {
 }
 
 script BreedingCenter_Script_SignifyEggReady
 {
-    if (flag(FLAG_PENDING_DAYCARE_EGG)) {
-        setobjectmovementtype(BREEDINGEGG,MOVEMENT_TYPE_FACE_RIGHT)
-    }
+    setobjectmovementtype(LOCALID_CHASILLA_EGG_ATTENDANT,MOVEMENT_TYPE_FACE_RIGHT)
 }
 
 script BreedingCenter_Script_StartMonManagement
 {
     lock
     faceplayer
-    call(BreedingCenter_Dialogue_IntroPackage)
+    call_if_unset(FLAG_RECEIVED_BREEDING_CENTER_WELCOME_KIT,BreedingCenter_Dialogue_IntroPackage)
     if (!flag(FLAG_TEMP_11))
     {
         msgbox(format("Welcome back to the Chasilla Breeding Center, {PLAYER}!"),,SPEAKER_BREEDINGPARENT)
@@ -79,11 +75,6 @@ script BreedingCenter_Script_HandleCoreMenu
 
 script BreedingCenter_Dialogue_IntroPackage
 {
-    if (flag(FLAG_RECEIVED_BREEDING_CENTER_WELCOME_KIT))
-    {
-        return
-    }
-
     msgbox(format("Welcome to the Chasilla Breeding Center! Our state of the art Pokémon breeding facilities are open to the public."),,SPEAKER_BREEDINGPARENT)
     msgbox(format("Since its your first visit, we have a welcome package for you!"),,SPEAKER_BREEDINGPARENT)
 
@@ -533,7 +524,7 @@ script BreedingCenter_Script_GiveEggToPlayer
     closemessage
     callnative(BufferUnhatchedMonEgg)
     callnative(GiveEggFromDaycare_Silicon)
-    cueobjectplayer(BREEDINGEGG)
+    cueobjectplayer(LOCALID_CHASILLA_EGG_ATTENDANT)
     playfanfare(MUS_LEVEL_UP)
     if (var(VAR_0x8009) != MON_GIVEN_TO_PARTY)
     {
