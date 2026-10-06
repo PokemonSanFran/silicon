@@ -1631,7 +1631,7 @@ static void BattleInfoText_UpdateHeader(void)
     }
 
     // do not reveal opponent data w/o google glass
-    if (!isOnPlayerSide && !FlagGet(FLAG_SYS_APP_GOOGLE_GLASS_GET))
+    if (!isOnPlayerSide && (!FlagGet(FLAG_SYS_APP_GOOGLE_GLASS_GET) || !(gBattleTypeFlags & BATTLE_TYPE_TRAINER)))
         return;
 
     // ability
