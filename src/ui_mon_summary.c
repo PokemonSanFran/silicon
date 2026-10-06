@@ -328,7 +328,7 @@ void MonSummary_Init(enum PokemonSummaryScreenMode mode, void *mons, u8 currIdx,
     SetMainCallback2(CB2_SummarySetup);
 }
 
-u32 MonSummary_CreateHPBarSprite(u32 tileTag, u32 palTag, s32 x, s32 y)
+u32 MonSummary_CreateHPBarSprite(u32 tileTag, u32 palTag, s32 x, s32 y, bool32 hideText)
 {
     const struct MonSummarySprite *config = SummarySprite_GetMainStruct(1);
 
@@ -342,13 +342,19 @@ u32 MonSummary_CreateHPBarSprite(u32 tileTag, u32 palTag, s32 x, s32 y)
         .tag = palTag
     });
 
-    return CreateSprite(&(const struct SpriteTemplate){
+    u32 spriteId = CreateSprite(&(const struct SpriteTemplate){
         .tileTag = tileTag,
         .paletteTag = palTag,
         .oam = config->oam,
         .anims = config->anims,
         .affineAnims = gDummySpriteAffineAnimTable,
     }, x, y, 0);
+
+    if (spriteId == SPRITE_NONE)
+        return SPRITE_NONE;
+
+    gSprites[spriteId].sHideHPText = hideText;
+    return spriteId;
 }
 
 u32 MonSummary_Create11x9TypeIcon(u32 tileTag, s32 x, s32 y)
@@ -422,18 +428,21 @@ void MonSummary_InjectHpBar(struct Sprite *sprite, s32 currHp, s32 maxHp)
 
     LoadPalette(&sSummarySprite_HpBarColors[1 + (color * 2)], OBJ_PLTT_ID(sprite->oam.paletteNum) + 6, PLTT_SIZEOF(2));
 
-    u32 fontId = FONT_OUTLINED;
+    if (!sprite->sHideHPText)
+    {
+        u32 fontId = FONT_OUTLINED;
 
-    ConvertUIntToDecimalStringN(gStringVar1, currHp, STR_CONV_MODE_RIGHT_ALIGN, 4);
-    u32 x = GetStringRightAlignXOffset(fontId, gStringVar1, TILE_TO_PIXELS(3) + 1);
-    SummaryPrint_AddText(windowId, fontId, x, 0, SUMMARY_FNTCLR_INTERFACE, gStringVar1);
+        ConvertUIntToDecimalStringN(gStringVar1, currHp, STR_CONV_MODE_RIGHT_ALIGN, 4);
+        u32 x = GetStringRightAlignXOffset(fontId, gStringVar1, TILE_TO_PIXELS(3) + 1);
+        SummaryPrint_AddText(windowId, fontId, x, 0, SUMMARY_FNTCLR_INTERFACE, gStringVar1);
 
-    x = TILE_TO_PIXELS(3) + 1;
-    SummaryPrint_AddText(windowId, fontId, x, 0, SUMMARY_FNTCLR_INTERFACE, COMPOUND_STRING("/"));
+        x = TILE_TO_PIXELS(3) + 1;
+        SummaryPrint_AddText(windowId, fontId, x, 0, SUMMARY_FNTCLR_INTERFACE, COMPOUND_STRING("/"));
 
-    x = TILE_TO_PIXELS(4) - 2;
-    ConvertUIntToDecimalStringN(gStringVar1, maxHp, STR_CONV_MODE_LEFT_ALIGN, 4);
-    SummaryPrint_AddText(windowId, fontId, x, 0, SUMMARY_FNTCLR_INTERFACE, gStringVar1);
+        x = TILE_TO_PIXELS(4) - 2;
+        ConvertUIntToDecimalStringN(gStringVar1, maxHp, STR_CONV_MODE_LEFT_ALIGN, 4);
+        SummaryPrint_AddText(windowId, fontId, x, 0, SUMMARY_FNTCLR_INTERFACE, gStringVar1);
+    }
 
     u8 *tileData = (u8 *)GetWindowAttribute(windowId, WINDOW_TILE_DATA);
     u32 tileNum = TILE_OFFSET_4BPP(sprite->oam.tileNum);

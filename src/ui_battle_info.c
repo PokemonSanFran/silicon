@@ -1439,7 +1439,7 @@ static u32 BattleInfoSprite_CreateFaintedIcon(enum BattleTrainer trainer, u32 id
 static void BattleInfoSprite_CreateHPBar(void)
 {
     u8 *spriteId = &sBattleInfoDataPtr->spriteIds[BI_SPRITE_HPBAR];
-    *spriteId = MonSummary_CreateHPBarSprite(TAG_BI_HPBAR, TAG_BI_HPBAR, BI_HPBAR_X, BI_HPBAR_Y);
+    *spriteId = MonSummary_CreateHPBarSprite(TAG_BI_HPBAR, TAG_BI_HPBAR, BI_HPBAR_X, BI_HPBAR_Y, TRUE);
     if (*spriteId == SPRITE_NONE)
         return;
 

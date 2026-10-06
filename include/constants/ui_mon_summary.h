@@ -121,6 +121,8 @@ enum MonSummaryHpBarColors
 #define sTileTag        data[0]
 #define sPaletteTag     data[1]
 
+#define sHideHPText     data[7]
+
 enum MonSummaryInfosSprites
 {
     SUMMARY_INFOS_SPRITE_HELD_ITEM,
