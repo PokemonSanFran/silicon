@@ -2302,14 +2302,20 @@ static void SummaryPrint_TextBox(const u8 *str)
 static void SummaryPrint_MonName(u32 x, u32 y, u32 maxWidth)
 {
     struct MonSummary *mon = SummaryMon_GetStruct();
-    const u8 *str = SummaryInput_GetUpdateText() ? GetSpeciesName(mon->species) : mon->nickname;
-    u32 fontId = GetOutlineFontIdToFit(str, maxWidth);
+    if (mon->isEgg == TRUE)
+        StringCopy(gStringVar3,COMPOUND_STRING("Egg"));
+    else if (SummaryInput_GetUpdateText() == TRUE)
+        StringCopy(gStringVar3,GetSpeciesName(mon->species));
+    else
+        StringCopy(gStringVar3,mon->nickname);
+
+    u32 fontId = GetOutlineFontIdToFit(gStringVar3, maxWidth);
     u32 windowId = SUMMARY_MAIN_WIN_PAGE_TEXT;
 
     FillWindowPixelRect(windowId, PIXEL_FILL(0), x, y, maxWidth, 16);
     PutWindowTilemap(windowId);
 
-    SummaryPrint_AddText(windowId, fontId, x, y, SUMMARY_FNTCLR_INTERFACE, str);
+    SummaryPrint_AddText(windowId, fontId, x, y, SUMMARY_FNTCLR_INTERFACE, gStringVar3);
 }
 
 static void SummaryPrint_MonGender(u32 x, u32 y)
@@ -2677,7 +2683,7 @@ static void InfosPageMisc_PrintTextBox(void)
             StringExpandPlaceholders(gStringVar4, COMPOUND_STRING("Met at {LV} {STR_VAR_1}, {STR_VAR_2}."));
         else if (mon->isEgg == TRUE)
             StringExpandPlaceholders(gStringVar4, COMPOUND_STRING("Received as an unhatched egg."));
-        else 
+        else
             StringExpandPlaceholders(gStringVar4, COMPOUND_STRING("Hatched at {STR_VAR_2}."));
         SummaryPrint_AddText(SUMMARY_MAIN_WIN_PAGE_TEXT, FONT_NORMAL, x, y, color, gStringVar4);
     }
