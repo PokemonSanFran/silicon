@@ -390,8 +390,6 @@ script BreedingCenter_Dialogue_InformPlayer
         }
     }
 
-    closemessage
-
     specialvar(VAR_RESULT,GetDaycareState)
     if(var(VAR_RESULT) == DAYCARE_NO_MONS)
     {
