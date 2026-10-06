@@ -4,31 +4,39 @@ script NewAssholeAppears_Script_HideBaiya
 }
 
 script NewAssholeAppears_WalkToPlayer_Script {
-    lockall
+	lock
+    playbgm(MUS_ENCOUNTER_CHAMPION,TRUE)
     playse(SE_PIN)
     applymovement(LOCALID_ROUTE10_BAIYA,Common_Movement_ExclamationMark)
     waitmovement(LOCALID_ROUTE10_BAIYA)
-    waitse
-    playbgm(MUS_ENCOUNTER_CHAMPION,TRUE)
     call(NewAssholeAppears_Script_MovePlayerAndBaiyaIntoPosition)
+    waitse
     goto(BaiyaAlpha_Event_Script)
 }
 
 script NewAssholeAppears_Script_MovePlayerAndBaiyaIntoPosition
 {
     getplayerxy(VAR_0x8004,VAR_0x8005)
-    if(var(VAR_0x8005) == 4)
+    if(var(VAR_0x8004) < 32)
     {
-        applymovement(LOCALID_ROUTE10_BAIYA, moves(walk_down))
+		moveobjecttocoords(LOCALID_ROUTE10_BAIYA,28,3,DIR_WEST)
+		moveobjecttocoords(LOCALID_PLAYER,27,3,DIR_EAST)
+    }
+
+    if(var(VAR_0x8004) > 26)
+    {
+		moveobjecttocoords(LOCALID_ROUTE10_BAIYA,30,3,DIR_EAST)
+		moveobjecttocoords(LOCALID_PLAYER,31,3,DIR_WEST)
     }
     
-    waitmovement(0)
-    applymovement(LOCALID_ROUTE10_BAIYA, moves(walk_right*2))
-    waitmovement(0)
+    waitmovement(LOCALID_PLAYER)
+    waitmovement(LOCALID_ROUTE10_BAIYA)
 }
 
-script BaiyaAlpha_Event_Script{
-    switch(var(VAR_ROUTE10_STATE)) {
+script BaiyaAlpha_Event_Script
+{
+    switch(var(VAR_ROUTE10_STATE)) 
+	{
         case HAS_NOT_MET_BAIYA: goto(NewAssholeAppears_Intro_Dialogue)
         case SAVED_BEFORE_BAIYA_ROUTE10: goto(NewAssholeAppears_StartBattle_Script)
     }
@@ -72,7 +80,9 @@ script NewAssholeAppears_StartBattle_Script{
 }
 
 script NewAssholeAppears_PostBattle_Script {
-    lockall
+   	lock 
+    addvar(VAR_STORYLINE_STATE,1)
+    setvar(VAR_TEMP_0,0)
     startcutscene(JUMPPLAYER_NEWASSHOLEAPPEARS)
     setvar(VAR_ROUTE10_STATE,DEFEATED_BAIYA_ROUTE10)
     msgbox(format("Are you done being an ass, whateveryournameis?"),,SPEAKER_ALICIA)
@@ -89,16 +99,13 @@ script NewAssholeAppears_PostBattle_Script {
 }
 
 script NewAssholeAppears_BaiyaExit_Script{
-    applymovement(LOCALID_ROUTE10_BAIYA, moves(walk_left*4, walk_up*7))
-    waitmovement(0)
+	moveobjecttocoords(LOCALID_ROUTE10_BAIYA,23,0,DIR_NORTH)
     delay(24)
+    fadedefaultbgm
     endcutscene
 	fadescreenswapbuffers(FADE_TO_BLACK)
-    fadedefaultbgm
     removeobject(LOCALID_ROUTE10_BAIYA)
 	fadescreenswapbuffers(FADE_FROM_BLACK)
-    addvar(VAR_STORYLINE_STATE,1)
-    setvar(VAR_TEMP_0,0)
     call(AaandWereBack_Monologue)
     call(TryAutoSave)
     releaseall
