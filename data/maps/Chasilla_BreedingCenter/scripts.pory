@@ -760,11 +760,10 @@ script BreedingCenter_Script_RemoveFundsFinishGene
 {
     playse(SE_SHOP)
     variableremovemoney(VAR_0x8005,TRUE)
-    waitse
-	waitbuttonpress
-    hidemoneybox
     callnative(FinalizeIndividualValueChanges)
-    msgbox(format("Your changes are complete. Let me know if you want to change any more of your Pokémon."),,SPEAKER_BREEDINGEGG)
+    msgbox(format("Your changes are complete. Let me know if you want to change any more of your Pokémon."),,SPEAKER_BREEDINGGENE)
+    waitse
+    hidemoneybox
     closemessage
     release
     end
