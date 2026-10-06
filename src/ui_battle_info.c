@@ -606,6 +606,17 @@ void BattleInfo_Init(u32 partyAction, MainCallback savedCB)
     SetMainCallback2(CB2_BattleInfoInit);
 }
 
+void BattleInfo_ResetSavedState(void)
+{
+    sBattleInfoSavedState.mode = 0;
+    sBattleInfoSavedState.optionsCursor = 0;
+    sBattleInfoSavedState.gridPos.x = 0;
+    sBattleInfoSavedState.gridPos.y = 1;
+    sBattleInfoSavedState.trueCB = NULL;
+    sBattleInfoSavedState.partyAction = 0;
+    sBattleInfoSavedState.partyView = 0;
+}
+
 static void CB2_BattleInfoInit(void)
 {
     enum

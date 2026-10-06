@@ -64,7 +64,10 @@
 #include "util.h"
 #include "wild_encounter.h"
 #include "window.h"
-#include "silicon_battle_status_criteria.h" // battleInfo
+// start battleInfo
+#include "ui_battle_info.h"
+#include "silicon_battle_status_criteria.h"
+// end battleInfo
 #include "constants/abilities.h"
 #include "constants/battle_ai.h"
 #include "constants/battle_move_effects.h"
@@ -3051,6 +3054,7 @@ static void BattleStartClearSetData(void)
     }
 
     memset(&gRecordedMaxBattleStatusValues, 0, sizeof(struct MaxBattleStatusValues)); // battleInfo
+    BattleInfo_ResetSavedState();
 }
 
 #define UNPACK_VOLATILE_BATON_PASSABLES(_enum, _fieldName, _typeMaxValue, ...) __VA_OPT__(if ((FIRST(__VA_ARGS__)) & V_BATON_PASSABLE) gBattleMons[battler].volatiles._fieldName = volatilesCopy->_fieldName;)
