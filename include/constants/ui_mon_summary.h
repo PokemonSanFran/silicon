@@ -442,6 +442,7 @@ struct MonSummary
     u8 nickname[min(10, POKEMON_NAME_LENGTH)];
     enum PokeBall ball;
     u8 flavors[TOTAL_MON_NATURE_FLAVORS];
+    u8 eggCycles;
 };
 
 struct MonSummaryResources
