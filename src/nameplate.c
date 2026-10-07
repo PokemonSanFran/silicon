@@ -535,7 +535,7 @@ static void CreateSpeakerIconSprite(u32 nameplateWidth, enum NameplateSpeaker sp
     u32 spriteTag = GFXTAG_SPEAKER_ICON;
     struct SpriteSheet sSpriteSheet_Speaker;
     sSpriteSheet_Speaker.data = GetSpeakerIcon(speaker);
-    sSpriteSheet_Speaker.size = 2048;
+    sSpriteSheet_Speaker.size = 512;
     sSpriteSheet_Speaker.tag = spriteTag;
     LoadSpriteSheet(&sSpriteSheet_Speaker);
 
