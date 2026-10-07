@@ -11637,19 +11637,6 @@
       "layout_version": "emerald"
     },
     {
-      "id": "LAYOUT_ESPULEE_OUTSKIRTS_SOLAR",
-      "name": "EspuleeOutskirts_Solar_Layout",
-      "width": 7,
-      "height": 8,
-      "primary_tileset": "gTileset_Building",
-      "secondary_tileset": "gTileset_Facility",
-      "border_filepath": "data/layouts/EspuleeOutskirts_Solar/border.bin",
-      "blockdata_filepath": "data/layouts/EspuleeOutskirts_Solar/map.bin",
-      "border_height": 2,
-      "border_width": 2,
-      "layout_version": "emerald"
-    },
-    {
       "id": "LAYOUT_CURENO_PORT_BIKERHQ",
       "name": "CurenoPort_BIkerhq_Layout",
       "width": 15,
