@@ -967,7 +967,7 @@ static void SetInventorySortVar(u8 pocket, u8 type){
 
 static u16 GetInventorySortValue(u8 pocket){
     enum Silicon_BagSortOptions sort = VarGet(sInventorySortVars[pocket]);
-    
+
     if (sort > ITEM_SORT_BY_NUMBER)
     {
         sort = ITEM_SORT_DEFAULT;
@@ -2886,21 +2886,6 @@ static u8 getSelectedItemNumOptions(void)
     }
 }
 
-static const struct StringList sInventory_TitleStrings[NUM_INVENTORY_POCKETS] = {
-    [POCKET_MEDICINE]       = { _("Medicine"),     },
-    [POCKET_POKE_BALLS]     = { _("Poké Balls"),   },
-    [POCKET_BATTLE_ITEMS]   = { _("Battle Items"), },
-    [POCKET_POWERUP]        = { _("Power Up"),     },
-    [POCKET_BERRIES]        = { _("Berries"),      },
-    [POCKET_OTHER]          = { _("Other Items"),  },
-    [POCKET_TM_HM]          = { _("TMs & HMs"),    },
-    [POCKET_TREASURE]       = { _("Treasures"),    },
-    [POCKET_Z_CRYSTALS]     = { _("Z-Crystals"),   },
-    [POCKET_MEGA_STONES]    = { _("Mega Stones"),  },
-    [POCKET_KEY_ITEMS]      = { _("Key Items"),    },
-    [POCKET_FAVORITE_ITEMS] = { _("Favorite"),     },
-};
-
 static const u8 sInventory_Exit_Desc[] = _("Close the Inventory");
 static const u8 sInventory_Nothing[]   = _("---");
 static const u8 sText_Item_Num[]       = _("x{STR_VAR_1}");
@@ -2990,7 +2975,7 @@ static u32 Inventory_CalculateWidestBagPocketTitle(void)
     u32 width = 0;
 
     for (enum Pocket pocketIndex = 0; pocketIndex < NUM_INVENTORY_POCKETS; pocketIndex++)
-        width = max(width,(GetStringWidth(INVENTORY_FONT_HEADER,sInventory_TitleStrings[pocketIndex].string,GetFontAttribute(INVENTORY_FONT_HEADER,FONTATTR_LETTER_SPACING))));
+        width = max(width,(GetStringWidth(INVENTORY_FONT_HEADER,GetPocketName(pocketIndex),GetFontAttribute(INVENTORY_FONT_HEADER,FONTATTR_LETTER_SPACING))));
 
     return width;
 }
@@ -3020,7 +3005,7 @@ static void Inventory_PrintHeader(void)
     u32 letterSpacing = GetFontAttribute(font,FONTATTR_LETTER_SPACING);
 
     FillWindowPixelBuffer(INVENTORY_WINDOW_HEADER, PIXEL_FILL(TEXT_COLOR_TRANSPARENT));
-    StringCopy(gStringVar1, sInventory_TitleStrings[pocketId].string);
+    StringCopy(gStringVar1, GetPocketName(pocketId));
     StringCopy(gStringVar2, sSortTypeStrings[GetInventorySortValue(pocketId)]);
     StringExpandPlaceholders(gStringVar4, sInventory_Pocket_Name);
     AddTextPrinterParameterized4(INVENTORY_WINDOW_HEADER, font, x, y, letterSpacing, lineSpacing, sInventoryFontColors[INVENTORY_FONT_WHITE], TEXT_SKIP_DRAW, gStringVar4);

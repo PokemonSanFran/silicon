@@ -49,7 +49,8 @@ bool32 DoesPlayerHaveSpaceForWelcomeKit(void)
         {ITEM_POWER_ANKLET,2},
     };
 
-    u32 item, quantity;
+    enum Item item;
+    u32 quantity;
     s32 itemIndex;
     bool32 result = TRUE;
 
@@ -80,6 +81,15 @@ bool32 DoesPlayerHaveSpaceForWelcomeKit(void)
     }
 
     gSpecialVar_Result = result;
+
+    if (gSpecialVar_Result == FALSE)
+    {
+        enum Pocket pocket = GetItemPocket(ITEM_EVERSTONE);
+        StringCopy(gStringVar1, GetPocketName(pocket));
+
+        pocket = GetItemPocket(ITEM_POWER_WEIGHT);
+        StringCopy(gStringVar2, GetPocketName(pocket));
+    }
     return result;
 }
 
