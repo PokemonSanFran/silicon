@@ -686,15 +686,18 @@ enum {
 // Start midBattleEvolution
 static void ChangeMusicAfterEvo(u32 taskId)
 {
-    if (!(gTasks[taskId].tBits & TASK_BIT_LEARN_MOVE))
+    if (gMidBattleEvo) 
     {
-        if (gMidBattleEvo) {
-            m4aMPlayContinue(&gMPlayInfo_BGM);
-        }
-        else {
-            StopMapMusic();
-            Overworld_PlaySpecialMapMusic();
-        }
+        m4aMPlayContinue(&gMPlayInfo_BGM);
+    }
+    else if (gMain.inBattle && gBattleOutcome == 0) 
+    {
+        PlayBattleBGM(); 
+    }
+    else 
+    {
+        StopMapMusic();
+        Overworld_PlaySpecialMapMusic();
     }
 }
 
@@ -863,7 +866,8 @@ static void Task_EvolutionScene(u8 taskId)
             if (var != MOVE_NONE && !gTasks[taskId].tEvoWasStopped)
             {
                 u8 nickname[POKEMON_NAME_BUFFER_SIZE];
-                ChangeMusicAfterEvo(taskId); // midBattleEvolution
+                if (!(gTasks[taskId].tBits & TASK_BIT_LEARN_MOVE)) // midBattleEvolution
+                    ChangeMusicAfterEvo(taskId); // midBattleEvolution
 
                 gTasks[taskId].tBits |= TASK_BIT_LEARN_MOVE;
                 gTasks[taskId].tLearnsFirstMove = FALSE;
@@ -896,18 +900,13 @@ static void Task_EvolutionScene(u8 taskId)
                Overworld_PlaySpecialMapMusic();
                }
                */
-            ChangeMusicAfterEvo(taskId);
 // End midBattleEvolution
-            if (!(gTasks[taskId].tBits & TASK_BIT_LEARN_MOVE))
-            {
-                StopMapMusic();
-                Overworld_PlaySpecialMapMusic();
-
-            }
 
             if (!gTasks[taskId].tEvoWasStopped)
                 CreateShedinja(gTasks[taskId].tPreEvoSpecies, gTasks[taskId].tPostEvoSpecies, mon);
 
+            gMidBattleEvo = FALSE;
+            ChangeMusicAfterEvo(taskId);
             DestroyTask(taskId);
             FreeMonSpritesGfx();
             FREE_AND_SET_NULL(sEvoStructPtr);
