@@ -617,6 +617,31 @@ void BattleInfo_ResetSavedState(void)
     sBattleInfoSavedState.partyView = 0;
 }
 
+enum BattleTrainer BattleInfo_GetBattleTrainer(void)
+{
+    enum BattleTrainer currTrainer = B_TRAINER_OPPONENT_A - sBattleInfoSavedState.gridPos.y;
+    currTrainer = (currTrainer + (!!(sBattleInfoSavedState.partyView & (currTrainer + 1)) * NUM_BATTLE_SIDES));
+
+    return currTrainer;
+}
+
+const u8 *BattleInfo_GetBattleTrainerName(void)
+{
+    switch (BattleInfo_GetBattleTrainer())
+    {
+    default:
+        return gText_EmptyString3;
+    case B_TRAINER_PLAYER:
+        return gSaveBlock2Ptr->playerName;
+    case B_TRAINER_PARTNER:
+        return GetTrainerNameFromId(gPartnerTrainerId);
+    case B_TRAINER_OPPONENT_A:
+        return GetTrainerNameFromId(TRAINER_BATTLE_PARAM.opponentA);
+    case B_TRAINER_OPPONENT_B:
+        return GetTrainerNameFromId(TRAINER_BATTLE_PARAM.opponentB);
+    }
+}
+
 static void CB2_BattleInfoInit(void)
 {
     enum

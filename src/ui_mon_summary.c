@@ -41,6 +41,7 @@
 #include "m4a.h"
 #include "item_menu.h"
 #include "ui_move_reminder.h"
+#include "ui_battle_info.h"
 #include "nameplate.h"
 #include "ui_mon_summary.h"
 #include "constants/ui_mon_summary.h"
@@ -1568,7 +1569,13 @@ static void SummaryMon_SetStruct(void)
     res->summary.nature = GetNature(mon);
     res->summary.currHp = GetMonData(mon, MON_DATA_HP);
 
-    GetMonData(mon, MON_DATA_OT_NAME, res->summary.trainerName);
+    // MON_DATA_OT_NAME only stores around 7-8 characters (includin EOS)
+    // but NPC trainers may have exceed that name length
+    if (gMain.inBattle && BattleInfo_GetBattleTrainer() != B_TRAINER_PLAYER)
+        StringCopy(res->summary.trainerName, BattleInfo_GetBattleTrainerName());
+    else
+        GetMonData(mon, MON_DATA_OT_NAME, res->summary.trainerName);
+
     ConvertInternationalString(res->summary.trainerName, GetMonData(mon, MON_DATA_LANGUAGE));
     res->summary.ailment = GetMonAilment(mon);
     res->summary.trainerId = GetMonData(mon, MON_DATA_OT_ID);
