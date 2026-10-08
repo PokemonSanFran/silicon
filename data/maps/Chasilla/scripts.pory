@@ -20,31 +20,6 @@ mapscripts Chasilla_MapScripts{
     }
 }
 
-script Chasilla_Stan_Interact_Script{
-    lock
-        call(Quest_WallaceArmy_LoadStanSpeech_Script)
-        msgbox(format("Oh Wallace-sama... so dreamy! The {STR_VAR_1}of his {STR_VAR_2}...oh! I can't get enough."),MSGBOX_NPC)
-        call(Quest_WallaceArmy_PreBattleStan_Script)
-
-        trainerbattle_single(TRAINER_CHASILLA_STAN,gText_WallaceArmy_EspuleeOutskirtsSolarTheySpoke,gText_WallaceArmy_MyLord,Chasilla_Stan_PostBattle_Script)
-        goto(Chasilla_Stan_PostBattle_Script)
-}
-
-script Chasilla_Stan_PostBattle_Script{
-
-    subquestmenu(QUEST_MENU_COMPLETE_QUEST,QUEST_WALLACEARMY,SUB_QUEST_4)
-        call(Quest_WallaceArmy_CheckCompletionRate_Script)
-        questmenu(QUEST_MENU_CHECK_COMPLETE, QUEST_WALLACEARMY)
-        if (!var(VAR_RESULT)){
-            msgbox(format("PostBattlePlaceholder1"))
-        }else {
-            msgbox(format("PostQuestPlaceholder1"))
-        }
-
-    release
-        end
-}
-
 script Chasilla_University_Locked_Door_Script{
     msgbox(format("The door is locked."),MSGBOX_SIGN)
     call(Quest_StealTheAxe_LockedDoor_Dialogue)

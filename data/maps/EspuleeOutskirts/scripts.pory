@@ -33,31 +33,6 @@ script EspuleeOutskirts_RangerStationDoor_Script{
     goto(Quest_ManOfManyHats_GuessDoorCombination_Dialogue)
 }
 
-script EspuleeOutskirts_Stan_Interact_Script{
-    lock
-        call(Quest_WallaceArmy_LoadStanSpeech_Script)
-        msgbox(format("Oh Wallace-sama... so dreamy! The {STR_VAR_1}of his {STR_VAR_2}...oh! I can't get enough."),MSGBOX_NPC)
-        call(Quest_WallaceArmy_PreBattleStan_Script)
-
-        trainerbattle_single(TRAINER_ESPULEE_OUTSKIRTS_STAN,gText_WallaceArmy_EspuleeOutskirtsSolarTheySpoke,gText_WallaceArmy_MyLord,EspuleeOutskirts_Stan_PostBattle_Script)
-        goto(EspuleeOutskirts_Stan_PostBattle_Script)
-}
-
-script EspuleeOutskirts_Stan_PostBattle_Script{
-
-    subquestmenu(QUEST_MENU_COMPLETE_QUEST,QUEST_WALLACEARMY,SUB_QUEST_5)
-        call(Quest_WallaceArmy_CheckCompletionRate_Script)
-        questmenu(QUEST_MENU_CHECK_COMPLETE, QUEST_WALLACEARMY)
-        if (!var(VAR_RESULT)){
-            msgbox(format("PostBattlePlaceholder1"))
-        }else {
-            msgbox(format("PostQuestPlaceholder1"))
-        }
-
-    release
-        end
-}
-
 script EspuleeOutskirts_Script_InteractImelda
 {
     lock
