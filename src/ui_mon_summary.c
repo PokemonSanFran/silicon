@@ -448,10 +448,9 @@ void MonSummary_InjectHpBar(struct Sprite *sprite, s32 currHp, s32 maxHp)
         BlitBitmapRectToWindow(windowId, blit, x, y, TILE_TO_PIXELS(9), TILE_TO_PIXELS(6), i * 8, 0, TILE_TO_PIXELS(1), TILE_TO_PIXELS(2));
     }
 
+    u32 fontId = FONT_OUTLINED;
     if (!sprite->sHideHPText)
     {
-        u32 fontId = FONT_OUTLINED;
-
         ConvertUIntToDecimalStringN(gStringVar1, currHp, STR_CONV_MODE_RIGHT_ALIGN, 4);
         u32 x = GetStringRightAlignXOffset(fontId, gStringVar1, TILE_TO_PIXELS(3) + 1);
         SummaryPrint_AddText(windowId, fontId, x, 0, SUMMARY_FNTCLR_INTERFACE, gStringVar1);
@@ -461,6 +460,14 @@ void MonSummary_InjectHpBar(struct Sprite *sprite, s32 currHp, s32 maxHp)
 
         x = TILE_TO_PIXELS(4) - 2;
         ConvertUIntToDecimalStringN(gStringVar1, maxHp, STR_CONV_MODE_LEFT_ALIGN, 4);
+        SummaryPrint_AddText(windowId, fontId, x, 0, SUMMARY_FNTCLR_INTERFACE, gStringVar1);
+    }
+    else
+    {
+        u32 hpPercent = (currHp * 100) / maxHp;
+        u8 *tail = ConvertUIntToDecimalStringN(gStringVar1, hpPercent, STR_CONV_MODE_LEFT_ALIGN, 4);
+        StringCopy(tail, COMPOUND_STRING("%"));
+        u32 x = GetStringCenterAlignXOffset(fontId, gStringVar1, TILE_TO_PIXELS(7));
         SummaryPrint_AddText(windowId, fontId, x, 0, SUMMARY_FNTCLR_INTERFACE, gStringVar1);
     }
 
@@ -1908,6 +1915,7 @@ static const struct MonSummarySprite *SummarySprite_GetMainStruct(u32 idx)
 static void SummarySprite_InjectHpBar(struct Sprite *sprite)
 {
     struct MonSummary *mon = SummaryMon_GetStruct();
+    sprite->sHideHPText = FALSE; // opponent's party cannot be viewed in the summary screen w/o google glass
     MonSummary_InjectHpBar(sprite, mon->currHp, GetMonData(&sMonSummaryDataPtr->mon, MON_DATA_MAX_HP));
     // bullshit workaround bc the injected hp colors keeps showing up
     if (FindTaskIdByFunc(SummaryMode_GetInputFunc(SummaryMode_GetValue())) == TASK_NONE)

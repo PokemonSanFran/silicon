@@ -301,6 +301,7 @@ static bool32 BattleInfoHelper_CanMonInfoBeShown(void);
 static void BattleInfoHelper_PopulateOptionsList(void);
 static void BattleInfoHelper_PopulateStatusList(void);
 static u32 BattleInfoHelper_GetTotalCrits(void);
+static bool32 BattleInfoHelper_CanShowHP(void);
 static void BattleInfoHelper_AddTextPrinterToWindow(u32, u32, u32, u32, enum BattleInfoTextColors, const u8 *);
 static void BattleInfoHelper_AddTextPrinter(u32, u32, u32, enum BattleInfoTextColors, const u8 *);
 
@@ -1072,6 +1073,7 @@ static void SpriteCB_BattleInfo_HPBar(struct Sprite *sprite)
     sprite->sPartySlotIdx = slotIdx;
     struct Pokemon *mon = BattleInfoHelper_GetCurrMon();
     sprite->invisible = !BattleInfoHelper_CanMonInfoBeShown();
+    sprite->data[7] = BattleInfoHelper_CanShowHP();
     MonSummary_InjectHpBar(sprite, GetMonData(mon, MON_DATA_HP, NULL), GetMonData(mon, MON_DATA_MAX_HP, NULL));
     // bullshit workaround bc the injected hp colors keeps showing up
     if (FindTaskIdByFunc(Task_BattleInfo_WaitInput) == TASK_NONE)
@@ -1501,7 +1503,7 @@ static u32 BattleInfoSprite_CreateFaintedIcon(enum BattleTrainer trainer, u32 id
 static void BattleInfoSprite_CreateHPBar(void)
 {
     u8 *spriteId = &sBattleInfoDataPtr->spriteIds[BI_SPRITE_HPBAR];
-    *spriteId = MonSummary_CreateHPBarSprite(TAG_BI_HPBAR, TAG_BI_HPBAR, BI_HPBAR_X, BI_HPBAR_Y, TRUE);
+    *spriteId = MonSummary_CreateHPBarSprite(TAG_BI_HPBAR, TAG_BI_HPBAR, BI_HPBAR_X, BI_HPBAR_Y, BattleInfoHelper_CanShowHP());
     if (*spriteId == SPRITE_NONE)
         return;
 
@@ -2230,6 +2232,12 @@ static u32 BattleInfoHelper_GetTotalCrits(void)
     u32 CalcBattlerPassiveCritChance(enum BattlerId battler, enum HoldEffect holdEffect, enum Ability ability);
 
     return CalcBattlerPassiveCritChance(battler, GetItemHoldEffect(batMon->item), batMon->ability);
+}
+
+// CanShowMon has other checks we don't want (mainly the sentOut bit)
+static bool32 BattleInfoHelper_CanShowHP(void)
+{
+    return !BattleInfoHelper_IsTrainerOnPlayerSide() && !FlagGet(FLAG_SYS_APP_GOOGLE_GLASS_GET);
 }
 
 static void BattleInfoHelper_AddTextPrinterToWindow(u32 windowId, u32 x, u32 y, u32 fontId, enum BattleInfoTextColors color, const u8 *str)
