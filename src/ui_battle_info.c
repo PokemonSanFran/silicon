@@ -690,7 +690,7 @@ static void CB2_ReloadBattleInfo(void)
     default:
         break;
     case BI_MODE_OPTIONS_LIST:
-        BattleInfoInput_SetGrid(gLastViewedMonIndex, TRUE);
+        BattleInfoInput_SetGrid(gLastViewedMonIndex, sBattleInfoSavedState.gridPos.y);
         BattleInfoHelper_PopulateOptionsList();
         sBattleInfoDataPtr->optionsCursor = sBattleInfoSavedState.optionsCursor;
         break;
