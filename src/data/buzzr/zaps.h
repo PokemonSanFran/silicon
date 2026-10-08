@@ -2279,4 +2279,22 @@ const struct Zap gZaps[] =
         .dislikeCount = COMPOUND_STRING("1"),
         .likeCount = COMPOUND_STRING("100"),
     },
+    [ZAP_QUEST_WALLACEARMY_DM] =
+    {
+        .userId = BUZZR_USER_OLIVER,
+        .content = COMPOUND_STRING("Hello there, I’ve heard about your protest and have chosen to cancel my show in solidarity with you. Thank you for being on the right side of history, and I wish you the best of luck."),
+        .isPrivate = TRUE,
+        .criteria = 0,
+        .dislikeCount = COMPOUND_STRING("0"),
+        .likeCount = COMPOUND_STRING("0"),
+    },
+    [ZAP_QUEST_WALLACEARMY_FINAL_STAN] =
+    {
+        .userId = BUZZR_USER_OLIVER,
+        .content = COMPOUND_STRING("The Wallace Army has gone quiet online lately. Have The Tide’s assassins finally infiltrated our cause? Whatever the case, I, Wallace’s strongest soldier will NEVER back down! I’m on the {STR_VAR_1} at The Tide’s home turf just raring for a fight! Come get me!"),
+        .isPrivate = TRUE,
+        .criteria = 0,
+        .dislikeCount = COMPOUND_STRING("0"),
+        .likeCount = COMPOUND_STRING("0"),
+    },
 };

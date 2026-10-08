@@ -215,4 +215,9 @@ const struct Users gBuzzrUsers[] =
         .username = COMPOUND_STRING("Tide Member"),
         .isVerified = FALSE,
     },
+    [BUZZR_USER_WALLACE] =
+    {
+        .username = COMPOUND_STRING("RealWetWallace"),
+        .isVerified = TRUE,
+    },
 };
