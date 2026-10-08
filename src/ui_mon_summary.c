@@ -381,39 +381,23 @@ u32 MonSummary_Create11x9TypeIcon(u32 tileTag, s32 x, s32 y)
 static u32 MonSummary_CalcHPBarPixels(u32 maxHp, u32 currHp, u8 *pixelsPerTile, u32 scale)
 {
     u32 totalPixels = scale * 8;
-
     for (u32 i = 0; i < scale; i++)
         pixelsPerTile[i] = 0;
 
-    if (maxHp == 0)
+    if (currHp == 0 || maxHp == 0)
         return 0;
 
-    u32 pixels;
-    /*if (maxHp < totalPixels)
-        pixels = (currHp * totalPixels / maxHp) >> 8;
-    else*/
-        pixels = (currHp * totalPixels / maxHp);
-
-    totalPixels = pixels;
-
-    if (pixels == 0)
+    u32 pixels = totalPixels = (currHp * totalPixels) / maxHp;
+    for (u32 i = 0; i < scale; i++)
     {
-        pixelsPerTile[0] = 1;
-        totalPixels = 1;
-    }
-    else
-    {
-        for (u32 i = 0; i < scale; i++)
+        if (pixels < 8)
         {
-            if (pixels < 8)
-            {
-                pixelsPerTile[i] = pixels;
-                break;
-            }
-
-            pixelsPerTile[i] = 8;
-            pixels -= 8;
+            pixelsPerTile[i] = pixels;
+            break;
         }
+
+        pixelsPerTile[i] = 8;
+        pixels -= 8;
     }
 
     return totalPixels;
@@ -423,31 +407,6 @@ void MonSummary_InjectHpBar(struct Sprite *sprite, s32 currHp, s32 maxHp)
 {
     struct WindowTemplate template = { .width = 8, .height  = 4 }; // 64x32
     u32 windowId = AddWindow(&template);
-
-    u8 array[7];
-    const u8 *blit = sSummarySprite_HpBarAnims;
-    bool32 fill = MonSummary_CalcHPBarPixels(maxHp, currHp, array, 7);
-    for (u32 i = 0; i < 7; i++)
-    {
-        u32 x, y;
-
-        if (array[i] < 2 && fill == 1)
-            x = 8;
-        else
-            x = array[i];
-
-        x *= 8;
-
-        if (i < 3)
-            y = 0;
-        else if (i == 3)
-            y = 1;
-        else
-            y = 2;
-
-        y *= 16;
-        BlitBitmapRectToWindow(windowId, blit, x, y, TILE_TO_PIXELS(9), TILE_TO_PIXELS(6), i * 8, 0, TILE_TO_PIXELS(1), TILE_TO_PIXELS(2));
-    }
 
     enum MonSummaryHpBarColors color;
     switch (GetHPBarLevel(currHp, maxHp))
@@ -469,6 +428,25 @@ void MonSummary_InjectHpBar(struct Sprite *sprite, s32 currHp, s32 maxHp)
     }
 
     LoadPalette(&sSummarySprite_HpBarColors[1 + (color * 2)], OBJ_PLTT_ID(sprite->oam.paletteNum) + 6, PLTT_SIZEOF(2));
+
+    u8 array[7];
+    const u8 *blit = sSummarySprite_HpBarAnims;
+    MonSummary_CalcHPBarPixels(maxHp, currHp, array, 7);
+    for (u32 i = 0; i < 7; i++)
+    {
+        u32 x, y;
+
+        x = array[i] * 8;
+        if (i < 3)
+            y = 0;
+        else if (i == 3)
+            y = 1;
+        else
+            y = 2;
+
+        y *= 16;
+        BlitBitmapRectToWindow(windowId, blit, x, y, TILE_TO_PIXELS(9), TILE_TO_PIXELS(6), i * 8, 0, TILE_TO_PIXELS(1), TILE_TO_PIXELS(2));
+    }
 
     if (!sprite->sHideHPText)
     {
