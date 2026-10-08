@@ -58,12 +58,14 @@ static enum Gender GetSpeakerGender(void)
 
 static const u32* GetSpeakerIcon(enum NameplateSpeaker speaker)
 {
-    return sSpeakerData[speaker].speakerIcon;
+    enum SpeakerIcons icon = sSpeakerData[speaker].speakerIcon;
+    return sSpeakerIconData[icon].speakerIcon;
 }
 
 static const u16* GetSpeakerPal(enum NameplateSpeaker speaker)
 {
-    return sSpeakerData[speaker].speakerPal;
+    enum SpeakerIcons icon = sSpeakerData[speaker].speakerIcon;
+    return sSpeakerIconData[icon].speakerPal;
 }
 
 //WindowId + 1, 0 if window is not open
