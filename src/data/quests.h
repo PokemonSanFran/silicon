@@ -392,45 +392,50 @@ static const struct SubQuest sCutePokemon_Sub[QUEST_CUTEPOKEMON_SUB_COUNT] = {
 };
 
 static const struct SubQuest sWallaceArmy_Sub[QUEST_WALLACEARMY_SUB_COUNT] = {
-    sub_quest(44,
-            gText_Quest_WallaceArmy_Sub2_Name,
-            gText_Quest_WallaceArmy_Sub2_Desc,
-            gText_Quest_WallaceArmy_Sub2_Map,
-            OBJ_EVENT_GFX_GIRL_1,
+    sub_quest(
+            44,
+            COMPOUND_STRING("Wallacearmystanb"),
+            COMPOUND_STRING("Wallacearmystanb was defeated and subdued."),
+            COMPOUND_STRING("Route 1"),
+            OBJ_EVENT_QUEST_WALLACEARMY_STAN_B,
             QUEST_SPRITE_TYPE_OBJECT,
-            COMPOUND_STRING("Defeated")
+            COMPOUND_STRING("")
             ),
-    sub_quest(45,
-            gText_Quest_WallaceArmy_Sub3_Name,
-            gText_Quest_WallaceArmy_Sub3_Desc,
-            gText_Quest_WallaceArmy_Sub3_Map,
-            OBJ_EVENT_GFX_SAILOR,
+    sub_quest(
+            45,
+            COMPOUND_STRING("Wallacearmystanc"),
+            COMPOUND_STRING("Wallacearmystanc was defeated and subdued."),
+            COMPOUND_STRING("Route 99"),
+            OBJ_EVENT_QUEST_WALLACEARMY_STAN_C,
             QUEST_SPRITE_TYPE_OBJECT,
-            COMPOUND_STRING("Defeated")
+            COMPOUND_STRING("")
             ),
-    sub_quest(46,
-            gText_Quest_WallaceArmy_Sub4_Name,
-            gText_Quest_WallaceArmy_Sub4_Desc,
-            gText_Quest_WallaceArmy_Sub4_Map,
-            OBJ_EVENT_GFX_DEVON_EMPLOYEE,
+    sub_quest(
+            46,
+            COMPOUND_STRING("Wallacearmystand"),
+            COMPOUND_STRING("Wallacearmystand was defeated and subdued."),
+            COMPOUND_STRING("Route 9"),
+            OBJ_EVENT_QUEST_WALLACEARMY_STAN_D,
             QUEST_SPRITE_TYPE_OBJECT,
-            COMPOUND_STRING("Defeated")
+            COMPOUND_STRING("")
             ),
-    sub_quest(47,
-            gText_Quest_WallaceArmy_Sub5_Name,
-            gText_Quest_WallaceArmy_Sub5_Desc,
-            gText_Quest_WallaceArmy_Sub5_Map,
-            OBJ_EVENT_GFX_MAN_4,
+    sub_quest(
+            47,
+            COMPOUND_STRING("Wallacearmystane"),
+            COMPOUND_STRING("Wallacearmystane was defeated and subdued."),
+            COMPOUND_STRING("Torgeot Climb"),
+            OBJ_EVENT_QUEST_WALLACEARMY_STAN_E,
             QUEST_SPRITE_TYPE_OBJECT,
-            COMPOUND_STRING("Defeated")
+            COMPOUND_STRING("")
             ),
-    sub_quest(48,
-            gText_Quest_WallaceArmy_Sub6_Name,
-            gText_Quest_WallaceArmy_Sub6_Desc,
-            gText_Quest_WallaceArmy_Sub6_Map,
-            OBJ_EVENT_GFX_WOMAN_4,
+    sub_quest(
+            48,
+            COMPOUND_STRING("Wallacearmystanf"),
+            COMPOUND_STRING("Wallacearmystanf was defeated and subdued."),
+            COMPOUND_STRING("Naval Base Exterior"),
+            OBJ_EVENT_QUEST_WALLACEARMY_STAN_F,
             QUEST_SPRITE_TYPE_OBJECT,
-            COMPOUND_STRING("Defeated")
+            COMPOUND_STRING("")
             ),
 };
 
@@ -4226,14 +4231,115 @@ const struct SideQuest sSideQuests[QUEST_COUNT] =
     },
     [QUEST_WALLACEARMY] =
     {
-        .name = gText_Quest_WallaceArmy_Name,
-        .desc[FLAG_GET_ACTIVE] = gText_Quest_WallaceArmy_Desc,
-        .desc[FLAG_GET_COMPLETED] = gText_Quest_WallaceArmy_DoneDesc,
-        .map = gText_Quest_WallaceArmy_Map,
-        .sprite = OBJ_EVENT_GFX_SAILOR,
+        .name = COMPOUND_STRING("Wallace Army"),
+        .desc[FLAG_GET_ACTIVE] = COMPOUND_STRING("Find Wallace’s biggest supporters and get them to stop attacking The Tide on social media."),
+        .desc[FLAG_GET_COMPLETED] = COMPOUND_STRING("The fans have mellowed out… for now."),
+        .map = COMPOUND_STRING("Arantraz"),
+        .sprite = OBJ_EVENT_QUEST_WALLACEARMY_TIDE_A,
         .spritetype = QUEST_SPRITE_TYPE_OBJECT,
         .subquests = sWallaceArmy_Sub,
-        .numSubquests = QUEST_WALLACEARMY_SUB_COUNT
+        .numSubquests = QUEST_WALLACEARMY_SUB_COUNT,
+        .states =
+        {
+            [STATE_QUEST_WALLACE_ARMY_NOT_STARTED]=
+            {
+                .name = COMPOUND_STRING("Not Started"),
+                .setupFunc = DebugQuest_WallaceArmy,
+                side_quest_map(MAP_QUEST_WALLACEARMY_ORIGIN),
+                .warpId = 0,
+            },
+            [STATE_QUEST_WALLACE_ARMY_STARTED_QUEST] =
+            {
+                .name = COMPOUND_STRING("Started Quest"),
+                .setupFunc = DebugQuest_WallaceArmy,
+                side_quest_map(MAP_QUEST_WALLACEARMY_ORIGIN),
+                .warpId = 0,
+            },
+            [STATE_QUEST_WALLACE_ARMY_BEFORE_STAN_B] =
+            {
+                .name = COMPOUND_STRING("Before Stan B"),
+                .setupFunc = DebugQuest_WallaceArmy,
+                side_quest_map(MAP_QUEST_WALLACEARMY_STAN_B),
+                .warpId = 0,
+            },
+            [STATE_QUEST_WALLACE_ARMY_AFTER_STAN_B] =
+            {
+                .name = COMPOUND_STRING("After Stan B"),
+                .setupFunc = DebugQuest_WallaceArmy,
+                side_quest_map(MAP_QUEST_WALLACEARMY_STAN_B),
+                .warpId = 0,
+            },
+            [STATE_QUEST_WALLACE_ARMY_BEFORE_STAN_C] =
+            {
+                .name = COMPOUND_STRING("Before Stan C"),
+                .setupFunc = DebugQuest_WallaceArmy,
+                side_quest_map(MAP_QUEST_WALLACEARMY_STAN_C),
+                .warpId = 0,
+            },
+            [STATE_QUEST_WALLACE_ARMY_AFTER_STAN_C] =
+            {
+                .name = COMPOUND_STRING("After Stan C"),
+                .setupFunc = DebugQuest_WallaceArmy,
+                side_quest_map(MAP_QUEST_WALLACEARMY_STAN_C),
+                .warpId = 0,
+            },
+            [STATE_QUEST_WALLACE_ARMY_BEFORE_STAN_D] =
+            {
+                .name = COMPOUND_STRING("Before Stan D"),
+                .setupFunc = DebugQuest_WallaceArmy,
+                side_quest_map(MAP_QUEST_WALLACEARMY_STAN_D),
+                .warpId = 0,
+            },
+            [STATE_QUEST_WALLACE_ARMY_AFTER_STAN_D] =
+            {
+                .name = COMPOUND_STRING("After Stan D"),
+                .setupFunc = DebugQuest_WallaceArmy,
+                side_quest_map(MAP_QUEST_WALLACEARMY_STAN_D),
+                .warpId = 0,
+            },
+            [STATE_QUEST_WALLACE_ARMY_BEFORE_STAN_E] =
+            {
+                .name = COMPOUND_STRING("Before Stan E"),
+                .setupFunc = DebugQuest_WallaceArmy,
+                side_quest_map(MAP_QUEST_WALLACEARMY_STAN_E),
+                .warpId = 0,
+            },
+            [STATE_QUEST_WALLACE_ARMY_AFTER_STAN_E] =
+            {
+                .name = COMPOUND_STRING("After Stan E"),
+                .setupFunc = DebugQuest_WallaceArmy,
+                side_quest_map(MAP_QUEST_WALLACEARMY_STAN_E),
+                .warpId = 0,
+            },
+            [STATE_QUEST_WALLACE_ARMY_BEFORE_STAN_F] =
+            {
+                .name = COMPOUND_STRING("Before Stan F"),
+                .setupFunc = DebugQuest_WallaceArmy,
+                side_quest_map(MAP_QUEST_WALLACEARMY_STAN_F),
+                .warpId = 0,
+            },
+            [STATE_QUEST_WALLACE_ARMY_AFTER_STAN_F] =
+            {
+                .name = COMPOUND_STRING("After Stan F"),
+                .setupFunc = DebugQuest_WallaceArmy,
+                side_quest_map(MAP_QUEST_WALLACEARMY_STAN_F),
+                .warpId = 0,
+            },
+            [STATE_QUEST_WALLACE_ARMY_REWARD] =
+            {
+                .name = COMPOUND_STRING("Reward"),
+                .setupFunc = DebugQuest_WallaceArmy,
+                side_quest_map(MAP_QUEST_WALLACEARMY_ORIGIN),
+                .warpId = 0,
+            },
+            [STATE_QUEST_WALLACE_ARMY_COMPLETE] =
+            {
+                .name = COMPOUND_STRING("Complete"),
+                .setupFunc = DebugQuest_WallaceArmy,
+                side_quest_map(MAP_QUEST_WALLACEARMY_ORIGIN),
+                .warpId = 0,
+            },
+        },
     },
     [QUEST_KITCHENVOLUNTEERING] =
     {

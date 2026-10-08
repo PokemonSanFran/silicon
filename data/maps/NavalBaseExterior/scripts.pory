@@ -1,4 +1,8 @@
 mapscripts NavalBaseExterior_MapScripts{
+MAP_SCRIPT_ON_TRANSITION
+{
+    call(WallaceArmy_Script_HideStanF)
+}
 }
 
 script NavalBaseExterior_Script_Interact_BodegaburnoutDeliveryCutC

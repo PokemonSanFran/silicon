@@ -92,6 +92,20 @@
       "trainer_sight_or_berry_tree_id": "0",
       "script": "EventScript_CutTree",
       "flag": "FLAG_TREE_NAVAL_BASE_3"
+    },
+    {
+      "local_id": "LOCALID_NAVALBASE_WALLACEARMYSTANF",
+      "graphics_id": "OBJ_EVENT_QUEST_WALLACEARMY_STAN_F",
+      "x": 10,
+      "y": 7,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_UP",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "Quest_WallaceArmy_Script_InteractWallacearmystanF",
+      "flag": "FLAG_TEMP_6"
     }
   ],
   "warp_events": [
@@ -103,6 +117,115 @@
       "dest_warp_id": "6"
     }
   ],
-  "coord_events": [],
+  "coord_events": [
+    {
+      "type": "trigger",
+      "x": 8,
+      "y": 6,
+      "elevation": 0,
+      "var": "VAR_ALWAYS_ZERO",
+      "var_value": "0",
+      "script": "WallaceArmy_Script_TriggerLastStanCutscene"
+    },
+    {
+      "type": "trigger",
+      "x": 10,
+      "y": 5,
+      "elevation": 0,
+      "var": "VAR_ALWAYS_ZERO",
+      "var_value": "0",
+      "script": "WallaceArmy_Script_TriggerLastStanCutscene"
+    },
+    {
+      "type": "trigger",
+      "x": 9,
+      "y": 5,
+      "elevation": 0,
+      "var": "VAR_ALWAYS_ZERO",
+      "var_value": "0",
+      "script": "WallaceArmy_Script_TriggerLastStanCutscene"
+    },
+    {
+      "type": "trigger",
+      "x": 12,
+      "y": 7,
+      "elevation": 0,
+      "var": "VAR_ALWAYS_ZERO",
+      "var_value": "0",
+      "script": "WallaceArmy_Script_TriggerLastStanCutscene"
+    },
+    {
+      "type": "trigger",
+      "x": 12,
+      "y": 8,
+      "elevation": 0,
+      "var": "VAR_ALWAYS_ZERO",
+      "var_value": "0",
+      "script": "WallaceArmy_Script_TriggerLastStanCutscene"
+    },
+    {
+      "type": "trigger",
+      "x": 11,
+      "y": 9,
+      "elevation": 0,
+      "var": "VAR_ALWAYS_ZERO",
+      "var_value": "0",
+      "script": "WallaceArmy_Script_TriggerLastStanCutscene"
+    },
+    {
+      "type": "trigger",
+      "x": 12,
+      "y": 6,
+      "elevation": 0,
+      "var": "VAR_ALWAYS_ZERO",
+      "var_value": "0",
+      "script": "WallaceArmy_Script_TriggerLastStanCutscene"
+    },
+    {
+      "type": "trigger",
+      "x": 11,
+      "y": 5,
+      "elevation": 0,
+      "var": "VAR_ALWAYS_ZERO",
+      "var_value": "0",
+      "script": "WallaceArmy_Script_TriggerLastStanCutscene"
+    },
+    {
+      "type": "trigger",
+      "x": 10,
+      "y": 9,
+      "elevation": 0,
+      "var": "VAR_ALWAYS_ZERO",
+      "var_value": "0",
+      "script": "WallaceArmy_Script_TriggerLastStanCutscene"
+    },
+    {
+      "type": "trigger",
+      "x": 9,
+      "y": 9,
+      "elevation": 0,
+      "var": "VAR_ALWAYS_ZERO",
+      "var_value": "0",
+      "script": "WallaceArmy_Script_TriggerLastStanCutscene"
+    },
+    {
+      "type": "trigger",
+      "x": 8,
+      "y": 8,
+      "elevation": 0,
+      "var": "VAR_ALWAYS_ZERO",
+      "var_value": "0",
+      "script": "WallaceArmy_Script_TriggerLastStanCutscene"
+    },
+    {
+      "type": "trigger",
+      "x": 8,
+      "y": 7,
+      "elevation": 0,
+      "var": "VAR_ALWAYS_ZERO",
+      "var_value": "0",
+      "script": "WallaceArmy_Script_TriggerLastStanCutscene"
+    }
+  ],
   "bg_events": []
 }

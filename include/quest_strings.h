@@ -133,11 +133,6 @@ extern const u8 gText_Quest_CutePokemon_Desc[];
 extern const u8 gText_Quest_CutePokemon_DoneDesc[];
 extern const u8 gText_Quest_CutePokemon_Map[];
 
-extern const u8 gText_Quest_WallaceArmy_Name[];
-extern const u8 gText_Quest_WallaceArmy_Desc[];
-extern const u8 gText_Quest_WallaceArmy_DoneDesc[];
-extern const u8 gText_Quest_WallaceArmy_Map[];
-
 extern const u8 gText_Quest_DexCompletion_Name[];
 extern const u8 gText_Quest_DexCompletion_Desc[];
 extern const u8 gText_Quest_DexCompletion_DoneDesc[];
@@ -517,22 +512,6 @@ extern const u8 gText_Quest_CutePokemon_Sub3_Map[];
 extern const u8 gText_Quest_CutePokemon_Sub4_Name[];
 extern const u8 gText_Quest_CutePokemon_Sub4_Desc[];
 extern const u8 gText_Quest_CutePokemon_Sub4_Map[];
-
-extern const u8 gText_Quest_WallaceArmy_Sub2_Name[];
-extern const u8 gText_Quest_WallaceArmy_Sub2_Desc[];
-extern const u8 gText_Quest_WallaceArmy_Sub2_Map[];
-extern const u8 gText_Quest_WallaceArmy_Sub3_Name[];
-extern const u8 gText_Quest_WallaceArmy_Sub3_Desc[];
-extern const u8 gText_Quest_WallaceArmy_Sub3_Map[];
-extern const u8 gText_Quest_WallaceArmy_Sub4_Name[];
-extern const u8 gText_Quest_WallaceArmy_Sub4_Desc[];
-extern const u8 gText_Quest_WallaceArmy_Sub4_Map[];
-extern const u8 gText_Quest_WallaceArmy_Sub5_Name[];
-extern const u8 gText_Quest_WallaceArmy_Sub5_Desc[];
-extern const u8 gText_Quest_WallaceArmy_Sub5_Map[];
-extern const u8 gText_Quest_WallaceArmy_Sub6_Name[];
-extern const u8 gText_Quest_WallaceArmy_Sub6_Desc[];
-extern const u8 gText_Quest_WallaceArmy_Sub6_Map[];
 
 extern const u8 gText_Quest_DexCompletion_Sub1_Name[];
 extern const u8 gText_Quest_DexCompletion_Sub1_Desc[];

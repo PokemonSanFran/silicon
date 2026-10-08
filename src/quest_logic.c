@@ -6684,3 +6684,99 @@ void WhyAreYouHelpingThemTimeJump(void)
 {
     FakeRtc_AdvanceTimeBy(3,0,0,0);
 }
+
+// ***********************************************************************
+// Quest: Wallace Army
+// ***********************************************************************
+
+bool8 HasSharpriseRaidStarted(void)
+{
+    u32 state = VarGet(VAR_STORYLINE_STATE);
+    return ((state >= STORY_WARP_TILE_ACCESSIBLE) && (state < STORY_CLEAR));
+}
+
+void Script_HasSharpriseRaidStarted(void)
+{
+    gSpecialVar_Result = HasSharpriseRaidStarted();
+}
+
+bool8 HasSharpriseRaidCompleted(void)
+{
+    u32 state = VarGet(VAR_STORYLINE_STATE);
+    return (state >= STORY_CLEAR);
+}
+
+void Script_HasSharpriseRaidCompleted(void)
+{
+    gSpecialVar_Result = HasSharpriseRaidCompleted();
+}
+
+bool8 WallaceArmy_OnlyOneStanRemains(void)
+{
+    u32 count = Quest_Generic_CountRemainingSubquests(QUEST_WALLACEARMY);
+    u32 totalSubquests = sSideQuests[QUEST_WALLACEARMY].numSubquests;
+    return (count == (totalSubquests - 1));
+}
+
+void Script_WallaceArmy_OnlyOneStanRemains(void)
+{
+    gSpecialVar_Result = WallaceArmy_OnlyOneStanRemains();
+}
+
+void Quest_WallaceArmy_CountRemainingSubquestsTryProgressReward(void)
+{
+    Quest_Generic_CountRemainingSubquestsTryProgressReward(QUEST_WALLACEARMY);
+}
+
+void DebugQuest_WallaceArmy(u8 state)
+{
+    switch (state)
+    {
+        default:
+        case STATE_QUEST_WALLACE_ARMY_NOT_STARTED:
+            FlagSet(FLAG_SYS_STARTER_APPS_GET);
+            JumpPlayerTo_SpeechSpeechSpeech(JUMP_DEBUG);
+            JumpPlayerTo_WarehouseRave(JUMP_DEBUG);
+            break;
+        case STATE_QUEST_WALLACE_ARMY_STARTED_QUEST:
+            QuestMenu_ScriptSetActive(QUEST_WALLACEARMY);
+            break;
+        case STATE_QUEST_WALLACE_ARMY_BEFORE_STAN_B:
+            break;
+        case STATE_QUEST_WALLACE_ARMY_AFTER_STAN_B:
+            FlagSet(TRAINER_FLAGS_START + TRAINER_QUEST_WALLACEARMY_STANB);
+            QuestMenu_GetSetSubquestState(QUEST_WALLACEARMY, FLAG_SET_COMPLETED, SUB_QUEST_1);
+            break;
+        case STATE_QUEST_WALLACE_ARMY_BEFORE_STAN_C:
+            break;
+        case STATE_QUEST_WALLACE_ARMY_AFTER_STAN_C:
+            FlagSet(TRAINER_FLAGS_START + TRAINER_QUEST_WALLACEARMY_STANC);
+            QuestMenu_GetSetSubquestState(QUEST_WALLACEARMY, FLAG_SET_COMPLETED, SUB_QUEST_2);
+            break;
+        case STATE_QUEST_WALLACE_ARMY_BEFORE_STAN_D:
+            break;
+        case STATE_QUEST_WALLACE_ARMY_AFTER_STAN_D:
+            FlagSet(TRAINER_FLAGS_START + TRAINER_QUEST_WALLACEARMY_STAND);
+            QuestMenu_GetSetSubquestState(QUEST_WALLACEARMY, FLAG_SET_COMPLETED, SUB_QUEST_3);
+            break;
+        case STATE_QUEST_WALLACE_ARMY_BEFORE_STAN_E:
+            break;
+        case STATE_QUEST_WALLACE_ARMY_AFTER_STAN_E:
+            FlagSet(TRAINER_FLAGS_START + TRAINER_QUEST_WALLACEARMY_STANE);
+            QuestMenu_GetSetSubquestState(QUEST_WALLACEARMY, FLAG_SET_COMPLETED, SUB_QUEST_4);
+            break;
+        case STATE_QUEST_WALLACE_ARMY_BEFORE_STAN_F:
+            break;
+        case STATE_QUEST_WALLACE_ARMY_AFTER_STAN_F:
+            FlagSet(TRAINER_FLAGS_START + TRAINER_QUEST_WALLACEARMY_STANF);
+            QuestMenu_GetSetSubquestState(QUEST_WALLACEARMY, FLAG_SET_COMPLETED, SUB_QUEST_5);
+            Quest_WallaceArmy_CountRemainingSubquestsTryProgressReward();
+            break;
+        case STATE_QUEST_WALLACE_ARMY_REWARD:
+            break;
+        case STATE_QUEST_WALLACE_ARMY_COMPLETE:
+            AddBagItem(ITEM_QUEST_WALLACEARMY_REWARD,1);
+            QuestMenu_ScriptSetComplete(QUEST_WALLACEARMY);
+            break;
+    }
+}

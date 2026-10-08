@@ -44,19 +44,6 @@
       "flag": "FLAG_TEMP_C"
     },
     {
-      "graphics_id": "OBJ_EVENT_GFX_SCHOOL_KID_M",
-      "x": 27,
-      "y": 11,
-      "elevation": 3,
-      "movement_type": "MOVEMENT_TYPE_FACE_UP",
-      "movement_range_x": 0,
-      "movement_range_y": 0,
-      "trainer_type": "TRAINER_TYPE_NONE",
-      "trainer_sight_or_berry_tree_id": "0",
-      "script": "Quest_GardenCleanUp_Event_Script",
-      "flag": "FLAG_TEMP_2"
-    },
-    {
       "graphics_id": "OBJ_EVENT_GFX_BERRY_TREE",
       "x": 27,
       "y": 9,
@@ -227,6 +214,20 @@
       "trainer_sight_or_berry_tree_id": "0",
       "script": "NULL",
       "flag": "0"
+    },
+    {
+      "local_id": "LOCALID_ROUTE1_WALLACEARMYSTANB",
+      "graphics_id": "OBJ_EVENT_QUEST_WALLACEARMY_STAN_B",
+      "x": 27,
+      "y": 11,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_UP",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "Route1_Script_Interact_WallacearmystanB",
+      "flag": "FLAG_TEMP_2"
     }
   ],
   "warp_events": [

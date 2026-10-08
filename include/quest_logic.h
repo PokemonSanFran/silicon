@@ -73,6 +73,7 @@ void DebugQuest_CulturalPurity(u8 state);
 void DebugQuest_HybridCulture(u8 state);
 void DebugQuest_InstallNatureProbes(u8 state);
 void DebugQuest_ManOfManyHats(u8 state);
+void DebugQuest_WallaceArmy(u8 state);
 
 void AwardPartyMonChampionRibbon(void);
 void Script_CheckIfAnyMonHasChampionRibbon(void);

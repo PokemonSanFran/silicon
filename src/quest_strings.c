@@ -138,11 +138,6 @@ const u8 gText_Quest_CutePokemon_Desc[] =_("Description");
 const u8 gText_Quest_CutePokemon_DoneDesc[] =_("DoneDescription");
 const u8 gText_Quest_CutePokemon_Map[] =_("N/A");
 
-const u8 gText_Quest_WallaceArmy_Name[] = _("Wallace Army");
-const u8 gText_Quest_WallaceArmy_Desc[] =_("Description");
-const u8 gText_Quest_WallaceArmy_DoneDesc[] =_("DoneDescription");
-const u8 gText_Quest_WallaceArmy_Map[] =_("EspuleeOutskirts");
-
 const u8 gText_Quest_DexCompletion_Name[] = _("Dex Completion");
 const u8 gText_Quest_DexCompletion_Desc[] =_("Description");
 const u8 gText_Quest_DexCompletion_DoneDesc[] =_("DoneDescription");
@@ -504,22 +499,6 @@ const u8 gText_Quest_CutePokemon_Sub3_Map[] = _("CresaltaVista");
 const u8 gText_Quest_CutePokemon_Sub4_Name[] = _("Eiscue");
 const u8 gText_Quest_CutePokemon_Sub4_Desc[] = _("Sub Lorem");
 const u8 gText_Quest_CutePokemon_Sub4_Map[] = _("HalaiIsland");
-
-const u8 gText_Quest_WallaceArmy_Sub2_Name[] = _("Stan A");
-const u8 gText_Quest_WallaceArmy_Sub2_Desc[] = _("Sub Lorem");
-const u8 gText_Quest_WallaceArmy_Sub2_Map[] = _("HalaiIsland");
-const u8 gText_Quest_WallaceArmy_Sub3_Name[] = _("Stan B");
-const u8 gText_Quest_WallaceArmy_Sub3_Desc[] = _("Sub Lorem");
-const u8 gText_Quest_WallaceArmy_Sub3_Map[] = _("TirabudinPlace");
-const u8 gText_Quest_WallaceArmy_Sub4_Name[] = _("Stan C");
-const u8 gText_Quest_WallaceArmy_Sub4_Desc[] = _("Sub Lorem");
-const u8 gText_Quest_WallaceArmy_Sub4_Map[] = _("PerlaciaCity");
-const u8 gText_Quest_WallaceArmy_Sub5_Name[] = _("Stan D");
-const u8 gText_Quest_WallaceArmy_Sub5_Desc[] = _("Sub Lorem");
-const u8 gText_Quest_WallaceArmy_Sub5_Map[] = _("Chasilla");
-const u8 gText_Quest_WallaceArmy_Sub6_Name[] = _("Stan E");
-const u8 gText_Quest_WallaceArmy_Sub6_Desc[] = _("Sub Lorem");
-const u8 gText_Quest_WallaceArmy_Sub6_Map[] = _("EspuleeOutskirts");
 
 const u8 gText_Quest_DexCompletion_Sub1_Name[] = _("50% Complete");
 const u8 gText_Quest_DexCompletion_Sub1_Desc[] = _("Sub Lorem");

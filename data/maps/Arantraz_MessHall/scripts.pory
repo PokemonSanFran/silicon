@@ -6,6 +6,7 @@ mapscripts Arantraz_MessHall_MapScripts {
         call(Arantraz_MessHall_ObjectVisibility_Script)
         call(Quest_Redomugging_Hide_Muggers_Script)
         call_if_quest_not_complete(QUEST_FREETHEINNOCENT,Quest_Freetheinnocent_Script_HideFindtheguiltyvictimB)
+        call_if_unset(FLAG_TIMELINE_TRUE,WallaceArmy_Script_HideWallacearmytidememberA)
     }
     MAP_SCRIPT_ON_FRAME_TABLE [
         VAR_ARANTRAZ_STATE, PRE_YOU_REALIZE_THEYRE_EVIL_RIGHT: YouRealizeTheyreEvilRight_PlayerArrived2F_Dialogue

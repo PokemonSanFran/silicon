@@ -1,427 +1,428 @@
-//Quest_WallaceArmy_
-//gText_WallaceArmy_
-//
-
-const PLAYER = OBJ_EVENT_ID_PLAYER
-const SOLAR_CEO = 1
-const SOLAR_LADY = 2
-const LEAD_STAN = 3
-const FLAG_HIDE_LEAD_STAN = FLAG_TEMP_1
-
-script Quest_WallaceArmy_HideObject_Script{
-    setflag(FLAG_HIDE_LEAD_STAN)
+script WallaceArmy_Script_HideWallacearmytidememberA
+{
+    setobjectflagfromlocalid(LOCALID_WALLACEARMYTIDEMEMBERA)
 }
 
-script Quest_WallaceArmy_SetMovementType_Script{
-    questmenu(QUEST_MENU_CHECK_COMPLETE, QUEST_WALLACEARMY)
-    if (var(VAR_RESULT)){
-   setobjectmovementtype(SOLAR_CEO,MOVEMENT_TYPE_FACE_UP)
-   setobjectmovementtype(SOLAR_LADY,MOVEMENT_TYPE_FACE_UP)
-    }
-}
-
-script Quest_WallaceArmy_PreQuest_Dialogue{
-    if (flag(FLAG_IS_CHAMPION)){
-        goto(Quest_WallaceArmy_QuestStart_Dialogue)
-    }else{
-        msgbox(format("What makes them think they can treat us like this? You can't just back out like that..."),MSGBOX_NPC,SPEAKER_SHASHI)
-    }
-    end
-}
-
-script Quest_WallaceArmy_CheckQuestState_Script{
+script WallaceArmy_Script_InteractWallacearmytidememberA
+{
     lock
     faceplayer
+    goto_if_quest_active(QUEST_WALLACEARMY,WallaceArmy_Dialogue_QuestActive)
+    goto_if_quest_inactive(QUEST_WALLACEARMY,WallaceArmy_Dialogue_QuestInactive)
+    goto_if_quest_reward(QUEST_WALLACEARMY,WallaceArmy_Dialogue_QuestReward)
+    goto_if_quest_complete(QUEST_WALLACEARMY,WallaceArmy_Dialogue_QuestComplete)
+}
 
-    returnqueststate(QUEST_WALLACEARMY)
+script WallaceArmy_Script_HideStanB
+{
+    setobjectflagfromlocalid(LOCALID_ROUTE1_WALLACEARMYSTANB)
+}
+script WallaceArmy_Script_HideStanC
+{
+    setobjectflagfromlocalid(LOCALID_ROUTE99_WALLACEARMYSTANC)
+}
+script WallaceArmy_Script_HideStanD
+{
+    setobjectflagfromlocalid(LOCALID_ROUTE9_WALLACEARMYSTAND)
+}
+script WallaceArmy_Script_HideStanE
+{
+    setobjectflagfromlocalid(LOCALID_TORGEOTCLIMB_WALLACEARMYSTANE)
+}
+script WallaceArmy_Script_HideStanF
+{
+    setobjectflagfromlocalid(LOCALID_NAVALBASE_WALLACEARMYSTANF)
+}
 
-    switch(var(VAR_RESULT)){
-        case QUEST_MENU_SET_ACTIVE: goto(Quest_WallaceArmy_Active_Dialogue)
-        case QUEST_MENU_COMPLETE_QUEST: goto(Quest_WallaceArmy_CompleteDialogue)
-        default: goto(Quest_WallaceArmy_PreQuest_Dialogue)
+script WallaceArmy_Dialogue_QuestActive
+{
+    callnative(WallaceArmy_OnlyOneStanRemains)
+    if (var(VAR_RESULT) == TRUE)
+    {
+        msgbox(format("I’ve never seen any of these terminally online sorts actually have the guts to call anybody out in person, but this one might just be crazy enough to be legit."),,SPEAKER_WALLACEARMYTIDEMEMBERA)
+        msgbox(format("It sure is a sight to behold, huh? Hahahaha. Good luck in your battle with the final boss of the insane Wallace fandom."),,SPEAKER_WALLACEARMYTIDEMEMBERA)
+        msgbox(format("If you can convince them to calm down, I should think the whole “Wallace Army” will too."),,SPEAKER_WALLACEARMYTIDEMEMBERA)
     }
-}
-
-script Quest_WallaceArmy_QuestStart_Dialogue{
-        msgbox(format("These kids are gonna ruin my business! First the League, now this?"),,SPEAKER_SHASHI)
-        msgbox(format("First the bid goes tits up, and now some kids are going take my business apart..."),,SPEAKER_SHASHI)
-        msgbox(format("Oh, the Champion. Just what else does the League want to do now?!?"),,SPEAKER_SHASHI)
-
-        msgbox(format("The League didn't send me! Why did you think so?"),,SPEAKER_ALICIA)
-
-        msgbox(format("We're EspuleeOutskirts Solar. We were working with the League to provide solar power for their fancy new statement. They had it all buttoned up, they signed a deal, and then a lawyer pulled a fast one and pulled out of the deal right after I got the materials and staff together. They said some shit about a better option. But I'm absolutely screwed! So I went online and wrote a nasty post about them... and the next thing I know, some kids called the 'Wallace Army' are blowing up my phone, leaving bad reviews, and attacking my servers. We can't even get online! The League sent them!"),,SPEAKER_SHASHI)
-
-        msgbox(format("...You think the League sent Wallace stans after you?"),,SPEAKER_ALICIA)
-
-        msgbox(format("Look, I don't even know what a stan is, but I do know that I haven't been able to log into all morning. I can't get any work done like this! My newphew is a computer guy and he told me the attacks are coming from specific spots in the region... but I don't even know where to start!"),,SPEAKER_SHASHI)
-        startquest(QUEST_WALLACEARMY)
-}
-
-script Quest_WallaceArmy_Active_Dialogue{
-    call(Quest_WallaceArmy_CheckCompletionRate_Script)
-    call(Quest_WallaceArmy_ListRemainingLocations_Script)
-
-    lock
-    msgbox(format("According to my nephew, there are attacks from HalaiIsland, TirabudinPlace, PerlaciaCity, Chasilla, and EspuleeOutskirts."),,SPEAKER_SHASHI)
+    else
+    {
+        msgbox(format("The hate’s still flowing in! Have you been able to reason with any of these people yet?"),,SPEAKER_WALLACEARMYTIDEMEMBERA)
+    }
+    closemessage
+    release
     end
 }
 
-script Quest_WallaceArmy_PreBattleStan_Script{
-    questmenu(QUEST_MENU_CHECK_INACTIVE, QUEST_WALLACEARMY)
-
-    if (var(VAR_RESULT)){
-        release
-        end
-    }
+script WallaceArmy_Dialogue_QuestInactive
+{
+    msgbox(format("I never thought we of all people would draw the ire of superfans..."),,SPEAKER_WALLACEARMYTIDEMEMBERA,TAIL_WHISPER)
+    msgbox(format("Hey! Ever heard of the famous idol, Wallace?"),,SPEAKER_WALLACEARMYTIDEMEMBERA)
+    msgbox(format("I think I have in passing… Aren’t they from Hoenn?"),,SPEAKER_PLAYER)
+    msgbox(format("Yep! He’s a Gym Leader & Coordinator who’s slowly risen in fame over the past 20 years."),,SPEAKER_WALLACEARMYTIDEMEMBERA)
+    msgbox(format("He was gonna be performing at the Sharprise Arena during his current tour, but then after tickets went on sale the tour date suddenly vanished."),,SPEAKER_WALLACEARMYTIDEMEMBERA)
+    msgbox(format("Sharprise is saying on Buzzr that he cancelled due to safety concerns after The Tide said they were gonna be staging a massive protest there on the day."),,SPEAKER_WALLACEARMYTIDEMEMBERA)
+    msgbox(format("So naturally his fans went into a frenzy and started harassing us all. We’ve been threatened, doxx’ed, everything."),,SPEAKER_WALLACEARMYTIDEMEMBERA)
+    msgbox(format("But look at this DM one of our we got from Wallace himself. I'll forward it to you."),,SPEAKER_WALLACEARMYTIDEMEMBERA)
     closemessage
-    return
+    showzap(ZAP_QUEST_WALLACEARMY_DM)
+    msgbox(format("He canceled to show solidarity with us."),,SPEAKER_WALLACEARMYTIDEMEMBERA)
+    msgbox(format("Haha, wow. Stand-up guy!"),,SPEAKER_PLAYER)
+    msgbox(format("Do you think you could find these people and settle them down? Actually talking is the best cure for Buzzr fingers, I find."),,SPEAKER_WALLACEARMYTIDEMEMBERA)
+    closemessage
+    startquest(QUEST_WALLACEARMY)
+    cueobjectplayer(LOCALID_WALLACEARMYTIDEMEMBERA)
+    msgbox(format("My hope is that a little human interaction will get some of these people to chill out."),,SPEAKER_WALLACEARMYTIDEMEMBERA)
+    msgbox(format("I think I’ve isolated all but one of the signals, and added them to your ToDo List."),,SPEAKER_WALLACEARMYTIDEMEMBERA)
+    msgbox(format("Follow up on the four known signals, then get back to me, okay?"),,SPEAKER_WALLACEARMYTIDEMEMBERA)
+    closemessage
+    release
+    end
 }
 
-script Quest_WallaceArmy_LoadStanSpeech_Script{
-    random(4)
-
-    switch(var(VAR_RESULT)){
-        case 0:
-            bufferstring(STR_VAR_1,gText_Beauty3)
-            bufferspeciesname(STR_VAR_2,SPECIES_MILOTIC)
-        case 1:
-            bufferstring(STR_VAR_1,gText_Coolness)
-            bufferspeciesname(STR_VAR_2,SPECIES_GYARADOS)
-        case 2:
-            bufferstring(STR_VAR_1,gText_Cuteness)
-            bufferspeciesname(STR_VAR_2,SPECIES_LUDICOLO)
-        case 3:
-            bufferstring(STR_VAR_1,gText_Smartness)
-            bufferspeciesname(STR_VAR_2,SPECIES_WHISCASH)
-        case 4:
-            bufferstring(STR_VAR_1,gText_Toughness)
-            bufferspeciesname(STR_VAR_2,SPECIES_WAILORD)
-}
-return
+script WallaceArmy_Dialogue_QuestReward
+{
+    checkitemspace(ITEM_QUEST_WALLACEARMY_REWARD,1)
+    goto_if_eq(VAR_RESULT,TRUE,WallaceArmy_Script_GiveReward)
+    msgbox(format("At last, the onslaught is over."),,SPEAKER_WALLACEARMYTIDEMEMBERA)
+    msgbox(format("Empty your bag real quick and then grab me again, okay?"),,SPEAKER_WALLACEARMYTIDEMEMBERA)
+    closemessage
+    release
+    end
 }
 
-script Quest_WallaceArmy_Reward_Cutscene{
-    setvar(VAR_TEMP_0,1)
-
-    questmenu(QUEST_MENU_CHECK_REWARD,QUEST_WALLACEARMY)
-    if (!var(VAR_RESULT)){
-        release
-        end
-   }
-
-    applymovement(SOLAR_CEO, moves(emote_exclamation_mark, walk_fast_right * 2, walk_fast_down * 2, step_end))
-    waitmovement(SOLAR_CEO)
-
-    msgbox(format("We're back up! I don't know what you did,but I can access my systems again!"),,SPEAKER_SHASHI)
-
-    msgbox(format("The Wallace Army will never die!"),,SPEAKER_DEFAULT)
+script WallaceArmy_Script_GiveReward
+{
+    msgbox(format(" Thanks so much for your help, {PLAYER}."),,SPEAKER_WALLACEARMYTIDEMEMBERA)
+    msgbox(format("At last, the onslaught is over. WallacearmystanF got the rest of the fans to listen to reason."),,SPEAKER_WALLACEARMYTIDEMEMBERA)
+    msgbox(format("This is the best I can do for you. Hope you find it satisfactory."),,SPEAKER_WALLACEARMYTIDEMEMBERA)
     closemessage
-    call(Quest_WallaceArmy_LeadStanAppearance_Script)
-
-    applymovement(PLAYER,Quest_WallaceArmy_ExclaimAndFaceNorth_Movement)
-    applymovement(SOLAR_CEO,Quest_WallaceArmy_ExclaimAndFaceNorth_Movement)
-    waitmovement(SOLAR_CEO)
-
-    msgbox(format("How did you get in here?"),,SPEAKER_SHASHI)
-    msgbox(format("...what is that music?"),,SPEAKER_SHASHI)
-
-    msgbox(format("Our Army will always prevail!"),,SPEAKER_LEAH)
-    closemessage
-    applymovement(LEAD_STAN,Common_Movement_WalkDown)
-    waitmovement(LEAD_STAN)
-
-    msgbox(format("I'm Leah, and I'm the Leader of the Wallace Army!"),,SPEAKER_LEAH)
-    msgbox(format("Wait, you're the leader? You?"),,SPEAKER_SHASHI)
-
-    msgbox(format("Can it, old man."),,SPEAKER_LEAH)
-
-    msgbox(format("And you! Champion {PLAYER}, attacking the army?"),,SPEAKER_SHASHI)
-
-    applymovement(LEAD_STAN,Common_Movement_WalkDown)
-    waitmovement(LEAD_STAN)
-
-    goto(Quest_WallaceArmy_StartBattle_Script)
-}
-
-script Quest_WallaceArmy_StartBattle_Script{
-    msgbox(format("A crime punishable by death!"),,SPEAKER_LEAH)
-    trainerbattle_no_intro(TRAINER_WALLACEARMY_LEAH,gText_WallaceArmy_MyLord)
-    closemessage
-    goto(Quest_WallaceArmy_PostBattle_Script)
-}
-
-script Quest_WallaceArmy_PostBattle_Script{
-    playbgm(MUS_ENCOUNTER_CHAMPION,TRUE)
-
-    msgbox(format("Why are you defending them anyways? You're young! Don't you understand the might of Wallace!"),,SPEAKER_LEAH,TAIL_SHOUT,EMOTE_CONFUSE)
-    msgbox(format("We really had nothing to do with this Wallace thing, I swear."),,SPEAKER_SHASHI,TAIL_SHOUT)
-    closemessage
-
-    fadescreenswapbuffers(FADE_TO_BLACK)
-    fadedefaultbgm
-    delay(32)
-    call(Quest_WallaceArmy_MoveAllObjects_Script)
-    fadescreenswapbuffers(FADE_FROM_BLACK)
-
-    msgbox(format("That's the whole story, see? Those are all the messages. I didn't know anything about Wallace or anything."),,SPEAKER_SHASHI)
-
-    msgbox(format("...there was no Wallace at all."),,SPEAKER_LEAH)
-    msgbox(format("I still don't know who that is."),,SPEAKER_SHASHI)
-    closemessage
-
-    applymovement(LEAD_STAN,Common_Movement_WalkDown)
-    waitmovement(LEAD_STAN)
-
-    msgbox(format("I'm sorry for mobilizing the Army. We will now retreat. Take this as an apology."),,SPEAKER_LEAH,,EMOTE_SWEAT)
-    giveitem(ITEM_LIFE_ORB,1)
-    waitmessage
-    closemessage
-
-    applymovement(LEAD_STAN, moves(walk_right * 2, walk_down * 2, step_end))
-    waitmovement(LEAD_STAN)
-    playse(SE_EXIT)
-    waitse
-    removeobject(LEAD_STAN)
-
-    applymovement(SOLAR_CEO,Common_Movement_FaceUp)
-    waitmovement(SOLAR_CEO)
-
+    cueobjectplayer(LOCALID_WALLACEARMYTIDEMEMBERA)
+    giveitem(ITEM_QUEST_WALLACEARMY_REWARD,1)
     completequest(QUEST_WALLACEARMY)
     release
     end
 }
 
-script Quest_WallaceArmy_CompleteDialogue{
-            msgbox(format("Thank you for stopping them! Now... can somebody explain who Wallace is?"),MSGBOX_NPC,SPEAKER_SHASHI)
-            end
+script WallaceArmy_Dialogue_QuestComplete
+{
+    msgbox(format("I think a nice, long social media break is in order."),,SPEAKER_WALLACEARMYTIDEMEMBERA)
+    msgbox(format("I’m happy that The Tide is a collective. We always know to come together."),,SPEAKER_WALLACEARMYTIDEMEMBERA)
+    closemessage
+    release
+    end
 }
 
-script Quest_WallaceArmy_MoveAllObjects_Script{
-    setobjectxy(SOLAR_CEO,2,4)
-    setobjectxyperm(SOLAR_CEO,2,4)
-
-    setobjectxy(LEAD_STAN,1,4)
-    setobjectxyperm(LEAD_STAN,1,4)
-    applymovement(LEAD_STAN,Common_Movement_FaceUp)
-    waitmovement(LEAD_STAN)
-
-    setobjectxy(PLAYER,1,6)
-    TeleportCamera(1,6)
-    return
-}
-
-script Quest_WallaceArmy_LeadStanAppearance_Script{
+script Quest_WallaceArmy_Battle_WallacearmystanB
+{
+    msgbox(format("I CAN NOT BELIEVE that Wallace’s show was canceled because of the stupid Tide!"),,SPEAKER_WALLACEARMYSTANB)
+    msgbox(format("Wait, I think I recognize you! You’re one of them!"),,SPEAKER_WALLACEARMYSTANB)
+    msgbox(format("You helped scare Wallace off! I’ll never forgive you!"),,SPEAKER_WALLACEARMYSTANB)
+    closemessage
+    trainerbattle_no_intro(TRAINER_QUEST_WALLACEARMY_STANB,format("AHHHHH! One Wallace Army Opp DOWNED!"))
+    subquestmenu(QUEST_MENU_COMPLETE_QUEST,QUEST_WALLACEARMY,SUB_QUEST_1)
+    msgbox(format("It’s not fair!! Why did The Tide have to take Wallace away from me?"),,SPEAKER_WALLACEARMYSTANB)
+    msgbox(format("Okay, firstly, The Tide didn’t take him away…"),,SPEAKER_PLAYER)
     fadescreenswapbuffers(FADE_TO_BLACK)
-    clearflag(FLAG_HIDE_LEAD_STAN)
-    addobject(LEAD_STAN)
-    delay(16)
-    playse(SE_EXIT)
-    waitse
-    playbgm(MUS_ENCOUNTER_CHAMPION,TRUE)
+    delay(30)
     fadescreenswapbuffers(FADE_FROM_BLACK)
+    msgbox(format("That makes sense I guess… I knew Wallace would be on the right side of things!"),,SPEAKER_WALLACEARMYSTANB)
+    msgbox(format("I’ll just have to buy a ticket in another region and see him there… but I was gonna do that anyways! Heh…"),,SPEAKER_WALLACEARMYSTANB)
+    callnative(Script_HasSharpriseRaidCompleted)
+    if (var(VAR_RESULT) == FALSE)
+    {
+        msgbox(format("I wish there was a way to get back at Sharprise for their crimes…"),,SPEAKER_WALLACEARMYSTANB)
+        buffermapname(STR_VAR_1,MAP_SHARPRISE_SPIRE_TOP)
+        msgbox(format("Hmm… What if we could get a floorplan for {STR_VAR_1}?..."),,SPEAKER_WALLACEARMYSTANB)
+    }
+    closemessage
+    moveobjecttocoords(LOCALID_ROUTE1_WALLACEARMYSTANB,1, 1,DIR_NORTH)
+    delay(24)
+    fadescreenswapbuffers(FADE_TO_BLACK)
+    removeobject(LOCALID_ROUTE1_WALLACEARMYSTANB)
+    fadescreenswapbuffers(FADE_FROM_BLACK)
+    call(Quest_WallaceArmy_Script_TrySendLastZap)
+    closemessage
+    release
+    end
 }
 
-script Quest_WallaceArmy_ListRemainingLocations_Script{
-    if (var(VAR_TEMP_1) == 0){
-        bufferstring(STR_VAR_1,gText_HalaiIsland)
+script Quest_WallaceArmy_Battle_WallacearmystanC
+{
+    msgbox(format("I won’t stop until all of Resido - no, the world knows that The Tide is a terrorist organisation!! They must be stopped!"),,SPEAKER_WALLACEARMYSTANC)
+    msgbox(format("Are you a fan of Wallace by any chance?... Because you should know that it’s not The Tide’s fault that the show got canceled."),,SPEAKER_PLAYER)
+    msgbox(format("BETRAYER!!! You’re working for them! You are the enemy!"),,SPEAKER_WALLACEARMYSTANC)
+    closemessage
+    trainerbattle_no_intro(TRAINER_QUEST_WALLACEARMY_STANC,format("And what else are you gonna take from me now? Huh!?"))
+    subquestmenu(QUEST_MENU_COMPLETE_QUEST,QUEST_WALLACEARMY,SUB_QUEST_2)
+    msgbox(format("Listen to me, The Tide has no interest in stopping Wallace from performing…"),,SPEAKER_PLAYER)
+    fadescreenswapbuffers(FADE_TO_BLACK)
+    delay(30)
+    fadescreenswapbuffers(FADE_FROM_BLACK)
+    msgbox(format("I didn’t realise Sharprise was mistreating their workers like that… It looks like Wallace made the right call."),,SPEAKER_WALLACEARMYSTANC)
+    msgbox(format("I’m gonna show solidarity by buying more Wallace merch! Which, I mean, I was already planning to do of course! Duh!"),,SPEAKER_WALLACEARMYSTANC)
+    callnative(Script_HasSharpriseRaidCompleted)
+    if (var(VAR_RESULT) == FALSE)
+    {
+    msgbox(format("I wish there was a way to get back at Sharprise for their crimes…"),,SPEAKER_WALLACEARMYSTANC)
+        buffermapname(STR_VAR_1,MAP_SHARPRISE_SPIRE_TOP)
+    msgbox(format("What if we get a list of the staff who work at {STR_VAR_1}?..."),,SPEAKER_WALLACEARMYSTANC)
     }
-
-    if (var(VAR_TEMP_2) == 0){
-        bufferstring(STR_VAR_2,gText_TirabudinPlace)
-    }
-
-    if (var(VAR_TEMP_3) == 0){
-        bufferstring(STR_VAR_3,gText_PerlaciaCity)
-    }
-
-    if (var(VAR_TEMP_4) == 0){
-        bufferstring(STR_VAR_3,gText_Chasilla)
-    }
-
-    if (var(VAR_TEMP_5) == 0){
-        bufferstring(STR_VAR_3,gText_EspuleeOutskirts)
-    }
-
-    return
+    closemessage
+    moveobjecttocoords(LOCALID_ROUTE99_WALLACEARMYSTANC,1, 1,DIR_NORTH)
+    delay(24)
+    fadescreenswapbuffers(FADE_TO_BLACK)
+    removeobject(LOCALID_ROUTE99_WALLACEARMYSTANC)
+    fadescreenswapbuffers(FADE_FROM_BLACK)
+    call(Quest_WallaceArmy_Script_TrySendLastZap)
+    closemessage
+    release
+    end
 }
 
-script Quest_WallaceArmy_CheckCompletionRate_Script{
-    questmenu(QUEST_MENU_CHECK_ACTIVE,QUEST_WALLACEARMY)
+script Quest_WallaceArmy_Battle_WallacearmystanD
+{
+    msgbox(format("I can’t believe The Tide forced Wallace to cancel!"),,SPEAKER_WALLACEARMYSTAND)
+    msgbox(format("The police wanna know who their leader, that Vigrim, is! I do too!"),,SPEAKER_WALLACEARMYSTAND)
+    msgbox(format("Vigrim had nothing to do with it."),,SPEAKER_PLAYER)
+    msgbox(format("You’re working with The Tide! You can’t be trusted!"),,SPEAKER_WALLACEARMYSTAND)
+    closemessage
+    trainerbattle_no_intro(TRAINER_QUEST_WALLACEARMY_STAND,format("Woman down! Woman down! I surrender!"))
+    subquestmenu(QUEST_MENU_COMPLETE_QUEST,QUEST_WALLACEARMY,SUB_QUEST_3)
+    msgbox(format("Okay… I’ll promise not to look into this Vigrim person if you promise not to hurt me…"),,SPEAKER_WALLACEARMYSTAND)
+    msgbox(format("I’m not here to hurt anybody, I just want to talk."),,SPEAKER_PLAYER)
+    fadescreenswapbuffers(FADE_TO_BLACK)
+    delay(30)
+    fadescreenswapbuffers(FADE_FROM_BLACK)
+msgbox(format("Hmm. I never guess I never thought about how our silly online messages could actually be causing people distress."),,SPEAKER_WALLACEARMYSTAND)
+msgbox(format("I’ll take down the ones that reveal any personal information."),,SPEAKER_PLAYER)
+msgbox(format("To be honest I’m… Shocked you’d ever post such a thing in the first place."),,SPEAKER_WALLACEARMYSTAND)
+msgbox(format("Well from here on out I’m gonna double down on positivity online with more fancams! Which totally was not in my plans already!"),,SPEAKER_WALLACEARMYSTAND)
+    callnative(Script_HasSharpriseRaidCompleted)
+    if (var(VAR_RESULT) == FALSE)
+    {
 
-    if(!var(VAR_RESULT)){
+        buffermapname(STR_VAR_1,MAP_SHARPRISE_SPIRE_TOP)
+    msgbox(format("We need to get Sharprise back for their crimes!"),,SPEAKER_WALLACEARMYSTAND)
+    msgbox(format("What if we got a hold of the {STR_VAR_1} security schedule?..."),,SPEAKER_WALLACEARMYSTAND)
+    }
+    closemessage
+    moveobjecttocoords(LOCALID_ROUTE9_WALLACEARMYSTAND,1, 1,DIR_NORTH)
+    delay(24)
+    fadescreenswapbuffers(FADE_TO_BLACK)
+    removeobject(LOCALID_ROUTE9_WALLACEARMYSTAND)
+    fadescreenswapbuffers(FADE_FROM_BLACK)
+    call(Quest_WallaceArmy_Script_TrySendLastZap)
+    closemessage
+    release
+    end
+}
+
+script Quest_WallaceArmy_Battle_WallacearmystanE
+{
+msgbox(format("GAHHHHH! Wallace’s show was canceled!?!? Can nothing go right in this world!? GAHHHHH!"),,SPEAKER_WALLACEARMYSTANE,TAIL_SHOUT,EMOTE_ANGRY)
+msgbox(format("I wonder if The Tide are working with other idols to ensure Wallace can’t succeed…"),,SPEAKER_WALLACEARMYSTANE,TAIL_WHISPER)
+msgbox(format("The show’s cancellation was actually because of Sharprise."),,SPEAKER_PLAYER)
+msgbox(format("You must be one of their agents! To the Wallace Army jail with you!"),,SPEAKER_WALLACEARMYSTANE,,EMOTE_ANGRY)
+    closemessage
+    trainerbattle_no_intro(TRAINER_QUEST_WALLACEARMY_STANE,format("The Wallace Army’s enemies are numerous… And they are powerful."))
+    subquestmenu(QUEST_MENU_COMPLETE_QUEST,QUEST_WALLACEARMY,SUB_QUEST_4)
+    msgbox(format("So? Which of the idols is The Tide working with after all?"),,SPEAKER_WALLACEARMYSTANE)
+    msgbox(format("None of them - you’ve got the situation all wrong."),,SPEAKER_PLAYER)
+    fadescreenswapbuffers(FADE_TO_BLACK)
+    delay(30)
+    fadescreenswapbuffers(FADE_FROM_BLACK)
+    msgbox(format("I’ve been weaponized by a corporation! Happens to everyone I guess."),,SPEAKER_WALLACEARMYSTANE)
+    msgbox(format("Our countermeasure is simple! We recruit more members of the Fantina Fam to our cause! Then the Wallace Army will be utterly unstoppable!"),,SPEAKER_WALLACEARMYSTANE)
+    msgbox(format("Are more rabid fans really the answer?"),,SPEAKER_PLAYER,TAIL_THOUGHT)
+    callnative(Script_HasSharpriseRaidCompleted)
+    if (var(VAR_RESULT) == FALSE)
+    {
+        buffermapname(STR_VAR_1,MAP_SHARPRISE_SPIRE_TOP)
+    msgbox(format("There has to be a way to pay Sharprise back for their grave transgressions!"),,SPEAKER_WALLACEARMYSTANE)
+    msgbox(format("How about finding out where the cameras are in {STR_VAR_1}?..."),,SPEAKER_WALLACEARMYSTANE)
+    }
+    closemessage
+    moveobjecttocoords(LOCALID_TORGEOTCLIMB_WALLACEARMYSTANE,1, 1,DIR_NORTH)
+    delay(24)
+    fadescreenswapbuffers(FADE_TO_BLACK)
+    removeobject(LOCALID_TORGEOTCLIMB_WALLACEARMYSTANE)
+    fadescreenswapbuffers(FADE_FROM_BLACK)
+    call(Quest_WallaceArmy_Script_TrySendLastZap)
+    closemessage
+    release
+    end
+}
+
+script Quest_WallaceArmy_Script_TrySendLastZap
+{
+    callnative(Script_WallaceArmy_OnlyOneStanRemains)
+    if (var(VAR_RESULT) == FALSE)
+    {
+        return
+    }
+    playse(SE_POKENAV_CALL)
+    msgbox(format("Hmm, Wallacearmytidemembera forwarded me another message..."),,SPEAKER_PLAYER,TAIL_THOUGHT)
+    showzap(ZAP_QUEST_WALLACEARMY_FINAL_STAN)
+    buffermapname(STR_VAR_1,MAP_QUEST_WALLACEARMY_STAN_F)
+    msgbox(format("Guess I have to go to the {STR_VAR_1}..."),,SPEAKER_PLAYER,TAIL_THOUGHT)
+    closemessage
+    release
+    end
+}
+
+script WallaceArmy_Script_TriggerLastStanCutscene
+{
+    callnative(Script_WallaceArmy_OnlyOneStanRemains)
+    if (var(VAR_RESULT) == FALSE)
+    {
+        end
+    }
+
+    checktrainerdiscovered(TRAINER_QUEST_WALLACEARMY_STANF)
+    if (var(VAR_RESULT) == TRUE)
+    {
+        end
+    }
+    goto_if_eq(Quest_WallaceArmy_Intro_WallacearmystanF)
+}
+
+script Quest_WallaceArmy_Script_InteractWallacearmystanF
+{
+    lock
+    faceplayer
+    goto(Quest_WallaceArmy_Battle_Start)
+}
+
+script Quest_WallaceArmy_Intro_WallacearmystanF
+{
+    lock
+    moveobjecttocoords(LOCALID_PLAYER,11,7,DIR_NORTH)
+    waitmovement(LOCALID_PLAYER)
+    applymovement(LOCALID_PLAYER,moves(face_left, delay_16, face_right, delay_16, face_up))
+    waitmovement(LOCALID_PLAYER)
+    msgbox(format("Maybe they’re not coming after all?..."),,SPEAKER_PLAYER,TAIL_THOUGHT)
+    msgbox(format("The Wallace Army will never submit to terrorists! If Wallace has only one fan, it is me! If Wallace has no fans, I am dead!"),,SPEAKER_WALLACEARMYSTANF)
+    closemessage
+    fadescreenswapbuffers(FADE_TO_BLACK)
+    clearobjectflagfromlocalid(LOCALID_NAVALBASE_WALLACEARMYSTANF)
+    addobject(LOCALID_NAVALBASE_WALLACEARMYSTANF)
+    delay(30)
+    fadescreenswapbuffers(FADE_FROM_BLACK)
+    msgbox(format("If the world is against Wallace, then I am against the world!"),,SPEAKER_WALLACEARMYSTANF)
+    msgbox(format("Well, hello there. I am WallacearmystanF."),,SPEAKER_WALLACEARMYSTANF)
+    msgbox(format("..."),,SPEAKER_PLAYER)
+    msgbox(format("You must be The Tide’s lapdog!"),,SPEAKER_WALLACEARMYSTANF)
+    msgbox(format("Did you clear everybody out when you learned I was coming?"),,SPEAKER_WALLACEARMYSTANF)
+    msgbox(format("Actually the police raided this place a while ago."),,SPEAKER_PLAYER)
+    msgbox(format("Good! I hope the police take this whole organization down."),,SPEAKER_WALLACEARMYSTANF)
+    goto(Quest_WallaceArmy_Battle_Start)
+}
+
+script Quest_WallaceArmy_Battle_Start
+{
+    msgbox(format("Now I will show you the real power of my love for Wallace!"),,SPEAKER_WALLACEARMYSTANF)
+    trainerbattle_no_intro(TRAINER_QUEST_WALLACEARMY_STANF,format("But I’m his strongest soldier! How did I lose?"))
+    subquestmenu(QUEST_MENU_COMPLETE_QUEST,QUEST_WALLACEARMY,SUB_QUEST_5)
+    callnative(Quest_WallaceArmy_CountRemainingSubquestsTryProgressReward)
+
+    msgbox(format("Wallace lets me ignore the realities of the world."),,SPEAKER_WALLACEARMYSTANF)
+    msgbox(format("I don’t understand why The Tide wants to take that away."),,SPEAKER_WALLACEARMYSTANF)
+    msgbox(format("The people being mistreated by Sharprise don’t have the luxury of ignoring reality."),,SPEAKER_PLAYER)
+    msgbox(format("Neither The Tide OR Wallace want to let Sharprise get away with such things."),,SPEAKER_PLAYER)
+    msgbox(format("What do you mean by “mistreated”?"),,SPEAKER_WALLACEARMYSTANF)
+    msgbox(format("Let me explain…"),,SPEAKER_PLAYER)
+    fadescreenswapbuffers(FADE_TO_BLACK)
+    delay(30)
+    fadescreenswapbuffers(FADE_FROM_BLACK)
+    msgbox(format("Clearly I… Misunderstood the situation."),,SPEAKER_WALLACEARMYSTANF)
+    msgbox(format("I’ll redirect the fire toward Sharprise, the true enemy!"),,SPEAKER_WALLACEARMYSTANF)
+    msgbox(format("I’m not sure that Sharprise will suffer as much as The Tide did."),,SPEAKER_PLAYER)
+    msgbox(format("Hmm… I’ve really made a mess of it… I’m sorry. Please tell The Tide I’m sorry."),,SPEAKER_WALLACEARMYSTANF)
+    msgbox(format("I need to go back and watch some videos from 2002. Cleanse my palette."),,SPEAKER_WALLACEARMYSTANF)
+
+    callnative(Script_HasSharpriseRaidCompleted)
+    if (var(VAR_RESULT) == FALSE)
+    {
+        msgbox(format("Sharprise has to pay for their crimes."),,SPEAKER_WALLACEARMYSTANF)
+            msgbox(format("I will rally the Wallace Army, Sootopolis Squad and all! They will face consequences!"),,SPEAKER_WALLACEARMYSTANF)
+    }
+closemessage
+    moveobjecttocoords(LOCALID_NAVALBASE_WALLACEARMYSTANF,1, 1,DIR_NORTH)
+    delay(24)
+    fadescreenswapbuffers(FADE_TO_BLACK)
+    removeobject(LOCALID_NAVALBASE_WALLACEARMYSTANF)
+    fadescreenswapbuffers(FADE_FROM_BLACK)
+    closemessage
+    release
+    end
+}
+
+script WallaceArmy_Script_HideRaidParty
+{
+    callnative(Script_HasSharpriseRaidCompleted)
+    if (var(VAR_RESULT) == FALSE)
+    {
         return
     }
 
-	setvar(VAR_TEMP_0, 0)
-	setvar(VAR_TEMP_1, 0)
-	setvar(VAR_TEMP_2, 0)
-	setvar(VAR_TEMP_3, 0)
-    setvar(VAR_TEMP_4, 0)
-    setvar(VAR_TEMP_5, 0)
-
-    subquestmenu(QUEST_MENU_CHECK_COMPLETE,QUEST_WALLACEARMY,SUB_QUEST_1)
-    if (var(VAR_RESULT))
+    callnative(Script_HasSharpriseRaidStarted)
+    if (var(VAR_RESULT) == TRUE)
     {
-        addvar(VAR_TEMP_0,1)
-        addvar(VAR_TEMP_1,1)
+        return
     }
 
-    subquestmenu(QUEST_MENU_CHECK_COMPLETE,QUEST_WALLACEARMY,SUB_QUEST_2)
-    if (var(VAR_RESULT))
-    {
-        addvar(VAR_TEMP_0,1)
-        addvar(VAR_TEMP_2,1)
-    }
-
-    subquestmenu(QUEST_MENU_CHECK_COMPLETE,QUEST_WALLACEARMY,SUB_QUEST_3)
-    if (var(VAR_RESULT))
-    {
-        addvar(VAR_TEMP_0,1)
-        addvar(VAR_TEMP_3,1)
-    }
-
-    subquestmenu(QUEST_MENU_CHECK_COMPLETE,QUEST_WALLACEARMY,SUB_QUEST_4)
-    if (var(VAR_RESULT))
-    {
-        addvar(VAR_TEMP_0,1)
-        addvar(VAR_TEMP_4,1)
-    }
-
-    subquestmenu(QUEST_MENU_CHECK_COMPLETE,QUEST_WALLACEARMY,SUB_QUEST_5)
-    if (var(VAR_RESULT))
-    {
-        addvar(VAR_TEMP_0,1)
-        addvar(VAR_TEMP_5,1)
-    }
-
-    if (var(VAR_TEMP_0) == 5){
-        questmenu(QUEST_MENU_SET_REWARD, QUEST_WALLACEARMY)
-    }
+    setobjectflagfromlocalid(LOCALID_SHARPRISE_GIFT_SHOP_WALLACEARMYSTANB)
 }
 
-movement Quest_WallaceArmy_ExclaimAndFaceNorth_Movement{
-    emote_exclamation_mark
-    face_up
-    step_end
+script SharpriseRaid_Dialogue_WallacearmystanB
+{
+    lock
+    faceplayer
+    msgbox(format("Heh, you must be surprised to see me here!"),,SPEAKER_WALLACEARMYSTANB)
+    msgbox(format("Well, you should know that the Wallace Army can do anything it sets its mind to!"),,SPEAKER_WALLACEARMYSTANB)
+    closemessage
+    release
+    end
+}
+script SharpriseRaid_Dialogue_WallacearmystanC
+{
+    lock
+    faceplayer
+    msgbox(format("The Wallace Army vowed to have revenge against Sharprise!"),,SPEAKER_WALLACEARMYSTANC)
+    msgbox(format("I heard about the raid because… Well, I have my methods."),,SPEAKER_WALLACEARMYSTANC)
+    closemessage
+    release
+    end
+}
+script SharpriseRaid_Dialogue_WallacearmystanD
+{
+    lock
+    faceplayer
+    msgbox(format("This is the first time the Wallace Army have met up in person!"),,SPEAKER_WALLACEARMYSTAND)
+    msgbox(format("It’s exciting to meet people when they’re not behind a keyboard."),,SPEAKER_WALLACEARMYSTAND)
+    closemessage
+    release
+    end
+}
+script SharpriseRaid_Dialogue_WallacearmystanE
+{
+    lock
+    faceplayer
+    msgbox(format("The trainers guarding the gift shop were surprisingly easy to beat!"),,SPEAKER_WALLACEARMYSTANE)
+    msgbox(format("Granted, WallacearmystanF did most of the fighting."),,SPEAKER_WALLACEARMYSTANE)
+    closemessage
+    release
+    end
+}
+script SharpriseRaid_Dialogue_WallacearmystanF
+{
+    lock
+    faceplayer
+    msgbox(format("Ha! If I knew I’d see you again if I just waited here for a bit!"),,SPEAKER_WALLACEARMYSTANF)
+    msgbox(format("I was tempted to climb all the way up and take on the rest of Sharprise myself!"),,SPEAKER_WALLACEARMYSTANF)
+    msgbox(format("But I know this is your fight. So make the Wallace Army proud!"),,SPEAKER_WALLACEARMYSTANF)
+    closemessage
+    release
+    end
 }
 
-text gText_WallaceArmy_WhatMakesThemThinkTheyCanTreat{
-    format("What makes them think they can treat us like this? You can't just back out like that...")
-}
-text gText_WallaceArmy_TheseKidsAreGonnaRuin{
-    format("These kids are gonna ruin my business! First the League, now this?")
-}
-text gText_WallaceArmy_FirstTheBidNowTheDamnKids{
-    format("First the bid goes tits up, and now some kids are going take my business apart...")
-}
-text gText_WallaceArmy_OhTheChampionJustWhat{
-    format("Oh, the Champion. Just what else does the League want to do now?!?")
-}
-text gText_WallaceArmy_TheLeagueDidntSend{
-    format("The League didn't send me! Why did you think so?")
-}
-text gText_WallaceArmy_SighWereEspuleeOutskirtsSolar{
-    format("We're EspuleeOutskirts Solar. We were working with the League to provide solar power for their fancy new statement. They had it all buttoned up, they signed a deal, and then a lawyer pulled a fast one and pulled out of the deal right after I got the materials and staff together. They said some shit about a better option. But I'm absolutely screwed! So I went online and wrote a nasty post about them... and the next thing I know, some kids called the 'Wallace Army' are blowing up my phone, leaving bad reviews, and attacking my servers. We can't even get online! The League sent them!")
-}
-text gText_WallaceArmy_YouThinkTheLeague{
-    format("...You think the League sent Wallace stans after you?")
-}
-text gText_WallaceArmy_LookIHaveNoIdea{
-    format("Look, I don't even know what a stan is, but I do know that I haven't been able to log into all morning. I can't get any work done like this! My newphew is a computer guy and he told me the attacks are coming from specific spots in the region... but I don't even know where to start!")
-}
-text gText_WallaceArmy_LooksLikeThereStill{
-    format("According to my nephew, there are attacks from HalaiIsland, TirabudinPlace, PerlaciaCity, Chasilla, and EspuleeOutskirts.")
-}
-text gText_WallaceArmy_WereBackUp{
-    format("We're back up! I don't know what you did,but I can access my systems again!")
-}
-text gText_WallaceArmy_TheStanArmyWillNeverDie{
-    format("The Wallace Army will never die!")
-}
-text gText_WallaceArmy_HowDidYouGetInHere{
-    format("How did you get in here?")
-}
-text gText_WallaceArmy_WhatIsThatMusic{
-    format("...what is that music?")
-}
-text gText_WallaceArmy_OurArmyWillAlwaysPrevail{
-    format("Our Army will always prevail!")
-}
-text gText_WallaceArmy_ImLeahLeaderOfTheStanArmy{
-    format("I'm Leah, and I'm the Leader of the Wallace Army!")
-}
-text gText_WallaceArmy_WaitYoureTheLeader{
-    format("Wait, you're the leader? You?")
-}
-text gText_WallaceArmy_CanItOldMan{
-    format("Can it, old man.")
-}
-text gText_WallaceArmy_AndYouAttackingTheArmy{
-    format("And you! Champion {PLAYER}, attacking the army?")
-}
-text gText_WallaceArmy_ACrimePunishableByDeath{
-    format("A crime punishable by death!")
-}
-text gText_WallaceArmy_MyLord{
-    format("My Lord...")
-}
-text gText_WallaceArmy_WhyAreYouDefending{
-    format("Why are you defending them anyways? You're young! Don't you understand the might of Wallace!")
-}
-text gText_WallaceArmy_WeReallyHadNothing{
-    format("We really had nothing to do with this Wallace thing, I swear.")
-}
-text gText_WallaceArmy_ThatsTheWholeStorySee{
-    format("That's the whole story, see? Those are all the messages. I didn't know anything about Wallace or anything.")
-}
-text gText_WallaceArmy_ThereWasNoWallaceAtAll {
-    format("...there was no Wallace at all.")
-}
-text gText_WallaceArmy_IStillDontKnowWhoThatIs{
-    format("I still don't know who that is.")
-}
-text gText_WallaceArmy_ImSorryForAttacking{
-    format("I'm sorry for mobilizing the Army. We will now retreat. Take this as an apology.")
-}
-text gText_WallaceArmy_ThankYouForStopping{
-    format("Thank you for stopping them! Now... can somebody explain who Wallace is?")
-}
-text gText_WallaceArmy_OhWallaceSama{
-    format("Oh Wallace-sama... so dreamy! The {STR_VAR_1}of his {STR_VAR_2}...oh! I can't get enough.")
-}
-text gText_WallaceArmy_EspuleeOutskirtsSolarTheySpoke{
-    format("EspuleeOutskirts Solar? They spoke against our Lord, so we're taking them down! Anybody who gets in our way... is getting taken out!")
-}
-text gText_WallaceArmy_YouDidntHear{
-    format("You didn't hear? After EspuleeOutskirts Solar heard that Wallace was going to perform at the SharpRise Stadium, they said refused to power a stadium that was hiring 'tasteless hacks'. How dare they?!")
-}
-text gText_WallaceArmy_PostBattlePlaceholder1{
-	format("PostBattlePlaceholder1")
-}
-text gText_WallaceArmy_PostQuestPlaceholder1{
-	format("PostQuestPlaceholder1")
-}
-text gText_WallaceArmy_PostBattlePlaceholder2{
-	format("PostBattlePlaceholder2")
-}
-text gText_WallaceArmy_PostQuestPlaceholder2{
-	format("PostQuestPlaceholder2")
-}
-text gText_WallaceArmy_PostBattlePlaceholder3{
-	format("PostBattlePlaceholder3")
-}
-text gText_WallaceArmy_PostQuestPlaceholder3{
-	format("PostQuestPlaceholder3")
-}
-text gText_WallaceArmy_PostBattlePlaceholder4{
-	format("PostBattlePlaceholder4")
-}
-text gText_WallaceArmy_PostQuestPlaceholder4{
-	format("PostQuestPlaceholder4")
-}
-text gText_WallaceArmy_PostBattlePlaceholder5{
-	format("PostBattlePlaceholder5")
-}
-text gText_WallaceArmy_PostQuestPlaceholder5{
-	format("PostQuestPlaceholder5")
-}
+
