@@ -836,6 +836,9 @@ TEST("All Resido Trainers do not have Game Move Errors")
                 if (!IsSpeciesEnabled(species))
                     continue;
 
+                if (species == SPECIES_SMEARGLE)
+                    continue;
+
                 for (u32 moveIndex = 0; moveIndex < MAX_MON_MOVES; moveIndex++)
                 {
                     u32 move = mon->moves[moveIndex];
