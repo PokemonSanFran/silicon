@@ -350,7 +350,7 @@ static const struct WindowTemplate sBattleInfo_WindowTemplates[] =
     {
         .bg = BI_BG_TEXT_ALT,
         .tilemapLeft = 20, .tilemapTop = 8,
-        .width = 9, .height = 11
+        .width = 10, .height = 11
     },
     [BI_WIN_OPTIONS_LIST] =
     {
@@ -1770,8 +1770,11 @@ static void BattleInfoText_ShowMonStatusList(void)
     u32 count = 0;
     if (sBattleInfoDataPtr->mode == BI_MODE_MAIN)
     {
-        while ((sBattleInfoDataPtr->statusPagination + count) < sBattleInfoDataPtr->numStatuses)
+        while ((sBattleInfoDataPtr->statusPagination + count) < sBattleInfoDataPtr->numStatuses
+         && count < MAX_SHOWN_BI_STATUS_ITEMS)
+        {
             count++;
+        }
     }
     else
     {
