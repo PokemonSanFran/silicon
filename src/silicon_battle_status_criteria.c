@@ -41,8 +41,10 @@ static bool32 IsStatusActive_MistyTerrain(enum BattlerId);
 static const u8 *FormatStatusName_MistyTerrain(enum BattlerId);
 static bool32 IsStatusActive_PsychicTerrain(enum BattlerId);
 static const u8 *FormatStatusName_PsychicTerrain(enum BattlerId);
+static bool32 IsStatusActive_VeryHarshSun(enum BattlerId);
 static bool32 IsStatusActive_HarshSun(enum BattlerId);
 static const u8 *FormatStatusName_HarshSun(enum BattlerId);
+static bool32 IsStatusActive_HeavyRain(enum BattlerId);
 static bool32 IsStatusActive_Rain(enum BattlerId);
 static const u8 *FormatStatusName_Rain(enum BattlerId);
 static bool32 IsStatusActive_Sandstorm(enum BattlerId);
@@ -174,8 +176,8 @@ static const struct {
     { BATTLE_STATUS_SANDSTORM,                      IsStatusActive_Sandstorm,             FormatStatusName_Sandstorm, COMPOUND_STRING("Pokémon that are not Rock, Ground, or Steel types take damage equal to 1/16 of their max HP at the end of every turn. Boosts the Sp. Def stats of Rock-type Pokémon by 50%.") },
     { BATTLE_STATUS_SNOW,                           IsStatusActive_Snow,                  FormatStatusName_Snow, COMPOUND_STRING("Boosts the Defense stats of Ice-type Pokémon by 50%.") },
     { BATTLE_STATUS_FOG,                            IsStatusActive_Fog,                   FormatStatusName_Fog },
-    { BATTLE_STATUS_VERY_HARSH_SUN,                 IsStatusActive_HarshSun,              FormatStatusName_HarshSun, sBattleStatusCriteria_HarshSunDesc },
-    { BATTLE_STATUS_HEAVY_RAIN,                     IsStatusActive_Rain,                  FormatStatusName_Rain, sBattleStatusCriteria_Rain },
+    { BATTLE_STATUS_VERY_HARSH_SUN,                 IsStatusActive_VeryHarshSun,          FormatStatusName_HarshSun, sBattleStatusCriteria_HarshSunDesc },
+    { BATTLE_STATUS_HEAVY_RAIN,                     IsStatusActive_HeavyRain,             FormatStatusName_Rain, sBattleStatusCriteria_Rain },
     { BATTLE_STATUS_STRONG_WINDS,                   IsStatusActive_StrongWinds,           FormatStatusName_StrongWinds },
     { BATTLE_STATUS_SPIKES,                         IsStatusActive_Spikes,                FormatStatusName_Spikes, COMPOUND_STRING("Pokémon that switch into battle will take damage equal to 1/8 of their max HP. This damage will increase if 2 layers of Spikes are set, and again if 3 layers are set. Pokémon such as Flying types or ones with the Levitate Ability are unaffected.") },
     { BATTLE_STATUS_STEALTH_ROCK,                   IsStatusActive_StealthRock,           FormatStatusName_StealthRock, COMPOUND_STRING("Pokémon that switch into battle will take damage equal to 1/8 of their max HP. This damage differs depending on the Pokémon’s type matchup with the Rock type.") },
@@ -479,6 +481,11 @@ static const u8 *FormatStatusName_PsychicTerrain(enum BattlerId battler)
     return BattleStatusCriteria_FormatTerrainName(COMPOUND_STRING("Psychic"));
 }
 
+static bool32 IsStatusActive_VeryHarshSun(enum BattlerId battler)
+{
+    return gBattleWeather & B_WEATHER_SUN_PRIMAL;
+}
+
 static bool32 IsStatusActive_HarshSun(enum BattlerId battler)
 {
     return gBattleWeather & B_WEATHER_SUN;
@@ -490,6 +497,11 @@ static const u8 *FormatStatusName_HarshSun(enum BattlerId battler)
         return COMPOUND_STRING("Very Harsh Sun");
 
     return BattleStatusCriteria_FormatWeatherDuration(COMPOUND_STRING("Harsh Sun"));
+}
+
+static bool32 IsStatusActive_HeavyRain(enum BattlerId battler)
+{
+    return gBattleWeather & B_WEATHER_RAIN_PRIMAL;
 }
 
 static bool32 IsStatusActive_Rain(enum BattlerId battler)
