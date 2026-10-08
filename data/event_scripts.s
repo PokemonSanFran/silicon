@@ -2213,7 +2213,6 @@ EventScript_PalletTown_PlayersHouse_2F_TurnOnPC::
 .include "data/maps/ZenzuIsland/scripts.inc"
 .include "data/maps/ZenzuIsland_PokemonCenter_1F/scripts.inc"
 .include "data/maps/ZenzuIsland_Restaurant/scripts.inc"
-.include "data/maps/ZenzuIsland_SkillLibrary/scripts.inc"
 @ End siliconMerge
 
 	.include "data/maps/CapheCommunityGarden/scripts.inc"

@@ -13210,19 +13210,6 @@
       "layout_version": "emerald"
     },
     {
-      "id": "LAYOUT_ZENZU_ISLAND_SKILL_LIBRARY",
-      "name": "ZenzuIsland_Skilllibrary_Layout",
-      "width": 5,
-      "height": 5,
-      "primary_tileset": "gTileset_Building",
-      "secondary_tileset": "gTileset_GenericBuilding",
-      "border_filepath": "data/layouts/ZenzuIsland_SkillLibrary/border.bin",
-      "blockdata_filepath": "data/layouts/ZenzuIsland_SkillLibrary/map.bin",
-      "border_height": 2,
-      "border_width": 2,
-      "layout_version": "emerald"
-    },
-    {
       "id": "LAYOUT_POPIDORA_PIER_ARCADE",
       "name": "PopidoraPier_Arcade_Layout",
       "width": 22,
