@@ -286,7 +286,7 @@
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
       "script": "Route9_Script_Interact_WallacearmystanD",
-      "flag": "FLAG_TEMP_6"
+      "flag": "FLAG_TEMP_2"
     }
   ],
   "warp_events": [
