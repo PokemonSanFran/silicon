@@ -4637,7 +4637,53 @@ const struct SideQuest sSideQuests[QUEST_COUNT] =
         .sprite = OBJ_EVENT_GFX_GENTLEMAN,
         .spritetype = QUEST_SPRITE_TYPE_OBJECT,
         .subquests = sTheBoyWhoCriesWithWolves_Sub,
-        .numSubquests = QUEST_THEBOYWHOCRIESWITHWOLVES_SUB_COUNT
+        .numSubquests = QUEST_THEBOYWHOCRIESWITHWOLVES_SUB_COUNT,
+        .states =
+        {
+            [STATE_QUEST_THEBOYWHOCRIESWITHWOLVES_NOT_STARTED] =
+            {
+                .name = COMPOUND_STRING("Not Started"),
+                .setupFunc = DebugQuest_BoyWhoCriesWithWolves,
+                side_quest_map(MAP_QUEST_THEBOYWHOCRIESWITHWOLVES),
+                .warpId = 0,
+            },
+            [STATE_QUEST_THEBOYWHOCRIESWITHWOLVES_STARTED] =
+            {
+                .name = COMPOUND_STRING("Started"),
+                .setupFunc = DebugQuest_BoyWhoCriesWithWolves,
+                side_quest_map(MAP_QUEST_THEBOYWHOCRIESWITHWOLVES),
+                .warpId = 0,
+            },
+            [STATE_QUEST_THEBOYWHOCRIESWITHWOLVES_FIRSTAIDKIT] =
+            {
+                .name = COMPOUND_STRING("Hill Probe Installed"),
+                .setupFunc = DebugQuest_BoyWhoCriesWithWolves,
+                side_quest_map(MAP_QUEST_THEBOYWHOCRIESWITHWOLVES),
+                .warpId = 0,
+            },
+            [STATE_QUEST_THEBOYWHOCRIESWITHWOLVES_CELLPHONE] =
+            {
+                .name = COMPOUND_STRING("Forest Probe Installed"),
+                .setupFunc = DebugQuest_BoyWhoCriesWithWolves,
+                side_quest_map(MAP_QUEST_THEBOYWHOCRIESWITHWOLVES),
+                .warpId = 0,
+            },
+            [STATE_QUEST_THEBOYWHOCRIESWITHWOLVES_JEANS] =
+            {
+                .name = COMPOUND_STRING("Shore Probe Installed"),
+                .setupFunc = DebugQuest_BoyWhoCriesWithWolves,
+                side_quest_map(MAP_QUEST_THEBOYWHOCRIESWITHWOLVES),
+                .warpId = 0,
+            },
+            [STATE_QUEST_THEBOYWHOCRIESWITHWOLVES_COMPLETE] =
+            {
+                .name = COMPOUND_STRING("Complete"),
+                .setupFunc = DebugQuest_BoyWhoCriesWithWolves,
+                side_quest_map(MAP_QUEST_THEBOYWHOCRIESWITHWOLVES),
+                .warpId = 0,
+            },
+        },
+        },
     },
     [QUEST_TAXICABTURNAROUND] =
     {

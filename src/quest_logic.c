@@ -4103,6 +4103,50 @@ void DebugQuest_ManOfManyHats(u8 state)
             break;
     }
 }
+
+static void Quest_BoyWhoCriesWithWolves_CountRemainingSubquestsTryProgressReward(void)
+{
+    Quest_Generic_CountRemainingSubquestsTryProgressReward(QUEST_THEBOYWHOCRIESWITHWOLVES);
+}
+
+void DebugQuest_BoyWhoCriesWithWolves(u8 state)
+{
+    switch (state)
+    {
+        default:
+        case STATE_QUEST_THEBOYWHOCRIESWITHWOLVES_NOT_STARTED:
+            FlagSet(FLAG_SYS_STARTER_APPS_GET);
+            JumpPlayerTo_YoungPadawan(JUMP_DEBUG);
+            QuestMenu_ScriptSetComplete(QUEST_BUTONLYINMYBACKYARD) //note: must be replaced with proper funcs once But Only In My Backyard has been finished
+            break;
+        case STATE_QUEST_THEBOYWHOCRIESWITHWOLVES_STARTED:
+            QuestMenu_ScriptSetActive(QUEST_THEBOYWHOCRIESWITHWOLVES);
+            AddBagItem(ITEM_QUEST_THEBOYWHOCRIESWITHWOLVES_FIRSTAIDKIT, 1);
+            break;
+        case STATE_QUEST_THEBOYWHOCRIESWITHWOLVES_FIRSTAIDKIT:
+            QuestMenu_GetSetSubquestState(QUEST_THEBOYWHOCRIESWITHWOLVES, FLAG_SET_COMPLETED, SUB_QUEST_1);
+            RemoveBagItem(ITEM_QUEST_THEBOYWHOCRIESWITHWOLVES_FIRSTAIDKIT, 1);
+            AddBagItem(ITEM_QUEST_THEBOYWHOCRIESWITHWOLVES_CELLPHONE, 1);
+            Quest_InstallNatureProbes_CountRemainingSubquestsTryProgressReward();
+            break;
+        case STATE_QUEST_THEBOYWHOCRIESWITHWOLVES_CELLPHONE:
+            QuestMenu_GetSetSubquestState(QUEST_THEBOYWHOCRIESWITHWOLVES, FLAG_SET_COMPLETED, SUB_QUEST_2);
+            RemoveBagItem(ITEM_QUEST_THEBOYWHOCRIESWITHWOLVES_CELLPHONE, 1);
+            AddBagItem(ITEM_QUEST_THEBOYWHOCRIESWITHWOLVES_JEANS, 1);
+            Quest_InstallNatureProbes_CountRemainingSubquestsTryProgressReward();
+            break;
+        case STATE_QUEST_THEBOYWHOCRIESWITHWOLVES_JEANS:
+            QuestMenu_GetSetSubquestState(QUEST_THEBOYWHOCRIESWITHWOLVES, FLAG_SET_COMPLETED, SUB_QUEST_3);
+            RemoveBagItem(ITEM_QUEST_THEBOYWHOCRIESWITHWOLVES_JEANS, 1);
+            Quest_InstallNatureProbes_CountRemainingSubquestsTryProgressReward();
+            break;
+        case STATE_QUEST_THEBOYWHOCRIESWITHWOLVES_COMPLETE:
+            QuestMenu_ScriptSetComplete(QUEST_THEBOYWHOCRIESWITHWOLVES);
+            AddBagItem(ITEM_QUEST_THEBOYWHOCRIESWITHWOLVES_REWARD, 1);
+            break;
+    }
+}
+
 // ***********************************************************************
 // Cutscene: Earthquake
 // ***********************************************************************

@@ -224,8 +224,8 @@
   "coord_events": [
     {
       "type": "trigger",
-      "x": 23,
-      "y": 7,
+      "x": 25,
+      "y": 8,
       "elevation": 0,
       "var": "VAR_ALWAYS_ZERO",
       "var_value": "0",
@@ -233,8 +233,8 @@
     },
     {
       "type": "trigger",
-      "x": 28,
-      "y": 7,
+      "x": 26,
+      "y": 8,
       "elevation": 0,
       "var": "VAR_ALWAYS_ZERO",
       "var_value": "0",
