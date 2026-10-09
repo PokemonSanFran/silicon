@@ -347,11 +347,12 @@
       "dest_warp_id": "0"
     },
     {
+      "warp_id": "WARP_ID_TO_HALAI_TO_NAVAL_BASE_EXTERIOR",
       "x": 22,
       "y": 6,
       "elevation": 0,
       "dest_map": "MAP_NAVAL_BASE_EXTERIOR",
-      "dest_warp_id": "0"
+      "dest_warp_id": "WARP_ID_NAVAL_BASE_EXTERIOR_TO_HALAI"
     }
   ],
   "coord_events": [

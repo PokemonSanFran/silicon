@@ -99,7 +99,7 @@
       "x": 10,
       "y": 7,
       "elevation": 3,
-      "movement_type": "MOVEMENT_TYPE_FACE_UP",
+      "movement_type": "MOVEMENT_TYPE_FACE_RIGHT",
       "movement_range_x": 0,
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
@@ -110,122 +110,14 @@
   ],
   "warp_events": [
     {
+      "warp_id": "WARP_ID_NAVAL_BASE_EXTERIOR_TO_HALAI",
       "x": 10,
       "y": 14,
       "elevation": 0,
       "dest_map": "MAP_HALAI_ISLAND",
-      "dest_warp_id": "6"
+      "dest_warp_id": "WARP_ID_TO_HALAI_TO_NAVAL_BASE_EXTERIOR"
     }
   ],
-  "coord_events": [
-    {
-      "type": "trigger",
-      "x": 8,
-      "y": 6,
-      "elevation": 0,
-      "var": "VAR_ALWAYS_ZERO",
-      "var_value": "0",
-      "script": "WallaceArmy_Script_TriggerLastStanCutscene"
-    },
-    {
-      "type": "trigger",
-      "x": 10,
-      "y": 5,
-      "elevation": 0,
-      "var": "VAR_ALWAYS_ZERO",
-      "var_value": "0",
-      "script": "WallaceArmy_Script_TriggerLastStanCutscene"
-    },
-    {
-      "type": "trigger",
-      "x": 9,
-      "y": 5,
-      "elevation": 0,
-      "var": "VAR_ALWAYS_ZERO",
-      "var_value": "0",
-      "script": "WallaceArmy_Script_TriggerLastStanCutscene"
-    },
-    {
-      "type": "trigger",
-      "x": 12,
-      "y": 7,
-      "elevation": 0,
-      "var": "VAR_ALWAYS_ZERO",
-      "var_value": "0",
-      "script": "WallaceArmy_Script_TriggerLastStanCutscene"
-    },
-    {
-      "type": "trigger",
-      "x": 12,
-      "y": 8,
-      "elevation": 0,
-      "var": "VAR_ALWAYS_ZERO",
-      "var_value": "0",
-      "script": "WallaceArmy_Script_TriggerLastStanCutscene"
-    },
-    {
-      "type": "trigger",
-      "x": 11,
-      "y": 9,
-      "elevation": 0,
-      "var": "VAR_ALWAYS_ZERO",
-      "var_value": "0",
-      "script": "WallaceArmy_Script_TriggerLastStanCutscene"
-    },
-    {
-      "type": "trigger",
-      "x": 12,
-      "y": 6,
-      "elevation": 0,
-      "var": "VAR_ALWAYS_ZERO",
-      "var_value": "0",
-      "script": "WallaceArmy_Script_TriggerLastStanCutscene"
-    },
-    {
-      "type": "trigger",
-      "x": 11,
-      "y": 5,
-      "elevation": 0,
-      "var": "VAR_ALWAYS_ZERO",
-      "var_value": "0",
-      "script": "WallaceArmy_Script_TriggerLastStanCutscene"
-    },
-    {
-      "type": "trigger",
-      "x": 10,
-      "y": 9,
-      "elevation": 0,
-      "var": "VAR_ALWAYS_ZERO",
-      "var_value": "0",
-      "script": "WallaceArmy_Script_TriggerLastStanCutscene"
-    },
-    {
-      "type": "trigger",
-      "x": 9,
-      "y": 9,
-      "elevation": 0,
-      "var": "VAR_ALWAYS_ZERO",
-      "var_value": "0",
-      "script": "WallaceArmy_Script_TriggerLastStanCutscene"
-    },
-    {
-      "type": "trigger",
-      "x": 8,
-      "y": 8,
-      "elevation": 0,
-      "var": "VAR_ALWAYS_ZERO",
-      "var_value": "0",
-      "script": "WallaceArmy_Script_TriggerLastStanCutscene"
-    },
-    {
-      "type": "trigger",
-      "x": 8,
-      "y": 7,
-      "elevation": 0,
-      "var": "VAR_ALWAYS_ZERO",
-      "var_value": "0",
-      "script": "WallaceArmy_Script_TriggerLastStanCutscene"
-    }
-  ],
+  "coord_events": [],
   "bg_events": []
 }
