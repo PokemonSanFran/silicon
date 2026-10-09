@@ -3,6 +3,10 @@ MAP_SCRIPT_ON_TRANSITION
 {
     call(WallaceArmy_Script_HideStanF)
 }
+MAP_SCRIPT_ON_FRAME_TABLE
+[
+    FLAG_QUEST_WALLACEARMY_WALLACEARMYSTANF_READY, TRUE: Quest_WallaceArmy_Intro_WallacearmystanF
+]
 }
 
 script NavalBaseExterior_Script_Interact_BodegaburnoutDeliveryCutC

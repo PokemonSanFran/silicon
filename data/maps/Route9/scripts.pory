@@ -1,6 +1,6 @@
 mapscripts Route9_MapScripts {
     MAP_SCRIPT_ON_TRANSITION{
-        call_if_subquest_not_complete(QUEST_WALLACEARMY,SUB_QUEST_3,WallaceArmy_Script_HideStanD)
+        call_if_subquest_complete(QUEST_WALLACEARMY,SUB_QUEST_3,WallaceArmy_Script_HideStanD)
         call(Vsdeoxys_Script_HideObjectRoute)
         call(Quest_Ultrawormholeresearch_ControlTotemVisibility)
     }
@@ -101,6 +101,8 @@ script Route9_Script_Interact_Quest_Restaurantexpansionbusser
 
 script Route9_Script_Interact_WallacearmystanD
 {
+    lock
+    faceplayer
     goto_if_quest_active(QUEST_WALLACEARMY,Quest_WallaceArmy_Battle_WallacearmystanD)
     msgbox(format("Wallace’s toughness is so inspiring! It’s what makes me love him so much!"),,SPEAKER_WALLACEARMYSTAND)
     bufferspeciesname(STR_VAR_1,SPECIES_WALLACE_MON_D)

@@ -3,7 +3,7 @@ mapscripts Route1_MapScripts {
         call(Quest_ArtisanBalls2_CheckTrainerA_Script)
         call(Quest_Ultrawormholeresearch_ControlTotemVisibility)
 		call_if_quest_not_complete(QUEST_RESTORETIRABUDINGYM,Quest_Rematches_Script_HideBD)
-        call_if_subquest_not_complete(QUEST_WALLACEARMY,SUB_QUEST_1,WallaceArmy_Script_HideStanB)
+        call_if_subquest_complete(QUEST_WALLACEARMY,SUB_QUEST_1,WallaceArmy_Script_HideStanB)
     }
     MAP_SCRIPT_ON_LOAD
     {
@@ -60,6 +60,8 @@ script Route1_EventScript_SignSafeHouse
 
 script Route1_Script_Interact_WallacearmystanB
 {
+    lock
+    faceplayer
     goto_if_quest_active(QUEST_WALLACEARMY,Quest_WallaceArmy_Battle_WallacearmystanB)
     msgbox(format("I love Wallace sooo much! He’s so cute!"),,SPEAKER_WALLACEARMYSTANB)
     bufferspeciesname(STR_VAR_1,SPECIES_WALLACE_MON_B)

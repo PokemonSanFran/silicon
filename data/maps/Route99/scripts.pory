@@ -1,6 +1,6 @@
 mapscripts Route99_MapScripts {
     MAP_SCRIPT_ON_TRANSITION {
-        call_if_subquest_not_complete(QUEST_WALLACEARMY,SUB_QUEST_2,WallaceArmy_Script_HideStanC)
+        call_if_subquest_complete(QUEST_WALLACEARMY,SUB_QUEST_2,WallaceArmy_Script_HideStanC)
         call(Route99_MapScripts_OnTransition)
     }
 
@@ -36,6 +36,8 @@ script Route99_Script_Interact_Quest_Restaurantexpansionchef
 
 script Route99_Script_Interact_WallacearmystanC
 {
+    lock
+    faceplayer
     goto_if_quest_active(QUEST_WALLACEARMY,Quest_WallaceArmy_Battle_WallacearmystanC)
     msgbox(format("Wallace is so cool… I can’t get over it!"),,SPEAKER_WALLACEARMYSTANC)
     bufferspeciesname(STR_VAR_1,SPECIES_WALLACE_MON_C)

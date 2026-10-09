@@ -1,6 +1,6 @@
 mapscripts TorgeotClimb_MapScripts {
     MAP_SCRIPT_ON_TRANSITION {
-        call_if_subquest_not_complete(QUEST_WALLACEARMY,SUB_QUEST_3,WallaceArmy_Script_HideStanE)
+        call_if_subquest_complete(QUEST_WALLACEARMY,SUB_QUEST_4,WallaceArmy_Script_HideStanE)
         call(Quest_IBelieveICanFly_Gertrude_Visibility_Script)
 		call(OkayLetsFixit_Script_HikoVisibility)
         call_if_quest_not_complete(QUEST_FINDTHEGUILTY,Quest_Findtheguilty_Script_HideTorgeotFindtheguilityplantH)
@@ -18,6 +18,8 @@ mapscripts TorgeotClimb_MapScripts {
 
 script TorgeotClimb_Script_Interact_WallacearmystanE
 {
+    lock
+    faceplayer
     goto_if_quest_active(QUEST_WALLACEARMY,Quest_WallaceArmy_Battle_WallacearmystanE)
     msgbox(format("Wallace is so clever! Every performance he does makes my heart flutter!"),,SPEAKER_WALLACEARMYSTANE)
     bufferspeciesname(STR_VAR_1,SPECIES_WALLACE_MON_E)
