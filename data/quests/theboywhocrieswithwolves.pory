@@ -1,27 +1,53 @@
-const FLAG_HIDE_BOYWHOCRIESWOLVESDOCTOR = FLAG_TEMP_1
+const FLAG_HIDE_BOYWHOCRIESWOLVESDOCTOR = FLAG_TEMP_2
 const BOYWHOCRIESWOLVESDOCTOR = LOCALID_BOYWHOCRIESWOLVESDOCTOR
 
 //Quest_Theboywhocriedwithwolves_
 //gText_Theboywhocriedwithwolves_
 
-script Quest_Theboywhocriedwithwolves_Boywhocriedwolvesdoctor_Visibility_Script{
+script Quest_Theboywhocriedwithwolves_Boywhocriedwolvesdoctor_Visibility_Script
+{
     questmenu(QUEST_MENU_CHECK_COMPLETE,QUEST_THEBOYWHOCRIESWITHWOLVES)
-
-    if (var(VAR_RESULT)){
+    if (var(VAR_RESULT))
+    {
         setflag(FLAG_HIDE_BOYWHOCRIESWOLVESDOCTOR)
     }
     return
 }
 
-script Quest_Theboywhocriedwithwolves_CheckSubquests_Script{
+script Quest_Theboywhocriedwithwolves_CheckAndCountItemsScript
+{
+    checkitem(ITEM_QUEST_THEBOYWHOCRIESWITHWOLVES_FIRSTAIDKIT)
+    if(var(VAR_RESULT) == TRUE){addvar(VAR_TEMP_1, 1)}
+    checkitem(ITEM_QUEST_THEBOYWHOCRIESWITHWOLVES_CELLPHONE)
+    if(var(VAR_RESULT) == TRUE){addvar(VAR_TEMP_1, 1)}
+    checkitem(ITEM_QUEST_THEBOYWHOCRIESWITHWOLVES_JEANS)
+    if(var(VAR_RESULT) == TRUE){addvar(VAR_TEMP_1, 1)}
+
+    switch(var(VAR_TEMP_1))
+    {
+        case 3:
+            goto_if_quest_inactive(QUEST_THEBOYWHOCRIESWITHWOLVES,Quest_Theboywhocriedwithwolves_Secret_Dialogue)
+            goto_if_quest_active(QUEST_THEBOYWHOCRIESWITHWOLVES,Quest_Theboywhocriedwithwolves_AcknowledgeItems)
+        case 2:
+        case 1:
+            questmenu(QUEST_MENU_CHECK_ACTIVE, QUEST_THEBOYWHOCRIESWITHWOLVES)
+            if(var(VAR_RESULT)){goto_if_quest_active(QUEST_THEBOYWHOCRIESWITHWOLVES,Quest_Theboywhocriedwithwolves_AcknowledgeItems)}
+        default: 
+            break
+    }
+}
+
+script Quest_Theboywhocriedwithwolves_CheckSubquests_Script
+{
     call_if_quest_active(QUEST_THEBOYWHOCRIESWITHWOLVES,Quest_Theboywhocriedwithwolves_CountSubquestCompletion)
         if (var(VAR_TEMP_0) == 3){
             questmenu(QUEST_MENU_SET_REWARD,QUEST_THEBOYWHOCRIESWITHWOLVES)
         }
-    return
+    end
 }
 
-script Quest_Theboywhocriedwithwolves_CountSubquestCompletion{
+script Quest_Theboywhocriedwithwolves_CountSubquestCompletion
+{
         setvar(VAR_TEMP_0,0)
         subquestmenu(QUEST_MENU_CHECK_COMPLETE,QUEST_THEBOYWHOCRIESWITHWOLVES,SUB_QUEST_1)
         if(var(VAR_RESULT)){
@@ -40,34 +66,35 @@ script Quest_Theboywhocriedwithwolves_CountSubquestCompletion{
         return
 }
 
-script Quest_Theboywhocriedwithwolves_Interact_Boywhocriesdoctor_Script{
+script Quest_Theboywhocriedwithwolves_Interact_Boywhocriesdoctor_Script
+{
     lock
-    //check for items in player bag
     goto_if_quest_active(QUEST_THEBOYWHOCRIESWITHWOLVES,Quest_Theboywhocriedwithwolves_Active_Dialogue)
     goto_if_quest_reward(QUEST_THEBOYWHOCRIESWITHWOLVES,Quest_Theboywhocriedwithwolves_Reward_Dialogue)
     // goto_if_quest_complete(QUEST_THEBOYWHOCRIESWITHWOLVES,Quest_Theboywhocriedwithwolves_Completed_Dialogue)
     goto(Quest_Theboywhocriedwithwolves_StartQuest_Dialogue)
 }
 
-script Quest_Theboywhocriedwithwolves_StartQuest_Dialogue{
+script Quest_Theboywhocriedwithwolves_StartQuest_Dialogue
+{
     // Boywhocriesdoctor does not turn to face the player.
     cueobject(BOYWHOCRIESWOLVESDOCTOR, DIR_SOUTH)
     msgbox("Oh man… What am I gonna do?..",,SPEAKER_BOYCRIESWOLVESDOCTOR,,EMOTE_SWEAT)
-    faceplayer
+    applymovement(BOYWHOCRIESWOLVESDOCTOR, moves(face_player))
     cueobjecttalking(BOYWHOCRIESWOLVESDOCTOR)
     
     msgbox("Oh. Hello.",,SPEAKER_BOYCRIESWOLVESDOCTOR,TAIL_TALK)
     msgbox("S-some kids stole my stuff and threw it\nover the fence!",,SPEAKER_BOYCRIESWOLVESDOCTOR,TAIL_TALK)
-    msgbox("On the other side is the golf course…\nThe members there are so rude!\lThey just pretend I'm not even here!",,SPEAKER_BOYCRIESWOLVESDOCTOR,TAIL_TALK)
+    msgbox("On the other side is the golf course…\nThe members there are so rude!\nThey just pretend I'm not even here!",,SPEAKER_BOYCRIESWOLVESDOCTOR,TAIL_TALK)
     msgbox("My stuff's stuck in there and I'm stuck\nout here… Typical.",,SPEAKER_BOYCRIESWOLVESDOCTOR,TAIL_TALK)
     msgbox("I don't even have a house… And now more\nis being taken from me…",,SPEAKER_BOYCRIESWOLVESDOCTOR,TAIL_TALK)
     cueobjecttalking(LOCALID_PLAYER,wait=0)
     msgbox("Hey, I'm sorry those kids were so mean to\nyou.\pLet me help you get your things back.",,SPEAKER_PLAYER,TAIL_TALK)
     msgbox("Oh! Oh! Wow, really? Thanks so much!\nThat would be amazing!",,SPEAKER_BOYCRIESWOLVESDOCTOR,TAIL_TALK,EMOTE_HAPPY)
     startquest(QUEST_THEBOYWHOCRIESWITHWOLVES)
-    msgbox("Those were some of the last things I own…",,SPEAKER_BOYCRIESWOLVESDOCTOR,TAIL_TALK,EMOTE_SAD)
+    msgbox("Those were some of the last things\nI own…",,SPEAKER_BOYCRIESWOLVESDOCTOR,TAIL_TALK,EMOTE_SAD)
     lock
-    call(Quest_Theboywhocriedwithwolves_CheckSubquests_Script)
+    call(Quest_Theboywhocriedwithwolves_CheckAndCountItemsScript)
     goto_if_quest_reward(QUEST_THEBOYWHOCRIESWITHWOLVES,Quest_Theboywhocriedwithwolves_Secret_Dialogue)
 
     msgbox(format("Its fine! I'm sorry those kids were so awful."),,SPEAKER_PLAYER)
@@ -76,27 +103,76 @@ script Quest_Theboywhocriedwithwolves_StartQuest_Dialogue{
     end
 }
 
-script Quest_Theboywhocriedwithwolves_Active_Dialogue{
+script Quest_Theboywhocriedwithwolves_Active_Dialogue
+{
+    call(Quest_Theboywhocriedwithwolves_CheckAndCountItemsScript)
+    call(Quest_Theboywhocriedwithwolves_CheckSubquests_Script)
     msgbox(format("Those were some of the last things I own…"),MSGBOX_NPC,SPEAKER_BOYCRIESWOLVESDOCTOR,TAIL_WHISPER)
 }
 
-script Quest_Theboywhocriedwithwolves_Secret_Dialogue{
+script Quest_Theboywhocriedwithwolves_AcknowledgeItems
+{
+    applymovement(BOYWHOCRIESWOLVESDOCTOR, moves(face_player))
+    checkitem(ITEM_QUEST_THEBOYWHOCRIESWITHWOLVES_FIRSTAIDKIT)
+    if(var(VAR_RESULT) == TRUE)
+    {
+        subquestmenu(QUEST_MENU_SET_ACTIVE, QUEST_THEBOYWHOCRIESWITHWOLVES, SUB_QUEST_1)
+        removeitem(ITEM_QUEST_THEBOYWHOCRIESWITHWOLVES_FIRSTAIDKIT,1)
+        msgbox("Hey I found a First Aid Kit. Is this one of\nyour things?",,SPEAKER_PLAYER)
+        msgbox("It is! That's awesome! Thanks!",,SPEAKER_BOYCRIESWOLVESDOCTOR)
+        cueobjecttalking(LOCALID_PLAYER, 1)
+        msgbox("Basic first aid supplies are important!\nIt's crucial you take care of cuts and\nscrapes before they get infected!",,SPEAKER_BOYCRIESWOLVESDOCTOR)
+        msgbox("My daily meds are in here too…",,SPEAKER_BOYCRIESWOLVESDOCTOR)
+        msgbox("Ironic, huh?\pI used to be a Doctor and now I'm the one\nwithout medicine.",,SPEAKER_BOYCRIESWOLVESDOCTOR)
+        msgbox("This was probably the most important\nfind. It means a lot.",,SPEAKER_BOYCRIESWOLVESDOCTOR)
+        closemessage
+    }
+    checkitem(ITEM_QUEST_THEBOYWHOCRIESWITHWOLVES_CELLPHONE)
+    if(var(VAR_RESULT) == TRUE)
+    {
+        subquestmenu(QUEST_MENU_SET_ACTIVE, QUEST_THEBOYWHOCRIESWITHWOLVES, SUB_QUEST_2)
+        removeitem(ITEM_QUEST_THEBOYWHOCRIESWITHWOLVES_CELLPHONE,1)
+        msgbox("Think I got something for you.",,SPEAKER_PLAYER)
+        msgbox("Hey, that's…",,SPEAKER_BOYCRIESWOLVESDOCTOR)
+        cueobjecttalking(LOCALID_PLAYER, 1)
+        msgbox("Some people think that I'm lying about\nbeing homeless because I have a phone.\p"
+               "Of course, cheap phones are easy to find\nif you know the right place to look.",,SPEAKER_BOYCRIESWOLVESDOCTOR)
+        msgbox("Without a phone it's like you're locked\nout of the world. Out of looking for\nhousing, for example. I'm grateful.",,SPEAKER_BOYCRIESWOLVESDOCTOR)
+        closemessage
+    }
+    checkitem(ITEM_QUEST_THEBOYWHOCRIESWITHWOLVES_JEANS)
+    if(var(VAR_RESULT) == TRUE)
+    {
+        subquestmenu(QUEST_MENU_SET_ACTIVE, QUEST_THEBOYWHOCRIESWITHWOLVES, SUB_QUEST_3)
+        removeitem(ITEM_QUEST_THEBOYWHOCRIESWITHWOLVES_JEANS,1)
+        msgbox("Something of yours?",,SPEAKER_PLAYER)
+        msgbox("O-oh! My clothes!",,SPEAKER_BOYCRIESWOLVESDOCTOR)
+        cueobjecttalking(LOCALID_PLAYER, 1)
+        msgbox("Even just one piece of clothing in good\ncondition is worth its weight in gold when\nyou don't have a home.\pThis'll go a long way for me!",,SPEAKER_BOYCRIESWOLVESDOCTOR)
+        closemessage
+    }
+}
+
+script Quest_Theboywhocriedwithwolves_Secret_Dialogue
+{
     msgbox(format("Actually, I was in there earlier. Are these your things?"),,SPEAKER_PLAYER)
     goto(Quest_Theboywhocriedwithwolves_Reward_Dialogue)
 }
 
-script Quest_Theboywhocriedwithwolves_TakeItems_Script{
-    removeitem(ITEM_ROTOM_CATALOG,1)
-    removeitem(ITEM_GRACIDEA,1)
-    removeitem(ITEM_REVEAL_GLASS,1)
+script Quest_Theboywhocriedwithwolves_TakeAllItems_Script
+{
+    removeitem(ITEM_QUEST_THEBOYWHOCRIESWITHWOLVES_FIRSTAIDKIT,1)
+    removeitem(ITEM_QUEST_THEBOYWHOCRIESWITHWOLVES_CELLPHONE,1)
+    removeitem(ITEM_QUEST_THEBOYWHOCRIESWITHWOLVES_JEANS,1)
     return
 }
 
-script Quest_Theboywhocriedwithwolves_Reward_Dialogue{
+script Quest_Theboywhocriedwithwolves_Reward_Dialogue
+{
     msgbox(format("My stuff! Thank you!"),MSGBOX_NPC,SPEAKER_BOYCRIESWOLVESDOCTOR)
     lock
     msgbox(format("{PLAYER} gave LOCALID_BOYWHOCRIESWOLVESDOCTOR back their belongings."))
-    call(Quest_Theboywhocriedwithwolves_TakeItems_Script)
+    call(Quest_Theboywhocriedwithwolves_TakeAllItems_Script)
     closemessage
     msgbox(format("I don't have any way to repay you. Thank you for your kindness."),,SPEAKER_BOYCRIESWOLVESDOCTOR)
     msgbox(format("Its fine! I'm glad you got your stuff."),,SPEAKER_PLAYER)
@@ -113,5 +189,10 @@ script Quest_Theboywhocriedwithwolves_Reward_Dialogue{
     fadescreenswapbuffers(FADE_FROM_BLACK)
     completequest(QUEST_THEBOYWHOCRIESWITHWOLVES)
     release
+    end
+}
+
+script(local) ScriptEnd
+{
     end
 }

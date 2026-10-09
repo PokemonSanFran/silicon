@@ -29,7 +29,7 @@
       "movement_range_x": 0,
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
-      "trainer_sight_or_berry_tree_id": "ITEM_ROTOM_CATALOG",
+      "trainer_sight_or_berry_tree_id": "ITEM_QUEST_THEBOYWHOCRIESWITHWOLVES_FIRSTAIDKIT",
       "script": "Common_EventScript_FindItem",
       "flag": "FLAG_ITEM_WAJABI_LAKE_STUFF1"
     },
@@ -42,7 +42,7 @@
       "movement_range_x": 0,
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
-      "trainer_sight_or_berry_tree_id": "ITEM_GRACIDEA",
+      "trainer_sight_or_berry_tree_id": "ITEM_QUEST_THEBOYWHOCRIESWITHWOLVES_CELLPHONE",
       "script": "Common_EventScript_FindItem",
       "flag": "FLAG_ITEM_WAJABI_LAKE_STUFF2"
     },
@@ -55,87 +55,9 @@
       "movement_range_x": 0,
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
-      "trainer_sight_or_berry_tree_id": "ITEM_REVEAL_GLASS",
+      "trainer_sight_or_berry_tree_id": "ITEM_QUEST_THEBOYWHOCRIESWITHWOLVES_JEANS",
       "script": "Common_EventScript_FindItem",
       "flag": "FLAG_ITEM_WAJABI_LAKE_STUFF3"
-    },
-    {
-      "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
-      "x": 40,
-      "y": 50,
-      "elevation": 0,
-      "movement_type": "MOVEMENT_TYPE_LOOK_AROUND",
-      "movement_range_x": 0,
-      "movement_range_y": 0,
-      "trainer_type": "TRAINER_TYPE_NONE",
-      "trainer_sight_or_berry_tree_id": "ITEM_DNA_SPLICERS",
-      "script": "Common_EventScript_FindItem",
-      "flag": "FLAG_ITEM_WAJABI_LAKE_STUFF4"
-    },
-    {
-      "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
-      "x": 30,
-      "y": 29,
-      "elevation": 0,
-      "movement_type": "MOVEMENT_TYPE_LOOK_AROUND",
-      "movement_range_x": 0,
-      "movement_range_y": 0,
-      "trainer_type": "TRAINER_TYPE_NONE",
-      "trainer_sight_or_berry_tree_id": "ITEM_ZYGARDE_CUBE",
-      "script": "Common_EventScript_FindItem",
-      "flag": "FLAG_ITEM_WAJABI_LAKE_STUFF5"
-    },
-    {
-      "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
-      "x": 41,
-      "y": 9,
-      "elevation": 0,
-      "movement_type": "MOVEMENT_TYPE_LOOK_AROUND",
-      "movement_range_x": 0,
-      "movement_range_y": 0,
-      "trainer_type": "TRAINER_TYPE_NONE",
-      "trainer_sight_or_berry_tree_id": "ITEM_PRISON_BOTTLE",
-      "script": "Common_EventScript_FindItem",
-      "flag": "FLAG_ITEM_WAJABI_LAKE_STUFF6"
-    },
-    {
-      "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
-      "x": 48,
-      "y": 38,
-      "elevation": 0,
-      "movement_type": "MOVEMENT_TYPE_LOOK_AROUND",
-      "movement_range_x": 0,
-      "movement_range_y": 0,
-      "trainer_type": "TRAINER_TYPE_NONE",
-      "trainer_sight_or_berry_tree_id": "ITEM_N_SOLARIZER",
-      "script": "Common_EventScript_FindItem",
-      "flag": "FLAG_ITEM_WAJABI_LAKE_STUFF7"
-    },
-    {
-      "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
-      "x": 26,
-      "y": 37,
-      "elevation": 0,
-      "movement_type": "MOVEMENT_TYPE_LOOK_AROUND",
-      "movement_range_x": 0,
-      "movement_range_y": 0,
-      "trainer_type": "TRAINER_TYPE_NONE",
-      "trainer_sight_or_berry_tree_id": "ITEM_N_LUNARIZER",
-      "script": "Common_EventScript_FindItem",
-      "flag": "FLAG_ITEM_WAJABI_LAKE_STUFF8"
-    },
-    {
-      "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
-      "x": 42,
-      "y": 28,
-      "elevation": 0,
-      "movement_type": "MOVEMENT_TYPE_LOOK_AROUND",
-      "movement_range_x": 0,
-      "movement_range_y": 0,
-      "trainer_type": "TRAINER_TYPE_NONE",
-      "trainer_sight_or_berry_tree_id": "ITEM_REINS_OF_UNITY",
-      "script": "Common_EventScript_FindItem",
-      "flag": "FLAG_ITEM_WAJABI_LAKE_STUFF9"
     },
     {
       "local_id": "LOCALID_BOYWHOCRIESWOLVESDOCTOR",
@@ -149,7 +71,7 @@
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
       "script": "Quest_Theboywhocriedwithwolves_Interact_Boywhocriesdoctor_Script",
-      "flag": "FLAG_TEMP_1"
+      "flag": "FLAG_TEMP_2"
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_BERRY_TREE",
@@ -302,8 +224,8 @@
   "coord_events": [
     {
       "type": "trigger",
-      "x": 25,
-      "y": 9,
+      "x": 23,
+      "y": 7,
       "elevation": 0,
       "var": "VAR_ALWAYS_ZERO",
       "var_value": "0",
@@ -311,8 +233,8 @@
     },
     {
       "type": "trigger",
-      "x": 26,
-      "y": 9,
+      "x": 28,
+      "y": 7,
       "elevation": 0,
       "var": "VAR_ALWAYS_ZERO",
       "var_value": "0",

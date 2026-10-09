@@ -11,9 +11,6 @@ script Common_EventScript_StoryItem
     switch(var(VAR_RESULT))
     {
         case ITEM_RANGER_HEADPHONES: call(EspuleeOutskirts_Ranger_Quest_ManOfManyHats_EventScript_ItemHeadphones)
-        case ITEM_ROTOM_CATALOG: call(WajabiLake_Quest_Theboywhocrieswithwolves_EventScript_ItemStuff1)
-        case ITEM_GRACIDEA: call(WajabiLake_Quest_Theboywhocrieswithwolves_EventScript_ItemStuff2)
-        case ITEM_REVEAL_GLASS: call(WajabiLake_Quest_Theboywhocrieswithwolves_EventScript_ItemStuff3)
         case ITEM_PANNEN_JOURNAL_PAGE_1: call(Quest_Hiddengrottomapping_EventScript_Journal1)
         case ITEM_PANNEN_JOURNAL_PAGE_2: call(Quest_Hiddengrottomapping_EventScript_Journal2)
         case ITEM_PANNEN_JOURNAL_PAGE_3: call(Quest_Hiddengrottomapping_EventScript_Journal3)
@@ -24,24 +21,6 @@ script Common_EventScript_StoryItem
 script EspuleeOutskirts_Ranger_Quest_ManOfManyHats_EventScript_ItemHeadphones
 {
     questmenu(QUEST_MENU_SET_REWARD,QUEST_MANOFMANYHATS)
-}
-
-script WajabiLake_Quest_Theboywhocrieswithwolves_EventScript_ItemStuff1
-{
-    subquestmenu(QUEST_MENU_COMPLETE_QUEST,QUEST_THEBOYWHOCRIESWITHWOLVES,SUB_QUEST_1)
-    call(Quest_Theboywhocriedwithwolves_CheckSubquests_Script)
-}
-
-script WajabiLake_Quest_Theboywhocrieswithwolves_EventScript_ItemStuff2
-{
-    subquestmenu(QUEST_MENU_COMPLETE_QUEST,QUEST_THEBOYWHOCRIESWITHWOLVES,SUB_QUEST_2)
-    call(Quest_Theboywhocriedwithwolves_CheckSubquests_Script)
-}
-
-script WajabiLake_Quest_Theboywhocrieswithwolves_EventScript_ItemStuff3
-{
-    subquestmenu(QUEST_MENU_COMPLETE_QUEST,QUEST_THEBOYWHOCRIESWITHWOLVES,SUB_QUEST_3)
-    call(Quest_Theboywhocriedwithwolves_CheckSubquests_Script)
 }
 
 script Quest_Hiddengrottomapping_EventScript_Journal1

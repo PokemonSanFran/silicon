@@ -742,7 +742,8 @@ const u8 gText_Quest_TheBoyWhoCriesWithWolves_Sub2_Name[] = _("Item 2");
 const u8 gText_Quest_TheBoyWhoCriesWithWolves_Sub2_Desc[] = _("Sub Lorem");
 const u8 gText_Quest_TheBoyWhoCriesWithWolves_Sub2_Map[] = _("WajabiLake");
 const u8 gText_Quest_TheBoyWhoCriesWithWolves_Sub3_Name[] = _("Item 3");
-
+const u8 gText_Quest_TheBoyWhoCriesWithWolves_Sub3_Desc[] = _("Sub Lorem");
+const u8 gText_Quest_TheBoyWhoCriesWithWolves_Sub3_Map[] = _("WajabiLake");
 
 const u8 gText_Quest_TaxicabturnaroundSea_Sub1_Name[] = _("Water 1");
 const u8 gText_Quest_TaxicabturnaroundSea_Sub1_Desc[] = _("Sub Lorem");
