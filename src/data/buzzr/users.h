@@ -220,4 +220,29 @@ const struct Users gBuzzrUsers[] =
         .username = COMPOUND_STRING("RealWetWallace"),
         .isVerified = TRUE,
     },
+    [BUZZR_USER_WALLACEARMYSTANF] =
+    {
+        .username = COMPOUND_STRING("WallacearmystanF"),
+        .isVerified = FALSE,
+    },
+    [BUZZR_USER_WALLACEARMYSTAN1] =
+    {
+        .username = COMPOUND_STRING("Wallacearmystan1"),
+        .isVerified = FALSE,
+    },
+    [BUZZR_USER_WALLACEARMYSTAN2] =
+    {
+        .username = COMPOUND_STRING("Wallacearmystan2"),
+        .isVerified = FALSE,
+    },
+    [BUZZR_USER_WALLACEARMYSTAN3] =
+    {
+        .username = COMPOUND_STRING("Wallacearmystan3"),
+        .isVerified = FALSE,
+    },
+    [BUZZR_USER_WALLACEARMYSTAN4] =
+    {
+        .username = COMPOUND_STRING("Wallacearmystan4"),
+        .isVerified = FALSE,
+    },
 };

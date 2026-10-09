@@ -2290,11 +2290,83 @@ const struct Zap gZaps[] =
     },
     [ZAP_QUEST_WALLACEARMY_FINAL_STAN] =
     {
-        .userId = BUZZR_USER_OLIVER,
+        .userId = BUZZR_USER_WALLACEARMYSTANF,
         .content = COMPOUND_STRING("The Wallace Army has gone quiet online lately. Have The Tide’s assassins finally infiltrated our cause? Whatever the case, I, Wallace’s strongest soldier will NEVER back down! I’m on the {STR_VAR_1} at The Tide’s home turf just raring for a fight! Come get me!"),
-        .isPrivate = TRUE,
+        .isPrivate = FALSE,
         .criteria = 0,
-        .dislikeCount = COMPOUND_STRING("0"),
-        .likeCount = COMPOUND_STRING("0"),
+        .dislikeCount = COMPOUND_STRING("4.9K"),
+        .likeCount = COMPOUND_STRING("4M"),
+    },
+    [ZAP_QUEST_WALLACEARMY_STAN_CANCELLED_1] =
+    {
+        .userId = BUZZR_USER_WALLACEARMYSTAN1,
+        .content = COMPOUND_STRING("Canceled!? Just like that? I booked the whole day off work and everything…"),
+        .isPrivate = FALSE,
+        .criteria = ZapCriteria_WallaceArmy_HasSeenCancelledZap,
+        .dislikeCount = COMPOUND_STRING(""),
+        .likeCount = COMPOUND_STRING(""),
+    },
+    [ZAP_QUEST_WALLACEARMY_STAN_CANCELLED_2] =
+    {
+        .userId = BUZZR_USER_WALLACEARMYSTAN2,
+        .content = COMPOUND_STRING("Stupid Tide messing things up! Why’d they have to do it on the exact same day!"),
+        .isPrivate = FALSE,
+        .criteria = ZapCriteria_WallaceArmy_HasSeenCancelledZap,
+        .dislikeCount = COMPOUND_STRING(""),
+        .likeCount = COMPOUND_STRING(""),
+    },
+    [ZAP_QUEST_WALLACEARMY_STAN_CANCELLED_3] =
+    {
+        .userId = BUZZR_USER_WALLACEARMYSTAN3,
+        .content = COMPOUND_STRING("This is The Tide, right!? Why are they protesting Wallace? What is there to protest!?"),
+        .isPrivate = FALSE,
+        .criteria = ZapCriteria_WallaceArmy_HasSeenCancelledZap,
+        .dislikeCount = COMPOUND_STRING(""),
+        .likeCount = COMPOUND_STRING(""),
+    },
+    [ZAP_QUEST_WALLACEARMY_STAN_CANCELLED_4] =
+    {
+        .userId = BUZZR_USER_WALLACEARMYSTAN4,
+        .content = COMPOUND_STRING("The Tide have spoiled everything! They’re gonna pay for this!"),
+        .isPrivate = FALSE,
+        .criteria = ZapCriteria_WallaceArmy_HasSeenCancelledZap,
+        .dislikeCount = COMPOUND_STRING(""),
+        .likeCount = COMPOUND_STRING(""),
+    },
+    [ZAP_QUEST_WALLACEARMY_STAN_UNDERSTAND_1] =
+    {
+        .userId = BUZZR_USER_WALLACEARMYSTAN1,
+        .content = COMPOUND_STRING("Until they learn to treat their workers better, I’m boycotting all Sharprise products."),
+        .isPrivate = FALSE,
+        .criteria = ZapCriteria_IsWallaceArmyComplete,
+        .dislikeCount = COMPOUND_STRING(""),
+        .likeCount = COMPOUND_STRING(""),
+    },
+    [ZAP_QUEST_WALLACEARMY_STAN_UNDERSTAND_2] =
+    {
+        .userId = BUZZR_USER_WALLACEARMYSTAN2,
+        .content = COMPOUND_STRING("I didn’t realize Wallace was so political, that stuff makes my head spin! He’s so smart…"),
+        .isPrivate = FALSE,
+        .criteria = ZapCriteria_IsWallaceArmyComplete,
+        .dislikeCount = COMPOUND_STRING(""),
+        .likeCount = COMPOUND_STRING(""),
+    },
+    [ZAP_QUEST_WALLACEARMY_STAN_UNDERSTAND_3] =
+    {
+        .userId = BUZZR_USER_WALLACEARMYSTAN3,
+        .content = COMPOUND_STRING("Wallace stands with The Tide!... Can I, too? Tide members if you’re reading this, let me in!"),
+        .isPrivate = FALSE,
+        .criteria = ZapCriteria_IsWallaceArmyComplete,
+        .dislikeCount = COMPOUND_STRING(""),
+        .likeCount = COMPOUND_STRING(""),
+    },
+    [ZAP_QUEST_WALLACEARMY_CANCEL_ANNOUNCE] =
+    {
+        .userId = BUZZR_USER_SHARPRISECAPTIAL,
+        .content = COMPOUND_STRING("The Resido leg of the Wallace World Tour has been cancelled due to safety concerns in relation to a planned protest on the same day. We apologize for any inconvenience."),
+        .isPrivate = FALSE,
+        .criteria = ZapCriteria_IsChampion,
+        .dislikeCount = COMPOUND_STRING(""),
+        .likeCount = COMPOUND_STRING(""),
     },
 };
