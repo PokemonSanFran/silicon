@@ -2068,8 +2068,8 @@ static enum BattlerId BattleInfoHelper_GetCurrBattler(void)
         if (BattleInfoHelper_SlotToBattlePartyOrder(battler, partySlot) != gBattlerPartyIndexes[battler])
             continue;
 
-        if ((isOpponent && !IsOnPlayerSide(battler))
-         || (!isOpponent && IsOnPlayerSide(battler)))
+        if (((isOpponent && !IsOnPlayerSide(battler)) || (!isOpponent && IsOnPlayerSide(battler)))
+         && GetBattlerTrainer(battler) == BattleInfoHelper_GetCurrTrainer())
         {
             return battler;
         }
