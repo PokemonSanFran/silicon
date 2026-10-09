@@ -1966,8 +1966,21 @@ static void BattleInfoText_ShowOptionsPrompt(void)
 static void BattleInfoText_ShowTextbox(u32 taskId, bool32 copyToVram)
 {
     enum BattleInfoWindows win = BI_WIN_TEXTBOX;
+    ClearStdWindowAndFrameToTransparent(win, FALSE);
+    RemoveWindow(win);
 
+    struct WindowTemplate template = sBattleInfo_WindowTemplates[win];
+    u32 newlines = CountLineBreaks(gStringVar4);
+    if (newlines < 2)
+    {
+        template.height -= 2;
+        template.tilemapTop += 2;
+    }
+
+    template.baseBlock = CalculateNextWindowBaseblock();
+    AddWindow(&template);
     DrawStdFrameWithCustomTileAndPalette(win, FALSE, sBattleInfoDataPtr->textboxTileNum, BI_STD_WIN_PALETTE_OFFSET);
+
     // typically i'd use TEXT_SKIP_DRAW here but for some ???? reason it keeps playing SE_SELECT when printed
     // this does NOT happen when using a proper text speed. it's so bizzare
     u32 speedDelay = GetPlayerTextSpeedDelay();
