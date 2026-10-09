@@ -121,6 +121,7 @@ script Quest_WallaceArmy_Battle_WallacearmystanB
     subquestmenu(QUEST_MENU_COMPLETE_QUEST,QUEST_WALLACEARMY,SUB_QUEST_1)
     msgbox(format("It’s not fair!! Why did The Tide have to take Wallace away from me?"),,SPEAKER_WALLACEARMYSTANB)
     msgbox(format("Okay, firstly, The Tide didn’t take him away…"),,SPEAKER_PLAYER)
+    closemessage
     fadescreenswapbuffers(FADE_TO_BLACK)
     delay(30)
     fadescreenswapbuffers(FADE_FROM_BLACK)
@@ -134,7 +135,7 @@ script Quest_WallaceArmy_Battle_WallacearmystanB
         msgbox(format("Hmm… What if we could get a floorplan for {STR_VAR_1}?..."),,SPEAKER_WALLACEARMYSTANB)
     }
     closemessage
-    moveobjecttocoords(LOCALID_ROUTE1_WALLACEARMYSTANB,1, 1,DIR_NORTH)
+    moveobjecttocoords(LOCALID_ROUTE1_WALLACEARMYSTANB,25, 16,DIR_NORTH)
     delay(24)
     fadescreenswapbuffers(FADE_TO_BLACK)
     removeobject(LOCALID_ROUTE1_WALLACEARMYSTANB)
@@ -154,6 +155,7 @@ script Quest_WallaceArmy_Battle_WallacearmystanC
     trainerbattle_no_intro(TRAINER_QUEST_WALLACEARMY_STANC,format("And what else are you gonna take from me now? Huh!?"))
     subquestmenu(QUEST_MENU_COMPLETE_QUEST,QUEST_WALLACEARMY,SUB_QUEST_2)
     msgbox(format("Listen to me, The Tide has no interest in stopping Wallace from performing…"),,SPEAKER_PLAYER)
+    closemessage
     fadescreenswapbuffers(FADE_TO_BLACK)
     delay(30)
     fadescreenswapbuffers(FADE_FROM_BLACK)
@@ -167,7 +169,7 @@ script Quest_WallaceArmy_Battle_WallacearmystanC
     msgbox(format("What if we get a list of the staff who work at {STR_VAR_1}?..."),,SPEAKER_WALLACEARMYSTANC)
     }
     closemessage
-    moveobjecttocoords(LOCALID_ROUTE99_WALLACEARMYSTANC,1, 1,DIR_NORTH)
+    moveobjecttocoords(LOCALID_ROUTE99_WALLACEARMYSTANC,6, 0,DIR_NORTH)
     delay(24)
     fadescreenswapbuffers(FADE_TO_BLACK)
     removeobject(LOCALID_ROUTE99_WALLACEARMYSTANC)
@@ -189,12 +191,13 @@ script Quest_WallaceArmy_Battle_WallacearmystanD
     subquestmenu(QUEST_MENU_COMPLETE_QUEST,QUEST_WALLACEARMY,SUB_QUEST_3)
     msgbox(format("Okay… I’ll promise not to look into this Vigrim person if you promise not to hurt me…"),,SPEAKER_WALLACEARMYSTAND)
     msgbox(format("I’m not here to hurt anybody, I just want to talk."),,SPEAKER_PLAYER)
+    closemessage
     fadescreenswapbuffers(FADE_TO_BLACK)
     delay(30)
     fadescreenswapbuffers(FADE_FROM_BLACK)
 msgbox(format("Hmm. I never guess I never thought about how our silly online messages could actually be causing people distress."),,SPEAKER_WALLACEARMYSTAND)
-msgbox(format("I’ll take down the ones that reveal any personal information."),,SPEAKER_PLAYER)
-msgbox(format("To be honest I’m… Shocked you’d ever post such a thing in the first place."),,SPEAKER_WALLACEARMYSTAND)
+msgbox(format("I’ll take down the ones that reveal any personal information."),,SPEAKER_WALLACEARMYSTAND)
+msgbox(format("To be honest I’m… Shocked you’d ever post such a thing in the first place."),,SPEAKER_PLAYER)
 msgbox(format("Well from here on out I’m gonna double down on positivity online with more fancams! Which totally was not in my plans already!"),,SPEAKER_WALLACEARMYSTAND)
     callnative(Script_HasSharpriseRaidCompleted)
     if (var(VAR_RESULT) == FALSE)
@@ -205,7 +208,7 @@ msgbox(format("Well from here on out I’m gonna double down on positivity onlin
     msgbox(format("What if we got a hold of the {STR_VAR_1} security schedule?..."),,SPEAKER_WALLACEARMYSTAND)
     }
     closemessage
-    moveobjecttocoords(LOCALID_ROUTE9_WALLACEARMYSTAND,1, 1,DIR_NORTH)
+    moveobjecttocoords(LOCALID_ROUTE9_WALLACEARMYSTAND,19, 2,DIR_NORTH)
     delay(24)
     fadescreenswapbuffers(FADE_TO_BLACK)
     removeobject(LOCALID_ROUTE9_WALLACEARMYSTAND)
@@ -227,6 +230,7 @@ msgbox(format("You must be one of their agents! To the Wallace Army jail with yo
     subquestmenu(QUEST_MENU_COMPLETE_QUEST,QUEST_WALLACEARMY,SUB_QUEST_4)
     msgbox(format("So? Which of the idols is The Tide working with after all?"),,SPEAKER_WALLACEARMYSTANE)
     msgbox(format("None of them - you’ve got the situation all wrong."),,SPEAKER_PLAYER)
+    closemessage
     fadescreenswapbuffers(FADE_TO_BLACK)
     delay(30)
     fadescreenswapbuffers(FADE_FROM_BLACK)
@@ -241,7 +245,7 @@ msgbox(format("You must be one of their agents! To the Wallace Army jail with yo
     msgbox(format("How about finding out where the cameras are in {STR_VAR_1}?..."),,SPEAKER_WALLACEARMYSTANE)
     }
     closemessage
-    moveobjecttocoords(LOCALID_TORGEOTCLIMB_WALLACEARMYSTANE,1, 1,DIR_NORTH)
+    moveobjecttocoords(LOCALID_TORGEOTCLIMB_WALLACEARMYSTANE,20,0,DIR_NORTH)
     delay(24)
     fadescreenswapbuffers(FADE_TO_BLACK)
     removeobject(LOCALID_TORGEOTCLIMB_WALLACEARMYSTANE)
@@ -263,26 +267,11 @@ script Quest_WallaceArmy_Script_TrySendLastZap
     msgbox(format("Hmm, Wallacearmytidemembera forwarded me another message..."),,SPEAKER_PLAYER,TAIL_THOUGHT)
     showzap(ZAP_QUEST_WALLACEARMY_FINAL_STAN)
     buffermapname(STR_VAR_1,MAP_QUEST_WALLACEARMY_STAN_F)
+    setflag(FLAG_QUEST_WALLACEARMY_WALLACEARMYSTANF_READY)
     msgbox(format("Guess I have to go to the {STR_VAR_1}..."),,SPEAKER_PLAYER,TAIL_THOUGHT)
     closemessage
     release
     end
-}
-
-script WallaceArmy_Script_TriggerLastStanCutscene
-{
-    callnative(Script_WallaceArmy_OnlyOneStanRemains)
-    if (var(VAR_RESULT) == FALSE)
-    {
-        end
-    }
-
-    checktrainerdiscovered(TRAINER_QUEST_WALLACEARMY_STANF)
-    if (var(VAR_RESULT) == TRUE)
-    {
-        end
-    }
-    goto_if_eq(Quest_WallaceArmy_Intro_WallacearmystanF)
 }
 
 script Quest_WallaceArmy_Script_InteractWallacearmystanF
@@ -295,15 +284,16 @@ script Quest_WallaceArmy_Script_InteractWallacearmystanF
 script Quest_WallaceArmy_Intro_WallacearmystanF
 {
     lock
+    clearflag(FLAG_QUEST_WALLACEARMY_WALLACEARMYSTANF_READY)
     moveobjecttocoords(LOCALID_PLAYER,11,7,DIR_NORTH)
     waitmovement(LOCALID_PLAYER)
-    applymovement(LOCALID_PLAYER,moves(face_left, delay_16, face_right, delay_16, face_up))
+    clearobjectflagfromlocalid(LOCALID_NAVALBASE_WALLACEARMYSTANF)
+    applymovement(LOCALID_PLAYER,moves(face_left, delay_16, face_right, delay_16, face_up, delay_16,face_left))
     waitmovement(LOCALID_PLAYER)
     msgbox(format("Maybe they’re not coming after all?..."),,SPEAKER_PLAYER,TAIL_THOUGHT)
     msgbox(format("The Wallace Army will never submit to terrorists! If Wallace has only one fan, it is me! If Wallace has no fans, I am dead!"),,SPEAKER_WALLACEARMYSTANF)
     closemessage
     fadescreenswapbuffers(FADE_TO_BLACK)
-    clearobjectflagfromlocalid(LOCALID_NAVALBASE_WALLACEARMYSTANF)
     addobject(LOCALID_NAVALBASE_WALLACEARMYSTANF)
     delay(30)
     fadescreenswapbuffers(FADE_FROM_BLACK)
@@ -314,12 +304,15 @@ script Quest_WallaceArmy_Intro_WallacearmystanF
     msgbox(format("Did you clear everybody out when you learned I was coming?"),,SPEAKER_WALLACEARMYSTANF)
     msgbox(format("Actually the police raided this place a while ago."),,SPEAKER_PLAYER)
     msgbox(format("Good! I hope the police take this whole organization down."),,SPEAKER_WALLACEARMYSTANF)
+    closemessage
+    startmenu_savescreen
     goto(Quest_WallaceArmy_Battle_Start)
 }
 
 script Quest_WallaceArmy_Battle_Start
 {
     msgbox(format("Now I will show you the real power of my love for Wallace!"),,SPEAKER_WALLACEARMYSTANF)
+    closemessage
     trainerbattle_no_intro(TRAINER_QUEST_WALLACEARMY_STANF,format("But I’m his strongest soldier! How did I lose?"))
     subquestmenu(QUEST_MENU_COMPLETE_QUEST,QUEST_WALLACEARMY,SUB_QUEST_5)
     callnative(Quest_WallaceArmy_CountRemainingSubquestsTryProgressReward)
@@ -330,6 +323,7 @@ script Quest_WallaceArmy_Battle_Start
     msgbox(format("Neither The Tide OR Wallace want to let Sharprise get away with such things."),,SPEAKER_PLAYER)
     msgbox(format("What do you mean by “mistreated”?"),,SPEAKER_WALLACEARMYSTANF)
     msgbox(format("Let me explain…"),,SPEAKER_PLAYER)
+    closemessage
     fadescreenswapbuffers(FADE_TO_BLACK)
     delay(30)
     fadescreenswapbuffers(FADE_FROM_BLACK)
@@ -355,21 +349,24 @@ closemessage
     release
     end
 }
-
-script WallaceArmy_Script_HideRaidParty
+script WallaceArmy_TryScript_HideRaidParty
 {
-    callnative(Script_HasSharpriseRaidCompleted)
-    if (var(VAR_RESULT) == FALSE)
-    {
-        return
-    }
-
     callnative(Script_HasSharpriseRaidStarted)
     if (var(VAR_RESULT) == TRUE)
     {
         return
     }
 
+    callnative(Script_HasSharpriseRaidCompleted)
+    if (var(VAR_RESULT) == FALSE)
+    {
+        return
+    }
+    call(WallaceArmy_Script_HideRaidParty)
+}
+
+script WallaceArmy_Script_HideRaidParty
+{
     setobjectflagfromlocalid(LOCALID_SHARPRISE_GIFT_SHOP_WALLACEARMYSTANB)
 }
 
