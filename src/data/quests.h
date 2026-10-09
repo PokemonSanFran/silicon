@@ -4261,6 +4261,8 @@ const struct SideQuest sSideQuests[QUEST_COUNT] =
                 .setupFunc = DebugQuest_WallaceArmy,
                 side_quest_map(MAP_QUEST_WALLACEARMY_STAN_B),
                 .warpId = 0,
+                .x = 28,
+                .y = 11,
             },
             [STATE_QUEST_WALLACE_ARMY_AFTER_STAN_B] =
             {
@@ -4268,6 +4270,8 @@ const struct SideQuest sSideQuests[QUEST_COUNT] =
                 .setupFunc = DebugQuest_WallaceArmy,
                 side_quest_map(MAP_QUEST_WALLACEARMY_STAN_B),
                 .warpId = 0,
+                .x = 28,
+                .y = 11,
             },
             [STATE_QUEST_WALLACE_ARMY_BEFORE_STAN_C] =
             {
@@ -4275,6 +4279,8 @@ const struct SideQuest sSideQuests[QUEST_COUNT] =
                 .setupFunc = DebugQuest_WallaceArmy,
                 side_quest_map(MAP_QUEST_WALLACEARMY_STAN_C),
                 .warpId = 0,
+                .x = 3,
+                .y = 12,
             },
             [STATE_QUEST_WALLACE_ARMY_AFTER_STAN_C] =
             {
@@ -4282,6 +4288,8 @@ const struct SideQuest sSideQuests[QUEST_COUNT] =
                 .setupFunc = DebugQuest_WallaceArmy,
                 side_quest_map(MAP_QUEST_WALLACEARMY_STAN_C),
                 .warpId = 0,
+                .x = 3,
+                .y = 12,
             },
             [STATE_QUEST_WALLACE_ARMY_BEFORE_STAN_D] =
             {
@@ -4289,6 +4297,8 @@ const struct SideQuest sSideQuests[QUEST_COUNT] =
                 .setupFunc = DebugQuest_WallaceArmy,
                 side_quest_map(MAP_QUEST_WALLACEARMY_STAN_D),
                 .warpId = 0,
+                .x = 2,
+                .y = 1,
             },
             [STATE_QUEST_WALLACE_ARMY_AFTER_STAN_D] =
             {
@@ -4296,6 +4306,8 @@ const struct SideQuest sSideQuests[QUEST_COUNT] =
                 .setupFunc = DebugQuest_WallaceArmy,
                 side_quest_map(MAP_QUEST_WALLACEARMY_STAN_D),
                 .warpId = 0,
+                .x = 2,
+                .y = 1,
             },
             [STATE_QUEST_WALLACE_ARMY_BEFORE_STAN_E] =
             {
@@ -4303,6 +4315,8 @@ const struct SideQuest sSideQuests[QUEST_COUNT] =
                 .setupFunc = DebugQuest_WallaceArmy,
                 side_quest_map(MAP_QUEST_WALLACEARMY_STAN_E),
                 .warpId = 0,
+                .x = 19,
+                .y = 13,
             },
             [STATE_QUEST_WALLACE_ARMY_AFTER_STAN_E] =
             {
@@ -4310,20 +4324,22 @@ const struct SideQuest sSideQuests[QUEST_COUNT] =
                 .setupFunc = DebugQuest_WallaceArmy,
                 side_quest_map(MAP_QUEST_WALLACEARMY_STAN_E),
                 .warpId = 0,
+                .x = 19,
+                .y = 13,
             },
             [STATE_QUEST_WALLACE_ARMY_BEFORE_STAN_F] =
             {
                 .name = COMPOUND_STRING("Before Stan F"),
                 .setupFunc = DebugQuest_WallaceArmy,
                 side_quest_map(MAP_QUEST_WALLACEARMY_STAN_F),
-                .warpId = 0,
+                .warpId = WARP_ID_NAVAL_BASE_EXTERIOR_TO_HALAI,
             },
             [STATE_QUEST_WALLACE_ARMY_AFTER_STAN_F] =
             {
                 .name = COMPOUND_STRING("After Stan F"),
                 .setupFunc = DebugQuest_WallaceArmy,
                 side_quest_map(MAP_QUEST_WALLACEARMY_STAN_F),
-                .warpId = 0,
+                .warpId = WARP_ID_NAVAL_BASE_EXTERIOR_TO_HALAI,
             },
             [STATE_QUEST_WALLACE_ARMY_REWARD] =
             {

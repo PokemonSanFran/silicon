@@ -6714,8 +6714,7 @@ void Script_HasSharpriseRaidCompleted(void)
 bool8 WallaceArmy_OnlyOneStanRemains(void)
 {
     u32 count = Quest_Generic_CountRemainingSubquests(QUEST_WALLACEARMY);
-    u32 totalSubquests = sSideQuests[QUEST_WALLACEARMY].numSubquests;
-    return (count == (totalSubquests - 1));
+    return (count == 1);
 }
 
 void Script_WallaceArmy_OnlyOneStanRemains(void)
@@ -6763,6 +6762,7 @@ void DebugQuest_WallaceArmy(u8 state)
             break;
         case STATE_QUEST_WALLACE_ARMY_AFTER_STAN_E:
             FlagSet(TRAINER_FLAGS_START + TRAINER_QUEST_WALLACEARMY_STANE);
+            FlagSet(FLAG_QUEST_WALLACEARMY_WALLACEARMYSTANF_READY);
             QuestMenu_GetSetSubquestState(QUEST_WALLACEARMY, FLAG_SET_COMPLETED, SUB_QUEST_4);
             break;
         case STATE_QUEST_WALLACE_ARMY_BEFORE_STAN_F:
