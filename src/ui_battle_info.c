@@ -35,8 +35,9 @@
 
 enum BattleInfoBackgrounds
 {
-    BI_BG_TEXT,
     BI_BG_TEXT_ALT,
+    BI_BG_TEXT,
+    BI_BG_TEXT_LOW,
     BI_BG_MAIN,
 
     NUM_BI_BACKGROUNDS
@@ -44,9 +45,16 @@ enum BattleInfoBackgrounds
 
 enum BattleInfoWindows
 {
-    BI_WIN_MAIN,
-    BI_WIN_STATUS_LIST,
-    BI_WIN_OPTIONS_LIST,
+    //BI_WIN_MAIN,
+    BI_WIN_HEADER,
+    BI_WIN_STAT_STAGES,
+    NUM_BI_DYNAMIC_WINDOWS,
+
+    // these windows are updated manually
+    BI_WIN_STATIC_STATS = NUM_BI_DYNAMIC_WINDOWS,
+    BI_WIN_FOOTER,
+    BI_WIN_LIST_TEXT,
+    BI_WIN_LIST_BOX,
     BI_WIN_TEXTBOX,
 
     NUM_BI_WINDOWS
@@ -275,11 +283,14 @@ static void BattleInfoSprite_CreateStatusCursor(void);
 static void BattleInfoSprite_CreatePartyIndicators(void);
 
 static void BattleInfoText_UpdateHeader(void);
+static void BattleInfoText_PrintStaticStats(void);
 static void BattleInfoText_UpdateStatStages(void);
+static void BattleInfoText_PutListBox(void);
 static void BattleInfoText_ShowMonStatusList(void);
-static void BattleInfoText_ShowStatusDescription(void);
+static void BattleInfoText_ShowStatusDescription(bool32);
+static void BattleInfoText_PutOptionPromptTile(u32, u32, u32);
 static void BattleInfoText_ShowOptionsPrompt(void);
-static void BattleInfoText_ShowTextbox(u32);
+static void BattleInfoText_ShowTextbox(u32, bool32);
 static void BattleInfoText_UpdateFooter(void);
 
 static void BattleInfoHelper_Exit(u8);
@@ -302,8 +313,7 @@ static void BattleInfoHelper_PopulateOptionsList(void);
 static void BattleInfoHelper_PopulateStatusList(void);
 static u32 BattleInfoHelper_GetTotalCrits(void);
 static bool32 BattleInfoHelper_CanShowHP(void);
-static void BattleInfoHelper_AddTextPrinterToWindow(u32, u32, u32, u32, enum BattleInfoTextColors, const u8 *);
-static void BattleInfoHelper_AddTextPrinter(u32, u32, u32, enum BattleInfoTextColors, const u8 *);
+static void BattleInfoHelper_AddTextPrinter(u32, u32, u32, u32, enum BattleInfoTextColors, const u8 *);
 
 bool8 DoesSelectedMonKnowHM(u8 *slotPtr);
 
@@ -317,13 +327,6 @@ static const u8 sBattleInfo_OptionsPromptBlit[] = INCGFX_U8("graphics/ui_menus/b
 
 static const struct BgTemplate sBattleInfo_BgTemplates[NUM_BI_BACKGROUNDS] =
 {
-    [BI_BG_TEXT] =
-    {
-        .bg = BI_BG_TEXT,
-        .charBaseIndex = 1,
-        .mapBaseIndex = 30,
-        .priority = 1,
-    },
     [BI_BG_TEXT_ALT] =
     {
         .bg = BI_BG_TEXT_ALT,
@@ -331,33 +334,66 @@ static const struct BgTemplate sBattleInfo_BgTemplates[NUM_BI_BACKGROUNDS] =
         .mapBaseIndex = 29,
         .priority = 0,
     },
+    [BI_BG_TEXT] =
+    {
+        .bg = BI_BG_TEXT,
+        .charBaseIndex = 1,
+        .mapBaseIndex = 30,
+        .priority = 1,
+    },
+    [BI_BG_TEXT_LOW] =
+    {
+        .bg = BI_BG_TEXT_LOW,
+        .charBaseIndex = 1,
+        .mapBaseIndex = 28,
+        .priority = 2,
+    },
     [BI_BG_MAIN] =
     {
         .bg = BI_BG_MAIN,
         .charBaseIndex = 0,
-        .mapBaseIndex = 28,
-        .priority = 2,
+        .mapBaseIndex = 27,
+        .priority = 3,
     },
 };
 
 static const struct WindowTemplate sBattleInfo_WindowTemplates[] =
 {
-    [BI_WIN_MAIN] =
+    [BI_WIN_STAT_STAGES] =
     {
-        .tilemapLeft = 0, .tilemapTop = 8,
-        .width = DISPLAY_TILE_WIDTH, .height = 12,
+        .bg = BI_BG_TEXT,
+        .tilemapLeft = 14, .tilemapTop = 9,
+        .width = 6, .height = 9,
     },
-    [BI_WIN_STATUS_LIST] =
+    [BI_WIN_HEADER] =
+    {
+        .bg = BI_BG_TEXT,
+        .tilemapLeft = 0, .tilemapTop = 8,
+        .width = 11, .height = 9,
+    },
+    [BI_WIN_STATIC_STATS] =
+    {
+        .bg = BI_BG_TEXT_LOW,
+        .tilemapLeft = 10, .tilemapTop = 8,
+        .width = 10, .height = 11,
+    },
+    [BI_WIN_FOOTER] =
+    {
+        .bg = BI_BG_TEXT_ALT,
+        .tilemapLeft = 0, .tilemapTop = 18,
+        .width = 20, .height = 2,
+    },
+    [BI_WIN_LIST_TEXT] =
     {
         .bg = BI_BG_TEXT_ALT,
         .tilemapLeft = 20, .tilemapTop = 8,
-        .width = 10, .height = 11
+        .width = 10, .height = 11,
     },
-    [BI_WIN_OPTIONS_LIST] =
+    [BI_WIN_LIST_BOX] =
     {
-        .bg = BI_BG_TEXT_ALT,
-        .tilemapLeft = 24, .tilemapTop = 10,
-        .width = 6, .height = 8,
+        .bg = BI_BG_TEXT_LOW,
+        .tilemapLeft = 20, .tilemapTop = 9,
+        .width = 10, .height = 10,
     },
     [BI_WIN_TEXTBOX] =
     {
@@ -762,8 +798,6 @@ static void Task_BattleInfo_MainModeInput(u8 taskId)
             sBattleInfoDataPtr->statusPagination = 0;
 
         BattleInfoMode_Update();
-        CopyWindowToVram(BI_WIN_MAIN, COPYWIN_FULL);
-        CopyWindowToVram(BI_WIN_STATUS_LIST, COPYWIN_FULL);
     }
 
     if (JOY_NEW(B_BUTTON))
@@ -800,7 +834,7 @@ static void Task_BattleInfo_MainModeInput(u8 taskId)
                     PlaySE(SE_FAILURE);
                     StringCopy(gStringVar4, COMPOUND_STRING("Cannot send that mon to the box, because it knows a HM move.{PAUSE_UNTIL_PRESS}"));
                     BreakStringAutomatic(gStringVar4, WindowWidthPx(BI_WIN_TEXTBOX), 3, FONT_SMALL, HIDE_SCROLL_PROMPT);
-                    BattleInfoText_ShowTextbox(taskId);
+                    BattleInfoText_ShowTextbox(taskId, TRUE);
                 }
                 else
                 {
@@ -869,7 +903,7 @@ static void Task_BattleInfo_OptionsModeInput(u8 taskId)
                 case NO_SWITCH:
                 case SAME_SWITCH:
                     PlaySE(SE_FAILURE);
-                    BattleInfoText_ShowTextbox(taskId);
+                    BattleInfoText_ShowTextbox(taskId, TRUE);
                     // fallthrough
                 default:
                     return;
@@ -924,6 +958,13 @@ static void Task_BattleInfo_StatusListModeInput(u8 taskId)
     if (JOY_NEW(B_BUTTON))
     {
         PlaySE(SE_SELECT);
+        if (!sBattleInfoDataPtr->toggleStatusDesc)
+        {
+            sBattleInfoDataPtr->toggleStatusDesc ^= 1;
+            BattleInfoText_ShowStatusDescription(TRUE);
+            return;
+        }
+
         BattleInfoMode_Set(BI_MODE_OPTIONS_LIST);
         return;
     }
@@ -932,7 +973,7 @@ static void Task_BattleInfo_StatusListModeInput(u8 taskId)
     {
         PlaySE(SE_SELECT);
         sBattleInfoDataPtr->toggleStatusDesc ^= 1;
-        BattleInfoText_ShowStatusDescription();
+        BattleInfoText_ShowStatusDescription(TRUE);
         return;
     }
 
@@ -1186,11 +1227,9 @@ static void BattleInfoInit_Windows(void)
     FreeAllWindowBuffers();
     InitWindows(sBattleInfo_WindowTemplates);
     DeactivateAllTextPrinters();
-    ScheduleBgCopyTilemapToVram(BI_BG_TEXT);
-    ScheduleBgCopyTilemapToVram(BI_BG_TEXT_ALT);
 
     u32 baseBlock = 1;
-    for (u32 i = 0; i < NUM_BI_WINDOWS; i++)
+    for (enum BattleInfoWindows i = 0; i < NUM_BI_WINDOWS; i++)
     {
         SetWindowAttribute(i, WINDOW_BASE_BLOCK, baseBlock);
         FillWindowPixelBuffer(i, PIXEL_FILL(0));
@@ -1202,7 +1241,13 @@ static void BattleInfoInit_Windows(void)
     LoadUserWindowBorderGfx(BI_WIN_TEXTBOX, baseBlock, BI_STD_WIN_PALETTE_OFFSET);
     sBattleInfoDataPtr->textboxTileNum = baseBlock;
 
+    BattleInfoText_UpdateFooter();
+    BattleInfoText_PrintStaticStats();
     BattleInfoHelper_UpdateEverything();
+    BattleInfoText_PutListBox();
+
+    for (enum BattleInfoWindows i = 0; i < NUM_BI_WINDOWS; i++)
+        CopyWindowToVram(i, COPYWIN_GFX);
 }
 
 static void BattleInfoInit_Sprites(void)
@@ -1223,6 +1268,8 @@ static void BattleInfoMode_Set(enum BattleInfoModes mode)
 {
     sBattleInfoDataPtr->mode = mode;
 
+    ClearStdWindowAndFrameToTransparent(BI_WIN_TEXTBOX, TRUE);
+
     switch (mode)
     {
     case BI_MODE_OPTIONS_LIST:
@@ -1239,14 +1286,21 @@ static void BattleInfoMode_Set(enum BattleInfoModes mode)
         break;
     }
 
-    BattleInfoHelper_UpdateEverything();
+    BattleInfoText_PutListBox();
+    BattleInfoText_UpdateFooter();
+    BattleInfoMode_Update();
+    for (enum BattleInfoWindows win = BI_WIN_FOOTER; win < NUM_BI_WINDOWS; win++)
+        CopyWindowToVram(win, COPYWIN_FULL);
 }
 
 static void BattleInfoMode_Update(void)
 {
+    FillWindowPixelBuffer(BI_WIN_LIST_TEXT, PIXEL_FILL(0));
     void (*updateFunc)(void) = sBattleInfo_ModesInfo[sBattleInfoDataPtr->mode].updateFunc;
     if (updateFunc != NULL)
         updateFunc();
+
+    CopyWindowToVram(BI_WIN_LIST_TEXT, COPYWIN_GFX);
 }
 
 static void BattleInfoInput_UpdateGrid(s32 deltaX, s32 deltaY)
@@ -1376,7 +1430,6 @@ static void BattleInfoInput_UpdateStatusCursor(s32 delta)
     sBattleInfoDataPtr->visualStatusCursor = visualPos;
 
     BattleInfoMode_Update();
-    BattleInfoText_ShowStatusDescription();
 }
 
 static void BattleInfoInput_SetGrid(u32 x, u32 y)
@@ -1621,9 +1674,9 @@ static void BattleInfoText_UpdateHeader(void)
 
     // species
     BattleInfoHelper_AddTextPrinter(
+        BI_WIN_HEADER,
         BI_SPECIES_NAME_X, BI_SPECIES_NAME_Y,
-        FONT_OUTLINED,
-        BI_TXTCLR_OUTLINED,
+        FONT_OUTLINED, BI_TXTCLR_OUTLINED,
         GetSpeciesName(species));
 
     // gender
@@ -1651,7 +1704,11 @@ static void BattleInfoText_UpdateHeader(void)
         break;
     }
 
-    BattleInfoHelper_AddTextPrinter(BI_GENDER_SYMBOL_X, BI_GENDER_SYMBOL_Y, FONT_OUTLINED, BI_TXTCLR_OUTLINED, strbuf);
+    BattleInfoHelper_AddTextPrinter(
+        BI_WIN_HEADER,
+        BI_GENDER_SYMBOL_X, BI_GENDER_SYMBOL_Y,
+        FONT_OUTLINED, BI_TXTCLR_OUTLINED,
+        strbuf);
 
     bool32 isOnPlayerSide = BattleInfoHelper_IsTrainerOnPlayerSide();
     u32 y = BI_HEADER_TEXT_Y;
@@ -1661,6 +1718,7 @@ static void BattleInfoText_UpdateHeader(void)
      || (!isOnPlayerSide && (gBattleTypeFlags & BATTLE_TYPE_TRAINER)))
     {
         BattleInfoHelper_AddTextPrinter(
+            BI_WIN_HEADER,
             BI_HEADER_TEXT_X, y,
             fontId,
             BI_TXTCLR_CONTENT,
@@ -1675,9 +1733,9 @@ static void BattleInfoText_UpdateHeader(void)
     // ability
     enum Ability ability = GetSpeciesAbility(species, GetMonData(mon, MON_DATA_ABILITY_NUM, NULL));
     BattleInfoHelper_AddTextPrinter(
+        BI_WIN_HEADER,
         BI_HEADER_TEXT_X, y,
-        fontId,
-        BI_TXTCLR_CONTENT,
+        fontId, BI_TXTCLR_CONTENT,
         GetAbilityName(ability));
     y += BI_HEADER_TEXT_Y_PAD;
 
@@ -1688,35 +1746,54 @@ static void BattleInfoText_UpdateHeader(void)
     else
         strbuf = COMPOUND_STRING("No Held Item");
     BattleInfoHelper_AddTextPrinter(
+        BI_WIN_HEADER,
         BI_HEADER_TEXT_X, y,
-        fontId,
-        BI_TXTCLR_CONTENT,
+        fontId, BI_TXTCLR_CONTENT,
         strbuf);
+}
+
+static void BattleInfoText_PrintStaticStats(void)
+{
+    for (u32 idx = 0, y = 5; idx < ARRAY_COUNT(sBattleInfo_StatOrder); idx++, y += TILE_TO_PIXELS(1) + 1)
+    {
+        enum Stat stat = sBattleInfo_StatOrder[idx];
+        BattleInfoHelper_AddTextPrinter(
+            BI_WIN_STATIC_STATS,
+            6, y,
+            FONT_OUTLINED,
+            BI_TXTCLR_OUTLINED,
+            sBattleInfo_StatNames[stat]);
+
+        u32 maxStages;
+        if (stat > STAT_EVASION)
+            maxStages = ARRAY_COUNT(sCriticalHitOdds) - 1;
+        else
+            maxStages = DEFAULT_STAT_STAGE;
+
+        for (u32 stage = 0, x = TILE_TO_PIXELS(5) - 3; stage < maxStages; stage++, x += TILE_TO_PIXELS(1) - 1)
+            BlitBitmapToWindow(BI_WIN_STATIC_STATS, sBattleInfo_StatStageBlit, x, y + 5, 8, 8);
+    }
 }
 
 static void BattleInfoText_UpdateStatStages(void)
 {
     if (!BattleInfoHelper_CanMonInfoBeShown())
+    {
+        HideBg(BI_BG_TEXT_LOW);
         return;
+    }
 
-    for (u32 idx = 0, y = 5; idx < ARRAY_COUNT(sBattleInfo_StatOrder); idx++, y += TILE_TO_PIXELS(1) + 1)
+    ShowBg(BI_BG_TEXT_LOW);
+    for (u32 idx = 0, y = 1; idx < ARRAY_COUNT(sBattleInfo_StatOrder); idx++, y += TILE_TO_PIXELS(1) + 1)
     {
         enum Stat stat = sBattleInfo_StatOrder[idx];
-
-        BattleInfoHelper_AddTextPrinter(
-            86, y,
-            FONT_OUTLINED,
-            BI_TXTCLR_OUTLINED,
-            sBattleInfo_StatNames[stat]);
-
-        // don't print anything related to stat changes if the mon is not out
-        struct BattlePokemon *batMon = BattleInfoHelper_GetCurrBattleMon();
         u32 statStages, maxStages = DEFAULT_STAT_STAGE;
         if (stat > STAT_EVASION)
             maxStages = ARRAY_COUNT(sCriticalHitOdds) - 1;
         else
             maxStages = DEFAULT_STAT_STAGE;
 
+        struct BattlePokemon *batMon = BattleInfoHelper_GetCurrBattleMon();
         if (batMon == NULL)
             statStages = stat > STAT_EVASION ? 0 : DEFAULT_STAT_STAGE;
         else if (batMon != NULL && stat > STAT_EVASION)
@@ -1724,7 +1801,7 @@ static void BattleInfoText_UpdateStatStages(void)
         else
             statStages = batMon->statStages[stat];
 
-        for (u32 stage = 0, x = 117; stage < maxStages; stage++, x += TILE_TO_PIXELS(1) - 1)
+        for (u32 stage = 0, x = 5; stage < maxStages; stage++, x += TILE_TO_PIXELS(1) - 1)
         {
             u32 tileNum = 0;
             u32 positiveStages = statStages >= DEFAULT_STAT_STAGE;
@@ -1742,8 +1819,47 @@ static void BattleInfoText_UpdateStatStages(void)
                     tileNum = TILE_OFFSET_4BPP(2);
             }
 
-            BlitBitmapToWindow(BI_WIN_MAIN, sBattleInfo_StatStageBlit + tileNum, x, y + 5, 8, 8);
+            if (!tileNum) break;
+            BlitBitmapToWindow(BI_WIN_STAT_STAGES, sBattleInfo_StatStageBlit + tileNum, x, y, 8, 8);
         }
+    }
+}
+
+static void BattleInfoText_PutListBox(void)
+{
+    enum BattleInfoWindows windowId = BI_WIN_LIST_BOX;
+    FillWindowPixelBuffer(windowId, PIXEL_FILL(0));
+
+    if (sBattleInfoDataPtr->mode == BI_MODE_OPTIONS_LIST)
+    {
+        u32 count = sBattleInfoDataPtr->numOptions;
+        u32 baseY = (NUM_BI_OPTIONS - count) * 16;
+        u32 topTilesY = baseY;
+
+        BattleInfoText_PutOptionPromptTile(0, TILE_TO_PIXELS(2), topTilesY);
+        for (u32 i = 0; i < 7; i++)
+            BattleInfoText_PutOptionPromptTile(1, TILE_TO_PIXELS(3 + i), topTilesY);
+
+        for (u32 i = 0; i < count; i++)
+        {
+            u32 middleTilesY = 8 + baseY + i * 16;
+            BattleInfoText_PutOptionPromptTile(2, TILE_TO_PIXELS(2), middleTilesY);
+            BattleInfoText_PutOptionPromptTile(2, TILE_TO_PIXELS(2), middleTilesY + TILE_TO_PIXELS(1));
+            for (u32 i = 0; i < 7; i++)
+            {
+                BattleInfoText_PutOptionPromptTile(3, TILE_TO_PIXELS(3 + i), middleTilesY);
+                BattleInfoText_PutOptionPromptTile(3, TILE_TO_PIXELS(3 + i), middleTilesY + TILE_TO_PIXELS(1));
+            }
+        }
+
+        u32 bottomTilesY = 8 + baseY + count * 16;
+        BattleInfoText_PutOptionPromptTile(4, TILE_TO_PIXELS(2), bottomTilesY);
+        for (u32 i = 0; i < 7; i++)
+            BattleInfoText_PutOptionPromptTile(5, TILE_TO_PIXELS(3 + i), bottomTilesY);
+    }
+    else
+    {
+        BlitBitmapToWindow(windowId, sBattleInfo_StatusListBlit, 0, 0, TILE_TO_PIXELS(10), TILE_TO_PIXELS(10));
     }
 }
 
@@ -1752,20 +1868,18 @@ static void BattleInfoText_ShowMonStatusList(void)
     if (!BattleInfoHelper_CanMonInfoBeShown())
         return;
 
-    enum BattleInfoWindows windowId = BI_WIN_MAIN;
-    FillWindowPixelRect(windowId,   PIXEL_FILL(0),              TILE_TO_PIXELS(20), TILE_TO_PIXELS(1), TILE_TO_PIXELS(10), TILE_TO_PIXELS(10));
-    BlitBitmapToWindow(windowId,    sBattleInfo_StatusListBlit, TILE_TO_PIXELS(20), TILE_TO_PIXELS(1), TILE_TO_PIXELS(10), TILE_TO_PIXELS(10));
-
     #define STATUS_LIST_MAX_ITEM_WIDTH      TILE_TO_PIXELS(9)
-    #define STATUS_LIST_X                   162
+    #define STATUS_LIST_X                   1
     #define STATUS_LIST_Y_POS(pos)          4 + ((pos) * 16)
+
+    enum BattleInfoWindows windowId = BI_WIN_LIST_TEXT;
 
     if (sBattleInfoDataPtr->numStatuses == 0)
     {
         const u8 *str = COMPOUND_STRING("No Active Status");
         u32 fontId = GetFontIdToFit(str, FONT_OUTLINED, 0, STATUS_LIST_MAX_ITEM_WIDTH);
         u32 x = STATUS_LIST_X + GetStringCenterAlignXOffset(fontId, str, STATUS_LIST_MAX_ITEM_WIDTH);
-        BattleInfoHelper_AddTextPrinter(x, STATUS_LIST_Y_POS(MAX_SHOWN_BI_STATUS_ITEMS / 2), fontId, BI_TXTCLR_OUTLINED, str);
+        BattleInfoHelper_AddTextPrinter(windowId, x, STATUS_LIST_Y_POS(MAX_SHOWN_BI_STATUS_ITEMS / 2), fontId, BI_TXTCLR_OUTLINED, str);
         return;
     }
 
@@ -1785,9 +1899,6 @@ static void BattleInfoText_ShowMonStatusList(void)
             count = MAX_SHOWN_BI_STATUS_ITEMS;
     }
 
-    windowId = BI_WIN_STATUS_LIST;
-    FillWindowPixelBuffer(windowId, PIXEL_FILL(0));
-
     for (u32 i = 0; i < count; i++)
     {
         u32 idx = i;
@@ -1799,7 +1910,8 @@ static void BattleInfoText_ShowMonStatusList(void)
         enum SiliconBattleStatuses status = sBattleInfoDataPtr->statusList[idx];
         const u8 *str = BattleStatusCriteria_GetFormattedName(BattleInfoHelper_GetCurrBattler(), status);
         u32 fontId = GetFontIdToFit(str, FONT_OUTLINED, 0, STATUS_LIST_MAX_ITEM_WIDTH);
-        BattleInfoHelper_AddTextPrinterToWindow(
+
+        BattleInfoHelper_AddTextPrinter(
             windowId,
             2, STATUS_LIST_Y_POS(i),
             fontId,
@@ -1807,30 +1919,28 @@ static void BattleInfoText_ShowMonStatusList(void)
             str);
     }
 
-    PutWindowTilemap(windowId);
+    if (sBattleInfoDataPtr->mode == BI_MODE_STATUS_LIST)
+        BattleInfoText_ShowStatusDescription(TRUE);
 }
 
-static void BattleInfoText_ShowStatusDescription(void)
+static void BattleInfoText_ShowStatusDescription(bool32 copyToVram)
 {
-    if (!sBattleInfoDataPtr->toggleStatusDesc)
+    if (sBattleInfoDataPtr->toggleStatusDesc)
     {
-        ClearStdWindowAndFrameToTransparent(BI_WIN_TEXTBOX, COPYWIN_FULL);
+        ClearStdWindowAndFrameToTransparent(BI_WIN_TEXTBOX, copyToVram);
     }
     else
     {
         StringCopy(gStringVar4, BattleStatusCriteria_GetDescription(sBattleInfoDataPtr->statusList[sBattleInfoDataPtr->statusCursor]));
         BreakStringAutomatic(gStringVar4, WindowWidthPx(BI_WIN_TEXTBOX), 3, FONT_SMALL, HIDE_SCROLL_PROMPT);
-        BattleInfoText_ShowTextbox(TASK_NONE);
+        BattleInfoText_ShowTextbox(TASK_NONE, copyToVram);
     }
-
-    CopyWindowToVram(BI_WIN_STATUS_LIST, COPYWIN_FULL);
-    CopyWindowToVram(BI_WIN_MAIN, COPYWIN_FULL);
 }
 
 static void BattleInfoText_PutOptionPromptTile(u32 tileNum, u32 x, u32 y)
 {
     BlitBitmapToWindow(
-        BI_WIN_MAIN,
+        BI_WIN_LIST_BOX,
         sBattleInfo_OptionsPromptBlit + TILE_OFFSET_4BPP(tileNum),
         x, y,
         8, 8);
@@ -1839,42 +1949,21 @@ static void BattleInfoText_PutOptionPromptTile(u32 tileNum, u32 x, u32 y)
 static void BattleInfoText_ShowOptionsPrompt(void)
 {
     u32 count = sBattleInfoDataPtr->numOptions;
-    u32 baseY = (NUM_BI_OPTIONS - count) * 16;
-
-    u32 topTilesY = baseY + 8;
-    BattleInfoText_PutOptionPromptTile(0, TILE_TO_PIXELS(22), topTilesY);
-    for (u32 i = 0; i < 7; i++)
-        BattleInfoText_PutOptionPromptTile(1, TILE_TO_PIXELS(23 + i), topTilesY);
+    u32 baseY = TILE_TO_PIXELS(2) + (NUM_BI_OPTIONS - count) * 16;
 
     for (u32 i = 0; i < count; i++)
     {
-        u32 middleTilesY = 16 + baseY + i * 16;
-        BattleInfoText_PutOptionPromptTile(2, TILE_TO_PIXELS(22), middleTilesY);
-        BattleInfoText_PutOptionPromptTile(2, TILE_TO_PIXELS(22), middleTilesY + TILE_TO_PIXELS(1));
-        for (u32 i = 0; i < 7; i++)
-        {
-            BattleInfoText_PutOptionPromptTile(3, TILE_TO_PIXELS(23 + i), middleTilesY);
-            BattleInfoText_PutOptionPromptTile(3, TILE_TO_PIXELS(23 + i), middleTilesY + TILE_TO_PIXELS(1));
-        }
-
         u32 baseTextY = baseY + i * 16;
-        BattleInfoHelper_AddTextPrinterToWindow(
-            BI_WIN_OPTIONS_LIST,
-            2, baseTextY,
+        BattleInfoHelper_AddTextPrinter(
+            BI_WIN_LIST_TEXT,
+            TILE_TO_PIXELS(5) - 3, baseTextY,
             FONT_OUTLINED,
             BI_TXTCLR_OUTLINED,
             sBattleInfo_OptionNames[sBattleInfoDataPtr->optionsList[i]]);
     }
-
-    u32 bottomTilesY = 16 + baseY + count * 16;
-    BattleInfoText_PutOptionPromptTile(4, TILE_TO_PIXELS(22), bottomTilesY);
-    for (u32 i = 0; i < 7; i++)
-        BattleInfoText_PutOptionPromptTile(5, TILE_TO_PIXELS(23 + i), bottomTilesY);
-
-    PutWindowTilemap(BI_WIN_OPTIONS_LIST);
 }
 
-static void BattleInfoText_ShowTextbox(u32 taskId)
+static void BattleInfoText_ShowTextbox(u32 taskId, bool32 copyToVram)
 {
     enum BattleInfoWindows win = BI_WIN_TEXTBOX;
 
@@ -1888,7 +1977,8 @@ static void BattleInfoText_ShowTextbox(u32 taskId)
     const union TextColor *ptr = &sBattleInfo_TextColors[BI_TXTCLR_CONTENT];
     const u8 colors[3] = { ptr->background, ptr->foreground, ptr->shadow };
     AddTextPrinterParameterized3(win, FONT_SMALL, 0, 0, colors, speedDelay, gStringVar4);
-    CopyWindowToVram(win, COPYWIN_FULL);
+    if (copyToVram)
+        CopyWindowToVram(win, COPYWIN_FULL);
 
     if (taskId != TASK_NONE)
         SetTaskFuncWithFollowupFunc(taskId, Task_BattleInfo_WaitTextboxInput, Task_BattleInfo_WaitInput);
@@ -1912,7 +2002,10 @@ static void BattleInfoText_UpdateFooter(void)
         break;
     }
 
-    BattleInfoHelper_AddTextPrinter(4, 81, FONT_SMALL, BI_TXTCLR_FOOTER, str);
+    enum BattleInfoWindows win = BI_WIN_FOOTER;
+
+    FillWindowPixelBuffer(win, PIXEL_FILL(0));
+    BattleInfoHelper_AddTextPrinter(win, 4, 1, FONT_SMALL, BI_TXTCLR_FOOTER, str);
 }
 
 static void BattleInfoHelper_Exit(u8 taskId)
@@ -1923,20 +2016,16 @@ static void BattleInfoHelper_Exit(u8 taskId)
 
 static void BattleInfoHelper_UpdateEverything(void)
 {
-    ClearStdWindowAndFrameToTransparent(BI_WIN_TEXTBOX, FALSE);
-    for (enum BattleInfoWindows win = 0; win < NUM_BI_WINDOWS; win++)
+    for (enum BattleInfoWindows win = 0; win < NUM_BI_DYNAMIC_WINDOWS; win++)
         FillWindowPixelBuffer(win, PIXEL_FILL(0));
 
     BattleInfoText_UpdateHeader();
     BattleInfoText_UpdateStatStages();
-    BattleInfoText_UpdateFooter();
 
-    PutWindowTilemap(BI_WIN_TEXTBOX);
-    PutWindowTilemap(BI_WIN_MAIN);
+    for (enum BattleInfoWindows win = 0; win < NUM_BI_DYNAMIC_WINDOWS; win++)
+        CopyWindowToVram(win, COPYWIN_GFX);
 
     BattleInfoMode_Update();
-    for (enum BattleInfoWindows win = 0; win < NUM_BI_WINDOWS; win++)
-        CopyWindowToVram(win, COPYWIN_FULL);
 }
 
 static struct Pokemon *BattleInfoHelper_GetCurrMon(void)
@@ -2240,14 +2329,9 @@ static bool32 BattleInfoHelper_CanShowHP(void)
     return !BattleInfoHelper_IsTrainerOnPlayerSide() && !FlagGet(FLAG_SYS_APP_GOOGLE_GLASS_GET);
 }
 
-static void BattleInfoHelper_AddTextPrinterToWindow(u32 windowId, u32 x, u32 y, u32 fontId, enum BattleInfoTextColors color, const u8 *str)
+static void BattleInfoHelper_AddTextPrinter(u32 windowId, u32 x, u32 y, u32 fontId, enum BattleInfoTextColors color, const u8 *str)
 {
     const union TextColor *ptr = &sBattleInfo_TextColors[color];
     const u8 colors[3] = { ptr->background, ptr->foreground, ptr->shadow };
     AddTextPrinterParameterized3(windowId, fontId, x, y, colors, TEXT_SKIP_DRAW, str);
-}
-
-static void BattleInfoHelper_AddTextPrinter(u32 x, u32 y, u32 fontId, enum BattleInfoTextColors color, const u8 *str)
-{
-    BattleInfoHelper_AddTextPrinterToWindow(BI_WIN_MAIN, x, y, fontId, color, str);
 }
