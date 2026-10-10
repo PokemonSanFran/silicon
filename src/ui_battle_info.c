@@ -788,6 +788,14 @@ static void Task_BattleInfo_WaitInput(u8 taskId)
 {
     if (JOY_NEW(START_BUTTON))
     {
+        if (sBattleInfoDataPtr->mode == BI_MODE_OPTIONS_LIST
+         && sBattleInfoDataPtr->optionsList[sBattleInfoDataPtr->optionsCursor] == BI_OPTION_SUMMARY)
+        {
+            PlaySE(SE_SELECT);
+            BattleInfoHelper_Exit(taskId);
+            return;
+        }
+
         switch (sBattleInfoSavedState.partyAction)
         {
         case PARTY_ACTION_SEND_MON_TO_BOX:
