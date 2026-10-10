@@ -115,12 +115,15 @@ enum PACKED BattleInfoModes
 enum BattleInfoOptions
 {
     BI_OPTION_SWAP,
+    BI_OPTION_SEND_OUT,
     BI_OPTION_SUMMARY,
     BI_OPTION_STATUS,
     BI_OPTION_CANCEL,
 
     NUM_BI_OPTIONS
 };
+
+#define MAX_SHOWN_BI_OPTIONS    4
 
 #define MOVE_BACK       -1
 #define MOVE_FORWARD     1
@@ -207,7 +210,7 @@ struct BattleInfoData
     // options prompt
     u8 optionsCursor:4;
     u8 numOptions:4;
-    enum BattleInfoOptions optionsList[NUM_BI_OPTIONS];
+    enum BattleInfoOptions optionsList[MAX_SHOWN_BI_OPTIONS];
     u8 switchInResult;
 
     // status conditions list
@@ -606,6 +609,7 @@ static const enum Stat sBattleInfo_StatOrder[] =
 static const u8 *sBattleInfo_OptionNames[] =
 {
     [BI_OPTION_SWAP]     = COMPOUND_STRING("Swap"),
+    [BI_OPTION_SEND_OUT] = COMPOUND_STRING("Send Out"),
     [BI_OPTION_SUMMARY]  = COMPOUND_STRING("Summary"),
     [BI_OPTION_STATUS]   = COMPOUND_STRING("Status"),
     [BI_OPTION_CANCEL]   = COMPOUND_STRING("Cancel"),
@@ -921,6 +925,7 @@ static void Task_BattleInfo_OptionsModeInput(u8 taskId)
         switch (sBattleInfoDataPtr->optionsList[sBattleInfoDataPtr->optionsCursor])
         {
         case BI_OPTION_SWAP:
+        case BI_OPTION_SEND_OUT:
             {
                 sBattleInfoDataPtr->switchInResult = BattleInfoHelper_TrySwitchInMon();
                 switch (sBattleInfoDataPtr->switchInResult)
@@ -1188,7 +1193,7 @@ static void SpriteCB_BattleInfo_OptionsCursor(struct Sprite *sprite)
         return;
 
     sprite->y2 = sBattleInfoDataPtr->optionsCursor * 16;
-    sprite->y2 += (NUM_BI_OPTIONS - sBattleInfoDataPtr->numOptions) * 16;
+    sprite->y2 += (MAX_SHOWN_BI_OPTIONS - sBattleInfoDataPtr->numOptions) * 16;
 }
 
 static void SpriteCB_BattleInfo_StatusCursor(struct Sprite *sprite)
@@ -1858,7 +1863,7 @@ static void BattleInfoText_PutListBox(void)
     if (sBattleInfoDataPtr->mode == BI_MODE_OPTIONS_LIST)
     {
         u32 count = sBattleInfoDataPtr->numOptions;
-        u32 baseY = (NUM_BI_OPTIONS - count) * 16;
+        u32 baseY = (MAX_SHOWN_BI_OPTIONS - count) * 16;
         u32 topTilesY = baseY;
 
         BattleInfoText_PutOptionPromptTile(0, TILE_TO_PIXELS(2), topTilesY);
@@ -1974,7 +1979,7 @@ static void BattleInfoText_PutOptionPromptTile(u32 tileNum, u32 x, u32 y)
 static void BattleInfoText_ShowOptionsPrompt(void)
 {
     u32 count = sBattleInfoDataPtr->numOptions;
-    u32 baseY = TILE_TO_PIXELS(2) + (NUM_BI_OPTIONS - count) * 16;
+    u32 baseY = TILE_TO_PIXELS(2) + (MAX_SHOWN_BI_OPTIONS - count) * 16;
 
     for (u32 i = 0; i < count; i++)
     {
@@ -2304,7 +2309,16 @@ static void BattleInfoHelper_PopulateOptionsList(void)
     sBattleInfoDataPtr->numOptions = 0;
     #define ADD_OPT(num) sBattleInfoDataPtr->optionsList[sBattleInfoDataPtr->numOptions++] = CAT(BI_OPTION_, num);
     if (BattleInfoHelper_GetCurrTrainer() == B_TRAINER_PLAYER)
-        ADD_OPT(SWAP);
+    {
+        if (sBattleInfoSavedState.partyAction == PARTY_ACTION_SEND_OUT)
+        {
+            ADD_OPT(SEND_OUT);
+        }
+        else
+        {
+            ADD_OPT(SWAP);
+        }
+    }
 
     if ((!isOnPlayerSide
          && FlagGet(FLAG_SYS_APP_GOOGLE_GLASS_GET)
