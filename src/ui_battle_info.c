@@ -2040,7 +2040,7 @@ static void BattleInfoText_UpdateFooter(void)
         if (sBattleInfoDataPtr->toggleStatusDesc)
             tail = StringCopy(tail, COMPOUND_STRING("{A_BUTTON} Summary "));
         else
-            tail = StringCopy(tail, COMPOUND_STRING("{B_BUTTON} Back"));
+            tail = StringCopy(tail, COMPOUND_STRING("{B_BUTTON} Back "));
 
         if (sBattleInfoDataPtr->numStatuses > 1)
             tail = StringCopy(tail, COMPOUND_STRING("{DPAD_UPDOWN} Navigate "));
