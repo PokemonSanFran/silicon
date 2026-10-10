@@ -19,143 +19,38 @@
 #include "ui_party_menu.h"
 #include "constants/rgb.h"
 #include "constants/songs.h"
-
-#define PARTY_SLOT_COLUMNS      2
-#define PARTY_SLOT_LEFT         1
-#define PARTY_SLOT_WIDTH        14
-#define PARTY_SLOT_MAIN_HEIGHT  5
-#define PARTY_SLOT_MID_HEIGHT   6
-
-// pal 0 comes from the BG3 wallpaper
-#define PARTY_PAL_SLOT_FIRST   1
-#define PARTY_PAL_SLOT_SLOTS   1
-
-enum PartyMenuBackgrounds
-{
-    PARTY_BG_SLOTS = 2,
-    PARTY_BG_WALLPAPER,
-};
-
-enum PartyMenuSlotRows
-{
-    PARTY_SLOT_ROW_TOP,
-    PARTY_SLOT_ROW_MID,
-    PARTY_SLOT_ROW_BOTTOM,
-    NUM_PARTY_SLOT_ROWS
-};
-
-enum PartyMenuSetupSteps
-{
-    PARTY_SETUP_RESET = 0,
-    PARTY_SETUP_BG,
-    PARTY_SETUP_GFX,
-    PARTY_SETUP_SLOTS,
-    PARTY_SETUP_FADE,
-    PARTY_SETUP_FINISH
-};
+#include "constants/ui_party_menu.h"
 
 struct PartyMenuData
 {
     MainCallback savedCB;
+    u8 partyCount;
+    u8 cursorSlot;
+    u8 cursorSpriteId;
     u16 slotsTilemapBuf[BG_SCREEN_SIZE / sizeof(u16)];
 };
 
 static EWRAM_DATA struct PartyMenuData *sPartyMenuDataPtr = NULL;
 
-static void Task_PartyMenu_WaitForFade(u8);
-static void Task_PartyMenu_HandleInput(u8);
-static void Task_PartyMenu_Exit(u8);
 static void CB2_PartyMenu_Setup(void);
 static void CB2_PartyMenu_Idle(void);
 static void VBlankCB_PartyMenu_Idle(void);
 static void PartySetup_Bgs(void);
 static void PartySetup_Graphics(void);
 static void PartySetup_Slots(void);
+static void PartySetup_Sprites(void);
+static void Task_PartyMenu_WaitForFade(u8);
+static void Task_PartyMenu_HandleInput(u8);
+static void PartyCursor_HandleDirectionalInput(void);
+static void PartyCursor_SnapToSlot(void);
+static void Task_PartyMenu_Exit(u8);
 static void PartyMenu_Free(void);
 
-static const struct BgTemplate sPartyMenu_BackgroundTemplates[] =
-{
-    {
-        .bg = PARTY_BG_SLOTS,
-        .charBaseIndex = 2,
-        .mapBaseIndex = 31,
-        .screenSize = 0,
-        .priority = 2
-    },
-    {
-        .bg = PARTY_BG_WALLPAPER,
-        .charBaseIndex = 1,
-        .mapBaseIndex = 30,
-        .screenSize = 0,
-        .priority = 3
-    },
-};
+#include "data/ui_party_menu.h"
 
-// silicon color theme pals
-static const u32 sPartyMenu_WallpaperTiles[]            = INCGFX_U32("graphics/ui_menus/start_menu/tiles.png", ".4bpp.smol");
-static const u16 sPartyMenu_WallpaperTilemap[]          = INCBIN_U16("graphics/ui_menus/start_menu/wallpaper.bin");
-static const u16 sPartyMenu_WallpaperPal_Red[]          = INCGFX_U16("graphics/ui_menus/options_menu/palettes/red.pal", ".gbapal");
-static const u16 sPartyMenu_WallpaperPal_Green[]        = INCGFX_U16("graphics/ui_menus/options_menu/palettes/green.pal", ".gbapal");
-static const u16 sPartyMenu_WallpaperPal_Blue[]         = INCGFX_U16("graphics/ui_menus/options_menu/palettes/blue.pal", ".gbapal");
-static const u16 sPartyMenu_WallpaperPal_Yellow[]       = INCGFX_U16("graphics/ui_menus/options_menu/palettes/yellow.pal", ".gbapal");
-static const u16 sPartyMenu_WallpaperPal_Black[]        = INCGFX_U16("graphics/ui_menus/options_menu/palettes/black.pal", ".gbapal");
-static const u16 sPartyMenu_WallpaperPal_White[]        = INCGFX_U16("graphics/ui_menus/options_menu/palettes/white.pal", ".gbapal");
-static const u16 sPartyMenu_WallpaperPal_Platinum[]     = INCGFX_U16("graphics/ui_menus/options_menu/palettes/platinum.pal", ".gbapal");
-static const u16 sPartyMenu_WallpaperPal_Scarlet[]      = INCGFX_U16("graphics/ui_menus/options_menu/palettes/scarlet.pal", ".gbapal");
-static const u16 sPartyMenu_WallpaperPal_Violet[]       = INCGFX_U16("graphics/ui_menus/options_menu/palettes/violet.pal", ".gbapal");
-static const u16 sPartyMenu_WallpaperPal_Custom[]       = INCGFX_U16("graphics/ui_menus/options_menu/palette_custom.pal", ".gbapal");
-
-// party BG tiles
-static const u32 sPartyMenu_Tiles[]                     = INCGFX_U32("graphics/ui_menus/party_menu/tiles.png", ".4bpp.smol");
-static const u16 sPartyMenu_Palette[]                   = INCGFX_U16("graphics/ui_menus/party_menu/tiles.png", ".gbapal");
-static const u8 sPartyMenu_SlotMainTilemap[]            = INCBIN_U8("graphics/ui_menus/party_menu/slot_main.bin");
-static const u8 sPartyMenu_SlotMainEmptyTilemap[]       = INCBIN_U8("graphics/ui_menus/party_menu/slot_main_empty.bin");
-static const u8 sPartyMenu_SlotMidTilemap[]             = INCBIN_U8("graphics/ui_menus/party_menu/slot_mid.bin");
-static const u8 sPartyMenu_SlotMidEmptyTilemap[]        = INCBIN_U8("graphics/ui_menus/party_menu/slot_mid_empty.bin");
-
-static const struct {
-    const u8 *tilemap;
-    const u8 *emptyTilemap;
-    u8 top;
-    u8 height;
-} sPartyMenu_SlotRows[NUM_PARTY_SLOT_ROWS] =
-{
-    [PARTY_SLOT_ROW_TOP] =
-    {
-        .tilemap = sPartyMenu_SlotMainTilemap,
-        .emptyTilemap = sPartyMenu_SlotMainEmptyTilemap,
-        .top = 2,
-        .height = PARTY_SLOT_MAIN_HEIGHT,
-    },
-    [PARTY_SLOT_ROW_MID] =
-    {
-        .tilemap = sPartyMenu_SlotMidTilemap,
-        .emptyTilemap = sPartyMenu_SlotMidEmptyTilemap,
-        .top = 7,
-        .height = PARTY_SLOT_MID_HEIGHT,
-    },
-    [PARTY_SLOT_ROW_BOTTOM] =
-    {
-        .tilemap = sPartyMenu_SlotMainTilemap,
-        .emptyTilemap = sPartyMenu_SlotMainEmptyTilemap,
-        .top = 13,
-        .height = PARTY_SLOT_MAIN_HEIGHT,
-    },
-};
-
-static const u16 *const sPartyMenu_WallpaperPalettes[VISUAL_OPTION_COLOR_COUNT] =
-{
-    [VISUAL_OPTION_COLOR_RED]      = sPartyMenu_WallpaperPal_Red,
-    [VISUAL_OPTION_COLOR_GREEN]    = sPartyMenu_WallpaperPal_Green,
-    [VISUAL_OPTION_COLOR_BLUE]     = sPartyMenu_WallpaperPal_Blue,
-    [VISUAL_OPTION_COLOR_YELLOW]   = sPartyMenu_WallpaperPal_Yellow,
-    [VISUAL_OPTION_COLOR_BLACK]    = sPartyMenu_WallpaperPal_Black,
-    [VISUAL_OPTION_COLOR_WHITE]    = sPartyMenu_WallpaperPal_White,
-    [VISUAL_OPTION_COLOR_PLATINUM] = sPartyMenu_WallpaperPal_Platinum,
-    [VISUAL_OPTION_COLOR_SCARLET]  = sPartyMenu_WallpaperPal_Scarlet,
-    [VISUAL_OPTION_COLOR_VIOLET]   = sPartyMenu_WallpaperPal_Violet,
-    [VISUAL_OPTION_COLOR_CUSTOM]   = sPartyMenu_WallpaperPal_Custom,
-};
+// ==================================================
+// Party menu set up
+// ==================================================
 
 void PartyMenu_Init(MainCallback callback)
 {
@@ -167,34 +62,9 @@ void PartyMenu_Init(MainCallback callback)
     }
 
     sPartyMenuDataPtr->savedCB = callback;
+    sPartyMenuDataPtr->partyCount = CalculatePlayerPartyCount();
     gMain.state = 0;
     SetMainCallback2(CB2_PartyMenu_Setup);
-}
-
-static void Task_PartyMenu_WaitForFade(u8 taskId)
-{
-    if (!gPaletteFade.active)
-        gTasks[taskId].func = Task_PartyMenu_HandleInput;
-}
-
-static void Task_PartyMenu_HandleInput(u8 taskId)
-{
-    if (JOY_NEW(B_BUTTON))
-    {
-        PlaySE(SE_PC_OFF);
-        BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
-        gTasks[taskId].func = Task_PartyMenu_Exit;
-    }
-}
-
-static void Task_PartyMenu_Exit(u8 taskId)
-{
-    if (!gPaletteFade.active)
-    {
-        SetMainCallback2(sPartyMenuDataPtr->savedCB);
-        PartyMenu_Free();
-        DestroyTask(taskId);
-    }
 }
 
 static void CB2_PartyMenu_Setup(void)
@@ -227,6 +97,9 @@ static void CB2_PartyMenu_Setup(void)
         break;
     case PARTY_SETUP_SLOTS:
         PartySetup_Slots();
+        break;
+    case PARTY_SETUP_SPRITES:
+        PartySetup_Sprites();
         break;
     case PARTY_SETUP_FADE:
         BlendPalettes(PALETTES_ALL, 16, RGB_BLACK);
@@ -307,7 +180,106 @@ static void PartySetup_Slots(void)
     ScheduleBgCopyTilemapToVram(PARTY_BG_SLOTS);
 }
 
+static void PartySetup_Sprites(void)
+{
+    LoadCompressedSpriteSheet(&sPartyMenu_CursorSpriteSheet);
+    LoadSpritePalette(&sPartyMenu_CursorSpritePalette);
+    sPartyMenuDataPtr->cursorSpriteId = CreateSprite(&sPartyMenu_CursorSpriteTemplate, 0, 0, PARTY_OBJ_SUBPRIORITY_CURSOR);
+
+    struct Sprite *cursor = &gSprites[sPartyMenuDataPtr->cursorSpriteId];
+    SetSubspriteTables(cursor, sPartyMenu_CursorSubspriteTable);
+    cursor->subspriteMode = SUBSPRITES_IGNORE_PRIORITY;
+    PartyCursor_SnapToSlot();
+}
+
+// ==================================================
+// Input
+// ==================================================
+
+static void Task_PartyMenu_WaitForFade(u8 taskId)
+{
+    if (!gPaletteFade.active)
+        gTasks[taskId].func = Task_PartyMenu_HandleInput;
+}
+
+static void Task_PartyMenu_HandleInput(u8 taskId)
+{
+    PartyCursor_HandleDirectionalInput();
+
+    if (JOY_NEW(B_BUTTON))
+    {
+        PlaySE(SE_PC_OFF);
+        BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
+        gTasks[taskId].func = Task_PartyMenu_Exit;
+    }
+}
+
+// ==================================================
+// Cursor
+// ==================================================
+
+static void PartyCursor_HandleDirectionalInput(void)
+{
+    u32 partyCount = sPartyMenuDataPtr->partyCount;
+    u32 slot = sPartyMenuDataPtr->cursorSlot;
+    u32 col = slot % PARTY_SLOT_COLUMNS;
+
+    if (JOY_REPEAT(DPAD_LEFT) || JOY_REPEAT(DPAD_RIGHT))
+    {
+        slot += (PARTY_SLOT_COLUMNS - 1) - 2 * col;
+    }
+    else if (JOY_REPEAT(DPAD_UP))
+    {
+        if (slot < PARTY_SLOT_COLUMNS)
+        {
+            // wrap to the lowest filled slot in this column
+            slot = col + ((partyCount - 1 - col) / PARTY_SLOT_COLUMNS) * PARTY_SLOT_COLUMNS;
+        }
+        else
+        {
+            slot -= PARTY_SLOT_COLUMNS;
+        }
+    }
+    else if (JOY_REPEAT(DPAD_DOWN))
+    {
+        slot += PARTY_SLOT_COLUMNS;
+        if (slot >= partyCount)
+            slot = col;
+    }
+
+    if (slot >= partyCount || slot == sPartyMenuDataPtr->cursorSlot)
+        return;
+
+    PlaySE(SE_SELECT);
+    sPartyMenuDataPtr->cursorSlot = slot;
+    PartyCursor_SnapToSlot();
+}
+
+static void PartyCursor_SnapToSlot(void)
+{
+    struct Sprite *cursor = &gSprites[sPartyMenuDataPtr->cursorSpriteId];
+    u32 slot = sPartyMenuDataPtr->cursorSlot;
+
+    cursor->x = PARTY_CURSOR_X + PARTY_CURSOR_X_SPACING * (slot % PARTY_SLOT_COLUMNS);
+    cursor->y = PARTY_CURSOR_Y + PARTY_CURSOR_Y_SPACING * (slot / PARTY_SLOT_COLUMNS);
+}
+
+// ==================================================
+// Exit
+// ==================================================
+
+static void Task_PartyMenu_Exit(u8 taskId)
+{
+    if (!gPaletteFade.active)
+    {
+        SetMainCallback2(sPartyMenuDataPtr->savedCB);
+        PartyMenu_Free();
+        DestroyTask(taskId);
+    }
+}
+
 static void PartyMenu_Free(void)
 {
+    DestroySpriteAndFreeResources(&gSprites[sPartyMenuDataPtr->cursorSpriteId]);
     TRY_FREE_AND_SET_NULL(sPartyMenuDataPtr);
 }
