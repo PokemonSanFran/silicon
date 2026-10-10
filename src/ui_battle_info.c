@@ -401,8 +401,8 @@ static const struct WindowTemplate sBattleInfo_WindowTemplates[] =
     [BI_WIN_TEXTBOX] =
     {
         .bg = BI_BG_TEXT_ALT,
-        .tilemapLeft = 1, .tilemapTop = 11,
-        .width = 18, .height = 6,
+        .tilemapLeft = 1, .tilemapTop = 13,
+        .width = 18, .height = 4,
     },
     DUMMY_WIN_TEMPLATE
 };
@@ -1265,6 +1265,11 @@ static void BattleInfoInit_Windows(void)
     DeactivateAllTextPrinters();
 
     u32 baseBlock = 1;
+
+    LoadUserWindowBorderGfx(BI_WIN_TEXTBOX, baseBlock, BI_STD_WIN_PALETTE_OFFSET);
+    sBattleInfoDataPtr->textboxTileNum = baseBlock;
+    baseBlock += (0x120 / TILE_SIZE_4BPP);
+
     for (enum BattleInfoWindows i = 0; i < NUM_BI_WINDOWS; i++)
     {
         SetWindowAttribute(i, WINDOW_BASE_BLOCK, baseBlock);
@@ -1273,9 +1278,6 @@ static void BattleInfoInit_Windows(void)
 
         baseBlock += GetWindowAttribute(i, WINDOW_WIDTH) * GetWindowAttribute(i, WINDOW_HEIGHT);
     }
-
-    LoadUserWindowBorderGfx(BI_WIN_TEXTBOX, baseBlock, BI_STD_WIN_PALETTE_OFFSET);
-    sBattleInfoDataPtr->textboxTileNum = baseBlock;
 
     BattleInfoText_UpdateFooter();
     BattleInfoText_PrintStaticStats();
@@ -2010,10 +2012,20 @@ static void BattleInfoText_ShowTextbox(u32 taskId, bool32 copyToVram)
 
     struct WindowTemplate template = sBattleInfo_WindowTemplates[win];
     u32 newlines = CountLineBreaks(gStringVar4);
-    if (newlines < 2)
+    if (newlines > 1)
     {
-        template.height -= 2;
-        template.tilemapTop += 2;
+        // certain numbers needs specific number to avoid stray spaces, just modulo alone is not enough
+        u32 extraSpacing = (2 * (newlines % 2)) + (2 * (newlines > 7)) - (newlines < 3 || newlines == 5);
+        template.height += newlines + extraSpacing;
+        if (template.height > 16)
+        {
+            template.height = 16;
+            template.tilemapTop = 1;
+        }
+        else
+        {
+            template.tilemapTop -= newlines + extraSpacing;
+        }
     }
 
     template.baseBlock = CalculateNextWindowBaseblock();
