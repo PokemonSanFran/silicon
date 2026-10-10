@@ -71,6 +71,7 @@
 #include "trade.h"
 #include "union_room.h"
 #include "ui_inventory.h" // inventory
+#include "ui_party_menu.h"
 #include "window.h"
 #include "constants/battle.h"
 #include "constants/battle_frontier.h"
@@ -571,6 +572,12 @@ static const u8 sText_CannotSendMonToBoxPartner[] = _("Cannot send a mon that do
 static void InitPartyMenu(enum PartyMenuType menuType, enum PartyMenuLayout layout, u8 partyAction, bool8 keepCursorPos, u8 messageId, TaskFunc task, MainCallback callback)
 {
     u16 i;
+
+    if (UI_PARTY_MENU)
+    {
+        PartyMenu_Init(callback);
+        return;
+    }
 
     ResetPartyMenu();
     sPartyMenuInternal = Alloc(sizeof(struct PartyMenuInternal));
