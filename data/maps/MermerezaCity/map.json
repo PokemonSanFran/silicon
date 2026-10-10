@@ -19,25 +19,25 @@
       "direction": "emerge"
     },
     {
-      "map": "MAP_ROUTE8",
-      "offset": 16,
-      "direction": "down"
-    },
-    {
       "map": "MAP_ROUTE10",
-      "offset": -9,
+      "offset": 0,
       "direction": "up"
     },
     {
+      "map": "MAP_ROUTE8",
+      "offset": 0,
+      "direction": "down"
+    },
+    {
       "map": "MAP_ROUTE5",
-      "offset": 15,
+      "offset": 17,
       "direction": "left"
     }
   ],
   "object_events": [
     {
       "graphics_id": "OBJ_EVENT_GFX_POKEFAN_M",
-      "x": 36,
+      "x": 46,
       "y": 5,
       "elevation": 3,
       "movement_type": "MOVEMENT_TYPE_FACE_LEFT",
@@ -51,7 +51,7 @@
     {
       "local_id": "LOCALID_RETURNDOLLCHILD",
       "graphics_id": "OBJ_EVENT_GFX_LITTLE_GIRL",
-      "x": 5,
+      "x": 15,
       "y": 22,
       "elevation": 3,
       "movement_type": "MOVEMENT_TYPE_FACE_LEFT",
@@ -64,7 +64,7 @@
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_RAMESH",
-      "x": 4,
+      "x": 14,
       "y": 8,
       "elevation": 3,
       "movement_type": "MOVEMENT_TYPE_FACE_UP",
@@ -77,7 +77,7 @@
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_DUSCLOPS",
-      "x": 36,
+      "x": 46,
       "y": 8,
       "elevation": 3,
       "movement_type": "MOVEMENT_TYPE_FACE_UP",
@@ -90,7 +90,7 @@
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_BOY_2",
-      "x": 27,
+      "x": 37,
       "y": 25,
       "elevation": 3,
       "movement_type": "MOVEMENT_TYPE_WANDER_AROUND",
@@ -103,7 +103,7 @@
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_SWIMMER_M",
-      "x": 33,
+      "x": 43,
       "y": 9,
       "elevation": 3,
       "movement_type": "MOVEMENT_TYPE_LOOK_AROUND",
@@ -116,7 +116,7 @@
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_TRUCK",
-      "x": 27,
+      "x": 37,
       "y": 5,
       "elevation": 3,
       "movement_type": "MOVEMENT_TYPE_NONE",
@@ -129,7 +129,7 @@
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_COOK",
-      "x": 7,
+      "x": 17,
       "y": 25,
       "elevation": 0,
       "movement_type": "MOVEMENT_TYPE_WANDER_AROUND",
@@ -142,7 +142,7 @@
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_BERRY_TREE",
-      "x": 1,
+      "x": 11,
       "y": 23,
       "elevation": 3,
       "movement_type": "MOVEMENT_TYPE_BERRY_TREE_GROWTH",
@@ -155,7 +155,7 @@
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_BERRY_TREE",
-      "x": 1,
+      "x": 11,
       "y": 24,
       "elevation": 3,
       "movement_type": "MOVEMENT_TYPE_BERRY_TREE_GROWTH",
@@ -169,21 +169,21 @@
   ],
   "warp_events": [
     {
-      "x": 31,
+      "x": 41,
       "y": 19,
       "elevation": 0,
       "dest_map": "MAP_MERMEREZA_CITY_GYM",
       "dest_warp_id": "0"
     },
     {
-      "x": 18,
+      "x": 28,
       "y": 12,
       "elevation": 0,
       "dest_map": "MAP_MERMEREZA_CITY_CONSULTING",
       "dest_warp_id": "0"
     },
     {
-      "x": 28,
+      "x": 38,
       "y": 18,
       "elevation": 0,
       "dest_map": "MAP_MERMEREZA_CITY_POKEMON_CENTER_1F",
@@ -191,7 +191,7 @@
     },
     {
       "warp_id": "WARP_ID_BAR_TO_MERMEREZA",
-      "x": 7,
+      "x": 17,
       "y": 13,
       "elevation": 0,
       "dest_map": "MAP_MERMEREZA_CITY_BAR",

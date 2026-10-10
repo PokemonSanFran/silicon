@@ -15,20 +15,25 @@
   "connections": [
     {
       "map": "MAP_IRISINA_TOWN",
-      "offset": -8,
+      "offset": 3,
       "direction": "left"
     },
     {
+      "map": "MAP_ROUTE8",
+      "offset": 15,
+      "direction": "right"
+    },
+    {
       "map": "MAP_MERMEREZA_CITY",
-      "offset": -15,
+      "offset": -17,
       "direction": "right"
     }
   ],
   "object_events": [
     {
       "graphics_id": "OBJ_EVENT_GFX_OLD_WOMAN",
-      "x": 38,
-      "y": 4,
+      "x": 74,
+      "y": 6,
       "elevation": 3,
       "movement_type": "MOVEMENT_TYPE_NONE",
       "movement_range_x": 0,
@@ -40,8 +45,8 @@
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_BERRY_TREE",
-      "x": 29,
-      "y": 8,
+      "x": 65,
+      "y": 10,
       "elevation": 3,
       "movement_type": "MOVEMENT_TYPE_BERRY_TREE_GROWTH",
       "movement_range_x": 0,
@@ -53,8 +58,8 @@
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_BERRY_TREE",
-      "x": 26,
-      "y": 10,
+      "x": 62,
+      "y": 12,
       "elevation": 3,
       "movement_type": "MOVEMENT_TYPE_BERRY_TREE_GROWTH",
       "movement_range_x": 0,
@@ -66,8 +71,8 @@
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_BREAKABLE_ROCK",
-      "x": 23,
-      "y": 11,
+      "x": 59,
+      "y": 13,
       "elevation": 0,
       "movement_type": "MOVEMENT_TYPE_NONE",
       "movement_range_x": 0,
@@ -79,8 +84,8 @@
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_BREAKABLE_ROCK",
-      "x": 33,
-      "y": 4,
+      "x": 69,
+      "y": 6,
       "elevation": 0,
       "movement_type": "MOVEMENT_TYPE_NONE",
       "movement_range_x": 0,
@@ -93,8 +98,8 @@
   ],
   "warp_events": [
     {
-      "x": 30,
-      "y": 10,
+      "x": 66,
+      "y": 12,
       "elevation": 0,
       "dest_map": "MAP_ROUTE5_GROTTO",
       "dest_warp_id": "0"
@@ -104,16 +109,16 @@
   "bg_events": [
     {
       "type": "sign",
-      "x": 29,
-      "y": 11,
+      "x": 65,
+      "y": 13,
       "elevation": 3,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
       "script": "Hiddengrotto_EnterGrotto_Dialogue"
     },
     {
       "type": "sign",
-      "x": 29,
-      "y": 10,
+      "x": 65,
+      "y": 12,
       "elevation": 3,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
       "script": "Hiddengrotto_EnterGrotto_Dialogue"

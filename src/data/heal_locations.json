@@ -299,7 +299,7 @@
     {
       "id": "HEAL_LOCATION_MERMEREZA_CITY",
       "map": "MAP_MERMEREZA_CITY",
-      "x": 28,
+      "x": 38,
       "y": 19
     },
     {
@@ -359,7 +359,7 @@
     {
       "id": "HEAL_LOCATION_ROUTE8",
       "map": "MAP_ROUTE8",
-      "x": 3,
+      "x": 19,
       "y": 13
     },
     {
@@ -377,8 +377,8 @@
     {
       "id": "HEAL_LOCATION_ROUTE5",
       "map": "MAP_ROUTE5",
-      "x": 30,
-      "y": 8
+      "x": 66,
+      "y": 10
     },
     {
       "id": "HEAL_LOCATION_ROUTE_D",
