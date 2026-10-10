@@ -9,6 +9,7 @@
 #include "overworld.h"
 #include "palette.h"
 #include "pokemon.h"
+#include "pokemon_icon.h"
 #include "scanline_effect.h"
 #include "sound.h"
 #include "sprite.h"
@@ -27,6 +28,7 @@ struct PartyMenuData
     u8 partyCount;
     u8 cursorSlot;
     u8 cursorSpriteId;
+    u8 monIconSpriteIds[PARTY_SIZE];
     u16 slotsTilemapBuf[BG_SCREEN_SIZE / sizeof(u16)];
 };
 
@@ -43,6 +45,9 @@ static void Task_PartyMenu_WaitForFade(u8);
 static void Task_PartyMenu_HandleInput(u8);
 static void PartyCursor_HandleDirectionalInput(void);
 static void PartyCursor_SnapToSlot(void);
+static void PartySetup_MonIcons(void);
+static s16 PartyMonIcon_GetX(u32);
+static s16 PartyMonIcon_GetY(u32);
 static void Task_PartyMenu_Exit(u8);
 static void PartyMenu_Free(void);
 
@@ -63,6 +68,7 @@ void PartyMenu_Init(MainCallback callback)
 
     sPartyMenuDataPtr->savedCB = callback;
     sPartyMenuDataPtr->partyCount = CalculatePlayerPartyCount();
+    memset(sPartyMenuDataPtr->monIconSpriteIds, SPRITE_NONE, sizeof(sPartyMenuDataPtr->monIconSpriteIds));
     gMain.state = 0;
     SetMainCallback2(CB2_PartyMenu_Setup);
 }
@@ -182,6 +188,8 @@ static void PartySetup_Slots(void)
 
 static void PartySetup_Sprites(void)
 {
+    PartySetup_MonIcons();
+
     LoadCompressedSpriteSheet(&sPartyMenu_CursorSpriteSheet);
     LoadSpritePalette(&sPartyMenu_CursorSpritePalette);
     sPartyMenuDataPtr->cursorSpriteId = CreateSprite(&sPartyMenu_CursorSpriteTemplate, 0, 0, PARTY_OBJ_SUBPRIORITY_CURSOR);
@@ -260,8 +268,39 @@ static void PartyCursor_SnapToSlot(void)
     struct Sprite *cursor = &gSprites[sPartyMenuDataPtr->cursorSpriteId];
     u32 slot = sPartyMenuDataPtr->cursorSlot;
 
-    cursor->x = PARTY_CURSOR_X + PARTY_CURSOR_X_SPACING * (slot % PARTY_SLOT_COLUMNS);
-    cursor->y = PARTY_CURSOR_Y + PARTY_CURSOR_Y_SPACING * (slot / PARTY_SLOT_COLUMNS);
+    cursor->x = PartyMonIcon_GetX(slot);
+    cursor->y = PartyMonIcon_GetY(slot) + PARTY_CURSOR_Y_OFFSET;
+}
+
+// ==================================================
+// Mon icons
+// ==================================================
+
+static void PartySetup_MonIcons(void)
+{
+    LoadMonIconPalettes();
+
+    for (u32 slot = 0; slot < sPartyMenuDataPtr->partyCount; slot++)
+    {
+        struct Pokemon *mon = &gParties[B_TRAINER_PLAYER][slot];
+        u8 spriteId = CreateMonIconIsEgg(GetMonData(mon, MON_DATA_SPECIES), SpriteCB_MonIcon,
+                                         PartyMonIcon_GetX(slot), PartyMonIcon_GetY(slot),
+                                         PARTY_OBJ_SUBPRIORITY_MON_ICON,
+                                         GetMonData(mon, MON_DATA_PERSONALITY), GetMonData(mon, MON_DATA_IS_EGG));
+
+        gSprites[spriteId].oam.priority = PARTY_OBJ_PRIORITY;
+        sPartyMenuDataPtr->monIconSpriteIds[slot] = spriteId;
+    }
+}
+
+static s16 PartyMonIcon_GetX(u32 slot)
+{
+    return PARTY_MON_ICON_X + PARTY_MON_ICON_X_SPACING * (slot % PARTY_SLOT_COLUMNS);
+}
+
+static s16 PartyMonIcon_GetY(u32 slot)
+{
+    return PARTY_MON_ICON_Y + PARTY_MON_ICON_Y_SPACING * (slot / PARTY_SLOT_COLUMNS);
 }
 
 // ==================================================
@@ -281,5 +320,14 @@ static void Task_PartyMenu_Exit(u8 taskId)
 static void PartyMenu_Free(void)
 {
     DestroySpriteAndFreeResources(&gSprites[sPartyMenuDataPtr->cursorSpriteId]);
+
+    for (u32 slot = 0; slot < PARTY_SIZE; slot++)
+    {
+        if (sPartyMenuDataPtr->monIconSpriteIds[slot] != SPRITE_NONE)
+            FreeAndDestroyMonIconSprite(&gSprites[sPartyMenuDataPtr->monIconSpriteIds[slot]]);
+    }
+
+    FreeMonIconPalettes();
+
     TRY_FREE_AND_SET_NULL(sPartyMenuDataPtr);
 }
