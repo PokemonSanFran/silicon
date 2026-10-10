@@ -1,7 +1,10 @@
 #include "global.h"
+#include "battle.h"
+#include "battle_interface.h"
 #include "bg.h"
 #include "decompress.h"
 #include "gpu_regs.h"
+#include "international_string_util.h"
 #include "main.h"
 #include "malloc.h"
 #include "menu.h"
@@ -13,7 +16,10 @@
 #include "scanline_effect.h"
 #include "sound.h"
 #include "sprite.h"
+#include "string_util.h"
+#include "strings.h"
 #include "task.h"
+#include "text.h"
 #include "window.h"
 #include "options_visual.h"
 #include "ui_options_menu.h"
@@ -22,6 +28,11 @@
 #include "constants/songs.h"
 #include "constants/ui_party_menu.h"
 
+struct PartySlotRect
+{
+    u8 x, y, width, height;
+};
+
 struct PartyMenuData
 {
     MainCallback savedCB;
@@ -29,6 +40,7 @@ struct PartyMenuData
     u8 cursorSlot;
     u8 cursorSpriteId;
     u8 monIconSpriteIds[PARTY_SIZE];
+    u8 slotWindowIds[PARTY_SIZE];
     u16 slotsTilemapBuf[BG_SCREEN_SIZE / sizeof(u16)];
 };
 
@@ -39,10 +51,18 @@ static void CB2_PartyMenu_Idle(void);
 static void VBlankCB_PartyMenu_Idle(void);
 static void PartySetup_Bgs(void);
 static void PartySetup_Graphics(void);
+static void PartySetup_Windows(void);
 static void PartySetup_Slots(void);
 static void PartySetup_Sprites(void);
 static void Task_PartyMenu_WaitForFade(u8);
 static void Task_PartyMenu_HandleInput(u8);
+static void PartySlot_Draw(u32);
+static void PartySlot_DrawFrame(u32, u32);
+static void PartySlot_DrawMonInfo(u32, u32);
+static void PartySlot_DrawGender(u32, struct Pokemon *, const u8 *, u32);
+static void PartySlot_DrawLevel(u32, struct Pokemon *, u32);
+static void PartySlot_DrawHp(u32, struct Pokemon *, u32);
+static void PartySlot_Print(u32, u32, u32, u32, enum PartySlotTextColors, const u8 *);
 static void PartyCursor_HandleDirectionalInput(void);
 static void PartyCursor_SnapToSlot(void);
 static void PartySetup_MonIcons(void);
@@ -101,6 +121,9 @@ static void CB2_PartyMenu_Setup(void)
     case PARTY_SETUP_GFX:
         PartySetup_Graphics();
         break;
+    case PARTY_SETUP_WINDOWS:
+        PartySetup_Windows();
+        break;
     case PARTY_SETUP_SLOTS:
         PartySetup_Slots();
         break;
@@ -157,33 +180,39 @@ static void PartySetup_Graphics(void)
                 BG_PLTT_ID(0), PLTT_SIZE_4BPP);
     SetBackdropFromColor(RGB_BLACK);
 
-    DecompressDataWithHeaderVram(sPartyMenu_Tiles, (void *)BG_CHAR_ADDR(GetBgAttribute(PARTY_BG_SLOTS, BG_ATTR_CHARBASEINDEX)));
     LoadPalette(&sPartyMenu_Palette[BG_PLTT_ID(PARTY_PAL_SLOT_FIRST)], BG_PLTT_ID(PARTY_PAL_SLOT_FIRST),
                 sizeof(sPartyMenu_Palette) - PLTT_SIZE_4BPP * PARTY_PAL_SLOT_FIRST);
+}
+
+static void PartySetup_Windows(void)
+{
+    InitWindows(sPartyMenu_WindowTemplates);
+    DeactivateAllTextPrinters();
+
+    u32 baseBlock = 1;
+    for (u32 slot = 0; slot < PARTY_SIZE; slot++)
+    {
+        u32 row = slot / PARTY_SLOT_COLUMNS;
+        struct WindowTemplate template =
+        {
+            .bg = PARTY_BG_SLOTS,
+            .tilemapLeft = PARTY_SLOT_LEFT + PARTY_SLOT_WIDTH * (slot % PARTY_SLOT_COLUMNS),
+            .tilemapTop = sPartyMenu_SlotRows[row].top,
+            .width = PARTY_SLOT_WIDTH,
+            .height = sPartyMenu_SlotRows[row].height,
+            .paletteNum = PARTY_PAL_SLOT_SLOTS,
+            .baseBlock = baseBlock,
+        };
+
+        sPartyMenuDataPtr->slotWindowIds[slot] = AddWindow(&template);
+        baseBlock += template.width * template.height;
+    }
 }
 
 static void PartySetup_Slots(void)
 {
     for (u32 slot = 0; slot < PARTY_SIZE; slot++)
-    {
-        u32 row = slot / PARTY_SLOT_COLUMNS;
-        u32 left = PARTY_SLOT_LEFT + PARTY_SLOT_WIDTH * (slot % PARTY_SLOT_COLUMNS);
-        const u8 *tilemap = sPartyMenu_SlotRows[row].tilemap;
-
-        if (GetMonData(&gParties[B_TRAINER_PLAYER][slot], MON_DATA_SPECIES) == SPECIES_NONE)
-            tilemap = sPartyMenu_SlotRows[row].emptyTilemap;
-
-        for (u32 y = 0; y < sPartyMenu_SlotRows[row].height; y++)
-        {
-            for (u32 x = 0; x < PARTY_SLOT_WIDTH; x++)
-            {
-                FillBgTilemapBufferRect(PARTY_BG_SLOTS, tilemap[y * PARTY_SLOT_WIDTH + x],
-                                        left + x, sPartyMenu_SlotRows[row].top + y, 1, 1, PARTY_PAL_SLOT_SLOTS);
-            }
-        }
-    }
-
-    ScheduleBgCopyTilemapToVram(PARTY_BG_SLOTS);
+        PartySlot_Draw(slot);
 }
 
 static void PartySetup_Sprites(void)
@@ -223,6 +252,119 @@ static void Task_PartyMenu_HandleInput(u8 taskId)
 }
 
 // ==================================================
+// Party slots
+// ==================================================
+
+static void PartySlot_Draw(u32 slot)
+{
+    u32 windowId = sPartyMenuDataPtr->slotWindowIds[slot];
+
+    PartySlot_DrawFrame(windowId, slot);
+    if (slot < sPartyMenuDataPtr->partyCount)
+        PartySlot_DrawMonInfo(windowId, slot);
+
+    PutWindowTilemap(windowId);
+    CopyWindowToVram(windowId, COPYWIN_FULL);
+}
+
+static void PartySlot_DrawFrame(u32 windowId, u32 slot)
+{
+    u32 row = slot / PARTY_SLOT_COLUMNS;
+    u32 numTiles = PARTY_SLOT_WIDTH * sPartyMenu_SlotRows[row].height;
+    u8 *tileData = (u8 *)GetWindowAttribute(windowId, WINDOW_TILE_DATA);
+    const u8 *tilemap = sPartyMenu_SlotRows[row].tilemap;
+
+    if (slot >= sPartyMenuDataPtr->partyCount)
+        tilemap = sPartyMenu_SlotRows[row].emptyTilemap;
+
+    for (u32 i = 0; i < numTiles; i++)
+        CpuCopy16(&sPartyMenu_SlotTiles[TILE_OFFSET_4BPP(tilemap[i])], &tileData[TILE_OFFSET_4BPP(i)], TILE_SIZE_4BPP);
+}
+
+static void PartySlot_DrawMonInfo(u32 windowId, u32 slot)
+{
+    struct Pokemon *mon = &gParties[B_TRAINER_PLAYER][slot];
+    u32 contentY = sPartyMenu_SlotRows[slot / PARTY_SLOT_COLUMNS].contentY;
+    const struct PartySlotRect *rect = &sPartyMenu_SlotLayout.nickname;
+    u8 nickname[POKEMON_NAME_LENGTH + 1];
+
+    GetMonData(mon, MON_DATA_NICKNAME, nickname);
+    StringGet_Nickname(nickname);
+    PartySlot_Print(windowId, GetFontIdToFit(nickname, FONT_OUTLINED, 0, rect->width),
+                    rect->x, rect->y + contentY, COLORID_PARTY_DEFAULT, nickname);
+
+    if (GetMonData(mon, MON_DATA_IS_EGG))
+        return;
+
+    PartySlot_DrawHp(windowId, mon, contentY);
+    PartySlot_DrawGender(windowId, mon, nickname, contentY);
+    PartySlot_DrawLevel(windowId, mon, contentY);
+}
+
+static void PartySlot_DrawGender(u32 windowId, struct Pokemon *mon, const u8 *nickname, u32 contentY)
+{
+    const struct PartySlotRect *rect = &sPartyMenu_SlotLayout.gender;
+    enum Species species = GetMonData(mon, MON_DATA_SPECIES);
+
+    if ((species == SPECIES_NIDORAN_M || species == SPECIES_NIDORAN_F)
+     && StringCompare(nickname, GetSpeciesName(species)) == 0)
+        return;
+
+    switch (GetMonGender(mon))
+    {
+    case MON_MALE:
+        PartySlot_Print(windowId, FONT_OUTLINED, rect->x, rect->y + contentY, COLORID_PARTY_MALE, gText_MaleSymbol);
+        break;
+    case MON_FEMALE:
+        PartySlot_Print(windowId, FONT_OUTLINED, rect->x, rect->y + contentY, COLORID_PARTY_FEMALE, gText_FemaleSymbol);
+        break;
+    }
+}
+
+static void PartySlot_DrawLevel(u32 windowId, struct Pokemon *mon, u32 contentY)
+{
+    const struct PartySlotRect *rect = &sPartyMenu_SlotLayout.level;
+    u32 numberX = rect->x + GetStringWidth(FONT_OUTLINED, gText_LevelSymbol, 0) + PARTY_SLOT_LEVEL_SPACING;
+    u8 level[4];
+
+    ConvertIntToDecimalStringN(level, GetMonData(mon, MON_DATA_LEVEL), STR_CONV_MODE_LEFT_ALIGN, 3);
+    PartySlot_Print(windowId, FONT_OUTLINED, rect->x, rect->y + contentY, COLORID_PARTY_LEVEL, gText_LevelSymbol);
+    PartySlot_Print(windowId, FONT_OUTLINED, numberX, rect->y + contentY, COLORID_PARTY_DEFAULT, level);
+}
+
+static void PartySlot_DrawHp(u32 windowId, struct Pokemon *mon, u32 contentY)
+{
+    const struct PartySlotRect *bar = &sPartyMenu_SlotLayout.hpBar;
+    const struct PartySlotRect *rect = &sPartyMenu_SlotLayout.hp;
+    u32 hp = GetMonData(mon, MON_DATA_HP);
+    u32 maxHp = GetMonData(mon, MON_DATA_MAX_HP);
+    u32 fillX = bar->x + PARTY_HP_BAR_FRAME_SIZE;
+    u32 fillY = bar->y + PARTY_HP_BAR_FRAME_SIZE + contentY;
+    u32 fillMaxWidth = bar->width - 2 * PARTY_HP_BAR_FRAME_SIZE;
+    u32 fillHeight = bar->height - 2 * PARTY_HP_BAR_FRAME_SIZE;
+    u32 fillWidth = GetScaledHPFraction(hp, maxHp, fillMaxWidth);
+    const u8 *colors = sPartyMenu_HpBarColors[GetHPBarLevel(hp, maxHp)];
+    u8 text[8];
+
+    FillWindowPixelRect(windowId, PIXEL_FILL(colors[0]), fillX, bar->y + contentY, fillMaxWidth, bar->height);
+    FillWindowPixelRect(windowId, PIXEL_FILL(colors[0]), bar->x, fillY, bar->width, fillHeight);
+    FillWindowPixelRect(windowId, PIXEL_FILL(colors[1]), fillX, fillY, fillMaxWidth, fillHeight);
+    if (fillWidth > 0)
+        FillWindowPixelRect(windowId, PIXEL_FILL(colors[2]), fillX, fillY, fillWidth, fillHeight);
+
+    u8 *end = ConvertIntToDecimalStringN(text, hp, STR_CONV_MODE_LEFT_ALIGN, 3);
+    *end++ = CHAR_SLASH;
+    ConvertIntToDecimalStringN(end, maxHp, STR_CONV_MODE_LEFT_ALIGN, 3);
+    PartySlot_Print(windowId, FONT_OUTLINED, rect->x + GetStringRightAlignXOffset(FONT_OUTLINED, text, rect->width),
+                    rect->y + contentY, COLORID_PARTY_DEFAULT, text);
+}
+
+static void PartySlot_Print(u32 windowId, u32 fontId, u32 x, u32 y, enum PartySlotTextColors color, const u8 *str)
+{
+    AddTextPrinterParameterized4(windowId, fontId, x, y, 0, 0, sPartyMenu_TextColors[color], TEXT_SKIP_DRAW, str);
+}
+
+// ==================================================
 // Cursor
 // ==================================================
 
@@ -240,7 +382,6 @@ static void PartyCursor_HandleDirectionalInput(void)
     {
         if (slot < PARTY_SLOT_COLUMNS)
         {
-            // wrap to the lowest filled slot in this column
             slot = col + ((partyCount - 1 - col) / PARTY_SLOT_COLUMNS) * PARTY_SLOT_COLUMNS;
         }
         else
@@ -319,6 +460,7 @@ static void Task_PartyMenu_Exit(u8 taskId)
 
 static void PartyMenu_Free(void)
 {
+    FreeAllWindowBuffers();
     DestroySpriteAndFreeResources(&gSprites[sPartyMenuDataPtr->cursorSpriteId]);
 
     for (u32 slot = 0; slot < PARTY_SIZE; slot++)
