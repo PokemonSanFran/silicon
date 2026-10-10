@@ -19,7 +19,7 @@
 
 // FONT_OUTLINED maxLetterHeight
 #define PARTY_SLOT_TEXT_HEIGHT      15
-#define PARTY_SLOT_LEVEL_SPACING    1
+#define PARTY_SLOT_LEVEL_SPACING    0
 #define PARTY_HP_BAR_FRAME_SIZE     1
 
 // lifted slot offset, in tiles
