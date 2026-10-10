@@ -38,10 +38,13 @@ struct PartyMenuData
     MainCallback savedCB;
     u8 partyCount;
     u8 cursorSlot;
+    u8 heldSlot;
     u8 cursorSpriteId;
     u8 monIconSpriteIds[PARTY_SIZE];
     u8 slotWindowIds[PARTY_SIZE];
+    u8 heldWindowId;
     u16 slotsTilemapBuf[BG_SCREEN_SIZE / sizeof(u16)];
+    u16 heldTilemapBuf[BG_SCREEN_SIZE / sizeof(u16)];
 };
 
 static EWRAM_DATA struct PartyMenuData *sPartyMenuDataPtr = NULL;
@@ -56,15 +59,21 @@ static void PartySetup_Slots(void);
 static void PartySetup_Sprites(void);
 static void Task_PartyMenu_WaitForFade(u8);
 static void Task_PartyMenu_HandleInput(u8);
+static void Task_PartyMenu_HandleHeldInput(u8);
 static void PartySlot_Draw(u32);
-static void PartySlot_DrawFrame(u32, u32);
-static void PartySlot_DrawMonInfo(u32, u32);
+static void PartySlot_DrawEmpty(u32);
+static void PartySlot_Render(u32, u32, struct Pokemon *);
+static void PartySlot_DrawFrame(u32, u32, bool32);
+static void PartySlot_DrawMonInfo(u32, struct Pokemon *, u32);
 static void PartySlot_DrawGender(u32, struct Pokemon *, const u8 *, u32);
 static void PartySlot_DrawLevel(u32, struct Pokemon *, u32);
 static void PartySlot_DrawHp(u32, struct Pokemon *, u32);
 static void PartySlot_Print(u32, u32, u32, u32, enum PartySlotTextColors, const u8 *);
-static void PartyCursor_HandleDirectionalInput(void);
+static bool32 PartyCursor_HandleDirectionalInput(void);
 static void PartyCursor_SnapToSlot(void);
+static void PartyHeld_Lift(void);
+static void PartyHeld_SnapToSlot(void);
+static void PartyHeld_Place(bool32);
 static void PartySetup_MonIcons(void);
 static s16 PartyMonIcon_GetX(u32);
 static s16 PartyMonIcon_GetY(u32);
@@ -167,7 +176,9 @@ static void PartySetup_Bgs(void)
     ResetBgsAndClearDma3BusyFlags(0);
     InitBgsFromTemplates(0, sPartyMenu_BackgroundTemplates, NELEMS(sPartyMenu_BackgroundTemplates));
     SetGpuReg(REG_OFFSET_DISPCNT, DISPCNT_OBJ_ON | DISPCNT_OBJ_1D_MAP);
+    SetBgTilemapBuffer(PARTY_BG_HELD, sPartyMenuDataPtr->heldTilemapBuf);
     SetBgTilemapBuffer(PARTY_BG_SLOTS, sPartyMenuDataPtr->slotsTilemapBuf);
+    ShowBg(PARTY_BG_HELD);
     ShowBg(PARTY_BG_SLOTS);
     ShowBg(PARTY_BG_WALLPAPER);
 }
@@ -207,6 +218,16 @@ static void PartySetup_Windows(void)
         sPartyMenuDataPtr->slotWindowIds[slot] = AddWindow(&template);
         baseBlock += template.width * template.height;
     }
+
+    struct WindowTemplate heldTemplate =
+    {
+        .bg = PARTY_BG_HELD,
+        .width = PARTY_SLOT_WIDTH,
+        .height = PARTY_SLOT_MID_HEIGHT,
+        .paletteNum = PARTY_PAL_SLOT_SLOTS,
+        .baseBlock = baseBlock,
+    };
+    sPartyMenuDataPtr->heldWindowId = AddWindow(&heldTemplate);
 }
 
 static void PartySetup_Slots(void)
@@ -241,13 +262,35 @@ static void Task_PartyMenu_WaitForFade(u8 taskId)
 
 static void Task_PartyMenu_HandleInput(u8 taskId)
 {
-    PartyCursor_HandleDirectionalInput();
-
-    if (JOY_NEW(B_BUTTON))
+    if (PartyCursor_HandleDirectionalInput())
+    {
+        PartyCursor_SnapToSlot();
+    }
+    else if (JOY_NEW(A_BUTTON))
+    {
+        PlaySE(SE_SELECT);
+        PartyHeld_Lift();
+        gTasks[taskId].func = Task_PartyMenu_HandleHeldInput;
+    }
+    else if (JOY_NEW(B_BUTTON))
     {
         PlaySE(SE_PC_OFF);
         BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
         gTasks[taskId].func = Task_PartyMenu_Exit;
+    }
+}
+
+static void Task_PartyMenu_HandleHeldInput(u8 taskId)
+{
+    if (PartyCursor_HandleDirectionalInput())
+    {
+        PartyHeld_SnapToSlot();
+    }
+    else if (JOY_NEW(A_BUTTON) || JOY_NEW(B_BUTTON))
+    {
+        PlaySE(SE_SELECT);
+        PartyHeld_Place(JOY_NEW(A_BUTTON));
+        gTasks[taskId].func = Task_PartyMenu_HandleInput;
     }
 }
 
@@ -258,33 +301,47 @@ static void Task_PartyMenu_HandleInput(u8 taskId)
 static void PartySlot_Draw(u32 slot)
 {
     u32 windowId = sPartyMenuDataPtr->slotWindowIds[slot];
+    struct Pokemon *mon = NULL;
 
-    PartySlot_DrawFrame(windowId, slot);
     if (slot < sPartyMenuDataPtr->partyCount)
-        PartySlot_DrawMonInfo(windowId, slot);
+        mon = &gParties[B_TRAINER_PLAYER][slot];
 
+    PartySlot_Render(windowId, slot / PARTY_SLOT_COLUMNS, mon);
     PutWindowTilemap(windowId);
     CopyWindowToVram(windowId, COPYWIN_FULL);
 }
 
-static void PartySlot_DrawFrame(u32 windowId, u32 slot)
+static void PartySlot_DrawEmpty(u32 slot)
 {
-    u32 row = slot / PARTY_SLOT_COLUMNS;
+    u32 windowId = sPartyMenuDataPtr->slotWindowIds[slot];
+
+    PartySlot_Render(windowId, slot / PARTY_SLOT_COLUMNS, NULL);
+    CopyWindowToVram(windowId, COPYWIN_GFX);
+}
+
+static void PartySlot_Render(u32 windowId, u32 row, struct Pokemon *mon)
+{
+    PartySlot_DrawFrame(windowId, row, mon == NULL);
+    if (mon != NULL)
+        PartySlot_DrawMonInfo(windowId, mon, row);
+}
+
+static void PartySlot_DrawFrame(u32 windowId, u32 row, bool32 isEmpty)
+{
     u32 numTiles = PARTY_SLOT_WIDTH * sPartyMenu_SlotRows[row].height;
     u8 *tileData = (u8 *)GetWindowAttribute(windowId, WINDOW_TILE_DATA);
     const u8 *tilemap = sPartyMenu_SlotRows[row].tilemap;
 
-    if (slot >= sPartyMenuDataPtr->partyCount)
+    if (isEmpty)
         tilemap = sPartyMenu_SlotRows[row].emptyTilemap;
 
     for (u32 i = 0; i < numTiles; i++)
         CpuCopy16(&sPartyMenu_SlotTiles[TILE_OFFSET_4BPP(tilemap[i])], &tileData[TILE_OFFSET_4BPP(i)], TILE_SIZE_4BPP);
 }
 
-static void PartySlot_DrawMonInfo(u32 windowId, u32 slot)
+static void PartySlot_DrawMonInfo(u32 windowId, struct Pokemon *mon, u32 row)
 {
-    struct Pokemon *mon = &gParties[B_TRAINER_PLAYER][slot];
-    u32 contentY = sPartyMenu_SlotRows[slot / PARTY_SLOT_COLUMNS].contentY;
+    u32 contentY = sPartyMenu_SlotRows[row].contentY;
     const struct PartySlotRect *rect = &sPartyMenu_SlotLayout.nickname;
     u8 nickname[POKEMON_NAME_LENGTH + 1];
 
@@ -368,7 +425,8 @@ static void PartySlot_Print(u32 windowId, u32 fontId, u32 x, u32 y, enum PartySl
 // Cursor
 // ==================================================
 
-static void PartyCursor_HandleDirectionalInput(void)
+// returns TRUE if cursorSlot moved
+static bool32 PartyCursor_HandleDirectionalInput(void)
 {
     u32 partyCount = sPartyMenuDataPtr->partyCount;
     u32 slot = sPartyMenuDataPtr->cursorSlot;
@@ -397,11 +455,11 @@ static void PartyCursor_HandleDirectionalInput(void)
     }
 
     if (slot >= partyCount || slot == sPartyMenuDataPtr->cursorSlot)
-        return;
+        return FALSE;
 
     PlaySE(SE_SELECT);
     sPartyMenuDataPtr->cursorSlot = slot;
-    PartyCursor_SnapToSlot();
+    return TRUE;
 }
 
 static void PartyCursor_SnapToSlot(void)
@@ -411,6 +469,88 @@ static void PartyCursor_SnapToSlot(void)
 
     cursor->x = PartyMonIcon_GetX(slot);
     cursor->y = PartyMonIcon_GetY(slot) + PARTY_CURSOR_Y_OFFSET;
+}
+
+// ==================================================
+// Held slot
+// ==================================================
+
+static void PartyHeld_Lift(void)
+{
+    struct Sprite *icon;
+
+    sPartyMenuDataPtr->heldSlot = sPartyMenuDataPtr->cursorSlot;
+    gSprites[sPartyMenuDataPtr->cursorSpriteId].invisible = TRUE;
+    PartySlot_DrawEmpty(sPartyMenuDataPtr->heldSlot);
+
+    icon = &gSprites[sPartyMenuDataPtr->monIconSpriteIds[sPartyMenuDataPtr->heldSlot]];
+    icon->oam.priority = PARTY_SPRITE_PRIORITY_LIFTED;
+    icon->x2 = PARTY_HELD_OFFSET_X * TILE_WIDTH;
+    icon->y2 = -PARTY_HELD_OFFSET_Y * TILE_HEIGHT;
+
+    PartyHeld_SnapToSlot();
+}
+
+static void PartyHeld_SnapToSlot(void)
+{
+    u32 heldWindowId = sPartyMenuDataPtr->heldWindowId;
+    u32 slot = sPartyMenuDataPtr->cursorSlot;
+    u32 slotWindowId = sPartyMenuDataPtr->slotWindowIds[slot];
+    struct Sprite *icon = &gSprites[sPartyMenuDataPtr->monIconSpriteIds[sPartyMenuDataPtr->heldSlot]];
+
+    ClearWindowTilemap(heldWindowId);
+    SetWindowAttribute(heldWindowId, WINDOW_TILEMAP_LEFT, GetWindowAttribute(slotWindowId, WINDOW_TILEMAP_LEFT) + PARTY_HELD_OFFSET_X);
+    SetWindowAttribute(heldWindowId, WINDOW_TILEMAP_TOP, GetWindowAttribute(slotWindowId, WINDOW_TILEMAP_TOP) - PARTY_HELD_OFFSET_Y);
+    FillWindowPixelBuffer(heldWindowId, PIXEL_FILL(0));
+    PartySlot_Render(heldWindowId, slot / PARTY_SLOT_COLUMNS, &gParties[B_TRAINER_PLAYER][sPartyMenuDataPtr->heldSlot]);
+    PutWindowTilemap(heldWindowId);
+    CopyWindowToVram(heldWindowId, COPYWIN_FULL);
+
+    icon->x = PartyMonIcon_GetX(slot);
+    icon->y = PartyMonIcon_GetY(slot);
+}
+
+static void PartyHeld_Place(bool32 confirm)
+{
+    u32 heldSlot = sPartyMenuDataPtr->heldSlot;
+    struct Sprite *icon = &gSprites[sPartyMenuDataPtr->monIconSpriteIds[heldSlot]];
+
+    ClearWindowTilemap(sPartyMenuDataPtr->heldWindowId);
+    CopyBgTilemapBufferToVram(PARTY_BG_HELD);
+
+    icon->oam.priority = PARTY_SPRITE_PRIORITY_MAIN;
+    icon->x2 = 0;
+    icon->y2 = 0;
+
+    if (!confirm)
+        sPartyMenuDataPtr->cursorSlot = heldSlot;
+
+    u32 targetSlot = sPartyMenuDataPtr->cursorSlot;
+    if (targetSlot != heldSlot)
+    {
+        struct Pokemon *party = gParties[B_TRAINER_PLAYER];
+        struct Pokemon *temp = Alloc(sizeof(struct Pokemon));
+        u8 *iconIds = sPartyMenuDataPtr->monIconSpriteIds;
+        u8 tempIconId;
+
+        if (heldSlot == 0 || targetSlot == 0)
+            gFollowerSteps = 0;
+
+        *temp = party[heldSlot];
+        party[heldSlot] = party[targetSlot];
+        party[targetSlot] = *temp;
+        Free(temp);
+
+        SWAP(iconIds[heldSlot], iconIds[targetSlot], tempIconId);
+        PartySlot_Draw(targetSlot);
+    }
+
+    gSprites[sPartyMenuDataPtr->monIconSpriteIds[heldSlot]].x = PartyMonIcon_GetX(heldSlot);
+    gSprites[sPartyMenuDataPtr->monIconSpriteIds[heldSlot]].y = PartyMonIcon_GetY(heldSlot);
+    PartySlot_Draw(heldSlot);
+
+    gSprites[sPartyMenuDataPtr->cursorSpriteId].invisible = FALSE;
+    PartyCursor_SnapToSlot();
 }
 
 // ==================================================
@@ -429,7 +569,7 @@ static void PartySetup_MonIcons(void)
                                          PARTY_OBJ_SUBPRIORITY_MON_ICON,
                                          GetMonData(mon, MON_DATA_PERSONALITY), GetMonData(mon, MON_DATA_IS_EGG));
 
-        gSprites[spriteId].oam.priority = PARTY_OBJ_PRIORITY;
+        gSprites[spriteId].oam.priority = PARTY_SPRITE_PRIORITY_MAIN;
         sPartyMenuDataPtr->monIconSpriteIds[slot] = spriteId;
     }
 }

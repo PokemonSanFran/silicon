@@ -1,6 +1,13 @@
 static const struct BgTemplate sPartyMenu_BackgroundTemplates[] =
 {
     {
+        .bg = PARTY_BG_HELD,
+        .charBaseIndex = 2,
+        .mapBaseIndex = 29,
+        .screenSize = 0,
+        .priority = 1
+    },
+    {
         .bg = PARTY_BG_SLOTS,
         .charBaseIndex = 2,
         .mapBaseIndex = 31,
@@ -158,7 +165,7 @@ static const struct OamData sPartyMenu_CursorOam =
 {
     .shape = SPRITE_SHAPE(8x8),
     .size = SPRITE_SIZE(8x8),
-    .priority = PARTY_OBJ_PRIORITY,
+    .priority = PARTY_SPRITE_PRIORITY_MAIN,
 };
 
 static const union AnimCmd sPartyMenu_CursorAnim[] =

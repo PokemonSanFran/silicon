@@ -22,6 +22,10 @@
 #define PARTY_SLOT_LEVEL_SPACING    1
 #define PARTY_HP_BAR_FRAME_SIZE     1
 
+// lifted slot offset, in tiles
+#define PARTY_HELD_OFFSET_X     1
+#define PARTY_HELD_OFFSET_Y     1
+
 // sPartyMenu_SlotLayout
 #define PARTY_SLOT_NICKNAME_X   32
 #define PARTY_SLOT_NICKNAME_Y   0
@@ -51,9 +55,10 @@
 // ================================================================
 // Sprite defines
 // ================================================================
-#define PARTY_OBJ_PRIORITY              1
+#define PARTY_SPRITE_PRIORITY_MAIN      2
+#define PARTY_SPRITE_PRIORITY_LIFTED    1
 
-// priority 1
+// priority 2
 #define PARTY_OBJ_SUBPRIORITY_CURSOR    0
 #define PARTY_OBJ_SUBPRIORITY_MON_ICON  PARTY_OBJ_SUBPRIORITY_CURSOR + 1
 
@@ -73,7 +78,8 @@
 
 enum PartyMenuBackgrounds
 {
-    PARTY_BG_SLOTS = 2,
+    PARTY_BG_HELD = 1,
+    PARTY_BG_SLOTS,
     PARTY_BG_WALLPAPER,
 };
 
