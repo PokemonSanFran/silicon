@@ -805,10 +805,9 @@ static void Task_BattleInfo_WaitInput(u8 taskId)
             break;
         case PARTY_ACTION_SEND_OUT:
         case PARTY_ACTION_CHOOSE_FAINTED_MON:
+            PlaySE(SE_FAILURE);
             if (sBattleInfoDataPtr->mode != BI_MODE_MAIN)
                 BattleInfoMode_Set(BI_MODE_MAIN);
-            else
-                PlaySE(SE_FAILURE);
             break;
         default:
             PlaySE(SE_SELECT);
