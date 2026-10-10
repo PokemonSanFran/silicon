@@ -783,6 +783,31 @@ static void Task_BattleInfo_WaitFade(u8 taskId)
 
 static void Task_BattleInfo_WaitInput(u8 taskId)
 {
+    if (JOY_NEW(START_BUTTON))
+    {
+        switch (sBattleInfoSavedState.partyAction)
+        {
+        case PARTY_ACTION_SEND_MON_TO_BOX:
+            PlaySE(SE_SELECT);
+            gSelectedMonPartyId = PARTY_SIZE + 1;
+            BattleInfoHelper_Exit(taskId);
+            break;
+        case PARTY_ACTION_SEND_OUT:
+        case PARTY_ACTION_CHOOSE_FAINTED_MON:
+            if (sBattleInfoDataPtr->mode != BI_MODE_MAIN)
+                BattleInfoMode_Set(BI_MODE_MAIN);
+            else
+                PlaySE(SE_FAILURE);
+            break;
+        default:
+            PlaySE(SE_SELECT);
+            BattleInfoHelper_Exit(taskId);
+            break;
+        }
+
+        return;
+    }
+
     TaskFunc inputTask = sBattleInfo_ModesInfo[sBattleInfoDataPtr->mode].inputTask;
     if (inputTask != NULL)
         inputTask(taskId);
