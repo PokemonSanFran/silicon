@@ -588,7 +588,6 @@ static const struct {
     },
     [BI_MODE_STATUS_LIST] =
     {
-        .helpBarTxt = COMPOUND_STRING("{A_BUTTON} Summary {DPAD_UPDOWN} Navigate {B_BUTTON} Return"),
         .updateFunc = BattleInfoText_ShowMonStatusList,
         .inputTask = Task_BattleInfo_StatusListModeInput,
     },
@@ -1965,6 +1964,9 @@ static void BattleInfoText_ShowStatusDescription(bool32 copyToVram)
         BreakStringAutomatic(gStringVar4, WindowWidthPx(BI_WIN_TEXTBOX), 3, FONT_SMALL, HIDE_SCROLL_PROMPT);
         BattleInfoText_ShowTextbox(TASK_NONE, copyToVram);
     }
+
+    BattleInfoText_UpdateFooter();
+    CopyWindowToVram(BI_WIN_FOOTER, COPYWIN_GFX);
 }
 
 static void BattleInfoText_PutOptionPromptTile(u32 tileNum, u32 x, u32 y)
@@ -2030,6 +2032,22 @@ static void BattleInfoText_ShowTextbox(u32 taskId, bool32 copyToVram)
 static void BattleInfoText_UpdateFooter(void)
 {
     const u8 *str = sBattleInfo_ModesInfo[sBattleInfoDataPtr->mode].helpBarTxt;
+    if (sBattleInfoDataPtr->mode == BI_MODE_STATUS_LIST)
+    {
+        u8 *tail = gStringVar1;
+        str = gStringVar1;
+
+        if (sBattleInfoDataPtr->toggleStatusDesc)
+            tail = StringCopy(tail, COMPOUND_STRING("{A_BUTTON} Summary "));
+        else
+            tail = StringCopy(tail, COMPOUND_STRING("{B_BUTTON} Back"));
+
+        if (sBattleInfoDataPtr->numStatuses > 1)
+            tail = StringCopy(tail, COMPOUND_STRING("{DPAD_UPDOWN} Navigate "));
+
+        if (sBattleInfoDataPtr->toggleStatusDesc)
+            StringCopy(tail, COMPOUND_STRING("{B_BUTTON} Return"));
+    }
 
     switch (sBattleInfoSavedState.partyAction)
     {
