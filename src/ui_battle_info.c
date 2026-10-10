@@ -2328,7 +2328,8 @@ static void BattleInfoHelper_PopulateOptionsList(void)
     #define ADD_OPT(num) sBattleInfoDataPtr->optionsList[sBattleInfoDataPtr->numOptions++] = CAT(BI_OPTION_, num);
     if (BattleInfoHelper_GetCurrTrainer() == B_TRAINER_PLAYER)
     {
-        if (sBattleInfoSavedState.partyAction == PARTY_ACTION_SEND_OUT)
+        if (sBattleInfoSavedState.partyAction == PARTY_ACTION_SEND_OUT
+         && gBattleMons[gBattlerInMenuId].hp)
         {
             ADD_OPT(SEND_OUT);
         }
