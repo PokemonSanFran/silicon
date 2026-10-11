@@ -46,5 +46,6 @@ enum Species GetEggSpecies(enum Species species);
 u32 GetChildNature(struct DayCare *daycare);
 void InheritIVs(struct Pokemon *egg, struct DayCare *daycare);
 void InheritAbility(struct Pokemon *egg, struct DayCare *daycare);
+bool8 IsMonInUndiscoveredOrGenderless(enum Species species);
 
 #endif // GUARD_DAYCARE_H
