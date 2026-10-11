@@ -2918,6 +2918,8 @@ static void BattleStartClearSetData(void)
 
     for (i = 0; i < MAX_BATTLERS_COUNT; i++)
     {
+        gBattleStruct->battlersItemIds[i][B_SIDE_PLAYER] = GetMonData(&gParties[B_TRAINER_PLAYER][i], MON_DATA_HELD_ITEM); // Battle Settings: Take Wild Items
+        gBattleStruct->battlersItemIds[i][B_SIDE_OPPONENT] = GetMonData(&gParties[B_TRAINER_OPPONENT_A][i], MON_DATA_HELD_ITEM); // Battle Settings: Take Wild Items
         gBattleStruct->battlerState[i].isFirstTurn = 2;
         gBattleStruct->battlerState[i].originalBattlerPartyId = PARTY_SIZE;
         gLastMoves[i] = MOVE_NONE;
@@ -3013,8 +3015,6 @@ static void BattleStartClearSetData(void)
 
     for (u32 partySlot = 0; partySlot < PARTY_SIZE; partySlot++)
     {
-        gBattleStruct->battlersItemIds[i][B_SIDE_PLAYER] = GetMonData(&gParties[B_TRAINER_PLAYER][i], MON_DATA_HELD_ITEM); // Battle Settings: Take Wild Items
-        gBattleStruct->battlersItemIds[i][B_SIDE_OPPONENT] = GetMonData(&gParties[B_TRAINER_OPPONENT_A][i], MON_DATA_HELD_ITEM); // Battle Settings: Take Wild Items
         for (enum BattleTrainer trainer = B_TRAINER_PLAYER; trainer < MAX_BATTLE_TRAINERS; trainer++)
         {
             SetItemsToRestoreAfterBattle(trainer, partySlot);
