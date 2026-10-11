@@ -1124,3 +1124,26 @@ bool32 IsItemShopCriteriaFulfilled(enum Item itemId)
 
     return func(SanitizeItemId(itemId));
 }
+
+const u8 *GetPocketName(enum Pocket pocket)
+{
+    if (pocket >= NUM_INVENTORY_POCKETS)
+        pocket = 0;
+
+    const u8 *sInventory_TitleStrings[NUM_INVENTORY_POCKETS] =
+    {
+        [POCKET_MEDICINE]     = COMPOUND_STRING("Medicine"),
+        [POCKET_POKE_BALLS]   = COMPOUND_STRING("Pokeballs"),
+        [POCKET_BATTLE_ITEMS] = COMPOUND_STRING("Battle Items"),
+        [POCKET_POWERUP]    = COMPOUND_STRING("Power-Ups"),
+        [POCKET_BERRIES]      = COMPOUND_STRING("Berries"),
+        [POCKET_OTHER]  = COMPOUND_STRING("Other Items"),
+        [POCKET_TM_HM]          = COMPOUND_STRING("TMs"),
+        [POCKET_TREASURE]    = COMPOUND_STRING("Treasures"),
+        [POCKET_Z_CRYSTALS]   = COMPOUND_STRING("Z-Crystals"),
+        [POCKET_MEGA_STONES]  = COMPOUND_STRING("Mega Stones"),
+        [POCKET_KEY_ITEMS] = COMPOUND_STRING("Key Items"),
+        [POCKET_FAVORITE_ITEMS] = COMPOUND_STRING("Favorites"),
+    };
+    return sInventory_TitleStrings[pocket];
+}

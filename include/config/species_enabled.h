@@ -215,7 +215,7 @@
 #define P_FAMILY_ROSELIA                 P_GEN_3_POKEMON
 #define P_FAMILY_GULPIN                  P_GEN_3_POKEMON
 #define P_FAMILY_CARVANHA                P_GEN_3_POKEMON
-#define P_FAMILY_WAILMER                 FALSE
+#define P_FAMILY_WAILMER                 P_GEN_3_POKEMON
 #define P_FAMILY_NUMEL                   P_GEN_3_POKEMON
 #define P_FAMILY_TORKOAL                 P_GEN_3_POKEMON
 #define P_FAMILY_SPOINK                  P_GEN_3_POKEMON
@@ -227,7 +227,7 @@
 #define P_FAMILY_SEVIPER                 FALSE
 #define P_FAMILY_LUNATONE                FALSE
 #define P_FAMILY_SOLROCK                 FALSE
-#define P_FAMILY_BARBOACH                FALSE
+#define P_FAMILY_BARBOACH                P_GEN_3_POKEMON
 #define P_FAMILY_CORPHISH                FALSE
 #define P_FAMILY_BALTOY                  FALSE
 #define P_FAMILY_LILEEP                  P_GEN_3_POKEMON
