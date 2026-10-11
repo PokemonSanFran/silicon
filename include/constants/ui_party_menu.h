@@ -52,6 +52,11 @@
 #define PARTY_SLOT_HP_BAR_W     72
 #define PARTY_SLOT_HP_BAR_H     9
 
+#define PARTY_SLOT_ITEM_X       32
+#define PARTY_SLOT_ITEM_Y       24
+#define PARTY_SLOT_ITEM_W       76
+#define PARTY_SLOT_ITEM_H       PARTY_SLOT_TEXT_HEIGHT
+
 // ================================================================
 // Sprite defines
 // ================================================================

@@ -95,6 +95,7 @@ static const struct
     struct PartySlotRect level;
     struct PartySlotRect hp;
     struct PartySlotRect hpBar;
+    struct PartySlotRect item;
 } sPartyMenu_SlotLayout =
 {
     // {x, y, width, height}
@@ -127,6 +128,12 @@ static const struct
         PARTY_SLOT_HP_BAR_Y,
         PARTY_SLOT_HP_BAR_W,
         PARTY_SLOT_HP_BAR_H
+    },
+    .item = {
+        PARTY_SLOT_ITEM_X,
+        PARTY_SLOT_ITEM_Y,
+        PARTY_SLOT_ITEM_W,
+        PARTY_SLOT_ITEM_H
     },
 };
 

@@ -5,6 +5,7 @@
 #include "decompress.h"
 #include "gpu_regs.h"
 #include "international_string_util.h"
+#include "item.h"
 #include "main.h"
 #include "malloc.h"
 #include "menu.h"
@@ -69,6 +70,8 @@ static void PartySlot_DrawMonInfo(u32, struct Pokemon *, u32);
 static void PartySlot_DrawGender(u32, struct Pokemon *, const u8 *, u32);
 static void PartySlot_DrawLevel(u32, struct Pokemon *, u32);
 static void PartySlot_DrawHp(u32, struct Pokemon *, u32);
+static void PartySlot_DrawItem(u32, struct Pokemon *, u32);
+static void PartySlot_FillRect(u32, u32, u32, u32, u32, u32);
 static void PartySlot_Print(u32, u32, u32, u32, enum PartySlotTextColors, const u8 *);
 static bool32 PartyCursor_HandleDirectionalInput(void);
 static void PartyCursor_SnapToSlot(void);
@@ -315,7 +318,8 @@ static void PartySlot_Draw(u32 slot)
 
     PartySlot_Render(windowId, slot / PARTY_SLOT_COLUMNS, mon);
     PutWindowTilemap(windowId);
-    CopyWindowToVram(windowId, COPYWIN_FULL);
+    CopyWindowToVram(windowId, COPYWIN_GFX);
+    ScheduleBgCopyTilemapToVram(PARTY_BG_SLOTS);
 }
 
 static void PartySlot_DrawEmpty(u32 slot)
@@ -363,6 +367,7 @@ static void PartySlot_DrawMonInfo(u32 windowId, struct Pokemon *mon, u32 row)
     PartySlot_DrawHp(windowId, mon, contentY);
     PartySlot_DrawGender(windowId, mon, nickname, contentY);
     PartySlot_DrawLevel(windowId, mon, contentY);
+    PartySlot_DrawItem(windowId, mon, contentY);
 }
 
 static void PartySlot_DrawGender(u32 windowId, struct Pokemon *mon, const u8 *nickname, u32 contentY)
@@ -410,17 +415,53 @@ static void PartySlot_DrawHp(u32 windowId, struct Pokemon *mon, u32 contentY)
     const u8 *colors = sPartyMenu_HpBarColors[GetHPBarLevel(hp, maxHp)];
     u8 text[8];
 
-    FillWindowPixelRect(windowId, PIXEL_FILL(colors[0]), fillX, bar->y + contentY, fillMaxWidth, bar->height);
-    FillWindowPixelRect(windowId, PIXEL_FILL(colors[0]), bar->x, fillY, bar->width, fillHeight);
-    FillWindowPixelRect(windowId, PIXEL_FILL(colors[1]), fillX, fillY, fillMaxWidth, fillHeight);
+    PartySlot_FillRect(windowId, colors[0], fillX, bar->y + contentY, fillMaxWidth, bar->height);
+    PartySlot_FillRect(windowId, colors[0], bar->x, fillY, bar->width, fillHeight);
+    PartySlot_FillRect(windowId, colors[1], fillX, fillY, fillMaxWidth, fillHeight);
     if (fillWidth > 0)
-        FillWindowPixelRect(windowId, PIXEL_FILL(colors[2]), fillX, fillY, fillWidth, fillHeight);
+        PartySlot_FillRect(windowId, colors[2], fillX, fillY, fillWidth, fillHeight);
 
     u8 *end = ConvertIntToDecimalStringN(text, hp, STR_CONV_MODE_LEFT_ALIGN, 3);
     *end++ = CHAR_SLASH;
     ConvertIntToDecimalStringN(end, maxHp, STR_CONV_MODE_LEFT_ALIGN, 3);
     PartySlot_Print(windowId, FONT_OUTLINED, rect->x + GetStringRightAlignXOffset(FONT_OUTLINED, text, rect->width),
                     rect->y + contentY, COLORID_PARTY_DEFAULT, text);
+}
+
+static void PartySlot_DrawItem(u32 windowId, struct Pokemon *mon, u32 contentY)
+{
+    const struct PartySlotRect *rect = &sPartyMenu_SlotLayout.item;
+    enum Item item = GetMonData(mon, MON_DATA_HELD_ITEM);
+
+    if (item == ITEM_NONE)
+        return;
+
+    const u8 *name = GetItemName(item);
+    PartySlot_Print(windowId, GetFontIdToFit(name, FONT_OUTLINED, 0, rect->width),
+                    rect->x, rect->y + contentY, COLORID_PARTY_DEFAULT, name);
+}
+
+static void PartySlot_FillRect(u32 windowId, u32 color, u32 x, u32 y, u32 width, u32 height)
+{
+    u32 *tileData = (u32 *)GetWindowAttribute(windowId, WINDOW_TILE_DATA);
+    u32 widthTiles = GetWindowAttribute(windowId, WINDOW_WIDTH);
+    u32 fill = color * 0x11111111;
+
+    for (u32 py = y; py < y + height; py++)
+    {
+        u32 *row = &tileData[(py / TILE_HEIGHT) * widthTiles * TILE_HEIGHT + py % TILE_HEIGHT];
+
+        for (u32 px = x; px < x + width;)
+        {
+            u32 start = px % TILE_WIDTH;
+            u32 end = min(TILE_WIDTH, start + (x + width - px));
+            u32 mask = (end == TILE_WIDTH ? 0xFFFFFFFF : (1u << (end * 4)) - 1) & ~((1u << (start * 4)) - 1);
+            u32 *word = &row[(px / TILE_WIDTH) * TILE_HEIGHT];
+
+            *word = (*word & ~mask) | (fill & mask);
+            px += end - start;
+        }
+    }
 }
 
 static void PartySlot_Print(u32 windowId, u32 fontId, u32 x, u32 y, enum PartySlotTextColors color, const u8 *str)
