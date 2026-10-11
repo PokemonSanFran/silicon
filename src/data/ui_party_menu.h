@@ -54,6 +54,8 @@ static const u16 sPartyMenu_Pal_Slot[]              = INCGFX_U16("graphics/ui_me
 static const u16 sPartyMenu_Pal_Ui[]                = INCGFX_U16("graphics/ui_menus/party_menu/cursor.png", ".gbapal");
 static const u32 sPartyMenu_Gfx_Cursor[]            = INCGFX_U32("graphics/ui_menus/party_menu/cursor.png", ".4bpp.smol");
 static const u32 sPartyMenu_Gfx_HeldItem[]          = INCGFX_U32("graphics/ui_menus/party_menu/held_item.png", ".4bpp.smol");
+static const u32 sPartyMenu_Gfx_Status[]            = INCGFX_U32("graphics/ui_menus/party_menu/status_icons.png", ".4bpp.smol");
+static const u16 sPartyMenu_Pal_Status[]            = INCGFX_U16("graphics/ui_menus/party_menu/status_icons.png", ".gbapal");
 
 static const struct {
     const u8 *tilemap;
@@ -258,6 +260,95 @@ static const struct SpriteTemplate sPartyMenu_SpriteTemplate_HeldItem =
     .tileTag = PARTY_GFXTAG_HELD_ITEM,
     .paletteTag = PARTY_PALTAG_UI,
     .oam = &sPartyMenu_Oam_HeldItem,
+};
+
+static const struct CompressedSpriteSheet sPartyMenu_SpriteSheet_Status =
+{
+    .data = sPartyMenu_Gfx_Status,
+    .size = TILE_OFFSET_4BPP(PARTY_STATUS_ICON_COUNT * PARTY_STATUS_ICON_TILES),
+    .tag = PARTY_GFXTAG_STATUS,
+};
+
+static const struct SpritePalette sPartyMenu_SpritePalette_Status =
+{
+    .data = sPartyMenu_Pal_Status,
+    .tag = PARTY_PALTAG_STATUS,
+};
+
+static const struct OamData sPartyMenu_Oam_Status =
+{
+    .objMode = ST_OAM_OBJ_BLEND,
+    .shape = SPRITE_SHAPE(32x16),
+    .size = SPRITE_SIZE(32x16),
+    .priority = PARTY_SPRITE_PRIORITY_MAIN,
+};
+
+static const union AnimCmd sPartyMenu_Anim_StatusPoison[] =
+{
+    ANIMCMD_FRAME(0 * PARTY_STATUS_ICON_TILES, 0),
+    ANIMCMD_END
+};
+
+static const union AnimCmd sPartyMenu_Anim_StatusParalysis[] =
+{
+    ANIMCMD_FRAME(1 * PARTY_STATUS_ICON_TILES, 0),
+    ANIMCMD_END
+};
+
+static const union AnimCmd sPartyMenu_Anim_StatusSleep[] =
+{
+    ANIMCMD_FRAME(2 * PARTY_STATUS_ICON_TILES, 0),
+    ANIMCMD_END
+};
+
+static const union AnimCmd sPartyMenu_Anim_StatusFreeze[] =
+{
+    ANIMCMD_FRAME(3 * PARTY_STATUS_ICON_TILES, 0),
+    ANIMCMD_END
+};
+
+static const union AnimCmd sPartyMenu_Anim_StatusBurn[] =
+{
+    ANIMCMD_FRAME(4 * PARTY_STATUS_ICON_TILES, 0),
+    ANIMCMD_END
+};
+
+static const union AnimCmd sPartyMenu_Anim_StatusPokerus[] =
+{
+    ANIMCMD_FRAME(5 * PARTY_STATUS_ICON_TILES, 0),
+    ANIMCMD_END
+};
+
+static const union AnimCmd sPartyMenu_Anim_StatusFaint[] =
+{
+    ANIMCMD_FRAME(6 * PARTY_STATUS_ICON_TILES, 0),
+    ANIMCMD_END
+};
+
+static const union AnimCmd sPartyMenu_Anim_StatusFrostbite[] =
+{
+    ANIMCMD_FRAME(7 * PARTY_STATUS_ICON_TILES, 0),
+    ANIMCMD_END
+};
+
+static const union AnimCmd *const sPartyMenu_Anims_Status[] =
+{
+    sPartyMenu_Anim_StatusPoison,
+    sPartyMenu_Anim_StatusParalysis,
+    sPartyMenu_Anim_StatusSleep,
+    sPartyMenu_Anim_StatusFreeze,
+    sPartyMenu_Anim_StatusBurn,
+    sPartyMenu_Anim_StatusPokerus,
+    sPartyMenu_Anim_StatusFaint,
+    sPartyMenu_Anim_StatusFrostbite,
+};
+
+static const struct SpriteTemplate sPartyMenu_SpriteTemplate_Status =
+{
+    .tileTag = PARTY_GFXTAG_STATUS,
+    .paletteTag = PARTY_PALTAG_STATUS,
+    .oam = &sPartyMenu_Oam_Status,
+    .anims = sPartyMenu_Anims_Status,
 };
 
 static const u16 *const sPartyMenu_Pals_Wallpaper[VISUAL_OPTION_COLOR_COUNT] =

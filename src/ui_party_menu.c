@@ -12,6 +12,7 @@
 #include "menu_helpers.h"
 #include "overworld.h"
 #include "palette.h"
+#include "party_menu.h"
 #include "pokemon.h"
 #include "pokemon_icon.h"
 #include "scanline_effect.h"
@@ -25,6 +26,7 @@
 #include "options_visual.h"
 #include "ui_options_menu.h"
 #include "ui_party_menu.h"
+#include "constants/party_menu.h"
 #include "constants/rgb.h"
 #include "constants/songs.h"
 #include "constants/ui_party_menu.h"
@@ -43,6 +45,12 @@ struct PartyMenuData
     u8 cursorSpriteId;
     u8 monIconSpriteIds[PARTY_SIZE];
     u8 heldItemSpriteIds[PARTY_SIZE];
+    u8 statusSpriteIds[PARTY_SIZE];
+    u16 statusFadeTimer;
+    u8 statusFadePhase;
+    u8 statusFadeLevel;
+    u8 statusFadeAppliedLevel;
+    bool8 statusFadePinned;
     u8 slotWindowIds[PARTY_SIZE];
     u8 heldWindowId;
     u16 slotsTilemapBuf[BG_SCREEN_SIZE / sizeof(u16)];
@@ -80,6 +88,8 @@ static void PartyHeld_SnapToSlot(void);
 static void PartyHeld_Place(bool32);
 static void PartySetup_MonIcons(void);
 static void PartySetup_HeldItems(void);
+static void PartySetup_StatusIcons(void);
+static void PartyStatusIcons_UpdateFade(void);
 static void PartyMonSprites_SetLifted(u32, bool32);
 static void PartyMonSprites_MoveToSlot(u32, u32);
 static s16 PartyMonIcon_GetX(u32);
@@ -106,6 +116,7 @@ void PartyMenu_Init(MainCallback callback)
     sPartyMenuDataPtr->partyCount = CalculatePlayerPartyCount();
     memset(sPartyMenuDataPtr->monIconSpriteIds, SPRITE_NONE, sizeof(sPartyMenuDataPtr->monIconSpriteIds));
     memset(sPartyMenuDataPtr->heldItemSpriteIds, SPRITE_NONE, sizeof(sPartyMenuDataPtr->heldItemSpriteIds));
+    memset(sPartyMenuDataPtr->statusSpriteIds, SPRITE_NONE, sizeof(sPartyMenuDataPtr->statusSpriteIds));
     gMain.state = 0;
     SetMainCallback2(CB2_PartyMenu_Setup);
 }
@@ -166,6 +177,7 @@ static void CB2_PartyMenu_Setup(void)
 static void CB2_PartyMenu_Idle(void)
 {
     RunTasks();
+    PartyStatusIcons_UpdateFade();
     AnimateSprites();
     BuildOamBuffer();
     DoScheduledBgTilemapCopiesToVram();
@@ -250,6 +262,7 @@ static void PartySetup_Sprites(void)
 
     LoadSpritePalette(&sPartyMenu_SpritePalette_Ui);
     PartySetup_HeldItems();
+    PartySetup_StatusIcons();
 
     LoadCompressedSpriteSheet(&sPartyMenu_SpriteSheet_Cursor);
     sPartyMenuDataPtr->cursorSpriteId = CreateSprite(&sPartyMenu_SpriteTemplate_Cursor, 0, 0, PARTY_SPRITE_SUBPRIORITY_CURSOR);
@@ -567,6 +580,7 @@ static void PartyHeld_Place(bool32 confirm)
         struct Pokemon *temp = Alloc(sizeof(struct Pokemon));
         u8 *iconIds = sPartyMenuDataPtr->monIconSpriteIds;
         u8 *itemIds = sPartyMenuDataPtr->heldItemSpriteIds;
+        u8 *statusIds = sPartyMenuDataPtr->statusSpriteIds;
         u8 tempSpriteId;
 
         if (heldSlot == 0 || targetSlot == 0)
@@ -579,6 +593,7 @@ static void PartyHeld_Place(bool32 confirm)
 
         SWAP(iconIds[heldSlot], iconIds[targetSlot], tempSpriteId);
         SWAP(itemIds[heldSlot], itemIds[targetSlot], tempSpriteId);
+        SWAP(statusIds[heldSlot], statusIds[targetSlot], tempSpriteId);
         PartySlot_Draw(targetSlot);
     }
 
@@ -636,10 +651,111 @@ static void PartySetup_HeldItems(void)
     }
 }
 
+static void PartySetup_StatusIcons(void)
+{
+    LoadCompressedSpriteSheet(&sPartyMenu_SpriteSheet_Status);
+    LoadSpritePalette(&sPartyMenu_SpritePalette_Status);
+
+    SetGpuReg(REG_OFFSET_BLDCNT, BLDCNT_TGT2_BG1 | BLDCNT_TGT2_BG2 | BLDCNT_TGT2_BG3
+                               | BLDCNT_TGT2_BD | BLDCNT_EFFECT_BLEND);
+    SetGpuReg(REG_OFFSET_BLDALPHA, BLDALPHA_BLEND(PARTY_STATUS_FADE_LEVELS, 0));
+
+    for (u32 slot = 0; slot < sPartyMenuDataPtr->partyCount; slot++)
+    {
+        u32 ailment = GetMonAilment(&gParties[B_TRAINER_PLAYER][slot]);
+        if (ailment == AILMENT_NONE || ailment == AILMENT_PKRS)
+            continue;
+
+        u8 spriteId = CreateSprite(&sPartyMenu_SpriteTemplate_Status,
+                                   PartyMonIcon_GetX(slot) + PARTY_STATUS_ICON_X_OFFSET,
+                                   PartyMonIcon_GetY(slot) + PARTY_STATUS_ICON_Y_OFFSET,
+                                   PARTY_SPRITE_SUBPRIORITY_STATUS);
+        StartSpriteAnim(&gSprites[spriteId], ailment - 1);
+        sPartyMenuDataPtr->statusSpriteIds[slot] = spriteId;
+    }
+}
+
+static void PartyStatusIcons_UpdateFade(void)
+{
+    struct PartyMenuData *data = sPartyMenuDataPtr;
+
+    data->statusFadeTimer++;
+
+    if (data->statusFadePinned && data->statusFadePhase != PARTY_STATUS_FADE_IN)
+    {
+        if (data->statusFadeLevel == 0)
+        {
+            data->statusFadePhase = PARTY_STATUS_FADE_SHOW;
+            data->statusFadeTimer = 0;
+        }
+        else
+        {
+            data->statusFadePhase = PARTY_STATUS_FADE_IN;
+            data->statusFadeTimer = (PARTY_STATUS_FADE_LEVELS - data->statusFadeLevel)
+                                  * PARTY_STATUS_FADE_FRAMES / PARTY_STATUS_FADE_LEVELS;
+        }
+    }
+
+    switch (data->statusFadePhase)
+    {
+    case PARTY_STATUS_FADE_SHOW:
+        if (!data->statusFadePinned && data->statusFadeTimer >= PARTY_STATUS_FADE_SHOW_FRAMES)
+        {
+            data->statusFadeTimer = 0;
+            data->statusFadePhase = PARTY_STATUS_FADE_OUT;
+        }
+        break;
+    case PARTY_STATUS_FADE_OUT:
+        if (data->statusFadeTimer >= PARTY_STATUS_FADE_FRAMES)
+        {
+            data->statusFadeLevel = PARTY_STATUS_FADE_LEVELS;
+            data->statusFadeTimer = 0;
+            data->statusFadePhase = PARTY_STATUS_FADE_HIDE;
+        }
+        else
+        {
+            data->statusFadeLevel = data->statusFadeTimer * PARTY_STATUS_FADE_LEVELS / PARTY_STATUS_FADE_FRAMES;
+        }
+        break;
+    case PARTY_STATUS_FADE_HIDE:
+        if (data->statusFadeTimer >= PARTY_STATUS_FADE_HIDE_FRAMES)
+        {
+            data->statusFadeTimer = 0;
+            data->statusFadePhase = PARTY_STATUS_FADE_IN;
+        }
+        break;
+    case PARTY_STATUS_FADE_IN:
+        if (data->statusFadeTimer >= PARTY_STATUS_FADE_FRAMES)
+        {
+            data->statusFadeLevel = 0;
+            data->statusFadeTimer = 0;
+            data->statusFadePhase = PARTY_STATUS_FADE_SHOW;
+        }
+        else
+        {
+            data->statusFadeLevel = PARTY_STATUS_FADE_LEVELS
+                                  - data->statusFadeTimer * PARTY_STATUS_FADE_LEVELS / PARTY_STATUS_FADE_FRAMES;
+        }
+        break;
+    }
+
+    if (data->statusFadeLevel == data->statusFadeAppliedLevel)
+        return;
+
+    SetGpuReg(REG_OFFSET_BLDALPHA, BLDALPHA_BLEND(PARTY_STATUS_FADE_LEVELS - data->statusFadeLevel, data->statusFadeLevel));
+    data->statusFadeAppliedLevel = data->statusFadeLevel;
+}
+
 // spriteSlot is the party index whose sprites move
 static void PartyMonSprites_SetLifted(u32 spriteSlot, bool32 lifted)
 {
-    u8 spriteIds[] = { sPartyMenuDataPtr->monIconSpriteIds[spriteSlot], sPartyMenuDataPtr->heldItemSpriteIds[spriteSlot] };
+    u8 spriteIds[] = {
+        sPartyMenuDataPtr->monIconSpriteIds[spriteSlot],
+        sPartyMenuDataPtr->heldItemSpriteIds[spriteSlot],
+        sPartyMenuDataPtr->statusSpriteIds[spriteSlot],
+    };
+
+    sPartyMenuDataPtr->statusFadePinned = lifted;
 
     for (u32 i = 0; i < ARRAY_COUNT(spriteIds); i++)
     {
@@ -657,6 +773,7 @@ static void PartyMonSprites_MoveToSlot(u32 spriteSlot, u32 slot)
 {
     u32 iconSpriteId = sPartyMenuDataPtr->monIconSpriteIds[spriteSlot];
     u32 itemSpriteId = sPartyMenuDataPtr->heldItemSpriteIds[spriteSlot];
+    u32 statusSpriteId = sPartyMenuDataPtr->statusSpriteIds[spriteSlot];
 
     gSprites[iconSpriteId].x = PartyMonIcon_GetX(slot);
     gSprites[iconSpriteId].y = PartyMonIcon_GetY(slot);
@@ -665,6 +782,12 @@ static void PartyMonSprites_MoveToSlot(u32 spriteSlot, u32 slot)
     {
         gSprites[itemSpriteId].x = PartyMonIcon_GetX(slot) + PARTY_HELD_ITEM_X_OFFSET;
         gSprites[itemSpriteId].y = PartyMonIcon_GetY(slot) + PARTY_HELD_ITEM_Y_OFFSET;
+    }
+
+    if (statusSpriteId != SPRITE_NONE)
+    {
+        gSprites[statusSpriteId].x = PartyMonIcon_GetX(slot) + PARTY_STATUS_ICON_X_OFFSET;
+        gSprites[statusSpriteId].y = PartyMonIcon_GetY(slot) + PARTY_STATUS_ICON_Y_OFFSET;
     }
 }
 
@@ -693,9 +816,15 @@ static void PartyMenu_Free(void)
             FreeAndDestroyMonIconSprite(&gSprites[sPartyMenuDataPtr->monIconSpriteIds[slot]]);
         if (sPartyMenuDataPtr->heldItemSpriteIds[slot] != SPRITE_NONE)
             DestroySprite(&gSprites[sPartyMenuDataPtr->heldItemSpriteIds[slot]]);
+        if (sPartyMenuDataPtr->statusSpriteIds[slot] != SPRITE_NONE)
+            DestroySprite(&gSprites[sPartyMenuDataPtr->statusSpriteIds[slot]]);
     }
 
     FreeSpriteTilesByTag(PARTY_GFXTAG_HELD_ITEM);
+    FreeSpriteTilesByTag(PARTY_GFXTAG_STATUS);
+    FreeSpritePaletteByTag(PARTY_PALTAG_STATUS);
+    SetGpuReg(REG_OFFSET_BLDCNT, 0);
+    SetGpuReg(REG_OFFSET_BLDALPHA, 0);
 
     FreeMonIconPalettes();
 
