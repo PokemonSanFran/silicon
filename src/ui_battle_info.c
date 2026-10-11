@@ -176,6 +176,8 @@ enum BattleInfoOptions
 
 #define sPartyView_SineIdx      data[0]
 
+#define tDisableMonSummary      data[0]
+
 #define NUM_BI_MON_ICONS        (PARTY_SIZE * 2)
 
 #define MAX_SHOWN_BI_STATUS_ITEMS   5
@@ -788,19 +790,12 @@ static void Task_BattleInfo_WaitInput(u8 taskId)
 {
     if (JOY_NEW(START_BUTTON))
     {
-        if (sBattleInfoDataPtr->mode == BI_MODE_OPTIONS_LIST
-         && sBattleInfoDataPtr->optionsList[sBattleInfoDataPtr->optionsCursor] == BI_OPTION_SUMMARY)
-        {
-            PlaySE(SE_SELECT);
-            BattleInfoHelper_Exit(taskId);
-            return;
-        }
-
         switch (sBattleInfoSavedState.partyAction)
         {
         case PARTY_ACTION_SEND_MON_TO_BOX:
             PlaySE(SE_SELECT);
             gSelectedMonPartyId = PARTY_SIZE + 1;
+            gTasks[taskId].tDisableMonSummary = TRUE;
             BattleInfoHelper_Exit(taskId);
             break;
         case PARTY_ACTION_SEND_OUT:
@@ -811,6 +806,7 @@ static void Task_BattleInfo_WaitInput(u8 taskId)
             break;
         default:
             PlaySE(SE_SELECT);
+            gTasks[taskId].tDisableMonSummary = TRUE;
             BattleInfoHelper_Exit(taskId);
             break;
         }
@@ -1075,23 +1071,21 @@ static void Task_BattleInfo_Close(u8 taskId)
         sBattleInfoSavedState.trueCB = sBattleInfoDataPtr->savedCB;
         sBattleInfoSavedState.mode = sBattleInfoDataPtr->mode;
 
-        switch (sBattleInfoDataPtr->optionsList[sBattleInfoDataPtr->optionsCursor])
+        enum BattleInfoOptions option = sBattleInfoDataPtr->optionsList[sBattleInfoDataPtr->optionsCursor];
+        if (option == BI_OPTION_SUMMARY && !gTasks[taskId].tDisableMonSummary)
         {
-        default:
+            sBattleInfoSavedState.optionsCursor = sBattleInfoDataPtr->optionsCursor;
+            BattleInfoHelper_ReorderPartyToInfoLayout();
+
+            enum BattleTrainer trainer = BattleInfoHelper_GetCurrTrainer();
+            struct Pokemon *party = GetTrainerParty(trainer);
+            u32 partySlot = BattleInfoHelper_GetCurrPartySlot();
+
+            MonSummary_Init(SUMMARY_MODE_LOCK_MOVES, party, partySlot, gPartiesCount[trainer] - 1, FALSE, CB2_ReloadBattleInfo);
+        }
+        else
+        {
             SetMainCallback2(sBattleInfoDataPtr->savedCB);
-            break;
-        case BI_OPTION_SUMMARY:
-            {
-                sBattleInfoSavedState.optionsCursor = sBattleInfoDataPtr->optionsCursor;
-                BattleInfoHelper_ReorderPartyToInfoLayout();
-
-                enum BattleTrainer trainer = BattleInfoHelper_GetCurrTrainer();
-                struct Pokemon *party = GetTrainerParty(trainer);
-                u32 partySlot = BattleInfoHelper_GetCurrPartySlot();
-
-                MonSummary_Init(SUMMARY_MODE_LOCK_MOVES, party, partySlot, gPartiesCount[trainer] - 1, FALSE, CB2_ReloadBattleInfo);
-                break;
-            }
         }
     }
     else
