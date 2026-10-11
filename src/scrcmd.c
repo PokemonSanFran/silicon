@@ -3999,7 +3999,7 @@ bool8 ScrCmd_debugprint(struct ScriptContext *ctx)
     {
         if (numOrVar != 65535)
         {
-            u16 num = VarGet(numOrVar);
+            u16 UNUSED num = VarGet(numOrVar);
             DebugPrintfLevel(MGBA_LOG_WARN, "%S, %u", str, num);
         }
         else
