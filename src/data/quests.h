@@ -907,74 +907,26 @@ static const struct SubQuest sWildfireRisk_Sub[QUEST_WILDFIRERISK_SUB_COUNT] = {
 static const struct SubQuest sTheBoyWhoCriesWithWolves_Sub[QUEST_THEBOYWHOCRIESWITHWOLVES_SUB_COUNT]
 = {
     sub_quest(103,
-            gText_Quest_TheBoyWhoCriesWithWolves_Sub1_Name,
-            gText_Quest_TheBoyWhoCriesWithWolves_Sub1_Desc,
-            gText_Quest_TheBoyWhoCriesWithWolves_Sub1_Map,
-            ITEM_POKE_BALL,
+            COMPOUND_STRING("First Aid Kit"),
+            COMPOUND_STRING("You found Boycrieswolvesdoctor's First Aid Kit."),
+            COMPOUND_STRING("Lake Wajabi"),
+            ITEM_QUEST_THEBOYWHOCRIESWITHWOLVES_FIRSTAIDKIT,
             QUEST_SPRITE_TYPE_ITEM,
             COMPOUND_STRING("Found")
             ),
     sub_quest(104,
-            gText_Quest_TheBoyWhoCriesWithWolves_Sub2_Name,
-            gText_Quest_TheBoyWhoCriesWithWolves_Sub2_Desc,
-            gText_Quest_TheBoyWhoCriesWithWolves_Sub2_Map,
-            ITEM_POKE_BALL,
+            COMPOUND_STRING("Cell Phone"),
+            COMPOUND_STRING("You found Boycrieswolvesdoctor's Cell Phone."),
+            COMPOUND_STRING("Lake Wajabi"),
+            ITEM_QUEST_THEBOYWHOCRIESWITHWOLVES_CELLPHONE,
             QUEST_SPRITE_TYPE_ITEM,
             COMPOUND_STRING("Found")
             ),
     sub_quest(105,
-            gText_Quest_TheBoyWhoCriesWithWolves_Sub3_Name,
-            gText_Quest_TheBoyWhoCriesWithWolves_Sub3_Desc,
-            gText_Quest_TheBoyWhoCriesWithWolves_Sub3_Map,
-            ITEM_POKE_BALL,
-            QUEST_SPRITE_TYPE_ITEM,
-            COMPOUND_STRING("Found")
-            ),
-    sub_quest(106,
-            gText_Quest_TheBoyWhoCriesWithWolves_Sub4_Name,
-            gText_Quest_TheBoyWhoCriesWithWolves_Sub4_Desc,
-            gText_Quest_TheBoyWhoCriesWithWolves_Sub4_Map,
-            ITEM_POKE_BALL,
-            QUEST_SPRITE_TYPE_ITEM,
-            COMPOUND_STRING("Found")
-            ),
-    sub_quest(107,
-            gText_Quest_TheBoyWhoCriesWithWolves_Sub5_Name,
-            gText_Quest_TheBoyWhoCriesWithWolves_Sub5_Desc,
-            gText_Quest_TheBoyWhoCriesWithWolves_Sub5_Map,
-            ITEM_POKE_BALL,
-            QUEST_SPRITE_TYPE_ITEM,
-            COMPOUND_STRING("Found")
-            ),
-    sub_quest(108,
-            gText_Quest_TheBoyWhoCriesWithWolves_Sub6_Name,
-            gText_Quest_TheBoyWhoCriesWithWolves_Sub6_Desc,
-            gText_Quest_TheBoyWhoCriesWithWolves_Sub6_Map,
-            ITEM_POKE_BALL,
-            QUEST_SPRITE_TYPE_ITEM,
-            COMPOUND_STRING("Found")
-            ),
-    sub_quest(109,
-            gText_Quest_TheBoyWhoCriesWithWolves_Sub7_Name,
-            gText_Quest_TheBoyWhoCriesWithWolves_Sub7_Desc,
-            gText_Quest_TheBoyWhoCriesWithWolves_Sub7_Map,
-            ITEM_POKE_BALL,
-            QUEST_SPRITE_TYPE_ITEM,
-            COMPOUND_STRING("Found")
-            ),
-    sub_quest(110,
-            gText_Quest_TheBoyWhoCriesWithWolves_Sub8_Name,
-            gText_Quest_TheBoyWhoCriesWithWolves_Sub8_Desc,
-            gText_Quest_TheBoyWhoCriesWithWolves_Sub8_Map,
-            ITEM_POKE_BALL,
-            QUEST_SPRITE_TYPE_ITEM,
-            COMPOUND_STRING("Found")
-            ),
-    sub_quest(111,
-            gText_Quest_TheBoyWhoCriesWithWolves_Sub9_Name,
-            gText_Quest_TheBoyWhoCriesWithWolves_Sub9_Desc,
-            gText_Quest_TheBoyWhoCriesWithWolves_Sub9_Map,
-            ITEM_POKE_BALL,
+            COMPOUND_STRING("Jeans"),
+            COMPOUND_STRING("You found Boycrieswolvesdoctor's Jeans."),
+            COMPOUND_STRING("Lake Wajabi"),
+            ITEM_QUEST_THEBOYWHOCRIESWITHWOLVES_JEANS,
             QUEST_SPRITE_TYPE_ITEM,
             COMPOUND_STRING("Found")
             ),
@@ -4782,14 +4734,80 @@ const struct SideQuest sSideQuests[QUEST_COUNT] =
     },
     [QUEST_THEBOYWHOCRIESWITHWOLVES] =
     {
-        .name = gText_Quest_TheBoyWhoCriesWithWolves_Name,
-        .desc[FLAG_GET_ACTIVE] = gText_Quest_TheBoyWhoCriesWithWolves_Desc,
-        .desc[FLAG_GET_COMPLETED] = gText_Quest_TheBoyWhoCriesWithWolves_DoneDesc,
-        .map = gText_Quest_TheBoyWhoCriesWithWolves_Map,
-        .sprite = OBJ_EVENT_GFX_GENTLEMAN,
+        .name = COMPOUND_STRING("The Boy Who Cries With Wolves"),
+        .desc[FLAG_GET_ACTIVE] = COMPOUND_STRING("Help Boywhocriesdoctor get their items that were thrown in the golf course!"),
+        .desc[FLAG_GET_COMPLETED] = COMPOUND_STRING("Boywhocriesdoctor got his things back, access to the golf course was useful after all."),
+        .map = COMPOUND_STRING("Wajabi Lake"),
+        .sprite = OBJ_EVENT_GFX_THEBOYWHOCRIESWITHWOLVES_DOCTOR,
         .spritetype = QUEST_SPRITE_TYPE_OBJECT,
         .subquests = sTheBoyWhoCriesWithWolves_Sub,
-        .numSubquests = QUEST_THEBOYWHOCRIESWITHWOLVES_SUB_COUNT
+        .numSubquests = QUEST_THEBOYWHOCRIESWITHWOLVES_SUB_COUNT,
+        .states =
+        {
+            [STATE_QUEST_THEBOYWHOCRIESWITHWOLVES_NOT_STARTED] =
+            {
+                .name = COMPOUND_STRING("Not Started"),
+                .setupFunc = DebugQuest_BoyWhoCriesWithWolves,
+                side_quest_map(MAP_QUEST_THEBOYWHOCRIESWITHWOLVES),
+                .warpId = 0,
+            },
+            [STATE_QUEST_THEBOYWHOCRIESWITHWOLVES_STARTED] =
+            {
+                .name = COMPOUND_STRING("Started"),
+                .setupFunc = DebugQuest_BoyWhoCriesWithWolves,
+                side_quest_map(MAP_QUEST_THEBOYWHOCRIESWITHWOLVES),
+                .warpId = 0,
+            },
+            [STATE_QUEST_THEBOYWHOCRIESWITHWOLVES_FOUND_FIRSTAIDKIT] =
+            {
+                .name = COMPOUND_STRING("Found First Aid Kit"),
+                .setupFunc = DebugQuest_BoyWhoCriesWithWolves,
+                side_quest_map(MAP_QUEST_THEBOYWHOCRIESWITHWOLVES),
+                .warpId = 0,
+            },
+            [STATE_QUEST_THEBOYWHOCRIESWITHWOLVES_GAVE_FIRSTAIDKIT] =
+            {
+                .name = COMPOUND_STRING("Gave First Aid Kit"),
+                .setupFunc = DebugQuest_BoyWhoCriesWithWolves,
+                side_quest_map(MAP_QUEST_THEBOYWHOCRIESWITHWOLVES),
+                .warpId = 0,
+            },
+            [STATE_QUEST_THEBOYWHOCRIESWITHWOLVES_FOUND_CELLPHONE] =
+            {
+                .name = COMPOUND_STRING("Found Cellphone"),
+                .setupFunc = DebugQuest_BoyWhoCriesWithWolves,
+                side_quest_map(MAP_QUEST_THEBOYWHOCRIESWITHWOLVES),
+                .warpId = 0,
+            },
+            [STATE_QUEST_THEBOYWHOCRIESWITHWOLVES_GAVE_CELLPHONE] =
+            {
+                .name = COMPOUND_STRING("Gave Cellphone"),
+                .setupFunc = DebugQuest_BoyWhoCriesWithWolves,
+                side_quest_map(MAP_QUEST_THEBOYWHOCRIESWITHWOLVES),
+                .warpId = 0,
+            },
+            [STATE_QUEST_THEBOYWHOCRIESWITHWOLVES_FOUND_JEANS] =
+            {
+                .name = COMPOUND_STRING("Found Jeans"),
+                .setupFunc = DebugQuest_BoyWhoCriesWithWolves,
+                side_quest_map(MAP_QUEST_THEBOYWHOCRIESWITHWOLVES),
+                .warpId = 0,
+            },
+            [STATE_QUEST_THEBOYWHOCRIESWITHWOLVES_GAVE_JEANS] =
+            {
+                .name = COMPOUND_STRING("Gave Jeans"),
+                .setupFunc = DebugQuest_BoyWhoCriesWithWolves,
+                side_quest_map(MAP_QUEST_THEBOYWHOCRIESWITHWOLVES),
+                .warpId = 0,
+            },
+            [STATE_QUEST_THEBOYWHOCRIESWITHWOLVES_COMPLETE] =
+            {
+                .name = COMPOUND_STRING("Complete"),
+                .setupFunc = DebugQuest_BoyWhoCriesWithWolves,
+                side_quest_map(MAP_QUEST_THEBOYWHOCRIESWITHWOLVES),
+                .warpId = 0,
+            },
+        },
     },
     [QUEST_TAXICABTURNAROUND] =
     {

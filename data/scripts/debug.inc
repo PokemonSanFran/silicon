@@ -788,7 +788,7 @@ Debug_EventScript_SetAbility::
 # 494 "data/scripts/debug.pory"
 	dynmultipush gStringVar3, 2
 # 495 "data/scripts/debug.pory"
-	dynmultistack 0, 0, FALSE, 3 FALSE, 0, NULL
+	dynmultistack 0, 0, FALSE, 3, FALSE, 0, NULL
 # 496 "data/scripts/debug.pory"
 	switch VAR_RESULT
 # 498 "data/scripts/debug.pory"

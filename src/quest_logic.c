@@ -2,6 +2,7 @@
 #include "battle.h"
 #include "fake_rtc.h"
 #include "fishing.h"
+#include "pokevial.h"
 #include "ui_pokedex.h"
 #include "daycare.h"
 #include "constants/trainers.h"
@@ -4127,6 +4128,59 @@ void DebugQuest_ManOfManyHats(u8 state)
             break;
     }
 }
+
+void Quest_BoyWhoCriesWithWolves_CountRemainingSubquestsTryProgressReward(void)
+{
+    Quest_Generic_CountRemainingSubquestsTryProgressReward(QUEST_THEBOYWHOCRIESWITHWOLVES);
+}
+
+void DebugQuest_BoyWhoCriesWithWolves(u8 state)
+{
+    switch (state)
+    {
+        default:
+        case STATE_QUEST_THEBOYWHOCRIESWITHWOLVES_NOT_STARTED:
+            FlagSet(FLAG_SYS_STARTER_APPS_GET);
+            AddBagItem(ITEM_POKEVIAL,1);
+            JumpPlayerTo_YoungPadawan(JUMP_DEBUG);
+            break;
+        case STATE_QUEST_THEBOYWHOCRIESWITHWOLVES_STARTED:
+            QuestMenu_ScriptSetActive(QUEST_THEBOYWHOCRIESWITHWOLVES);
+            break;
+        case STATE_QUEST_THEBOYWHOCRIESWITHWOLVES_FOUND_FIRSTAIDKIT:
+            QuestMenu_ScriptSetComplete(QUEST_BUTONLYINMYBACKYARD); //note: must be replaced with proper funcs once But Only In My Backyard has been finished
+            AddBagItem(ITEM_QUEST_THEBOYWHOCRIESWITHWOLVES_FIRSTAIDKIT, 1);
+            FlagSet(FLAG_ITEM_WAJABI_LAKE_STUFF1);
+            break;
+        case STATE_QUEST_THEBOYWHOCRIESWITHWOLVES_GAVE_FIRSTAIDKIT:
+            RemoveBagItem(ITEM_QUEST_THEBOYWHOCRIESWITHWOLVES_FIRSTAIDKIT, 1);
+            QuestMenu_GetSetSubquestState(QUEST_THEBOYWHOCRIESWITHWOLVES, FLAG_SET_COMPLETED, SUB_QUEST_1);
+            break;
+        case STATE_QUEST_THEBOYWHOCRIESWITHWOLVES_FOUND_CELLPHONE:
+            AddBagItem(ITEM_QUEST_THEBOYWHOCRIESWITHWOLVES_CELLPHONE, 1);
+            FlagSet(FLAG_ITEM_WAJABI_LAKE_STUFF2);
+            break;
+        case STATE_QUEST_THEBOYWHOCRIESWITHWOLVES_GAVE_CELLPHONE:
+            QuestMenu_GetSetSubquestState(QUEST_THEBOYWHOCRIESWITHWOLVES, FLAG_SET_COMPLETED, SUB_QUEST_2);
+            RemoveBagItem(ITEM_QUEST_THEBOYWHOCRIESWITHWOLVES_CELLPHONE, 1);
+            break;
+        case STATE_QUEST_THEBOYWHOCRIESWITHWOLVES_FOUND_JEANS:
+            DebugQuest_Hang20(STATE_QUEST_HANG20_COMPLETE);
+            AddBagItem(ITEM_QUEST_THEBOYWHOCRIESWITHWOLVES_JEANS, 1);
+            FlagSet(FLAG_ITEM_WAJABI_LAKE_STUFF3);
+            break;
+        case STATE_QUEST_THEBOYWHOCRIESWITHWOLVES_GAVE_JEANS:
+        case STATE_QUEST_THEBOYWHOCRIESWITHWOLVES_COMPLETE:
+            QuestMenu_GetSetSubquestState(QUEST_THEBOYWHOCRIESWITHWOLVES, FLAG_SET_COMPLETED, SUB_QUEST_3);
+            RemoveBagItem(ITEM_QUEST_THEBOYWHOCRIESWITHWOLVES_JEANS, 1);
+            Quest_BoyWhoCriesWithWolves_CountRemainingSubquestsTryProgressReward();
+            QuestMenu_ScriptSetComplete(QUEST_THEBOYWHOCRIESWITHWOLVES);
+            PokevialSizeUp(1);
+            PokevialDoseUp(1);
+            break;
+    }
+}
+
 // ***********************************************************************
 // Cutscene: Earthquake
 // ***********************************************************************
