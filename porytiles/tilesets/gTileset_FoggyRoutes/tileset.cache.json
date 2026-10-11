@@ -1,6 +1,6 @@
 {
-  "data/tilesets/secondary/foggy_routes/porytiles_bin/metatile_attributes.bin": "0f343b0931126a20f133d67c2b018a3b",
-  "data/tilesets/secondary/foggy_routes/porytiles_bin/metatiles.bin": "f8e86697f0d0e71246ad3272eb0fcbb7",
+  "data/tilesets/secondary/foggy_routes/porytiles_bin/metatile_attributes.bin": "aa491c1c7846d8c75ca01c637206df73",
+  "data/tilesets/secondary/foggy_routes/porytiles_bin/metatiles.bin": "c9d6525cd70f17a5c9ea3c4cdf6db6a0",
   "data/tilesets/secondary/foggy_routes/porytiles_bin/palettes/00.pal": "8479423eaa4fdce9f04158a964fcd863",
   "data/tilesets/secondary/foggy_routes/porytiles_bin/palettes/01.pal": "5b47fc4d67bf776efbc06c58a3890cf0",
   "data/tilesets/secondary/foggy_routes/porytiles_bin/palettes/02.pal": "290b919fa9362810cfdc4eda9cfc73d6",
@@ -8,7 +8,7 @@
   "data/tilesets/secondary/foggy_routes/porytiles_bin/palettes/04.pal": "30ce7929fb853204239455703a7220f4",
   "data/tilesets/secondary/foggy_routes/porytiles_bin/palettes/05.pal": "44b49fc7fd6fe933a0aee6534dedf66f",
   "data/tilesets/secondary/foggy_routes/porytiles_bin/palettes/06.pal": "2958cd1a8e60693c3d7fd4e4d81c9ae3",
-  "data/tilesets/secondary/foggy_routes/porytiles_bin/palettes/07.pal": "b324c3e89be895ac24935a8503a0154e",
+  "data/tilesets/secondary/foggy_routes/porytiles_bin/palettes/07.pal": "b0da87161cb2a2bfc8112dba53ea9f9f",
   "data/tilesets/secondary/foggy_routes/porytiles_bin/palettes/08.pal": "b324c3e89be895ac24935a8503a0154e",
   "data/tilesets/secondary/foggy_routes/porytiles_bin/palettes/09.pal": "b324c3e89be895ac24935a8503a0154e",
   "data/tilesets/secondary/foggy_routes/porytiles_bin/palettes/10.pal": "b324c3e89be895ac24935a8503a0154e",
@@ -17,9 +17,9 @@
   "data/tilesets/secondary/foggy_routes/porytiles_bin/palettes/13.pal": "59f83737350efeb148a299bdbf87e97f",
   "data/tilesets/secondary/foggy_routes/porytiles_bin/palettes/14.pal": "59f83737350efeb148a299bdbf87e97f",
   "data/tilesets/secondary/foggy_routes/porytiles_bin/palettes/15.pal": "59f83737350efeb148a299bdbf87e97f",
-  "data/tilesets/secondary/foggy_routes/porytiles_bin/tiles.png": "33cc2c715382406fae31655f9af09da4",
-  "data/tilesets/secondary/foggy_routes/porytiles_src/attributes.csv": "df3fb67252f25094dcc2fcf278e51135",
-  "data/tilesets/secondary/foggy_routes/porytiles_src/bottom.png": "e3d668922c51a4c35d8813315bdea843",
-  "data/tilesets/secondary/foggy_routes/porytiles_src/middle.png": "2a448eac1d228d93809e1346207a4a8e",
-  "data/tilesets/secondary/foggy_routes/porytiles_src/top.png": "874428bf888c7a23730001461b412aeb"
+  "data/tilesets/secondary/foggy_routes/porytiles_bin/tiles.png": "b19a7fa8589146854a750957c42feda1",
+  "data/tilesets/secondary/foggy_routes/porytiles_src/attributes.csv": "4753d508b8ffc4d293c4d211f270a85f",
+  "data/tilesets/secondary/foggy_routes/porytiles_src/bottom.png": "2bc2439b139525e4eb3172f00fca0266",
+  "data/tilesets/secondary/foggy_routes/porytiles_src/middle.png": "134c83a70f6ceab22f4e6773bd960866",
+  "data/tilesets/secondary/foggy_routes/porytiles_src/top.png": "7dfc53f94133cd708b4d7adf8a594d9b"
 }
