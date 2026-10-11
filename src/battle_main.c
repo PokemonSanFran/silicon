@@ -3036,7 +3036,7 @@ static void BattleStartClearSetData(void)
     }
 
     memset(&gRecordedMaxBattleStatusValues, 0, sizeof(struct MaxBattleStatusValues)); // battleInfo
-    BattleInfo_ResetSavedState();
+    BattleInfo_ResetSavedState(); // battleInfo
 }
 
 #define UNPACK_VOLATILE_BATON_PASSABLES(_enum, _fieldName, _typeMaxValue, ...) __VA_OPT__(if ((FIRST(__VA_ARGS__)) & V_BATON_PASSABLE) gBattleMons[battler].volatiles._fieldName = volatilesCopy->_fieldName;)
