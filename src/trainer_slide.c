@@ -385,6 +385,10 @@ static u32 GetPartyMonCount(u32 lastId, struct Pokemon *party, bool32 onlyAlive)
     return count;
 }
 
+// Start siliconMerge
+#if TESTING
+
+#else
 static bool8 ShouldUseManhuntVigrim(u32 trainerId)
 {
     if (trainerId != TRAINER_VIGRIM)
@@ -392,6 +396,8 @@ static bool8 ShouldUseManhuntVigrim(u32 trainerId)
 
     return (VarGet(VAR_MANHUNT_STATE) == SAVED_BEFORE_VIGRIM);
 }
+#endif // TESTING
+// End siliconMerge
 
 static const u8* const *GetTrainerSlideArray(enum DifficultyLevel difficulty, u32 trainerId, u32 slideId)
 {
