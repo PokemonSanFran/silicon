@@ -2,6 +2,7 @@
 #include "battle.h"
 #include "fake_rtc.h"
 #include "fishing.h"
+#include "pokevial.h"
 #include "ui_pokedex.h"
 #include "daycare.h"
 #include "constants/trainers.h"
@@ -4128,6 +4129,59 @@ void DebugQuest_ManOfManyHats(u8 state)
             break;
     }
 }
+
+void Quest_BoyWhoCriesWithWolves_CountRemainingSubquestsTryProgressReward(void)
+{
+    Quest_Generic_CountRemainingSubquestsTryProgressReward(QUEST_THEBOYWHOCRIESWITHWOLVES);
+}
+
+void DebugQuest_BoyWhoCriesWithWolves(u8 state)
+{
+    switch (state)
+    {
+        default:
+        case STATE_QUEST_THEBOYWHOCRIESWITHWOLVES_NOT_STARTED:
+            FlagSet(FLAG_SYS_STARTER_APPS_GET);
+            AddBagItem(ITEM_POKEVIAL,1);
+            JumpPlayerTo_YoungPadawan(JUMP_DEBUG);
+            break;
+        case STATE_QUEST_THEBOYWHOCRIESWITHWOLVES_STARTED:
+            QuestMenu_ScriptSetActive(QUEST_THEBOYWHOCRIESWITHWOLVES);
+            break;
+        case STATE_QUEST_THEBOYWHOCRIESWITHWOLVES_FOUND_FIRSTAIDKIT:
+            QuestMenu_ScriptSetComplete(QUEST_BUTONLYINMYBACKYARD); //note: must be replaced with proper funcs once But Only In My Backyard has been finished
+            AddBagItem(ITEM_QUEST_THEBOYWHOCRIESWITHWOLVES_FIRSTAIDKIT, 1);
+            FlagSet(FLAG_ITEM_WAJABI_LAKE_STUFF1);
+            break;
+        case STATE_QUEST_THEBOYWHOCRIESWITHWOLVES_GAVE_FIRSTAIDKIT:
+            RemoveBagItem(ITEM_QUEST_THEBOYWHOCRIESWITHWOLVES_FIRSTAIDKIT, 1);
+            QuestMenu_GetSetSubquestState(QUEST_THEBOYWHOCRIESWITHWOLVES, FLAG_SET_COMPLETED, SUB_QUEST_1);
+            break;
+        case STATE_QUEST_THEBOYWHOCRIESWITHWOLVES_FOUND_CELLPHONE:
+            AddBagItem(ITEM_QUEST_THEBOYWHOCRIESWITHWOLVES_CELLPHONE, 1);
+            FlagSet(FLAG_ITEM_WAJABI_LAKE_STUFF2);
+            break;
+        case STATE_QUEST_THEBOYWHOCRIESWITHWOLVES_GAVE_CELLPHONE:
+            QuestMenu_GetSetSubquestState(QUEST_THEBOYWHOCRIESWITHWOLVES, FLAG_SET_COMPLETED, SUB_QUEST_2);
+            RemoveBagItem(ITEM_QUEST_THEBOYWHOCRIESWITHWOLVES_CELLPHONE, 1);
+            break;
+        case STATE_QUEST_THEBOYWHOCRIESWITHWOLVES_FOUND_JEANS:
+            DebugQuest_Hang20(STATE_QUEST_HANG20_COMPLETE);
+            AddBagItem(ITEM_QUEST_THEBOYWHOCRIESWITHWOLVES_JEANS, 1);
+            FlagSet(FLAG_ITEM_WAJABI_LAKE_STUFF3);
+            break;
+        case STATE_QUEST_THEBOYWHOCRIESWITHWOLVES_GAVE_JEANS:
+        case STATE_QUEST_THEBOYWHOCRIESWITHWOLVES_COMPLETE:
+            QuestMenu_GetSetSubquestState(QUEST_THEBOYWHOCRIESWITHWOLVES, FLAG_SET_COMPLETED, SUB_QUEST_3);
+            RemoveBagItem(ITEM_QUEST_THEBOYWHOCRIESWITHWOLVES_JEANS, 1);
+            Quest_BoyWhoCriesWithWolves_CountRemainingSubquestsTryProgressReward();
+            QuestMenu_ScriptSetComplete(QUEST_THEBOYWHOCRIESWITHWOLVES);
+            PokevialSizeUp(1);
+            PokevialDoseUp(1);
+            break;
+    }
+}
+
 // ***********************************************************************
 // Cutscene: Earthquake
 // ***********************************************************************
@@ -6684,4 +6738,100 @@ void WhyAreYouHelpingThem_LoadCharlotteMon(void)
 void WhyAreYouHelpingThemTimeJump(void)
 {
     FakeRtc_AdvanceTimeBy(3,0,0,0);
+}
+
+// ***********************************************************************
+// Quest: Wallace Army
+// ***********************************************************************
+
+bool8 HasSharpriseRaidStarted(void)
+{
+    u32 state = VarGet(VAR_STORYLINE_STATE);
+    return ((state >= STORY_WARP_TILE_ACCESSIBLE) && (state < STORY_CLEAR));
+}
+
+void Script_HasSharpriseRaidStarted(void)
+{
+    gSpecialVar_Result = HasSharpriseRaidStarted();
+}
+
+bool8 HasSharpriseRaidCompleted(void)
+{
+    u32 state = VarGet(VAR_STORYLINE_STATE);
+    return (state >= STORY_CLEAR);
+}
+
+void Script_HasSharpriseRaidCompleted(void)
+{
+    gSpecialVar_Result = HasSharpriseRaidCompleted();
+}
+
+bool8 WallaceArmy_OnlyOneStanRemains(void)
+{
+    u32 count = Quest_Generic_CountRemainingSubquests(QUEST_WALLACEARMY);
+    return (count == 1);
+}
+
+void Script_WallaceArmy_OnlyOneStanRemains(void)
+{
+    gSpecialVar_Result = WallaceArmy_OnlyOneStanRemains();
+}
+
+void Quest_WallaceArmy_CountRemainingSubquestsTryProgressReward(void)
+{
+    Quest_Generic_CountRemainingSubquestsTryProgressReward(QUEST_WALLACEARMY);
+}
+
+void DebugQuest_WallaceArmy(u8 state)
+{
+    switch (state)
+    {
+        default:
+        case STATE_QUEST_WALLACE_ARMY_NOT_STARTED:
+            FlagSet(FLAG_SYS_STARTER_APPS_GET);
+            JumpPlayerTo_SpeechSpeechSpeech(JUMP_DEBUG);
+            JumpPlayerTo_WarehouseRave(JUMP_DEBUG);
+            break;
+        case STATE_QUEST_WALLACE_ARMY_STARTED_QUEST:
+            QuestMenu_ScriptSetActive(QUEST_WALLACEARMY);
+            break;
+        case STATE_QUEST_WALLACE_ARMY_BEFORE_STAN_B:
+            break;
+        case STATE_QUEST_WALLACE_ARMY_AFTER_STAN_B:
+            FlagSet(TRAINER_FLAGS_START + TRAINER_QUEST_WALLACEARMY_STANB);
+            QuestMenu_GetSetSubquestState(QUEST_WALLACEARMY, FLAG_SET_COMPLETED, SUB_QUEST_1);
+            break;
+        case STATE_QUEST_WALLACE_ARMY_BEFORE_STAN_C:
+            break;
+        case STATE_QUEST_WALLACE_ARMY_AFTER_STAN_C:
+            FlagSet(TRAINER_FLAGS_START + TRAINER_QUEST_WALLACEARMY_STANC);
+            QuestMenu_GetSetSubquestState(QUEST_WALLACEARMY, FLAG_SET_COMPLETED, SUB_QUEST_2);
+            break;
+        case STATE_QUEST_WALLACE_ARMY_BEFORE_STAN_D:
+            break;
+        case STATE_QUEST_WALLACE_ARMY_AFTER_STAN_D:
+            FlagSet(TRAINER_FLAGS_START + TRAINER_QUEST_WALLACEARMY_STAND);
+            QuestMenu_GetSetSubquestState(QUEST_WALLACEARMY, FLAG_SET_COMPLETED, SUB_QUEST_3);
+            break;
+        case STATE_QUEST_WALLACE_ARMY_BEFORE_STAN_E:
+            break;
+        case STATE_QUEST_WALLACE_ARMY_AFTER_STAN_E:
+            FlagSet(TRAINER_FLAGS_START + TRAINER_QUEST_WALLACEARMY_STANE);
+            FlagSet(FLAG_QUEST_WALLACEARMY_WALLACEARMYSTANF_READY);
+            QuestMenu_GetSetSubquestState(QUEST_WALLACEARMY, FLAG_SET_COMPLETED, SUB_QUEST_4);
+            break;
+        case STATE_QUEST_WALLACE_ARMY_BEFORE_STAN_F:
+            break;
+        case STATE_QUEST_WALLACE_ARMY_AFTER_STAN_F:
+            FlagSet(TRAINER_FLAGS_START + TRAINER_QUEST_WALLACEARMY_STANF);
+            QuestMenu_GetSetSubquestState(QUEST_WALLACEARMY, FLAG_SET_COMPLETED, SUB_QUEST_5);
+            Quest_WallaceArmy_CountRemainingSubquestsTryProgressReward();
+            break;
+        case STATE_QUEST_WALLACE_ARMY_REWARD:
+            break;
+        case STATE_QUEST_WALLACE_ARMY_COMPLETE:
+            AddBagItem(ITEM_QUEST_WALLACEARMY_REWARD,1);
+            QuestMenu_ScriptSetComplete(QUEST_WALLACEARMY);
+            break;
+    }
 }

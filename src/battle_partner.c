@@ -29,8 +29,9 @@ void FillPartnerParty(u16 trainerId)
 #if FREE_EMERALD_BATTLE_FRONTIER == FALSE
     u32 ivs, level;
     u16 monId;
-#else // siliconFrontier
     u8 trainerName[(PLAYER_NAME_LENGTH * 3) + 1];
+#else // siliconFrontier
+
 #endif // siliconFrontier
 
     SetFacilityPtrsGetLevel();
@@ -55,8 +56,10 @@ void FillPartnerParty(u16 trainerId)
     }
     else if (trainerId == TRAINER_EREADER)
     {
+#if FREE_EMERALD_BATTLE_FRONTIER == FALSE
         // Scrapped, lol.
         trainerName[0] = gGameLanguage;
+#endif // siliconFrontier
     }
     else if (trainerId < FRONTIER_TRAINERS_COUNT)
     {

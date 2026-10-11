@@ -21,7 +21,7 @@
         .encounterMusic = TRAINER_ENCOUNTER_MUSIC_MALE,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
-        .partySize = 1,
+        .partySize = 2,
         .party = (const struct TrainerMon[])
         {
             {
@@ -31,7 +31,7 @@
             .species = SPECIES_WOBBUFFET,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 25
-            .ev = TRAINER_PARTY_EVS(0, 252, 252, 0, 6, 0),
+            .ev = TRAINER_PARTY_EVS(0, 0, 252, 6, 0, 252),
 #line 24
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
 #line 23
@@ -42,100 +42,96 @@
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             .moves = {
 #line 26
-                MOVE_EARTHQUAKE,
-                MOVE_FLAMETHROWER,
-                MOVE_CELEBRATE,
-                MOVE_CELEBRATE,
+                MOVE_BRUTAL_SWING,
+                MOVE_WATER_GUN,
+                MOVE_BUBBLE,
+                MOVE_SLEEP_TALK,
+            },
+            },
+            {
+#line 31
+            .species = SPECIES_WYNAUT,
+            .gender = TRAINER_MON_RANDOM_GENDER,
+#line 35
+            .ev = TRAINER_PARTY_EVS(0, 0, 252, 6, 0, 252),
+#line 34
+            .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
+#line 33
+            .lvl = 100,
+            .ball = POKEBALL_COUNT,
+#line 32
+            .nature = NATURE_BRAVE,
+            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .moves = {
+#line 36
+                MOVE_BRUTAL_SWING,
+                MOVE_FLY,
+                MOVE_BUBBLE,
+                MOVE_SLEEP_TALK,
             },
             },
         },
     },
-#line 31
+#line 41
     [DIFFICULTY_NORMAL][DEBUG_TRAINER_AI] =
     {
-#line 32
+#line 42
         .trainerName = _("Debugger"),
-#line 34
+#line 44
         .trainerClass = TRAINER_CLASS_RIVAL,
-#line 36
+#line 46
         .trainerPic = TRAINER_PIC_STEVEN,
-#line 37
+#line 47
         .gender = TRAINER_GENDER_MALE,
-#line 38
+#line 48
         .encounterMusic = TRAINER_ENCOUNTER_MUSIC_MALE,
-#line 35
+#line 45
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
-#line 33
+#line 43
         .aiFlags = AI_FLAG_SMART_TRAINER,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
-        .partySize = 3,
+        .partySize = 2,
         .party = (const struct TrainerMon[])
         {
             {
-#line 40
-            .species = SPECIES_METANG,
-            .gender = TRAINER_MON_RANDOM_GENDER,
-#line 44
-            .ev = TRAINER_PARTY_EVS(0, 252, 252, 0, 6, 0),
-#line 43
-            .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 42
-            .lvl = 42,
-            .ball = POKEBALL_COUNT,
-#line 41
-            .nature = NATURE_BRAVE,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
-            .moves = {
-#line 45
-                MOVE_LIGHT_SCREEN,
-                MOVE_PSYCHIC,
-                MOVE_REFLECT,
-                MOVE_METAL_CLAW,
-            },
-            },
-            {
 #line 50
-            .species = SPECIES_SKARMORY,
+            .nickname = COMPOUND_STRING("Buffie"),
+#line 50
+            .species = SPECIES_WOBBUFFET,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 54
-            .ev = TRAINER_PARTY_EVS(252, 0, 0, 0, 6, 252),
+            .ev = TRAINER_PARTY_EVS(0, 0, 252, 6, 0, 252),
 #line 53
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
 #line 52
-            .lvl = 43,
+            .lvl = 100,
             .ball = POKEBALL_COUNT,
 #line 51
-            .nature = NATURE_IMPISH,
+            .nature = NATURE_BRAVE,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             .moves = {
 #line 55
-                MOVE_TOXIC,
-                MOVE_AERIAL_ACE,
-                MOVE_PROTECT,
-                MOVE_STEEL_WING,
+                MOVE_SLEEP_TALK,
             },
             },
             {
-#line 60
-            .species = SPECIES_AGGRON,
+#line 57
+            .species = SPECIES_WYNAUT,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 64
-            .ev = TRAINER_PARTY_EVS(0, 252, 0, 0, 252, 6),
-#line 63
-            .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 62
-            .lvl = 44,
-            .ball = POKEBALL_COUNT,
 #line 61
-            .nature = NATURE_ADAMANT,
+            .ev = TRAINER_PARTY_EVS(0, 0, 252, 6, 0, 252),
+#line 60
+            .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
+#line 59
+            .lvl = 100,
+            .ball = POKEBALL_COUNT,
+#line 58
+            .nature = NATURE_BRAVE,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             .moves = {
-#line 65
-                MOVE_THUNDER,
-                MOVE_PROTECT,
-                MOVE_SOLAR_BEAM,
-                MOVE_DRAGON_CLAW,
+#line 62
+                MOVE_SLEEP_TALK,
             },
             },
         },

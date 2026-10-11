@@ -111,6 +111,8 @@ void ZapCriteria_RaveComplete(void);
 void ZapCriteria_BodegaBurnout(void);
 void ZapCriteria_EarthquakeHappened(void);
 void ZapCriteria_TowerRaidStarted(void);
+void ZapCriteria_WallaceArmy_HasSeenCancelledZap(void);
+void ZapCriteria_IsWallaceArmyComplete(void);
 void ZapCriteria_RegularZap(void);
 
 #endif // GUARD_BUZZR_CRITERIA_H

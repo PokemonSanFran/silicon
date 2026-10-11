@@ -83,7 +83,6 @@ static void Task_MenuMain(u8 taskId);
 static u32 OptionMenu_FadeWhiteIfMainMenu();
 
 static void HandlePresetData();
-static void ChangePresetDataToCustom();
 
 static void CopySaveBlockDataToTemporalData();
 static void CopyTemporalDataToSaveBlockData();

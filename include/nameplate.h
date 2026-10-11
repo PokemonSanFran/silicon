@@ -9,8 +9,13 @@ struct SpeakerData
     const u8 *name;
     const u8 *title;
     const u8 gender;
-    const u32 *speakerIcon;
-    const u16 *speakerPal;
+    const enum SpeakerIcons speakerIcon;
+};
+
+struct SpeakerIconData
+{
+    const void *speakerIcon;
+    const void *speakerPal;
 };
 
 void DrawNameplate(void);

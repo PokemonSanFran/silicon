@@ -138,11 +138,6 @@ const u8 gText_Quest_CutePokemon_Desc[] =_("Description");
 const u8 gText_Quest_CutePokemon_DoneDesc[] =_("DoneDescription");
 const u8 gText_Quest_CutePokemon_Map[] =_("N/A");
 
-const u8 gText_Quest_WallaceArmy_Name[] = _("Wallace Army");
-const u8 gText_Quest_WallaceArmy_Desc[] =_("Description");
-const u8 gText_Quest_WallaceArmy_DoneDesc[] =_("DoneDescription");
-const u8 gText_Quest_WallaceArmy_Map[] =_("EspuleeOutskirts");
-
 const u8 gText_Quest_DexCompletion_Name[] = _("Dex Completion");
 const u8 gText_Quest_DexCompletion_Desc[] =_("Description");
 const u8 gText_Quest_DexCompletion_DoneDesc[] =_("DoneDescription");
@@ -252,11 +247,6 @@ const u8 gText_Quest_WildfireRisk_Name[] = _("Wildfire Risk");
 const u8 gText_Quest_WildfireRisk_Desc[] =_("Description");
 const u8 gText_Quest_WildfireRisk_DoneDesc[] =_("DoneDescription");
 const u8 gText_Quest_WildfireRisk_Map[] =_("QiuVillage");
-
-const u8 gText_Quest_TheBoyWhoCriesWithWolves_Name[] = _("The Boy Who Cries With Wolves");
-const u8 gText_Quest_TheBoyWhoCriesWithWolves_Desc[] =_("Description");
-const u8 gText_Quest_TheBoyWhoCriesWithWolves_DoneDesc[] =_("DoneDescription");
-const u8 gText_Quest_TheBoyWhoCriesWithWolves_Map[] =_("WajabiLake");
 
 const u8 gText_Quest_UnknownTrolleyProblem_Name[] = _("Unknown Trolley Problem");
 const u8 gText_Quest_UnknownTrolleyProblem_Desc[] =_("Description");
@@ -505,22 +495,6 @@ const u8 gText_Quest_CutePokemon_Sub4_Name[] = _("Eiscue");
 const u8 gText_Quest_CutePokemon_Sub4_Desc[] = _("Sub Lorem");
 const u8 gText_Quest_CutePokemon_Sub4_Map[] = _("HalaiIsland");
 
-const u8 gText_Quest_WallaceArmy_Sub2_Name[] = _("Stan A");
-const u8 gText_Quest_WallaceArmy_Sub2_Desc[] = _("Sub Lorem");
-const u8 gText_Quest_WallaceArmy_Sub2_Map[] = _("HalaiIsland");
-const u8 gText_Quest_WallaceArmy_Sub3_Name[] = _("Stan B");
-const u8 gText_Quest_WallaceArmy_Sub3_Desc[] = _("Sub Lorem");
-const u8 gText_Quest_WallaceArmy_Sub3_Map[] = _("TirabudinPlace");
-const u8 gText_Quest_WallaceArmy_Sub4_Name[] = _("Stan C");
-const u8 gText_Quest_WallaceArmy_Sub4_Desc[] = _("Sub Lorem");
-const u8 gText_Quest_WallaceArmy_Sub4_Map[] = _("PerlaciaCity");
-const u8 gText_Quest_WallaceArmy_Sub5_Name[] = _("Stan D");
-const u8 gText_Quest_WallaceArmy_Sub5_Desc[] = _("Sub Lorem");
-const u8 gText_Quest_WallaceArmy_Sub5_Map[] = _("Chasilla");
-const u8 gText_Quest_WallaceArmy_Sub6_Name[] = _("Stan E");
-const u8 gText_Quest_WallaceArmy_Sub6_Desc[] = _("Sub Lorem");
-const u8 gText_Quest_WallaceArmy_Sub6_Map[] = _("EspuleeOutskirts");
-
 const u8 gText_Quest_DexCompletion_Sub1_Name[] = _("50% Complete");
 const u8 gText_Quest_DexCompletion_Sub1_Desc[] = _("Sub Lorem");
 const u8 gText_Quest_DexCompletion_Sub1_Map[] = _("Chasilla");
@@ -744,25 +718,6 @@ const u8 gText_Quest_TheBoyWhoCriesWithWolves_Sub2_Map[] = _("WajabiLake");
 const u8 gText_Quest_TheBoyWhoCriesWithWolves_Sub3_Name[] = _("Item 3");
 const u8 gText_Quest_TheBoyWhoCriesWithWolves_Sub3_Desc[] = _("Sub Lorem");
 const u8 gText_Quest_TheBoyWhoCriesWithWolves_Sub3_Map[] = _("WajabiLake");
-const u8 gText_Quest_TheBoyWhoCriesWithWolves_Sub4_Name[] = _("Item 4");
-const u8 gText_Quest_TheBoyWhoCriesWithWolves_Sub4_Desc[] = _("Sub Lorem");
-const u8 gText_Quest_TheBoyWhoCriesWithWolves_Sub4_Map[] = _("WajabiLake");
-const u8 gText_Quest_TheBoyWhoCriesWithWolves_Sub5_Name[] = _("Item 5");
-const u8 gText_Quest_TheBoyWhoCriesWithWolves_Sub5_Desc[] = _("Sub Lorem");
-const u8 gText_Quest_TheBoyWhoCriesWithWolves_Sub5_Map[] = _("WajabiLake");
-const u8 gText_Quest_TheBoyWhoCriesWithWolves_Sub6_Name[] = _("Item 6");
-const u8 gText_Quest_TheBoyWhoCriesWithWolves_Sub6_Desc[] = _("Sub Lorem");
-const u8 gText_Quest_TheBoyWhoCriesWithWolves_Sub6_Map[] = _("WajabiLake");
-const u8 gText_Quest_TheBoyWhoCriesWithWolves_Sub7_Name[] = _("Item 7");
-const u8 gText_Quest_TheBoyWhoCriesWithWolves_Sub7_Desc[] = _("Sub Lorem");
-const u8 gText_Quest_TheBoyWhoCriesWithWolves_Sub7_Map[] = _("WajabiLake");
-const u8 gText_Quest_TheBoyWhoCriesWithWolves_Sub8_Name[] = _("Item 8");
-const u8 gText_Quest_TheBoyWhoCriesWithWolves_Sub8_Desc[] = _("Sub Lorem");
-const u8 gText_Quest_TheBoyWhoCriesWithWolves_Sub8_Map[] = _("WajabiLake");
-const u8 gText_Quest_TheBoyWhoCriesWithWolves_Sub9_Name[] = _("Item 9");
-const u8 gText_Quest_TheBoyWhoCriesWithWolves_Sub9_Desc[] = _("Sub Lorem");
-const u8 gText_Quest_TheBoyWhoCriesWithWolves_Sub9_Map[] = _("WajabiLake");
-
 
 const u8 gText_Quest_TaxicabturnaroundSea_Sub1_Name[] = _("Water 1");
 const u8 gText_Quest_TaxicabturnaroundSea_Sub1_Desc[] = _("Sub Lorem");

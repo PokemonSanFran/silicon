@@ -2034,7 +2034,6 @@ EventScript_PalletTown_PlayersHouse_2F_TurnOnPC::
 .include "data/maps/EspuleeOutskirts_KomalaCabin_2F/scripts.inc"
 .include "data/maps/EspuleeOutskirts_PokemonCenter_1F/scripts.inc"
 .include "data/maps/EspuleeOutskirts_Ranger/scripts.inc"
-.include "data/maps/EspuleeOutskirts_Solar/scripts.inc"
 .include "data/maps/Fakenews_Warehouse/scripts.inc"
 .include "data/maps/Ferrybuilding/scripts.inc"
 .include "data/maps/FortYobu/scripts.inc"
@@ -2224,7 +2223,6 @@ EventScript_PalletTown_PlayersHouse_2F_TurnOnPC::
 .include "data/maps/ZenzuIsland/scripts.inc"
 .include "data/maps/ZenzuIsland_PokemonCenter_1F/scripts.inc"
 .include "data/maps/ZenzuIsland_Restaurant/scripts.inc"
-.include "data/maps/ZenzuIsland_SkillLibrary/scripts.inc"
 @ End siliconMerge
 
 	.include "data/maps/CapheCommunityGarden/scripts.inc"

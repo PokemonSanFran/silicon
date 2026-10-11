@@ -95,15 +95,7 @@
       "y": 20,
       "elevation": 0,
       "dest_map": "MAP_ZENZU_ISLAND_POKEMON_CENTER_1F",
-      "dest_warp_id": "0"
-    },
-    {
-      "warp_id": "WARP_ID_ZENZU_ISLAND_TO_SKILL_LIBRARY",
-      "x": 19,
-      "y": 21,
-      "elevation": 0,
-      "dest_map": "MAP_ZENZU_ISLAND_SKILL_LIBRARY",
-      "dest_warp_id": "0"
+      "dest_warp_id": "WARP_CENTER_TO_ZENZU_ISLAND_RIGHT"
     },
     {
       "warp_id": "WARP_ID_ZENZU_ISLAND_TO_GYM",

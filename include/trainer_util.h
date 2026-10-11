@@ -20,6 +20,7 @@ void GenerateMonFromTrainerMon(struct Pokemon *mon, const struct TrainerMon *tra
 void ModifyPersonalityForNature(u32 *personality, s32 newNature);
 // End Battle Settings: Trainer Scaling
 u32 GeneratePersonalityForGender(u32 gender, u32 species);
+void ModifyPersonalityForNature(u32 *personality, s32 newNature);
 void MakeTrainerGenerator(struct TrainerGenerator *trainerGen, const struct Trainer *trainer);
 void MakePartnerGenerator(struct TrainerGenerator *trainerGen, const struct Trainer *partner);
 

@@ -392,16 +392,14 @@
   ],
   "gMapGroup_IndoorEspuleeOutskirts": [
     "EspuleeOutskirts_Ranger",
-    "EspuleeOutskirts_Solar",
     "EspuleeOutskirts_EliteHome",
     "EspuleeOutskirts_PokemonCenter_1F",
     "EspuleeOutskirts_KomalaCabin_1F",
     "EspuleeOutskirts_KomalaCabin_2F"
   ],
   "gMapGroup_IndoorZenzuIsland": [
-    "ZenzuIsland_PokemonCenter_1F",
-    "ZenzuIsland_SkillLibrary",
-    "ZenzuIsland_Gym"
+    "ZenzuIsland_Gym",
+    "ZenzuIsland_PokemonCenter_1F"
   ],
   "gMapGroup_IndoorHalaiIsland": [
     "HalaiIsland_Baiya",
