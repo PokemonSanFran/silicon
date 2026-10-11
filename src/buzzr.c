@@ -2361,5 +2361,8 @@ static void Buzzr_ExpandStrings(enum BuzzrZapIds zapId)
             StringCopy(gStringVar2,GetSpeciesName(SPECIES_AEGISLASH));
             StringCopy(gStringVar3,GetItemName(ITEM_DUSK_STONE));
             break;
+        case ZAP_QUEST_WALLACEARMY_FINAL_STAN:
+            GetMapName(gStringVar1,Overworld_GetMapHeaderByGroupAndId(MAP_GROUP(MAP_QUEST_WALLACEARMY_STAN_F),MAP_NUM(MAP_QUEST_WALLACEARMY_STAN_F))->regionMapSectionId,0);
+            break;
     }
 }

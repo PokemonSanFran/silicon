@@ -64,6 +64,10 @@
 #include "util.h"
 #include "wild_encounter.h"
 #include "window.h"
+// start battleInfo
+#include "ui_battle_info.h"
+#include "silicon_battle_status_criteria.h"
+// end battleInfo
 #include "constants/abilities.h"
 #include "constants/battle_ai.h"
 #include "constants/battle_move_effects.h"
@@ -1921,23 +1925,6 @@ void CB2_QuitRecordedBattle(void)
     }
 }
 
-// Start Battle Settings: Trainer Scaling
-/*
-void ModifyPersonalityForNature(u32 *personality, u32 newNature)
-{
-    u32 nature = GetNatureFromPersonality(*personality);
-    s32 diff = abs((s32)nature - (s32)newNature);
-    s32 sign = (nature > newNature) ? 1 : -1;
-    if (diff > NUM_NATURES / 2)
-    {
-        diff = NUM_NATURES - diff;
-        sign *= -1;
-    }
-    *personality -= (diff * sign);
-}
-*/
-// End Battle Settings: Trainer Scaling
-
 void VBlankCB_Battle(void)
 {
     // Change gRngSeed every vblank unless the battle could be recorded.
@@ -2931,6 +2918,8 @@ static void BattleStartClearSetData(void)
 
     for (i = 0; i < MAX_BATTLERS_COUNT; i++)
     {
+        gBattleStruct->battlersItemIds[i][B_SIDE_PLAYER] = GetMonData(&gParties[B_TRAINER_PLAYER][i], MON_DATA_HELD_ITEM); // Battle Settings: Take Wild Items
+        gBattleStruct->battlersItemIds[i][B_SIDE_OPPONENT] = GetMonData(&gParties[B_TRAINER_OPPONENT_A][i], MON_DATA_HELD_ITEM); // Battle Settings: Take Wild Items
         gBattleStruct->battlerState[i].isFirstTurn = 2;
         gBattleStruct->battlerState[i].originalBattlerPartyId = PARTY_SIZE;
         gLastMoves[i] = MOVE_NONE;
@@ -3024,16 +3013,13 @@ static void BattleStartClearSetData(void)
     }
     gBattleStruct->beatUpSlot = 0;
 
-    for (i = 0; i < PARTY_SIZE; i++)
+    for (u32 partySlot = 0; partySlot < PARTY_SIZE; partySlot++)
     {
-        gBattleStruct->battlersItemIds[i][B_SIDE_PLAYER] = GetMonData(&gParties[B_TRAINER_PLAYER][i], MON_DATA_HELD_ITEM); // Battle Settings: Take Wild Items
-        gBattleStruct->battlersItemIds[i][B_SIDE_OPPONENT] = GetMonData(&gParties[B_TRAINER_OPPONENT_A][i], MON_DATA_HELD_ITEM); // Battle Settings: Take Wild Items
         for (enum BattleTrainer trainer = B_TRAINER_PLAYER; trainer < MAX_BATTLE_TRAINERS; trainer++)
         {
-            gBattleStruct->partyState[trainer][i].usedHeldItem = ITEM_NONE;
-            gBattleStruct->itemLost[trainer][i].originalItem = GetMonData(&gParties[trainer][i], MON_DATA_HELD_ITEM);
-            gPartyCriticalHits[i] = 0;
+            SetItemsToRestoreAfterBattle(trainer, partySlot);
         }
+        gPartyCriticalHits[partySlot] = 0;
     }
 
     ClearPursuitValues();
@@ -3048,6 +3034,9 @@ static void BattleStartClearSetData(void)
         gBattleStruct->monCausingSleepClause[B_SIDE_OPPONENT].partyIndex = PARTY_SIZE;
         gBattleStruct->monCausingSleepClause[B_SIDE_OPPONENT].trainer = MAX_BATTLE_TRAINERS;
     }
+
+    memset(&gRecordedMaxBattleStatusValues, 0, sizeof(struct MaxBattleStatusValues)); // battleInfo
+    BattleInfo_ResetSavedState(); // battleInfo
 }
 
 #define UNPACK_VOLATILE_BATON_PASSABLES(_enum, _fieldName, _typeMaxValue, ...) __VA_OPT__(if ((FIRST(__VA_ARGS__)) & V_BATON_PASSABLE) gBattleMons[battler].volatiles._fieldName = volatilesCopy->_fieldName;)
@@ -3982,8 +3971,6 @@ enum
 static void HandleTurnActionSelectionState(void)
 {
     s32 i;
-
-    gAiLogicData->reverseBattlerLogicOrder = RandomPercentage(RNG_AI_REVERSE_BATTLER_LOGIC_ORDER, GetConfig(AI_REVERSE_BATTLER_LOGIC_ORDER_CHANCE)) && IsDoubleBattle();
 
     gBattleCommunication[ACTIONS_CONFIRMED_COUNT] = 0;
     for (enum BattlerId battlerIndex = 0; battlerIndex < gBattlersCount; battlerIndex++)

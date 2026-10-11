@@ -41,6 +41,7 @@
 #include "m4a.h"
 #include "item_menu.h"
 #include "ui_move_reminder.h"
+#include "ui_battle_info.h"
 #include "nameplate.h"
 #include "ui_mon_summary.h"
 #include "constants/ui_mon_summary.h"
@@ -81,8 +82,6 @@ static void Task_SummarySetup_WaitFade(u8);
 static void SummaryInput_UpdatePage(s32);
 static void SummaryInput_UpdateMon(s32);
 static s32 SummaryInput_UpdateMonDefault(s32, u32, s32);
-static s32 SummaryInput_UpdateMonMultiBattle(s32, u32, s32);
-static bool32 SummaryInput_IsMonValidToView(struct Pokemon *);
 static s32 SummaryInput_UpdateMonBox(s32, u32, s32);
 static void SummaryInput_SetIndex(u32);
 static u32 SummaryInput_GetIndex(void);
@@ -329,6 +328,155 @@ void MonSummary_Init(enum PokemonSummaryScreenMode mode, void *mons, u8 currIdx,
     memset(sMonSummaryDataPtr->spriteIds, SPRITE_NONE, ARRAY_COUNT(sMonSummaryDataPtr->spriteIds));
 
     SetMainCallback2(CB2_SummarySetup);
+}
+
+u32 MonSummary_CreateHPBarSprite(u32 tileTag, u32 palTag, s32 x, s32 y, bool32 hideText)
+{
+    const struct MonSummarySprite *config = SummarySprite_GetMainStruct(1);
+
+    LoadSpriteSheet(&(const struct SpriteSheet){
+        .tag = tileTag,
+        .data = gMiscBlank_Gfx,
+        .size = config->size,
+    });
+    LoadSpritePalette(&(const struct SpritePalette){
+        .data = sMonSummary_MainPalette,
+        .tag = palTag
+    });
+
+    u32 spriteId = CreateSprite(&(const struct SpriteTemplate){
+        .tileTag = tileTag,
+        .paletteTag = palTag,
+        .oam = config->oam,
+        .anims = config->anims,
+        .affineAnims = gDummySpriteAffineAnimTable,
+    }, x, y, 0);
+
+    if (spriteId == SPRITE_NONE)
+        return SPRITE_NONE;
+
+    gSprites[spriteId].sHideHPText = hideText;
+    return spriteId;
+}
+
+u32 MonSummary_Create11x9TypeIcon(u32 tileTag, s32 x, s32 y)
+{
+    const struct MonSummarySprite *config = SummarySprite_GetMainStruct(4);
+
+    LoadCompressedSpriteSheet(&(const struct CompressedSpriteSheet){
+        .tag = tileTag,
+        .data = config->gfx,
+        .size = GetDecompressedDataSize(config->gfx),
+    });
+
+    // assume palette is already pre-loaded
+    return CreateSprite(&(const struct SpriteTemplate){
+        .tileTag = tileTag,
+        .paletteTag = TAG_NONE,
+        .oam = config->oam,
+        .anims = config->anims,
+        .affineAnims = gDummySpriteAffineAnimTable,
+    }, x, y, 0);
+}
+
+static u32 MonSummary_CalcHPBarPixels(u32 maxHp, u32 currHp, u8 *pixelsPerTile, u32 scale)
+{
+    u32 totalPixels = scale * 8;
+    for (u32 i = 0; i < scale; i++)
+        pixelsPerTile[i] = 0;
+
+    if (currHp == 0 || maxHp == 0)
+        return 0;
+
+    u32 pixels = totalPixels = (currHp * totalPixels) / maxHp;
+    for (u32 i = 0; i < scale; i++)
+    {
+        if (pixels < 8)
+        {
+            pixelsPerTile[i] = pixels;
+            break;
+        }
+
+        pixelsPerTile[i] = 8;
+        pixels -= 8;
+    }
+
+    return totalPixels;
+}
+
+void MonSummary_InjectHpBar(struct Sprite *sprite, s32 currHp, s32 maxHp, bool32 monIsEgg)
+{
+    struct WindowTemplate template = { .width = 8, .height  = 4 }; // 64x32
+    u32 windowId = AddWindow(&template);
+
+    enum MonSummaryHpBarColors color;
+    switch (GetHPBarLevel(currHp, maxHp))
+    {
+    case HP_BAR_FULL:
+    case HP_BAR_GREEN:
+        color = SUMMARY_HP_BAR_CLR_GREEN;
+        break;
+    case HP_BAR_YELLOW:
+        color = SUMMARY_HP_BAR_CLR_YELLOW;
+        break;
+    case HP_BAR_RED:
+    default:
+        if (maxHp > 1)
+            color = SUMMARY_HP_BAR_CLR_RED;
+        else
+            color = SUMMARY_HP_BAR_CLR_GREEN;
+        break;
+    }
+
+    LoadPalette(&sSummarySprite_HpBarColors[1 + (color * 2)], OBJ_PLTT_ID(sprite->oam.paletteNum) + 6, PLTT_SIZEOF(2));
+
+    u8 array[7];
+    const u8 *blit = sSummarySprite_HpBarAnims;
+    MonSummary_CalcHPBarPixels(maxHp, currHp, array, 7);
+    for (u32 i = 0; i < 7; i++)
+    {
+        u32 x, y;
+
+        x = array[i] * 8;
+        if (i < 3)
+            y = 0;
+        else if (i == 3)
+            y = 1;
+        else
+            y = 2;
+
+        y *= 16;
+        BlitBitmapRectToWindow(windowId, blit, x, y, TILE_TO_PIXELS(9), TILE_TO_PIXELS(6), i * 8, 0, TILE_TO_PIXELS(1), TILE_TO_PIXELS(2));
+    }
+
+    u32 fontId = FONT_OUTLINED;
+    u32 x = 0;
+    if (!sprite->sHideHPText && !monIsEgg)
+    {
+        ConvertUIntToDecimalStringN(gStringVar1, currHp, STR_CONV_MODE_RIGHT_ALIGN, 4);
+        x = GetStringRightAlignXOffset(fontId, gStringVar1, TILE_TO_PIXELS(3) + 1);
+        SummaryPrint_AddText(windowId, fontId, x, 0, SUMMARY_FNTCLR_INTERFACE, gStringVar1);
+
+        x = TILE_TO_PIXELS(3) + 1;
+        SummaryPrint_AddText(windowId, fontId, x, 0, SUMMARY_FNTCLR_INTERFACE, COMPOUND_STRING("/"));
+
+        x = TILE_TO_PIXELS(4) - 2;
+        ConvertUIntToDecimalStringN(gStringVar1, maxHp, STR_CONV_MODE_LEFT_ALIGN, 4);
+    }
+    else
+    {
+        u32 hpPercent = (currHp * 100) / maxHp;
+        u8 *tail = ConvertUIntToDecimalStringN(gStringVar1, hpPercent, STR_CONV_MODE_LEFT_ALIGN, 4);
+        StringCopy(tail, COMPOUND_STRING("%"));
+        x = GetStringCenterAlignXOffset(fontId, gStringVar1, TILE_TO_PIXELS(7));
+    }
+    SummaryPrint_AddText(windowId, fontId, x, 0, SUMMARY_FNTCLR_INTERFACE, gStringVar1);
+
+    u8 *tileData = (u8 *)GetWindowAttribute(windowId, WINDOW_TILE_DATA);
+    u32 tileNum = TILE_OFFSET_4BPP(sprite->oam.tileNum);
+    CpuCopy32(tileData, (void *)(OBJ_VRAM0 + tileNum), TILE_OFFSET_4BPP(template.width * template.height));
+
+    RemoveWindow(windowId);
 }
 
 static void MonSummary_FadeAndExit(u8 taskId)
@@ -687,8 +835,6 @@ static void SummaryInput_UpdateMon(s32 delta)
 
     if (sMonSummaryDataPtr->useBoxMon)
         idx = SummaryInput_UpdateMonBox(idx, count, delta);
-    else if (IsMultiBattle())
-        idx = SummaryInput_UpdateMonMultiBattle(idx, count, delta);
     else
         idx = SummaryInput_UpdateMonDefault(idx, count, delta);
 
@@ -708,43 +854,6 @@ static s32 SummaryInput_UpdateMonDefault(s32 idx, u32 totalIdx, s32 delta)
     } while (GetMonData(&sMonSummaryDataPtr->list.mons[idx], MON_DATA_SPECIES) == SPECIES_NONE);
 
     return idx;
-}
-
-static s32 SummaryInput_UpdateMonMultiBattle(s32 idx, u32 totalIdx, s32 delta)
-{
-    s32 arrId = 0;
-
-    for (u32 i = 0; i < PARTY_SIZE; i++)
-    {
-        if (sSummaryInput_MultiPartyOrder[i] == idx)
-        {
-            arrId = i;
-            break;
-        }
-    }
-
-    while (TRUE)
-    {
-        const s8 *order = sSummaryInput_MultiPartyOrder;
-
-        arrId += delta;
-        if (arrId < 0 || arrId >= PARTY_SIZE)
-            return -1;
-
-        idx = order[arrId];
-        if (SummaryInput_IsMonValidToView(&sMonSummaryDataPtr->list.mons[idx]))
-            return idx;
-    }
-}
-
-static bool32 SummaryInput_IsMonValidToView(struct Pokemon *mon)
-{
-    if (GetMonData(mon, MON_DATA_SPECIES) == SPECIES_NONE)
-    {
-        return FALSE;
-    }
-
-    return TRUE;
 }
 
 static s32 SummaryInput_UpdateMonBox(s32 idx, u32 totalIdx, s32 delta)
@@ -1445,7 +1554,13 @@ static void SummaryMon_SetStruct(void)
     res->summary.nature = GetNature(mon);
     res->summary.currHp = GetMonData(mon, MON_DATA_HP);
 
-    GetMonData(mon, MON_DATA_OT_NAME, res->summary.trainerName);
+    // MON_DATA_OT_NAME only stores around 7-8 characters (includin EOS)
+    // but NPC trainers may have exceed that name length
+    if (gMain.inBattle && BattleInfo_GetBattleTrainer() != B_TRAINER_PLAYER)
+        StringCopy(res->summary.trainerName, BattleInfo_GetBattleTrainerName());
+    else
+        GetMonData(mon, MON_DATA_OT_NAME, res->summary.trainerName);
+
     ConvertInternationalString(res->summary.trainerName, GetMonData(mon, MON_DATA_LANGUAGE));
     res->summary.ailment = GetMonAilment(mon);
     res->summary.trainerId = GetMonData(mon, MON_DATA_OT_ID);
@@ -1800,12 +1915,10 @@ static const struct MonSummarySprite *SummarySprite_GetMainStruct(u32 idx)
 
 static void SummarySprite_InjectHpBar(struct Sprite *sprite)
 {
-    struct WindowTemplate template = { .width = 8, .height  = 4 }; // 64x32
-    u32 windowId = AddWindow(&template);
-    s32 currHp = 0, maxHp = 0;
-
     struct MonSummary *mon = SummaryMon_GetStruct();
-    if (SummaryScreen_IsMonEgg())
+    s32 maxHp = 0, currHp = 0;
+    bool32 isMonEgg = SummaryScreen_IsMonEgg();
+    if (isMonEgg == TRUE)
     {
         maxHp = mon->eggCycles;
         currHp = maxHp - mon->friendship;
@@ -1815,90 +1928,11 @@ static void SummarySprite_InjectHpBar(struct Sprite *sprite)
         currHp = mon->currHp;
         maxHp = GetMonData(&sMonSummaryDataPtr->mon, MON_DATA_MAX_HP);
     }
-
-    const u8 *blit = SummarySprite_GetMainStruct(SUMMARY_MAIN_SPRITE_HP_BAR)->gfx;
-    BlitBitmapToWindow(windowId, blit, 0, 0, TILE_TO_PIXELS(template.width), TILE_TO_PIXELS(template.height));
-
-    u8 array[7];
-    blit = sSummarySprite_HpBarAnims;
-
-    bool32 fill = CalcBarFilledPixels(maxHp, currHp, 0, &currHp, array, 7);
-    for (u32 i = 0; i < 7; i++)
-    {
-        u32 x, y;
-
-        if (currHp == maxHp && fill == 1)
-            x = 8;
-        else
-            x = array[i];
-
-        x *= 8;
-
-        if (i < 3)
-            y = 0;
-        else if (i == 3)
-            y = 1;
-        else
-            y = 2;
-
-        y *= 16;
-        BlitBitmapRectToWindow(windowId, blit, x, y, TILE_TO_PIXELS(9), TILE_TO_PIXELS(6), i * 8, 0, TILE_TO_PIXELS(1), TILE_TO_PIXELS(2));
-    }
-
-    enum MonSummaryHpBarColors color;
-    switch (GetHPBarLevel(currHp, maxHp))
-    {
-    case HP_BAR_FULL:
-    case HP_BAR_GREEN:
-        color = SUMMARY_HP_BAR_CLR_GREEN;
-        break;
-    case HP_BAR_YELLOW:
-        color = SUMMARY_HP_BAR_CLR_YELLOW;
-        break;
-    case HP_BAR_RED:
-    default:
-        if (maxHp > 1)
-            color = SUMMARY_HP_BAR_CLR_RED;
-        else
-            color = SUMMARY_HP_BAR_CLR_GREEN;
-        break;
-    }
-
-    LoadPalette(&sSummarySprite_HpBarColors[1 + (color * 2)], OBJ_PLTT_ID(sprite->oam.paletteNum) + 6, PLTT_SIZEOF(2));
-
-    u32 fontId = FONT_OUTLINED;
-    u32 x = 0;
-
-    if (SummaryScreen_IsMonEgg() == FALSE)
-    {
-        ConvertUIntToDecimalStringN(gStringVar1, currHp, STR_CONV_MODE_RIGHT_ALIGN, 4);
-        x = GetStringRightAlignXOffset(fontId, gStringVar1, TILE_TO_PIXELS(3) + 1);
-        SummaryPrint_AddText(windowId, fontId, x, 0, SUMMARY_FNTCLR_INTERFACE, gStringVar1);
-
-        x = TILE_TO_PIXELS(3) + 1;
-        SummaryPrint_AddText(windowId, fontId, x, 0, SUMMARY_FNTCLR_INTERFACE, COMPOUND_STRING("/"));
-
-        x = TILE_TO_PIXELS(4) - 2;
-        ConvertUIntToDecimalStringN(gStringVar1, maxHp, STR_CONV_MODE_LEFT_ALIGN, 4);
-    }
-    else
-    {
-        u32 percent = currHp * 100 / maxHp;
-        if (percent == 100)
-            percent = 99;
-
-        ConvertUIntToDecimalStringN(gStringVar1, percent, STR_CONV_MODE_LEFT_ALIGN, CountDigits(percent));
-        StringAppend(gStringVar1,COMPOUND_STRING("%"));
-        u32 letterSpacing = GetFontAttribute(fontId, FONTATTR_LETTER_SPACING);
-        x = GetStringCenterAlignXOffsetWithLetterSpacing(fontId, gStringVar1, TILE_TO_PIXELS(template.width),letterSpacing);
-    }
-    SummaryPrint_AddText(windowId, fontId, x, 0, SUMMARY_FNTCLR_INTERFACE, gStringVar1);
-
-    u8 *tileData = (u8 *)GetWindowAttribute(windowId, WINDOW_TILE_DATA);
-    u32 tileNum = TILE_OFFSET_4BPP(sprite->oam.tileNum);
-    CpuCopy32(tileData, (void *)(OBJ_VRAM0 + tileNum), TILE_OFFSET_4BPP(template.width * template.height));
-
-    RemoveWindow(windowId);
+    sprite->sHideHPText = FALSE; // opponent's party cannot be viewed in the summary screen w/o google glass
+    MonSummary_InjectHpBar(sprite, currHp, maxHp, isMonEgg);
+    // bullshit workaround bc the injected hp colors keeps showing up
+    if (FindTaskIdByFunc(SummaryMode_GetInputFunc(SummaryMode_GetValue())) == TASK_NONE)
+        BlendPalettes(1 << (16 + sprite->oam.paletteNum), 16, RGB_BLACK);
 }
 
 static bool8 SummaryScreen_IsMonEgg(void)
@@ -2165,7 +2199,7 @@ static void SummarySprite_UpdateMonTypes(void)
 
 static u32 SummarySprite_GetTypePaletteTag(enum Type type)
 {
-    return TAG_SUMMARY_TYPE_1 + (type >= TYPE_MYSTERY);
+    return MonSummary_GetTypePaletteFromTag(TAG_SUMMARY_TYPE_1, type);
 }
 
 static void SummarySprite_MonMove(u32 idx, s32 x, s32 y)
