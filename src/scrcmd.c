@@ -3992,7 +3992,6 @@ void ScrFunc_timeprintinggiven(struct ScriptContext *ctx)
 // Start siliconQuests
 bool8 ScrCmd_debugprint(struct ScriptContext *ctx)
 {
-    u16 num;
     const u8 *str = (const u8*)ScriptReadWord(ctx);
     u16 numOrVar = ScriptReadHalfword(ctx);
 
@@ -4000,7 +3999,7 @@ bool8 ScrCmd_debugprint(struct ScriptContext *ctx)
     {
         if (numOrVar != 65535)
         {
-            num = VarGet(numOrVar);
+            u16 num = VarGet(numOrVar);
             DebugPrintfLevel(MGBA_LOG_WARN, "%S, %u", str, num);
         }
         else
