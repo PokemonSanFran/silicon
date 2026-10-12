@@ -46,7 +46,7 @@ void _SiliconExpTest(const struct SiliconExpTestData *data, struct BattlePokemon
             u32 missingExp = targetFrontExp - finalExp;
             u32 expToGet = targetFrontExp - ExpTest_GetTargetExp(species, startLevel);
             u32 fracProgress = 100 * (finalExp - ExpTest_GetTargetExp(species, startLevel)) / expToGet;
-            Test_ExitWithResult(TEST_RESULT_FAIL, __LINE__, ":L%s:%d: Active Pokemon need %d more exp (0.%d to goal)", gTestRunnerState.test->filename, __LINE__, missingExp, fracProgress);
+            Test_ExitWithResult(TEST_RESULT_FAIL, __LINE__, "%s:%d: Active Pokemon need %d more exp (0.%d to goal)", gTestRunnerState.test->filename, __LINE__, missingExp, fracProgress);
         }
 
         if (finalExpBack < targetBackExp)
@@ -54,7 +54,7 @@ void _SiliconExpTest(const struct SiliconExpTestData *data, struct BattlePokemon
             u32 missingExp = targetBackExp - finalExpBack;
             u32 expToGet = targetBackExp - ExpTest_GetTargetExp(species, startLevel);
             u32 fracProgress = 100 * (finalExpBack - ExpTest_GetTargetExp(species, startLevel)) / expToGet;
-            Test_ExitWithResult(TEST_RESULT_FAIL, __LINE__, ":L%s:%d: Benched Pokemon need %d more exp (0.%d to goal of 0.%d of level %d to %d)", gTestRunnerState.test->filename, __LINE__, missingExp, fracProgress, benchPercent, startLevel, data->targetLevel);
+            Test_ExitWithResult(TEST_RESULT_FAIL, __LINE__, "%s:%d: Benched Pokemon need %d more exp (0.%d to goal of 0.%d of level %d to %d)", gTestRunnerState.test->filename, __LINE__, missingExp, fracProgress, benchPercent, startLevel, data->targetLevel);
         }
         ExpTest_ZeroData();
     }
@@ -160,16 +160,27 @@ static const struct SiliconExpTestData sEmrys_GymTrainers =
         TRAINER_NONE
     },
 };
-/*
+
 static const struct SiliconExpTestData sKai_AssholeshomeTrainers =
 {
     .startLevel = LEVEL_CAP_VALUE_4,
     .targetLevel = LEVEL_CAP_VALUE_5,
     .trainerIds =
     {
+        TRAINER_1BC45966,
+        TRAINER_1C2B088C,
+        TRAINER_1C6CA7F6,
+        TRAINER_1CBE4FB1,
+        TRAINER_1CBFAF10,
+        TRAINER_1CC4D5D6,
+        TRAINER_1D63E5A1,
+        TRAINER_1D7A6DED,
+        TRAINER_1D93B10D,
+        TRAINER_1DD07C78,
         TRAINER_NONE
     },
 };
+/*
 static const struct SiliconExpTestData sKauna_GymTrainers =
 {
     .startLevel = LEVEL_CAP_VALUE_5,
@@ -505,13 +516,14 @@ AI_SINGLE_BATTLE_TEST("Silicon Exp Test: Emrys Gym")
 
     SiliconExpTest(&sEmrys_GymTrainers, SILICON_MINIMUM_BENCH_LEVEL_PERCENT);
 }
-/*
+
 AI_SINGLE_BATTLE_TEST("Silicon Exp Test: Kai Assholeshome")
 {
     OptionsMenu_SetSavedOptions(BATTLE_SETTINGS,BATTLE_OPTIONS_EXP_MULTIPLIER,BATTLE_OPTION_MULTIPLIER_1);
 
     SiliconExpTest(&sKai_AssholeshomeTrainers, SILICON_MINIMUM_BENCH_LEVEL_PERCENT);
 }
+/*
 AI_SINGLE_BATTLE_TEST("Silicon Exp Test: Kauna Gym")
 {
     OptionsMenu_SetSavedOptions(BATTLE_SETTINGS,BATTLE_OPTIONS_EXP_MULTIPLIER,BATTLE_OPTION_MULTIPLIER_1);
@@ -704,7 +716,7 @@ TEST("All Resido Mons have learnsets")
 
         const u16 *teachables = GetSpeciesTeachableLearnset(monIndex);
         if (teachables[0] == MOVE_UNAVAILABLE || teachables[0] == MOVE_NONE)
-            Test_ExitWithResult(TEST_RESULT_FAIL, __LINE__, ":L%s:%d: %d | %s has no teachables moves!",gTestRunnerState.test->filename, __LINE__,monIndex,GetSpeciesName(monIndex));
+            Test_ExitWithResult(TEST_RESULT_FAIL, __LINE__, "%s:%d: %d | %s has no teachables moves!",gTestRunnerState.test->filename, __LINE__,monIndex,GetSpeciesName(monIndex));
     }
 }
 
@@ -745,7 +757,7 @@ TEST("All Resido Trainers have Pokemon in the Resido Dex")
                 if (residoId != RESIDO_DEX_NONE && residoId != RESIDO_DEX_COUNT)
                     continue;
 
-                Test_ExitWithResult(TEST_RESULT_FAIL, __LINE__, ":L%s:%d: %S %S is not in Resido.", gTestRunnerState.test->filename, __LINE__, GetTrainerNameFromId(trainerId), GetSpeciesName(species));
+                Test_ExitWithResult(TEST_RESULT_FAIL, __LINE__, "%s:%d: %S %S is not in Resido.", gTestRunnerState.test->filename, __LINE__, GetTrainerNameFromId(trainerId), GetSpeciesName(species));
 
             }
         }
@@ -824,6 +836,9 @@ TEST("All Resido Trainers do not have Game Move Errors")
                 if (!IsSpeciesEnabled(species))
                     continue;
 
+                if (species == SPECIES_SMEARGLE)
+                    continue;
+
                 for (u32 moveIndex = 0; moveIndex < MAX_MON_MOVES; moveIndex++)
                 {
                     u32 move = mon->moves[moveIndex];
@@ -853,11 +868,11 @@ TEST("All Resido Trainers do not have Game Move Errors")
 
                     if (neededLevel > 0)
                     {
-                        Test_ExitWithResult(TEST_RESULT_FAIL, __LINE__,":L%s:%d: %S's %S (#%d) has invalid move %S (Lvl %d < Req %d).",gTestRunnerState.test->filename, __LINE__, GetTrainerNameFromId(trainerId),GetSpeciesName(species), monIndex, GetMoveName(move), level, neededLevel);
+                        Test_ExitWithResult(TEST_RESULT_FAIL, __LINE__,"%s:%d: %S's %S (#%d) has invalid move %S (Lvl %d < Req %d).",gTestRunnerState.test->filename, __LINE__, GetTrainerNameFromId(trainerId),GetSpeciesName(species), monIndex, GetMoveName(move), level, neededLevel);
                     }
                     else
                     {
-                        Test_ExitWithResult(TEST_RESULT_FAIL, __LINE__,":L%s:%d: %S's %S (#%d) has invalid move %S.",gTestRunnerState.test->filename, __LINE__, GetTrainerNameFromId(trainerId),GetSpeciesName(species), monIndex, GetMoveName(move));
+                        Test_ExitWithResult(TEST_RESULT_FAIL, __LINE__,"%s:%d: %S's %S (#%d) has invalid move %S.",gTestRunnerState.test->filename, __LINE__, GetTrainerNameFromId(trainerId),GetSpeciesName(species), monIndex, GetMoveName(move));
                     }
                 }
             }

@@ -3275,7 +3275,7 @@ Brave Nature
 - Life Dew  
 - Baton Pass  
 
-Maushold-Four @ Figy Berry  
+Maushold @ Figy Berry  
 Ability: Friend Guard  
 Level: 40  
 EVs: 4 HP / 252 SpA / 252 Spe  
@@ -7566,37 +7566,40 @@ AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI
 Battle Type: Single
 Type: Regular
 Map Section: HalerbaWilds
+Starting Status: Toxic Spikes Opponent L2
 
-Mudsdale @ Smooth Rock
-Ability: Stamina
+Ursaring @ Dark Gem
+Ability: Quick Feet
 Level: 44
-EVs: 156 HP/244 Def
-Impish Nature
+EVs: 40 Atk / 120 Spe
+Adamant Nature
 IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
-- Sandstorm
-- Body Press
-- Counter
-- Curse
+- Play Rough
+- Body Slam
+- Avalanche
+- Thief
 
-Sandaconda (M) @ Red Card
-Ability: Sand Spit
+Breloom @ Coba Berry
+Ability: Poison Heal
 Level: 44
-EVs: 152 HP/88 Atk/156 Def
+EVs: 40 Atk / 40 Def / 80 Spe
+Jolly Nature
 IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
-- Hurricane
-- Drill Run
-- Fire Fang
-- Skitter Smack
+- Seed Bomb
+- Drain Punch
+- Headbutt
+- Protect
 
-Kadabra @ Life Orb
-Ability: Magic Guard
-Level: 47
-EVs: 148 Def/252 SpA
+Luxray @ Clear Amulet
+Ability: Guts
+Level: 46
+EVs: 40 Atk / 120 Spe
+Hasty Nature
 IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
-- Psychic
-- Thunder Punch
-- Shadow Ball
-- Energy Ball
+- Discharge
+- Double Kick
+- Bite
+- Howl
 
 === TRAINER_15598A38 ===
 Name: 15598A38
@@ -7916,10 +7919,7 @@ Name: 1A2CA162
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Flygon
-Level: 1
-
-Camerupt
+Buneary
 Level: 1
 
 === TRAINER_BD_REMATCH ===
@@ -7992,8 +7992,25 @@ Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 Map Section: Route1
 
-Buneary
-Level: 1
+Donphan @ Covert Cloak  
+Ability: Sturdy  
+Level: 37  
+Impish Nature  
+EVs: 72 Atk / 80 Def
+- Body Press  
+- Stomping Tantrum  
+- Ice Shard  
+- Focus Energy  
+
+Jynx  
+Ability: Dry Skin  
+Level: 36  
+Lax Nature  
+EVs: 80 Def / 56 SpD / 20 Spe  
+- Ice Beam  
+- Confusion  
+- Draining Kiss  
+- Fake Out  
 
 === TRAINER_QUEST_WALLACEARMY_STANC ===
 Name: WallacearmystanC
@@ -8001,8 +8018,25 @@ Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 Map Section: Route99
 
-Buneary
-Level: 1
+Oricorio-Sensu  
+Ability: Dancer  
+Level: 36  
+Gentle Nature  
+EVs: 32 HP / 56 Def / 64 SpA
+- Revelation Dance  
+- Alluring Voice  
+- Air Cutter  
+- Taunt  
+
+Grapploct  
+Ability: Technician  
+Level: 37  
+Brave Nature  
+EVs: 72 HP / 80 Atk
+- Retaliate  
+- Circle Throw  
+- Skitter Smack  
+- Bulk Up  
 
 === TRAINER_QUEST_WALLACEARMY_STAND ===
 Name: WallacearmystanD
@@ -8010,8 +8044,15 @@ Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 Map Section: Route9
 
-Buneary
-Level: 1
+Amoonguss @ Leftovers  
+Ability: Effect Spore  
+Level: 40  
+EVs: 56 Def / 80 SpD  
+Calm Nature  
+- Giga Drain  
+- Synthesis  
+- Rage Powder  
+- Ingrain  
 
 === TRAINER_QUEST_WALLACEARMY_STANE ===
 Name: WallacearmystanE
@@ -8019,8 +8060,36 @@ Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 Map Section: Torgeot Climb
 
-Buneary
-Level: 1
+Pachirisu  
+Ability: Volt Absorb  
+Level: 35  
+EVs: 100 SpA / 40 Spe  
+Naive Nature  
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe  
+- Nuzzle  
+- Electro Ball  
+- Super Fang  
+- Light Screen  
+
+Pawmo  
+Ability: Iron Fist  
+Level: 35  
+EVs: 40 Atk / 100 Spe  
+Impish Nature  
+- Volt Switch  
+- Metal Claw  
+- Mach Punch  
+- Helping Hand  
+
+Rotom @ Ring Target  
+Ability: Levitate  
+Level: 34  
+EVs: 20 HP / 60 Def / 72 SpD  
+Modest Nature  
+- Hex  
+- Thunder Wave  
+- Will-O-Wisp  
+- Trick  
 
 === TRAINER_QUEST_WALLACEARMY_STANF ===
 Name: WallacearmystanF
@@ -8028,48 +8097,184 @@ Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 Map Section: Naval Base
 
-Buneary
-Level: 1
+Swalot
+Ability: Gluttony
+Level: 40
+EVs: 156 SpA
+Bold Nature
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+- Spit Up
+- Swallow
+- Stockpile
+- Helping Hand
+
+Tatsugiri-Droopy @ Binding Band
+Ability: Storm Drain
+Level: 40
+EVs: 156 SpA
+Sassy Nature
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+- Muddy Water
+- Dragon Pulse
+- Whirlpool
+- Harden
 
 === TRAINER_1CC4D5D6 ===
 Name: 1CC4D5D6
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Buneary
-Level: 1
+Marshtomp @ Rindo Berry  
+Ability: Torrent  
+Level: 37  
+EVs: 60 Def / 80 SpD  
+Bashful Nature  
+- Focus Punch  
+- Water Pledge  
+- Ancient Power  
+- Avalanche  
+
+Grotle  
+Ability: Shell Armor  
+Level: 37  
+EVs: 80 Def / 60 SpD  
+Sassy Nature  
+- Superpower  
+- Grass Pledge  
+- Stealth Rock  
+- Leech Seed  
+
+Smeargle @ Quick Claw  
+Ability: Moody  
+Level: 39  
+EVs: 160 HP  
+Bold Nature  
+- Fire Pledge  
+- Spore  
+- Substitute  
+- Sketch  
+
+Magmar  
+Ability: Flame Body  
+Level: 37  
+EVs: 120 SpA / 40 SpD  
+Naive Nature  
+- Heat Wave  
+- Thunder Punch  
+- Acid Spray  
+- Follow Me  
 
 === TRAINER_1D63E5A1 ===
 Name: 1D63E5A1
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Buneary
-Level: 1
+Minior-Green @ Focus Sash
+Ability: Shields Down
+Level: 40
+EVs: 160 Atk
+Jolly Nature
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+- Self-Destruct
+- Shell Smash
+
+Slurpuff @ Chilan Berry
+Ability: Unburden
+Level: 40
+EVs: 160 SpA
+Timid Nature
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+- Misty Explosion
 
 === TRAINER_1D7A6DED ===
 Name: 1D7A6DED
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Buneary
-Level: 1
+Mudsdale
+Ability: Stamina
+Level: 36
+EVs: 60 HP / 100 Def
+Impish Nature
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+- Body Press
+- Counter
+- Sandstorm
+- Curse
+
+Kadabra @  Life Orb
+Ability: Magic Guard
+Level: 37
+EVs: 40 Def / 120 SpA
+Timid Nature
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+- Energy Ball
+- Shadow Ball
+- Thunder Punch
 
 === TRAINER_1D93B10D ===
 Name: 1D93B10D
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Buneary
-Level: 1
+Sandaconda @  Red Card
+Ability: Sand Spit
+Level: 37
+EVs: 60 HP / 40 Atk / 60 Def
+Bashful Nature
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+- Drill Run
+- Fire Fang
+- Skitter Smack
+
+Excadrill
+Ability: Sand Rush
+Level: 36
+EVs: 40 Atk / 120 SpD
+Careful Nature
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+- Stomping Tantrum
+- Crush Claw
+- Metal Claw
+- Sandstorm
 
 === TRAINER_1DD07C78 ===
-Name: 1DD07C78
+Name: Olly
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Buneary
-Level: 1
+Togetic @ Weakness Policy
+Ability: Serene Grace
+Level: 39
+EVs: 40 SpD / 120 Spe
+Timid Nature
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+- Ancient Power
+- Draining Kiss
+- Stored Power
+- Follow Me
+
+Maushold-Four
+Ability: Friend Guard
+Level: 38
+EVs: 120 Def / 40 SpD
+Naive Nature
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+- Super Fang
+- Mud Slap
+- Copycat
+- Endure
+
+Medicham @ Big Root
+Ability: Inner Focus
+Level: 38
+EVs: 120 Atk / 40 Spe
+Jolly Nature
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+- Thunder Punch
+- Drain Punch
+- Psycho Cut
+- Fake Out
 
 === TRAINER_1E5E6E80 ===
 Name: 1E5E6E80
