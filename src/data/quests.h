@@ -3868,12 +3868,12 @@ const struct SideQuest sSideQuests[QUEST_COUNT] =
         .subquests = sBuildingAnExhibit_Sub,
         .numSubquests = QUEST_BUILDINGANEXHIBIT_SUB_COUNT
     },
-    [QUEST_STEALTHEAXE] =
+    [QUEST_PEN_TEST] =
     {
-        .name = gText_Quest_StealTheAxe_Name,
-        .desc[FLAG_GET_ACTIVE] = gText_Quest_StealTheAxe_Desc,
-        .desc[FLAG_GET_COMPLETED] = gText_Quest_StealTheAxe_DoneDesc,
-        .map = gText_Quest_StealTheAxe_Map,
+        .name = COMPOUND_STRING(""),
+        .desc[FLAG_GET_ACTIVE] = COMPOUND_STRING(""),
+        .desc[FLAG_GET_COMPLETED] = COMPOUND_STRING(""),
+        .map = COMPOUND_STRING(""),
         .sprite = OBJ_EVENT_GFX_NERIENE,
         .spritetype = QUEST_SPRITE_TYPE_OBJECT,
         .subquests = NULL,

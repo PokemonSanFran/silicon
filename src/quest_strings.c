@@ -323,11 +323,6 @@ const u8 gText_Quest_PandaPride_Desc[] =_("Lorem Desc");
 const u8 gText_Quest_PandaPride_DoneDesc[] =_("Done Desc");
 const u8 gText_Quest_PandaPride_Map[] =_("HodouCity");
 
-const u8 gText_Quest_StealTheAxe_Name[] =_("Steal The Axe");
-const u8 gText_Quest_StealTheAxe_Desc[] =_("Lorem Desc");
-const u8 gText_Quest_StealTheAxe_DoneDesc[] =_("Done Desc");
-const u8 gText_Quest_StealTheAxe_Map[] =_("HalaiIsland");
-
 const u8 gText_Quest_Skilllibrary_Name[] =_("Skill Library");
 const u8 gText_Quest_Skilllibrary_Desc[] =_("");
 const u8 gText_Quest_Skilllibrary_DoneDesc[] =_("");
