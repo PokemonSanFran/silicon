@@ -14,14 +14,14 @@
   "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
   "connections": [
     {
-      "map": "MAP_ROUTE11",
-      "offset": 0,
-      "direction": "up"
-    },
-    {
       "map": "MAP_PINTILLON_HOUSE_EXTERIOR",
       "offset": 16,
       "direction": "down"
+    },
+    {
+      "map": "MAP_ROUTE11",
+      "offset": 0,
+      "direction": "up"
     }
   ],
   "object_events": [
