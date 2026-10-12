@@ -147,7 +147,7 @@ Type: Boss
 Map Section: Mermereza City
 
 Swalot @ Aguav Berry
-Ability: Gluttony
+Ability: Gluttony 
 Level: 26 
 Ball: Master
 Shiny: No
@@ -1095,6 +1095,94 @@ Serious Nature
 - Trick Room  
 
 === TRAINER_VIGRIM ===
+Name: Vigrim
+Pic: Vigrim
+AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
+Battle Type: Double
+Reveal: Vigrim
+Class: The Tide Leader
+Type: Boss
+Overworld Sprite: Vigrim
+Map Section: Naval Base
+
+Poliwrath @ Focus Sash  
+Ability: Swift Swim  
+Level: 76   
+Ball: Master
+Shiny: No
+Happiness: 1
+EVs: 12 HP / 248 Atk / 248 Spe  
+Adamant Nature  
+- Liquidation  
+- Close Combat  
+- Ice Punch  
+- Earthquake  
+
+Gyarados @ Wacan Berry  
+Ability: Intimidate  
+Level: 75  
+Ball: Master
+Shiny: No
+Happiness: 1
+EVs: 132 HP / 132 Atk / 4 Def / 4 SpD / 236 Spe  
+Adamant Nature  
+- Waterfall  
+- Crunch  
+- Dragon Dance  
+
+Beartic @ Waterium Z  
+Ability: Swift Swim  
+Level: 75  
+Ball: Master
+Shiny: No
+Happiness: 1
+EVs: 4 HP / 252 Atk / 252 Spe  
+Adamant Nature  
+- Icicle Crash  
+- Liquidation  
+- Aqua Jet  
+- Play Rough
+
+Mienshao @ Choice Band  
+Ability: Inner Focus  
+Level: 76    
+Ball: Master
+Shiny: No
+Happiness: 1
+EVs: 4 HP / 252 Atk / 252 Spe  
+Jolly Nature  
+- Close Combat  
+- U-turn  
+- Poison Jab  
+- Triple Axel  
+
+Gliscor @ Flying Gem  
+Ability: Hyper Cutter  
+Level: 76  
+Ball: Master
+Shiny: No
+Happiness: 1
+EVs: 64 HP / 196 Atk / 248 Spe  
+Adamant Nature  
+- High Horsepower  
+- Acrobatics  
+- X-Scissor  
+- Crabhammer  
+
+Swampert @ Swampertite  
+Ability: Torrent  
+Level: 77  
+Ball: Master
+Shiny: No
+Happiness: 1
+EVs: 136 HP / 116 Atk / 4 Def / 4 SpD / 248 Spe  
+Adamant Nature  
+- Liquidation  
+- Earthquake  
+- High Horsepower  
+- Ice Punch  
+
+=== TRAINER_VIGRIM_MANHUNT ===
 Name: Vigrim
 Pic: Vigrim
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
@@ -2314,7 +2402,7 @@ Adamant Nature
 - Rock Slide  
 - U-turn  
 
-Pheromosa @ Fightinium Z  
+Pheromosa Sharprise @ Fightinium Z  
 Ability: Swift Ascent  
 Level: 81  
 Ball: Master
@@ -2385,7 +2473,7 @@ IVs: 0 Atk
 - Energy Ball  
 - Calm Mind  
 
-Blacephalon @ Psychium Z  
+Blacephalon Sharprise @ Psychium Z  
 Ability: Swift Ascent  
 Level: 81  
 Ball: Master
@@ -2455,7 +2543,7 @@ IVs: 0 Atk
 - Bug Buzz  
 - Flash Cannon
 
-Xurkitree @ Electrium Z  
+Xurkitree Sharprise @ Electrium Z  
 Ability: Swift Ascent  
 Level: 81  
 Ball: Master
@@ -2518,7 +2606,7 @@ Careful Nature
 - Zen Headbutt  
 - Giga Impact  
 
-Buzzwole @ Buginium Z  
+Buzzwole Sharprise @ Buginium Z  
 Ability: Swift Ascent  
 Level: 85  
 Ball: Master
@@ -7992,6 +8080,55 @@ Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 Map Section: Route1
 
+Buneary
+Level: 1
+
+
+=== TRAINER_QUEST_WALLACEARMY_STANC ===
+Name: WallacearmystanC
+Pic: Cooltrainer M
+AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
+Map Section: Route99
+
+Buneary
+Level: 1
+ 
+
+=== TRAINER_QUEST_WALLACEARMY_STAND ===
+Name: WallacearmystanD
+Pic: Cooltrainer M
+AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
+Map Section: Route9
+
+Buneary
+Level: 1
+ 
+
+=== TRAINER_QUEST_WALLACEARMY_STANE ===
+Name: WallacearmystanE
+Pic: Cooltrainer M
+AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
+Map Section: Torgeot Climb
+
+Buneary
+Level: 1
+
+
+=== TRAINER_QUEST_WALLACEARMY_STANF ===
+Name: WallacearmystanF
+Pic: Cooltrainer M
+AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
+Map Section: Naval Base
+
+Buneary
+Level: 1
+
+=== TRAINER_1BC45966 ===
+Name: 1BC45966
+Pic: Cooltrainer M
+AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
+Battle Type: Double
+
 Donphan @ Covert Cloak  
 Ability: Sturdy  
 Level: 37  
@@ -8012,11 +8149,11 @@ EVs: 80 Def / 56 SpD / 20 Spe
 - Draining Kiss  
 - Fake Out  
 
-=== TRAINER_QUEST_WALLACEARMY_STANC ===
-Name: WallacearmystanC
+=== TRAINER_1C2B088C ===
+Name: 1C2B088C
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
-Map Section: Route99
+Battle Type: Double
 
 Oricorio-Sensu  
 Ability: Dancer  
@@ -8036,13 +8173,13 @@ EVs: 72 HP / 80 Atk
 - Retaliate  
 - Circle Throw  
 - Skitter Smack  
-- Bulk Up  
+- Bulk Up
 
-=== TRAINER_QUEST_WALLACEARMY_STAND ===
-Name: WallacearmystanD
+=== TRAINER_1C6CA7F6 ===
+Name: 1C6CA7F6
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
-Map Section: Route9
+Battle Type: Double
 
 Amoonguss @ Leftovers  
 Ability: Effect Spore  
@@ -8054,11 +8191,11 @@ Calm Nature
 - Rage Powder  
 - Ingrain  
 
-=== TRAINER_QUEST_WALLACEARMY_STANE ===
-Name: WallacearmystanE
+=== TRAINER_1CBE4FB1 ===
+Name: 1CBE4FB1
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
-Map Section: Torgeot Climb
+Battle Type: Double
 
 Pachirisu  
 Ability: Volt Absorb  
@@ -8089,13 +8226,13 @@ Modest Nature
 - Hex  
 - Thunder Wave  
 - Will-O-Wisp  
-- Trick  
+- Trick
 
-=== TRAINER_QUEST_WALLACEARMY_STANF ===
-Name: WallacearmystanF
+=== TRAINER_DON_AND_MEL ===
+Name: Don & Mel
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
-Map Section: Naval Base
+Battle Type: Double
 
 Swalot
 Ability: Gluttony
@@ -8123,6 +8260,7 @@ IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
 Name: 1CC4D5D6
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
+Battle Type: Double
 
 Marshtomp @ Rindo Berry  
 Ability: Torrent  
@@ -8168,6 +8306,7 @@ Naive Nature
 Name: 1D63E5A1
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
+Battle Type: Double
 
 Minior-Green @ Focus Sash
 Ability: Shields Down
@@ -8190,6 +8329,7 @@ IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
 Name: 1D7A6DED
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
+Battle Type: Double
 
 Mudsdale
 Ability: Stamina
@@ -8216,6 +8356,7 @@ IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
 Name: 1D93B10D
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
+Battle Type: Double
 
 Sandaconda @  Red Card
 Ability: Sand Spit
@@ -8238,10 +8379,11 @@ IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
 - Metal Claw
 - Sandstorm
 
-=== TRAINER_1DD07C78 ===
+=== TRAINER_OLLY ===
 Name: Olly
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
+Battle Type: Double
 
 Togetic @ Weakness Policy
 Ability: Serene Grace
@@ -8266,7 +8408,7 @@ IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
 - Endure
 
 Medicham @ Big Root
-Ability: Inner Focus
+Ability: Pure Power
 Level: 38
 EVs: 120 Atk / 40 Spe
 Jolly Nature
@@ -8461,6 +8603,14 @@ Buneary
 Level: 1
 
 === TRAINER_24AAFD0D ===
+Name: 24AAFD0D
+Pic: Cooltrainer M
+AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
+
+Buneary
+Level: 1
+
+=== TRAINER_24AC96DF ===
 Name: 24AAFD0D
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
@@ -11868,6 +12018,22 @@ AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI
 Buneary
 Level: 1
 
+=== TRAINER_A646F21E ===
+Name: A6328173
+Pic: Cooltrainer M
+AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
+
+Buneary
+Level: 1
+
+=== TRAINER_A685428F ===
+Name: A6328173
+Pic: Cooltrainer M
+AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
+
+Buneary
+Level: 1
+
 === TRAINER_A686809A ===
 Name: A686809A
 Pic: Cooltrainer M
@@ -12134,38 +12300,6 @@ Level: 1
 
 === TRAINER_AF765F9F ===
 Name: AF765F9F
-Pic: Cooltrainer M
-AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
-
-Buneary
-Level: 1
-
-=== TRAINER_AFA4A980 ===
-Name: AFA4A980
-Pic: Cooltrainer M
-AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
-
-Buneary
-Level: 1
-
-=== TRAINER_AFA5BAC9 ===
-Name: AFA5BAC9
-Pic: Cooltrainer M
-AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
-
-Buneary
-Level: 1
-
-=== TRAINER_AFD8F2EF ===
-Name: AFD8F2EF
-Pic: Cooltrainer M
-AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
-
-Buneary
-Level: 1
-
-=== TRAINER_AFE855B1 ===
-Name: AFE855B1
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
