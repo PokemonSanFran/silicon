@@ -80,7 +80,7 @@ static void PartySlot_DrawLevel(u32, struct Pokemon *, u32);
 static void PartySlot_DrawHp(u32, struct Pokemon *, u32);
 static void PartySlot_DrawItem(u32, struct Pokemon *, u32);
 static void PartySlot_FillRect(u32, u32, u32, u32, u32, u32);
-static void PartySlot_Print(u32, u32, u32, u32, enum PartySlotTextColors, const u8 *);
+static void PartySlot_Print(u32, u32, u32, u32, enum PartyTextColors, const u8 *);
 static bool32 PartyCursor_HandleDirectionalInput(void);
 static void PartyCursor_SnapToSlot(void);
 static void PartyHeld_Lift(void);
@@ -211,8 +211,11 @@ static void PartySetup_Graphics(void)
                 BG_PLTT_ID(0), PLTT_SIZE_4BPP);
     SetBackdropFromColor(RGB_BLACK);
 
-    LoadPalette(&sPartyMenu_Pal_Slot[BG_PLTT_ID(PARTY_PAL_SLOT_FIRST)], BG_PLTT_ID(PARTY_PAL_SLOT_FIRST),
-                sizeof(sPartyMenu_Pal_Slot) - PLTT_SIZE_4BPP * PARTY_PAL_SLOT_FIRST);
+    LoadPalette(&sPartyMenu_Pal_Slot[BG_PLTT_ID(PARTY_BG_PAL_SLOT_MAIN)], BG_PLTT_ID(PARTY_BG_PAL_SLOT_MAIN), PLTT_SIZE_4BPP);
+    LoadPalette(&sPartyMenu_Pal_Slot[BG_PLTT_ID(PARTY_BG_PAL_SLOT_MAIN)], BG_PLTT_ID(PARTY_BG_PAL_SLOT_MARKED), PLTT_SIZE_4BPP);
+    LoadPalette(&sPartyMenu_Pal_Slot[BG_PLTT_ID(PARTY_BG_PAL_SLOT_MARKED) + PARTY_SLOT_MARKED_PAL_START],
+                BG_PLTT_ID(PARTY_BG_PAL_SLOT_MARKED) + PARTY_SLOT_MARKED_PAL_START,
+                PLTT_SIZEOF(PARTY_SLOT_MARKED_PAL_END - PARTY_SLOT_MARKED_PAL_START + 1));
 }
 
 static void PartySetup_Windows(void)
@@ -231,7 +234,7 @@ static void PartySetup_Windows(void)
             .tilemapTop = sPartyMenu_SlotRows[row].top,
             .width = PARTY_SLOT_WIDTH,
             .height = sPartyMenu_SlotRows[row].height,
-            .paletteNum = PARTY_PAL_SLOT_SLOTS,
+            .paletteNum = PARTY_BG_PAL_SLOT_MAIN,
             .baseBlock = baseBlock,
         };
 
@@ -244,7 +247,7 @@ static void PartySetup_Windows(void)
         .bg = PARTY_BG_HELD,
         .width = PARTY_SLOT_WIDTH,
         .height = PARTY_SLOT_MID_HEIGHT,
-        .paletteNum = PARTY_PAL_SLOT_SLOTS,
+        .paletteNum = PARTY_BG_PAL_SLOT_MAIN,
         .baseBlock = baseBlock,
     };
     sPartyMenuDataPtr->heldWindowId = AddWindow(&heldTemplate);
@@ -372,7 +375,7 @@ static void PartySlot_DrawMonInfo(u32 windowId, struct Pokemon *mon, u32 row)
     GetMonData(mon, MON_DATA_NICKNAME, nickname);
     StringGet_Nickname(nickname);
     PartySlot_Print(windowId, GetFontIdToFit(nickname, FONT_OUTLINED, 0, rect->width),
-                    rect->x, rect->y + contentY, COLORID_PARTY_DEFAULT, nickname);
+                    rect->x, rect->y + contentY, COLORID_PARTY_WHITE, nickname);
 
     if (GetMonData(mon, MON_DATA_IS_EGG))
         return;
@@ -395,10 +398,10 @@ static void PartySlot_DrawGender(u32 windowId, struct Pokemon *mon, const u8 *ni
     switch (GetMonGender(mon))
     {
     case MON_MALE:
-        PartySlot_Print(windowId, FONT_OUTLINED, rect->x, rect->y + contentY, COLORID_PARTY_MALE, gText_MaleSymbol);
+        PartySlot_Print(windowId, FONT_OUTLINED, rect->x, rect->y + contentY, COLORID_PARTY_BLUE, gText_MaleSymbol);
         break;
     case MON_FEMALE:
-        PartySlot_Print(windowId, FONT_OUTLINED, rect->x, rect->y + contentY, COLORID_PARTY_FEMALE, gText_FemaleSymbol);
+        PartySlot_Print(windowId, FONT_OUTLINED, rect->x, rect->y + contentY, COLORID_PARTY_RED, gText_FemaleSymbol);
         break;
     }
 }
@@ -410,8 +413,8 @@ static void PartySlot_DrawLevel(u32 windowId, struct Pokemon *mon, u32 contentY)
     u8 level[4];
 
     ConvertIntToDecimalStringN(level, GetMonData(mon, MON_DATA_LEVEL), STR_CONV_MODE_LEFT_ALIGN, 3);
-    PartySlot_Print(windowId, FONT_OUTLINED, rect->x, rect->y + contentY, COLORID_PARTY_LEVEL, gText_LevelSymbol);
-    PartySlot_Print(windowId, FONT_OUTLINED, numberX, rect->y + contentY, COLORID_PARTY_DEFAULT, level);
+    PartySlot_Print(windowId, FONT_OUTLINED, rect->x, rect->y + contentY, COLORID_PARTY_YELLOW, gText_LevelSymbol);
+    PartySlot_Print(windowId, FONT_OUTLINED, numberX, rect->y + contentY, COLORID_PARTY_WHITE, level);
 }
 
 static void PartySlot_DrawHp(u32 windowId, struct Pokemon *mon, u32 contentY)
@@ -438,7 +441,7 @@ static void PartySlot_DrawHp(u32 windowId, struct Pokemon *mon, u32 contentY)
     *end++ = CHAR_SLASH;
     ConvertIntToDecimalStringN(end, maxHp, STR_CONV_MODE_LEFT_ALIGN, 3);
     PartySlot_Print(windowId, FONT_OUTLINED, rect->x + GetStringRightAlignXOffset(FONT_OUTLINED, text, rect->width),
-                    rect->y + contentY, COLORID_PARTY_DEFAULT, text);
+                    rect->y + contentY, COLORID_PARTY_WHITE, text);
 }
 
 static void PartySlot_DrawItem(u32 windowId, struct Pokemon *mon, u32 contentY)
@@ -451,7 +454,7 @@ static void PartySlot_DrawItem(u32 windowId, struct Pokemon *mon, u32 contentY)
 
     const u8 *name = GetItemName(item);
     PartySlot_Print(windowId, GetFontIdToFit(name, FONT_OUTLINED, 0, rect->width),
-                    rect->x, rect->y + contentY, COLORID_PARTY_DEFAULT, name);
+                    rect->x, rect->y + contentY, COLORID_PARTY_WHITE, name);
 }
 
 static void PartySlot_FillRect(u32 windowId, u32 color, u32 x, u32 y, u32 width, u32 height)
@@ -477,7 +480,7 @@ static void PartySlot_FillRect(u32 windowId, u32 color, u32 x, u32 y, u32 width,
     }
 }
 
-static void PartySlot_Print(u32 windowId, u32 fontId, u32 x, u32 y, enum PartySlotTextColors color, const u8 *str)
+static void PartySlot_Print(u32 windowId, u32 fontId, u32 x, u32 y, enum PartyTextColors color, const u8 *str)
 {
     AddTextPrinterParameterized4(windowId, fontId, x, y, 0, 0, sPartyMenu_TextColors[color], TEXT_SKIP_DRAW, str);
 }

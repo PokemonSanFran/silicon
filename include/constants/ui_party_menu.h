@@ -2,8 +2,13 @@
 #define GUARD_CONSTANTS_UI_PARTY_MENU_H
 
 // pal 0 comes from the BG3 wallpaper
-#define PARTY_PAL_SLOT_FIRST   1
-#define PARTY_PAL_SLOT_SLOTS   1
+#define PARTY_BG_PAL_SLOT_MAIN      1
+#define PARTY_BG_PAL_SLOT_MARKED    2
+
+// when a slot is marked (e.g., moving item) we highlight the slot
+// by swapping in a different palette (see pal2 in tiles.png)
+#define PARTY_SLOT_MARKED_PAL_START 1
+#define PARTY_SLOT_MARKED_PAL_END   3
 
 // ================================================================
 // Party slot defines
@@ -37,8 +42,8 @@
 #define PARTY_SLOT_GENDER_W     8
 #define PARTY_SLOT_GENDER_H     PARTY_SLOT_TEXT_HEIGHT
 
-#define PARTY_SLOT_LEVEL_X      4
-#define PARTY_SLOT_LEVEL_Y      25
+#define PARTY_SLOT_LEVEL_X      5
+#define PARTY_SLOT_LEVEL_Y      24
 #define PARTY_SLOT_LEVEL_W      24
 #define PARTY_SLOT_LEVEL_H      PARTY_SLOT_TEXT_HEIGHT
 
@@ -70,8 +75,8 @@
 #define PARTY_SPRITE_SUBPRIORITY_MON_ICON   PARTY_SPRITE_SUBPRIORITY_STATUS + 1
 
 // mon icons
-#define PARTY_MON_ICON_X            23
-#define PARTY_MON_ICON_Y            27
+#define PARTY_MON_ICON_X            24
+#define PARTY_MON_ICON_Y            26
 #define PARTY_MON_ICON_X_SPACING    112
 #define PARTY_MON_ICON_Y_SPACING    44
 
@@ -114,12 +119,14 @@ enum PartyMenuSlotRows
     NUM_PARTY_SLOT_ROWS
 };
 
-enum PartySlotTextColors
+enum PartyTextColors
 {
-    COLORID_PARTY_DEFAULT,
-    COLORID_PARTY_MALE,
-    COLORID_PARTY_FEMALE,
-    COLORID_PARTY_LEVEL,
+    COLORID_PARTY_WHITE,
+    COLORID_PARTY_BLUE,
+    COLORID_PARTY_GREEN,
+    COLORID_PARTY_YELLOW,
+    COLORID_PARTY_RED,
+    COLORID_PARTY_GREY,
     NUM_PARTY_TEXT_COLORS
 };
 

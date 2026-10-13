@@ -142,10 +142,13 @@ static const struct
 // see pal 1 in tiles.png
 static const u8 sPartyMenu_TextColors[NUM_PARTY_TEXT_COLORS][3] =
 {
-    [COLORID_PARTY_DEFAULT] = {0, 5,  4},  // white
-    [COLORID_PARTY_MALE]    = {0, 5,  1},  // blue
-    [COLORID_PARTY_FEMALE]  = {0, 5, 14},  // red
-    [COLORID_PARTY_LEVEL]   = {0, 5, 13},  // yellow
+    // from pal 1 of tiles.png
+    [COLORID_PARTY_WHITE]   = {0, 5,  4},
+    [COLORID_PARTY_BLUE]    = {0, 5,  1},
+    [COLORID_PARTY_GREEN]   = {0, 5, 12},
+    [COLORID_PARTY_YELLOW]  = {0, 5, 13},
+    [COLORID_PARTY_RED]     = {0, 5, 14},
+    [COLORID_PARTY_GREY]    = {0, 5, 15},
 };
 
 // {frame, empty, fill} per HP_BAR_* level
