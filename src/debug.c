@@ -383,6 +383,7 @@ static void DebugAction_Jump_JumpPlayerToStoryPoint(u8 taskId, enum StoryJumpPoi
 static void Debug_CreateInputDisplayWindow(u8 taskId);
 static void DebugNativeStep_DelayedSelection(u8 taskId);
 static void DebugAction_Selection_Init(u8 taskId, const void *params);
+static void DebugSelectionStep_ReturnToMainMenu(u8 taskId); // siliconQuests
 
 extern const u8 Debug_FlagsNotSetOverworldConfigMessage[];
 extern const u8 Debug_FlagsNotSetBattleConfigMessage[];
@@ -461,6 +462,7 @@ static const struct DebugSelection sTrainerFromMapSelection;
 static const struct DebugSelection sTrainer1Selection;
 static const struct DebugSelection sTrainer2Selection;
 static const struct DebugSelection sPartnerSelection;
+static const struct DebugSelection sQuestJumpTypeSelection; // siliconQuests
 
 #include "data/map_group_count.h"
 
@@ -931,6 +933,7 @@ static const u8 *const sDebugMenu_Actions_BagUse_Options[] =
 static const struct DebugMenuOption sDebugMenu_Actions_Main[] =
 {
     { COMPOUND_STRING("Story Jump…"),   DebugAction_OpenSubMenu, sDebugMenu_Actions_StoryJump, },
+    { COMPOUND_STRING("Quest Debug…{CLEAR_TO 110}{RIGHT_ARROW}"),  DebugAction_Selection_Init, &sQuestJumpTypeSelection, }, // siliconQuests
     { COMPOUND_STRING("Utilities…"),    DebugAction_OpenSubMenu, sDebugMenu_Actions_Utilities, },
     { COMPOUND_STRING("PC/Bag…"),       DebugAction_OpenSubMenu, sDebugMenu_Actions_PCBag, },
     { COMPOUND_STRING("Party…"),        DebugAction_OpenSubMenu, sDebugMenu_Actions_Party, },
@@ -1171,6 +1174,21 @@ static void Debug_CreateInputDisplayWindow(u8 taskId)
     CopyWindowToVram(windowId, COPYWIN_FULL);
     gTasks[taskId].tSubWindowId = windowId;
 }
+
+// Start siliconQuests
+static void Debug_CreateInputDisplayWindowWide(u8 taskId)
+{
+    u8 windowId;
+
+    ClearStdWindowAndFrame(gTasks[taskId].tWindowId, TRUE);
+    RemoveWindow(gTasks[taskId].tWindowId);
+    LoadMessageBoxAndBorderGfx();
+    windowId = AddWindow(&sDebugMenuWindowTemplateExtra_Wide);
+    DrawStdWindowFrame(windowId, FALSE);
+    CopyWindowToVram(windowId, COPYWIN_FULL);
+    gTasks[taskId].tSubWindowId = windowId;
+}
+// End siliconQuests
 
 static void DestroyDebugIcon(u8 taskId)
 {
@@ -1486,6 +1504,15 @@ static void DebugSelectionStep_GenericInputConfirmAndDestroyIcon(u8 taskId)
     DestroyDebugIcon(taskId);
     DebugSelectionStep_GenericInputConfirm(taskId);
 }
+
+// Start siliconQuests
+static void DebugSelectionStep_ReturnToMainMenu(u8 taskId)
+{
+    Debug_DestroyMenu(taskId);
+    Debug_RemoveCallbackMenu();
+    DebugAction_OpenSubMenu(taskId, sDebugMenu_Actions_Main);
+}
+// End siliconQuests
 
 static void DebugSelectionStep_ReturnToUtilMenu(u8 taskId)
 {
@@ -2783,6 +2810,169 @@ static void DebugSelectionStep_MovesConfirm(u8 taskId)
 UPDATE_GENERIC_INPUT(Level, Level)
 UPDATE_GENERIC_INPUT(OutbreakProbability, Probability)
 UPDATE_GENERIC_INPUT(OutbreakDaysLeft, Days Left)
+
+// Start siliconQuests
+static void DebugSelectionStep_UpdateQuestJumpType(u8 taskId, u8 digits, u32 min, u32 max)
+{
+    u32 type = gTasks[taskId].tInput;
+    ConvertIntToDecimalStringN(gStringVar3, type, STR_CONV_MODE_LEADING_ZEROS, digits);
+    StringExpandPlaceholders(gStringVar1, COMPOUND_STRING("Jump Type: {STR_VAR_3}"));
+    u8 *end;
+
+    if (type == 0)
+        end = StringCopy(gStringVar2,COMPOUND_STRING("Jump to Quest State"));
+    else
+        end = StringCopy(gStringVar2,COMPOUND_STRING("Set Quest State"));
+
+    WrapFontIdToFit(gStringVar2, end, DEBUG_MENU_FONT, WindowWidthPx(gTasks[taskId].tSubWindowId));
+    StringCopy(gStringVar3, COMPOUND_STRING(""));
+    DebugNativeStep_PrintWindowSelection(taskId);
+}
+
+static void DebugSelectionStep_UpdateQuest(u8 taskId, u8 digits, u32 min, u32 max)
+{
+    for (u32 questIndex = min; questIndex < QUEST_COUNT; questIndex++)
+    {
+        if (sSideQuests[questIndex].states[0].name != NULL)
+            break;
+        min++;
+    }
+
+    for (u32 questIndex = max; questIndex > 0; questIndex--)
+    {
+        if (sSideQuests[questIndex].states[0].name != NULL)
+            break;
+        max--;
+    }
+
+    bool32 loopBreak = FALSE;
+    while (loopBreak == FALSE)
+    {
+        if (JOY_NEW(DPAD_DOWN) && gTasks[taskId].tInput <= min)
+        {
+            gTasks[taskId].tInput = max;
+        }
+
+        if (JOY_NEW(DPAD_UP) && gTasks[taskId].tInput >= max)
+        {
+            gTasks[taskId].tInput = min;
+        }
+
+        while (sSideQuests[gTasks[taskId].tInput].states[0].name == NULL)
+        {
+            if (JOY_NEW(DPAD_DOWN))
+            {
+                gTasks[taskId].tInput--;
+            }
+            else if (JOY_NEW(DPAD_UP))
+            {
+                gTasks[taskId].tInput++;
+            }
+            else
+                gTasks[taskId].tInput++;
+        }
+        loopBreak = TRUE;
+    }
+
+    enum QuestIdList quest = gTasks[taskId].tInput;
+
+    ConvertIntToDecimalStringN(gStringVar3, quest, STR_CONV_MODE_LEADING_ZEROS, digits);
+    StringExpandPlaceholders(gStringVar1, COMPOUND_STRING("Quest: {STR_VAR_3}"));
+    u8 *end = StringCopy(gStringVar2,sSideQuests[quest].name);
+    WrapFontIdToFit(gStringVar2, end, DEBUG_MENU_FONT, WindowWidthPx(gTasks[taskId].tSubWindowId));
+    StringCopy(gStringVar3, COMPOUND_STRING(""));
+    DebugNativeStep_PrintWindowSelection(taskId);
+}
+
+static void DebugSelectionStep_UpdateQuestState(u8 taskId, u8 digits, u32 min, u32 max)
+{
+    enum QuestIdList quest = DebugSelection_GetData(taskId, 1);
+
+    for (u32 questIndex = MAX_QUEST_STATES; questIndex > 0; questIndex--)
+    {
+        if (sSideQuests[quest].states[questIndex].name != NULL)
+            break;
+        max--;
+    }
+
+    if (JOY_NEW(DPAD_DOWN) && gTasks[taskId].tInput <= min)
+    {
+        gTasks[taskId].tInput = max;
+    }
+
+    if (JOY_NEW(DPAD_UP) && gTasks[taskId].tInput > max)
+    {
+        gTasks[taskId].tInput = min;
+    }
+
+    u32 state = gTasks[taskId].tInput;
+
+    ConvertIntToDecimalStringN(gStringVar3, state, STR_CONV_MODE_LEADING_ZEROS, digits);
+    StringExpandPlaceholders(gStringVar1, COMPOUND_STRING("{STR_VAR_3}"));
+    QuestMenu_CopyQuestStateName(gStringVar2, quest, state);
+    u8 *end = gStringVar2;
+    WrapFontIdToFit(gStringVar2, end, DEBUG_MENU_FONT, WindowWidthPx(gTasks[taskId].tSubWindowId));
+    StringCopy(gStringVar3, COMPOUND_STRING(""));
+    DebugNativeStep_PrintWindowSelection(taskId);
+}
+
+static bool32 DebugSelection_HandleQuest_OnComplete(u8 taskId)
+{
+    enum QuestIdList quest = DebugSelection_GetData(taskId,1);
+    u32 state = DebugSelection_GetData(taskId,2);
+
+    if (DebugSelection_GetData(taskId,0) == 0)
+    {
+        DestroyTask(taskId);
+        QuestMenu_JumpToQuestState(quest, state);
+    }
+    else
+    {
+        QuestMenu_SetupQuestState(quest, state);
+        DebugSelectionStep_ReturnToMainMenu(taskId);
+    }
+
+    PlaySE(SE_SUCCESS);
+    return TRUE;
+};
+
+static const struct DebugSelectionStep sQuestSelectTypeStep = {
+    .stepUpdate = DebugSelectionStep_UpdateQuestJumpType,
+    .stepConfirm = DebugSelectionStep_GenericInputConfirm,
+    .minValue = 0,
+    .maxValue = 1,
+    .digits = 1
+};
+
+static const struct DebugSelectionStep sQuestSelectStep = {
+    .stepUpdate = DebugSelectionStep_UpdateQuest,
+    .stepConfirm = DebugSelectionStep_GenericInputConfirm,
+    .minValue = 1,
+    .maxValue = QUEST_COUNT - 1,
+    .digits = 2
+};
+
+static const struct DebugSelectionStep sQuestStateSelectStep =
+{
+    .stepUpdate = DebugSelectionStep_UpdateQuestState,
+    .stepConfirm = DebugSelectionStep_GenericInputConfirm,
+    .minValue = 0,
+    .maxValue = MAX_QUEST_STATES,
+    .digits = 2
+};
+
+static const struct DebugSelection sQuestJumpTypeSelection = {
+    .onInit = Debug_CreateInputDisplayWindowWide,
+    .onCancel = DebugSelectionStep_ReturnToMainMenu,
+    .onComplete = DebugSelection_HandleQuest_OnComplete,
+    .steps = {
+        &sQuestSelectTypeStep,
+        &sQuestSelectStep,
+        &sQuestStateSelectStep,
+    },
+    .maxSteps = 3,
+};
+// End siliconQuests
 
 static const struct DebugSelectionStep sSpeciesSelectionStep = {
     .stepUpdate = DebugSelectionStep_UpdateSpecies,
