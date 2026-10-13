@@ -242,14 +242,14 @@ void SiliconFrontier_SetLongestStreakPartner(enum SiliconFrontierFacility facili
     rec->longestStreakPartner = partner;
 }
 
-u16 SiliconFrontier_GetPlayerFactoryRentalMon(enum SiliconFrontierChallengeType challengeType, u32 slot)
+enum SiliconFrontierMonIds SiliconFrontier_GetFactoryRentalMon(enum BattleSide battleSide, enum SiliconFrontierChallengeType challengeType, u32 slot)
 {
-    return gSaveBlock2Ptr->frontier.factoryRentalMonIds[challengeType][slot];
+    return gSaveBlock2Ptr->frontier.factoryRentalMonIds[battleSide][challengeType][slot];
 }
 
-void SiliconFrontier_SetPlayerFactoryRentalMon(enum SiliconFrontierChallengeType challengeType, u32 slot, u32 monId)
+void SiliconFrontier_SetFactoryRentalMon(enum BattleSide battleSide, enum SiliconFrontierChallengeType challengeType, u32 slot, enum SiliconFrontierMonIds monId)
 {
-    gSaveBlock2Ptr->frontier.factoryRentalMonIds[challengeType][slot] = monId;
+    gSaveBlock2Ptr->frontier.factoryRentalMonIds[battleSide][challengeType][slot] = monId;
 }
 
 u32 SiliconFrontier_GetCurrentPartner(void)

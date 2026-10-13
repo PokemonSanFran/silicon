@@ -159,7 +159,9 @@ __attribute__((section(".text.header_gf"))) USED static const struct GFRomHeader
     .moves = gMovesInfo,
     //.ballGfx = gBallSpriteSheets, //handled in gPokeBalls
     //.ballPalettes = gBallSpritePalettes, //handled in gPokeBalls
+#if FREE_DISABLE_GCNLINK == FALSE
     .gcnLinkFlagsOffset = offsetof(struct SaveBlock2, gcnLinkFlags),
+#endif
     .gameClearFlag = FLAG_SYS_GAME_CLEAR,
     .ribbonFlag = FLAG_SYS_RIBBON_GET,
     .bagCountItems = BAG_ITEMS_COUNT,

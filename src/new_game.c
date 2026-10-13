@@ -218,7 +218,9 @@ void NewGameInitData(void)
     ClearSav3();
     ClearAllMail();
     gSaveBlock2Ptr->specialSaveWarpFlags = 0;
+#if FREE_DISABLE_GCNLINK == FALSE
     gSaveBlock2Ptr->gcnLinkFlags = 0;
+#endif
     // Start siliconStarter
     //InitPlayerTrainerId();
     InitPlayerTrainerId();

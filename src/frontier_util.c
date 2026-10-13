@@ -1625,7 +1625,9 @@ static void ShowPyramidResultsWindow(void)
 static void ShowLinkContestResultsWindow(void)
 {
     const u8 *str;
+#if FREE_CONTEST_LINK_RESULTS == FALSE
     s32 i, j;
+#endif //FREE_CONTEST_LINK_RESULTS
     s32 x;
 
     gRecordsWindowId = AddWindow(&sLinkContestResultsWindowTemplate);
@@ -1659,6 +1661,7 @@ static void ShowLinkContestResultsWindow(void)
     AddTextPrinterParameterized(gRecordsWindowId, FONT_NORMAL, gText_Smart, x, 89, TEXT_SKIP_DRAW, NULL);
     AddTextPrinterParameterized(gRecordsWindowId, FONT_NORMAL, gText_Tough, x, 105, TEXT_SKIP_DRAW, NULL);
 
+#if FREE_CONTEST_LINK_RESULTS == FALSE
     for (i = 0; i < CONTEST_CATEGORIES_COUNT; i++)
     {
         for (j = 0; j < CONTESTANT_COUNT; j++)
@@ -1667,6 +1670,7 @@ static void ShowLinkContestResultsWindow(void)
             AddTextPrinterParameterized(gRecordsWindowId, FONT_NORMAL, gStringVar4, (j * 38) + 64, (i * 16) + 41, TEXT_SKIP_DRAW, NULL);
         }
     }
+#endif //FREE_CONTEST_LINK_RESULTS
 
     PutWindowTilemap(gRecordsWindowId);
     CopyWindowToVram(gRecordsWindowId, COPYWIN_FULL);

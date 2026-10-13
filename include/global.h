@@ -45,6 +45,7 @@
 #include "constants/hidden_grotto.h" // hiddenGrotto
 #include "constants/region_map_sections.h"
 #include "silicon_battle_frontier.h"
+#include "constants/battle.h" // siliconFrontier
 
 // Prevent cross-jump optimization.
 #define BLOCK_CROSS_JUMP asm("");
@@ -713,8 +714,7 @@ struct BattleFrontier
 
     struct BattleFrontierPartnerMon partnerSparring[FRONTIER_MULTI_PARTY_SIZE];
 
-    u16 factoryRentalMonIds[SILICON_FRONTIER_CHALLENGE_TYPE_COUNT][FRONTIER_PARTY_SIZE];
-
+    u16 factoryRentalMonIds[NUM_BATTLE_SIDES][SILICON_FRONTIER_CHALLENGE_TYPE_COUNT][FRONTIER_PARTY_SIZE];
     u8 selectedPartyMons[MAX_FRONTIER_PARTY_SIZE];
     u8 currentPartner;
     u8 remainingSparringHeals : 2;
@@ -805,7 +805,9 @@ struct SaveBlock2
     ///*0x90*/ u8 filler_90[0x8]; // siliconMerge
     /*0x98*/ struct Time localTimeOffset;
     /*0xA0*/ struct Time lastBerryTreeUpdate;
+#if FREE_DISABLE_GCNLINK == FALSE
     /*0xA8*/ u32 gcnLinkFlags; // Read by Pokémon Colosseum/XD
+#endif
     /*0xAC*/ u32 encryptionKey;
     /*0xB0*/ struct PlayersApprentice playerApprentice;
     /*0xDC*/ struct Apprentice apprentices[APPRENTICE_COUNT];
@@ -818,7 +820,9 @@ struct SaveBlock2
     /*0x21C*/ struct RankingHall1P hallRecords1P[HALL_FACILITIES_COUNT][FRONTIER_LVL_MODE_COUNT][HALL_RECORDS_COUNT]; // From record mixing.
     /*0x57C*/ struct RankingHall2P hallRecords2P[FRONTIER_LVL_MODE_COUNT][HALL_RECORDS_COUNT]; // From record mixing.
 #endif //FREE_RECORD_MIXING_HALL_RECORDS
+#if FREE_CONTEST_LINK_RESULTS == FALSE
     /*0x624*/ u16 contestLinkResults[CONTEST_CATEGORIES_COUNT][CONTESTANT_COUNT];
+#endif //FREE_CONTEST_LINK_RESULTS
     struct BattleFrontier frontier;
     // Start siliconMerge
     struct SiliconOptions options;
