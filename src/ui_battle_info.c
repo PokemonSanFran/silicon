@@ -440,7 +440,6 @@ static const struct SpriteTemplate sBattleInfo_FaintedIconSpriteTemplate =
     .oam = &(const struct OamData){
         .shape = SPRITE_SHAPE(32x32),
         .size = SPRITE_SIZE(32x32),
-        .objMode = ST_OAM_OBJ_BLEND,
         .priority = 0
     },
     .images = &(const struct SpriteFrameImage){
@@ -460,7 +459,6 @@ static const struct OamData sBattleInfo_GenericCursorOamData =
 {
     .shape = SPRITE_SHAPE(32x16),
     .size = SPRITE_SIZE(32x16),
-    .objMode = ST_OAM_OBJ_BLEND,
     .priority = 1
 };
 
@@ -508,7 +506,6 @@ static const struct SpriteTemplate sBattleInfo_PartyIndicatorSpriteTemplate =
     .oam = &(const struct OamData){
         .shape = SPRITE_SHAPE(16x16),
         .size = SPRITE_SIZE(16x16),
-        .objMode = ST_OAM_OBJ_BLEND,
     },
     .images = &(const struct SpriteFrameImage){
         .data = (const u8[])INCGFX_U8("graphics/ui_menus/battle_info/party_switch_indicator.png", ".4bpp"),
@@ -1284,8 +1281,8 @@ static void BattleInfoInit_Windows(void)
 
 static void BattleInfoInit_Sprites(void)
 {
-    SetGpuReg(REG_OFFSET_BLDCNT, BLDCNT_EFFECT_DARKEN | BLDCNT_TGT1_OBJ);
-    SetGpuReg(REG_OFFSET_BLDY, 9);
+    SetGpuReg(REG_OFFSET_BLDCNT, BLDCNT_EFFECT_BLEND |  BLDCNT_TGT2_BG_ALL);
+    SetGpuReg(REG_OFFSET_BLDALPHA, BLDALPHA_BLEND(9, 0));
 
     BattleInfoSprite_CreateMonIcons();
     BattleInfoSprite_CreateHPBar();
@@ -1522,6 +1519,23 @@ static void BattleInfoSprite_RecreateMonIcons(void)
     }
 }
 
+static bool32 BattleInfoSprite_ShouldDarkenMonIcon(u32 idx, struct Pokemon *mon, enum Species species)
+{
+    for (enum BattlerId battler = 0; battler < gBattlersCount; battler++)
+    {
+        if ((IsBattlerAlive(battler)
+             && &GetBattlerParty(battler)[idx] == mon
+             && BattleInfoHelper_SlotToBattlePartyOrder(battler, idx) == gBattlerPartyIndexes[battler])
+         || species == SPECIES_NONE)
+        {
+            return FALSE;
+        }
+    }
+
+
+    return TRUE;
+}
+
 static u8 BattleInfoSprite_CreateMonIcon(enum BattleTrainer trainer, u32 idx, s32 x, s32 y)
 {
     enum BattlerId battler = 0;
@@ -1544,17 +1558,8 @@ static u8 BattleInfoSprite_CreateMonIcon(enum BattleTrainer trainer, u32 idx, s3
         x, y, 0,
         GetMonData(mon, MON_DATA_PERSONALITY, NULL));
 
-    for (battler = 0; battler < gBattlersCount; battler++)
-    {
-        if ((IsBattlerAlive(battler)
-         && &GetBattlerParty(battler)[idx] == mon
-         && BattleInfoHelper_SlotToBattlePartyOrder(battler, idx) == gBattlerPartyIndexes[battler])
-         || species == SPECIES_NONE)
-        {
-            gSprites[spriteId].oam.objMode = ST_OAM_OBJ_BLEND;
-            break;
-        }
-    }
+    if (BattleInfoSprite_ShouldDarkenMonIcon(idx, mon, species))
+        gSprites[spriteId].oam.objMode = ST_OAM_OBJ_BLEND;
 
     if (idx < gPartiesCount[trainer])
     {
@@ -1594,7 +1599,6 @@ static void BattleInfoSprite_CreateHPBar(void)
 
     struct Sprite *sprite = &gSprites[*spriteId];
     sprite->sPartySlotIdx = -1;
-    sprite->oam.objMode = ST_OAM_OBJ_BLEND;
     sprite->oam.priority = 1;
     sprite->callback = SpriteCB_BattleInfo_HPBar;
 }
@@ -1618,7 +1622,6 @@ static void BattleInfoSprite_CreateTypeIcon(enum BattleInfoSprites id, enum Type
     struct Sprite *sprite = &gSprites[*spriteId];
     sprite->sTypeIcon_Index = id == BI_SPRITE_TYPE_2; // either 0 or 1
     sprite->sTypeIcon_Type = -1;
-    sprite->oam.objMode = ST_OAM_OBJ_BLEND;
     sprite->oam.priority = 1;
     sprite->callback = SpriteCB_BattleInfo_TypeIcon;
 }
@@ -1627,11 +1630,6 @@ static void BattleInfoSprite_CreateCursor(void)
 {
     u8 *spriteId = &sBattleInfoDataPtr->spriteIds[BI_SPRITE_CURSOR];
     *spriteId = CreateSprite(&sBattleInfo_CursorSpriteTemplate, BI_MON_ICON_X, BI_MON_ICON_Y, 128);
-    if (*spriteId == SPRITE_NONE)
-        return;
-
-    struct Sprite *sprite = &gSprites[*spriteId];
-    sprite->oam.objMode = ST_OAM_OBJ_BLEND;
 }
 
 static void BattleInfoSprite_CreateOptionsCursor(void)
