@@ -575,7 +575,7 @@ static void InitPartyMenu(enum PartyMenuType menuType, enum PartyMenuLayout layo
 
     if (UI_PARTY_MENU)
     {
-        PartyMenu_Init(callback);
+        PartyMenu_Init(menuType, layout, partyAction, keepCursorPos, messageId, task, callback);
         return;
     }
 
