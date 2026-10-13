@@ -646,6 +646,7 @@ void GenerateGiveStarterToPlayer(void)
 void FlagsVarWarp_StarterChoice(void)
 {
     FlagSet(FLAG_SYS_B_DASH);
+    FlagClear(FLAG_VISITED_OROLAND_COLISEUM);
     FlagClear(FLAG_SPAWN_INVISIBLE);
     SetWarpDestination(MAP_GROUP(MAP_CUCONU_TOWN), MAP_NUM(MAP_CUCONU_TOWN), 0, 3, 10);
 }
