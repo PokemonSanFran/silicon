@@ -23,6 +23,7 @@
 #include "strings.h"
 #include "task.h"
 #include "text.h"
+#include "text_window.h"
 #include "window.h"
 #include "options_visual.h"
 #include "ui_options_menu.h"
@@ -55,6 +56,8 @@ struct PartyMenuData
     bool8 statusFadePinned;
     u8 slotWindowIds[PARTY_SIZE];
     u8 heldWindowId;
+    u8 windowId[NUM_PARTY_DYN_WINDOWS];
+    u16 textTilemapBuf[BG_SCREEN_SIZE / sizeof(u16)];
     u16 slotsTilemapBuf[BG_SCREEN_SIZE / sizeof(u16)];
     u16 heldTilemapBuf[BG_SCREEN_SIZE / sizeof(u16)];
 };
@@ -97,6 +100,12 @@ static void PartyMonSprites_SetLifted(u32, bool32);
 static void PartyMonSprites_MoveToSlot(u32, u32);
 static s16 PartyMonIcon_GetX(u32);
 static s16 PartyMonIcon_GetY(u32);
+static void PartyView_DisplayStdMessage(u32);
+static void PartyView_PrintHeader(const u8 *);
+static void PartyView_ClearHeader(void);
+static void PartyView_ClearFooter(void);
+static void PartyView_RemoveWindow(u8 *);
+static bool8 ShouldUseChooseMonText(void);
 static void Task_PartyMenu_Exit(u8);
 static void PartyMenu_Free(void);
 
@@ -133,6 +142,7 @@ void PartyMenu_Init(enum PartyMenuType menuType, enum PartyMenuLayout layout, u8
     memset(sPartyMenuDataPtr->monIconSpriteIds, SPRITE_NONE, sizeof(sPartyMenuDataPtr->monIconSpriteIds));
     memset(sPartyMenuDataPtr->heldItemSpriteIds, SPRITE_NONE, sizeof(sPartyMenuDataPtr->heldItemSpriteIds));
     memset(sPartyMenuDataPtr->statusSpriteIds, SPRITE_NONE, sizeof(sPartyMenuDataPtr->statusSpriteIds));
+    memset(sPartyMenuDataPtr->windowId, WINDOW_NONE, sizeof(sPartyMenuDataPtr->windowId));
     gMain.state = 0;
     SetMainCallback2(CB2_PartyMenu_Setup);
 }
@@ -180,6 +190,7 @@ static void CB2_PartyMenu_Setup(void)
         break;
     case PARTY_SETUP_FINISH:
         CreateTask(Task_PartyMenu_WaitForFade, 0);
+        PartyView_DisplayStdMessage(sPartyMenuDataPtr->messageId);
         SetVBlankCallback(VBlankCB_PartyMenu_Idle);
         SetMainCallback2(CB2_PartyMenu_Idle);
         return;
@@ -212,8 +223,10 @@ static void PartySetup_Bgs(void)
     ResetBgsAndClearDma3BusyFlags(0);
     InitBgsFromTemplates(0, sPartyMenu_BackgroundTemplates, NELEMS(sPartyMenu_BackgroundTemplates));
     SetGpuReg(REG_OFFSET_DISPCNT, DISPCNT_OBJ_ON | DISPCNT_OBJ_1D_MAP);
+    SetBgTilemapBuffer(PARTY_BG_TEXT, sPartyMenuDataPtr->textTilemapBuf);
     SetBgTilemapBuffer(PARTY_BG_HELD, sPartyMenuDataPtr->heldTilemapBuf);
     SetBgTilemapBuffer(PARTY_BG_SLOTS, sPartyMenuDataPtr->slotsTilemapBuf);
+    ShowBg(PARTY_BG_TEXT);
     ShowBg(PARTY_BG_HELD);
     ShowBg(PARTY_BG_SLOTS);
     ShowBg(PARTY_BG_WALLPAPER);
@@ -232,12 +245,22 @@ static void PartySetup_Graphics(void)
     LoadPalette(&sPartyMenu_Pal_Slot[BG_PLTT_ID(PARTY_BG_PAL_SLOT_MARKED) + PARTY_SLOT_MARKED_PAL_START],
                 BG_PLTT_ID(PARTY_BG_PAL_SLOT_MARKED) + PARTY_SLOT_MARKED_PAL_START,
                 PLTT_SIZEOF(PARTY_SLOT_MARKED_PAL_END - PARTY_SLOT_MARKED_PAL_START + 1));
+    LoadPalette(sPartyMenu_Pal_HelperText, BG_PLTT_ID(PARTY_BG_PAL_HELPER), PLTT_SIZE_4BPP);
+
+    LoadUserWindowBorderGfxOnBg(PARTY_BG_TEXT, PARTY_TEXT_TILE_FRAME, BG_PLTT_ID(PARTY_BG_PAL_FRAME));
+    LoadPalette(GetOverworldTextboxPalettePtr(), BG_PLTT_ID(PARTY_BG_PAL_DIALOG), PLTT_SIZE_4BPP);
+    LoadPalette(gStandardMenuPalette, BG_PLTT_ID(PARTY_BG_PAL_MENU_TEXT), PLTT_SIZE_4BPP);
 }
 
 static void PartySetup_Windows(void)
 {
     InitWindows(sPartyMenu_WindowTemplates);
     DeactivateAllTextPrinters();
+    FillWindowPixelBuffer(PARTY_WIN_HEADER, PIXEL_FILL(0));
+    PutWindowTilemap(PARTY_WIN_HEADER);
+    FillWindowPixelBuffer(PARTY_WIN_FOOTER, PIXEL_FILL(0));
+    PutWindowTilemap(PARTY_WIN_FOOTER);
+    ScheduleBgCopyTilemapToVram(PARTY_BG_TEXT);
 
     u32 baseBlock = 1;
     for (u32 slot = 0; slot < PARTY_SIZE; slot++)
@@ -574,6 +597,7 @@ static void PartyHeld_Lift(void)
 {
     gPartyMenu.action = PARTY_ACTION_SWITCH;
     gPartyMenu.slotId2 = gPartyMenu.slotId;
+    PartyView_ClearHeader();
     gSprites[sPartyMenuDataPtr->cursorSpriteId].invisible = TRUE;
     PartySlot_DrawEmpty(gPartyMenu.slotId);
     PartyMonSprites_SetLifted(gPartyMenu.slotId, TRUE);
@@ -637,6 +661,7 @@ static void PartyHeld_Place(bool32 confirm)
 
     gPartyMenu.action = PARTY_ACTION_CHOOSE_MON;
     gPartyMenu.slotId = targetSlot;
+    PartyView_DisplayStdMessage(PARTY_MSG_CHOOSE_MON);
     gSprites[sPartyMenuDataPtr->cursorSpriteId].invisible = FALSE;
     PartyCursor_SnapToSlot();
 }
@@ -826,6 +851,97 @@ static void PartyMonSprites_MoveToSlot(u32 spriteSlot, u32 slot)
         gSprites[statusSpriteId].x = PartyMonIcon_GetX(slot) + PARTY_STATUS_ICON_X_OFFSET;
         gSprites[statusSpriteId].y = PartyMonIcon_GetY(slot) + PARTY_STATUS_ICON_Y_OFFSET;
     }
+}
+
+// ==================================================
+// Messages
+// ==================================================
+
+static void PartyView_DisplayStdMessage(u32 stringId)
+{
+    u8 *windowPtr = &sPartyMenuDataPtr->windowId[PARTY_DYN_WIN_MSG];
+
+    PartyView_RemoveWindow(windowPtr);
+    PartyView_ClearHeader();
+
+    if (stringId == PARTY_MSG_NONE)
+        return;
+
+    if (stringId == PARTY_MSG_CHOOSE_MON)
+    {
+        if (sPartyMenuDataPtr->chooseHalf)
+            stringId = PARTY_MSG_CHOOSE_MON_AND_CONFIRM;
+        else if (!ShouldUseChooseMonText())
+            stringId = PARTY_MSG_CHOOSE_MON_OR_CANCEL;
+    }
+
+    if (sPartyMenu_HeaderMessages[stringId] != NULL)
+    {
+        StringExpandPlaceholders(gStringVar4, sPartyMenu_HeaderMessages[stringId]);
+        PartyView_PrintHeader(gStringVar4);
+        PutWindowTilemap(PARTY_WIN_FOOTER);
+        ScheduleBgCopyTilemapToVram(PARTY_BG_TEXT);
+        return;
+    }
+
+    PartyView_ClearFooter();
+    StringExpandPlaceholders(gStringVar4, sPartyMenu_MsgBoxMessages[stringId]);
+    *windowPtr = AddWindow(&sPartyMenu_WinTemplate_MsgBox);
+    DrawStdFrameWithCustomTileAndPalette(*windowPtr, FALSE, PARTY_TEXT_TILE_FRAME, PARTY_BG_PAL_FRAME);
+    AddTextPrinterParameterized(*windowPtr, FONT_NORMAL, gStringVar4, 0, 1, 0, 0);
+    ScheduleBgCopyTilemapToVram(PARTY_BG_TEXT);
+}
+
+static void PartyView_PrintHeader(const u8 *str)
+{
+    u32 fontId = GetFontIdToFit(str, FONT_SMALL, 0, TILE_TO_PIXELS(PARTY_HELPER_WIDTH));
+
+    FillWindowPixelBuffer(PARTY_WIN_HEADER, PIXEL_FILL(0));
+    AddTextPrinterParameterized4(PARTY_WIN_HEADER, fontId, 0, PARTY_HELPER_TEXT_Y, 0, 0, sPartyMenu_TextColors[COLORID_PARTY_HELPER], TEXT_SKIP_DRAW, str);
+    CopyWindowToVram(PARTY_WIN_HEADER, COPYWIN_GFX);
+}
+
+static void PartyView_ClearHeader(void)
+{
+    FillWindowPixelBuffer(PARTY_WIN_HEADER, PIXEL_FILL(0));
+    CopyWindowToVram(PARTY_WIN_HEADER, COPYWIN_GFX);
+}
+
+static void PartyView_ClearFooter(void)
+{
+    FillWindowPixelBuffer(PARTY_WIN_FOOTER, PIXEL_FILL(0));
+    ClearWindowTilemap(PARTY_WIN_FOOTER);
+    CopyWindowToVram(PARTY_WIN_FOOTER, COPYWIN_GFX);
+}
+
+static void PartyView_RemoveWindow(u8 *windowPtr)
+{
+    if (*windowPtr == WINDOW_NONE)
+        return;
+
+    ClearStdWindowAndFrameToTransparent(*windowPtr, FALSE);
+    RemoveWindow(*windowPtr);
+    *windowPtr = WINDOW_NONE;
+    ScheduleBgCopyTilemapToVram(PARTY_BG_TEXT);
+}
+
+static bool8 ShouldUseChooseMonText(void)
+{
+    u8 numAliveMons = 0;
+
+    if (gPartyMenu.action == PARTY_ACTION_SEND_OUT)
+        return TRUE;
+
+    for (u32 slot = 0; slot < PARTY_SIZE; slot++)
+    {
+        struct Pokemon *mon = &gParties[B_TRAINER_PLAYER][slot];
+
+        if (GetMonData(mon, MON_DATA_SPECIES) != SPECIES_NONE && (GetMonData(mon, MON_DATA_HP) != 0 || GetMonData(mon, MON_DATA_IS_EGG)))
+            numAliveMons++;
+        if (numAliveMons > 1)
+            return TRUE;
+    }
+    return FALSE;
 }
 
 // ==================================================

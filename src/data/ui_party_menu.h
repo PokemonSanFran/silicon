@@ -1,6 +1,13 @@
 static const struct BgTemplate sPartyMenu_BackgroundTemplates[] =
 {
     {
+        .bg = PARTY_BG_TEXT,
+        .charBaseIndex = 0,
+        .mapBaseIndex = 28,
+        .screenSize = 0,
+        .priority = 0
+    },
+    {
         .bg = PARTY_BG_HELD,
         .charBaseIndex = 2,
         .mapBaseIndex = 29,
@@ -25,7 +32,79 @@ static const struct BgTemplate sPartyMenu_BackgroundTemplates[] =
 
 static const struct WindowTemplate sPartyMenu_WindowTemplates[] =
 {
+    [PARTY_WIN_HEADER] =
+    {
+        .bg = PARTY_BG_TEXT,
+        .tilemapLeft = PARTY_HELPER_LEFT,
+        .tilemapTop = PARTY_HEADER_TOP,
+        .width = PARTY_HELPER_WIDTH,
+        .height = PARTY_HELPER_HEIGHT,
+        .paletteNum = PARTY_BG_PAL_HELPER,
+        .baseBlock = PARTY_TEXT_TILE_HEADER,
+    },
+    [PARTY_WIN_FOOTER] =
+    {
+        .bg = PARTY_BG_TEXT,
+        .tilemapLeft = PARTY_HELPER_LEFT,
+        .tilemapTop = PARTY_FOOTER_TOP,
+        .width = PARTY_HELPER_WIDTH,
+        .height = PARTY_HELPER_HEIGHT,
+        .paletteNum = PARTY_BG_PAL_HELPER,
+        .baseBlock = PARTY_TEXT_TILE_FOOTER,
+    },
     DUMMY_WIN_TEMPLATE
+};
+
+static const struct WindowTemplate sPartyMenu_WinTemplate_MsgBox =
+{
+    .bg = PARTY_BG_TEXT,
+    .tilemapLeft = PARTY_MSGBOX_LEFT,
+    .tilemapTop = PARTY_MSGBOX_TOP,
+    .width = PARTY_MSGBOX_WIDTH,
+    .height = PARTY_MSGBOX_HEIGHT,
+    .paletteNum = PARTY_BG_PAL_DIALOG,
+    .baseBlock = PARTY_TEXT_TILE_MSGBOX,
+};
+
+static const u8 *const sPartyMenu_HeaderMessages[] =
+{
+    [PARTY_MSG_CHOOSE_MON]             = gText_ChoosePokemon,
+    [PARTY_MSG_CHOOSE_MON_OR_CANCEL]   = gText_ChoosePokemonCancel,
+    [PARTY_MSG_CHOOSE_MON_AND_CONFIRM] = gText_ChoosePokemonConfirm,
+    [PARTY_MSG_MOVE_TO_WHERE]          = gText_MoveToWhere,
+    [PARTY_MSG_TEACH_WHICH_MON]        = gText_TeachWhichPokemon,
+    [PARTY_MSG_USE_ON_WHICH_MON]       = gText_UseOnWhichPokemon,
+    [PARTY_MSG_GIVE_TO_WHICH_MON]      = gText_GiveToWhichPokemon,
+    [PARTY_MSG_CHOOSE_MON_2]           = gText_ChoosePokemon2,
+    [PARTY_MSG_DO_WHAT_WITH_MON]       = gText_DoWhatWithPokemon,
+    [PARTY_MSG_RESTORE_WHICH_MOVE]     = gText_RestoreWhichMove,
+    [PARTY_MSG_BOOST_PP_WHICH_MOVE]    = gText_BoostPP,
+    [PARTY_MSG_DO_WHAT_WITH_ITEM]      = gText_DoWhatWithItem,
+    [PARTY_MSG_DO_WHAT_WITH_MAIL]      = gText_DoWhatWithMail,
+    [PARTY_MSG_WHICH_APPLIANCE]        = gText_WhichAppliance,
+    [PARTY_MSG_CHOOSE_SECOND_FUSION]   = gText_NextFusionMon,
+    [PARTY_MSG_WHICH_STATUS]           = COMPOUND_STRING("Inflict which status?"),
+    [PARTY_MSG_NO_POKEMON]             = COMPOUND_STRING("You have no Pokémon."),
+    [PARTY_MSG_CHOOSE_MON_FOR_BOX]     = gText_SendWhichMonToPC,
+    [PARTY_MSG_MOVE_ITEM_WHERE]        = gText_MoveItemWhere,
+};
+
+static const u8 *const sPartyMenu_MsgBoxMessages[] =
+{
+    [PARTY_MSG_NOTHING_TO_CUT]         = gText_NothingToCut,
+    [PARTY_MSG_CANT_SURF_HERE]         = gText_CantSurfHere,
+    [PARTY_MSG_ALREADY_SURFING]        = gText_AlreadySurfing,
+    [PARTY_MSG_CURRENT_TOO_FAST]       = gText_CurrentIsTooFast,
+    [PARTY_MSG_ENJOY_CYCLING]          = gText_EnjoyCycling,
+    [PARTY_MSG_ALREADY_IN_USE]         = gText_InUseAlready_PM,
+    [PARTY_MSG_CANT_USE_HERE]          = gText_CantUseHere,
+    [PARTY_MSG_NO_MON_FOR_BATTLE]      = gText_NoPokemonForBattle,
+    [PARTY_MSG_NOT_ENOUGH_HP]          = gText_NotEnoughHp,
+    [PARTY_MSG_X_MONS_ARE_NEEDED]      = gText_PokemonAreNeeded,
+    [PARTY_MSG_MONS_CANT_BE_SAME]      = gText_PokemonCantBeSame,
+    [PARTY_MSG_NO_SAME_HOLD_ITEMS]     = gText_NoIdenticalHoldItems,
+    [PARTY_MSG_UNUSED]                 = gText_EmptyString2,
+    [PARTY_MSG_ALREADY_HOLDING_ONE]    = gText_AlreadyHoldingOne,
 };
 
 // silicon color theme pals
@@ -49,6 +128,8 @@ static const u8 sPartyMenu_Tilemap_SlotMainEmpty[]  = INCBIN_U8("graphics/ui_men
 static const u8 sPartyMenu_Tilemap_SlotMid[]        = INCBIN_U8("graphics/ui_menus/party_menu/slot_mid.bin");
 static const u8 sPartyMenu_Tilemap_SlotMidEmpty[]   = INCBIN_U8("graphics/ui_menus/party_menu/slot_mid_empty.bin");
 static const u16 sPartyMenu_Pal_Slot[]              = INCGFX_U16("graphics/ui_menus/party_menu/tiles.png", ".gbapal");
+
+static const u16 sPartyMenu_Pal_HelperText[]        = INCGFX_U16("graphics/ui_menus/start_menu/text.pal", ".gbapal");
 
 // party sprites
 static const u16 sPartyMenu_Pal_Ui[]                = INCGFX_U16("graphics/ui_menus/party_menu/cursor.png", ".gbapal");
@@ -149,6 +230,8 @@ static const u8 sPartyMenu_TextColors[NUM_PARTY_TEXT_COLORS][3] =
     [COLORID_PARTY_YELLOW]  = {0, 5, 13},
     [COLORID_PARTY_RED]     = {0, 5, 14},
     [COLORID_PARTY_GREY]    = {0, 5, 15},
+    // from text.pal
+    [COLORID_PARTY_HELPER]  = {0, 1,  0},
 };
 
 // {frame, empty, fill} per HP_BAR_* level

@@ -4,11 +4,37 @@
 // pal 0 comes from the BG3 wallpaper
 #define PARTY_BG_PAL_SLOT_MAIN      1
 #define PARTY_BG_PAL_SLOT_MARKED    2
+#define PARTY_BG_PAL_HELPER         3
 
 // when a slot is marked (e.g., moving item) we highlight the slot
 // by swapping in a different palette (see pal2 in tiles.png)
 #define PARTY_SLOT_MARKED_PAL_START 1
 #define PARTY_SLOT_MARKED_PAL_END   3
+
+#define PARTY_BG_PAL_FRAME          13
+#define PARTY_BG_PAL_DIALOG         14
+#define PARTY_BG_PAL_MENU_TEXT      15
+
+// ================================================================
+// Text layer
+// ================================================================
+#define PARTY_TEXT_FRAME_TILES      9
+#define PARTY_HELPER_WIDTH          28
+#define PARTY_HELPER_HEIGHT         2
+#define PARTY_HELPER_LEFT           1
+#define PARTY_HEADER_TOP            0
+#define PARTY_FOOTER_TOP            18
+#define PARTY_HELPER_TEXT_Y         1
+
+#define PARTY_MSGBOX_LEFT           1
+#define PARTY_MSGBOX_TOP            15
+#define PARTY_MSGBOX_WIDTH          28
+#define PARTY_MSGBOX_HEIGHT         4
+
+#define PARTY_TEXT_TILE_FRAME       1
+#define PARTY_TEXT_TILE_HEADER      (PARTY_TEXT_TILE_FRAME + PARTY_TEXT_FRAME_TILES)
+#define PARTY_TEXT_TILE_FOOTER      (PARTY_TEXT_TILE_HEADER + PARTY_HELPER_WIDTH * PARTY_HELPER_HEIGHT)
+#define PARTY_TEXT_TILE_MSGBOX      (PARTY_TEXT_TILE_FOOTER + PARTY_HELPER_WIDTH * PARTY_HELPER_HEIGHT)
 
 // ================================================================
 // Party slot defines
@@ -106,9 +132,24 @@
 
 enum PartyMenuBackgrounds
 {
-    PARTY_BG_HELD = 1,
+    PARTY_BG_TEXT,
+    PARTY_BG_HELD,
     PARTY_BG_SLOTS,
     PARTY_BG_WALLPAPER,
+};
+
+enum PartyMenuWindows
+{
+    PARTY_WIN_HEADER,
+    PARTY_WIN_FOOTER,
+    NUM_PARTY_FIXED_WINDOWS
+};
+
+enum PartyMenuDynamicWindows
+{
+    PARTY_DYN_WIN_LIST,
+    PARTY_DYN_WIN_MSG,
+    NUM_PARTY_DYN_WINDOWS
 };
 
 enum PartyMenuSlotRows
@@ -127,6 +168,7 @@ enum PartyTextColors
     COLORID_PARTY_YELLOW,
     COLORID_PARTY_RED,
     COLORID_PARTY_GREY,
+    COLORID_PARTY_HELPER,
     NUM_PARTY_TEXT_COLORS
 };
 
