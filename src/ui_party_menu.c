@@ -141,6 +141,8 @@ static void PartyMonSprites_SetLifted(u32, bool32);
 static void PartyMonSprites_MoveToSlot(u32, u32);
 static s16 PartyMonIcon_GetX(u32);
 static s16 PartyMonIcon_GetY(u32);
+static void PrintMessage(const u8 *);
+static void Task_PrintAndWaitForText(u8);
 static void PartyView_PrintHeader(const u8 *);
 static void PartyView_ClearHeader(void);
 static void PartyView_ClearFooter(void);
@@ -178,6 +180,7 @@ static void CB2_ReturnToBagMenu(void);
 static void Task_SetSacredAshCB(u8);
 static void Task_UsePokevialFromField(u8);
 static void Task_ValidateChosenHalfParty(u8);
+static void ItemUseCB_WontHaveEffect(u8, TaskFunc);
 
 #include "data/ui_party_menu.h"
 
@@ -1032,6 +1035,50 @@ void DisplayPartyMenuStdMessage(u32 stringId)
     ScheduleBgCopyTilemapToVram(PARTY_BG_TEXT);
 }
 
+#define tKeepOpen  data[0]
+
+u8 DisplayPartyMenuMessage(const u8 *str, bool8 keepOpen)
+{
+    u8 taskId;
+
+    PrintMessage(str);
+    taskId = CreateTask(Task_PrintAndWaitForText, 1);
+    gTasks[taskId].tKeepOpen = keepOpen;
+    return taskId;
+}
+
+static void Task_PrintAndWaitForText(u8 taskId)
+{
+    u8 *windowPtr = &sPartyMenuDataPtr->windowId[PARTY_DYN_WIN_MSG];
+
+    if (RunTextPrintersRetIsActive(*windowPtr) != TRUE)
+    {
+        if (gTasks[taskId].tKeepOpen == FALSE)
+            PartyMenuRemoveWindow(windowPtr);
+        DestroyTask(taskId);
+    }
+}
+
+#undef tKeepOpen
+
+bool8 IsPartyMenuTextPrinterActive(void)
+{
+    return FuncIsActiveTask(Task_PrintAndWaitForText);
+}
+
+static void PrintMessage(const u8 *text)
+{
+    u8 *windowPtr = &sPartyMenuDataPtr->windowId[PARTY_DYN_WIN_MSG];
+
+    PartyMenuRemoveWindow(windowPtr);
+    PartyView_ClearFooter();
+    *windowPtr = AddWindow(&sPartyMenu_WinTemplate_MsgBox);
+    DrawStdFrameWithCustomTileAndPalette(*windowPtr, FALSE, PARTY_TEXT_TILE_FRAME, PARTY_BG_PAL_FRAME);
+    gTextFlags.canABSpeedUpPrint = TRUE;
+    AddTextPrinterParameterized(*windowPtr, FONT_NORMAL, text, 0, 1, GetPlayerTextSpeedDelay(), NULL);
+    ScheduleBgCopyTilemapToVram(PARTY_BG_TEXT);
+}
+
 static void PartyView_PrintHeader(const u8 *str)
 {
     u32 fontId = GetFontIdToFit(str, FONT_SMALL, 0, TILE_TO_PIXELS(PARTY_HELPER_WIDTH));
@@ -1436,16 +1483,6 @@ void AnimatePartySlot(u8 slot, u8 animNum)
 {
 }
 
-u8 DisplayPartyMenuMessage(const u8 *str, bool8 keepOpen)
-{
-    return TASK_NONE;
-}
-
-bool8 IsPartyMenuTextPrinterActive(void)
-{
-    return FALSE;
-}
-
 void PartyMenuModifyHP(u8 taskId, u8 slot, s8 hpIncrement, s16 hpDifference, TaskFunc task)
 {
 }
@@ -1462,96 +1499,127 @@ static void Task_ValidateChosenHalfParty(u8 taskId)
 {
 }
 
+static void ItemUseCB_WontHaveEffect(u8 taskId, TaskFunc task)
+{
+    gPartyMenuUseExitCallback = FALSE;
+    PlaySE(SE_SELECT);
+    DisplayPartyMenuMessage(gText_WontHaveEffect, TRUE);
+    gTasks[taskId].func = task;
+}
+
 void ItemUseCB_BattleScript(u8 taskId, TaskFunc task)
 {
+    ItemUseCB_WontHaveEffect(taskId, task);
 }
 
 void ItemUseCB_BattleChooseMove(u8 taskId, TaskFunc task)
 {
+    ItemUseCB_WontHaveEffect(taskId, task);
 }
 
 void ItemUseCB_Medicine(u8 taskId, TaskFunc task)
 {
+    ItemUseCB_WontHaveEffect(taskId, task);
 }
 
 void ItemUseCB_AbilityCapsule(u8 taskId, TaskFunc task)
 {
+    ItemUseCB_WontHaveEffect(taskId, task);
 }
 
 void ItemUseCB_AbilityPatch(u8 taskId, TaskFunc task)
 {
+    ItemUseCB_WontHaveEffect(taskId, task);
 }
 
 void ItemUseCB_Mint(u8 taskId, TaskFunc task)
 {
+    ItemUseCB_WontHaveEffect(taskId, task);
 }
 
 void ItemUseCB_ResetEVs(u8 taskId, TaskFunc task)
 {
+    ItemUseCB_WontHaveEffect(taskId, task);
 }
 
 void ItemUseCB_ResetEVsAndFriendship(u8 taskId, TaskFunc task)
 {
+    ItemUseCB_WontHaveEffect(taskId, task);
 }
 
 void ItemUseCB_ReduceEV(u8 taskId, TaskFunc task)
 {
+    ItemUseCB_WontHaveEffect(taskId, task);
 }
 
 void ItemUseCB_PPRecovery(u8 taskId, TaskFunc task)
 {
+    ItemUseCB_WontHaveEffect(taskId, task);
 }
 
 void ItemUseCB_PPUp(u8 taskId, TaskFunc task)
 {
+    ItemUseCB_WontHaveEffect(taskId, task);
 }
 
 void ItemUseCB_TMHM(u8 taskId, TaskFunc task)
 {
+    ItemUseCB_WontHaveEffect(taskId, task);
 }
 
 void ItemUseCB_RareCandy(u8 taskId, TaskFunc task)
 {
+    ItemUseCB_WontHaveEffect(taskId, task);
 }
 
 void ItemUseCB_DynamaxCandy(u8 taskId, TaskFunc task)
 {
+    ItemUseCB_WontHaveEffect(taskId, task);
 }
 
 void ItemUseCB_SacredAsh(u8 taskId, TaskFunc task)
 {
+    ItemUseCB_WontHaveEffect(taskId, task);
 }
 
 void ItemUseCB_EvolutionStone(u8 taskId, TaskFunc task)
 {
+    ItemUseCB_WontHaveEffect(taskId, task);
 }
 
 void ItemUseCB_FormChange(u8 taskId, TaskFunc task)
 {
+    ItemUseCB_WontHaveEffect(taskId, task);
 }
 
 void ItemUseCB_FormChange_ConsumedOnUse(u8 taskId, TaskFunc task)
 {
+    ItemUseCB_WontHaveEffect(taskId, task);
 }
 
 void ItemUseCB_RotomCatalog(u8 taskId, TaskFunc task)
 {
+    ItemUseCB_WontHaveEffect(taskId, task);
 }
 
 void ItemUseCB_ZygardeCube(u8 taskId, TaskFunc task)
 {
+    ItemUseCB_WontHaveEffect(taskId, task);
 }
 
 void ItemUseCB_Fusion(u8 taskId, TaskFunc task)
 {
+    ItemUseCB_WontHaveEffect(taskId, task);
 }
 
 void ItemUseCB_UsePokevial(u8 taskId, TaskFunc task)
 {
+    ItemUseCB_WontHaveEffect(taskId, task);
 }
 
 void ItemUseCB_UseHexorb(u8 taskId, TaskFunc task)
 {
+    ItemUseCB_WontHaveEffect(taskId, task);
 }
 
 // ==================================================
