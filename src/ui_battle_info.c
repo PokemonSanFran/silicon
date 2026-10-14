@@ -442,7 +442,7 @@ static const struct SpriteTemplate sBattleInfo_FaintedIconSpriteTemplate =
     .oam = &(const struct OamData){
         .shape = SPRITE_SHAPE(32x32),
         .size = SPRITE_SIZE(32x32),
-        .priority = 0
+        .priority = 1
     },
     .images = &(const struct SpriteFrameImage){
         .data = (const u8[])INCGFX_U8("graphics/ui_menus/battle_info/fainted.png", ".4bpp"),
