@@ -146,7 +146,8 @@ static void PartyView_ClearHeader(void);
 static void PartyView_ClearFooter(void);
 static void PartyMenuRemoveWindow(u8 *);
 static bool8 ShouldUseChooseMonText(void);
-static void Task_PartyMenu_Exit(u8);
+static void Task_ClosePartyMenu(u8);
+static void Task_ClosePartyMenuAndSetCB2(u8);
 static void PartyMenu_Free(void);
 static void BufferMonSelection(void);
 static void Task_PartyMenuWaitForFade(u8);
@@ -169,6 +170,7 @@ static void BufferBattlePartyOrderBySide(u8 *, u8, enum BattlerId);
 static u8 GetPartyIdFromBattleSlot(u8);
 static void SetPartyIdAtBattleSlot(u8, u8);
 static void UpdatePartyToBattleOrder(void);
+static void UpdatePartyToFieldOrder(void);
 static void GetPartyAndSlotFromPartyMenuId(s8, struct Pokemon **, s8 *);
 static void CreateHeldItemSpriteForTrade(u8, bool8);
 static void SpriteCB_HeldItem(struct Sprite *);
@@ -408,8 +410,7 @@ void Task_HandleChooseMonInput(u8 taskId)
     else if (JOY_NEW(B_BUTTON))
     {
         PlaySE(SE_PC_OFF);
-        BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
-        gTasks[taskId].func = Task_PartyMenu_Exit;
+        Task_ClosePartyMenu(taskId);
     }
 }
 
@@ -1087,10 +1088,19 @@ static bool8 ShouldUseChooseMonText(void)
 // Exit
 // ==================================================
 
-static void Task_PartyMenu_Exit(u8 taskId)
+static void Task_ClosePartyMenu(u8 taskId)
+{
+    BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
+    gTasks[taskId].func = Task_ClosePartyMenuAndSetCB2;
+}
+
+static void Task_ClosePartyMenuAndSetCB2(u8 taskId)
 {
     if (!gPaletteFade.active)
     {
+        if (gPartyMenu.menuType == PARTY_MENU_TYPE_IN_BATTLE)
+            UpdatePartyToFieldOrder();
+
         if (sPartyMenuDataPtr->exitCallback != NULL)
             SetMainCallback2(sPartyMenuDataPtr->exitCallback);
         else
@@ -1987,6 +1997,44 @@ static void UpdatePartyToBattleOrder(void)
         GetPartyAndSlotFromPartyMenuId(i, &dstParty, &dstPartySlot);
         memcpy(&dstParty[dstPartySlot], &partyBuffer[i], sizeof(struct Pokemon));
     }
+    Free(partyBuffer);
+}
+
+static void UpdatePartyToFieldOrder(void)
+{
+    struct Pokemon *partyBuffer = Alloc(sizeof(gParties[B_TRAINER_PLAYER]));
+    u8 i;
+
+    const u8 *multiBattlePartyIdToMenuId = sMultiBattlePartyIdToMenuId_Left;
+
+    if ((gBattleTypeFlags & BATTLE_TYPE_LINK)
+     && ((gBattlerInMenuId & BIT_FLANK) != B_FLANK_LEFT))
+    {
+        multiBattlePartyIdToMenuId = sMultiBattlePartyIdToMenuId_Right;
+    }
+
+    for (i = 0; i < PARTY_SIZE; i++)
+    {
+        struct Pokemon *srcParty = NULL;
+        s8 srcPartySlot = 0;
+        GetPartyAndSlotFromPartyMenuId(i, &srcParty, &srcPartySlot);
+        memcpy(&partyBuffer[i], &srcParty[srcPartySlot], sizeof(struct Pokemon));
+    }
+
+    for (i = 0; i < PARTY_SIZE; i++)
+    {
+        struct Pokemon *dstParty = NULL;
+        s8 dstPartySlot = 0;
+        u8 battlePartyId = GetPartyIdFromBattleSlot(i);
+        u8 dstMenuId = battlePartyId;
+
+        if (gPartyMenu.layout == PARTY_LAYOUT_MULTI && battlePartyId < PARTY_SIZE)
+            dstMenuId = multiBattlePartyIdToMenuId[battlePartyId];
+
+        GetPartyAndSlotFromPartyMenuId(dstMenuId, &dstParty, &dstPartySlot);
+        memcpy(&dstParty[dstPartySlot], &partyBuffer[i], sizeof(struct Pokemon));
+    }
+
     Free(partyBuffer);
 }
 
