@@ -4,13 +4,17 @@
 #include "battle_pike.h"
 #include "bg.h"
 #include "decompress.h"
+#include "event_data.h"
 #include "gpu_regs.h"
 #include "international_string_util.h"
 #include "item.h"
+#include "item_menu.h"
+#include "item_use.h"
 #include "main.h"
 #include "malloc.h"
 #include "menu.h"
 #include "menu_helpers.h"
+#include "move_relearner.h"
 #include "overworld.h"
 #include "palette.h"
 #include "party_menu.h"
@@ -77,13 +81,16 @@ static void Task_PartyMenu_HandleInput(u8);
 static void Task_PartyMenu_HandleHeldInput(u8);
 static void PartySlot_Draw(u32);
 static void PartySlot_DrawEmpty(u32);
-static void PartySlot_Render(u32, u32, struct Pokemon *);
+static void PartySlot_Render(u32, u32, u32, bool32);
 static void PartySlot_DrawFrame(u32, u32, bool32);
-static void PartySlot_DrawMonInfo(u32, struct Pokemon *, u32);
+static void PartySlot_DrawMonInfo(u32, u32, u32);
 static void PartySlot_DrawGender(u32, struct Pokemon *, const u8 *, u32);
 static void PartySlot_DrawLevel(u32, struct Pokemon *, u32);
 static void PartySlot_DrawHp(u32, struct Pokemon *, u32);
 static void PartySlot_DrawItem(u32, struct Pokemon *, u32);
+static void PartySlot_DrawDescription(u32, u32, enum PartyTextColors, u32);
+static u32 PartySlot_GetDescription(u32, enum PartyTextColors *);
+static u32 PartySlot_GetTeachMoveDescription(struct Pokemon *, enum Move, enum PartyTextColors *);
 static void PartySlot_FillRect(u32, u32, u32, u32, u32, u32);
 static void PartySlot_Print(u32, u32, u32, u32, enum PartyTextColors, const u8 *);
 static bool32 PartyCursor_HandleDirectionalInput(void);
@@ -366,12 +373,8 @@ static void Task_PartyMenu_HandleHeldInput(u8 taskId)
 static void PartySlot_Draw(u32 slot)
 {
     u32 windowId = sPartyMenuDataPtr->slotWindowIds[slot];
-    struct Pokemon *mon = NULL;
 
-    if (slot < sPartyMenuDataPtr->partyCount)
-        mon = &gParties[B_TRAINER_PLAYER][slot];
-
-    PartySlot_Render(windowId, slot / PARTY_SLOT_COLUMNS, mon);
+    PartySlot_Render(windowId, slot / PARTY_SLOT_COLUMNS, slot, slot >= sPartyMenuDataPtr->partyCount);
     PutWindowTilemap(windowId);
     CopyWindowToVram(windowId, COPYWIN_GFX);
     ScheduleBgCopyTilemapToVram(PARTY_BG_SLOTS);
@@ -381,15 +384,15 @@ static void PartySlot_DrawEmpty(u32 slot)
 {
     u32 windowId = sPartyMenuDataPtr->slotWindowIds[slot];
 
-    PartySlot_Render(windowId, slot / PARTY_SLOT_COLUMNS, NULL);
+    PartySlot_Render(windowId, slot / PARTY_SLOT_COLUMNS, slot, TRUE);
     CopyWindowToVram(windowId, COPYWIN_GFX);
 }
 
-static void PartySlot_Render(u32 windowId, u32 row, struct Pokemon *mon)
+static void PartySlot_Render(u32 windowId, u32 row, u32 partySlot, bool32 isEmpty)
 {
-    PartySlot_DrawFrame(windowId, row, mon == NULL);
-    if (mon != NULL)
-        PartySlot_DrawMonInfo(windowId, mon, row);
+    PartySlot_DrawFrame(windowId, row, isEmpty);
+    if (!isEmpty)
+        PartySlot_DrawMonInfo(windowId, partySlot, row);
 }
 
 static void PartySlot_DrawFrame(u32 windowId, u32 row, bool32 isEmpty)
@@ -405,8 +408,9 @@ static void PartySlot_DrawFrame(u32 windowId, u32 row, bool32 isEmpty)
         CpuCopy16(&sPartyMenu_Gfx_Slot[TILE_OFFSET_4BPP(tilemap[i])], &tileData[TILE_OFFSET_4BPP(i)], TILE_SIZE_4BPP);
 }
 
-static void PartySlot_DrawMonInfo(u32 windowId, struct Pokemon *mon, u32 row)
+static void PartySlot_DrawMonInfo(u32 windowId, u32 partySlot, u32 row)
 {
+    struct Pokemon *mon = &gParties[B_TRAINER_PLAYER][partySlot];
     u32 contentY = sPartyMenu_SlotRows[row].contentY;
     const struct PartySlotRect *rect = &sPartyMenu_SlotLayout.nickname;
     u8 nickname[POKEMON_NAME_LENGTH + 1];
@@ -416,10 +420,16 @@ static void PartySlot_DrawMonInfo(u32 windowId, struct Pokemon *mon, u32 row)
     PartySlot_Print(windowId, GetFontIdToFit(nickname, FONT_OUTLINED, 0, rect->width),
                     rect->x, rect->y + contentY, COLORID_PARTY_WHITE, nickname);
 
+    enum PartyTextColors descColor;
+    u32 description = PartySlot_GetDescription(partySlot, &descColor);
+    if (description != PARTY_SLOT_DESC_NONE)
+        PartySlot_DrawDescription(windowId, description, descColor, contentY);
+
     if (GetMonData(mon, MON_DATA_IS_EGG))
         return;
 
-    PartySlot_DrawHp(windowId, mon, contentY);
+    if (description == PARTY_SLOT_DESC_NONE)
+        PartySlot_DrawHp(windowId, mon, contentY);
     PartySlot_DrawGender(windowId, mon, nickname, contentY);
     PartySlot_DrawLevel(windowId, mon, contentY);
     PartySlot_DrawItem(windowId, mon, contentY);
@@ -494,6 +504,72 @@ static void PartySlot_DrawItem(u32 windowId, struct Pokemon *mon, u32 contentY)
     const u8 *name = GetItemName(item);
     PartySlot_Print(windowId, GetFontIdToFit(name, FONT_OUTLINED, 0, rect->width),
                     rect->x, rect->y + contentY, COLORID_PARTY_WHITE, name);
+}
+
+static void PartySlot_DrawDescription(u32 windowId, u32 description, enum PartyTextColors color, u32 contentY)
+{
+    const struct PartySlotRect *rect = &sPartyMenu_SlotLayout.description;
+    const u8 *str = sPartyMenu_Descriptions[description];
+    u32 fontId = GetFontIdToFit(str, FONT_OUTLINED, 0, rect->width);
+
+    PartySlot_Print(windowId, fontId, rect->x + GetStringCenterAlignXOffset(fontId, str, rect->width),
+                    rect->y + contentY, color, str);
+}
+
+static u32 PartySlot_GetDescription(u32 partySlot, enum PartyTextColors *color)
+{
+    struct Pokemon *mon = &gParties[B_TRAINER_PLAYER][partySlot];
+
+    *color = COLORID_PARTY_WHITE;
+
+    if (gPartyMenu.menuType == PARTY_MENU_TYPE_MOVE_RELEARNER)
+    {
+        if (!GetMonData(mon, MON_DATA_IS_EGG) && HasMoveToRelearn(&mon->box, gMoveRelearnerState))
+            return PARTYBOX_DESC_ABLE_2;
+        return PARTYBOX_DESC_NOT_ABLE_2;
+    }
+
+    if (gPartyMenu.action == PARTY_ACTION_MOVE_TUTOR)
+    {
+        gSpecialVar_Result = FALSE;
+        return PartySlot_GetTeachMoveDescription(mon, gSpecialVar_0x8005, color);
+    }
+
+    if (gPartyMenu.action != PARTY_ACTION_USE_ITEM)
+        return PARTY_SLOT_DESC_NONE;
+
+    switch (CheckIfItemIsTMHMOrEvolutionStone(gSpecialVar_ItemId))
+    {
+    case ITEM_IS_TM_HM:
+        return PartySlot_GetTeachMoveDescription(mon, ItemIdToBattleMoveId(gSpecialVar_ItemId), color);
+    case ITEM_IS_EVOLUTION_STONE:
+        if (!GetMonData(mon, MON_DATA_IS_EGG)
+         && GetEvolutionTargetSpecies(mon, EVO_MODE_ITEM_CHECK, gSpecialVar_ItemId, NULL, NULL, CHECK_EVO) != SPECIES_NONE)
+        {
+            *color = COLORID_PARTY_GREEN;
+            return PARTYBOX_DESC_ABLE_3;
+        }
+        return PARTYBOX_DESC_NO_USE;
+    default:
+        return PARTY_SLOT_DESC_NONE;
+    }
+}
+
+static u32 PartySlot_GetTeachMoveDescription(struct Pokemon *mon, enum Move move, enum PartyTextColors *color)
+{
+    switch (CanTeachMove(mon, move))
+    {
+    case CANNOT_LEARN_MOVE:
+    case CANNOT_LEARN_MOVE_IS_EGG:
+        *color = COLORID_PARTY_RED;
+        return PARTYBOX_DESC_NOT_ABLE_2;
+    case ALREADY_KNOWS_MOVE:
+        *color = COLORID_PARTY_GREY;
+        return PARTYBOX_DESC_LEARNED;
+    default:
+        *color = COLORID_PARTY_GREEN;
+        return PARTYBOX_DESC_ABLE_2;
+    }
 }
 
 static void PartySlot_FillRect(u32 windowId, u32 color, u32 x, u32 y, u32 width, u32 height)
@@ -614,7 +690,7 @@ static void PartyHeld_SnapToSlot(void)
     SetWindowAttribute(heldWindowId, WINDOW_TILEMAP_LEFT, GetWindowAttribute(slotWindowId, WINDOW_TILEMAP_LEFT) + PARTY_HELD_OFFSET_X);
     SetWindowAttribute(heldWindowId, WINDOW_TILEMAP_TOP, GetWindowAttribute(slotWindowId, WINDOW_TILEMAP_TOP) - PARTY_HELD_OFFSET_Y);
     FillWindowPixelBuffer(heldWindowId, PIXEL_FILL(0));
-    PartySlot_Render(heldWindowId, slot / PARTY_SLOT_COLUMNS, &gParties[B_TRAINER_PLAYER][gPartyMenu.slotId]);
+    PartySlot_Render(heldWindowId, slot / PARTY_SLOT_COLUMNS, gPartyMenu.slotId, FALSE);
     PutWindowTilemap(heldWindowId);
     CopyWindowToVram(heldWindowId, COPYWIN_FULL);
 

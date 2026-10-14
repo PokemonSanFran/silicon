@@ -88,6 +88,12 @@
 #define PARTY_SLOT_ITEM_W       76
 #define PARTY_SLOT_ITEM_H       PARTY_SLOT_TEXT_HEIGHT
 
+#define PARTY_SLOT_DESC_X       PARTY_SLOT_HP_BAR_X
+#define PARTY_SLOT_DESC_Y       PARTY_SLOT_HP_VALUE_Y
+#define PARTY_SLOT_DESC_W       PARTY_SLOT_HP_BAR_W
+#define PARTY_SLOT_DESC_H       PARTY_SLOT_TEXT_HEIGHT
+#define PARTY_SLOT_DESC_NONE    0xFF
+
 // ================================================================
 // Sprite defines
 // ================================================================

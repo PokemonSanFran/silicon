@@ -66,16 +66,33 @@ static const struct WindowTemplate sPartyMenu_WinTemplate_MsgBox =
     .baseBlock = PARTY_TEXT_TILE_MSGBOX,
 };
 
+static const u8 *const sPartyMenu_Descriptions[] =
+{
+    [PARTYBOX_DESC_NO_USE]     = COMPOUND_STRING("No use"),
+    [PARTYBOX_DESC_ABLE_3]     = COMPOUND_STRING("Able!"),
+    [PARTYBOX_DESC_FIRST]      = COMPOUND_STRING("First"),
+    [PARTYBOX_DESC_SECOND]     = COMPOUND_STRING("Second"),
+    [PARTYBOX_DESC_THIRD]      = COMPOUND_STRING("Third"),
+    [PARTYBOX_DESC_FOURTH]     = COMPOUND_STRING("Fourth"),
+    [PARTYBOX_DESC_ABLE]       = COMPOUND_STRING("Able"),
+    [PARTYBOX_DESC_NOT_ABLE]   = COMPOUND_STRING("Not able"),
+    [PARTYBOX_DESC_ABLE_2]     = COMPOUND_STRING("Able"),
+    [PARTYBOX_DESC_NOT_ABLE_2] = COMPOUND_STRING("Not able!"),
+    [PARTYBOX_DESC_LEARNED]    = COMPOUND_STRING("Learned"),
+    [PARTYBOX_DESC_HAVE]       = COMPOUND_STRING("Have"),
+    [PARTYBOX_DESC_DONT_HAVE]  = COMPOUND_STRING("Don't have"),
+};
+
 static const u8 *const sPartyMenu_HeaderMessages[] =
 {
-    [PARTY_MSG_CHOOSE_MON]             = gText_ChoosePokemon,
-    [PARTY_MSG_CHOOSE_MON_OR_CANCEL]   = gText_ChoosePokemonCancel,
-    [PARTY_MSG_CHOOSE_MON_AND_CONFIRM] = gText_ChoosePokemonConfirm,
+    [PARTY_MSG_CHOOSE_MON]             = COMPOUND_STRING("Choose a Pokémon."),
+    [PARTY_MSG_CHOOSE_MON_OR_CANCEL]   = COMPOUND_STRING("Choose a Pokémon or cancel."),
+    [PARTY_MSG_CHOOSE_MON_AND_CONFIRM] = COMPOUND_STRING("Choose a Pokémon and confirm."),
     [PARTY_MSG_MOVE_TO_WHERE]          = gText_MoveToWhere,
-    [PARTY_MSG_TEACH_WHICH_MON]        = gText_TeachWhichPokemon,
-    [PARTY_MSG_USE_ON_WHICH_MON]       = gText_UseOnWhichPokemon,
-    [PARTY_MSG_GIVE_TO_WHICH_MON]      = gText_GiveToWhichPokemon,
-    [PARTY_MSG_CHOOSE_MON_2]           = gText_ChoosePokemon2,
+    [PARTY_MSG_TEACH_WHICH_MON]        = COMPOUND_STRING("Teach which Pokémon?"),
+    [PARTY_MSG_USE_ON_WHICH_MON]       = COMPOUND_STRING("Use on which Pokémon?"),
+    [PARTY_MSG_GIVE_TO_WHICH_MON]      = COMPOUND_STRING("Give to which Pokémon"),
+    [PARTY_MSG_CHOOSE_MON_2]           = COMPOUND_STRING("Choose a Pokémon."),
     [PARTY_MSG_DO_WHAT_WITH_MON]       = gText_DoWhatWithPokemon,
     [PARTY_MSG_RESTORE_WHICH_MOVE]     = gText_RestoreWhichMove,
     [PARTY_MSG_BOOST_PP_WHICH_MOVE]    = gText_BoostPP,
@@ -85,7 +102,7 @@ static const u8 *const sPartyMenu_HeaderMessages[] =
     [PARTY_MSG_CHOOSE_SECOND_FUSION]   = gText_NextFusionMon,
     [PARTY_MSG_WHICH_STATUS]           = COMPOUND_STRING("Inflict which status?"),
     [PARTY_MSG_NO_POKEMON]             = COMPOUND_STRING("You have no Pokémon."),
-    [PARTY_MSG_CHOOSE_MON_FOR_BOX]     = gText_SendWhichMonToPC,
+    [PARTY_MSG_CHOOSE_MON_FOR_BOX]     = COMPOUND_STRING("Send which Pokémon to the PC?"),
     [PARTY_MSG_MOVE_ITEM_WHERE]        = gText_MoveItemWhere,
 };
 
@@ -179,6 +196,7 @@ static const struct
     struct PartySlotRect hp;
     struct PartySlotRect hpBar;
     struct PartySlotRect item;
+    struct PartySlotRect description;
 } sPartyMenu_SlotLayout =
 {
     // {x, y, width, height}
@@ -217,6 +235,12 @@ static const struct
         PARTY_SLOT_ITEM_Y,
         PARTY_SLOT_ITEM_W,
         PARTY_SLOT_ITEM_H
+    },
+    .description = {
+        PARTY_SLOT_DESC_X,
+        PARTY_SLOT_DESC_Y,
+        PARTY_SLOT_DESC_W,
+        PARTY_SLOT_DESC_H
     },
 };
 
