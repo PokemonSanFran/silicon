@@ -167,6 +167,8 @@ enum BattleInfoOptions
 #define BI_HEADER_TEXT_Y        TILE_TO_PIXELS(3) + 2
 #define BI_HEADER_TEXT_Y_PAD    TILE_TO_PIXELS(2)
 
+#define BI_HEADER_MAX_WIDTH     TILE_TO_PIXELS(8) + 2
+
 #define BI_STD_WIN_PALETTE_OFFSET   BG_PLTT_ID(1)
 
 #define sPartySlotIdx           data[0]
@@ -1700,13 +1702,13 @@ static void BattleInfoText_UpdateHeader(void)
 
     struct Pokemon *mon = BattleInfoHelper_GetCurrMon();
     enum Species species = GetMonData(mon, MON_DATA_SPECIES, NULL);
-    u32 fontId = FONT_SMALL;
+    u32 fontId = FONT_OUTLINED;
 
     // species
     BattleInfoHelper_AddTextPrinter(
         BI_WIN_HEADER,
         BI_SPECIES_NAME_X, BI_SPECIES_NAME_Y,
-        FONT_OUTLINED, BI_TXTCLR_OUTLINED,
+        fontId, BI_TXTCLR_OUTLINED,
         GetSpeciesName(species));
 
     // gender
@@ -1737,7 +1739,7 @@ static void BattleInfoText_UpdateHeader(void)
     BattleInfoHelper_AddTextPrinter(
         BI_WIN_HEADER,
         BI_GENDER_SYMBOL_X, BI_GENDER_SYMBOL_Y,
-        FONT_OUTLINED, BI_TXTCLR_OUTLINED,
+        fontId, BI_TXTCLR_OUTLINED,
         strbuf);
 
     bool32 isOnPlayerSide = BattleInfoHelper_IsTrainerOnPlayerSide();
@@ -1747,12 +1749,15 @@ static void BattleInfoText_UpdateHeader(void)
     if (isOnPlayerSide
      || (!isOnPlayerSide && (gBattleTypeFlags & BATTLE_TYPE_TRAINER)))
     {
+        strbuf = BattleInfoHelper_GetTrainerName();
+        fontId = GetFontIdToFit(strbuf, FONT_SMALL, 0, BI_HEADER_MAX_WIDTH);
+
         BattleInfoHelper_AddTextPrinter(
             BI_WIN_HEADER,
             BI_HEADER_TEXT_X, y,
             fontId,
             BI_TXTCLR_CONTENT,
-            BattleInfoHelper_GetTrainerName());
+            strbuf);
         y += BI_HEADER_TEXT_Y_PAD;
     }
 
@@ -1762,11 +1767,14 @@ static void BattleInfoText_UpdateHeader(void)
 
     // ability
     enum Ability ability = GetSpeciesAbility(species, GetMonData(mon, MON_DATA_ABILITY_NUM, NULL));
+    strbuf = GetAbilityName(ability);
+    fontId = GetFontIdToFit(strbuf, FONT_SMALL, 0, BI_HEADER_MAX_WIDTH);
+
     BattleInfoHelper_AddTextPrinter(
         BI_WIN_HEADER,
         BI_HEADER_TEXT_X, y,
         fontId, BI_TXTCLR_CONTENT,
-        GetAbilityName(ability));
+        strbuf);
     y += BI_HEADER_TEXT_Y_PAD;
 
     // held item
@@ -1775,6 +1783,8 @@ static void BattleInfoText_UpdateHeader(void)
         strbuf = GetItemName(item);
     else
         strbuf = COMPOUND_STRING("No Held Item");
+
+    fontId = GetFontIdToFit(strbuf, FONT_SMALL, 0, BI_HEADER_MAX_WIDTH);
     BattleInfoHelper_AddTextPrinter(
         BI_WIN_HEADER,
         BI_HEADER_TEXT_X, y,
