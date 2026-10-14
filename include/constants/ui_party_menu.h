@@ -115,6 +115,37 @@
 #define PARTY_SLOT_DESC_H       PARTY_SLOT_TEXT_HEIGHT
 #define PARTY_SLOT_DESC_NONE    0xFF
 
+// EV item stats: the stat replaces the HP row, IV/EV replace the item row
+#define PARTY_SLOT_STAT_NAME_X      38
+#define PARTY_SLOT_STAT_NAME_Y      PARTY_SLOT_HP_VALUE_Y
+#define PARTY_SLOT_STAT_NAME_W      36
+#define PARTY_SLOT_STAT_NAME_H      PARTY_SLOT_TEXT_HEIGHT
+
+#define PARTY_SLOT_STAT_VALUE_X     80
+#define PARTY_SLOT_STAT_VALUE_Y     PARTY_SLOT_HP_VALUE_Y
+#define PARTY_SLOT_STAT_VALUE_W     28
+#define PARTY_SLOT_STAT_VALUE_H     PARTY_SLOT_TEXT_HEIGHT
+
+#define PARTY_SLOT_IV_LABEL_X       40
+#define PARTY_SLOT_IV_LABEL_Y       PARTY_SLOT_ITEM_Y
+#define PARTY_SLOT_IV_LABEL_W       9
+#define PARTY_SLOT_IV_LABEL_H       PARTY_SLOT_TEXT_HEIGHT
+
+#define PARTY_SLOT_IV_VALUE_X       49
+#define PARTY_SLOT_IV_VALUE_Y       PARTY_SLOT_ITEM_Y
+#define PARTY_SLOT_IV_VALUE_W       20
+#define PARTY_SLOT_IV_VALUE_H       PARTY_SLOT_TEXT_HEIGHT
+
+#define PARTY_SLOT_EV_LABEL_X       69
+#define PARTY_SLOT_EV_LABEL_Y       PARTY_SLOT_ITEM_Y
+#define PARTY_SLOT_EV_LABEL_W       11
+#define PARTY_SLOT_EV_LABEL_H       PARTY_SLOT_TEXT_HEIGHT
+
+#define PARTY_SLOT_EV_VALUE_X       80
+#define PARTY_SLOT_EV_VALUE_Y       PARTY_SLOT_ITEM_Y
+#define PARTY_SLOT_EV_VALUE_W       28
+#define PARTY_SLOT_EV_VALUE_H       PARTY_SLOT_TEXT_HEIGHT
+
 // ================================================================
 // Sprite defines
 // ================================================================

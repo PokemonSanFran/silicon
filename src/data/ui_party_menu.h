@@ -315,6 +315,12 @@ static const struct
     struct PartySlotRect hpBar;
     struct PartySlotRect item;
     struct PartySlotRect description;
+    struct PartySlotRect statName;
+    struct PartySlotRect statValue;
+    struct PartySlotRect ivLabel;
+    struct PartySlotRect ivValue;
+    struct PartySlotRect evLabel;
+    struct PartySlotRect evValue;
 } sPartyMenu_SlotLayout =
 {
     // {x, y, width, height}
@@ -359,6 +365,42 @@ static const struct
         PARTY_SLOT_DESC_Y,
         PARTY_SLOT_DESC_W,
         PARTY_SLOT_DESC_H
+    },
+    .statName = {
+        PARTY_SLOT_STAT_NAME_X,
+        PARTY_SLOT_STAT_NAME_Y,
+        PARTY_SLOT_STAT_NAME_W,
+        PARTY_SLOT_STAT_NAME_H
+    },
+    .statValue = {
+        PARTY_SLOT_STAT_VALUE_X,
+        PARTY_SLOT_STAT_VALUE_Y,
+        PARTY_SLOT_STAT_VALUE_W,
+        PARTY_SLOT_STAT_VALUE_H
+    },
+    .ivLabel = {
+        PARTY_SLOT_IV_LABEL_X,
+        PARTY_SLOT_IV_LABEL_Y,
+        PARTY_SLOT_IV_LABEL_W,
+        PARTY_SLOT_IV_LABEL_H
+    },
+    .ivValue = {
+        PARTY_SLOT_IV_VALUE_X,
+        PARTY_SLOT_IV_VALUE_Y,
+        PARTY_SLOT_IV_VALUE_W,
+        PARTY_SLOT_IV_VALUE_H
+    },
+    .evLabel = {
+        PARTY_SLOT_EV_LABEL_X,
+        PARTY_SLOT_EV_LABEL_Y,
+        PARTY_SLOT_EV_LABEL_W,
+        PARTY_SLOT_EV_LABEL_H
+    },
+    .evValue = {
+        PARTY_SLOT_EV_VALUE_X,
+        PARTY_SLOT_EV_VALUE_Y,
+        PARTY_SLOT_EV_VALUE_W,
+        PARTY_SLOT_EV_VALUE_H
     },
 };
 

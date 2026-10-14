@@ -1,6 +1,8 @@
 #include "global.h"
 #include "battle.h"
+#include "battle_gfx_sfx_util.h"
 #include "battle_interface.h"
+#include "battle_message.h"
 #include "battle_pike.h"
 #include "battle_pyramid.h"
 #include "battle_pyramid_bag.h"
@@ -43,6 +45,7 @@
 #include "pokemon_storage_system.h"
 #include "pokemon_summary_screen.h"
 #include "pokerus.h"
+#include "pokevial.h"
 #include "qol_field_moves.h"
 #include "region_map.h"
 #include "reshow_battle_screen.h"
@@ -83,6 +86,7 @@ struct PartyMenuData
 {
     TaskFunc task;
     MainCallback exitCallback;
+    s16 data[16];
     u8 messageId;
     bool8 chooseHalf;
     u8 partyCount;
@@ -137,6 +141,9 @@ static void PartySlot_DrawGender(u32, struct Pokemon *, const u8 *, u32);
 static void PartySlot_DrawLevel(u32, struct Pokemon *, u32);
 static void PartySlot_DrawHp(u32, struct Pokemon *, u32);
 static void PartySlot_DrawItem(u32, struct Pokemon *, u32);
+static enum Stat PartySlot_GetEvItemStat(void);
+static void PartySlot_DrawEvItemStat(u32, struct Pokemon *, enum Stat, u32);
+static void PartySlot_PrintNumber(u32, const struct PartySlotRect *, u32, enum PartyTextColors, u32);
 static void PartySlot_DrawDescription(u32, u32, enum PartyTextColors, u32);
 static u32 PartySlot_GetDescription(u32, enum PartyTextColors *);
 static u32 PartySlot_GetTeachMoveDescription(struct Pokemon *, enum Move, enum PartyTextColors *);
@@ -154,6 +161,7 @@ static void PartyMonIcon_Create(u32);
 static void PartySetup_HeldItems(void);
 static void UpdatePartyMonHeldItemSprite(u32);
 static void PartySetup_StatusIcons(void);
+static void SetPartyMonAilmentGfx(u32);
 static void PartyStatusIcons_UpdateFade(void);
 static void PartyMonSprites_SetLifted(u32, bool32);
 static void PartyMonSprites_MoveToSlot(u32, u32);
@@ -254,6 +262,20 @@ static void Task_CancelAfterAorBPress(u8);
 static void DisplayCantUseFlashMessage(void);
 static void DisplayCantUseSurfMessage(void);
 static void Task_PartyMenuModifyHP(u8);
+static void ResetHPTaskData(u8, u8, u32);
+static bool32 IsHPRecoveryItem(enum Item);
+static void GetMedicineItemEffectMessage(enum Item, u32);
+static bool32 NotUsingHPEVItemOnShedinja(struct Pokemon *, enum Item);
+static bool32 IsItemFlute(enum Item);
+static void Task_DisplayHPRestoredMessage(u8);
+static void UseSacredAsh(u8);
+static void Task_SacredAshLoop(u8);
+static void Task_SacredAshDisplayHPRestored(u8);
+static bool8 IsMonNotFullyHealed(void);
+static void HealMonFromSlotId(void);
+static void PokevialStartVariablesAndRun(u8, TaskFunc);
+static void UsePokevial(u8);
+static void Task_PokevialLoop(u8);
 static void TryItemHoldFormChange(struct Pokemon *, s8, enum BattleTrainer);
 static void BufferBagFullCantTakeItemMessage(void);
 static void DisplayTookHeldItemMessage(struct Pokemon *, enum Item, bool8);
@@ -909,10 +931,18 @@ static void PartySlot_DrawMonInfo(u32 windowId, u32 partySlot, u32 row)
     if (GetMonData(mon, MON_DATA_IS_EGG))
         return;
 
-    if (description == PARTY_SLOT_DESC_NONE)
-        PartySlot_DrawHp(windowId, mon, contentY);
     PartySlot_DrawGender(windowId, mon, nickname, contentY);
     PartySlot_DrawLevel(windowId, mon, contentY);
+
+    enum Stat evStat = PartySlot_GetEvItemStat();
+    if (evStat != NUM_STATS)
+    {
+        PartySlot_DrawEvItemStat(windowId, mon, evStat, contentY);
+        return;
+    }
+
+    if (description == PARTY_SLOT_DESC_NONE)
+        PartySlot_DrawHp(windowId, mon, contentY);
     PartySlot_DrawItem(windowId, mon, contentY);
 }
 
@@ -987,6 +1017,59 @@ static void PartySlot_DrawItem(u32 windowId, struct Pokemon *mon, u32 contentY)
     const u8 *name = GetItemName(item);
     PartySlot_Print(windowId, GetFontIdToFit(name, FONT_OUTLINED, 0, rect->width),
                     rect->x, rect->y + contentY, COLORID_PARTY_WHITE, name);
+}
+
+static enum Stat PartySlot_GetEvItemStat(void)
+{
+    if (gPartyMenu.action != PARTY_ACTION_USE_ITEM)
+        return NUM_STATS;
+
+    switch (GetItemEffectType(gSpecialVar_ItemId))
+    {
+    case ITEM_EFFECT_HP_EV:
+        return STAT_HP;
+    case ITEM_EFFECT_ATK_EV:
+        return STAT_ATK;
+    case ITEM_EFFECT_DEF_EV:
+        return STAT_DEF;
+    case ITEM_EFFECT_SPEED_EV:
+        return STAT_SPEED;
+    case ITEM_EFFECT_SPATK_EV:
+        return STAT_SPATK;
+    case ITEM_EFFECT_SPDEF_EV:
+        return STAT_SPDEF;
+    default:
+        return NUM_STATS;
+    }
+}
+
+static void PartySlot_DrawEvItemStat(u32 windowId, struct Pokemon *mon, enum Stat stat, u32 contentY)
+{
+    const struct PartySlotRect *rect = &sPartyMenu_SlotLayout.statName;
+    const u8 *name = gStatNamesTable[stat];
+    u32 fontId = GetFontIdToFit(name, FONT_OUTLINED, 0, rect->width);
+    u32 iv = GetMonData(mon, MON_DATA_HP_IV + stat);
+    u32 ev = GetMonData(mon, MON_DATA_HP_EV + stat);
+
+    PartySlot_Print(windowId, fontId, rect->x + GetStringCenterAlignXOffset(fontId, name, rect->width),
+                    rect->y + contentY, COLORID_PARTY_WHITE, name);
+    PartySlot_PrintNumber(windowId, &sPartyMenu_SlotLayout.statValue, GetMonData(mon, MON_DATA_MAX_HP + stat), COLORID_PARTY_WHITE, contentY);
+
+    rect = &sPartyMenu_SlotLayout.ivLabel;
+    PartySlot_Print(windowId, FONT_OUTLINED_NARROW, rect->x, rect->y + contentY, COLORID_PARTY_YELLOW, COMPOUND_STRING("Iv"));
+    PartySlot_PrintNumber(windowId, &sPartyMenu_SlotLayout.ivValue, iv, iv == MAX_PER_STAT_IVS ? COLORID_PARTY_GREEN : COLORID_PARTY_WHITE, contentY);
+
+    rect = &sPartyMenu_SlotLayout.evLabel;
+    PartySlot_Print(windowId, FONT_OUTLINED_NARROW, rect->x, rect->y + contentY, COLORID_PARTY_YELLOW, COMPOUND_STRING("Ev"));
+    PartySlot_PrintNumber(windowId, &sPartyMenu_SlotLayout.evValue, ev, ev == MAX_PER_STAT_EVS ? COLORID_PARTY_GREEN : COLORID_PARTY_WHITE, contentY);
+}
+
+static void PartySlot_PrintNumber(u32 windowId, const struct PartySlotRect *rect, u32 value, enum PartyTextColors color, u32 contentY)
+{
+    u8 text[4];
+
+    ConvertIntToDecimalStringN(text, value, STR_CONV_MODE_LEFT_ALIGN, 3);
+    PartySlot_Print(windowId, FONT_OUTLINED, rect->x, rect->y + contentY, color, text);
 }
 
 static void PartySlot_DrawDescription(u32 windowId, u32 description, enum PartyTextColors color, u32 contentY)
@@ -1307,18 +1390,32 @@ static void PartySetup_StatusIcons(void)
     SetGpuReg(REG_OFFSET_BLDALPHA, BLDALPHA_BLEND(PARTY_STATUS_FADE_LEVELS, 0));
 
     for (u32 slot = 0; slot < sPartyMenuDataPtr->partyCount; slot++)
-    {
-        u32 ailment = GetMonAilment(&gParties[B_TRAINER_PLAYER][slot]);
-        if (ailment == AILMENT_NONE || ailment == AILMENT_PKRS)
-            continue;
+        SetPartyMonAilmentGfx(slot);
+}
 
-        u8 spriteId = CreateSprite(&sPartyMenu_SpriteTemplate_Status,
-                                   PartyMonIcon_GetX(slot) + PARTY_STATUS_ICON_X_OFFSET,
-                                   PartyMonIcon_GetY(slot) + PARTY_STATUS_ICON_Y_OFFSET,
-                                   PARTY_SPRITE_SUBPRIORITY_STATUS);
-        StartSpriteAnim(&gSprites[spriteId], ailment - 1);
-        sPartyMenuDataPtr->statusSpriteIds[slot] = spriteId;
+static void SetPartyMonAilmentGfx(u32 slot)
+{
+    u8 *spriteId = &sPartyMenuDataPtr->statusSpriteIds[slot];
+    u32 ailment = GetMonAilment(&gParties[B_TRAINER_PLAYER][slot]);
+
+    if (ailment == AILMENT_NONE || ailment == AILMENT_PKRS)
+    {
+        if (*spriteId != SPRITE_NONE)
+        {
+            DestroySprite(&gSprites[*spriteId]);
+            *spriteId = SPRITE_NONE;
+        }
+        return;
     }
+
+    if (*spriteId == SPRITE_NONE)
+    {
+        *spriteId = CreateSprite(&sPartyMenu_SpriteTemplate_Status,
+                                 PartyMonIcon_GetX(slot) + PARTY_STATUS_ICON_X_OFFSET,
+                                 PartyMonIcon_GetY(slot) + PARTY_STATUS_ICON_Y_OFFSET,
+                                 PARTY_SPRITE_SUBPRIORITY_STATUS);
+    }
+    StartSpriteAnim(&gSprites[*spriteId], ailment - 1);
 }
 
 static void PartyStatusIcons_UpdateFade(void)
@@ -2044,12 +2141,464 @@ void PartyMenuModifyHP(u8 taskId, u8 slot, s8 hpIncrement, s16 hpDifference, Tas
     SetTaskFuncWithFollowupFunc(taskId, Task_PartyMenuModifyHP, task);
 }
 
+// The usage of hp in this function is mostly nonsense
+// Because caseId is always passed 0, none of the other cases ever occur
+static void ResetHPTaskData(u8 taskId, u8 caseId, u32 hp)
+{
+    s16 *data = gTasks[taskId].data;
+
+    switch (caseId) // always zero
+    {
+    case 0:
+        tHP = hp;
+        tStartHP = hp;
+        break;
+    case 1:
+        tMaxHP = hp;
+        break;
+    case 2:
+        tHPIncrement = hp;
+        break;
+    case 3:
+        tHPToAdd = hp;
+        break;
+    case 4:
+        tPartyId = hp;
+        break;
+    case 5:
+        SetTaskFuncWithFollowupFunc(taskId, Task_PartyMenuModifyHP, (TaskFunc)hp); // >casting hp as a taskfunc
+        break;
+    }
+}
+
 #undef tHP
 #undef tMaxHP
 #undef tHPIncrement
 #undef tHPToAdd
 #undef tPartyId
 #undef tStartHP
+
+// ==================================================
+// Item use: HP and status
+// ==================================================
+
+static bool32 IsHPRecoveryItem(enum Item item)
+{
+    const u8 *effect = GetItemEffect(item);
+
+    if (effect == NULL)
+        return FALSE;
+
+    if (effect[4] & ITEM4_HEAL_HP)
+        return TRUE;
+    else
+        return FALSE;
+}
+
+static void GetMedicineItemEffectMessage(enum Item item, u32 statusCured)
+{
+    switch (GetItemEffectType(item))
+    {
+    case ITEM_EFFECT_CURE_POISON:
+        StringExpandPlaceholders(gStringVar4, gText_PkmnCuredOfPoison);
+        break;
+    case ITEM_EFFECT_CURE_SLEEP:
+        StringExpandPlaceholders(gStringVar4, gText_PkmnWokeUp2);
+        break;
+    case ITEM_EFFECT_CURE_BURN:
+        StringExpandPlaceholders(gStringVar4, gText_PkmnBurnHealed);
+        break;
+    case ITEM_EFFECT_CURE_FREEZE_FROSTBITE:
+        if (statusCured & STATUS1_FREEZE)
+            StringExpandPlaceholders(gStringVar4, gText_PkmnThawedOut);
+        if (statusCured & STATUS1_FROSTBITE)
+            StringExpandPlaceholders(gStringVar4, gText_PkmnFrostbiteHealed);
+        break;
+    case ITEM_EFFECT_CURE_PARALYSIS:
+        StringExpandPlaceholders(gStringVar4, gText_PkmnCuredOfParalysis);
+        break;
+    case ITEM_EFFECT_CURE_CONFUSION:
+        StringExpandPlaceholders(gStringVar4, gText_PkmnSnappedOutOfConfusion);
+        break;
+    case ITEM_EFFECT_CURE_INFATUATION:
+        StringExpandPlaceholders(gStringVar4, gText_PkmnGotOverInfatuation);
+        break;
+    case ITEM_EFFECT_CURE_ALL_STATUS:
+        StringExpandPlaceholders(gStringVar4, gText_PkmnBecameHealthy);
+        break;
+    case ITEM_EFFECT_HP_EV:
+        StringCopy(gStringVar2, gText_HP3);
+        StringExpandPlaceholders(gStringVar4, gText_PkmnBaseVar2StatIncreased);
+        break;
+    case ITEM_EFFECT_ATK_EV:
+        StringCopy(gStringVar2, gText_Attack3);
+        StringExpandPlaceholders(gStringVar4, gText_PkmnBaseVar2StatIncreased);
+        break;
+    case ITEM_EFFECT_DEF_EV:
+        StringCopy(gStringVar2, gText_Defense3);
+        StringExpandPlaceholders(gStringVar4, gText_PkmnBaseVar2StatIncreased);
+        break;
+    case ITEM_EFFECT_SPEED_EV:
+        StringCopy(gStringVar2, gText_Speed2);
+        StringExpandPlaceholders(gStringVar4, gText_PkmnBaseVar2StatIncreased);
+        break;
+    case ITEM_EFFECT_SPATK_EV:
+        StringCopy(gStringVar2, gText_SpAtk3);
+        StringExpandPlaceholders(gStringVar4, gText_PkmnBaseVar2StatIncreased);
+        break;
+    case ITEM_EFFECT_SPDEF_EV:
+        StringCopy(gStringVar2, gText_SpDef3);
+        StringExpandPlaceholders(gStringVar4, gText_PkmnBaseVar2StatIncreased);
+        break;
+    case ITEM_EFFECT_PP_UP:
+    case ITEM_EFFECT_PP_MAX:
+        StringExpandPlaceholders(gStringVar4, gText_MovesPPIncreased);
+        break;
+    case ITEM_EFFECT_HEAL_PP:
+        StringExpandPlaceholders(gStringVar4, gText_PPWasRestored);
+        break;
+    default:
+        StringExpandPlaceholders(gStringVar4, gText_WontHaveEffect);
+        break;
+    }
+}
+
+static bool32 NotUsingHPEVItemOnShedinja(struct Pokemon *mon, enum Item item)
+{
+    if (GetItemEffectType(item) == ITEM_EFFECT_HP_EV && HasShedinjaHPHandling(GetMonData(mon, MON_DATA_SPECIES)))
+        return FALSE;
+    return TRUE;
+}
+
+static bool32 IsItemFlute(enum Item item)
+{
+    if (item == ITEM_BLUE_FLUTE || item == ITEM_RED_FLUTE || item == ITEM_YELLOW_FLUTE)
+        return TRUE;
+    return FALSE;
+}
+
+void ItemUseCB_Medicine(u8 taskId, TaskFunc task)
+{
+    u16 hp = 0;
+    struct Pokemon *party = NULL;
+    s8 partySlot = 0;
+    GetPartyAndSlotFromPartyMenuId(gPartyMenu.slotId, &party, &partySlot);
+    struct Pokemon *mon = &party[partySlot];
+    enum Item item = gSpecialVar_ItemId;
+    bool8 canHeal, cannotUse;
+    u32 oldStatus = GetMonData(mon, MON_DATA_STATUS);
+
+    if (NotUsingHPEVItemOnShedinja(mon, item) == FALSE)
+    {
+        cannotUse = TRUE;
+    }
+    else
+    {
+        canHeal = IsHPRecoveryItem(item);
+        if (canHeal == TRUE)
+        {
+            hp = GetMonData(mon, MON_DATA_HP);
+            if (hp == GetMonData(mon, MON_DATA_MAX_HP))
+                canHeal = FALSE;
+        }
+        cannotUse = ExecuteTableBasedItemEffect(mon, item, gPartyMenu.slotId, 0);
+    }
+
+    if (cannotUse != FALSE)
+    {
+        gPartyMenuUseExitCallback = FALSE;
+        PlaySE(SE_SELECT);
+        DisplayPartyMenuMessage(gText_WontHaveEffect, TRUE);
+        if (gPartyMenu.menuType == PARTY_MENU_TYPE_FIELD)
+            gTasks[taskId].func = Task_ReturnToChooseMonAfterText;
+        else
+            gTasks[taskId].func = task;
+        return;
+    }
+    else
+    {
+        gPartyMenuUseExitCallback = TRUE;
+        if (!IsItemFlute(item))
+        {
+            PlaySE(SE_USE_ITEM);
+            RemoveBagItem(item, 1);
+        }
+        else
+        {
+            PlaySE(SE_GLASS_FLUTE);
+        }
+        SetPartyMonAilmentGfx(gPartyMenu.slotId);
+        if (canHeal == TRUE)
+        {
+            if (hp == 0)
+                AnimatePartySlot(gPartyMenu.slotId, 1);
+            PartyMenuModifyHP(taskId, gPartyMenu.slotId, 1, GetMonData(mon, MON_DATA_HP) - hp, Task_DisplayHPRestoredMessage);
+            ResetHPTaskData(taskId, 0, hp);
+            return;
+        }
+        else
+        {
+            PartySlot_Draw(gPartyMenu.slotId);
+            GetMonNickname(mon, gStringVar1);
+            GetMedicineItemEffectMessage(item, oldStatus);
+            DisplayPartyMenuMessage(gStringVar4, TRUE);
+
+            if (gPartyMenu.menuType == PARTY_MENU_TYPE_FIELD && CheckBagHasItem(item, 1))
+                gTasks[taskId].func = Task_ReturnToChooseMonAfterText;
+            else
+                gTasks[taskId].func = task;
+        }
+    }
+}
+
+static void Task_DisplayHPRestoredMessage(u8 taskId)
+{
+    struct Pokemon *party = NULL;
+    s8 partySlot = 0;
+
+    GetPartyAndSlotFromPartyMenuId(gPartyMenu.slotId, &party, &partySlot);
+    GetMonNickname(&party[partySlot], gStringVar1);
+    StringExpandPlaceholders(gStringVar4, gText_PkmnHPRestoredByVar2);
+    DisplayPartyMenuMessage(gStringVar4, FALSE);
+    HandleBattleLowHpMusicChange();
+    if (gPartyMenu.menuType == PARTY_MENU_TYPE_FIELD && CheckBagHasItem(gSpecialVar_ItemId, 1))
+        gTasks[taskId].func = Task_ReturnToChooseMonAfterText;
+    else
+        gTasks[taskId].func = Task_ClosePartyMenuAfterText;
+}
+
+#define tUsedOnSlot   data[0]
+#define tHadEffect    data[1]
+#define tLastSlotUsed data[2]
+
+void ItemUseCB_SacredAsh(u8 taskId, TaskFunc task)
+{
+    sPartyMenuDataPtr->tUsedOnSlot = FALSE;
+    sPartyMenuDataPtr->tHadEffect = FALSE;
+    sPartyMenuDataPtr->tLastSlotUsed = gPartyMenu.slotId;
+    UseSacredAsh(taskId);
+}
+
+static void UseSacredAsh(u8 taskId)
+{
+    struct Pokemon *mon = &gParties[B_TRAINER_PLAYER][gPartyMenu.slotId];
+    u16 hp;
+
+    if (GetMonData(mon, MON_DATA_SPECIES) == SPECIES_NONE)
+    {
+        gTasks[taskId].func = Task_SacredAshLoop;
+        return;
+    }
+
+    hp = GetMonData(mon, MON_DATA_HP);
+    if (ExecuteTableBasedItemEffect(mon, gSpecialVar_ItemId, gPartyMenu.slotId, 0))
+    {
+        gTasks[taskId].func = Task_SacredAshLoop;
+        return;
+    }
+
+    PlaySE(SE_USE_ITEM);
+    SetPartyMonAilmentGfx(gPartyMenu.slotId);
+    AnimatePartySlot(sPartyMenuDataPtr->tLastSlotUsed, 0);
+    AnimatePartySlot(gPartyMenu.slotId, 1);
+    PartyCursor_SnapToSlot();
+    PartyMenuModifyHP(taskId, gPartyMenu.slotId, 1, GetMonData(mon, MON_DATA_HP) - hp, Task_SacredAshDisplayHPRestored);
+    ResetHPTaskData(taskId, 0, hp);
+    sPartyMenuDataPtr->tUsedOnSlot = TRUE;
+    sPartyMenuDataPtr->tHadEffect = TRUE;
+}
+
+static void Task_SacredAshLoop(u8 taskId)
+{
+    if (IsPartyMenuTextPrinterActive() != TRUE)
+    {
+        if (sPartyMenuDataPtr->tUsedOnSlot == TRUE)
+        {
+            sPartyMenuDataPtr->tUsedOnSlot = FALSE;
+            sPartyMenuDataPtr->tLastSlotUsed = gPartyMenu.slotId;
+        }
+        if (++(gPartyMenu.slotId) == PARTY_SIZE)
+        {
+            if (sPartyMenuDataPtr->tHadEffect == FALSE)
+            {
+                gPartyMenuUseExitCallback = FALSE;
+                DisplayPartyMenuMessage(gText_WontHaveEffect, TRUE);
+            }
+            else
+            {
+                gPartyMenuUseExitCallback = TRUE;
+                RemoveBagItem(gSpecialVar_ItemId, 1);
+            }
+            gTasks[taskId].func = Task_ClosePartyMenuAfterText;
+            gPartyMenu.slotId = 0;
+        }
+        else
+        {
+            UseSacredAsh(taskId);
+        }
+    }
+}
+
+static void Task_SacredAshDisplayHPRestored(u8 taskId)
+{
+    GetMonNickname(&gParties[B_TRAINER_PLAYER][gPartyMenu.slotId], gStringVar1);
+    StringExpandPlaceholders(gStringVar4, gText_PkmnHPRestoredByVar2);
+    DisplayPartyMenuMessage(gStringVar4, FALSE);
+    gTasks[taskId].func = Task_SacredAshLoop;
+}
+
+static bool8 IsMonNotFullyHealed(void)
+{
+    struct Pokemon *mon = &gParties[B_TRAINER_PLAYER][gPartyMenu.slotId];
+    u16 currentHP = GetMonData(mon,MON_DATA_HP);
+    u16 maxHP = GetMonData(mon,MON_DATA_MAX_HP);
+    u32 status = GetMonData(mon,MON_DATA_STATUS);
+
+    u8 currentPP = 0, maxPP = 0;
+    u8 ppBonuses = GetMonData(mon, MON_DATA_PP_BONUSES);
+
+    s32 j;
+
+    if (currentHP < maxHP)
+        return TRUE;
+
+    if (status != 0)
+        return TRUE;
+
+    for (j = 0; j < MAX_MON_MOVES; j++)
+    {
+        currentPP = GetMonData(mon, MON_DATA_PP1 + j);
+        maxPP = CalculatePPWithBonus(GetMonData(mon,MON_DATA_MOVE1 + j), ppBonuses, j);
+
+        if (currentPP < maxPP)
+        {
+            return TRUE;
+        }
+    }
+
+    return FALSE;
+}
+
+static void HealMonFromSlotId(void)
+{
+    struct Pokemon *mon = &gParties[B_TRAINER_PLAYER][gPartyMenu.slotId];
+    u32 j = 0, ppBonuses = 0;
+    u8 arg[4] = {0,0,0,0};
+
+    // restore HP.
+    u16 maxHP = GetMonData(mon, MON_DATA_MAX_HP);
+    arg[0] = maxHP;
+    arg[1] = maxHP >> 8;
+    SetMonData(mon, MON_DATA_HP, arg);
+
+    // restore PP.
+    ppBonuses = GetMonData(mon, MON_DATA_PP_BONUSES);
+    for(j = 0; j < MAX_MON_MOVES; j++)
+    {
+        arg[0] = CalculatePPWithBonus(GetMonData(mon, MON_DATA_MOVE1 + j), ppBonuses, j);
+        SetMonData(mon, MON_DATA_PP1 + j, arg);
+    }
+
+    // since status is u32, the four 0 assignments here are probably for safety to prevent undefined data from reaching SetMonData.
+    arg[0] = 0;
+    arg[1] = 0;
+    arg[2] = 0;
+    arg[3] = 0;
+    SetMonData(mon, MON_DATA_STATUS, arg);
+}
+
+void ItemUseCB_UsePokevial(u8 taskId, TaskFunc task)
+{
+    PokevialStartVariablesAndRun(taskId, task);
+}
+
+static void Task_UsePokevialFromField(u8 taskId)
+{
+    PokevialStartVariablesAndRun(taskId,NULL);
+}
+
+static void PokevialStartVariablesAndRun(u8 taskId, TaskFunc task)
+{
+    if (gPartyMenu.slotId == 1)
+        sPartyMenuDataPtr->tHadEffect = FALSE;
+
+    sPartyMenuDataPtr->tUsedOnSlot = FALSE;
+    sPartyMenuDataPtr->tLastSlotUsed = gPartyMenu.slotId;
+
+    gPartyMenu.slotId = 0;
+    UsePokevial(taskId);
+}
+
+static void UsePokevial(u8 taskId)
+{
+    struct Pokemon *mon = &gParties[B_TRAINER_PLAYER][gPartyMenu.slotId];
+    u16 hp = 0, maxHP = 0;
+
+    if (GetMonData(mon, MON_DATA_SPECIES) == SPECIES_NONE)
+    {
+        gTasks[taskId].func = Task_PokevialLoop;
+        return;
+    }
+
+    if (!IsMonNotFullyHealed())
+    {
+        gTasks[taskId].func = Task_PokevialLoop;
+        return;
+    }
+
+    hp = GetMonData(mon, MON_DATA_HP);
+    maxHP = GetMonData(mon, MON_DATA_MAX_HP);
+
+    PlaySE(SE_USE_ITEM);
+    HealMonFromSlotId();
+    SetPartyMonAilmentGfx(gPartyMenu.slotId);
+    AnimatePartySlot(sPartyMenuDataPtr->tLastSlotUsed, 0);
+    AnimatePartySlot(gPartyMenu.slotId, 1);
+    PartyCursor_SnapToSlot();
+    if (hp != maxHP)
+    {
+        PartyMenuModifyHP(taskId, gPartyMenu.slotId, 1, GetMonData(mon, MON_DATA_HP) - hp, Task_PokevialLoop);
+        ResetHPTaskData(taskId, 0, hp);
+    }
+
+    sPartyMenuDataPtr->tUsedOnSlot = TRUE;
+    sPartyMenuDataPtr->tHadEffect = TRUE;
+}
+
+static void Task_PokevialLoop(u8 taskId)
+{
+    if (IsPartyMenuTextPrinterActive())
+        return;
+
+    if (sPartyMenuDataPtr->tUsedOnSlot == TRUE)
+    {
+        sPartyMenuDataPtr->tUsedOnSlot = FALSE;
+        sPartyMenuDataPtr->tLastSlotUsed = gPartyMenu.slotId;
+    }
+
+    gPartyMenu.slotId++;
+    if (gPartyMenu.slotId < PARTY_SIZE)
+    {
+        UsePokevial(taskId);
+        return;
+    }
+
+    gPartyMenuUseExitCallback = FALSE;
+    if (sPartyMenuDataPtr->tHadEffect)
+    {
+        PokevialDoseDown(VIAL_STANDARD_DOSE);
+        DisplayPartyMenuMessage(gText_YourPkmnWereRestored, FALSE);
+    }
+    else
+        DisplayPartyMenuMessage(gText_WontHaveEffect, TRUE);
+
+    gTasks[taskId].func = Task_ClosePartyMenuAfterText;
+    gPartyMenu.slotId = 0;
+}
+
+#undef tUsedOnSlot
+#undef tHadEffect
+#undef tLastSlotUsed
 
 // ==================================================
 // Held item
@@ -3059,12 +3608,6 @@ static void Task_SetSacredAshCB(u8 taskId)
     }
 }
 
-static void Task_UsePokevialFromField(u8 taskId)
-{
-    if (!gPaletteFade.active)
-        ItemUseCB_UsePokevial(taskId, Task_ClosePartyMenuAfterText);
-}
-
 static void TryTutorSelectedMon(u8 taskId)
 {
 }
@@ -3100,11 +3643,6 @@ void ItemUseCB_BattleScript(u8 taskId, TaskFunc task)
 }
 
 void ItemUseCB_BattleChooseMove(u8 taskId, TaskFunc task)
-{
-    ItemUseCB_WontHaveEffect(taskId, task);
-}
-
-void ItemUseCB_Medicine(u8 taskId, TaskFunc task)
 {
     ItemUseCB_WontHaveEffect(taskId, task);
 }
@@ -3164,11 +3702,6 @@ void ItemUseCB_DynamaxCandy(u8 taskId, TaskFunc task)
     ItemUseCB_WontHaveEffect(taskId, task);
 }
 
-void ItemUseCB_SacredAsh(u8 taskId, TaskFunc task)
-{
-    ItemUseCB_WontHaveEffect(taskId, task);
-}
-
 void ItemUseCB_EvolutionStone(u8 taskId, TaskFunc task)
 {
     ItemUseCB_WontHaveEffect(taskId, task);
@@ -3195,11 +3728,6 @@ void ItemUseCB_ZygardeCube(u8 taskId, TaskFunc task)
 }
 
 void ItemUseCB_Fusion(u8 taskId, TaskFunc task)
-{
-    ItemUseCB_WontHaveEffect(taskId, task);
-}
-
-void ItemUseCB_UsePokevial(u8 taskId, TaskFunc task)
 {
     ItemUseCB_WontHaveEffect(taskId, task);
 }
