@@ -11,6 +11,7 @@
 #include "event_object_movement.h"
 #include "field_control_avatar.h"
 #include "field_effect.h"
+#include "fldeff.h"
 #include "field_player_avatar.h"
 #include "field_screen_effect.h"
 #include "field_weather.h"
@@ -51,10 +52,12 @@
 #include "text_window.h"
 #include "trade.h"
 #include "window.h"
+#include "options_battle.h"
 #include "options_visual.h"
 #include "ui_inventory.h"
 #include "ui_options_menu.h"
 #include "ui_start_menu.h"
+#include "constants/battle_frontier.h"
 #include "constants/field_effects.h"
 #include "constants/party_menu.h"
 #include "constants/rgb.h"
@@ -111,7 +114,6 @@ static void PartySetup_Graphics(void);
 static void PartySetup_Windows(void);
 static void PartySetup_Slots(void);
 static void PartySetup_Sprites(void);
-static void Task_PartyMenu_WaitForFade(u8);
 static void Task_PartyMenu_HandleHeldInput(u8);
 static void PartySlot_Draw(u32);
 static void PartySlot_DrawEmpty(u32);
@@ -127,6 +129,7 @@ static u32 PartySlot_GetDescription(u32, enum PartyTextColors *);
 static u32 PartySlot_GetTeachMoveDescription(struct Pokemon *, enum Move, enum PartyTextColors *);
 static void PartySlot_FillRect(u32, u32, u32, u32, u32, u32);
 static void PartySlot_Print(u32, u32, u32, u32, enum PartyTextColors, const u8 *);
+static s8 *PartyCursor_GetSlotPtr(void);
 static bool32 PartyCursor_HandleDirectionalInput(void);
 static bool32 PartyMenu_CanSwitch(void);
 static void PartyCursor_SnapToSlot(void);
@@ -148,7 +151,24 @@ static void PartyView_ClearHeader(void);
 static void PartyView_ClearFooter(void);
 static void PartyMenuRemoveWindow(u8 *);
 static bool8 ShouldUseChooseMonText(void);
+static void HandleChooseMonSelection(u8, s8 *);
+static bool8 IsSelectedMonNotEgg(u8 *);
+static bool8 DoesSelectedMonKnowHM(u8 *);
+static void HandleChooseMonCancel(u8, s8 *);
+static bool8 DisplayCancelChooseMonYesNo(u8);
+static const u8 *GetFacilityCancelString(void);
+static void Task_CancelChooseMonYesNo(u8);
+static void Task_HandleCancelChooseMonYesNoInput(u8);
+static void CancelParticipationPrompt(u8);
+static void Task_CancelParticipationYesNo(u8);
+static void Task_HandleCancelParticipationYesNoInput(u8);
+static void FinishTwoMonAction(u8);
+static void Task_ReturnToChooseMonAfterText(u8);
+static void Task_WaitForLinkAndReturnToChooseMon(u8);
+static void PartyMenuDisplayYesNoMenu(void);
 static void Task_ClosePartyMenu(u8);
+static void Task_ClosePartyMenuAfterText(u8);
+static void CB2_SetUpExitToBattleScreen(void);
 static void Task_ClosePartyMenuAndSetCB2(u8);
 static void PartyMenu_Free(void);
 static void BufferMonSelection(void);
@@ -173,6 +193,7 @@ static u8 GetPartyIdFromBattleSlot(u8);
 static void SetPartyIdAtBattleSlot(u8, u8);
 static void UpdatePartyToBattleOrder(void);
 static void UpdatePartyToFieldOrder(void);
+static u8 CombinedToIndividualPartyId(u8);
 static void GetPartyAndSlotFromPartyMenuId(s8, struct Pokemon **, s8 *);
 static void CreateHeldItemSpriteForTrade(u8, bool8);
 static void SpriteCB_HeldItem(struct Sprite *);
@@ -180,6 +201,11 @@ static void CB2_ReturnToBagMenu(void);
 static void Task_SetSacredAshCB(u8);
 static void Task_UsePokevialFromField(u8);
 static void Task_ValidateChosenHalfParty(u8);
+static void Task_TryCreateSelectionWindow(u8);
+static void TryTutorSelectedMon(u8);
+static void TryGiveMailToSelectedMon(u8);
+static void TryGiveItemOrMailToSelectedMon(u8);
+static void TryEnterMonForMinigame(u8, u8);
 static void ItemUseCB_WontHaveEffect(u8, TaskFunc);
 
 #include "data/ui_party_menu.h"
@@ -262,7 +288,7 @@ static void CB2_PartyMenu_Setup(void)
         BeginNormalPaletteFade(PALETTES_ALL, 0, 16, 0, RGB_BLACK);
         break;
     case PARTY_SETUP_FINISH:
-        CreateTask(Task_PartyMenu_WaitForFade, 0);
+        CreateTask(sPartyMenuDataPtr->task, 0);
         DisplayPartyMenuStdMessage(sPartyMenuDataPtr->messageId);
         SetVBlankCallback(VBlankCB_PartyMenu_Idle);
         SetMainCallback2(CB2_PartyMenu_Idle);
@@ -392,28 +418,338 @@ static void PartySetup_Sprites(void)
 // Input
 // ==================================================
 
-static void Task_PartyMenu_WaitForFade(u8 taskId)
-{
-    if (!gPaletteFade.active)
-        gTasks[taskId].func = Task_HandleChooseMonInput;
-}
-
 void Task_HandleChooseMonInput(u8 taskId)
 {
-    if (PartyCursor_HandleDirectionalInput())
+    if (!gPaletteFade.active && MenuHelpers_ShouldWaitForLinkRecv() != TRUE)
     {
-        PartyCursor_SnapToSlot();
+        s8 *slotPtr = PartyCursor_GetSlotPtr();
+
+        if (PartyCursor_HandleDirectionalInput())
+        {
+            PartyCursor_SnapToSlot();
+        }
+        else if (JOY_NEW(A_BUTTON))
+        {
+            HandleChooseMonSelection(taskId, slotPtr);
+        }
+        else if (JOY_NEW(SELECT_BUTTON) && PartyMenu_CanSwitch())
+        {
+            PlaySE(SE_SELECT);
+            PartyHeld_Lift();
+            gTasks[taskId].func = Task_PartyMenu_HandleHeldInput;
+        }
+        else if (JOY_NEW(B_BUTTON))
+        {
+            HandleChooseMonCancel(taskId, slotPtr);
+        }
     }
-    else if (JOY_NEW(SELECT_BUTTON) && PartyMenu_CanSwitch())
+}
+
+static void HandleChooseMonSelection(u8 taskId, s8 *slotPtr)
+{
+    switch (gPartyMenu.action)
     {
+    case PARTY_ACTION_SOFTBOILED:
+        if (IsSelectedMonNotEgg((u8 *)slotPtr))
+        {
+            PartyMenuRemoveWindow(&sPartyMenuDataPtr->windowId[PARTY_DYN_WIN_MSG]);
+            Task_TryUseSoftboiledOnPartyMon(taskId);
+        }
+        break;
+    case PARTY_ACTION_USE_ITEM:
+        if (IsSelectedMonNotEgg((u8 *)slotPtr))
+        {
+            if (gPartyMenu.menuType == PARTY_MENU_TYPE_IN_BATTLE)
+                sPartyMenuDataPtr->exitCallback = CB2_SetUpExitToBattleScreen;
+
+            PartyMenuRemoveWindow(&sPartyMenuDataPtr->windowId[PARTY_DYN_WIN_MSG]);
+            gItemUseCB(taskId, Task_ClosePartyMenuAfterText);
+        }
+        break;
+    case PARTY_ACTION_MOVE_TUTOR:
+        if (IsSelectedMonNotEgg((u8 *)slotPtr))
+        {
+            PlaySE(SE_SELECT);
+            PartyMenuRemoveWindow(&sPartyMenuDataPtr->windowId[PARTY_DYN_WIN_MSG]);
+            TryTutorSelectedMon(taskId);
+        }
+        break;
+    case PARTY_ACTION_GIVE_MAILBOX_MAIL:
+        if (IsSelectedMonNotEgg((u8 *)slotPtr))
+        {
+            PlaySE(SE_SELECT);
+            PartyMenuRemoveWindow(&sPartyMenuDataPtr->windowId[PARTY_DYN_WIN_MSG]);
+            TryGiveMailToSelectedMon(taskId);
+        }
+        break;
+    case PARTY_ACTION_GIVE_ITEM:
+    case PARTY_ACTION_GIVE_PC_ITEM:
+        if (IsSelectedMonNotEgg((u8 *)slotPtr))
+        {
+            PlaySE(SE_SELECT);
+            PartyMenuRemoveWindow(&sPartyMenuDataPtr->windowId[PARTY_DYN_WIN_MSG]);
+            TryGiveItemOrMailToSelectedMon(taskId);
+        }
+        break;
+    case PARTY_ACTION_CHOOSE_AND_CLOSE:
         PlaySE(SE_SELECT);
-        PartyHeld_Lift();
-        gTasks[taskId].func = Task_PartyMenu_HandleHeldInput;
-    }
-    else if (JOY_NEW(B_BUTTON))
-    {
-        PlaySE(SE_PC_OFF);
         Task_ClosePartyMenu(taskId);
+        break;
+    case PARTY_ACTION_MINIGAME:
+        if (IsSelectedMonNotEgg((u8 *)slotPtr))
+        {
+            TryEnterMonForMinigame(taskId, (u8)*slotPtr);
+        }
+        break;
+    case PARTY_ACTION_CHOOSE_FAINTED_MON:
+    {
+        u8 partyId = GetPartyIdFromBattleSlot((u8)*slotPtr);
+        struct Pokemon *party = NULL;
+        s8 partySlot = 0;
+        GetPartyAndSlotFromPartyMenuId(*slotPtr, &party, &partySlot);
+
+        if (GetMonData(&party[partySlot], MON_DATA_HP) > 0
+         || GetMonData(&party[partySlot], MON_DATA_SPECIES_OR_EGG) == SPECIES_EGG
+         || ((gBattleTypeFlags & BATTLE_TYPE_MULTI) && !AreMultiPartiesFullTeams() && partyId >= (PARTY_SIZE / 2))
+         || IsFaintedMon(&party[partySlot]))
+        {
+            // Can't select if egg, alive, or doesn't belong to you
+            // Can't select if Fainted Mon is active and the 'mon in question has fainted either.
+            PlaySE(SE_FAILURE);
+        }
+        else
+        {
+            PlaySE(SE_SELECT);
+            gSelectedMonPartyId = CombinedToIndividualPartyId(partyId);
+            Task_ClosePartyMenu(taskId);
+        }
+        break;
+    }
+    case PARTY_ACTION_SEND_MON_TO_BOX:
+    {
+        u8 partyId = (u8)*slotPtr;
+        if ((gBattleTypeFlags & BATTLE_TYPE_MULTI) && !AreMultiPartiesFullTeams() && partyId >= (PARTY_SIZE / 2))
+        {
+            // Can't select if mon doesn't belong to you
+            PlaySE(SE_FAILURE);
+            DisplayPartyMenuMessage(COMPOUND_STRING("Cannot send a mon that doesn't\nbelong to you to the box.{PAUSE_UNTIL_PRESS}"), FALSE);
+            gTasks[taskId].func = Task_ReturnToChooseMonAfterText;
+        }
+        else if (DoesSelectedMonKnowHM((u8 *)slotPtr))
+        {
+            PlaySE(SE_FAILURE);
+            DisplayPartyMenuMessage(COMPOUND_STRING("Cannot send that mon to the box,\nbecause it knows a HM move.{PAUSE_UNTIL_PRESS}"), FALSE);
+            gTasks[taskId].func = Task_ReturnToChooseMonAfterText;
+        }
+        else
+        {
+            PlaySE(SE_SELECT);
+            gSelectedMonPartyId = GetPartyIdFromBattleSlot(partyId);
+            Task_ClosePartyMenu(taskId);
+        }
+        break;
+    }
+    default:
+    case PARTY_ACTION_ABILITY_PREVENTS:
+    case PARTY_ACTION_SWITCHING:
+        PlaySE(SE_SELECT);
+        Task_TryCreateSelectionWindow(taskId);
+        break;
+    }
+}
+
+static bool8 IsSelectedMonNotEgg(u8 *slotPtr)
+{
+    if (GetMonData(&gParties[B_TRAINER_PLAYER][*slotPtr], MON_DATA_IS_EGG) == TRUE)
+    {
+        PlaySE(SE_FAILURE);
+        return FALSE;
+    }
+    return TRUE;
+}
+
+static bool8 DoesSelectedMonKnowHM(u8 *slotPtr)
+{
+    if (B_CATCH_SWAP_CHECK_HMS == FALSE)
+        return FALSE;
+
+    for (u32 i = 0; i < MAX_MON_MOVES; i++)
+    {
+        if (IsMoveHM(GetMonData(&gParties[B_TRAINER_PLAYER][*slotPtr], MON_DATA_MOVE1 + i)))
+            return TRUE;
+    }
+    return FALSE;
+}
+
+static void HandleChooseMonCancel(u8 taskId, s8 *slotPtr)
+{
+    switch (gPartyMenu.action)
+    {
+    case PARTY_ACTION_SEND_OUT:
+    case PARTY_ACTION_CHOOSE_FAINTED_MON:
+        PlaySE(SE_FAILURE);
+        break;
+    case PARTY_ACTION_SWITCH:
+    case PARTY_ACTION_SOFTBOILED:
+        PlaySE(SE_SELECT);
+        FinishTwoMonAction(taskId);
+        break;
+    case PARTY_ACTION_MINIGAME:
+        PlaySE(SE_SELECT);
+        CancelParticipationPrompt(taskId);
+        break;
+    case PARTY_ACTION_SEND_MON_TO_BOX:
+        PlaySE(SE_PC_OFF);
+        gSelectedMonPartyId = PARTY_SIZE + 1;
+        Task_ClosePartyMenu(taskId);
+        break;
+    default:
+        if (DisplayCancelChooseMonYesNo(taskId) == TRUE)
+        {
+            PlaySE(SE_SELECT);
+        }
+        else
+        {
+            PlaySE(SE_PC_OFF);
+            if (!MenuHelpers_IsLinkActive())
+                gSpecialVar_0x8004 = PARTY_SIZE + 1;
+            gPartyMenuUseExitCallback = FALSE;
+            *slotPtr = PARTY_SIZE + 1;
+            Task_ClosePartyMenu(taskId);
+        }
+        break;
+    }
+}
+
+static bool8 DisplayCancelChooseMonYesNo(u8 taskId)
+{
+    const u8 *stringPtr = NULL;
+
+    if (gPartyMenu.menuType == PARTY_MENU_TYPE_CONTEST)
+        stringPtr = gText_CancelParticipation;
+    else if (gPartyMenu.menuType == PARTY_MENU_TYPE_CHOOSE_HALF)
+        stringPtr = GetFacilityCancelString();
+
+    if (stringPtr == NULL)
+        return FALSE;
+
+    PartyMenuRemoveWindow(&sPartyMenuDataPtr->windowId[PARTY_DYN_WIN_MSG]);
+    StringExpandPlaceholders(gStringVar4, stringPtr);
+    DisplayPartyMenuMessage(gStringVar4, TRUE);
+    gTasks[taskId].func = Task_CancelChooseMonYesNo;
+    return TRUE;
+}
+
+static const u8 *GetFacilityCancelString(void)
+{
+    u8 facilityNum = VarGet(VAR_FRONTIER_FACILITY);
+
+    if (!(facilityNum != FACILITY_UNION_ROOM && facilityNum != FACILITY_MULTI_OR_EREADER))
+        return gText_CancelBattle;
+    else if (facilityNum == FRONTIER_FACILITY_DOME && gSpecialVar_0x8005 == 2)
+        return gText_ReturnToWaitingRoom;
+    else
+        return gText_CancelChallenge;
+}
+
+static void Task_CancelChooseMonYesNo(u8 taskId)
+{
+    if (IsPartyMenuTextPrinterActive() != TRUE)
+    {
+        PartyMenuDisplayYesNoMenu();
+        gTasks[taskId].func = Task_HandleCancelChooseMonYesNoInput;
+    }
+}
+
+static void Task_HandleCancelChooseMonYesNoInput(u8 taskId)
+{
+    switch (Menu_ProcessInputNoWrapClearOnChoose())
+    {
+    case 0:
+        gPartyMenuUseExitCallback = FALSE;
+        gPartyMenu.slotId = PARTY_SIZE + 1;
+        ClearSelectedPartyOrder();
+        Task_ClosePartyMenu(taskId);
+        break;
+    case MENU_B_PRESSED:
+        PlaySE(SE_SELECT);
+        // fallthrough
+    case 1:
+        Task_ReturnToChooseMonAfterText(taskId);
+        break;
+    }
+}
+
+static void CancelParticipationPrompt(u8 taskId)
+{
+    DisplayPartyMenuMessage(gText_CancelParticipation, TRUE);
+    gTasks[taskId].func = Task_CancelParticipationYesNo;
+}
+
+static void Task_CancelParticipationYesNo(u8 taskId)
+{
+    if (IsPartyMenuTextPrinterActive() != TRUE)
+    {
+        PartyMenuDisplayYesNoMenu();
+        gTasks[taskId].func = Task_HandleCancelParticipationYesNoInput;
+    }
+}
+
+static void Task_HandleCancelParticipationYesNoInput(u8 taskId)
+{
+    switch (Menu_ProcessInputNoWrapClearOnChoose())
+    {
+    case 0:
+        gSpecialVar_0x8004 = PARTY_SIZE + 1;
+        Task_ClosePartyMenu(taskId);
+        break;
+    case MENU_B_PRESSED:
+        PlaySE(SE_SELECT);
+        // fallthrough
+    case 1:
+        gTasks[taskId].func = Task_ReturnToChooseMonAfterText;
+        break;
+    }
+}
+
+// Finish switching mons or using Softboiled
+static void FinishTwoMonAction(u8 taskId)
+{
+    PartyMenuRemoveWindow(&sPartyMenuDataPtr->windowId[PARTY_DYN_WIN_MSG]);
+    gPartyMenu.action = PARTY_ACTION_CHOOSE_MON;
+    AnimatePartySlot(gPartyMenu.slotId, 0);
+    gPartyMenu.slotId = gPartyMenu.slotId2;
+    AnimatePartySlot(gPartyMenu.slotId2, 1);
+    DisplayPartyMenuStdMessage(PARTY_MSG_CHOOSE_MON);
+    gTasks[taskId].func = Task_HandleChooseMonInput;
+}
+
+static void Task_ReturnToChooseMonAfterText(u8 taskId)
+{
+    if (IsPartyMenuTextPrinterActive() != TRUE)
+    {
+        PartyMenuRemoveWindow(&sPartyMenuDataPtr->windowId[PARTY_DYN_WIN_MSG]);
+        if (MenuHelpers_IsLinkActive() == TRUE)
+        {
+            gTasks[taskId].func = Task_WaitForLinkAndReturnToChooseMon;
+        }
+        else
+        {
+            if (gPartyMenu.action == PARTY_ACTION_SEND_MON_TO_BOX)
+                DisplayPartyMenuStdMessage(PARTY_MSG_CHOOSE_MON_FOR_BOX);
+            else
+                DisplayPartyMenuStdMessage(PARTY_MSG_CHOOSE_MON);
+            gTasks[taskId].func = Task_HandleChooseMonInput;
+        }
+    }
+}
+
+static void Task_WaitForLinkAndReturnToChooseMon(u8 taskId)
+{
+    if (MenuHelpers_ShouldWaitForLinkRecv() != TRUE)
+    {
+        DisplayPartyMenuStdMessage(PARTY_MSG_CHOOSE_MON);
+        gTasks[taskId].func = Task_HandleChooseMonInput;
     }
 }
 
@@ -1066,6 +1402,11 @@ bool8 IsPartyMenuTextPrinterActive(void)
     return FuncIsActiveTask(Task_PrintAndWaitForText);
 }
 
+static void PartyMenuDisplayYesNoMenu(void)
+{
+    CreateYesNoMenu(&sPartyMenu_WinTemplate_YesNo, PARTY_TEXT_TILE_FRAME, PARTY_BG_PAL_FRAME, 0);
+}
+
 static void PrintMessage(const u8 *text)
 {
     u8 *windowPtr = &sPartyMenuDataPtr->windowId[PARTY_DYN_WIN_MSG];
@@ -1139,6 +1480,21 @@ static void Task_ClosePartyMenu(u8 taskId)
 {
     BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
     gTasks[taskId].func = Task_ClosePartyMenuAndSetCB2;
+}
+
+static void Task_ClosePartyMenuAfterText(u8 taskId)
+{
+    if (IsPartyMenuTextPrinterActive() != TRUE)
+    {
+        if (gPartyMenuUseExitCallback == FALSE)
+            sPartyMenuDataPtr->exitCallback = NULL;
+        Task_ClosePartyMenu(taskId);
+    }
+}
+
+static void CB2_SetUpExitToBattleScreen(void)
+{
+    SetMainCallback2(CB2_SetUpReshowBattleScreenAfterMenu);
 }
 
 static void Task_ClosePartyMenuAndSetCB2(u8 taskId)
@@ -1489,9 +1845,37 @@ void PartyMenuModifyHP(u8 taskId, u8 slot, s8 hpIncrement, s16 hpDifference, Tas
 
 static void Task_SetSacredAshCB(u8 taskId)
 {
+    if (!gPaletteFade.active)
+    {
+        if (gPartyMenu.menuType == PARTY_MENU_TYPE_IN_BATTLE)
+            sPartyMenuDataPtr->exitCallback = CB2_SetUpExitToBattleScreen;
+        gItemUseCB(taskId, Task_ClosePartyMenuAfterText); // ItemUseCB_SacredAsh in this case
+    }
 }
 
 static void Task_UsePokevialFromField(u8 taskId)
+{
+    if (!gPaletteFade.active)
+        ItemUseCB_UsePokevial(taskId, Task_ClosePartyMenuAfterText);
+}
+
+static void Task_TryCreateSelectionWindow(u8 taskId)
+{
+}
+
+static void TryTutorSelectedMon(u8 taskId)
+{
+}
+
+static void TryGiveMailToSelectedMon(u8 taskId)
+{
+}
+
+static void TryGiveItemOrMailToSelectedMon(u8 taskId)
+{
+}
+
+static void TryEnterMonForMinigame(u8 taskId, u8 slot)
 {
 }
 
@@ -2104,6 +2488,14 @@ static void UpdatePartyToFieldOrder(void)
     }
 
     Free(partyBuffer);
+}
+
+// Functions for 4-party link multi battle handling
+static u8 CombinedToIndividualPartyId(u8 index)
+{
+    if (IsMultiBattle() == TRUE && !AreMultiPartiesFullTeams() && index >= MULTI_PARTY_SIZE)
+        return index - MULTI_PARTY_SIZE;
+    return index;
 }
 
 static void GetPartyAndSlotFromPartyMenuId(s8 menuId, struct Pokemon **party, s8 *partySlot)

@@ -31,10 +31,16 @@
 #define PARTY_MSGBOX_WIDTH          28
 #define PARTY_MSGBOX_HEIGHT         4
 
+#define PARTY_YESNO_LEFT            21
+#define PARTY_YESNO_TOP             9
+#define PARTY_YESNO_WIDTH           5
+#define PARTY_YESNO_HEIGHT          4
+
 #define PARTY_TEXT_TILE_FRAME       1
 #define PARTY_TEXT_TILE_HEADER      (PARTY_TEXT_TILE_FRAME + PARTY_TEXT_FRAME_TILES)
 #define PARTY_TEXT_TILE_FOOTER      (PARTY_TEXT_TILE_HEADER + PARTY_HELPER_WIDTH * PARTY_HELPER_HEIGHT)
 #define PARTY_TEXT_TILE_MSGBOX      (PARTY_TEXT_TILE_FOOTER + PARTY_HELPER_WIDTH * PARTY_HELPER_HEIGHT)
+#define PARTY_TEXT_TILE_YESNO       (PARTY_TEXT_TILE_MSGBOX + PARTY_MSGBOX_WIDTH * PARTY_MSGBOX_HEIGHT)
 
 // ================================================================
 // Party slot defines

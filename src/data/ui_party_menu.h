@@ -66,6 +66,17 @@ static const struct WindowTemplate sPartyMenu_WinTemplate_MsgBox =
     .baseBlock = PARTY_TEXT_TILE_MSGBOX,
 };
 
+static const struct WindowTemplate sPartyMenu_WinTemplate_YesNo =
+{
+    .bg = PARTY_BG_TEXT,
+    .tilemapLeft = PARTY_YESNO_LEFT,
+    .tilemapTop = PARTY_YESNO_TOP,
+    .width = PARTY_YESNO_WIDTH,
+    .height = PARTY_YESNO_HEIGHT,
+    .paletteNum = PARTY_BG_PAL_DIALOG,
+    .baseBlock = PARTY_TEXT_TILE_YESNO,
+};
+
 static const u8 *const sPartyMenu_Descriptions[] =
 {
     [PARTYBOX_DESC_NO_USE]     = COMPOUND_STRING("No use"),
