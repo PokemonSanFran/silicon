@@ -13,6 +13,7 @@
 #include "field_effect.h"
 #include "field_move.h"
 #include "field_player_avatar.h"
+#include "field_puzzles.h"
 #include "field_screen_effect.h"
 #include "field_specials.h"
 #include "field_weather.h"
@@ -25,6 +26,7 @@
 #include "item.h"
 #include "item_menu.h"
 #include "item_use.h"
+#include "link.h"
 #include "mail.h"
 #include "main.h"
 #include "malloc.h"
@@ -42,6 +44,7 @@
 #include "pokemon_summary_screen.h"
 #include "pokerus.h"
 #include "qol_field_moves.h"
+#include "region_map.h"
 #include "reshow_battle_screen.h"
 #include "scanline_effect.h"
 #include "script.h"
@@ -58,6 +61,7 @@
 #include "options_battle.h"
 #include "options_visual.h"
 #include "ui_inventory.h"
+#include "ui_map_system.h"
 #include "ui_options_menu.h"
 #include "ui_start_menu.h"
 #include "constants/battle_frontier.h"
@@ -212,6 +216,7 @@ static void LoadBattlePartyCurrentOrderForLayout(void);
 static void GetMultiPartyForSummaryScreen(void);
 static void RestoreMultiPartyFromSummaryScreen(void);
 static void GetPartyAndSlotFromPartyMenuId(s8, struct Pokemon **, s8 *);
+static struct Pokemon *GetPartyMonFromPartyMenuId(s8);
 static void CreateHeldItemSpriteForTrade(u8, bool8);
 static void SpriteCB_HeldItem(struct Sprite *);
 static void CB2_ReturnToBagMenu(void);
@@ -242,6 +247,13 @@ static void CursorCb_Cancel1(u8);
 static void CursorCb_SendMon(u8);
 static u32 TrySwitchInPokemon(void);
 static void SwapPartyPokemon(struct Pokemon *, struct Pokemon *);
+static void DisplayFieldMoveExitAreaMessage(u8);
+static void Task_FieldMoveExitAreaYesNo(u8);
+static void Task_HandleFieldMoveExitAreaYesNoInput(u8);
+static void Task_CancelAfterAorBPress(u8);
+static void DisplayCantUseFlashMessage(void);
+static void DisplayCantUseSurfMessage(void);
+static void Task_PartyMenuModifyHP(u8);
 static void TryItemHoldFormChange(struct Pokemon *, s8, enum BattleTrainer);
 static void BufferBagFullCantTakeItemMessage(void);
 static void DisplayTookHeldItemMessage(struct Pokemon *, enum Item, bool8);
@@ -1847,6 +1859,199 @@ static void CursorCb_SendMon(u8 taskId)
 }
 
 // ==================================================
+// Field moves
+// ==================================================
+
+static void CursorCb_FieldMove(u8 taskId)
+{
+    u8 fieldMove = sPartyMenuDataPtr->actions[sPartyMenuDataPtr->actionCursor] - MENU_FIELD_MOVES;
+    const struct MapHeader *mapHeader;
+
+    PlaySE(SE_SELECT);
+    if (gFieldMoveInfo[fieldMove].fieldMoveFunc == NULL)
+        return;
+
+    PartyMenuRemoveWindow(&sPartyMenuDataPtr->windowId[PARTY_DYN_WIN_LIST]);
+    PartyMenuRemoveWindow(&sPartyMenuDataPtr->windowId[PARTY_DYN_WIN_MSG]);
+    if (MenuHelpers_IsLinkActive() == TRUE || InUnionRoom() == TRUE)
+    {
+        DisplayPartyMenuStdMessage(PARTY_MSG_CANT_USE_HERE);
+        gTasks[taskId].func = Task_CancelAfterAorBPress;
+        return;
+    }
+
+    if (!IsFieldMoveUnlocked(fieldMove))
+    {
+        DisplayPartyMenuMessage(FieldMove_GetLockedMessage(fieldMove), TRUE);
+        gTasks[taskId].func = Task_ReturnToChooseMonAfterText;
+    }
+    else if (SetUpFieldMove(fieldMove) == TRUE)
+    {
+        switch (fieldMove)
+        {
+        case FIELD_MOVE_MILK_DRINK:
+        case FIELD_MOVE_SOFT_BOILED:
+            ChooseMonForSoftboiled(taskId);
+            break;
+        case FIELD_MOVE_TELEPORT:
+            mapHeader = Overworld_GetMapHeaderByGroupAndId(gSaveBlock1Ptr->lastHealLocation.mapGroup, gSaveBlock1Ptr->lastHealLocation.mapNum);
+            GetMapNameGeneric(gStringVar1, mapHeader->regionMapSectionId);
+            StringExpandPlaceholders(gStringVar4, gText_ReturnToHealingSpot);
+            DisplayFieldMoveExitAreaMessage(taskId);
+            break;
+        case FIELD_MOVE_DIG:
+            if (ShouldDoSecretLabDigEffect())
+            {
+                StringExpandPlaceholders(gStringVar4, gText_WantToUseDig);
+            }
+            else
+            {
+                mapHeader = Overworld_GetMapHeaderByGroupAndId(gSaveBlock1Ptr->escapeWarp.mapGroup, gSaveBlock1Ptr->escapeWarp.mapNum);
+                GetMapNameGeneric(gStringVar1, mapHeader->regionMapSectionId);
+                StringExpandPlaceholders(gStringVar4, gText_EscapeFromHere);
+            }
+            DisplayFieldMoveExitAreaMessage(taskId);
+            break;
+        case FIELD_MOVE_FLY:
+            gPartyMenu.exitCallback = CB2_OpenFlyMapSystemReturnToPartyMenu;
+            Task_ClosePartyMenu(taskId);
+            break;
+        default:
+            gPartyMenu.exitCallback = CB2_ReturnToField;
+            Task_ClosePartyMenu(taskId);
+            break;
+        }
+    }
+    // Cant use Field Move
+    else
+    {
+        switch (fieldMove)
+        {
+        case FIELD_MOVE_SURF:
+            DisplayCantUseSurfMessage();
+            break;
+        case FIELD_MOVE_FLASH:
+            DisplayCantUseFlashMessage();
+            break;
+        default:
+            DisplayPartyMenuStdMessage(FieldMove_GetPartyMsgID(fieldMove));
+            break;
+        }
+        gTasks[taskId].func = Task_CancelAfterAorBPress;
+    }
+}
+
+static void DisplayFieldMoveExitAreaMessage(u8 taskId)
+{
+    DisplayPartyMenuMessage(gStringVar4, TRUE);
+    gTasks[taskId].func = Task_FieldMoveExitAreaYesNo;
+}
+
+static void Task_FieldMoveExitAreaYesNo(u8 taskId)
+{
+    if (IsPartyMenuTextPrinterActive() != TRUE)
+    {
+        PartyMenuDisplayYesNoMenu();
+        gTasks[taskId].func = Task_HandleFieldMoveExitAreaYesNoInput;
+    }
+}
+
+static void Task_HandleFieldMoveExitAreaYesNoInput(u8 taskId)
+{
+    switch (PartyMenuProcessYesNoInput())
+    {
+    case 0:
+        gPartyMenu.exitCallback = CB2_ReturnToField;
+        Task_ClosePartyMenu(taskId);
+        break;
+    case MENU_B_PRESSED:
+        PlaySE(SE_SELECT);
+        // fallthrough
+    case 1:
+        gFieldCallback2 = NULL;
+        gPostMenuFieldCallback = NULL;
+        Task_ReturnToChooseMonAfterText(taskId);
+        break;
+    }
+}
+
+static void Task_CancelAfterAorBPress(u8 taskId)
+{
+    if ((JOY_NEW(A_BUTTON)) || (JOY_NEW(B_BUTTON)))
+        CursorCb_Cancel1(taskId);
+}
+
+static void DisplayCantUseFlashMessage(void)
+{
+    if (FlagGet(FLAG_SYS_USE_FLASH) == TRUE)
+        DisplayPartyMenuStdMessage(PARTY_MSG_ALREADY_IN_USE);
+    else
+        DisplayPartyMenuStdMessage(PARTY_MSG_CANT_USE_HERE);
+}
+
+static void DisplayCantUseSurfMessage(void)
+{
+    if (TestPlayerAvatarFlags(PLAYER_AVATAR_FLAG_SURFING))
+        DisplayPartyMenuStdMessage(PARTY_MSG_ALREADY_SURFING);
+    else
+        DisplayPartyMenuStdMessage(PARTY_MSG_CANT_SURF_HERE);
+}
+
+// ==================================================
+// HP
+// ==================================================
+
+#define tHP           data[0]
+#define tMaxHP        data[1]
+#define tHPIncrement  data[2]
+#define tHPToAdd      data[3]
+#define tPartyId      data[4]
+#define tStartHP      data[5]
+
+static void Task_PartyMenuModifyHP(u8 taskId)
+{
+    s16 *data = gTasks[taskId].data;
+
+    tHP += tHPIncrement;
+    tHPToAdd--;
+    struct Pokemon *party = NULL;
+    s8 partySlot = 0;
+    GetPartyAndSlotFromPartyMenuId(tPartyId, &party, &partySlot);
+
+    SetMonData(&party[partySlot], MON_DATA_HP, &tHP);
+    PartySlot_Draw(partySlot);
+    if (tHPToAdd == 0 || tHP == 0 || tHP == tMaxHP)
+    {
+        // If HP was recovered, buffer the amount recovered
+        if (tHP > tStartHP)
+            ConvertIntToDecimalStringN(gStringVar2, tHP - tStartHP, STR_CONV_MODE_LEFT_ALIGN, 3);
+
+        SwitchTaskToFollowupFunc(taskId);
+    }
+}
+
+void PartyMenuModifyHP(u8 taskId, u8 slot, s8 hpIncrement, s16 hpDifference, TaskFunc task)
+{
+    struct Pokemon *mon = GetPartyMonFromPartyMenuId(slot);
+    s16 *data = gTasks[taskId].data;
+
+    tHP = GetMonData(mon, MON_DATA_HP);
+    tMaxHP = GetMonData(mon, MON_DATA_MAX_HP);
+    tHPIncrement = hpIncrement;
+    tHPToAdd = hpDifference;
+    tPartyId = slot;
+    tStartHP = tHP;
+    SetTaskFuncWithFollowupFunc(taskId, Task_PartyMenuModifyHP, task);
+}
+
+#undef tHP
+#undef tMaxHP
+#undef tHPIncrement
+#undef tHPToAdd
+#undef tPartyId
+#undef tStartHP
+
+// ==================================================
 // Held item
 // ==================================================
 
@@ -2844,10 +3049,6 @@ void InitPartyMenuForHexorbFromField(u8 taskId)
 // Not ported yet
 // ==================================================
 
-void PartyMenuModifyHP(u8 taskId, u8 slot, s8 hpIncrement, s16 hpDifference, TaskFunc task)
-{
-}
-
 static void Task_SetSacredAshCB(u8 taskId)
 {
     if (!gPaletteFade.active)
@@ -2869,11 +3070,6 @@ static void TryTutorSelectedMon(u8 taskId)
 }
 
 static void CursorCb_Stub(u8 taskId)
-{
-    PlaySE(SE_FAILURE);
-}
-
-static void CursorCb_FieldMove(u8 taskId)
 {
     PlaySE(SE_FAILURE);
 }
@@ -3681,6 +3877,16 @@ static void GetPartyAndSlotFromPartyMenuId(s8 menuId, struct Pokemon **party, s8
         *partySlot = menuId;
         break;
     }
+}
+
+static struct Pokemon *GetPartyMonFromPartyMenuId(s8 menuId)
+{
+    struct Pokemon *party = NULL;
+    s8 partySlot = 0;
+
+    GetPartyAndSlotFromPartyMenuId(menuId, &party, &partySlot);
+
+    return &party[partySlot];
 }
 
 // ==================================================
