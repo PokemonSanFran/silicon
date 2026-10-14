@@ -474,3 +474,157 @@ static const u16 *const sPartyMenu_Pals_Wallpaper[VISUAL_OPTION_COLOR_COUNT] =
     [VISUAL_OPTION_COLOR_VIOLET]   = sMenuPalette_Violet,
     [VISUAL_OPTION_COLOR_CUSTOM]   = sMenuPalette,
 };
+
+// vanilla assets used by trade, dexnav and battle_debug
+// mont note: candidates for consodlidation
+static const u32 sHeldItemGfx[] = INCGFX_U32("graphics/party_menu/hold_icons.png", ".4bpp");
+const u16 gHeldItemPalette[] = INCGFX_U16("graphics/party_menu/hold_icons.png", ".gbapal");
+
+static const struct OamData sOamData_HeldItem =
+{
+    .y = 0,
+    .affineMode = ST_OAM_AFFINE_OFF,
+    .objMode = ST_OAM_OBJ_NORMAL,
+    .mosaic = FALSE,
+    .bpp = ST_OAM_4BPP,
+    .shape = SPRITE_SHAPE(8x8),
+    .x = 0,
+    .matrixNum = 0,
+    .size = SPRITE_SIZE(8x8),
+    .tileNum = 0,
+    .priority = 1,
+    .paletteNum = 0,
+    .affineParam = 0,
+};
+
+static const union AnimCmd sSpriteAnim_HeldItem[] =
+{
+    ANIMCMD_FRAME(0, 1),
+    ANIMCMD_END
+};
+
+static const union AnimCmd sSpriteAnim_HeldMail[] =
+{
+    ANIMCMD_FRAME(1, 1),
+    ANIMCMD_END
+};
+
+static const union AnimCmd *const sSpriteAnimTable_HeldItem[] =
+{
+    sSpriteAnim_HeldItem,
+    sSpriteAnim_HeldMail,
+};
+
+const struct SpriteSheet gSpriteSheet_HeldItem =
+{
+    .data = sHeldItemGfx, .size = sizeof(sHeldItemGfx), .tag = TAG_HELD_ITEM
+};
+
+static const struct SpritePalette sSpritePalette_HeldItem =
+{
+    .data = gHeldItemPalette, .tag = TAG_HELD_ITEM
+};
+
+static const struct SpriteTemplate sSpriteTemplate_HeldItem =
+{
+    .tileTag = TAG_HELD_ITEM,
+    .paletteTag = TAG_HELD_ITEM,
+    .oam = &sOamData_HeldItem,
+    .anims = sSpriteAnimTable_HeldItem,
+};
+
+static const struct OamData sOamData_StatusCondition =
+{
+    .y = 0,
+    .affineMode = ST_OAM_AFFINE_OFF,
+    .objMode = ST_OAM_OBJ_NORMAL,
+    .mosaic = FALSE,
+    .bpp = ST_OAM_4BPP,
+    .shape = SPRITE_SHAPE(32x8),
+    .x = 0,
+    .matrixNum = 0,
+    .size = SPRITE_SIZE(32x8),
+    .tileNum = 0,
+    .priority = 1,
+    .paletteNum = 0,
+    .affineParam = 0
+};
+
+static const union AnimCmd sSpriteAnim_StatusPoison[] =
+{
+    ANIMCMD_FRAME(0, 0),
+    ANIMCMD_END
+};
+
+static const union AnimCmd sSpriteAnim_StatusParalyzed[] =
+{
+    ANIMCMD_FRAME(4, 0),
+    ANIMCMD_END
+};
+
+static const union AnimCmd sSpriteAnim_StatusSleep[] =
+{
+    ANIMCMD_FRAME(8, 0),
+    ANIMCMD_END
+};
+
+static const union AnimCmd sSpriteAnim_StatusFrozen[] =
+{
+    ANIMCMD_FRAME(12, 0),
+    ANIMCMD_END
+};
+
+static const union AnimCmd sSpriteAnim_StatusBurn[] =
+{
+    ANIMCMD_FRAME(16, 0),
+    ANIMCMD_END
+};
+
+static const union AnimCmd sSpriteAnim_StatusPokerus[] =
+{
+    ANIMCMD_FRAME(20, 0),
+    ANIMCMD_END
+};
+
+static const union AnimCmd sSpriteAnim_StatusFaint[] =
+{
+    ANIMCMD_FRAME(24, 0),
+    ANIMCMD_END
+};
+
+static const union AnimCmd sSpriteAnim_StatusFrostbite[] =
+{
+    ANIMCMD_FRAME(28, 0),
+    ANIMCMD_END
+};
+
+static const union AnimCmd *const sSpriteTemplate_StatusCondition[] =
+{
+    sSpriteAnim_StatusPoison,
+    sSpriteAnim_StatusParalyzed,
+    sSpriteAnim_StatusSleep,
+    sSpriteAnim_StatusFrozen,
+    sSpriteAnim_StatusBurn,
+    sSpriteAnim_StatusPokerus,
+    sSpriteAnim_StatusFaint,
+    sSpriteAnim_StatusFrostbite
+};
+
+static const struct CompressedSpriteSheet sSpriteSheet_StatusIcons =
+{
+    gStatusGfx_Icons, 0x400, TAG_STATUS_ICONS
+};
+
+static const struct SpritePalette sSpritePalette_StatusIcons =
+{
+    gStatusPal_Icons, TAG_STATUS_ICONS
+};
+
+const struct SpriteTemplate gSpriteTemplate_StatusIcons =
+{
+    .tileTag = TAG_STATUS_ICONS,
+    .paletteTag = TAG_STATUS_ICONS,
+    .oam = &sOamData_StatusCondition,
+    .anims = sSpriteTemplate_StatusCondition,
+};
+

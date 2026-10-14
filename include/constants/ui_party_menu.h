@@ -204,6 +204,11 @@ enum PartyMenuTags
     PARTY_PALTAG_STATUS,
 };
 
+// tags for assets used by trade, dexnav and battle_debug
+// mont note: candidate for consolidation vs. custom version in current
+#define TAG_STATUS_ICONS 1202
+#define TAG_HELD_ITEM    55120
+
 enum PartyMenuSetupSteps
 {
     PARTY_SETUP_RESET = 0,

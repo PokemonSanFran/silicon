@@ -71,7 +71,6 @@
 #include "trade.h"
 #include "union_room.h"
 #include "ui_inventory.h" // inventory
-#include "ui_party_menu.h"
 #include "window.h"
 #include "constants/battle.h"
 #include "constants/battle_frontier.h"
@@ -89,6 +88,8 @@
 #include "qol_field_moves.h" // pokedex
 #include "field_puzzles.h" // siliconMerge
 #include "surprise_trade.h" // surpriseTrade
+
+#if !UI_PARTY_MENU
 
 enum {
     MENU_SUMMARY,
@@ -572,12 +573,6 @@ static const u8 sText_CannotSendMonToBoxPartner[] = _("Cannot send a mon that do
 static void InitPartyMenu(enum PartyMenuType menuType, enum PartyMenuLayout layout, u8 partyAction, bool8 keepCursorPos, u8 messageId, TaskFunc task, MainCallback callback)
 {
     u16 i;
-
-    if (UI_PARTY_MENU)
-    {
-        PartyMenu_Init(menuType, layout, partyAction, keepCursorPos, messageId, task, callback);
-        return;
-    }
 
     ResetPartyMenu();
     sPartyMenuInternal = Alloc(sizeof(struct PartyMenuInternal));
@@ -9142,3 +9137,5 @@ s8 Test_UpdatePartySelectionSingleLayout(s8 slotId, s8 movementDir, bool8 choose
     return slotId;
 }
 #endif
+
+#endif // !UI_PARTY_MENU
