@@ -66,14 +66,121 @@ static const struct WindowTemplate sPartyMenu_WinTemplate_MsgBox =
     .baseBlock = PARTY_TEXT_TILE_MSGBOX,
 };
 
+static const u32 sPartyMenu_Gfx_MenuFrame[] = INCGFX_U32("graphics/ui_menus/party_menu/menu_frame.png", ".4bpp");
+static const u8 sPartyMenu_Gfx_ListCursor[] = INCBIN_U8("graphics/ui_menus/inventory/listMenuCursor.4bpp");
+
+struct
+{
+    const u8 *text;
+    TaskFunc func;
+} static const sCursorOptions[MENU_FIELD_MOVES] =
+{
+    [MENU_SUMMARY]         = {COMPOUND_STRING("Summary"),           CursorCb_Summary},
+    [MENU_SWITCH]          = {COMPOUND_STRING("Switch"),            CursorCb_Switch},
+    [MENU_CANCEL1]         = {COMPOUND_STRING("Cancel"),            CursorCb_Cancel1},
+    [MENU_ITEM]            = {COMPOUND_STRING("Item"),              CursorCb_Stub},
+    [MENU_GIVE]            = {COMPOUND_STRING("Give"),              CursorCb_Stub},
+    [MENU_TAKE_ITEM]       = {COMPOUND_STRING("Take"),              CursorCb_Stub},
+    [MENU_MOVE_ITEM]       = {COMPOUND_STRING("Move"),              CursorCb_Stub},
+    [MENU_MAIL]            = {COMPOUND_STRING("Mail"),              CursorCb_Stub},
+    [MENU_TAKE_MAIL]       = {COMPOUND_STRING("Take"),              CursorCb_Stub},
+    [MENU_READ]            = {COMPOUND_STRING("Read"),              CursorCb_Stub},
+    [MENU_CANCEL2]         = {COMPOUND_STRING("Cancel"),            CursorCb_Stub},
+    [MENU_SHIFT]           = {COMPOUND_STRING("Shift"),             CursorCb_SendMon},
+    [MENU_SEND_OUT]        = {COMPOUND_STRING("Send out"),          CursorCb_SendMon},
+    [MENU_ENTER]           = {COMPOUND_STRING("Enter"),             CursorCb_Stub},
+    [MENU_NO_ENTRY]        = {COMPOUND_STRING("No entry"),          CursorCb_Stub},
+    [MENU_STORE]           = {COMPOUND_STRING("Store"),             CursorCb_Stub},
+    [MENU_REGISTER]        = {COMPOUND_STRING("Register"),          CursorCb_Stub},
+    [MENU_TRADE1]          = {COMPOUND_STRING("Trade"),             CursorCb_Stub},
+    [MENU_TRADE2]          = {COMPOUND_STRING("Trade"),             CursorCb_Stub},
+    [MENU_TOSS]            = {COMPOUND_STRING("Toss"),              CursorCb_Stub},
+    [MENU_CATALOG_BULB]    = {COMPOUND_STRING("Light bulb"),        CursorCb_Stub},
+    [MENU_CATALOG_OVEN]    = {COMPOUND_STRING("Microwave oven"),    CursorCb_Stub},
+    [MENU_CATALOG_WASHING] = {COMPOUND_STRING("Washing machine"),   CursorCb_Stub},
+    [MENU_CATALOG_FRIDGE]  = {COMPOUND_STRING("Refrigerator"),      CursorCb_Stub},
+    [MENU_CATALOG_FAN]     = {COMPOUND_STRING("Electric fan"),      CursorCb_Stub},
+    [MENU_CATALOG_MOWER]   = {COMPOUND_STRING("Lawn mower"),        CursorCb_Stub},
+    [MENU_CHANGE_FORM]     = {COMPOUND_STRING("Change form"),       CursorCb_Stub},
+    [MENU_CHANGE_ABILITY]  = {COMPOUND_STRING("Change Ability"),    CursorCb_Stub},
+    [MENU_INFLICT_SLEEP]   = {COMPOUND_STRING("SLP"),               CursorCb_Stub},
+    [MENU_INFLICT_POISON]  = {COMPOUND_STRING("PSN"),               CursorCb_Stub},
+    [MENU_INFLICT_BURN]    = {COMPOUND_STRING("BRN"),               CursorCb_Stub},
+#if B_USE_FROSTBITE == TRUE
+    [MENU_INFLICT_FREEZE_FROSTBITE] = {COMPOUND_STRING("FSB"), CursorCb_Stub},
+#else
+    [MENU_INFLICT_FREEZE_FROSTBITE] = {COMPOUND_STRING("FRZ"), CursorCb_Stub},
+#endif
+    [MENU_INFLICT_PARALYSIS] = {COMPOUND_STRING("PAR"), CursorCb_Stub},
+};
+
+static const u8 sPartyMenuAction_SummarySwitchCancel[] = {MENU_SUMMARY, MENU_SWITCH, MENU_CANCEL1};
+static const u8 sPartyMenuAction_ShiftSummaryCancel[] = {MENU_SHIFT, MENU_SUMMARY, MENU_CANCEL1};
+static const u8 sPartyMenuAction_SendOutSummaryCancel[] = {MENU_SEND_OUT, MENU_SUMMARY, MENU_CANCEL1};
+static const u8 sPartyMenuAction_SummaryCancel[] = {MENU_SUMMARY, MENU_CANCEL1};
+static const u8 sPartyMenuAction_EnterSummaryCancel[] = {MENU_ENTER, MENU_SUMMARY, MENU_CANCEL1};
+static const u8 sPartyMenuAction_NoEntrySummaryCancel[] = {MENU_NO_ENTRY, MENU_SUMMARY, MENU_CANCEL1};
+static const u8 sPartyMenuAction_StoreSummaryCancel[] = {MENU_STORE, MENU_SUMMARY, MENU_CANCEL1};
+static const u8 sPartyMenuAction_GiveTakeItemCancel[] = {MENU_GIVE, MENU_TAKE_ITEM, MENU_MOVE_ITEM, MENU_CANCEL2};
+static const u8 sPartyMenuAction_ReadTakeMailCancel[] = {MENU_READ, MENU_TAKE_MAIL, MENU_CANCEL2};
+static const u8 sPartyMenuAction_RegisterSummaryCancel[] = {MENU_REGISTER, MENU_SUMMARY, MENU_CANCEL1};
+static const u8 sPartyMenuAction_TradeSummaryCancel1[] = {MENU_TRADE1, MENU_SUMMARY, MENU_CANCEL1};
+static const u8 sPartyMenuAction_TradeSummaryCancel2[] = {MENU_TRADE2, MENU_SUMMARY, MENU_CANCEL1};
+static const u8 sPartyMenuAction_TakeItemTossCancel[] = {MENU_TAKE_ITEM, MENU_TOSS, MENU_CANCEL1};
+static const u8 sPartyMenuAction_RotomCatalog[] = {MENU_CATALOG_BULB, MENU_CATALOG_OVEN, MENU_CATALOG_WASHING, MENU_CATALOG_FRIDGE, MENU_CATALOG_FAN, MENU_CATALOG_MOWER, MENU_CANCEL1};
+static const u8 sPartyMenuAction_ZygardeCube[] = {MENU_CHANGE_FORM, MENU_CHANGE_ABILITY, MENU_CANCEL1};
+static const u8 sPartyMenuAction_Hexorb[] = {MENU_INFLICT_SLEEP, MENU_INFLICT_POISON, MENU_INFLICT_BURN, MENU_INFLICT_FREEZE_FROSTBITE, MENU_INFLICT_PARALYSIS, MENU_CANCEL1};
+
+static const u8 *const sPartyMenuActions[] =
+{
+    [ACTIONS_NONE]          = NULL,
+    [ACTIONS_SWITCH]        = sPartyMenuAction_SummarySwitchCancel,
+    [ACTIONS_SHIFT]         = sPartyMenuAction_ShiftSummaryCancel,
+    [ACTIONS_SEND_OUT]      = sPartyMenuAction_SendOutSummaryCancel,
+    [ACTIONS_ENTER]         = sPartyMenuAction_EnterSummaryCancel,
+    [ACTIONS_NO_ENTRY]      = sPartyMenuAction_NoEntrySummaryCancel,
+    [ACTIONS_STORE]         = sPartyMenuAction_StoreSummaryCancel,
+    [ACTIONS_SUMMARY_ONLY]  = sPartyMenuAction_SummaryCancel,
+    [ACTIONS_ITEM]          = sPartyMenuAction_GiveTakeItemCancel,
+    [ACTIONS_MAIL]          = sPartyMenuAction_ReadTakeMailCancel,
+    [ACTIONS_REGISTER]      = sPartyMenuAction_RegisterSummaryCancel,
+    [ACTIONS_TRADE]         = sPartyMenuAction_TradeSummaryCancel1,
+    [ACTIONS_SPIN_TRADE]    = sPartyMenuAction_TradeSummaryCancel2,
+    [ACTIONS_TAKEITEM_TOSS] = sPartyMenuAction_TakeItemTossCancel,
+    [ACTIONS_ROTOM_CATALOG] = sPartyMenuAction_RotomCatalog,
+    [ACTIONS_ZYGARDE_CUBE]  = sPartyMenuAction_ZygardeCube,
+    [ACTIONS_HEXORB]        = sPartyMenuAction_Hexorb,
+};
+
+static const u8 sPartyMenuActionCounts[] =
+{
+    [ACTIONS_NONE]          = 0,
+    [ACTIONS_SWITCH]        = ARRAY_COUNT(sPartyMenuAction_SummarySwitchCancel),
+    [ACTIONS_SHIFT]         = ARRAY_COUNT(sPartyMenuAction_ShiftSummaryCancel),
+    [ACTIONS_SEND_OUT]      = ARRAY_COUNT(sPartyMenuAction_SendOutSummaryCancel),
+    [ACTIONS_ENTER]         = ARRAY_COUNT(sPartyMenuAction_EnterSummaryCancel),
+    [ACTIONS_NO_ENTRY]      = ARRAY_COUNT(sPartyMenuAction_NoEntrySummaryCancel),
+    [ACTIONS_STORE]         = ARRAY_COUNT(sPartyMenuAction_StoreSummaryCancel),
+    [ACTIONS_SUMMARY_ONLY]  = ARRAY_COUNT(sPartyMenuAction_SummaryCancel),
+    [ACTIONS_ITEM]          = ARRAY_COUNT(sPartyMenuAction_GiveTakeItemCancel),
+    [ACTIONS_MAIL]          = ARRAY_COUNT(sPartyMenuAction_ReadTakeMailCancel),
+    [ACTIONS_REGISTER]      = ARRAY_COUNT(sPartyMenuAction_RegisterSummaryCancel),
+    [ACTIONS_TRADE]         = ARRAY_COUNT(sPartyMenuAction_TradeSummaryCancel1),
+    [ACTIONS_SPIN_TRADE]    = ARRAY_COUNT(sPartyMenuAction_TradeSummaryCancel2),
+    [ACTIONS_TAKEITEM_TOSS] = ARRAY_COUNT(sPartyMenuAction_TakeItemTossCancel),
+    [ACTIONS_ROTOM_CATALOG] = ARRAY_COUNT(sPartyMenuAction_RotomCatalog),
+    [ACTIONS_ZYGARDE_CUBE]  = ARRAY_COUNT(sPartyMenuAction_ZygardeCube),
+    [ACTIONS_HEXORB]        = ARRAY_COUNT(sPartyMenuAction_Hexorb),
+};
+
 static const struct WindowTemplate sPartyMenu_WinTemplate_YesNo =
 {
     .bg = PARTY_BG_TEXT,
-    .tilemapLeft = PARTY_YESNO_LEFT,
+    .tilemapLeft = DISPLAY_TILE_WIDTH - PARTY_YESNO_WIDTH,
     .tilemapTop = PARTY_YESNO_TOP,
     .width = PARTY_YESNO_WIDTH,
     .height = PARTY_YESNO_HEIGHT,
-    .paletteNum = PARTY_BG_PAL_DIALOG,
+    .paletteNum = PARTY_BG_PAL_WALLPAPER,
     .baseBlock = PARTY_TEXT_TILE_YESNO,
 };
 
@@ -259,14 +366,17 @@ static const struct
 static const u8 sPartyMenu_TextColors[NUM_PARTY_TEXT_COLORS][3] =
 {
     // from pal 1 of tiles.png
-    [COLORID_PARTY_WHITE]   = {0, 5,  4},
-    [COLORID_PARTY_BLUE]    = {0, 5,  1},
-    [COLORID_PARTY_GREEN]   = {0, 5, 12},
-    [COLORID_PARTY_YELLOW]  = {0, 5, 13},
-    [COLORID_PARTY_RED]     = {0, 5, 14},
-    [COLORID_PARTY_GREY]    = {0, 5, 15},
+    [COLORID_PARTY_WHITE]           = {0, 5,  4},
+    [COLORID_PARTY_BLUE]            = {0, 5,  1},
+    [COLORID_PARTY_GREEN]           = {0, 5, 12},
+    [COLORID_PARTY_YELLOW]          = {0, 5, 13},
+    [COLORID_PARTY_RED]             = {0, 5, 14},
+    [COLORID_PARTY_GREY]            = {0, 5, 15},
     // from text.pal
-    [COLORID_PARTY_HELPER]  = {0, 1,  0},
+    [COLORID_PARTY_HELPER]          = {0, 1,  0},
+    // from the wallpaper pal
+    [COLORID_PARTY_MENU_BLACK]      = {0, 3,  1},
+    [COLORID_PARTY_MENU_HIGHLIGHT]  = {0, 4,  1},
 };
 
 // {frame, empty, fill} per HP_BAR_* level
