@@ -78,14 +78,14 @@ struct
     [MENU_SUMMARY]         = {COMPOUND_STRING("Summary"),           CursorCb_Summary},
     [MENU_SWITCH]          = {COMPOUND_STRING("Switch"),            CursorCb_Switch},
     [MENU_CANCEL1]         = {COMPOUND_STRING("Cancel"),            CursorCb_Cancel1},
-    [MENU_ITEM]            = {COMPOUND_STRING("Item"),              CursorCb_Stub},
-    [MENU_GIVE]            = {COMPOUND_STRING("Give"),              CursorCb_Stub},
-    [MENU_TAKE_ITEM]       = {COMPOUND_STRING("Take"),              CursorCb_Stub},
-    [MENU_MOVE_ITEM]       = {COMPOUND_STRING("Move"),              CursorCb_Stub},
+    [MENU_ITEM]            = {COMPOUND_STRING("Item"),              CursorCb_Item},
+    [MENU_GIVE]            = {COMPOUND_STRING("Give"),              CursorCb_Give},
+    [MENU_TAKE_ITEM]       = {COMPOUND_STRING("Take"),              CursorCb_TakeItem},
+    [MENU_MOVE_ITEM]       = {COMPOUND_STRING("Move"),              CursorCb_MoveItem},
     [MENU_MAIL]            = {COMPOUND_STRING("Mail"),              CursorCb_Stub},
     [MENU_TAKE_MAIL]       = {COMPOUND_STRING("Take"),              CursorCb_Stub},
     [MENU_READ]            = {COMPOUND_STRING("Read"),              CursorCb_Stub},
-    [MENU_CANCEL2]         = {COMPOUND_STRING("Cancel"),            CursorCb_Stub},
+    [MENU_CANCEL2]         = {COMPOUND_STRING("Cancel"),            CursorCb_Cancel2},
     [MENU_SHIFT]           = {COMPOUND_STRING("Shift"),             CursorCb_SendMon},
     [MENU_SEND_OUT]        = {COMPOUND_STRING("Send out"),          CursorCb_SendMon},
     [MENU_ENTER]           = {COMPOUND_STRING("Enter"),             CursorCb_Stub},
@@ -366,27 +366,27 @@ static const struct
 static const u8 sPartyMenu_TextColors[NUM_PARTY_TEXT_COLORS][3] =
 {
     // from pal 1 of tiles.png
-    [COLORID_PARTY_WHITE]           = {0, 5,  4},
-    [COLORID_PARTY_BLUE]            = {0, 5,  1},
-    [COLORID_PARTY_GREEN]           = {0, 5, 12},
-    [COLORID_PARTY_YELLOW]          = {0, 5, 13},
-    [COLORID_PARTY_RED]             = {0, 5, 14},
-    [COLORID_PARTY_GREY]            = {0, 5, 15},
+    [COLORID_PARTY_BLUE]            = {0, 5, 10},
+    [COLORID_PARTY_GREEN]           = {0, 5, 11},
+    [COLORID_PARTY_YELLOW]          = {0, 5, 12},
+    [COLORID_PARTY_RED]             = {0, 5, 13},
+    [COLORID_PARTY_GREY]            = {0, 5, 14},
+    [COLORID_PARTY_WHITE]           = {0, 5, 15},
     // from text.pal
     [COLORID_PARTY_HELPER]          = {0, 1,  0},
     // from the wallpaper pal
     [COLORID_PARTY_MENU_BLACK]      = {0, 3,  1},
-    [COLORID_PARTY_MENU_HIGHLIGHT]  = {0, 4,  1},
+    [COLORID_PARTY_MENU_HIGHLIGHT]  = {0, 3,  5},
 };
 
 // {frame, empty, fill} per HP_BAR_* level
 static const u8 sPartyMenu_HpBarColors[][3] =
 {
-    [HP_BAR_EMPTY]  = {4, 15, 14},
-    [HP_BAR_RED]    = {4, 15, 14},  // red
-    [HP_BAR_YELLOW] = {4, 15, 13},  // yellow
-    [HP_BAR_GREEN]  = {4, 15, 12},  // green
-    [HP_BAR_FULL]   = {4, 15, 12},  // green
+    [HP_BAR_EMPTY]  = {4, 14, 13},
+    [HP_BAR_RED]    = {4, 14, 13},  // red
+    [HP_BAR_YELLOW] = {4, 14, 12},  // yellow
+    [HP_BAR_GREEN]  = {4, 14, 11},  // green
+    [HP_BAR_FULL]   = {4, 14, 11},  // green
 };
 
 static const struct CompressedSpriteSheet sPartyMenu_SpriteSheet_Cursor =
