@@ -196,6 +196,8 @@ enum BattleInfoOptions
 #define BI_SET_PARTY_VIEW_TRAINER(_t)  (1 << (_t))
 #define BI_GET_TRUE_TRAINER(_t)        (_t + (!!(sBattleInfoDataPtr->viewPartnerParty & (_t + 1)) * NUM_BATTLE_SIDES))
 
+#define INFO_BOX_WIDTH 70
+
 struct BattleInfoData
 {
     MainCallback savedCB;
@@ -1703,6 +1705,7 @@ static void BattleInfoText_UpdateHeader(void)
     struct Pokemon *mon = BattleInfoHelper_GetCurrMon();
     enum Species species = GetMonData(mon, MON_DATA_SPECIES, NULL);
     u32 fontId = FONT_SMALL;
+    u32 letterSpacing = GetFontAttribute(fontId,FONTATTR_LINE_SPACING);
 
     // species
     BattleInfoHelper_AddTextPrinter(
@@ -1749,6 +1752,7 @@ static void BattleInfoText_UpdateHeader(void)
     if (isOnPlayerSide
      || (!isOnPlayerSide && (gBattleTypeFlags & BATTLE_TYPE_TRAINER)))
     {
+        fontId = GetFontIdToFit(BattleInfoHelper_GetTrainerName(),fontId,letterSpacing,INFO_BOX_WIDTH);
         BattleInfoHelper_AddTextPrinter(
             BI_WIN_HEADER,
             BI_HEADER_TEXT_X, y,
@@ -1764,6 +1768,7 @@ static void BattleInfoText_UpdateHeader(void)
 
     // ability
     enum Ability ability = GetSpeciesAbility(species, GetMonData(mon, MON_DATA_ABILITY_NUM, NULL));
+    fontId = GetFontIdToFit(GetAbilityName(ability),fontId,letterSpacing,INFO_BOX_WIDTH);
     BattleInfoHelper_AddTextPrinter(
         BI_WIN_HEADER,
         BI_HEADER_TEXT_X, y,
@@ -1777,6 +1782,7 @@ static void BattleInfoText_UpdateHeader(void)
         strbuf = GetItemName(item);
     else
         strbuf = COMPOUND_STRING("No Held Item");
+    fontId = GetFontIdToFit(strbuf,fontId,letterSpacing,INFO_BOX_WIDTH);
     BattleInfoHelper_AddTextPrinter(
         BI_WIN_HEADER,
         BI_HEADER_TEXT_X, y,
