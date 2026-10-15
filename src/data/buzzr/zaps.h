@@ -2000,7 +2000,7 @@ const struct Zap gZaps[] =
     [ZAP_CURENO_ANKLE] =
     {
         .userId = BUZZR_USER_PLACEHOLDER,
-        .content = COMPOUND_STRING("Sprained my ankle cycling around {STR_VAR_1}, waited 3 hours in A&E, had some mid noodles and now I'm sat at home in a cast with my {STR_VAR_2} pecking away at my head. It's only Tuesday."),
+        .content = COMPOUND_STRING("Sprained my ankle cycling around {STR_VAR_1}, waited 3 hours in the emergency room, had some mid noodles and now I'm sat at home in a cast with my {STR_VAR_2} pecking away at my head. It's only Tuesday."),
         .isPrivate = FALSE,
         .criteria = ZapCriteria_RegularZap,
         .quest = 0,
