@@ -1462,3 +1462,17 @@ void SiliconFrontier_ResetSketchedMoves(void)
     }
 }
 
+u8 SiliconFrontier_GetBattleIndexValue(void)
+{
+    enum SiliconFrontierFacility facility = SiliconFrontier_GetFacilityFromCurrentChallenge();
+    enum SiliconFrontierChallengeType challengeType = SiliconFrontier_GetTypeFromCurrentChallenge();
+    enum SiliconFrontierSparringTypes sparringType = SiliconFrontier_GetCurrentChallengeSparringType();
+    u32 currentStreak = SiliconFrontier_GetCurrentStreak(facility,challengeType, sparringType);
+
+    return (currentStreak % SILICON_FRONTIER_STREAK_LENGTH_BOSS);
+}
+
+void Script_SiliconFrontier_GetBattleIndexValue(void)
+{
+    VarSet(VAR_TEMP_D,SiliconFrontier_GetBattleIndexValue());
+}

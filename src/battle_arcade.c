@@ -1941,12 +1941,7 @@ static bool32 IsEventValidDuringBattleOrStreak(enum ArcadeEvents event)
 
 static bool32 IsEventValidDuringCurrentBattle(enum ArcadeEvents event)
 {
-    enum SiliconFrontierFacility facility = SiliconFrontier_GetFacilityFromCurrentChallenge();
-    enum SiliconFrontierChallengeType challengeType = SiliconFrontier_GetTypeFromCurrentChallenge();
-    enum SiliconFrontierSparringTypes sparringType = SiliconFrontier_GetCurrentChallengeSparringType();
-    u32 currentStreak = SiliconFrontier_GetCurrentStreak(facility,challengeType, sparringType);
-
-    return arcadeEventBattleEligibility[event][currentStreak % SILICON_FRONTIER_STREAK_LENGTH_BOSS];
+    return arcadeEventBattleEligibility[event][SiliconFrontier_GetBattleIndexValue()];
 }
 
 static bool32 IsEventValidDuringCurrentStreak(enum ArcadeEvents event)
