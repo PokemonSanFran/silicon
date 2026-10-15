@@ -8,7 +8,8 @@ mapscripts CuconuTown_MapScripts
 	}
     MAP_SCRIPT_ON_TRANSITION
     {
-        call(AngelDelivery_Script_HideBikers)
+        call_if_quest_reward(QUEST_ANGELDELIVERY,AngelDelivery_Script_HideBikersCuconuTown)
+        call_if_quest_complete(QUEST_ANGELDELIVERY,AngelDelivery_Script_HideBikersCuconuTown)
     }
     MAP_SCRIPT_ON_FRAME_TABLE
     [

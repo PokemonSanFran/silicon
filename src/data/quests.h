@@ -3903,14 +3903,16 @@ const struct SideQuest sSideQuests[QUEST_COUNT] =
     },
     [QUEST_ANGELDELIVERY] =
     {
-        .name = gText_Quest_AngelDelivery_Name,
-        .desc[FLAG_GET_ACTIVE] = gText_Quest_AngelDelivery_Desc,
-        .desc[FLAG_GET_COMPLETED] = gText_Quest_AngelDelivery_DoneDesc,
-        .map = gText_Quest_AngelDelivery_Map,
-        .sprite = OBJ_EVENT_GFX_CYCLING_TRIATHLETE_M,
+        .name = COMPOUND_STRING("Angel Delivery"),
+        .desc[FLAG_GET_ACTIVE] = COMPOUND_STRING("Help AngeldeliverybikerA pass the Gear Grind Gang initiation. Deliver the {STR_VAR_1} to AngeldeliverybikerB in {STR_VAR_2}."),
+        .desc[FLAG_GET_REWARD] = COMPOUND_STRING("Head to the Gear Grind Gang HQ in {STR_VAR_3} for your thanks!"),
+        .desc[FLAG_GET_COMPLETED] = COMPOUND_STRING("The Gear Grind Gang has welcomed you as one of their own."),
+        .map = COMPOUND_STRING("Pioca Bridge"),
+        .sprite = OBJ_EVENT_GFX_ANGELDELIVERYBIKERA,
         .spritetype = QUEST_SPRITE_TYPE_OBJECT,
         .subquests = NULL,
         .numSubquests = 0,
+        .descFunc = GetQuestDesc_AngelDelivery,
         .states =
         {
             [STATE_QUEST_ANGELDELIVERY_QUEST_NOT_STARTED] =
@@ -3935,7 +3937,7 @@ const struct SideQuest sSideQuests[QUEST_COUNT] =
             {
                 .name = COMPOUND_STRING("About To_Deliver Item"),
                 .setupFunc = DebugQuest_AngelDelivery,
-                side_quest_map(MAP_ROUTE9),
+                side_quest_map(MAP_CUCONU_TOWN),
                 .warpId = WARP_ID_NONE,
                 .x = 29,
                 .y = 3,
@@ -3944,7 +3946,7 @@ const struct SideQuest sSideQuests[QUEST_COUNT] =
             {
                 .name = COMPOUND_STRING("Delivered Item"),
                 .setupFunc = DebugQuest_AngelDelivery,
-                side_quest_map(MAP_ROUTE98),
+                side_quest_map(MAP_CUCONU_TOWN),
                 .warpId = WARP_ID_NONE,
                 .x = 29,
                 .y = 3,

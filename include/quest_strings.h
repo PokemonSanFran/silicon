@@ -108,11 +108,6 @@ extern const u8 gText_Quest_ContractorPorygon_Desc[];
 extern const u8 gText_Quest_ContractorPorygon_DoneDesc[];
 extern const u8 gText_Quest_ContractorPorygon_Map[];
 
-extern const u8 gText_Quest_AngelDelivery_Name[];
-extern const u8 gText_Quest_AngelDelivery_Desc[];
-extern const u8 gText_Quest_AngelDelivery_DoneDesc[];
-extern const u8 gText_Quest_AngelDelivery_Map[];
-
 extern const u8 gText_Quest_FoodTruckBureacracy_Name[];
 extern const u8 gText_Quest_FoodTruckBureacracy_Desc[];
 extern const u8 gText_Quest_FoodTruckBureacracy_DoneDesc[];
