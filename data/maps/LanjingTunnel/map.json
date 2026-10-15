@@ -50,11 +50,12 @@
       "dest_warp_id": "0"
     },
     {
+      "warp_id": "WARP_ID_LANJING_TUNNEL_TO_ESPULEE_OUTSKIRTS",
       "x": 29,
       "y": 16,
       "elevation": 0,
       "dest_map": "MAP_ESPULEE_OUTSKIRTS",
-      "dest_warp_id": "0"
+      "dest_warp_id": "WARP_ID_ESPULEE_OUTSKIRTS_TO_LANJING_TUNNEL"
     },
     {
       "x": 18,

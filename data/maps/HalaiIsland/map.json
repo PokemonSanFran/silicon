@@ -234,7 +234,7 @@
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "Quest_StealTheAxe_Event_Script",
+      "script": "NULL",
       "flag": "FLAG_TEMP_5"
     },
     {
@@ -340,11 +340,12 @@
       "dest_warp_id": "0"
     },
     {
+      "warp_id": "WARP_ID_HALAI_TO_ROUTEB",
       "x": 20,
       "y": 1,
       "elevation": 0,
       "dest_map": "MAP_ROUTE_B",
-      "dest_warp_id": "0"
+      "dest_warp_id": "WARP_ID_ROUTEB_TO_HALAI"
     },
     {
       "warp_id": "WARP_ID_TO_HALAI_TO_NAVAL_BASE_EXTERIOR",

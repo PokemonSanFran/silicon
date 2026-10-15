@@ -16,7 +16,7 @@ script TheStrikeStrikesBack_Script_AddOliverCharlotte
 
 script TheStrikeStrikesBack_UnblockConstruction_Script
 {
-    setmetatile(21,19,0x811,FALSE)
+    setmetatile(21,31,0x811,FALSE)
     special(DrawWholeMapView)
 }
 
@@ -156,6 +156,35 @@ script TheStrikeStrikesBack_Intro_Dialogue
 endcutscene
             release
             end
+}
+
+script TheStrikeStrikesBack_Script_AddTurnCharlotteAndSharpriseNorth
+{
+	call(TheStrikeStrikesBack_Script_AddSharpriseCharlotteTide)
+    turnobject(LOCALID_PLAYER,DIR_NORTH)
+    turnobject(LOCALID_ROUTE2_CHARLOTTE,DIR_NORTH)
+    turnobject(LOCALID_ROUTE2_LUCREZIA,DIR_NORTH)
+    turnobject(LOCALID_ROUTE2_OLIVER,DIR_NORTH)
+
+	turnobject(LOCALID_ROUTE2_POLICE_A,DIR_WEST)
+	turnobject(LOCALID_ROUTE2_POLICE_B,DIR_WEST)
+	turnobject(LOCALID_ROUTE2_VIGRIM,DIR_WEST)
+	turnobject(LOCALID_ROUTE2_TIDE_B,DIR_WEST)
+	turnobject(LOCALID_ROUTE2_TIDE_A,DIR_WEST)
+}
+
+script TheStrikeStrikesBack_Script_AddSharpriseCharlotteTide
+{
+    spawnobject(OBJ_EVENT_GFX_OLIVER,LOCALID_ROUTE2_OLIVER,21,34,DIR_NORTH,3)
+    spawnobject(OBJ_EVENT_GFX_LUCREZIA,LOCALID_ROUTE2_LUCREZIA,20,33,DIR_NORTH,3)
+    spawnobject(OBJ_EVENT_GFX_CHARLOTTE,LOCALID_ROUTE2_CHARLOTTE,21,33,DIR_NORTH,3)
+
+    spawnobject(OBJ_EVENT_GFX_COMRADE_5,LOCALID_ROUTE2_TIDE_B,26,31,DIR_WEST,3)
+    spawnobject(OBJ_EVENT_GFX_COMRADE_9,LOCALID_ROUTE2_TIDE_A,26,32,DIR_WEST,3)
+    spawnobject(OBJ_EVENT_GFX_VIGRIM,LOCALID_ROUTE2_VIGRIM,25,32,DIR_WEST,3)
+
+    spawnobject(OBJ_EVENT_GFX_MYSTERY_GIFT_MAN,LOCALID_ROUTE2_POLICE_A,27,31,DIR_WEST,3)
+    spawnobject(OBJ_EVENT_GFX_MYSTERY_GIFT_MAN,LOCALID_ROUTE2_POLICE_B,27,32,DIR_WEST,3)
 }
 
 movement TheStrikeStrikesBack_FaceNorth {

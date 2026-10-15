@@ -113,11 +113,6 @@ const u8 gText_Quest_ContractorPorygon_Desc[] =_("Description");
 const u8 gText_Quest_ContractorPorygon_DoneDesc[] =_("DoneDescription");
 const u8 gText_Quest_ContractorPorygon_Map[] =_("PerlaciaCity");
 
-const u8 gText_Quest_AngelDelivery_Name[] = _("Angel Delivery");
-const u8 gText_Quest_AngelDelivery_Desc[] =_("Description");
-const u8 gText_Quest_AngelDelivery_DoneDesc[] =_("DoneDescription");
-const u8 gText_Quest_AngelDelivery_Map[] =_("TirabudinPlace");
-
 const u8 gText_Quest_FoodTruckBureacracy_Name[] = _("Food Truck Bureacracy");
 const u8 gText_Quest_FoodTruckBureacracy_Desc[] =_("Description");
 const u8 gText_Quest_FoodTruckBureacracy_DoneDesc[] =_("DoneDescription");
@@ -322,11 +317,6 @@ const u8 gText_Quest_PandaPride_Name[] =_("Panda Pride");
 const u8 gText_Quest_PandaPride_Desc[] =_("Lorem Desc");
 const u8 gText_Quest_PandaPride_DoneDesc[] =_("Done Desc");
 const u8 gText_Quest_PandaPride_Map[] =_("HodouCity");
-
-const u8 gText_Quest_StealTheAxe_Name[] =_("Steal The Axe");
-const u8 gText_Quest_StealTheAxe_Desc[] =_("Lorem Desc");
-const u8 gText_Quest_StealTheAxe_DoneDesc[] =_("Done Desc");
-const u8 gText_Quest_StealTheAxe_Map[] =_("HalaiIsland");
 
 const u8 gText_Quest_Skilllibrary_Name[] =_("Skill Library");
 const u8 gText_Quest_Skilllibrary_Desc[] =_("");

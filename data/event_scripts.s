@@ -1941,7 +1941,6 @@ EventScript_PalletTown_PlayersHouse_2F_TurnOnPC::
 .include "data/quests/hybridculture.inc"
 .include "data/quests/alohafromalola.inc"
 .include "data/quests/buildinganexhibit.inc"
-.include "data/quests/stealtheaxe.inc"
 .include "data/quests/inversehallucinogenic.inc"
 .include "data/quests/contractorporygon.inc"
 .include "data/quests/angeldelivery.inc"

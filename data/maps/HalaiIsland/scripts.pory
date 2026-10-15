@@ -6,7 +6,6 @@ mapscripts HalaiIsland_MapScripts {
     MAP_SCRIPT_ON_TRANSITION
     {
         call(HalaiIsland_LayoutSwap_Script)
-        call(Quest_StealTheAxe_HideLeader_Script)
         call(HalaiIsland_ObjectVisibility_Script)
         call(CutePokemon_Script_ControlMelissaHalaiOutsideVisibility)
         call(Earthquake_HideTransport_Script)

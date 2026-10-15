@@ -659,7 +659,6 @@ const u8 *GetQuestDesc_Letsburnthismotherdown(void)
 
 const u8 *GetQuestDesc_Manofmanyhats(void)
 {
-
     enum QuestCases flag = ReturnQuestState(QUEST_MANOFMANYHATS);
     if (flag == FLAG_GET_ACTIVE)
     {
@@ -690,4 +689,15 @@ const u8 *GetQuestDesc_Manofmanyhats(void)
     return gStringVar4;
 }
 
+const u8 *GetQuestDesc_AngelDelivery(void)
+{
+    enum QuestCases flag = ReturnQuestState(QUEST_ANGELDELIVERY);
+
+    GetMapName(gStringVar1,Overworld_GetMapHeaderByGroupAndId(MAP_GROUP(MAP_QUEST_ANGELDELIVERY_ORIGIN),MAP_NUM(MAP_QUEST_ANGELDELIVERY_ORIGIN))->regionMapSectionId,0);
+    GetMapName(gStringVar2,Overworld_GetMapHeaderByGroupAndId(MAP_GROUP(MAP_QUEST_ANGELDELIVERY_DELIVERY),MAP_NUM(MAP_QUEST_ANGELDELIVERY_DELIVERY))->regionMapSectionId,0);
+    GetMapName(gStringVar3,Overworld_GetMapHeaderByGroupAndId(MAP_GROUP(MAP_QUEST_ANGELDELIVERY_TARGET),MAP_NUM(MAP_QUEST_ANGELDELIVERY_TARGET))->regionMapSectionId,0);
+
+    StringExpandPlaceholders(gStringVar4,sSideQuests[QUEST_ANGELDELIVERY].desc[flag]);
+    return gStringVar4;
+}
 
