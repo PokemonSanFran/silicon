@@ -173,6 +173,22 @@ static const u8 sPartyMenuActionCounts[] =
     [ACTIONS_HEXORB]        = ARRAY_COUNT(sPartyMenuAction_Hexorb),
 };
 
+static const u8 sPartyMenu_LevelUpStatOrder[NUM_STATS] =
+{
+    STAT_HP, STAT_ATK, STAT_DEF, STAT_SPATK, STAT_SPDEF, STAT_SPEED,
+};
+
+static const struct WindowTemplate sPartyMenu_WinTemplate_LevelUp =
+{
+    .bg = PARTY_BG_TEXT,
+    .tilemapLeft = DISPLAY_TILE_WIDTH - PARTY_LEVELUP_WIDTH,
+    .tilemapTop = PARTY_LEVELUP_TOP,
+    .width = PARTY_LEVELUP_WIDTH,
+    .height = PARTY_LEVELUP_HEIGHT,
+    .paletteNum = PARTY_BG_PAL_WALLPAPER,
+    .baseBlock = PARTY_TEXT_TILE_LIST,
+};
+
 static const struct WindowTemplate sPartyMenu_WinTemplate_YesNo =
 {
     .bg = PARTY_BG_TEXT,
@@ -323,6 +339,8 @@ static const struct
     struct PartySlotRect evLabel;
     struct PartySlotRect evValue;
     struct PartySlotRect evDelta;
+    struct PartySlotRect expLevel;
+    struct PartySlotRect expToNext;
 } sPartyMenu_SlotLayout =
 {
     // {x, y, width, height}
@@ -410,6 +428,18 @@ static const struct
         PARTY_SLOT_EV_DELTA_W,
         PARTY_SLOT_EV_DELTA_H
     },
+    .expLevel = {
+        PARTY_SLOT_EXP_LEVEL_X,
+        PARTY_SLOT_EXP_LEVEL_Y,
+        PARTY_SLOT_EXP_LEVEL_W,
+        PARTY_SLOT_EXP_LEVEL_H
+    },
+    .expToNext = {
+        PARTY_SLOT_EXP_TO_NEXT_X,
+        PARTY_SLOT_EXP_TO_NEXT_Y,
+        PARTY_SLOT_EXP_TO_NEXT_W,
+        PARTY_SLOT_EXP_TO_NEXT_H
+    },
 };
 
 // see pal 1 in tiles.png
@@ -427,6 +457,7 @@ static const u8 sPartyMenu_TextColors[NUM_PARTY_TEXT_COLORS][3] =
     // from the wallpaper pal
     [COLORID_PARTY_MENU_BLACK]      = {0, 3,  1},
     [COLORID_PARTY_MENU_HIGHLIGHT]  = {0, 3,  5},
+    [COLORID_PARTY_MENU_RED]        = {0, 3, 14},
 };
 
 // {frame, empty, fill} per HP_BAR_* level
@@ -438,6 +469,9 @@ static const u8 sPartyMenu_HpBarColors[][3] =
     [HP_BAR_GREEN]  = {4, 14, 11},  // green
     [HP_BAR_FULL]   = {4, 14, 11},  // green
 };
+
+// {frame, to go, progress}
+static const u8 sPartyMenu_ExpBarColors[3] = {4, 14, 9};
 
 static const struct CompressedSpriteSheet sPartyMenu_SpriteSheet_Cursor =
 {

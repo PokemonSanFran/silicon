@@ -4,6 +4,7 @@
 // pal 0 comes from the BG3 wallpaper
 #define PARTY_BG_PAL_WALLPAPER      0
 #define PARTY_WALLPAPER_COLOR_WHITE 1
+#define PARTY_WALLPAPER_COLOR_BLACK 3
 #define PARTY_BG_PAL_SLOT_MAIN      1
 #define PARTY_BG_PAL_SLOT_MARKED    2
 #define PARTY_BG_PAL_HELPER         3
@@ -48,6 +49,15 @@
 // bottom frame sits above message box frame
 #define PARTY_YESNO_TOP             (PARTY_MSGBOX_TOP - PARTY_FRAME_SIZE - PARTY_FRAME_SIZE - PARTY_YESNO_HEIGHT)
 #define PARTY_MAX_ACTIONS           8
+
+#define PARTY_LEVELUP_WIDTH         11
+#define PARTY_LEVELUP_HEIGHT        11
+// bottom frame sits above message box frame; shares the list's tiles
+#define PARTY_LEVELUP_TOP           (PARTY_MSGBOX_TOP - PARTY_FRAME_SIZE - PARTY_FRAME_SIZE - PARTY_LEVELUP_HEIGHT)
+#define PARTY_LEVELUP_ROW_HEIGHT    15
+#define PARTY_LEVELUP_LABEL_X       2
+#define PARTY_LEVELUP_VALUE_RIGHT   60
+#define PARTY_LEVELUP_DELTA_X       64
 
 #define PARTY_TEXT_TILE_FRAME       1
 #define PARTY_TEXT_TILE_MENU_FRAME  (PARTY_TEXT_TILE_FRAME + PARTY_TEXT_FRAME_TILES)
@@ -114,6 +124,18 @@
 #define PARTY_SLOT_DESC_W       PARTY_SLOT_HP_BAR_W
 #define PARTY_SLOT_DESC_H       PARTY_SLOT_TEXT_HEIGHT
 #define PARTY_SLOT_DESC_NONE    0xFF
+
+// EXP item: end level and exp to next level
+#define PARTY_SLOT_EXP_LEVEL_X      30
+#define PARTY_SLOT_EXP_LEVEL_Y      PARTY_SLOT_ITEM_Y
+#define PARTY_SLOT_EXP_LEVEL_W      25
+#define PARTY_SLOT_EXP_LEVEL_H      PARTY_SLOT_TEXT_HEIGHT
+#define PARTY_SLOT_EXP_LEVEL_SPACING (-2)
+
+#define PARTY_SLOT_EXP_TO_NEXT_X    57
+#define PARTY_SLOT_EXP_TO_NEXT_Y    PARTY_SLOT_ITEM_Y
+#define PARTY_SLOT_EXP_TO_NEXT_W    45
+#define PARTY_SLOT_EXP_TO_NEXT_H    PARTY_SLOT_TEXT_HEIGHT
 
 // EV item stats: the stat replaces the HP row, IV/EV replace the item row
 #define PARTY_SLOT_STAT_NAME_X      38
@@ -188,6 +210,7 @@
 // item use quantity spinner
 #define PARTY_SPINNER_X_OFFSET          95
 #define PARTY_SPINNER_Y_OFFSET          22
+#define PARTY_SPINNER_EXP_Y_OFFSET      11
 #define PARTY_SPINNER_FRAME_TILES       4
 #define PARTY_SPINNER_NUM_FRAMES        2
 #define PARTY_SPINNER_FRAME_DURATION    30
@@ -313,6 +336,7 @@ enum PartyTextColors
     COLORID_PARTY_HELPER,
     COLORID_PARTY_MENU_BLACK,
     COLORID_PARTY_MENU_HIGHLIGHT,
+    COLORID_PARTY_MENU_RED,
     NUM_PARTY_TEXT_COLORS
 };
 
