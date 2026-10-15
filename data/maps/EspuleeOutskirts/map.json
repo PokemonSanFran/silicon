@@ -120,34 +120,39 @@
   ],
   "warp_events": [
     {
+      "warp_id": "WARP_ID_ESPULEE_OUTSKIRTS_TO_LANJING_TUNNEL",
       "x": 5,
       "y": 32,
       "elevation": 0,
       "dest_map": "MAP_LANJING_TUNNEL",
-      "dest_warp_id": "1"
+      "dest_warp_id": "WARP_ID_LANJING_TUNNEL_TO_ESPULEE_OUTSKIRTS"
     },
     {
+      "warp_id": "WARP_ID_ESPULEE_OUTSKIRTS_TO_ELITE_HOME",
       "x": 17,
       "y": 18,
       "elevation": 0,
       "dest_map": "MAP_ESPULEE_OUTSKIRTS_ELITE_HOME",
-      "dest_warp_id": "0"
+      "dest_warp_id": "WARP_ID_ELITE_HOME_TO__ESPULEE_OUTSKIRTS_LEFT"
     },
     {
+      "warp_id": "WARP_ID_ESPULEE_OUTSKIRTS_TO_RANGER_STATION",
       "x": 13,
       "y": 8,
       "elevation": 0,
       "dest_map": "MAP_ESPULEE_OUTSKIRTS_RANGER",
-      "dest_warp_id": "0"
+      "dest_warp_id": "WARP_ID_RANGER_STATION_TO_ESPULEE_OUTSKIRTS_LEFT"
     },
     {
+      "warp_id": "WARP_ID_ESPULEE_OUTSKIRTS_TO_POKEMON_CENTER",
       "x": 16,
       "y": 27,
       "elevation": 0,
       "dest_map": "MAP_ESPULEE_OUTSKIRTS_POKEMON_CENTER_1F",
-      "dest_warp_id": "0"
+      "dest_warp_id": "WARP_ID_POKEMON_CENTER_TO_ESPULEE_OUTSKIRTS_RIGHT"
     },
     {
+      "warp_id": "WARP_ID_ESPULEE_OUTSKIRTS_TO_KOMALA_KABIN",
       "x": 4,
       "y": 4,
       "elevation": 0,

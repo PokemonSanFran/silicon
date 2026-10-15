@@ -271,7 +271,7 @@
 #define VAR_NEW_MAUVILLE_STATE                                      0x408E
 #define VAR_BRAVO_TRAINER_BATTLE_TOWER_ON                           0x408F
 
-#define VAR_CHASILLA_AXE_STATE                                      0x4080
+#define VAR_SILICON_UNUSED_0x4080                                   0x4080
 #define VAR_DANCEBATTLE_STATE                                       0x4081
 #define VAR_DEFEATED_GLAMEOW_COUNT                                  0x4082
 #define VAR_DEFEATED_CRESALTA_VISTA_COUNT                           0x4083

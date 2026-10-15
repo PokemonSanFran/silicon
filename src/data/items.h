@@ -7745,7 +7745,10 @@ const struct ItemInfo gItemsInfo[] =
 
 // Gems
     #if I_PRICE >= GEN_9
-        #define GEM_PRICE 15000
+        // Start siliconMerge
+        //#define GEM_PRICE 15000
+        #define GEM_PRICE 0 
+        // End siliconMerge
     #elif I_PRICE >= GEN_7
         #define GEM_PRICE 4000
     #else

@@ -57,18 +57,20 @@
   ],
   "warp_events": [
     {
+      "warp_id": "WARP_ID_ROUTEB_TO_HALAI",
       "x": 5,
       "y": 48,
       "elevation": 0,
       "dest_map": "MAP_HALAI_ISLAND",
-      "dest_warp_id": "5"
+      "dest_warp_id": "WARP_ID_HALAI_TO_ROUTEB"
     },
     {
+      "warp_id": "WARP_ID_ROUTEB_TO_OROLAND",
       "x": 4,
       "y": 1,
       "elevation": 0,
       "dest_map": "MAP_OROLAND",
-      "dest_warp_id": "1"
+      "dest_warp_id": "WARP_ID_OROLAND_TO_ROUTEB"
     }
   ],
   "coord_events": [],

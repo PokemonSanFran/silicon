@@ -8,13 +8,11 @@ script Earthquake_HideObject_Script
 {
 	setobjectxyperm(LOCALID_HALAI_BAIYA,28,33)
 	turnobject(LOCALID_HALAI_BAIYA,DIR_NORTH)
-	setobjectflagfromlocalid(LOCALID_HALAI_NERIENE)
 	setobjectflagfromlocalid(LOCALID_HALAI_POLICE_C)
 	setobjectflagfromlocalid(LOCALID_HALAI_FRANK)
 	setobjectflagfromlocalid(LOCALID_HALAI_MAGNUS)
 	setobjectflagfromlocalid(LOCALID_HALAI_TALA)
 	setobjectflagfromlocalid(LOCALID_HALAI_ELEANOR)
-	setobjectflagfromlocalid(LOCALID_HALAI_NERIENE)
 }
 
 script Earthquake_Script_PlayCrisisMusic
