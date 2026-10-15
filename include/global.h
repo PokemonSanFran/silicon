@@ -715,6 +715,7 @@ struct BattleFrontier
     struct BattleFrontierPartnerMon partnerSparring[FRONTIER_MULTI_PARTY_SIZE];
 
     u16 factoryRentalMonIds[NUM_BATTLE_SIDES][SILICON_FRONTIER_CHALLENGE_TYPE_COUNT][FRONTIER_PARTY_SIZE];
+    u16 factoryLastOpponent;
     u8 selectedPartyMons[MAX_FRONTIER_PARTY_SIZE];
     u8 currentPartner;
     u8 remainingSparringHeals : 2;
