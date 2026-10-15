@@ -1,0 +1,159 @@
+script BattleConvention_Movement_MovePlayerIntoBattlePosition
+{
+    callnative(Script_SiliconFroniter_IsCurrentChallengeTypeMulti)
+    if (var(VAR_TEMP_E) == FALSE)
+    {
+        applymovement(LOCALID_CONVENTION_PARTNER,moves(set_invisible))
+        waitmovement(LOCALID_CONVENTION_PARTNER)
+    }
+
+    callnative(Script_SiliconFrontier_GetBattleIndexValue)
+    switch (var(VAR_TEMP_D))
+    {
+        case 0:
+        moveobjecttocoords(LOCALID_PLAYER,3,5,DIR_NORTH)
+        moveobjecttocoords(LOCALID_CONVENTION_PARTNER,3,5,DIR_NORTH)
+        case 1:
+        moveobjecttocoords(LOCALID_PLAYER,3,5,DIR_NORTH)
+        moveobjecttocoords(LOCALID_CONVENTION_PARTNER,3,5,DIR_NORTH)
+        case 2:
+        moveobjecttocoords(LOCALID_PLAYER,3,5,DIR_NORTH)
+        moveobjecttocoords(LOCALID_CONVENTION_PARTNER,3,5,DIR_NORTH)
+        case 3:
+        moveobjecttocoords(LOCALID_PLAYER,3,5,DIR_NORTH)
+        moveobjecttocoords(LOCALID_CONVENTION_PARTNER,3,5,DIR_NORTH)
+        case 4:
+        moveobjecttocoords(LOCALID_PLAYER,3,5,DIR_NORTH)
+        moveobjecttocoords(LOCALID_CONVENTION_PARTNER,3,5,DIR_NORTH)
+        case 5:
+        moveobjecttocoords(LOCALID_PLAYER,3,5,DIR_SOUTH)
+        moveobjecttocoords(LOCALID_CONVENTION_PARTNER,3,5,DIR_SOUTH)
+        case 6:
+        moveobjecttocoords(LOCALID_PLAYER,3,5,DIR_SOUTH)
+        moveobjecttocoords(LOCALID_CONVENTION_PARTNER,3,5,DIR_SOUTH)
+        case 7:
+        moveobjecttocoords(LOCALID_PLAYER,3,5,DIR_SOUTH)
+        moveobjecttocoords(LOCALID_CONVENTION_PARTNER,3,5,DIR_SOUTH)
+        case 8:
+        moveobjecttocoords(LOCALID_PLAYER,3,5,DIR_SOUTH)
+        moveobjecttocoords(LOCALID_CONVENTION_PARTNER,3,5,DIR_SOUTH)
+        case 9:
+        moveobjecttocoords(LOCALID_PLAYER,3,5,DIR_SOUTH)
+        moveobjecttocoords(LOCALID_CONVENTION_PARTNER,3,5,DIR_SOUTH)
+    }
+
+    callnative(Script_SiliconFroniter_IsCurrentChallengeTypeMulti)
+    waitmovement(LOCALID_CONVENTION_PARTNER)
+    waitmovement(LOCALID_PLAYER)
+}
+
+script BattleConvention_Movement_MoveOpponentsIntoPosition
+{
+    callnative(Script_SiliconFroniter_IsCurrentChallengeTypeMulti)
+    if (var(VAR_TEMP_E) == FALSE)
+    {
+        moveobjecttocoords(LOCALID_CONVENTION_OPPONENT_A,6,5,DIR_WEST)
+    }
+    else
+    {
+        moveobjecttocoords(LOCALID_CONVENTION_OPPONENT_A,6,4,DIR_WEST)
+        moveobjecttocoords(LOCALID_CONVENTION_OPPONENT_B,6,6,DIR_WEST)
+    }
+    waitmovement(LOCALID_PLAYER)
+    waitmovement(LOCALID_CONVENTION_OPPONENT_A)
+
+    if (var(VAR_TEMP_E) == TRUE)
+    {
+        waitmovement(LOCALID_CONVENTION_OPPONENT_B)
+    }
+}
+
+script BattleConvention_Movement_MoveBattlersIntoBattle
+{
+    callnative(Script_SiliconFroniter_IsCurrentChallengeTypeMulti)
+    if (var(VAR_TEMP_E) == FALSE)
+    {
+        moveobjecttocoords(LOCALID_PLAYER,4,5,DIR_EAST)
+        moveobjecttocoords(LOCALID_CONVENTION_OPPONENT_A,5,5,DIR_WEST)
+        waitmovement(LOCALID_PLAYER)
+        waitmovement(LOCALID_CONVENTION_OPPONENT_A)
+    }
+    else
+    {
+        moveobjecttocoords(LOCALID_PLAYER,4,6,DIR_EAST)
+        moveobjecttocoords(LOCALID_CONVENTION_OPPONENT_A,5,4,DIR_WEST)
+        moveobjecttocoords(LOCALID_CONVENTION_PARTNER,4,4,DIR_EAST)
+        moveobjecttocoords(LOCALID_CONVENTION_OPPONENT_B,5,6,DIR_WEST)
+        waitmovement(LOCALID_PLAYER)
+        waitmovement(LOCALID_CONVENTION_OPPONENT_A)
+        waitmovement(LOCALID_CONVENTION_OPPONENT_B)
+        waitmovement(LOCALID_CONVENTION_PARTNER)
+    }
+}
+
+script BattleConvention_Script_TryHidePartner
+{
+    callnative(Script_SiliconFroniter_IsCurrentChallengeTypeMulti)
+    if (var(VAR_TEMP_E) == TRUE)
+    {
+        return
+    }
+    setobjectflagfromlocalid(LOCALID_CONVENTION_PARTNER)
+}
+
+script BattleConvention_Movement_MoveBattlersOutOfBattle
+{
+    moveobjecttocoords(LOCALID_CONVENTION_OPPONENT_A,4,1,DIR_NORTH)
+    moveobjecttocoords(LOCALID_PLAYER,2,5,DIR_WEST)
+    callnative(Script_SiliconFroniter_IsCurrentChallengeTypeMulti)
+    if (var(VAR_TEMP_E) == TRUE)
+    {
+        moveobjecttocoords(LOCALID_CONVENTION_OPPONENT_B,5,1,DIR_NORTH)
+        moveobjecttocoords(LOCALID_CONVENTION_PARTNER,1,4,DIR_SOUTH)
+    }
+
+    waitmovement(LOCALID_CONVENTION_OPPONENT_A)
+    applymovement(LOCALID_CONVENTION_OPPONENT_A,moves(set_invisible))
+    waitmovement(LOCALID_CONVENTION_OPPONENT_A)
+    playse(SE_EXIT)
+    if (var(VAR_TEMP_E) == TRUE)
+    {
+        waitmovement(LOCALID_CONVENTION_OPPONENT_B)
+        applymovement(LOCALID_CONVENTION_OPPONENT_B,moves(set_invisible))
+        waitmovement(LOCALID_CONVENTION_OPPONENT_B)
+        playse(SE_EXIT)
+    }
+    waitmovement(LOCALID_CONVENTION_PARTNER)
+    waitmovement(LOCALID_PLAYER)
+}
+
+script BattleConvention_Movement_LeaveForBattleRoom
+{
+    moveobjecttocoords(LOCALID_PLAYER,4,3,DIR_NORTH)
+    waitmovement(LOCALID_PLAYER)
+    playse(SE_EXIT)
+    waitse
+    warpsilent(MAP_ESPULEE_OUTSKIRTS_GYM,0)
+    waitstate
+}
+
+script BattleConvention_Script_RefreshOpponentObjects
+{
+    removeobject(LOCALID_CONVENTION_OPPONENT_A)
+    clearobjectflagfromlocalid(LOCALID_CONVENTION_OPPONENT_A)
+    addobject(LOCALID_CONVENTION_OPPONENT_A)
+
+    callnative(Script_SiliconFroniter_IsCurrentChallengeTypeMulti)
+    if (var(VAR_TEMP_E) == TRUE)
+    {
+        removeobject(LOCALID_CONVENTION_OPPONENT_B)
+        clearobjectflagfromlocalid(LOCALID_CONVENTION_OPPONENT_B)
+        addobject(LOCALID_CONVENTION_OPPONENT_B)
+    }
+}
+
+script BattleConvention_Movement_CueAttendant
+{
+    cueobjectplayer(LOCALID_CONVENTION_OPPONENT_A)
+    cueobjectplayer(LOCALID_CONVENTION_OPPONENT_B)
+}

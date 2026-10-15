@@ -10,6 +10,7 @@ script SiliconFrontier_Movement_MovePlayerIntoBattlePosition
         case SILICON_FACILITY_ARCADE:
             call(BattleStudio_Movement_MovePlayerIntoBattlePosition)
         case SILICON_FACILITY_FACTORY:
+            call(BattleConvention_Movement_MovePlayerIntoBattlePosition)
     }
 }
 
@@ -25,6 +26,7 @@ script SiliconFrontier_Movement_MoveOpponentsIntoPosition
         case SILICON_FACILITY_ARCADE:
             call(BattleStudio_Movement_MoveOpponentsIntoPosition)
         case SILICON_FACILITY_FACTORY:
+            call(BattleConvention_Movement_MoveOpponentsIntoPosition)
     }
 }
 
@@ -40,6 +42,7 @@ script SiliconFrontier_Movement_MoveBattlersIntoBattle
         case SILICON_FACILITY_ARCADE:
             call(BattleStudio_Movement_MoveBattlersIntoBattle)
         case SILICON_FACILITY_FACTORY:
+            call(BattleConvention_Movement_MoveBattlersIntoBattle)
     }
 }
 
@@ -55,6 +58,7 @@ script SiliconFrontier_Movement_MoveBattlersOutOfBattle
         case SILICON_FACILITY_ARCADE:
             call(BattleStudio_Movement_MoveBattlersOutOfBattle)
         case SILICON_FACILITY_FACTORY:
+            return
     }
 }
 
@@ -70,6 +74,7 @@ script SiliconFrontier_Movement_LeaveForBattleRoom
         case SILICON_FACILITY_ARCADE:
             call(BattleStudio_Movement_LeaveForBattleRoom)
         case SILICON_FACILITY_FACTORY:
+            call(BattleConvention_Movement_LeaveForBattleRoom)
     }
 }
 
@@ -85,6 +90,7 @@ script SiliconFrontier_Script_RefreshOpponentObjects
         case SILICON_FACILITY_ARCADE:
             call(BattleStudio_Script_RefreshOpponentObjects)
         case SILICON_FACILITY_FACTORY:
+            call(BattleConvention_Script_RefreshOpponentObjects)
     }
 }
 
@@ -100,6 +106,7 @@ script SiliconFrontier_Movement_CueAttendant
         case SILICON_FACILITY_ARCADE:
             call(BattleStudio_Movement_CueAttendant)
         case SILICON_FACILITY_FACTORY:
+            call(BattleConvention_Movement_CueAttendant)
     }
 }
 

@@ -1823,8 +1823,10 @@ EventScript_PalletTown_PlayersHouse_2F_TurnOnPC::
 .include "data/scripts/silicon_frontier/text_restricted_sparring.inc" @ siliconFrontier
 .include "data/scripts/silicon_frontier/movement_restricted_sparring.inc" @ siliconFrontier
 .include "data/scripts/silicon_frontier/movement_battle_studio.inc" @ siliconFrontier
+.include "data/scripts/silicon_frontier/movement_battle_convention.inc" @ siliconFrontier
 .include "data/scripts/silicon_frontier/restricted_sparring.inc" @ siliconFrontier
 .include "data/scripts/silicon_frontier/battle_studio.inc" @ siliconFrontier
+.include "data/scripts/silicon_frontier/battle_convention.inc" @ siliconFrontier
 .include "data/scripts/silicon_frontier/text_general.inc" @ siliconFrontier
 .include "data/scripts/save.inc" @ autoSave
 .include "data/scripts/phenomenon.inc" @ autoSave
@@ -2270,3 +2272,5 @@ EventScript_PalletTown_PlayersHouse_2F_TurnOnPC::
 
 	.include "data/maps/ZenzuIsland_Gym/scripts.inc"
 	.include "data/maps/CuconuTown_SharpriseCompound_2F_Corridor/scripts.inc"
+
+	.include "data/maps/EspuleeOutskirts_Gym/scripts.inc"
