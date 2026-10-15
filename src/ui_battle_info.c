@@ -167,6 +167,8 @@ enum BattleInfoOptions
 #define BI_HEADER_TEXT_Y        TILE_TO_PIXELS(3) + 2
 #define BI_HEADER_TEXT_Y_PAD    TILE_TO_PIXELS(2)
 
+#define BI_HEADER_MAX_WIDTH     TILE_TO_PIXELS(8) + 2
+
 #define BI_STD_WIN_PALETTE_OFFSET   BG_PLTT_ID(1)
 
 #define sPartySlotIdx           data[0]
@@ -195,6 +197,8 @@ enum BattleInfoOptions
 // so we shouldn't worry to add an edge case here
 #define BI_SET_PARTY_VIEW_TRAINER(_t)  (1 << (_t))
 #define BI_GET_TRUE_TRAINER(_t)        (_t + (!!(sBattleInfoDataPtr->viewPartnerParty & (_t + 1)) * NUM_BATTLE_SIDES))
+
+#define INFO_BOX_WIDTH 70
 
 struct BattleInfoData
 {
@@ -440,8 +444,7 @@ static const struct SpriteTemplate sBattleInfo_FaintedIconSpriteTemplate =
     .oam = &(const struct OamData){
         .shape = SPRITE_SHAPE(32x32),
         .size = SPRITE_SIZE(32x32),
-        .objMode = ST_OAM_OBJ_BLEND,
-        .priority = 0
+        .priority = 1
     },
     .images = &(const struct SpriteFrameImage){
         .data = (const u8[])INCGFX_U8("graphics/ui_menus/battle_info/fainted.png", ".4bpp"),
@@ -460,7 +463,6 @@ static const struct OamData sBattleInfo_GenericCursorOamData =
 {
     .shape = SPRITE_SHAPE(32x16),
     .size = SPRITE_SIZE(32x16),
-    .objMode = ST_OAM_OBJ_BLEND,
     .priority = 1
 };
 
@@ -508,7 +510,6 @@ static const struct SpriteTemplate sBattleInfo_PartyIndicatorSpriteTemplate =
     .oam = &(const struct OamData){
         .shape = SPRITE_SHAPE(16x16),
         .size = SPRITE_SIZE(16x16),
-        .objMode = ST_OAM_OBJ_BLEND,
     },
     .images = &(const struct SpriteFrameImage){
         .data = (const u8[])INCGFX_U8("graphics/ui_menus/battle_info/party_switch_indicator.png", ".4bpp"),
@@ -1284,8 +1285,8 @@ static void BattleInfoInit_Windows(void)
 
 static void BattleInfoInit_Sprites(void)
 {
-    SetGpuReg(REG_OFFSET_BLDCNT, BLDCNT_EFFECT_DARKEN | BLDCNT_TGT1_OBJ);
-    SetGpuReg(REG_OFFSET_BLDY, 9);
+    SetGpuReg(REG_OFFSET_BLDCNT, BLDCNT_EFFECT_BLEND |  BLDCNT_TGT2_BG_ALL);
+    SetGpuReg(REG_OFFSET_BLDALPHA, BLDALPHA_BLEND(9, 0));
 
     BattleInfoSprite_CreateMonIcons();
     BattleInfoSprite_CreateHPBar();
@@ -1522,6 +1523,23 @@ static void BattleInfoSprite_RecreateMonIcons(void)
     }
 }
 
+static bool32 BattleInfoSprite_ShouldDarkenMonIcon(u32 idx, struct Pokemon *mon, enum Species species)
+{
+    for (enum BattlerId battler = 0; battler < gBattlersCount; battler++)
+    {
+        if ((IsBattlerAlive(battler)
+             && &GetBattlerParty(battler)[idx] == mon
+             && BattleInfoHelper_SlotToBattlePartyOrder(battler, idx) == gBattlerPartyIndexes[battler])
+         || species == SPECIES_NONE)
+        {
+            return FALSE;
+        }
+    }
+
+
+    return TRUE;
+}
+
 static u8 BattleInfoSprite_CreateMonIcon(enum BattleTrainer trainer, u32 idx, s32 x, s32 y)
 {
     enum BattlerId battler = 0;
@@ -1544,17 +1562,8 @@ static u8 BattleInfoSprite_CreateMonIcon(enum BattleTrainer trainer, u32 idx, s3
         x, y, 0,
         GetMonData(mon, MON_DATA_PERSONALITY, NULL));
 
-    for (battler = 0; battler < gBattlersCount; battler++)
-    {
-        if ((IsBattlerAlive(battler)
-         && &GetBattlerParty(battler)[idx] == mon
-         && BattleInfoHelper_SlotToBattlePartyOrder(battler, idx) == gBattlerPartyIndexes[battler])
-         || species == SPECIES_NONE)
-        {
-            gSprites[spriteId].oam.objMode = ST_OAM_OBJ_BLEND;
-            break;
-        }
-    }
+    if (BattleInfoSprite_ShouldDarkenMonIcon(idx, mon, species))
+        gSprites[spriteId].oam.objMode = ST_OAM_OBJ_BLEND;
 
     if (idx < gPartiesCount[trainer])
     {
@@ -1594,7 +1603,6 @@ static void BattleInfoSprite_CreateHPBar(void)
 
     struct Sprite *sprite = &gSprites[*spriteId];
     sprite->sPartySlotIdx = -1;
-    sprite->oam.objMode = ST_OAM_OBJ_BLEND;
     sprite->oam.priority = 1;
     sprite->callback = SpriteCB_BattleInfo_HPBar;
 }
@@ -1618,7 +1626,6 @@ static void BattleInfoSprite_CreateTypeIcon(enum BattleInfoSprites id, enum Type
     struct Sprite *sprite = &gSprites[*spriteId];
     sprite->sTypeIcon_Index = id == BI_SPRITE_TYPE_2; // either 0 or 1
     sprite->sTypeIcon_Type = -1;
-    sprite->oam.objMode = ST_OAM_OBJ_BLEND;
     sprite->oam.priority = 1;
     sprite->callback = SpriteCB_BattleInfo_TypeIcon;
 }
@@ -1627,11 +1634,6 @@ static void BattleInfoSprite_CreateCursor(void)
 {
     u8 *spriteId = &sBattleInfoDataPtr->spriteIds[BI_SPRITE_CURSOR];
     *spriteId = CreateSprite(&sBattleInfo_CursorSpriteTemplate, BI_MON_ICON_X, BI_MON_ICON_Y, 128);
-    if (*spriteId == SPRITE_NONE)
-        return;
-
-    struct Sprite *sprite = &gSprites[*spriteId];
-    sprite->oam.objMode = ST_OAM_OBJ_BLEND;
 }
 
 static void BattleInfoSprite_CreateOptionsCursor(void)
@@ -1702,13 +1704,14 @@ static void BattleInfoText_UpdateHeader(void)
 
     struct Pokemon *mon = BattleInfoHelper_GetCurrMon();
     enum Species species = GetMonData(mon, MON_DATA_SPECIES, NULL);
-    u32 fontId = FONT_SMALL;
+    u32 fontId = FONT_OUTLINED;
+    u32 letterSpacing = GetFontAttribute(fontId,FONTATTR_LINE_SPACING);
 
     // species
     BattleInfoHelper_AddTextPrinter(
         BI_WIN_HEADER,
         BI_SPECIES_NAME_X, BI_SPECIES_NAME_Y,
-        FONT_OUTLINED, BI_TXTCLR_OUTLINED,
+        fontId, BI_TXTCLR_OUTLINED,
         GetSpeciesName(species));
 
     // gender
@@ -1739,7 +1742,7 @@ static void BattleInfoText_UpdateHeader(void)
     BattleInfoHelper_AddTextPrinter(
         BI_WIN_HEADER,
         BI_GENDER_SYMBOL_X, BI_GENDER_SYMBOL_Y,
-        FONT_OUTLINED, BI_TXTCLR_OUTLINED,
+        fontId, BI_TXTCLR_OUTLINED,
         strbuf);
 
     bool32 isOnPlayerSide = BattleInfoHelper_IsTrainerOnPlayerSide();
@@ -1749,12 +1752,14 @@ static void BattleInfoText_UpdateHeader(void)
     if (isOnPlayerSide
      || (!isOnPlayerSide && (gBattleTypeFlags & BATTLE_TYPE_TRAINER)))
     {
+        strbuf = BattleInfoHelper_GetTrainerName();
+        fontId = GetFontIdToFit(strbuf, FONT_SMALL, letterSpacing, BI_HEADER_MAX_WIDTH);
         BattleInfoHelper_AddTextPrinter(
             BI_WIN_HEADER,
             BI_HEADER_TEXT_X, y,
             fontId,
             BI_TXTCLR_CONTENT,
-            BattleInfoHelper_GetTrainerName());
+            strbuf);
         y += BI_HEADER_TEXT_Y_PAD;
     }
 
@@ -1764,11 +1769,14 @@ static void BattleInfoText_UpdateHeader(void)
 
     // ability
     enum Ability ability = GetSpeciesAbility(species, GetMonData(mon, MON_DATA_ABILITY_NUM, NULL));
+    strbuf = GetAbilityName(ability);
+    fontId = GetFontIdToFit(strbuf, FONT_SMALL, letterSpacing, BI_HEADER_MAX_WIDTH);
+
     BattleInfoHelper_AddTextPrinter(
         BI_WIN_HEADER,
         BI_HEADER_TEXT_X, y,
         fontId, BI_TXTCLR_CONTENT,
-        GetAbilityName(ability));
+        strbuf);
     y += BI_HEADER_TEXT_Y_PAD;
 
     // held item
@@ -1777,6 +1785,7 @@ static void BattleInfoText_UpdateHeader(void)
         strbuf = GetItemName(item);
     else
         strbuf = COMPOUND_STRING("No Held Item");
+    fontId = GetFontIdToFit(strbuf, FONT_SMALL, letterSpacing, BI_HEADER_MAX_WIDTH);
     BattleInfoHelper_AddTextPrinter(
         BI_WIN_HEADER,
         BI_HEADER_TEXT_X, y,

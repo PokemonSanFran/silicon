@@ -10300,7 +10300,7 @@
     {
       "id": "LAYOUT_ROUTE8",
       "name": "Route8_Layout",
-      "width": 21,
+      "width": 39,
       "height": 20,
       "primary_tileset": "gTileset_GeneralSilicon",
       "secondary_tileset": "gTileset_Petalburg",
@@ -10404,14 +10404,14 @@
     {
       "id": "LAYOUT_MERMEREZA_CITY",
       "name": "MermerezaCity_Layout",
-      "width": 40,
-      "height": 27,
-      "primary_tileset": "gTileset_General",
+      "width": 51,
+      "height": 32,
+      "primary_tileset": "gTileset_GeneralSilicon",
       "secondary_tileset": "gTileset_Mauville",
       "border_filepath": "data/layouts/MermerezaCity/border.bin",
       "blockdata_filepath": "data/layouts/MermerezaCity/map.bin",
       "border_height": 2,
-      "border_width": 2,
+      "border_width": 3,
       "layout_version": "emerald"
     },
     {
@@ -10424,7 +10424,7 @@
       "border_filepath": "data/layouts/Route10/border.bin",
       "blockdata_filepath": "data/layouts/Route10/map.bin",
       "border_height": 2,
-      "border_width": 2,
+      "border_width": 3,
       "layout_version": "emerald"
     },
     {
@@ -10508,14 +10508,14 @@
     {
       "id": "LAYOUT_ROUTE5",
       "name": "Route5_Layout",
-      "width": 40,
-      "height": 20,
-      "primary_tileset": "gTileset_General",
-      "secondary_tileset": "gTileset_Petalburg",
+      "width": 66,
+      "height": 33,
+      "primary_tileset": "gTileset_GeneralSilicon",
+      "secondary_tileset": "gTileset_FoggyRoutes",
       "border_filepath": "data/layouts/Route5/border.bin",
       "blockdata_filepath": "data/layouts/Route5/map.bin",
       "border_height": 2,
-      "border_width": 2,
+      "border_width": 3,
       "layout_version": "emerald"
     },
     {
