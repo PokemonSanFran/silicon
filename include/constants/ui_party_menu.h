@@ -126,25 +126,30 @@
 #define PARTY_SLOT_STAT_VALUE_W     28
 #define PARTY_SLOT_STAT_VALUE_H     PARTY_SLOT_TEXT_HEIGHT
 
-#define PARTY_SLOT_IV_LABEL_X       40
+#define PARTY_SLOT_IV_LABEL_X       32
 #define PARTY_SLOT_IV_LABEL_Y       PARTY_SLOT_ITEM_Y
 #define PARTY_SLOT_IV_LABEL_W       9
 #define PARTY_SLOT_IV_LABEL_H       PARTY_SLOT_TEXT_HEIGHT
 
-#define PARTY_SLOT_IV_VALUE_X       49
+#define PARTY_SLOT_IV_VALUE_X       40
 #define PARTY_SLOT_IV_VALUE_Y       PARTY_SLOT_ITEM_Y
 #define PARTY_SLOT_IV_VALUE_W       20
 #define PARTY_SLOT_IV_VALUE_H       PARTY_SLOT_TEXT_HEIGHT
 
-#define PARTY_SLOT_EV_LABEL_X       69
+#define PARTY_SLOT_EV_LABEL_X       53
 #define PARTY_SLOT_EV_LABEL_Y       PARTY_SLOT_ITEM_Y
 #define PARTY_SLOT_EV_LABEL_W       11
 #define PARTY_SLOT_EV_LABEL_H       PARTY_SLOT_TEXT_HEIGHT
 
-#define PARTY_SLOT_EV_VALUE_X       80
+#define PARTY_SLOT_EV_VALUE_X       63
 #define PARTY_SLOT_EV_VALUE_Y       PARTY_SLOT_ITEM_Y
 #define PARTY_SLOT_EV_VALUE_W       28
 #define PARTY_SLOT_EV_VALUE_H       PARTY_SLOT_TEXT_HEIGHT
+
+#define PARTY_SLOT_EV_DELTA_X       80
+#define PARTY_SLOT_EV_DELTA_Y       PARTY_SLOT_ITEM_Y
+#define PARTY_SLOT_EV_DELTA_W       16
+#define PARTY_SLOT_EV_DELTA_H       PARTY_SLOT_TEXT_HEIGHT
 
 // ================================================================
 // Sprite defines
@@ -179,6 +184,13 @@
 #define PARTY_STATUS_FADE_FRAMES        48
 #define PARTY_STATUS_FADE_SHOW_FRAMES   120
 #define PARTY_STATUS_FADE_HIDE_FRAMES   120
+
+// item use quantity spinner
+#define PARTY_SPINNER_X_OFFSET          95
+#define PARTY_SPINNER_Y_OFFSET          22
+#define PARTY_SPINNER_FRAME_TILES       4
+#define PARTY_SPINNER_NUM_FRAMES        2
+#define PARTY_SPINNER_FRAME_DURATION    30
 
 // party cursor
 #define PARTY_CURSOR_Y_OFFSET       2
@@ -326,6 +338,7 @@ enum PartyMenuTags
     PARTY_GFXTAG_CURSOR = 42000,
     PARTY_GFXTAG_HELD_ITEM,
     PARTY_GFXTAG_STATUS,
+    PARTY_GFXTAG_SPINNER,
     PARTY_PALTAG_UI,
     PARTY_PALTAG_STATUS,
 };

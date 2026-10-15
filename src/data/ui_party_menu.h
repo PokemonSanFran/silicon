@@ -271,6 +271,7 @@ static const u16 sPartyMenu_Pal_Ui[]                = INCGFX_U16("graphics/ui_me
 static const u32 sPartyMenu_Gfx_Cursor[]            = INCGFX_U32("graphics/ui_menus/party_menu/cursor.png", ".4bpp.smol");
 static const u32 sPartyMenu_Gfx_HeldItem[]          = INCGFX_U32("graphics/ui_menus/party_menu/held_item.png", ".4bpp.smol");
 static const u32 sPartyMenu_Gfx_Status[]            = INCGFX_U32("graphics/ui_menus/party_menu/status_icons.png", ".4bpp.smol");
+static const u32 sPartyMenu_Gfx_Spinner[]           = INCGFX_U32("graphics/ui_menus/mon_summary/infos/scroll_indicator.png", ".4bpp.smol");
 static const u16 sPartyMenu_Pal_Status[]            = INCGFX_U16("graphics/ui_menus/party_menu/status_icons.png", ".gbapal");
 
 static const struct {
@@ -321,6 +322,7 @@ static const struct
     struct PartySlotRect ivValue;
     struct PartySlotRect evLabel;
     struct PartySlotRect evValue;
+    struct PartySlotRect evDelta;
 } sPartyMenu_SlotLayout =
 {
     // {x, y, width, height}
@@ -401,6 +403,12 @@ static const struct
         PARTY_SLOT_EV_VALUE_Y,
         PARTY_SLOT_EV_VALUE_W,
         PARTY_SLOT_EV_VALUE_H
+    },
+    .evDelta = {
+        PARTY_SLOT_EV_DELTA_X,
+        PARTY_SLOT_EV_DELTA_Y,
+        PARTY_SLOT_EV_DELTA_W,
+        PARTY_SLOT_EV_DELTA_H
     },
 };
 
@@ -512,6 +520,43 @@ static const struct SpriteTemplate sPartyMenu_SpriteTemplate_Cursor =
     .paletteTag = PARTY_PALTAG_UI,
     .oam = &sPartyMenu_Oam_Cursor,
     .anims = sPartyMenu_Anims_Cursor,
+};
+
+static const struct CompressedSpriteSheet sPartyMenu_SpriteSheet_Spinner =
+{
+    .data = sPartyMenu_Gfx_Spinner,
+    .size = TILE_OFFSET_4BPP(PARTY_SPINNER_FRAME_TILES * PARTY_SPINNER_NUM_FRAMES),
+    .tag = PARTY_GFXTAG_SPINNER,
+};
+
+static const struct OamData sPartyMenu_Oam_Spinner =
+{
+    .shape = SPRITE_SHAPE(16x16),
+    .size = SPRITE_SIZE(16x16),
+    .priority = PARTY_SPRITE_PRIORITY_MAIN,
+};
+
+static const union AnimCmd sPartyMenu_Anim_Spinner[] =
+{
+    ANIMCMD_FRAME(0, PARTY_SPINNER_FRAME_DURATION),
+    ANIMCMD_FRAME(PARTY_SPINNER_FRAME_TILES, PARTY_SPINNER_FRAME_DURATION),
+    ANIMCMD_JUMP(0)
+};
+
+static const union AnimCmd *const sPartyMenu_Anims_Spinner[] =
+{
+    sPartyMenu_Anim_Spinner,
+};
+
+static const struct SpriteTemplate sPartyMenu_SpriteTemplate_Spinner =
+{
+    .tileTag = PARTY_GFXTAG_SPINNER,
+    .paletteTag = PARTY_PALTAG_UI,
+    .oam = &sPartyMenu_Oam_Spinner,
+    .anims = sPartyMenu_Anims_Spinner,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = SpriteCallbackDummy,
 };
 
 static const struct CompressedSpriteSheet sPartyMenu_SpriteSheet_HeldItem =

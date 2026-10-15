@@ -106,6 +106,9 @@ struct PartyMenuData
     u8 numActions;
     u8 actionCursor;
     u8 yesNoCursor;
+    u8 spinnerSpriteId;
+    s16 itemCount;
+    u16 maxItemCount;
     u16 textTilemapBuf[BG_SCREEN_SIZE / sizeof(u16)];
     u16 slotsTilemapBuf[BG_SCREEN_SIZE / sizeof(u16)];
     u16 heldTilemapBuf[BG_SCREEN_SIZE / sizeof(u16)];
@@ -142,7 +145,14 @@ static void PartySlot_DrawLevel(u32, struct Pokemon *, u32);
 static void PartySlot_DrawHp(u32, struct Pokemon *, u32);
 static void PartySlot_DrawItem(u32, struct Pokemon *, u32);
 static enum Stat PartySlot_GetEvItemStat(void);
-static void PartySlot_DrawEvItemStat(u32, struct Pokemon *, enum Stat, u32);
+static bool32 PartySlot_IsEvResetItem(void);
+static void PartySlot_DrawEvItemStat(u32, u32, struct Pokemon *, enum Stat, u32);
+static void PartySlot_DrawEvItemDelta(u32, struct Pokemon *, enum Stat, u32);
+static u32 PartySlot_GetEvItemDelta(struct Pokemon *, enum Stat, u32);
+static bool32 PartySpinner_TryOpen(u8, struct Pokemon *);
+static void PartySpinner_Close(void);
+static void Task_HandleItemSpinnerInput(u8);
+static void PartySlot_DrawEvReset(u32, u32);
 static void PartySlot_PrintNumber(u32, const struct PartySlotRect *, u32, enum PartyTextColors, u32);
 static void PartySlot_DrawDescription(u32, u32, enum PartyTextColors, u32);
 static u32 PartySlot_GetDescription(u32, enum PartyTextColors *);
@@ -525,10 +535,16 @@ void Task_HandleChooseMonInput(u8 taskId)
     if (!gPaletteFade.active && MenuHelpers_ShouldWaitForLinkRecv() != TRUE)
     {
         s8 *slotPtr = PartyCursor_GetSlotPtr();
+        u32 prevSlot = *slotPtr;
 
         if (PartyCursor_HandleDirectionalInput())
         {
             PartyCursor_SnapToSlot();
+            if (PartySlot_GetEvItemStat() != NUM_STATS)
+            {
+                PartySlot_Draw(prevSlot);
+                PartySlot_Draw(*slotPtr);
+            }
         }
         else if (JOY_NEW(A_BUTTON))
         {
@@ -937,7 +953,13 @@ static void PartySlot_DrawMonInfo(u32 windowId, u32 partySlot, u32 row)
     enum Stat evStat = PartySlot_GetEvItemStat();
     if (evStat != NUM_STATS)
     {
-        PartySlot_DrawEvItemStat(windowId, mon, evStat, contentY);
+        if (PartySlot_IsEvResetItem())
+        {
+            if (partySlot == *PartyCursor_GetSlotPtr())
+                PartySlot_DrawEvReset(windowId, contentY);
+        }
+        else
+            PartySlot_DrawEvItemStat(windowId, partySlot, mon, evStat, contentY);
         return;
     }
 
@@ -1043,13 +1065,20 @@ static enum Stat PartySlot_GetEvItemStat(void)
     }
 }
 
-static void PartySlot_DrawEvItemStat(u32 windowId, struct Pokemon *mon, enum Stat stat, u32 contentY)
+// Fresh-Start Mochi and Sherbet Surprise reset every EV
+static bool32 PartySlot_IsEvResetItem(void)
+{
+    return GetItemEffect(gSpecialVar_ItemId)[ITEM_EFFECT_ARG_START] == ITEM6_RESET_EV;
+}
+
+static void PartySlot_DrawEvItemStat(u32 windowId, u32 partySlot, struct Pokemon *mon, enum Stat stat, u32 contentY)
 {
     const struct PartySlotRect *rect = &sPartyMenu_SlotLayout.statName;
     const u8 *name = gStatNamesTable[stat];
     u32 fontId = GetFontIdToFit(name, FONT_OUTLINED, 0, rect->width);
     u32 iv = GetMonData(mon, MON_DATA_HP_IV + stat);
     u32 ev = GetMonData(mon, MON_DATA_HP_EV + stat);
+    bool32 isEvMaxed = (ev >= MAX_PER_STAT_EVS || GetMonEVCount(mon) >= MAX_TOTAL_EVS);
 
     PartySlot_Print(windowId, fontId, rect->x + GetStringCenterAlignXOffset(fontId, name, rect->width),
                     rect->y + contentY, COLORID_PARTY_WHITE, name);
@@ -1061,7 +1090,123 @@ static void PartySlot_DrawEvItemStat(u32 windowId, struct Pokemon *mon, enum Sta
 
     rect = &sPartyMenu_SlotLayout.evLabel;
     PartySlot_Print(windowId, FONT_OUTLINED_NARROW, rect->x, rect->y + contentY, COLORID_PARTY_YELLOW, COMPOUND_STRING("Ev"));
-    PartySlot_PrintNumber(windowId, &sPartyMenu_SlotLayout.evValue, ev, ev == MAX_PER_STAT_EVS ? COLORID_PARTY_GREEN : COLORID_PARTY_WHITE, contentY);
+    PartySlot_PrintNumber(windowId, &sPartyMenu_SlotLayout.evValue, ev, isEvMaxed ? COLORID_PARTY_GREEN : COLORID_PARTY_WHITE, contentY);
+
+    if (partySlot == *PartyCursor_GetSlotPtr())
+        PartySlot_DrawEvItemDelta(windowId, mon, stat, contentY);
+}
+
+static void PartySlot_DrawEvItemDelta(u32 windowId, struct Pokemon *mon, enum Stat stat, u32 contentY)
+{
+    const struct PartySlotRect *rect = &sPartyMenu_SlotLayout.evDelta;
+    u32 count = sPartyMenuDataPtr->itemCount != 0 ? sPartyMenuDataPtr->itemCount : 1;
+    u32 delta = PartySlot_GetEvItemDelta(mon, stat, count);
+    u8 text[5];
+
+    text[0] = (s8)GetItemEffect(gSpecialVar_ItemId)[ITEM_EFFECT_ARG_START] > 0 ? CHAR_PLUS : CHAR_HYPHEN;
+    ConvertIntToDecimalStringN(&text[1], delta, STR_CONV_MODE_LEFT_ALIGN, 3);
+    PartySlot_Print(windowId, FONT_OUTLINED, rect->x, rect->y + contentY, delta != 0 ? COLORID_PARTY_WHITE : COLORID_PARTY_GREY, text);
+}
+
+// mirrors the EV branch of PokemonUseItemEffects
+static u32 PartySlot_GetEvItemDelta(struct Pokemon *mon, enum Stat stat, u32 count)
+{
+    const u8 *effect = GetItemEffect(gSpecialVar_ItemId);
+    s32 change = (s8)effect[ITEM_EFFECT_ARG_START];
+    s32 ev = GetMonData(mon, MON_DATA_HP_EV + stat);
+
+    if (change < 0)
+        return min(-change * (s32)count, ev);
+
+    s32 cap = (effect[10] & ITEM10_IS_VITAMIN) ? EV_ITEM_RAISE_LIMIT : MAX_PER_STAT_EVS;
+    return max(0, min(change * (s32)count, min(cap - ev, MAX_TOTAL_EVS - (s32)GetMonEVCount(mon))));
+}
+
+static bool32 PartySpinner_TryOpen(u8 taskId, struct Pokemon *mon)
+{
+    enum Stat stat = PartySlot_GetEvItemStat();
+
+    if (stat == NUM_STATS || PartySlot_IsEvResetItem())
+        return FALSE;
+
+    u32 change = abs((s8)GetItemEffect(gSpecialVar_ItemId)[ITEM_EFFECT_ARG_START]);
+    u32 maxDelta = PartySlot_GetEvItemDelta(mon, stat, MAX_BAG_ITEM_CAPACITY);
+    u32 maxCount = min(CountTotalItemQuantityInBag(gSpecialVar_ItemId), (maxDelta + change - 1) / change);
+
+    if (maxCount <= 1)
+        return FALSE;
+
+    PlaySE(SE_SELECT);
+    sPartyMenuDataPtr->itemCount = 1;
+    sPartyMenuDataPtr->maxItemCount = maxCount;
+    LoadCompressedSpriteSheet(&sPartyMenu_SpriteSheet_Spinner);
+    sPartyMenuDataPtr->spinnerSpriteId = CreateSprite(&sPartyMenu_SpriteTemplate_Spinner,
+                                                      PartyMonIcon_GetX(gPartyMenu.slotId) + PARTY_SPINNER_X_OFFSET,
+                                                      PartyMonIcon_GetY(gPartyMenu.slotId) + PARTY_SPINNER_Y_OFFSET,
+                                                      PARTY_SPRITE_SUBPRIORITY_CURSOR);
+    gTasks[taskId].func = Task_HandleItemSpinnerInput;
+    return TRUE;
+}
+
+static void PartySpinner_Close(void)
+{
+    DestroySprite(&gSprites[sPartyMenuDataPtr->spinnerSpriteId]);
+    FreeSpriteTilesByTag(PARTY_GFXTAG_SPINNER);
+    sPartyMenuDataPtr->itemCount = 0;
+}
+
+static void Task_HandleItemSpinnerInput(u8 taskId)
+{
+    if (AdjustQuantityAccordingToDPadInput(&sPartyMenuDataPtr->itemCount, sPartyMenuDataPtr->maxItemCount))
+    {
+        PartySlot_Draw(gPartyMenu.slotId);
+    }
+    else if (JOY_NEW(A_BUTTON))
+    {
+        struct Pokemon *mon = &gParties[B_TRAINER_PLAYER][gPartyMenu.slotId];
+        enum Item item = gSpecialVar_ItemId;
+        u32 count = sPartyMenuDataPtr->itemCount;
+
+        PartySpinner_Close();
+        for (u32 i = 0; i < count; i++)
+            ExecuteTableBasedItemEffect(mon, item, gPartyMenu.slotId, 0);
+
+        gPartyMenuUseExitCallback = TRUE;
+        PlaySE(SE_USE_ITEM);
+        RemoveBagItem(item, count);
+        PartySlot_Draw(gPartyMenu.slotId);
+        GetMonNickname(mon, gStringVar1);
+        GetMedicineItemEffectMessage(item, 0);
+        DisplayPartyMenuMessage(gStringVar4, TRUE);
+        if (CheckBagHasItem(item, 1))
+            gTasks[taskId].func = Task_ReturnToChooseMonAfterText;
+        else
+            gTasks[taskId].func = Task_ClosePartyMenuAfterText;
+    }
+    else if (JOY_NEW(B_BUTTON))
+    {
+        PlaySE(SE_SELECT);
+        PartySpinner_Close();
+        PartySlot_Draw(gPartyMenu.slotId);
+        gTasks[taskId].func = Task_HandleChooseMonInput;
+    }
+}
+
+static void PartySlot_DrawEvReset(u32 windowId, u32 contentY)
+{
+    const struct PartySlotRect *rect = &sPartyMenu_SlotLayout.statName;
+    const u8 *label = COMPOUND_STRING("Ev");
+    const u8 *all = COMPOUND_STRING(": All {RIGHT_ARROW}");
+    const u8 *zero = COMPOUND_STRING("0");
+    u32 labelWidth = GetStringWidth(FONT_OUTLINED_NARROW, label, 0);
+    u32 allWidth = GetStringWidth(FONT_OUTLINED, all, 0);
+    u32 width = labelWidth + allWidth + GetStringWidth(FONT_OUTLINED, zero, 0);
+    u32 x = rect->x + (width < rect->width ? (rect->width - width) / 2 : 0);
+    u32 y = rect->y + contentY;
+
+    PartySlot_Print(windowId, FONT_OUTLINED_NARROW, x, y, COLORID_PARTY_YELLOW, label);
+    PartySlot_Print(windowId, FONT_OUTLINED, x + labelWidth, y, COLORID_PARTY_WHITE, all);
+    PartySlot_Print(windowId, FONT_OUTLINED, x + labelWidth + allWidth, y, COLORID_PARTY_RED, zero);
 }
 
 static void PartySlot_PrintNumber(u32 windowId, const struct PartySlotRect *rect, u32 value, enum PartyTextColors color, u32 contentY)
@@ -2291,6 +2436,10 @@ void ItemUseCB_Medicine(u8 taskId, TaskFunc task)
     if (NotUsingHPEVItemOnShedinja(mon, item) == FALSE)
     {
         cannotUse = TRUE;
+    }
+    else if (PartySpinner_TryOpen(taskId, mon))
+    {
+        return;
     }
     else
     {
