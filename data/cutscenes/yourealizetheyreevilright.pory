@@ -6,7 +6,6 @@ const GARBODOR = 4
 const BAIYA_OUTSIDE = 10
 
 const FLAG_HIDE_BAIYA = FLAG_TEMP_1
-const FLAG_HIDE_ELITES_1 = FLAG_TEMP_2
 const FLAG_HIDE_GARBODOR = FLAG_TEMP_4
 const FLAG_HIDE_FRANK = FLAG_TEMP_5
 const FLAG_HIDE_VIGRIM = FLAG_TEMP_6
@@ -30,7 +29,8 @@ script YouRealizeTheyreEvilRight_HideGarbodor_Script {
 
 script YouRealizeTheyreEvilRight_HideBasement_Script {
     setflag(FLAG_HIDE_BAIYA)
-    setflag(FLAG_HIDE_ELITES_1)
+	setobjectflagfromlocalid(LOCALID_ARANTRAZ_MESSHALL_TALA)
+	setobjectflagfromlocalid(LOCALID_ARANTRAZ_MESSHALL_MAGNUS)
     setflag(FLAG_HIDE_GARBODOR)
     setflag(FLAG_HIDE_FRANK)
     setflag(FLAG_HIDE_VIGRIM)

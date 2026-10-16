@@ -246,7 +246,7 @@ script Earthquake_PostRescue_Dialogue {
         applymovement(LOCALID_HALAI_BAIYA,Common_Movement_FaceUp)
         waitmovement(LOCALID_HALAI_BAIYA)
 
-        msgbox(format("Fine. The three of us and maybe a few more… nobody can take all of us at once."),MSGBOX_DEFAULT,SPEAKER_BAIYA_TIDE)
+        msgbox(format("Fine. I don't think anybody can take all of us at once."),MSGBOX_DEFAULT,SPEAKER_BAIYA_TIDE)
                 closemessage
         setvar(VAR_STORYLINE_STATE,STORY_POST_EARTHQUAKE)
         setvar(VAR_HALAI_ISLAND_STATE,MEET_AT_ROUTE4)
