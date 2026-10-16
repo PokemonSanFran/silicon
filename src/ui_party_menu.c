@@ -374,7 +374,6 @@ static void TryTutorSelectedMon(u8);
 static void TryGiveMailToSelectedMon(u8);
 static void TryGiveItemToSelectedMon(u8);
 static void TryEnterMonForMinigame(u8, u8);
-static void ItemUseCB_WontHaveEffect(u8, TaskFunc);
 static void Task_AbilityCapsule(u8);
 static void Task_AbilityPatch(u8);
 static void Task_Mint(u8);
@@ -4640,17 +4639,26 @@ static void Task_ValidateChosenHalfParty(u8 taskId)
 {
 }
 
-static void ItemUseCB_WontHaveEffect(u8 taskId, TaskFunc task)
-{
-    gPartyMenuUseExitCallback = FALSE;
-    PlaySE(SE_SELECT);
-    DisplayPartyMenuMessage(gText_WontHaveEffect, TRUE);
-    gTasks[taskId].func = task;
-}
-
+// Battle scripts called in HandleAction_UseItem
 void ItemUseCB_BattleScript(u8 taskId, TaskFunc task)
 {
-    ItemUseCB_WontHaveEffect(taskId, task);
+    struct Pokemon *mon = GetPartyMonFromPartyMenuId(gPartyMenu.slotId);
+    if (CannotUseItemsInBattle(gSpecialVar_ItemId, mon))
+    {
+        gPartyMenuUseExitCallback = FALSE;
+        PlaySE(SE_SELECT);
+        DisplayPartyMenuMessage(gText_WontHaveEffect, TRUE);
+        gTasks[taskId].func = task;
+    }
+    else
+    {
+        gBattleStruct->itemPartyIndex[gBattlerInMenuId] = GetPartyIdFromBattleSlot(gPartyMenu.slotId);
+        gPartyMenuUseExitCallback = TRUE;
+        PlaySE(SE_SELECT);
+        if (!IsItemFlute(gSpecialVar_ItemId))
+            RemoveBagItem(gSpecialVar_ItemId, 1);
+        gTasks[taskId].func = task;
+    }
 }
 
 void ItemUseCB_BattleChooseMove(u8 taskId, TaskFunc task)
