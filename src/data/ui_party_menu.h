@@ -95,23 +95,23 @@ struct
     [MENU_TRADE1]          = {COMPOUND_STRING("Trade"),             CursorCb_Stub},
     [MENU_TRADE2]          = {COMPOUND_STRING("Trade"),             CursorCb_Stub},
     [MENU_TOSS]            = {COMPOUND_STRING("Toss"),              CursorCb_Stub},
-    [MENU_CATALOG_BULB]    = {COMPOUND_STRING("Light bulb"),        CursorCb_Stub},
-    [MENU_CATALOG_OVEN]    = {COMPOUND_STRING("Microwave oven"),    CursorCb_Stub},
-    [MENU_CATALOG_WASHING] = {COMPOUND_STRING("Washing machine"),   CursorCb_Stub},
-    [MENU_CATALOG_FRIDGE]  = {COMPOUND_STRING("Refrigerator"),      CursorCb_Stub},
-    [MENU_CATALOG_FAN]     = {COMPOUND_STRING("Electric fan"),      CursorCb_Stub},
-    [MENU_CATALOG_MOWER]   = {COMPOUND_STRING("Lawn mower"),        CursorCb_Stub},
-    [MENU_CHANGE_FORM]     = {COMPOUND_STRING("Change form"),       CursorCb_Stub},
-    [MENU_CHANGE_ABILITY]  = {COMPOUND_STRING("Change Ability"),    CursorCb_Stub},
-    [MENU_INFLICT_SLEEP]   = {COMPOUND_STRING("SLP"),               CursorCb_Stub},
-    [MENU_INFLICT_POISON]  = {COMPOUND_STRING("PSN"),               CursorCb_Stub},
-    [MENU_INFLICT_BURN]    = {COMPOUND_STRING("BRN"),               CursorCb_Stub},
+    [MENU_CATALOG_BULB]    = {COMPOUND_STRING("Light bulb"),        CursorCb_CatalogBulb},
+    [MENU_CATALOG_OVEN]    = {COMPOUND_STRING("Microwave oven"),    CursorCb_CatalogOven},
+    [MENU_CATALOG_WASHING] = {COMPOUND_STRING("Washing machine"),   CursorCb_CatalogWashing},
+    [MENU_CATALOG_FRIDGE]  = {COMPOUND_STRING("Refrigerator"),      CursorCb_CatalogFridge},
+    [MENU_CATALOG_FAN]     = {COMPOUND_STRING("Electric fan"),      CursorCb_CatalogFan},
+    [MENU_CATALOG_MOWER]   = {COMPOUND_STRING("Lawn mower"),        CursorCb_CatalogMower},
+    [MENU_CHANGE_FORM]     = {COMPOUND_STRING("Change form"),       CursorCb_ChangeForm},
+    [MENU_CHANGE_ABILITY]  = {COMPOUND_STRING("Change Ability"),    CursorCb_ChangeAbility},
+    [MENU_INFLICT_SLEEP]   = {COMPOUND_STRING("SLP"),               TryHexorbAndPrintResult},
+    [MENU_INFLICT_POISON]  = {COMPOUND_STRING("PSN"),               TryHexorbAndPrintResult},
+    [MENU_INFLICT_BURN]    = {COMPOUND_STRING("BRN"),               TryHexorbAndPrintResult},
 #if B_USE_FROSTBITE == TRUE
-    [MENU_INFLICT_FREEZE_FROSTBITE] = {COMPOUND_STRING("FSB"), CursorCb_Stub},
+    [MENU_INFLICT_FREEZE_FROSTBITE] = {COMPOUND_STRING("FSB"), TryHexorbAndPrintResult},
 #else
-    [MENU_INFLICT_FREEZE_FROSTBITE] = {COMPOUND_STRING("FRZ"), CursorCb_Stub},
+    [MENU_INFLICT_FREEZE_FROSTBITE] = {COMPOUND_STRING("FRZ"), TryHexorbAndPrintResult},
 #endif
-    [MENU_INFLICT_PARALYSIS] = {COMPOUND_STRING("PAR"), CursorCb_Stub},
+    [MENU_INFLICT_PARALYSIS] = {COMPOUND_STRING("PAR"), TryHexorbAndPrintResult},
 };
 
 static const u8 sPartyMenuAction_SummarySwitchCancel[] = {MENU_SUMMARY, MENU_SWITCH, MENU_CANCEL1};
@@ -171,6 +171,22 @@ static const u8 sPartyMenuActionCounts[] =
     [ACTIONS_ROTOM_CATALOG] = ARRAY_COUNT(sPartyMenuAction_RotomCatalog),
     [ACTIONS_ZYGARDE_CUBE]  = ARRAY_COUNT(sPartyMenuAction_ZygardeCube),
     [ACTIONS_HEXORB]        = ARRAY_COUNT(sPartyMenuAction_Hexorb),
+};
+
+#define ROTOM_BASE_MOVE  MOVE_THUNDER_SHOCK
+#define ROTOM_HEAT_MOVE  MOVE_OVERHEAT
+#define ROTOM_WASH_MOVE  MOVE_HYDRO_PUMP
+#define ROTOM_FROST_MOVE MOVE_BLIZZARD
+#define ROTOM_FAN_MOVE   MOVE_AIR_SLASH
+#define ROTOM_MOW_MOVE   MOVE_LEAF_STORM
+
+static const u16 sRotomFormChangeMoves[5] =
+{
+    ROTOM_HEAT_MOVE,
+    ROTOM_WASH_MOVE,
+    ROTOM_FROST_MOVE,
+    ROTOM_FAN_MOVE,
+    ROTOM_MOW_MOVE,
 };
 
 static const u8 sPartyMenu_LevelUpStatOrder[NUM_STATS] =
