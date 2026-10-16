@@ -12,7 +12,6 @@ mapscripts QiuVillage_MapScripts
         call_if_ne(VAR_TOWER_RAID_STATE,0,ImIn_Script_HideEntireQiuRaidParty)
         call_if_eq(VAR_STORYLINE_STATE,STORY_BEFORE_RAMESH_BREAKIN,ImIn_Script_HideQiuSpecificRaidPartyMembers)
 
-        call(Quest_StolenTrade_HideObjectA_Script)
         call(CutePokemon_Script_ControlMelissaQiuOutsideVisibility)
         call(Quest_ButOnlyIn_HideGunda_Script)
         call(Quest_Breaktheinternet_QiuVillageGuy_Visibility_Script)
