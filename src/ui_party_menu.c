@@ -266,6 +266,13 @@ static bool8 HasPartySlotAlreadyBeenSelected(u8);
 static u8 GetBattleEntryLevelCap(void);
 static u8 DisplaySelectionWindow(u8);
 static void PartyActions_Draw(u32);
+static void PartyMoves_Draw(u32);
+static s32 PartyList_ProcessInput(void (*)(u32));
+static void ShowMoveSelectWindow(u8);
+static void Task_HandleWhichMoveInput(u8);
+static void SetSelectedMoveForItem(u8);
+static void ReturnToUseOnWhichMon(u8);
+static void TryUseItemOnMove(u8);
 static void PartyList_Clear(u32, u32);
 static void PartyList_DrawFrame(u8, u8, u8, u8, u8, u8);
 static void PartyList_ClearFrame(u8, u8, u8, u8, u8, u8);
@@ -2063,23 +2070,31 @@ static u8 DisplaySelectionWindow(u8 windowType)
     u8 *windowPtr = &sPartyMenuDataPtr->windowId[PARTY_DYN_WIN_LIST];
     struct WindowTemplate window;
 
+    u32 height = sPartyMenuDataPtr->numActions * PARTY_LIST_ROW_HEIGHT;
+
     switch (windowType)
     {
+    case SELECTWINDOW_MOVES:
+        SetWindowTemplateFields(&window, PARTY_BG_TEXT, DISPLAY_TILE_WIDTH - PARTY_MOVES_WIDTH, PARTY_FOOTER_TOP - PARTY_FRAME_SIZE - height, PARTY_MOVES_WIDTH, height, PARTY_BG_PAL_WALLPAPER, PARTY_TEXT_TILE_LIST);
+        break;
     case SELECTWINDOW_ACTIONS:
     case SELECTWINDOW_ITEM:
     default:
-    {
-        u32 height = sPartyMenuDataPtr->numActions * PARTY_LIST_ROW_HEIGHT;
-
         SetWindowTemplateFields(&window, PARTY_BG_TEXT, DISPLAY_TILE_WIDTH - PARTY_ACTIONS_WIDTH, PARTY_FOOTER_TOP - PARTY_FRAME_SIZE - height, PARTY_ACTIONS_WIDTH, height, PARTY_BG_PAL_WALLPAPER, PARTY_TEXT_TILE_LIST);
         break;
-    }
     }
 
     *windowPtr = AddWindow(&window);
     CallWindowFunction(*windowPtr, PartyList_DrawFrame);
     sPartyMenuDataPtr->actionCursor = 0;
-    PartyActions_Draw(*windowPtr);
+    if (windowType == SELECTWINDOW_MOVES)
+    {
+        PartyMoves_Draw(*windowPtr);
+    }
+    else
+    {
+        PartyActions_Draw(*windowPtr);
+    }
     PutWindowTilemap(*windowPtr);
     ScheduleBgCopyTilemapToVram(PARTY_BG_TEXT);
 
@@ -2102,10 +2117,38 @@ static void PartyActions_Draw(u32 windowId)
     CopyWindowToVram(windowId, COPYWIN_GFX);
 }
 
+static void PartyMoves_Draw(u32 windowId)
+{
+    struct Pokemon *mon = &gParties[B_TRAINER_PLAYER][gPartyMenu.slotId];
+    enum ItemEffectType effectType = GetItemEffectType(gSpecialVar_ItemId);
+    bool32 showFullPP = (effectType == ITEM_EFFECT_PP_UP || effectType == ITEM_EFFECT_PP_MAX);
+
+    PartyList_Clear(windowId, sPartyMenuDataPtr->actionCursor);
+    for (u32 i = 0; i < sPartyMenuDataPtr->numActions; i++)
+    {
+        enum Move move = GetMonData(mon, MON_DATA_MOVE1 + i);
+        const u8 *name = GetMoveName(move);
+        u32 y = i * TILE_TO_PIXELS(PARTY_LIST_ROW_HEIGHT);
+        u32 pp = showFullPP ? CalculatePPWithBonus(move, GetMonData(mon, MON_DATA_PP_BONUSES), i) : GetMonData(mon, MON_DATA_PP1 + i);
+        u8 text[4];
+
+        PartySlot_Print(windowId, GetFontIdToFit(name, PARTY_LIST_FONT, 0, PARTY_MOVES_NAME_WIDTH), PARTY_LIST_TEXT_X, y, COLORID_PARTY_MENU_BLACK, name);
+        ConvertIntToDecimalStringN(text, pp, STR_CONV_MODE_LEFT_ALIGN, 3);
+        PartySlot_Print(windowId, PARTY_LIST_FONT, PARTY_MOVES_PP_RIGHT - GetStringWidth(PARTY_LIST_FONT, text, 0), y, COLORID_PARTY_MENU_BLACK, text);
+    }
+    CopyWindowToVram(windowId, COPYWIN_GFX);
+}
+
 static void PartyList_Clear(u32 windowId, u32 cursor)
 {
+    u32 y = cursor * TILE_TO_PIXELS(PARTY_LIST_ROW_HEIGHT);
+    s32 extra = TILE_TO_PIXELS(GetWindowAttribute(windowId, WINDOW_WIDTH)) - PARTY_LIST_CURSOR_WIDTH;
+
     FillWindowPixelBuffer(windowId, PIXEL_FILL(PARTY_WALLPAPER_COLOR_WHITE));
-    BlitBitmapToWindow(windowId, sPartyMenu_Gfx_ListCursor, 0, cursor * TILE_TO_PIXELS(PARTY_LIST_ROW_HEIGHT), PARTY_LIST_CURSOR_WIDTH, PARTY_LIST_CURSOR_HEIGHT);
+    BlitBitmapToWindow(windowId, sPartyMenu_Gfx_ListCursor, 0, y, PARTY_LIST_CURSOR_WIDTH, PARTY_LIST_CURSOR_HEIGHT);
+    if (extra > 0)
+        BlitBitmapRectToWindow(windowId, sPartyMenu_Gfx_ListCursor, PARTY_LIST_CURSOR_WIDTH - extra, 0, PARTY_LIST_CURSOR_WIDTH, PARTY_LIST_CURSOR_HEIGHT,
+                               PARTY_LIST_CURSOR_WIDTH, y, extra, PARTY_LIST_CURSOR_HEIGHT);
 }
 
 static void PartyList_DrawFrame(u8 bg, u8 left, u8 top, u8 width, u8 height, u8 paletteNum)
@@ -2129,29 +2172,36 @@ static void PartyList_PrintRow(u32 windowId, u32 row, u32 width, enum PartyTextC
     AddTextPrinterParameterized4(windowId, fontId, PARTY_LIST_TEXT_X, row * TILE_TO_PIXELS(PARTY_LIST_ROW_HEIGHT), 0, 0, sPartyMenu_TextColors[color], TEXT_SKIP_DRAW, text);
 }
 
+static s32 PartyList_ProcessInput(void (*draw)(u32))
+{
+    u32 numRows = sPartyMenuDataPtr->numActions;
+    u32 cursor = sPartyMenuDataPtr->actionCursor;
+    s32 input = MENU_NOTHING_CHOSEN;
+
+    if (JOY_REPEAT(DPAD_UP))
+        cursor = (cursor == 0) ? numRows - 1 : cursor - 1;
+    else if (JOY_REPEAT(DPAD_DOWN))
+        cursor = (cursor == numRows - 1) ? 0 : cursor + 1;
+    else if (JOY_NEW(A_BUTTON))
+        input = cursor;
+    else if (JOY_NEW(B_BUTTON))
+        input = MENU_B_PRESSED;
+
+    if (cursor != sPartyMenuDataPtr->actionCursor)
+    {
+        PlaySE(SE_SELECT);
+        sPartyMenuDataPtr->actionCursor = cursor;
+        draw(sPartyMenuDataPtr->windowId[PARTY_DYN_WIN_LIST]);
+    }
+    return input;
+}
+
 static void Task_HandleSelectionMenuInput(u8 taskId)
 {
     if (!gPaletteFade.active && MenuHelpers_ShouldWaitForLinkRecv() != TRUE)
     {
         u32 numActions = sPartyMenuDataPtr->numActions;
-        u32 cursor = sPartyMenuDataPtr->actionCursor;
-        s32 input = MENU_NOTHING_CHOSEN;
-
-        if (JOY_REPEAT(DPAD_UP))
-            cursor = (cursor == 0) ? numActions - 1 : cursor - 1;
-        else if (JOY_REPEAT(DPAD_DOWN))
-            cursor = (cursor == numActions - 1) ? 0 : cursor + 1;
-        else if (JOY_NEW(A_BUTTON))
-            input = cursor;
-        else if (JOY_NEW(B_BUTTON))
-            input = MENU_B_PRESSED;
-
-        if (cursor != sPartyMenuDataPtr->actionCursor)
-        {
-            PlaySE(SE_SELECT);
-            sPartyMenuDataPtr->actionCursor = cursor;
-            PartyActions_Draw(sPartyMenuDataPtr->windowId[PARTY_DYN_WIN_LIST]);
-        }
+        s32 input = PartyList_ProcessInput(PartyActions_Draw);
 
         switch (input)
         {
@@ -4490,7 +4540,10 @@ void ItemUseCB_BattleScript(u8 taskId, TaskFunc task)
 
 void ItemUseCB_BattleChooseMove(u8 taskId, TaskFunc task)
 {
-    ItemUseCB_WontHaveEffect(taskId, task);
+    PlaySE(SE_SELECT);
+    DisplayPartyMenuStdMessage(PARTY_MSG_RESTORE_WHICH_MOVE);
+    ShowMoveSelectWindow(gPartyMenu.slotId);
+    gTasks[taskId].func = Task_HandleWhichMoveInput;
 }
 
 void ItemUseCB_AbilityCapsule(u8 taskId, TaskFunc task)
@@ -4523,14 +4576,135 @@ void ItemUseCB_ReduceEV(u8 taskId, TaskFunc task)
     ItemUseCB_WontHaveEffect(taskId, task);
 }
 
+static void ShowMoveSelectWindow(u8 slot)
+{
+    u32 moveCount = 0;
+
+    for (u32 i = 0; i < MAX_MON_MOVES; i++)
+    {
+        if (GetMonData(&gParties[B_TRAINER_PLAYER][slot], MON_DATA_MOVE1 + i) != MOVE_NONE)
+        {
+            moveCount++;
+        }
+    }
+    sPartyMenuDataPtr->numActions = moveCount;
+    DisplaySelectionWindow(SELECTWINDOW_MOVES);
+}
+
+static void Task_HandleWhichMoveInput(u8 taskId)
+{
+    s32 input = PartyList_ProcessInput(PartyMoves_Draw);
+
+    if (input != MENU_NOTHING_CHOSEN)
+    {
+        PlaySE(SE_SELECT);
+        if (input == MENU_B_PRESSED)
+        {
+            ReturnToUseOnWhichMon(taskId);
+        }
+        else
+        {
+            SetSelectedMoveForItem(taskId);
+        }
+    }
+}
+
 void ItemUseCB_PPRecovery(u8 taskId, TaskFunc task)
 {
-    ItemUseCB_WontHaveEffect(taskId, task);
+    const u8 *effect = GetItemEffect(gSpecialVar_ItemId);
+
+    if (effect == NULL || !(effect[4] & ITEM4_HEAL_PP_ONE))
+    {
+        gPartyMenu.data1 = 0;
+        TryUseItemOnMove(taskId);
+    }
+    else
+    {
+        PlaySE(SE_SELECT);
+        DisplayPartyMenuStdMessage(PARTY_MSG_RESTORE_WHICH_MOVE);
+        ShowMoveSelectWindow(gPartyMenu.slotId);
+        gTasks[taskId].func = Task_HandleWhichMoveInput;
+    }
+}
+
+static void SetSelectedMoveForItem(u8 taskId)
+{
+    PartyMenuRemoveWindow(&sPartyMenuDataPtr->windowId[PARTY_DYN_WIN_LIST]);
+    gPartyMenu.data1 = sPartyMenuDataPtr->actionCursor;
+    TryUseItemOnMove(taskId);
+}
+
+static void ReturnToUseOnWhichMon(u8 taskId)
+{
+    gTasks[taskId].func = Task_HandleChooseMonInput;
+    sPartyMenuDataPtr->exitCallback = NULL;
+    PartyMenuRemoveWindow(&sPartyMenuDataPtr->windowId[PARTY_DYN_WIN_LIST]);
+    DisplayPartyMenuStdMessage(PARTY_MSG_USE_ON_WHICH_MON);
+}
+
+static void TryUseItemOnMove(u8 taskId)
+{
+    struct PartyMenu *ptr = &gPartyMenu;
+    struct Pokemon *party = NULL;
+    s8 partySlot = 0;
+    GetPartyAndSlotFromPartyMenuId(ptr->slotId, &party, &partySlot);
+    struct Pokemon *mon = &party[partySlot];
+    // In battle, set appropriate variables to be used in battle script.
+    if (gMain.inBattle)
+    {
+        if (CannotUseItemsInBattle(gSpecialVar_ItemId, mon))
+        {
+            gPartyMenuUseExitCallback = FALSE;
+            PlaySE(SE_SELECT);
+            DisplayPartyMenuMessage(gText_WontHaveEffect, TRUE);
+            gTasks[taskId].func = Task_ClosePartyMenuAfterText;
+        }
+        else
+        {
+            gBattleStruct->itemPartyIndex[gBattlerInMenuId] = GetPartyIdFromBattleSlot(gPartyMenu.slotId);
+            gBattleStruct->itemMoveIndex[gBattlerInMenuId] = ptr->data1;
+            gPartyMenuUseExitCallback = TRUE;
+            RemoveBagItem(gSpecialVar_ItemId, 1);
+            gTasks[taskId].func = Task_ClosePartyMenuAfterText;
+        }
+    }
+    // Outside of battle, only PP items are used on moves.
+    else
+    {
+        enum Move move = MOVE_NONE;
+        s16 *moveSlot = &gPartyMenu.data1;
+        enum Item item = gSpecialVar_ItemId;
+
+        if (ExecuteTableBasedItemEffect(mon, item, ptr->slotId, *moveSlot))
+        {
+            gPartyMenuUseExitCallback = FALSE;
+            PlaySE(SE_SELECT);
+            DisplayPartyMenuMessage(gText_WontHaveEffect, TRUE);
+            gTasks[taskId].func = Task_ReturnToChooseMonAfterText;
+        }
+        else
+        {
+            gPartyMenuUseExitCallback = TRUE;
+            PlaySE(SE_USE_ITEM);
+            RemoveBagItem(item, 1);
+            move = GetMonData(mon, MON_DATA_MOVE1 + *moveSlot);
+            StringCopy(gStringVar1, GetMoveName(move));
+            GetMedicineItemEffectMessage(item, 0);
+            DisplayPartyMenuMessage(gStringVar4, TRUE);
+            if (CheckBagHasItem(gSpecialVar_ItemId, 1))
+                gTasks[taskId].func = Task_ReturnToChooseMonAfterText;
+            else
+                gTasks[taskId].func = Task_ClosePartyMenuAfterText;
+        }
+    }
 }
 
 void ItemUseCB_PPUp(u8 taskId, TaskFunc task)
 {
-    ItemUseCB_WontHaveEffect(taskId, task);
+    PlaySE(SE_SELECT);
+    DisplayPartyMenuStdMessage(PARTY_MSG_BOOST_PP_WHICH_MOVE);
+    ShowMoveSelectWindow(gPartyMenu.slotId);
+    gTasks[taskId].func = Task_HandleWhichMoveInput;
 }
 
 void ItemUseCB_TMHM(u8 taskId, TaskFunc task)
