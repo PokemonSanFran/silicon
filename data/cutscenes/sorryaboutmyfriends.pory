@@ -85,7 +85,7 @@ script SorryAboutMyFriends_GiveTicket_Script {
         msgbox(format("I appreciate the gesture, but doesn't my version of the app from SharpRise Capital get me everywhere?"),,SPEAKER_ALICIA)
 
     buffermapname(STR_VAR_1,MAP_ARANTRAZ)
-        msgbox(format("Nope. {STR_VAR_1} is such a popular tourist destination that its unuslally hard to get there, even with your fancy pass. But this should be able to get you there whenever you want."),,SPEAKER_ADAORA)
+        msgbox(format("Nope. {STR_VAR_1} is such a popular tourist destination that its unusually hard to get there, even with your fancy pass. But this should be able to get you there whenever you want."),,SPEAKER_ADAORA)
 
     buffermapname(STR_VAR_2,MAP_HALAI_ISLAND)
         msgbox(format("You'll learn a lot about Resido by going, and it's an excellent place to train for the Gym Challenge. With that upgrade, you can go to {STR_VAR_1} from the {STR_VAR_2} Ferry."),,SPEAKER_ADAORA)

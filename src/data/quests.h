@@ -218,7 +218,7 @@ static const struct SubQuest sContractorPorygon_Sub[QUEST_CONTRACTORPORYGON_SUB_
             gText_Quest_ContractorPorygon_Sub1_Map,
             OBJ_EVENT_GFX_RUNNING_TRIATHLETE_F,
             QUEST_SPRITE_TYPE_OBJECT,
-            COMPOUND_STRING("Delievered")
+            COMPOUND_STRING("Delivered")
             ),
     sub_quest(24,
             gText_Quest_ContractorPorygon_Sub2_Name,
@@ -226,7 +226,7 @@ static const struct SubQuest sContractorPorygon_Sub[QUEST_CONTRACTORPORYGON_SUB_
             gText_Quest_ContractorPorygon_Sub2_Map,
             OBJ_EVENT_GFX_TEALA,
             QUEST_SPRITE_TYPE_OBJECT,
-            COMPOUND_STRING("Delievered")
+            COMPOUND_STRING("Delivered")
             ),
     sub_quest(25,
             gText_Quest_ContractorPorygon_Sub3_Name,
@@ -234,7 +234,7 @@ static const struct SubQuest sContractorPorygon_Sub[QUEST_CONTRACTORPORYGON_SUB_
             gText_Quest_ContractorPorygon_Sub3_Map,
             OBJ_EVENT_GFX_COOK,
             QUEST_SPRITE_TYPE_OBJECT,
-            COMPOUND_STRING("Delievered")
+            COMPOUND_STRING("Delivered")
             ),
 };
 
@@ -699,7 +699,7 @@ static const struct SubQuest sRockCollector_Sub[QUEST_ROCKCOLLECTOR_SUB_COUNT] =
             COMPOUND_STRING("Underground"),
             ITEM_FIRE_STONE,
             QUEST_SPRITE_TYPE_ITEM,
-            COMPOUND_STRING("Delievered")
+            COMPOUND_STRING("Delivered")
             ),
     sub_quest(79,
             COMPOUND_STRING("Water Stone"),
@@ -707,7 +707,7 @@ static const struct SubQuest sRockCollector_Sub[QUEST_ROCKCOLLECTOR_SUB_COUNT] =
             COMPOUND_STRING("Underground"),
             ITEM_WATER_STONE,
             QUEST_SPRITE_TYPE_ITEM,
-            COMPOUND_STRING("Delievered")
+            COMPOUND_STRING("Delivered")
             ),
     sub_quest(80,
             COMPOUND_STRING("Thunder Stone"),
@@ -715,7 +715,7 @@ static const struct SubQuest sRockCollector_Sub[QUEST_ROCKCOLLECTOR_SUB_COUNT] =
             COMPOUND_STRING("Underground"),
             ITEM_THUNDER_STONE,
             QUEST_SPRITE_TYPE_ITEM,
-            COMPOUND_STRING("Delievered")
+            COMPOUND_STRING("Delivered")
             ),
     sub_quest(81,
             COMPOUND_STRING("Leaf Stone"),
@@ -723,7 +723,7 @@ static const struct SubQuest sRockCollector_Sub[QUEST_ROCKCOLLECTOR_SUB_COUNT] =
             COMPOUND_STRING("Underground"),
             ITEM_LEAF_STONE,
             QUEST_SPRITE_TYPE_ITEM,
-            COMPOUND_STRING("Delievered")
+            COMPOUND_STRING("Delivered")
             ),
     sub_quest(82,
             COMPOUND_STRING("Moon Stone"),
@@ -731,7 +731,7 @@ static const struct SubQuest sRockCollector_Sub[QUEST_ROCKCOLLECTOR_SUB_COUNT] =
             COMPOUND_STRING("Underground"),
             ITEM_MOON_STONE,
             QUEST_SPRITE_TYPE_ITEM,
-            COMPOUND_STRING("Delievered")
+            COMPOUND_STRING("Delivered")
             ),
 };
 
