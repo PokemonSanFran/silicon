@@ -12,12 +12,17 @@ const FLAG_HIDE_ELITE = FLAG_TEMP_4
 const FLAG_HIDE_BAIYA = FLAG_TEMP_1
 const FLAG_HIDE_ADAORA = FLAG_TEMP_3
 
-script LetsFinishThis_ObjectHide_Script{
-    setflag(FLAG_HIDE_POLICE)
-    setflag(FLAG_HIDE_ELITE)
-    setflag(FLAG_HIDE_BAIYA)
-    setflag(FLAG_HIDE_ADAORA)
-    return
+script LetsFinishThis_ObjectHide_Script
+{
+	setobjectflagfromlocalid(LOCALID_HALAI_TALA)
+	setobjectflagfromlocalid(LOCALID_HALAI_FRANK)
+	setobjectflagfromlocalid(LOCALID_HALAI_ELEANOR)
+	setobjectflagfromlocalid(LOCALID_HALAI_MAGNUS)
+	setobjectflagfromlocalid(LOCALID_HALAI_POLICE_A)
+	setobjectflagfromlocalid(LOCALID_HALAI_POLICE_B)
+	setobjectflagfromlocalid(LOCALID_HALAI_POLICE_C)
+	setobjectflagfromlocalid(LOCALID_HALAI_BAIYA)
+	setobjectflagfromlocalid(LOCALID_HALAI_ADAORA)
 }
 
 script LetsFinishThis_ObjectSetUp_Script {
