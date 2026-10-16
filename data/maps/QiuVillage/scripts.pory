@@ -15,6 +15,7 @@ mapscripts QiuVillage_MapScripts
         call(CutePokemon_Script_ControlMelissaQiuOutsideVisibility)
         call(Quest_ButOnlyIn_HideGunda_Script)
         call(Quest_Breaktheinternet_QiuVillageGuy_Visibility_Script)
+        call_if_gt(VAR_TOWER_RAID_STATE,0,ImIn_DestroyWall_Script)
     }
     MAP_SCRIPT_ON_LOAD
     {
