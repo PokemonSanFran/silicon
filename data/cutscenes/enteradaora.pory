@@ -153,7 +153,7 @@ script EnterAdaora_ExplainHope_Dialogue{
         msgbox(format("What is everybody lining up for?"),MSGBOX_DEFAULT,SPEAKER_ALICIA)
         msgbox(format("Hope."),MSGBOX_DEFAULT,SPEAKER_ADAORA_FIRST_INTRO)
         msgbox(format("Wait, hope?"),MSGBOX_DEFAULT,SPEAKER_ALICIA)
-        msgbox(format("Sorry, sometimes I get a little whimsical! One of the biggest challenges of being unhoused is access to food and sanitary supplies. My colleagues and I, set up around the city and hand out kits."),MSGBOX_DEFAULT,SPEAKER_ADAORA_FIRST_INTRO)
+        msgbox(format("Sorry, sometimes I get a little whimsical! One of the biggest challenges of being unhoused is access to food and sanitary supplies. My colleagues and I set up around the city and hand out kits."),MSGBOX_DEFAULT,SPEAKER_ADAORA_FIRST_INTRO)
         msgbox(format("Oh wow, that's amazing! But why are you in an alleyway?"),MSGBOX_DEFAULT,SPEAKER_ALICIA)
         msgbox(format("The city isn't super chill with us, for complicated reasons. We move around a lot and choose unconventional locations in order to avoid the cops. It sucks, but it works."),MSGBOX_DEFAULT,SPEAKER_ADAORA_FIRST_INTRO)
         msgbox(format("Wait, but you're helping people! Why isn't the city supporting you?"),MSGBOX_DEFAULT,SPEAKER_ALICIA)

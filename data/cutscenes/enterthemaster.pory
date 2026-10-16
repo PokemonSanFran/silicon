@@ -270,7 +270,7 @@ script EnterTheMaster_MegaEvolution_Dialogue
     }
     else
     {
-        msgbox(format("Your {STR_VAR_1} is capable of Mega Evolution, as long as its holding the correspond Mega Stone, the {STR_VAR_2}."),MSGBOX_DEFAULT,SPEAKER_CHARLOTTE)
+        msgbox(format("Your {STR_VAR_1} is capable of Mega Evolution, as long as its holding the corresponding Mega Stone, the {STR_VAR_2}."),MSGBOX_DEFAULT,SPEAKER_CHARLOTTE)
     }
 }
 

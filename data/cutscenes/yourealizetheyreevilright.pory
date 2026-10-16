@@ -386,7 +386,7 @@ script YouRealizeTheyreEvilRight_NoIdea_Dialogue {
             msgbox(format("What the hell was that? That dream was… insane. What the hell did I eat?"),,SPEAKER_ALICIA,TAIL_THOUGHT,EMOTE_SHOCK)
             msgbox(format("Was that real? I sided with SharpRise Capital and... made things worse? Yeah, that was worse. It was just a dream... but it felt so real!"),,SPEAKER_ALICIA,TAIL_THOUGHT,EMOTE_SHOCK)
             msgbox(format("That regret felt so real though. I was so disappointed. I was so wrong. It was all wrong!"),,SPEAKER_ALICIA,TAIL_THOUGHT,EMOTE_SAD)
-            msgbox(format("I remember I yelled at Baiya. I told him he couldn't hack it. I called them thugs. And I left. I was disguisting. Is he still there now?"),,SPEAKER_ALICIA,TAIL_THOUGHT)
+            msgbox(format("I remember I yelled at Baiya. I told him he couldn't hack it. I called them thugs. And I left. I was disgusting. Is he still there now?"),,SPEAKER_ALICIA,TAIL_THOUGHT)
 closemessage
     }else{
 
