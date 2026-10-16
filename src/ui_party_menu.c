@@ -267,6 +267,8 @@ static u8 GetBattleEntryLevelCap(void);
 static u8 DisplaySelectionWindow(u8);
 static void PartyActions_Draw(u32);
 static void PartyMoves_Draw(u32);
+static bool32 PartyMoves_IsPPBoostItem(void);
+static u32 PartyMoves_GetPPBoost(struct Pokemon *, u32);
 static s32 PartyList_ProcessInput(void (*)(u32));
 static void ShowMoveSelectWindow(u8);
 static void Task_HandleWhichMoveInput(u8);
@@ -514,7 +516,7 @@ static void PartySetup_Graphics(void)
     LoadUserWindowBorderGfxOnBg(PARTY_BG_TEXT, PARTY_TEXT_TILE_FRAME, BG_PLTT_ID(PARTY_BG_PAL_FRAME));
     LoadBgTiles(PARTY_BG_TEXT, sPartyMenu_Gfx_MenuFrame, sizeof(sPartyMenu_Gfx_MenuFrame), PARTY_TEXT_TILE_MENU_FRAME);
     LoadPalette(GetOverworldTextboxPalettePtr(), BG_PLTT_ID(PARTY_BG_PAL_DIALOG), PLTT_SIZE_4BPP);
-    LoadPalette(gStandardMenuPalette, BG_PLTT_ID(PARTY_BG_PAL_MENU_TEXT), PLTT_SIZE_4BPP);
+    LoadPalette(&sPartyMenu_Pal_Slot[BG_PLTT_ID(PARTY_TILES_PAL_MENU)], BG_PLTT_ID(PARTY_BG_PAL_MENU_TEXT), PLTT_SIZE_4BPP);
 }
 
 static void PartySetup_Windows(void)
@@ -2075,12 +2077,16 @@ static u8 DisplaySelectionWindow(u8 windowType)
     switch (windowType)
     {
     case SELECTWINDOW_MOVES:
-        SetWindowTemplateFields(&window, PARTY_BG_TEXT, DISPLAY_TILE_WIDTH - PARTY_MOVES_WIDTH, PARTY_FOOTER_TOP - PARTY_FRAME_SIZE - height, PARTY_MOVES_WIDTH, height, PARTY_BG_PAL_WALLPAPER, PARTY_TEXT_TILE_LIST);
+    {
+        u32 width = PARTY_MOVES_WIDTH + (PartyMoves_IsPPBoostItem() ? PARTY_MOVES_DELTA_WIDTH : 0);
+
+        SetWindowTemplateFields(&window, PARTY_BG_TEXT, DISPLAY_TILE_WIDTH - width, PARTY_FOOTER_TOP - PARTY_FRAME_SIZE - height, width, height, PARTY_BG_PAL_MENU_TEXT, PARTY_TEXT_TILE_LIST);
         break;
+    }
     case SELECTWINDOW_ACTIONS:
     case SELECTWINDOW_ITEM:
     default:
-        SetWindowTemplateFields(&window, PARTY_BG_TEXT, DISPLAY_TILE_WIDTH - PARTY_ACTIONS_WIDTH, PARTY_FOOTER_TOP - PARTY_FRAME_SIZE - height, PARTY_ACTIONS_WIDTH, height, PARTY_BG_PAL_WALLPAPER, PARTY_TEXT_TILE_LIST);
+        SetWindowTemplateFields(&window, PARTY_BG_TEXT, DISPLAY_TILE_WIDTH - PARTY_ACTIONS_WIDTH, PARTY_FOOTER_TOP - PARTY_FRAME_SIZE - height, PARTY_ACTIONS_WIDTH, height, PARTY_BG_PAL_MENU_TEXT, PARTY_TEXT_TILE_LIST);
         break;
     }
 
@@ -2110,9 +2116,9 @@ static void PartyActions_Draw(u32 windowId)
         u32 action = sPartyMenuDataPtr->actions[i];
 
         if (action >= MENU_FIELD_MOVES)
-            PartyList_PrintRow(windowId, i, PARTY_ACTIONS_WIDTH, COLORID_PARTY_MENU_HIGHLIGHT, GetMoveName(FieldMove_GetMoveId(action - MENU_FIELD_MOVES)));
+            PartyList_PrintRow(windowId, i, PARTY_ACTIONS_WIDTH, COLORID_MENU_FIELD_MOVE, GetMoveName(FieldMove_GetMoveId(action - MENU_FIELD_MOVES)));
         else
-            PartyList_PrintRow(windowId, i, PARTY_ACTIONS_WIDTH, COLORID_PARTY_MENU_BLACK, sCursorOptions[action].text);
+            PartyList_PrintRow(windowId, i, PARTY_ACTIONS_WIDTH, COLORID_MENU_WHITE, sCursorOptions[action].text);
     }
     CopyWindowToVram(windowId, COPYWIN_GFX);
 }
@@ -2120,8 +2126,7 @@ static void PartyActions_Draw(u32 windowId)
 static void PartyMoves_Draw(u32 windowId)
 {
     struct Pokemon *mon = &gParties[B_TRAINER_PLAYER][gPartyMenu.slotId];
-    enum ItemEffectType effectType = GetItemEffectType(gSpecialVar_ItemId);
-    bool32 showFullPP = (effectType == ITEM_EFFECT_PP_UP || effectType == ITEM_EFFECT_PP_MAX);
+    bool32 showFullPP = PartyMoves_IsPPBoostItem();
 
     PartyList_Clear(windowId, sPartyMenuDataPtr->actionCursor);
     for (u32 i = 0; i < sPartyMenuDataPtr->numActions; i++)
@@ -2129,26 +2134,63 @@ static void PartyMoves_Draw(u32 windowId)
         enum Move move = GetMonData(mon, MON_DATA_MOVE1 + i);
         const u8 *name = GetMoveName(move);
         u32 y = i * TILE_TO_PIXELS(PARTY_LIST_ROW_HEIGHT);
-        u32 pp = showFullPP ? CalculatePPWithBonus(move, GetMonData(mon, MON_DATA_PP_BONUSES), i) : GetMonData(mon, MON_DATA_PP1 + i);
+        u32 maxPP = CalculatePPWithBonus(move, GetMonData(mon, MON_DATA_PP_BONUSES), i);
+        u32 pp = showFullPP ? maxPP : GetMonData(mon, MON_DATA_PP1 + i);
         u8 text[4];
 
-        PartySlot_Print(windowId, GetFontIdToFit(name, PARTY_LIST_FONT, 0, PARTY_MOVES_NAME_WIDTH), PARTY_LIST_TEXT_X, y, COLORID_PARTY_MENU_BLACK, name);
+        PartySlot_Print(windowId, GetFontIdToFit(name, PARTY_LIST_FONT, 0, PARTY_MOVES_NAME_WIDTH), PARTY_LIST_TEXT_X, y, COLORID_MENU_WHITE, name);
         ConvertIntToDecimalStringN(text, pp, STR_CONV_MODE_LEFT_ALIGN, 3);
-        PartySlot_Print(windowId, PARTY_LIST_FONT, PARTY_MOVES_PP_RIGHT - GetStringWidth(PARTY_LIST_FONT, text, 0), y, COLORID_PARTY_MENU_BLACK, text);
+        enum PartyTextColors ppColor = showFullPP ? COLORID_MENU_WHITE : sPartyMenu_PPStateColors[GetCurrentPPToMaxPPState(pp, maxPP)];
+        PartySlot_Print(windowId, PARTY_LIST_FONT, PARTY_MOVES_PP_RIGHT - GetStringWidth(PARTY_LIST_FONT, text, 0), y, ppColor, text);
+        if (showFullPP && i == sPartyMenuDataPtr->actionCursor)
+        {
+            u32 boost = PartyMoves_GetPPBoost(mon, i);
+
+            text[0] = CHAR_PLUS;
+            ConvertIntToDecimalStringN(&text[1], boost, STR_CONV_MODE_LEFT_ALIGN, 2);
+            PartySlot_Print(windowId, PARTY_LIST_FONT, PARTY_MOVES_DELTA_X, y, boost != 0 ? COLORID_MENU_RED : COLORID_MENU_GREY, text);
+        }
     }
     CopyWindowToVram(windowId, COPYWIN_GFX);
+}
+
+static bool32 PartyMoves_IsPPBoostItem(void)
+{
+    enum ItemEffectType effectType = GetItemEffectType(gSpecialVar_ItemId);
+
+    return effectType == ITEM_EFFECT_PP_UP || effectType == ITEM_EFFECT_PP_MAX;
+}
+
+// mirrors ITEM4_PP_UP / ITEM5_PP_MAX in PokemonUseItemEffects
+static u32 PartyMoves_GetPPBoost(struct Pokemon *mon, u32 moveSlot)
+{
+    enum Move move = GetMonData(mon, MON_DATA_MOVE1 + moveSlot);
+    u32 ppBonuses = GetMonData(mon, MON_DATA_PP_BONUSES);
+    u32 ppUps = (ppBonuses & gPPUpGetMask[moveSlot]) >> (moveSlot * 2);
+    u32 maxPP = CalculatePPWithBonus(move, ppBonuses, moveSlot);
+    u32 newPPUps = (GetItemEffectType(gSpecialVar_ItemId) == ITEM_EFFECT_PP_MAX) ? 3 : ppUps + 1;
+
+    if (ppUps >= 3 || maxPP < 5)
+        return 0;
+
+    ppBonuses = (ppBonuses & gPPUpClearMask[moveSlot]) + gPPUpAddValues[moveSlot] * newPPUps;
+    return CalculatePPWithBonus(move, ppBonuses, moveSlot) - maxPP;
 }
 
 static void PartyList_Clear(u32 windowId, u32 cursor)
 {
     u32 y = cursor * TILE_TO_PIXELS(PARTY_LIST_ROW_HEIGHT);
-    s32 extra = TILE_TO_PIXELS(GetWindowAttribute(windowId, WINDOW_WIDTH)) - PARTY_LIST_CURSOR_WIDTH;
+    u32 windowWidth = TILE_TO_PIXELS(GetWindowAttribute(windowId, WINDOW_WIDTH));
 
-    FillWindowPixelBuffer(windowId, PIXEL_FILL(PARTY_WALLPAPER_COLOR_WHITE));
+    FillWindowPixelBuffer(windowId, PIXEL_FILL(PARTY_MENU_COLOR_WHITE));
     BlitBitmapToWindow(windowId, sPartyMenu_Gfx_ListCursor, 0, y, PARTY_LIST_CURSOR_WIDTH, PARTY_LIST_CURSOR_HEIGHT);
-    if (extra > 0)
-        BlitBitmapRectToWindow(windowId, sPartyMenu_Gfx_ListCursor, PARTY_LIST_CURSOR_WIDTH - extra, 0, PARTY_LIST_CURSOR_WIDTH, PARTY_LIST_CURSOR_HEIGHT,
-                               PARTY_LIST_CURSOR_WIDTH, y, extra, PARTY_LIST_CURSOR_HEIGHT);
+    for (u32 x = PARTY_LIST_CURSOR_WIDTH; x < windowWidth; x += PARTY_LIST_CURSOR_WIDTH - PARTY_LIST_CURSOR_CAP_WIDTH)
+    {
+        u32 width = min(windowWidth - x, PARTY_LIST_CURSOR_WIDTH - PARTY_LIST_CURSOR_CAP_WIDTH);
+
+        BlitBitmapRectToWindow(windowId, sPartyMenu_Gfx_ListCursor, PARTY_LIST_CURSOR_WIDTH - width, 0, PARTY_LIST_CURSOR_WIDTH, PARTY_LIST_CURSOR_HEIGHT,
+                               x, y, width, PARTY_LIST_CURSOR_HEIGHT);
+    }
 }
 
 static void PartyList_DrawFrame(u8 bg, u8 left, u8 top, u8 width, u8 height, u8 paletteNum)
@@ -3120,23 +3162,23 @@ static void DisplayLevelUpStatsPg2(u8 taskId)
 
 static void DrawLevelUpStats(u32 windowId, const u16 *stats, const u16 *statsAfter)
 {
-    FillWindowPixelBuffer(windowId, PIXEL_FILL(PARTY_WALLPAPER_COLOR_WHITE));
+    FillWindowPixelBuffer(windowId, PIXEL_FILL(PARTY_MENU_COLOR_WHITE));
     for (u32 i = 0; i < NUM_STATS; i++)
     {
         enum Stat stat = sPartyMenu_LevelUpStatOrder[i];
         u32 y = i * PARTY_LEVELUP_ROW_HEIGHT;
         u8 text[5];
 
-        PartySlot_Print(windowId, FONT_OUTLINED, PARTY_LEVELUP_LABEL_X, y, COLORID_PARTY_MENU_BLACK,
+        PartySlot_Print(windowId, FONT_OUTLINED, PARTY_LEVELUP_LABEL_X, y, COLORID_MENU_WHITE,
                         stat == STAT_HP ? COMPOUND_STRING("Max. HP") : gStatNamesTable[stat]);
         ConvertIntToDecimalStringN(text, stats[stat], STR_CONV_MODE_LEFT_ALIGN, 3);
         PartySlot_Print(windowId, FONT_OUTLINED, PARTY_LEVELUP_VALUE_RIGHT - GetStringWidth(FONT_OUTLINED, text, 0), y,
-                        COLORID_PARTY_MENU_BLACK, text);
+                        COLORID_MENU_WHITE, text);
         if (statsAfter != NULL)
         {
             text[0] = CHAR_PLUS;
             ConvertIntToDecimalStringN(&text[1], statsAfter[stat] - stats[stat], STR_CONV_MODE_LEFT_ALIGN, 3);
-            PartySlot_Print(windowId, FONT_OUTLINED, PARTY_LEVELUP_DELTA_X, y, COLORID_PARTY_MENU_RED, text);
+            PartySlot_Print(windowId, FONT_OUTLINED, PARTY_LEVELUP_DELTA_X, y, COLORID_MENU_RED, text);
         }
     }
 }
@@ -4019,8 +4061,8 @@ static void PartyMenuDisplayYesNoMenu(void)
 static void PartyYesNo_Draw(u32 windowId)
 {
     PartyList_Clear(windowId, sPartyMenuDataPtr->yesNoCursor);
-    PartyList_PrintRow(windowId, 0, PARTY_YESNO_WIDTH, COLORID_PARTY_MENU_BLACK, gText_Yes);
-    PartyList_PrintRow(windowId, 1, PARTY_YESNO_WIDTH, COLORID_PARTY_MENU_BLACK, gText_No);
+    PartyList_PrintRow(windowId, 0, PARTY_YESNO_WIDTH, COLORID_MENU_WHITE, gText_Yes);
+    PartyList_PrintRow(windowId, 1, PARTY_YESNO_WIDTH, COLORID_MENU_WHITE, gText_No);
     CopyWindowToVram(windowId, COPYWIN_GFX);
 }
 

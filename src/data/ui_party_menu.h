@@ -185,7 +185,7 @@ static const struct WindowTemplate sPartyMenu_WinTemplate_LevelUp =
     .tilemapTop = PARTY_LEVELUP_TOP,
     .width = PARTY_LEVELUP_WIDTH,
     .height = PARTY_LEVELUP_HEIGHT,
-    .paletteNum = PARTY_BG_PAL_WALLPAPER,
+    .paletteNum = PARTY_BG_PAL_MENU_TEXT,
     .baseBlock = PARTY_TEXT_TILE_LIST,
 };
 
@@ -196,7 +196,7 @@ static const struct WindowTemplate sPartyMenu_WinTemplate_YesNo =
     .tilemapTop = PARTY_YESNO_TOP,
     .width = PARTY_YESNO_WIDTH,
     .height = PARTY_YESNO_HEIGHT,
-    .paletteNum = PARTY_BG_PAL_WALLPAPER,
+    .paletteNum = PARTY_BG_PAL_MENU_TEXT,
     .baseBlock = PARTY_TEXT_TILE_YESNO,
 };
 
@@ -446,32 +446,34 @@ static const struct
 static const u8 sPartyMenu_TextColors[NUM_PARTY_TEXT_COLORS][3] =
 {
     // from pal 1 of tiles.png
-    [COLORID_PARTY_BLUE]            = {0, 5, 10},
-    [COLORID_PARTY_GREEN]           = {0, 5, 11},
-    [COLORID_PARTY_YELLOW]          = {0, 5, 12},
-    [COLORID_PARTY_RED]             = {0, 5, 13},
-    [COLORID_PARTY_GREY]            = {0, 5, 14},
-    [COLORID_PARTY_WHITE]           = {0, 5, 15},
+    [COLORID_PARTY_BLUE]            = {0, 15,  9},
+    [COLORID_PARTY_GREEN]           = {0, 15, 10},
+    [COLORID_PARTY_YELLOW]          = {0, 15, 11},
+    [COLORID_PARTY_RED]             = {0, 15, 12},
+    [COLORID_PARTY_GREY]            = {0, 15, 14},
+    [COLORID_PARTY_WHITE]           = {0, 15, 13},
     // from text.pal
     [COLORID_PARTY_HELPER]          = {0, 1,  0},
-    // from the wallpaper pal
-    [COLORID_PARTY_MENU_BLACK]      = {0, 3,  1},
-    [COLORID_PARTY_MENU_HIGHLIGHT]  = {0, 3,  5},
-    [COLORID_PARTY_MENU_RED]        = {0, 3, 14},
+    // from pal 3 of tiles.png
+    [COLORID_MENU_HIGHLIGHT]        = {0, 15, 5},
+    [COLORID_MENU_FIELD_MOVE]       = {0, 15, 2},
 };
+
+// indexed by GetCurrentPPToMaxPPState: yellow, orange, empty, normal
+static const u8 sPartyMenu_PPStateColors[] = {COLORID_MENU_YELLOW, COLORID_MENU_RED, COLORID_MENU_RED, COLORID_MENU_WHITE};
 
 // {frame, empty, fill} per HP_BAR_* level
 static const u8 sPartyMenu_HpBarColors[][3] =
 {
-    [HP_BAR_EMPTY]  = {4, 14, 13},
-    [HP_BAR_RED]    = {4, 14, 13},  // red
-    [HP_BAR_YELLOW] = {4, 14, 12},  // yellow
-    [HP_BAR_GREEN]  = {4, 14, 11},  // green
-    [HP_BAR_FULL]   = {4, 14, 11},  // green
+    [HP_BAR_EMPTY]  = {13, 14, 14},
+    [HP_BAR_RED]    = {13, 14, 12},  // red
+    [HP_BAR_YELLOW] = {13, 14, 11},  // yellow
+    [HP_BAR_GREEN]  = {13, 14, 10},  // green
+    [HP_BAR_FULL]   = {13, 14, 10},  // green
 };
 
 // {frame, to go, progress}
-static const u8 sPartyMenu_ExpBarColors[3] = {4, 14, 9};
+static const u8 sPartyMenu_ExpBarColors[3] = {13, 14, 8};
 
 static const struct CompressedSpriteSheet sPartyMenu_SpriteSheet_Cursor =
 {

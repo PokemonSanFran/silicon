@@ -3,8 +3,6 @@
 
 // pal 0 comes from the BG3 wallpaper
 #define PARTY_BG_PAL_WALLPAPER      0
-#define PARTY_WALLPAPER_COLOR_WHITE 1
-#define PARTY_WALLPAPER_COLOR_BLACK 3
 #define PARTY_BG_PAL_SLOT_MAIN      1
 #define PARTY_BG_PAL_SLOT_MARKED    2
 #define PARTY_BG_PAL_HELPER         3
@@ -17,6 +15,9 @@
 #define PARTY_BG_PAL_FRAME          13
 #define PARTY_BG_PAL_DIALOG         14
 #define PARTY_BG_PAL_MENU_TEXT      15
+// list / yes-no / level-up windows: pal 3 of tiles.png, text indices match pal 1
+#define PARTY_TILES_PAL_MENU        3
+#define PARTY_MENU_COLOR_WHITE      13
 
 // ================================================================
 // Text layer
@@ -40,12 +41,15 @@
 #define PARTY_LIST_TEXT_X           5
 #define PARTY_LIST_CURSOR_WIDTH     64
 #define PARTY_LIST_CURSOR_HEIGHT    16
+#define PARTY_LIST_CURSOR_CAP_WIDTH 2
 
 #define PARTY_ACTIONS_WIDTH         8
 #define PARTY_MOVES_WIDTH           14
 #define PARTY_MOVES_PP_RIGHT        (TILE_TO_PIXELS(PARTY_MOVES_WIDTH) - PARTY_LIST_TEXT_X)
 #define PARTY_MOVES_PP_WIDTH        14
 #define PARTY_MOVES_NAME_WIDTH      (PARTY_MOVES_PP_RIGHT - PARTY_MOVES_PP_WIDTH - PARTY_LIST_TEXT_X)
+#define PARTY_MOVES_DELTA_WIDTH     3
+#define PARTY_MOVES_DELTA_X         TILE_TO_PIXELS(PARTY_MOVES_WIDTH)
 
 #define PARTY_YESNO_OPTIONS         2
 #define PARTY_YESNO_WIDTH           4
@@ -338,11 +342,18 @@ enum PartyTextColors
     COLORID_PARTY_RED,
     COLORID_PARTY_GREY,
     COLORID_PARTY_HELPER,
-    COLORID_PARTY_MENU_BLACK,
-    COLORID_PARTY_MENU_HIGHLIGHT,
-    COLORID_PARTY_MENU_RED,
+    COLORID_MENU_HIGHLIGHT,
+    COLORID_MENU_FIELD_MOVE,
     NUM_PARTY_TEXT_COLORS
 };
+
+// menu windows (pal 3) share pal 1's text indices
+#define COLORID_MENU_WHITE  COLORID_PARTY_WHITE
+#define COLORID_MENU_BLUE   COLORID_PARTY_BLUE
+#define COLORID_MENU_GREEN  COLORID_PARTY_GREEN
+#define COLORID_MENU_YELLOW COLORID_PARTY_YELLOW
+#define COLORID_MENU_RED    COLORID_PARTY_RED
+#define COLORID_MENU_GREY   COLORID_PARTY_GREY
 
 enum PartyMenuCursorCorners
 {
