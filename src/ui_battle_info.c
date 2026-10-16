@@ -1144,9 +1144,23 @@ static void SpriteCB_BattleInfo_HPBar(struct Sprite *sprite)
 
     sprite->sPartySlotIdx = slotIdx;
     struct Pokemon *mon = BattleInfoHelper_GetCurrMon();
+    bool32 isEgg = GetMonData(mon,MON_DATA_IS_EGG);
+    u32 maxHp = 0, currHp = 0;
     sprite->invisible = !BattleInfoHelper_CanMonInfoBeShown();
     sprite->data[7] = BattleInfoHelper_CanShowHP();
-    MonSummary_InjectHpBar(sprite, GetMonData(mon, MON_DATA_HP, NULL), GetMonData(mon, MON_DATA_MAX_HP, NULL), GetMonData(mon,MON_DATA_IS_EGG));
+
+    if (isEgg == TRUE)
+    {
+        maxHp = gSpeciesInfo[GetMonData(mon,MON_DATA_SPECIES)].eggCycles;
+        currHp = maxHp - GetMonData(mon,MON_DATA_FRIENDSHIP);
+    }
+    else
+    {
+        currHp = GetMonData(mon, MON_DATA_HP);
+        maxHp = GetMonData(mon, MON_DATA_MAX_HP);
+    }
+
+    MonSummary_InjectHpBar(sprite, currHp, maxHp, GetMonData(mon,MON_DATA_IS_EGG));
     // bullshit workaround bc the injected hp colors keeps showing up
     if (FindTaskIdByFunc(Task_BattleInfo_WaitInput) == TASK_NONE)
         BlendPalettes(1 << (16 + sprite->oam.paletteNum), 16, RGB_BLACK);
@@ -1161,6 +1175,13 @@ static void SpriteCB_BattleInfo_TypeIcon(struct Sprite *sprite)
     }
 
     struct Pokemon *mon = BattleInfoHelper_GetCurrMon();
+    bool32 isEgg = GetMonData(mon,MON_DATA_IS_EGG);
+    if (isEgg)
+    {
+        sprite->invisible = isEgg;
+        return;
+    }
+
     enum Type type = GetSpeciesType(GetMonData(mon, MON_DATA_SPECIES, NULL), sprite->sTypeIcon_Index);
 
     if (sprite->sTypeIcon_Index == TYPE_SLOT_2)
@@ -1548,7 +1569,8 @@ static u8 BattleInfoSprite_CreateMonIcon(enum BattleTrainer trainer, u32 idx, s3
             break;
 
     struct Pokemon *mon = &gParties[trainer][idx];
-    enum Species species = GetMonData(mon, MON_DATA_SPECIES, NULL);
+    bool32 isEgg = GetMonData(mon,MON_DATA_IS_EGG);
+    enum Species species = (isEgg) ? SPECIES_EGG : GetMonData(mon, MON_DATA_SPECIES, NULL);
     if (!IsOnPlayerSide(battler)
      && !FlagGet(FLAG_SYS_APP_GOOGLE_GLASS_GET)
      && !gBattleStruct->partyState[trainer][idx].sentOut)
@@ -1703,7 +1725,8 @@ static void BattleInfoText_UpdateHeader(void)
         return;
 
     struct Pokemon *mon = BattleInfoHelper_GetCurrMon();
-    enum Species species = GetMonData(mon, MON_DATA_SPECIES, NULL);
+    bool32 isEgg = GetMonData(mon,MON_DATA_IS_EGG);
+    enum Species species = (isEgg) ? SPECIES_EGG : GetMonData(mon, MON_DATA_SPECIES, NULL);
     u32 fontId = FONT_OUTLINED;
     u32 letterSpacing = GetFontAttribute(fontId,FONTATTR_LINE_SPACING);
 
@@ -1716,7 +1739,7 @@ static void BattleInfoText_UpdateHeader(void)
 
     // gender
     GetMonNickname(mon, gStringVar1);
-    u32 gender = GetMonGender(mon);
+    u32 gender = (isEgg) ? MON_GENDERLESS : GetMonGender(mon);
     if ((species == SPECIES_NIDORAN_F || species == SPECIES_NIDORAN_M)
      && StringCompare(gStringVar1, GetSpeciesName(species)) == 0)
         gender = 100;
@@ -1769,7 +1792,7 @@ static void BattleInfoText_UpdateHeader(void)
 
     // ability
     enum Ability ability = GetSpeciesAbility(species, GetMonData(mon, MON_DATA_ABILITY_NUM, NULL));
-    strbuf = GetAbilityName(ability);
+    strbuf = (isEgg) ? GetAbilityName(ABILITY_NONE) : GetAbilityName(ability);
     fontId = GetFontIdToFit(strbuf, FONT_SMALL, letterSpacing, BI_HEADER_MAX_WIDTH);
 
     BattleInfoHelper_AddTextPrinter(
@@ -1783,6 +1806,8 @@ static void BattleInfoText_UpdateHeader(void)
     enum Item item = GetMonData(mon, MON_DATA_HELD_ITEM, NULL);
     if (item != ITEM_NONE)
         strbuf = GetItemName(item);
+    else if (isEgg)
+        strbuf = GetAbilityName(ABILITY_NONE);
     else
         strbuf = COMPOUND_STRING("No Held Item");
     fontId = GetFontIdToFit(strbuf, FONT_SMALL, letterSpacing, BI_HEADER_MAX_WIDTH);
