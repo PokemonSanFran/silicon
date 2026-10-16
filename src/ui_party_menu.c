@@ -316,6 +316,7 @@ static void PartyMenuTryEvolution(u8);
 static void DisplayMonNeedsToReplaceMove(u8);
 static void DisplayMonLearnedMove(u8, u16);
 static void DisplayLearnMoveMessage(const u8 *);
+static void DisplayLearnMoveMessageAndClose(u8, const u8 *);
 static void Task_LearnedMove(u8);
 static void Task_DoLearnedMoveFanfareAfterText(u8);
 static void Task_LearnNextMoveOrClosePartyMenu(u8);
@@ -3232,6 +3233,12 @@ static void DisplayLearnMoveMessage(const u8 *str)
     DisplayPartyMenuMessage(gStringVar4, TRUE);
 }
 
+static void DisplayLearnMoveMessageAndClose(u8 taskId, const u8 *str)
+{
+    DisplayLearnMoveMessage(str);
+    gTasks[taskId].func = Task_ReturnToChooseMonAfterText;
+}
+
 static void Task_LearnedMove(u8 taskId)
 {
     struct Pokemon *mon = &gParties[B_TRAINER_PLAYER][gPartyMenu.slotId];
@@ -3265,13 +3272,13 @@ static void Task_LearnNextMoveOrClosePartyMenu(u8 taskId)
 {
     if (IsFanfareTaskInactive() && ((JOY_NEW(A_BUTTON)) || (JOY_NEW(B_BUTTON))))
     {
-        if (gPartyMenu.data1 == 1)
+        if (gPartyMenu.learnMoveState == 1)
         {
             Task_TryLearningNextMove(taskId);
         }
         else
         {
-            if (gPartyMenu.data1 == 2) // never occurs
+            if (gPartyMenu.learnMoveState == 2) // never occurs
                 gSpecialVar_Result = TRUE;
             Task_ReturnToChooseMonAfterText(taskId);
         }
@@ -4528,7 +4535,40 @@ void ItemUseCB_PPUp(u8 taskId, TaskFunc task)
 
 void ItemUseCB_TMHM(u8 taskId, TaskFunc task)
 {
-    ItemUseCB_WontHaveEffect(taskId, task);
+    struct Pokemon *mon;
+    enum Item item = gSpecialVar_ItemId;
+    enum Move move = ItemIdToBattleMoveId(item);
+
+    gPartyMenu.data1 = move;
+    gPartyMenu.learnMoveState = 0;
+
+    PlaySE(SE_SELECT);
+    mon = &gParties[B_TRAINER_PLAYER][gPartyMenu.slotId];
+
+    GetMonNickname(mon, gStringVar1);
+    StringCopy(gStringVar2, GetMoveName(move));
+
+    switch (CanTeachMove(mon, move))
+    {
+    case CANNOT_LEARN_MOVE:
+        DisplayLearnMoveMessageAndClose(taskId, COMPOUND_STRING("{STR_VAR_1} cannot learn\n{STR_VAR_2}.{PAUSE_UNTIL_PRESS}"));
+        return;
+    case ALREADY_KNOWS_MOVE:
+        DisplayLearnMoveMessageAndClose(taskId, gText_PkmnAlreadyKnows);
+        return;
+    default:
+        break;
+    }
+
+    if (GiveMoveToMon(mon, move) != MON_HAS_MAX_MOVES)
+    {
+        gTasks[taskId].func = Task_LearnedMove;
+    }
+    else
+    {
+        DisplayLearnMoveMessage(gText_PkmnNeedsToReplaceMove);
+        gTasks[taskId].func = Task_ReplaceMoveYesNo;
+    }
 }
 
 void ItemUseCB_DynamaxCandy(u8 taskId, TaskFunc task)
