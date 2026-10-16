@@ -272,13 +272,6 @@
       "dest_warp_id": "WARP_ID_CULTHOUSE_TO_HODOU_RIGHT"
     },
     {
-      "x": 9,
-      "y": 26,
-      "elevation": 0,
-      "dest_map": "MAP_HODOU_CITY_PROUD_PANDA",
-      "dest_warp_id": "0"
-    },
-    {
       "warp_id": "WARP_ID_HODOU_TO_HERBAL",
       "x": 18,
       "y": 10,

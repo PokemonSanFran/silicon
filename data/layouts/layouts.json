@@ -11975,19 +11975,6 @@
       "layout_version": "emerald"
     },
     {
-      "id": "LAYOUT_HODOU_CITY_PROUD_PANDA",
-      "name": "HodouCity_Proudpanda_Layout",
-      "width": 20,
-      "height": 10,
-      "primary_tileset": "gTileset_Building",
-      "secondary_tileset": "gTileset_PokemonCenter",
-      "border_filepath": "data/layouts/HodouCity_ProudPanda/border.bin",
-      "blockdata_filepath": "data/layouts/HodouCity_ProudPanda/map.bin",
-      "border_height": 2,
-      "border_width": 2,
-      "layout_version": "emerald"
-    },
-    {
       "id": "LAYOUT_ROUTE_D",
       "name": "RouteD_Layout",
       "width": 80,
