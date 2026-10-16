@@ -1307,9 +1307,9 @@ const struct CustomizationData Customization_Options[NUM_CUSTOMIZATION_PARTS] =
     {
         .title = COMPOUND_STRING("Subject Pronoun"),
         .options = {
-            [PRONOUN_SUBJECT_THEY] = COMPOUND_STRING("They"),
-            [PRONOUN_SUBJECT_HE] = COMPOUND_STRING("He"),
-            [PRONOUN_SUBJECT_SHE] = COMPOUND_STRING("She"),
+            [PRONOUN_SUBJECT_THEY] = COMPOUND_STRING("they"),
+            [PRONOUN_SUBJECT_HE] = COMPOUND_STRING("he"),
+            [PRONOUN_SUBJECT_SHE] = COMPOUND_STRING("she"),
             [PRONOUN_SUBJECT_CUSTOM] = COMPOUND_STRING("Custom {A_BUTTON}"),
         },
         .numOptions = PRONOUN_SUBJECT_COUNT,
@@ -1318,9 +1318,9 @@ const struct CustomizationData Customization_Options[NUM_CUSTOMIZATION_PARTS] =
     {
         .title = COMPOUND_STRING("Object Pronoun"),
         .options = {
-            [PRONOUN_OBJECT_THEM] = COMPOUND_STRING("Them"),
-            [PRONOUN_OBJECT_HIM] = COMPOUND_STRING("Him"),
-            [PRONOUN_OBJECT_HER] = COMPOUND_STRING("Her"),
+            [PRONOUN_OBJECT_THEM] = COMPOUND_STRING("them"),
+            [PRONOUN_OBJECT_HIM] = COMPOUND_STRING("him"),
+            [PRONOUN_OBJECT_HER] = COMPOUND_STRING("her"),
             [PRONOUN_OBJECT_CUSTOM] = COMPOUND_STRING("Custom {A_BUTTON}"),
         },
         .numOptions = PRONOUN_OBJECT_COUNT,
@@ -1329,9 +1329,9 @@ const struct CustomizationData Customization_Options[NUM_CUSTOMIZATION_PARTS] =
     {
         .title = COMPOUND_STRING("Possessive Pronoun"),
         .options = {
-            [PRONOUN_POSSESSIVE_THEIR] = COMPOUND_STRING("Their"),
-            [PRONOUN_POSSESSIVE_HIS] = COMPOUND_STRING("His"),
-            [PRONOUN_POSSESSIVE_HER] = COMPOUND_STRING("Hers"),
+            [PRONOUN_POSSESSIVE_THEIR] = COMPOUND_STRING("theirs"),
+            [PRONOUN_POSSESSIVE_HIS] = COMPOUND_STRING("his"),
+            [PRONOUN_POSSESSIVE_HER] = COMPOUND_STRING("hers"),
             [PRONOUN_POSSESSIVE_CUSTOM] = COMPOUND_STRING("Custom {A_BUTTON}"),
         },
         .numOptions = PRONOUN_POSSESSIVE_COUNT,
