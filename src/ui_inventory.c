@@ -4329,27 +4329,33 @@ void ItemUseInBattle_PartyMenuChooseMove_New(u8 taskId)
 
 static void Task_ItemUseOnBattle(u8 taskId)
 {
-    // Safety check
     u16 itemId = gSpecialVar_ItemId = Inventory_GetItemIdCurrentlySelected();
     u16 type = GetItemType(itemId);
 
-    if (!GetItemBattleUsage(itemId))
-        return;
-
-    if (!CanUseBagItems(itemId) || !IsPlayerAllowedToUseHealingItems(itemId, FALSE, TRUE, FALSE))
+    if (!GetItemBattleUsage(itemId)
+            || !CanUseBagItems(itemId)
+            || !IsPlayerAllowedToUseHealingItems(itemId, FALSE, TRUE, FALSE))
     {
-        sMenuDataPtr->currentSelectMode = INVENTORY_MESSAGE_CANT_USE_ITEM;
+        Task_ReturnToMainInventoryMenu(taskId, INVENTORY_MESSAGE_CANT_USE_ITEM);
     }
-    else{
-        if (type == ITEM_USE_BAG_MENU)
-            ItemUseInBattle_NewBagMenu(taskId);
-        else if (type == ITEM_USE_PARTY_MENU)
-            ItemUseInBattle_PartyMenu_New(taskId);
-        else if (type == ITEM_USE_PARTY_MENU_MOVES)
-            ItemUseInBattle_PartyMenuChooseMove_New(taskId);
+    else if (type == ITEM_USE_BAG_MENU)
+    {
+        ItemUseInBattle_NewBagMenu(taskId);
+    }
+    else if (type == ITEM_USE_PARTY_MENU)
+    {
+        ItemUseInBattle_PartyMenu_New(taskId);
+    }
+    else if (type == ITEM_USE_PARTY_MENU_MOVES)
+    {
+        ItemUseInBattle_PartyMenuChooseMove_New(taskId);
+    }
+    else
+    {
+        Task_ReturnToMainInventoryMenu(taskId, INVENTORY_MESSAGE_CANT_USE_ITEM);
+    }
 
-        sMenuDataPtr->itemIdxPickMode = 0;
-    }
+    sMenuDataPtr->itemIdxPickMode = 0;
 }
 
 void CB2_ReturnToInventoryMenu(void)
