@@ -134,40 +134,39 @@ script YouRealizeTheyreEvilRight_InteractBaiya {
 
 script YouRealizeTheyreEvil_Ghost1_Battle_Script{
     trainerbattle_single(TRAINER_ARANTRAZ_GHOST_A, format("..."), format("..."), YouRealizeTheyreEvil_Ghost1_Battle_Script)
-        msgbox(format("While Arantraz was a prison, it was absolutely not a state of the art facility - rather, criminals deemed “dangerous” were thrown into Arantraz with little regard for health, rehabilitation, or even due process of law, with a preponderance of marginalized communities being locked away. "),MSGBOX_AUTOCLOSE,SPEAKER_GHOST)
-        goto(YouRealizeTheyreEvilRight_RemoveGhost)
+        msgbox(format("While Arantraz was a prison, it was absolutely not a state of the art facility - rather, criminals deemed “dangerous” were thrown into Arantraz with little regard for health, rehabilitation, or even due process of law, with a preponderance of marginalized communities being locked away. "),,SPEAKER_GHOST)
+        call(YouRealizeTheyreEvilRight_RemoveGhost)
         end
 }
 
 script YouRealizeTheyreEvil_Ghost2_Battle_Script{
     trainerbattle_single(TRAINER_ARANTRAZ_GHOST_B, format("..."), format("..."), YouRealizeTheyreEvil_Ghost2_Battle_Script)
-        msgbox(format("As the prison population grew, pressure mounted both internally and externally in order to demand a better quality of life for the prisoners.  The prison riot that started the occupation of the island came from an out of control guard killing an inmate for a minor violation. "),MSGBOX_AUTOCLOSE,SPEAKER_GHOST)
-        goto(YouRealizeTheyreEvilRight_RemoveGhost)
+        msgbox(format("As the prison population grew, pressure mounted both internally and externally in order to demand a better quality of life for the prisoners.  The prison riot that started the occupation of the island came from an out of control guard killing an inmate for a minor violation. "),,SPEAKER_GHOST)
+        call(YouRealizeTheyreEvilRight_RemoveGhost)
         end
 }
 
 script YouRealizeTheyreEvil_Ghost3_Battle_Script{
     trainerbattle_single(TRAINER_ARANTRAZ_GHOST_C, format("..."), format("..."), YouRealizeTheyreEvil_Ghost3_Battle_Script)
-        msgbox(format("The inmate was also a member of Resido's indigenous population, killed on the land that was stolen from their ancestors. The occupation called for the dissolution of the prison, transfer of prisoners to locations with humane conditions, and the return of the land back to its original owners."),MSGBOX_AUTOCLOSE,SPEAKER_GHOST)
-        goto(YouRealizeTheyreEvilRight_RemoveGhost)
+        msgbox(format("The inmate was also a member of Resido's indigenous population, killed on the land that was stolen from their ancestors. The occupation called for the dissolution of the prison, transfer of prisoners to locations with humane conditions, and the return of the land back to its original owners."),,SPEAKER_GHOST)
+        call(YouRealizeTheyreEvilRight_RemoveGhost)
         end
 }
 
 script YouRealizeTheyreEvil_Ghost4_Battle_Script{
     trainerbattle_single(TRAINER_ARANTRAZ_GHOST_D, format("..."), format("..."), YouRealizeTheyreEvil_Ghost4_Battle_Script)
-        msgbox(format("The protests gained national attention and seemed to be gathering interest, particularly with the help of Magnus's support, and pressure mounted on the government to comply. At the height of tension, an earthquake broke out, destroying a large portion of the prison and killing inmates and guards and effectively ending the occupation. "),MSGBOX_AUTOCLOSE,SPEAKER_GHOST)
-        goto(YouRealizeTheyreEvilRight_RemoveGhost)
+        msgbox(format("The protests gained national attention and seemed to be gathering interest, particularly with the help of Magnus's support, and pressure mounted on the government to comply. At the height of tension, an earthquake broke out, destroying a large portion of the prison and killing inmates and guards and effectively ending the occupation. "),,SPEAKER_GHOST)
+        call(YouRealizeTheyreEvilRight_RemoveGhost)
         end
 }
 
-script YouRealizeTheyreEvilRight_RemoveGhost {
-    lock
-        closemessage
-        fadescreenswapbuffers(FADE_TO_BLACK)
-        removeobject(VAR_LAST_TALKED)
-        fadescreenswapbuffers(FADE_FROM_BLACK)
-        release
-        end
+script YouRealizeTheyreEvilRight_RemoveGhost 
+{
+	closemessage
+	fadescreen(FADE_TO_BLACK)
+	removeobject(VAR_LAST_TALKED)
+	fadescreen(FADE_FROM_BLACK)
+	release
 }
 
 script YouRealizeTheyreEvil_ReleaseGarbodor_Script {

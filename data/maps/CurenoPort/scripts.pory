@@ -5,7 +5,6 @@ mapscripts CurenoPort_MapScripts {
 	}
     MAP_SCRIPT_ON_TRANSITION {
 		call(WarehouseRave_Script_StartOutsideMusic)
-        call(Quest_StolenTrade_HideObjectB_Script)
         call(HowDoWeGetHome_PostSceneObjectCleanUp_Script)
         call(HowDoWeGetHome_FerryFixed_Script)
         call(Quest_NeighborhoodCleanUp2_ObjectVisibility_Script)
