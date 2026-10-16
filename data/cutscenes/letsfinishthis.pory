@@ -72,7 +72,7 @@ script LetsFinishThis_Debrief_Dialogue
 
         msgbox(format("Even if we pull it off, will exposing them even matter? Or work?"),,SPEAKER_ADAORA)
 
-        msgbox(format("They came for the Kings and missed. This may be our only chance to fight back."),,SPEAKER_ELEANOR)
+        msgbox(format("They came for the kings and missed. This may be our only chance to fight back."),,SPEAKER_ELEANOR)
 
         msgbox(format("So, break into SharpRise Spire, force a confession from Lucrezia, broadcast it using their equipment and public sentiment will come crashing down. Right?"),,SPEAKER_BAIYA_TIDE)
 
