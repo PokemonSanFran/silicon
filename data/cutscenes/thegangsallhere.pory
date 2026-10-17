@@ -210,7 +210,7 @@ script TheGangsAllHere_GivePrestoApp_Script{
 }
 
 script TheGangsAllHere_GivePrestoApp_Dialogue{
-    msgbox(format("As a member of the SharpRise family, I've just granted you special access to Presto's drone delivery service. If you select that app while you're outdoors, you can have items delievered to you instantly! I'm excited to see how you use our tools."),,SPEAKER_LUCREZIA)
+    msgbox(format("As a member of the SharpRise family, I've just granted you special access to Presto's drone delivery service. If you select that app while you're outdoors, you can have items delivered to you instantly! I'm excited to see how you use our tools."),,SPEAKER_LUCREZIA)
 
     applymovement(OBJ_EVENT_ID_NPC_FOLLOWER,Common_Movement_FacePlayer)
     waitmovement(OBJ_EVENT_ID_NPC_FOLLOWER)

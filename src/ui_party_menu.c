@@ -68,6 +68,7 @@
 #include "window.h"
 #include "options_battle.h"
 #include "options_visual.h"
+#include "ui_battle_info.h"
 #include "ui_inventory.h"
 #include "ui_map_system.h"
 #include "ui_options_menu.h"
@@ -204,7 +205,7 @@ static void PartyView_DrawFooter(enum PartyMenuFooters);
 static void PartyMenuRemoveWindow(u8 *);
 static void HandleChooseMonSelection(u8, s8 *);
 static bool8 IsSelectedMonNotEgg(u8 *);
-static bool8 DoesSelectedMonKnowHM(u8 *);
+bool8 DoesSelectedMonKnowHM(u8 *);
 static void HandleChooseMonCancel(u8, s8 *);
 static bool8 DisplayCancelChooseMonYesNo(u8);
 static void Task_CancelChooseMonYesNo(u8);
@@ -814,7 +815,7 @@ static bool8 IsSelectedMonNotEgg(u8 *slotPtr)
     return TRUE;
 }
 
-static bool8 DoesSelectedMonKnowHM(u8 *slotPtr)
+bool8 DoesSelectedMonKnowHM(u8 *slotPtr)
 {
     if (B_CATCH_SWAP_CHECK_HMS == FALSE)
         return FALSE;
@@ -4730,12 +4731,8 @@ static u8 GetPartyLayoutFromBattleType(void)
 
 void OpenPartyMenuInBattle(u8 partyAction)
 {
-    if (partyAction == PARTY_ACTION_SEND_MON_TO_BOX)
-        InitPartyMenu(PARTY_MENU_TYPE_IN_BATTLE, GetPartyLayoutFromBattleType(), partyAction, FALSE, PARTY_MSG_CHOOSE_MON_FOR_BOX, Task_HandleChooseMonInput, ReshowBlankBattleScreenAfterMenu);
-    else
-        InitPartyMenu(PARTY_MENU_TYPE_IN_BATTLE, GetPartyLayoutFromBattleType(), partyAction, FALSE, PARTY_MSG_CHOOSE_MON, Task_HandleChooseMonInput, CB2_SetUpReshowBattleScreenAfterMenu);
-    ReshowBattleScreenDummy();
-    UpdatePartyToBattleOrder();
+    MainCallback cb = partyAction == PARTY_ACTION_SEND_MON_TO_BOX ? ReshowBlankBattleScreenAfterMenu : CB2_SetUpReshowBattleScreenAfterMenu;
+    BattleInfo_Init(partyAction, cb);
 }
 
 void ChooseMonForInBattleItem(void)

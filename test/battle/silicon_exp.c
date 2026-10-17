@@ -46,7 +46,7 @@ void _SiliconExpTest(const struct SiliconExpTestData *data, struct BattlePokemon
             u32 missingExp = targetFrontExp - finalExp;
             u32 expToGet = targetFrontExp - ExpTest_GetTargetExp(species, startLevel);
             u32 fracProgress = 100 * (finalExp - ExpTest_GetTargetExp(species, startLevel)) / expToGet;
-            Test_ExitWithResult(TEST_RESULT_FAIL, __LINE__, ":L%s:%d: Active Pokemon need %d more exp (0.%d to goal)", gTestRunnerState.test->filename, __LINE__, missingExp, fracProgress);
+            Test_ExitWithResult(TEST_RESULT_FAIL, __LINE__, "%s:%d: Active Pokemon need %d more exp (0.%d to goal)", gTestRunnerState.test->filename, __LINE__, missingExp, fracProgress);
         }
 
         if (finalExpBack < targetBackExp)
@@ -54,7 +54,7 @@ void _SiliconExpTest(const struct SiliconExpTestData *data, struct BattlePokemon
             u32 missingExp = targetBackExp - finalExpBack;
             u32 expToGet = targetBackExp - ExpTest_GetTargetExp(species, startLevel);
             u32 fracProgress = 100 * (finalExpBack - ExpTest_GetTargetExp(species, startLevel)) / expToGet;
-            Test_ExitWithResult(TEST_RESULT_FAIL, __LINE__, ":L%s:%d: Benched Pokemon need %d more exp (0.%d to goal of 0.%d of level %d to %d)", gTestRunnerState.test->filename, __LINE__, missingExp, fracProgress, benchPercent, startLevel, data->targetLevel);
+            Test_ExitWithResult(TEST_RESULT_FAIL, __LINE__, "%s:%d: Benched Pokemon need %d more exp (0.%d to goal of 0.%d of level %d to %d)", gTestRunnerState.test->filename, __LINE__, missingExp, fracProgress, benchPercent, startLevel, data->targetLevel);
         }
         ExpTest_ZeroData();
     }
@@ -93,7 +93,7 @@ static const struct SiliconExpTestData sBelenTrainers =
     },
 };
 
-static const struct SiliconExpTestData sKai_NewassholeappearsTrainers =
+static const struct SiliconExpTestData sBaiya_NewassholeappearsTrainers =
 {
     .startLevel = LEVEL_CAP_VALUE_0,
     .targetLevel = LEVEL_CAP_VALUE_1,
@@ -160,17 +160,28 @@ static const struct SiliconExpTestData sEmrys_GymTrainers =
         TRAINER_NONE
     },
 };
-/*
-static const struct SiliconExpTestData sKai_AssholeshomeTrainers =
+
+static const struct SiliconExpTestData sBaiya_AssholeshomeTrainers =
 {
     .startLevel = LEVEL_CAP_VALUE_4,
     .targetLevel = LEVEL_CAP_VALUE_5,
     .trainerIds =
     {
+        TRAINER_1BC45966,
+        TRAINER_1C2B088C,
+        TRAINER_1C6CA7F6,
+        TRAINER_1CBE4FB1,
+        TRAINER_DON_AND_MEL,
+        TRAINER_1CC4D5D6,
+        TRAINER_1D63E5A1,
+        TRAINER_1D7A6DED,
+        TRAINER_1D93B10D,
+        TRAINER_OLLY,
         TRAINER_NONE
     },
 };
-static const struct SiliconExpTestData sKauna_GymTrainers =
+/*
+static const struct SiliconExpTestData sPua_GymTrainers =
 {
     .startLevel = LEVEL_CAP_VALUE_5,
     .targetLevel = LEVEL_CAP_VALUE_6,
@@ -257,7 +268,7 @@ static const struct SiliconExpTestData sBd_GymTrainers =
     },
 };
 /*
-static const struct SiliconExpTestData sKai_Battle8Trainers =
+static const struct SiliconExpTestData sBaiya_Battle8Trainers =
 {
     .startLevel = LEVEL_CAP_VALUE_11,
     .targetLevel = LEVEL_CAP_VALUE_12,
@@ -275,7 +286,7 @@ static const struct SiliconExpTestData sAmi_GymTrainers =
         TRAINER_NONE
     },
 };
-static const struct SiliconExpTestData sKai_WhyareyouhelpingthemTrainers =
+static const struct SiliconExpTestData sBaiya_WhyareyouhelpingthemTrainers =
 {
     .startLevel = LEVEL_CAP_VALUE_13,
     .targetLevel = LEVEL_CAP_VALUE_15,
@@ -320,7 +331,7 @@ static const struct SiliconExpTestData sLeagueopponent4Trainers =
             TRAINER_NONE
         },
 };
-static const struct SiliconExpTestData sKai_FinalsTrainers =
+static const struct SiliconExpTestData sBaiya_FinalsTrainers =
 {
     .startLevel = LEVEL_CAP_VALUE_16,
     .targetLevel = LEVEL_CAP_VALUE_17,
@@ -329,7 +340,7 @@ static const struct SiliconExpTestData sKai_FinalsTrainers =
         TRAINER_NONE
     },
 };
-static const struct SiliconExpTestData sKai_LetsgrablunchTrainers =
+static const struct SiliconExpTestData sBaiya_LetsgrablunchTrainers =
 {
     .startLevel = LEVEL_CAP_VALUE_17,
     .targetLevel = LEVEL_CAP_VALUE_18,
@@ -347,7 +358,7 @@ static const struct SiliconExpTestData sImelda_RestorationTrainers =
         TRAINER_NONE
     },
 };
-static const struct SiliconExpTestData sKai_LetsburnthismotherdownTrainers =
+static const struct SiliconExpTestData sBaiya_LetsburnthismotherdownTrainers =
 {
     .startLevel = LEVEL_CAP_VALUE_19,
     .targetLevel = LEVEL_CAP_VALUE_20,
@@ -365,7 +376,7 @@ static const struct SiliconExpTestData sAdaora_HowdisappointingTrainers =
         TRAINER_NONE
     },
 };
-static const struct SiliconExpTestData sAlcmene_ManhuntTrainers =
+static const struct SiliconExpTestData sVigrim_ManhuntTrainers =
 {
     .startLevel = LEVEL_CAP_VALUE_19,
     .targetLevel = LEVEL_CAP_VALUE_20,
@@ -446,7 +457,7 @@ static const struct SiliconExpTestData sCharlotte_IminTrainers =
         TRAINER_NONE
     },
 };
-static const struct SiliconExpTestData sAdelaide_YoucantstopmeTrainers =
+static const struct SiliconExpTestData sLucrezia_YoucantstopmeTrainers =
 {
     .startLevel = LEVEL_CAP_VALUE_25,
     .targetLevel = LEVEL_CAP_VALUE_26,
@@ -455,7 +466,7 @@ static const struct SiliconExpTestData sAdelaide_YoucantstopmeTrainers =
         TRAINER_NONE
     },
 };
-static const struct SiliconExpTestData sAdelaide_WecanstopyouactuallyTrainers =
+static const struct SiliconExpTestData sLucrezia_WecanstopyouactuallyTrainers =
 {
     .startLevel = LEVEL_CAP_VALUE_25,
     .targetLevel = LEVEL_CAP_VALUE_26,
@@ -476,11 +487,11 @@ AI_SINGLE_BATTLE_TEST("Silicon Exp Test: Belen")
 
     SiliconExpTest(&sBelenTrainers, SILICON_MINIMUM_BENCH_LEVEL_PERCENT);
 }
-AI_SINGLE_BATTLE_TEST("Silicon Exp Test: Kai Newassholeappears")
+AI_SINGLE_BATTLE_TEST("Silicon Exp Test: Baiya Newassholeappears")
 {
     OptionsMenu_SetSavedOptions(BATTLE_SETTINGS,BATTLE_OPTIONS_EXP_MULTIPLIER,BATTLE_OPTION_MULTIPLIER_1);
 
-    SiliconExpTest(&sKai_NewassholeappearsTrainers, SILICON_MINIMUM_BENCH_LEVEL_PERCENT);
+    SiliconExpTest(&sBaiya_NewassholeappearsTrainers, SILICON_MINIMUM_BENCH_LEVEL_PERCENT);
 }
 
 AI_SINGLE_BATTLE_TEST("Silicon Exp Test: Shinzo Gym")
@@ -505,18 +516,19 @@ AI_SINGLE_BATTLE_TEST("Silicon Exp Test: Emrys Gym")
 
     SiliconExpTest(&sEmrys_GymTrainers, SILICON_MINIMUM_BENCH_LEVEL_PERCENT);
 }
-/*
-AI_SINGLE_BATTLE_TEST("Silicon Exp Test: Kai Assholeshome")
+
+AI_SINGLE_BATTLE_TEST("Silicon Exp Test: Baiya Assholeshome")
 {
     OptionsMenu_SetSavedOptions(BATTLE_SETTINGS,BATTLE_OPTIONS_EXP_MULTIPLIER,BATTLE_OPTION_MULTIPLIER_1);
 
-    SiliconExpTest(&sKai_AssholeshomeTrainers, SILICON_MINIMUM_BENCH_LEVEL_PERCENT);
+    SiliconExpTest(&sBaiya_AssholeshomeTrainers, SILICON_MINIMUM_BENCH_LEVEL_PERCENT);
 }
-AI_SINGLE_BATTLE_TEST("Silicon Exp Test: Kauna Gym")
+/*
+AI_SINGLE_BATTLE_TEST("Silicon Exp Test: Pua Gym")
 {
     OptionsMenu_SetSavedOptions(BATTLE_SETTINGS,BATTLE_OPTIONS_EXP_MULTIPLIER,BATTLE_OPTION_MULTIPLIER_1);
 
-    SiliconExpTest(&sKauna_GymTrainers, SILICON_MINIMUM_BENCH_LEVEL_PERCENT);
+    SiliconExpTest(&sPua_GymTrainers, SILICON_MINIMUM_BENCH_LEVEL_PERCENT);
 }*/
 AI_SINGLE_BATTLE_TEST("Silicon Exp Test: Tala")
 {
@@ -551,11 +563,11 @@ AI_SINGLE_BATTLE_TEST("Silicon Exp Test: BD Gym")
     SiliconExpTest(&sBd_GymTrainers, SILICON_MINIMUM_BENCH_LEVEL_PERCENT);
 }
 /*
-AI_SINGLE_BATTLE_TEST("Silicon Exp Test: Kai Battle8")
+AI_SINGLE_BATTLE_TEST("Silicon Exp Test: Baiya Battle8")
 {
     OptionsMenu_SetSavedOptions(BATTLE_SETTINGS,BATTLE_OPTIONS_EXP_MULTIPLIER,BATTLE_OPTION_MULTIPLIER_1);
 
-    SiliconExpTest(&sKai_Battle8Trainers, SILICON_MINIMUM_BENCH_LEVEL_PERCENT);
+    SiliconExpTest(&sBaiya_Battle8Trainers, SILICON_MINIMUM_BENCH_LEVEL_PERCENT);
 }
 AI_SINGLE_BATTLE_TEST("Silicon Exp Test: Ami Gym")
 {
@@ -563,11 +575,11 @@ AI_SINGLE_BATTLE_TEST("Silicon Exp Test: Ami Gym")
 
     SiliconExpTest(&sAmi_GymTrainers, SILICON_MINIMUM_BENCH_LEVEL_PERCENT);
 }
-AI_SINGLE_BATTLE_TEST("Silicon Exp Test: Kai Whyareyouhelpingthem")
+AI_SINGLE_BATTLE_TEST("Silicon Exp Test: Baiya Whyareyouhelpingthem")
 {
     OptionsMenu_SetSavedOptions(BATTLE_SETTINGS,BATTLE_OPTIONS_EXP_MULTIPLIER,BATTLE_OPTION_MULTIPLIER_1);
 
-    SiliconExpTest(&sKai_WhyareyouhelpingthemTrainers, SILICON_MINIMUM_BENCH_LEVEL_PERCENT);
+    SiliconExpTest(&sBaiya_WhyareyouhelpingthemTrainers, SILICON_MINIMUM_BENCH_LEVEL_PERCENT);
 }
 AI_SINGLE_BATTLE_TEST("Silicon Exp Test: Leagueopponent1")
 {
@@ -593,17 +605,17 @@ AI_SINGLE_BATTLE_TEST("Silicon Exp Test: Leagueopponent4")
 
     SiliconExpTest(&sLeagueopponent4Trainers, SILICON_MINIMUM_BENCH_LEVEL_PERCENT);
 }
-AI_SINGLE_BATTLE_TEST("Silicon Exp Test: Kai Finals")
+AI_SINGLE_BATTLE_TEST("Silicon Exp Test: Baiya Finals")
 {
     OptionsMenu_SetSavedOptions(BATTLE_SETTINGS,BATTLE_OPTIONS_EXP_MULTIPLIER,BATTLE_OPTION_MULTIPLIER_1);
 
-    SiliconExpTest(&sKai_FinalsTrainers, SILICON_MINIMUM_BENCH_LEVEL_PERCENT);
+    SiliconExpTest(&sBaiya_FinalsTrainers, SILICON_MINIMUM_BENCH_LEVEL_PERCENT);
 }
-AI_SINGLE_BATTLE_TEST("Silicon Exp Test: Kai Letsgrablunch")
+AI_SINGLE_BATTLE_TEST("Silicon Exp Test: Baiya Letsgrablunch")
 {
     OptionsMenu_SetSavedOptions(BATTLE_SETTINGS,BATTLE_OPTIONS_EXP_MULTIPLIER,BATTLE_OPTION_MULTIPLIER_1);
 
-    SiliconExpTest(&sKai_LetsgrablunchTrainers, SILICON_MINIMUM_BENCH_LEVEL_PERCENT);
+    SiliconExpTest(&sBaiya_LetsgrablunchTrainers, SILICON_MINIMUM_BENCH_LEVEL_PERCENT);
 }
 AI_SINGLE_BATTLE_TEST("Silicon Exp Test: Imelda Restoration")
 {
@@ -611,11 +623,11 @@ AI_SINGLE_BATTLE_TEST("Silicon Exp Test: Imelda Restoration")
 
     SiliconExpTest(&sImelda_RestorationTrainers, SILICON_MINIMUM_BENCH_LEVEL_PERCENT);
 }
-AI_SINGLE_BATTLE_TEST("Silicon Exp Test: Kai Letsburnthismotherdown")
+AI_SINGLE_BATTLE_TEST("Silicon Exp Test: Baiya Letsburnthismotherdown")
 {
     OptionsMenu_SetSavedOptions(BATTLE_SETTINGS,BATTLE_OPTIONS_EXP_MULTIPLIER,BATTLE_OPTION_MULTIPLIER_1);
 
-    SiliconExpTest(&sKai_LetsburnthismotherdownTrainers, SILICON_MINIMUM_BENCH_LEVEL_PERCENT);
+    SiliconExpTest(&sBaiya_LetsburnthismotherdownTrainers, SILICON_MINIMUM_BENCH_LEVEL_PERCENT);
 }
 AI_SINGLE_BATTLE_TEST("Silicon Exp Test: Adaora Howdisappointing")
 {
@@ -623,11 +635,11 @@ AI_SINGLE_BATTLE_TEST("Silicon Exp Test: Adaora Howdisappointing")
 
     SiliconExpTest(&sAdaora_HowdisappointingTrainers, SILICON_MINIMUM_BENCH_LEVEL_PERCENT);
 }
-AI_SINGLE_BATTLE_TEST("Silicon Exp Test: Alcmene Manhunt")
+AI_SINGLE_BATTLE_TEST("Silicon Exp Test: Vigrim Manhunt")
 {
     OptionsMenu_SetSavedOptions(BATTLE_SETTINGS,BATTLE_OPTIONS_EXP_MULTIPLIER,BATTLE_OPTION_MULTIPLIER_1);
 
-    SiliconExpTest(&sAlcmene_ManhuntTrainers, SILICON_MINIMUM_BENCH_LEVEL_PERCENT);
+    SiliconExpTest(&sVigrim_ManhuntTrainers, SILICON_MINIMUM_BENCH_LEVEL_PERCENT);
 }
 AI_SINGLE_BATTLE_TEST("Silicon Exp Test: Diantha")
 {
@@ -677,19 +689,30 @@ AI_SINGLE_BATTLE_TEST("Silicon Exp Test: Charlotte Imin")
 
     SiliconExpTest(&sCharlotte_IminTrainers, SILICON_MINIMUM_BENCH_LEVEL_PERCENT);
 }
-AI_SINGLE_BATTLE_TEST("Silicon Exp Test: Adelaide Youcantstopme")
+AI_SINGLE_BATTLE_TEST("Silicon Exp Test: Lucrezia Youcantstopme")
 {
     OptionsMenu_SetSavedOptions(BATTLE_SETTINGS,BATTLE_OPTIONS_EXP_MULTIPLIER,BATTLE_OPTION_MULTIPLIER_1);
 
-    SiliconExpTest(&sAdelaide_YoucantstopmeTrainers, SILICON_MINIMUM_BENCH_LEVEL_PERCENT);
+    SiliconExpTest(&sLucrezia_YoucantstopmeTrainers, SILICON_MINIMUM_BENCH_LEVEL_PERCENT);
 }
-AI_SINGLE_BATTLE_TEST("Silicon Exp Test: Adelaide Wecanstopyouactually")
+AI_SINGLE_BATTLE_TEST("Silicon Exp Test: Lucrezia Wecanstopyouactually")
 {
     OptionsMenu_SetSavedOptions(BATTLE_SETTINGS,BATTLE_OPTIONS_EXP_MULTIPLIER,BATTLE_OPTION_MULTIPLIER_1);
 
-    SiliconExpTest(&sAdelaide_WecanstopyouactuallyTrainers, SILICON_MINIMUM_BENCH_LEVEL_PERCENT);
+    SiliconExpTest(&sLucrezia_WecanstopyouactuallyTrainers, SILICON_MINIMUM_BENCH_LEVEL_PERCENT);
 }
 */
+
+bool8 ShouldReportNoPartyMons(u32 trainerId, enum DifficultyLevel difficulty)
+{
+    if (trainerId == TRAINER_NONE)
+        return FALSE;
+
+    if (difficulty != DIFFICULTY_NORMAL)
+        return FALSE;
+
+    return TRUE;
+}
 
 TEST("All Resido Mons have learnsets")
 {
@@ -704,7 +727,7 @@ TEST("All Resido Mons have learnsets")
 
         const u16 *teachables = GetSpeciesTeachableLearnset(monIndex);
         if (teachables[0] == MOVE_UNAVAILABLE || teachables[0] == MOVE_NONE)
-            Test_ExitWithResult(TEST_RESULT_FAIL, __LINE__, ":L%s:%d: %d | %s has no teachables moves!",gTestRunnerState.test->filename, __LINE__,monIndex,GetSpeciesName(monIndex));
+            Test_ExitWithResult(TEST_RESULT_FAIL, __LINE__, "%s:%d: %d | %s has no teachables moves!",gTestRunnerState.test->filename, __LINE__,monIndex,GetSpeciesName(monIndex));
     }
 }
 
@@ -723,7 +746,10 @@ TEST("All Resido Trainers have Pokemon in the Resido Dex")
 
             if (partySize == 0)
             {
-                continue;
+                if (ShouldReportNoPartyMons(trainerId,difficulty))
+                    Test_ExitWithResult(TEST_RESULT_FAIL, __LINE__, "%s:%d: %S (%d) has no mons.", gTestRunnerState.test->filename, __LINE__, GetTrainerNameFromId(trainerId), trainerId);
+                else
+                    continue;
             }
 
             const struct TrainerMon *party = trainer->party;
@@ -745,7 +771,7 @@ TEST("All Resido Trainers have Pokemon in the Resido Dex")
                 if (residoId != RESIDO_DEX_NONE && residoId != RESIDO_DEX_COUNT)
                     continue;
 
-                Test_ExitWithResult(TEST_RESULT_FAIL, __LINE__, ":L%s:%d: %S %S is not in Resido.", gTestRunnerState.test->filename, __LINE__, GetTrainerNameFromId(trainerId), GetSpeciesName(species));
+                Test_ExitWithResult(TEST_RESULT_FAIL, __LINE__, "%s:%d: %S %S is not in Resido.", gTestRunnerState.test->filename, __LINE__, GetTrainerNameFromId(trainerId), GetSpeciesName(species));
 
             }
         }
@@ -805,11 +831,11 @@ static u16 GetPreEvolution(u16 targetSpecies)
     return SPECIES_NONE;
 }
 
-TEST("All Resido Trainers do not have Game Move Errors")
+TEST("All Resido Trainers do not have Game Move / Ability Errors")
 {
-    for (u32 difficulty = 0; difficulty < DIFFICULTY_COUNT; difficulty++)
+    for (enum DifficultyLevel difficulty = 0; difficulty < DIFFICULTY_COUNT; difficulty++)
     {
-        for (u32 trainerId = 0; trainerId < TRAINERS_COUNT; trainerId++)
+        for (enum ResidoTrainerIds trainerId = 0; trainerId < TRAINERS_COUNT; trainerId++)
         {
             const struct Trainer *trainer = GetTrainerFromGame(trainerId, difficulty);
             if (!trainer || trainer->partySize == 0)
@@ -818,25 +844,44 @@ TEST("All Resido Trainers do not have Game Move Errors")
             for (u32 monIndex = 0; monIndex < trainer->partySize; monIndex++)
             {
                 const struct TrainerMon *mon = &trainer->party[monIndex];
-                u32 species = mon->species;
-                u32 level = mon->lvl;
+                enum Species species = mon->species;
 
                 if (!IsSpeciesEnabled(species))
                     continue;
 
+                u32 level = mon->lvl;
+                enum Ability ability = mon->ability;
+
+                const struct SpeciesInfo *speciesInfo = &gSpeciesInfo[species];
+                u32 abilityNum = 0;
+                u32 maxAbilityNum = ARRAY_COUNT(speciesInfo->abilities);
+                for (abilityNum = 0; abilityNum < maxAbilityNum; ++abilityNum)
+                {
+                    if (ability == ABILITY_NONE)
+                        break;
+
+                    if (speciesInfo->abilities[abilityNum] == ability)
+                        break;
+                }
+
+                if (abilityNum >= maxAbilityNum)
+                    Test_ExitWithResult(TEST_RESULT_FAIL, __LINE__,"%s:%d: %S's %S (#%d) has invalid ability %S.",gTestRunnerState.test->filename, __LINE__, GetTrainerNameFromId(trainerId),GetSpeciesName(species), monIndex, GetAbilityName(ability));
+
+                if (species == SPECIES_SMEARGLE)
+                    continue;
+
                 for (u32 moveIndex = 0; moveIndex < MAX_MON_MOVES; moveIndex++)
                 {
-                    u32 move = mon->moves[moveIndex];
+                    enum Move move = mon->moves[moveIndex];
                     if (move == MOVE_NONE)
                         continue;
 
                     u32 neededLevel = 0;
                     bool32 canLearn = FALSE;
-                    u32 currentSpecies = species;
+                    enum Species currentSpecies = species;
 
                     for (u32 depth = 0; depth < 5; depth++)
                     {
-
                         if (CanSpeciesLearnMove(currentSpecies, move, level, &neededLevel))
                         {
                             canLearn = TRUE;
@@ -853,11 +898,11 @@ TEST("All Resido Trainers do not have Game Move Errors")
 
                     if (neededLevel > 0)
                     {
-                        Test_ExitWithResult(TEST_RESULT_FAIL, __LINE__,":L%s:%d: %S's %S (#%d) has invalid move %S (Lvl %d < Req %d).",gTestRunnerState.test->filename, __LINE__, GetTrainerNameFromId(trainerId),GetSpeciesName(species), monIndex, GetMoveName(move), level, neededLevel);
+                        Test_ExitWithResult(TEST_RESULT_FAIL, __LINE__,"%s:%d: %S's %S (#%d) has invalid move %S (Lvl %d < Req %d).",gTestRunnerState.test->filename, __LINE__, GetTrainerNameFromId(trainerId),GetSpeciesName(species), monIndex, GetMoveName(move), level, neededLevel);
                     }
                     else
                     {
-                        Test_ExitWithResult(TEST_RESULT_FAIL, __LINE__,":L%s:%d: %S's %S (#%d) has invalid move %S.",gTestRunnerState.test->filename, __LINE__, GetTrainerNameFromId(trainerId),GetSpeciesName(species), monIndex, GetMoveName(move));
+                        Test_ExitWithResult(TEST_RESULT_FAIL, __LINE__,"%s:%d: %S's %S (#%d) has invalid move %S.",gTestRunnerState.test->filename, __LINE__, GetTrainerNameFromId(trainerId),GetSpeciesName(species), monIndex, GetMoveName(move));
                     }
                 }
             }

@@ -3,9 +3,10 @@ mapscripts Route2_MapScripts {
         call(Quest_NeighborhoodCleanUp_ObjectVisibility_Script)
         call(Quest_Ultrawormholeresearch_ControlTotemVisibility)
         call_if_subquest_complete(QUEST_BODEGABURNOUT,SUB_QUEST_15,Quest_Bodegaburnout_Script_Hide_BodegaburnoutRescueK)
+        call_if_gt(VAR_STORYLINE_STATE,STORY_COMPLETED_NAVAL_BASE,HeresHowThisIsGoingToGo_ConstructionCompleted_Script)
     }
     MAP_SCRIPT_ON_LOAD {
-        call(HeresHowThisIsGoingToGo_ConstructionCompleted_Script)
+        call_if_gt(VAR_STORYLINE_STATE,STORY_COMPLETED_NAVAL_BASE,HeresHowThisIsGoingToGo_ConstructionCompleted_Script)
         call_if_gt(VAR_CONSTRUCTION_STRIKE_STATE,0,TheStrikeStrikesBack_UnblockConstruction_Script)
     }
     MAP_SCRIPT_ON_RESUME{

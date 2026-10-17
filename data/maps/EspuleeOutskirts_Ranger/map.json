@@ -56,18 +56,20 @@
   ],
   "warp_events": [
     {
+      "warp_id": "WARP_ID_RANGER_STATION_TO_ESPULEE_OUTSKIRTS_RIGHT",
       "x": 2,
       "y": 4,
       "elevation": 0,
       "dest_map": "MAP_ESPULEE_OUTSKIRTS",
-      "dest_warp_id": "2"
+      "dest_warp_id": "WARP_ID_ESPULEE_OUTSKIRTS_TO_RANGER_STATION"
     },
     {
+      "warp_id": "WARP_ID_RANGER_STATION_TO_ESPULEE_OUTSKIRTS_LEFT",
       "x": 1,
       "y": 4,
       "elevation": 0,
       "dest_map": "MAP_ESPULEE_OUTSKIRTS",
-      "dest_warp_id": "2"
+      "dest_warp_id": "WARP_ID_ESPULEE_OUTSKIRTS_TO_RANGER_STATION"
     }
   ],
   "coord_events": [],

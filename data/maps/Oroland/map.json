@@ -182,14 +182,15 @@
       "y": 18,
       "elevation": 0,
       "dest_map": "MAP_OROLAND_POKEMON_CENTER_1F",
-      "dest_warp_id": "0"
+      "dest_warp_id": "WARP_ID_CENTER_TO_OROLAND_RIGHT"
     },
     {
+      "warp_id": "WARP_ID_OROLAND_TO_ROUTEB",
       "x": 11,
       "y": 30,
       "elevation": 0,
       "dest_map": "MAP_ROUTE_B",
-      "dest_warp_id": "1"
+      "dest_warp_id": "WARP_ID_ROUTEB_TO_OROLAND"
     },
     {
       "warp_id": "WARP_ID_OROLAND_TO_CHAPEL",

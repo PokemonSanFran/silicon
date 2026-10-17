@@ -1,11 +1,27 @@
 const FLAG_HIDE_ELEANOR = FLAG_TEMP_8
+const FLAG_HIDE_FRANK = FLAG_TEMP_5
 
-mapscripts Arantraz_MessHall_MapScripts {
-    MAP_SCRIPT_ON_TRANSITION {
+mapscripts Arantraz_MessHall_MapScripts 
+{
+    MAP_SCRIPT_ON_TRANSITION 
+	{
         call(YouRealizeTheyreEvilRight_HideGarbodor_Script)
-        call(Arantraz_MessHall_ObjectVisibility_Script)
+		call_if_eq(VAR_ARANTRAZ_STATE,0,YouRealizeTheyreEvilRight_HideBasement_Script)
+		call_if_eq(VAR_ARANTRAZ_STATE,FIRST_ARRIVED_ARANTRAZ,YouRealizeTheyreEvilRight_HideBasement_Script)
+		call_if_eq(VAR_ARANTRAZ_STATE,BATTLED_TALA,YouRealizeTheyreEvilRight_HideBasement_Script)
+		call_if_eq(VAR_ARANTRAZ_STATE,PRE_YOU_REALIZE_THEYRE_EVIL_RIGHT,YouRealizeTheyreEvilRight_Basement_SetUpObjects_Script)
+		call_if_eq(VAR_ARANTRAZ_STATE,POST_YOU_REALIZE_THEYRE_EVIL_RIGHT,LetsGettheBandBackTogether_HideObject_Script)
+		call_if_eq(VAR_ARANTRAZ_STATE,LAST_CHANCE_TRUE_TIMELINE_START,LetsGettheBandBackTogether_HideObject_Script)
+		call_if_eq(VAR_ARANTRAZ_STATE,START_TRUE_TIMELINE,YouRealizeTheyreEvilRight_HideBasement_Script)
+		call_if_eq(VAR_ARANTRAZ_STATE,PRE_SPEECHSPEECH,SpeechSpeechSpeech_MoveObject_Script)
+		call_if_eq(VAR_ARANTRAZ_STATE,POST_SPEECHSPEECH,SpeechSpeechSpeech_ProjectAssignment_ObjectSetUp_Script)
+		call(Arantraz_MessHall_Script_EleanorVisibility)
+		call(Arantraz_MessHall_Script_FrankVisibility)
+		call(Arantraz_MessHall_Script_TalaVisibility)
+		call(Arantraz_MessHall_Script_MagnusVisibility)
         call(Quest_Redomugging_Hide_Muggers_Script)
         call_if_quest_not_complete(QUEST_FREETHEINNOCENT,Quest_Freetheinnocent_Script_HideFindtheguiltyvictimB)
+        call_if_unset(FLAG_TIMELINE_TRUE,WallaceArmy_Script_HideWallacearmytidememberA)
     }
     MAP_SCRIPT_ON_FRAME_TABLE [
         VAR_ARANTRAZ_STATE, PRE_YOU_REALIZE_THEYRE_EVIL_RIGHT: YouRealizeTheyreEvilRight_PlayerArrived2F_Dialogue
@@ -14,35 +30,69 @@ mapscripts Arantraz_MessHall_MapScripts {
     ]
 }
 
-script Arantraz_MessHall_ObjectVisibility_Script{
-    switch(var(VAR_ARANTRAZ_STATE)){
-        case 0: call(YouRealizeTheyreEvilRight_HideBasement_Script)
-        case FIRST_ARRIVED_ARANTRAZ: call(YouRealizeTheyreEvilRight_HideBasement_Script)
-        case BATTLED_TALA: call(YouRealizeTheyreEvilRight_HideBasement_Script)
-        case PRE_YOU_REALIZE_THEYRE_EVIL_RIGHT: call(YouRealizeTheyreEvilRight_Basement_SetUpObjects_Script)
-        case POST_YOU_REALIZE_THEYRE_EVIL_RIGHT: call(LetsGettheBandBackTogether_HideObject_Script)
-        case LAST_CHANCE_TRUE_TIMELINE_START: call(LetsGettheBandBackTogether_HideObject_Script)
-        case START_TRUE_TIMELINE: call(YouRealizeTheyreEvilRight_HideBasement_Script)
-        case PRE_SPEECHSPEECH: call(SpeechSpeechSpeech_MoveObject_Script)
-        case POST_SPEECHSPEECH: call(SpeechSpeechSpeech_ProjectAssignment_ObjectSetUp_Script)
-    }
-    call(Arantraz_MessHall_Script_EleanorVisibility)
+script Arantraz_MessHall_ObjectVisibility_Script
+{
+}
+
+script Arantraz_MessHall_Script_HideFrank
+{
+		setobjectflagfromlocalid(LOCALID_ARANTRAZ_MESSHALL_FRANK)
+}
+
+script Arantraz_MessHall_Script_HideTala
+{
+		setobjectflagfromlocalid(LOCALID_ARANTRAZ_MESSHALL_TALA)
+}
+
+script Arantraz_MessHall_Script_HideMagnus
+{
+		setobjectflagfromlocalid(LOCALID_ARANTRAZ_MESSHALL_MAGNUS)
+}
+
+script Arantraz_MessHall_Script_HideEleanor
+{
+		setobjectflagfromlocalid(LOCALID_ARANTRAZ_MESSHALL_ELEANOR)
+}
+
+script Arantraz_MessHall_Script_HideFrankAfterStory
+{
+	call_if_gt(VAR_STORYLINE_STATE,STORY_PRE_EARTHQUAKE,Arantraz_MessHall_Script_HideFrank)
+}
+
+script Arantraz_MessHall_Script_HideTalaAfterStory
+{
+	call_if_gt(VAR_STORYLINE_STATE,STORY_PRE_EARTHQUAKE,Arantraz_MessHall_Script_HideTala)
+}
+
+script Arantraz_MessHall_Script_HideEleanorAfterStory
+{
+	call_if_gt(VAR_STORYLINE_STATE,STORY_PRE_EARTHQUAKE,Arantraz_MessHall_Script_HideEleanor)
+}
+
+script Arantraz_MessHall_Script_FrankVisibility
+{
+	call_if_quest_active(QUEST_PERSUASIVEPASSENGER,Arantraz_MessHall_Script_HideFrank)
+	call_if_quest_reward(QUEST_PERSUASIVEPASSENGER,Arantraz_MessHall_Script_HideFrank)
+	call_if_quest_complete(QUEST_PERSUASIVEPASSENGER,Arantraz_MessHall_Script_HideFrankAfterStory)
+}
+
+script Arantraz_MessHall_Script_TalaVisibility
+{
+	call_if_quest_active(QUEST_BREAKTHEINTERNET,Arantraz_MessHall_Script_HideTala)
+	call_if_quest_reward(QUEST_BREAKTHEINTERNET,Arantraz_MessHall_Script_HideTala)
+	call_if_quest_complete(QUEST_BREAKTHEINTERNET,Arantraz_MessHall_Script_HideTalaAfterStory)
 }
 
 script Arantraz_MessHall_Script_EleanorVisibility
 {
-    if (var(VAR_ARANTRAZ_STATE) < PRE_SPEECHSPEECH)
-    {
-        setflag(FLAG_HIDE_ELEANOR)
-        return
-    }
+	call_if_quest_active(QUEST_BODEGABURNOUT,Arantraz_MessHall_Script_HideEleanor)
+	call_if_quest_reward(QUEST_BODEGABURNOUT,Arantraz_MessHall_Script_HideEleanor)
+	call_if_quest_complete(QUEST_BODEGABURNOUT,Arantraz_MessHall_Script_HideEleanorAfterStory)
+}
 
-    questmenu(QUEST_MENU_CHECK_ACTIVE,QUEST_BODEGABURNOUT)
-    if (var(VAR_RESULT) == TRUE)
-    {
-        setflag(FLAG_HIDE_ELEANOR)
-        return
-    }
+script Arantraz_MessHall_Script_MagnusVisibility
+{
+	call_if_gt(VAR_STORYLINE_STATE,STORY_PRE_EARTHQUAKE,Arantraz_MessHall_Script_HideMagnus)
 }
 
 script Arantraz_MessHall_Baiya_Event_Script {

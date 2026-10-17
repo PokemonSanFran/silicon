@@ -4120,44 +4120,77 @@ void WaitSound(void){
 
 void ItemUseOutOfBattle_Repel_New(u8 taskId)
 {
-    u16 ItemId = gSpecialVar_ItemId;
-    u16 LastRepelUsed = VarGet(VAR_LAST_REPEL_LURE_USED);
-    u16 remainingSteps = VarGet(VAR_REPEL_STEP_COUNT);
-    bool8 isLure = FALSE;
-    bool8 lastItemWasLure = FALSE;
-    bool8 isUsable = TRUE;
+    enum Item isTryingToSpray = gSpecialVar_ItemId;
+    bool8 isTryingToUseLure = FALSE;
+    bool8 isTryingToUseRepel = FALSE;
 
-    switch(ItemId){
+    switch(isTryingToSpray)
+    {
+        default:
+            break;
         case ITEM_LURE:
         case ITEM_SUPER_LURE:
         case ITEM_MAX_LURE:
-            isLure = TRUE;
-        break;
+            isTryingToUseLure = TRUE;
+            break;
+        case ITEM_REPEL:
+        case ITEM_SUPER_REPEL:
+        case ITEM_MAX_REPEL:
+            isTryingToUseRepel = TRUE;
+            break;
     }
 
-    switch(LastRepelUsed){
+    enum Item lastSprayUsed = VarGet(VAR_LAST_REPEL_LURE_USED);
+    bool8 lastSprayWasLure = FALSE;
+    bool8 lastSprayWasRepel = FALSE;
+
+    switch(lastSprayUsed)
+    {
+        default:
+            break;
         case ITEM_LURE:
         case ITEM_SUPER_LURE:
         case ITEM_MAX_LURE:
-            lastItemWasLure = TRUE;
-        break;
+            lastSprayWasLure = TRUE;
+            break;
+        case ITEM_REPEL:
+        case ITEM_SUPER_REPEL:
+        case ITEM_MAX_REPEL:
+            lastSprayWasRepel = TRUE;
+            break;
     }
 
-    if(remainingSteps != 0 && isLure != lastItemWasLure)
-        isUsable = FALSE;
+    u16 remainingSteps = lastSprayWasLure ? LURE_STEP_COUNT : REPEL_STEP_COUNT;
+    bool32 isUsable = TRUE;
+
+    if (remainingSteps != 0)
+    {
+        if((isTryingToUseLure == TRUE) && (lastSprayWasLure == TRUE))
+            isUsable = FALSE;
+
+        if((isTryingToUseRepel == TRUE) && (lastSprayWasRepel == TRUE))
+            isUsable = FALSE;
+    }
+
     WaitSound();
 
-    if (isUsable){
-        u16 steps = GetItemHoldEffectParam(gSpecialVar_ItemId) | REPEL_LURE_MASK;
-        remainingSteps += steps;
-        PlaySE(SE_REPEL);
-        VarSet(VAR_LAST_REPEL_LURE_USED, ItemId);
-        VarSet(VAR_REPEL_STEP_COUNT, remainingSteps);
-        WaitSound();
-        Task_ReturnToMainInventoryMenu(taskId, INVENTORY_MESSAGE_USED_ITEM);
-    }
-    else
+    if (isUsable == FALSE)
+    {
         Task_ReturnToMainInventoryMenu(taskId, INVENTORY_MESSAGE_CANT_USE_ITEM);
+        return;
+    }
+
+    u16 steps = 0;
+    if (isTryingToUseLure)
+        steps = (GetItemHoldEffectParam(gSpecialVar_ItemId) | REPEL_LURE_MASK);
+    else 
+        steps = GetItemHoldEffectParam(gSpecialVar_ItemId);
+
+    PlaySE(SE_REPEL);
+    VarSet(VAR_LAST_REPEL_LURE_USED, isTryingToSpray);
+    VarSet(VAR_REPEL_STEP_COUNT, steps);
+    WaitSound();
+    Task_ReturnToMainInventoryMenu(taskId, INVENTORY_MESSAGE_USED_ITEM);
 }
 
 static bool8 CanUseSpecificItem(u16 item){
@@ -4296,27 +4329,33 @@ void ItemUseInBattle_PartyMenuChooseMove_New(u8 taskId)
 
 static void Task_ItemUseOnBattle(u8 taskId)
 {
-    // Safety check
     u16 itemId = gSpecialVar_ItemId = Inventory_GetItemIdCurrentlySelected();
     u16 type = GetItemType(itemId);
 
-    if (!GetItemBattleUsage(itemId))
-        return;
-
-    if (!CanUseBagItems(itemId) || !IsPlayerAllowedToUseHealingItems(itemId, FALSE, TRUE, FALSE))
+    if (!GetItemBattleUsage(itemId)
+            || !CanUseBagItems(itemId)
+            || !IsPlayerAllowedToUseHealingItems(itemId, FALSE, TRUE, FALSE))
     {
-        sMenuDataPtr->currentSelectMode = INVENTORY_MESSAGE_CANT_USE_ITEM;
+        Task_ReturnToMainInventoryMenu(taskId, INVENTORY_MESSAGE_CANT_USE_ITEM);
     }
-    else{
-        if (type == ITEM_USE_BAG_MENU)
-            ItemUseInBattle_NewBagMenu(taskId);
-        else if (type == ITEM_USE_PARTY_MENU)
-            ItemUseInBattle_PartyMenu_New(taskId);
-        else if (type == ITEM_USE_PARTY_MENU_MOVES)
-            ItemUseInBattle_PartyMenuChooseMove_New(taskId);
+    else if (type == ITEM_USE_BAG_MENU)
+    {
+        ItemUseInBattle_NewBagMenu(taskId);
+    }
+    else if (type == ITEM_USE_PARTY_MENU)
+    {
+        ItemUseInBattle_PartyMenu_New(taskId);
+    }
+    else if (type == ITEM_USE_PARTY_MENU_MOVES)
+    {
+        ItemUseInBattle_PartyMenuChooseMove_New(taskId);
+    }
+    else
+    {
+        Task_ReturnToMainInventoryMenu(taskId, INVENTORY_MESSAGE_CANT_USE_ITEM);
+    }
 
-        sMenuDataPtr->itemIdxPickMode = 0;
-    }
+    sMenuDataPtr->itemIdxPickMode = 0;
 }
 
 void CB2_ReturnToInventoryMenu(void)

@@ -15,6 +15,7 @@
   "connections": null,
   "object_events": [
     {
+      "local_id": "LOCALID_ARANTRAZ_HOSPITAL_GHOST_A",
       "graphics_id": "OBJ_EVENT_GFX_LINK_RECEPTIONIST",
       "x": 2,
       "y": 5,
@@ -25,9 +26,10 @@
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
       "script": "YouRealizeTheyreEvil_Ghost1_Battle_Script",
-      "flag": "0x608"
+      "flag": "TRAINER_FLAGS_START+TRAINER_ARANTRAZ_GHOST_A"
     },
     {
+      "local_id": "LOCALID_ARANTRAZ_HOSPITAL_GHOST_B",
       "graphics_id": "OBJ_EVENT_GFX_LITTLE_BOY_3",
       "x": 10,
       "y": 15,
@@ -38,9 +40,10 @@
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
       "script": "YouRealizeTheyreEvil_Ghost2_Battle_Script",
-      "flag": "0x690"
+      "flag": "TRAINER_FLAGS_START+TRAINER_ARANTRAZ_GHOST_B"
     },
     {
+      "local_id": "LOCALID_ARANTRAZ_HOSPITAL_GHOST_C",
       "graphics_id": "OBJ_EVENT_GFX_SCHOOL_KID_M",
       "x": 18,
       "y": 2,
@@ -51,9 +54,10 @@
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
       "script": "YouRealizeTheyreEvil_Ghost3_Battle_Script",
-      "flag": "TRAINER_FLAGS_START+TRAINER_TASHA"
+      "flag": "TRAINER_FLAGS_START+TRAINER_ARANTRAZ_GHOST_C"
     },
     {
+      "local_id": "LOCALID_ARANTRAZ_HOSPITAL_GHOST_D",
       "graphics_id": "OBJ_EVENT_GFX_EXPERT_M",
       "x": 10,
       "y": 10,
@@ -64,7 +68,7 @@
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
       "script": "YouRealizeTheyreEvil_Ghost4_Battle_Script",
-      "flag": "0x975"
+      "flag": "TRAINER_FLAGS_START+TRAINER_ARANTRAZ_GHOST_D"
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_BAIYA",
@@ -76,7 +80,7 @@
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "Arantraz_Hospital_Charlotte_Event_Script",
+      "script": "LetsBurnThisMotherDown_StartBattle_Script",
       "flag": "FLAG_TEMP_5"
     },
     {

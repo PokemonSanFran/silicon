@@ -15,6 +15,7 @@
   "connections": null,
   "object_events": [
     {
+      "local_id": "LOCALID_ARANTRAZ_MESSHALL_BAIYA",
       "graphics_id": "OBJ_EVENT_GFX_BAIYA",
       "x": 4,
       "y": 12,
@@ -28,6 +29,7 @@
       "flag": "FLAG_TEMP_1"
     },
     {
+      "local_id": "LOCALID_ARANTRAZ_MESSHALL_MAGNUS",
       "graphics_id": "OBJ_EVENT_GFX_MAGNUS",
       "x": 5,
       "y": 12,
@@ -41,6 +43,7 @@
       "flag": "FLAG_TEMP_2"
     },
     {
+      "local_id": "LOCALID_ARANTRAZ_MESSHALL_TALA",
       "graphics_id": "OBJ_EVENT_GFX_TALA",
       "x": 5,
       "y": 13,
@@ -51,9 +54,10 @@
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
       "script": "Arantraz_MessHall_Tala_Event_Script",
-      "flag": "FLAG_TEMP_2"
+      "flag": "FLAG_TEMP_B"
     },
     {
+      "local_id": "LOCALID_ARANTRAZ_MESSHALL_KAI_POKEMON",
       "graphics_id": "OBJ_EVENT_GFX_SPECIES_SHINY(GARBODOR)",
       "x": 4,
       "y": 12,
@@ -67,7 +71,7 @@
       "flag": "FLAG_TEMP_4"
     },
     {
-      "local_id": "LOCALID_ARANTRAZ_ELEANOR",
+      "local_id": "LOCALID_ARANTRAZ_MESSHALL_ELEANOR",
       "graphics_id": "OBJ_EVENT_GFX_ELEANOR",
       "x": 9,
       "y": 3,
@@ -81,6 +85,7 @@
       "flag": "FLAG_TEMP_8"
     },
     {
+      "local_id": "LOCALID_ARANTRAZ_MESSHALL_FRANK",
       "graphics_id": "OBJ_EVENT_GFX_FRANK",
       "x": 10,
       "y": 3,
@@ -94,6 +99,7 @@
       "flag": "FLAG_TEMP_5"
     },
     {
+      "local_id": "LOCALID_ARANTRAZ_MESSHALL_VIGRIM",
       "graphics_id": "OBJ_EVENT_GFX_VIGRIM",
       "x": 9,
       "y": 6,
@@ -107,6 +113,7 @@
       "flag": "FLAG_TEMP_6"
     },
     {
+      "local_id": "LOCALID_ARANTRAZ_MESSHALL_ADAORA",
       "graphics_id": "OBJ_EVENT_GFX_ADAORA",
       "x": 10,
       "y": 6,
@@ -160,7 +167,8 @@
       "flag": "FLAG_TEMP_7"
     },
     {
-      "graphics_id": "OBJ_EVENT_GFX_COMRADE_4",
+      "local_id": "LOCALID_WALLACEARMYTIDEMEMBERA",
+      "graphics_id": "OBJ_EVENT_QUEST_WALLACEARMY_TIDE_A",
       "x": 8,
       "y": 9,
       "elevation": 3,
@@ -169,7 +177,7 @@
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "NULL",
+      "script": "WallaceArmy_Script_InteractWallacearmytidememberA",
       "flag": "FLAG_TEMP_7"
     },
     {

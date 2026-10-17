@@ -11,7 +11,7 @@ script NewAssholeAppears_WalkToPlayer_Script {
     waitmovement(LOCALID_ROUTE10_BAIYA)
     call(NewAssholeAppears_Script_MovePlayerAndBaiyaIntoPosition)
     waitse
-    goto(BaiyaAlpha_Event_Script)
+	goto(NewAssholeAppears_Intro_Dialogue)
 }
 
 script NewAssholeAppears_Script_MovePlayerAndBaiyaIntoPosition
@@ -35,6 +35,9 @@ script NewAssholeAppears_Script_MovePlayerAndBaiyaIntoPosition
 
 script BaiyaAlpha_Event_Script
 {
+	lock
+	faceplayer
+    playbgm(MUS_ENCOUNTER_CHAMPION,TRUE)
     switch(var(VAR_ROUTE10_STATE)) 
 	{
         case HAS_NOT_MET_BAIYA: goto(NewAssholeAppears_Intro_Dialogue)
@@ -46,7 +49,8 @@ script NewAssholeAppears_Intro_Dialogue {
     setvar(VAR_ROUTE10_STATE,SAVED_BEFORE_BAIYA_ROUTE10)
     msgbox(format("You look familiar. You flew here to do the SharpRise Capital League Challenge, right?"),,SPEAKER_BAIYA)
     if (var(VAR_SHARPRISESPIRE_CONFERENCE_STATE) > DEFEATED_THIRD_LEADER){
-        msgbox(format("Yeah, you had some weird rant in Perlacia City the other day. I'm {PLAYER}, and yes, I'm doing the challenge."),,SPEAKER_ALICIA)
+		buffermapname(STR_VAR_1,MAP_PERLACIA_CITY)
+        msgbox(format("Yeah, I remember your some weird rant in {STR_VAR_1}... I'm {PLAYER}, and yes, I'm doing the challenge."),,SPEAKER_ALICIA)
     }else{
         msgbox(format("Yeah! Just started not too long ago. Name's {PLAYER}."),,SPEAKER_ALICIA)
     }
@@ -62,17 +66,14 @@ script NewAssholeAppears_BadgeJudge_Dialogue {
         case 1: msgbox(format("...yeah I thought I recognized you. Guess you transplants aren't all a total joke!"),,SPEAKER_BAIYA)
         default: msgbox(format("Yeah, I heard about your wins from the guys. The colonizers are really getting a head start, huh?"),,SPEAKER_BAIYA)
     }
-
     msgbox(format("Woah, what the hell is your problem?"),,SPEAKER_ALICIA)
-
-    lockall
+	closemessage
     startmenu_savescreen
     goto(NewAssholeAppears_StartBattle_Script)
 }
 
 script NewAssholeAppears_StartBattle_Script{
-    lockall
-    faceplayer
+	lock
     msgbox(format("Go mind your business in your own region."),,SPEAKER_BAIYA)
     closemessage
     trainerbattle_no_intro(TRAINER_BAIYA_NEWASSHOLEAPPEARS,format("...you're tough."))

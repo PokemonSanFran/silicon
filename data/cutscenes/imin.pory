@@ -459,7 +459,7 @@ script ImIn_OfficeReveal_Dialogue
     msgbox(format("Wait, trash? Did you hear what these people did to {STR_VAR_1}?"),MSGBOX_DEFAULT,SPEAKER_ALICIA)
     msgbox(format("The Tide was destroying this region with their idiocy. We wiped ‘em out. And you decided to help them? After everything SharpRise Capital did for you?"),,SPEAKER_CHARLOTTE_SHARPRISE)
     msgbox(format("So you just don't care that you work for murderers? What is wrong with you?"),MSGBOX_DEFAULT,SPEAKER_ALICIA)
-    msgbox(format("All this helping people shit is nice and all, but I came here to the best. I don't care to get bogged down in all your allegations and melodrama. If I've done something wrong, I'll wrestle with it AFTER I reach the top. I'll donate to a homeless shelter or something."),,SPEAKER_CHARLOTTE_SHARPRISE)
+    msgbox(format("All this helping people shit is nice and all, but I came here to be the best. I don't care to get bogged down in all your allegations and melodrama. If I've done something wrong, I'll wrestle with it AFTER I reach the top. I'll donate to a homeless shelter or something."),,SPEAKER_CHARLOTTE_SHARPRISE)
     msgbox(format("You're the worst…Daddy won't be able to buy you your way out of this one."),MSGBOX_DEFAULT,SPEAKER_ALICIA)
     closemessage
 

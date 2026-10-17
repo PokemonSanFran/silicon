@@ -121,6 +121,8 @@ enum MonSummaryHpBarColors
 #define sTileTag        data[0]
 #define sPaletteTag     data[1]
 
+#define sHideHPText     data[7]
+
 enum MonSummaryInfosSprites
 {
     SUMMARY_INFOS_SPRITE_HELD_ITEM,
@@ -416,10 +418,9 @@ struct MonSummary
 {
     enum Species species;
     u8 isShiny:1;
-    u8 abilityNum:1;
+    u8 abilityNum:2;
     u8 markings:4;
     u8 isEgg:1;
-    u8 padding:1;
     u8 level;
     u8 ailment;
     metloc_u16_t metLocation;
