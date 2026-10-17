@@ -98,6 +98,9 @@
 #define PARTY_HELD_OFFSET_X     1
 #define PARTY_HELD_OFFSET_Y     1
 
+// lifted sprite y offset, in pixels
+#define PARTY_HELD_SPRITE_OFFSET_Y  4
+
 // sPartyMenu_SlotLayout
 #define PARTY_SLOT_NICKNAME_X   32
 #define PARTY_SLOT_NICKNAME_Y   0
@@ -246,6 +249,20 @@ enum PartyMenuWindows
     PARTY_WIN_HEADER,
     PARTY_WIN_FOOTER,
     NUM_PARTY_FIXED_WINDOWS
+};
+
+enum PartyMenuFooters
+{
+    PARTY_FOOTER_DEFAULT,
+    PARTY_FOOTER_DEFAULT_NO_SWITCH,
+    PARTY_FOOTER_CHOOSE_HALF,
+    PARTY_FOOTER_CHOOSE,
+    PARTY_FOOTER_CHOOSE_NO_CANCEL,
+    PARTY_FOOTER_SWITCH,
+    PARTY_FOOTER_TARGET,
+    PARTY_FOOTER_LIST,
+    PARTY_FOOTER_SPINNER,
+    NUM_PARTY_FOOTERS
 };
 
 enum PartyMenuDynamicWindows

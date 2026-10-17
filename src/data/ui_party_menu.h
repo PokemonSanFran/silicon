@@ -238,12 +238,12 @@ static const u8 *const sPartyMenu_HeaderMessages[] =
     [PARTY_MSG_CHOOSE_MON]             = COMPOUND_STRING("Choose a Pokémon."),
     [PARTY_MSG_CHOOSE_MON_OR_CANCEL]   = COMPOUND_STRING("Choose a Pokémon or cancel."),
     [PARTY_MSG_CHOOSE_MON_AND_CONFIRM] = COMPOUND_STRING("Choose a Pokémon and confirm."),
-    [PARTY_MSG_MOVE_TO_WHERE]          = gText_MoveToWhere,
-    [PARTY_MSG_TEACH_WHICH_MON]        = COMPOUND_STRING("Teach which Pokémon?"),
-    [PARTY_MSG_USE_ON_WHICH_MON]       = COMPOUND_STRING("Use on which Pokémon?"),
+    [PARTY_MSG_MOVE_TO_WHERE]          = COMPOUND_STRING("Move {DYNAMIC 0} to which position?"),
+    [PARTY_MSG_TEACH_WHICH_MON]        = COMPOUND_STRING("Teach {DYNAMIC 0} to which Pokémon?"),
+    [PARTY_MSG_USE_ON_WHICH_MON]       = COMPOUND_STRING("Use {DYNAMIC 0} on which Pokémon?"),
     [PARTY_MSG_GIVE_TO_WHICH_MON]      = COMPOUND_STRING("Give to which Pokémon"),
     [PARTY_MSG_CHOOSE_MON_2]           = COMPOUND_STRING("Choose a Pokémon."),
-    [PARTY_MSG_DO_WHAT_WITH_MON]       = COMPOUND_STRING("Do what with this Pokémon?"),
+    [PARTY_MSG_DO_WHAT_WITH_MON]       = COMPOUND_STRING("Do what with {DYNAMIC 0}?"),
     [PARTY_MSG_RESTORE_WHICH_MOVE]     = gText_RestoreWhichMove,
     [PARTY_MSG_BOOST_PP_WHICH_MOVE]    = gText_BoostPP,
     [PARTY_MSG_DO_WHAT_WITH_ITEM]      = gText_DoWhatWithItem,
@@ -253,7 +253,20 @@ static const u8 *const sPartyMenu_HeaderMessages[] =
     [PARTY_MSG_WHICH_STATUS]           = COMPOUND_STRING("Inflict which status?"),
     [PARTY_MSG_NO_POKEMON]             = COMPOUND_STRING("You have no Pokémon."),
     [PARTY_MSG_CHOOSE_MON_FOR_BOX]     = COMPOUND_STRING("Send which Pokémon to the PC?"),
-    [PARTY_MSG_MOVE_ITEM_WHERE]        = gText_MoveItemWhere,
+    [PARTY_MSG_MOVE_ITEM_WHERE]        = COMPOUND_STRING("Swap {DYNAMIC 0}'s item with who?"),
+};
+
+static const u8 *const sPartyMenu_FooterMessages[NUM_PARTY_FOOTERS] =
+{
+    [PARTY_FOOTER_DEFAULT]           = COMPOUND_STRING("{A_BUTTON} Choose   {B_BUTTON} Return   {SELECT_BUTTON} Switch  {START_BUTTON} Storage"),
+    [PARTY_FOOTER_DEFAULT_NO_SWITCH] = COMPOUND_STRING("{A_BUTTON} Choose   {B_BUTTON} Return   {START_BUTTON} Storage"),
+    [PARTY_FOOTER_CHOOSE_HALF]       = COMPOUND_STRING("{A_BUTTON} Choose   {B_BUTTON} Return   {START_BUTTON} Confirm"),
+    [PARTY_FOOTER_CHOOSE]            = COMPOUND_STRING("{A_BUTTON} Choose   {B_BUTTON} Return"),
+    [PARTY_FOOTER_CHOOSE_NO_CANCEL]  = COMPOUND_STRING("{A_BUTTON} Choose"),
+    [PARTY_FOOTER_SWITCH]            = COMPOUND_STRING("{A_BUTTON} Place   {B_BUTTON} Cancel"),
+    [PARTY_FOOTER_TARGET]            = COMPOUND_STRING("{A_BUTTON} Choose   {B_BUTTON} Cancel"),
+    [PARTY_FOOTER_LIST]              = COMPOUND_STRING("{A_BUTTON} Select   {B_BUTTON} Cancel"),
+    [PARTY_FOOTER_SPINNER]           = COMPOUND_STRING("{DPAD_UPDOWN} +1/-1   {DPAD_LEFTRIGHT} +10/-10   {A_BUTTON} Use   {B_BUTTON} Cancel"),
 };
 
 static const u8 *const sPartyMenu_MsgBoxMessages[] =

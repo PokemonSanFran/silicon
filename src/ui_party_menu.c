@@ -28,6 +28,7 @@
 #include "graphics.h"
 #include "hexorb.h"
 #include "international_string_util.h"
+#include "dynamic_placeholder_text_util.h"
 #include "item.h"
 #include "item_menu.h"
 #include "item_use.h"
@@ -193,17 +194,19 @@ static s16 PartyMonIcon_GetX(u32);
 static s16 PartyMonIcon_GetY(u32);
 static void PrintMessage(const u8 *);
 static void Task_PrintAndWaitForText(u8);
+static void PartyView_ExpandHeader(u32);
 static void PartyView_PrintHeader(const u8 *);
 static void PartyView_ClearHeader(void);
 static void PartyView_ClearFooter(void);
+static enum PartyMenuFooters PartyView_GetChooseMonFooter(void);
+static enum PartyMenuFooters PartyView_GetFooter(u32);
+static void PartyView_DrawFooter(enum PartyMenuFooters);
 static void PartyMenuRemoveWindow(u8 *);
-static bool8 ShouldUseChooseMonText(void);
 static void HandleChooseMonSelection(u8, s8 *);
 static bool8 IsSelectedMonNotEgg(u8 *);
 static bool8 DoesSelectedMonKnowHM(u8 *);
 static void HandleChooseMonCancel(u8, s8 *);
 static bool8 DisplayCancelChooseMonYesNo(u8);
-static const u8 *GetFacilityCancelString(void);
 static void Task_CancelChooseMonYesNo(u8);
 static void Task_HandleCancelChooseMonYesNoInput(u8);
 static void CancelParticipationPrompt(u8);
@@ -871,7 +874,7 @@ static bool8 DisplayCancelChooseMonYesNo(u8 taskId)
     if (gPartyMenu.menuType == PARTY_MENU_TYPE_CONTEST)
         stringPtr = gText_CancelParticipation;
     else if (gPartyMenu.menuType == PARTY_MENU_TYPE_CHOOSE_HALF)
-        stringPtr = GetFacilityCancelString();
+        stringPtr = gText_CancelBattle;
 
     if (stringPtr == NULL)
         return FALSE;
@@ -881,18 +884,6 @@ static bool8 DisplayCancelChooseMonYesNo(u8 taskId)
     DisplayPartyMenuMessage(gStringVar4, TRUE);
     gTasks[taskId].func = Task_CancelChooseMonYesNo;
     return TRUE;
-}
-
-static const u8 *GetFacilityCancelString(void)
-{
-    u8 facilityNum = VarGet(VAR_FRONTIER_FACILITY);
-
-    if (!(facilityNum != FACILITY_UNION_ROOM && facilityNum != FACILITY_MULTI_OR_EREADER))
-        return gText_CancelBattle;
-    else if (facilityNum == FRONTIER_FACILITY_DOME && gSpecialVar_0x8005 == 2)
-        return gText_ReturnToWaitingRoom;
-    else
-        return gText_CancelChallenge;
 }
 
 static void Task_CancelChooseMonYesNo(u8 taskId)
@@ -1379,6 +1370,7 @@ static bool32 PartySpinner_TryOpen(u8 taskId, u32 maxCount, s32 yOffset)
                                                       PartyMonIcon_GetX(gPartyMenu.slotId) + PARTY_SPINNER_X_OFFSET,
                                                       PartyMonIcon_GetY(gPartyMenu.slotId) + yOffset,
                                                       PARTY_SPRITE_SUBPRIORITY_CURSOR);
+    PartyView_DrawFooter(PARTY_FOOTER_SPINNER);
     gTasks[taskId].func = Task_HandleItemSpinnerInput;
     return TRUE;
 }
@@ -1413,6 +1405,7 @@ static void Task_HandleItemSpinnerInput(u8 taskId)
         PlaySE(SE_SELECT);
         PartySpinner_Close();
         PartySlot_Draw(gPartyMenu.slotId);
+        PartyView_DrawFooter(PartyView_GetChooseMonFooter());
         gTasks[taskId].func = Task_HandleChooseMonInput;
     }
 }
@@ -1660,7 +1653,7 @@ static void PartyHeld_Lift(void)
 {
     gPartyMenu.action = PARTY_ACTION_SWITCH;
     gPartyMenu.slotId2 = gPartyMenu.slotId;
-    PartyView_ClearHeader();
+    DisplayPartyMenuStdMessage(PARTY_MSG_MOVE_TO_WHERE);
     gSprites[sPartyMenuDataPtr->cursorSpriteId].invisible = TRUE;
     PartySlot_DrawEmpty(gPartyMenu.slotId);
     PartyMonSprites_SetLifted(gPartyMenu.slotId, TRUE);
@@ -1672,12 +1665,14 @@ static void PartyHeld_SnapToSlot(void)
     u32 heldWindowId = sPartyMenuDataPtr->heldWindowId;
     u32 slot = gPartyMenu.slotId2;
     u32 slotWindowId = sPartyMenuDataPtr->slotWindowIds[slot];
+    bool32 isMidRow = (slot / PARTY_SLOT_COLUMNS == PARTY_SLOT_ROW_MID);
 
     ClearWindowTilemap(heldWindowId);
     SetWindowAttribute(heldWindowId, WINDOW_TILEMAP_LEFT, GetWindowAttribute(slotWindowId, WINDOW_TILEMAP_LEFT) + PARTY_HELD_OFFSET_X);
-    SetWindowAttribute(heldWindowId, WINDOW_TILEMAP_TOP, GetWindowAttribute(slotWindowId, WINDOW_TILEMAP_TOP) - PARTY_HELD_OFFSET_Y);
+    SetWindowAttribute(heldWindowId, WINDOW_TILEMAP_TOP, GetWindowAttribute(slotWindowId, WINDOW_TILEMAP_TOP) - (isMidRow ? 0 : PARTY_HELD_OFFSET_Y));
     FillWindowPixelBuffer(heldWindowId, PIXEL_FILL(0));
-    PartySlot_Render(heldWindowId, slot / PARTY_SLOT_COLUMNS, gPartyMenu.slotId, FALSE);
+    // the lifted slot swaps frame art: slot_main on the middle row, slot_mid elsewhere
+    PartySlot_Render(heldWindowId, isMidRow ? PARTY_SLOT_ROW_TOP : PARTY_SLOT_ROW_MID, gPartyMenu.slotId, FALSE);
     PutWindowTilemap(heldWindowId);
     CopyWindowToVram(heldWindowId, COPYWIN_FULL);
 
@@ -1918,7 +1913,7 @@ static void PartyMonSprites_SetLifted(u32 spriteSlot, bool32 lifted)
         struct Sprite *sprite = &gSprites[spriteIds[i]];
         sprite->oam.priority = lifted ? PARTY_SPRITE_PRIORITY_LIFTED : PARTY_SPRITE_PRIORITY_MAIN;
         sprite->x2 = lifted ? PARTY_HELD_OFFSET_X * TILE_WIDTH : 0;
-        sprite->y2 = lifted ? -PARTY_HELD_OFFSET_Y * TILE_HEIGHT : 0;
+        sprite->y2 = lifted ? -PARTY_HELD_SPRITE_OFFSET_Y : 0;
     }
 }
 
@@ -2289,6 +2284,8 @@ static u8 DisplaySelectionWindow(u8 windowType)
         PartyActions_Draw(*windowPtr);
     }
     PutWindowTilemap(*windowPtr);
+    if (sPartyMenuDataPtr->windowId[PARTY_DYN_WIN_MSG] == WINDOW_NONE)
+        PartyView_DrawFooter(PARTY_FOOTER_LIST);
     ScheduleBgCopyTilemapToVram(PARTY_BG_TEXT);
 
     return *windowPtr;
@@ -4247,18 +4244,20 @@ void DisplayPartyMenuStdMessage(u32 stringId)
 
     if (stringId == PARTY_MSG_CHOOSE_MON)
     {
-        if (sPartyMenuDataPtr->chooseHalf)
-            stringId = PARTY_MSG_CHOOSE_MON_AND_CONFIRM;
-        else if (!ShouldUseChooseMonText())
-            stringId = PARTY_MSG_CHOOSE_MON_OR_CANCEL;
+        if (gPartyMenu.action == PARTY_ACTION_MOVE_TUTOR
+         || (gPartyMenu.action == PARTY_ACTION_USE_ITEM && GetItemPocket(gSpecialVar_ItemId) == POCKET_TM_HM))
+            stringId = PARTY_MSG_TEACH_WHICH_MON;
+        else if (gPartyMenu.action == PARTY_ACTION_USE_ITEM)
+            stringId = PARTY_MSG_USE_ON_WHICH_MON;
+        else if (gPartyMenu.action == PARTY_ACTION_GIVE_ITEM)
+            stringId = PARTY_MSG_GIVE_TO_WHICH_MON;
     }
 
     if (sPartyMenu_HeaderMessages[stringId] != NULL)
     {
-        StringExpandPlaceholders(gStringVar4, sPartyMenu_HeaderMessages[stringId]);
+        PartyView_ExpandHeader(stringId);
         PartyView_PrintHeader(gStringVar4);
-        PutWindowTilemap(PARTY_WIN_FOOTER);
-        ScheduleBgCopyTilemapToVram(PARTY_BG_TEXT);
+        PartyView_DrawFooter(PartyView_GetFooter(stringId));
         return;
     }
 
@@ -4369,6 +4368,36 @@ static void PrintMessage(const u8 *text)
     ScheduleBgCopyTilemapToVram(PARTY_BG_TEXT);
 }
 
+static void PartyView_ExpandHeader(u32 stringId)
+{
+    u8 nickname[POKEMON_NAME_LENGTH + 1];
+    const u8 *str = sPartyMenu_HeaderMessages[stringId];
+
+    DynamicPlaceholderTextUtil_Reset();
+    switch (stringId)
+    {
+    case PARTY_MSG_DO_WHAT_WITH_MON:
+    case PARTY_MSG_MOVE_TO_WHERE:
+    case PARTY_MSG_MOVE_ITEM_WHERE:
+        GetMonNickname(&gParties[B_TRAINER_PLAYER][gPartyMenu.slotId], nickname);
+        DynamicPlaceholderTextUtil_SetPlaceholderPtr(0, nickname);
+        break;
+    case PARTY_MSG_TEACH_WHICH_MON:
+        if (gPartyMenu.action == PARTY_ACTION_MOVE_TUTOR)
+            DynamicPlaceholderTextUtil_SetPlaceholderPtr(0, GetMoveName(gSpecialVar_0x8005));
+        else
+            DynamicPlaceholderTextUtil_SetPlaceholderPtr(0, GetMoveName(ItemIdToBattleMoveId(gSpecialVar_ItemId)));
+        break;
+    case PARTY_MSG_USE_ON_WHICH_MON:
+        if (gPartyMenu.action == PARTY_ACTION_SOFTBOILED)
+            str = COMPOUND_STRING("Use on which Pokémon?");
+        else
+            DynamicPlaceholderTextUtil_SetPlaceholderPtr(0, GetItemName(gSpecialVar_ItemId));
+        break;
+    }
+    DynamicPlaceholderTextUtil_ExpandPlaceholders(gStringVar4, str);
+}
+
 static void PartyView_PrintHeader(const u8 *str)
 {
     u32 fontId = GetFontIdToFit(str, FONT_SMALL, 0, TILE_TO_PIXELS(PARTY_HELPER_WIDTH));
@@ -4391,6 +4420,61 @@ static void PartyView_ClearFooter(void)
     CopyWindowToVram(PARTY_WIN_FOOTER, COPYWIN_GFX);
 }
 
+static enum PartyMenuFooters PartyView_GetChooseMonFooter(void)
+{
+    if (sPartyMenuDataPtr->chooseHalf)
+        return PARTY_FOOTER_CHOOSE_HALF;
+
+    switch (gPartyMenu.action)
+    {
+    case PARTY_ACTION_SOFTBOILED:
+        return PARTY_FOOTER_TARGET;
+    case PARTY_ACTION_SEND_OUT:
+    case PARTY_ACTION_CHOOSE_FAINTED_MON:
+        return PARTY_FOOTER_CHOOSE_NO_CANCEL;
+    case PARTY_ACTION_CHOOSE_MON:
+        if (PartyMenu_CanSwitch())
+            return PARTY_FOOTER_DEFAULT;
+        if (gPartyMenu.menuType == PARTY_MENU_TYPE_FIELD)
+            return PARTY_FOOTER_DEFAULT_NO_SWITCH;
+        return PARTY_FOOTER_CHOOSE;
+    default:
+        return PARTY_FOOTER_CHOOSE;
+    }
+}
+
+static enum PartyMenuFooters PartyView_GetFooter(u32 stringId)
+{
+    switch (stringId)
+    {
+    case PARTY_MSG_MOVE_TO_WHERE:
+        return PARTY_FOOTER_SWITCH;
+    case PARTY_MSG_MOVE_ITEM_WHERE:
+        return PARTY_FOOTER_TARGET;
+    case PARTY_MSG_DO_WHAT_WITH_MON:
+    case PARTY_MSG_DO_WHAT_WITH_ITEM:
+    case PARTY_MSG_DO_WHAT_WITH_MAIL:
+    case PARTY_MSG_RESTORE_WHICH_MOVE:
+    case PARTY_MSG_BOOST_PP_WHICH_MOVE:
+    case PARTY_MSG_WHICH_APPLIANCE:
+    case PARTY_MSG_WHICH_STATUS:
+        return PARTY_FOOTER_LIST;
+    default:
+        return PartyView_GetChooseMonFooter();
+    }
+}
+
+static void PartyView_DrawFooter(enum PartyMenuFooters footer)
+{
+    const u8 *str = sPartyMenu_FooterMessages[footer];
+    u32 fontId = GetFontIdToFit(str, FONT_SMALL, 0, TILE_TO_PIXELS(PARTY_HELPER_WIDTH));
+
+    FillWindowPixelBuffer(PARTY_WIN_FOOTER, PIXEL_FILL(0));
+    AddTextPrinterParameterized4(PARTY_WIN_FOOTER, fontId, 0, PARTY_HELPER_TEXT_Y, 0, 0, sPartyMenu_TextColors[COLORID_PARTY_HELPER], TEXT_SKIP_DRAW, str);
+    PutWindowTilemap(PARTY_WIN_FOOTER);
+    CopyWindowToVram(PARTY_WIN_FOOTER, COPYWIN_FULL);
+}
+
 static void PartyMenuRemoveWindow(u8 *windowPtr)
 {
     if (*windowPtr == WINDOW_NONE)
@@ -4407,25 +4491,6 @@ static void PartyMenuRemoveWindow(u8 *windowPtr)
     RemoveWindow(*windowPtr);
     *windowPtr = WINDOW_NONE;
     ScheduleBgCopyTilemapToVram(PARTY_BG_TEXT);
-}
-
-static bool8 ShouldUseChooseMonText(void)
-{
-    u8 numAliveMons = 0;
-
-    if (gPartyMenu.action == PARTY_ACTION_SEND_OUT)
-        return TRUE;
-
-    for (u32 slot = 0; slot < PARTY_SIZE; slot++)
-    {
-        struct Pokemon *mon = &gParties[B_TRAINER_PLAYER][slot];
-
-        if (GetMonData(mon, MON_DATA_SPECIES) != SPECIES_NONE && (GetMonData(mon, MON_DATA_HP) != 0 || GetMonData(mon, MON_DATA_IS_EGG)))
-            numAliveMons++;
-        if (numAliveMons > 1)
-            return TRUE;
-    }
-    return FALSE;
 }
 
 // ==================================================
