@@ -11,38 +11,29 @@ script BattleConvention_Movement_MovePlayerIntoBattlePosition
     switch (var(VAR_TEMP_D))
     {
         case 0:
-        moveobjecttocoords(LOCALID_PLAYER,3,5,DIR_NORTH)
-        moveobjecttocoords(LOCALID_CONVENTION_PARTNER,3,5,DIR_NORTH)
-        case 1:
-        moveobjecttocoords(LOCALID_PLAYER,3,5,DIR_NORTH)
-        moveobjecttocoords(LOCALID_CONVENTION_PARTNER,3,5,DIR_NORTH)
-        case 2:
-        moveobjecttocoords(LOCALID_PLAYER,3,5,DIR_NORTH)
-        moveobjecttocoords(LOCALID_CONVENTION_PARTNER,3,5,DIR_NORTH)
-        case 3:
-        moveobjecttocoords(LOCALID_PLAYER,3,5,DIR_NORTH)
-        moveobjecttocoords(LOCALID_CONVENTION_PARTNER,3,5,DIR_NORTH)
         case 4:
-        moveobjecttocoords(LOCALID_PLAYER,3,5,DIR_NORTH)
-        moveobjecttocoords(LOCALID_CONVENTION_PARTNER,3,5,DIR_NORTH)
+        applymovement(LOCALID_PLAYER,walk_up * 3)
+        applymovement(LOCALID_CONVENTION_PARTNER,walk_up * 3)
+        case 1:
+        case 2:
+        case 3:
+        applymovement(LOCALID_PLAYER,walk_right * 3)
+        applymovement(LOCALID_CONVENTION_PARTNER,walk_right * 3)
         case 5:
-        moveobjecttocoords(LOCALID_PLAYER,3,5,DIR_SOUTH)
-        moveobjecttocoords(LOCALID_CONVENTION_PARTNER,3,5,DIR_SOUTH)
         case 6:
-        moveobjecttocoords(LOCALID_PLAYER,3,5,DIR_SOUTH)
-        moveobjecttocoords(LOCALID_CONVENTION_PARTNER,3,5,DIR_SOUTH)
         case 7:
-        moveobjecttocoords(LOCALID_PLAYER,3,5,DIR_SOUTH)
-        moveobjecttocoords(LOCALID_CONVENTION_PARTNER,3,5,DIR_SOUTH)
         case 8:
-        moveobjecttocoords(LOCALID_PLAYER,3,5,DIR_SOUTH)
-        moveobjecttocoords(LOCALID_CONVENTION_PARTNER,3,5,DIR_SOUTH)
+        applymovement(LOCALID_PLAYER,walk_left * 3)
+        applymovement(LOCALID_CONVENTION_PARTNER,walk_left * 3)
         case 9:
-        moveobjecttocoords(LOCALID_PLAYER,3,5,DIR_SOUTH)
-        moveobjecttocoords(LOCALID_CONVENTION_PARTNER,3,5,DIR_SOUTH)
+        applymovement(LOCALID_PLAYER,walk_down * 3)
+        applymovement(LOCALID_CONVENTION_PARTNER,walk_down * 3)
     }
+    delay(24)
+    fadescreen(FADE_TO_BLACK)
 
-    callnative(Script_SiliconFroniter_IsCurrentChallengeTypeMulti)
+    fadescreen(FADE_FROM_BLACK)
+
     waitmovement(LOCALID_CONVENTION_PARTNER)
     waitmovement(LOCALID_PLAYER)
 }
