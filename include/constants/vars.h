@@ -74,7 +74,7 @@
 #define VAR_EARTHQUAKE_COUNT                                        0x4024
 #define VAR_EARTHQUAKE_STEP_COUNTER                                 0x4025
 #define VAR_DEXNAV_STEP_COUNTER                                     0x4026
-#define VAR_SILICON_UNUSED_0x4027                                   0x4027
+#define VAR_SILICON_LAST_REPEL_LURE_USED                            0x4027
 #define VAR_SILICON_UNUSED_0x4028                                   0x4028
 #define VAR_SILICON_UNUSED_0x4029                                   0x4029
 //#define VAR_FRIENDSHIP_STEP_COUNTER                               0x402A

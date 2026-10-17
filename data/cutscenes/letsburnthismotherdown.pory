@@ -183,10 +183,15 @@ script LetsBurnThisMotherDown_PositionPlayerBeforeBattle_Script
     waitmovement(0)
 }
 
+script LetsBurnThisMotherDown_Interact_Baiya_Script
+{
+    lock
+    goto(LetsBurnThisMotherDown_StartBattle_Script)
+}
+
 script LetsBurnThisMotherDown_StartBattle_Script
 {
     call(LetsBurnThisMotherDown_PositionPlayerBeforeBattle_Script)
-
     msgbox(format("We're winning this revolution. With or without you."),MSGBOX_DEFAULT,SPEAKER_BAIYA_TIDE)
     closemessage
 

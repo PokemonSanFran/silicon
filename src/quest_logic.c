@@ -4409,6 +4409,9 @@ static u32 GenerateAndGiveOddEgg(void)
     bool8 isEgg = TRUE;
     SetMonData(&mon, MON_DATA_IS_EGG, &isEgg);
 
+    u8 metLevel = 0;
+    SetMonData(&mon, MON_DATA_MET_LEVEL, &metLevel);
+
     u8 hp = Random() % MAX_PER_STAT_IVS;
     SetMonData(&mon, (MON_DATA_HP_IV), &hp);
 
