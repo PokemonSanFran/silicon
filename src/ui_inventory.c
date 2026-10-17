@@ -4283,6 +4283,7 @@ static void RemoveUsedItem(void)
 
 void ItemUseInBattle_NewBagMenu(u8 taskId)
 {
+    gPartyMenu.slotId = gBattleStruct->itemPartyIndex[gBattlerInMenuId] = gBattlerPartyIndexes[gBattlerInMenuId];
     if (CannotUseItemsInBattle(gSpecialVar_ItemId, NULL))
     {
         Task_ReturnToMainInventoryMenu(taskId, INVENTORY_MESSAGE_CANT_USE_ITEM);
@@ -4342,7 +4343,7 @@ static void Task_ItemUseOnBattle(u8 taskId)
     {
         ItemUseInBattle_NewBagMenu(taskId);
     }
-    else if (type == ITEM_USE_PARTY_MENU)
+    else if (type == ITEM_USE_PARTY_MENU || type == ITEM_USE_BATTLER)
     {
         ItemUseInBattle_PartyMenu_New(taskId);
     }

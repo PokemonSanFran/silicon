@@ -218,19 +218,20 @@ static const struct WindowTemplate sPartyMenu_WinTemplate_YesNo =
 
 static const u8 *const sPartyMenu_Descriptions[] =
 {
-    [PARTYBOX_DESC_NO_USE]     = COMPOUND_STRING("No use"),
-    [PARTYBOX_DESC_ABLE_3]     = COMPOUND_STRING("Able!"),
-    [PARTYBOX_DESC_FIRST]      = COMPOUND_STRING("First"),
-    [PARTYBOX_DESC_SECOND]     = COMPOUND_STRING("Second"),
-    [PARTYBOX_DESC_THIRD]      = COMPOUND_STRING("Third"),
-    [PARTYBOX_DESC_FOURTH]     = COMPOUND_STRING("Fourth"),
-    [PARTYBOX_DESC_ABLE]       = COMPOUND_STRING("Able"),
-    [PARTYBOX_DESC_NOT_ABLE]   = COMPOUND_STRING("Not able"),
-    [PARTYBOX_DESC_ABLE_2]     = COMPOUND_STRING("Able"),
-    [PARTYBOX_DESC_NOT_ABLE_2] = COMPOUND_STRING("Not able!"),
-    [PARTYBOX_DESC_LEARNED]    = COMPOUND_STRING("Learned"),
-    [PARTYBOX_DESC_HAVE]       = COMPOUND_STRING("Have"),
-    [PARTYBOX_DESC_DONT_HAVE]  = COMPOUND_STRING("Don't have"),
+    [PARTYBOX_DESC_NO_USE]      = COMPOUND_STRING("No use"),
+    [PARTYBOX_DESC_ABLE_3]      = COMPOUND_STRING("Able!"),
+    [PARTYBOX_DESC_FIRST]       = COMPOUND_STRING("First"),
+    [PARTYBOX_DESC_SECOND]      = COMPOUND_STRING("Second"),
+    [PARTYBOX_DESC_THIRD]       = COMPOUND_STRING("Third"),
+    [PARTYBOX_DESC_FOURTH]      = COMPOUND_STRING("Fourth"),
+    [PARTYBOX_DESC_ABLE]        = COMPOUND_STRING("Able"),
+    [PARTYBOX_DESC_NOT_ABLE]    = COMPOUND_STRING("Not able"),
+    [PARTYBOX_DESC_ABLE_2]      = COMPOUND_STRING("Able"),
+    [PARTYBOX_DESC_NOT_ABLE_2]  = COMPOUND_STRING("Not able!"),
+    [PARTYBOX_DESC_LEARNED]     = COMPOUND_STRING("Learned"),
+    [PARTYBOX_DESC_HAVE]        = COMPOUND_STRING("Have"),
+    [PARTYBOX_DESC_DONT_HAVE]   = COMPOUND_STRING("Don't have"),
+    [PARTY_SLOT_DESC_IN_BATTLE] = COMPOUND_STRING("In battle"),
 };
 
 static const u8 *const sPartyMenu_HeaderMessages[] =
@@ -317,6 +318,7 @@ static const u32 sPartyMenu_Gfx_Cursor[]            = INCGFX_U32("graphics/ui_me
 static const u32 sPartyMenu_Gfx_HeldItem[]          = INCGFX_U32("graphics/ui_menus/party_menu/held_item.png", ".4bpp.smol");
 static const u32 sPartyMenu_Gfx_Status[]            = INCGFX_U32("graphics/ui_menus/party_menu/status_icons.png", ".4bpp.smol");
 static const u32 sPartyMenu_Gfx_Spinner[]           = INCGFX_U32("graphics/ui_menus/mon_summary/infos/scroll_indicator.png", ".4bpp.smol");
+static const u32 sPartyMenu_Gfx_StatStage[]         = INCGFX_U32("graphics/ui_menus/party_menu/stat_stage.png", ".4bpp.smol");
 static const u16 sPartyMenu_Pal_Status[]            = INCGFX_U16("graphics/ui_menus/party_menu/status_icons.png", ".gbapal");
 
 static const struct {
@@ -622,6 +624,53 @@ static const struct SpriteTemplate sPartyMenu_SpriteTemplate_Spinner =
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
     .callback = SpriteCallbackDummy,
+};
+
+static const struct CompressedSpriteSheet sPartyMenu_SpriteSheet_StatStage =
+{
+    .data = sPartyMenu_Gfx_StatStage,
+    .size = TILE_OFFSET_4BPP(NUM_PARTY_STAT_STAGE_FRAMES),
+    .tag = PARTY_GFXTAG_STAT_STAGE,
+};
+
+static const struct OamData sPartyMenu_Oam_StatStage =
+{
+    .shape = SPRITE_SHAPE(8x8),
+    .size = SPRITE_SIZE(8x8),
+    .priority = PARTY_SPRITE_PRIORITY_MAIN,
+};
+
+static const union AnimCmd sPartyMenu_Anim_StatStageEmpty[] =
+{
+    ANIMCMD_FRAME(PARTY_STAT_STAGE_EMPTY, 0),
+    ANIMCMD_END
+};
+
+static const union AnimCmd sPartyMenu_Anim_StatStageRaised[] =
+{
+    ANIMCMD_FRAME(PARTY_STAT_STAGE_RAISED, 0),
+    ANIMCMD_END
+};
+
+static const union AnimCmd sPartyMenu_Anim_StatStageLowered[] =
+{
+    ANIMCMD_FRAME(PARTY_STAT_STAGE_LOWERED, 0),
+    ANIMCMD_END
+};
+
+static const union AnimCmd *const sPartyMenu_Anims_StatStage[NUM_PARTY_STAT_STAGE_FRAMES] =
+{
+    [PARTY_STAT_STAGE_EMPTY]   = sPartyMenu_Anim_StatStageEmpty,
+    [PARTY_STAT_STAGE_RAISED]  = sPartyMenu_Anim_StatStageRaised,
+    [PARTY_STAT_STAGE_LOWERED] = sPartyMenu_Anim_StatStageLowered,
+};
+
+static const struct SpriteTemplate sPartyMenu_SpriteTemplate_StatStage =
+{
+    .tileTag = PARTY_GFXTAG_STAT_STAGE,
+    .paletteTag = PARTY_PALTAG_UI,
+    .oam = &sPartyMenu_Oam_StatStage,
+    .anims = sPartyMenu_Anims_StatStage,
 };
 
 static const struct CompressedSpriteSheet sPartyMenu_SpriteSheet_HeldItem =

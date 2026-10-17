@@ -100,6 +100,7 @@ struct PartyMenuData
     u8 monIconSpriteIds[PARTY_SIZE];
     u8 heldItemSpriteIds[PARTY_SIZE];
     u8 statusSpriteIds[PARTY_SIZE];
+    u8 statStageSpriteIds[PARTY_STAT_STAGE_NUM];
     u16 statusFadeTimer;
     u8 statusFadePhase;
     u8 statusFadeLevel;
@@ -154,6 +155,9 @@ static void PartySlot_DrawHp(u32, struct Pokemon *, u32);
 static void PartySlot_DrawBar(u32, const u8 *, u32, u32, u32);
 static void PartySlot_DrawItem(u32, struct Pokemon *, u32);
 static enum Stat PartySlot_GetEvItemStat(void);
+static enum Stat PartySlot_GetXItemStat(void);
+static u32 PartySlot_GetActiveBattler(u32);
+static void PartySlot_DrawStatName(u32, enum Stat, u32);
 static bool32 PartySlot_IsEvResetItem(void);
 static void PartySlot_DrawEvItemStat(u32, u32, struct Pokemon *, enum Stat, u32);
 static void PartySlot_DrawEvItemDelta(u32, struct Pokemon *, enum Stat, u32);
@@ -189,6 +193,8 @@ static void UpdatePartyMonHeldItemSprite(u32);
 static void PartySetup_StatusIcons(void);
 static void SetPartyMonAilmentGfx(u32);
 static void PartyStatusIcons_UpdateFade(void);
+static void PartySetup_StatStages(void);
+static void PartyStatStages_Update(void);
 static void PartyMonSprites_SetLifted(u32, bool32);
 static void PartyMonSprites_MoveToSlot(u32, u32);
 static s16 PartyMonIcon_GetX(u32);
@@ -452,6 +458,7 @@ static void InitPartyMenu(enum PartyMenuType menuType, enum PartyMenuLayout layo
     memset(sPartyMenuDataPtr->monIconSpriteIds, SPRITE_NONE, sizeof(sPartyMenuDataPtr->monIconSpriteIds));
     memset(sPartyMenuDataPtr->heldItemSpriteIds, SPRITE_NONE, sizeof(sPartyMenuDataPtr->heldItemSpriteIds));
     memset(sPartyMenuDataPtr->statusSpriteIds, SPRITE_NONE, sizeof(sPartyMenuDataPtr->statusSpriteIds));
+    memset(sPartyMenuDataPtr->statStageSpriteIds, SPRITE_NONE, sizeof(sPartyMenuDataPtr->statStageSpriteIds));
     memset(sPartyMenuDataPtr->windowId, WINDOW_NONE, sizeof(sPartyMenuDataPtr->windowId));
     gMain.state = 0;
     SetMainCallback2(CB2_PartyMenu_Setup);
@@ -616,6 +623,7 @@ static void PartySetup_Sprites(void)
     LoadSpritePalette(&sPartyMenu_SpritePalette_Ui);
     PartySetup_HeldItems();
     PartySetup_StatusIcons();
+    PartySetup_StatStages();
 
     LoadCompressedSpriteSheet(&sPartyMenu_SpriteSheet_Cursor);
     sPartyMenuDataPtr->cursorSpriteId = CreateSprite(&sPartyMenu_SpriteTemplate_Cursor, 0, 0, PARTY_SPRITE_SUBPRIORITY_CURSOR);
@@ -665,11 +673,14 @@ void Task_HandleChooseMonInput(u8 taskId)
         if (PartyCursor_HandleDirectionalInput())
         {
             PartyCursor_SnapToSlot();
-            if (PartySlot_GetEvItemStat() != NUM_STATS || PartySlot_IsExpItem())
+            if (PartySlot_GetEvItemStat() != NUM_STATS
+             || PartySlot_IsExpItem()
+             || PartySlot_GetXItemStat() != NUM_BATTLE_STATS)
             {
                 PartySlot_Draw(prevSlot);
                 PartySlot_Draw(*slotPtr);
             }
+            PartyStatStages_Update();
         }
         else if (JOY_NEW(A_BUTTON))
         {
@@ -1067,6 +1078,15 @@ static void PartySlot_DrawMonInfo(u32 windowId, u32 partySlot, u32 row)
     PartySlot_DrawGender(windowId, mon, nickname, contentY);
     PartySlot_DrawLevel(windowId, mon, contentY);
 
+    enum Stat xItemStat = PartySlot_GetXItemStat();
+    if (xItemStat != NUM_BATTLE_STATS
+     && partySlot == *PartyCursor_GetSlotPtr()
+     && PartySlot_GetActiveBattler(partySlot) != MAX_BATTLERS_COUNT)
+    {
+        PartySlot_DrawStatName(windowId, xItemStat, contentY);
+        return;
+    }
+
     enum Stat evStat = PartySlot_GetEvItemStat();
     if (evStat != NUM_STATS)
     {
@@ -1202,17 +1222,49 @@ static bool32 PartySlot_IsEvResetItem(void)
     return GetItemEffect(gSpecialVar_ItemId)[ITEM_EFFECT_ARG_START] == ITEM6_RESET_EV;
 }
 
-static void PartySlot_DrawEvItemStat(u32 windowId, u32 partySlot, struct Pokemon *mon, enum Stat stat, u32 contentY)
+static enum Stat PartySlot_GetXItemStat(void)
+{
+    if (gPartyMenu.action != PARTY_ACTION_USE_ITEM || GetItemBattleUsage(gSpecialVar_ItemId) != EFFECT_ITEM_INCREASE_STAT)
+        return NUM_BATTLE_STATS;
+
+    return GetItemEffect(gSpecialVar_ItemId)[1];
+}
+
+static u32 PartySlot_GetActiveBattler(u32 partySlot)
+{
+    u32 battler;
+
+    if (gPartyMenu.menuType != PARTY_MENU_TYPE_IN_BATTLE)
+        return MAX_BATTLERS_COUNT;
+
+    if (partySlot == 0)
+        battler = GetBattlerAtPosition(B_POSITION_PLAYER_LEFT);
+    else if (partySlot == 1 && IsDoubleBattle())
+        battler = GetBattlerAtPosition(B_POSITION_PLAYER_RIGHT);
+    else
+        return MAX_BATTLERS_COUNT;
+
+    return IsBattlerAlive(battler) ? battler : MAX_BATTLERS_COUNT;
+}
+
+static void PartySlot_DrawStatName(u32 windowId, enum Stat stat, u32 contentY)
 {
     const struct PartySlotRect *rect = &sPartyMenu_SlotLayout.statName;
     const u8 *name = gStatNamesTable[stat];
     u32 fontId = GetFontIdToFit(name, FONT_OUTLINED, 0, rect->width);
+
+    PartySlot_Print(windowId, fontId, rect->x + GetStringCenterAlignXOffset(fontId, name, rect->width),
+                    rect->y + contentY, COLORID_PARTY_WHITE, name);
+}
+
+static void PartySlot_DrawEvItemStat(u32 windowId, u32 partySlot, struct Pokemon *mon, enum Stat stat, u32 contentY)
+{
+    const struct PartySlotRect *rect;
     u32 iv = GetMonData(mon, MON_DATA_HP_IV + stat);
     u32 ev = GetMonData(mon, MON_DATA_HP_EV + stat);
     bool32 isEvMaxed = (ev >= MAX_PER_STAT_EVS || GetMonEVCount(mon) >= MAX_TOTAL_EVS);
 
-    PartySlot_Print(windowId, fontId, rect->x + GetStringCenterAlignXOffset(fontId, name, rect->width),
-                    rect->y + contentY, COLORID_PARTY_WHITE, name);
+    PartySlot_DrawStatName(windowId, stat, contentY);
     PartySlot_PrintNumber(windowId, &sPartyMenu_SlotLayout.statValue, GetMonData(mon, MON_DATA_MAX_HP + stat), COLORID_PARTY_WHITE, contentY);
 
     rect = &sPartyMenu_SlotLayout.ivLabel;
@@ -1507,6 +1559,20 @@ static u32 PartySlot_GetDescription(u32 partySlot, enum PartyTextColors *color)
 
     if (gPartyMenu.action != PARTY_ACTION_USE_ITEM)
         return PARTY_SLOT_DESC_NONE;
+
+    if (PartySlot_GetXItemStat() != NUM_BATTLE_STATS)
+    {
+        if (PartySlot_GetActiveBattler(partySlot) == MAX_BATTLERS_COUNT)
+        {
+            *color = COLORID_PARTY_GREY;
+            return PARTYBOX_DESC_NO_USE;
+        }
+        if (partySlot == *PartyCursor_GetSlotPtr())
+            return PARTY_SLOT_DESC_NONE;
+
+        *color = COLORID_PARTY_GREEN;
+        return PARTY_SLOT_DESC_IN_BATTLE;
+    }
 
     switch (CheckIfItemIsTMHMOrEvolutionStone(gSpecialVar_ItemId))
     {
@@ -1822,6 +1888,47 @@ static void SetPartyMonAilmentGfx(u32 slot)
                                  PARTY_SPRITE_SUBPRIORITY_STATUS);
     }
     StartSpriteAnim(&gSprites[*spriteId], ailment - 1);
+}
+
+static void PartySetup_StatStages(void)
+{
+    if (PartySlot_GetXItemStat() == NUM_BATTLE_STATS)
+        return;
+
+    LoadCompressedSpriteSheet(&sPartyMenu_SpriteSheet_StatStage);
+    for (u32 i = 0; i < PARTY_STAT_STAGE_NUM; i++)
+        sPartyMenuDataPtr->statStageSpriteIds[i] = CreateSprite(&sPartyMenu_SpriteTemplate_StatStage, 0, 0, PARTY_SPRITE_SUBPRIORITY_STAT_STAGE);
+
+    PartyStatStages_Update();
+}
+
+static void PartyStatStages_Update(void)
+{
+    if (sPartyMenuDataPtr->statStageSpriteIds[0] == SPRITE_NONE)
+        return;
+
+    u32 slot = *PartyCursor_GetSlotPtr();
+    u32 battler = PartySlot_GetActiveBattler(slot);
+    s32 stages = 0;
+
+    if (battler != MAX_BATTLERS_COUNT)
+        stages = gBattleMons[battler].statStages[PartySlot_GetXItemStat()] - DEFAULT_STAT_STAGE;
+
+    for (u32 i = 0; i < PARTY_STAT_STAGE_NUM; i++)
+    {
+        struct Sprite *sprite = &gSprites[sPartyMenuDataPtr->statStageSpriteIds[i]];
+        enum PartyStatStageFrames frame = PARTY_STAT_STAGE_EMPTY;
+
+        sprite->invisible = (battler == MAX_BATTLERS_COUNT);
+        sprite->x = PartyMonIcon_GetX(slot) + PARTY_STAT_STAGE_X_OFFSET + i * PARTY_STAT_STAGE_SPACING;
+        sprite->y = PartyMonIcon_GetY(slot) + PARTY_STAT_STAGE_Y_OFFEST;
+
+        if (stages > (s32)i)
+            frame = PARTY_STAT_STAGE_RAISED;
+        else if (-stages > (s32)i)
+            frame = PARTY_STAT_STAGE_LOWERED;
+        StartSpriteAnim(sprite, frame);
+    }
 }
 
 static void PartyStatusIcons_UpdateFade(void)
@@ -4550,7 +4657,14 @@ static void PartyMenu_Free(void)
             DestroySprite(&gSprites[sPartyMenuDataPtr->statusSpriteIds[slot]]);
     }
 
+    for (u32 i = 0; i < PARTY_STAT_STAGE_NUM; i++)
+    {
+        if (sPartyMenuDataPtr->statStageSpriteIds[i] != SPRITE_NONE)
+            DestroySprite(&gSprites[sPartyMenuDataPtr->statStageSpriteIds[i]]);
+    }
+
     FreeSpriteTilesByTag(PARTY_GFXTAG_HELD_ITEM);
+    FreeSpriteTilesByTag(PARTY_GFXTAG_STAT_STAGE);
     FreeSpriteTilesByTag(PARTY_GFXTAG_STATUS);
     FreeSpritePaletteByTag(PARTY_PALTAG_STATUS);
     SetGpuReg(REG_OFFSET_BLDCNT, 0);
