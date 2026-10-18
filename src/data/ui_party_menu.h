@@ -372,6 +372,10 @@ static const struct
     struct PartySlotRect evDelta;
     struct PartySlotRect expLevel;
     struct PartySlotRect expToNext;
+    struct PartySlotRect natureName;
+    struct PartySlotRect natureCurrent;
+    struct PartySlotRect natureArrow;
+    struct PartySlotRect natureNext;
 } sPartyMenu_SlotLayout =
 {
     // {x, y, width, height}
@@ -471,6 +475,40 @@ static const struct
         PARTY_SLOT_EXP_TO_NEXT_W,
         PARTY_SLOT_EXP_TO_NEXT_H
     },
+    .natureName = {
+        PARTY_SLOT_NATURE_NAME_X,
+        PARTY_SLOT_NATURE_NAME_Y,
+        PARTY_SLOT_NATURE_NAME_W,
+        PARTY_SLOT_NATURE_NAME_H
+    },
+    .natureCurrent = {
+        PARTY_SLOT_NATURE_CURRENT_X,
+        PARTY_SLOT_NATURE_CURRENT_Y,
+        PARTY_SLOT_NATURE_CURRENT_W,
+        PARTY_SLOT_NATURE_CURRENT_H
+    },
+    .natureArrow = {
+        PARTY_SLOT_NATURE_ARROW_X,
+        PARTY_SLOT_NATURE_ARROW_Y,
+        PARTY_SLOT_NATURE_ARROW_W,
+        PARTY_SLOT_NATURE_ARROW_H
+    },
+    .natureNext = {
+        PARTY_SLOT_NATURE_NEXT_X,
+        PARTY_SLOT_NATURE_NEXT_Y,
+        PARTY_SLOT_NATURE_NEXT_W,
+        PARTY_SLOT_NATURE_NEXT_H
+    },
+};
+
+static const u8 *const sPartyMenu_StatShortLabels[NUM_STATS] =
+{
+    [STAT_HP]    = COMPOUND_STRING("HP"),
+    [STAT_ATK]   = COMPOUND_STRING("Atk"),
+    [STAT_DEF]   = COMPOUND_STRING("Def"),
+    [STAT_SPEED] = COMPOUND_STRING("Spe"),
+    [STAT_SPATK] = COMPOUND_STRING("SpAtk"),
+    [STAT_SPDEF] = COMPOUND_STRING("SpDef"),
 };
 
 // see pal 1 in tiles.png

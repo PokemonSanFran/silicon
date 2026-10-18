@@ -164,6 +164,10 @@ static void PartySlot_DrawEvItemDelta(u32, struct Pokemon *, enum Stat, u32);
 static u32 PartySlot_GetEvItemDelta(struct Pokemon *, enum Stat, u32);
 static u32 PartySlot_GetEvItemMaxCount(struct Pokemon *);
 static bool32 PartySlot_IsExpItem(void);
+static bool32 PartySlot_IsMint(void);
+static void PartySlot_DrawNature(u32, u32, struct Pokemon *, u32);
+static void PartySlot_DrawNatureRow(u32, u32, u32, bool32, u32);
+static u8 *PartySlot_StringNatureStat(u8 *, u32, bool32);
 static u32 PartySlot_GetExpItemCeiling(void);
 static u32 PartySlot_GetExpItemGain(struct Pokemon *, u32);
 static u32 PartySlot_GetExpItemMaxCount(struct Pokemon *);
@@ -675,6 +679,7 @@ void Task_HandleChooseMonInput(u8 taskId)
             PartyCursor_SnapToSlot();
             if (PartySlot_GetEvItemStat() != NUM_STATS
              || PartySlot_IsExpItem()
+             || PartySlot_IsMint()
              || PartySlot_GetXItemStat() != NUM_BATTLE_STATS)
             {
                 PartySlot_Draw(prevSlot);
@@ -1087,6 +1092,13 @@ static void PartySlot_DrawMonInfo(u32 windowId, u32 partySlot, u32 row)
         return;
     }
 
+    if (PartySlot_IsMint())
+    {
+        if (description == PARTY_SLOT_DESC_NONE)
+            PartySlot_DrawNature(windowId, partySlot, mon, contentY);
+        return;
+    }
+
     enum Stat evStat = PartySlot_GetEvItemStat();
     if (evStat != NUM_STATS)
     {
@@ -1321,6 +1333,71 @@ static bool32 PartySlot_IsExpItem(void)
 {
     return gPartyMenu.action == PARTY_ACTION_USE_ITEM
         && GetItemEffectType(gSpecialVar_ItemId) == ITEM_EFFECT_RAISE_LEVEL;
+}
+
+static bool32 PartySlot_IsMint(void)
+{
+    return gPartyMenu.action == PARTY_ACTION_USE_ITEM
+        && GetItemFieldFunc(gSpecialVar_ItemId) == ItemUseOutOfBattle_Mint;
+}
+
+static void PartySlot_DrawNature(u32 windowId, u32 partySlot, struct Pokemon *mon, u32 contentY)
+{
+    u32 nature = GetMonData(mon, MON_DATA_HIDDEN_NATURE);
+
+    if (partySlot != *PartyCursor_GetSlotPtr())
+    {
+        const struct PartySlotRect *rect = &sPartyMenu_SlotLayout.natureName;
+        const u8 *name = gNaturesInfo[nature].name;
+        u32 fontId = GetFontIdToFit(name, FONT_OUTLINED, 0, rect->width);
+        PartySlot_Print(windowId, fontId, rect->x + GetStringCenterAlignXOffset(fontId, name, rect->width),
+                        rect->y + contentY, COLORID_PARTY_YELLOW, name);
+        return;
+    }
+
+    u32 newNature = GetItemSecondaryId(gSpecialVar_ItemId);
+    PartySlot_DrawNatureRow(windowId, nature, newNature, TRUE, contentY);
+    PartySlot_DrawNatureRow(windowId, nature, newNature, FALSE, contentY + PARTY_SLOT_NATURE_DOWN_Y - PARTY_SLOT_NATURE_UP_Y);
+}
+
+static void PartySlot_DrawNatureRow(u32 windowId, u32 nature, u32 newNature, bool32 raised, u32 contentY)
+{
+    const struct PartySlotRect *rect = &sPartyMenu_SlotLayout.natureCurrent;
+    bool32 isNeutral = gNaturesInfo[newNature].statUp == gNaturesInfo[newNature].statDown;
+    enum PartyTextColors changeColor;
+    u8 text[8];
+    u32 fontId;
+
+    if (isNeutral)
+        changeColor = COLORID_PARTY_GREY;
+    else if (raised)
+        changeColor = COLORID_PARTY_RED;
+    else
+        changeColor = COLORID_PARTY_BLUE;
+
+    PartySlot_StringNatureStat(text, nature, raised);
+    fontId = GetFontIdToFit(text, FONT_OUTLINED, 0, rect->width);
+    PartySlot_Print(windowId, fontId, rect->x + GetStringRightAlignXOffset(fontId, text, rect->width),
+                    rect->y + contentY, COLORID_PARTY_WHITE, text);
+
+    rect = &sPartyMenu_SlotLayout.natureArrow;
+    PartySlot_Print(windowId, FONT_OUTLINED, rect->x, rect->y + contentY, changeColor, COMPOUND_STRING("{RIGHT_ARROW}"));
+
+    rect = &sPartyMenu_SlotLayout.natureNext;
+    PartySlot_StringNatureStat(text, newNature, raised);
+    fontId = GetFontIdToFit(text, FONT_OUTLINED, 0, rect->width);
+    PartySlot_Print(windowId, fontId, rect->x, rect->y + contentY, changeColor, text);
+}
+
+static u8 *PartySlot_StringNatureStat(u8 *dst, u32 nature, bool32 raised)
+{
+    const struct NatureInfo *info = &gNaturesInfo[nature];
+
+    if (info->statUp == info->statDown)
+        return StringCopy(dst, COMPOUND_STRING("None"));
+
+    *dst++ = raised ? CHAR_PLUS : CHAR_HYPHEN;
+    return StringCopy(dst, sPartyMenu_StatShortLabels[raised ? info->statUp : info->statDown]);
 }
 
 static u32 PartySlot_GetExpItemCeiling(void)
@@ -1559,6 +1636,15 @@ static u32 PartySlot_GetDescription(u32 partySlot, enum PartyTextColors *color)
 
     if (gPartyMenu.action != PARTY_ACTION_USE_ITEM)
         return PARTY_SLOT_DESC_NONE;
+
+    if (PartySlot_IsMint()
+     && partySlot == *PartyCursor_GetSlotPtr()
+     && !GetMonData(mon, MON_DATA_IS_EGG)
+     && GetMonData(mon, MON_DATA_HIDDEN_NATURE) == GetItemSecondaryId(gSpecialVar_ItemId))
+    {
+        *color = COLORID_PARTY_GREY;
+        return PARTYBOX_DESC_NO_USE;
+    }
 
     if (PartySlot_GetXItemStat() != NUM_BATTLE_STATS)
     {
