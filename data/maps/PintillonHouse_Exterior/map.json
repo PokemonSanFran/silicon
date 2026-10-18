@@ -72,11 +72,12 @@
   ],
   "warp_events": [
     {
+      "warp_id": "WARP_ID_PINTILLION_HOUSE_EXTERIOR_TO_INTERIOR",
       "x": 19,
       "y": 15,
       "elevation": 0,
       "dest_map": "MAP_PINTILLON_HOUSE_INTERIOR_1F",
-      "dest_warp_id": "0"
+      "dest_warp_id": "WARP_ID_PINTILLION_HOUSE_INTERIOR_TO_EXTERIOR"
     }
   ],
   "coord_events": [
