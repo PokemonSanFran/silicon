@@ -2594,10 +2594,6 @@ bool32 NoAliveMonsForBattlerSide(enum BattlerId battler)
 
 static u32 DoesPartyHaveBattleReadyMons(enum BattleTrainer trainer)
 {
-    // Start littlecup
-    if (WasPreviousBattleLittleCup())
-        return TRUE;
-    // End littlecup
     for (u32 i = 0; i < PARTY_SIZE; i++)
     {
         struct Pokemon mon = gParties[trainer][i];
@@ -2617,6 +2613,11 @@ static u32 DoesPartyHaveBattleReadyMons(enum BattleTrainer trainer)
         if (GetMonData(&mon, MON_DATA_HP) > 0)
             return TRUE;
     }
+
+    // Start littlecup
+    if (WasPreviousBattleLittleCup() && (trainer == B_TRAINER_PLAYER))
+        return FALSE;
+    // End littlecup
 
     return FALSE;
 }
