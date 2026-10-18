@@ -566,6 +566,7 @@ EWRAM_DATA static u8 sMovingMonOrigBoxPos = 0;
 EWRAM_DATA static bool8 sAutoActionOn = 0;
 EWRAM_DATA static bool8 sJustOpenedBag = 0;
 EWRAM_DATA static bool8 sRefreshDisplayMonGfx = FALSE;
+EWRAM_DATA static MainCallback sReturnToPartyCallback = NULL;
 EWRAM_DATA static struct BoxPokemon sCurrentBoxPokemon = {0}; // colorVariation
 
 // Main tasks
@@ -1652,6 +1653,34 @@ static void FieldTask_ReturnToPcMenu(void)
     FadeInFromBlack();
 }
 
+static void FieldTask_ReturnToPartyMenu(void)
+{
+    MainCallback vblankCb = gMain.vblankCallback;
+    ResetSpriteData();
+    FreeAllWindowBuffers();
+
+    SetVBlankCallback(NULL);
+    SetMainCallback2(sReturnToPartyCallback != NULL ? sReturnToPartyCallback : CB2_ReturnToFieldWithOpenMenu);
+    sReturnToPartyCallback = NULL;
+    SetVBlankCallback(vblankCb);
+    FadeInFromBlack();
+}
+
+void PokemonPC_SetReturnToPartyCallback(MainCallback cb)
+{
+    sReturnToPartyCallback = cb;
+}
+
+void ShowPokemonPCFromParty(void)
+{
+    EnterPokeStorage(OPTION_MOVE_MONS);
+}
+
+void CB2_ShowPokemonPCFromParty(void)
+{
+    ShowPokemonPCFromParty();
+}
+
 #undef tState
 #undef tSelectedOption
 #undef tInput
@@ -1674,7 +1703,14 @@ static void CreateMainMenu(u8 whichMenu, s16 *windowIdPtr)
 static void CB2_ExitPokeStorage(void)
 {
     sPreviousBoxOption = GetCurrentBoxOption();
-    gFieldCallback = FieldTask_ReturnToPcMenu;
+    if (sReturnToPartyCallback != NULL)
+    {
+        gFieldCallback = FieldTask_ReturnToPartyMenu;
+    }
+    else
+    {
+        gFieldCallback = FieldTask_ReturnToPcMenu;
+    }
     SetMainCallback2(CB2_ReturnToField);
 }
 

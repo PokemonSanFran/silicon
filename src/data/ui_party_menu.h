@@ -268,6 +268,7 @@ static const u8 *const sPartyMenu_FooterMessages[NUM_PARTY_FOOTERS] =
     [PARTY_FOOTER_TARGET]            = COMPOUND_STRING("{A_BUTTON} Choose   {B_BUTTON} Cancel"),
     [PARTY_FOOTER_LIST]              = COMPOUND_STRING("{A_BUTTON} Select   {B_BUTTON} Cancel"),
     [PARTY_FOOTER_SPINNER]           = COMPOUND_STRING("{DPAD_UPDOWN} +1/-1   {DPAD_LEFTRIGHT} +10/-10   {A_BUTTON} Use   {B_BUTTON} Cancel"),
+    [PARTY_FOOTER_NO_SIGNAL]         = COMPOUND_STRING("There's no signal! Cannot reach PC. {A_BUTTON} Confirm"),
 };
 
 static const u8 *const sPartyMenu_MsgBoxMessages[] =

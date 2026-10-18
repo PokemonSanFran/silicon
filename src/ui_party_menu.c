@@ -186,6 +186,7 @@ static void PartySlot_Print(u32, u32, u32, u32, enum PartyTextColors, const u8 *
 static s8 *PartyCursor_GetSlotPtr(void);
 static bool32 PartyCursor_HandleDirectionalInput(void);
 static bool32 PartyMenu_CanSwitch(void);
+static bool32 PartyMenu_IsDefaultScreen(void);
 static void PartyCursor_SnapToSlot(void);
 static void PartyHeld_Lift(void);
 static void PartyHeld_SnapToSlot(void);
@@ -226,6 +227,7 @@ static void Task_HandleCancelParticipationYesNoInput(u8);
 static void FinishTwoMonAction(u8);
 static void Task_ReturnToChooseMonAfterText(u8);
 static void Task_WaitForLinkAndReturnToChooseMon(u8);
+static void Task_ReturnToChooseMonAfterConfirm(u8);
 static void PartyMenuDisplayYesNoMenu(void);
 static void PartyYesNo_Draw(u32);
 static s8 PartyMenuProcessYesNoInput(void);
@@ -238,6 +240,7 @@ static void BufferMonSelection(void);
 static void Task_PartyMenuWaitForFade(u8);
 static void Task_ChooseContestMon(u8);
 static void CB2_ChooseContestMon(void);
+static void CB2_ReopenPartyMenuFromPC(void);
 static void Task_ChoosePartyMon(u8);
 static void Task_ChooseMonForMoveRelearner(u8);
 static void CB2_ChooseMonForMoveRelearner(void);
@@ -705,6 +708,22 @@ void Task_HandleChooseMonInput(u8 taskId)
         {
             gPartyMenu.task(taskId);
         }
+        else if (JOY_NEW(START_BUTTON) && PartyMenu_IsDefaultScreen())
+        {
+            if (CellularSignal_GetCurrentStrength() == START_SIGNAL_NONE)
+            {
+                PlaySE(SE_BOO);
+                PartyView_DrawFooter(PARTY_FOOTER_NO_SIGNAL);
+                gTasks[taskId].func = Task_ReturnToChooseMonAfterConfirm;
+            }
+            else
+            {
+                PlaySE(SE_SELECT);
+                PokemonPC_SetReturnToPartyCallback(CB2_ReopenPartyMenuFromPC);
+                sPartyMenuDataPtr->exitCallback = CB2_ShowPokemonPCFromParty;
+                Task_ClosePartyMenu(taskId);
+            }
+        }
     }
 }
 
@@ -1000,6 +1019,16 @@ static void Task_WaitForLinkAndReturnToChooseMon(u8 taskId)
     if (MenuHelpers_ShouldWaitForLinkRecv() != TRUE)
     {
         DisplayPartyMenuStdMessage(PARTY_MSG_CHOOSE_MON);
+        gTasks[taskId].func = Task_HandleChooseMonInput;
+    }
+}
+
+static void Task_ReturnToChooseMonAfterConfirm(u8 taskId)
+{
+    if (JOY_NEW(A_BUTTON))
+    {
+        PlaySE(SE_SELECT);
+        PartyView_DrawFooter(PartyView_GetChooseMonFooter());
         gTasks[taskId].func = Task_HandleChooseMonInput;
     }
 }
@@ -1800,6 +1829,12 @@ static bool32 PartyMenu_CanSwitch(void)
         && gPartyMenu.action == PARTY_ACTION_CHOOSE_MON
         && sPartyMenuDataPtr->partyCount > 1
         && !InBattlePike();
+}
+
+static bool32 PartyMenu_IsDefaultScreen(void)
+{
+    return gPartyMenu.menuType == PARTY_MENU_TYPE_FIELD
+        && gPartyMenu.action == PARTY_ACTION_CHOOSE_MON;
 }
 
 static void PartyHeld_Lift(void)
@@ -4805,6 +4840,12 @@ void CB2_PartyMenuFromStartMenu(void)
 void CB2_ReturnToPartyMenuFromFlyMap(void)
 {
     InitPartyMenu(PARTY_MENU_TYPE_FIELD, PARTY_LAYOUT_SINGLE, PARTY_ACTION_CHOOSE_MON, TRUE, PARTY_MSG_CHOOSE_MON, Task_HandleChooseMonInput, CB2_StartMenu_ReturnToUI);
+}
+
+static void CB2_ReopenPartyMenuFromPC(void)
+{
+    PokemonPC_SetReturnToPartyCallback(NULL);
+    InitPartyMenu(gPartyMenu.menuType, KEEP_PARTY_LAYOUT, gPartyMenu.action, TRUE, PARTY_MSG_CHOOSE_MON, Task_HandleChooseMonInput, gPartyMenu.exitCallback);
 }
 
 void CB2_ShowPartyMenuForItemUse(void)
