@@ -557,7 +557,6 @@ gSpecials::
     def_special CheckSpecies
 	def_special DeleteChosenPartyMon
 	def_special Script_GetGameStat
-	def_special AlohaFromAlolaCheck
 	def_special IsPartyFullOfShinyOctillery
 	def_special Script_CheckForMonAndMove
 	def_special GetPokedexPercentage
