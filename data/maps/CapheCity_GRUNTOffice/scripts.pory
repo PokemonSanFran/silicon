@@ -24,21 +24,3 @@ script CapheCity_TrolleyHQ_Manager_Quest_Script
     release
     end
 }
-
-script CapheCity_TrolleyHQ_Interact_Clerk_Script{
-    goto_if_quest_not_inactive(QUEST_FOODTRUCKBUREACRACY,Quest_Foodtruckbureaucracy_DOT_Active_Dialogue)
-    goto(CapheCity_TrolleyHQ_Clerk_Dialogue)
-}
-
-script CapheCity_TrolleyHQ_Clerk_Dialogue{
-    msgbox(format("I hate having to leave the office to get food... but ordering Rapidoordash is so expensive!"),MSGBOX_NPC,SPEAKER_ISIDORE)
-    end
-}
-
-text gText_CapheCity_TrolleyHQ_IHateHaving{
-    format("I hate having to leave the office to get food... but ordering Rapidoordash is so expensive!")
-}
-
-text gText_CapheCity_TrolleyHQ_DoYouHave{
-    format("Do you have any idea what it takes to make sure all the trolleys run on time? Especially when ridership is down...")
-}

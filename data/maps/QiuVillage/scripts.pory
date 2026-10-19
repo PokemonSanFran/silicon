@@ -34,13 +34,6 @@ script Ramesh_House_LockedDoor_Script
     end
 }
 
-script Waite_Interact_Script
-{
-    msgbox(format("I can't believe this shit!"),,SPEAKER_WAITE,TAIL_WHISPER)
-    goto_if_set(FLAG_BADGE05_GET,Quest_Foodtruckbureaucracy_Food_Interact_Script)
-    end
-}
-
 script QiuVillage_Guy_Interact_Script
 {
     msgbox(gText_ExpandedPlaceholder_Empty,MSGBOX_NPC)
