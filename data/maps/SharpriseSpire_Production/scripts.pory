@@ -35,14 +35,8 @@ script SharpriseSpire_Production_Ramesh_Visibility_Script{
 }
 
 script SharpriseSpire_Interact_Ramesh_Script{
-    returnqueststate(QUEST_RECRUITLOCALARTISTS)
-
-    switch(var(VAR_RESULT)){
-        case QUEST_MENU_SET_ACTIVE: goto(Quest_Recruitlocalartists_Active_Dialogue)
-        case QUEST_MENU_SET_REWARD: goto(Quest_Recruitlocalartists_CompleteQuest_Dialogue)
-        default: goto(AlwaysWatchingWazowski_IgnoringPlayer_Dialogue)
+        goto(AlwaysWatchingWazowski_IgnoringPlayer_Dialogue)
     }
-}
 
 script SharpriseSpire_Script_HideProductionGuard
 {
