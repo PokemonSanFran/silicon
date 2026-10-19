@@ -2076,7 +2076,6 @@ EventScript_PalletTown_PlayersHouse_2F_TurnOnPC::
 .include "data/maps/OrolandColiseum_Arena/scripts.inc"
 .include "data/maps/OrolandColiseum_Hall/scripts.inc"
 .include "data/maps/OrolandColiseum_Hallway/scripts.inc"
-.include "data/maps/Orolandferry/scripts.inc"
 .include "data/maps/Palacefinearts/scripts.inc"
 .include "data/maps/PARC/scripts.inc"
 .include "data/maps/Perlacia_City_Coffee/scripts.inc"

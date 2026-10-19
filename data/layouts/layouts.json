@@ -10623,19 +10623,6 @@
       "layout_version": "emerald"
     },
     {
-      "id": "LAYOUT_OROLANDFERRY",
-      "name": "Orolandferry_Layout",
-      "width": 17,
-      "height": 13,
-      "border_width": 2,
-      "border_height": 2,
-      "primary_tileset": "gTileset_General",
-      "secondary_tileset": "gTileset_IslandHarbor",
-      "border_filepath": "data/layouts/Orolandferry/border.bin",
-      "blockdata_filepath": "data/layouts/Orolandferry/map.bin",
-      "layout_version": "emerald"
-    },
-    {
       "id": "LAYOUT_ROUTE_B",
       "name": "RouteB_Layout",
       "width": 10,
