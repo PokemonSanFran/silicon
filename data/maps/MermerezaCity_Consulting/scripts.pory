@@ -1,6 +1,5 @@
 mapscripts MermerezaCity_Consulting_MapScripts {
     MAP_SCRIPT_ON_TRANSITION {
-        goto(MermerezaCity_Consulting_MapScripts_OnTransition)
     }
 }
 
@@ -14,8 +13,4 @@ script MermerezaCity_Consulting_Dialogue_InteractTeodoro
     closemessage
     release
     end
-}
-
-script MermerezaCity_Consulting_MapScripts_OnTransition {
-    setflag(FLAG_TEMP_2) //Hide Charlotte
 }
