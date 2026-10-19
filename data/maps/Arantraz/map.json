@@ -21,6 +21,7 @@
   ],
   "object_events": [
     {
+      "local_id": "LOCALID_ARANTRAZ_BOAT_ATTENDANT",
       "graphics_id": "OBJ_EVENT_GFX_WOMAN_2",
       "x": 49,
       "y": 61,
@@ -34,6 +35,7 @@
       "flag": "FLAG_TEMP_3"
     },
     {
+      "local_id": "LOCALID_ARANTRAZ_BOAT",
       "graphics_id": "OBJ_EVENT_GFX_SS_TIDAL",
       "x": 45,
       "y": 60,
@@ -117,6 +119,7 @@
       "flag": "0"
     },
     {
+      "local_id": "LOCALID_ARANTRAZ_CHALLENGE_ATTENDANT",
       "graphics_id": "OBJ_EVENT_GFX_NINJA_BOY",
       "x": 38,
       "y": 60,

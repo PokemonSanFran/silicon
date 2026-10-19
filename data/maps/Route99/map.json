@@ -26,6 +26,7 @@
   ],
   "object_events": [
     {
+      "local_id": "LOCALID_ROUTE_99_HOUSING_PROTEST_A",
       "graphics_id": "OBJ_EVENT_GFX_GIRL_1",
       "x": 5,
       "y": 15,
@@ -39,6 +40,7 @@
       "flag": "FLAG_TEMP_5"
     },
     {
+      "local_id": "LOCALID_ROUTE_99_HOUSING_PROTEST_B",
       "graphics_id": "OBJ_EVENT_GFX_PICNICKER",
       "x": 6,
       "y": 16,
@@ -52,6 +54,7 @@
       "flag": "FLAG_TEMP_5"
     },
     {
+      "local_id": "LOCALID_ROUTE_99_HOUSING_PROTEST_C",
       "graphics_id": "OBJ_EVENT_GFX_FAT_MAN",
       "x": 7,
       "y": 17,
@@ -65,6 +68,7 @@
       "flag": "FLAG_TEMP_5"
     },
     {
+      "local_id": "LOCALID_ROUTE_99_HOUSING_PROTEST_D",
       "graphics_id": "OBJ_EVENT_GFX_CONTEST_JUDGE",
       "x": 8,
       "y": 16,
@@ -78,6 +82,7 @@
       "flag": "FLAG_TEMP_5"
     },
     {
+      "local_id": "LOCALID_ROUTE_99_HOUSING_PROTEST_E",
       "graphics_id": "OBJ_EVENT_GFX_LASS",
       "x": 9,
       "y": 15,
@@ -91,6 +96,7 @@
       "flag": "FLAG_TEMP_5"
     },
     {
+      "local_id": "LOCALID_ROUTE_99_HOUSING_PROTEST_F",
       "graphics_id": "OBJ_EVENT_GFX_UNION_ROOM_NURSE",
       "x": 6,
       "y": 20,
@@ -104,6 +110,7 @@
       "flag": "FLAG_TEMP_5"
     },
     {
+      "local_id": "LOCALID_ROUTE_99_HOUSING_PROTEST_G",
       "graphics_id": "OBJ_EVENT_GFX_FISHERMAN",
       "x": 9,
       "y": 21,
@@ -117,6 +124,7 @@
       "flag": "FLAG_TEMP_5"
     },
     {
+      "local_id": "LOCALID_ROUTE_99_HOUSING_PROTEST_H",
       "graphics_id": "OBJ_EVENT_GFX_OLD_MAN",
       "x": 9,
       "y": 23,
@@ -130,6 +138,7 @@
       "flag": "FLAG_TEMP_5"
     },
     {
+      "local_id": "LOCALID_ROUTE_99_HOUSING_PROTEST_I",
       "graphics_id": "OBJ_EVENT_GFX_LINK_RECEPTIONIST",
       "x": 6,
       "y": 22,
@@ -143,6 +152,7 @@
       "flag": "FLAG_TEMP_5"
     },
     {
+      "local_id": "LOCALID_ROUTE_99_HOUSING_PROTEST_FAKE_COMRADE_A",
       "graphics_id": "OBJ_EVENT_GFX_COMRADE_6",
       "x": 1,
       "y": 24,
@@ -156,6 +166,7 @@
       "flag": "FLAG_TEMP_1"
     },
     {
+      "local_id": "LOCALID_ROUTE_99_HOUSING_PROTEST_FAKE_COMRADE_B",
       "graphics_id": "OBJ_EVENT_GFX_COMRADE_6",
       "x": 2,
       "y": 24,
@@ -169,6 +180,7 @@
       "flag": "FLAG_TEMP_1"
     },
     {
+      "local_id": "LOCALID_ROUTE_99_HOUSING_PROTEST_LANDLORD",
       "graphics_id": "OBJ_EVENT_GFX_MANIAC",
       "x": 2,
       "y": 17,
@@ -182,6 +194,7 @@
       "flag": "FLAG_TEMP_3"
     },
     {
+      "local_id": "LOCALID_ROUTE_99_HOUSING_PROTEST_FAKE_COMRADE_MON",
       "graphics_id": "OBJ_EVENT_GFX_VAR_0",
       "x": 2,
       "y": 19,
@@ -195,6 +208,7 @@
       "flag": "FLAG_TEMP_2"
     },
     {
+      "local_id": "LOCALID_ROUTE_99_HOUSING_PROTEST_J",
       "graphics_id": "OBJ_EVENT_GFX_CAMPER",
       "x": 8,
       "y": 12,
@@ -208,6 +222,7 @@
       "flag": "0"
     },
     {
+      "local_id": "LOCALID_ROUTE_99_HOUSING_PROTEST_K",
       "graphics_id": "OBJ_EVENT_GFX_SCIENTIST_1",
       "x": 2,
       "y": 5,
@@ -221,6 +236,7 @@
       "flag": "0"
     },
     {
+      "local_id": "LOCALID_BERRY_TREE_ROUTE_99_1",
       "graphics_id": "OBJ_EVENT_GFX_BERRY_TREE",
       "x": 8,
       "y": 27,
@@ -234,6 +250,7 @@
       "flag": "0"
     },
     {
+      "local_id": "LOCALID_BERRY_TREE_ROUTE_99_2",
       "graphics_id": "OBJ_EVENT_GFX_BERRY_TREE",
       "x": 8,
       "y": 31,

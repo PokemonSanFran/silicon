@@ -141,6 +141,7 @@
       "flag": "FLAG_TEMP_3"
     },
     {
+      "local_id": "LOCALID_HALAI_ISLAND_EARTHQUAKE_VICTIM_A",
       "graphics_id": "OBJ_EVENT_GFX_FISHERMAN",
       "x": 32,
       "y": 21,
@@ -238,19 +239,7 @@
       "flag": "FLAG_TEMP_5"
     },
     {
-      "graphics_id": "OBJ_EVENT_GFX_GIRL_1",
-      "x": 31,
-      "y": 28,
-      "elevation": 3,
-      "movement_type": "MOVEMENT_TYPE_NONE",
-      "movement_range_x": 0,
-      "movement_range_y": 0,
-      "trainer_type": "TRAINER_TYPE_NONE",
-      "trainer_sight_or_berry_tree_id": "0",
-      "script": "NULL",
-      "flag": "FLAG_TEMP_6"
-    },
-    {
+      "local_id": "LOCALID_HALAI_ISLAND_MELISSA",
       "graphics_id": "OBJ_EVENT_GFX_WOMAN_5",
       "x": 17,
       "y": 31,
@@ -264,6 +253,7 @@
       "flag": "FLAG_TEMP_6"
     },
     {
+      "local_id": "LOCALID_HALAI_ISLAND_PERSUASIVE_PASSENGER_LANDLORD",
       "graphics_id": "OBJ_EVENT_GFX_CYCLING_TRIATHLETE_M",
       "x": 33,
       "y": 26,
@@ -277,6 +267,7 @@
       "flag": "TRAINER_FLAGS_START+TRAINER_PERSUASIVE_LANDLORD"
     },
     {
+      "local_id": "LOCALID_BERRY_TREE_HALAI_ISLAND_1",
       "graphics_id": "OBJ_EVENT_GFX_BERRY_TREE",
       "x": 27,
       "y": 26,
@@ -290,6 +281,7 @@
       "flag": "0"
     },
     {
+      "local_id": "LOCALID_BERRY_TREE_HALAI_ISLAND_2",
       "graphics_id": "OBJ_EVENT_GFX_BERRY_TREE",
       "x": 27,
       "y": 27,

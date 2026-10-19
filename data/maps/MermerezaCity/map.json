@@ -50,6 +50,7 @@
       "flag": "0"
     },
     {
+      "local_id": "LOCALID_MERMEREZA_CITY_TAXI",
       "graphics_id": "OBJ_EVENT_GFX_TRUCK",
       "x": 37,
       "y": 5,
@@ -63,6 +64,7 @@
       "flag": "0"
     },
     {
+      "local_id": "LOCALID_PERSAUSIVE_PASSENGER_SIBLING",
       "graphics_id": "OBJ_EVENT_GFX_COOK",
       "x": 17,
       "y": 25,
@@ -76,6 +78,7 @@
       "flag": "FLAG_QUEST_PERSUASIVE_SIBLING"
     },
     {
+      "local_id": "LOCALID_BERRY_TREE_MERMEREZA_CITY_1",
       "graphics_id": "OBJ_EVENT_GFX_BERRY_TREE",
       "x": 13,
       "y": 23,
@@ -89,6 +92,7 @@
       "flag": "0"
     },
     {
+      "local_id": "LOCALID_BERRY_TREE_MERMEREZA_CITY_2",
       "graphics_id": "OBJ_EVENT_GFX_BERRY_TREE",
       "x": 13,
       "y": 24,

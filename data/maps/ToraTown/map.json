@@ -35,6 +35,7 @@
       "flag": "FLAG_TEMP_1"
     },
     {
+      "local_id": "LOCALID_TORA_TOWN_TAXI",
       "graphics_id": "OBJ_EVENT_GFX_TRUCK",
       "x": 6,
       "y": 2,
@@ -48,6 +49,7 @@
       "flag": "0"
     },
     {
+      "local_id": "LOCALID_BERRY_TREE_TORA_TOWN_1",
       "graphics_id": "OBJ_EVENT_GFX_BERRY_TREE",
       "x": 13,
       "y": 4,
@@ -61,6 +63,7 @@
       "flag": "0"
     },
     {
+      "local_id": "LOCALID_BERRY_TREE_TORA_TOWN_2",
       "graphics_id": "OBJ_EVENT_GFX_BERRY_TREE",
       "x": 13,
       "y": 5,

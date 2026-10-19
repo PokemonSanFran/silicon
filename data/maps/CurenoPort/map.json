@@ -40,6 +40,7 @@
       "flag": "FLAG_TEMP_1"
     },
     {
+      "local_id": "LOCALID_HOWDOWEGETHOME_BYSTANDERA",
       "graphics_id": "OBJ_EVENT_GFX_MAN_3",
       "x": 1,
       "y": 23,
@@ -53,6 +54,7 @@
       "flag": "FLAG_TEMP_5"
     },
     {
+      "local_id": "LOCALID_HOWDOWEGETHOME_BYSTANDERB",
       "graphics_id": "OBJ_EVENT_GFX_MAN_1",
       "x": 1,
       "y": 18,
@@ -66,6 +68,7 @@
       "flag": "FLAG_TEMP_5"
     },
     {
+      "local_id": "LOCALID_HOWDOWEGETHOME_BYSTANDERC",
       "graphics_id": "OBJ_EVENT_GFX_WOMAN_5",
       "x": 2,
       "y": 24,
@@ -79,6 +82,7 @@
       "flag": "FLAG_TEMP_5"
     },
     {
+      "local_id": "LOCALID_HOWDOWEGETHOME_BYSTANDERD",
       "graphics_id": "OBJ_EVENT_GFX_WOMAN_3",
       "x": 5,
       "y": 18,
@@ -120,6 +124,7 @@
       "flag": "FLAG_TEMP_5"
     },
     {
+      "local_id": "LOCALID_HOWDOWEGETHOME_BYSTANDERE",
       "graphics_id": "OBJ_EVENT_GFX_MAN_5",
       "x": 6,
       "y": 19,
@@ -133,6 +138,7 @@
       "flag": "FLAG_TEMP_5"
     },
     {
+      "local_id": "LOCALID_HOWDOWEGETHOME_BYSTANDERF",
       "graphics_id": "OBJ_EVENT_GFX_MAN_4",
       "x": 3,
       "y": 24,
@@ -160,6 +166,7 @@
       "flag": "FLAG_TEMP_5"
     },
     {
+      "local_id": "LOCALID_HOWDOWEGETHOME_BYSTANDERG",
       "graphics_id": "OBJ_EVENT_GFX_BARD",
       "x": 2,
       "y": 23,
@@ -173,6 +180,7 @@
       "flag": "FLAG_TEMP_5"
     },
     {
+      "local_id": "LOCALID_HOWDOWEGETHOME_BYSTANDERH",
       "graphics_id": "OBJ_EVENT_GFX_FAT_MAN",
       "x": 6,
       "y": 18,
@@ -186,6 +194,7 @@
       "flag": "FLAG_TEMP_5"
     },
     {
+      "local_id": "LOCALID_HOWDOWEGETHOME_BYSTANDERI",
       "graphics_id": "OBJ_EVENT_GFX_HEX_MANIAC",
       "x": 1,
       "y": 17,
@@ -199,6 +208,7 @@
       "flag": "FLAG_TEMP_5"
     },
     {
+      "local_id": "LOCALID_HOWDOWEGETHOME_BYSTANDERJ",
       "graphics_id": "OBJ_EVENT_GFX_CYCLING_TRIATHLETE_M",
       "x": 27,
       "y": 15,
@@ -226,6 +236,7 @@
       "flag": "FLAG_TEMP_1"
     },
     {
+      "local_id": "LOCALID_CURENO_PORT_TAXI",
       "graphics_id": "OBJ_EVENT_GFX_TRUCK",
       "x": 9,
       "y": 7,
@@ -239,6 +250,7 @@
       "flag": "0"
     },
     {
+      "local_id": "LOCALID_BERRY_TREE_CURENO_PORT_1",
       "graphics_id": "OBJ_EVENT_GFX_BERRY_TREE",
       "x": 10,
       "y": 15,
@@ -252,6 +264,7 @@
       "flag": "0"
     },
     {
+      "local_id": "LOCALID_BERRY_TREE_CURENO_PORT_2",
       "graphics_id": "OBJ_EVENT_GFX_BERRY_TREE",
       "x": 11,
       "y": 15,

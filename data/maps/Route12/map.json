@@ -40,6 +40,7 @@
       "flag": "FLAG_TEMP_2"
     },
     {
+      "local_id": "LOCALID_BERRY_TREE_ROUTE_12_1",
       "graphics_id": "OBJ_EVENT_GFX_BERRY_TREE",
       "x": 3,
       "y": 13,
@@ -53,6 +54,7 @@
       "flag": "0"
     },
     {
+      "local_id": "LOCALID_BERRY_TREE_ROUTE_12_2",
       "graphics_id": "OBJ_EVENT_GFX_BERRY_TREE",
       "x": 13,
       "y": 7,

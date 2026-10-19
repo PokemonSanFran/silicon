@@ -15,6 +15,7 @@
   "connections": null,
   "object_events": [
     {
+      "local_id": "LOCALID_FERRY_BUILDING_ATTENDANT",
       "graphics_id": "OBJ_EVENT_GFX_FAT_MAN",
       "x": 8,
       "y": 10,
@@ -28,6 +29,7 @@
       "flag": "FLAG_TEMP_2"
     },
     {
+      "local_id": "LOCALID_FERRY_BUILDING_BOAT",
       "graphics_id": "OBJ_EVENT_GFX_SS_TIDAL",
       "x": 8,
       "y": 9,

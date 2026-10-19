@@ -41,6 +41,7 @@
   ],
   "object_events": [
     {
+      "local_id": "LOCALID_ROUTE_4_BAIYA",
       "graphics_id": "OBJ_EVENT_GFX_BAIYA",
       "x": 10,
       "y": 27,
@@ -54,6 +55,7 @@
       "flag": "FLAG_TEMP_1"
     },
     {
+      "local_id": "LOCALID_ROUTE_4_ADAORA",
       "graphics_id": "OBJ_EVENT_GFX_ADAORA",
       "x": 7,
       "y": 51,
@@ -67,6 +69,7 @@
       "flag": "FLAG_TEMP_1"
     },
     {
+      "local_id": "LOCALID_ROUTE_4_MAGNUS",
       "graphics_id": "OBJ_EVENT_GFX_MAGNUS",
       "x": 7,
       "y": 80,
@@ -120,6 +123,7 @@
       "flag": "0"
     },
     {
+      "local_id": "LOCALID_BERRY_TREE_ROUTE_4_1",
       "graphics_id": "OBJ_EVENT_GFX_BERRY_TREE",
       "x": 9,
       "y": 39,
@@ -133,6 +137,7 @@
       "flag": "0"
     },
     {
+      "local_id": "LOCALID_BERRY_TREE_ROUTE_4_2",
       "graphics_id": "OBJ_EVENT_GFX_BERRY_TREE",
       "x": 9,
       "y": 41,

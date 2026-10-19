@@ -124,6 +124,7 @@
       "flag": "0"
     },
     {
+      "local_id": "LOCALID_BERRY_TREE_ROUTE_6_1",
       "graphics_id": "OBJ_EVENT_GFX_BERRY_TREE",
       "x": 17,
       "y": 7,
@@ -137,6 +138,7 @@
       "flag": "0"
     },
     {
+      "local_id": "LOCALID_BERRY_TREE_ROUTE_6_2",
       "graphics_id": "OBJ_EVENT_GFX_BERRY_TREE",
       "x": 18,
       "y": 7,
@@ -163,6 +165,7 @@
       "flag": "0"
     },
     {
+      "local_id": "LOCALID_BERRY_TREE_ROUTE_6_3",
       "graphics_id": "OBJ_EVENT_GFX_BERRY_TREE",
       "x": 47,
       "y": 2,
@@ -176,6 +179,7 @@
       "flag": "0"
     },
     {
+      "local_id": "LOCALID_BERRY_TREE_ROUTE_6_4",
       "graphics_id": "OBJ_EVENT_GFX_BERRY_TREE",
       "x": 48,
       "y": 2,
@@ -189,6 +193,7 @@
       "flag": "0"
     },
     {
+      "local_id": "LOCALID_BERRY_TREE_ROUTE_6_5",
       "graphics_id": "OBJ_EVENT_GFX_BERRY_TREE",
       "x": 49,
       "y": 2,
