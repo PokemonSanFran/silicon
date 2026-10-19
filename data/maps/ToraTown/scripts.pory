@@ -9,9 +9,6 @@ mapscripts ToraTown_MapScripts {
     MAP_SCRIPT_ON_TRANSITION {
         call(ToraTown_Script_HandleShinzoVisibility)
     }
-    MAP_SCRIPT_ON_LOAD{
-       call(Quest_ArtisanBalls3_ChangeDoorMetatile_Script)
-    }
     MAP_SCRIPT_ON_FRAME_TABLE [
         VAR_SHARPRISESPIRE_CONFERENCE_STATE, DEFEATED_THIRD_LEADER: WowYoureStrong_WalkToPlayer_Script
         VAR_TEMP_1, 0: SwagbagContinued_Dialogue_StartDexnav
