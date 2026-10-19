@@ -10,7 +10,6 @@ mapscripts PetarosaBorough_MapScripts {
 
     MAP_SCRIPT_ON_TRANSITION {
         call(FriendsForDinner_BlockMansionAccess_Script)
-        call(Quest_BuildingScope_MoveEmployee_Script)
         call(Quest_Breaktheinternet_WarehouseGuard_Script)
     }
 }
