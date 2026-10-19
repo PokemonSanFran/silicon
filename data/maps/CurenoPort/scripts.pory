@@ -7,7 +7,6 @@ mapscripts CurenoPort_MapScripts {
 		call(WarehouseRave_Script_StartOutsideMusic)
         call(HowDoWeGetHome_PostSceneObjectCleanUp_Script)
         call(HowDoWeGetHome_FerryFixed_Script)
-        call(Quest_NeighborhoodCleanUp2_ObjectVisibility_Script)
         call(Quest_Diggingupadaorasdirt_Script_ControlVisibilityDigginginvestigator)
     }
     MAP_SCRIPT_ON_WARP_INTO_MAP_TABLE [

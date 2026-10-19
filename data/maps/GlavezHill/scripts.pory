@@ -4,7 +4,6 @@ mapscripts GlavezHill_MapScripts {
 		callnative(WarpTaxiAfterCutscene)
 	}
     MAP_SCRIPT_ON_TRANSITION{
-        call(Quest_NeighborhoodCleanUp3_ObjectVisibility_Script)
     }
     MAP_SCRIPT_ON_FRAME_TABLE [
         FLAG_VISITED_GLAVEZ_HILL, FALSE: Generic_Mappreview
