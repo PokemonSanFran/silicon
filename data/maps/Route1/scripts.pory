@@ -6,7 +6,6 @@ mapscripts Route1_MapScripts {
     }
     MAP_SCRIPT_ON_LOAD
     {
-    call(Quest_GardenCleanUp_ClearGarden_Script)
     }
     MAP_SCRIPT_ON_RESUME
     {
