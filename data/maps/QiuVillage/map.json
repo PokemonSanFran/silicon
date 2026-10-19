@@ -124,20 +124,6 @@
       "flag": "FLAG_TEMP_5"
     },
     {
-      "local_id": "LOCALID_QIU_GUNDA",
-      "graphics_id": "OBJ_EVENT_GFX_WOMAN_3",
-      "x": 4,
-      "y": 10,
-      "elevation": 3,
-      "movement_type": "MOVEMENT_TYPE_NONE",
-      "movement_range_x": 0,
-      "movement_range_y": 0,
-      "trainer_type": "TRAINER_TYPE_NONE",
-      "trainer_sight_or_berry_tree_id": "0",
-      "script": "Quest_ButOnlyIn_Interact_Gunda_Script",
-      "flag": "FLAG_TEMP_6"
-    },
-    {
       "local_id": "LOCALID_QIU_WILDFIRERISKWORKER",
       "graphics_id": "OBJ_EVENT_GFX_ARTIST",
       "x": 7,
