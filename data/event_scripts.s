@@ -2103,7 +2103,6 @@ EventScript_PalletTown_PlayersHouse_2F_TurnOnPC::
 .include "data/maps/Presto_Barge_2/scripts.inc"
 .include "data/maps/Presto_Barge_3/scripts.inc"
 .include "data/maps/Psfroute7e17fdd1/scripts.inc"
-.include "data/maps/Psfroute9f45da86/scripts.inc"
 .include "data/maps/PsfrouteA04e14ea_Grotto/scripts.inc"
 .include "data/maps/QiuVillage/scripts.inc"
 .include "data/maps/QiuVillage_Apartment/scripts.inc"

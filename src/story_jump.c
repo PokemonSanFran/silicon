@@ -1229,7 +1229,7 @@ void JumpPlayerTo_YoungPadawan(bool32 jumpType)
 void FlagsVarWarp_WaitYouWentWhere()
 {
     VarSet(VAR_WAIT_YOU_WENT_WHERE, POST_WAITYOUWENTWHERE);
-    SetWarpDestination(MAP_GROUP(MAP_PSFROUTE9F45DA86),MAP_NUM(MAP_PSFROUTE9F45DA86),WARP_ID_NONE,3,1);
+    SetWarpDestination(MAP_GROUP(MAP_POPIDORA_PIER),MAP_NUM(MAP_POPIDORA_PIER),0,USE_WARP_ID,USE_WARP_ID);
 }
 
 void JumpPlayerTo_WaitYouWentWhere(bool32 jumpType)

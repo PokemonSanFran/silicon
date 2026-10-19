@@ -10467,19 +10467,6 @@
       "layout_version": "emerald"
     },
     {
-      "id": "LAYOUT_PSFROUTE9F45DA86",
-      "name": "Psfroute9f45da86_Layout",
-      "width": 50,
-      "height": 5,
-      "border_width": 2,
-      "border_height": 2,
-      "primary_tileset": "gTileset_General",
-      "secondary_tileset": "gTileset_Petalburg",
-      "border_filepath": "data/layouts/Psfroute9f45da86/border.bin",
-      "blockdata_filepath": "data/layouts/Psfroute9f45da86/map.bin",
-      "layout_version": "emerald"
-    },
-    {
       "id": "LAYOUT_ROUTE4",
       "name": "Route4_Layout",
       "width": 30,
