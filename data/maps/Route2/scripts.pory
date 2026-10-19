@@ -1,7 +1,6 @@
 mapscripts Route2_MapScripts {
     MAP_SCRIPT_ON_TRANSITION {
         call(Quest_NeighborhoodCleanUp_ObjectVisibility_Script)
-        call(Quest_Ultrawormholeresearch_ControlTotemVisibility)
         call_if_subquest_complete(QUEST_BODEGABURNOUT,SUB_QUEST_15,Quest_Bodegaburnout_Script_Hide_BodegaburnoutRescueK)
         call_if_gt(VAR_STORYLINE_STATE,STORY_COMPLETED_NAVAL_BASE,HeresHowThisIsGoingToGo_ConstructionCompleted_Script)
     }
@@ -10,7 +9,6 @@ mapscripts Route2_MapScripts {
         call_if_gt(VAR_CONSTRUCTION_STRIKE_STATE,0,TheStrikeStrikesBack_UnblockConstruction_Script)
     }
     MAP_SCRIPT_ON_RESUME{
-        call(Quest_Ultrawormholeresearch_TryRemoveTotem_Script)
     }
     MAP_SCRIPT_ON_FRAME_TABLE [
         VAR_CONSTRUCTION_STRIKE_STATE, STRIKE_HAS_BEGUN: TheStrikeStrikesBack_Intro_Dialogue

@@ -1,10 +1,8 @@
 mapscripts NongyuBridge_MapScripts{
     MAP_SCRIPT_ON_TRANSITION{
-        call(Quest_Ultrawormholeresearch_ControlTotemVisibility)
         call_if_subquest_complete(QUEST_GETTHEBANDBACKTOGETHER,SUB_QUEST_5,Quest_Getthebandbacktogether_Hide_GetthebandbacktogetherbikerE)
     }
     MAP_SCRIPT_ON_RESUME{
-        call(Quest_Ultrawormholeresearch_TryRemoveTotem_Script)
     }
     MAP_SCRIPT_ON_FRAME_TABLE [
         FLAG_VISITED_NONGYU_BRIDGE, FALSE: Generic_Mappreview

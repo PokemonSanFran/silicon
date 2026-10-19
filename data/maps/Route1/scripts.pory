@@ -1,6 +1,5 @@
 mapscripts Route1_MapScripts {
     MAP_SCRIPT_ON_TRANSITION{
-        call(Quest_Ultrawormholeresearch_ControlTotemVisibility)
 		call_if_quest_not_complete(QUEST_RESTORETIRABUDINGYM,Quest_Rematches_Script_HideBD)
         call_if_subquest_complete(QUEST_WALLACEARMY,SUB_QUEST_1,WallaceArmy_Script_HideStanB)
     }
@@ -9,7 +8,6 @@ mapscripts Route1_MapScripts {
     }
     MAP_SCRIPT_ON_RESUME
     {
-        call(Quest_Ultrawormholeresearch_TryRemoveTotem_Script)
     }
 }
 

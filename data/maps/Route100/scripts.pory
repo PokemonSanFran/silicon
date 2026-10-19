@@ -3,11 +3,9 @@ mapscripts Route100_MapScripts
 	MAP_SCRIPT_ON_TRANSITION
 	{
 		call_if_ne(VAR_LEAVERRA_FOREST_STATE,CHARLOTTE_WAITING_LEAVERRA_FOREST,EnterTheMaster_Script_HideCharlotteEntrance)
-			call(Quest_Ultrawormholeresearch_ControlTotemVisibility)
 	}
 	MAP_SCRIPT_ON_RESUME
 	{
-		call(Quest_Ultrawormholeresearch_TryRemoveTotem_Script)
 	}
 }
 
