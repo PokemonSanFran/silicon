@@ -579,31 +579,6 @@ void Script_Quest_Rockcollector_CountNumberOfStonesToAsk(void)
 }
 
 // ***********************************************************************
-// Quest: Hidden Grotto Mapping
-// ***********************************************************************
-
-u16 Quest_Hiddengrottomapping_CountCompletedSubquests(void){
-    return Quest_Generic_CountAndBufferRemainingSubquests(QUEST_HIDDENGROTTOMAPPING);
-}
-
-bool8 Quest_Hiddengrottomapping_CheckForJournalPage(void){
-    u16 currentJournalPage;
-    bool8 hasJournalPages = FALSE;
-    u8 i;
-
-    for (i = 0; i < QUEST_HIDDENGROTTOMAPPING_SUB_COUNT; i++){
-        currentJournalPage = ITEM_PANNEN_JOURNAL_PAGE_1 + i;
-
-        if (CheckBagHasItem(currentJournalPage,1)){
-            RemoveBagItem(currentJournalPage,1);
-            QuestMenu_GetSetSubquestState(QUEST_HIDDENGROTTOMAPPING,FLAG_SET_COMPLETED,i);
-            hasJournalPages = TRUE;
-        }
-    }
-    return hasJournalPages;
-}
-
-// ***********************************************************************
 // Quest: Ultra Wormhole Research
 // ***********************************************************************
 
@@ -1565,56 +1540,6 @@ void Quest_Persuasivepassenger_TakeNeededItems(void){
         RemoveBagItem(ITEM_WATMEL_BERRY,1);
         RemoveBagItem(ITEM_LEMONADE,2);
     }
-}
-
-// ***********************************************************************
-// Quest: Skill Library
-// ***********************************************************************
-
-u32 Quest_Skilllibrary_CountObtainedTechnicalMachines(void)
-{
-    u32 count = 0, machineIndex = 0;
-    u32 machineRange = (ITEM_TM001 + NUM_TECHNICAL_MACHINES);
-
-    for (machineIndex = ITEM_TM001; machineIndex < machineRange; machineIndex++)
-        if (CheckBagHasItem(machineIndex,1))
-            count++;
-
-    return count;
-}
-
-void Quest_Skilllibrary_StoreAndCompare(void)
-{
-    u32 numMachines = Quest_Skilllibrary_CountObtainedTechnicalMachines();
-    u32 previousNumMachines = VarGet(VAR_QUEST_SKILLLIBRARY_TM_COUNT);
-    u32 diff = (numMachines - previousNumMachines);
-    u32 remainingMachines = (NUM_TECHNICAL_MACHINES - numMachines);
-    bool32 hasMoreMachines = (diff > 0);
-
-    gSpecialVar_Result = hasMoreMachines;
-    ConvertIntToDecimalStringN(gStringVar1, numMachines, STR_CONV_MODE_LEFT_ALIGN, 3);
-
-    if (!hasMoreMachines)
-        return;
-
-    VarSet(VAR_QUEST_SKILLLIBRARY_TM_COUNT,numMachines);
-    ConvertIntToDecimalStringN(gStringVar2, diff, STR_CONV_MODE_LEFT_ALIGN, 3);
-    ConvertIntToDecimalStringN(gStringVar3, remainingMachines, STR_CONV_MODE_LEFT_ALIGN, 3);
-}
-
-u32 Quest_Skilllibrary_GetPercentage(void)
-{
-    return (Quest_Skilllibrary_CountObtainedTechnicalMachines() / NUM_TECHNICAL_MACHINES) * 100;
-}
-
-void Quest_Skilllibrary_Debug(void)
-{
-    u32 machineIndex = 0;
-    u32 machineRange = (ITEM_TM001 + NUM_TECHNICAL_MACHINES);
-
-    for (machineIndex = ITEM_TM001; machineIndex < machineRange; machineIndex++)
-        if (!CheckBagHasItem(machineIndex,1))
-            AddBagItem(machineIndex,1);
 }
 
 // ***********************************************************************

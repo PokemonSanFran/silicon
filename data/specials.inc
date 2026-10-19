@@ -559,18 +559,14 @@ gSpecials::
 	def_special Script_GetGameStat
 	def_special IsPartyFullOfShinyOctillery
 	def_special Script_CheckForMonAndMove
-	def_special GetPokedexPercentage
 	def_special Script_GetCurrentMapName
 	def_special CopyMonToStolenTradeStorage
 	def_special CopyMonFromStolenTradeStorage
     def_special CheckPartyHasOneMon
-    def_special ConvertChallengeTurnsToRank
     def_special KitchenvolunteeringFunc_GeneratePantryItem
     def_special KitchenvolunteeringFunc_CheckProgressAndSetReward
     def_special KitchenvolunteeringFunc_ChooseRandomPantryItem
     def_special HiddenGrotto_LoadGrottoAndWarpPlayer
-    def_special Quest_Hiddengrottomapping_CheckForJournalPage
-    def_special Quest_Hiddengrottomapping_CountCompletedSubquests
     def_special Quest_Ultrawormholeresearch_SetTotemBattle
     def_special Quest_Ultrawormholeresearch_ShouldTotemNotSpawn
     def_special Quest_Ultrawormholeresearch_SetDefeatedTotemFlag
@@ -593,8 +589,6 @@ gSpecials::
     def_special Quest_Persuasivepassenger_CheckQuestAndChooseDriver
     def_special Quest_Persuasivepassenger_CheckNeededItems
     def_special Quest_Persuasivepassenger_TakeNeededItems
-    def_special Quest_Skilllibrary_StoreAndCompare
-    def_special Quest_Skilllibrary_Debug
     def_special Quest_Restorezenzugym_CheckRemainingSubquests
     def_special Quest_Restoreespuleeoutskirts_CheckRemainingSubquests
     def_special Quest_Taxicabturnaround_LookUpQuestType
