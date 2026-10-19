@@ -7,7 +7,6 @@ mapscripts TirabudinPlace_MapScripts
 	}
     MAP_SCRIPT_ON_TRANSITION
     {
-        call(Quest_LastMusicVenue_HidePublicDrummers)
         callnative(LetsGrabLunch_IncrementStoryVariable)
         call(Quest_Inversehallucinogenic_ControlLeaderVisibilityOutside_Script)
     }
