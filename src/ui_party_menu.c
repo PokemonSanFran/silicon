@@ -184,6 +184,12 @@ static bool32 PartySlot_IsAbilityItem(void);
 static void PartySlot_DrawAbility(u32, u32, struct Pokemon *, u32);
 static bool32 PartySlot_IsPPItem(void);
 static void PartySlot_DrawPP(u32, struct Pokemon *, u32);
+static enum FormChanges PartySlot_GetFormChangeMethod(void);
+static enum Item PartySlot_GetFormChangeItem(void);
+static const u8 *PartySlot_GetFormName(enum Species);
+static bool32 PartySlot_ShowsFormChange(struct Pokemon *);
+static void PartySlot_DrawFormChange(u32, u32, struct Pokemon *, u32);
+static enum Species PartyMon_GetFormChangeTarget(struct Pokemon *);
 static u32 PartySlot_GetExpItemCeiling(void);
 static u32 PartySlot_GetExpItemGain(struct Pokemon *, u32);
 static u32 PartySlot_GetExpItemMaxCount(struct Pokemon *);
@@ -714,6 +720,7 @@ void Task_HandleChooseMonInput(u8 taskId)
              || PartySlot_IsMint()
              || PartySlot_IsAbilityItem()
              || PartySlot_IsPPItem()
+             || PartySlot_GetFormChangeMethod() != FORM_CHANGE_TERMINATOR
              || PartySlot_GetXItemStat() != NUM_BATTLE_STATS)
             {
                 PartySlot_Draw(prevSlot);
@@ -1203,6 +1210,24 @@ static void PartySlot_DrawMonInfo(u32 windowId, u32 partySlot, u32 row)
         return;
     }
 
+    enum FormChanges formChangeMethod = PartySlot_GetFormChangeMethod();
+    if (formChangeMethod != FORM_CHANGE_TERMINATOR)
+    {
+        if (PartySlot_ShowsFormChange(mon)
+         && (formChangeMethod == FORM_CHANGE_ITEM_USE || partySlot == *PartyCursor_GetSlotPtr()))
+        {
+            if (description == PARTY_SLOT_DESC_NONE)
+            {
+                PartySlot_DrawFormChange(windowId, partySlot, mon, contentY);
+            }
+            return;
+        }
+        if (formChangeMethod == FORM_CHANGE_ITEM_USE && partySlot == *PartyCursor_GetSlotPtr())
+        {
+            return;
+        }
+    }
+
     if (description == PARTY_SLOT_DESC_NONE)
     {
         PartySlot_DrawHp(windowId, mon, contentY);
@@ -1510,10 +1535,10 @@ static void PartySlot_DrawAbility(u32 windowId, u32 partySlot, struct Pokemon *m
         return;
     }
 
-    rect = &sPartyMenu_SlotLayout.abilityArrow;
+    rect = &sPartyMenu_SlotLayout.arrowBottom;
     PartySlot_Print(windowId, FONT_OUTLINED, rect->x, rect->y + contentY, COLORID_PARTY_RED, COMPOUND_STRING("{RIGHT_ARROW}"));
 
-    rect = &sPartyMenu_SlotLayout.abilityNext;
+    rect = &sPartyMenu_SlotLayout.indentBottom;
     name = gAbilitiesInfo[GetAbilityBySpecies(GetMonData(mon, MON_DATA_SPECIES), PartyMon_GetNewAbilityNum(mon))].name;
     fontId = GetFontIdToFit(name, FONT_OUTLINED, 0, rect->width);
     PartySlot_Print(windowId, fontId, rect->x, rect->y + contentY, COLORID_PARTY_RED, name);
@@ -1525,6 +1550,122 @@ static bool32 PartySlot_IsPPItem(void)
 
     return gPartyMenu.action == PARTY_ACTION_USE_ITEM
         && (effectType == ITEM_EFFECT_HEAL_PP || effectType == ITEM_EFFECT_PP_UP || effectType == ITEM_EFFECT_PP_MAX);
+}
+
+static enum FormChanges PartySlot_GetFormChangeMethod(void)
+{
+    if (gPartyMenu.action == PARTY_ACTION_GIVE_ITEM)
+    {
+        return FORM_CHANGE_ITEM_HOLD;
+    }
+
+    ItemUseFunc fieldFunc = GetItemFieldFunc(gSpecialVar_ItemId);
+
+    if (gPartyMenu.action == PARTY_ACTION_USE_ITEM
+     && (fieldFunc == ItemUseOutOfBattle_FormChange || fieldFunc == ItemUseOutOfBattle_FormChange_ConsumedOnUse))
+    {
+        return FORM_CHANGE_ITEM_USE;
+    }
+    return FORM_CHANGE_TERMINATOR;
+}
+
+static enum Item PartySlot_GetFormChangeItem(void)
+{
+    return (gPartyMenu.action == PARTY_ACTION_GIVE_ITEM) ? gPartyMenu.bagItem : gSpecialVar_ItemId;
+}
+
+static const u8 *PartySlot_GetFormName(enum Species species)
+{
+    for (u32 i = 0; i < ARRAY_COUNT(sPartyMenu_FormNames); i++)
+    {
+        if (sPartyMenu_FormNames[i].species == species)
+        {
+            return sPartyMenu_FormNames[i].name;
+        }
+    }
+    return NULL;
+}
+
+static bool32 PartySlot_ShowsFormChange(struct Pokemon *mon)
+{
+    enum Species species = GetMonData(mon, MON_DATA_SPECIES);
+
+    enum FormChanges method = PartySlot_GetFormChangeMethod();
+    enum Item item = PartySlot_GetFormChangeItem();
+
+    if (PartySlot_GetFormName(species) == NULL)
+    {
+        return FALSE;
+    }
+    if (method == FORM_CHANGE_ITEM_HOLD && GetItemHoldEffect(item) != HOLD_EFFECT_MEMORY)
+    {
+        return FALSE;
+    }
+    if (PartyMon_GetFormChangeTarget(mon) != species)
+    {
+        return TRUE;
+    }
+
+    const struct FormChange *formChanges = GetSpeciesFormChanges(species);
+
+    for (u32 i = 0; formChanges[i].method != FORM_CHANGE_TERMINATOR; i++)
+    {
+        if (formChanges[i].method == method && formChanges[i].param1 == item)
+        {
+            return TRUE;
+        }
+    }
+    return FALSE;
+}
+
+static enum Species PartyMon_GetFormChangeTarget(struct Pokemon *mon)
+{
+    enum Item item = PartySlot_GetFormChangeItem();
+    struct FormChangeContext ctx =
+    {
+        .method = PartySlot_GetFormChangeMethod(),
+        .currentSpecies = GetMonData(mon, MON_DATA_SPECIES),
+        .partyItemUsed = item,
+        .heldItem = item,
+        .ability = GetMonAbility(mon),
+    };
+
+    return GetFormChangeTargetSpecies_Internal(ctx);
+}
+
+static void PartySlot_DrawFormChange(u32 windowId, u32 partySlot, struct Pokemon *mon, u32 contentY)
+{
+    const struct PartySlotRect *rect = &sPartyMenu_SlotLayout.indentTop;
+    enum Species species = GetMonData(mon, MON_DATA_SPECIES);
+    enum Species targetSpecies = PartyMon_GetFormChangeTarget(mon);
+
+    if (partySlot != *PartyCursor_GetSlotPtr() || targetSpecies == species)
+    {
+        PartySlot_Print(windowId, FONT_OUTLINED, rect->x, rect->y + contentY, COLORID_PARTY_YELLOW, PartySlot_GetFormName(species));
+        return;
+    }
+
+    if (PartySlot_GetFormChangeMethod() == FORM_CHANGE_ITEM_HOLD)
+    {
+        PartySlot_Print(windowId, FONT_OUTLINED, rect->x, rect->y + contentY, COLORID_PARTY_WHITE, PartySlot_GetFormName(species));
+        rect = &sPartyMenu_SlotLayout.arrowBottom;
+        PartySlot_Print(windowId, FONT_OUTLINED, rect->x, rect->y + contentY, COLORID_PARTY_RED, COMPOUND_STRING("{RIGHT_ARROW}"));
+        rect = &sPartyMenu_SlotLayout.indentBottom;
+        PartySlot_Print(windowId, FONT_OUTLINED, rect->x, rect->y + contentY, COLORID_PARTY_RED, PartySlot_GetFormName(targetSpecies));
+        return;
+    }
+
+    PartySlot_Print(windowId, FONT_OUTLINED, rect->x, rect->y + contentY, COLORID_PARTY_RED, PartySlot_GetFormName(targetSpecies));
+    rect = &sPartyMenu_SlotLayout.arrowTop;
+    PartySlot_Print(windowId, FONT_OUTLINED, rect->x, rect->y + contentY, COLORID_PARTY_RED, COMPOUND_STRING("{RIGHT_ARROW}"));
+
+    u8 text[TYPE_NAME_LENGTH + 3];
+    u8 *end = StringCopy(text, COMPOUND_STRING("("));
+
+    end = StringCopy(end, gTypesInfo[GetSpeciesType(targetSpecies, 0)].name);
+    StringCopy(end, COMPOUND_STRING(")"));
+    rect = &sPartyMenu_SlotLayout.indentBottom;
+    PartySlot_Print(windowId, FONT_OUTLINED, rect->x, rect->y + contentY, COLORID_PARTY_RED, text);
 }
 
 static void PartySlot_DrawPP(u32 windowId, struct Pokemon *mon, u32 contentY)
@@ -1805,6 +1946,15 @@ static u32 PartySlot_GetDescription(u32 partySlot, enum PartyTextColors *color)
      && partySlot == *PartyCursor_GetSlotPtr()
      && !GetMonData(mon, MON_DATA_IS_EGG)
      && GetMonData(mon, MON_DATA_HIDDEN_NATURE) == GetItemSecondaryId(gSpecialVar_ItemId))
+    {
+        *color = COLORID_PARTY_GREY;
+        return PARTYBOX_DESC_NO_USE;
+    }
+
+    if (PartySlot_GetFormChangeMethod() == FORM_CHANGE_ITEM_USE
+     && partySlot == *PartyCursor_GetSlotPtr()
+     && !GetMonData(mon, MON_DATA_IS_EGG)
+     && PartyMon_GetFormChangeTarget(mon) == GetMonData(mon, MON_DATA_SPECIES))
     {
         *color = COLORID_PARTY_GREY;
         return PARTYBOX_DESC_NO_USE;

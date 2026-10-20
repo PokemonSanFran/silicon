@@ -480,8 +480,10 @@ static const struct
     struct PartySlotRect natureArrow;
     struct PartySlotRect natureNext;
     struct PartySlotRect abilityName;
-    struct PartySlotRect abilityArrow;
-    struct PartySlotRect abilityNext;
+    struct PartySlotRect arrowTop;
+    struct PartySlotRect arrowBottom;
+    struct PartySlotRect indentTop;
+    struct PartySlotRect indentBottom;
     struct PartySlotRect ppMove;
 } sPartyMenu_SlotLayout =
 {
@@ -612,17 +614,29 @@ static const struct
         PARTY_SLOT_ABILITY_NAME_W,
         PARTY_SLOT_ABILITY_NAME_H
     },
-    .abilityArrow = {
-        PARTY_SLOT_ABILITY_ARROW_X,
-        PARTY_SLOT_ABILITY_ARROW_Y,
-        PARTY_SLOT_ABILITY_ARROW_W,
-        PARTY_SLOT_ABILITY_ARROW_H
+    .arrowTop = {
+        PARTY_SLOT_ARROW_TOP_X,
+        PARTY_SLOT_ARROW_TOP_Y,
+        PARTY_SLOT_ARROW_TOP_W,
+        PARTY_SLOT_ARROW_TOP_H
     },
-    .abilityNext = {
-        PARTY_SLOT_ABILITY_NEXT_X,
-        PARTY_SLOT_ABILITY_NEXT_Y,
-        PARTY_SLOT_ABILITY_NEXT_W,
-        PARTY_SLOT_ABILITY_NEXT_H
+    .arrowBottom = {
+        PARTY_SLOT_ARROW_BOTTOM_X,
+        PARTY_SLOT_ARROW_BOTTOM_Y,
+        PARTY_SLOT_ARROW_BOTTOM_W,
+        PARTY_SLOT_ARROW_BOTTOM_H
+    },
+    .indentTop = {
+        PARTY_SLOT_INDENT_TOP_X,
+        PARTY_SLOT_INDENT_TOP_Y,
+        PARTY_SLOT_INDENT_TOP_W,
+        PARTY_SLOT_INDENT_TOP_H
+    },
+    .indentBottom = {
+        PARTY_SLOT_INDENT_BOTTOM_X,
+        PARTY_SLOT_INDENT_BOTTOM_Y,
+        PARTY_SLOT_INDENT_BOTTOM_W,
+        PARTY_SLOT_INDENT_BOTTOM_H
     },
     .ppMove = {
         PARTY_SLOT_PP_X,
@@ -630,6 +644,37 @@ static const struct
         PARTY_SLOT_PP_W,
         PARTY_SLOT_PP_H
     },
+};
+
+// forms with a party menu form change preview: Oricorio by nectar (use), Silvally by memory (give)
+static const struct
+{
+    enum Species species;
+    const u8 *name;
+} sPartyMenu_FormNames[] =
+{
+    {SPECIES_ORICORIO_BAILE,    COMPOUND_STRING("Baile")},
+    {SPECIES_ORICORIO_POM_POM,  COMPOUND_STRING("Pom-Pom")},
+    {SPECIES_ORICORIO_PAU,      COMPOUND_STRING("Pa'u")},
+    {SPECIES_ORICORIO_SENSU,    COMPOUND_STRING("Sensu")},
+    {SPECIES_SILVALLY_NORMAL,   gTypesInfo[TYPE_NORMAL].name},
+    {SPECIES_SILVALLY_FIGHTING, gTypesInfo[TYPE_FIGHTING].name},
+    {SPECIES_SILVALLY_FLYING,   gTypesInfo[TYPE_FLYING].name},
+    {SPECIES_SILVALLY_POISON,   gTypesInfo[TYPE_POISON].name},
+    {SPECIES_SILVALLY_GROUND,   gTypesInfo[TYPE_GROUND].name},
+    {SPECIES_SILVALLY_ROCK,     gTypesInfo[TYPE_ROCK].name},
+    {SPECIES_SILVALLY_BUG,      gTypesInfo[TYPE_BUG].name},
+    {SPECIES_SILVALLY_GHOST,    gTypesInfo[TYPE_GHOST].name},
+    {SPECIES_SILVALLY_STEEL,    gTypesInfo[TYPE_STEEL].name},
+    {SPECIES_SILVALLY_FIRE,     gTypesInfo[TYPE_FIRE].name},
+    {SPECIES_SILVALLY_WATER,    gTypesInfo[TYPE_WATER].name},
+    {SPECIES_SILVALLY_GRASS,    gTypesInfo[TYPE_GRASS].name},
+    {SPECIES_SILVALLY_ELECTRIC, gTypesInfo[TYPE_ELECTRIC].name},
+    {SPECIES_SILVALLY_PSYCHIC,  gTypesInfo[TYPE_PSYCHIC].name},
+    {SPECIES_SILVALLY_ICE,      gTypesInfo[TYPE_ICE].name},
+    {SPECIES_SILVALLY_DRAGON,   gTypesInfo[TYPE_DRAGON].name},
+    {SPECIES_SILVALLY_DARK,     gTypesInfo[TYPE_DARK].name},
+    {SPECIES_SILVALLY_FAIRY,    gTypesInfo[TYPE_FAIRY].name},
 };
 
 static const u8 *const sPartyMenu_StatShortLabels[NUM_STATS] =

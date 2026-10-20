@@ -2438,6 +2438,7 @@ static const enum InventoryItemOptions sInventory_PocketOptions_Field[NUM_ITEMS_
 
     [ITEM_TYPE_NECTAR] =
     {
+        INVENTORY_ITEM_OPTION_USE,
         INVENTORY_ITEM_OPTION_GIVE,
         INVENTORY_ITEM_OPTION_TOSS,
         INVENTORY_ITEM_OPTION_FAVORITE,
