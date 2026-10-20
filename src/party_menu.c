@@ -5843,7 +5843,10 @@ static void Task_LearnNextMoveOrClosePartyMenu(u8 taskId)
         {
             if (gPartyMenu.learnMoveState == 2) // never occurs
                 gSpecialVar_Result = TRUE;
-            Task_ReturnToChooseMonAfterText(taskId);
+            if (gPartyMenu.action == PARTY_ACTION_USE_ITEM)
+                Task_ReturnToChooseMonAfterText(taskId);
+            else
+                Task_ClosePartyMenu(taskId);
         }
     }
 }

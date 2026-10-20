@@ -188,6 +188,8 @@ static enum FormChanges PartySlot_GetFormChangeMethod(void);
 static enum Item PartySlot_GetFormChangeItem(void);
 static const u8 *PartySlot_GetFormName(enum Species);
 static bool32 PartySlot_ShowsFormChange(struct Pokemon *);
+static bool32 PartyMon_HasFormChangeItem(enum Species, enum FormChanges, enum Item);
+static bool32 PartySlot_IsRotomCatalog(void);
 static void PartySlot_DrawFormChange(u32, u32, struct Pokemon *, u32);
 static enum Species PartyMon_GetFormChangeTarget(struct Pokemon *);
 static u32 PartySlot_GetExpItemCeiling(void);
@@ -721,6 +723,7 @@ void Task_HandleChooseMonInput(u8 taskId)
              || PartySlot_IsAbilityItem()
              || PartySlot_IsPPItem()
              || PartySlot_GetFormChangeMethod() != FORM_CHANGE_TERMINATOR
+             || PartySlot_IsRotomCatalog()
              || PartySlot_GetXItemStat() != NUM_BATTLE_STATS)
             {
                 PartySlot_Draw(prevSlot);
@@ -1228,6 +1231,11 @@ static void PartySlot_DrawMonInfo(u32 windowId, u32 partySlot, u32 row)
         }
     }
 
+    if (PartySlot_IsRotomCatalog() && description != PARTY_SLOT_DESC_NONE)
+    {
+        return;
+    }
+
     if (description == PARTY_SLOT_DESC_NONE)
     {
         PartySlot_DrawHp(windowId, mon, contentY);
@@ -1601,13 +1609,17 @@ static bool32 PartySlot_ShowsFormChange(struct Pokemon *mon)
     {
         return FALSE;
     }
-    if (PartyMon_GetFormChangeTarget(mon) != species)
-    {
-        return TRUE;
-    }
+    return PartyMon_GetFormChangeTarget(mon) != species || PartyMon_HasFormChangeItem(species, method, item);
+}
 
+static bool32 PartyMon_HasFormChangeItem(enum Species species, enum FormChanges method, enum Item item)
+{
     const struct FormChange *formChanges = GetSpeciesFormChanges(species);
 
+    if (formChanges == NULL)
+    {
+        return FALSE;
+    }
     for (u32 i = 0; formChanges[i].method != FORM_CHANGE_TERMINATOR; i++)
     {
         if (formChanges[i].method == method && formChanges[i].param1 == item)
@@ -1616,6 +1628,11 @@ static bool32 PartySlot_ShowsFormChange(struct Pokemon *mon)
         }
     }
     return FALSE;
+}
+
+static bool32 PartySlot_IsRotomCatalog(void)
+{
+    return gPartyMenu.action == PARTY_ACTION_USE_ITEM && GetItemFieldFunc(gSpecialVar_ItemId) == ItemUseOutOfBattle_RotomCatalog;
 }
 
 static enum Species PartyMon_GetFormChangeTarget(struct Pokemon *mon)
@@ -1946,6 +1963,15 @@ static u32 PartySlot_GetDescription(u32 partySlot, enum PartyTextColors *color)
      && partySlot == *PartyCursor_GetSlotPtr()
      && !GetMonData(mon, MON_DATA_IS_EGG)
      && GetMonData(mon, MON_DATA_HIDDEN_NATURE) == GetItemSecondaryId(gSpecialVar_ItemId))
+    {
+        *color = COLORID_PARTY_GREY;
+        return PARTYBOX_DESC_NO_USE;
+    }
+
+    if (PartySlot_IsRotomCatalog()
+     && partySlot == *PartyCursor_GetSlotPtr()
+     && !GetMonData(mon, MON_DATA_IS_EGG)
+     && !PartyMon_HasFormChangeItem(GetMonData(mon, MON_DATA_SPECIES), FORM_CHANGE_ITEM_USE_MULTICHOICE, gSpecialVar_ItemId))
     {
         *color = COLORID_PARTY_GREY;
         return PARTYBOX_DESC_NO_USE;
@@ -4318,7 +4344,14 @@ static void Task_LearnNextMoveOrClosePartyMenu(u8 taskId)
         {
             if (gPartyMenu.learnMoveState == 2) // never occurs
                 gSpecialVar_Result = TRUE;
-            Task_ReturnToChooseMonAfterText(taskId);
+            if (gPartyMenu.action == PARTY_ACTION_USE_ITEM)
+            {
+                Task_ReturnToChooseMonAfterText(taskId);
+            }
+            else
+            {
+                Task_ClosePartyMenu(taskId);
+            }
         }
     }
 }
@@ -6875,6 +6908,17 @@ void ItemUseCB_FormChange_ConsumedOnUse(u8 taskId, TaskFunc task)
 
 void ItemUseCB_RotomCatalog(u8 taskId, TaskFunc task)
 {
+    enum Species species = GetMonData(&gParties[B_TRAINER_PLAYER][gPartyMenu.slotId], MON_DATA_SPECIES);
+
+    if (!PartyMon_HasFormChangeItem(species, FORM_CHANGE_ITEM_USE_MULTICHOICE, gSpecialVar_ItemId))
+    {
+        gPartyMenuUseExitCallback = FALSE;
+        PlaySE(SE_SELECT);
+        DisplayPartyMenuMessage(gText_WontHaveEffect, TRUE);
+        gTasks[taskId].func = Task_ReturnToChooseMonAfterText;
+        return;
+    }
+
     PartyMenuRemoveWindow(&sPartyMenuDataPtr->windowId[PARTY_DYN_WIN_LIST]);
     PartyMenuRemoveWindow(&sPartyMenuDataPtr->windowId[PARTY_DYN_WIN_MSG]);
     SetPartyMonSelectionActions(gParties[B_TRAINER_PLAYER], gPartyMenu.slotId, ACTIONS_ROTOM_CATALOG);
