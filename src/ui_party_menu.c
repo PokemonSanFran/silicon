@@ -217,6 +217,8 @@ static void PartyHeld_SnapToSlot(void);
 static void PartyHeld_Place(bool32);
 static void PartySetup_MonIcons(void);
 static void PartyMonIcon_Create(u32);
+static void PartyMonIcon_UpdateAnim(u32);
+static enum PartyMonIconAnims PartyMon_GetIconAnim(struct Pokemon *);
 static void PartySetup_HeldItems(void);
 static void UpdatePartyMonHeldItemSprite(u32);
 static void PartySetup_StatusIcons(void);
@@ -1101,6 +1103,7 @@ static void PartySlot_Draw(u32 slot)
     PutWindowTilemap(windowId);
     CopyWindowToVram(windowId, COPYWIN_GFX);
     ScheduleBgCopyTilemapToVram(PARTY_BG_SLOTS);
+    PartyMonIcon_UpdateAnim(slot);
 }
 
 static void PartySlot_DrawEmpty(u32 slot)
@@ -2257,6 +2260,57 @@ static void PartyMonIcon_Create(u32 slot)
 
     gSprites[spriteId].oam.priority = PARTY_SPRITE_PRIORITY_MAIN;
     sPartyMenuDataPtr->monIconSpriteIds[slot] = spriteId;
+    PartyMonIcon_UpdateAnim(slot);
+}
+
+static void PartyMonIcon_UpdateAnim(u32 slot)
+{
+    u32 spriteId = sPartyMenuDataPtr->monIconSpriteIds[slot];
+
+    if (spriteId == SPRITE_NONE)
+    {
+        return;
+    }
+
+    enum PartyMonIconAnims anim = PartyMon_GetIconAnim(&gParties[B_TRAINER_PLAYER][slot]);
+    if (gSprites[spriteId].animNum != anim)
+    {
+        SetPartyHPBarSprite(&gSprites[spriteId], anim);
+    }
+}
+
+static enum PartyMonIconAnims PartyMon_GetIconAnim(struct Pokemon *mon)
+{
+    enum PartyMonIconAnims hpAnim;
+
+    switch (GetHPBarLevel(GetMonData(mon, MON_DATA_HP), GetMonData(mon, MON_DATA_MAX_HP)))
+    {
+    case HP_BAR_FULL:
+        hpAnim = PARTY_ICON_ANIM_FULL_HP;
+        break;
+    case HP_BAR_GREEN:
+        hpAnim = PARTY_ICON_ANIM_GREEN_HP;
+        break;
+    case HP_BAR_YELLOW:
+        hpAnim = PARTY_ICON_ANIM_YELLOW_HP;
+        break;
+    case HP_BAR_RED:
+        hpAnim = PARTY_ICON_ANIM_RED_HP;
+        break;
+    default:
+        return PARTY_ICON_ANIM_STOPPED;
+    }
+
+    switch (GetAilmentFromStatus(GetMonData(mon, MON_DATA_STATUS)))
+    {
+    case AILMENT_NONE:
+        return hpAnim;
+    case AILMENT_SLP:
+    case AILMENT_FRZ:
+        return PARTY_ICON_ANIM_STOPPED;
+    default:
+        return max(hpAnim, PARTY_ICON_ANIM_RED_HP);
+    }
 }
 
 static s16 PartyMonIcon_GetX(u32 slot)
@@ -2313,6 +2367,8 @@ static void SetPartyMonAilmentGfx(u32 slot)
 {
     u8 *spriteId = &sPartyMenuDataPtr->statusSpriteIds[slot];
     u32 ailment = GetMonAilment(&gParties[B_TRAINER_PLAYER][slot]);
+
+    PartyMonIcon_UpdateAnim(slot);
 
     if (ailment == AILMENT_NONE || ailment == AILMENT_PKRS || PartySlot_IsExpItem())
     {

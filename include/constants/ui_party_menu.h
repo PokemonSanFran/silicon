@@ -501,6 +501,16 @@ enum PartyStatusFadePhases
     PARTY_STATUS_FADE_IN,
 };
 
+// sMonIconAnims in pokemon_icon.c, fastest to slowest
+enum PartyMonIconAnims
+{
+    PARTY_ICON_ANIM_FULL_HP,
+    PARTY_ICON_ANIM_GREEN_HP,
+    PARTY_ICON_ANIM_YELLOW_HP,
+    PARTY_ICON_ANIM_RED_HP,
+    PARTY_ICON_ANIM_STOPPED,
+};
+
 enum PartyStatStageFrames
 {
     PARTY_STAT_STAGE_EMPTY,
