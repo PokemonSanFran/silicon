@@ -31,6 +31,7 @@
   ],
   "object_events": [
     {
+      "local_id": "LOCALID_KEIYING_SECURITY_LEFT",
       "graphics_id": "OBJ_EVENT_GFX_BLACK_BELT",
       "x": 13,
       "y": 11,
@@ -44,6 +45,7 @@
       "flag": "0"
     },
     {
+      "local_id": "LOCALID_KEIYING_SECURITY_RIGHT",
       "graphics_id": "OBJ_EVENT_GFX_BLACK_BELT",
       "x": 15,
       "y": 11,
@@ -57,19 +59,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "OBJ_EVENT_GFX_OLD_MAN",
-      "x": 24,
-      "y": 7,
-      "elevation": 3,
-      "movement_type": "MOVEMENT_TYPE_WANDER_AROUND",
-      "movement_range_x": 0,
-      "movement_range_y": 0,
-      "trainer_type": "TRAINER_TYPE_NONE",
-      "trainer_sight_or_berry_tree_id": "0",
-      "script": "NULL",
-      "flag": "0"
-    },
-    {
+      "local_id": "LOCALID_PETAROSA_BOROUGH_TAXI",
       "graphics_id": "OBJ_EVENT_GFX_TRUCK",
       "x": 2,
       "y": 14,
@@ -83,6 +73,7 @@
       "flag": "0"
     },
     {
+      "local_id": "LOCALID_PETAROSA_BOROUGH_BUZZR_GUARD",
       "graphics_id": "OBJ_EVENT_GFX_MAN_2",
       "x": 14,
       "y": 19,
@@ -96,6 +87,7 @@
       "flag": "FLAG_TEMP_2"
     },
     {
+      "local_id": "LOCALID_BERRY_TREE_PETAROSA_BOROUGH_1",
       "graphics_id": "OBJ_EVENT_GFX_BERRY_TREE",
       "x": 9,
       "y": 10,
@@ -109,6 +101,7 @@
       "flag": "0"
     },
     {
+      "local_id": "LOCALID_BERRY_TREE_PETAROSA_BOROUGH_2",
       "graphics_id": "OBJ_EVENT_GFX_BERRY_TREE",
       "x": 19,
       "y": 10,
@@ -135,13 +128,6 @@
       "y": 10,
       "elevation": 0,
       "dest_map": "MAP_PETAROSA_BOROUGH_SHARPRISE_COMPOUND_1F",
-      "dest_warp_id": "0"
-    },
-    {
-      "x": 26,
-      "y": 5,
-      "elevation": 0,
-      "dest_map": "MAP_PETAROSA_BOROUGH_HAUNTEDHOUSE",
       "dest_warp_id": "0"
     },
     {

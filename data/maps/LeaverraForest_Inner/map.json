@@ -71,6 +71,7 @@
       "flag": "FLAG_TEMP_4"
     },
     {
+      "local_id": "LOCALID_BERRY_TREE_LEAVERRA_FOREST_INNER_CLEARING_1",
       "graphics_id": "OBJ_EVENT_GFX_BERRY_TREE",
       "x": 14,
       "y": 15,
@@ -84,6 +85,7 @@
       "flag": "0"
     },
     {
+      "local_id": "LOCALID_BERRY_TREE_LEAVERRA_FOREST_INNER_CLEARING_2",
       "graphics_id": "OBJ_EVENT_GFX_BERRY_TREE",
       "x": 5,
       "y": 15,

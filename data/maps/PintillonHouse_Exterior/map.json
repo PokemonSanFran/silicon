@@ -31,6 +31,7 @@
   ],
   "object_events": [
     {
+      "local_id": "LOCALID_PINTILLION_HOUSE_EXTERIOR_BAIYA",
       "graphics_id": "OBJ_EVENT_GFX_BAIYA",
       "x": 19,
       "y": 16,
@@ -44,6 +45,7 @@
       "flag": "FLAG_TEMP_1"
     },
     {
+      "local_id": "LOCALID_BERRY_TREE_PINTILLON_HOUSE_EXTERIOR_1",
       "graphics_id": "OBJ_EVENT_GFX_BERRY_TREE",
       "x": 17,
       "y": 17,
@@ -57,6 +59,7 @@
       "flag": "0"
     },
     {
+      "local_id": "LOCALID_BERRY_TREE_PINTILLON_HOUSE_EXTERIOR_2",
       "graphics_id": "OBJ_EVENT_GFX_BERRY_TREE",
       "x": 21,
       "y": 17,

@@ -35,6 +35,7 @@
       "flag": "FLAG_TEMP_1"
     },
     {
+      "local_id": "LOCALID_BERRY_TREE_WISHAAST_LAKE_1",
       "graphics_id": "OBJ_EVENT_GFX_BERRY_TREE",
       "x": 21,
       "y": 3,
@@ -48,6 +49,7 @@
       "flag": "0"
     },
     {
+      "local_id": "LOCALID_BERRY_TREE_WISHAAST_LAKE_2",
       "graphics_id": "OBJ_EVENT_GFX_BERRY_TREE",
       "x": 25,
       "y": 2,

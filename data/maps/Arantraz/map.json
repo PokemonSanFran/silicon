@@ -147,6 +147,7 @@
       "flag": "0"
     },
     {
+      "local_id": "LOCALID_ARANTRAZ_EXTERIOR_BAIYA",
       "graphics_id": "OBJ_EVENT_GFX_BAIYA",
       "x": 39,
       "y": 14,
@@ -173,6 +174,7 @@
       "flag": "0"
     },
     {
+      "local_id": "LOCALID_BERRY_TREE_ARANTRAZ_1",
       "graphics_id": "OBJ_EVENT_GFX_BERRY_TREE",
       "x": 24,
       "y": 61,
@@ -186,6 +188,7 @@
       "flag": "0"
     },
     {
+      "local_id": "LOCALID_BERRY_TREE_ARANTRAZ_2",
       "graphics_id": "OBJ_EVENT_GFX_BERRY_TREE",
       "x": 21,
       "y": 56,

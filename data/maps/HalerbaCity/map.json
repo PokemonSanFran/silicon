@@ -15,6 +15,7 @@
   "connections": null,
   "object_events": [
     {
+      "local_id": "LOCALID_HALERBA_CITY_TAXI",
       "graphics_id": "OBJ_EVENT_GFX_TRUCK",
       "x": 26,
       "y": 7,
@@ -28,6 +29,7 @@
       "flag": "0"
     },
     {
+      "local_id": "LOCALID_HALERBA_CITY_VSDEOGUY",
       "graphics_id": "OBJ_EVENT_GFX_BOY_3",
       "x": 39,
       "y": 9,
@@ -41,6 +43,7 @@
       "flag": "FLAG_TEMP_7"
     },
     {
+      "local_id": "LOCALID_BERRY_TREE_HALERBA_CITY_1",
       "graphics_id": "OBJ_EVENT_GFX_BERRY_TREE",
       "x": 15,
       "y": 9,
@@ -54,6 +57,7 @@
       "flag": "0"
     },
     {
+      "local_id": "LOCALID_BERRY_TREE_HALERBA_CITY_2",
       "graphics_id": "OBJ_EVENT_GFX_BERRY_TREE",
       "x": 22,
       "y": 9,

@@ -71,6 +71,7 @@
       "flag": "TRAINER_FLAGS_START+TRAINER_ARANTRAZ_GHOST_D"
     },
     {
+      "local_id": "LOCALID_ARANTRAZ_HOSPITAL_BAIYA",
       "graphics_id": "OBJ_EVENT_GFX_BAIYA",
       "x": 1,
       "y": 4,
@@ -84,6 +85,7 @@
       "flag": "FLAG_TEMP_5"
     },
     {
+      "local_id": "LOCALID_ARANTRAZ_HOSPITAL_CHARLOTTE",
       "graphics_id": "OBJ_EVENT_GFX_CHARLOTTE",
       "x": 1,
       "y": 4,
@@ -97,6 +99,7 @@
       "flag": "FLAG_TEMP_6"
     },
     {
+      "local_id": "LOCALID_ARANTRAZ_HOSPITAL_POLICE_A",
       "graphics_id": "OBJ_EVENT_GFX_MYSTERY_GIFT_MAN",
       "x": 2,
       "y": 4,
@@ -110,6 +113,7 @@
       "flag": "FLAG_TEMP_7"
     },
     {
+      "local_id": "LOCALID_ARANTRAZ_HOSPITAL_POLICE_B",
       "graphics_id": "OBJ_EVENT_GFX_MYSTERY_GIFT_MAN",
       "x": 2,
       "y": 4,

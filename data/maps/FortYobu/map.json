@@ -26,6 +26,7 @@
   ],
   "object_events": [
     {
+      "local_id": "LOCALID_FORT_YOBU_EXTERIOR_KEIYING",
       "graphics_id": "OBJ_EVENT_GFX_KEIYING",
       "x": 19,
       "y": 6,
