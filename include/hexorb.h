@@ -5,6 +5,7 @@
 
 #define HEXORB_BLOCK_STATUS       FALSE // When TRUE, a Pokémon that is afflicted by a non-volatile status decision cannot get a status condition from the Hexorb.
 
+enum HexorbResultCodes Hexorb_GetInflictResult(struct Pokemon*, u32);
 enum HexorbResultCodes Hexorb_TryInflictStatus(struct Pokemon*, u32);
 u32 Hexorb_ConvertMenuPosToStatus(u32);
 void Hexorb_ConstructStatusFailureMessage(struct Pokemon*);

@@ -312,6 +312,7 @@ static u8 GetMinBattleEntries(void);
 static u8 GetBattleEntryLevelCap(void);
 static u8 DisplaySelectionWindow(u8);
 static void PartyActions_Draw(u32);
+static bool32 PartyActions_IsHexorbBlocked(u32);
 static void PartyMoves_Draw(u32);
 static bool32 PartyMoves_IsPPBoostItem(void);
 static u32 PartyMoves_GetPPBoost(struct Pokemon *, u32);
@@ -2855,12 +2856,27 @@ static void PartyActions_Draw(u32 windowId)
         {
             PartyList_PrintRow(windowId, row, width, COLORID_MENU_FIELD_MOVE, GetMoveName(FieldMove_GetMoveId(action - MENU_FIELD_MOVES)));
         }
+        else if (PartyActions_IsHexorbBlocked(action))
+        {
+            PartyList_PrintRow(windowId, row, width, COLORID_MENU_GREY, sCursorOptions[action].text);
+        }
         else
         {
             PartyList_PrintRow(windowId, row, width, action == MENU_FIELD_MOVES_SUBMENU ? COLORID_MENU_FIELD_MOVE : COLORID_MENU_WHITE, sCursorOptions[action].text);
         }
     }
     CopyWindowToVram(windowId, COPYWIN_GFX);
+}
+
+static bool32 PartyActions_IsHexorbBlocked(u32 action)
+{
+    if (action < MENU_INFLICT_SLEEP || action > MENU_INFLICT_PARALYSIS)
+    {
+        return FALSE;
+    }
+
+    u32 status = Hexorb_ConvertMenuPosToStatus(action - MENU_INFLICT_SLEEP);
+    return Hexorb_GetInflictResult(&gParties[B_TRAINER_PLAYER][gPartyMenu.slotId], status) != HEXORB_RESULT_SUCCESS;
 }
 
 static void PartyMoves_Draw(u32 windowId)

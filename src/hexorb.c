@@ -117,9 +117,8 @@ static bool32 Hexorb_ShouldExistingStatusBlock(struct Pokemon *mon)
     return HEXORB_BLOCK_STATUS && (GetMonData(mon, MON_DATA_STATUS) & STATUS1_ANY);
 }
 
-enum HexorbResultCodes Hexorb_TryInflictStatus(struct Pokemon *mon, u32 status)
+enum HexorbResultCodes Hexorb_GetInflictResult(struct Pokemon *mon, u32 status)
 {
-    u32 clearStatus;
     u32 species = GetMonData(mon,MON_DATA_SPECIES);
 
     if (Hexorb_ShouldExistingStatusBlock(mon))
@@ -133,6 +132,19 @@ enum HexorbResultCodes Hexorb_TryInflictStatus(struct Pokemon *mon, u32 status)
 
     if (Hexorb_DoesTypeBlockStatus(species, 1, status))
         return HEXORB_RESULT_FAIL_TYPE_1;
+
+    return HEXORB_RESULT_SUCCESS;
+}
+
+enum HexorbResultCodes Hexorb_TryInflictStatus(struct Pokemon *mon, u32 status)
+{
+    u32 clearStatus;
+    enum HexorbResultCodes result = Hexorb_GetInflictResult(mon, status);
+
+    if (result != HEXORB_RESULT_SUCCESS)
+    {
+        return result;
+    }
 
     clearStatus = STATUS1_NONE;
     SetMonData(mon, MON_DATA_STATUS, &clearStatus);
