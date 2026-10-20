@@ -293,11 +293,6 @@ extern const u8 gText_Quest_RedoMugging_Desc[];
 extern const u8 gText_Quest_RedoMugging_DoneDesc[];
 extern const u8 gText_Quest_RedoMugging_Map[];
 
-extern const u8 gText_Quest_PandaPride_Name[];
-extern const u8 gText_Quest_PandaPride_Desc[];
-extern const u8 gText_Quest_PandaPride_DoneDesc[];
-extern const u8 gText_Quest_PandaPride_Map[];
-
 extern const u8 gText_Quest_Skilllibrary_Name[];
 extern const u8 gText_Quest_Skilllibrary_Desc[];
 extern const u8 gText_Quest_Skilllibrary_DoneDesc[];
