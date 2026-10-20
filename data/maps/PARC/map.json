@@ -15,6 +15,7 @@
   "connections": null,
   "object_events": [
     {
+      "local_id": "LOCALID_PARC_BAIYA",
       "graphics_id": "OBJ_EVENT_GFX_BAIYA",
       "x": 32,
       "y": 35,
@@ -28,6 +29,7 @@
       "flag": "FLAG_TEMP_1"
     },
     {
+      "local_id": "LOCALID_PARC_ADAORA",
       "graphics_id": "OBJ_EVENT_GFX_ADAORA",
       "x": 31,
       "y": 34,
@@ -41,6 +43,7 @@
       "flag": "FLAG_TEMP_1"
     },
     {
+      "local_id": "LOCALID_PARC_MAGNUS",
       "graphics_id": "OBJ_EVENT_GFX_MAGNUS",
       "x": 33,
       "y": 35,
@@ -54,6 +57,7 @@
       "flag": "FLAG_TEMP_1"
     },
     {
+      "local_id": "LOCALID_PARC_MON_A",
       "graphics_id": "OBJ_EVENT_GFX_DUSCLOPS",
       "x": 4,
       "y": 26,
@@ -67,6 +71,7 @@
       "flag": "FLAG_DEFEATED_LAB_MON_A"
     },
     {
+      "local_id": "LOCALID_PARC_MON_B",
       "graphics_id": "OBJ_EVENT_GFX_DUSCLOPS",
       "x": 4,
       "y": 17,
@@ -80,6 +85,7 @@
       "flag": "FLAG_DEFEATED_LAB_MON_B"
     },
     {
+      "local_id": "LOCALID_PARC_MON_BOSS",
       "graphics_id": "OBJ_EVENT_GFX_GROUDON_FRONT",
       "x": 33,
       "y": 4,

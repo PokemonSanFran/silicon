@@ -15,6 +15,7 @@
   "connections": null,
   "object_events": [
     {
+      "localid": "LOCALID_BERRY_TREE_CAPHE_COMMUNITY_GARDEN_1",
       "graphics_id": "OBJ_EVENT_GFX_BERRY_TREE",
       "x": 1,
       "y": 0,
@@ -28,6 +29,7 @@
       "flag": "0"
     },
     {
+      "localid": "LOCALID_BERRY_TREE_CAPHE_COMMUNITY_GARDEN_2",
       "graphics_id": "OBJ_EVENT_GFX_BERRY_TREE",
       "x": 2,
       "y": 0,
@@ -41,6 +43,7 @@
       "flag": "0"
     },
     {
+      "localid": "LOCALID_BERRY_TREE_CAPHE_COMMUNITY_GARDEN_3",
       "graphics_id": "OBJ_EVENT_GFX_BERRY_TREE",
       "x": 3,
       "y": 0,
@@ -54,6 +57,7 @@
       "flag": "0"
     },
     {
+      "localid": "LOCALID_BERRY_TREE_CAPHE_COMMUNITY_GARDEN_4",
       "graphics_id": "OBJ_EVENT_GFX_BERRY_TREE",
       "x": 4,
       "y": 0,
@@ -67,6 +71,7 @@
       "flag": "0"
     },
     {
+      "localid": "LOCALID_BERRY_TREE_CAPHE_COMMUNITY_GARDEN_5",
       "graphics_id": "OBJ_EVENT_GFX_BERRY_TREE",
       "x": 5,
       "y": 0,
@@ -80,6 +85,7 @@
       "flag": "0"
     },
     {
+      "localid": "LOCALID_BERRY_TREE_CAPHE_COMMUNITY_GARDEN_6",
       "graphics_id": "OBJ_EVENT_GFX_BERRY_TREE",
       "x": 6,
       "y": 0,
@@ -93,6 +99,7 @@
       "flag": "0"
     },
     {
+      "localid": "LOCALID_BERRY_TREE_CAPHE_COMMUNITY_GARDEN_7",
       "graphics_id": "OBJ_EVENT_GFX_BERRY_TREE",
       "x": 7,
       "y": 0,
@@ -106,6 +113,7 @@
       "flag": "0"
     },
     {
+      "localid": "LOCALID_BERRY_TREE_CAPHE_COMMUNITY_GARDEN_8",
       "graphics_id": "OBJ_EVENT_GFX_BERRY_TREE",
       "x": 8,
       "y": 0,

@@ -15,6 +15,7 @@
   "connections": null,
   "object_events": [
     {
+        "local_id": "LOCALID_GLAVEZ_HILL_TAXI_UNION_PERSUASIVEPASSENGER_LEADER",
       "graphics_id": "OBJ_EVENT_GFX_LITTLE_BOY",
       "x": 2,
       "y": 2,

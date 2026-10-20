@@ -26,6 +26,7 @@
   ],
   "object_events": [
     {
+      "local_id": "LOCALID_BERRY_TREE_ROUTE_20_1",
       "graphics_id": "OBJ_EVENT_GFX_BERRY_TREE",
       "x": 5,
       "y": 7,
@@ -39,6 +40,7 @@
       "flag": "0"
     },
     {
+      "local_id": "LOCALID_BERRY_TREE_ROUTE_20_2",
       "graphics_id": "OBJ_EVENT_GFX_BERRY_TREE",
       "x": 8,
       "y": 5,

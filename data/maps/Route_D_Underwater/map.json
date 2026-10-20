@@ -21,6 +21,7 @@
   ],
   "object_events": [
     {
+      "local_id": "LOCALID_ROUTE_D_UNDERWATER_ALLTHATGLITTERS_MON",
       "graphics_id": "OBJ_EVENT_GFX_DUSCLOPS",
       "x": 45,
       "y": 66,
@@ -34,6 +35,7 @@
       "flag": "FLAG_QUEST_ALLTHATGLITTERS_DEFEATED_POKEMON"
     },
     {
+      "local_id": "LOCALID_ROUTE_D_UNDERWATER_SURFACE",
       "graphics_id": "OBJ_EVENT_GFX_BIG_SNORLAX_DOLL",
       "x": 42,
       "y": 19,

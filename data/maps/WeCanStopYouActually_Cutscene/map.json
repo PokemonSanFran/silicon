@@ -12,9 +12,10 @@
   "allow_running": false,
   "show_map_name": false,
   "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
-  "connections": 0,
+  "connections": null,
   "object_events": [
     {
+      "local_id": "LOCALID_WECANSTOPYOUACTUALLY_COMRADE_A",
       "graphics_id": "OBJ_EVENT_GFX_COMRADE_2",
       "x": 5,
       "y": 12,
@@ -28,6 +29,7 @@
       "flag": "0"
     },
     {
+      "local_id": "LOCALID_WECANSTOPYOUACTUALLY_COMRADE_B",
       "graphics_id": "OBJ_EVENT_GFX_COMRADE_4",
       "x": 5,
       "y": 13,
@@ -41,6 +43,7 @@
       "flag": "0"
     },
     {
+      "local_id": "LOCALID_WECANSTOPYOUACTUALLY_ADAORA",
       "graphics_id": "OBJ_EVENT_GFX_ADAORA",
       "x": 5,
       "y": 14,
@@ -54,6 +57,7 @@
       "flag": "0"
     },
     {
+      "local_id": "LOCALID_WECANSTOPYOUACTUALLY_POLICE_A",
       "graphics_id": "OBJ_EVENT_GFX_MYSTERY_GIFT_MAN",
       "x": 5,
       "y": 10,
@@ -67,6 +71,7 @@
       "flag": "FLAG_TEMP_1"
     },
     {
+      "local_id": "LOCALID_WECANSTOPYOUACTUALLY_OLIVER",
       "graphics_id": "OBJ_EVENT_GFX_OLIVER",
       "x": 5,
       "y": 10,
@@ -80,6 +85,7 @@
       "flag": "FLAG_TEMP_1"
     },
     {
+      "local_id": "LOCALID_WECANSTOPYOUACTUALLY_LUCREZIA",
       "graphics_id": "OBJ_EVENT_GFX_LUCREZIA",
       "x": 5,
       "y": 10,
@@ -93,6 +99,7 @@
       "flag": "FLAG_TEMP_1"
     },
     {
+      "local_id": "LOCALID_WECANSTOPYOUACTUALLY_CHARLOTTE",
       "graphics_id": "OBJ_EVENT_GFX_CHARLOTTE",
       "x": 5,
       "y": 10,
@@ -106,6 +113,7 @@
       "flag": "FLAG_TEMP_1"
     },
     {
+      "local_id": "LOCALID_WECANSTOPYOUACTUALLY_RAMESH",
       "graphics_id": "OBJ_EVENT_GFX_RAMESH",
       "x": 5,
       "y": 10,
@@ -119,6 +127,7 @@
       "flag": "FLAG_TEMP_1"
     },
     {
+      "local_id": "LOCALID_WECANSTOPYOUACTUALLY_POLICE_B",
       "graphics_id": "OBJ_EVENT_GFX_MYSTERY_GIFT_MAN",
       "x": 5,
       "y": 10,
@@ -132,6 +141,7 @@
       "flag": "FLAG_TEMP_1"
     },
     {
+      "local_id": "LOCALID_WECANSTOPYOUACTUALLY_ELEANOR",
       "graphics_id": "OBJ_EVENT_GFX_ELEANOR",
       "x": 5,
       "y": 10,
@@ -145,6 +155,7 @@
       "flag": "FLAG_TEMP_1"
     },
     {
+      "local_id": "LOCALID_WECANSTOPYOUACTUALLY_TALA",
       "graphics_id": "OBJ_EVENT_GFX_TALA",
       "x": 5,
       "y": 10,
@@ -158,6 +169,7 @@
       "flag": "FLAG_TEMP_1"
     },
     {
+      "local_id": "LOCALID_WECANSTOPYOUACTUALLY_MAGNUS",
       "graphics_id": "OBJ_EVENT_GFX_MAGNUS",
       "x": 5,
       "y": 10,
@@ -171,6 +183,7 @@
       "flag": "FLAG_TEMP_1"
     },
     {
+      "local_id": "LOCALID_WECANSTOPYOUACTUALLY_FRANK",
       "graphics_id": "OBJ_EVENT_GFX_FRANK",
       "x": 5,
       "y": 10,
@@ -184,7 +197,8 @@
       "flag": "FLAG_TEMP_1"
     },
     {
-      "graphics_id": "OBJ_EVENT_GFX_ADAORA",
+      "local_id": "LOCALID_WECANSTOPYOUACTUALLY_COMRADE_D",
+      "graphics_id": "OBJ_EVENT_GFX_COMRADE_3",
       "x": 5,
       "y": 15,
       "elevation": 3,
