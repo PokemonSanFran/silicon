@@ -582,6 +582,7 @@ void Script_Quest_Rockcollector_CountNumberOfStonesToAsk(void)
 // Quest: Ultra Wormhole Research
 // ***********************************************************************
 
+/*
 #define BEAST  0
 #define TOTEM  1
 #define NUM_TOTEM_MON (QUEST_ULTRAWORMHOLERESEARCH_SUB_COUNT)
@@ -599,6 +600,7 @@ static const u32 TOTEM_POKEMON_LIST[NUM_TOTEM_MON][9]=
     {MAP_ROUTE9, TOTEM_POKEMON_8, ITEM_LEFTOVERS, 1, 4, 6, 2, 3, (FLAG_QUEST_ULTRAWORMHOLE_FIRST_TOTEM + 9)},
     {MAP_ROUTE9, TOTEM_POKEMON_9, ITEM_LEFTOVERS, 1, 4, 6, 2, 3, (FLAG_QUEST_ULTRAWORMHOLE_FIRST_TOTEM + 9)},
 };
+
 
 static const u32 ULTRA_BEAST_LIST[QUEST_ULTRAWORMHOLERESEARCH_SUB_COUNT][9]=
 {
@@ -754,6 +756,7 @@ void Quest_Ultrawormholeresearch_SetSubquestForUltraBeast(void){
 u16 Quest_Ultrawormholeresearch_CountRemainingSubquests(void){
     return Quest_Generic_CountAndBufferRemainingSubquests(QUEST_ULTRAWORMHOLERESEARCH);
 }
+*/
 
 // ***********************************************************************
 // Quest: Taxicabturnaround

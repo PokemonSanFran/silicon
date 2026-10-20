@@ -567,16 +567,6 @@ gSpecials::
     def_special KitchenvolunteeringFunc_CheckProgressAndSetReward
     def_special KitchenvolunteeringFunc_ChooseRandomPantryItem
     def_special HiddenGrotto_LoadGrottoAndWarpPlayer
-    def_special Quest_Ultrawormholeresearch_SetTotemBattle
-    def_special Quest_Ultrawormholeresearch_ShouldTotemNotSpawn
-    def_special Quest_Ultrawormholeresearch_SetDefeatedTotemFlag
-    def_special Quest_Ultrawormholeresearch_BufferTotemPokemonName
-    def_special Quest_Ultrawormholeresearch_PlayTotemCry
-    def_special Quest_Ultrawormholeresearch_PlayUltraBeastCry
-    def_special Quest_Ultrawormholeresearch_SetUltraBeastBattle
-    def_special Quest_Ultrawormholeresearch_BufferUltraBeastPokemonName
-    def_special Quest_Ultrawormholeresearch_SetSubquestForUltraBeast
-    def_special Quest_Ultrawormholeresearch_CountRemainingSubquests
     def_special Quest_Taxicabturnaround_IsSubquestComplete
     def_special Quest_Taxicabturnaround_CheckRequiredPokemon
     def_special Quest_Taxicabturnaround_MarkSubquestComplete

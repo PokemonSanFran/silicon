@@ -1,7 +1,0 @@
-mapscripts UltraJohto_MapScripts {
-    MAP_SCRIPT_ON_RESUME{
-    }
-    MAP_SCRIPT_ON_TRANSITION{
-    }
-}
-

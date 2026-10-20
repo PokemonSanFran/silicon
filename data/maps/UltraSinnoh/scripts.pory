@@ -1,7 +1,0 @@
-mapscripts UltraSinnoh_MapScripts {
-    MAP_SCRIPT_ON_RESUME{
-        
-    }
-    MAP_SCRIPT_ON_TRANSITION{
-    }
-}

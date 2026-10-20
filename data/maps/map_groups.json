@@ -24,7 +24,6 @@
     "gMapGroup_IndoorHalaiIsland",
     "gMapGroup_SharpriseSpire",
     "gMapGroup_HiddenGrotto",
-    "gMapGroup_UltraSpace",
     "gMapGroup_TownsAndRoutes",
     "gMapGroup_IndoorLittleroot",
     "gMapGroup_IndoorOldale",
@@ -251,7 +250,6 @@
   ],
   "gMapGroup_IndoorPetarosaBorough": [
     "PetarosaBorough_PokemonCenter_1F",
-    "PetarosaBorough_Hauntedhouse",
     "PetarosaBorough_SharpriseCompound_1F",
     "PetarosaBorough_KeiYingMansion",
     "PetarosaBorough_Improv",
@@ -304,7 +302,6 @@
     "Arriba_2F"
   ],
   "gMapGroup_IndoorHodouCity": [
-    "HodouCity_ProudPanda",
     "HodouCity_Gym",
     "HodouCity_Racisthouse",
     "HodouCity_Tunnel",
@@ -384,18 +381,6 @@
     "Route5_Grotto",
     "Route3_Grotto",
     "Route16_Grotto"
-  ],
-  "gMapGroup_UltraSpace": [
-    "UltraPaldea",
-    "UltraUnova",
-    "UltraOrre",
-    "UltraSinnoh",
-    "UltraHoenn",
-    "UltraAlola",
-    "UltraKalos",
-    "UltraJohto",
-    "UltraGalar",
-    "UltraKanto"
   ],
   "gMapGroup_TownsAndRoutes": [
     "PetalburgCity",
