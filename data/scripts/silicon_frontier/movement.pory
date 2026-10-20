@@ -58,6 +58,7 @@ script SiliconFrontier_Movement_MoveBattlersOutOfBattle
         case SILICON_FACILITY_ARCADE:
             call(BattleStudio_Movement_MoveBattlersOutOfBattle)
         case SILICON_FACILITY_FACTORY:
+            call(BattleConvention_Movement_MoveBattlersOutOfBattle)
             return
     }
 }

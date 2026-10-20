@@ -17,8 +17,8 @@
     {
       "local_id": "LOCALID_ESPULEE_ISLAND_GYM_ATTENDANT",
       "graphics_id": "OBJ_EVENT_GFX_ANABEL",
-      "x": 7,
-      "y": 14,
+      "x": 38,
+      "y": 85,
       "elevation": 3,
       "movement_type": "MOVEMENT_TYPE_FACE_LEFT",
       "movement_range_x": 0,
@@ -71,7 +71,24 @@
       "flag": "FLAG_TEMP_B"
     }
   ],
-  "warp_events": [],
+  "warp_events": [
+    {
+      "warp_id": "WARP_ID_ESPULEE_OUTSKIRTS_GYM_TO_ESPULEE_OUTSKIRTS_LEFT",
+      "x": 36,
+      "y": 85,
+      "elevation": 0,
+      "dest_map": "MAP_ESPULEE_OUTSKIRTS",
+      "dest_warp_id": "WARP_ID_ESPULEE_OUTSKIRTS_TO_GYM"
+    },
+    {
+      "warp_id": "WARP_ID_ESPULEE_OUTSKIRTS_GYM_TO_ESPULEE_OUTSKIRTS_RIGHT",
+      "x": 37,
+      "y": 85,
+      "elevation": 0,
+      "dest_map": "MAP_ESPULEE_OUTSKIRTS",
+      "dest_warp_id": "WARP_ID_ESPULEE_OUTSKIRTS_TO_GYM"
+    }
+  ],
   "coord_events": [],
   "bg_events": []
 }
