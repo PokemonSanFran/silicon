@@ -44,8 +44,19 @@
 #define PARTY_LIST_CURSOR_CAP_WIDTH 2
 
 #define PARTY_ACTIONS_WIDTH         8
+
+// field moves
+#define PARTY_FIELD_MOVES_ROWS      4
+#define PARTY_FIELD_MOVES_TOP       (PARTY_FOOTER_TOP - PARTY_FRAME_SIZE - PARTY_FIELD_MOVES_ROWS * PARTY_LIST_ROW_HEIGHT)
+// center scrolling arrows on action window width
+#define PARTY_SCROLL_ARROW_X        TILE_TO_PIXELS(DISPLAY_TILE_WIDTH - PARTY_ACTIONS_WIDTH / 2)
+#define PARTY_SCROLL_ARROW_UP_Y     (TILE_TO_PIXELS(PARTY_FIELD_MOVES_TOP - PARTY_FRAME_SIZE) + TILE_TO_PIXELS(PARTY_FRAME_SIZE) / 2)
+#define PARTY_SCROLL_ARROW_DOWN_Y   (TILE_TO_PIXELS(PARTY_FOOTER_TOP - PARTY_FRAME_SIZE) + TILE_TO_PIXELS(PARTY_FRAME_SIZE) / 2)
+
 #define PARTY_CATALOG_WIDTH         12
 #define PARTY_ZYGARDE_CUBE_WIDTH    11
+
+// moves (Ether, PP Up, PP Max)
 #define PARTY_MOVES_WIDTH           14
 #define PARTY_MOVES_PP_RIGHT        (TILE_TO_PIXELS(PARTY_MOVES_WIDTH) - PARTY_LIST_TEXT_X)
 #define PARTY_MOVES_PP_WIDTH        14
@@ -58,7 +69,6 @@
 #define PARTY_YESNO_HEIGHT          (PARTY_YESNO_OPTIONS * PARTY_LIST_ROW_HEIGHT)
 // bottom frame sits above message box frame
 #define PARTY_YESNO_TOP             (PARTY_MSGBOX_TOP - PARTY_FRAME_SIZE - PARTY_FRAME_SIZE - PARTY_YESNO_HEIGHT)
-#define PARTY_MAX_ACTIONS           8
 
 #define PARTY_LEVELUP_WIDTH         11
 #define PARTY_LEVELUP_HEIGHT        11
@@ -139,6 +149,10 @@
 #define PARTY_SLOT_DESC_NONE        0xFF
 #define PARTY_SLOT_DESC_IN_BATTLE   (PARTYBOX_DESC_DONT_HAVE + 1)
 
+#define PARTY_MSG_WHICH_FIELD_MOVE  (PARTY_MSG_MOVE_ITEM_WHERE + 1)
+#define FIELD_MOVE_BIT(fieldMove)   (1u << (fieldMove))
+#define SELECTWINDOW_FIELD_MOVES    (SELECTWINDOW_HEXORB + 1)
+
 // EXP item: end level and exp to next level
 #define PARTY_SLOT_EXP_LEVEL_X      30
 #define PARTY_SLOT_EXP_LEVEL_Y      PARTY_SLOT_ITEM_Y
@@ -217,6 +231,7 @@
 // ================================================================
 #define PARTY_SPRITE_PRIORITY_MAIN      2
 #define PARTY_SPRITE_PRIORITY_LIFTED    1
+#define PARTY_SPRITE_PRIORITY_MENU      0
 
 // priority 2
 #define PARTY_SPRITE_SUBPRIORITY_CURSOR     0
@@ -254,6 +269,20 @@
 #define PARTY_SPINNER_FRAME_TILES       4
 #define PARTY_SPINNER_NUM_FRAMES        2
 #define PARTY_SPINNER_FRAME_DURATION    30
+// the spinner's second frame holds the scroll arrows, 16x8 each
+#define PARTY_SCROLL_ARROW_TILES        2
+#define PARTY_SCROLL_ARROW_UP_TILE      PARTY_SPINNER_FRAME_TILES
+#define PARTY_SCROLL_ARROW_DOWN_TILE    (PARTY_SCROLL_ARROW_UP_TILE + PARTY_SCROLL_ARROW_TILES)
+// list_menu's bounce: ±2 px over 32 frames
+#define PARTY_SCROLL_ARROW_BOUNCE       2
+#define PARTY_SCROLL_ARROW_SINE_STEP    8
+
+enum PartyScrollArrow
+{
+    PARTY_SCROLL_ARROW_UP,
+    PARTY_SCROLL_ARROW_DOWN,
+    PARTY_SCROLL_ARROW_COUNT,
+};
 
 // party cursor
 #define PARTY_CURSOR_Y_OFFSET       2
@@ -341,6 +370,7 @@ enum {
     MENU_INFLICT_BURN,
     MENU_INFLICT_FREEZE_FROSTBITE,
     MENU_INFLICT_PARALYSIS,
+    MENU_FIELD_MOVES_SUBMENU,
     MENU_FIELD_MOVES
 };
 

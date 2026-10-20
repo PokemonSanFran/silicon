@@ -75,61 +75,88 @@ struct
     TaskFunc func;
 } static const sCursorOptions[MENU_FIELD_MOVES] =
 {
-    [MENU_SUMMARY]         = {COMPOUND_STRING("Summary"),           CursorCb_Summary},
-    [MENU_SWITCH]          = {COMPOUND_STRING("Switch"),            CursorCb_Switch},
-    [MENU_CANCEL1]         = {COMPOUND_STRING("Cancel"),            CursorCb_Cancel1},
-    [MENU_ITEM]            = {COMPOUND_STRING("Item"),              CursorCb_Item},
-    [MENU_GIVE]            = {COMPOUND_STRING("Give"),              CursorCb_Give},
-    [MENU_TAKE_ITEM]       = {COMPOUND_STRING("Take"),              CursorCb_TakeItem},
-    [MENU_MOVE_ITEM]       = {COMPOUND_STRING("Move"),              CursorCb_MoveItem},
-    [MENU_MAIL]            = {COMPOUND_STRING("Mail"),              CursorCb_Stub},
-    [MENU_TAKE_MAIL]       = {COMPOUND_STRING("Take"),              CursorCb_Stub},
-    [MENU_READ]            = {COMPOUND_STRING("Read"),              CursorCb_Stub},
-    [MENU_CANCEL2]         = {COMPOUND_STRING("Cancel"),            CursorCb_Cancel2},
-    [MENU_SHIFT]           = {COMPOUND_STRING("Shift"),             CursorCb_SendMon},
-    [MENU_SEND_OUT]        = {COMPOUND_STRING("Send out"),          CursorCb_SendMon},
-    [MENU_ENTER]           = {COMPOUND_STRING("Enter"),             CursorCb_Enter},
-    [MENU_NO_ENTRY]        = {COMPOUND_STRING("No entry"),          CursorCb_NoEntry},
-    [MENU_STORE]           = {COMPOUND_STRING("Store"),             CursorCb_Store},
-    [MENU_REGISTER]        = {COMPOUND_STRING("Register"),          CursorCb_Stub},
-    [MENU_TRADE1]          = {COMPOUND_STRING("Trade"),             CursorCb_Stub},
-    [MENU_TRADE2]          = {COMPOUND_STRING("Trade"),             CursorCb_Stub},
-    [MENU_TOSS]            = {COMPOUND_STRING("Toss"),              CursorCb_Stub},
-    [MENU_CATALOG_BULB]    = {COMPOUND_STRING("Light bulb"),        CursorCb_CatalogBulb},
-    [MENU_CATALOG_OVEN]    = {COMPOUND_STRING("Microwave oven"),    CursorCb_CatalogOven},
-    [MENU_CATALOG_WASHING] = {COMPOUND_STRING("Washing machine"),   CursorCb_CatalogWashing},
-    [MENU_CATALOG_FRIDGE]  = {COMPOUND_STRING("Refrigerator"),      CursorCb_CatalogFridge},
-    [MENU_CATALOG_FAN]     = {COMPOUND_STRING("Electric fan"),      CursorCb_CatalogFan},
-    [MENU_CATALOG_MOWER]   = {COMPOUND_STRING("Lawn mower"),        CursorCb_CatalogMower},
-    [MENU_CHANGE_FORM]     = {COMPOUND_STRING("Change form"),       CursorCb_ChangeForm},
-    [MENU_CHANGE_ABILITY]  = {COMPOUND_STRING("Change Ability"),    CursorCb_ChangeAbility},
-    [MENU_INFLICT_SLEEP]   = {COMPOUND_STRING("SLP"),               TryHexorbAndPrintResult},
-    [MENU_INFLICT_POISON]  = {COMPOUND_STRING("PSN"),               TryHexorbAndPrintResult},
-    [MENU_INFLICT_BURN]    = {COMPOUND_STRING("BRN"),               TryHexorbAndPrintResult},
+    [MENU_SUMMARY]                  = {COMPOUND_STRING("Summary"),           CursorCb_Summary},
+    [MENU_SWITCH]                   = {COMPOUND_STRING("Switch"),            CursorCb_Switch},
+    [MENU_CANCEL1]                  = {COMPOUND_STRING("Cancel"),            CursorCb_Cancel1},
+    [MENU_ITEM]                     = {COMPOUND_STRING("Item"),              CursorCb_Item},
+    [MENU_GIVE]                     = {COMPOUND_STRING("Give"),              CursorCb_Give},
+    [MENU_TAKE_ITEM]                = {COMPOUND_STRING("Take"),              CursorCb_TakeItem},
+    [MENU_MOVE_ITEM]                = {COMPOUND_STRING("Move"),              CursorCb_MoveItem},
+    [MENU_MAIL]                     = {COMPOUND_STRING("Mail"),              CursorCb_Stub},
+    [MENU_TAKE_MAIL]                = {COMPOUND_STRING("Take"),              CursorCb_Stub},
+    [MENU_READ]                     = {COMPOUND_STRING("Read"),              CursorCb_Stub},
+    [MENU_CANCEL2]                  = {COMPOUND_STRING("Cancel"),            CursorCb_Cancel2},
+    [MENU_SHIFT]                    = {COMPOUND_STRING("Shift"),             CursorCb_SendMon},
+    [MENU_SEND_OUT]                 = {COMPOUND_STRING("Send out"),          CursorCb_SendMon},
+    [MENU_ENTER]                    = {COMPOUND_STRING("Enter"),             CursorCb_Enter},
+    [MENU_NO_ENTRY]                 = {COMPOUND_STRING("No entry"),          CursorCb_NoEntry},
+    [MENU_STORE]                    = {COMPOUND_STRING("Store"),             CursorCb_Store},
+    [MENU_REGISTER]                 = {COMPOUND_STRING("Register"),          CursorCb_Stub},
+    [MENU_TRADE1]                   = {COMPOUND_STRING("Trade"),             CursorCb_Stub},
+    [MENU_TRADE2]                   = {COMPOUND_STRING("Trade"),             CursorCb_Stub},
+    [MENU_TOSS]                     = {COMPOUND_STRING("Toss"),              CursorCb_Stub},
+    [MENU_CATALOG_BULB]             = {COMPOUND_STRING("Light bulb"),        CursorCb_CatalogBulb},
+    [MENU_CATALOG_OVEN]             = {COMPOUND_STRING("Microwave oven"),    CursorCb_CatalogOven},
+    [MENU_CATALOG_WASHING]          = {COMPOUND_STRING("Washing machine"),   CursorCb_CatalogWashing},
+    [MENU_CATALOG_FRIDGE]           = {COMPOUND_STRING("Refrigerator"),      CursorCb_CatalogFridge},
+    [MENU_CATALOG_FAN]              = {COMPOUND_STRING("Electric fan"),      CursorCb_CatalogFan},
+    [MENU_CATALOG_MOWER]            = {COMPOUND_STRING("Lawn mower"),        CursorCb_CatalogMower},
+    [MENU_CHANGE_FORM]              = {COMPOUND_STRING("Change form"),       CursorCb_ChangeForm},
+    [MENU_CHANGE_ABILITY]           = {COMPOUND_STRING("Change Ability"),    CursorCb_ChangeAbility},
+    [MENU_INFLICT_SLEEP]            = {COMPOUND_STRING("SLP"),               TryHexorbAndPrintResult},
+    [MENU_INFLICT_POISON]           = {COMPOUND_STRING("PSN"),               TryHexorbAndPrintResult},
+    [MENU_INFLICT_BURN]             = {COMPOUND_STRING("BRN"),               TryHexorbAndPrintResult},
 #if B_USE_FROSTBITE == TRUE
     [MENU_INFLICT_FREEZE_FROSTBITE] = {COMPOUND_STRING("FSB"), TryHexorbAndPrintResult},
 #else
     [MENU_INFLICT_FREEZE_FROSTBITE] = {COMPOUND_STRING("FRZ"), TryHexorbAndPrintResult},
 #endif
-    [MENU_INFLICT_PARALYSIS] = {COMPOUND_STRING("PAR"), TryHexorbAndPrintResult},
+    [MENU_INFLICT_PARALYSIS]        = {COMPOUND_STRING("PAR"), TryHexorbAndPrintResult},
+    [MENU_FIELD_MOVES_SUBMENU]      = {COMPOUND_STRING("Field Moves"), CursorCb_FieldMoves},
 };
 
-static const u8 sPartyMenuAction_SummarySwitchCancel[] = {MENU_SUMMARY, MENU_SWITCH, MENU_CANCEL1};
-static const u8 sPartyMenuAction_ShiftSummaryCancel[] = {MENU_SHIFT, MENU_SUMMARY, MENU_CANCEL1};
-static const u8 sPartyMenuAction_SendOutSummaryCancel[] = {MENU_SEND_OUT, MENU_SUMMARY, MENU_CANCEL1};
-static const u8 sPartyMenuAction_SummaryCancel[] = {MENU_SUMMARY, MENU_CANCEL1};
-static const u8 sPartyMenuAction_EnterSummaryCancel[] = {MENU_ENTER, MENU_SUMMARY, MENU_CANCEL1};
-static const u8 sPartyMenuAction_NoEntrySummaryCancel[] = {MENU_NO_ENTRY, MENU_SUMMARY, MENU_CANCEL1};
-static const u8 sPartyMenuAction_StoreSummaryCancel[] = {MENU_STORE, MENU_SUMMARY, MENU_CANCEL1};
-static const u8 sPartyMenuAction_GiveTakeItemCancel[] = {MENU_GIVE, MENU_TAKE_ITEM, MENU_MOVE_ITEM, MENU_CANCEL2};
-static const u8 sPartyMenuAction_ReadTakeMailCancel[] = {MENU_READ, MENU_TAKE_MAIL, MENU_CANCEL2};
-static const u8 sPartyMenuAction_RegisterSummaryCancel[] = {MENU_REGISTER, MENU_SUMMARY, MENU_CANCEL1};
-static const u8 sPartyMenuAction_TradeSummaryCancel1[] = {MENU_TRADE1, MENU_SUMMARY, MENU_CANCEL1};
-static const u8 sPartyMenuAction_TradeSummaryCancel2[] = {MENU_TRADE2, MENU_SUMMARY, MENU_CANCEL1};
-static const u8 sPartyMenuAction_TakeItemTossCancel[] = {MENU_TAKE_ITEM, MENU_TOSS, MENU_CANCEL1};
-static const u8 sPartyMenuAction_RotomCatalog[] = {MENU_CATALOG_BULB, MENU_CATALOG_OVEN, MENU_CATALOG_WASHING, MENU_CATALOG_FRIDGE, MENU_CATALOG_FAN, MENU_CATALOG_MOWER, MENU_CANCEL1};
-static const u8 sPartyMenuAction_ZygardeCube[] = {MENU_CHANGE_FORM, MENU_CHANGE_ABILITY, MENU_CANCEL1};
-static const u8 sPartyMenuAction_Hexorb[] = {MENU_INFLICT_SLEEP, MENU_INFLICT_POISON, MENU_INFLICT_BURN, MENU_INFLICT_FREEZE_FROSTBITE, MENU_INFLICT_PARALYSIS, MENU_CANCEL1};
+static const u8 sPartyMenuAction_SummaryCancel[] =
+    {MENU_SUMMARY, MENU_CANCEL1};
+static const u8 sPartyMenuAction_SummaryItemCancel[] =
+    {MENU_SUMMARY, MENU_ITEM, MENU_CANCEL1};
+static const u8 sPartyMenuAction_SummaryItemFieldMovesCancel[] =
+    {MENU_SUMMARY, MENU_ITEM, MENU_FIELD_MOVES_SUBMENU, MENU_CANCEL1};
+static const u8 sPartyMenuAction_SummarySwitchCancel[] =
+    {MENU_SUMMARY, MENU_SWITCH, MENU_CANCEL1};
+static const u8 sPartyMenuAction_SummarySwitchItemCancel[] =
+    {MENU_SUMMARY, MENU_SWITCH, MENU_ITEM, MENU_CANCEL1};
+static const u8 sPartyMenuAction_SummarySwitchItemFieldMovesCancel[] =
+    {MENU_SUMMARY, MENU_SWITCH, MENU_ITEM, MENU_FIELD_MOVES_SUBMENU, MENU_CANCEL1};
+static const u8 sPartyMenuAction_SummaryFieldMovesCancel[] =
+    {MENU_SUMMARY, MENU_FIELD_MOVES_SUBMENU, MENU_CANCEL1};
+static const u8 sPartyMenuAction_ShiftSummaryCancel[] =
+    {MENU_SHIFT, MENU_SUMMARY, MENU_CANCEL1};
+static const u8 sPartyMenuAction_SendOutSummaryCancel[] =
+    {MENU_SEND_OUT, MENU_SUMMARY, MENU_CANCEL1};
+static const u8 sPartyMenuAction_EnterSummaryCancel[] =
+    {MENU_ENTER, MENU_SUMMARY, MENU_CANCEL1};
+static const u8 sPartyMenuAction_NoEntrySummaryCancel[] =
+    {MENU_NO_ENTRY, MENU_SUMMARY, MENU_CANCEL1};
+static const u8 sPartyMenuAction_StoreSummaryCancel[] =
+    {MENU_STORE, MENU_SUMMARY, MENU_CANCEL1};
+static const u8 sPartyMenuAction_GiveTakeItemCancel[] =
+    {MENU_GIVE, MENU_TAKE_ITEM, MENU_MOVE_ITEM, MENU_CANCEL2};
+static const u8 sPartyMenuAction_ReadTakeMailCancel[] =
+    {MENU_READ, MENU_TAKE_MAIL, MENU_CANCEL2};
+static const u8 sPartyMenuAction_RegisterSummaryCancel[] =
+    {MENU_REGISTER, MENU_SUMMARY, MENU_CANCEL1};
+static const u8 sPartyMenuAction_TradeSummaryCancel1[] =
+    {MENU_TRADE1, MENU_SUMMARY, MENU_CANCEL1};
+static const u8 sPartyMenuAction_TradeSummaryCancel2[] =
+    {MENU_TRADE2, MENU_SUMMARY, MENU_CANCEL1};
+static const u8 sPartyMenuAction_TakeItemTossCancel[] =
+    {MENU_TAKE_ITEM, MENU_TOSS, MENU_CANCEL1};
+static const u8 sPartyMenuAction_RotomCatalog[] =
+    {MENU_CATALOG_BULB, MENU_CATALOG_OVEN, MENU_CATALOG_WASHING, MENU_CATALOG_FRIDGE, MENU_CATALOG_FAN, MENU_CATALOG_MOWER, MENU_CANCEL1};
+static const u8 sPartyMenuAction_ZygardeCube[] =
+    {MENU_CHANGE_FORM, MENU_CHANGE_ABILITY, MENU_CANCEL1};
+static const u8 sPartyMenuAction_Hexorb[] =
+    {MENU_INFLICT_SLEEP, MENU_INFLICT_POISON, MENU_INFLICT_BURN, MENU_INFLICT_FREEZE_FROSTBITE, MENU_INFLICT_PARALYSIS, MENU_CANCEL1};
 
 static const u8 *const sPartyMenuActions[] =
 {
@@ -171,6 +198,44 @@ static const u8 sPartyMenuActionCounts[] =
     [ACTIONS_ROTOM_CATALOG] = ARRAY_COUNT(sPartyMenuAction_RotomCatalog),
     [ACTIONS_ZYGARDE_CUBE]  = ARRAY_COUNT(sPartyMenuAction_ZygardeCube),
     [ACTIONS_HEXORB]        = ARRAY_COUNT(sPartyMenuAction_Hexorb),
+};
+
+// field Choose menu, by [can switch][has field moves]
+static const u8 *const sPartyMenuFieldActions[2][2] =
+{
+    [FALSE] = {
+        [FALSE] = sPartyMenuAction_SummaryItemCancel,
+        [TRUE] = sPartyMenuAction_SummaryItemFieldMovesCancel
+    },
+    [TRUE]  = {
+        [FALSE] = sPartyMenuAction_SummarySwitchItemCancel,
+        [TRUE] = sPartyMenuAction_SummarySwitchItemFieldMovesCancel
+    },
+};
+
+static const u8 sPartyMenuFieldActionCounts[2][2] =
+{
+    [FALSE] = {
+        [FALSE] = ARRAY_COUNT(sPartyMenuAction_SummaryItemCancel),
+        [TRUE] = ARRAY_COUNT(sPartyMenuAction_SummaryItemFieldMovesCancel)
+    },
+    [TRUE]  = {
+        [FALSE] = ARRAY_COUNT(sPartyMenuAction_SummarySwitchItemCancel),
+        [TRUE] = ARRAY_COUNT(sPartyMenuAction_SummarySwitchItemFieldMovesCancel)
+    },
+};
+
+// Battle Pike drops Switch and Item, by [has field moves]
+static const u8 *const sPartyMenuPikeActions[2] =
+{
+    [FALSE] = sPartyMenuAction_SummaryCancel,
+    [TRUE]  = sPartyMenuAction_SummaryFieldMovesCancel,
+};
+
+static const u8 sPartyMenuPikeActionCounts[2] =
+{
+    [FALSE] = ARRAY_COUNT(sPartyMenuAction_SummaryCancel),
+    [TRUE]  = ARRAY_COUNT(sPartyMenuAction_SummaryFieldMovesCancel),
 };
 
 #define ROTOM_BASE_MOVE  MOVE_THUNDER_SHOCK
@@ -255,6 +320,43 @@ static const u8 *const sPartyMenu_HeaderMessages[] =
     [PARTY_MSG_NO_POKEMON]             = COMPOUND_STRING("You have no Pokémon."),
     [PARTY_MSG_CHOOSE_MON_FOR_BOX]     = COMPOUND_STRING("Send which Pokémon to the PC?"),
     [PARTY_MSG_MOVE_ITEM_WHERE]        = COMPOUND_STRING("Swap {DYNAMIC 0}'s item with who?"),
+    [PARTY_MSG_WHICH_FIELD_MOVE]       = COMPOUND_STRING("What move should {DYNAMIC 0} use?"),
+};
+
+// Field Moves submenu order; the last four aren't in the spec's order
+static const enum FieldMove sPartyMenu_FieldMoveOrder[] =
+{
+    FIELD_MOVE_FLY,
+    FIELD_MOVE_DIG,
+    FIELD_MOVE_TELEPORT,
+    FIELD_MOVE_SWEET_SCENT,
+    FIELD_MOVE_SOFT_BOILED,
+    FIELD_MOVE_MILK_DRINK,
+    FIELD_MOVE_CUT,
+    FIELD_MOVE_DIVE,
+    FIELD_MOVE_ROCK_SMASH,
+    FIELD_MOVE_STRENGTH,
+    FIELD_MOVE_SURF,
+    FIELD_MOVE_WHIRLPOOL,
+    FIELD_MOVE_DEFOG,
+    FIELD_MOVE_FLASH,
+    FIELD_MOVE_ROCK_CLIMB,
+    FIELD_MOVE_SECRET_POWER,
+    FIELD_MOVE_WATERFALL,
+};
+
+STATIC_ASSERT(ARRAY_COUNT(sPartyMenu_FieldMoveOrder) == FIELD_MOVES_COUNT, PartyMenuFieldMoveOrderCoversAllMoves);
+
+// Table for conditional story-based scenarios that block certain field moves
+// IsHalaiIslandUnderCrisis is the only case so far
+static const struct FieldMoveBlock sPartyMenu_FieldMoveBlocks[] =
+{
+    {
+        .isActive = IsHalaiIslandUnderCrisis,
+        .fieldMoves = FIELD_MOVE_BIT(FIELD_MOVE_DIG) | FIELD_MOVE_BIT(FIELD_MOVE_TELEPORT) | FIELD_MOVE_BIT(FIELD_MOVE_FLY),
+        .message = COMPOUND_STRING("I need to help the citizens of\n{STR_VAR_1} first.{PAUSE_UNTIL_PRESS}"),
+        .bufferStrings = BufferCurrentMapName,
+    },
 };
 
 static const u8 *const sPartyMenu_FooterMessages[NUM_PARTY_FOOTERS] =
@@ -663,6 +765,40 @@ static const struct SpriteTemplate sPartyMenu_SpriteTemplate_Spinner =
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
     .callback = SpriteCallbackDummy,
+};
+
+static const struct OamData sPartyMenu_Oam_ScrollArrow =
+{
+    .shape = SPRITE_SHAPE(16x8),
+    .size = SPRITE_SIZE(16x8),
+    .priority = PARTY_SPRITE_PRIORITY_MENU,
+};
+
+static const union AnimCmd sPartyMenu_Anim_ScrollArrowUp[] =
+{
+    ANIMCMD_FRAME(PARTY_SCROLL_ARROW_UP_TILE, 0),
+    ANIMCMD_END
+};
+
+static const union AnimCmd sPartyMenu_Anim_ScrollArrowDown[] =
+{
+    ANIMCMD_FRAME(PARTY_SCROLL_ARROW_DOWN_TILE, 0),
+    ANIMCMD_END
+};
+
+static const union AnimCmd *const sPartyMenu_Anims_ScrollArrow[] =
+{
+    [PARTY_SCROLL_ARROW_UP] = sPartyMenu_Anim_ScrollArrowUp,
+    [PARTY_SCROLL_ARROW_DOWN] = sPartyMenu_Anim_ScrollArrowDown,
+};
+
+static const struct SpriteTemplate sPartyMenu_SpriteTemplate_ScrollArrow =
+{
+    .tileTag = PARTY_GFXTAG_SPINNER,
+    .paletteTag = PARTY_PALTAG_UI,
+    .oam = &sPartyMenu_Oam_ScrollArrow,
+    .anims = sPartyMenu_Anims_ScrollArrow,
+    .callback = SpriteCB_PartyScrollArrow,
 };
 
 static const struct CompressedSpriteSheet sPartyMenu_SpriteSheet_StatStage =

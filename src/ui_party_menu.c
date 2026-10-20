@@ -52,19 +52,20 @@
 #include "pokerus.h"
 #include "pokevial.h"
 #include "qol_field_moves.h"
+#include "quest_logic.h"
 #include "region_map.h"
 #include "reshow_battle_screen.h"
 #include "scanline_effect.h"
 #include "script.h"
 #include "sound.h"
 #include "sprite.h"
-#include "start_menu.h"
 #include "string_util.h"
 #include "strings.h"
 #include "task.h"
 #include "text.h"
 #include "text_window.h"
 #include "trade.h"
+#include "trig.h"
 #include "window.h"
 #include "options_battle.h"
 #include "options_visual.h"
@@ -88,6 +89,14 @@ struct PartySlotRect
     u8 x, y, width, height;
 };
 
+struct FieldMoveBlock
+{
+    bool8 (*isActive)(void);
+    u32 fieldMoves;
+    const u8 *message;
+    void (*bufferStrings)(void);
+};
+
 struct PartyMenuData
 {
     TaskFunc task;
@@ -109,9 +118,12 @@ struct PartyMenuData
     u8 slotWindowIds[PARTY_SIZE];
     u8 heldWindowId;
     u8 windowId[NUM_PARTY_DYN_WINDOWS];
-    u8 actions[PARTY_MAX_ACTIONS];
+    const u8 *actions;
+    u8 fieldMoveRows[PARTY_FIELD_MOVES_ROWS];
     u8 numActions;
     u8 actionCursor;
+    u8 listScroll;
+    u8 scrollArrowSpriteIds[PARTY_SCROLL_ARROW_COUNT];
     u8 yesNoCursor;
     u8 spinnerSpriteId;
     s16 itemCount;
@@ -301,6 +313,9 @@ static void PartyList_Clear(u32, u32);
 static void PartyList_DrawFrame(u8, u8, u8, u8, u8, u8);
 static void PartyList_ClearFrame(u8, u8, u8, u8, u8, u8);
 static void PartyList_PrintRow(u32, u32, u32, enum PartyTextColors, const u8 *);
+static void PartyList_CreateScrollArrows(void);
+static void SpriteCB_PartyScrollArrow(struct Sprite *);
+static void PartyList_DestroyScrollArrows(void);
 static void Task_HandleSelectionMenuInput(u8);
 static void CursorCb_Summary(u8);
 static void CB2_ShowPokemonSummaryScreen(void);
@@ -393,6 +408,14 @@ static void Task_SwitchItemsFromBagYesNo(u8);
 static void Task_HandleSwitchItemsFromBagYesNoInput(u8);
 static bool8 ReturnGiveItemToBagOrPC(enum Item);
 static void CursorCb_Stub(u8);
+static void CursorCb_FieldMoves(u8);
+static void Task_HandleFieldMoveMenuInput(u8);
+static bool32 PartyMon_CanUseFieldMove(struct Pokemon *, enum FieldMove);
+static bool32 PartyMon_HasFieldMoves(struct Pokemon *);
+static void SetPartyMonFieldMoveActions(struct Pokemon *);
+static void PartyFieldMoves_Draw(u32);
+static void BufferCurrentMapName(void);
+static const struct FieldMoveBlock *PartyMenu_GetFieldMoveBlock(enum FieldMove);
 static void CursorCb_FieldMove(u8);
 static void TryTutorSelectedMon(u8);
 static void TryGiveMailToSelectedMon(u8);
@@ -466,6 +489,7 @@ static void InitPartyMenu(enum PartyMenuType menuType, enum PartyMenuLayout layo
     memset(sPartyMenuDataPtr->heldItemSpriteIds, SPRITE_NONE, sizeof(sPartyMenuDataPtr->heldItemSpriteIds));
     memset(sPartyMenuDataPtr->statusSpriteIds, SPRITE_NONE, sizeof(sPartyMenuDataPtr->statusSpriteIds));
     memset(sPartyMenuDataPtr->statStageSpriteIds, SPRITE_NONE, sizeof(sPartyMenuDataPtr->statStageSpriteIds));
+    memset(sPartyMenuDataPtr->scrollArrowSpriteIds, SPRITE_NONE, sizeof(sPartyMenuDataPtr->scrollArrowSpriteIds));
     memset(sPartyMenuDataPtr->windowId, WINDOW_NONE, sizeof(sPartyMenuDataPtr->windowId));
     gMain.state = 0;
     SetMainCallback2(CB2_PartyMenu_Setup);
@@ -2198,8 +2222,6 @@ static bool8 CreateSelectionWindow(u8 taskId)
 
 static void SetPartyMonSelectionActions(struct Pokemon *mons, u8 slotId, u8 action)
 {
-    u8 i;
-
     if (action == ACTIONS_NONE)
     {
         SetPartyMonFieldSelectionActions(mons, slotId);
@@ -2207,41 +2229,26 @@ static void SetPartyMonSelectionActions(struct Pokemon *mons, u8 slotId, u8 acti
     else
     {
         sPartyMenuDataPtr->numActions = sPartyMenuActionCounts[action];
-        for (i = 0; i < sPartyMenuDataPtr->numActions; i++)
-            sPartyMenuDataPtr->actions[i] = sPartyMenuActions[action][i];
+        sPartyMenuDataPtr->actions = sPartyMenuActions[action];
     }
 }
 
 static void SetPartyMonFieldSelectionActions(struct Pokemon *mons, u8 slotId)
 {
-    u8 i, j;
+    bool32 hasFieldMoves = PartyMon_HasFieldMoves(&mons[slotId]);
 
-    sPartyMenuDataPtr->numActions = 0;
-    AppendToList(sPartyMenuDataPtr->actions, &sPartyMenuDataPtr->numActions, MENU_SUMMARY);
-
-    // Add field moves to action list
-    for (i = 0; i < MAX_MON_MOVES; i++)
+    if (InBattlePike())
     {
-        for (j = 0; j != FIELD_MOVES_COUNT; j++)
-        {
-            if (!FieldMove_IsVisible(j))
-                continue;
-
-            if (GetMonData(&mons[slotId], i + MON_DATA_MOVE1) == FieldMove_GetMoveId(j))
-            {
-                AppendToList(sPartyMenuDataPtr->actions, &sPartyMenuDataPtr->numActions, j + MENU_FIELD_MOVES);
-                break;
-            }
-        }
+        sPartyMenuDataPtr->actions = sPartyMenuPikeActions[hasFieldMoves];
+        sPartyMenuDataPtr->numActions = sPartyMenuPikeActionCounts[hasFieldMoves];
     }
-
-    if (!InBattlePike())
+    else
     {
-        if (GetMonData(&mons[1], MON_DATA_SPECIES) != SPECIES_NONE)
-            AppendToList(sPartyMenuDataPtr->actions, &sPartyMenuDataPtr->numActions, MENU_SWITCH);
-        AppendToList(sPartyMenuDataPtr->actions, &sPartyMenuDataPtr->numActions, MENU_ITEM);
+        bool32 canSwitch = GetMonData(&mons[1], MON_DATA_SPECIES) != SPECIES_NONE;
+
+        sPartyMenuDataPtr->actions = sPartyMenuFieldActions[canSwitch][hasFieldMoves];
+        sPartyMenuDataPtr->numActions = sPartyMenuFieldActionCounts[canSwitch][hasFieldMoves];
     }
-    AppendToList(sPartyMenuDataPtr->actions, &sPartyMenuDataPtr->numActions, MENU_CANCEL1);
 }
 
 static u8 GetPartyMenuActionsType(struct Pokemon *mon)
@@ -2494,6 +2501,10 @@ static u8 DisplaySelectionWindow(u8 windowType)
     case SELECTWINDOW_ZYGARDECUBE:
         SetWindowTemplateFields(&window, PARTY_BG_TEXT, DISPLAY_TILE_WIDTH - PARTY_ZYGARDE_CUBE_WIDTH, PARTY_FOOTER_TOP - PARTY_FRAME_SIZE - height, PARTY_ZYGARDE_CUBE_WIDTH, height, PARTY_BG_PAL_MENU_TEXT, PARTY_TEXT_TILE_LIST);
         break;
+    case SELECTWINDOW_FIELD_MOVES:
+        height = min(sPartyMenuDataPtr->numActions, PARTY_FIELD_MOVES_ROWS) * PARTY_LIST_ROW_HEIGHT;
+        SetWindowTemplateFields(&window, PARTY_BG_TEXT, DISPLAY_TILE_WIDTH - PARTY_ACTIONS_WIDTH, PARTY_FOOTER_TOP - PARTY_FRAME_SIZE - height, PARTY_ACTIONS_WIDTH, height, PARTY_BG_PAL_MENU_TEXT, PARTY_TEXT_TILE_LIST);
+        break;
     case SELECTWINDOW_ACTIONS:
     case SELECTWINDOW_ITEM:
     default:
@@ -2504,6 +2515,11 @@ static u8 DisplaySelectionWindow(u8 windowType)
     *windowPtr = AddWindow(&window);
     CallWindowFunction(*windowPtr, PartyList_DrawFrame);
     sPartyMenuDataPtr->actionCursor = 0;
+    sPartyMenuDataPtr->listScroll = 0;
+    if (windowType == SELECTWINDOW_FIELD_MOVES && sPartyMenuDataPtr->numActions > PARTY_FIELD_MOVES_ROWS)
+    {
+        PartyList_CreateScrollArrows();
+    }
     if (windowType == SELECTWINDOW_MOVES)
     {
         PartyMoves_Draw(*windowPtr);
@@ -2523,20 +2539,27 @@ static u8 DisplaySelectionWindow(u8 windowType)
 static void PartyActions_Draw(u32 windowId)
 {
     u32 width = GetWindowAttribute(windowId, WINDOW_WIDTH);
+    u32 numRows = GetWindowAttribute(windowId, WINDOW_HEIGHT) / PARTY_LIST_ROW_HEIGHT;
+    u32 scroll = sPartyMenuDataPtr->listScroll;
 
-    PartyList_Clear(windowId, sPartyMenuDataPtr->actionCursor);
-
-    for (u32 i = 0; i < sPartyMenuDataPtr->numActions; i++)
+    PartyList_Clear(windowId, sPartyMenuDataPtr->actionCursor - scroll);
+    if (sPartyMenuDataPtr->scrollArrowSpriteIds[PARTY_SCROLL_ARROW_UP] != SPRITE_NONE)
     {
-        u32 action = sPartyMenuDataPtr->actions[i];
+        gSprites[sPartyMenuDataPtr->scrollArrowSpriteIds[PARTY_SCROLL_ARROW_UP]].invisible = (scroll == 0);
+        gSprites[sPartyMenuDataPtr->scrollArrowSpriteIds[PARTY_SCROLL_ARROW_DOWN]].invisible = (scroll + numRows >= sPartyMenuDataPtr->numActions);
+    }
+
+    for (u32 row = 0; row < numRows; row++)
+    {
+        u32 action = sPartyMenuDataPtr->actions[row];
 
         if (action >= MENU_FIELD_MOVES)
         {
-            PartyList_PrintRow(windowId, i, width, COLORID_MENU_FIELD_MOVE, GetMoveName(FieldMove_GetMoveId(action - MENU_FIELD_MOVES)));
+            PartyList_PrintRow(windowId, row, width, COLORID_MENU_FIELD_MOVE, GetMoveName(FieldMove_GetMoveId(action - MENU_FIELD_MOVES)));
         }
         else
         {
-            PartyList_PrintRow(windowId, i, width, COLORID_MENU_WHITE, sCursorOptions[action].text);
+            PartyList_PrintRow(windowId, row, width, action == MENU_FIELD_MOVES_SUBMENU ? COLORID_MENU_FIELD_MOVE : COLORID_MENU_WHITE, sCursorOptions[action].text);
         }
     }
     CopyWindowToVram(windowId, COPYWIN_GFX);
@@ -2633,6 +2656,41 @@ static void PartyList_PrintRow(u32 windowId, u32 row, u32 width, enum PartyTextC
     AddTextPrinterParameterized4(windowId, fontId, PARTY_LIST_TEXT_X, row * TILE_TO_PIXELS(PARTY_LIST_ROW_HEIGHT), 0, 0, sPartyMenu_TextColors[color], TEXT_SKIP_DRAW, text);
 }
 
+#define tSineStep data[0]
+#define tSinePos  data[1]
+
+static void PartyList_CreateScrollArrows(void)
+{
+    u8 *spriteIds = sPartyMenuDataPtr->scrollArrowSpriteIds;
+
+    LoadCompressedSpriteSheet(&sPartyMenu_SpriteSheet_Spinner);
+    spriteIds[PARTY_SCROLL_ARROW_UP] = CreateSprite(&sPartyMenu_SpriteTemplate_ScrollArrow, PARTY_SCROLL_ARROW_X, PARTY_SCROLL_ARROW_UP_Y, PARTY_SPRITE_SUBPRIORITY_CURSOR);
+    spriteIds[PARTY_SCROLL_ARROW_DOWN] = CreateSprite(&sPartyMenu_SpriteTemplate_ScrollArrow, PARTY_SCROLL_ARROW_X, PARTY_SCROLL_ARROW_DOWN_Y, PARTY_SPRITE_SUBPRIORITY_CURSOR);
+    StartSpriteAnim(&gSprites[spriteIds[PARTY_SCROLL_ARROW_DOWN]], PARTY_SCROLL_ARROW_DOWN);
+
+    gSprites[spriteIds[PARTY_SCROLL_ARROW_UP]].tSineStep = PARTY_SCROLL_ARROW_SINE_STEP;
+    gSprites[spriteIds[PARTY_SCROLL_ARROW_DOWN]].tSineStep = -PARTY_SCROLL_ARROW_SINE_STEP;
+}
+
+static void SpriteCB_PartyScrollArrow(struct Sprite *sprite)
+{
+    sprite->y2 = Sin((u8)sprite->tSinePos, PARTY_SCROLL_ARROW_BOUNCE);
+    sprite->tSinePos += sprite->tSineStep;
+}
+
+#undef tSineStep
+#undef tSinePos
+
+static void PartyList_DestroyScrollArrows(void)
+{
+    for (u32 i = 0; i < ARRAY_COUNT(sPartyMenuDataPtr->scrollArrowSpriteIds); i++)
+    {
+        DestroySprite(&gSprites[sPartyMenuDataPtr->scrollArrowSpriteIds[i]]);
+        sPartyMenuDataPtr->scrollArrowSpriteIds[i] = SPRITE_NONE;
+    }
+    FreeSpriteTilesByTag(PARTY_GFXTAG_SPINNER);
+}
+
 static s32 PartyList_ProcessInput(void (*draw)(u32))
 {
     u32 numRows = sPartyMenuDataPtr->numActions;
@@ -2650,9 +2708,18 @@ static s32 PartyList_ProcessInput(void (*draw)(u32))
 
     if (cursor != sPartyMenuDataPtr->actionCursor)
     {
+        u32 windowId = sPartyMenuDataPtr->windowId[PARTY_DYN_WIN_LIST];
+        u32 visibleRows = GetWindowAttribute(windowId, WINDOW_HEIGHT) / PARTY_LIST_ROW_HEIGHT;
+
         PlaySE(SE_SELECT);
         sPartyMenuDataPtr->actionCursor = cursor;
-        draw(sPartyMenuDataPtr->windowId[PARTY_DYN_WIN_LIST]);
+        if (numRows > visibleRows)
+        {
+            s32 scroll = (s32)cursor - (s32)(visibleRows / 2);
+
+            sPartyMenuDataPtr->listScroll = min(max(scroll, 0), (s32)(numRows - visibleRows));
+        }
+        draw(windowId);
     }
     return input;
 }
@@ -2670,16 +2737,10 @@ static void Task_HandleSelectionMenuInput(u8 taskId)
             break;
         case MENU_B_PRESSED:
             PlaySE(SE_SELECT);
-            if (sPartyMenuDataPtr->actions[numActions - 1] >= MENU_FIELD_MOVES)
-                CursorCb_FieldMove(taskId);
-            else
-                sCursorOptions[sPartyMenuDataPtr->actions[numActions - 1]].func(taskId);
+            sCursorOptions[sPartyMenuDataPtr->actions[numActions - 1]].func(taskId);
             break;
         default:
-            if (sPartyMenuDataPtr->actions[input] >= MENU_FIELD_MOVES)
-                CursorCb_FieldMove(taskId);
-            else
-                sCursorOptions[sPartyMenuDataPtr->actions[input]].func(taskId);
+            sCursorOptions[sPartyMenuDataPtr->actions[input]].func(taskId);
             break;
         }
     }
@@ -2843,9 +2904,110 @@ static void CursorCb_Store(u8 taskId)
 // Field moves
 // ==================================================
 
+static void CursorCb_FieldMoves(u8 taskId)
+{
+    PlaySE(SE_SELECT);
+    PartyMenuRemoveWindow(&sPartyMenuDataPtr->windowId[PARTY_DYN_WIN_LIST]);
+    PartyMenuRemoveWindow(&sPartyMenuDataPtr->windowId[PARTY_DYN_WIN_MSG]);
+    SetPartyMonFieldMoveActions(&gParties[B_TRAINER_PLAYER][gPartyMenu.slotId]);
+    DisplaySelectionWindow(SELECTWINDOW_FIELD_MOVES);
+    DisplayPartyMenuStdMessage(PARTY_MSG_WHICH_FIELD_MOVE);
+    gTasks[taskId].func = Task_HandleFieldMoveMenuInput;
+}
+
+static void Task_HandleFieldMoveMenuInput(u8 taskId)
+{
+    if (!gPaletteFade.active && MenuHelpers_ShouldWaitForLinkRecv() != TRUE)
+    {
+        switch (PartyList_ProcessInput(PartyFieldMoves_Draw))
+        {
+        case MENU_NOTHING_CHOSEN:
+            break;
+        case MENU_B_PRESSED:
+            CursorCb_Cancel2(taskId);
+            break;
+        default:
+            CursorCb_FieldMove(taskId);
+            break;
+        }
+    }
+}
+
+static bool32 PartyMon_CanUseFieldMove(struct Pokemon *mon, enum FieldMove fieldMove)
+{
+    enum CanMoveBeLearned canLearn;
+
+    if (!IsFieldMoveUnlocked(fieldMove))
+    {
+        return FALSE;
+    }
+
+    canLearn = CanTeachMove(mon, FieldMove_GetMoveId(fieldMove));
+    return canLearn == ALREADY_KNOWS_MOVE || canLearn == CAN_LEARN_MOVE;
+}
+
+static bool32 PartyMon_HasFieldMoves(struct Pokemon *mon)
+{
+    for (enum FieldMove fieldMove = 0; fieldMove < FIELD_MOVES_COUNT; fieldMove++)
+    {
+        if (PartyMon_CanUseFieldMove(mon, fieldMove))
+        {
+            return TRUE;
+        }
+    }
+    return FALSE;
+}
+
+static void SetPartyMonFieldMoveActions(struct Pokemon *mon)
+{
+    u32 scroll = sPartyMenuDataPtr->listScroll;
+
+    sPartyMenuDataPtr->numActions = 0;
+    for (u32 i = 0; i < ARRAY_COUNT(sPartyMenu_FieldMoveOrder); i++)
+    {
+        enum FieldMove fieldMove = sPartyMenu_FieldMoveOrder[i];
+
+        if (!PartyMon_CanUseFieldMove(mon, fieldMove))
+        {
+            continue;
+        }
+        if (sPartyMenuDataPtr->numActions >= scroll && sPartyMenuDataPtr->numActions - scroll < PARTY_FIELD_MOVES_ROWS)
+        {
+            sPartyMenuDataPtr->fieldMoveRows[sPartyMenuDataPtr->numActions - scroll] = fieldMove + MENU_FIELD_MOVES;
+        }
+        sPartyMenuDataPtr->numActions++;
+    }
+    sPartyMenuDataPtr->actions = sPartyMenuDataPtr->fieldMoveRows;
+}
+
+static void PartyFieldMoves_Draw(u32 windowId)
+{
+    SetPartyMonFieldMoveActions(&gParties[B_TRAINER_PLAYER][gPartyMenu.slotId]);
+    PartyActions_Draw(windowId);
+}
+
+static void BufferCurrentMapName(void)
+{
+    GetMapNameGeneric(gStringVar1, gMapHeader.regionMapSectionId);
+}
+
+static const struct FieldMoveBlock *PartyMenu_GetFieldMoveBlock(enum FieldMove fieldMove)
+{
+    for (u32 i = 0; i < ARRAY_COUNT(sPartyMenu_FieldMoveBlocks); i++)
+    {
+        const struct FieldMoveBlock *block = &sPartyMenu_FieldMoveBlocks[i];
+
+        if ((block->fieldMoves & FIELD_MOVE_BIT(fieldMove)) && block->isActive())
+        {
+            return block;
+        }
+    }
+    return NULL;
+}
+
 static void CursorCb_FieldMove(u8 taskId)
 {
-    u8 fieldMove = sPartyMenuDataPtr->actions[sPartyMenuDataPtr->actionCursor] - MENU_FIELD_MOVES;
+    u8 fieldMove = sPartyMenuDataPtr->actions[sPartyMenuDataPtr->actionCursor - sPartyMenuDataPtr->listScroll] - MENU_FIELD_MOVES;
     const struct MapHeader *mapHeader;
 
     PlaySE(SE_SELECT);
@@ -2861,9 +3023,16 @@ static void CursorCb_FieldMove(u8 taskId)
         return;
     }
 
-    if (!IsFieldMoveUnlocked(fieldMove))
+    const struct FieldMoveBlock *block = PartyMenu_GetFieldMoveBlock(fieldMove);
+
+    if (block != NULL)
     {
-        DisplayPartyMenuMessage(FieldMove_GetLockedMessage(fieldMove), TRUE);
+        if (block->bufferStrings != NULL)
+        {
+            block->bufferStrings();
+        }
+        StringExpandPlaceholders(gStringVar4, block->message);
+        DisplayPartyMenuMessage(gStringVar4, TRUE);
         gTasks[taskId].func = Task_ReturnToChooseMonAfterText;
     }
     else if (SetUpFieldMove(fieldMove) == TRUE)
@@ -4608,6 +4777,7 @@ static void PartyView_ExpandHeader(u32 stringId)
     case PARTY_MSG_DO_WHAT_WITH_MON:
     case PARTY_MSG_MOVE_TO_WHERE:
     case PARTY_MSG_MOVE_ITEM_WHERE:
+    case PARTY_MSG_WHICH_FIELD_MOVE:
         GetMonNickname(&gParties[B_TRAINER_PLAYER][gPartyMenu.slotId], nickname);
         DynamicPlaceholderTextUtil_SetPlaceholderPtr(0, nickname);
         break;
@@ -4681,6 +4851,7 @@ static enum PartyMenuFooters PartyView_GetFooter(u32 stringId)
     case PARTY_MSG_MOVE_ITEM_WHERE:
         return PARTY_FOOTER_TARGET;
     case PARTY_MSG_DO_WHAT_WITH_MON:
+    case PARTY_MSG_WHICH_FIELD_MOVE:
     case PARTY_MSG_DO_WHAT_WITH_ITEM:
     case PARTY_MSG_DO_WHAT_WITH_MAIL:
     case PARTY_MSG_RESTORE_WHICH_MOVE:
@@ -4707,7 +4878,15 @@ static void PartyView_DrawFooter(enum PartyMenuFooters footer)
 static void PartyMenuRemoveWindow(u8 *windowPtr)
 {
     if (*windowPtr == WINDOW_NONE)
+    {
         return;
+    }
+
+    if (windowPtr == &sPartyMenuDataPtr->windowId[PARTY_DYN_WIN_LIST]
+     && sPartyMenuDataPtr->scrollArrowSpriteIds[PARTY_SCROLL_ARROW_UP] != SPRITE_NONE)
+    {
+        PartyList_DestroyScrollArrows();
+    }
 
     if (windowPtr == &sPartyMenuDataPtr->windowId[PARTY_DYN_WIN_MSG])
     {
