@@ -158,6 +158,14 @@
       "elevation": 0,
       "dest_map": "MAP_ESPULEE_OUTSKIRTS_KOMALA_CABIN_1F",
       "dest_warp_id": "0"
+    },
+    {
+      "warp_id": "WARP_ID_ESPULEE_OUTSKIRTS_TO_GYM",
+      "x": 12,
+      "y": 17,
+      "elevation": 0,
+      "dest_map": "MAP_ESPULEE_OUTSKIRTS_GYM",
+      "dest_warp_id": "WARP_ID_ESPULEE_OUTSKIRTS_GYM_TO_ESPULEE_OUTSKIRTS_RIGHT"
     }
   ],
   "coord_events": [
