@@ -193,11 +193,6 @@ extern const u8 gText_Quest_AllThatGlittersMightBeGold_Desc[];
 extern const u8 gText_Quest_AllThatGlittersMightBeGold_DoneDesc[];
 extern const u8 gText_Quest_AllThatGlittersMightBeGold_Map[];
 
-extern const u8 gText_Quest_UnknownFishingQuest_Name[];
-extern const u8 gText_Quest_UnknownFishingQuest_Desc[];
-extern const u8 gText_Quest_UnknownFishingQuest_DoneDesc[];
-extern const u8 gText_Quest_UnknownFishingQuest_Map[];
-
 extern const u8 gText_Quest_HiddenGrottoMapping_Name[];
 extern const u8 gText_Quest_HiddenGrottoMapping_Desc[];
 extern const u8 gText_Quest_HiddenGrottoMapping_DoneDesc[];

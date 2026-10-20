@@ -198,11 +198,6 @@ const u8 gText_Quest_AllThatGlittersMightBeGold_Desc[] =_("Description");
 const u8 gText_Quest_AllThatGlittersMightBeGold_DoneDesc[] =_("DoneDescription");
 const u8 gText_Quest_AllThatGlittersMightBeGold_Map[] =_("PopidoraPier");
 
-const u8 gText_Quest_UnknownFishingQuest_Name[] = _("Unknown Fishing Quest");
-const u8 gText_Quest_UnknownFishingQuest_Desc[] =_("Description");
-const u8 gText_Quest_UnknownFishingQuest_DoneDesc[] =_("DoneDescription");
-const u8 gText_Quest_UnknownFishingQuest_Map[] =_("HalaiIsland");
-
 const u8 gText_Quest_HiddenGrottoMapping_Name[] = _("Hidden Grotto Mapping 2");
 const u8 gText_Quest_HiddenGrottoMapping_Desc[] =_("Description");
 const u8 gText_Quest_HiddenGrottoMapping_DoneDesc[] =_("DoneDescription");

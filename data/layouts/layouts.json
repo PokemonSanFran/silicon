@@ -11416,19 +11416,6 @@
       "layout_version": "emerald"
     },
     {
-      "id": "LAYOUT_LAYOUT_TESTER",
-      "name": "LayoutTester_Layout",
-      "width": 20,
-      "height": 20,
-      "border_width": 2,
-      "border_height": 2,
-      "primary_tileset": "gTileset_General",
-      "secondary_tileset": "gTileset_Petalburg",
-      "border_filepath": "data/layouts/LayoutTester/border.bin",
-      "blockdata_filepath": "data/layouts/LayoutTester/map.bin",
-      "layout_version": "emerald"
-    },
-    {
       "id": "LAYOUT_HALAI_ISLAND_POST_EARTHQUAKE",
       "name": "HalaiIsland_PostEarthquake_Layout",
       "width": 40,
