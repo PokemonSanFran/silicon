@@ -482,6 +482,7 @@ static const struct
     struct PartySlotRect abilityName;
     struct PartySlotRect abilityArrow;
     struct PartySlotRect abilityNext;
+    struct PartySlotRect ppMove;
 } sPartyMenu_SlotLayout =
 {
     // {x, y, width, height}
@@ -622,6 +623,12 @@ static const struct
         PARTY_SLOT_ABILITY_NEXT_Y,
         PARTY_SLOT_ABILITY_NEXT_W,
         PARTY_SLOT_ABILITY_NEXT_H
+    },
+    .ppMove = {
+        PARTY_SLOT_PP_X,
+        PARTY_SLOT_PP_Y,
+        PARTY_SLOT_PP_W,
+        PARTY_SLOT_PP_H
     },
 };
 

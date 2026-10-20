@@ -182,6 +182,8 @@ static void PartySlot_DrawNatureRow(u32, u32, u32, bool32, u32);
 static u8 *PartySlot_StringNatureStat(u8 *, u32, bool32);
 static bool32 PartySlot_IsAbilityItem(void);
 static void PartySlot_DrawAbility(u32, u32, struct Pokemon *, u32);
+static bool32 PartySlot_IsPPItem(void);
+static void PartySlot_DrawPP(u32, struct Pokemon *, u32);
 static u32 PartySlot_GetExpItemCeiling(void);
 static u32 PartySlot_GetExpItemGain(struct Pokemon *, u32);
 static u32 PartySlot_GetExpItemMaxCount(struct Pokemon *);
@@ -305,6 +307,7 @@ static void PartyActions_Draw(u32);
 static void PartyMoves_Draw(u32);
 static bool32 PartyMoves_IsPPBoostItem(void);
 static u32 PartyMoves_GetPPBoost(struct Pokemon *, u32);
+static u32 PartyMoves_GetPPRestore(struct Pokemon *, u32);
 static s32 PartyList_ProcessInput(void (*)(u32));
 static void ShowMoveSelectWindow(u8);
 static void Task_HandleWhichMoveInput(u8);
@@ -710,6 +713,7 @@ void Task_HandleChooseMonInput(u8 taskId)
              || PartySlot_IsExpItem()
              || PartySlot_IsMint()
              || PartySlot_IsAbilityItem()
+             || PartySlot_IsPPItem()
              || PartySlot_GetXItemStat() != NUM_BATTLE_STATS)
             {
                 PartySlot_Draw(prevSlot);
@@ -1193,6 +1197,12 @@ static void PartySlot_DrawMonInfo(u32 windowId, u32 partySlot, u32 row)
         return;
     }
 
+    if (PartySlot_IsPPItem() && partySlot == *PartyCursor_GetSlotPtr())
+    {
+        PartySlot_DrawPP(windowId, mon, contentY);
+        return;
+    }
+
     if (description == PARTY_SLOT_DESC_NONE)
     {
         PartySlot_DrawHp(windowId, mon, contentY);
@@ -1507,6 +1517,49 @@ static void PartySlot_DrawAbility(u32 windowId, u32 partySlot, struct Pokemon *m
     name = gAbilitiesInfo[GetAbilityBySpecies(GetMonData(mon, MON_DATA_SPECIES), PartyMon_GetNewAbilityNum(mon))].name;
     fontId = GetFontIdToFit(name, FONT_OUTLINED, 0, rect->width);
     PartySlot_Print(windowId, fontId, rect->x, rect->y + contentY, COLORID_PARTY_RED, name);
+}
+
+static bool32 PartySlot_IsPPItem(void)
+{
+    enum ItemEffectType effectType = GetItemEffectType(gSpecialVar_ItemId);
+
+    return gPartyMenu.action == PARTY_ACTION_USE_ITEM
+        && (effectType == ITEM_EFFECT_HEAL_PP || effectType == ITEM_EFFECT_PP_UP || effectType == ITEM_EFFECT_PP_MAX);
+}
+
+static void PartySlot_DrawPP(u32 windowId, struct Pokemon *mon, u32 contentY)
+{
+    const struct PartySlotRect *rect = &sPartyMenu_SlotLayout.ppMove;
+    const u8 *slash = COMPOUND_STRING("/");
+    u32 slashWidth = GetStringWidth(FONT_OUTLINED, slash, 0);
+    u32 ppBonuses = GetMonData(mon, MON_DATA_PP_BONUSES);
+
+    for (u32 i = 0; i < MAX_MON_MOVES; i++)
+    {
+        enum Move move = GetMonData(mon, MON_DATA_MOVE1 + i);
+
+        if (move == MOVE_NONE)
+        {
+            continue;
+        }
+
+        u32 maxPP = CalculatePPWithBonus(move, ppBonuses, i);
+        u32 pp = GetMonData(mon, MON_DATA_PP1 + i);
+        u32 slashX = rect->x + (i % PARTY_SLOT_PP_COLUMNS) * rect->width + (rect->width - slashWidth) / 2;
+        u32 y = rect->y + (i / PARTY_SLOT_PP_COLUMNS) * PARTY_SLOT_PP_ROW_SPACING + contentY;
+        enum PartyTextColors color;
+        u8 text[4];
+
+        ConvertIntToDecimalStringN(text, pp, STR_CONV_MODE_LEFT_ALIGN, 2);
+        color = (pp == maxPP) ? COLORID_PARTY_GREEN : sPartyMenu_PPStateColors[GetCurrentPPToMaxPPState(pp, maxPP)];
+        PartySlot_Print(windowId, FONT_OUTLINED, slashX - GetStringWidth(FONT_OUTLINED, text, 0), y, color, text);
+
+        PartySlot_Print(windowId, FONT_OUTLINED, slashX, y, COLORID_PARTY_WHITE, slash);
+
+        ConvertIntToDecimalStringN(text, maxPP, STR_CONV_MODE_LEFT_ALIGN, 2);
+        color = (PartyMoves_GetPPBoost(mon, i) == 0) ? COLORID_PARTY_GREEN : COLORID_PARTY_WHITE;
+        PartySlot_Print(windowId, FONT_OUTLINED, slashX + slashWidth, y, color, text);
+    }
 }
 
 static u32 PartySlot_GetExpItemCeiling(void)
@@ -2559,7 +2612,7 @@ static u8 DisplaySelectionWindow(u8 windowType)
     {
     case SELECTWINDOW_MOVES:
     {
-        u32 width = PARTY_MOVES_WIDTH + (PartyMoves_IsPPBoostItem() ? PARTY_MOVES_DELTA_WIDTH : 0);
+        u32 width = PARTY_MOVES_WIDTH;
 
         SetWindowTemplateFields(&window, PARTY_BG_TEXT, DISPLAY_TILE_WIDTH - width, PARTY_FOOTER_TOP - PARTY_FRAME_SIZE - height, width, height, PARTY_BG_PAL_MENU_TEXT, PARTY_TEXT_TILE_LIST);
         break;
@@ -2637,7 +2690,11 @@ static void PartyActions_Draw(u32 windowId)
 static void PartyMoves_Draw(u32 windowId)
 {
     struct Pokemon *mon = &gParties[B_TRAINER_PLAYER][gPartyMenu.slotId];
-    bool32 showFullPP = PartyMoves_IsPPBoostItem();
+    bool32 isBoostItem = PartyMoves_IsPPBoostItem();
+    const u8 *slash = COMPOUND_STRING("/");
+    u32 slashX = isBoostItem ? PARTY_MOVES_BOOST_SLASH_X : PARTY_MOVES_HEAL_SLASH_X;
+    u32 slashWidth = GetStringWidth(PARTY_LIST_FONT, slash, 0);
+    u32 ppBonuses = GetMonData(mon, MON_DATA_PP_BONUSES);
 
     PartyList_Clear(windowId, sPartyMenuDataPtr->actionCursor);
     for (u32 i = 0; i < sPartyMenuDataPtr->numActions; i++)
@@ -2645,21 +2702,33 @@ static void PartyMoves_Draw(u32 windowId)
         enum Move move = GetMonData(mon, MON_DATA_MOVE1 + i);
         const u8 *name = GetMoveName(move);
         u32 y = i * TILE_TO_PIXELS(PARTY_LIST_ROW_HEIGHT);
-        u32 maxPP = CalculatePPWithBonus(move, GetMonData(mon, MON_DATA_PP_BONUSES), i);
-        u32 pp = showFullPP ? maxPP : GetMonData(mon, MON_DATA_PP1 + i);
+        u32 maxPP = CalculatePPWithBonus(move, ppBonuses, i);
+        u32 pp = GetMonData(mon, MON_DATA_PP1 + i);
+        enum PartyTextColors color;
         u8 text[4];
 
         PartySlot_Print(windowId, GetFontIdToFit(name, PARTY_LIST_FONT, 0, PARTY_MOVES_NAME_WIDTH), PARTY_LIST_TEXT_X, y, COLORID_MENU_WHITE, name);
-        ConvertIntToDecimalStringN(text, pp, STR_CONV_MODE_LEFT_ALIGN, 3);
-        enum PartyTextColors ppColor = showFullPP ? COLORID_MENU_WHITE : sPartyMenu_PPStateColors[GetCurrentPPToMaxPPState(pp, maxPP)];
-        PartySlot_Print(windowId, PARTY_LIST_FONT, PARTY_MOVES_PP_RIGHT - GetStringWidth(PARTY_LIST_FONT, text, 0), y, ppColor, text);
-        if (showFullPP && i == sPartyMenuDataPtr->actionCursor)
+
+        ConvertIntToDecimalStringN(text, pp, STR_CONV_MODE_LEFT_ALIGN, 2);
+        color = (pp == maxPP) ? COLORID_MENU_GREEN : sPartyMenu_PPStateColors[GetCurrentPPToMaxPPState(pp, maxPP)];
+        u32 x = (isBoostItem ? slashX : PARTY_MOVES_HEAL_PP_RIGHT) - GetStringWidth(PARTY_LIST_FONT, text, 0);
+        PartySlot_Print(windowId, PARTY_LIST_FONT, x, y, color, text);
+
+        PartySlot_Print(windowId, PARTY_LIST_FONT, slashX, y, COLORID_MENU_WHITE, slash);
+
+        ConvertIntToDecimalStringN(text, maxPP, STR_CONV_MODE_LEFT_ALIGN, 2);
+        color = (PartyMoves_GetPPBoost(mon, i) == 0) ? COLORID_MENU_GREEN : COLORID_MENU_WHITE;
+        x = isBoostItem ? PARTY_MOVES_BOOST_MAX_RIGHT - GetStringWidth(PARTY_LIST_FONT, text, 0) : slashX + slashWidth;
+        PartySlot_Print(windowId, PARTY_LIST_FONT, x, y, color, text);
+
+        if (i == sPartyMenuDataPtr->actionCursor)
         {
-            u32 boost = PartyMoves_GetPPBoost(mon, i);
+            u32 delta = isBoostItem ? PartyMoves_GetPPBoost(mon, i) : PartyMoves_GetPPRestore(mon, i);
 
             text[0] = CHAR_PLUS;
-            ConvertIntToDecimalStringN(&text[1], boost, STR_CONV_MODE_LEFT_ALIGN, 2);
-            PartySlot_Print(windowId, PARTY_LIST_FONT, PARTY_MOVES_DELTA_X, y, boost != 0 ? COLORID_MENU_RED : COLORID_MENU_GREY, text);
+            ConvertIntToDecimalStringN(&text[1], delta, STR_CONV_MODE_LEFT_ALIGN, 2);
+            x = isBoostItem ? PARTY_MOVES_BOOST_DELTA_X : PARTY_MOVES_HEAL_DELTA_X;
+            PartySlot_Print(windowId, PARTY_LIST_FONT, x, y, delta != 0 ? COLORID_MENU_RED : COLORID_MENU_GREY, text);
         }
     }
     CopyWindowToVram(windowId, COPYWIN_GFX);
@@ -2686,6 +2755,14 @@ static u32 PartyMoves_GetPPBoost(struct Pokemon *mon, u32 moveSlot)
 
     ppBonuses = (ppBonuses & gPPUpClearMask[moveSlot]) + gPPUpAddValues[moveSlot] * newPPUps;
     return CalculatePPWithBonus(move, ppBonuses, moveSlot) - maxPP;
+}
+
+static u32 PartyMoves_GetPPRestore(struct Pokemon *mon, u32 moveSlot)
+{
+    enum Move move = GetMonData(mon, MON_DATA_MOVE1 + moveSlot);
+    u32 maxPP = CalculatePPWithBonus(move, GetMonData(mon, MON_DATA_PP_BONUSES), moveSlot);
+
+    return min(GetItemEffect(gSpecialVar_ItemId)[ITEM_EFFECT_ARG_START], maxPP - GetMonData(mon, MON_DATA_PP1 + moveSlot));
 }
 
 static void PartyList_Clear(u32 windowId, u32 cursor)
@@ -5920,6 +5997,7 @@ static void TryUseItemOnMove(u8 taskId)
             gPartyMenuUseExitCallback = TRUE;
             PlaySE(SE_USE_ITEM);
             RemoveBagItem(item, 1);
+            PartySlot_Draw(ptr->slotId);
             move = GetMonData(mon, MON_DATA_MOVE1 + *moveSlot);
             StringCopy(gStringVar1, GetMoveName(move));
             GetMedicineItemEffectMessage(item, 0);
