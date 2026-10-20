@@ -333,12 +333,6 @@
       "y": 17
     },
     {
-      "id": "HEAL_LOCATION_PALACEFINEARTS",
-      "map": "MAP_PALACEFINEARTS",
-      "x": 19,
-      "y": 30
-    },
-    {
       "id": "HEAL_LOCATION_PETAROSA_BOROUGH",
       "map": "MAP_PETAROSA_BOROUGH",
       "x": 24,

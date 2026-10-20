@@ -2570,7 +2570,7 @@
 #define FLAG_VISITED_OROLAND                                         (SYSTEM_FLAGS + 0x48)
 #define FLAG_VISITED_OROLAND_COLISEUM                                (SYSTEM_FLAGS + 0x49)
 #define FLAG_VISITED_OROLANDFERRY                                    (SYSTEM_FLAGS + 0x4A)
-#define FLAG_VISITED_PALACEFINEARTS                                  (SYSTEM_FLAGS + 0x4B)
+#define FLAG_VISITED_SYSTEM_FLAGS_0x4B                               (SYSTEM_FLAGS + 0x4B)
 #define FLAG_VISITED_PARC                                            (SYSTEM_FLAGS + 0x4C)
 #define FLAG_VISITED_PERLACIA_CITY                                   (SYSTEM_FLAGS + 0x4D)
 #define FLAG_VISITED_PETAROSA_BOROUGH                                (SYSTEM_FLAGS + 0x4E)
