@@ -180,6 +180,8 @@ static bool32 PartySlot_IsMint(void);
 static void PartySlot_DrawNature(u32, u32, struct Pokemon *, u32);
 static void PartySlot_DrawNatureRow(u32, u32, u32, bool32, u32);
 static u8 *PartySlot_StringNatureStat(u8 *, u32, bool32);
+static bool32 PartySlot_IsAbilityItem(void);
+static void PartySlot_DrawAbility(u32, u32, struct Pokemon *, u32);
 static u32 PartySlot_GetExpItemCeiling(void);
 static u32 PartySlot_GetExpItemGain(struct Pokemon *, u32);
 static u32 PartySlot_GetExpItemMaxCount(struct Pokemon *);
@@ -421,8 +423,8 @@ static void TryTutorSelectedMon(u8);
 static void TryGiveMailToSelectedMon(u8);
 static void TryGiveItemToSelectedMon(u8);
 static void TryEnterMonForMinigame(u8, u8);
-static void Task_AbilityCapsule(u8);
-static void Task_AbilityPatch(u8);
+static u32 PartyMon_GetNewAbilityNum(struct Pokemon *);
+static void Task_ChangeAbility(u8);
 static void Task_Mint(u8);
 static void ItemUse_ApplyReduceEvItem(u8, u32);
 static u16 ItemEffectToMonEv(struct Pokemon *, enum ItemEffectType);
@@ -707,6 +709,7 @@ void Task_HandleChooseMonInput(u8 taskId)
             if (PartySlot_GetEvItemStat() != NUM_STATS
              || PartySlot_IsExpItem()
              || PartySlot_IsMint()
+             || PartySlot_IsAbilityItem()
              || PartySlot_GetXItemStat() != NUM_BATTLE_STATS)
             {
                 PartySlot_Draw(prevSlot);
@@ -1128,10 +1131,14 @@ static void PartySlot_DrawMonInfo(u32 windowId, u32 partySlot, u32 row)
     enum PartyTextColors descColor;
     u32 description = PartySlot_GetDescription(partySlot, &descColor);
     if (description != PARTY_SLOT_DESC_NONE)
+    {
         PartySlot_DrawDescription(windowId, description, descColor, contentY);
+    }
 
     if (GetMonData(mon, MON_DATA_IS_EGG))
+    {
         return;
+    }
 
     PartySlot_DrawGender(windowId, mon, nickname, contentY);
     PartySlot_DrawLevel(windowId, mon, contentY);
@@ -1148,7 +1155,18 @@ static void PartySlot_DrawMonInfo(u32 windowId, u32 partySlot, u32 row)
     if (PartySlot_IsMint())
     {
         if (description == PARTY_SLOT_DESC_NONE)
+        {
             PartySlot_DrawNature(windowId, partySlot, mon, contentY);
+        }
+        return;
+    }
+
+    if (PartySlot_IsAbilityItem())
+    {
+        if (description == PARTY_SLOT_DESC_NONE)
+        {
+            PartySlot_DrawAbility(windowId, partySlot, mon, contentY);
+        }
         return;
     }
 
@@ -1158,10 +1176,14 @@ static void PartySlot_DrawMonInfo(u32 windowId, u32 partySlot, u32 row)
         if (PartySlot_IsEvResetItem())
         {
             if (partySlot == *PartyCursor_GetSlotPtr())
+            {
                 PartySlot_DrawEvReset(windowId, contentY);
+            }
         }
         else
+        {
             PartySlot_DrawEvItemStat(windowId, partySlot, mon, evStat, contentY);
+        }
         return;
     }
 
@@ -1172,7 +1194,9 @@ static void PartySlot_DrawMonInfo(u32 windowId, u32 partySlot, u32 row)
     }
 
     if (description == PARTY_SLOT_DESC_NONE)
+    {
         PartySlot_DrawHp(windowId, mon, contentY);
+    }
     PartySlot_DrawItem(windowId, mon, contentY);
 }
 
@@ -1453,6 +1477,38 @@ static u8 *PartySlot_StringNatureStat(u8 *dst, u32 nature, bool32 raised)
     return StringCopy(dst, sPartyMenu_StatShortLabels[raised ? info->statUp : info->statDown]);
 }
 
+static bool32 PartySlot_IsAbilityItem(void)
+{
+    ItemUseFunc fieldFunc = GetItemFieldFunc(gSpecialVar_ItemId);
+
+    return gPartyMenu.action == PARTY_ACTION_USE_ITEM
+        && (fieldFunc == ItemUseOutOfBattle_AbilityCapsule
+         || fieldFunc == ItemUseOutOfBattle_AbilityPatch);
+}
+
+static void PartySlot_DrawAbility(u32 windowId, u32 partySlot, struct Pokemon *mon, u32 contentY)
+{
+    const struct PartySlotRect *rect = &sPartyMenu_SlotLayout.abilityName;
+    const u8 *name = gAbilitiesInfo[GetMonAbility(mon)].name;
+    bool32 isHovered = partySlot == *PartyCursor_GetSlotPtr();
+    u32 fontId = GetFontIdToFit(name, FONT_OUTLINED, 0, rect->width);
+
+    PartySlot_Print(windowId, fontId, rect->x + GetStringCenterAlignXOffset(fontId, name, rect->width),
+                    rect->y + contentY, isHovered ? COLORID_PARTY_WHITE : COLORID_PARTY_YELLOW, name);
+    if (!isHovered)
+    {
+        return;
+    }
+
+    rect = &sPartyMenu_SlotLayout.abilityArrow;
+    PartySlot_Print(windowId, FONT_OUTLINED, rect->x, rect->y + contentY, COLORID_PARTY_RED, COMPOUND_STRING("{RIGHT_ARROW}"));
+
+    rect = &sPartyMenu_SlotLayout.abilityNext;
+    name = gAbilitiesInfo[GetAbilityBySpecies(GetMonData(mon, MON_DATA_SPECIES), PartyMon_GetNewAbilityNum(mon))].name;
+    fontId = GetFontIdToFit(name, FONT_OUTLINED, 0, rect->width);
+    PartySlot_Print(windowId, fontId, rect->x, rect->y + contentY, COLORID_PARTY_RED, name);
+}
+
 static u32 PartySlot_GetExpItemCeiling(void)
 {
     if (GetItemHoldEffectParam(gSpecialVar_ItemId) == 0)
@@ -1688,12 +1744,23 @@ static u32 PartySlot_GetDescription(u32 partySlot, enum PartyTextColors *color)
     }
 
     if (gPartyMenu.action != PARTY_ACTION_USE_ITEM)
+    {
         return PARTY_SLOT_DESC_NONE;
+    }
 
     if (PartySlot_IsMint()
      && partySlot == *PartyCursor_GetSlotPtr()
      && !GetMonData(mon, MON_DATA_IS_EGG)
      && GetMonData(mon, MON_DATA_HIDDEN_NATURE) == GetItemSecondaryId(gSpecialVar_ItemId))
+    {
+        *color = COLORID_PARTY_GREY;
+        return PARTYBOX_DESC_NO_USE;
+    }
+
+    if (PartySlot_IsAbilityItem()
+     && partySlot == *PartyCursor_GetSlotPtr()
+     && !GetMonData(mon, MON_DATA_IS_EGG)
+     && PartyMon_GetNewAbilityNum(mon) == NUM_ABILITY_SLOTS)
     {
         *color = COLORID_PARTY_GREY;
         return PARTYBOX_DESC_NO_USE;
@@ -1707,7 +1774,9 @@ static u32 PartySlot_GetDescription(u32 partySlot, enum PartyTextColors *color)
             return PARTYBOX_DESC_NO_USE;
         }
         if (partySlot == *PartyCursor_GetSlotPtr())
+        {
             return PARTY_SLOT_DESC_NONE;
+        }
 
         *color = COLORID_PARTY_GREEN;
         return PARTY_SLOT_DESC_IN_BATTLE;
@@ -5368,7 +5437,31 @@ static const u8 sText_AbilityChanged[] = _("{STR_VAR_1}'s ability became\n{STR_V
 #define tMonId      data[3]
 #define tOldFunc    4
 
-static void Task_AbilityCapsule(u8 taskId)
+static u32 PartyMon_GetNewAbilityNum(struct Pokemon *mon)
+{
+    enum Species species = GetMonData(mon, MON_DATA_SPECIES);
+    u32 abilityNum = GetMonData(mon, MON_DATA_ABILITY_NUM);
+
+    if (GetItemFieldFunc(gSpecialVar_ItemId) == ItemUseOutOfBattle_AbilityPatch)
+    {
+        abilityNum = (abilityNum == NUM_NORMAL_ABILITY_SLOTS) ? 0 : NUM_NORMAL_ABILITY_SLOTS;
+        if (GetSpeciesAbility(species, abilityNum) == ABILITY_NONE)
+        {
+            return NUM_ABILITY_SLOTS;
+        }
+        return abilityNum;
+    }
+
+    if (abilityNum >= NUM_NORMAL_ABILITY_SLOTS
+     || GetSpeciesAbility(species, 1) == ABILITY_NONE
+     || GetSpeciesAbility(species, 0) == GetSpeciesAbility(species, 1))
+    {
+        return NUM_ABILITY_SLOTS;
+    }
+    return abilityNum ^ 1;
+}
+
+static void Task_ChangeAbility(u8 taskId)
 {
     s16 *data = gTasks[taskId].data;
 
@@ -5376,10 +5469,7 @@ static void Task_AbilityCapsule(u8 taskId)
     {
     case 0:
         // Can't use.
-        if (GetSpeciesAbility(tSpecies, 0) == GetSpeciesAbility(tSpecies, 1)
-            || GetSpeciesAbility(tSpecies, 1) == 0
-            || tAbilityNum > 1
-            || !tSpecies)
+        if (tAbilityNum == NUM_ABILITY_SLOTS)
         {
             gPartyMenuUseExitCallback = FALSE;
             PlaySE(SE_SELECT);
@@ -5446,94 +5536,14 @@ void ItemUseCB_AbilityCapsule(u8 taskId, TaskFunc task)
     tState = 0;
     tMonId = gPartyMenu.slotId;
     tSpecies = GetMonData(&gParties[B_TRAINER_PLAYER][tMonId], MON_DATA_SPECIES);
-    tAbilityNum = GetMonData(&gParties[B_TRAINER_PLAYER][tMonId], MON_DATA_ABILITY_NUM) ^ 1;
+    tAbilityNum = PartyMon_GetNewAbilityNum(&gParties[B_TRAINER_PLAYER][tMonId]);
     SetWordTaskArg(taskId, tOldFunc, (uintptr_t)(gTasks[taskId].func));
-    gTasks[taskId].func = Task_AbilityCapsule;
-}
-
-static void Task_AbilityPatch(u8 taskId)
-{
-    s16 *data = gTasks[taskId].data;
-
-    switch (tState)
-    {
-    case 0:
-        // Can't use.
-        if (GetSpeciesAbility(tSpecies, tAbilityNum) == 0
-            || !tSpecies
-            )
-        {
-            gPartyMenuUseExitCallback = FALSE;
-            PlaySE(SE_SELECT);
-            DisplayPartyMenuMessage(gText_WontHaveEffect, 1);
-            gTasks[taskId].func = Task_ClosePartyMenuAfterText;
-            return;
-        }
-        gPartyMenuUseExitCallback = TRUE;
-        GetMonNickname(&gParties[B_TRAINER_PLAYER][tMonId], gStringVar1);
-        StringCopy(gStringVar2, gAbilitiesInfo[GetAbilityBySpecies(tSpecies, tAbilityNum)].name);
-        StringExpandPlaceholders(gStringVar4, sText_AskChangeAbility);
-        PlaySE(SE_SELECT);
-        DisplayPartyMenuMessage(gStringVar4, 1);
-        tState++;
-        break;
-    case 1:
-        if (!IsPartyMenuTextPrinterActive())
-        {
-            PartyMenuDisplayYesNoMenu();
-            tState++;
-        }
-        break;
-    case 2:
-        switch (PartyMenuProcessYesNoInput())
-        {
-        case 0:
-            tState++;
-            break;
-        case 1:
-        case MENU_B_PRESSED:
-            gPartyMenuUseExitCallback = FALSE;
-            PlaySE(SE_SELECT);
-            // Don't exit party selections screen, return to choosing a mon.
-            DisplayPartyMenuStdMessage(PARTY_MSG_USE_ON_WHICH_MON);
-            gTasks[taskId].func = (void *)GetWordTaskArg(taskId, tOldFunc);
-            return;
-        }
-        break;
-    case 3:
-        PlaySE(SE_USE_ITEM);
-        StringExpandPlaceholders(gStringVar4, sText_AbilityChanged);
-        DisplayPartyMenuMessage(gStringVar4, 1);
-        tState++;
-        break;
-    case 4:
-        if (!IsPartyMenuTextPrinterActive())
-            tState++;
-        break;
-    case 5:
-        SetMonData(&gParties[B_TRAINER_PLAYER][tMonId], MON_DATA_ABILITY_NUM, &tAbilityNum);
-        RemoveBagItem(gSpecialVar_ItemId, 1);
-        if (CheckBagHasItem(gSpecialVar_ItemId, 1))
-            gTasks[taskId].func = Task_ReturnToChooseMonAfterText;
-        else
-            gTasks[taskId].func = Task_ClosePartyMenu;
-        break;
-    }
+    gTasks[taskId].func = Task_ChangeAbility;
 }
 
 void ItemUseCB_AbilityPatch(u8 taskId, TaskFunc task)
 {
-    s16 *data = gTasks[taskId].data;
-
-    tState = 0;
-    tMonId = gPartyMenu.slotId;
-    tSpecies = GetMonData(&gParties[B_TRAINER_PLAYER][tMonId], MON_DATA_SPECIES);
-    if (GetMonData(&gParties[B_TRAINER_PLAYER][tMonId], MON_DATA_ABILITY_NUM) == 2)
-        tAbilityNum = 0;
-    else
-        tAbilityNum = 2;
-    SetWordTaskArg(taskId, tOldFunc, (uintptr_t)(gTasks[taskId].func));
-    gTasks[taskId].func = Task_AbilityPatch;
+    ItemUseCB_AbilityCapsule(taskId, task);
 }
 
 #undef tState

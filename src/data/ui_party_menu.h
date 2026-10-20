@@ -479,6 +479,9 @@ static const struct
     struct PartySlotRect natureCurrent;
     struct PartySlotRect natureArrow;
     struct PartySlotRect natureNext;
+    struct PartySlotRect abilityName;
+    struct PartySlotRect abilityArrow;
+    struct PartySlotRect abilityNext;
 } sPartyMenu_SlotLayout =
 {
     // {x, y, width, height}
@@ -601,6 +604,24 @@ static const struct
         PARTY_SLOT_NATURE_NEXT_Y,
         PARTY_SLOT_NATURE_NEXT_W,
         PARTY_SLOT_NATURE_NEXT_H
+    },
+    .abilityName = {
+        PARTY_SLOT_ABILITY_NAME_X,
+        PARTY_SLOT_ABILITY_NAME_Y,
+        PARTY_SLOT_ABILITY_NAME_W,
+        PARTY_SLOT_ABILITY_NAME_H
+    },
+    .abilityArrow = {
+        PARTY_SLOT_ABILITY_ARROW_X,
+        PARTY_SLOT_ABILITY_ARROW_Y,
+        PARTY_SLOT_ABILITY_ARROW_W,
+        PARTY_SLOT_ABILITY_ARROW_H
+    },
+    .abilityNext = {
+        PARTY_SLOT_ABILITY_NEXT_X,
+        PARTY_SLOT_ABILITY_NEXT_Y,
+        PARTY_SLOT_ABILITY_NEXT_W,
+        PARTY_SLOT_ABILITY_NEXT_H
     },
 };
 
