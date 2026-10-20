@@ -170,6 +170,8 @@ static enum Stat PartySlot_GetEvItemStat(void);
 static enum Stat PartySlot_GetXItemStat(void);
 static u32 PartySlot_GetActiveBattler(u32);
 static void PartySlot_DrawStatName(u32, enum Stat, u32);
+static bool32 PartySlot_IsDireHit(void);
+static void PartySlot_DrawDireHit(u32, u32);
 static bool32 PartySlot_IsEvResetItem(void);
 static void PartySlot_DrawEvItemStat(u32, u32, struct Pokemon *, enum Stat, u32);
 static void PartySlot_DrawEvItemDelta(u32, struct Pokemon *, enum Stat, u32);
@@ -1170,6 +1172,12 @@ static void PartySlot_DrawMonInfo(u32 windowId, u32 partySlot, u32 row)
         return;
     }
 
+    if (PartySlot_IsDireHit() && description == PARTY_SLOT_DESC_NONE)
+    {
+        PartySlot_DrawDireHit(windowId, contentY);
+        return;
+    }
+
     if (PartySlot_IsMint())
     {
         if (description == PARTY_SLOT_DESC_NONE)
@@ -1391,6 +1399,21 @@ static void PartySlot_DrawStatName(u32 windowId, enum Stat stat, u32 contentY)
 
     PartySlot_Print(windowId, fontId, rect->x + GetStringCenterAlignXOffset(fontId, name, rect->width),
                     rect->y + contentY, COLORID_PARTY_WHITE, name);
+}
+
+static bool32 PartySlot_IsDireHit(void)
+{
+    return gPartyMenu.action == PARTY_ACTION_USE_ITEM && GetItemBattleUsage(gSpecialVar_ItemId) == EFFECT_ITEM_SET_FOCUS_ENERGY;
+}
+
+static void PartySlot_DrawDireHit(u32 windowId, u32 contentY)
+{
+    const struct PartySlotRect *rect = &sPartyMenu_SlotLayout.description;
+    const u8 *name = COMPOUND_STRING("Crit. hits");
+    u32 boostX = rect->x + GetStringWidth(FONT_OUTLINED, name, 0) + GetStringWidth(FONT_OUTLINED, gText_Space, 0);
+
+    PartySlot_Print(windowId, FONT_OUTLINED, rect->x, rect->y + contentY, COLORID_PARTY_WHITE, name);
+    PartySlot_Print(windowId, FONT_OUTLINED, boostX, rect->y + contentY, COLORID_PARTY_RED, COMPOUND_STRING("+2"));
 }
 
 static void PartySlot_DrawEvItemStat(u32 windowId, u32 partySlot, struct Pokemon *mon, enum Stat stat, u32 contentY)
@@ -2002,6 +2025,26 @@ static u32 PartySlot_GetDescription(u32 partySlot, enum PartyTextColors *color)
     if (PartySlot_GetXItemStat() != NUM_BATTLE_STATS)
     {
         if (PartySlot_GetActiveBattler(partySlot) == MAX_BATTLERS_COUNT)
+        {
+            *color = COLORID_PARTY_GREY;
+            return PARTYBOX_DESC_NO_USE;
+        }
+        if (partySlot == *PartyCursor_GetSlotPtr())
+        {
+            return PARTY_SLOT_DESC_NONE;
+        }
+
+        *color = COLORID_PARTY_GREEN;
+        return PARTY_SLOT_DESC_IN_BATTLE;
+    }
+
+    if (PartySlot_IsDireHit())
+    {
+        u32 battler = PartySlot_GetActiveBattler(partySlot);
+
+        if (battler == MAX_BATTLERS_COUNT
+         || gBattleMons[battler].volatiles.focusEnergy
+         || gBattleMons[battler].volatiles.dragonCheer)
         {
             *color = COLORID_PARTY_GREY;
             return PARTYBOX_DESC_NO_USE;
