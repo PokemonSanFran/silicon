@@ -256,6 +256,8 @@ static void Task_CancelParticipationYesNo(u8);
 static void Task_HandleCancelParticipationYesNoInput(u8);
 static void FinishTwoMonAction(u8);
 static void Task_ReturnToChooseMonAfterText(u8);
+static void PartyItem_ReturnOrCloseAfterText(u8);
+static void PartyItem_DisplayNoEffect(u8);
 static void Task_WaitForLinkAndReturnToChooseMon(u8);
 static void Task_ReturnToChooseMonAfterConfirm(u8);
 static void PartyMenuDisplayYesNoMenu(void);
@@ -1061,6 +1063,27 @@ static void Task_ReturnToChooseMonAfterText(u8 taskId)
             gTasks[taskId].func = Task_HandleChooseMonInput;
         }
     }
+}
+
+static void PartyItem_ReturnOrCloseAfterText(u8 taskId)
+{
+    if (gPartyMenu.menuType == PARTY_MENU_TYPE_FIELD && CheckBagHasItem(gSpecialVar_ItemId, 1))
+    {
+        gTasks[taskId].func = Task_ReturnToChooseMonAfterText;
+    }
+    else
+    {
+        gTasks[taskId].func = Task_ClosePartyMenuAfterText;
+    }
+}
+
+// when not able to use / no effect, go back to pick another mon - both in field and in battle
+static void PartyItem_DisplayNoEffect(u8 taskId)
+{
+    gPartyMenuUseExitCallback = FALSE;
+    sPartyMenuDataPtr->exitCallback = NULL;
+    DisplayPartyMenuMessage(gText_WontHaveEffect, TRUE);
+    gTasks[taskId].func = Task_ReturnToChooseMonAfterText;
 }
 
 static void Task_WaitForLinkAndReturnToChooseMon(u8 taskId)
@@ -1905,10 +1928,7 @@ static void ItemUse_ApplyEvItem(u8 taskId, u32 count)
     GetMonNickname(mon, gStringVar1);
     GetMedicineItemEffectMessage(item, 0);
     DisplayPartyMenuMessage(gStringVar4, TRUE);
-    if (CheckBagHasItem(item, 1))
-        gTasks[taskId].func = Task_ReturnToChooseMonAfterText;
-    else
-        gTasks[taskId].func = Task_ClosePartyMenuAfterText;
+    PartyItem_ReturnOrCloseAfterText(taskId);
 }
 
 static void PartySlot_DrawEvReset(u32 windowId, u32 contentY)
@@ -3864,13 +3884,8 @@ void ItemUseCB_Medicine(u8 taskId, TaskFunc task)
 
     if (cannotUse != FALSE)
     {
-        gPartyMenuUseExitCallback = FALSE;
         PlaySE(SE_SELECT);
-        DisplayPartyMenuMessage(gText_WontHaveEffect, TRUE);
-        if (gPartyMenu.menuType == PARTY_MENU_TYPE_FIELD)
-            gTasks[taskId].func = Task_ReturnToChooseMonAfterText;
-        else
-            gTasks[taskId].func = task;
+        PartyItem_DisplayNoEffect(taskId);
         return;
     }
     else
@@ -3900,11 +3915,7 @@ void ItemUseCB_Medicine(u8 taskId, TaskFunc task)
             GetMonNickname(mon, gStringVar1);
             GetMedicineItemEffectMessage(item, oldStatus);
             DisplayPartyMenuMessage(gStringVar4, TRUE);
-
-            if (gPartyMenu.menuType == PARTY_MENU_TYPE_FIELD && CheckBagHasItem(item, 1))
-                gTasks[taskId].func = Task_ReturnToChooseMonAfterText;
-            else
-                gTasks[taskId].func = task;
+            PartyItem_ReturnOrCloseAfterText(taskId);
         }
     }
 }
@@ -3919,10 +3930,7 @@ static void Task_DisplayHPRestoredMessage(u8 taskId)
     StringExpandPlaceholders(gStringVar4, gText_PkmnHPRestoredByVar2);
     DisplayPartyMenuMessage(gStringVar4, FALSE);
     HandleBattleLowHpMusicChange();
-    if (gPartyMenu.menuType == PARTY_MENU_TYPE_FIELD && CheckBagHasItem(gSpecialVar_ItemId, 1))
-        gTasks[taskId].func = Task_ReturnToChooseMonAfterText;
-    else
-        gTasks[taskId].func = Task_ClosePartyMenuAfterText;
+    PartyItem_ReturnOrCloseAfterText(taskId);
 }
 
 #define tUsedOnSlot   data[0]
@@ -4194,12 +4202,7 @@ void ItemUseCB_RareCandy(u8 taskId, TaskFunc task)
         }
         else
         {
-            gPartyMenuUseExitCallback = FALSE;
-            DisplayPartyMenuMessage(gText_WontHaveEffect, TRUE);
-            if (gPartyMenu.menuType == PARTY_MENU_TYPE_FIELD && CheckBagHasItem(gSpecialVar_ItemId, 1))
-                gTasks[taskId].func = Task_ReturnToChooseMonAfterText;
-            else
-                gTasks[taskId].func = task;
+            PartyItem_DisplayNoEffect(taskId);
         }
     }
     else if (!PartySpinner_TryOpen(taskId, PartySlot_GetExpItemMaxCount(mon), PARTY_SPINNER_EXP_Y_OFFSET))
@@ -4248,10 +4251,7 @@ static void ItemUse_ApplyExpItem(u8 taskId, u32 count)
         ConvertIntToDecimalStringN(gStringVar2, gain, STR_CONV_MODE_LEFT_ALIGN, 7);
         StringExpandPlaceholders(gStringVar4, gText_PkmnGainedExp);
         DisplayPartyMenuMessage(gStringVar4, FALSE);
-        if (gPartyMenu.menuType == PARTY_MENU_TYPE_FIELD && CheckBagHasItem(gSpecialVar_ItemId, 1))
-            gTasks[taskId].func = Task_ReturnToChooseMonAfterText;
-        else
-            gTasks[taskId].func = Task_ClosePartyMenuAfterText;
+        PartyItem_ReturnOrCloseAfterText(taskId);
     }
 }
 
@@ -4442,10 +4442,7 @@ static void PartyMenuTryEvolution(u8 taskId)
     }
     else
     {
-        if (gPartyMenu.menuType == PARTY_MENU_TYPE_FIELD && CheckBagHasItem(gSpecialVar_ItemId, 1))
-            gTasks[taskId].func = Task_ReturnToChooseMonAfterText;
-        else
-            gTasks[taskId].func = Task_ClosePartyMenuAfterText;
+        PartyItem_ReturnOrCloseAfterText(taskId);
     }
 }
 
@@ -4578,7 +4575,7 @@ static void CB2_ReturnToPartyMenuWhileLearningMove(void)
 {
     if (sFinalLevel != 0)
         SetMonData(&gParties[B_TRAINER_PLAYER][gPartyMenu.slotId], MON_DATA_LEVEL, &sFinalLevel); // to avoid displaying incorrect level
-    if (GetItemFieldFunc(gSpecialVar_ItemId) == ItemUseOutOfBattle_RareCandy && gPartyMenu.menuType == PARTY_MENU_TYPE_FIELD && CheckBagHasItem(gSpecialVar_ItemId, 1))
+    if (gPartyMenu.action == PARTY_ACTION_USE_ITEM && gPartyMenu.menuType == PARTY_MENU_TYPE_FIELD && CheckBagHasItem(gSpecialVar_ItemId, 1))
         InitPartyMenu(PARTY_MENU_TYPE_FIELD, PARTY_LAYOUT_SINGLE, PARTY_ACTION_USE_ITEM, TRUE, PARTY_MSG_NONE, Task_ReturnToPartyMenuWhileLearningMove, gPartyMenu.exitCallback);
     else
         InitPartyMenu(PARTY_MENU_TYPE_FIELD, PARTY_LAYOUT_SINGLE, PARTY_ACTION_CHOOSE_MON, TRUE, PARTY_MSG_NONE, Task_ReturnToPartyMenuWhileLearningMove, gPartyMenu.exitCallback);
@@ -5840,12 +5837,13 @@ static void TryEnterMonForMinigame(u8 taskId, u8 slot)
 void ItemUseCB_BattleScript(u8 taskId, TaskFunc task)
 {
     struct Pokemon *mon = GetPartyMonFromPartyMenuId(gPartyMenu.slotId);
-    if (CannotUseItemsInBattle(gSpecialVar_ItemId, mon))
+    bool32 isBattlerItem = PartySlot_GetXItemStat() != NUM_BATTLE_STATS || PartySlot_IsDireHit();
+
+    if ((isBattlerItem && PartySlot_GetActiveBattler(gPartyMenu.slotId) == MAX_BATTLERS_COUNT)
+     || CannotUseItemsInBattle(gSpecialVar_ItemId, mon))
     {
-        gPartyMenuUseExitCallback = FALSE;
         PlaySE(SE_SELECT);
-        DisplayPartyMenuMessage(gText_WontHaveEffect, TRUE);
-        gTasks[taskId].func = task;
+        PartyItem_DisplayNoEffect(taskId);
     }
     else
     {
@@ -5909,10 +5907,8 @@ static void Task_ChangeAbility(u8 taskId)
         // Can't use.
         if (tAbilityNum == NUM_ABILITY_SLOTS)
         {
-            gPartyMenuUseExitCallback = FALSE;
             PlaySE(SE_SELECT);
-            DisplayPartyMenuMessage(gText_WontHaveEffect, 1);
-            gTasks[taskId].func = Task_ClosePartyMenuAfterText;
+            PartyItem_DisplayNoEffect(taskId);
             return;
         }
         gPartyMenuUseExitCallback = TRUE;
@@ -5959,10 +5955,7 @@ static void Task_ChangeAbility(u8 taskId)
     case 5:
         SetMonData(&gParties[B_TRAINER_PLAYER][tMonId], MON_DATA_ABILITY_NUM, &tAbilityNum);
         RemoveBagItem(gSpecialVar_ItemId, 1);
-        if (CheckBagHasItem(gSpecialVar_ItemId, 1))
-            gTasks[taskId].func = Task_ReturnToChooseMonAfterText;
-        else
-            gTasks[taskId].func = Task_ClosePartyMenu;
+        PartyItem_ReturnOrCloseAfterText(taskId);
         break;
     }
 }
@@ -6006,10 +5999,8 @@ static void Task_Mint(u8 taskId)
         // Can't use.
         if (tOldNature == tNewNature)
         {
-            gPartyMenuUseExitCallback = FALSE;
             PlaySE(SE_SELECT);
-            DisplayPartyMenuMessage(gText_WontHaveEffect, 1);
-            gTasks[taskId].func = Task_ClosePartyMenuAfterText;
+            PartyItem_DisplayNoEffect(taskId);
             return;
         }
         gPartyMenuUseExitCallback = TRUE;
@@ -6057,11 +6048,7 @@ static void Task_Mint(u8 taskId)
         SetMonData(&gParties[B_TRAINER_PLAYER][tMonId], MON_DATA_HIDDEN_NATURE, &tNewNature);
         CalculateMonStats(&gParties[B_TRAINER_PLAYER][tMonId]);
         RemoveBagItem(gSpecialVar_ItemId, 1);
-
-        if (CheckBagHasItem(gSpecialVar_ItemId, 1))
-            gTasks[taskId].func = Task_ReturnToChooseMonAfterText;
-        else
-            gTasks[taskId].func = Task_ClosePartyMenu;
+        PartyItem_ReturnOrCloseAfterText(taskId);
         break;
     }
 }
@@ -6092,10 +6079,8 @@ void ItemUseCB_ResetEVs(u8 taskId, TaskFunc task)
 
     if (cannotUseEffect)
     {
-        gPartyMenuUseExitCallback = FALSE;
         PlaySE(SE_SELECT);
-        DisplayPartyMenuMessage(gText_WontHaveEffect, TRUE);
-        gTasks[taskId].func = task;
+        PartyItem_DisplayNoEffect(taskId);
     }
     else
     {
@@ -6105,7 +6090,7 @@ void ItemUseCB_ResetEVs(u8 taskId, TaskFunc task)
         GetMonNickname(mon, gStringVar1);
         StringExpandPlaceholders(gStringVar4, COMPOUND_STRING("{STR_VAR_1}'s base points\nwere all reset to zero!{PAUSE_UNTIL_PRESS}"));
         DisplayPartyMenuMessage(gStringVar4, TRUE);
-        gTasks[taskId].func = task;
+        PartyItem_ReturnOrCloseAfterText(taskId);
     }
 }
 
@@ -6117,10 +6102,8 @@ void ItemUseCB_ResetEVsAndFriendship(u8 taskId, TaskFunc task)
 
     if (cannotUseEffect)
     {
-        gPartyMenuUseExitCallback = FALSE;
         PlaySE(SE_SELECT);
-        DisplayPartyMenuMessage(gText_WontHaveEffect, TRUE);
-        gTasks[taskId].func = task;
+        PartyItem_DisplayNoEffect(taskId);
     }
     else
     {
@@ -6132,7 +6115,7 @@ void ItemUseCB_ResetEVsAndFriendship(u8 taskId, TaskFunc task)
         GetMonNickname(mon, gStringVar1);
         StringExpandPlaceholders(gStringVar4, COMPOUND_STRING("{STR_VAR_1} is unhappy, and its base points\nwere all reset to zero!{PAUSE_UNTIL_PRESS}"));
         DisplayPartyMenuMessage(gStringVar4, TRUE);
-        gTasks[taskId].func = task;
+        PartyItem_ReturnOrCloseAfterText(taskId);
     }
 }
 
@@ -6161,13 +6144,8 @@ static void ItemUse_ApplyReduceEvItem(u8 taskId, u32 count)
 
     if (cannotUseEffect || (friendship == newFriendship && ev == newEv))
     {
-        gPartyMenuUseExitCallback = FALSE;
         PlaySE(SE_SELECT);
-        DisplayPartyMenuMessage(gText_WontHaveEffect, TRUE);
-        if (CheckBagHasItem(item, 1))
-            gTasks[taskId].func = Task_ReturnToChooseMonAfterText;
-        else
-            gTasks[taskId].func = Task_ClosePartyMenuAfterText;
+        PartyItem_DisplayNoEffect(taskId);
     }
     else
     {
@@ -6189,10 +6167,7 @@ static void ItemUse_ApplyReduceEvItem(u8 taskId, u32 count)
             StringExpandPlaceholders(gStringVar4, gText_PkmnAdoresBaseVar2Fell);
         }
         DisplayPartyMenuMessage(gStringVar4, TRUE);
-        if (CheckBagHasItem(item, 1))
-            gTasks[taskId].func = Task_ReturnToChooseMonAfterText;
-        else
-            gTasks[taskId].func = Task_ClosePartyMenuAfterText;
+        PartyItem_ReturnOrCloseAfterText(taskId);
     }
 }
 
@@ -6325,10 +6300,8 @@ static void TryUseItemOnMove(u8 taskId)
     {
         if (CannotUseItemsInBattle(gSpecialVar_ItemId, mon))
         {
-            gPartyMenuUseExitCallback = FALSE;
             PlaySE(SE_SELECT);
-            DisplayPartyMenuMessage(gText_WontHaveEffect, TRUE);
-            gTasks[taskId].func = Task_ClosePartyMenuAfterText;
+            PartyItem_DisplayNoEffect(taskId);
         }
         else
         {
@@ -6348,10 +6321,8 @@ static void TryUseItemOnMove(u8 taskId)
 
         if (ExecuteTableBasedItemEffect(mon, item, ptr->slotId, *moveSlot))
         {
-            gPartyMenuUseExitCallback = FALSE;
             PlaySE(SE_SELECT);
-            DisplayPartyMenuMessage(gText_WontHaveEffect, TRUE);
-            gTasks[taskId].func = Task_ReturnToChooseMonAfterText;
+            PartyItem_DisplayNoEffect(taskId);
         }
         else
         {
@@ -6363,10 +6334,7 @@ static void TryUseItemOnMove(u8 taskId)
             StringCopy(gStringVar1, GetMoveName(move));
             GetMedicineItemEffectMessage(item, 0);
             DisplayPartyMenuMessage(gStringVar4, TRUE);
-            if (CheckBagHasItem(gSpecialVar_ItemId, 1))
-                gTasks[taskId].func = Task_ReturnToChooseMonAfterText;
-            else
-                gTasks[taskId].func = Task_ClosePartyMenuAfterText;
+            PartyItem_ReturnOrCloseAfterText(taskId);
         }
     }
 }
@@ -6484,9 +6452,7 @@ void ItemUseCB_EvolutionStone(u8 taskId, TaskFunc task)
     gCB2_AfterEvolution = gPartyMenu.exitCallback;
     if (ExecuteTableBasedItemEffect(&gParties[B_TRAINER_PLAYER][gPartyMenu.slotId], gSpecialVar_ItemId, gPartyMenu.slotId, 0))
     {
-        gPartyMenuUseExitCallback = FALSE;
-        DisplayPartyMenuMessage(gText_WontHaveEffect, TRUE);
-        gTasks[taskId].func = task;
+        PartyItem_DisplayNoEffect(taskId);
     }
     else
     {
@@ -7065,10 +7031,8 @@ static bool32 TryItemUseFormChange(u8 taskId, TaskFunc task)
     }
     else
     {
-        gPartyMenuUseExitCallback = FALSE;
         PlaySE(SE_SELECT);
-        DisplayPartyMenuMessage(gText_WontHaveEffect, TRUE);
-        gTasks[taskId].func = task;
+        PartyItem_DisplayNoEffect(taskId);
         return FALSE;
     }
 }
@@ -7125,10 +7089,8 @@ static bool32 TryMultichoiceFormChange(u8 taskId)
     }
     else
     {
-        gPartyMenuUseExitCallback = FALSE;
         PlaySE(SE_SELECT);
-        DisplayPartyMenuMessage(gText_WontHaveEffect, TRUE);
-        gTasks[taskId].func = Task_ClosePartyMenuAfterText;
+        PartyItem_DisplayNoEffect(taskId);
         return FALSE;
     }
 }
@@ -7259,6 +7221,11 @@ static void DisplayHexorbResult(u8 taskId, u32 status, enum HexorbResultCodes re
             gPartyMenuUseExitCallback = FALSE;
             PlaySE(SE_SELECT);
             Hexorb_ConstructTypeFailureMessage(mon, status, result);
+            DisplayHexorbMessageAndScheduleTask(taskId, gStringVar4, Task_RetryHexorbAfterFailedStatus, FALSE);
+            break;
+        case HEXORB_RESULT_FAIL_SAME_STATUS:
+            PlaySE(SE_SELECT);
+            Hexorb_ConstructAlreadyStatusedMessage(mon, status);
             DisplayHexorbMessageAndScheduleTask(taskId, gStringVar4, Task_RetryHexorbAfterFailedStatus, FALSE);
             break;
         case HEXORB_RESULT_FAIL_HAS_STATUS:
