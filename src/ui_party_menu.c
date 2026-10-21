@@ -124,6 +124,7 @@ struct PartyMenuData
     u8 actionCursor;
     u8 listScroll;
     u8 scrollArrowSpriteIds[PARTY_SCROLL_ARROW_COUNT];
+    u8 listCursorSpriteIds[NUM_PARTY_DYN_WINDOWS];
     u8 yesNoCursor;
     u8 spinnerSpriteId;
     s16 itemCount;
@@ -331,12 +332,14 @@ static void Task_HandleWhichMoveInput(u8);
 static void SetSelectedMoveForItem(u8);
 static void ReturnToUseOnWhichMon(u8);
 static void TryUseItemOnMove(u8);
-static void PartyList_Clear(u32, u32);
 static void PartyList_DrawFrame(u8, u8, u8, u8, u8, u8);
 static void PartyList_ClearFrame(u8, u8, u8, u8, u8, u8);
 static void PartyList_PrintRow(u32, u32, u32, enum PartyTextColors, const u8 *);
 static void PartyList_CreateScrollArrows(void);
 static void SpriteCB_PartyScrollArrow(struct Sprite *);
+static void PartyList_CreateCursor(enum PartyMenuDynamicWindows);
+static void SpriteCB_PartyListCursor(struct Sprite *);
+static u32 PartyList_GetFrameBaseTile(void);
 static void PartyList_DestroyScrollArrows(void);
 static void Task_HandleSelectionMenuInput(u8);
 static void CursorCb_Summary(u8);
@@ -517,6 +520,7 @@ static void InitPartyMenu(enum PartyMenuType menuType, enum PartyMenuLayout layo
     memset(sPartyMenuDataPtr->statusSpriteIds, SPRITE_NONE, sizeof(sPartyMenuDataPtr->statusSpriteIds));
     memset(sPartyMenuDataPtr->statStageSpriteIds, SPRITE_NONE, sizeof(sPartyMenuDataPtr->statStageSpriteIds));
     memset(sPartyMenuDataPtr->scrollArrowSpriteIds, SPRITE_NONE, sizeof(sPartyMenuDataPtr->scrollArrowSpriteIds));
+    memset(sPartyMenuDataPtr->listCursorSpriteIds, SPRITE_NONE, sizeof(sPartyMenuDataPtr->listCursorSpriteIds));
     memset(sPartyMenuDataPtr->windowId, WINDOW_NONE, sizeof(sPartyMenuDataPtr->windowId));
     gMain.state = 0;
     SetMainCallback2(CB2_PartyMenu_Setup);
@@ -623,7 +627,6 @@ static void PartySetup_Graphics(void)
     LoadPalette(sPartyMenu_Pal_HelperText, BG_PLTT_ID(PARTY_BG_PAL_HELPER), PLTT_SIZE_4BPP);
 
     LoadUserWindowBorderGfxOnBg(PARTY_BG_TEXT, PARTY_TEXT_TILE_FRAME, BG_PLTT_ID(PARTY_BG_PAL_FRAME));
-    LoadBgTiles(PARTY_BG_TEXT, sPartyMenu_Gfx_MenuFrame, sizeof(sPartyMenu_Gfx_MenuFrame), PARTY_TEXT_TILE_MENU_FRAME);
     LoadPalette(GetOverworldTextboxPalettePtr(), BG_PLTT_ID(PARTY_BG_PAL_DIALOG), PLTT_SIZE_4BPP);
     LoadPalette(&sPartyMenu_Pal_Slot[BG_PLTT_ID(PARTY_TILES_PAL_MENU)], BG_PLTT_ID(PARTY_BG_PAL_MENU_TEXT), PLTT_SIZE_4BPP);
 }
@@ -666,6 +669,7 @@ static void PartySetup_Windows(void)
         .baseBlock = baseBlock,
     };
     sPartyMenuDataPtr->heldWindowId = AddWindow(&heldTemplate);
+    LoadBgTiles(PARTY_BG_HELD, sPartyMenu_Gfx_MenuFrame, sizeof(sPartyMenu_Gfx_MenuFrame), PartyList_GetFrameBaseTile());
 }
 
 static void PartySetup_Slots(void)
@@ -684,6 +688,7 @@ static void PartySetup_Sprites(void)
     PartySetup_StatStages();
 
     LoadCompressedSpriteSheet(&sPartyMenu_SpriteSheet_Cursor);
+    LoadCompressedSpriteSheet(&sPartyMenu_SpriteSheet_ListCursor);
     sPartyMenuDataPtr->cursorSpriteId = CreateSprite(&sPartyMenu_SpriteTemplate_Cursor, 0, 0, PARTY_SPRITE_SUBPRIORITY_CURSOR);
 
     struct Sprite *cursor = &gSprites[sPartyMenuDataPtr->cursorSpriteId];
@@ -3087,6 +3092,7 @@ static u8 DisplaySelectionWindow(u8 windowType)
     CallWindowFunction(*windowPtr, PartyList_DrawFrame);
     sPartyMenuDataPtr->actionCursor = 0;
     sPartyMenuDataPtr->listScroll = 0;
+    PartyList_CreateCursor(PARTY_DYN_WIN_LIST);
     if (windowType == SELECTWINDOW_FIELD_MOVES && sPartyMenuDataPtr->numActions > PARTY_FIELD_MOVES_ROWS)
     {
         PartyList_CreateScrollArrows();
@@ -3113,7 +3119,7 @@ static void PartyActions_Draw(u32 windowId)
     u32 numRows = GetWindowAttribute(windowId, WINDOW_HEIGHT) / PARTY_LIST_ROW_HEIGHT;
     u32 scroll = sPartyMenuDataPtr->listScroll;
 
-    PartyList_Clear(windowId, sPartyMenuDataPtr->actionCursor - scroll);
+    FillWindowPixelBuffer(windowId, PIXEL_FILL(0));
     if (sPartyMenuDataPtr->scrollArrowSpriteIds[PARTY_SCROLL_ARROW_UP] != SPRITE_NONE)
     {
         gSprites[sPartyMenuDataPtr->scrollArrowSpriteIds[PARTY_SCROLL_ARROW_UP]].invisible = (scroll == 0);
@@ -3161,7 +3167,7 @@ static void PartyMoves_Draw(u32 windowId)
     u32 slashWidth = GetStringWidth(PARTY_LIST_FONT, slash, 0);
     u32 ppBonuses = GetMonData(mon, MON_DATA_PP_BONUSES);
 
-    PartyList_Clear(windowId, sPartyMenuDataPtr->actionCursor);
+    FillWindowPixelBuffer(windowId, PIXEL_FILL(0));
     for (u32 i = 0; i < sPartyMenuDataPtr->numActions; i++)
     {
         enum Move move = GetMonData(mon, MON_DATA_MOVE1 + i);
@@ -3232,34 +3238,32 @@ static u32 PartyMoves_GetPPRestore(struct Pokemon *mon, u32 moveSlot)
     return min(GetItemEffect(gSpecialVar_ItemId)[ITEM_EFFECT_ARG_START], maxPP - GetMonData(mon, MON_DATA_PP1 + moveSlot));
 }
 
-static void PartyList_Clear(u32 windowId, u32 cursor)
+static u32 PartyList_GetFrameBaseTile(void)
 {
-    u32 y = cursor * TILE_TO_PIXELS(PARTY_LIST_ROW_HEIGHT);
-    u32 windowWidth = TILE_TO_PIXELS(GetWindowAttribute(windowId, WINDOW_WIDTH));
+    u32 heldWindowId = sPartyMenuDataPtr->heldWindowId;
 
-    FillWindowPixelBuffer(windowId, PIXEL_FILL(PARTY_MENU_COLOR_WHITE));
-    BlitBitmapToWindow(windowId, sPartyMenu_Gfx_ListCursor, 0, y, PARTY_LIST_CURSOR_WIDTH, PARTY_LIST_CURSOR_HEIGHT);
-    for (u32 x = PARTY_LIST_CURSOR_WIDTH; x < windowWidth; x += PARTY_LIST_CURSOR_WIDTH - PARTY_LIST_CURSOR_CAP_WIDTH)
-    {
-        u32 width = min(windowWidth - x, PARTY_LIST_CURSOR_WIDTH - PARTY_LIST_CURSOR_CAP_WIDTH);
-
-        BlitBitmapRectToWindow(windowId, sPartyMenu_Gfx_ListCursor, PARTY_LIST_CURSOR_WIDTH - width, 0, PARTY_LIST_CURSOR_WIDTH, PARTY_LIST_CURSOR_HEIGHT,
-                               x, y, width, PARTY_LIST_CURSOR_HEIGHT);
-    }
+    return GetWindowAttribute(heldWindowId, WINDOW_BASE_BLOCK)
+         + GetWindowAttribute(heldWindowId, WINDOW_WIDTH) * GetWindowAttribute(heldWindowId, WINDOW_HEIGHT);
 }
 
 static void PartyList_DrawFrame(u8 bg, u8 left, u8 top, u8 width, u8 height, u8 paletteNum)
 {
-    FillBgTilemapBufferRect(bg, PARTY_TEXT_TILE_MENU_FRAME + PARTY_FRAME_TILE_TOP_LEFT,    left - PARTY_FRAME_SIZE, top - PARTY_FRAME_SIZE, PARTY_FRAME_SIZE, PARTY_FRAME_SIZE, PARTY_BG_PAL_FRAME);
-    FillBgTilemapBufferRect(bg, PARTY_TEXT_TILE_MENU_FRAME + PARTY_FRAME_TILE_TOP,         left,                    top - PARTY_FRAME_SIZE, width,            PARTY_FRAME_SIZE, PARTY_BG_PAL_FRAME);
-    FillBgTilemapBufferRect(bg, PARTY_TEXT_TILE_MENU_FRAME + PARTY_FRAME_TILE_LEFT,        left - PARTY_FRAME_SIZE, top,                    PARTY_FRAME_SIZE, height,           PARTY_BG_PAL_FRAME);
-    FillBgTilemapBufferRect(bg, PARTY_TEXT_TILE_MENU_FRAME + PARTY_FRAME_TILE_BOTTOM_LEFT, left - PARTY_FRAME_SIZE, top + height,           PARTY_FRAME_SIZE, PARTY_FRAME_SIZE, PARTY_BG_PAL_FRAME);
-    FillBgTilemapBufferRect(bg, PARTY_TEXT_TILE_MENU_FRAME + PARTY_FRAME_TILE_BOTTOM,      left,                    top + height,           width,            PARTY_FRAME_SIZE, PARTY_BG_PAL_FRAME);
+    u32 tile = PartyList_GetFrameBaseTile();
+
+    PartyList_ClearFrame(bg, left, top, width, height, paletteNum);
+    FillBgTilemapBufferRect(PARTY_BG_HELD, tile + PARTY_FRAME_TILE_TOP_LEFT,    left - PARTY_FRAME_SIZE, top - PARTY_FRAME_SIZE, PARTY_FRAME_SIZE, PARTY_FRAME_SIZE, PARTY_BG_PAL_FRAME);
+    FillBgTilemapBufferRect(PARTY_BG_HELD, tile + PARTY_FRAME_TILE_TOP,         left,                    top - PARTY_FRAME_SIZE, width,            PARTY_FRAME_SIZE, PARTY_BG_PAL_FRAME);
+    FillBgTilemapBufferRect(PARTY_BG_HELD, tile + PARTY_FRAME_TILE_LEFT,        left - PARTY_FRAME_SIZE, top,                    PARTY_FRAME_SIZE, height,           PARTY_BG_PAL_FRAME);
+    FillBgTilemapBufferRect(PARTY_BG_HELD, tile + PARTY_FRAME_TILE_CENTER,      left,                    top,                    width,            height,           PARTY_BG_PAL_FRAME);
+    FillBgTilemapBufferRect(PARTY_BG_HELD, tile + PARTY_FRAME_TILE_BOTTOM_LEFT, left - PARTY_FRAME_SIZE, top + height,           PARTY_FRAME_SIZE, PARTY_FRAME_SIZE, PARTY_BG_PAL_FRAME);
+    FillBgTilemapBufferRect(PARTY_BG_HELD, tile + PARTY_FRAME_TILE_BOTTOM,      left,                    top + height,           width,            PARTY_FRAME_SIZE, PARTY_BG_PAL_FRAME);
 }
 
 static void PartyList_ClearFrame(u8 bg, u8 left, u8 top, u8 width, u8 height, u8 paletteNum)
 {
     FillBgTilemapBufferRect(bg, 0, left - PARTY_FRAME_SIZE, top - PARTY_FRAME_SIZE, width + PARTY_FRAME_SIZE, height + 2 * PARTY_FRAME_SIZE, 0);
+    FillBgTilemapBufferRect(PARTY_BG_HELD, 0, left - PARTY_FRAME_SIZE, top - PARTY_FRAME_SIZE, width + PARTY_FRAME_SIZE, height + 2 * PARTY_FRAME_SIZE, 0);
+    ScheduleBgCopyTilemapToVram(PARTY_BG_HELD);
 }
 
 static void PartyList_PrintRow(u32 windowId, u32 row, u32 width, enum PartyTextColors color, const u8 *text)
@@ -3293,6 +3297,40 @@ static void SpriteCB_PartyScrollArrow(struct Sprite *sprite)
 
 #undef tSineStep
 #undef tSinePos
+
+#define sDynWindow data[0]
+
+static void PartyList_CreateCursor(enum PartyMenuDynamicWindows dynWindow)
+{
+    u32 windowId = sPartyMenuDataPtr->windowId[dynWindow];
+    u32 x = TILE_TO_PIXELS(GetWindowAttribute(windowId, WINDOW_TILEMAP_LEFT)) + PARTY_LIST_CURSOR_X
+          + (PARTY_LIST_CURSOR_SEGMENTS / 2) * PARTY_LIST_CURSOR_SEGMENT_WIDTH;
+    u32 y = TILE_TO_PIXELS(GetWindowAttribute(windowId, WINDOW_TILEMAP_TOP)) + PARTY_LIST_CURSOR_Y;
+    u32 spriteId = CreateSprite(&sPartyMenu_SpriteTemplate_ListCursor, x, y, PARTY_SPRITE_SUBPRIORITY_CURSOR);
+    struct Sprite *sprite = &gSprites[spriteId];
+
+    sPartyMenuDataPtr->listCursorSpriteIds[dynWindow] = spriteId;
+    sprite->sDynWindow = dynWindow;
+    SetSubspriteTables(sprite, sPartyMenu_SubspriteTable_ListCursor);
+    sprite->subspriteMode = SUBSPRITES_IGNORE_PRIORITY;
+}
+
+static void SpriteCB_PartyListCursor(struct Sprite *sprite)
+{
+    u32 row;
+
+    if (sprite->sDynWindow == PARTY_DYN_WIN_YESNO)
+    {
+        row = sPartyMenuDataPtr->yesNoCursor;
+    }
+    else
+    {
+        row = sPartyMenuDataPtr->actionCursor - sPartyMenuDataPtr->listScroll;
+    }
+    sprite->y2 = row * TILE_TO_PIXELS(PARTY_LIST_ROW_HEIGHT);
+}
+
+#undef sDynWindow
 
 static void PartyList_DestroyScrollArrows(void)
 {
@@ -4433,7 +4471,7 @@ static void DisplayLevelUpStatsPg2(u8 taskId)
 
 static void DrawLevelUpStats(u32 windowId, const u16 *stats, const u16 *statsAfter)
 {
-    FillWindowPixelBuffer(windowId, PIXEL_FILL(PARTY_MENU_COLOR_WHITE));
+    FillWindowPixelBuffer(windowId, PIXEL_FILL(0));
     for (u32 i = 0; i < NUM_STATS; i++)
     {
         enum Stat stat = sPartyMenu_LevelUpStatOrder[i];
@@ -5330,6 +5368,7 @@ static void PartyMenuDisplayYesNoMenu(void)
     *windowPtr = AddWindow(&sPartyMenu_WinTemplate_YesNo);
     CallWindowFunction(*windowPtr, PartyList_DrawFrame);
     sPartyMenuDataPtr->yesNoCursor = 0;
+    PartyList_CreateCursor(PARTY_DYN_WIN_YESNO);
     PartyYesNo_Draw(*windowPtr);
     PutWindowTilemap(*windowPtr);
     ScheduleBgCopyTilemapToVram(PARTY_BG_TEXT);
@@ -5337,9 +5376,9 @@ static void PartyMenuDisplayYesNoMenu(void)
 
 static void PartyYesNo_Draw(u32 windowId)
 {
-    PartyList_Clear(windowId, sPartyMenuDataPtr->yesNoCursor);
-    PartyList_PrintRow(windowId, 0, PARTY_YESNO_WIDTH, COLORID_MENU_WHITE, gText_Yes);
-    PartyList_PrintRow(windowId, 1, PARTY_YESNO_WIDTH, COLORID_MENU_WHITE, gText_No);
+    FillWindowPixelBuffer(windowId, PIXEL_FILL(0));
+    PartyList_PrintRow(windowId, 0, PARTY_YESNO_WIDTH, COLORID_MENU_WHITE, COMPOUND_STRING("Yes"));
+    PartyList_PrintRow(windowId, 1, PARTY_YESNO_WIDTH, COLORID_MENU_WHITE, COMPOUND_STRING("No"));
     CopyWindowToVram(windowId, COPYWIN_GFX);
 }
 
@@ -5527,6 +5566,13 @@ static void PartyMenuRemoveWindow(u8 *windowPtr)
         PartyList_DestroyScrollArrows();
     }
 
+    u8 *cursorSpriteId = &sPartyMenuDataPtr->listCursorSpriteIds[windowPtr - sPartyMenuDataPtr->windowId];
+    if (*cursorSpriteId != SPRITE_NONE)
+    {
+        DestroySprite(&gSprites[*cursorSpriteId]);
+        *cursorSpriteId = SPRITE_NONE;
+    }
+
     if (windowPtr == &sPartyMenuDataPtr->windowId[PARTY_DYN_WIN_MSG])
     {
         ClearStdWindowAndFrameToTransparent(*windowPtr, FALSE);
@@ -5613,6 +5659,7 @@ static void PartyMenu_Free(void)
     FreeSpriteTilesByTag(PARTY_GFXTAG_HELD_ITEM);
     FreeSpriteTilesByTag(PARTY_GFXTAG_STAT_STAGE);
     FreeSpriteTilesByTag(PARTY_GFXTAG_STATUS);
+    FreeSpriteTilesByTag(PARTY_GFXTAG_LIST_CURSOR);
     FreeSpritePaletteByTag(PARTY_PALTAG_STATUS);
     SetGpuReg(REG_OFFSET_BLDCNT, 0);
     SetGpuReg(REG_OFFSET_BLDALPHA, 0);

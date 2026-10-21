@@ -17,7 +17,6 @@
 #define PARTY_BG_PAL_MENU_TEXT      15
 // list / yes-no / level-up windows: pal 3 of tiles.png, text indices match pal 1
 #define PARTY_TILES_PAL_MENU        3
-#define PARTY_MENU_COLOR_WHITE      13
 
 // ================================================================
 // Text layer
@@ -38,10 +37,19 @@
 
 #define PARTY_LIST_FONT             FONT_OUTLINED
 #define PARTY_LIST_ROW_HEIGHT       2
-#define PARTY_LIST_TEXT_X           5
-#define PARTY_LIST_CURSOR_WIDTH     64
-#define PARTY_LIST_CURSOR_HEIGHT    16
-#define PARTY_LIST_CURSOR_CAP_WIDTH 2
+// clears the list cursor's arrow
+#define PARTY_LIST_TEXT_X           13
+#define PARTY_LIST_TEXT_MARGIN      5
+
+// list cursor top-left, relative to the list window; its cap overlaps the frame
+#define PARTY_LIST_CURSOR_X                 -7
+#define PARTY_LIST_CURSOR_Y                 1
+#define PARTY_LIST_CURSOR_SEGMENT_WIDTH     32
+#define PARTY_LIST_CURSOR_SEGMENT_TILES     8
+#define PARTY_LIST_CURSOR_SEGMENTS          5
+#define PARTY_LIST_CURSOR_FRAME_TILES       (2 * PARTY_LIST_CURSOR_SEGMENT_TILES)
+#define PARTY_LIST_CURSOR_NUM_FRAMES        2
+#define PARTY_LIST_CURSOR_FRAME_DURATION    16
 
 #define PARTY_ACTIONS_WIDTH         8
 
@@ -58,7 +66,7 @@
 
 // moves (Ether, PP Up, PP Max): recovery "pp +delta /max", increase "pp/ max +delta"
 #define PARTY_MOVES_WIDTH           19
-#define PARTY_MOVES_RIGHT           (TILE_TO_PIXELS(PARTY_MOVES_WIDTH) - PARTY_LIST_TEXT_X)
+#define PARTY_MOVES_RIGHT           (TILE_TO_PIXELS(PARTY_MOVES_WIDTH) - PARTY_LIST_TEXT_MARGIN)
 #define PARTY_MOVES_PP_W            12
 #define PARTY_MOVES_SLASH_W         6
 #define PARTY_MOVES_DELTA_W         17
@@ -91,8 +99,7 @@
 #define PARTY_LEVELUP_DELTA_X       64
 
 #define PARTY_TEXT_TILE_FRAME       1
-#define PARTY_TEXT_TILE_MENU_FRAME  (PARTY_TEXT_TILE_FRAME + PARTY_TEXT_FRAME_TILES)
-#define PARTY_TEXT_TILE_HEADER      (PARTY_TEXT_TILE_MENU_FRAME + PARTY_TEXT_FRAME_TILES)
+#define PARTY_TEXT_TILE_HEADER      (PARTY_TEXT_TILE_FRAME + PARTY_TEXT_FRAME_TILES)
 #define PARTY_TEXT_TILE_FOOTER      (PARTY_TEXT_TILE_HEADER + PARTY_HELPER_WIDTH * PARTY_HELPER_HEIGHT)
 #define PARTY_TEXT_TILE_MSGBOX      (PARTY_TEXT_TILE_FOOTER + PARTY_HELPER_WIDTH * PARTY_HELPER_HEIGHT)
 #define PARTY_TEXT_TILE_YESNO       (PARTY_TEXT_TILE_MSGBOX + PARTY_MSGBOX_WIDTH * PARTY_MSGBOX_HEIGHT)
@@ -272,6 +279,7 @@
 #define PARTY_SPRITE_PRIORITY_MAIN      2
 #define PARTY_SPRITE_PRIORITY_LIFTED    1
 #define PARTY_SPRITE_PRIORITY_MENU      0
+#define PARTY_SPRITE_PRIORITY_LIST_CURSOR   1
 
 // priority 2
 #define PARTY_SPRITE_SUBPRIORITY_CURSOR     0
@@ -519,6 +527,7 @@ enum PartyMenuTags
     PARTY_GFXTAG_STATUS,
     PARTY_GFXTAG_SPINNER,
     PARTY_GFXTAG_STAT_STAGE,
+    PARTY_GFXTAG_LIST_CURSOR,
     PARTY_PALTAG_UI,
     PARTY_PALTAG_STATUS,
 };

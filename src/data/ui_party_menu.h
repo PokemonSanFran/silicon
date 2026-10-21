@@ -67,7 +67,6 @@ static const struct WindowTemplate sPartyMenu_WinTemplate_MsgBox =
 };
 
 static const u32 sPartyMenu_Gfx_MenuFrame[] = INCGFX_U32("graphics/ui_menus/party_menu/menu_frame.png", ".4bpp");
-static const u8 sPartyMenu_Gfx_ListCursor[] = INCBIN_U8("graphics/ui_menus/inventory/listMenuCursor.4bpp");
 
 struct
 {
@@ -422,6 +421,7 @@ static const u32 sPartyMenu_Gfx_HeldItem[]          = INCGFX_U32("graphics/ui_me
 static const u32 sPartyMenu_Gfx_Status[]            = INCGFX_U32("graphics/ui_menus/party_menu/status_icons.png", ".4bpp.smol");
 static const u32 sPartyMenu_Gfx_Spinner[]           = INCGFX_U32("graphics/ui_menus/mon_summary/infos/scroll_indicator.png", ".4bpp.smol");
 static const u32 sPartyMenu_Gfx_StatStage[]         = INCGFX_U32("graphics/ui_menus/party_menu/stat_stage.png", ".4bpp.smol");
+static const u32 sPartyMenu_Gfx_ListCursor[]        = INCGFX_U32("graphics/ui_menus/party_menu/options_cursor.png", ".4bpp.smol", "-mwidth 4 -mheight 2");
 static const u16 sPartyMenu_Pal_Status[]            = INCGFX_U16("graphics/ui_menus/party_menu/status_icons.png", ".gbapal");
 
 static const struct {
@@ -864,6 +864,69 @@ static const struct SpriteTemplate sPartyMenu_SpriteTemplate_ScrollArrow =
     .oam = &sPartyMenu_Oam_ScrollArrow,
     .anims = sPartyMenu_Anims_ScrollArrow,
     .callback = SpriteCB_PartyScrollArrow,
+};
+
+static const struct CompressedSpriteSheet sPartyMenu_SpriteSheet_ListCursor =
+{
+    .data = sPartyMenu_Gfx_ListCursor,
+    .size = TILE_OFFSET_4BPP(PARTY_LIST_CURSOR_FRAME_TILES * PARTY_LIST_CURSOR_NUM_FRAMES),
+    .tag = PARTY_GFXTAG_LIST_CURSOR,
+};
+
+static const struct OamData sPartyMenu_Oam_ListCursor =
+{
+    .shape = SPRITE_SHAPE(32x16),
+    .size = SPRITE_SIZE(32x16),
+    .priority = PARTY_SPRITE_PRIORITY_LIST_CURSOR,
+};
+
+static const union AnimCmd sPartyMenu_Anim_ListCursor[] =
+{
+    ANIMCMD_FRAME(0, PARTY_LIST_CURSOR_FRAME_DURATION),
+    ANIMCMD_FRAME(PARTY_LIST_CURSOR_FRAME_TILES, PARTY_LIST_CURSOR_FRAME_DURATION),
+    ANIMCMD_JUMP(0)
+};
+
+static const union AnimCmd *const sPartyMenu_Anims_ListCursor[] =
+{
+    sPartyMenu_Anim_ListCursor,
+};
+
+#define LIST_CURSOR_SEGMENT(i, tile)                                                    \
+    {                                                                                   \
+        .x = ((i) - PARTY_LIST_CURSOR_SEGMENTS / 2) * PARTY_LIST_CURSOR_SEGMENT_WIDTH,  \
+        .shape = SPRITE_SHAPE(32x16),                                                   \
+        .size = SPRITE_SIZE(32x16),                                                     \
+        .tileOffset = (tile),                                                           \
+    }
+
+static const struct Subsprite sPartyMenu_Subsprites_ListCursor[PARTY_LIST_CURSOR_SEGMENTS] =
+{
+    LIST_CURSOR_SEGMENT(0, 0),
+    LIST_CURSOR_SEGMENT(1, PARTY_LIST_CURSOR_SEGMENT_TILES),
+    LIST_CURSOR_SEGMENT(2, PARTY_LIST_CURSOR_SEGMENT_TILES),
+    LIST_CURSOR_SEGMENT(3, PARTY_LIST_CURSOR_SEGMENT_TILES),
+    LIST_CURSOR_SEGMENT(4, PARTY_LIST_CURSOR_SEGMENT_TILES),
+};
+
+#undef LIST_CURSOR_SEGMENT
+
+// the moves window is the widest list
+STATIC_ASSERT(PARTY_LIST_CURSOR_SEGMENTS * PARTY_LIST_CURSOR_SEGMENT_WIDTH >= TILE_TO_PIXELS(PARTY_MOVES_WIDTH) - PARTY_LIST_CURSOR_X,
+              PartyListCursorCoversMovesWindow);
+
+static const struct SubspriteTable sPartyMenu_SubspriteTable_ListCursor[] =
+{
+    { ARRAY_COUNT(sPartyMenu_Subsprites_ListCursor), sPartyMenu_Subsprites_ListCursor },
+};
+
+static const struct SpriteTemplate sPartyMenu_SpriteTemplate_ListCursor =
+{
+    .tileTag = PARTY_GFXTAG_LIST_CURSOR,
+    .paletteTag = PARTY_PALTAG_UI,
+    .oam = &sPartyMenu_Oam_ListCursor,
+    .anims = sPartyMenu_Anims_ListCursor,
+    .callback = SpriteCB_PartyListCursor,
 };
 
 static const struct CompressedSpriteSheet sPartyMenu_SpriteSheet_StatStage =
