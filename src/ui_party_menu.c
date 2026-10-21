@@ -220,7 +220,9 @@ static void PartyHeld_Place(bool32);
 static void PartySetup_MonIcons(void);
 static void PartyMonIcon_Create(u32);
 static void PartyMonIcon_UpdateAnim(u32);
-static enum PartyMonIconAnims PartyMon_GetIconAnim(struct Pokemon *);
+static enum PartyMonIconAnims PartyMon_GetIconAnim(struct Pokemon *, bool32);
+static u32 PartyMonIcon_GetBouncingSlot(void);
+static void SpriteCB_PartyMonIcon(struct Sprite *);
 static void PartySetup_HeldItems(void);
 static void UpdatePartyMonHeldItemSprite(u32);
 static void PartySetup_StatusIcons(void);
@@ -2186,6 +2188,11 @@ static void PartyCursor_SnapToSlot(void)
 
     cursor->x = PartyMonIcon_GetX(slot);
     cursor->y = PartyMonIcon_GetY(slot) + PARTY_CURSOR_Y_OFFSET;
+
+    for (u32 i = 0; i < sPartyMenuDataPtr->partyCount; i++)
+    {
+        PartyMonIcon_UpdateAnim(i);
+    }
 }
 
 // ==================================================
@@ -2296,7 +2303,7 @@ static void PartySetup_MonIcons(void)
 static void PartyMonIcon_Create(u32 slot)
 {
     struct Pokemon *mon = &gParties[B_TRAINER_PLAYER][slot];
-    u8 spriteId = CreateMonIconIsEgg(GetMonData(mon, MON_DATA_SPECIES), SpriteCB_MonIcon,
+    u8 spriteId = CreateMonIconIsEgg(GetMonData(mon, MON_DATA_SPECIES), SpriteCB_PartyMonIcon,
                                      PartyMonIcon_GetX(slot), PartyMonIcon_GetY(slot),
                                      PARTY_SPRITE_SUBPRIORITY_MON_ICON,
                                      GetMonData(mon, MON_DATA_PERSONALITY), GetMonData(mon, MON_DATA_IS_EGG));
@@ -2315,14 +2322,14 @@ static void PartyMonIcon_UpdateAnim(u32 slot)
         return;
     }
 
-    enum PartyMonIconAnims anim = PartyMon_GetIconAnim(&gParties[B_TRAINER_PLAYER][slot]);
+    enum PartyMonIconAnims anim = PartyMon_GetIconAnim(&gParties[B_TRAINER_PLAYER][slot], slot == PartyMonIcon_GetBouncingSlot());
     if (gSprites[spriteId].animNum != anim)
     {
         SetPartyHPBarSprite(&gSprites[spriteId], anim);
     }
 }
 
-static enum PartyMonIconAnims PartyMon_GetIconAnim(struct Pokemon *mon)
+static enum PartyMonIconAnims PartyMon_GetIconAnim(struct Pokemon *mon, bool32 isBouncing)
 {
     enum PartyMonIconAnims hpAnim;
 
@@ -2344,6 +2351,11 @@ static enum PartyMonIconAnims PartyMon_GetIconAnim(struct Pokemon *mon)
         return PARTY_ICON_ANIM_STOPPED;
     }
 
+    if (isBouncing)
+    {
+        return hpAnim;
+    }
+
     switch (GetAilmentFromStatus(GetMonData(mon, MON_DATA_STATUS)))
     {
     case AILMENT_NONE:
@@ -2353,6 +2365,37 @@ static enum PartyMonIconAnims PartyMon_GetIconAnim(struct Pokemon *mon)
         return PARTY_ICON_ANIM_STOPPED;
     default:
         return max(hpAnim, PARTY_ICON_ANIM_RED_HP);
+    }
+}
+
+static u32 PartyMonIcon_GetBouncingSlot(void)
+{
+    if (gSprites[sPartyMenuDataPtr->cursorSpriteId].invisible)
+    {
+        return gPartyMenu.slotId;
+    }
+    return *PartyCursor_GetSlotPtr();
+}
+
+static void SpriteCB_PartyMonIcon(struct Sprite *sprite)
+{
+    u32 bouncingSlot = PartyMonIcon_GetBouncingSlot();
+
+    UpdateMonIconFrame(sprite);
+
+    if (bouncingSlot >= sPartyMenuDataPtr->partyCount
+     || sprite - gSprites != sPartyMenuDataPtr->monIconSpriteIds[bouncingSlot])
+    {
+        sprite->y2 = 0;
+    }
+    else
+    {
+        sprite->y2 = (sprite->animCmdIndex & 1) ? PARTY_MON_ICON_BOUNCE_UP : PARTY_MON_ICON_BOUNCE_DOWN;
+    }
+
+    if (sprite->oam.priority == PARTY_SPRITE_PRIORITY_LIFTED)
+    {
+        sprite->y2 -= PARTY_HELD_SPRITE_OFFSET_Y;
     }
 }
 
@@ -6914,7 +6957,7 @@ static void SpriteCB_FormChangeIconMosaic(struct Sprite *sprite)
     if (sprite->data[0] == 0)
     {
         sprite->oam.mosaic = FALSE;
-        sprite->callback = SpriteCB_MonIcon;
+        sprite->callback = SpriteCB_PartyMonIcon;
     }
 }
 

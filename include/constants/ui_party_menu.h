@@ -291,6 +291,8 @@
 #define PARTY_MON_ICON_Y            26
 #define PARTY_MON_ICON_X_SPACING    112
 #define PARTY_MON_ICON_Y_SPACING    44
+#define PARTY_MON_ICON_BOUNCE_UP    -3
+#define PARTY_MON_ICON_BOUNCE_DOWN  1
 
 // held item
 #define PARTY_HELD_ITEM_X_OFFSET    11
