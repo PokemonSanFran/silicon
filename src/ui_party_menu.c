@@ -2161,9 +2161,13 @@ static bool32 PartyCursor_HandleDirectionalInput(void)
     u32 slot = *slotPtr;
     u32 col = slot % PARTY_SLOT_COLUMNS;
 
-    if (JOY_REPEAT(DPAD_LEFT) || JOY_REPEAT(DPAD_RIGHT))
+    if (JOY_REPEAT(DPAD_RIGHT))
     {
-        slot += (PARTY_SLOT_COLUMNS - 1) - 2 * col;
+        slot = (slot + 1) % partyCount;
+    }
+    else if (JOY_REPEAT(DPAD_LEFT))
+    {
+        slot = (slot + partyCount - 1) % partyCount;
     }
     else if (JOY_REPEAT(DPAD_UP))
     {
