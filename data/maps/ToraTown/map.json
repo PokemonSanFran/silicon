@@ -15,8 +15,8 @@
   "connections": [
     {
       "map": "MAP_ROUTE9",
-      "offset": 7,
-      "direction": "right"
+      "offset": 0,
+      "direction": "down"
     }
   ],
   "object_events": [
