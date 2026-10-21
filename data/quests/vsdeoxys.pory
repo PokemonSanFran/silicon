@@ -59,21 +59,33 @@ script Vsdeoxys_Dialogue_FirstInteractVsdeoguy
     msgbox(format("Yes! It was here! We have to capture it. Can you capture it? You look like you can capture it."),MSGBOX_DEFAULT,SPEAKER_VSDEOGUY)
 msgbox(format("Okay, slow down. What happened?"),MSGBOX_DEFAULT,SPEAKER_ALICIA,TAIL_DEFAULT,EMOTE_CONFUSE,PHONE_OFF)
     msgbox(format("I was smashing these meteors, right?"),MSGBOX_DEFAULT,SPEAKER_VSDEOGUY)
-    msgbox(format("And then the next thing I remember, an orange thing flew by me super fast, and blasted me with some kind of… Ancient Power! "),MSGBOX_DEFAULT,SPEAKER_VSDEOGUY,TAIL_DEFAULT,EMOTE_SHOCK,PHONE_OFF)
-    msgbox(format("My Trumbeak was KO’d in one hit! \nThen it zoomed away!"),MSGBOX_DEFAULT,SPEAKER_VSDEOGUY)
+	closemessage
+	applymovement(VAR_LAST_TALKED,moves(walk_in_place_right,delay_8,face_player))
+	waitmovement(VAR_LAST_TALKED)
+	buffermovename(STR_VAR_1,MOVE_ANCIENT_POWER)
+    msgbox(format("And then the next thing I remember, an orange thing flew by me super fast, and blasted me with some kind of…{STR_VAR_1}! "),MSGBOX_DEFAULT,SPEAKER_VSDEOGUY,TAIL_DEFAULT,EMOTE_SHOCK,PHONE_OFF)
+	bufferspeciesname(STR_VAR_1,SPECIES_TRUMBEAK)
+    msgbox(format("My {STR_VAR_1} was KO’d in one hit! \nThen it zoomed away!"),MSGBOX_DEFAULT,SPEAKER_VSDEOGUY)
     msgbox(format("Wait, so why did your zap say -"),MSGBOX_DEFAULT,SPEAKER_ALICIA)
-    msgbox(format("It wasn't just any Pokémon! Meteors are from space? An orange super strong Pokémon? It was Deoxys!"),MSGBOX_DEFAULT,SPEAKER_VSDEOGUY,TAIL_DEFAULT,EMOTE_SHOCK,PHONE_OFF)
+	bufferspeciesname(STR_VAR_1,SPECIES_DEOXYS)
+    msgbox(format("It wasn't just any Pokémon! Meteors are from space? An orange super strong Pokémon? It was {STR_VAR_1}!"),MSGBOX_DEFAULT,SPEAKER_VSDEOGUY,TAIL_DEFAULT,EMOTE_SHOCK,PHONE_OFF)
     msgbox(format("What is..."),MSGBOX_DEFAULT,SPEAKER_ALICIA,TAIL_DEFAULT,EMOTE_CONFUSE,PHONE_OFF)
     msgbox(format("It's a Pokémon the government doesn't want you to know about, but we know the Hoenn Champion captured one back in 1997. They keep it locked up at a research facility because it's too powerful to let the public know about it. It must've escaped!"),MSGBOX_DEFAULT,SPEAKER_VSDEOGUY)
     msgbox(format("And you think it's here?"),MSGBOX_DEFAULT,SPEAKER_ALICIA)
     msgbox(format("I know it's here! I saw it! But I'm not tough enough.\nSo you’re gonna capture it!"),MSGBOX_DEFAULT,SPEAKER_VSDEOGUY)
-    msgbox(format("We’re gonna bring it to the Halbera Research Facility. Not Chasilla. Those guys are in the pocket of big government.\nI - we’re gonna be so famous!"),MSGBOX_DEFAULT,SPEAKER_VSDEOGUY)
+	buffermapname(STR_VAR_1,MAP_HALERBA_CITY)
+	buffermapname(STR_VAR_2,MAP_CHASILLA_RESEARCH)
+    msgbox(format("We’re gonna bring it to the {STR_VAR_1} Research Facility. Not {STR_VAR_2}. Those guys are in the pocket of big government. I - we’re gonna be so famous!"),MSGBOX_DEFAULT,SPEAKER_VSDEOGUY)
     msgbox(format("What have I gotten myself into?"),MSGBOX_DEFAULT,SPEAKER_ALICIA,TAIL_THOUGHT,EMOTE_DEFAULT,PHONE_OFF)
     msgbox(format("Sure. What were you using to smash these rocks?"),MSGBOX_DEFAULT,SPEAKER_ALICIA,TAIL_DEFAULT,EMOTE_SWEAT,PHONE_OFF)
     msgbox(format("Meteors! They’re from space. You can use this."),MSGBOX_DEFAULT,SPEAKER_VSDEOGUY)
+	closemessage
+	cueobjectplayer(VAR_LAST_TALKED)
     giveitem(ITEM_TM192)
-    msgbox(format("If you have a Pokémon in your party that can learn that move, you’ll be able to smash meteors.\nAnd rocks."),MSGBOX_DEFAULT,SPEAKER_VSDEOGUY)
-    msgbox(format("Capture the Deoxys! Once you do, we’ll expose the lies!"),MSGBOX_AUTOCLOSE,SPEAKER_VSDEOGUY)
+	buffermovename(STR_VAR_1,MOVE_ROCK_SMASH)
+    msgbox(format("If you have a Pokémon in your party that can learn {STR_VAR_1}, you’ll be able to smash meteors. And rocks."),MSGBOX_DEFAULT,SPEAKER_VSDEOGUY)
+	bufferspeciesname(STR_VAR_1,SPECIES_DEOXYS)
+    msgbox(format("Capture the {STR_VAR_1}! Once you do, we’ll expose the lies!"),MSGBOX_AUTOCLOSE,SPEAKER_VSDEOGUY)
 }
 
 script Vsdeoxys_Script_CheckIfCanRockSmash
@@ -140,7 +152,7 @@ script Vsdeoxys_Script_UseRockSmashMiniorMovement
 
 script Vsdeoxys_Script_CreateMiniorObject
 {
-    createvobject(OBJ_EVENT_GFX_PIKACHU,MINIOR,9,0,3,DIR_SOUTH)
+    createvobject(OBJ_EVENT_GFX_SPECIES(MINIOR_ORANGE),MINIOR,29,45,5,DIR_SOUTH)
     call(Vsdeoxys_Script_Encounter)
 }
 
@@ -188,42 +200,33 @@ script Vsdeoxys_Script_CaughtMinior
 
 script Vsdeoxys_Script_ReturnToOverworldAfterCapturingMinior
 {
+	lock
     msgbox(format("You did it!"),MSGBOX_AUTOCLOSE,SPEAKER_VSDEOGUY)
     waitmessage
     call(Vsdeoxys_Script_RunToPlayerAfterMiniorCatch)
-    msgbox(format("You caught it!\nWe’ve got proof now!\nMeet me at Haelba Research!"),MSGBOX_AUTOCLOSE,SPEAKER_VSDEOGUY)
-    applymovement(VSDEOGUY, moves(face_right, walk_fast_right * 8))
-    waitmovement(VSDEOGUY)
-    removeobject(VSDEOGUY)
+	buffermapname(STR_VAR_1,MAP_HALERBA_CITY)
+    msgbox(format("You caught it!\nWe’ve got proof now!\nMeet me at {STR_VAR_1} Research!"),MSGBOX_AUTOCLOSE,SPEAKER_VSDEOGUY)
+	closemessage
+
+	moveobjecttocoords(VSDEOGUY,34,39,DIR_NORTH,2)
+	delay(32)
+	fadescreenswapbuffers(FADE_TO_BLACK)
+	removeobject(VSDEOGUY)
+	fadescreenswapbuffers(FADE_FROM_BLACK)
+
     releaseall
 }
 
 script Vsdeoxys_Script_RunToPlayerAfterMiniorCatch
 {
-    setobjectxyperm(VSDEOGUY, 17, 1)
+    setobjectxyperm(VSDEOGUY, 33, 39)
     waitmovement(VSDEOGUY)
     addobject(VSDEOGUY)
-    lockall
-    specialvar(VAR_RESULT,GetPlayerFacingDirection)
-
-    switch (var(VAR_RESULT))
-    {
-    case DIR_NORTH:
-        applymovement(VSDEOGUY,Vsdeoxys_Movement_Vsdeoguy_RunToPlayerFacingNorth)
-        waitmovement(VSDEOGUY)
-        applymovement(PLAYER, moves(face_right, step_end))
-        break
-    case DIR_WEST:
-        applymovement(VSDEOGUY,Vsdeoxys_Movement_Vsdeoguy_RunToPlayerFacingNorth)
-        waitmovement(VSDEOGUY)
-        applymovement(PLAYER,Common_Movement_FaceDown)
-        break
-    case DIR_EAST:
-        applymovement(VSDEOGUY, moves(walk_fast_left * 9, face_player))
-        waitmovement(VSDEOGUY)
-        applymovement(PLAYER,Common_Movement_FaceDown)
-        break
-    }
+	moveobjecttocoords(VSDEOGUY,31,45,DIR_WEST,2)
+	applymovement(PLAYER,moves(face_up,delay_8 * 3))
+	waitmovement(PLAYER)
+	moveobjecttocoords(PLAYER,30,45,DIR_EAST)
+	waitmovement(PLAYER)
 }
 
 script Vsdeoxys_Script_VsdeoguyEnterResearch
