@@ -1843,15 +1843,21 @@ static void PartySlot_DrawExpItem(u32 windowId, u32 partySlot, struct Pokemon *m
         PartySlot_Print(windowId, FONT_OUTLINED, rect->x + GetStringRightAlignXOffset(FONT_OUTLINED, text, rect->width),
                         rect->y + contentY, gain != 0 ? COLORID_PARTY_WHITE : COLORID_PARTY_GREY, text);
 
-        rect = &sPartyMenu_SlotLayout.expLevel;
         u32 endLevel = 1;
         while (endLevel <= MAX_LEVEL && expTable[endLevel] <= exp + gain)
             endLevel++;
-        const u8 *arrow = COMPOUND_STRING("{RIGHT_ARROW}");
-        PartySlot_Print(windowId, FONT_OUTLINED, rect->x, rect->y + contentY, COLORID_PARTY_WHITE, arrow);
-        ConvertIntToDecimalStringN(text, endLevel - 1, STR_CONV_MODE_LEFT_ALIGN, 3);
-        PartySlot_Print(windowId, FONT_OUTLINED, rect->x + GetStringWidth(FONT_OUTLINED, arrow, 0) + PARTY_SLOT_EXP_LEVEL_SPACING,
-                        rect->y + contentY, COLORID_PARTY_WHITE, text);
+        endLevel--;
+
+        if (endLevel > level)
+        {
+            const u8 *arrow = COMPOUND_STRING("{RIGHT_ARROW}");
+
+            rect = &sPartyMenu_SlotLayout.expLevel;
+            PartySlot_Print(windowId, FONT_OUTLINED, rect->x, rect->y + contentY, COLORID_PARTY_RED, arrow);
+            ConvertIntToDecimalStringN(text, endLevel, STR_CONV_MODE_LEFT_ALIGN, 3);
+            PartySlot_Print(windowId, FONT_OUTLINED, rect->x + GetStringWidth(FONT_OUTLINED, arrow, 0) + PARTY_SLOT_EXP_LEVEL_SPACING,
+                            rect->y + contentY, COLORID_PARTY_RED, text);
+        }
     }
 
     rect = &sPartyMenu_SlotLayout.expToNext;
@@ -4251,6 +4257,8 @@ static void ItemUse_ApplyExpItem(u8 taskId, u32 count)
     }
     else
     {
+        sInitialLevel = 0;
+        sFinalLevel = 0;
         PlaySE(SE_USE_ITEM);
         ConvertIntToDecimalStringN(gStringVar2, gain, STR_CONV_MODE_LEFT_ALIGN, 7);
         StringExpandPlaceholders(gStringVar4, gText_PkmnGainedExp);

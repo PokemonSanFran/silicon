@@ -82,10 +82,10 @@
 #define PARTY_YESNO_TOP             (PARTY_MSGBOX_TOP - PARTY_FRAME_SIZE - PARTY_FRAME_SIZE - PARTY_YESNO_HEIGHT)
 
 #define PARTY_LEVELUP_WIDTH         11
-#define PARTY_LEVELUP_HEIGHT        11
+#define PARTY_LEVELUP_HEIGHT        12
 // bottom frame sits above message box frame; shares the list's tiles
 #define PARTY_LEVELUP_TOP           (PARTY_MSGBOX_TOP - PARTY_FRAME_SIZE - PARTY_FRAME_SIZE - PARTY_LEVELUP_HEIGHT)
-#define PARTY_LEVELUP_ROW_HEIGHT    15
+#define PARTY_LEVELUP_ROW_HEIGHT    16
 #define PARTY_LEVELUP_LABEL_X       2
 #define PARTY_LEVELUP_VALUE_RIGHT   60
 #define PARTY_LEVELUP_DELTA_X       64
