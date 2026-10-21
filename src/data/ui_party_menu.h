@@ -307,14 +307,14 @@ static const u8 *const sPartyMenu_HeaderMessages[] =
     [PARTY_MSG_MOVE_TO_WHERE]          = COMPOUND_STRING("Move {DYNAMIC 0} to which position?"),
     [PARTY_MSG_TEACH_WHICH_MON]        = COMPOUND_STRING("Teach {DYNAMIC 0} to which Pokémon?"),
     [PARTY_MSG_USE_ON_WHICH_MON]       = COMPOUND_STRING("Use {DYNAMIC 0} on which Pokémon?"),
-    [PARTY_MSG_GIVE_TO_WHICH_MON]      = COMPOUND_STRING("Give to which Pokémon"),
+    [PARTY_MSG_GIVE_TO_WHICH_MON]      = COMPOUND_STRING("Give to which Pokémon?"),
     [PARTY_MSG_CHOOSE_MON_2]           = COMPOUND_STRING("Choose a Pokémon."),
     [PARTY_MSG_DO_WHAT_WITH_MON]       = COMPOUND_STRING("Do what with {DYNAMIC 0}?"),
     [PARTY_MSG_RESTORE_WHICH_MOVE]     = gText_RestoreWhichMove,
     [PARTY_MSG_BOOST_PP_WHICH_MOVE]    = gText_BoostPP,
     [PARTY_MSG_DO_WHAT_WITH_ITEM]      = gText_DoWhatWithItem,
     [PARTY_MSG_DO_WHAT_WITH_MAIL]      = gText_DoWhatWithMail,
-    [PARTY_MSG_WHICH_APPLIANCE]        = gText_WhichAppliance,
+    [PARTY_MSG_WHICH_APPLIANCE]        = COMPOUND_STRING("Order which appliance?"),
     [PARTY_MSG_CHOOSE_SECOND_FUSION]   = COMPOUND_STRING("Choose Pokémon to fuse with."),
     [PARTY_MSG_WHICH_STATUS]           = COMPOUND_STRING("Inflict which status?"),
     [PARTY_MSG_NO_POKEMON]             = COMPOUND_STRING("You have no Pokémon."),
@@ -1189,4 +1189,3 @@ const struct SpriteTemplate gSpriteTemplate_StatusIcons =
     .oam = &sOamData_StatusCondition,
     .anims = sSpriteTemplate_StatusCondition,
 };
-

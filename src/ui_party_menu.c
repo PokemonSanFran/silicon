@@ -497,7 +497,9 @@ static void InitPartyMenu(enum PartyMenuType menuType, enum PartyMenuLayout layo
     gPartyMenu.exitCallback = callback;
     gPartyMenu.action = partyAction;
     if (layout != KEEP_PARTY_LAYOUT)
+    {
         gPartyMenu.layout = layout;
+    }
 
     sPartyMenuDataPtr->task = task;
     sPartyMenuDataPtr->messageId = messageId;
@@ -505,7 +507,9 @@ static void InitPartyMenu(enum PartyMenuType menuType, enum PartyMenuLayout layo
     sPartyMenuDataPtr->partyCount = CalculatePlayerPartyCount();
 
     if (!keepCursorPos || gPartyMenu.slotId >= sPartyMenuDataPtr->partyCount)
+    {
         gPartyMenu.slotId = 0;
+    }
 
     gTextFlags.autoScroll = 0;
     memset(sPartyMenuDataPtr->monIconSpriteIds, SPRITE_NONE, sizeof(sPartyMenuDataPtr->monIconSpriteIds));
@@ -694,9 +698,13 @@ static void PartyMenu_Refresh(void)
     {
         FreeAndDestroyMonIconSprite(&gSprites[sPartyMenuDataPtr->monIconSpriteIds[slot]]);
         if (sPartyMenuDataPtr->heldItemSpriteIds[slot] != SPRITE_NONE)
+        {
             DestroySprite(&gSprites[sPartyMenuDataPtr->heldItemSpriteIds[slot]]);
+        }
         if (sPartyMenuDataPtr->statusSpriteIds[slot] != SPRITE_NONE)
+        {
             DestroySprite(&gSprites[sPartyMenuDataPtr->statusSpriteIds[slot]]);
+        }
     }
     memset(sPartyMenuDataPtr->monIconSpriteIds, SPRITE_NONE, sizeof(sPartyMenuDataPtr->monIconSpriteIds));
     memset(sPartyMenuDataPtr->heldItemSpriteIds, SPRITE_NONE, sizeof(sPartyMenuDataPtr->heldItemSpriteIds));
@@ -1147,7 +1155,9 @@ static void PartySlot_Render(u32 windowId, u32 row, u32 partySlot, bool32 isEmpt
 {
     PartySlot_DrawFrame(windowId, row, isEmpty);
     if (!isEmpty)
+    {
         PartySlot_DrawMonInfo(windowId, partySlot, row);
+    }
 }
 
 static void PartySlot_DrawFrame(u32 windowId, u32 row, bool32 isEmpty)
@@ -1157,7 +1167,9 @@ static void PartySlot_DrawFrame(u32 windowId, u32 row, bool32 isEmpty)
     const u8 *tilemap = sPartyMenu_SlotRows[row].tilemap;
 
     if (isEmpty)
+    {
         tilemap = sPartyMenu_SlotRows[row].emptyTilemap;
+    }
 
     for (u32 i = 0; i < numTiles; i++)
         CpuCopy16(&sPartyMenu_Gfx_Slot[TILE_OFFSET_4BPP(tilemap[i])], &tileData[TILE_OFFSET_4BPP(i)], TILE_SIZE_4BPP);
@@ -1341,13 +1353,17 @@ static void PartySlot_DrawBar(u32 windowId, const u8 *colors, u32 value, u32 max
     u32 fillWidth = value * fillMaxWidth / max;
 
     if (fillWidth == 0 && value > 0)
+    {
         fillWidth = 1;
+    }
 
     PartySlot_FillRect(windowId, colors[0], fillX, bar->y + contentY, fillMaxWidth, bar->height);
     PartySlot_FillRect(windowId, colors[0], bar->x, fillY, bar->width, fillHeight);
     PartySlot_FillRect(windowId, colors[1], fillX, fillY, fillMaxWidth, fillHeight);
     if (fillWidth > 0)
+    {
         PartySlot_FillRect(windowId, colors[2], fillX, fillY, fillWidth, fillHeight);
+    }
 }
 
 static void PartySlot_DrawItem(u32 windowId, struct Pokemon *mon, u32 contentY)
@@ -1356,7 +1372,9 @@ static void PartySlot_DrawItem(u32 windowId, struct Pokemon *mon, u32 contentY)
     enum Item item = GetMonData(mon, MON_DATA_HELD_ITEM);
 
     if (item == ITEM_NONE)
+    {
         return;
+    }
 
     const u8 *name = GetItemName(item);
     PartySlot_Print(windowId, GetFontIdToFit(name, FONT_OUTLINED, 0, rect->width),
@@ -1366,7 +1384,9 @@ static void PartySlot_DrawItem(u32 windowId, struct Pokemon *mon, u32 contentY)
 static enum Stat PartySlot_GetEvItemStat(void)
 {
     if (gPartyMenu.action != PARTY_ACTION_USE_ITEM)
+    {
         return NUM_STATS;
+    }
 
     switch (GetItemEffectType(gSpecialVar_ItemId))
     {
@@ -1395,8 +1415,11 @@ static bool32 PartySlot_IsEvResetItem(void)
 
 static enum Stat PartySlot_GetXItemStat(void)
 {
-    if (gPartyMenu.action != PARTY_ACTION_USE_ITEM || GetItemBattleUsage(gSpecialVar_ItemId) != EFFECT_ITEM_INCREASE_STAT)
+    if (gPartyMenu.action != PARTY_ACTION_USE_ITEM
+     || GetItemBattleUsage(gSpecialVar_ItemId) != EFFECT_ITEM_INCREASE_STAT)
+    {
         return NUM_BATTLE_STATS;
+    }
 
     return GetItemEffect(gSpecialVar_ItemId)[1];
 }
@@ -1406,14 +1429,22 @@ static u32 PartySlot_GetActiveBattler(u32 partySlot)
     u32 battler;
 
     if (gPartyMenu.menuType != PARTY_MENU_TYPE_IN_BATTLE)
+    {
         return MAX_BATTLERS_COUNT;
+    }
 
     if (partySlot == 0)
+    {
         battler = GetBattlerAtPosition(B_POSITION_PLAYER_LEFT);
+    }
     else if (partySlot == 1 && IsDoubleBattle())
+    {
         battler = GetBattlerAtPosition(B_POSITION_PLAYER_RIGHT);
+    }
     else
+    {
         return MAX_BATTLERS_COUNT;
+    }
 
     return IsBattlerAlive(battler) ? battler : MAX_BATTLERS_COUNT;
 }
@@ -1462,7 +1493,9 @@ static void PartySlot_DrawEvItemStat(u32 windowId, u32 partySlot, struct Pokemon
     PartySlot_PrintNumber(windowId, &sPartyMenu_SlotLayout.evValue, ev, isEvMaxed ? COLORID_PARTY_GREEN : COLORID_PARTY_WHITE, contentY);
 
     if (partySlot == *PartyCursor_GetSlotPtr())
+    {
         PartySlot_DrawEvItemDelta(windowId, mon, stat, contentY);
+    }
 }
 
 static void PartySlot_DrawEvItemDelta(u32 windowId, struct Pokemon *mon, enum Stat stat, u32 contentY)
@@ -1485,7 +1518,9 @@ static u32 PartySlot_GetEvItemDelta(struct Pokemon *mon, enum Stat stat, u32 cou
     s32 ev = GetMonData(mon, MON_DATA_HP_EV + stat);
 
     if (change < 0)
+    {
         return min(-change * (s32)count, ev);
+    }
 
     s32 cap = (effect[10] & ITEM10_IS_VITAMIN) ? EV_ITEM_RAISE_LIMIT : MAX_PER_STAT_EVS;
     return max(0, min(change * (s32)count, min(cap - ev, MAX_TOTAL_EVS - (s32)GetMonEVCount(mon))));
@@ -1496,7 +1531,9 @@ static u32 PartySlot_GetEvItemMaxCount(struct Pokemon *mon)
     enum Stat stat = PartySlot_GetEvItemStat();
 
     if (stat == NUM_STATS || PartySlot_IsEvResetItem())
+    {
         return 0;
+    }
 
     u32 change = abs((s8)GetItemEffect(gSpecialVar_ItemId)[ITEM_EFFECT_ARG_START]);
     u32 maxDelta = PartySlot_GetEvItemDelta(mon, stat, MAX_BAG_ITEM_CAPACITY);
@@ -1543,11 +1580,17 @@ static void PartySlot_DrawNatureRow(u32 windowId, u32 nature, u32 newNature, boo
     u32 fontId;
 
     if (isNeutral)
+    {
         changeColor = COLORID_PARTY_GREY;
+    }
     else if (raised)
+    {
         changeColor = COLORID_PARTY_RED;
+    }
     else
+    {
         changeColor = COLORID_PARTY_BLUE;
+    }
 
     PartySlot_StringNatureStat(text, nature, raised);
     fontId = GetFontIdToFit(text, FONT_OUTLINED, 0, rect->width);
@@ -1568,7 +1611,9 @@ static u8 *PartySlot_StringNatureStat(u8 *dst, u32 nature, bool32 raised)
     const struct NatureInfo *info = &gNaturesInfo[nature];
 
     if (info->statUp == info->statDown)
+    {
         return StringCopy(dst, COMPOUND_STRING("None"));
+    }
 
     *dst++ = raised ? CHAR_PLUS : CHAR_HYPHEN;
     return StringCopy(dst, sPartyMenu_StatShortLabels[raised ? info->statUp : info->statDown]);
@@ -1776,7 +1821,9 @@ static void PartySlot_DrawPP(u32 windowId, struct Pokemon *mon, u32 contentY)
 static u32 PartySlot_GetExpItemCeiling(void)
 {
     if (GetItemHoldEffectParam(gSpecialVar_ItemId) == 0)
+    {
         return B_RARE_CANDY_CAP ? min(GetCurrentLevelCap(), MAX_LEVEL) : MAX_LEVEL;
+    }
     return (B_RARE_CANDY_CAP && B_EXP_CAP_TYPE == EXP_CAP_HARD) ? min(GetCurrentLevelCap(), MAX_LEVEL) : MAX_LEVEL;
 }
 
@@ -1786,7 +1833,9 @@ static u32 PartySlot_GetExpItemGain(struct Pokemon *mon, u32 count)
     u32 ceiling = PartySlot_GetExpItemCeiling();
 
     if (level >= ceiling || (B_RARE_CANDY_CAP && level >= GetCurrentLevelCap()))
+    {
         return 0;
+    }
 
     const u32 *expTable = gExperienceTables[gSpeciesInfo[GetMonData(mon, MON_DATA_SPECIES)].growthRate];
     u32 param = GetItemHoldEffectParam(gSpecialVar_ItemId);
@@ -1794,9 +1843,13 @@ static u32 PartySlot_GetExpItemGain(struct Pokemon *mon, u32 count)
     u32 target;
 
     if (param == 0)
+    {
         target = expTable[min(level + count, ceiling)];
+    }
     else
+    {
         target = min(exp + sExpCandyExperienceTable[param - 1] * count, expTable[ceiling]);
+    }
 
     return target > exp ? target - exp : 0;
 }
@@ -1807,9 +1860,13 @@ static u32 PartySlot_GetExpItemMaxCount(struct Pokemon *mon)
     u32 count;
 
     if (param == 0)
+    {
         count = PartySlot_GetExpItemCeiling() - GetMonData(mon, MON_DATA_LEVEL);
+    }
     else
+    {
         count = (PartySlot_GetExpItemGain(mon, MAX_BAG_ITEM_CAPACITY) + sExpCandyExperienceTable[param - 1] - 1) / sExpCandyExperienceTable[param - 1];
+    }
 
     return min(CountTotalItemQuantityInBag(gSpecialVar_ItemId), count);
 }
@@ -1870,7 +1927,9 @@ static void PartySlot_DrawExpItem(u32 windowId, u32 partySlot, struct Pokemon *m
 static bool32 PartySpinner_TryOpen(u8 taskId, u32 maxCount, s32 yOffset)
 {
     if (maxCount <= 1)
+    {
         return FALSE;
+    }
 
     sPartyMenuDataPtr->itemCount = 1;
     sPartyMenuDataPtr->maxItemCount = maxCount;
@@ -1903,11 +1962,17 @@ static void Task_HandleItemSpinnerInput(u8 taskId)
 
         PartySpinner_Close();
         if (PartySlot_IsExpItem())
+        {
             ItemUse_ApplyExpItem(taskId, count);
+        }
         else if (gItemUseCB == ItemUseCB_ReduceEV)
+        {
             ItemUse_ApplyReduceEvItem(taskId, count);
+        }
         else
+        {
             ItemUse_ApplyEvItem(taskId, count);
+        }
     }
     else if (JOY_NEW(B_BUTTON))
     {
@@ -2000,7 +2065,9 @@ static u32 PartySlot_GetDescription(u32 partySlot, enum PartyTextColors *color)
     if (gPartyMenu.menuType == PARTY_MENU_TYPE_MOVE_RELEARNER)
     {
         if (!GetMonData(mon, MON_DATA_IS_EGG) && HasMoveToRelearn(&mon->box, gMoveRelearnerState))
+        {
             return PARTYBOX_DESC_ABLE_2;
+        }
         return PARTYBOX_DESC_NOT_ABLE_2;
     }
 
@@ -2107,6 +2174,7 @@ static u32 PartySlot_GetDescription(u32 partySlot, enum PartyTextColors *color)
             *color = COLORID_PARTY_GREEN;
             return PARTYBOX_DESC_ABLE_3;
         }
+        *color = COLORID_PARTY_GREY;
         return PARTYBOX_DESC_NO_USE;
     default:
         return PARTY_SLOT_DESC_NONE;
@@ -2199,11 +2267,15 @@ static bool32 PartyCursor_HandleDirectionalInput(void)
     {
         slot += PARTY_SLOT_COLUMNS;
         if (slot >= partyCount)
+        {
             slot = col;
+        }
     }
 
     if (slot >= partyCount || slot == (u32)*slotPtr)
+    {
         return FALSE;
+    }
 
     PlaySE(SE_SELECT);
     *slotPtr = slot;
@@ -2292,7 +2364,9 @@ static void PartyHeld_Place(bool32 confirm)
     PartyMonSprites_SetLifted(heldSlot, FALSE);
 
     if (!confirm)
+    {
         gPartyMenu.slotId2 = heldSlot;
+    }
 
     u32 targetSlot = gPartyMenu.slotId2;
     if (targetSlot != heldSlot)
@@ -2305,7 +2379,9 @@ static void PartyHeld_Place(bool32 confirm)
         u8 tempSpriteId;
 
         if (heldSlot == 0 || targetSlot == 0)
+        {
             gFollowerSteps = 0;
+        }
 
         *temp = party[heldSlot];
         party[heldSlot] = party[targetSlot];
@@ -2519,7 +2595,9 @@ static void SetPartyMonAilmentGfx(u32 slot)
 static void PartySetup_StatStages(void)
 {
     if (PartySlot_GetXItemStat() == NUM_BATTLE_STATS)
+    {
         return;
+    }
 
     LoadCompressedSpriteSheet(&sPartyMenu_SpriteSheet_StatStage);
     for (u32 i = 0; i < PARTY_STAT_STAGE_NUM; i++)
@@ -2531,14 +2609,18 @@ static void PartySetup_StatStages(void)
 static void PartyStatStages_Update(void)
 {
     if (sPartyMenuDataPtr->statStageSpriteIds[0] == SPRITE_NONE)
+    {
         return;
+    }
 
     u32 slot = *PartyCursor_GetSlotPtr();
     u32 battler = PartySlot_GetActiveBattler(slot);
     s32 stages = 0;
 
     if (battler != MAX_BATTLERS_COUNT)
+    {
         stages = gBattleMons[battler].statStages[PartySlot_GetXItemStat()] - DEFAULT_STAT_STAGE;
+    }
 
     for (u32 i = 0; i < PARTY_STAT_STAGE_NUM; i++)
     {
@@ -2550,9 +2632,13 @@ static void PartyStatStages_Update(void)
         sprite->y = PartyMonIcon_GetY(slot) + PARTY_STAT_STAGE_Y_OFFEST;
 
         if (stages > (s32)i)
+        {
             frame = PARTY_STAT_STAGE_RAISED;
+        }
         else if (-stages > (s32)i)
+        {
             frame = PARTY_STAT_STAGE_LOWERED;
+        }
         StartSpriteAnim(sprite, frame);
     }
 }
@@ -2622,7 +2708,9 @@ static void PartyStatusIcons_UpdateFade(void)
     }
 
     if (data->statusFadeLevel == data->statusFadeAppliedLevel)
+    {
         return;
+    }
 
     SetGpuReg(REG_OFFSET_BLDALPHA, BLDALPHA_BLEND(PARTY_STATUS_FADE_LEVELS - data->statusFadeLevel, data->statusFadeLevel));
     data->statusFadeAppliedLevel = data->statusFadeLevel;
@@ -2642,7 +2730,9 @@ static void PartyMonSprites_SetLifted(u32 spriteSlot, bool32 lifted)
     for (u32 i = 0; i < ARRAY_COUNT(spriteIds); i++)
     {
         if (spriteIds[i] == SPRITE_NONE)
+        {
             continue;
+        }
 
         struct Sprite *sprite = &gSprites[spriteIds[i]];
         sprite->oam.priority = lifted ? PARTY_SPRITE_PRIORITY_LIFTED : PARTY_SPRITE_PRIORITY_MAIN;
@@ -3126,7 +3216,9 @@ static u32 PartyMoves_GetPPBoost(struct Pokemon *mon, u32 moveSlot)
     u32 newPPUps = (GetItemEffectType(gSpecialVar_ItemId) == ITEM_EFFECT_PP_MAX) ? 3 : ppUps + 1;
 
     if (ppUps >= 3 || maxPP < 5)
+    {
         return 0;
+    }
 
     ppBonuses = (ppBonuses & gPPUpClearMask[moveSlot]) + gPPUpAddValues[moveSlot] * newPPUps;
     return CalculatePPWithBonus(move, ppBonuses, moveSlot) - maxPP;
@@ -3219,13 +3311,21 @@ static s32 PartyList_ProcessInput(void (*draw)(u32))
     s32 input = MENU_NOTHING_CHOSEN;
 
     if (JOY_REPEAT(DPAD_UP))
+    {
         cursor = (cursor == 0) ? numRows - 1 : cursor - 1;
+    }
     else if (JOY_REPEAT(DPAD_DOWN))
+    {
         cursor = (cursor == numRows - 1) ? 0 : cursor + 1;
+    }
     else if (JOY_NEW(A_BUTTON))
+    {
         input = cursor;
+    }
     else if (JOY_NEW(B_BUTTON))
+    {
         input = MENU_B_PRESSED;
+    }
 
     if (cursor != sPartyMenuDataPtr->actionCursor)
     {
@@ -5308,15 +5408,23 @@ static void PartyView_ExpandHeader(u32 stringId)
         break;
     case PARTY_MSG_TEACH_WHICH_MON:
         if (gPartyMenu.action == PARTY_ACTION_MOVE_TUTOR)
+        {
             DynamicPlaceholderTextUtil_SetPlaceholderPtr(0, GetMoveName(gSpecialVar_0x8005));
+        }
         else
+        {
             DynamicPlaceholderTextUtil_SetPlaceholderPtr(0, GetMoveName(ItemIdToBattleMoveId(gSpecialVar_ItemId)));
+        }
         break;
     case PARTY_MSG_USE_ON_WHICH_MON:
         if (gPartyMenu.action == PARTY_ACTION_SOFTBOILED)
+        {
             str = COMPOUND_STRING("Use on which Pokémon?");
+        }
         else
+        {
             DynamicPlaceholderTextUtil_SetPlaceholderPtr(0, GetItemName(gSpecialVar_ItemId));
+        }
         break;
     }
     DynamicPlaceholderTextUtil_ExpandPlaceholders(gStringVar4, str);
@@ -5347,7 +5455,9 @@ static void PartyView_ClearFooter(void)
 static enum PartyMenuFooters PartyView_GetChooseMonFooter(void)
 {
     if (sPartyMenuDataPtr->chooseHalf)
+    {
         return PARTY_FOOTER_CHOOSE_HALF;
+    }
 
     switch (gPartyMenu.action)
     {
@@ -5358,9 +5468,13 @@ static enum PartyMenuFooters PartyView_GetChooseMonFooter(void)
         return PARTY_FOOTER_CHOOSE_NO_CANCEL;
     case PARTY_ACTION_CHOOSE_MON:
         if (PartyMenu_CanSwitch())
+        {
             return PARTY_FOOTER_DEFAULT;
+        }
         if (gPartyMenu.menuType == PARTY_MENU_TYPE_FIELD)
+        {
             return PARTY_FOOTER_DEFAULT_NO_SWITCH;
+        }
         return PARTY_FOOTER_CHOOSE;
     default:
         return PARTY_FOOTER_CHOOSE;
@@ -5475,17 +5589,25 @@ static void PartyMenu_Free(void)
     for (u32 slot = 0; slot < PARTY_SIZE; slot++)
     {
         if (sPartyMenuDataPtr->monIconSpriteIds[slot] != SPRITE_NONE)
+        {
             FreeAndDestroyMonIconSprite(&gSprites[sPartyMenuDataPtr->monIconSpriteIds[slot]]);
+        }
         if (sPartyMenuDataPtr->heldItemSpriteIds[slot] != SPRITE_NONE)
+        {
             DestroySprite(&gSprites[sPartyMenuDataPtr->heldItemSpriteIds[slot]]);
+        }
         if (sPartyMenuDataPtr->statusSpriteIds[slot] != SPRITE_NONE)
+        {
             DestroySprite(&gSprites[sPartyMenuDataPtr->statusSpriteIds[slot]]);
+        }
     }
 
     for (u32 i = 0; i < PARTY_STAT_STAGE_NUM; i++)
     {
         if (sPartyMenuDataPtr->statStageSpriteIds[i] != SPRITE_NONE)
+        {
             DestroySprite(&gSprites[sPartyMenuDataPtr->statStageSpriteIds[i]]);
+        }
     }
 
     FreeSpriteTilesByTag(PARTY_GFXTAG_HELD_ITEM);
@@ -5827,7 +5949,7 @@ void InitPartyMenuForHexorbFromField(u8 taskId)
 }
 
 // ==================================================
-// Not ported yet
+// Item use
 // ==================================================
 
 static void Task_SetSacredAshCB(u8 taskId)
@@ -5885,9 +6007,6 @@ void ItemUseCB_BattleChooseMove(u8 taskId, TaskFunc task)
     gTasks[taskId].func = Task_HandleWhichMoveInput;
 }
 
-static const u8 sText_AskChangeAbility[] = _("Would you like to change {STR_VAR_1}'s\nability to {STR_VAR_2}?");
-static const u8 sText_AbilityChanged[] = _("{STR_VAR_1}'s ability became\n{STR_VAR_2}!{PAUSE_UNTIL_PRESS}");
-
 #define tState      data[0]
 #define tSpecies    data[1]
 #define tAbilityNum data[2]
@@ -5935,7 +6054,7 @@ static void Task_ChangeAbility(u8 taskId)
         gPartyMenuUseExitCallback = TRUE;
         GetMonNickname(&gParties[B_TRAINER_PLAYER][tMonId], gStringVar1);
         StringCopy(gStringVar2, gAbilitiesInfo[GetAbilityBySpecies(tSpecies, tAbilityNum)].name);
-        StringExpandPlaceholders(gStringVar4, sText_AskChangeAbility);
+        StringExpandPlaceholders(gStringVar4, COMPOUND_STRING("Would you like to change {STR_VAR_1}'s\nability to {STR_VAR_2}?"));
         PlaySE(SE_SELECT);
         DisplayPartyMenuMessage(gStringVar4, 1);
         tState++;
@@ -5965,7 +6084,7 @@ static void Task_ChangeAbility(u8 taskId)
         break;
     case 3:
         PlaySE(SE_USE_ITEM);
-        StringExpandPlaceholders(gStringVar4, sText_AbilityChanged);
+        StringExpandPlaceholders(gStringVar4, COMPOUND_STRING("{STR_VAR_1}'s ability became\n{STR_VAR_2}!{PAUSE_UNTIL_PRESS}"));
         DisplayPartyMenuMessage(gStringVar4, 1);
         tState++;
         break;
