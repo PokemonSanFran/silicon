@@ -18,7 +18,7 @@
       "local_id": "LOCALID_ESPULEE_ISLAND_GYM_ATTENDANT",
       "graphics_id": "OBJ_EVENT_GFX_ANABEL",
       "x": 38,
-      "y": 85,
+      "y": 103,
       "elevation": 3,
       "movement_type": "MOVEMENT_TYPE_FACE_LEFT",
       "movement_range_x": 0,
@@ -32,7 +32,7 @@
       "local_id": "LOCALID_CONVENTION_OPPONENT_A",
       "graphics_id": "OBJ_EVENT_GFX_VAR_0",
       "x": 0,
-      "y": 7,
+      "y": 25,
       "elevation": 0,
       "movement_type": "MOVEMENT_TYPE_FACE_UP",
       "movement_range_x": 0,
@@ -46,7 +46,7 @@
       "local_id": "LOCALID_CONVENTION_OPPONENT_B",
       "graphics_id": "OBJ_EVENT_GFX_VAR_1",
       "x": 1,
-      "y": 7,
+      "y": 25,
       "elevation": 0,
       "movement_type": "MOVEMENT_TYPE_FACE_UP",
       "movement_range_x": 0,
@@ -60,7 +60,7 @@
       "local_id": "LOCALID_CONVENTION_PARTNER",
       "graphics_id": "OBJ_EVENT_GFX_VAR_2",
       "x": 4,
-      "y": 14,
+      "y": 32,
       "elevation": 0,
       "movement_type": "MOVEMENT_TYPE_FACE_UP",
       "movement_range_x": 0,
@@ -75,7 +75,7 @@
     {
       "warp_id": "WARP_ID_ESPULEE_OUTSKIRTS_GYM_TO_ESPULEE_OUTSKIRTS_LEFT",
       "x": 36,
-      "y": 85,
+      "y": 103,
       "elevation": 0,
       "dest_map": "MAP_ESPULEE_OUTSKIRTS",
       "dest_warp_id": "WARP_ID_ESPULEE_OUTSKIRTS_TO_GYM"
@@ -83,7 +83,7 @@
     {
       "warp_id": "WARP_ID_ESPULEE_OUTSKIRTS_GYM_TO_ESPULEE_OUTSKIRTS_RIGHT",
       "x": 37,
-      "y": 85,
+      "y": 103,
       "elevation": 0,
       "dest_map": "MAP_ESPULEE_OUTSKIRTS",
       "dest_warp_id": "WARP_ID_ESPULEE_OUTSKIRTS_TO_GYM"
