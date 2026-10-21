@@ -23,6 +23,10 @@
     "gMapGroup_IndoorZenzuIsland",
     "gMapGroup_IndoorHalaiIsland",
     "gMapGroup_SharpriseSpire",
+    "gMapGroup_IndoorPopidoraPier",
+    "gMapGroup_IndoorNavalBase",
+    "gMapGroup_IndoorShapriseStadium",
+    "gMapGroup_CoroporationInteriors",
     "gMapGroup_HiddenGrotto",
     "gMapGroup_TownsAndRoutes",
     "gMapGroup_IndoorLittleroot",
@@ -158,52 +162,38 @@
     "EspuleeOutskirts",
     "Route100",
     "LeaverraForest",
-    "LanjingTunnel_B1F",
-    "LeaverraForest_Inner",
-    "LanjingTunnel_B2F",
-    "NavalBase",
-    "SharpriseStadium_Entrance",
-    "SharpriseStadium_Lockers",
-    "SharpriseStadium_Skybox",
-    "SharpriseStadium_Arena",
-    "SharpriseStadium_Stands",
     "ZenzuIsland",
-    "Arantraz_Hospital",
-    "Arantraz_MessHall",
-    "Arantraz_Prison",
     "Route98",
     "WishaastLake",
     "Route3",
     "TorgeotClimb",
-    "OkayLetsFixit_Flashback",
     "QiuVillage",
-    "HalaiIsland_PostEarthquake",
     "SecretPath",
     "PARC",
-    "WeCanStopYouActually_Cutscene",
     "Route20",
     "Route16",
     "RouteD",
-    "Route_D_Underwater",
     "WajabiLake",
-    "PintillonHouse_Interior_1F",
     "OrolandColiseum",
+    "RouteC",
+    "RouteE",
+    "RouteA",
+    "Route_D_Underwater",
+    "LanjingTunnel_B1F",
+    "LeaverraForest_Inner",
+    "LanjingTunnel_B2F",
+    "Arantraz_Hospital",
+    "Arantraz_MessHall",
+    "Arantraz_Prison",
+    "OkayLetsFixit_Flashback",
+    "HalaiIsland_PostEarthquake",
+    "WeCanStopYouActually_Cutscene",
+    "PintillonHouse_Interior_1F",
     "OrolandColiseum_Hallway",
     "OrolandColiseum_Arena",
     "OrolandColiseum_Hall",
     "CurenoPort_Underground",
-    "RouteC",
-    "RouteE",
-    "RouteA",
-    "Presto_Barge_1",
-    "Presto_Barge_2",
-    "Presto_Barge_3",
-    "Arriba_CarInterior",
-    "PopidoraPier_Arcade",
-    "GlavezHill_Taxiunion",
-    "CapheCommunityGarden",
-    "NavalBaseExterior",
-    "HodouCity_Alley1"
+    "NavalBaseExterior"
   ],
   "gMapGroup_IndoorCuconuTown": [
     "CuconuTown_SharpriseCompound_1F",
@@ -253,8 +243,7 @@
     "PetarosaBorough_SharpriseCompound_1F",
     "PetarosaBorough_KeiYingMansion",
     "PetarosaBorough_Improv",
-    "PetarosaBorough_SquattersMansion",
-    "Fakenews_Warehouse"
+    "PetarosaBorough_SquattersMansion"
   ],
   "gMapGroup_IndoorTirabudinPlace": [
     "TirabudinPlace_PokemonCenter_1F",
@@ -283,6 +272,7 @@
     "CapheCity_Library",
     "CapheCity_Pantry",
     "CapheCity_PantryMaze",
+    "CapheCommunityGarden",
     "CapheCity_PokemonCenter_1F"
   ],
   "gMapGroup_IndoorCresaltaVista": [
@@ -291,15 +281,13 @@
     "CresaltaVista_Gemhouse"
   ],
   "gMapGroup_IndoorGlavezHill": [
-    "GlavezHill_PokemonCenter_1F"
+    "GlavezHill_PokemonCenter_1F",
+    "GlavezHill_Taxiunion"
   ],
   "gMapGroup_IndoorCurenoPort": [
     "CurenoPort_PokemonCenter_1F",
     "CurenoPort_GearGrindGangHouse",
-    "Oroland_Warehouse",
-    "Arriba_B1F",
-    "Arriba_1F",
-    "Arriba_2F"
+    "Oroland_Warehouse"
   ],
   "gMapGroup_IndoorHodouCity": [
     "HodouCity_Gym",
@@ -311,6 +299,7 @@
     "HodouCity_BackroomD",
     "HodouCity_Herbal",
     "HodouCity_Cookie",
+    "HodouCity_Alley1",
     "HodouCity_PokemonCenter_1F"
   ],
   "gMapGroup_IndoorIrisinaTown": [
@@ -352,6 +341,29 @@
     "SharpriseSpire_Leagueops",
     "SharpriseSpire_Top",
     "SharpriseSpire_Lab"
+  ],
+  "gMapGroup_IndoorPopidoraPier": [
+    "PopidoraPier_Arcade"
+  ],
+  "gMapGroup_IndoorShapriseStadium": [
+    "SharpriseStadium_Entrance",
+    "SharpriseStadium_Lockers",
+    "SharpriseStadium_Skybox",
+    "SharpriseStadium_Arena",
+    "SharpriseStadium_Stands"
+  ],
+  "gMapGroup_IndoorNavalBase": [
+    "NavalBase"
+  ],
+  "gMapGroup_CoroporationInteriors": [
+    "Presto_Barge_1",
+    "Presto_Barge_2",
+    "Presto_Barge_3",
+    "Arriba_CarInterior",
+    "Fakenews_Warehouse",
+    "Arriba_B1F",
+    "Arriba_1F",
+    "Arriba_2F"
   ],
   "gMapGroup_HiddenGrotto": [
     "RouteD_Grotto",
