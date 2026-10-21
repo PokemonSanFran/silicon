@@ -715,7 +715,7 @@ static const u8 sPartyMenu_ExpBarColors[3] = {13, 14, 8};
 static const struct CompressedSpriteSheet sPartyMenu_SpriteSheet_Cursor =
 {
     .data = sPartyMenu_Gfx_Cursor,
-    .size = TILE_OFFSET_4BPP(NUM_PARTY_CURSOR_CORNERS * PARTY_CURSOR_NUM_FRAMES),
+    .size = TILE_OFFSET_4BPP(PARTY_CURSOR_FRAME_TILES * PARTY_CURSOR_NUM_FRAMES),
     .tag = PARTY_GFXTAG_CURSOR,
 };
 
@@ -727,59 +727,21 @@ static const struct SpritePalette sPartyMenu_SpritePalette_Ui =
 
 static const struct OamData sPartyMenu_Oam_Cursor =
 {
-    .shape = SPRITE_SHAPE(8x8),
-    .size = SPRITE_SIZE(8x8),
+    .shape = SPRITE_SHAPE(32x32),
+    .size = SPRITE_SIZE(32x32),
     .priority = PARTY_SPRITE_PRIORITY_MAIN,
 };
 
 static const union AnimCmd sPartyMenu_Anim_Cursor[] =
 {
-    ANIMCMD_FRAME(0, PARTY_CURSOR_FRAME_DURATION),
-    ANIMCMD_FRAME(1, PARTY_CURSOR_FRAME_DURATION),
-    ANIMCMD_FRAME(2, PARTY_CURSOR_FRAME_DURATION),
-    ANIMCMD_FRAME(1, PARTY_CURSOR_FRAME_DURATION),
+    ANIMCMD_FRAME(0 * PARTY_CURSOR_FRAME_TILES, PARTY_CURSOR_FRAME_DURATION),
+    ANIMCMD_FRAME(1 * PARTY_CURSOR_FRAME_TILES, PARTY_CURSOR_FRAME_DURATION),
+    ANIMCMD_FRAME(2 * PARTY_CURSOR_FRAME_TILES, PARTY_CURSOR_FRAME_DURATION),
+    ANIMCMD_FRAME(3 * PARTY_CURSOR_FRAME_TILES, PARTY_CURSOR_FRAME_DURATION),
+    ANIMCMD_FRAME(3 * PARTY_CURSOR_FRAME_TILES, PARTY_CURSOR_FRAME_DURATION, .hFlip = TRUE),
+    ANIMCMD_FRAME(2 * PARTY_CURSOR_FRAME_TILES, PARTY_CURSOR_FRAME_DURATION, .hFlip = TRUE),
+    ANIMCMD_FRAME(1 * PARTY_CURSOR_FRAME_TILES, PARTY_CURSOR_FRAME_DURATION, .hFlip = TRUE),
     ANIMCMD_JUMP(0)
-};
-
-static const struct Subsprite sPartyMenu_Subsprites_Cursor[NUM_PARTY_CURSOR_CORNERS] =
-{
-    [PARTY_CURSOR_CORNER_TOP_LEFT] =
-    {
-        .x = -PARTY_CURSOR_HALF_SIZE,
-        .y = -PARTY_CURSOR_HALF_SIZE,
-        .shape = SPRITE_SHAPE(8x8),
-        .size = SPRITE_SIZE(8x8),
-        .tileOffset = PARTY_CURSOR_CORNER_TOP_LEFT * PARTY_CURSOR_NUM_FRAMES,
-    },
-    [PARTY_CURSOR_CORNER_TOP_RIGHT] =
-    {
-        .x = PARTY_CURSOR_HALF_SIZE - PARTY_CURSOR_CORNER_SIZE,
-        .y = -PARTY_CURSOR_HALF_SIZE,
-        .shape = SPRITE_SHAPE(8x8),
-        .size = SPRITE_SIZE(8x8),
-        .tileOffset = PARTY_CURSOR_CORNER_TOP_RIGHT * PARTY_CURSOR_NUM_FRAMES,
-    },
-    [PARTY_CURSOR_CORNER_BOTTOM_LEFT] =
-    {
-        .x = -PARTY_CURSOR_HALF_SIZE,
-        .y = PARTY_CURSOR_HALF_SIZE - PARTY_CURSOR_CORNER_SIZE,
-        .shape = SPRITE_SHAPE(8x8),
-        .size = SPRITE_SIZE(8x8),
-        .tileOffset = PARTY_CURSOR_CORNER_BOTTOM_LEFT * PARTY_CURSOR_NUM_FRAMES,
-    },
-    [PARTY_CURSOR_CORNER_BOTTOM_RIGHT] =
-    {
-        .x = PARTY_CURSOR_HALF_SIZE - PARTY_CURSOR_CORNER_SIZE,
-        .y = PARTY_CURSOR_HALF_SIZE - PARTY_CURSOR_CORNER_SIZE,
-        .shape = SPRITE_SHAPE(8x8),
-        .size = SPRITE_SIZE(8x8),
-        .tileOffset = PARTY_CURSOR_CORNER_BOTTOM_RIGHT * PARTY_CURSOR_NUM_FRAMES,
-    },
-};
-
-static const struct SubspriteTable sPartyMenu_SubspriteTable_Cursor[] =
-{
-    { ARRAY_COUNT(sPartyMenu_Subsprites_Cursor), sPartyMenu_Subsprites_Cursor },
 };
 
 static const union AnimCmd *const sPartyMenu_Anims_Cursor[] =
