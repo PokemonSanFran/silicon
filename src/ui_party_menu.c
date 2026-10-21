@@ -608,7 +608,7 @@ static void PartySetup_Graphics(void)
     DecompressDataWithHeaderVram(sPartyMenu_Gfx_Wallpaper, (void *)BG_CHAR_ADDR(GetBgAttribute(PARTY_BG_WALLPAPER, BG_ATTR_CHARBASEINDEX)));
     LoadBgTilemap(PARTY_BG_WALLPAPER, sPartyMenu_Tilemap_Wallpaper, BG_SCREEN_SIZE, 0);
     LoadPalette(sPartyMenu_Pals_Wallpaper[OptionsMenu_GetSavedOptions(VISUAL_SETTINGS, VISUAL_OPTIONS_COLOR)],
-                BG_PLTT_ID(0), PLTT_SIZE_4BPP);
+                BG_PLTT_ID(PARTY_BG_PAL_WALLPAPER), PLTT_SIZE_4BPP);
     SetBackdropFromColor(RGB_BLACK);
 
     LoadPalette(&sPartyMenu_Pal_Slot[BG_PLTT_ID(PARTY_BG_PAL_SLOT_MAIN)], BG_PLTT_ID(PARTY_BG_PAL_SLOT_MAIN), PLTT_SIZE_4BPP);
@@ -734,7 +734,8 @@ void Task_HandleChooseMonInput(u8 taskId)
              || PartySlot_IsPPItem()
              || PartySlot_GetFormChangeMethod() != FORM_CHANGE_TERMINATOR
              || PartySlot_IsRotomCatalog()
-             || PartySlot_GetXItemStat() != NUM_BATTLE_STATS)
+             || PartySlot_GetXItemStat() != NUM_BATTLE_STATS
+             || PartySlot_IsDireHit())
             {
                 PartySlot_Draw(prevSlot);
                 PartySlot_Draw(*slotPtr);
@@ -1227,7 +1228,7 @@ static void PartySlot_DrawMonInfo(u32 windowId, u32 partySlot, u32 row)
     {
         if (PartySlot_IsEvResetItem())
         {
-            if (partySlot == *PartyCursor_GetSlotPtr())
+            if (partySlot == *PartyCursor_GetSlotPtr() && description == PARTY_SLOT_DESC_NONE)
             {
                 PartySlot_DrawEvReset(windowId, contentY);
             }
@@ -1584,13 +1585,12 @@ static bool32 PartySlot_IsAbilityItem(void)
 
 static void PartySlot_DrawAbility(u32 windowId, u32 partySlot, struct Pokemon *mon, u32 contentY)
 {
-    const struct PartySlotRect *rect = &sPartyMenu_SlotLayout.abilityName;
+    const struct PartySlotRect *rect = &sPartyMenu_SlotLayout.indentTop;
     const u8 *name = gAbilitiesInfo[GetMonAbility(mon)].name;
     bool32 isHovered = partySlot == *PartyCursor_GetSlotPtr();
     u32 fontId = GetFontIdToFit(name, FONT_OUTLINED, 0, rect->width);
 
-    PartySlot_Print(windowId, fontId, rect->x + GetStringCenterAlignXOffset(fontId, name, rect->width),
-                    rect->y + contentY, isHovered ? COLORID_PARTY_WHITE : COLORID_PARTY_YELLOW, name);
+    PartySlot_Print(windowId, fontId, rect->x, rect->y + contentY, isHovered ? COLORID_PARTY_WHITE : COLORID_PARTY_YELLOW, name);
     if (!isHovered)
     {
         return;
@@ -2046,6 +2046,15 @@ static u32 PartySlot_GetDescription(u32 partySlot, enum PartyTextColors *color)
      && partySlot == *PartyCursor_GetSlotPtr()
      && !GetMonData(mon, MON_DATA_IS_EGG)
      && PartyMon_GetNewAbilityNum(mon) == NUM_ABILITY_SLOTS)
+    {
+        *color = COLORID_PARTY_GREY;
+        return PARTYBOX_DESC_NO_USE;
+    }
+
+    if (gItemUseCB == ItemUseCB_ResetEVs
+     && partySlot == *PartyCursor_GetSlotPtr()
+     && !GetMonData(mon, MON_DATA_IS_EGG)
+     && GetMonEVCount(mon) == 0)
     {
         *color = COLORID_PARTY_GREY;
         return PARTYBOX_DESC_NO_USE;
@@ -5967,6 +5976,7 @@ static void Task_ChangeAbility(u8 taskId)
     case 5:
         SetMonData(&gParties[B_TRAINER_PLAYER][tMonId], MON_DATA_ABILITY_NUM, &tAbilityNum);
         RemoveBagItem(gSpecialVar_ItemId, 1);
+        PartySlot_Draw(tMonId);
         PartyItem_ReturnOrCloseAfterText(taskId);
         break;
     }
@@ -6060,6 +6070,7 @@ static void Task_Mint(u8 taskId)
         SetMonData(&gParties[B_TRAINER_PLAYER][tMonId], MON_DATA_HIDDEN_NATURE, &tNewNature);
         CalculateMonStats(&gParties[B_TRAINER_PLAYER][tMonId]);
         RemoveBagItem(gSpecialVar_ItemId, 1);
+        PartySlot_Draw(tMonId);
         PartyItem_ReturnOrCloseAfterText(taskId);
         break;
     }
@@ -6099,6 +6110,7 @@ void ItemUseCB_ResetEVs(u8 taskId, TaskFunc task)
         gPartyMenuUseExitCallback = TRUE;
         PlaySE(SE_USE_ITEM);
         RemoveBagItem(item, 1);
+        PartySlot_Draw(gPartyMenu.slotId);
         GetMonNickname(mon, gStringVar1);
         StringExpandPlaceholders(gStringVar4, COMPOUND_STRING("{STR_VAR_1}'s base points\nwere all reset to zero!{PAUSE_UNTIL_PRESS}"));
         DisplayPartyMenuMessage(gStringVar4, TRUE);

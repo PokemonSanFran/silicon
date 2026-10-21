@@ -479,7 +479,6 @@ static const struct
     struct PartySlotRect natureCurrent;
     struct PartySlotRect natureArrow;
     struct PartySlotRect natureNext;
-    struct PartySlotRect abilityName;
     struct PartySlotRect arrowTop;
     struct PartySlotRect arrowBottom;
     struct PartySlotRect indentTop;
@@ -608,12 +607,6 @@ static const struct
         PARTY_SLOT_NATURE_NEXT_W,
         PARTY_SLOT_NATURE_NEXT_H
     },
-    .abilityName = {
-        PARTY_SLOT_ABILITY_NAME_X,
-        PARTY_SLOT_ABILITY_NAME_Y,
-        PARTY_SLOT_ABILITY_NAME_W,
-        PARTY_SLOT_ABILITY_NAME_H
-    },
     .arrowTop = {
         PARTY_SLOT_ARROW_TOP_X,
         PARTY_SLOT_ARROW_TOP_Y,
@@ -700,7 +693,6 @@ static const u8 sPartyMenu_TextColors[NUM_PARTY_TEXT_COLORS][3] =
     // from text.pal
     [COLORID_PARTY_HELPER]          = {0, 1,  0},
     // from pal 3 of tiles.png
-    [COLORID_MENU_HIGHLIGHT]        = {0, 15, 5},
     [COLORID_MENU_FIELD_MOVE]       = {0, 15, 2},
 };
 

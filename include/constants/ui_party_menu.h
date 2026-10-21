@@ -201,12 +201,6 @@
 #define PARTY_SLOT_NATURE_NEXT_W    33
 #define PARTY_SLOT_NATURE_NEXT_H    PARTY_SLOT_TEXT_HEIGHT
 
-// ability items: ability name on the HP row; hovered, {RIGHT_ARROW} new ability on the item row
-#define PARTY_SLOT_ABILITY_NAME_X   PARTY_SLOT_ITEM_X
-#define PARTY_SLOT_ABILITY_NAME_Y   PARTY_SLOT_HP_VALUE_Y
-#define PARTY_SLOT_ABILITY_NAME_W   PARTY_SLOT_ITEM_W
-#define PARTY_SLOT_ABILITY_NAME_H   PARTY_SLOT_TEXT_HEIGHT
-
 // {RIGHT_ARROW} at the slot's left edge, text indented 1px right of it, on either row (ability, form change)
 #define PARTY_SLOT_ARROW_TOP_X      PARTY_SLOT_ITEM_X
 #define PARTY_SLOT_ARROW_TOP_Y      PARTY_SLOT_HP_VALUE_Y
@@ -358,7 +352,6 @@ enum PartyMenuWindows
 {
     PARTY_WIN_HEADER,
     PARTY_WIN_FOOTER,
-    NUM_PARTY_FIXED_WINDOWS
 };
 
 enum PartyMenuFooters
@@ -473,14 +466,12 @@ enum PartyTextColors
     COLORID_PARTY_RED,
     COLORID_PARTY_GREY,
     COLORID_PARTY_HELPER,
-    COLORID_MENU_HIGHLIGHT,
     COLORID_MENU_FIELD_MOVE,
     NUM_PARTY_TEXT_COLORS
 };
 
 // menu windows (pal 3) share pal 1's text indices
 #define COLORID_MENU_WHITE  COLORID_PARTY_WHITE
-#define COLORID_MENU_BLUE   COLORID_PARTY_BLUE
 #define COLORID_MENU_GREEN  COLORID_PARTY_GREEN
 #define COLORID_MENU_YELLOW COLORID_PARTY_YELLOW
 #define COLORID_MENU_RED    COLORID_PARTY_RED
