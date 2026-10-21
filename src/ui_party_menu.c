@@ -436,6 +436,7 @@ static void SetPartyMonFieldMoveActions(struct Pokemon *);
 static void PartyFieldMoves_Draw(u32);
 static void BufferCurrentMapName(void);
 static const struct FieldMoveBlock *PartyMenu_GetFieldMoveBlock(enum FieldMove);
+static bool32 PartyMenu_IsFieldMoveBlocked(enum FieldMove);
 static void CursorCb_FieldMove(u8);
 static void TryTutorSelectedMon(u8);
 static void TryGiveMailToSelectedMon(u8);
@@ -2996,7 +2997,8 @@ static void PartyActions_Draw(u32 windowId)
 
         if (action >= MENU_FIELD_MOVES)
         {
-            PartyList_PrintRow(windowId, row, width, COLORID_MENU_FIELD_MOVE, GetMoveName(FieldMove_GetMoveId(action - MENU_FIELD_MOVES)));
+            u32 color = PartyMenu_IsFieldMoveBlocked(action - MENU_FIELD_MOVES) ? COLORID_MENU_GREY : COLORID_MENU_FIELD_MOVE;
+            PartyList_PrintRow(windowId, row, width, color, GetMoveName(FieldMove_GetMoveId(action - MENU_FIELD_MOVES)));
         }
         else if (PartyActions_IsHexorbBlocked(action))
         {
@@ -3483,6 +3485,24 @@ static const struct FieldMoveBlock *PartyMenu_GetFieldMoveBlock(enum FieldMove f
         }
     }
     return NULL;
+}
+
+static bool32 PartyMenu_IsFieldMoveBlocked(enum FieldMove fieldMove)
+{
+    if (MenuHelpers_IsLinkActive() == TRUE || InUnionRoom() == TRUE || PartyMenu_GetFieldMoveBlock(fieldMove) != NULL)
+    {
+        return TRUE;
+    }
+
+    bool8 (*fieldCallback)(void) = gFieldCallback2;
+    MainCallback postMenuCallback = gPostMenuFieldCallback;
+    u16 specialVarResult = gSpecialVar_Result;
+    bool32 canUse = SetUpFieldMove(fieldMove);
+
+    gFieldCallback2 = fieldCallback;
+    gPostMenuFieldCallback = postMenuCallback;
+    gSpecialVar_Result = specialVarResult;
+    return !canUse;
 }
 
 static void CursorCb_FieldMove(u8 taskId)
