@@ -2681,8 +2681,8 @@ const struct SideQuest sSideQuests[QUEST_COUNT] =
                 .setupFunc = DebugQuest_VSDeoxys,
                 side_quest_map(MAP_ROUTE9),
                 .warpId = WARP_ID_NONE,
-                .x = 17,
-                .y = 3,
+                .x = 57,
+                .y = 22,
             },
             [STATE_QUEST_VSDEOXYS_RECIVED_ROCK_SMASH_TM] =
             {
@@ -2690,8 +2690,8 @@ const struct SideQuest sSideQuests[QUEST_COUNT] =
                 .setupFunc = DebugQuest_VSDeoxys,
                 side_quest_map(MAP_ROUTE9),
                 .warpId = WARP_ID_NONE,
-                .x = 9,
-                .y = 1,
+                .x = 29,
+                .y = 44,
             },
             [STATE_QUEST_VSDEOXYS_AFTER_MINIOR_BATTLE] =
             {
@@ -2699,8 +2699,8 @@ const struct SideQuest sSideQuests[QUEST_COUNT] =
                 .setupFunc = DebugQuest_VSDeoxys,
                 side_quest_map(MAP_HALERBA_CITY),
                 .warpId = WARP_ID_NONE,
-                .x = 39,
-                .y = 10,
+                .x = 29,
+                .y = 44,
             },
             [STATE_QUEST_VSDEOXYS_HAS_ENTERED_RESEARCH] =
             {
