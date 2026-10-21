@@ -574,8 +574,8 @@ static void CB2_PartyMenu_Setup(void)
 
 static void CB2_PartyMenu_Idle(void)
 {
-    RunTasks();
     PartyStatusIcons_UpdateFade();
+    RunTasks();
     AnimateSprites();
     BuildOamBuffer();
     DoScheduledBgTilemapCopiesToVram();
