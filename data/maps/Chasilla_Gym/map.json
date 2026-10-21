@@ -29,6 +29,7 @@
       "flag": "0"
     },
     {
+      "local_id": "LOCALID_CHASILLA_GYM_ENTRANCE_GUY",
       "graphics_id": "OBJ_EVENT_GFX_FAT_MAN",
       "x": 5,
       "y": 7,

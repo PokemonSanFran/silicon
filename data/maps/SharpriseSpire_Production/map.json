@@ -29,6 +29,7 @@
       "flag": "FLAG_TEMP_1"
     },
     {
+      "local_id": "LOCALID_SHARPRISE_SPIRE_PRODUCTION_RAMESH",
       "graphics_id": "OBJ_EVENT_GFX_RAMESH",
       "x": 9,
       "y": 6,
@@ -42,6 +43,7 @@
       "flag": "FLAG_TEMP_2"
     },
     {
+      "local_id": "LOCALID_SHARPRISE_SPIRE_PRODUCTION_WORKER_A",
       "graphics_id": "OBJ_EVENT_GFX_PRODUCT_MANAGER_1",
       "x": 2,
       "y": 10,
@@ -55,6 +57,7 @@
       "flag": "0"
     },
     {
+      "local_id": "LOCALID_SHARPRISE_SPIRE_PRODUCTION_WORKER_B",
       "graphics_id": "OBJ_EVENT_GFX_DEVELOPER_1",
       "x": 2,
       "y": 13,
@@ -68,6 +71,7 @@
       "flag": "0"
     },
     {
+      "local_id": "LOCALID_SHARPRISE_SPIRE_PRODUCTION_WORKER_C",
       "graphics_id": "OBJ_EVENT_GFX_DEVELOPER_2",
       "x": 6,
       "y": 11,
@@ -81,6 +85,7 @@
       "flag": "0"
     },
     {
+      "local_id": "LOCALID_SHARPRISE_SPIRE_PRODUCTION_WORKER_D",
       "graphics_id": "OBJ_EVENT_GFX_DEVELOPER_2",
       "x": 6,
       "y": 15,
@@ -94,6 +99,7 @@
       "flag": "0"
     },
     {
+      "local_id": "LOCALID_SHARPRISE_SPIRE_PRODUCTION_WORKER_E",
       "graphics_id": "OBJ_EVENT_GFX_DESIGNER_1",
       "x": 10,
       "y": 11,
@@ -107,6 +113,7 @@
       "flag": "0"
     },
     {
+      "local_id": "LOCALID_SHARPRISE_SPIRE_PRODUCTION_WORKER_F",
       "graphics_id": "OBJ_EVENT_GFX_DEVELOPER_1",
       "x": 14,
       "y": 13,
@@ -120,6 +127,7 @@
       "flag": "0"
     },
     {
+      "local_id": "LOCALID_SHARPRISE_SPIRE_PRODUCTION_WORKER_G",
       "graphics_id": "OBJ_EVENT_GFX_PRODUCT_MANAGER_2",
       "x": 14,
       "y": 16,

@@ -15,6 +15,7 @@
   "connections": null,
   "object_events": [
     {
+        "local_id": "LOCALID_TIRABUDIN_GYM_LOBBY_SINGLES",
       "graphics_id": "OBJ_EVENT_GFX_BEAUTY",
       "x": 5,
       "y": 4,
@@ -28,6 +29,7 @@
       "flag": "0"
     },
     {
+        "local_id": "LOCALID_TIRABUDIN_GYM_LOBBY_DOUBLE",
       "graphics_id": "OBJ_EVENT_GFX_POKEFAN_F",
       "x": 8,
       "y": 4,
@@ -41,6 +43,7 @@
       "flag": "0"
     },
     {
+        "local_id": "LOCALID_TIRABUDIN_GYM_LOBBY_MULTI",
       "graphics_id": "OBJ_EVENT_GFX_GENTLEMAN",
       "x": 12,
       "y": 4,
@@ -54,6 +57,7 @@
       "flag": "0"
     },
     {
+        "local_id": "LOCALID_TIRABUDIN_GYM_LOBBY_MULTI_LINK",
       "graphics_id": "OBJ_EVENT_GFX_WOMAN_1",
       "x": 16,
       "y": 4,
@@ -69,6 +73,7 @@
   ],
   "warp_events": [
     {
+        "local_id": "LOCALID_TIRABUDIN_GYM_LOBBY_MULTI",
       "x": 10,
       "y": 9,
       "elevation": 0,

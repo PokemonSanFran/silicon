@@ -29,6 +29,11 @@
     "gMapGroup_CoroporationInteriors",
     "gMapGroup_HiddenGrotto",
     "gMapGroup_TownsAndRoutes",
+    "gMapGroup_Underwater",
+    "gMapGroup_LanjingTunnel",
+    "gMapGroup_IndoorArantraz",
+    "gMapGroup_PintillionInterior",
+    "gMapGroup_IndoorOrolandColiseum",
     "gMapGroup_IndoorLittleroot",
     "gMapGroup_IndoorOldale",
     "gMapGroup_IndoorDewford",
@@ -178,20 +183,10 @@
     "RouteC",
     "RouteE",
     "RouteA",
-    "Route_D_Underwater",
-    "LanjingTunnel_B1F",
     "LeaverraForest_Inner",
-    "LanjingTunnel_B2F",
-    "Arantraz_Hospital",
-    "Arantraz_MessHall",
-    "Arantraz_Prison",
     "OkayLetsFixit_Flashback",
     "HalaiIsland_PostEarthquake",
     "WeCanStopYouActually_Cutscene",
-    "PintillonHouse_Interior_1F",
-    "OrolandColiseum_Hallway",
-    "OrolandColiseum_Arena",
-    "OrolandColiseum_Hall",
     "CurenoPort_Underground",
     "NavalBaseExterior"
   ],
@@ -345,15 +340,15 @@
   "gMapGroup_IndoorPopidoraPier": [
     "PopidoraPier_Arcade"
   ],
+  "gMapGroup_IndoorNavalBase": [
+    "NavalBase"
+  ],
   "gMapGroup_IndoorShapriseStadium": [
     "SharpriseStadium_Entrance",
     "SharpriseStadium_Lockers",
     "SharpriseStadium_Skybox",
     "SharpriseStadium_Arena",
     "SharpriseStadium_Stands"
-  ],
-  "gMapGroup_IndoorNavalBase": [
-    "NavalBase"
   ],
   "gMapGroup_CoroporationInteriors": [
     "Presto_Barge_1",
@@ -452,6 +447,26 @@
     "Underwater_Route129",
     "Underwater_Route105",
     "Underwater_Route125"
+  ],
+  "gMapGroup_Underwater": [
+    "Route_D_Underwater"
+  ],
+  "gMapGroup_LanjingTunnel": [
+    "LanjingTunnel_B1F",
+    "LanjingTunnel_B2F"
+  ],
+  "gMapGroup_IndoorArantraz": [
+    "Arantraz_Hospital",
+    "Arantraz_MessHall",
+    "Arantraz_Prison"
+  ],
+  "gMapGroup_PintillionInterior": [
+    "PintillonHouse_Interior_1F"
+  ],
+  "gMapGroup_IndoorOrolandColiseum": [
+    "OrolandColiseum_Hallway",
+    "OrolandColiseum_Arena",
+    "OrolandColiseum_Hall"
   ],
   "gMapGroup_IndoorLittleroot": [
     "LittlerootTown_BrendansHouse_1F",

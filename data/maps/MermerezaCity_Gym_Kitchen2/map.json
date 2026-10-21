@@ -43,6 +43,7 @@
       "flag": "0"
     },
     {
+        "local_id": "LOCALID_MERMEREZA_KITCHEN_2_ATTENDANT",
       "graphics_id": "OBJ_EVENT_GFX_NURSE",
       "x": 11,
       "y": 7,
