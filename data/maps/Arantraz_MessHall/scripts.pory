@@ -1,9 +1,9 @@
 const FLAG_HIDE_ELEANOR = FLAG_TEMP_8
 const FLAG_HIDE_FRANK = FLAG_TEMP_5
 
-mapscripts Arantraz_MessHall_MapScripts 
+mapscripts Arantraz_MessHall_MapScripts
 {
-    MAP_SCRIPT_ON_TRANSITION 
+    MAP_SCRIPT_ON_TRANSITION
 	{
         call(YouRealizeTheyreEvilRight_HideGarbodor_Script)
 		call_if_eq(VAR_ARANTRAZ_STATE,0,YouRealizeTheyreEvilRight_HideBasement_Script)
@@ -19,7 +19,6 @@ mapscripts Arantraz_MessHall_MapScripts
 		call(Arantraz_MessHall_Script_FrankVisibility)
 		call(Arantraz_MessHall_Script_TalaVisibility)
 		call(Arantraz_MessHall_Script_MagnusVisibility)
-        call(Quest_Redomugging_Hide_Muggers_Script)
         call_if_quest_not_complete(QUEST_FREETHEINNOCENT,Quest_Freetheinnocent_Script_HideFindtheguiltyvictimB)
         call_if_unset(FLAG_TIMELINE_TRUE,WallaceArmy_Script_HideWallacearmytidememberA)
     }
