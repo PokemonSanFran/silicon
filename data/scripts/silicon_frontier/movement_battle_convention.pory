@@ -1,254 +1,257 @@
 script BattleConvention_Movement_MovePlayerIntoBattlePosition
 {
-    callnative(Script_SiliconFroniter_IsCurrentChallengeTypeMulti)
-    if (var(VAR_TEMP_E) == FALSE)
-    {
-        applymovement(LOCALID_CONVENTION_PARTNER,moves(set_invisible))
-        waitmovement(LOCALID_CONVENTION_PARTNER)
-    }
-
-    callnative(Script_SiliconFrontier_GetBattleIndexValue)
-    switch (var(VAR_TEMP_D))
-    {
-        case 0:
-        case 4:
-        applymovement(LOCALID_PLAYER,moves(walk_up * 3))
-        applymovement(LOCALID_CONVENTION_PARTNER,moves(walk_up * 3))
-        case 1:
-        case 2:
-        case 3:
-        applymovement(LOCALID_CONVENTION_OPPONENT_A,moves(walk_up,face_up))
-        applymovement(LOCALID_PLAYER,moves(walk_right * 3))
-        applymovement(LOCALID_CONVENTION_PARTNER,moves(walk_right * 3))
-        applymovement(LOCALID_CONVENTION_OPPONENT_B,moves(walk_down,face_down))
-        case 5:
-        case 6:
-        case 7:
-        case 8:
-        applymovement(LOCALID_PLAYER,moves(walk_left * 3))
-        applymovement(LOCALID_CONVENTION_PARTNER,moves(walk_left * 3))
-        case 9:
-        applymovement(LOCALID_PLAYER,moves(walk_down * 3))
-        applymovement(LOCALID_CONVENTION_PARTNER,moves(walk_down * 3))
-    }
-    delay(24)
-    //fadescreen(FADE_TO_BLACK)
-
-    callnative(Script_SiliconFrontier_GetBattleIndexValue)
-    switch (var(VAR_TEMP_D))
-    {
-        case 0:
-            setobjectxy(LOCALID_PLAYER,8,101)
-            TeleportCamera(8,101)
-
-            setobjectxy(LOCALID_CONVENTION_PARTNER,8,102)
-
-            setobjectxy(LOCALID_CONVENTION_OPPONENT_A,9,93)
-            setobjectxy(LOCALID_CONVENTION_OPPONENT_B,10,93)
-
-            setobjectxyperm(LOCALID_CONVENTION_OPPONENT_A,9,93)
-            setobjectxyperm(LOCALID_CONVENTION_OPPONENT_B,10,93)
-
-            addobject(LOCALID_CONVENTION_OPPONENT_A)
-            addobject(LOCALID_CONVENTION_OPPONENT_B)
-
-            waitmovement(LOCALID_PLAYER)
-            waitmovement(LOCALID_CONVENTION_PARTNER)
-
-            moveobjecttocoords(LOCALID_PLAYER,9,98,DIR_EAST)
-            moveobjecttocoords(LOCALID_CONVENTION_PARTNER,9,99,DIR_EAST)
-        case 1:
-            setobjectxy(LOCALID_PLAYER,5,80)
-            TeleportCamera(5,80)
-
-            setobjectxy(LOCALID_CONVENTION_PARTNER,5,81)
-
-            setobjectxy(LOCALID_CONVENTION_OPPONENT_A,9,75)
-            setobjectxy(LOCALID_CONVENTION_OPPONENT_B,10,75)
-
-            setobjectxyperm(LOCALID_CONVENTION_OPPONENT_A,9,75)
-            setobjectxyperm(LOCALID_CONVENTION_OPPONENT_B,10,75)
-
-            addobject(LOCALID_CONVENTION_OPPONENT_A)
-            addobject(LOCALID_CONVENTION_OPPONENT_B)
-
-            waitmovement(LOCALID_PLAYER)
-            waitmovement(LOCALID_CONVENTION_PARTNER)
-
-            moveobjecttocoords(LOCALID_PLAYER,9,80,DIR_EAST)
-            moveobjecttocoords(LOCALID_CONVENTION_PARTNER,9,81,DIR_EAST)
-        case 2:
-            setobjectxy(LOCALID_PLAYER,27,80)
-            TeleportCamera(27,80)
-
-            setobjectxy(LOCALID_CONVENTION_PARTNER,27,81)
-
-            setobjectxy(LOCALID_CONVENTION_OPPONENT_A,31,75)
-            setobjectxy(LOCALID_CONVENTION_OPPONENT_B,32,75)
-
-            setobjectxyperm(LOCALID_CONVENTION_OPPONENT_A,31,75)
-            setobjectxyperm(LOCALID_CONVENTION_OPPONENT_B,32,75)
+	callnative(Script_SiliconFroniter_IsCurrentChallengeTypeMulti)
+	if (var(VAR_TEMP_E) == FALSE)
+	{
+		applymovement(LOCALID_CONVENTION_PARTNER,moves(set_invisible))
+		waitmovement(LOCALID_CONVENTION_PARTNER)
+	}
+
+	getplayerxy(VAR_TEMP_0,VAR_TEMP_1)
+	if (var(VAR_TEMP_1) >= 102)
+	{
+		moveobjecttocoords(LOCALID_PLAYER,36,100,DIR_NORTH)
+		moveobjecttocoords(LOCALID_CONVENTION_PARTNER,37,100,DIR_NORTH)
+	}
+	else
+	{
+		waitmovement(LOCALID_PLAYER)
+		waitmovement(LOCALID_CONVENTION_PARTNER)
+		callnative(Script_SiliconFrontier_GetBattleIndexValue)
+		switch (var(VAR_TEMP_D))
+		{
+			case 0:
+				moveobjecttocoords(LOCALID_PLAYER,8,6,DIR_NORTH)
+				moveobjecttocoords(LOCALID_CONVENTION_PARTNER,11,6,DIR_NORTH)
+			case 1:
+				moveobjecttocoords(LOCALID_PLAYER,13,98,DIR_EAST)
+				moveobjecttocoords(LOCALID_CONVENTION_PARTNER,13,98,DIR_EAST)
+			case 2:
+				moveobjecttocoords(LOCALID_PLAYER,13,80,DIR_EAST)
+				moveobjecttocoords(LOCALID_CONVENTION_PARTNER,13,81,DIR_EAST)
+			case 3:
+				moveobjecttocoords(LOCALID_PLAYER,35,80,DIR_EAST)
+				moveobjecttocoords(LOCALID_CONVENTION_PARTNER,35,81,DIR_EAST)
+			case 4:
+				moveobjecttocoords(LOCALID_PLAYER,8,60,DIR_NORTH)
+				moveobjecttocoords(LOCALID_CONVENTION_PARTNER,11,60,DIR_NORTH)
+			case 5:
+				moveobjecttocoords(LOCALID_PLAYER,28,62,DIR_WEST)
+				moveobjecttocoords(LOCALID_CONVENTION_PARTNER,28,63,DIR_WEST)
+			case 6:
+				moveobjecttocoords(LOCALID_PLAYER,6,44,DIR_WEST)
+				moveobjecttocoords(LOCALID_CONVENTION_PARTNER,6,45,DIR_WEST)
+			case 7:
+				moveobjecttocoords(LOCALID_PLAYER,28,44,DIR_WEST)
+				moveobjecttocoords(LOCALID_CONVENTION_PARTNER,28,45,DIR_WEST)
+			case 8:
+				moveobjecttocoords(LOCALID_PLAYER,6,26,DIR_WEST)
+				moveobjecttocoords(LOCALID_CONVENTION_PARTNER,6,27,DIR_WEST)
+			case 9:
+				moveobjecttocoords(LOCALID_PLAYER,28,26,DIR_SOUTH)
+				moveobjecttocoords(LOCALID_CONVENTION_PARTNER,28,27,DIR_SOUTH)
+		}
+	}
+	delay(24)
+	fadescreen(FADE_TO_BLACK)
+	waitmovement(LOCALID_PLAYER)
+	waitmovement(LOCALID_CONVENTION_PARTNER)
+
+	callnative(Script_SiliconFrontier_GetBattleIndexValue)
+	switch (var(VAR_TEMP_D))
+	{
+		case 0:
+			setobjectxy(LOCALID_PLAYER,8,101)
+			setobjectxy(LOCALID_CONVENTION_PARTNER,8,102)
+			TeleportCamera(8,101)
+
+			setobjectxyperm(LOCALID_CONVENTION_PARTNER,8,102)
+
+			setobjectxy(LOCALID_CONVENTION_OPPONENT_A,9,93)
+			setobjectxy(LOCALID_CONVENTION_OPPONENT_B,10,93)
+
+			setobjectxyperm(LOCALID_CONVENTION_OPPONENT_A,9,93)
+			setobjectxyperm(LOCALID_CONVENTION_OPPONENT_B,10,93)
+
+			addobject(LOCALID_CONVENTION_OPPONENT_A)
+			addobject(LOCALID_CONVENTION_OPPONENT_B)
+
+			moveobjecttocoords(LOCALID_PLAYER,9,98,DIR_EAST)
+			moveobjecttocoords(LOCALID_CONVENTION_PARTNER,9,99,DIR_EAST)
+		case 1:
+			setobjectxy(LOCALID_PLAYER,7,80)
+			setobjectxy(LOCALID_CONVENTION_PARTNER,7,81)
+			TeleportCamera(7,80)
+
+			setobjectxyperm(LOCALID_CONVENTION_PARTNER,7,81)
+
+			setobjectxy(LOCALID_CONVENTION_OPPONENT_A,9,75)
+			setobjectxy(LOCALID_CONVENTION_OPPONENT_B,10,75)
+
+			setobjectxyperm(LOCALID_CONVENTION_OPPONENT_A,9,75)
+			setobjectxyperm(LOCALID_CONVENTION_OPPONENT_B,10,75)
+
+			addobject(LOCALID_CONVENTION_OPPONENT_A)
+			addobject(LOCALID_CONVENTION_OPPONENT_B)
+
+			moveobjecttocoords(LOCALID_PLAYER,9,80,DIR_EAST)
+			moveobjecttocoords(LOCALID_CONVENTION_PARTNER,9,81,DIR_EAST)
+		case 2:
+			setobjectxy(LOCALID_PLAYER,27,80)
+			setobjectxy(LOCALID_CONVENTION_PARTNER,27,81)
+			TeleportCamera(27,80)
+
+			setobjectxyperm(LOCALID_CONVENTION_PARTNER,27,81)
 
-            addobject(LOCALID_CONVENTION_OPPONENT_A)
-            addobject(LOCALID_CONVENTION_OPPONENT_B)
+			setobjectxy(LOCALID_CONVENTION_OPPONENT_A,31,75)
+			setobjectxy(LOCALID_CONVENTION_OPPONENT_B,32,75)
 
-            waitmovement(LOCALID_PLAYER)
-            waitmovement(LOCALID_CONVENTION_PARTNER)
+			setobjectxyperm(LOCALID_CONVENTION_OPPONENT_A,31,75)
+			setobjectxyperm(LOCALID_CONVENTION_OPPONENT_B,32,75)
 
-            moveobjecttocoords(LOCALID_PLAYER,31,80,DIR_EAST)
-            moveobjecttocoords(LOCALID_CONVENTION_PARTNER,31,81,DIR_EAST)
-        case 3:
-            setobjectxy(LOCALID_PLAYER,5,62)
-            TeleportCamera(5,62)
+			addobject(LOCALID_CONVENTION_OPPONENT_A)
+			addobject(LOCALID_CONVENTION_OPPONENT_B)
 
-            setobjectxy(LOCALID_CONVENTION_PARTNER,5,63)
+			moveobjecttocoords(LOCALID_PLAYER,31,80,DIR_EAST)
+			moveobjecttocoords(LOCALID_CONVENTION_PARTNER,31,81,DIR_EAST)
+		case 3:
+			setobjectxy(LOCALID_PLAYER,7,62)
+			setobjectxy(LOCALID_CONVENTION_PARTNER,7,63)
+			TeleportCamera(7,62)
 
-            setobjectxy(LOCALID_CONVENTION_OPPONENT_A,31,75)
-            setobjectxy(LOCALID_CONVENTION_OPPONENT_B,32,75)
+			setobjectxyperm(LOCALID_CONVENTION_PARTNER,7,63)
 
-            setobjectxyperm(LOCALID_CONVENTION_OPPONENT_A,31,75)
-            setobjectxyperm(LOCALID_CONVENTION_OPPONENT_B,32,75)
+			setobjectxy(LOCALID_CONVENTION_OPPONENT_A,9,57)
+			setobjectxy(LOCALID_CONVENTION_OPPONENT_B,10,57)
 
-            addobject(LOCALID_CONVENTION_OPPONENT_A)
-            addobject(LOCALID_CONVENTION_OPPONENT_B)
+			setobjectxyperm(LOCALID_CONVENTION_OPPONENT_A,9,57)
+			setobjectxyperm(LOCALID_CONVENTION_OPPONENT_B,10,57)
 
-            waitmovement(LOCALID_PLAYER)
-            waitmovement(LOCALID_CONVENTION_PARTNER)
+			addobject(LOCALID_CONVENTION_OPPONENT_A)
+			addobject(LOCALID_CONVENTION_OPPONENT_B)
 
-            moveobjecttocoords(LOCALID_PLAYER,31,80,DIR_EAST)
-            moveobjecttocoords(LOCALID_CONVENTION_PARTNER,31,81,DIR_EAST)
-        case 4:
-            setobjectxy(LOCALID_PLAYER,30,65)
-            TeleportCamera(30,65)
+			moveobjecttocoords(LOCALID_PLAYER,9,62,DIR_EAST)
+			moveobjecttocoords(LOCALID_CONVENTION_PARTNER,9,63,DIR_EAST)
+		case 4:
+			setobjectxy(LOCALID_PLAYER,30,65)
+			setobjectxy(LOCALID_CONVENTION_PARTNER,30,66)
+			TeleportCamera(30,65)
 
-            setobjectxy(LOCALID_CONVENTION_PARTNER,30,66)
+			setobjectxyperm(LOCALID_CONVENTION_PARTNER,30,66)
 
-            setobjectxy(LOCALID_CONVENTION_OPPONENT_A,31,57)
-            setobjectxy(LOCALID_CONVENTION_OPPONENT_B,32,57)
+			setobjectxy(LOCALID_CONVENTION_OPPONENT_A,31,57)
+			setobjectxy(LOCALID_CONVENTION_OPPONENT_B,32,57)
 
-            setobjectxyperm(LOCALID_CONVENTION_OPPONENT_A,31,57)
-            setobjectxyperm(LOCALID_CONVENTION_OPPONENT_B,32,57)
+			setobjectxyperm(LOCALID_CONVENTION_OPPONENT_A,31,57)
+			setobjectxyperm(LOCALID_CONVENTION_OPPONENT_B,32,57)
 
-            addobject(LOCALID_CONVENTION_OPPONENT_A)
-            addobject(LOCALID_CONVENTION_OPPONENT_B)
+			addobject(LOCALID_CONVENTION_OPPONENT_A)
+			addobject(LOCALID_CONVENTION_OPPONENT_B)
 
-            waitmovement(LOCALID_PLAYER)
-            waitmovement(LOCALID_CONVENTION_PARTNER)
+			moveobjecttocoords(LOCALID_PLAYER,31,62,DIR_EAST)
+			moveobjecttocoords(LOCALID_CONVENTION_PARTNER,31,63,DIR_EAST)
+		case 5:
+			setobjectxy(LOCALID_PLAYER,14,44)
+			setobjectxy(LOCALID_CONVENTION_PARTNER,14,45)
+			TeleportCamera(14,44)
 
-            moveobjecttocoords(LOCALID_PLAYER,31,62,DIR_EAST)
-            moveobjecttocoords(LOCALID_CONVENTION_PARTNER,31,63,DIR_EAST)
-        case 5:
-            setobjectxy(LOCALID_PLAYER,14,44)
-            TeleportCamera(14,44)
+			setobjectxyperm(LOCALID_CONVENTION_PARTNER,14,45)
 
-            setobjectxy(LOCALID_CONVENTION_PARTNER,14,45)
+			setobjectxy(LOCALID_CONVENTION_OPPONENT_A,9,39)
+			setobjectxy(LOCALID_CONVENTION_OPPONENT_B,10,39)
 
-            setobjectxy(LOCALID_CONVENTION_OPPONENT_A,9,39)
-            setobjectxy(LOCALID_CONVENTION_OPPONENT_B,10,39)
+			setobjectxyperm(LOCALID_CONVENTION_OPPONENT_A,9,39)
+			setobjectxyperm(LOCALID_CONVENTION_OPPONENT_B,10,39)
 
-            setobjectxyperm(LOCALID_CONVENTION_OPPONENT_A,9,39)
-            setobjectxyperm(LOCALID_CONVENTION_OPPONENT_B,10,39)
+			addobject(LOCALID_CONVENTION_OPPONENT_A)
+			addobject(LOCALID_CONVENTION_OPPONENT_B)
 
-            addobject(LOCALID_CONVENTION_OPPONENT_A)
-            addobject(LOCALID_CONVENTION_OPPONENT_B)
+			moveobjecttocoords(LOCALID_PLAYER,9,44,DIR_EAST)
+			moveobjecttocoords(LOCALID_CONVENTION_PARTNER,9,45,DIR_EAST)
+		case 6:
+			setobjectxy(LOCALID_PLAYER,36,44)
+			setobjectxy(LOCALID_CONVENTION_PARTNER,36,45)
+			TeleportCamera(36,44)
 
-            waitmovement(LOCALID_PLAYER)
-            waitmovement(LOCALID_CONVENTION_PARTNER)
+			setobjectxyperm(LOCALID_CONVENTION_PARTNER,36,45)
 
-            moveobjecttocoords(LOCALID_PLAYER,9,44,DIR_EAST)
-            moveobjecttocoords(LOCALID_CONVENTION_PARTNER,9,45,DIR_EAST)
-        case 6:
-            setobjectxy(LOCALID_PLAYER,36,44)
-            TeleportCamera(36,44)
+			setobjectxy(LOCALID_CONVENTION_OPPONENT_A,31,39)
+			setobjectxy(LOCALID_CONVENTION_OPPONENT_B,32,39)
 
-            setobjectxy(LOCALID_CONVENTION_PARTNER,36,45)
+			setobjectxyperm(LOCALID_CONVENTION_OPPONENT_A,31,39)
+			setobjectxyperm(LOCALID_CONVENTION_OPPONENT_B,32,39)
 
-            setobjectxy(LOCALID_CONVENTION_OPPONENT_A,31,39)
-            setobjectxy(LOCALID_CONVENTION_OPPONENT_B,32,39)
+			addobject(LOCALID_CONVENTION_OPPONENT_A)
+			addobject(LOCALID_CONVENTION_OPPONENT_B)
 
-            setobjectxyperm(LOCALID_CONVENTION_OPPONENT_A,31,39)
-            setobjectxyperm(LOCALID_CONVENTION_OPPONENT_B,32,39)
+			moveobjecttocoords(LOCALID_PLAYER,31,44,DIR_EAST)
+			moveobjecttocoords(LOCALID_CONVENTION_PARTNER,31,45,DIR_EAST)
+		case 7:
+			setobjectxy(LOCALID_PLAYER,14,26)
+			setobjectxy(LOCALID_CONVENTION_PARTNER,14,27)
+			TeleportCamera(14,26)
 
-            addobject(LOCALID_CONVENTION_OPPONENT_A)
-            addobject(LOCALID_CONVENTION_OPPONENT_B)
+			setobjectxyperm(LOCALID_CONVENTION_PARTNER,14,27)
 
-            waitmovement(LOCALID_PLAYER)
-            waitmovement(LOCALID_CONVENTION_PARTNER)
+			setobjectxy(LOCALID_CONVENTION_OPPONENT_A,9,21)
+			setobjectxy(LOCALID_CONVENTION_OPPONENT_B,10,21)
+			setobjectxyperm(LOCALID_CONVENTION_OPPONENT_A,9,21)
+			setobjectxyperm(LOCALID_CONVENTION_OPPONENT_B,10,21)
 
-            moveobjecttocoords(LOCALID_PLAYER,31,44,DIR_EAST)
-            moveobjecttocoords(LOCALID_CONVENTION_PARTNER,31,45,DIR_EAST)
-        case 7:
-            setobjectxy(LOCALID_PLAYER,14,26)
-            TeleportCamera(14,26)
+			addobject(LOCALID_CONVENTION_OPPONENT_A)
+			addobject(LOCALID_CONVENTION_OPPONENT_B)
+			moveobjecttocoords(LOCALID_PLAYER,9,26,DIR_EAST)
+			moveobjecttocoords(LOCALID_CONVENTION_PARTNER,9,27,DIR_EAST)
+		case 8:
+			setobjectxy(LOCALID_PLAYER,36,26)
+			setobjectxy(LOCALID_CONVENTION_PARTNER,36,27)
+			TeleportCamera(36,26)
 
-            setobjectxy(LOCALID_CONVENTION_PARTNER,14,27)
+			setobjectxyperm(LOCALID_CONVENTION_PARTNER,36,27)
 
-            setobjectxy(LOCALID_CONVENTION_OPPONENT_A,9,21)
-            setobjectxy(LOCALID_CONVENTION_OPPONENT_B,10,21)
+			setobjectxy(LOCALID_CONVENTION_OPPONENT_A,31,21)
+			setobjectxy(LOCALID_CONVENTION_OPPONENT_B,32,21)
 
-            setobjectxyperm(LOCALID_CONVENTION_OPPONENT_A,9,21)
-            setobjectxyperm(LOCALID_CONVENTION_OPPONENT_B,10,21)
+			setobjectxyperm(LOCALID_CONVENTION_OPPONENT_A,31,21)
+			setobjectxyperm(LOCALID_CONVENTION_OPPONENT_B,32,21)
 
-            addobject(LOCALID_CONVENTION_OPPONENT_A)
-            addobject(LOCALID_CONVENTION_OPPONENT_B)
+			addobject(LOCALID_CONVENTION_OPPONENT_A)
+			addobject(LOCALID_CONVENTION_OPPONENT_B)
 
-            waitmovement(LOCALID_PLAYER)
-            waitmovement(LOCALID_CONVENTION_PARTNER)
+			moveobjecttocoords(LOCALID_PLAYER,31,26,DIR_EAST)
+			moveobjecttocoords(LOCALID_CONVENTION_PARTNER,31,27,DIR_EAST)
+		case 9:
+			setobjectxy(LOCALID_PLAYER,9,6)
+			setobjectxy(LOCALID_CONVENTION_PARTNER,10,6)
+			TeleportCamera(9,6)
 
-            moveobjecttocoords(LOCALID_PLAYER,9,26,DIR_EAST)
-            moveobjecttocoords(LOCALID_CONVENTION_PARTNER,9,27,DIR_EAST)
-        case 8:
-            setobjectxy(LOCALID_PLAYER,36,26)
-            TeleportCamera(36,26)
+			setobjectxyperm(LOCALID_CONVENTION_PARTNER,10,6)
 
-            setobjectxy(LOCALID_CONVENTION_PARTNER,36,27)
+			setobjectxy(LOCALID_CONVENTION_OPPONENT_A,9,3)
+			setobjectxy(LOCALID_CONVENTION_OPPONENT_B,10,3)
 
-            setobjectxy(LOCALID_CONVENTION_OPPONENT_A,31,21)
-            setobjectxy(LOCALID_CONVENTION_OPPONENT_B,32,21)
+			setobjectxyperm(LOCALID_CONVENTION_OPPONENT_A,9,3)
+			setobjectxyperm(LOCALID_CONVENTION_OPPONENT_B,10,3)
 
-            setobjectxyperm(LOCALID_CONVENTION_OPPONENT_A,31,21)
-            setobjectxyperm(LOCALID_CONVENTION_OPPONENT_B,32,21)
+			addobject(LOCALID_CONVENTION_OPPONENT_A)
+			addobject(LOCALID_CONVENTION_OPPONENT_B)
 
-            addobject(LOCALID_CONVENTION_OPPONENT_A)
-            addobject(LOCALID_CONVENTION_OPPONENT_B)
+			moveobjecttocoords(LOCALID_CONVENTION_PARTNER,9,9,DIR_EAST)
+			moveobjecttocoords(LOCALID_PLAYER,9,8,DIR_EAST)
+	}
 
-            waitmovement(LOCALID_PLAYER)
-            waitmovement(LOCALID_CONVENTION_PARTNER)
+callnative(Script_SiliconFroniter_IsCurrentChallengeTypeMulti)
+if (var(VAR_TEMP_E) == FALSE)
+{
+	removeobject(LOCALID_CONVENTION_OPPONENT_B)
+}
 
-            moveobjecttocoords(LOCALID_PLAYER,31,26,DIR_EAST)
-            moveobjecttocoords(LOCALID_CONVENTION_PARTNER,31,27,DIR_EAST)
-        case 9:
-            setobjectxy(LOCALID_PLAYER,14,8)
-            TeleportCamera(14,8)
+callnative(SiliconFrontier_SetUpOpponent)
+call(SiliconFrontier_Script_RefreshOpponentObjects)
 
-            setobjectxy(LOCALID_CONVENTION_PARTNER,14,9)
-
-            setobjectxy(LOCALID_CONVENTION_OPPONENT_A,9,3)
-            setobjectxy(LOCALID_CONVENTION_OPPONENT_B,10,3)
-
-            setobjectxyperm(LOCALID_CONVENTION_OPPONENT_A,9,3)
-            setobjectxyperm(LOCALID_CONVENTION_OPPONENT_B,10,3)
-
-            addobject(LOCALID_CONVENTION_OPPONENT_A)
-            addobject(LOCALID_CONVENTION_OPPONENT_B)
-
-            waitmovement(LOCALID_PLAYER)
-            waitmovement(LOCALID_CONVENTION_PARTNER)
-
-            moveobjecttocoords(LOCALID_PLAYER,9,8,DIR_EAST)
-            moveobjecttocoords(LOCALID_CONVENTION_PARTNER,9,9,DIR_EAST)
-    }
-
-    callnative(Script_SiliconFroniter_IsCurrentChallengeTypeMulti)
-    if (var(VAR_TEMP_E) == FALSE)
-    {
-        removeobject(LOCALID_CONVENTION_OPPONENT_B)
-    }
-
-        special(DrawWholeMapView)
-    //fadescreen(FADE_FROM_BLACK)
-    waitmovement(LOCALID_PLAYER)
-    waitmovement(LOCALID_CONVENTION_PARTNER)
+fadescreen(FADE_FROM_BLACK)
+waitmovement(LOCALID_PLAYER)
+waitmovement(LOCALID_CONVENTION_PARTNER)
 }
 
 script BattleConvention_Movement_MoveOpponentsIntoPosition
@@ -324,6 +327,13 @@ script BattleConvention_Movement_MoveBattlersOutOfBattle
 
 script BattleConvention_Movement_LeaveForBattleRoom
 {
+    callnative(Script_SiliconFroniter_IsCurrentChallengeTypeMulti)
+    if (var(VAR_TEMP_E) == TRUE)
+    {
+        callnative(SiliconFrontier_SetPartnerObject)
+        playse(SE_EXIT)
+        addobject(LOCALID_CONVENTION_PARTNER)
+    }
     goto(SiliconFrontier_Script_WalkIntoRoom)
 }
 

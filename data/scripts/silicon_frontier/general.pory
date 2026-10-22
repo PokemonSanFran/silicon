@@ -193,10 +193,16 @@ script SiliconFrontier_Script_StartBattle
     call(SiliconFrontier_Movement_MovePlayerIntoBattlePosition)
     callnative(LevelUpAllPokemonForFrontier)
 
-    callnative(SiliconFrontier_SetUpOpponent)
+    callnative(Script_SiliconFrontier_GetFacilityFromCurrentChallenge)
+	if (var(VAR_TEMP_F) != SILICON_FACILITY_FACTORY)
+	{
+		callnative(SiliconFrontier_SetUpOpponent)
+	}
     callnative(SiliconFrontier_SetPartnerDamage)
 
-    call(SiliconFrontier_Script_RefreshOpponentObjects)
+    callnative(Script_SiliconFrontier_GetFacilityFromCurrentChallenge)
+	call_if_ne(VAR_TEMP_F,SILICON_FACILITY_FACTORY,SiliconFrontier_Script_RefreshOpponentObjects)
+
     call(SiliconFrontier_Movement_MoveOpponentsIntoPosition)
     call(SiliconFrontier_Script_DoGameBoardSequence)
     callnative(SiliconFrontier_SetUpTextA)

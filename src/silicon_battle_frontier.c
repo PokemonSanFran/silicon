@@ -1476,3 +1476,12 @@ void Script_SiliconFrontier_GetBattleIndexValue(void)
 {
     VarSet(VAR_TEMP_D,SiliconFrontier_GetBattleIndexValue());
 }
+
+void Script_SiliconFrontier_GetCurrentSreak(void)
+{
+    enum SiliconFrontierFacility facility = SiliconFrontier_GetFacilityFromCurrentChallenge();
+    enum SiliconFrontierChallengeType challengeType = SiliconFrontier_GetTypeFromCurrentChallenge();
+    enum SiliconFrontierSparringTypes sparringType = SiliconFrontier_GetCurrentChallengeSparringType();
+    u32 currentStreak = SiliconFrontier_GetCurrentStreak(facility,challengeType, sparringType);
+    VarSet(VAR_TEMP_B,currentStreak);
+}
