@@ -50,5 +50,6 @@ void SiliconFrontier_ResetSketchedMoves(void);
 u32 SiliconFroniter_GetPartySizeFromCurrentChallenge(void);
 void SiliconFrontier_ResetArcadeData(void);
 u8 SiliconFrontier_GetBattleIndexValue(void);
+enum BattleSide ConvertBattleTrainerToBattleSide(enum BattleTrainer battleTrainer);
 
 #endif // GUARD_SILICON_BATTLE_FRONTIER_H

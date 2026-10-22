@@ -872,6 +872,14 @@ static void SiliconFrontier_FillTrainerParty(enum SiliconFrontierTrainerIds trai
         u32 monIndex = RandomUniform(RNG_RANDOM_SILICON_FRONTIER_MON,0,bfMonCount);
         monId = monSet[monIndex];
 
+        enum BattleSide side = ConvertBattleTrainerToBattleSide(trainer);
+
+        u32 slot = i;
+        if ((trainer == B_TRAINER_OPPONENT_B) || (trainer == B_TRAINER_PARTNER))
+            slot+= 2;
+
+        SiliconFrontier_SetFactoryRentalMon(side,SiliconFrontier_GetTypeFromCurrentChallenge(),slot,monId);
+
         // Ensure this Pokémon species isn't a duplicate.
         for (j = 0; j < i + firstMonId; j++)
         {
@@ -1484,4 +1492,16 @@ void Script_SiliconFrontier_GetCurrentSreak(void)
     enum SiliconFrontierSparringTypes sparringType = SiliconFrontier_GetCurrentChallengeSparringType();
     u32 currentStreak = SiliconFrontier_GetCurrentStreak(facility,challengeType, sparringType);
     VarSet(VAR_TEMP_B,currentStreak);
+}
+
+enum BattleSide ConvertBattleTrainerToBattleSide(enum BattleTrainer battleTrainer)
+{
+    switch(battleTrainer)
+    {
+        case B_TRAINER_PLAYER: return B_SIDE_PLAYER;
+        case B_TRAINER_OPPONENT_A: return B_SIDE_OPPONENT;
+        case B_TRAINER_PARTNER: return B_SIDE_PLAYER;
+        case B_TRAINER_OPPONENT_B: return B_SIDE_OPPONENT;
+        default: return NUM_BATTLE_SIDES;
+    }
 }

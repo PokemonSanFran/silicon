@@ -1970,18 +1970,6 @@ static u32 GetChallengeNum(void)
     return (currentStreak / SILICON_FRONTIER_STREAK_LENGTH_BOSS);
 }
 
-static enum BattleSide ConvertBattleTrainerToBattleSide(enum BattleTrainer battleTrainer)
-{
-    switch(battleTrainer)
-    {
-        case B_TRAINER_PLAYER: return B_SIDE_PLAYER;
-        case B_TRAINER_OPPONENT_A: return B_SIDE_OPPONENT;
-        case B_TRAINER_PARTNER: return B_SIDE_PLAYER;
-        case B_TRAINER_OPPONENT_B: return B_SIDE_OPPONENT;
-        default: return NUM_BATTLE_SIDES;
-    }
-}
-
 // Arcade Game Board Back End Resolution
 static bool32 DoGameBoardResult(enum ArcadeEvents event, enum ArcadeImpactTypes impact)
 {

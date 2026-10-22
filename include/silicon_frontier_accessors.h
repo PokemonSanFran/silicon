@@ -46,5 +46,6 @@ u8 SiliconFrontier_GetPartnerPP(u32 partyIndex, u32 moveIndex);
 enum Item SiliconFrontier_GetPartnerHeldItem(u32 partyIndex);
 u16 SiliconFrontier_GetPartnerHP(u32 partyIndex);
 u32 SiliconFrontier_GetPartnerStatus(u32 partyIndex);
+void SiliconFrontier_SetFactoryRentalMon(enum BattleSide battleSide, enum SiliconFrontierChallengeType challengeType, u32 slot, enum SiliconFrontierMonIds monId);
 
 #endif // GUARD_SILICON_FRONTIER_ACCESSORS_H
