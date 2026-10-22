@@ -1,5 +1,6 @@
 #include "global.h"
 #include "event_data.h"
+#include "silicon_factory.h"
 #include "battle_arcade.h"
 #include "pokedex.h"
 #include "ui_pokedex.h"
@@ -851,7 +852,8 @@ void SiliconFrontier_SetUpTextB(void)
 static void SiliconFrontier_FillTrainerParty(enum SiliconFrontierTrainerIds trainerId, u32 monCount, enum BattleTrainer trainer)
 {
     enum SiliconFrontierMonIdChallengeType monIDtype = (SiliconFroniter_IsCurrentChallengeTypeDouble()) ? SILICON_FRONTIER_MON_ID_BATTLE_DOUBLES : SILICON_FRONTIER_MON_ID_BATTLE_SINGLES;
-
+    SiliconFrontier_CopyTempVarsToLast();
+    SiliconFrontier_ResetNextMonsTemp();
     const u16 *monSet = gSiliconFrontierTrainers[trainerId].monSet[monIDtype];
 
     u32 bfMonCount = 0;
@@ -872,14 +874,6 @@ static void SiliconFrontier_FillTrainerParty(enum SiliconFrontierTrainerIds trai
         u32 monIndex = RandomUniform(RNG_RANDOM_SILICON_FRONTIER_MON,0,bfMonCount);
         monId = monSet[monIndex];
 
-        enum BattleSide side = ConvertBattleTrainerToBattleSide(trainer);
-
-        u32 slot = i;
-        if ((trainer == B_TRAINER_OPPONENT_B) || (trainer == B_TRAINER_PARTNER))
-            slot+= 2;
-
-        SiliconFrontier_SetFactoryRentalMon(side,SiliconFrontier_GetTypeFromCurrentChallenge(),slot,monId);
-
         // Ensure this Pokémon species isn't a duplicate.
         for (j = 0; j < i + firstMonId; j++)
         {
@@ -897,6 +891,14 @@ static void SiliconFrontier_FillTrainerParty(enum SiliconFrontierTrainerIds trai
         }
         if (j != i + firstMonId)
             continue;
+
+        enum BattleSide side = ConvertBattleTrainerToBattleSide(trainer);
+        u32 slot = i;
+        if ((trainer == B_TRAINER_OPPONENT_B) || (trainer == B_TRAINER_PARTNER))
+            slot+= 2;
+
+        if (side == B_SIDE_PLAYER)
+            SiliconFrontier_SaveNextMonIdsToTemp(slot,monId);
 
         u8 fixedIV = MAX_PER_STAT_IVS;
         CreateFacilityMon(&gSiliconFrontierMons[monId], SILICON_FRONTIER_LEVEL, fixedIV, otID, 0, &gParties[trainer][i + firstMonId]);
