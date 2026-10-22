@@ -1506,7 +1506,7 @@ static void PartySlot_DrawEvItemDelta(u32 windowId, struct Pokemon *mon, enum St
 
     text[0] = (s8)GetItemEffect(gSpecialVar_ItemId)[ITEM_EFFECT_ARG_START] > 0 ? CHAR_PLUS : CHAR_HYPHEN;
     ConvertIntToDecimalStringN(&text[1], delta, STR_CONV_MODE_LEFT_ALIGN, 3);
-    PartySlot_Print(windowId, FONT_OUTLINED, rect->x, rect->y + contentY, delta != 0 ? COLORID_PARTY_WHITE : COLORID_PARTY_GREY, text);
+    PartySlot_Print(windowId, FONT_OUTLINED, rect->x, rect->y + contentY, delta != 0 ? COLORID_PARTY_RED : COLORID_PARTY_GREY, text);
 }
 
 // mirrors the EV branch of PokemonUseItemEffects
