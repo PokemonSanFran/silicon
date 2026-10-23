@@ -100,18 +100,20 @@
       "dest_warp_id": "WARP_ID_COMPOUND_TO_CUCONU_RIGHT"
     },
     {
+        "warp_id": "WARP_ID_CUCONU_TO_CENTER",
       "x": 10,
       "y": 26,
       "elevation": 0,
       "dest_map": "MAP_CUCONU_TOWN_POKEMON_CENTER_1F",
-      "dest_warp_id": "0"
+      "dest_warp_id": "WARP_ID_CENTER_TO_CUCONU_LEFT"
     },
     {
+        "warp_id": "WARP_ID_CUCONU_TO_CAFE",
       "x": 16,
       "y": 26,
       "elevation": 0,
       "dest_map": "MAP_CUCONU_TOWN_CAFE",
-      "dest_warp_id": "0"
+      "dest_warp_id": "WARP_ID_CAFE_TO_CUCONU_LEFT"
     }
   ],
   "coord_events": [

@@ -101,25 +101,28 @@
   ],
   "warp_events": [
     {
+      "warp_id": "WARP_ID_LOCKERS_TO_SHARPRISE_STADIUM_LEFT",
       "x": 9,
       "y": 9,
       "elevation": 0,
       "dest_map": "MAP_SHARPRISE_STADIUM_ENTRANCE",
-      "dest_warp_id": "2"
+        "dest_warp_id": "WARP_ID_SHARPRISE_STADIUM_TO_LOCKERS"
     },
     {
+      "warp_id": "WARP_ID_LOCKERS_TO_SHARPRISE_STADIUM_RIGHT",
       "x": 10,
       "y": 9,
       "elevation": 0,
       "dest_map": "MAP_SHARPRISE_STADIUM_ENTRANCE",
-      "dest_warp_id": "2"
+        "dest_warp_id": "WARP_ID_SHARPRISE_STADIUM_TO_LOCKERS"
     },
     {
+      "warp_id": "WARP_ID_LOCKERS_TO_ARENA",
       "x": 10,
       "y": 1,
       "elevation": 0,
       "dest_map": "MAP_SHARPRISE_STADIUM_ARENA",
-      "dest_warp_id": "0"
+        "dest_warp_id": "WARP_ID_ARENA_TO_LOCKERS_LEFT"
     }
   ],
   "coord_events": [

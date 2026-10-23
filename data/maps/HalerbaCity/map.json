@@ -101,18 +101,20 @@
   ],
   "warp_events": [
     {
+        "warp_id": "WARP_ID_HALERBA_CITY_TO_WILDS_A",
       "x": 14,
       "y": 2,
       "elevation": 0,
       "dest_map": "MAP_HALERBA_WILDS",
-      "dest_warp_id": "4"
+        "dest_warp_id": "WARP_ID_HALERBA_WILDS_TO_HALERBA_CITY_A"
     },
     {
+        "warp_id": "WARP_ID_HALERBA_CITY_TO_WILDS_B",
       "x": 14,
       "y": 16,
       "elevation": 0,
       "dest_map": "MAP_HALERBA_WILDS",
-      "dest_warp_id": "5"
+        "dest_warp_id": "WARP_ID_HALERBA_WILDS_TO_HALERBA_CITY_B"
     },
     {
       "x": 19,

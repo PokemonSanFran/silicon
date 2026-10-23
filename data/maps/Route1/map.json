@@ -24,7 +24,7 @@
       "direction": "right"
     },
     {
-      "map": "MAP_ROUTE6",
+      "map": "MAP_ROUTE1",
       "offset": -23,
       "direction": "down"
     }
@@ -221,18 +221,20 @@
   ],
   "warp_events": [
     {
+        "warp_id": "WARP_ID_ROUTE1_TO_GROTTO_A",
       "x": 50,
       "y": 5,
       "elevation": 3,
       "dest_map": "MAP_ROUTE1_GROTTO",
-      "dest_warp_id": "0"
+      "dest_warp_id": "WARP_ID_GROTTO_TO_ROUTE1_A"
     },
     {
+        "warp_id": "WARP_ID_ROUTE1_TO_GROTTO_B",
       "x": 51,
       "y": 5,
       "elevation": 3,
       "dest_map": "MAP_ROUTE1_GROTTO",
-      "dest_warp_id": "0"
+      "dest_warp_id": "WARP_ID_GROTTO_TO_ROUTE1_A"
     }
   ],
   "coord_events": [],

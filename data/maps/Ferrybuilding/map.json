@@ -73,18 +73,20 @@
   ],
   "warp_events": [
     {
+        "warp_id": "WARP_ID_FERRY_BUILDING_TO_ROUTE4_LEFT",
       "x": 11,
       "y": 14,
       "elevation": 0,
       "dest_map": "MAP_ROUTE4",
-      "dest_warp_id": "1"
+      "dest_warp_id": "WARP_ID_ROUTE4_TO_FERRY_BUILDING"
     },
     {
+        "warp_id": "WARP_ID_FERRY_BUILDING_TO_ROUTE4_RIGHT",
       "x": 12,
       "y": 14,
       "elevation": 0,
       "dest_map": "MAP_ROUTE4",
-      "dest_warp_id": "1"
+      "dest_warp_id": "WARP_ID_ROUTE4_TO_FERRY_BUILDING"
     }
   ],
   "coord_events": [],

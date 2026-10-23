@@ -129,11 +129,12 @@
   ],
   "warp_events": [
     {
+        "warp_id": "WARP_ID_CONSTRUCTION_TO_ROUTE2",
       "x": 10,
       "y": 24,
       "elevation": 0,
       "dest_map": "MAP_ROUTE2",
-      "dest_warp_id": "0"
+      "dest_warp_id": "WARP_ID_ROUTE2_TO_CONSTRUCTION"
     }
   ],
   "coord_events": [

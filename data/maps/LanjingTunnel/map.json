@@ -43,11 +43,12 @@
   ],
   "warp_events": [
     {
+        "warp_id": "WARP_ID_LANJING_TUNNEL_TO_PIOCA_BRIDGE",
       "x": 4,
       "y": 10,
       "elevation": 0,
       "dest_map": "MAP_PIOCA_BRIDGE",
-      "dest_warp_id": "0"
+        "dest_warp_id": "WARP_ID_PIOCA_BRIDGE_TO_LANJING_TUNNEL"
     },
     {
       "warp_id": "WARP_ID_LANJING_TUNNEL_TO_ESPULEE_OUTSKIRTS",
@@ -58,11 +59,12 @@
       "dest_warp_id": "WARP_ID_ESPULEE_OUTSKIRTS_TO_LANJING_TUNNEL"
     },
     {
+        "warp_id": "WARP_ID_LANJING_TUNNEL_GROUND_TO_B1F",
       "x": 18,
       "y": 3,
       "elevation": 0,
       "dest_map": "MAP_LANJING_TUNNEL_B1F",
-      "dest_warp_id": "0"
+        "dest_warp_id": "WARP_ID_LANJING_TUNNEL_B1F_TO_GROUND"
     }
   ],
   "coord_events": [

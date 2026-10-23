@@ -146,25 +146,28 @@
   ],
   "warp_events": [
     {
+        "warp_id": "WARP_ID_ROUTE100_TO_LEAVERRA_A",
       "x": 5,
       "y": 6,
       "elevation": 0,
       "dest_map": "MAP_LEAVERRA_FOREST",
-      "dest_warp_id": "0"
+        "dest_warp_id": "WARP_ID_LEAVERRA_TO_ROUTE100_A"
     },
     {
+        "warp_id": "WARP_ID_ROUTE100_TO_LEAVERRA_B",
       "x": 4,
       "y": 6,
       "elevation": 0,
       "dest_map": "MAP_LEAVERRA_FOREST",
-      "dest_warp_id": "0"
+        "dest_warp_id": "WARP_ID_LEAVERRA_TO_ROUTE100_A"
     },
     {
+        "warp_id": "WARP_ID_ROUTE100_TO_GROTTO",
       "x": 16,
       "y": 3,
       "elevation": 0,
       "dest_map": "MAP_ROUTE100_GROTTO",
-      "dest_warp_id": "0"
+        "dest_warp_id": "WARP_ID_GROTTO_TO_ROUTE100_A"
     }
   ],
   "coord_events": [

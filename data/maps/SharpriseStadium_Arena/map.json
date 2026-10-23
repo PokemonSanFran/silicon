@@ -45,18 +45,20 @@
   ],
   "warp_events": [
     {
+        "warp_id": "WARP_ID_ARENA_TO_LOCKERS_LEFT",
       "x": 17,
       "y": 9,
       "elevation": 0,
       "dest_map": "MAP_SHARPRISE_STADIUM_LOCKERS",
-      "dest_warp_id": "2"
+      "dest_warp_id": "WARP_ID_LOCKERS_TO_ARENA"
     },
     {
+        "warp_id": "WARP_ID_ARENA_TO_LOCKERS_RIGHT",
       "x": 18,
       "y": 9,
       "elevation": 0,
       "dest_map": "MAP_SHARPRISE_STADIUM_LOCKERS",
-      "dest_warp_id": "2"
+      "dest_warp_id": "WARP_ID_LOCKERS_TO_ARENA"
     }
   ],
   "coord_events": [

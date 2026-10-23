@@ -45,18 +45,20 @@
   ],
   "warp_events": [
     {
+      "warp_id": "WARP_ID_STANDS_TO_SHARPRISE_STADIUM_LEFT",
       "x": 4,
       "y": 6,
       "elevation": 0,
       "dest_map": "MAP_SHARPRISE_STADIUM_ENTRANCE",
-      "dest_warp_id": "3"
+        "dest_warp_id": "WARP_ID_SHARPRISE_STADIUM_TO_STANDS"
     },
     {
+      "warp_id": "WARP_ID_STANDS_TO_SHARPRISE_STADIUM_RIGHT",
       "x": 5,
       "y": 6,
       "elevation": 0,
       "dest_map": "MAP_SHARPRISE_STADIUM_ENTRANCE",
-      "dest_warp_id": "3"
+        "dest_warp_id": "WARP_ID_SHARPRISE_STADIUM_TO_STANDS"
     }
   ],
   "coord_events": [],

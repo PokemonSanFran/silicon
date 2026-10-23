@@ -101,18 +101,20 @@
   ],
   "warp_events": [
     {
+      "warp_id": "WARP_ID_INNER_TO_LEAVERRA_A",
       "x": 9,
       "y": 18,
       "elevation": 0,
       "dest_map": "MAP_LEAVERRA_FOREST",
-      "dest_warp_id": "2"
+        "dest_warp_id": "WARP_ID_LEAVERRA_TO_INNER_A"
     },
     {
+      "warp_id": "WARP_ID_INNER_TO_LEAVERRA_B",
       "x": 10,
       "y": 18,
       "elevation": 0,
       "dest_map": "MAP_LEAVERRA_FOREST",
-      "dest_warp_id": "3"
+        "dest_warp_id": "WARP_ID_LEAVERRA_TO_INNER_B"
     }
   ],
   "coord_events": [],

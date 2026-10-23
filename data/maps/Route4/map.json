@@ -220,11 +220,12 @@
   ],
   "warp_events": [
     {
+        "warp_id": "WARP_ID_ROUTE4_TO_SECRET_PATH",
       "x": 13,
       "y": 17,
       "elevation": 0,
       "dest_map": "MAP_SECRET_PATH",
-      "dest_warp_id": "0"
+      "dest_warp_id": "WARP_ID_SECRET_PATH_TO_ROUTE4"
     },
     {
       "warp_id": "WARP_ID_ROUTE4_TO_FERRY_BUILDING",
@@ -232,14 +233,15 @@
       "y": 89,
       "elevation": 0,
       "dest_map": "MAP_FERRYBUILDING",
-      "dest_warp_id": "0"
+        "dest_warp_id": "WARP_ID_FERRY_BUILDING_TO_ROUTE4_LEFT"
     },
     {
+      "warp_id": "WARP_ID_ROUTE4_TO_GROTTO",
       "x": 13,
       "y": 45,
       "elevation": 0,
       "dest_map": "MAP_ROUTE4_GROTTO",
-      "dest_warp_id": "0"
+        "dest_warp_id": "WARP_ID_GROTTO_TO_ROUTE4_A"
     }
   ],
   "coord_events": [],

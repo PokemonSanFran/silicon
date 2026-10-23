@@ -101,11 +101,12 @@
   ],
   "warp_events": [
     {
+        "warp_id": "WARP_ID_PARC_TO_SECRET_PATH",
       "x": 32,
       "y": 33,
       "elevation": 0,
       "dest_map": "MAP_SECRET_PATH",
-      "dest_warp_id": "1"
+        "dest_warp_id": "WARP_ID_SECRET_PATH_TO_PARC"
     }
   ],
   "coord_events": [

@@ -85,18 +85,20 @@
   ],
   "warp_events": [
     {
+      "warp_id": "WARP_ID_SECRET_PATH_TO_ROUTE4",
       "x": 0,
       "y": 1,
       "elevation": 0,
       "dest_map": "MAP_ROUTE4",
-      "dest_warp_id": "0"
+        "dest_warp_id": "WARP_ID_ROUTE4_TO_SECRET_PATH"
     },
     {
+        "warp_id": "WARP_ID_SECRET_PATH_TO_PARC",
       "x": 39,
       "y": 1,
       "elevation": 0,
       "dest_map": "MAP_PARC",
-      "dest_warp_id": "0"
+        "dest_warp_id": "WARP_ID_PARC_TO_SECRET_PATH"
     }
   ],
   "coord_events": [],

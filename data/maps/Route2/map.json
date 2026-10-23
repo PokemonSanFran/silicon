@@ -194,25 +194,28 @@
   ],
   "warp_events": [
     {
+      "warp_id": "WARP_ID_ROUTE2_TO_CONSTRUCTION",
       "x": 21,
       "y": 30,
       "elevation": 0,
       "dest_map": "MAP_SHARPRISE_STADIUM_CONSTRUCTION",
-      "dest_warp_id": "0"
+      "dest_warp_id": "WARP_ID_CONSTRUCTION_TO_ROUTE2"
     },
     {
+        "warp_id": "WARP_ID_ROUTE2_TO_SHARPRISE_STADIUM",
       "x": 21,
       "y": 29,
       "elevation": 0,
       "dest_map": "MAP_SHARPRISE_STADIUM_ENTRANCE",
-      "dest_warp_id": "0"
+      "dest_warp_id": "WARP_ID_SHARPRISE_STADIUM_TO_ROUTE2_LEFT"
     },
     {
+        "warp_id": "WARP_ID_ROUTE2_TO_GROTTO_A",
       "x": 5,
       "y": 30,
       "elevation": 0,
       "dest_map": "MAP_ROUTE2_GROTTO",
-      "dest_warp_id": "0"
+      "dest_warp_id": "WARP_ID_GROTTO_TO_ROUTE2_A"
     }
   ],
   "coord_events": [],

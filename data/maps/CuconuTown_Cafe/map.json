@@ -45,18 +45,20 @@
   ],
   "warp_events": [
     {
+        "warp_id": "WARP_ID_CAFE_TO_CUCONU_LEFT",
       "x": 3,
       "y": 8,
       "elevation": 0,
       "dest_map": "MAP_CUCONU_TOWN",
-      "dest_warp_id": "2"
+      "dest_warp_id": "WARP_ID_CUCONU_TO_CAFE"
     },
     {
+        "warp_id": "WARP_ID_CAFE_TO_CUCONU_RIGHT",
       "x": 4,
       "y": 8,
       "elevation": 0,
       "dest_map": "MAP_CUCONU_TOWN",
-      "dest_warp_id": "2"
+      "dest_warp_id": "WARP_ID_CUCONU_TO_CAFE"
     }
   ],
   "coord_events": [

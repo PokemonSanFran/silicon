@@ -51,18 +51,20 @@
   ],
   "warp_events": [
     {
+        "warp_id": "WARP_ID_ROUTE22_TO_HALERBA",
       "x": 5,
       "y": 18,
       "elevation": 0,
       "dest_map": "MAP_HALERBA_WILDS",
-      "dest_warp_id": "0"
+        "dest_warp_id": "WARP_ID_HALERBA_WILDS_TO_ROUTE22_A"
     },
     {
+        "warp_id": "WARP_ID_ROUTE22_TO_GROTTO",
       "x": 7,
       "y": 9,
       "elevation": 0,
       "dest_map": "MAP_ROUTE22_GROTTO",
-      "dest_warp_id": "0"
+        "dest_warp_id": "WARP_ID_GROTTO_TO_ROUTE22_A"
     }
   ],
   "coord_events": [],

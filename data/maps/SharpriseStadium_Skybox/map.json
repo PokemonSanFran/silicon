@@ -87,11 +87,12 @@
   ],
   "warp_events": [
     {
+        "warp_id": "WARP_ID_SKYBOX_TO_SHARPRISE_STADIUM",
       "x": 9,
       "y": 1,
       "elevation": 0,
       "dest_map": "MAP_SHARPRISE_STADIUM_ENTRANCE",
-      "dest_warp_id": "4"
+        "dest_warp_id": "WARP_ID_SHARPRISE_STADIUM_TO_SKYBOX"
     }
   ],
   "coord_events": [],

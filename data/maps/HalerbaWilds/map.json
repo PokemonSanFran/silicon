@@ -281,46 +281,52 @@
   ],
   "warp_events": [
     {
+        "warp_id": "WARP_ID_HALERBA_WILDS_TO_ROUTE22_A",
       "x": 14,
       "y": 5,
       "elevation": 0,
       "dest_map": "MAP_ROUTE22",
-      "dest_warp_id": "0"
+        "dest_warp_id": "WARP_ID_ROUTE22_TO_HALERBA"
     },
     {
+        "warp_id": "WARP_ID_HALERBA_WILDS_TO_ROUTE22_B",
       "x": 15,
       "y": 5,
       "elevation": 0,
       "dest_map": "MAP_ROUTE22",
-      "dest_warp_id": "0"
+        "dest_warp_id": "WARP_ID_ROUTE22_TO_HALERBA"
     },
     {
+        "warp_id": "WARP_ID_HALERBA_WILDS_TO_ROUTE_18_A",
       "x": 16,
       "y": 38,
       "elevation": 0,
       "dest_map": "MAP_ROUTE18",
-      "dest_warp_id": "0"
+        "dest_warp_id": "WARP_ID_ROUTE18_TO_HALERBA_WILDS_A"
     },
     {
+        "warp_id": "WARP_ID_HALERBA_WILDS_TO_ROUTE_18_B",
       "x": 17,
       "y": 38,
       "elevation": 0,
       "dest_map": "MAP_ROUTE18",
-      "dest_warp_id": "0"
+        "dest_warp_id": "WARP_ID_ROUTE18_TO_HALERBA_WILDS_A"
     },
     {
+        "warp_id": "WARP_ID_HALERBA_WILDS_TO_HALERBA_CITY_A",
       "x": 24,
       "y": 7,
       "elevation": 0,
       "dest_map": "MAP_HALERBA_CITY",
-      "dest_warp_id": "0"
+        "dest_warp_id": "WARP_ID_HALERBA_CITY_TO_WILDS_A"
     },
     {
+        "warp_id": "WARP_ID_HALERBA_WILDS_TO_HALERBA_CITY_B",
       "x": 28,
       "y": 33,
       "elevation": 0,
       "dest_map": "MAP_HALERBA_CITY",
-      "dest_warp_id": "1"
+        "dest_warp_id": "WARP_ID_HALERBA_CITY_TO_WILDS_B"
     },
     {
       "x": 43,
