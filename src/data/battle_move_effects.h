@@ -9,12 +9,14 @@ const struct BattleMoveEffect gBattleMoveEffects[NUM_BATTLE_MOVE_EFFECTS] =
     {
         .battleScript = BattleScript_EffectPlaceholder,
         .battleTvScore = 0,
+        .battleFactoryStyle = FACTORY_STYLE_NONE, // siliconFrontier
     },
 
     [EFFECT_HIT] =
     {
         .battleScript = BattleScript_EffectHit,
         .battleTvScore = 1,
+        .battleFactoryStyle = FACTORY_STYLE_NONE, // siliconFrontier
     },
 
     [EFFECT_STAT_CHANGE] =
@@ -22,6 +24,7 @@ const struct BattleMoveEffect gBattleMoveEffects[NUM_BATTLE_MOVE_EFFECTS] =
         .battleScript = BattleScript_EffectStatChange,
         .battleTvScore = 0, // TODO: Assign points
         // .battleFactoryStyle = FACTORY_STYLE_PREPARATION,
+        .battleFactoryStyle = FACTORY_STYLE_NONE, // siliconFrontier
         .encourageEncore = TRUE,
     },
 
@@ -30,6 +33,7 @@ const struct BattleMoveEffect gBattleMoveEffects[NUM_BATTLE_MOVE_EFFECTS] =
         .battleScript = BattleScript_EffectStatChange,
         .battleTvScore = 0, // TODO: Assign points
         // .battleFactoryStyle = FACTORY_STYLE_PREPARATION,
+        .battleFactoryStyle = FACTORY_STYLE_PREPARATION, // siliconFrontier
         .encourageEncore = TRUE,
     },
 
@@ -38,6 +42,7 @@ const struct BattleMoveEffect gBattleMoveEffects[NUM_BATTLE_MOVE_EFFECTS] =
         .battleScript = BattleScript_EffectStatChange,
         .battleTvScore = 0, // TODO: Assign points
         // .battleFactoryStyle = FACTORY_STYLE_PREPARATION,
+        .battleFactoryStyle = FACTORY_STYLE_PREPARATION, // siliconFrontier
         .encourageEncore = TRUE,
     },
 
@@ -46,6 +51,7 @@ const struct BattleMoveEffect gBattleMoveEffects[NUM_BATTLE_MOVE_EFFECTS] =
         .battleScript = BattleScript_EffectStatChange,
         .battleTvScore = 0, // TODO: Assign points
         // .battleFactoryStyle = FACTORY_STYLE_PREPARATION,
+        .battleFactoryStyle = FACTORY_STYLE_PREPARATION, // siliconFrontier
         .encourageEncore = TRUE,
     },
 
@@ -54,6 +60,7 @@ const struct BattleMoveEffect gBattleMoveEffects[NUM_BATTLE_MOVE_EFFECTS] =
         .battleScript = BattleScript_EffectStatChange,
         .battleTvScore = 0, // TODO: Assign points
         // .battleFactoryStyle = FACTORY_STYLE_PREPARATION,
+        .battleFactoryStyle = FACTORY_STYLE_PREPARATION, // siliconFrontier
         .encourageEncore = TRUE,
         .twoTurnEffect = TRUE,
     },
@@ -63,12 +70,14 @@ const struct BattleMoveEffect gBattleMoveEffects[NUM_BATTLE_MOVE_EFFECTS] =
         .battleScript = BattleScript_EffectNonVolatileStatus,
         .battleTvScore = 0, // Handled within the battle TV functions
         .encourageEncore = TRUE,
+        .battleFactoryStyle = FACTORY_STYLE_SLOW_STEADY, // siliconFrontier
     },
 
     [EFFECT_TERRAIN_BOOST] =
     {
         .battleScript = BattleScript_EffectHit,
         .battleTvScore = 0, // TODO: Assign points
+        .battleFactoryStyle = FACTORY_STYLE_NONE, // siliconFrontier
     },
 
     [EFFECT_DREAM_EATER] =
@@ -76,6 +85,7 @@ const struct BattleMoveEffect gBattleMoveEffects[NUM_BATTLE_MOVE_EFFECTS] =
         .battleScript = BattleScript_EffectHit,
         .battleTvScore = 5,
         .encourageEncore = TRUE,
+        .battleFactoryStyle = FACTORY_STYLE_NONE, // siliconFrontier
     },
 
     [EFFECT_MIRROR_MOVE] =
@@ -105,6 +115,7 @@ const struct BattleMoveEffect gBattleMoveEffects[NUM_BATTLE_MOVE_EFFECTS] =
         .battleScript = BattleScript_EffectRoar,
         .battleTvScore = 5,
         .encourageEncore = TRUE,
+        .battleFactoryStyle = FACTORY_STYLE_NONE, // siliconFrontier
     },
 
     [EFFECT_CONVERSION] =
@@ -150,6 +161,7 @@ const struct BattleMoveEffect gBattleMoveEffects[NUM_BATTLE_MOVE_EFFECTS] =
     {
         .battleScript = BattleScript_EffectHit,
         .battleTvScore = 0, // TODO: Assign points
+        .battleFactoryStyle = FACTORY_STYLE_NONE, // siliconFrontier
     },
 
     [EFFECT_FIXED_PERCENT_DAMAGE] =
@@ -157,12 +169,14 @@ const struct BattleMoveEffect gBattleMoveEffects[NUM_BATTLE_MOVE_EFFECTS] =
         .battleScript = BattleScript_EffectHit,
         .battleTvScore = 5,
         .encourageEncore = TRUE,
+        .battleFactoryStyle = FACTORY_STYLE_NONE, // siliconFrontier
     },
 
     [EFFECT_FIXED_HP_DAMAGE] =
     {
         .battleScript = BattleScript_EffectHit,
         .battleTvScore = 1,
+        .battleFactoryStyle = FACTORY_STYLE_NONE, // siliconFrontier
     },
 
     [EFFECT_HEAL_BLOCK] =
@@ -170,12 +184,14 @@ const struct BattleMoveEffect gBattleMoveEffects[NUM_BATTLE_MOVE_EFFECTS] =
         .battleScript = BattleScript_EffectHealBlock,
         .battleTvScore = 0, // TODO: Assign points
         .encourageEncore = TRUE,
+        .battleFactoryStyle = FACTORY_STYLE_SLOW_STEADY, // siliconFrontier
     },
 
     [EFFECT_RECOIL_IF_MISS] =
     {
         .battleScript = BattleScript_EffectHit,
         .battleTvScore = 1,
+        .battleFactoryStyle = FACTORY_STYLE_NONE, // siliconFrontier
     },
 
     [EFFECT_MIST] =
@@ -222,6 +238,7 @@ const struct BattleMoveEffect gBattleMoveEffects[NUM_BATTLE_MOVE_EFFECTS] =
         .battleScript = BattleScript_EffectHit,
         .battleTvScore = 3,
         .twoTurnEffect = TRUE,
+        .battleFactoryStyle = FACTORY_STYLE_HIGH_RISK, // siliconFrontier
     },
 
     [EFFECT_SUBSTITUTE] =
@@ -258,6 +275,7 @@ const struct BattleMoveEffect gBattleMoveEffects[NUM_BATTLE_MOVE_EFFECTS] =
         .battleScript = BattleScript_EffectDoNothing,
         .battleTvScore = 1,
         .encourageEncore = TRUE,
+        .battleFactoryStyle = FACTORY_STYLE_NONE, // siliconFrontier
     },
 
     [EFFECT_HOLD_HANDS] =
@@ -265,6 +283,7 @@ const struct BattleMoveEffect gBattleMoveEffects[NUM_BATTLE_MOVE_EFFECTS] =
         .battleScript = BattleScript_EffectHoldHands,
         .battleTvScore = 1,
         .encourageEncore = TRUE,
+        .battleFactoryStyle = FACTORY_STYLE_NONE, // siliconFrontier
     },
 
     [EFFECT_CELEBRATE] =
@@ -272,6 +291,7 @@ const struct BattleMoveEffect gBattleMoveEffects[NUM_BATTLE_MOVE_EFFECTS] =
         .battleScript = BattleScript_EffectCelebrate,
         .battleTvScore = 1,
         .encourageEncore = TRUE,
+        .battleFactoryStyle = FACTORY_STYLE_NONE, // siliconFrontier
     },
 
     [EFFECT_HAPPY_HOUR] =
@@ -279,6 +299,7 @@ const struct BattleMoveEffect gBattleMoveEffects[NUM_BATTLE_MOVE_EFFECTS] =
         .battleScript = BattleScript_EffectHappyHour,
         .battleTvScore = 1,
         .encourageEncore = TRUE,
+        .battleFactoryStyle = FACTORY_STYLE_NONE, // siliconFrontier
     },
 
     [EFFECT_DISABLE] =
@@ -292,12 +313,14 @@ const struct BattleMoveEffect gBattleMoveEffects[NUM_BATTLE_MOVE_EFFECTS] =
     {
         .battleScript = BattleScript_EffectHit,
         .battleTvScore = 2,
+        .battleFactoryStyle = FACTORY_STYLE_NONE, // siliconFrontier
     },
 
     [EFFECT_PSYWAVE] =
     {
         .battleScript = BattleScript_EffectHit,
         .battleTvScore = 1,
+        .battleFactoryStyle = FACTORY_STYLE_NONE, // siliconFrontier
     },
 
     [EFFECT_REFLECT_DAMAGE] =
@@ -326,6 +349,7 @@ const struct BattleMoveEffect gBattleMoveEffects[NUM_BATTLE_MOVE_EFFECTS] =
     {
         .battleScript = BattleScript_EffectHit,
         .battleTvScore = 3,
+        .battleFactoryStyle = FACTORY_STYLE_NONE, // siliconFrontier
     },
 
     [EFFECT_CONVERSION_2] =
@@ -341,6 +365,7 @@ const struct BattleMoveEffect gBattleMoveEffects[NUM_BATTLE_MOVE_EFFECTS] =
         .battleScript = BattleScript_EffectLockOn,
         .battleTvScore = 3,
         .encourageEncore = TRUE,
+        .battleFactoryStyle = FACTORY_STYLE_NONE, // siliconFrontier
     },
 
     [EFFECT_SKETCH] =
@@ -355,6 +380,7 @@ const struct BattleMoveEffect gBattleMoveEffects[NUM_BATTLE_MOVE_EFFECTS] =
         .battleScript = BattleScript_EffectHit,
         .battleTvScore = 3,
         .encourageEncore = TRUE,
+        .battleFactoryStyle = FACTORY_STYLE_NONE, // siliconFrontier
     },
 
     [EFFECT_DESTINY_BOND] =
@@ -382,6 +408,7 @@ const struct BattleMoveEffect gBattleMoveEffects[NUM_BATTLE_MOVE_EFFECTS] =
     {
         .battleScript = BattleScript_EffectHit,
         .battleTvScore = 1,
+        .battleFactoryStyle = FACTORY_STYLE_NONE, // siliconFrontier
     },
 
     [EFFECT_HEAL_BELL] =
@@ -396,6 +423,7 @@ const struct BattleMoveEffect gBattleMoveEffects[NUM_BATTLE_MOVE_EFFECTS] =
     {
         .battleScript = BattleScript_EffectHit,
         .battleTvScore = 1,
+        .battleFactoryStyle = FACTORY_STYLE_NONE, // siliconFrontier
     },
 
     [EFFECT_MEAN_LOOK] =
@@ -411,6 +439,7 @@ const struct BattleMoveEffect gBattleMoveEffects[NUM_BATTLE_MOVE_EFFECTS] =
         .battleScript = BattleScript_EffectNightmare,
         .battleTvScore = 3,
         .encourageEncore = TRUE,
+        .battleFactoryStyle = FACTORY_STYLE_NONE, // siliconFrontier
     },
 
     [EFFECT_CURSE] =
@@ -425,12 +454,14 @@ const struct BattleMoveEffect gBattleMoveEffects[NUM_BATTLE_MOVE_EFFECTS] =
     {
         .battleScript = BattleScript_EffectHealingWish,
         .battleTvScore = 0, // TODO: Assign points
+        .battleFactoryStyle = FACTORY_STYLE_ENDURANCE, // siliconFrontier
     },
 
     [EFFECT_LUNAR_DANCE] =
     {
         .battleScript = BattleScript_EffectHealingWish,
         .battleTvScore = 0, // TODO: Assign points
+        .battleFactoryStyle = FACTORY_STYLE_ENDURANCE, // siliconFrontier
     },
 
     [EFFECT_PROTECT] =
@@ -454,6 +485,7 @@ const struct BattleMoveEffect gBattleMoveEffects[NUM_BATTLE_MOVE_EFFECTS] =
         .battleScript = BattleScript_EffectForesight,
         .battleTvScore = 3,
         .encourageEncore = TRUE,
+        .battleFactoryStyle = FACTORY_STYLE_NONE, // siliconFrontier
     },
 
     [EFFECT_PERISH_SONG] =
@@ -477,6 +509,7 @@ const struct BattleMoveEffect gBattleMoveEffects[NUM_BATTLE_MOVE_EFFECTS] =
     {
         .battleScript = BattleScript_EffectHit,
         .battleTvScore = 3,
+        .battleFactoryStyle = FACTORY_STYLE_NONE, // siliconFrontier
     },
 
     [EFFECT_SWAGGER] =
@@ -491,6 +524,7 @@ const struct BattleMoveEffect gBattleMoveEffects[NUM_BATTLE_MOVE_EFFECTS] =
     {
         .battleScript = BattleScript_EffectHit,
         .battleTvScore = 2,
+        .battleFactoryStyle = FACTORY_STYLE_NONE, // siliconFrontier
     },
 
     [EFFECT_ATTRACT] =
@@ -505,6 +539,7 @@ const struct BattleMoveEffect gBattleMoveEffects[NUM_BATTLE_MOVE_EFFECTS] =
     {
         .battleScript = BattleScript_EffectHit,
         .battleTvScore = 1,
+        .battleFactoryStyle = FACTORY_STYLE_NONE, // siliconFrontier
     },
 
     [EFFECT_PRESENT] =
@@ -518,6 +553,7 @@ const struct BattleMoveEffect gBattleMoveEffects[NUM_BATTLE_MOVE_EFFECTS] =
     {
         .battleScript = BattleScript_EffectHit,
         .battleTvScore = 1,
+        .battleFactoryStyle = FACTORY_STYLE_NONE, // siliconFrontier
     },
 
     [EFFECT_SAFEGUARD] =
@@ -532,6 +568,7 @@ const struct BattleMoveEffect gBattleMoveEffects[NUM_BATTLE_MOVE_EFFECTS] =
     {
         .battleScript = BattleScript_EffectHit,
         .battleTvScore = 1,
+        .battleFactoryStyle = FACTORY_STYLE_NONE, // siliconFrontier
     },
 
     [EFFECT_BATON_PASS] =
@@ -545,12 +582,14 @@ const struct BattleMoveEffect gBattleMoveEffects[NUM_BATTLE_MOVE_EFFECTS] =
     {
         .battleScript = BattleScript_EffectHit,
         .battleTvScore = 2,
+        .battleFactoryStyle = FACTORY_STYLE_NONE, // siliconFrontier
     },
 
     [EFFECT_CAPTIVATE] =
     {
         .battleScript = BattleScript_EffectStatChange,
         .battleTvScore = 0, // TODO: Assign points
+        .battleFactoryStyle = FACTORY_STYLE_WEAKENING, // siliconFrontier
     },
 
     [EFFECT_MORNING_SUN] =
@@ -581,6 +620,7 @@ const struct BattleMoveEffect gBattleMoveEffects[NUM_BATTLE_MOVE_EFFECTS] =
     {
         .battleScript = BattleScript_EffectHit,
         .battleTvScore = 1,
+        .battleFactoryStyle = FACTORY_STYLE_NONE, // siliconFrontier
     },
 
     [EFFECT_WEATHER] =
@@ -595,6 +635,7 @@ const struct BattleMoveEffect gBattleMoveEffects[NUM_BATTLE_MOVE_EFFECTS] =
     {
         .battleScript = BattleScript_EffectHit,
         .battleTvScore = 0, // TODO: Assign points
+        .battleFactoryStyle = FACTORY_STYLE_NONE, // siliconFrontier
     },
 
     [EFFECT_STAT_CHANGE_HALF_HP] =
@@ -625,6 +666,7 @@ const struct BattleMoveEffect gBattleMoveEffects[NUM_BATTLE_MOVE_EFFECTS] =
     {
         .battleScript = BattleScript_EffectHit,
         .battleTvScore = 1,
+        .battleFactoryStyle = FACTORY_STYLE_NONE, // siliconFrontier
     },
 
     [EFFECT_FUTURE_SIGHT] =
@@ -632,6 +674,7 @@ const struct BattleMoveEffect gBattleMoveEffects[NUM_BATTLE_MOVE_EFFECTS] =
         .battleScript = BattleScript_EffectFutureSight,
         .battleTvScore = 1,
         .encourageEncore = TRUE,
+        .battleFactoryStyle = FACTORY_STYLE_NONE, // siliconFrontier
     },
 
     [EFFECT_SOLAR_BEAM] =
@@ -639,18 +682,21 @@ const struct BattleMoveEffect gBattleMoveEffects[NUM_BATTLE_MOVE_EFFECTS] =
         .battleScript = BattleScript_EffectHit,
         .battleTvScore = 1,
         .twoTurnEffect = TRUE,
+        .battleFactoryStyle = FACTORY_STYLE_NONE, // siliconFrontier
     },
 
     [EFFECT_TELEPORT] =
     {
         .battleScript = BattleScript_EffectTeleport,
         .battleTvScore = 1,
+        .battleFactoryStyle = FACTORY_STYLE_NONE, // siliconFrontier
     },
 
     [EFFECT_BEAT_UP] =
     {
         .battleScript = BattleScript_EffectHit,
         .battleTvScore = 2,
+        .battleFactoryStyle = FACTORY_STYLE_NONE, // siliconFrontier
     },
 
     [EFFECT_SEMI_INVULNERABLE] =
@@ -659,6 +705,7 @@ const struct BattleMoveEffect gBattleMoveEffects[NUM_BATTLE_MOVE_EFFECTS] =
         .battleTvScore = 3,
         .twoTurnEffect = TRUE,
         .semiInvulnerableEffect = TRUE,
+        .battleFactoryStyle = FACTORY_STYLE_NONE, // siliconFrontier
     },
 
     [EFFECT_SOFTBOILED] =
@@ -674,6 +721,7 @@ const struct BattleMoveEffect gBattleMoveEffects[NUM_BATTLE_MOVE_EFFECTS] =
         .battleScript = BattleScript_EffectHit,
         .battleTvScore = 4,
         .encourageEncore = TRUE,
+        .battleFactoryStyle = FACTORY_STYLE_NONE, // siliconFrontier
     },
 
     [EFFECT_STOCKPILE] =
@@ -681,6 +729,7 @@ const struct BattleMoveEffect gBattleMoveEffects[NUM_BATTLE_MOVE_EFFECTS] =
         .battleScript = BattleScript_EffectStatChange,
         .battleTvScore = 3,
         .encourageEncore = TRUE,
+        .battleFactoryStyle = FACTORY_STYLE_NONE, // siliconFrontier
     },
 
     [EFFECT_SPIT_UP] =
@@ -688,6 +737,7 @@ const struct BattleMoveEffect gBattleMoveEffects[NUM_BATTLE_MOVE_EFFECTS] =
         .battleScript = BattleScript_EffectHit,
         .battleTvScore = 3,
         .encourageEncore = TRUE,
+        .battleFactoryStyle = FACTORY_STYLE_NONE, // siliconFrontier
     },
 
     [EFFECT_SWALLOW] =
@@ -703,6 +753,7 @@ const struct BattleMoveEffect gBattleMoveEffects[NUM_BATTLE_MOVE_EFFECTS] =
         .battleScript = BattleScript_EffectOverwriteAbility,
         .battleTvScore = 0, // TODO: Assign points
         .encourageEncore = TRUE,
+        .battleFactoryStyle = FACTORY_STYLE_WEAKENING, // siliconFrontier
     },
 
     [EFFECT_TORMENT] =
@@ -738,6 +789,7 @@ const struct BattleMoveEffect gBattleMoveEffects[NUM_BATTLE_MOVE_EFFECTS] =
     {
         .battleScript = BattleScript_EffectHit,
         .battleTvScore = 1,
+        .battleFactoryStyle = FACTORY_STYLE_NONE, // siliconFrontier
     },
 
     [EFFECT_FOLLOW_ME] =
@@ -745,12 +797,14 @@ const struct BattleMoveEffect gBattleMoveEffects[NUM_BATTLE_MOVE_EFFECTS] =
         .battleScript = BattleScript_EffectFollowMe,
         .battleTvScore = 5,
         .encourageEncore = TRUE,
+        .battleFactoryStyle = FACTORY_STYLE_UNPREDICTABLE, // siliconFrontier
     },
 
     [EFFECT_NATURE_POWER] =
     {
         .battleScript = BattleScript_EffectHit,
         .battleTvScore = 0, // Natural 0
+        .battleFactoryStyle = FACTORY_STYLE_NONE, // siliconFrontier
     },
 
     [EFFECT_CHARGE] =
@@ -772,6 +826,7 @@ const struct BattleMoveEffect gBattleMoveEffects[NUM_BATTLE_MOVE_EFFECTS] =
     {
         .battleScript = BattleScript_EffectHelpingHand,
         .battleTvScore = 4,
+        .battleFactoryStyle = FACTORY_STYLE_NONE, // siliconFrontier
     },
 
     [EFFECT_TRICK] =
@@ -831,12 +886,14 @@ const struct BattleMoveEffect gBattleMoveEffects[NUM_BATTLE_MOVE_EFFECTS] =
     {
         .battleScript = BattleScript_EffectHit,
         .battleTvScore = 4,
+        .battleFactoryStyle = FACTORY_STYLE_NONE, // siliconFrontier
     },
 
     [EFFECT_YAWN] =
     {
         .battleScript = BattleScript_EffectYawn,
         .battleTvScore = 5,
+        .battleFactoryStyle = FACTORY_STYLE_SLOW_STEADY, // siliconFrontier
     },
 
     [EFFECT_KNOCK_OFF] =
@@ -850,18 +907,21 @@ const struct BattleMoveEffect gBattleMoveEffects[NUM_BATTLE_MOVE_EFFECTS] =
     {
         .battleScript = BattleScript_EffectHit,
         .battleTvScore = 3,
+        .battleFactoryStyle = FACTORY_STYLE_NONE, // siliconFrontier
     },
 
     [EFFECT_ENDEAVOR] =
     {
         .battleScript = BattleScript_EffectHit,
         .battleTvScore = 1,
+        .battleFactoryStyle = FACTORY_STYLE_NONE, // siliconFrontier
     },
 
     [EFFECT_POWER_BASED_ON_USER_HP] =
     {
         .battleScript = BattleScript_EffectHit,
         .battleTvScore = 1,
+        .battleFactoryStyle = FACTORY_STYLE_NONE, // siliconFrontier
     },
 
     [EFFECT_SKILL_SWAP] =
@@ -907,12 +967,14 @@ const struct BattleMoveEffect gBattleMoveEffects[NUM_BATTLE_MOVE_EFFECTS] =
     {
         .battleScript = BattleScript_EffectHit,
         .battleTvScore = 1,
+        .battleFactoryStyle = FACTORY_STYLE_NONE, // siliconFrontier
     },
 
     [EFFECT_HIT_ESCAPE] =
     {
         .battleScript = BattleScript_EffectHit,
         .battleTvScore = 4,
+        .battleFactoryStyle = FACTORY_STYLE_NONE, // siliconFrontier
     },
 
     [EFFECT_MUD_SPORT] =
@@ -950,6 +1012,7 @@ const struct BattleMoveEffect gBattleMoveEffects[NUM_BATTLE_MOVE_EFFECTS] =
     {
         .battleScript = BattleScript_EffectHit,
         .battleTvScore = 0, // TODO: Assign points
+        .battleFactoryStyle = FACTORY_STYLE_PREPARATION, // siliconFrontier
     },
 
     [EFFECT_FLING] =
@@ -957,6 +1020,7 @@ const struct BattleMoveEffect gBattleMoveEffects[NUM_BATTLE_MOVE_EFFECTS] =
         .battleScript = BattleScript_EffectHit,
         .battleTvScore = 0, // TODO: Assign points
         .encourageEncore = TRUE,
+        .battleFactoryStyle = FACTORY_STYLE_NONE, // siliconFrontier
     },
 
     [EFFECT_NATURAL_GIFT] =
@@ -964,102 +1028,119 @@ const struct BattleMoveEffect gBattleMoveEffects[NUM_BATTLE_MOVE_EFFECTS] =
         .battleScript = BattleScript_EffectHit,
         .battleTvScore = 0, // TODO: Assign points
         .encourageEncore = TRUE,
+        .battleFactoryStyle = FACTORY_STYLE_UNPREDICTABLE, // siliconFrontier
     },
 
     [EFFECT_POWER_BASED_ON_TARGET_HP] =
     {
         .battleScript = BattleScript_EffectHit,
         .battleTvScore = 0, // TODO: Assign points
+        .battleFactoryStyle = FACTORY_STYLE_NONE, // siliconFrontier
     },
 
     [EFFECT_ASSURANCE] =
     {
         .battleScript = BattleScript_EffectHit,
         .battleTvScore = 0, // TODO: Assign points
+        .battleFactoryStyle = FACTORY_STYLE_NONE, // siliconFrontier
     },
 
     [EFFECT_TRUMP_CARD] =
     {
         .battleScript = BattleScript_EffectHit,
         .battleTvScore = 0, // TODO: Assign points
+        .battleFactoryStyle = FACTORY_STYLE_UNPREDICTABLE, // siliconFrontier
     },
 
     [EFFECT_ACROBATICS] =
     {
         .battleScript = BattleScript_EffectHit,
         .battleTvScore = 0, // TODO: Assign points
+        .battleFactoryStyle = FACTORY_STYLE_NONE, // siliconFrontier
     },
 
     [EFFECT_HEAT_CRASH] =
     {
         .battleScript = BattleScript_EffectHit,
         .battleTvScore = 0, // TODO: Assign points
+        .battleFactoryStyle = FACTORY_STYLE_NONE, // siliconFrontier
     },
 
     [EFFECT_PUNISHMENT] =
     {
         .battleScript = BattleScript_EffectHit,
         .battleTvScore = 0, // TODO: Assign points
+        .battleFactoryStyle = FACTORY_STYLE_NONE, // siliconFrontier
     },
 
     [EFFECT_STORED_POWER] =
     {
         .battleScript = BattleScript_EffectHit,
         .battleTvScore = 0, // TODO: Assign points
+        .battleFactoryStyle = FACTORY_STYLE_NONE, // siliconFrontier
     },
 
     [EFFECT_ELECTRO_BALL] =
     {
         .battleScript = BattleScript_EffectHit,
         .battleTvScore = 0, // TODO: Assign points
+        .battleFactoryStyle = FACTORY_STYLE_NONE, // siliconFrontier
     },
 
     [EFFECT_GYRO_BALL] =
     {
         .battleScript = BattleScript_EffectHit,
         .battleTvScore = 0, // TODO: Assign points
+        .battleFactoryStyle = FACTORY_STYLE_NONE, // siliconFrontier
     },
 
     [EFFECT_ECHOED_VOICE] =
     {
         .battleScript = BattleScript_EffectHit,
         .battleTvScore = 0, // TODO: Assign points
+        .battleFactoryStyle = FACTORY_STYLE_NONE, // siliconFrontier
     },
 
     [EFFECT_PAYBACK] =
     {
         .battleScript = BattleScript_EffectHit,
         .battleTvScore = 0, // TODO: Assign points
+        .battleFactoryStyle = FACTORY_STYLE_NONE, // siliconFrontier
     },
 
     [EFFECT_ROUND] =
     {
         .battleScript = BattleScript_EffectHit,
         .battleTvScore = 0, // TODO: Assign points
+        .battleFactoryStyle = FACTORY_STYLE_NONE, // siliconFrontier
     },
 
     [EFFECT_BRINE] =
     {
         .battleScript = BattleScript_EffectHit,
         .battleTvScore = 0, // TODO: Assign points
+        .battleFactoryStyle = FACTORY_STYLE_NONE, // siliconFrontier
     },
 
     [EFFECT_RETALIATE] =
     {
         .battleScript = BattleScript_EffectHit,
         .battleTvScore = 0, // TODO: Assign points
+        .battleFactoryStyle = FACTORY_STYLE_NONE, // siliconFrontier
     },
 
     [EFFECT_FOUL_PLAY] =
     {
         .battleScript = BattleScript_EffectHit,
         .battleTvScore = 0, // TODO: Assign points
+        .battleFactoryStyle = FACTORY_STYLE_NONE, // siliconFrontier
     },
 
     [EFFECT_PSYSHOCK] =
     {
         .battleScript = BattleScript_EffectHit,
         .battleTvScore = 0, // TODO: Assign points
+        .battleFactoryStyle = FACTORY_STYLE_NONE, // siliconFrontier
     },
 
     [EFFECT_ROOST] =
@@ -1067,6 +1148,7 @@ const struct BattleMoveEffect gBattleMoveEffects[NUM_BATTLE_MOVE_EFFECTS] =
         .battleScript = BattleScript_EffectRoost,
         .battleTvScore = 0, // TODO: Assign points
         .encourageEncore = TRUE,
+        .battleFactoryStyle = FACTORY_STYLE_ENDURANCE, // siliconFrontier
     },
 
     [EFFECT_GRAVITY] =
@@ -1074,6 +1156,7 @@ const struct BattleMoveEffect gBattleMoveEffects[NUM_BATTLE_MOVE_EFFECTS] =
         .battleScript = BattleScript_EffectGravity,
         .battleTvScore = 0, // TODO: Assign points
         .encourageEncore = TRUE,
+        .battleFactoryStyle = FACTORY_STYLE_WEATHER, // siliconFrontier
     },
 
     [EFFECT_MIRACLE_EYE] =
@@ -1081,6 +1164,7 @@ const struct BattleMoveEffect gBattleMoveEffects[NUM_BATTLE_MOVE_EFFECTS] =
         .battleScript = BattleScript_EffectMiracleEye,
         .battleTvScore = 0, // TODO: Assign points
         .encourageEncore = TRUE,
+        .battleFactoryStyle = FACTORY_STYLE_NONE, // siliconFrontier
     },
 
     [EFFECT_TAILWIND] =
@@ -1088,6 +1172,7 @@ const struct BattleMoveEffect gBattleMoveEffects[NUM_BATTLE_MOVE_EFFECTS] =
         .battleScript = BattleScript_EffectTailwind,
         .battleTvScore = 0, // TODO: Assign points
         .encourageEncore = TRUE,
+        .battleFactoryStyle = FACTORY_STYLE_PREPARATION, // siliconFrontier
     },
 
     [EFFECT_EMBARGO] =
@@ -1095,6 +1180,7 @@ const struct BattleMoveEffect gBattleMoveEffects[NUM_BATTLE_MOVE_EFFECTS] =
         .battleScript = BattleScript_EffectEmbargo,
         .battleTvScore = 0, // TODO: Assign points
         .encourageEncore = TRUE,
+        .battleFactoryStyle = FACTORY_STYLE_SLOW_STEADY, // siliconFrontier
     },
 
     [EFFECT_AQUA_RING] =
@@ -1102,24 +1188,28 @@ const struct BattleMoveEffect gBattleMoveEffects[NUM_BATTLE_MOVE_EFFECTS] =
         .battleScript = BattleScript_EffectAquaRing,
         .battleTvScore = 0, // TODO: Assign points
         .encourageEncore = TRUE,
+        .battleFactoryStyle = FACTORY_STYLE_ENDURANCE, // siliconFrontier
     },
 
     [EFFECT_TRICK_ROOM] =
     {
         .battleScript = BattleScript_EffectTrickRoom,
         .battleTvScore = 0, // TODO: Assign points
+        .battleFactoryStyle = FACTORY_STYLE_WEATHER, // siliconFrontier
     },
 
     [EFFECT_WONDER_ROOM] =
     {
         .battleScript = BattleScript_EffectWonderRoom,
         .battleTvScore = 0, // TODO: Assign points
+        .battleFactoryStyle = FACTORY_STYLE_WEATHER, // siliconFrontier
     },
 
     [EFFECT_MAGIC_ROOM] =
     {
         .battleScript = BattleScript_EffectMagicRoom,
         .battleTvScore = 0, // TODO: Assign points
+        .battleFactoryStyle = FACTORY_STYLE_WEATHER, // siliconFrontier
     },
 
     [EFFECT_MAGNET_RISE] =
@@ -1127,18 +1217,21 @@ const struct BattleMoveEffect gBattleMoveEffects[NUM_BATTLE_MOVE_EFFECTS] =
         .battleScript = BattleScript_EffectMagnetRise,
         .battleTvScore = 0, // TODO: Assign points
         .encourageEncore = TRUE,
+        .battleFactoryStyle = FACTORY_STYLE_PREPARATION, // siliconFrontier
     },
 
     [EFFECT_TOXIC_SPIKES] =
     {
         .battleScript = BattleScript_EffectToxicSpikes,
         .battleTvScore = 0, // TODO: Assign points
+        .battleFactoryStyle = FACTORY_STYLE_SLOW_STEADY, // siliconFrontier
     },
 
     [EFFECT_GASTRO_ACID] =
     {
         .battleScript = BattleScript_EffectGastroAcid,
         .battleTvScore = 0, // TODO: Assign points
+        .battleFactoryStyle = FACTORY_STYLE_WEAKENING, // siliconFrontier
     },
 
     [EFFECT_STEALTH_ROCK] =
@@ -1146,6 +1239,7 @@ const struct BattleMoveEffect gBattleMoveEffects[NUM_BATTLE_MOVE_EFFECTS] =
         .battleScript = BattleScript_EffectStealthRock,
         .battleTvScore = 0, // TODO: Assign points
         .encourageEncore = TRUE,
+        .battleFactoryStyle = FACTORY_STYLE_SLOW_STEADY, // siliconFrontier
     },
 
     [EFFECT_TELEKINESIS] =
@@ -1153,6 +1247,7 @@ const struct BattleMoveEffect gBattleMoveEffects[NUM_BATTLE_MOVE_EFFECTS] =
         .battleScript = BattleScript_EffectTelekinesis,
         .battleTvScore = 0, // TODO: Assign points
         .encourageEncore = TRUE,
+        .battleFactoryStyle = FACTORY_STYLE_SLOW_STEADY, // siliconFrontier
     },
 
     [EFFECT_POWER_SWAP] =
@@ -1160,6 +1255,7 @@ const struct BattleMoveEffect gBattleMoveEffects[NUM_BATTLE_MOVE_EFFECTS] =
         .battleScript = BattleScript_EffectPowerSwap,
         .battleTvScore = 0, // TODO: Assign points
         .encourageEncore = TRUE,
+        .battleFactoryStyle = FACTORY_STYLE_UNPREDICTABLE, // siliconFrontier
     },
 
     [EFFECT_GUARD_SWAP] =
@@ -1167,24 +1263,28 @@ const struct BattleMoveEffect gBattleMoveEffects[NUM_BATTLE_MOVE_EFFECTS] =
         .battleScript = BattleScript_EffectGuardSwap,
         .battleTvScore = 0, // TODO: Assign points
         .encourageEncore = TRUE,
+        .battleFactoryStyle = FACTORY_STYLE_UNPREDICTABLE, // siliconFrontier
     },
 
     [EFFECT_HEART_SWAP] =
     {
         .battleScript = BattleScript_EffectHeartSwap,
         .battleTvScore = 0, // TODO: Assign points
+        .battleFactoryStyle = FACTORY_STYLE_UNPREDICTABLE, // siliconFrontier
     },
 
     [EFFECT_POWER_SPLIT] =
     {
         .battleScript = BattleScript_EffectPowerSplit,
         .battleTvScore = 0, // TODO: Assign points
+        .battleFactoryStyle = FACTORY_STYLE_UNPREDICTABLE, // siliconFrontier
     },
 
     [EFFECT_GUARD_SPLIT] =
     {
         .battleScript = BattleScript_EffectGuardSplit,
         .battleTvScore = 0, // TODO: Assign points
+        .battleFactoryStyle = FACTORY_STYLE_UNPREDICTABLE, // siliconFrontier
     },
 
     [EFFECT_STICKY_WEB] =
@@ -1192,6 +1292,7 @@ const struct BattleMoveEffect gBattleMoveEffects[NUM_BATTLE_MOVE_EFFECTS] =
         .battleScript = BattleScript_EffectStickyWeb,
         .battleTvScore = 0, // TODO: Assign points
         .encourageEncore = TRUE,
+        .battleFactoryStyle = FACTORY_STYLE_NONE, // siliconFrontier
     },
 
     [EFFECT_LUCKY_CHANT] =
@@ -1199,18 +1300,21 @@ const struct BattleMoveEffect gBattleMoveEffects[NUM_BATTLE_MOVE_EFFECTS] =
         .battleScript = BattleScript_EffectLuckyChant,
         .battleTvScore = 0, // TODO: Assign points
         .encourageEncore = TRUE,
+        .battleFactoryStyle = FACTORY_STYLE_SLOW_STEADY, // siliconFrontier
     },
 
     [EFFECT_SUCKER_PUNCH] =
     {
         .battleScript = BattleScript_EffectHit,
         .battleTvScore = 0, // TODO: Assign points
+        .battleFactoryStyle = FACTORY_STYLE_NONE, // siliconFrontier
     },
 
     [EFFECT_ENTRAINMENT] =
     {
         .battleScript = BattleScript_EffectEntrainment,
         .battleTvScore = 0, // TODO: Assign points
+        .battleFactoryStyle = FACTORY_STYLE_UNPREDICTABLE, // siliconFrontier
     },
 
     [EFFECT_HEAL_PULSE] =
@@ -1218,6 +1322,7 @@ const struct BattleMoveEffect gBattleMoveEffects[NUM_BATTLE_MOVE_EFFECTS] =
         .battleScript = BattleScript_EffectHealPulse,
         .battleTvScore = 0, // TODO: Assign points
         .encourageEncore = TRUE,
+        .battleFactoryStyle = FACTORY_STYLE_ENDURANCE, // siliconFrontier
     },
 
     [EFFECT_QUASH] =
@@ -1225,48 +1330,56 @@ const struct BattleMoveEffect gBattleMoveEffects[NUM_BATTLE_MOVE_EFFECTS] =
         .battleScript = BattleScript_EffectQuash,
         .battleTvScore = 0, // TODO: Assign points
         .encourageEncore = TRUE,
+        .battleFactoryStyle = FACTORY_STYLE_UNPREDICTABLE, // siliconFrontier
     },
 
     [EFFECT_ION_DELUGE] =
     {
         .battleScript = BattleScript_EffectIonDeluge,
         .battleTvScore = 0, // TODO: Assign points
+        .battleFactoryStyle = FACTORY_STYLE_NONE, // siliconFrontier
     },
 
     [EFFECT_SUPER_EFFECTIVE_ON_ARG] =
     {
         .battleScript = BattleScript_EffectHit,
         .battleTvScore = 0, // TODO: Assign points
+        .battleFactoryStyle = FACTORY_STYLE_NONE, // siliconFrontier
     },
 
     [EFFECT_TOPSY_TURVY] =
     {
         .battleScript = BattleScript_EffectTopsyTurvy,
         .battleTvScore = 0, // TODO: Assign points
+        .battleFactoryStyle = FACTORY_STYLE_UNPREDICTABLE, // siliconFrontier
     },
 
     [EFFECT_TERRAIN] =
     {
         .battleScript = BattleScript_EffectTerrain,
         .battleTvScore = 0, // TODO: Assign points
+        .battleFactoryStyle = FACTORY_STYLE_WEATHER, // siliconFrontier
     },
 
     [EFFECT_TWO_TYPED_MOVE] =
     {
         .battleScript = BattleScript_EffectHit,
         .battleTvScore = 0, // TODO: Assign points
+        .battleFactoryStyle = FACTORY_STYLE_NONE, // siliconFrontier
     },
 
     [EFFECT_ME_FIRST] =
     {
         .battleScript = BattleScript_EffectHit,
         .battleTvScore = 0, // TODO: Assign points
+        .battleFactoryStyle = FACTORY_STYLE_UNPREDICTABLE, // siliconFrontier
     },
 
     [EFFECT_ELECTRIFY] =
     {
         .battleScript = BattleScript_EffectElectrify,
         .battleTvScore = 0, // TODO: Assign points
+        .battleFactoryStyle = FACTORY_STYLE_NONE, // siliconFrontier
     },
 
     [EFFECT_REFLECT_TYPE] =
@@ -1274,12 +1387,14 @@ const struct BattleMoveEffect gBattleMoveEffects[NUM_BATTLE_MOVE_EFFECTS] =
         .battleScript = BattleScript_EffectReflectType,
         .battleTvScore = 0, // TODO: Assign points
         .encourageEncore = TRUE,
+        .battleFactoryStyle = FACTORY_STYLE_UNPREDICTABLE, // siliconFrontier
     },
 
     [EFFECT_SOAK] =
     {
         .battleScript = BattleScript_EffectSoak,
         .battleTvScore = 0, // TODO: Assign points
+        .battleFactoryStyle = FACTORY_STYLE_UNPREDICTABLE, // siliconFrontier
     },
 
     [EFFECT_GROWTH] =
@@ -1294,42 +1409,49 @@ const struct BattleMoveEffect gBattleMoveEffects[NUM_BATTLE_MOVE_EFFECTS] =
     {
         .battleScript = BattleScript_EffectHit,
         .battleTvScore = 0, // TODO: Assign points
+        .battleFactoryStyle = FACTORY_STYLE_NONE, // siliconFrontier
     },
 
     [EFFECT_STAT_CHANGE_ON_STATUS] =
     {
         .battleScript = BattleScript_EffectStatChange,
         .battleTvScore = 0, // TODO: Assign points
+        .battleFactoryStyle = FACTORY_STYLE_NONE, // siliconFrontier
     },
 
     [EFFECT_TOXIC_THREAD] =
     {
         .battleScript = BattleScript_EffectStatChange,
         .battleTvScore = 0, // TODO: Assign points
+        .battleFactoryStyle = FACTORY_STYLE_SLOW_STEADY, // siliconFrontier
     },
 
     [EFFECT_HIT_SWITCH_TARGET] =
     {
         .battleScript = BattleScript_EffectHit,
         .battleTvScore = 0, // TODO: Assign points
+        .battleFactoryStyle = FACTORY_STYLE_NONE, // siliconFrontier
     },
 
     [EFFECT_FINAL_GAMBIT] =
     {
         .battleScript = BattleScript_EffectHit,
         .battleTvScore = 0, // TODO: Assign points
+        .battleFactoryStyle = FACTORY_STYLE_NONE, // siliconFrontier
     },
 
     [EFFECT_CHANGE_TYPE_ON_ITEM] =
     {
         .battleScript = BattleScript_EffectHit,
         .battleTvScore = 0, // TODO: Assign points
+        .battleFactoryStyle = FACTORY_STYLE_NONE, // siliconFrontier
     },
 
     [EFFECT_COPYCAT] =
     {
         .battleScript = BattleScript_EffectHit,
         .battleTvScore = 0, // TODO: Assign points
+        .battleFactoryStyle = FACTORY_STYLE_UNPREDICTABLE, // siliconFrontier
     },
 
     [EFFECT_DEFOG] =
@@ -1337,24 +1459,28 @@ const struct BattleMoveEffect gBattleMoveEffects[NUM_BATTLE_MOVE_EFFECTS] =
         .battleScript = BattleScript_EffectDefog,
         .battleTvScore = 0, // TODO: Assign points
         .encourageEncore = TRUE,
+        .battleFactoryStyle = FACTORY_STYLE_PREPARATION, // siliconFrontier
     },
 
     [EFFECT_HIT_ENEMY_HEAL_ALLY] =
     {
         .battleScript = BattleScript_EffectHitEnemyHealAlly,
         .battleTvScore = 0, // TODO: Assign points
+        .battleFactoryStyle = FACTORY_STYLE_UNPREDICTABLE, // siliconFrontier
     },
 
     [EFFECT_SYNCHRONOISE] =
     {
         .battleScript = BattleScript_EffectHit,
         .battleTvScore = 0, // TODO: Assign points
+        .battleFactoryStyle = FACTORY_STYLE_NONE, // siliconFrontier
     },
 
     [EFFECT_PSYCHO_SHIFT] =
     {
         .battleScript = BattleScript_EffectPsychoShift,
         .battleTvScore = 0, // TODO: Assign points
+        .battleFactoryStyle = FACTORY_STYLE_SLOW_STEADY, // siliconFrontier
     },
 
     [EFFECT_POWER_TRICK] =
@@ -1362,6 +1488,7 @@ const struct BattleMoveEffect gBattleMoveEffects[NUM_BATTLE_MOVE_EFFECTS] =
         .battleScript = BattleScript_EffectPowerTrick,
         .battleTvScore = 0, // TODO: Assign points
         .encourageEncore = TRUE,
+        .battleFactoryStyle = FACTORY_STYLE_UNPREDICTABLE, // siliconFrontier
     },
 
     [EFFECT_AFTER_YOU] =
@@ -1369,6 +1496,7 @@ const struct BattleMoveEffect gBattleMoveEffects[NUM_BATTLE_MOVE_EFFECTS] =
         .battleScript = BattleScript_EffectAfterYou,
         .battleTvScore = 0, // TODO: Assign points
         .encourageEncore = TRUE,
+        .battleFactoryStyle = FACTORY_STYLE_UNPREDICTABLE, // siliconFrontier
     },
 
     [EFFECT_BESTOW] =
@@ -1376,30 +1504,35 @@ const struct BattleMoveEffect gBattleMoveEffects[NUM_BATTLE_MOVE_EFFECTS] =
         .battleScript = BattleScript_EffectBestow,
         .battleTvScore = 0, // TODO: Assign points
         .encourageEncore = TRUE,
+        .battleFactoryStyle = FACTORY_STYLE_NONE, // siliconFrontier
     },
 
     [EFFECT_ROTOTILLER] =
     {
         .battleScript = BattleScript_EffectStatChange,
         .battleTvScore = 0, // TODO: Assign points
+        .battleFactoryStyle = FACTORY_STYLE_PREPARATION, // siliconFrontier
     },
 
     [EFFECT_FLOWER_SHIELD] =
     {
         .battleScript = BattleScript_EffectStatChange,
         .battleTvScore = 0, // TODO: Assign points
+        .battleFactoryStyle = FACTORY_STYLE_PREPARATION, // siliconFrontier
     },
 
     [EFFECT_SPEED_SWAP] =
     {
         .battleScript = BattleScript_EffectSpeedSwap,
         .battleTvScore = 0, // TODO: Assign points
+        .battleFactoryStyle = FACTORY_STYLE_UNPREDICTABLE, // siliconFrontier
     },
 
     [EFFECT_REVELATION_DANCE] =
     {
         .battleScript = BattleScript_EffectHit,
         .battleTvScore = 0, // TODO: Assign points
+        .battleFactoryStyle = FACTORY_STYLE_NONE, // siliconFrontier
     },
 
     [EFFECT_AURORA_VEIL] =
@@ -1407,36 +1540,42 @@ const struct BattleMoveEffect gBattleMoveEffects[NUM_BATTLE_MOVE_EFFECTS] =
         .battleScript = BattleScript_EffectAuroraVeil,
         .battleTvScore = 0, // TODO: Assign points
         .encourageEncore = TRUE,
+        .battleFactoryStyle = FACTORY_STYLE_ENDURANCE, // siliconFrontier
     },
 
     [EFFECT_THIRD_TYPE] =
     {
         .battleScript = BattleScript_EffectThirdType,
         .battleTvScore = 0, // TODO: Assign points
+        .battleFactoryStyle = FACTORY_STYLE_UNPREDICTABLE, // siliconFrontier
     },
 
     [EFFECT_ACUPRESSURE] =
     {
         .battleScript = BattleScript_EffectStatChange,
         .battleTvScore = 0, // TODO: Assign points
+        .battleFactoryStyle = FACTORY_STYLE_ENDURANCE, // siliconFrontier
     },
 
     [EFFECT_POWDER] =
     {
         .battleScript = BattleScript_EffectPowder,
         .battleTvScore = 0, // TODO: Assign points
+        .battleFactoryStyle = FACTORY_STYLE_NONE, // siliconFrontier
     },
 
     [EFFECT_BELCH] =
     {
         .battleScript = BattleScript_EffectHit,
         .battleTvScore = 0, // TODO: Assign points
+        .battleFactoryStyle = FACTORY_STYLE_NONE, // siliconFrontier
     },
 
     [EFFECT_PARTING_SHOT] =
     {
         .battleScript = BattleScript_EffectStatChange,
         .battleTvScore = 0, // TODO: Assign points
+        .battleFactoryStyle = FACTORY_STYLE_WEAKENING, // siliconFrontier
     },
 
     [EFFECT_MAT_BLOCK] =
@@ -1444,18 +1583,21 @@ const struct BattleMoveEffect gBattleMoveEffects[NUM_BATTLE_MOVE_EFFECTS] =
         .battleScript = BattleScript_EffectProtect,
         .battleTvScore = 0, // TODO: Assign points
         .encourageEncore = TRUE,
+        .battleFactoryStyle = FACTORY_STYLE_SLOW_STEADY, // siliconFrontier
     },
 
     [EFFECT_STOMPING_TANTRUM] =
     {
         .battleScript = BattleScript_EffectHit,
         .battleTvScore = 0, // TODO: Assign points
+        .battleFactoryStyle = FACTORY_STYLE_NONE, // siliconFrontier
     },
 
     [EFFECT_INSTRUCT] =
     {
         .battleScript = BattleScript_EffectInstruct,
         .battleTvScore = 0, // TODO: Assign points
+        .battleFactoryStyle = FACTORY_STYLE_UNPREDICTABLE, // siliconFrontier
     },
 
     [EFFECT_LASER_FOCUS] =
@@ -1463,6 +1605,7 @@ const struct BattleMoveEffect gBattleMoveEffects[NUM_BATTLE_MOVE_EFFECTS] =
         .battleScript = BattleScript_EffectLaserFocus,
         .battleTvScore = 0, // TODO: Assign points
         .encourageEncore = TRUE,
+        .battleFactoryStyle = FACTORY_STYLE_PREPARATION, // siliconFrontier
     },
 
     [EFFECT_STAT_CHANGE_MAGNETIC] =
@@ -1470,12 +1613,14 @@ const struct BattleMoveEffect gBattleMoveEffects[NUM_BATTLE_MOVE_EFFECTS] =
         .battleScript = BattleScript_EffectStatChange,
         .battleTvScore = 0, // TODO: Assign points
         .encourageEncore = TRUE,
+        .battleFactoryStyle = FACTORY_STYLE_PREPARATION, // siliconFrontier
     },
 
     [EFFECT_STRENGTH_SAP] =
     {
         .battleScript = BattleScript_EffectStatChange,
         .battleTvScore = 0, // TODO: Assign points
+        .battleFactoryStyle = FACTORY_STYLE_NONE, // siliconFrontier
     },
 
     [EFFECT_PURIFY] =
@@ -1483,12 +1628,14 @@ const struct BattleMoveEffect gBattleMoveEffects[NUM_BATTLE_MOVE_EFFECTS] =
         .battleScript = BattleScript_EffectPurify,
         .battleTvScore = 0, // TODO: Assign points
         .encourageEncore = TRUE,
+        .battleFactoryStyle = FACTORY_STYLE_ENDURANCE, // siliconFrontier
     },
 
     [EFFECT_FAIL_IF_NOT_ARG_TYPE] =
     {
         .battleScript = BattleScript_EffectHit,
         .battleTvScore = 0, // TODO: Assign points
+        .battleFactoryStyle = FACTORY_STYLE_NONE, // siliconFrontier
     },
 
     [EFFECT_SHORE_UP] =
@@ -1496,24 +1643,28 @@ const struct BattleMoveEffect gBattleMoveEffects[NUM_BATTLE_MOVE_EFFECTS] =
         .battleScript = BattleScript_EffectShoreUp,
         .battleTvScore = 0, // TODO: Assign points
         .encourageEncore = TRUE,
+        .battleFactoryStyle = FACTORY_STYLE_ENDURANCE, // siliconFrontier
     },
 
     [EFFECT_FAIRY_LOCK] =
     {
         .battleScript = BattleScript_EffectFairyLock,
         .battleTvScore = 0, // TODO: Assign points
+        .battleFactoryStyle = FACTORY_STYLE_SLOW_STEADY, // siliconFrontier
     },
 
     [EFFECT_ALLY_SWITCH] =
     {
         .battleScript = BattleScript_EffectAllySwitch,
         .battleTvScore = 0, // TODO: Assign points
+        .battleFactoryStyle = FACTORY_STYLE_UNPREDICTABLE, // siliconFrontier
     },
 
     [EFFECT_BODY_PRESS] =
     {
         .battleScript = BattleScript_EffectHit,
         .battleTvScore = 0, // TODO: Assign points
+        .battleFactoryStyle = FACTORY_STYLE_NONE, // siliconFrontier
     },
 
     [EFFECT_JUNGLE_HEALING] =
@@ -1521,36 +1672,42 @@ const struct BattleMoveEffect gBattleMoveEffects[NUM_BATTLE_MOVE_EFFECTS] =
         .battleScript = BattleScript_EffectJungleHealing,
         .battleTvScore = 0, // TODO: Assign points
         .encourageEncore = TRUE,
+        .battleFactoryStyle = FACTORY_STYLE_ENDURANCE, // siliconFrontier
     },
 
     [EFFECT_LASH_OUT] =
     {
         .battleScript = BattleScript_EffectHit,
         .battleTvScore = 0, // TODO: Assign points
+        .battleFactoryStyle = FACTORY_STYLE_NONE, // siliconFrontier
     },
 
     [EFFECT_GRASSY_GLIDE] =
     {
         .battleScript = BattleScript_EffectHit,
         .battleTvScore = 0, // TODO: Assign points
+        .battleFactoryStyle = FACTORY_STYLE_NONE, // siliconFrontier
     },
 
     [EFFECT_DYNAMAX_DOUBLE_DMG] =
     {
         .battleScript = BattleScript_EffectHit,
         .battleTvScore = 0, // TODO: Assign points
+        .battleFactoryStyle = FACTORY_STYLE_NONE, // siliconFrontier
     },
 
     [EFFECT_SNIPE_SHOT] =
     {
         .battleScript = BattleScript_EffectHit,
         .battleTvScore = 0, // TODO: Assign points
+        .battleFactoryStyle = FACTORY_STYLE_NONE, // siliconFrontier
     },
 
     [EFFECT_STRUGGLE] =
     {
         .battleScript = BattleScript_EffectStruggle,
         .battleTvScore = 0, // TODO: Assign points
+        .battleFactoryStyle = FACTORY_STYLE_NONE, // siliconFrontier
     },
 
     [EFFECT_STUFF_CHEEKS] =
@@ -1558,36 +1715,42 @@ const struct BattleMoveEffect gBattleMoveEffects[NUM_BATTLE_MOVE_EFFECTS] =
         .battleScript = BattleScript_EffectStatChange,
         .battleTvScore = 0, // TODO: Assign points
         .encourageEncore = TRUE,
+        .battleFactoryStyle = FACTORY_STYLE_PREPARATION, // siliconFrontier
     },
 
     [EFFECT_GRAV_APPLE] =
     {
         .battleScript = BattleScript_EffectHit,
         .battleTvScore = 0, // TODO: Assign points
+        .battleFactoryStyle = FACTORY_STYLE_NONE, // siliconFrontier
     },
 
     [EFFECT_HYPERSPACE_FURY] =
     {
         .battleScript = BattleScript_EffectHit,
         .battleTvScore = 0, // TODO: Assign points
+        .battleFactoryStyle = FACTORY_STYLE_NONE, // siliconFrontier
     },
 
     [EFFECT_AURA_WHEEL] =
     {
         .battleScript = BattleScript_EffectHit,
         .battleTvScore = 0, // TODO: Assign points
+        .battleFactoryStyle = FACTORY_STYLE_NONE, // siliconFrontier
     },
 
     [EFFECT_PHOTON_GEYSER] =
     {
         .battleScript = BattleScript_EffectHit,
         .battleTvScore = 0, // TODO: Assign points
+        .battleFactoryStyle = FACTORY_STYLE_NONE, // siliconFrontier
     },
 
     [EFFECT_TERRAIN_PULSE] =
     {
         .battleScript = BattleScript_EffectHit,
         .battleTvScore = 0, // TODO: Assign points
+        .battleFactoryStyle = FACTORY_STYLE_WEATHER, // siliconFrontier
     },
 
     [EFFECT_NO_RETREAT] =
@@ -1595,36 +1758,42 @@ const struct BattleMoveEffect gBattleMoveEffects[NUM_BATTLE_MOVE_EFFECTS] =
         .battleScript = BattleScript_EffectStatChange,
         .battleTvScore = 0, // TODO: Assign points
         .encourageEncore = TRUE,
+        .battleFactoryStyle = FACTORY_STYLE_PREPARATION, // siliconFrontier
     },
 
     [EFFECT_TAR_SHOT] =
     {
         .battleScript = BattleScript_EffectStatChange,
         .battleTvScore = 0, // TODO: Assign points
+        .battleFactoryStyle = FACTORY_STYLE_NONE, // siliconFrontier
     },
 
     [EFFECT_POLTERGEIST] =
     {
         .battleScript = BattleScript_EffectHit,
         .battleTvScore = 0, // TODO: Assign points
+        .battleFactoryStyle = FACTORY_STYLE_NONE, // siliconFrontier
     },
 
     [EFFECT_OCTOLOCK] =
     {
         .battleScript = BattleScript_EffectOctolock,
         .battleTvScore = 0, // TODO: Assign points
+        .battleFactoryStyle = FACTORY_STYLE_WEAKENING, // siliconFrontier
     },
 
     [EFFECT_CLANGOROUS_SOUL] =
     {
         .battleScript = BattleScript_EffectStatChange,
         .battleTvScore = 0, // TODO: Assign points
+        .battleFactoryStyle = FACTORY_STYLE_PREPARATION, // siliconFrontier
     },
 
     [EFFECT_BOLT_BEAK] =
     {
         .battleScript = BattleScript_EffectHit,
         .battleTvScore = 0, // TODO: Assign points
+        .battleFactoryStyle = FACTORY_STYLE_NONE, // siliconFrontier
     },
 
     [EFFECT_SKY_DROP] =
@@ -1633,42 +1802,49 @@ const struct BattleMoveEffect gBattleMoveEffects[NUM_BATTLE_MOVE_EFFECTS] =
         .battleTvScore = 0, // TODO: Assign points
         .twoTurnEffect = TRUE,
         .semiInvulnerableEffect = TRUE,
+        .battleFactoryStyle = FACTORY_STYLE_NONE, // siliconFrontier
     },
 
     [EFFECT_BEAK_BLAST] =
     {
         .battleScript = BattleScript_EffectHit,
         .battleTvScore = 0, // TODO: Assign points
+        .battleFactoryStyle = FACTORY_STYLE_NONE, // siliconFrontier
     },
 
     [EFFECT_COURT_CHANGE] =
     {
         .battleScript = BattleScript_EffectCourtChange,
         .battleTvScore = 0, // TODO: Assign points
+        .battleFactoryStyle = FACTORY_STYLE_UNPREDICTABLE, // siliconFrontier
     },
 
     [EFFECT_MAX_HP_50_RECOIL] =
     {
         .battleScript = BattleScript_EffectHit,
         .battleTvScore = 0, // TODO: Assign points
+        .battleFactoryStyle = FACTORY_STYLE_HIGH_RISK, // siliconFrontier
     },
 
     [EFFECT_CHLOROBLAST] =
     {
         .battleScript = BattleScript_EffectHit,
         .battleTvScore = 0, // TODO: Assign points
+        .battleFactoryStyle = FACTORY_STYLE_HIGH_RISK, // siliconFrontier
     },
 
     [EFFECT_EXTREME_EVOBOOST] =
     {
         .battleScript = BattleScript_EffectStatChange,
         .battleTvScore = 0, // TODO: Assign points
+        .battleFactoryStyle = FACTORY_STYLE_NONE, // siliconFrontier
     },
 
     [EFFECT_DARK_VOID] =
     {
         .battleScript = BattleScript_EffectNonVolatileStatus,
         .battleTvScore = 0, // TODO: Assign points
+        .battleFactoryStyle = FACTORY_STYLE_SLOW_STEADY, // siliconFrontier
     },
 
     [EFFECT_TEATIME] =
@@ -1676,36 +1852,42 @@ const struct BattleMoveEffect gBattleMoveEffects[NUM_BATTLE_MOVE_EFFECTS] =
         .battleScript = BattleScript_EffectTeatime,
         .battleTvScore = 0, // TODO: Assign points
         .encourageEncore = TRUE,
+        .battleFactoryStyle = FACTORY_STYLE_UNPREDICTABLE, // siliconFrontier
     },
 
     [EFFECT_SHELL_TRAP] =
     {
         .battleScript = BattleScript_EffectHit,
         .battleTvScore = 0, // TODO: Assign points
+        .battleFactoryStyle = FACTORY_STYLE_NONE, // siliconFrontier
     },
 
     [EFFECT_HYDRO_STEAM] =
     {
         .battleScript = BattleScript_EffectHit,
         .battleTvScore = 0, // TODO: Assign points
+        .battleFactoryStyle = FACTORY_STYLE_NONE, // siliconFrontier
     },
 
     [EFFECT_REVIVAL_BLESSING] =
     {
         .battleScript = BattleScript_EffectRevivalBlessing,
         .battleTvScore = 0, // TODO: Assign points
+        .battleFactoryStyle = FACTORY_STYLE_ENDURANCE, // siliconFrontier
     },
 
     [EFFECT_TAKE_HEART] =
     {
         .battleScript = BattleScript_EffectStatChange,
         .battleTvScore = 0, // TODO: Assign points
+        .battleFactoryStyle = FACTORY_STYLE_ENDURANCE, // siliconFrontier
     },
 
     [EFFECT_COLLISION_COURSE] =
     {
         .battleScript = BattleScript_EffectHit,
         .battleTvScore = 0, // TODO: Assign points
+        .battleFactoryStyle = FACTORY_STYLE_NONE, // siliconFrontier
     },
 
     [EFFECT_CORROSIVE_GAS] =
@@ -1719,6 +1901,7 @@ const struct BattleMoveEffect gBattleMoveEffects[NUM_BATTLE_MOVE_EFFECTS] =
     {
         .battleScript = BattleScript_EffectHit,
         .battleTvScore = 0, // TODO: Assign points
+        .battleFactoryStyle = FACTORY_STYLE_NONE, // siliconFrontier
     },
 
     [EFFECT_WEATHER_AND_SWITCH] =
@@ -1732,36 +1915,42 @@ const struct BattleMoveEffect gBattleMoveEffects[NUM_BATTLE_MOVE_EFFECTS] =
     {
         .battleScript = BattleScript_EffectHit,
         .battleTvScore = 0, // TODO: Assign points
+        .battleFactoryStyle = FACTORY_STYLE_NONE, // siliconFrontier
     },
 
     [EFFECT_RAGING_BULL] =
     {
         .battleScript = BattleScript_EffectHit,
         .battleTvScore = 0, // TODO: Assign points
+        .battleFactoryStyle = FACTORY_STYLE_NONE, // siliconFrontier
     },
 
     [EFFECT_RAGE_FIST] =
     {
         .battleScript = BattleScript_EffectHit,
         .battleTvScore = 0, // TODO: Assign points
+        .battleFactoryStyle = FACTORY_STYLE_NONE, // siliconFrontier
     },
 
     [EFFECT_DOODLE] =
     {
         .battleScript = BattleScript_EffectDoodle,
         .battleTvScore = 0, // TODO: Assign points
+        .battleFactoryStyle = FACTORY_STYLE_UNPREDICTABLE, // siliconFrontier
     },
 
     [EFFECT_IVY_CUDGEL] =
     {
         .battleScript = BattleScript_EffectHit,
         .battleTvScore = 0, // TODO: Assign points
+        .battleFactoryStyle = FACTORY_STYLE_NONE, // siliconFrontier
     },
 
     [EFFECT_FICKLE_BEAM] =
     {
         .battleScript = BattleScript_EffectHit,
         .battleTvScore = 0, // TODO: Assign points
+        .battleFactoryStyle = FACTORY_STYLE_NONE, // siliconFrontier
     },
 
     [EFFECT_SHED_TAIL] =
@@ -1769,6 +1958,7 @@ const struct BattleMoveEffect gBattleMoveEffects[NUM_BATTLE_MOVE_EFFECTS] =
         .battleScript = BattleScript_EffectShedTail,
         .battleTvScore = 0, // TODO: Assign points
         .encourageEncore = TRUE,
+        .battleFactoryStyle = FACTORY_STYLE_UNPREDICTABLE, // siliconFrontier
     },
 
     [EFFECT_UPPER_HAND] =
@@ -1776,6 +1966,7 @@ const struct BattleMoveEffect gBattleMoveEffects[NUM_BATTLE_MOVE_EFFECTS] =
         .battleScript = BattleScript_EffectHit,
         .battleTvScore = 0, // TODO: Assign points
         .encourageEncore = TRUE,
+        .battleFactoryStyle = FACTORY_STYLE_NONE, // siliconFrontier
     },
 
     [EFFECT_DRAGON_CHEER] =
@@ -1790,6 +1981,7 @@ const struct BattleMoveEffect gBattleMoveEffects[NUM_BATTLE_MOVE_EFFECTS] =
     {
         .battleScript = BattleScript_EffectHit,
         .battleTvScore = 0, // TODO: Assign points
+        .battleFactoryStyle = FACTORY_STYLE_NONE, // siliconFrontier
     },
 
     [EFFECT_TIDY_UP] =
@@ -1797,42 +1989,49 @@ const struct BattleMoveEffect gBattleMoveEffects[NUM_BATTLE_MOVE_EFFECTS] =
         .battleScript = BattleScript_EffectStatChange,
         .battleTvScore = 0, // TODO: Assign points
         .encourageEncore = TRUE,
+        .battleFactoryStyle = FACTORY_STYLE_PREPARATION, // siliconFrontier
     },
 
     [EFFECT_TERA_BLAST] =
     {
         .battleScript = BattleScript_EffectHit,
         .battleTvScore = 0, // TODO: Assign points
+        .battleFactoryStyle = FACTORY_STYLE_NONE, // siliconFrontier
     },
 
     [EFFECT_TERA_STARSTORM] =
     {
         .battleScript = BattleScript_EffectHit,
         .battleTvScore = 0, // TODO: Assign points
+        .battleFactoryStyle = FACTORY_STYLE_NONE, // siliconFrontier
     },
 
     [EFFECT_SHELL_SIDE_ARM] =
     {
         .battleScript = BattleScript_EffectHit,
         .battleTvScore = 0, // TODO: Assign points
+        .battleFactoryStyle = FACTORY_STYLE_NONE, // siliconFrontier
     },
 
     [EFFECT_RAPID_SPIN] =
     {
         .battleScript = BattleScript_EffectHit,
         .battleTvScore = 2,
+        .battleFactoryStyle = FACTORY_STYLE_NONE, // siliconFrontier
     },
 
     [EFFECT_RECOIL] =
     {
         .battleScript = BattleScript_EffectHit,
         .battleTvScore = 0, // TODO: Assign points
+        .battleFactoryStyle = FACTORY_STYLE_NONE, // siliconFrontier
     },
 
     [EFFECT_SMACK_DOWN] =
     {
         .battleScript = BattleScript_EffectHit,
         .battleTvScore = 0, // TODO: Assign points
+        .battleFactoryStyle = FACTORY_STYLE_NONE, // siliconFrontier
     },
 
 // Start trainerExpTests
@@ -1840,66 +2039,77 @@ const struct BattleMoveEffect gBattleMoveEffects[NUM_BATTLE_MOVE_EFFECTS] =
     {
         .battleScript = BattleScript_EffectExpTest,
         .battleTvScore = 0, // TODO: Assign points
+        .battleFactoryStyle = FACTORY_STYLE_NONE, // siliconFrontier
     },
 
     [EFFECT_EXP_TEST_SETUP] =
     {
         .battleScript = BattleScript_EffectExpTestSetup,
         .battleTvScore = 0, // TODO: Assign points
+        .battleFactoryStyle = FACTORY_STYLE_NONE, // siliconFrontier
     },
 
     [EFFECT_EXP_TEST_FINISH] =
     {
         .battleScript = BattleScript_EffectExpTestFinish,
         .battleTvScore = 0, // TODO: Assign points
+        .battleFactoryStyle = FACTORY_STYLE_NONE, // siliconFrontier
     },
 // End trainerExpTests
     [EFFECT_LIFE_DEW] =
     {
         .battleScript = BattleScript_EffectLifeDew,
         .battleTvScore = 0, // TODO: Assign points
+        .battleFactoryStyle = FACTORY_STYLE_ENDURANCE, // siliconFrontier
     },
 
     [EFFECT_ICE_SPINNER] =
     {
         .battleScript = BattleScript_EffectHit,
         .battleTvScore = 0, // TODO: Assign points
+        .battleFactoryStyle = FACTORY_STYLE_NONE, // siliconFrontier
     },
 
     [EFFECT_STEEL_ROLLER] =
     {
         .battleScript = BattleScript_EffectHit,
         .battleTvScore = 0, // TODO: Assign points
+        .battleFactoryStyle = FACTORY_STYLE_NONE, // siliconFrontier
     },
 
     [EFFECT_STONE_AXE] =
     {
         .battleScript = BattleScript_EffectHit,
         .battleTvScore = 0, // TODO: Assign points
+        .battleFactoryStyle = FACTORY_STYLE_SLOW_STEADY, // siliconFrontier
     },
 
     [EFFECT_CEASELESS_EDGE] =
     {
         .battleScript = BattleScript_EffectHit,
         .battleTvScore = 0, // TODO: Assign points
+        .battleFactoryStyle = FACTORY_STYLE_SLOW_STEADY, // siliconFrontier
     },
 
     [EFFECT_SPECIES_POWER_OVERRIDE] =
     {
         .battleScript = BattleScript_EffectHit,
         .battleTvScore = 0, // TODO: Assign points
+        .battleFactoryStyle = FACTORY_STYLE_NONE, // siliconFrontier
     },
 
     [EFFECT_SCALE_SHOT] =
     {
         .battleScript = BattleScript_EffectHit,
         .battleTvScore = 0, // TODO: Assign points
+        .battleFactoryStyle = FACTORY_STYLE_NONE, // siliconFrontier
     },
     // Start silicon-specific-tests
     [EFFECT_OPTION_TEST] =
     {
         .battleScript = BattleScript_OptionTest,
         .battleTvScore = 0,
+        .battleFactoryStyle = FACTORY_STYLE_NONE, // siliconFrontier
     },
     // End silicon-specific-tests
 
@@ -1907,5 +2117,6 @@ const struct BattleMoveEffect gBattleMoveEffects[NUM_BATTLE_MOVE_EFFECTS] =
     {
         .battleScript = BattleScript_EffectHit,
         .battleTvScore = 1,
+        .battleFactoryStyle = FACTORY_STYLE_NONE, // siliconFrontier
     },
 };
