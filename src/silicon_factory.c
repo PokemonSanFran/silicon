@@ -1,10 +1,13 @@
 #include "global.h"
 #include "silicon_factory.h"
 #include "event_data.h"
+#include "move.h"
+#include "constants/battle_move_effects.h"
 #include "constants/battle.h"
 #include "frontier_util.h"
 #include "battle_frontier.h"
 #include "constants/battle_frontier.h"
+#include "constants/battle_factory.h"
 #include "silicon_battle_frontier.h"
 #include "silicon_frontier_accessors.h"
 
@@ -61,4 +64,5 @@ void SiliconFrontier_ResetNextMonsTemp(void)
     gSpecialVar_0x800A= SILICON_FRONTIER_MON_NULL;
     gSpecialVar_0x800B = SILICON_FRONTIER_MON_NULL;
 }
+
 
