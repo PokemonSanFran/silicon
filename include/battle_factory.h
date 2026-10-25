@@ -8,5 +8,6 @@ void FillFactoryBrainParty(void);
 u8 GetNumPastRentalsRank(u8 battleMode, enum FrontierLevelMode lvlMode);
 u64 GetAiScriptsInBattleFactory(void);
 void FillFactoryTrainerParty(void);
+enum FactoryStyle GetMoveBattleStyle(enum Move move); // siliconFrontier
 
 #endif // GUARD_BATTLE_FACTORY_H

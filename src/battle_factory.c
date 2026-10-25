@@ -582,7 +582,10 @@ static void GetOpponentBattleStyle(void)
         gSpecialVar_Result = FACTORY_NUM_STYLES;
 }
 
-static enum FactoryStyle GetMoveBattleStyle(enum Move move)
+// Start siliconFrontier
+//static enum FactoryStyle GetMoveBattleStyle(enum Move move)
+enum FactoryStyle GetMoveBattleStyle(enum Move move)
+// End siliconFrontier
 {
     enum FactoryStyle style = gBattleMoveEffects[GetMoveEffect(move)].battleFactoryStyle;
 
@@ -602,6 +605,20 @@ static enum FactoryStyle GetMoveBattleStyle(enum Move move)
         if (GetMoveRecoil(move) >= 33)
             return FACTORY_STYLE_HIGH_RISK;
         break;
+    // Start siliconFrontier
+    case EFFECT_STAT_CHANGE:
+        u32 numAdditionalEffects = GetMoveAdditionalEffectCount(move);
+        for (u32 i = 0; i < numAdditionalEffects; i++)
+        {
+            const struct AdditionalEffect *additionalEffect = GetMoveAdditionalEffectById(move, i);
+            enum MoveEffect moveEffect = additionalEffect->moveEffect;
+            if (moveEffect == STAT_CHANGE_EFFECT_PLUS)
+                return FACTORY_STYLE_PREPARATION;
+            else if (moveEffect == STAT_CHANGE_EFFECT_MINUS)
+                return FACTORY_STYLE_SLOW_STEADY;
+        }
+        break;
+    // End siliconFrontier
     default:
         break;
     }
