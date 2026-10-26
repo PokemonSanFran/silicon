@@ -11,6 +11,14 @@ script Swagbag_IncrementState_Script{
     return
 }
 
+script Swagbag_Script_PreventSleep
+{
+	msgbox(format("I just got here! I can't sleep yet."),,SPEAKER_ALICIA,TAIL_THOUGHT,EMOTE_HAPPY)
+	closemessage
+	release
+	end
+}
+
 script swagbag_ObjectHide_Script
 {
     setobjectmovementtype(SHARPRISE_COMPOUND_1F_OLIVER, MOVEMENT_TYPE_FACE_LEFT)
