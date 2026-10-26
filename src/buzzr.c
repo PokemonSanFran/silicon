@@ -2103,7 +2103,7 @@ static void Buzzr_ExpandStrings(enum BuzzrZapIds zapId)
         case ZAP_QUEST_RESTOREESPULEEGYM_ACTIVE:
         case ZAP_QUEST_RESTOREESPULEEGYM_COMPLETE_BAIYA:
         case ZAP_QUEST_RESTOREESPULEEGYM_COMPLETE_IMELDA:
-            GetMapName(gStringVar2,Overworld_GetMapHeaderByGroupAndId(MAP_GROUP(MAP_QUEST_RESTOREESPULEEGYM_ORIGIN),MAP_NUM(MAP_QUEST_RESTOREESPULEEGYM_ORIGIN))->regionMapSectionId,0);
+            GetMapName(gStringVar1,Overworld_GetMapHeaderByGroupAndId(MAP_GROUP(MAP_QUEST_RESTOREESPULEEGYM_ORIGIN),MAP_NUM(MAP_QUEST_RESTOREESPULEEGYM_ORIGIN))->regionMapSectionId,0);
             break;
         case ZAP_QUEST_RESTOREZENZUISLAND_COMPLETE_DOYLE:
         case ZAP_QUEST_RESTOREZENZUISLAND_COMPLETE_BAIYA:
@@ -2360,6 +2360,9 @@ static void Buzzr_ExpandStrings(enum BuzzrZapIds zapId)
             StringCopy(gStringVar1,GetSpeciesName(SPECIES_DOUBLADE));
             StringCopy(gStringVar2,GetSpeciesName(SPECIES_AEGISLASH));
             StringCopy(gStringVar3,GetItemName(ITEM_DUSK_STONE));
+            break;
+        case ZAP_QUEST_WALLACEARMY_FINAL_STAN:
+            GetMapName(gStringVar1,Overworld_GetMapHeaderByGroupAndId(MAP_GROUP(MAP_QUEST_WALLACEARMY_STAN_F),MAP_NUM(MAP_QUEST_WALLACEARMY_STAN_F))->regionMapSectionId,0);
             break;
     }
 }

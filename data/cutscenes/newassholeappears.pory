@@ -4,31 +4,42 @@ script NewAssholeAppears_Script_HideBaiya
 }
 
 script NewAssholeAppears_WalkToPlayer_Script {
-    lockall
+	lock
+    playbgm(MUS_ENCOUNTER_CHAMPION,TRUE)
     playse(SE_PIN)
     applymovement(LOCALID_ROUTE10_BAIYA,Common_Movement_ExclamationMark)
     waitmovement(LOCALID_ROUTE10_BAIYA)
-    waitse
-    playbgm(MUS_ENCOUNTER_CHAMPION,TRUE)
     call(NewAssholeAppears_Script_MovePlayerAndBaiyaIntoPosition)
-    goto(BaiyaAlpha_Event_Script)
+    waitse
+	goto(NewAssholeAppears_Intro_Dialogue)
 }
 
 script NewAssholeAppears_Script_MovePlayerAndBaiyaIntoPosition
 {
     getplayerxy(VAR_0x8004,VAR_0x8005)
-    if(var(VAR_0x8005) == 4)
+    if(var(VAR_0x8004) < 32)
     {
-        applymovement(LOCALID_ROUTE10_BAIYA, moves(walk_down))
+		moveobjecttocoords(LOCALID_ROUTE10_BAIYA,28,3,DIR_WEST)
+		moveobjecttocoords(LOCALID_PLAYER,27,3,DIR_EAST)
+    }
+
+    if(var(VAR_0x8004) > 26)
+    {
+		moveobjecttocoords(LOCALID_ROUTE10_BAIYA,30,3,DIR_EAST)
+		moveobjecttocoords(LOCALID_PLAYER,31,3,DIR_WEST)
     }
     
-    waitmovement(0)
-    applymovement(LOCALID_ROUTE10_BAIYA, moves(walk_right*2))
-    waitmovement(0)
+    waitmovement(LOCALID_PLAYER)
+    waitmovement(LOCALID_ROUTE10_BAIYA)
 }
 
-script BaiyaAlpha_Event_Script{
-    switch(var(VAR_ROUTE10_STATE)) {
+script BaiyaAlpha_Event_Script
+{
+	lock
+	faceplayer
+    playbgm(MUS_ENCOUNTER_CHAMPION,TRUE)
+    switch(var(VAR_ROUTE10_STATE)) 
+	{
         case HAS_NOT_MET_BAIYA: goto(NewAssholeAppears_Intro_Dialogue)
         case SAVED_BEFORE_BAIYA_ROUTE10: goto(NewAssholeAppears_StartBattle_Script)
     }
@@ -38,7 +49,8 @@ script NewAssholeAppears_Intro_Dialogue {
     setvar(VAR_ROUTE10_STATE,SAVED_BEFORE_BAIYA_ROUTE10)
     msgbox(format("You look familiar. You flew here to do the SharpRise Capital League Challenge, right?"),,SPEAKER_BAIYA)
     if (var(VAR_SHARPRISESPIRE_CONFERENCE_STATE) > DEFEATED_THIRD_LEADER){
-        msgbox(format("Yeah, you had some weird rant in Perlacia City the other day. I'm {PLAYER}, and yes, I'm doing the challenge."),,SPEAKER_ALICIA)
+		buffermapname(STR_VAR_1,MAP_PERLACIA_CITY)
+        msgbox(format("Yeah, I remember your some weird rant in {STR_VAR_1}... I'm {PLAYER}, and yes, I'm doing the challenge."),,SPEAKER_ALICIA)
     }else{
         msgbox(format("Yeah! Just started not too long ago. Name's {PLAYER}."),,SPEAKER_ALICIA)
     }
@@ -54,17 +66,14 @@ script NewAssholeAppears_BadgeJudge_Dialogue {
         case 1: msgbox(format("...yeah I thought I recognized you. Guess you transplants aren't all a total joke!"),,SPEAKER_BAIYA)
         default: msgbox(format("Yeah, I heard about your wins from the guys. The colonizers are really getting a head start, huh?"),,SPEAKER_BAIYA)
     }
-
     msgbox(format("Woah, what the hell is your problem?"),,SPEAKER_ALICIA)
-
-    lockall
+	closemessage
     startmenu_savescreen
     goto(NewAssholeAppears_StartBattle_Script)
 }
 
 script NewAssholeAppears_StartBattle_Script{
-    lockall
-    faceplayer
+	lock
     msgbox(format("Go mind your business in your own region."),,SPEAKER_BAIYA)
     closemessage
     trainerbattle_no_intro(TRAINER_BAIYA_NEWASSHOLEAPPEARS,format("...you're tough."))
@@ -72,7 +81,9 @@ script NewAssholeAppears_StartBattle_Script{
 }
 
 script NewAssholeAppears_PostBattle_Script {
-    lockall
+   	lock 
+    addvar(VAR_STORYLINE_STATE,1)
+    setvar(VAR_TEMP_0,0)
     startcutscene(JUMPPLAYER_NEWASSHOLEAPPEARS)
     setvar(VAR_ROUTE10_STATE,DEFEATED_BAIYA_ROUTE10)
     msgbox(format("Are you done being an ass, whateveryournameis?"),,SPEAKER_ALICIA)
@@ -89,16 +100,13 @@ script NewAssholeAppears_PostBattle_Script {
 }
 
 script NewAssholeAppears_BaiyaExit_Script{
-    applymovement(LOCALID_ROUTE10_BAIYA, moves(walk_left*4, walk_up*7))
-    waitmovement(0)
+	moveobjecttocoords(LOCALID_ROUTE10_BAIYA,23,0,DIR_NORTH)
     delay(24)
+    fadedefaultbgm
     endcutscene
 	fadescreenswapbuffers(FADE_TO_BLACK)
-    fadedefaultbgm
     removeobject(LOCALID_ROUTE10_BAIYA)
 	fadescreenswapbuffers(FADE_FROM_BLACK)
-    addvar(VAR_STORYLINE_STATE,1)
-    setvar(VAR_TEMP_0,0)
     call(AaandWereBack_Monologue)
     call(TryAutoSave)
     releaseall

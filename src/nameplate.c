@@ -58,12 +58,14 @@ static enum Gender GetSpeakerGender(void)
 
 static const u32* GetSpeakerIcon(enum NameplateSpeaker speaker)
 {
-    return sSpeakerData[speaker].speakerIcon;
+    enum SpeakerIcons icon = sSpeakerData[speaker].speakerIcon;
+    return sSpeakerIconData[icon].speakerIcon;
 }
 
 static const u16* GetSpeakerPal(enum NameplateSpeaker speaker)
 {
-    return sSpeakerData[speaker].speakerPal;
+    enum SpeakerIcons icon = sSpeakerData[speaker].speakerIcon;
+    return sSpeakerIconData[icon].speakerPal;
 }
 
 //WindowId + 1, 0 if window is not open
@@ -535,7 +537,7 @@ static void CreateSpeakerIconSprite(u32 nameplateWidth, enum NameplateSpeaker sp
     u32 spriteTag = GFXTAG_SPEAKER_ICON;
     struct SpriteSheet sSpriteSheet_Speaker;
     sSpriteSheet_Speaker.data = GetSpeakerIcon(speaker);
-    sSpriteSheet_Speaker.size = 2048;
+    sSpriteSheet_Speaker.size = 512;
     sSpriteSheet_Speaker.tag = spriteTag;
     LoadSpriteSheet(&sSpriteSheet_Speaker);
 

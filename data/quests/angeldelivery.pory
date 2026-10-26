@@ -2,20 +2,14 @@ const PLAYER = OBJ_EVENT_ID_PLAYER
 
 //Quest_AngelDelivery
 
-script AngelDelivery_Script_HideBikers
+script AngelDelivery_Script_HideBikersCuconuTown
 {
-    returnqueststate(QUEST_ANGELDELIVERY)
+	setobjectflagfromlocalid(LOCALID_ANGELDELIVERYBIKERB)
+}
 
-    if (var(VAR_RESULT) >= QUEST_MENU_SET_ACTIVE)
-    {
-        setobjectflagfromlocalid(LOCALID_ANGELDELIVERYBIKERA)
-    }
-
-    if (var(VAR_RESULT) >= QUEST_MENU_SET_REWARD)
-    {
-        setobjectflagfromlocalid(LOCALID_ANGELDELIVERYBIKERB)
-    }
-    return
+script AngelDelivery_Script_HideBikersPiocaBridge
+{
+	setobjectflagfromlocalid(LOCALID_ANGELDELIVERYBIKERA)
 }
 
 script AngelDelivery_Script_CheckItemSpace
@@ -100,13 +94,13 @@ script AngelDelivery_Dialogue_Active
     closemessage
     call(AngelDelivery_Script_GesturePlayerTakeItem)
     msgbox(format("Isn’t that AngeldeliverybikerA’s?"),,SPEAKER_ANGELDELIVERYBIKERB)
-    msgbox(format("They broke their foot trying to get here. They wanted to prove that they were serious, so they even gave me their bike to come bring this to you."))
+    msgbox(format("They broke their foot trying to get here. They wanted to prove that they were serious, so they even gave me their bike to come bring this to you."),,SPEAKER_PLAYER)
     msgbox(format("Woah, that’s hardcore! Are they okay?"),,SPEAKER_ANGELDELIVERYBIKERB)
-    msgbox(format("They said they were going to the hospital."))
+    msgbox(format("They said they were going to the hospital."),,SPEAKER_PLAYER)
     msgbox(format("Wow."),,SPEAKER_ANGELDELIVERYBIKERB)
     msgbox(format("Well, you have a bike… And you’ve completed the initiation by finishing the challenge and giving me the Blue Card…"),,SPEAKER_ANGELDELIVERYBIKERB)
     msgbox(format("Sounds like you’ve earned a spot on Gear Grind Gang!"),,SPEAKER_ANGELDELIVERYBIKERB)
-    msgbox(format("I’m really just a Trainer…"))
+    msgbox(format("I’m really just a Trainer…"),,SPEAKER_PLAYER)
     buffermapname(STR_VAR_1,MAP_CURENO_PORT)
     msgbox(format("At least let us upgrade your bike! If you head to the HQ in {STR_VAR_1}, we can get that tuned up for you."),,SPEAKER_ANGELDELIVERYBIKERB)
     questmenu(QUEST_MENU_SET_REWARD, QUEST_ANGELDELIVERY)

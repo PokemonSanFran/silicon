@@ -118,12 +118,12 @@
     "GlavezHill",
     "GlavezHeights",
     "Route8",
+    "Route10",
     "Route1",
     "CurenoPort",
     "Route2",
     "PerlaciaCity",
     "MermerezaCity",
-    "Route10",
     "CapheCity",
     "Route9",
     "Route12",
@@ -392,15 +392,13 @@
   ],
   "gMapGroup_IndoorEspuleeOutskirts": [
     "EspuleeOutskirts_Ranger",
-    "EspuleeOutskirts_Solar",
     "EspuleeOutskirts_EliteHome",
     "EspuleeOutskirts_PokemonCenter_1F",
     "EspuleeOutskirts_KomalaCabin_1F",
     "EspuleeOutskirts_KomalaCabin_2F"
   ],
   "gMapGroup_IndoorZenzuIsland": [
-    "ZenzuIsland_PokemonCenter_1F",
-    "ZenzuIsland_SkillLibrary"
+    "ZenzuIsland_PokemonCenter_1F"
   ],
   "gMapGroup_IndoorHalaiIsland": [
     "HalaiIsland_Baiya",

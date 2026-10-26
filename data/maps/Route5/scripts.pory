@@ -23,3 +23,25 @@ script Route5_InteractHomeless_Script
     release
     end
 }
+
+script Route8_EventScript_Sign1
+{
+    msgbox(format("▶ Route 5\n{LEFT_ARROW} Irisina Town\n{RIGHT_ARROW} Mermereza City\pTravellers are advised to be mindful of the heavy fog."), MSGBOX_SIGN)
+    closemessage
+    end
+}
+
+script Route8_EventScript_Sign2
+{
+    msgbox(format("▶ Route 5\n{RIGHT_ARROW} Mermereza City\n{LEFT_ARROW} Irisina Town\pTravellers are advised to be mindful of the heavy fog."), MSGBOX_SIGN)
+    closemessage
+    end
+}
+
+script Route8_EventScript_SignHouse
+{
+    msgbox(format("House placeholder."), MSGBOX_SIGN)
+        closemessage
+    end
+}
+

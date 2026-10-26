@@ -10,10 +10,14 @@ These instructions assume you're using Linux or WSL.
 ```console
 git clone --recursive https://gitlab.com/YOUR_USERNAME/silicon.git
 ```
+<<<<<<< HEAD
 3. [Install go](https://go.dev/doc/install). `go` is required for building `poryscript`. `poryscript` is a submodule, so using a pre-built binary won't work.
 4. Change into the newly cloned directory and attempt to build the game.
 ```console
 cd silicon ; git checkout main ; make clean ; make -j
+=======
+Based off RHH's pokeemerald-expansion 1.17.1 https://github.com/rh-hideout/pokeemerald-expansion/
+>>>>>>> master
 ```
 5. Base development off `main`. Replace `newBranch` with the name of the feature you're working on.
 ```console
