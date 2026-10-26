@@ -1772,8 +1772,8 @@ static void MainPage_PrintMoveCategory(enum Move move)
     if (move == MOVE_NONE) return;
 
     BlitBitmapRectToWindow(MREMINDER_WINDOW_MAIN, sMoveReminder_CategoriesBlit,
-        0, category * 16,
-        16, 16 * DAMAGE_CATEGORY_COUNT,
+        0, (category - DAMAGE_CATEGORY_PHYSICAL) * 16,
+        16, 16 * (DAMAGE_CATEGORY_COUNT - DAMAGE_CATEGORY_PHYSICAL),
         PAGE_MAIN_MOVE_DETAILS_CAT_X, PAGE_MAIN_MOVE_DETAILS_CAT_Y,
         11, 9);
 }
@@ -1882,7 +1882,7 @@ static void FilterPage_HandleInput(u8 taskId)
             FilterPage_ToggleTypeFilter(type);
             break;
         case FILTER_GRID_Y_CATEGORY:
-            FilterPage_ToggleCategoryFilter(FilterPage_GetGridX());
+            FilterPage_ToggleCategoryFilter(DAMAGE_CATEGORY_PHYSICAL + FilterPage_GetGridX());
             break;
         case FILTER_GRID_Y_METHOD:
             FilterPage_ToggleMethodFilter(FilterPage_GetGridX());
@@ -2078,7 +2078,7 @@ static void FilterPage_PrintCategory(void)
         MREMINDER_TXTCLR_DEFAULT);
 
     u32 x = PAGE_FILTER_CLASSIFICATION_BASE_X, y = PAGE_FILTER_CLASSIFICATION_BASE_Y;
-    for (enum DamageCategory category = 0; category < DAMAGE_CATEGORY_COUNT; category++)
+    for (enum DamageCategory category = DAMAGE_CATEGORY_PHYSICAL; category < DAMAGE_CATEGORY_COUNT; category++)
     {
         bool32 filter = FilterPage_IsCategoryFilterActive(category);
         enum MoveReminderTextColors txtClr = filter ? MREMINDER_TXTCLR_FILTER : MREMINDER_TXTCLR_DEFAULT;
@@ -2086,7 +2086,7 @@ static void FilterPage_PrintCategory(void)
         MiscUtil_AddTextPrinter(MREMINDER_WINDOW_MAIN, gDamageCategoryNames[category], FONT_OUTLINED, x, y, txtClr);
 
         x += PAGE_FILTER_CLASSIFICATION_BASE_PADDING;
-        if (category) x += category;
+        if (category != DAMAGE_CATEGORY_PHYSICAL) x += category - DAMAGE_CATEGORY_PHYSICAL;
     }
 }
 
