@@ -71,8 +71,7 @@ script Swagbag_PokedexApps_Dialogue {
         msgbox(format("Right! Maps works very well in Resido, and is another available app on your phone. You can press {START_BUTTON} to access all \lof your apps."),,SPEAKER_OLIVER)
 
         playfanfare(MUS_OBTAIN_KEY_ITEM)
-        callnative(BufferStipendAmount)
-        msgbox(format("{PLAYER} received ¥{STR_VAR_1}, and updated phone apps from Oliver."))
+        msgbox(format("{PLAYER} received updated phone apps from Oliver."))
         waitmessage
         waitfanfare
         goto(Swagbag_WhenCanWeStart_Dialogue)
