@@ -903,6 +903,7 @@ bool8 MetatileBehavior_IsEastBlocked(u8 metatileBehavior)
      || metatileBehavior == MB_IMPASSABLE_NORTHEAST
      || metatileBehavior == MB_IMPASSABLE_SOUTHEAST
      || metatileBehavior == MB_IMPASSABLE_WEST_AND_EAST
+     || metatileBehavior == MB_SIDEWAYS_STAIRS_RIGHT_SIDE_TOP
      || metatileBehavior == MB_SECRET_BASE_BREAKABLE_DOOR)
         return TRUE;
     else
@@ -915,6 +916,7 @@ bool8 MetatileBehavior_IsWestBlocked(u8 metatileBehavior)
      || metatileBehavior == MB_IMPASSABLE_NORTHWEST
      || metatileBehavior == MB_IMPASSABLE_SOUTHWEST
      || metatileBehavior == MB_IMPASSABLE_WEST_AND_EAST
+     || metatileBehavior == MB_SIDEWAYS_STAIRS_LEFT_SIDE_TOP
      || metatileBehavior == MB_SECRET_BASE_BREAKABLE_DOOR)
         return TRUE;
     else

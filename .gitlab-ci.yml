@@ -60,7 +60,7 @@ upload_to_catbox:
         COMMIT_MESSAGE="${COMMIT_MESSAGE:0:$MAX_LENGTH}"
         COMMIT_MESSAGE="${COMMIT_MESSAGE}\n👀 Read more: https://gitlab.com/gorgonzolafoundation/silicon/-/commit/$COMMIT_HASH"
         fi
-        CATBOX_URL=$(curl -F "reqtype=fileupload" -F "short=6jsp6o" -F "userhash=$CATBOX_USER_HASH" -F "fileToUpload=@silicon.gba" https://catbox.moe/user/api.php)
+        CATBOX_URL=$(curl -F "reqtype=fileupload" -F "userhash=$CATBOX_USER_HASH" -F "fileToUpload=@silicon.gba" https://catbox.moe/user/api.php)
         echo "Artifact uploaded to: $CATBOX_URL"
         export CATBOX_URL COMMIT_MESSAGE
         if [ "$CI_PIPELINE_SOURCE" == "push" ]; then

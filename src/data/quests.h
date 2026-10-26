@@ -2681,8 +2681,8 @@ const struct SideQuest sSideQuests[QUEST_COUNT] =
                 .setupFunc = DebugQuest_VSDeoxys,
                 side_quest_map(MAP_ROUTE9),
                 .warpId = WARP_ID_NONE,
-                .x = 17,
-                .y = 3,
+                .x = 57,
+                .y = 22,
             },
             [STATE_QUEST_VSDEOXYS_RECIVED_ROCK_SMASH_TM] =
             {
@@ -2690,8 +2690,8 @@ const struct SideQuest sSideQuests[QUEST_COUNT] =
                 .setupFunc = DebugQuest_VSDeoxys,
                 side_quest_map(MAP_ROUTE9),
                 .warpId = WARP_ID_NONE,
-                .x = 9,
-                .y = 1,
+                .x = 29,
+                .y = 44,
             },
             [STATE_QUEST_VSDEOXYS_AFTER_MINIOR_BATTLE] =
             {
@@ -2699,8 +2699,8 @@ const struct SideQuest sSideQuests[QUEST_COUNT] =
                 .setupFunc = DebugQuest_VSDeoxys,
                 side_quest_map(MAP_HALERBA_CITY),
                 .warpId = WARP_ID_NONE,
-                .x = 39,
-                .y = 10,
+                .x = 29,
+                .y = 44,
             },
             [STATE_QUEST_VSDEOXYS_HAS_ENTERED_RESEARCH] =
             {
@@ -3500,8 +3500,8 @@ const struct SideQuest sSideQuests[QUEST_COUNT] =
                 .setupFunc = DebugQuest_Restaurantexpansion2,
                 side_quest_map(MAP_QUEST_RESTAURANTEXPANSION2_4),
                 .warpId = WARP_ID_NONE,
-                .x = 14,
-                .y = 4,
+                .x = 66,
+                .y = 46,
 
             },
             [STATE_QUEST_RESTAURANTEXPANSION2_AFTER_BUSSER_BATTLE] =
@@ -3510,8 +3510,8 @@ const struct SideQuest sSideQuests[QUEST_COUNT] =
                 .setupFunc = DebugQuest_Restaurantexpansion2,
                 side_quest_map(MAP_QUEST_RESTAURANTEXPANSION2_4),
                 .warpId = WARP_ID_NONE,
-                .x = 14,
-                .y = 4,
+                .x = 66,
+                .y = 46,
 
             },
             [STATE_QUEST_RESTAURANTEXPANSION2_RECRUITED_BUSSER] =
@@ -4251,8 +4251,8 @@ const struct SideQuest sSideQuests[QUEST_COUNT] =
                 .setupFunc = DebugQuest_WallaceArmy,
                 side_quest_map(MAP_QUEST_WALLACEARMY_STAN_D),
                 .warpId = 0,
-                .x = 2,
-                .y = 1,
+                .x = 74,
+                .y = 18,
             },
             [STATE_QUEST_WALLACE_ARMY_AFTER_STAN_D] =
             {
@@ -4260,8 +4260,8 @@ const struct SideQuest sSideQuests[QUEST_COUNT] =
                 .setupFunc = DebugQuest_WallaceArmy,
                 side_quest_map(MAP_QUEST_WALLACEARMY_STAN_D),
                 .warpId = 0,
-                .x = 2,
-                .y = 1,
+                .x = 74,
+                .y = 18,
             },
             [STATE_QUEST_WALLACE_ARMY_BEFORE_STAN_E] =
             {
@@ -5499,8 +5499,8 @@ const struct SideQuest sSideQuests[QUEST_COUNT] =
                 .setupFunc = DebugQuest_Freetheinnocent,
                 side_quest_map(MAP_QUEST_FREETHEINNOCENT_HIKERC),
                 .warpId = WARP_ID_NONE,
-                .x = 8,
-                .y = 4,
+                .x = 43,
+                .y = 38,
             },
             [STATE_QUEST_FREETHEINNOCENTHIKERC_AFTER] =
             {
@@ -5508,8 +5508,8 @@ const struct SideQuest sSideQuests[QUEST_COUNT] =
                 .setupFunc = DebugQuest_Freetheinnocent,
                 side_quest_map(MAP_QUEST_FREETHEINNOCENT_HIKERC),
                 .warpId = WARP_ID_NONE,
-                .x = 8,
-                .y = 4,
+                .x = 43,
+                .y = 38,
             },
             [STATE_QUEST_FREETHEINNOCENTHIKERD_BEFORE] =
             {

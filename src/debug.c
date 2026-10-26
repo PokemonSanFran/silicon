@@ -4723,6 +4723,7 @@ static void DebugAction_Jump_JumpPlayerToStoryPoint(u8 taskId, enum StoryJumpPoi
     X(MUS_VS_SILICON_GYM_LEADER) \
     X(MUS_HALERBA_CITY_NIGHT) \
     X(MUS_HODOU_CITY_NIGHT) \
+    X(MUS_LAKE_WAJABI_WISHAAT) \
 
 #define SOUND_LIST_SE               \
     X(SE_USE_ITEM)                  \
