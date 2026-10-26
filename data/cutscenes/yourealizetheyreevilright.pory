@@ -360,15 +360,13 @@ script YouRealizeTheyreEvilRight_PreventPlayer_Script{
         end
 }
 
-script YouRealizeTheyreEvilRight_CantSleep_Script{
-    if (var(VAR_ARANTRAZ_STATE) > BATTLED_TALA && (var(VAR_ARANTRAZ_STATE) < POST_YOU_REALIZE_THEYRE_EVIL_RIGHT)){
-        call(YouRealizeTheyreEvilRight_CantSleep_Dialogue)
-    }
-    return
+script YouRealizeTheyreEvilRight_CantSleep_Script
+{
+	call_if_lt(VAR_ARANTRAZ_STATE,POST_YOU_REALIZE_THEYRE_EVIL_RIGHT,YouRealizeTheyreEvilRight_CantSleep_Dialogue)
 }
 
 script YouRealizeTheyreEvilRight_CantSleep_Dialogue {
-        msgbox(format("Baiya is still waiting for me at Arantraz…"),,SPEAKER_ALICIA)
+        msgbox(format("Baiya is still waiting for me at Arantraz…"),,SPEAKER_ALICIA,TAIL_THOUGHT)
 
         closemessage
         release
