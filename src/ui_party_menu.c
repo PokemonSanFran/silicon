@@ -233,7 +233,8 @@ static void PartyMonSprites_SetLifted(u32, bool32);
 static void PartyMonSprites_MoveToSlot(u32, u32);
 static s16 PartyMonIcon_GetX(u32);
 static s16 PartyMonIcon_GetY(u32);
-static void PrintMessage(const u8 *);
+static u8 DisplayPartyMenuMessageWithHeight(const u8 *, bool8, u32);
+static void PrintMessage(const u8 *, u32);
 static void Task_PrintAndWaitForText(u8);
 static void PartyView_ExpandHeader(u32);
 static void PartyView_PrintHeader(const u8 *);
@@ -5105,6 +5106,7 @@ static void CursorCb_MoveItemCallback(u8 taskId)
         PartySlot_Draw(gPartyMenu.slotId);
         PartySlot_Draw(gPartyMenu.slotId2);
 
+        u32 msgBoxHeight = PARTY_MSGBOX_HEIGHT;
         if (item2 == ITEM_NONE)
         {
             GetMonNickname(&gParties[B_TRAINER_PLAYER][gPartyMenu.slotId2], gStringVar1);
@@ -5117,13 +5119,22 @@ static void CursorCb_MoveItemCallback(u8 taskId)
             CopyItemName(item1, gStringVar2);
             StringExpandPlaceholders(buffer, gText_XsYAnd);
 
-            StringAppend(buffer, gText_XsYWereSwapped);
             GetMonNickname(&gParties[B_TRAINER_PLAYER][gPartyMenu.slotId2], gStringVar1);
             CopyItemName(item2, gStringVar2);
+            StringExpandPlaceholders(gStringVar4, gText_XsYWereSwapped);
+            if (GetStringWidth(FONT_NORMAL, gStringVar4, 0) > PARTY_MSGBOX_WIDTH * TILE_WIDTH)
+            {
+                StringAppend(buffer, COMPOUND_STRING("{STR_VAR_1}'s {STR_VAR_2}\nwere swapped!{PAUSE_UNTIL_PRESS}"));
+                msgBoxHeight = PARTY_MSGBOX_3LINE_HEIGHT;
+            }
+            else
+            {
+                StringAppend(buffer, gText_XsYWereSwapped);
+            }
             StringExpandPlaceholders(gStringVar4, buffer);
         }
 
-        DisplayPartyMenuMessage(gStringVar4, TRUE);
+        DisplayPartyMenuMessageWithHeight(gStringVar4, TRUE, msgBoxHeight);
 
         AnimatePartySlot(gPartyMenu.slotId2, 0);
         AnimatePartySlot(gPartyMenu.slotId, 1);
@@ -5284,9 +5295,14 @@ void DisplayPartyMenuStdMessage(u32 stringId)
 
 u8 DisplayPartyMenuMessage(const u8 *str, bool8 keepOpen)
 {
+    return DisplayPartyMenuMessageWithHeight(str, keepOpen, PARTY_MSGBOX_HEIGHT);
+}
+
+static u8 DisplayPartyMenuMessageWithHeight(const u8 *str, bool8 keepOpen, u32 height)
+{
     u8 taskId;
 
-    PrintMessage(str);
+    PrintMessage(str, height);
     taskId = CreateTask(Task_PrintAndWaitForText, 1);
     gTasks[taskId].tKeepOpen = keepOpen;
     return taskId;
@@ -5367,13 +5383,17 @@ static s8 PartyMenuProcessYesNoInput(void)
     return result;
 }
 
-static void PrintMessage(const u8 *text)
+static void PrintMessage(const u8 *text, u32 height)
 {
     u8 *windowPtr = &sPartyMenuDataPtr->windowId[PARTY_DYN_WIN_MSG];
+    struct WindowTemplate template = sPartyMenu_WinTemplate_MsgBox;
+
+    template.tilemapTop = PARTY_MSGBOX_TOP + PARTY_MSGBOX_HEIGHT - height;
+    template.height = height;
 
     PartyMenuRemoveWindow(windowPtr);
     PartyView_ClearFooter();
-    *windowPtr = AddWindow(&sPartyMenu_WinTemplate_MsgBox);
+    *windowPtr = AddWindow(&template);
     DrawStdFrameWithCustomTileAndPalette(*windowPtr, FALSE, PARTY_TEXT_TILE_FRAME, PARTY_BG_PAL_FRAME);
     gTextFlags.canABSpeedUpPrint = TRUE;
     AddTextPrinterParameterized(*windowPtr, FONT_NORMAL, text, 0, 1, GetPlayerTextSpeedDelay(), NULL);
