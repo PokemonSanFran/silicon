@@ -2,9 +2,7 @@ const PLAYER = OBJ_EVENT_ID_PLAYER
 
 script EnterAdaora_ObjectCleanUp_Script 
 {
-	setobjectxyperm(LOCALID_CAPHE_LINE_PERSON_1,3,44)
-	setobjectxyperm(LOCALID_CAPHE_LINE_PERSON_2,3,45)
-	setobjectxyperm(LOCALID_CAPHE_LINE_PERSON_3,3,46)
+	call(EnterAdaora_RepositionLine)
 	setobjectflagfromlocalid(LOCALID_CAPHE_ADAORA)
 }
 
@@ -16,13 +14,13 @@ script EnterAdaora_SetConeTiles_Script
 
 script EnterAdaora_Script_SetNorthCone
 {
-	setmetatile(4,37,0x944,TRUE)
+	setmetatile(2,15,0x944,TRUE)
 	special(DrawWholeMapView)
 }
 
 script EnterAdaora_Script_SetSouthCone
 {
-	setmetatile(4,43,0x944,TRUE)
+	setmetatile(2,20,0x944,TRUE)
 	special(DrawWholeMapView)
 }
 
@@ -36,31 +34,31 @@ script EnterAdaora_InteractSiarl_Script {
         }
 }
 
-script EnterAdaora_PreventPlayerProgress_Dialogue{
-        if (var(VAR_CAPHE_CITY_STATE) > LINE_IS_BLOCKING)
-        {
-            release
-                end
-        }
+script EnterAdaora_PreventPlayerProgress_Dialogue
+{
+	if (var(VAR_CAPHE_CITY_STATE) > LINE_IS_BLOCKING)
+	{
+		release
+			end
+	}
     lock
     setvar(VAR_TEMP_1,0)
 
     getplayerxy(VAR_TEMP_0,VAR_TEMP_1)
-    switch(var(VAR_TEMP_1)){
-        case 38: applymovement(LOCALID_CAPHE_LINE_PERSON_1,Common_Movement_ExclamationMark)
-        case 40: applymovement(LOCALID_CAPHE_LINE_PERSON_2,Common_Movement_ExclamationMark)
-        case 42: applymovement(LOCALID_CAPHE_LINE_PERSON_3,Common_Movement_ExclamationMark)
+    playse(SE_PIN)
+    switch(var(VAR_TEMP_1))
+	{
+        case 19: applymovement(LOCALID_CAPHE_LINE_PERSON_1,Common_Movement_ExclamationMark)
+        case 17: applymovement(LOCALID_CAPHE_LINE_PERSON_2,Common_Movement_ExclamationMark)
+        case 15: applymovement(LOCALID_CAPHE_LINE_PERSON_3,Common_Movement_ExclamationMark)
     }
     waitmovement(0)
-
-    playse(SE_PIN)
     waitse
 
     applymovement(PLAYER,Common_Movement_FaceDown)
     waitmovement(PLAYER)
     msgbox(format("No cutting the line!"),MSGBOX_DEFAULT,SPEAKER_RESIDENT_A)
     closemessage
-
     applymovement(PLAYER,Common_Movement_WalkRight)
     waitmovement(PLAYER)
     release
@@ -180,12 +178,17 @@ script EnterAdaora_MoveLine_Script{
         applymovement(LOCALID_CAPHE_LINE_PERSON_2,EnterAdaora_MoveLine1_Movement)
         applymovement(LOCALID_CAPHE_LINE_PERSON_3,EnterAdaora_MoveLine1_Movement)
         waitmovement(0)
-        setobjectxy(LOCALID_CAPHE_LINE_PERSON_1,3,44)
-        setobjectxy(LOCALID_CAPHE_LINE_PERSON_2,3,45)
-        setobjectxy(LOCALID_CAPHE_LINE_PERSON_3,3,46)
-        setobjectxyperm(LOCALID_CAPHE_LINE_PERSON_1,3,44)
-        setobjectxyperm(LOCALID_CAPHE_LINE_PERSON_2,3,45)
-        setobjectxyperm(LOCALID_CAPHE_LINE_PERSON_3,3,46)
+		call(EnterAdaora_RepositionLine)
+}
+
+script EnterAdaora_RepositionLine
+{
+	setobjectxy(LOCALID_CAPHE_LINE_PERSON_1,1,20)
+	setobjectxy(LOCALID_CAPHE_LINE_PERSON_2,1,21)
+	setobjectxy(LOCALID_CAPHE_LINE_PERSON_3,1,22)
+	setobjectxyperm(LOCALID_CAPHE_LINE_PERSON_1,1,20)
+	setobjectxyperm(LOCALID_CAPHE_LINE_PERSON_2,1,21)
+	setobjectxyperm(LOCALID_CAPHE_LINE_PERSON_3,1,22)
 }
 
 script EnterAdaora_GiveKeystone_Dialogue{

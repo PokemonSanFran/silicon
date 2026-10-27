@@ -423,3 +423,6 @@ const u16 gMetatileAttributes_PorytilesManaged_FancyIndoors[] = INCBIN_U16("data
 
 const u16 gMetatiles_PorytilesManaged_FoggyRoutes[] = INCBIN_U16("data/tilesets/secondary/foggy_routes/porytiles_bin/metatiles.bin");
 const u16 gMetatileAttributes_PorytilesManaged_FoggyRoutes[] = INCBIN_U16("data/tilesets/secondary/foggy_routes/porytiles_bin/metatile_attributes.bin");
+
+const u16 gMetatiles_PorytilesManaged_Desert[] = INCBIN_U16("data/tilesets/secondary/desert/porytiles_bin/metatiles.bin");
+const u16 gMetatileAttributes_PorytilesManaged_Desert[] = INCBIN_U16("data/tilesets/secondary/desert/porytiles_bin/metatile_attributes.bin");

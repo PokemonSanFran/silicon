@@ -1,9 +1,9 @@
 {
-  "data/tilesets/primary/general_silicon/porytiles_bin/metatile_attributes.bin": "c82a682f0811bb4b2851e8e9fbe95f02",
-  "data/tilesets/primary/general_silicon/porytiles_bin/metatiles.bin": "0150d190a6871e7f123b446b13c244a1",
+  "data/tilesets/primary/general_silicon/porytiles_bin/metatile_attributes.bin": "eebbc0a5042dfcf5450c2b639e99d373",
+  "data/tilesets/primary/general_silicon/porytiles_bin/metatiles.bin": "1ac0ca54520adc475193ccdc52200a18",
   "data/tilesets/primary/general_silicon/porytiles_bin/palettes/00.pal": "8479423eaa4fdce9f04158a964fcd863",
   "data/tilesets/primary/general_silicon/porytiles_bin/palettes/01.pal": "5b47fc4d67bf776efbc06c58a3890cf0",
-  "data/tilesets/primary/general_silicon/porytiles_bin/palettes/02.pal": "290b919fa9362810cfdc4eda9cfc73d6",
+  "data/tilesets/primary/general_silicon/porytiles_bin/palettes/02.pal": "2231306584733106272fcbf2454f3f5d",
   "data/tilesets/primary/general_silicon/porytiles_bin/palettes/03.pal": "f8ff2e639c84929f985cb2c923af0c2c",
   "data/tilesets/primary/general_silicon/porytiles_bin/palettes/04.pal": "30ce7929fb853204239455703a7220f4",
   "data/tilesets/primary/general_silicon/porytiles_bin/palettes/05.pal": "44b49fc7fd6fe933a0aee6534dedf66f",
@@ -17,9 +17,9 @@
   "data/tilesets/primary/general_silicon/porytiles_bin/palettes/13.pal": "59f83737350efeb148a299bdbf87e97f",
   "data/tilesets/primary/general_silicon/porytiles_bin/palettes/14.pal": "59f83737350efeb148a299bdbf87e97f",
   "data/tilesets/primary/general_silicon/porytiles_bin/palettes/15.pal": "59f83737350efeb148a299bdbf87e97f",
-  "data/tilesets/primary/general_silicon/porytiles_bin/tiles.png": "84a86befc6fd56c7222c862f5a260143",
-  "data/tilesets/primary/general_silicon/porytiles_src/attributes.csv": "32b5b773b08cbd3edf97773ece368bbd",
-  "data/tilesets/primary/general_silicon/porytiles_src/bottom.png": "5a682fed204e4b1ca5abbd3a19839754",
-  "data/tilesets/primary/general_silicon/porytiles_src/middle.png": "3d0528856334c4328216e5dbad29fd68",
+  "data/tilesets/primary/general_silicon/porytiles_bin/tiles.png": "d80504a257d39d8d5ad51c1644ae2d7a",
+  "data/tilesets/primary/general_silicon/porytiles_src/attributes.csv": "1099e482cfde9aa39673dbd6427cbf3b",
+  "data/tilesets/primary/general_silicon/porytiles_src/bottom.png": "2f5695c93f3b37fd566f4ac2d055e375",
+  "data/tilesets/primary/general_silicon/porytiles_src/middle.png": "5e0854bae0fca17132b4f227d9b4fcd1",
   "data/tilesets/primary/general_silicon/porytiles_src/top.png": "a66e014427d46c4ceb4fade1884b1c13"
 }
