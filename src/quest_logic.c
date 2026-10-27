@@ -5057,6 +5057,9 @@ void Script_ShouldPlayerGetDexnav(void)
 
 static bool8 Improvbattling_ShouldLeaderMoveOffStage(void)
 {
+    if (FlagGet(FLAG_TIMELINE_FALSE))
+        return FALSE;
+
     if (IsQuestCompletedState(QUEST_IMPROVBATTLING) == FALSE)
         return FALSE;
 
