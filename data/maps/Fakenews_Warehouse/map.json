@@ -129,11 +129,13 @@
   ],
   "warp_events": [
     {
+
+        "warp_id": "WARP_ID_WAREHOUSE_TO_PETAROSA",
       "x": 32,
       "y": 7,
       "elevation": 0,
       "dest_map": "MAP_PETAROSA_BOROUGH",
-      "dest_warp_id": "7"
+        "dest_warp_id": "WARP_ID_PETAROSA_TO_WAREHOUSE"
     }
   ],
   "coord_events": [

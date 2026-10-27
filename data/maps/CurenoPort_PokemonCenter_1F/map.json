@@ -59,18 +59,20 @@
   ],
   "warp_events": [
     {
+        "warp_id": "MAP_CURENO_PORT_CENTER_TO_CURENO_PORT_LEFT",
       "x": 7,
       "y": 8,
       "elevation": 0,
       "dest_map": "MAP_CURENO_PORT",
-      "dest_warp_id": "2"
+      "dest_warp_id": "WARP_ID_CURENO_TO_CENTER"
     },
     {
+        "warp_id": "MAP_CURENO_PORT_CENTER_TO_CURENO_PORT_RIGHT",
       "x": 6,
       "y": 8,
       "elevation": 0,
       "dest_map": "MAP_CURENO_PORT",
-      "dest_warp_id": "2"
+      "dest_warp_id": "WARP_ID_CURENO_TO_CENTER"
     }
   ],
   "coord_events": [],

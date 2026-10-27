@@ -1847,14 +1847,14 @@ const struct SideQuest sSideQuests[QUEST_COUNT] =
                 .name = COMPOUND_STRING("Complete Improv Battling"),
                 .setupFunc = DebugQuest_RestoreZenzuIslandGym,
                 side_quest_map(MAP_QUEST_RESTOREZENZUISLAND_3),
-                .warpId = WARP_ID_THEATER_TO_PETAROSA_LEFT,
+                .warpId = WARP_ID_THEATER_TO_PETAROSA_BOROUGH_LEFT,
             },
             [STATE_QUEST_RESTOREZENZUISLANDGYM_RECRUIT_FROM_IMPROV_BATTLING] =
             {
                 .name = COMPOUND_STRING("Recruit From Improv Battling"),
                 .setupFunc = DebugQuest_RestoreZenzuIslandGym,
                 side_quest_map(MAP_QUEST_RESTOREZENZUISLAND_3),
-                .warpId = WARP_ID_THEATER_TO_PETAROSA_LEFT,
+                .warpId = WARP_ID_THEATER_TO_PETAROSA_BOROUGH_LEFT,
             },
             [STATE_QUEST_RESTOREZENZUISLANDGYM_BEFORE_MINIARCADE] =
             {

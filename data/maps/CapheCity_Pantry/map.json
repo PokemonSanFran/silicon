@@ -101,25 +101,28 @@
   ],
   "warp_events": [
     {
+        "warp_id": "WARP_ID_FLOWERS_TO_CAPHE_LEFT",
       "x": 12,
       "y": 29,
       "elevation": 0,
       "dest_map": "MAP_CAPHE_CITY",
-      "dest_warp_id": "2"
+      "dest_warp_id": "WARP_ID_CAPHE_TO_FLOWERS"
     },
     {
+        "warp_id": "WARP_ID_FLOWERS_TO_BASEMENT",
       "x": 5,
       "y": 2,
       "elevation": 0,
       "dest_map": "MAP_CAPHE_CITY_PANTRY_MAZE",
-      "dest_warp_id": "0"
+      "dest_warp_id": "WARP_ID_BASEMENT_TO_FLOWERS"
     },
     {
+        "warp_id": "WARP_ID_FLOWERS_TO_CAPHE_RIGHT",
       "x": 13,
       "y": 29,
       "elevation": 0,
       "dest_map": "MAP_CAPHE_CITY",
-      "dest_warp_id": "2"
+      "dest_warp_id": "WARP_ID_CAPHE_TO_FLOWERS"
     }
   ],
   "coord_events": [],

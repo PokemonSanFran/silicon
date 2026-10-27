@@ -45,32 +45,36 @@
   ],
   "warp_events": [
     {
+        "warp_id": "WARP_ID_ARRIBA_TO_CURENO_LEFT",
       "x": 8,
       "y": 9,
       "elevation": 0,
       "dest_map": "MAP_CURENO_PORT",
-      "dest_warp_id": "3"
+      "dest_warp_id": "WARP_ID_CURENO_TO_ARRIBA"
     },
     {
+        "warp_id": "WARP_ID_ARRIBA_TO_CURENO_RIGHT",
       "x": 9,
       "y": 9,
       "elevation": 0,
       "dest_map": "MAP_CURENO_PORT",
-      "dest_warp_id": "3"
+      "dest_warp_id": "WARP_ID_CURENO_TO_ARRIBA"
     },
     {
+        "warp_id": "WARP_ID_ARRIBA_TO_B1F",
       "x": 1,
       "y": 1,
       "elevation": 0,
       "dest_map": "MAP_ARRIBA_B1F",
-      "dest_warp_id": "0"
+      "dest_warp_id": "WARP_ID_B1F_TO_ARRIBA"
     },
     {
+        "warp_id": "WARP_ID_ARRIBA_TO_2F",
       "x": 11,
       "y": 1,
       "elevation": 0,
       "dest_map": "MAP_ARRIBA_2F",
-      "dest_warp_id": "0"
+      "dest_warp_id": "WARP_ID_2F_TO_ARRIBA"
     }
   ],
   "coord_events": [],

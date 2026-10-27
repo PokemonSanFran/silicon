@@ -16,11 +16,12 @@
   "object_events": [],
   "warp_events": [
     {
+        "warp_id": "WARP_ID_UNDERGROUND_TO_CURENO_PORT",
       "x": 10,
       "y": 1,
       "elevation": 0,
       "dest_map": "MAP_CURENO_PORT",
-      "dest_warp_id": "1"
+      "dest_warp_id": "WARP_ID_CURENO_PORT_TO_UNDERGROUND"
     }
   ],
   "coord_events": [],

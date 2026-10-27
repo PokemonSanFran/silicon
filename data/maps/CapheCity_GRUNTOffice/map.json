@@ -31,19 +31,22 @@
   ],
   "warp_events": [
     {
+      "warp_id": "WARP_ID_GRUNTOFFICE_TO_CAPHE_LEFT",
       "x": 2,
       "y": 4,
       "elevation": 0,
       "dest_map": "MAP_CAPHE_CITY",
-      "dest_warp_id": "1"
+        "dest_warp_id": "WARP_ID_CAPHE_TO_GRUNTOFFICE"
     },
     {
+      "warp_id": "WARP_ID_GRUNTOFFICE_TO_CAPHE_RIGHT",
       "x": 3,
       "y": 4,
       "elevation": 0,
       "dest_map": "MAP_CAPHE_CITY",
-      "dest_warp_id": "1"
+        "dest_warp_id": "WARP_ID_CAPHE_TO_GRUNTOFFICE"
     }
+
   ],
   "coord_events": [],
   "bg_events": [],

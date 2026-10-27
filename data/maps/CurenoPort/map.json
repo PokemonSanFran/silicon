@@ -308,39 +308,44 @@
   ],
   "warp_events": [
     {
+        "warp_id": "WARP_ID_CURENO_PORT_TO_GEAR_GRIND_GANG_HOUSE",
       "x": 26,
       "y": 14,
       "elevation": 0,
       "dest_map": "MAP_CURENO_PORT_GEAR_GRIND_GANG_HOUSE",
-      "dest_warp_id": "0"
+      "dest_warp_id": "WARP_ID_HEAR_GRIND_GANG_HOUSE_TO_CURENO_PORT_LEFT"
     },
     {
+        "warp_id": "WARP_ID_CURENO_PORT_TO_UNDERGROUND",
       "x": 24,
       "y": 47,
       "elevation": 0,
       "dest_map": "MAP_CURENO_PORT_UNDERGROUND",
-      "dest_warp_id": "0"
+      "dest_warp_id": "WARP_ID_UNDERGROUND_TO_CURENO_PORT"
     },
     {
+      "warp_id": "WARP_ID_CURENO_TO_CENTER",
       "x": 12,
       "y": 8,
       "elevation": 0,
       "dest_map": "MAP_CURENO_PORT_POKEMON_CENTER_1F",
-      "dest_warp_id": "0"
+        "dest_warp_id": "MAP_CURENO_PORT_CENTER_TO_CURENO_PORT_LEFT"
     },
     {
+      "warp_id": "WARP_ID_CURENO_TO_ARRIBA",
       "x": 3,
       "y": 12,
       "elevation": 0,
       "dest_map": "MAP_ARRIBA_1F",
-      "dest_warp_id": "0"
+        "dest_warp_id": "WARP_ID_ARRIBA_TO_CURENO_LEFT"
     },
     {
+        "warp_id": "WARP_ID_CURENO_TO_WAREHOUSE_EXPLODE",
       "x": 26,
       "y": 28,
       "elevation": 0,
       "dest_map": "MAP_OROLAND_WAREHOUSE",
-      "dest_warp_id": "1"
+        "dest_warp_id": "WARP_ID_WAREHOUSE_TO_CURENO_EXPLODE"
     },
     {
       "warp_id": "WARP_ID_CURENO_TO_WAREHOUSE",
@@ -348,7 +353,7 @@
       "y": 32,
       "elevation": 0,
       "dest_map": "MAP_OROLAND_WAREHOUSE",
-      "dest_warp_id": "0"
+        "dest_warp_id": "WARP_ID_WAREHOUSE_CURENO_PORT_A"
     }
   ],
   "coord_events": [

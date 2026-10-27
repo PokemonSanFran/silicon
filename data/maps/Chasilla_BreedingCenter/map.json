@@ -73,18 +73,20 @@
   ],
   "warp_events": [
     {
+        "warp_id": "WARP_ID_BREEDING_TO_CHASILLA_LEFT",
       "x": 2,
       "y": 8,
       "elevation": 0,
       "dest_map": "MAP_CHASILLA",
-      "dest_warp_id": "1"
+      "dest_warp_id": "MAP_CHASILLA_TO_BREEDING"
     },
     {
+        "warp_id": "WARP_ID_BREEDING_TO_CHASILLA_RIGHT",
       "x": 3,
       "y": 8,
       "elevation": 0,
       "dest_map": "MAP_CHASILLA",
-      "dest_warp_id": "1"
+      "dest_warp_id": "MAP_CHASILLA_TO_BREEDING"
     }
   ],
   "coord_events": [],

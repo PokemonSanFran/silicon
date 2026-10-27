@@ -117,18 +117,20 @@
   ],
   "warp_events": [
     {
+        "warp_id": "WARP_ID_PETAROSA_BOROUGH_TO_KEIYING_MANSION",
       "x": 14,
       "y": 10,
       "elevation": 0,
       "dest_map": "MAP_PETAROSA_BOROUGH_KEI_YING_MANSION",
-      "dest_warp_id": "1"
+      "dest_warp_id": "WARP_ID_KEIYING_MANSION_TO_PETAROSA_BOROUGH_RIGHT"
     },
     {
+        "warp_id": "WARP_ID_PETAROSA_BOROUGH_TO_SHARPRISE_COMPOUND",
       "x": 3,
       "y": 10,
       "elevation": 0,
       "dest_map": "MAP_PETAROSA_BOROUGH_SHARPRISE_COMPOUND_1F",
-      "dest_warp_id": "0"
+      "dest_warp_id": "WARP_ID_SHARPRISE_COMPOUND_TO_PETAROSA_BOROUGH_LEFT"
     },
     {
       "warp_id": "WARP_ID_PETAROSA_TO_THEATER",
@@ -136,7 +138,7 @@
       "y": 18,
       "elevation": 0,
       "dest_map": "MAP_PETAROSA_BOROUGH_IMPROV",
-      "dest_warp_id": "0"
+      "dest_warp_id": "WARP_ID_THEATER_TO_PETAROSA_BOROUGH_LEFT"
     },
     {
       "x": 2,
@@ -153,11 +155,12 @@
       "dest_warp_id": "0"
     },
     {
+        "warp_id": "WARP_ID_PETAROSA_TO_WAREHOUSE",
       "x": 14,
       "y": 18,
       "elevation": 0,
       "dest_map": "MAP_FAKENEWS_WAREHOUSE",
-      "dest_warp_id": "0"
+        "dest_warp_id": "WARP_ID_WAREHOUSE_TO_PETAROSA"
     },
     {
       "x": 3,

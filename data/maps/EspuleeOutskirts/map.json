@@ -129,12 +129,12 @@
       "dest_warp_id": "WARP_ID_POKEMON_CENTER_TO_ESPULEE_OUTSKIRTS_RIGHT"
     },
     {
-      "warp_id": "WARP_ID_ESPULEE_OUTSKIRTS_TO_KOMALA_KABIN",
+      "warp_id": "WARP_ID_ESPULEE_OUTSKIRTS_TO_KOMALA_CABIN",
       "x": 4,
       "y": 4,
       "elevation": 0,
       "dest_map": "MAP_ESPULEE_OUTSKIRTS_KOMALA_CABIN_1F",
-      "dest_warp_id": "0"
+      "dest_warp_id": "WARP_ID_KOMALA_CABIN_TO_ESPULEE_OUTSKIRTS_LEFT"
     }
   ],
   "coord_events": [],

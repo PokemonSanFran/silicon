@@ -59,11 +59,12 @@
   ],
   "warp_events": [
     {
+        "warp_id": "WARP_ID_CENTER_TO_CAPHE",
       "x": 7,
       "y": 8,
       "elevation": 0,
       "dest_map": "MAP_CAPHE_CITY",
-      "dest_warp_id": "4"
+        "dest_warp_id": "WARP_ID_CAPHE_TO_CENTER"
     },
     {
       "x": 6,

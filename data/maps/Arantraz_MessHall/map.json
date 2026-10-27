@@ -227,11 +227,12 @@
   ],
   "warp_events": [
     {
+        "warp_id": "WARP_ID_MESS_TO_HOSPITAL",
       "x": 2,
       "y": 14,
       "elevation": 0,
       "dest_map": "MAP_ARANTRAZ_HOSPITAL",
-      "dest_warp_id": "1"
+        "dest_warp_id": "WARP_ID_HOSPITAL_TO_MESS"
     }
   ],
   "coord_events": [],

@@ -129,11 +129,12 @@
   ],
   "warp_events": [
     {
+        "warp_id": "WARP_ID_GARDEN_TO_CAPHE",
       "x": 4,
       "y": 8,
       "elevation": 0,
       "dest_map": "MAP_CAPHE_CITY",
-      "dest_warp_id": "5"
+        "dest_warp_id": "WARP_ID_CAPHE_TO_GARDEN"
     }
   ],
   "coord_events": [],

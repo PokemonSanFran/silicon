@@ -31,11 +31,12 @@
   ],
   "warp_events": [
     {
+      "warp_id": "WARP_ID_2F_TO_ARRIBA",
       "x": 8,
       "y": 1,
       "elevation": 0,
       "dest_map": "MAP_ARRIBA_1F",
-      "dest_warp_id": "3"
+      "dest_warp_id": "WARP_ID_ARRIBA_TO_2F"
     }
   ],
   "coord_events": [],

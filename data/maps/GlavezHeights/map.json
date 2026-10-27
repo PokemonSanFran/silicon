@@ -85,11 +85,12 @@
   ],
   "warp_events": [
     {
+        "warp_id": "WARP_ID_GLAVEZ_HEIGHTS_TO_GLAVEZ_HILL",
       "x": 9,
       "y": 6,
       "elevation": 0,
       "dest_map": "MAP_GLAVEZ_HILL",
-      "dest_warp_id": "2"
+        "dest_warp_id": "WARP_ID_GLAVEZ_HILL_TO_GLAVEZ_HEIGHTS"
     }
   ],
   "coord_events": [],

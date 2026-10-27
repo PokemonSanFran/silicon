@@ -171,18 +171,20 @@
   ],
   "warp_events": [
     {
+      "warp_id": "WARP_ID_HEAR_GRIND_GANG_HOUSE_TO_CURENO_PORT_LEFT",
       "x": 6,
       "y": 6,
       "elevation": 0,
       "dest_map": "MAP_CURENO_PORT",
-      "dest_warp_id": "0"
+      "dest_warp_id": "WARP_ID_CURENO_PORT_TO_GEAR_GRIND_GANG_HOUSE"
     },
     {
+      "warp_id": "WARP_ID_HEAR_GRIND_GANG_HOUSE_TO_CURENO_PORT_RIGHT",
       "x": 7,
       "y": 6,
       "elevation": 0,
       "dest_map": "MAP_CURENO_PORT",
-      "dest_warp_id": "0"
+      "dest_warp_id": "WARP_ID_CURENO_PORT_TO_GEAR_GRIND_GANG_HOUSE"
     }
   ],
   "coord_events": [],

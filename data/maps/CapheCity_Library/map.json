@@ -31,18 +31,20 @@
   ],
   "warp_events": [
     {
+      "warp_id": "WARP_ID_LIBRARY_TO_CAPHE_LEFT",
       "x": 2,
       "y": 4,
       "elevation": 0,
       "dest_map": "MAP_CAPHE_CITY",
-      "dest_warp_id": "3"
+        "dest_warp_id": "WARP_ID_CAPHE_TO_LIBRARY"
     },
     {
+      "warp_id": "WARP_ID_LIBRARY_TO_CAPHE_RIGHT",
       "x": 3,
       "y": 4,
       "elevation": 0,
       "dest_map": "MAP_CAPHE_CITY",
-      "dest_warp_id": "3"
+        "dest_warp_id": "WARP_ID_CAPHE_TO_LIBRARY"
     }
   ],
   "coord_events": [],

@@ -45,18 +45,20 @@
   ],
   "warp_events": [
     {
+        "warp_id": "WARP_ID_RESTAURANT_TO_CRESALTA_VISTA_LEFT",
       "x": 4,
       "y": 10,
       "elevation": 0,
       "dest_map": "MAP_CRESALTA_VISTA",
-      "dest_warp_id": "0"
+        "dest_warp_id": "WARP_ID_CRESALTA_VISTA_TO_RESTAURANT"
     },
     {
+        "warp_id": "WARP_ID_RESTAURANT_TO_CRESALTA_VISTA_RIGHT",
       "x": 5,
       "y": 10,
       "elevation": 0,
       "dest_map": "MAP_CRESALTA_VISTA",
-      "dest_warp_id": "0"
+        "dest_warp_id": "WARP_ID_CRESALTA_VISTA_TO_RESTAURANT"
     }
   ],
   "coord_events": [],

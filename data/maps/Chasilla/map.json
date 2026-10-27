@@ -98,6 +98,7 @@
   ],
   "warp_events": [
     {
+      "warp_id": "MAP_CHASILLA_TO_GYM",
       "x": 15,
       "y": 8,
       "elevation": 0,
@@ -105,60 +106,60 @@
       "dest_warp_id": "0"
     },
     {
+      "warp_id": "MAP_CHASILLA_TO_BREEDING",
       "x": 12,
       "y": 15,
       "elevation": 0,
       "dest_map": "MAP_CHASILLA_BREEDING_CENTER",
-      "dest_warp_id": "0"
+        "dest_warp_id": "WARP_ID_BREEDING_TO_CHASILLA_LEFT"
     },
     {
+      "warp_id": "WARP_ID_CHASILLA_TO_ICE_CREAM",
       "x": 22,
       "y": 9,
       "elevation": 0,
       "dest_map": "MAP_CHASILLA_ICE_CREAM_SHOP",
-      "dest_warp_id": "0"
+        "dest_warp_id": "WARP_ID_ICE_CREAM_TO_CHASILLA_LEFT"
     },
     {
+        "warp_id": "WARP_ID_CHASILLA_TO_RESEARCH",
       "x": 23,
       "y": 16,
       "elevation": 0,
       "dest_map": "MAP_CHASILLA_RESEARCH",
-      "dest_warp_id": "0"
+      "dest_warp_id": "WARP_ID_UNIVERSITY_TO_CHASILLA_LEFT"
     },
     {
+        "warp_id": "WARP_ID_CHASILLA_TO_UNIVERSITY",
       "x": 22,
       "y": 3,
       "elevation": 0,
       "dest_map": "MAP_CHASILLA_UNIVERSITY",
-      "dest_warp_id": "0"
+      "dest_warp_id": "WARP_ID_UNIVERSITY_TO_CHASILLA_LEFT"
     },
     {
-      "x": 21,
-      "y": 0,
-      "elevation": 0,
-      "dest_map": "MAP_CHASILLA_UNIVERSITY",
-      "dest_warp_id": "2"
-    },
-    {
+      "warp_id": "WARP_ID_CHASILLA_TO_CENTER",
       "x": 6,
       "y": 3,
       "elevation": 0,
       "dest_map": "MAP_CHASILLA_POKEMON_CENTER_1F",
-      "dest_warp_id": "0"
+        "dest_warp_id": "WARP_ID_CENTER_TO_CHASILLA_LEFT"
     },
     {
+        "warp_id": "WARP_ID_CHASILLA_TAXI_DROP_OFF",
       "x": 14,
       "y": 3,
       "elevation": 0,
       "dest_map": "MAP_CHASILLA",
-      "dest_warp_id": "0"
+        "dest_warp_id": "WARP_ID_CHASILLA_TAXI_DROP_OFF"
     },
     {
+      "warp_id": "WARP_ID_CHASILLA_TO_MOCHI_SHOP",
       "x": 20,
       "y": 16,
       "elevation": 0,
       "dest_map": "MAP_CHASILLA_MOCHI_SHOP",
-      "dest_warp_id": "0"
+        "dest_warp_id": "WARP_ID_MOCHI_SHOP_TO_CHASILLA_LEFT"
     }
   ],
   "coord_events": [

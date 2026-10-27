@@ -179,32 +179,36 @@
   ],
   "warp_events": [
     {
+       "warp_id": "WARP_ID_CRESALTA_VISTA_TO_RESTAURANT",
       "x": 19,
       "y": 15,
       "elevation": 0,
       "dest_map": "MAP_CRESALTA_VISTA_GEMHOUSE",
-      "dest_warp_id": "0"
+        "dest_warp_id": "WARP_ID_RESTAURANT_TO_CRESALTA_VISTA_LEFT"
     },
     {
+        "warp_id": "WARP_ID_CRESALTA_VISTA_TO_SHOP_UNION",
       "x": 35,
       "y": 27,
       "elevation": 0,
       "dest_map": "MAP_CRESALTA_VISTA_SHOP_UNION",
-      "dest_warp_id": "0"
+        "dest_warp_id": "WARP_ID_SHOP_UNION_TO_CRESALTA_VISTA_LEFT"
     },
     {
+        "warp_id": "WARP_ID_CRESALTA_VISTA_TAXI_DROP_OFF",
       "x": 35,
       "y": 12,
       "elevation": 0,
       "dest_map": "MAP_CRESALTA_VISTA",
-      "dest_warp_id": "0"
+      "dest_warp_id": "WARP_ID_CRESALTA_VISTA_TAXI_DROP_OFF"
     },
     {
+        "warp_id": "WARP_ID_CRESALTA_VISTA_TO_CENTER",
       "x": 31,
       "y": 27,
       "elevation": 0,
       "dest_map": "MAP_CRESALTA_VISTA_POKEMON_CENTER_1F",
-      "dest_warp_id": "0"
+        "dest_warp_id": "WARP_ID_CENTER_TO_CRESALTA_VISTA_LEFT"
     }
   ],
   "coord_events": [

@@ -31,18 +31,20 @@
   ],
   "warp_events": [
     {
+        "warp_id": "WARP_ID_SHARPRISE_COMPOUND_TO_PETAROSA_BOROUGH_LEFT",
       "x": 6,
       "y": 10,
       "elevation": 0,
       "dest_map": "MAP_PETAROSA_BOROUGH",
-      "dest_warp_id": "1"
+      "dest_warp_id": "WARP_ID_PETAROSA_BOROUGH_TO_SHARPRISE_COMPOUND"
     },
     {
+        "warp_id": "WARP_ID_SHARPRISE_COMPOUND_TO_PETAROSA_BOROUGH_RIGHT",
       "x": 7,
       "y": 10,
       "elevation": 0,
       "dest_map": "MAP_PETAROSA_BOROUGH",
-      "dest_warp_id": "1"
+      "dest_warp_id": "WARP_ID_PETAROSA_BOROUGH_TO_SHARPRISE_COMPOUND"
     }
   ],
   "coord_events": [

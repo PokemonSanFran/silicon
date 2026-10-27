@@ -57,18 +57,20 @@
   ],
   "warp_events": [
     {
+        "warp_id": "WARP_ID_CENTER_TO_CRESALTA_VISTA_LEFT",
       "x": 7,
       "y": 8,
       "elevation": 0,
       "dest_map": "MAP_CRESALTA_VISTA",
-      "dest_warp_id": "3"
+        "dest_warp_id": "WARP_ID_CRESALTA_VISTA_TO_CENTER"
     },
     {
+        "warp_id": "WARP_ID_CENTER_TO_CRESALTA_VISTA_RIGHT",
       "x": 6,
       "y": 8,
       "elevation": 0,
       "dest_map": "MAP_CRESALTA_VISTA",
-      "dest_warp_id": "3"
+        "dest_warp_id": "WARP_ID_CRESALTA_VISTA_TO_CENTER"
     }
   ],
   "coord_events": [],

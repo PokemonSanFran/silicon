@@ -167,11 +167,12 @@
       "dest_warp_id": "0"
     },
     {
+        "warp_id": "WARP_ID_GLAVEZ_HILL_TO_GLAVEZ_HEIGHTS",
       "x": 10,
       "y": 6,
       "elevation": 0,
       "dest_map": "MAP_GLAVEZ_HEIGHTS",
-      "dest_warp_id": "0"
+        "dest_warp_id": "WARP_ID_GLAVEZ_HEIGHTS_TO_GLAVEZ_HILL"
     }
   ],
   "coord_events": [],

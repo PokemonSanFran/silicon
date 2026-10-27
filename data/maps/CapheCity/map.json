@@ -297,46 +297,52 @@
   ],
   "warp_events": [
     {
+        "warp_id": "WARP_ID_CAPHE_TAXI_DROP_OFF",
       "x": 2,
       "y": 56,
       "elevation": 0,
       "dest_map": "MAP_CAPHE_CITY",
-      "dest_warp_id": "0"
+      "dest_warp_id": "WARP_ID_CAPHE_TAXI_DROP_OFF"
     },
     {
+        "warp_id": "WARP_ID_CAPHE_TO_GRUNTOFFICE",
       "x": 14,
       "y": 30,
       "elevation": 0,
       "dest_map": "MAP_CAPHE_CITY_GRUNTOFFICE",
-      "dest_warp_id": "0"
+      "dest_warp_id": "WARP_ID_GRUNTOFFICE_TO_CAPHE_LEFT"
     },
     {
+        "warp_id": "WARP_ID_CAPHE_TO_FLOWERS",
       "x": 16,
       "y": 40,
       "elevation": 0,
       "dest_map": "MAP_CAPHE_CITY_PANTRY",
-      "dest_warp_id": "0"
+      "dest_warp_id": "WARP_ID_FLOWERS_TO_CAPHE_LEFT"
     },
     {
+        "warp_id": "WARP_ID_CAPHE_TO_LIBRARY",
       "x": 14,
       "y": 16,
       "elevation": 0,
       "dest_map": "MAP_CAPHE_CITY_LIBRARY",
-      "dest_warp_id": "0"
+      "dest_warp_id": "WARP_ID_LIBRARY_TO_CAPHE_LEFT"
     },
     {
+        "warp_id": "WARP_ID_CAPHE_TO_CENTER",
       "x": 11,
       "y": 5,
       "elevation": 0,
       "dest_map": "MAP_CAPHE_CITY_POKEMON_CENTER_1F",
-      "dest_warp_id": "0"
+      "dest_warp_id": "WARP_ID_CENTER_TO_CAPHE"
     },
     {
+        "warp_id": "WARP_ID_CAPHE_TO_GARDEN",
       "x": 1,
       "y": 9,
       "elevation": 0,
       "dest_map": "MAP_CAPHE_COMMUNITY_GARDEN",
-      "dest_warp_id": "0"
+        "dest_warp_id": "WARP_ID_GARDEN_TO_CAPHE"
     }
   ],
   "coord_events": [
