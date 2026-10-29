@@ -16,18 +16,20 @@
   "object_events": [],
   "warp_events": [
     {
+        "warp_id": "WARP_ID_IRISINA_INFO_TECH_TO_TOWN_LEFT",
       "x": 2,
       "y": 4,
       "elevation": 0,
       "dest_map": "MAP_IRISINA_TOWN",
-      "dest_warp_id": "2"
+      "dest_warp_id": "WARP_ID_IRISINA_TOWN_TO_INFO_TECH"
     },
     {
+        "warp_id": "WARP_ID_IRISINA_INFO_TECH_TO_TOWN_RIGHT",
       "x": 3,
       "y": 4,
       "elevation": 0,
       "dest_map": "MAP_IRISINA_TOWN",
-      "dest_warp_id": "2"
+      "dest_warp_id": "WARP_ID_IRISINA_TOWN_TO_INFO_TECH"
     }
   ],
   "coord_events": [],

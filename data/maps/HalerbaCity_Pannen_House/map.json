@@ -16,18 +16,20 @@
   "object_events": [],
   "warp_events": [
     {
+        "warp_id": "WARP_ID_HALERBA_CITY_PANNEN_TO_HALERBA_CITY_RIGHT",
       "x": 4,
       "y": 8,
       "elevation": 0,
       "dest_map": "MAP_HALERBA_CITY",
-      "dest_warp_id": "3"
+      "dest_warp_id": "WARP_ID_HALERBA_CITY_TO_HALERBA_CITY_PANNEN"
     },
     {
+        "warp_id": "WARP_ID_HALERBA_CITY_PANNEN_TO_HALERBA_CITY_LEFT",
       "x": 3,
       "y": 8,
       "elevation": 0,
       "dest_map": "MAP_HALERBA_CITY",
-      "dest_warp_id": "3"
+      "dest_warp_id": "WARP_ID_HALERBA_CITY_TO_HALERBA_CITY_PANNEN"
     }
   ],
   "coord_events": [],

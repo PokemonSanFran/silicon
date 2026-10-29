@@ -56,18 +56,20 @@
   ],
   "warp_events": [
     {
+        "warp_id": "WARP_ID_TUNNEL_TO_CULTHOUSE_LEFT",
       "x": 6,
       "y": 25,
       "elevation": 0,
       "dest_map": "MAP_HODOU_CITY_RACISTHOUSE",
-      "dest_warp_id": "2"
+      "dest_warp_id": "WARP_ID_CULTHOUSE_TO_TUNNEL"
     },
     {
+        "warp_id": "WARP_ID_TUNNEL_TO_CULTHOUSE_RIGHT",
       "x": 7,
       "y": 25,
       "elevation": 0,
       "dest_map": "MAP_HODOU_CITY_RACISTHOUSE",
-      "dest_warp_id": "2"
+      "dest_warp_id": "WARP_ID_CULTHOUSE_TO_TUNNEL"
     }
   ],
   "coord_events": [],

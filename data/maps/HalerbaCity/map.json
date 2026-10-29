@@ -117,32 +117,36 @@
         "dest_warp_id": "WARP_ID_HALERBA_WILDS_TO_HALERBA_CITY_B"
     },
     {
+        "warp_id": "WARP_ID_HALERBA_CITY_TO_GYM",
       "x": 19,
       "y": 11,
       "elevation": 0,
       "dest_map": "MAP_HALERBA_CITY_GYM",
-      "dest_warp_id": "0"
+      "dest_warp_id": "WARP_ID_GYM_TO_HALERBA_CITY"
     },
     {
+        "warp_id": "WARP_ID_HALERBA_CITY_TO_HALERBA_CITY_PANNEN",
       "x": 3,
       "y": 20,
       "elevation": 0,
       "dest_map": "MAP_HALERBA_CITY_PANNEN_HOUSE",
-      "dest_warp_id": "0"
+      "dest_warp_id": "WARP_ID_HALERBA_CITY_PANNEN_TO_HALERBA_CITY_RIGHT"
     },
     {
+        "warp_id": "WARP_ID_HALERBA_CITY_TO_CENTER",
       "x": 4,
       "y": 9,
       "elevation": 0,
       "dest_map": "MAP_HALERBA_CITY_POKEMON_CENTER_1F",
-      "dest_warp_id": "0"
+      "dest_warp_id": "WARP_ID_CENTER_TO_HALERBA_CITY_LEFT"
     },
     {
+        "warp_id": "WARP_ID_HALERBA_CITY_TO_HALERBA_RESEARCH",
       "x": 39,
       "y": 8,
       "elevation": 0,
       "dest_map": "MAP_GLDNTEPARK_HELEBRA_RESEARCH",
-      "dest_warp_id": "0"
+      "dest_warp_id": "WARP_ID_HALERBA_RESEARCH_TO_HALERBA_CITY_RIGHT"
     }
   ],
   "coord_events": [],

@@ -216,11 +216,12 @@
   ],
   "warp_events": [
     {
+        "warp_id": "WARP_ID_WAJABI_LAKE",
       "x": 0,
       "y": 0,
       "elevation": 0,
       "dest_map": "MAP_WAJABI_LAKE",
-      "dest_warp_id": "0"
+      "dest_warp_id": "WARP_ID_WAJABI_LAKE"
     }
   ],
   "coord_events": [

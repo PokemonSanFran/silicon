@@ -297,39 +297,44 @@
   ],
   "warp_events": [
     {
+        "warp_id": "WARP_ID_HALAI_ISLAND_TO_NAVAL_BASE_INTERIOR_B",
       "x": 22,
       "y": 11,
       "elevation": 0,
       "dest_map": "MAP_NAVAL_BASE",
-      "dest_warp_id": "0"
+      "dest_warp_id": "WARP_ID_NAVAL_BASE_INTERIOR_TO_HALAI_ISLAND_LEFT"
     },
     {
+        "warp_id": "WARP_ID_HALAI_ISLAND_TO_NAVAL_BASE_INTERIOR_A",
       "x": 18,
       "y": 11,
       "elevation": 0,
       "dest_map": "MAP_NAVAL_BASE",
-      "dest_warp_id": "0"
+      "dest_warp_id": "WARP_ID_NAVAL_BASE_INTERIOR_TO_HALAI_ISLAND_LEFT"
     },
     {
+        "warp_id": "WARP_ID_HALAI_ISLAND_TO_BAIYA_HOME",
       "x": 29,
       "y": 32,
       "elevation": 0,
       "dest_map": "MAP_HALAI_ISLAND_BAIYA",
-      "dest_warp_id": "0"
+      "dest_warp_id": "WARP_ID_BAIYA_HOME_TO_HALAI_ISLAND"
     },
     {
+      "warp_id": "WARP_ID_HALAI_ISLAND_TO_CENTER",
       "x": 29,
       "y": 27,
       "elevation": 0,
       "dest_map": "MAP_HALAI_ISLAND_POKEMON_CENTER_1F",
-      "dest_warp_id": "0"
+      "dest_warp_id": "WARP_ID_CENTER_TO_HALAI_ISLAND_LEFT"
     },
     {
+        "warp_id": "WARP_ID_HALAI_TO_RESTURANT",
       "x": 16,
       "y": 30,
       "elevation": 0,
       "dest_map": "MAP_ZENZU_ISLAND_RESTAURANT",
-      "dest_warp_id": "0"
+      "dest_warp_id": "WARP_ID_RESTUARANT_TO_HALAI_LEFT"
     },
     {
       "warp_id": "WARP_ID_HALAI_TO_ROUTEB",

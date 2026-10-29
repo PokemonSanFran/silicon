@@ -185,18 +185,20 @@
   ],
   "warp_events": [
     {
+      "warp_id": "WARP_ID_MERMEREZA_GYM_KITCHEN_3_TO_MERMEREZA_GYM_KITCHEN_2",
       "x": 8,
       "y": 1,
       "elevation": 0,
       "dest_map": "MAP_MERMEREZA_CITY_GYM_KITCHEN2",
-      "dest_warp_id": "2"
+        "dest_warp_id": "WARP_ID_MERMEREZA_GYM_KITCHEN_2_TO_MERMEREZA_GYM_KITCHEN_3_RIGHT"
     },
     {
+        "warp_id": "WARP_ID_MERMEREZA_KITCHEN_3_TO_MERMEREZA_GYM",
       "x": 18,
       "y": 7,
       "elevation": 0,
       "dest_map": "MAP_MERMEREZA_CITY_GYM",
-      "dest_warp_id": "3"
+      "dest_warp_id": "WARP_ID_MERMEREZA_GYM_TO_MERMEREZA_GYM_KITCHEN_3"
     }
   ],
   "coord_events": [

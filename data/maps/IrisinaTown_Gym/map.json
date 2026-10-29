@@ -31,18 +31,20 @@
   ],
   "warp_events": [
     {
+        "warp_id": "WARP_ID_IRISINA_GYM_TO_TOWN_LEFT",
       "x": 4,
       "y": 9,
       "elevation": 0,
       "dest_map": "MAP_IRISINA_TOWN",
-      "dest_warp_id": "0"
+      "dest_warp_id": "WARP_ID_IRISINA_TOWN_TO_GYM"
     },
     {
+        "warp_id": "WARP_ID_IRISINA_GYM_TO_TOWN_RIGHT",
       "x": 5,
       "y": 9,
       "elevation": 0,
       "dest_map": "MAP_IRISINA_TOWN",
-      "dest_warp_id": "0"
+      "dest_warp_id": "WARP_ID_IRISINA_TOWN_TO_GYM"
     }
   ],
   "coord_events": [],

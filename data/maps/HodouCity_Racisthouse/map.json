@@ -32,11 +32,12 @@
       "dest_warp_id": "WARP_ID_HODOU_TO_CULTHOUSE"
     },
     {
+      "warp_id": "WARP_ID_CULTHOUSE_TO_TUNNEL",
       "x": 5,
       "y": 2,
       "elevation": 0,
       "dest_map": "MAP_HODOU_CITY_TUNNEL",
-      "dest_warp_id": "0"
+      "dest_warp_id": "WARP_ID_TUNNEL_TO_CULTHOUSE_LEFT"
     }
   ],
   "coord_events": [],

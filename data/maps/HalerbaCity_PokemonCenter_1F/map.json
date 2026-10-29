@@ -59,18 +59,20 @@
   ],
   "warp_events": [
     {
+        "warp_id": "WARP_ID_CENTER_TO_HALERBA_CITY_RIGHT",
       "x": 7,
       "y": 8,
       "elevation": 0,
       "dest_map": "MAP_HALERBA_CITY",
-      "dest_warp_id": "4"
+      "dest_warp_id": "WARP_ID_HALERBA_CITY_TO_CENTER"
     },
     {
+        "warp_id": "WARP_ID_CENTER_TO_HALERBA_CITY_LEFT",
       "x": 6,
       "y": 8,
       "elevation": 0,
       "dest_map": "MAP_HALERBA_CITY",
-      "dest_warp_id": "4"
+      "dest_warp_id": "WARP_ID_HALERBA_CITY_TO_CENTER"
     }
   ],
   "coord_events": [],

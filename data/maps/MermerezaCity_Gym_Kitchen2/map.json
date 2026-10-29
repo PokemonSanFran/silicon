@@ -143,25 +143,28 @@
   ],
   "warp_events": [
     {
+        "warp_id": "WARP_ID_MERMEREZA_GYM_KITCHEN_2_TO_MERMEREZA_GYM_KITCHEN_1",
       "x": 12,
       "y": 6,
       "elevation": 0,
       "dest_map": "MAP_MERMEREZA_CITY_GYM_KITCHEN1",
-      "dest_warp_id": "2"
+      "dest_warp_id": "WARP_ID_MERMEREZA_GYM_KITCHEN_1_TO_MERMEREZA_GYM_KITCHEN_2"
     },
     {
+        "warp_id": "WARP_ID_MERMEREZA_GYM_KITCHEN_2_TO_MERMEREZA_GYM_KITCHEN_3_LEFT",
       "x": 5,
       "y": 13,
       "elevation": 0,
       "dest_map": "MAP_MERMEREZA_CITY_GYM_KITCHEN3",
-      "dest_warp_id": "0"
+      "dest_warp_id": "WARP_ID_MERMEREZA_GYM_KITCHEN_3_TO_MERMEREZA_GYM_KITCHEN_2"
     },
     {
+        "warp_id": "WARP_ID_MERMEREZA_GYM_KITCHEN_2_TO_MERMEREZA_GYM_KITCHEN_3_RIGHT",
       "x": 6,
       "y": 13,
       "elevation": 0,
       "dest_map": "MAP_MERMEREZA_CITY_GYM_KITCHEN3",
-      "dest_warp_id": "0"
+      "dest_warp_id": "WARP_ID_MERMEREZA_GYM_KITCHEN_3_TO_MERMEREZA_GYM_KITCHEN_2"
     }
   ],
   "coord_events": [

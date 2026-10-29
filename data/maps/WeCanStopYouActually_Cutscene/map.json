@@ -213,11 +213,12 @@
   ],
   "warp_events": [
     {
+        "warp_id": "WARP_ID_WE_CAN_STOP_YOU_ACUTALLY",
       "x": 5,
       "y": 10,
       "elevation": 0,
       "dest_map": "MAP_WE_CAN_STOP_YOU_ACTUALLY_CUTSCENE",
-      "dest_warp_id": "0"
+      "dest_warp_id": "WARP_ID_WE_CAN_STOP_YOU_ACUTALLY"
     }
   ],
   "coord_events": [],

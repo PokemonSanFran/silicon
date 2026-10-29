@@ -45,11 +45,12 @@
   ],
   "warp_events": [
     {
+        "warp_id": "WARP_ID_HALERBA_GYM_A_TO_GYM_ENTRANCE",
       "x": 9,
       "y": 1,
       "elevation": 0,
       "dest_map": "MAP_HALERBA_CITY_GYM",
-      "dest_warp_id": "1"
+        "dest_warp_id": "WARP_ID_HALERBA_CITY_GYM_TO_A"
     }
   ],
   "coord_events": [],

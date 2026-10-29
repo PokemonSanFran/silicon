@@ -31,18 +31,20 @@
   ],
   "warp_events": [
     {
+      "warp_id": "WARP_ID_TAXIUNION_TO_GLAVEZ_HILL_LEFT",
       "x": 2,
       "y": 4,
       "elevation": 0,
       "dest_map": "MAP_GLAVEZ_HILL",
-      "dest_warp_id": "1"
+      "dest_warp_id": "WARP_ID_GLAVEZ_HILL_TO_TAXIUNION"
     },
     {
+      "warp_id": "WARP_ID_TAXIUNION_TO_GLAVEZ_HILL_RIGHT",
       "x": 3,
       "y": 4,
       "elevation": 0,
       "dest_map": "MAP_GLAVEZ_HILL",
-      "dest_warp_id": "1"
+      "dest_warp_id": "WARP_ID_GLAVEZ_HILL_TO_TAXIUNION"
     }
   ],
   "coord_events": [],
