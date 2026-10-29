@@ -2043,7 +2043,6 @@ EventScript_PalletTown_PlayersHouse_2F_TurnOnPC::
 .include "data/maps/HodouCity_BackroomA/scripts.inc"
 .include "data/maps/HodouCity_BackroomB/scripts.inc"
 .include "data/maps/HodouCity_BackroomC/scripts.inc"
-.include "data/maps/HodouCity_BackroomD/scripts.inc"
 .include "data/maps/HodouCity_Gym/scripts.inc"
 .include "data/maps/HodouCity_PokemonCenter_1F/scripts.inc"
 .include "data/maps/HodouCity_Racisthouse/scripts.inc"

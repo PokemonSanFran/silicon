@@ -11663,19 +11663,6 @@
       "layout_version": "emerald"
     },
     {
-      "id": "LAYOUT_HODOU_CITY_BACKROOM_D",
-      "name": "HodouCity_BackroomD_Layout",
-      "width": 12,
-      "height": 6,
-      "border_width": 2,
-      "border_height": 2,
-      "primary_tileset": "gTileset_Building",
-      "secondary_tileset": "gTileset_MossdeepGameCorner",
-      "border_filepath": "data/layouts/HodouCity_BackroomD/border.bin",
-      "blockdata_filepath": "data/layouts/HodouCity_BackroomD/map.bin",
-      "layout_version": "emerald"
-    },
-    {
       "id": "LAYOUT_CRESALTA_VISTA_UNION_HQ",
       "name": "CresaltaVista_UnionHQ_Layout",
       "width": 6,
