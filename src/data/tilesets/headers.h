@@ -1596,3 +1596,14 @@ const struct Tileset gTileset_FoggyRoutes =
     .metatileAttributes = gMetatileAttributes_PorytilesManaged_FoggyRoutes,
     .callback = NULL,
 };
+
+const struct Tileset gTileset_Desert =
+{
+    .isCompressed = TRUE,
+    .isSecondary = TRUE,
+    .tiles = gTilesetTiles_PorytilesManaged_Desert,
+    .palettes = gTilesetPalettes_PorytilesManaged_Desert,
+    .metatiles = gMetatiles_PorytilesManaged_Desert,
+    .metatileAttributes = gMetatileAttributes_PorytilesManaged_Desert,
+    .callback = NULL,
+};

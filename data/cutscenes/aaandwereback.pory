@@ -64,7 +64,7 @@ script AaandWereBack_WarpToCompound_Script {
 }
 
 script AaandWereBack_Charlotte_Dialogue {
-        msgbox(format("Damn I'm beat. Getting five badges in one day was a hustle! What about you?"),MSGBOX_NPC,SPEAKER_CHARLOTTE)
+        msgbox(format("Damn I'm beat. Getting five badges so fast was a hustle! What about you?"),MSGBOX_NPC,SPEAKER_CHARLOTTE)
         msgbox(format("Only three so far. I'm praying the ferry is fixed tomorrow."),MSGBOX_DEFAULT,SPEAKER_ALICIA)
         buffermapname(STR_VAR_1,MAP_IRISINA_TOWN)
         buffermapname(STR_VAR_2,MAP_TIRABUDIN_PLACE)

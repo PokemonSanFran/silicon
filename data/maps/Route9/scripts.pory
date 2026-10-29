@@ -109,3 +109,17 @@ script Route9_Script_Interact_WallacearmystanD
     release
     end
 }
+
+script Route9_EventScript_Sign1
+{
+    msgbox(format("▶ Route 9\n{LEFT_ARROW} Tora Town\n{RIGHT_ARROW} Caphe City"), MSGBOX_SIGN)
+    closemessage
+    end
+}
+
+script Route9_EventScript_Sign2
+{
+    msgbox(format("▶ Route 9\n{UP_ARROW} Tora Town\n{RIGHT_ARROW} Caphe City"), MSGBOX_SIGN)
+    closemessage
+    end
+}

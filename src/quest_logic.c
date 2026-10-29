@@ -4897,15 +4897,6 @@ void LetsGrabLunch_IncrementStoryVariable(void)
 }
 
 // ***********************************************************************
-// Cutscene: Swagbag
-// ***********************************************************************
-
-void BufferStipendAmount(void)
-{
-    ConvertIntToDecimalStringN(gStringVar1, STIPEND_MONEY, STR_CONV_MODE_LEFT_ALIGN, CountDigits(STIPEND_MONEY));
-}
-
-// ***********************************************************************
 // Cutscene: Swagbag Continued
 // ***********************************************************************
 
@@ -4994,6 +4985,9 @@ void Script_ShouldPlayerGetDexnav(void)
 
 static bool8 Improvbattling_ShouldLeaderMoveOffStage(void)
 {
+    if (FlagGet(FLAG_TIMELINE_FALSE))
+        return FALSE;
+
     if (IsQuestCompletedState(QUEST_IMPROVBATTLING) == FALSE)
         return FALSE;
 

@@ -26,13 +26,15 @@ script LetsFinishThis_ObjectHide_Script
 }
 
 script LetsFinishThis_ObjectSetUp_Script {
-    setflag(FLAG_HIDE_POLICE)
+	setobjectflagfromlocalid(LOCALID_HALAI_POLICE_A)
+	setobjectflagfromlocalid(LOCALID_HALAI_POLICE_B)
+	setobjectflagfromlocalid(LOCALID_HALAI_POLICE_C)
 
-        setobjectxy(ADAORA,32,12)
-        setobjectxyperm(ADAORA,32,12)
+        setobjectxy(LOCALID_HALAI_ADAORA,32,12)
+        setobjectxyperm(LOCALID_HALAI_ADAORA,32,12)
 
-        setobjectxy(BAIYA,33,12)
-        setobjectxyperm(BAIYA,33,12)
+        setobjectxy(LOCALID_HALAI_BAIYA,33,12)
+        setobjectxyperm(LOCALID_HALAI_BAIYA,33,12)
 }
 
 script LetsFinishThis_MovePlayer_Script {
@@ -77,7 +79,7 @@ script LetsFinishThis_Debrief_Dialogue
 
         msgbox(format("Even if we pull it off, will exposing them even matter? Or work?"),,SPEAKER_ADAORA)
 
-        msgbox(format("They came for the kings and missed. This may be our only chance to fight back."),,SPEAKER_ELEANOR)
+        msgbox(format("They came for the kings and missed. This may be the only chance to fight back."),,SPEAKER_ELEANOR)
 
         msgbox(format("So, break into SharpRise Spire, force a confession from Lucrezia, broadcast it using their equipment and public sentiment will come crashing down. Right?"),,SPEAKER_BAIYA_TIDE)
 
@@ -88,7 +90,7 @@ script LetsFinishThis_Debrief_Dialogue
         msgbox(format("The hardest part of that plan is actually just getting to Lucrezia. The rest of that is fairly plausible, given we survive."),,SPEAKER_ELEANOR)
 
 	callnative(Script_BufferNumberOfCompletedTakedownQuests)
-        msgbox(format("{STR_VAR_1} has-beens, and a bunch of kids running into the belly of the beast? Count me the hell in. But how do we get in?"),,SPEAKER_TALA)
+        msgbox(format("{STR_VAR_1} has-beens, the disgraced Champion and some terriorists running into the belly of the beast... but how to get inside..."),,SPEAKER_ADAORA)
 		closemessage
 		delay(24)
 
@@ -106,22 +108,42 @@ script LetsFinishThis_GoToFlashback_Script
 	goto(LetsFinishThis_StartPlanning_Dialogue)
 }
 
+script LetsFinishThis_Script_HintTowardsTakedownFrank
+{
+	msgbox(format("I'd be there on the front lines, but I can't drop the momentum I'm making with against Arriba. If I finish up early, I'll be there to lend a hand!"),,SPEAKER_FRANK)
+}
+
+script LetsFinishThis_Script_HintTowardsTakedownEleanor
+{
+	msgbox(format("Storming Sharprise Capital is a dream... but I can't abandon my campaign against Presto. I wish you all the best, and I'll join as soon as we're done."),,SPEAKER_ELEANOR)
+}
+
+script LetsFinishThis_Script_HintTowardsTakedownTala
+{
+	msgbox(format("I don't know if I'm young enough for this, but I'm finally getting to the source of the rot within Buzzr. These old bones will make their way over once I've finished."),,SPEAKER_TALA)
+}
+
 script LetsFinishThis_StartPlanning_Dialogue {
     lock
         msgbox(format("That works... but nobody has seen Keiying since their stunt in the warehouse. Cops have been crawling all over that neighborhood and house looking for him."),,SPEAKER_ADAORA)
 
         msgbox(format("How about Ramesh? That workaholic absolutely has a panel in their place. And no police looking for them."),,SPEAKER_FRANK)
+
+		call_if_quest_not_complete(QUEST_WAREHOUSEWARFARE,LetsFinishThis_Script_HintTowardsTakedownEleanor)
+		call_if_quest_not_complete(QUEST_BREAKTHEINTERNET,LetsFinishThis_Script_HintTowardsTakedownTala)
+		call_if_quest_not_complete(QUEST_PERSUASIVEPASSENGER,LetsFinishThis_Script_HintTowardsTakedownFrank)
         closemessage
 
-        applymovement(PLAYER, Common_Movement_FaceDown)
-        applymovement(ELEANOR, moves(walk_right, face_up, step_end))
-        waitmovement(ELEANOR)
 
-        msgbox(format("We’re onto something. You should go prepare! Once we start, I don’t think there’s any turning back. Meet us outside Ramesh’s house in QiuVillage."),,SPEAKER_ELEANOR)
+        applymovement(LOCALID_HALAI_BAIYA, moves(walk_down, face_right, step_end))
+        waitmovement(LOCALID_HALAI_BAIYA)
+
+		buffermapname(STR_VAR_1,MAP_QIU_VILLAGE)
+        msgbox(format("You should go prepare! Once we start, I don’t think there’s any turning back. Meet us outside Ramesh’s house in {STR_VAR_1}."),,SPEAKER_BAIYA_TIDE)
         closemessage
 
-        applymovement(ELEANOR, moves(walk_left, face_up, step_end))
-        waitmovement(ELEANOR)
+        applymovement(LOCALID_HALAI_BAIYA, moves(walk_left, face_up, step_end))
+        waitmovement(LOCALID_HALAI_BAIYA)
 
         setvar(VAR_STORYLINE_STATE,STORY_BEFORE_RAMESH_BREAKIN)
         setvar(VAR_HALAI_ISLAND_STATE,POST_WAIT_EVEN_THEN)
