@@ -2,7 +2,7 @@
   "id": "MAP_HALAI_ISLAND_BAIYA",
   "name": "HalaiIsland_Baiya",
   "layout": "LAYOUT_HALAI_ISLAND_BAIYA",
-  "music": "MUS_HALAI_ISLAND",
+  "music": "MUS_WAREHOUSE_RAVE",
   "region_map_section": "MAPSEC_HALAI_ISLAND",
   "requires_flash": false,
   "weather": "WEATHER_NONE",
@@ -15,40 +15,148 @@
   "connections": null,
   "object_events": [
     {
-      "local_id": "LOCALID_HALAI_HOME_BAIYA",
-      "graphics_id": "OBJ_EVENT_GFX_BAIYA",
-      "x": 6,
-      "y": 4,
-      "elevation": 3,
-      "movement_type": "MOVEMENT_TYPE_LOOK_AROUND",
+      "graphics_id": "OBJ_EVENT_GFX_COMRADE_9",
+      "x": 3,
+      "y": 5,
+      "elevation": 0,
+      "movement_type": "MOVEMENT_TYPE_WALK_IN_PLACE_DOWN",
       "movement_range_x": 0,
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "NULL",
-      "flag": "FLAG_TEMP_1"
+      "script": "HalaiIsland_Baiya_Hardcore",
+      "flag": "FLAG_TEMP_2"
+    },
+    {
+      "graphics_id": "OBJ_EVENT_GFX_COMRADE_5",
+      "x": 7,
+      "y": 6,
+      "elevation": 0,
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "HalaiIsland_Baiya_CrashUpstairs",
+      "flag": "FLAG_TEMP_2"
+    },
+    {
+      "graphics_id": "OBJ_EVENT_GFX_COMRADE_3",
+      "x": 2,
+      "y": 3,
+      "elevation": 0,
+      "movement_type": "MOVEMENT_TYPE_FACE_UP",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "HalaiIsland_Baiya_News",
+      "flag": "FLAG_TEMP_2"
+    },
+    {
+      "graphics_id": "OBJ_EVENT_GFX_COMRADE_4",
+      "x": 0,
+      "y": 6,
+      "elevation": 0,
+      "movement_type": "MOVEMENT_TYPE_FACE_RIGHT",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "HalaiIsland_Baiya_CantHear",
+      "flag": "FLAG_TEMP_2"
+    },
+    {
+      "graphics_id": "OBJ_EVENT_GFX_COMRADE_6",
+      "x": 3,
+      "y": 9,
+      "elevation": 0,
+      "movement_type": "MOVEMENT_TYPE_FACE_UP",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "HalaiIsland_Baiya_GotEachOther",
+      "flag": "FLAG_TEMP_2"
+    },
+    {
+      "graphics_id": "OBJ_EVENT_GFX_COMRADE_7",
+      "x": 4,
+      "y": 7,
+      "elevation": 0,
+      "movement_type": "MOVEMENT_TYPE_FACE_LEFT",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "HalaiIsland_Baiya_ScrewSharpRise",
+      "flag": "FLAG_TEMP_3"
     }
   ],
   "warp_events": [
     {
-      "x": 7,
-      "y": 1,
+      "x": 8,
+      "y": 10,
       "elevation": 0,
       "dest_map": "MAP_HALAI_ISLAND",
       "dest_warp_id": "2"
-    }
-  ],
-  "coord_events": [
+    },
     {
-      "type": "trigger",
-      "x": 1,
-      "y": 4,
+      "x": 9,
+      "y": 10,
       "elevation": 0,
-      "var": "VAR_TEMP_1",
-      "var_value": "0",
-      "script": "CuconuTown_Compound_2F_Bed_Script"
+      "dest_map": "MAP_HALAI_ISLAND",
+      "dest_warp_id": "2"
+    },
+    {
+      "x": 9,
+      "y": 2,
+      "elevation": 0,
+      "dest_map": "MAP_HALAI_ISLAND_BAIYA2F",
+      "dest_warp_id": "0"
     }
   ],
-  "bg_events": [],
-  "night_music": "MUS_HALAI_ISLAND_NIGHT"
+  "coord_events": [],
+  "bg_events": [
+    {
+      "type": "sign",
+      "x": 3,
+      "y": 2,
+      "elevation": 3,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "HalaiIsland_Baiya_TV"
+    },
+    {
+      "type": "sign",
+      "x": 2,
+      "y": 2,
+      "elevation": 3,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "HalaiIsland_Baiya_TV"
+    },
+    {
+      "type": "sign",
+      "x": 5,
+      "y": 2,
+      "elevation": 3,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "HalaiIsland_Baiya_Fridge"
+    },
+    {
+      "type": "sign",
+      "x": 9,
+      "y": 6,
+      "elevation": 3,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "HalaiIsland_Baiya_Bin"
+    },
+    {
+      "type": "sign",
+      "x": 5,
+      "y": 10,
+      "elevation": 3,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "HalaiIsland_Baiya_Bin"
+    }
+  ]
 }

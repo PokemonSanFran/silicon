@@ -2303,7 +2303,7 @@ void JumpPlayerTo_MaskOff_Vigrim(bool32 jumpType)
 
 void FlagsVarWarp_LockedOut()
 {
-    FlagSet(FLAG_LOCKEDOUT_PLAYED);
+    FlagSet(FLAG_LOCKEDOUT_PLAYER);
     SetLastHealLocationWarp(HEAL_LOCATION_HALAI_ISLAND_BAIYA);
     SetWarpDestination(MAP_GROUP(MAP_HALAI_ISLAND_BAIYA),MAP_NUM(MAP_HALAI_ISLAND_BAIYA),0,USE_WARP_ID,USE_WARP_ID);
 }

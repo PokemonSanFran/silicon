@@ -2618,7 +2618,7 @@ static const struct PlayerAdventureText playerAdventureText[] =
       },
       {
         .dataType = QUEST_FLAVOR_COMPARE_FLAG,
-        .dataAddress = FLAG_LOCKEDOUT_PLAYED,
+        .dataAddress = FLAG_LOCKEDOUT_PLAYER,
         .compareOp = EQUAL,
         .targetValue = FALSE,
       },
@@ -2643,7 +2643,7 @@ static const struct PlayerAdventureText playerAdventureText[] =
       },
       {
         .dataType = QUEST_FLAVOR_COMPARE_FLAG,
-        .dataAddress = FLAG_LOCKEDOUT_PLAYED,
+        .dataAddress = FLAG_LOCKEDOUT_PLAYER,
         .compareOp = EQUAL,
         .targetValue = TRUE,
       },

@@ -1,0 +1,120 @@
+{
+  "id": "MAP_HALAI_ISLAND_BAIYA2F",
+  "name": "HalaiIsland_Baiya2F",
+  "layout": "LAYOUT_HALAI_ISLAND_BAIYA2F",
+  "music": "MUS_WAREHOUSE_RAVE",
+  "region_map_section": "MAPSEC_HALAI_ISLAND",
+  "requires_flash": false,
+  "weather": "WEATHER_NONE",
+  "map_type": "MAP_TYPE_NONE",
+  "allow_cycling": false,
+  "allow_escaping": false,
+  "allow_running": true,
+  "show_map_name": false,
+  "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
+  "connections": null,
+  "object_events": [
+    {
+      "local_id": "LOCALID_HALAI_HOME_BAIYA",
+      "graphics_id": "OBJ_EVENT_GFX_BAIYA",
+      "x": 5,
+      "y": 5,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_RIGHT",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "NULL",
+      "flag": "FLAG_TEMP_1"
+    }
+  ],
+  "warp_events": [
+    {
+      "x": 8,
+      "y": 2,
+      "elevation": 0,
+      "dest_map": "MAP_HALAI_ISLAND_BAIYA",
+      "dest_warp_id": "2"
+    }
+  ],
+  "coord_events": [
+    {
+      "type": "trigger",
+      "x": 9,
+      "y": 5,
+      "elevation": 0,
+      "var": "VAR_TEMP_1",
+      "var_value": "0",
+      "script": "CuconuTown_Compound_2F_Bed_Script"
+    },
+    {
+      "type": "trigger",
+      "x": 9,
+      "y": 4,
+      "elevation": 0,
+      "var": "VAR_TEMP_1",
+      "var_value": "0",
+      "script": "CuconuTown_Compound_2F_Bed_Script"
+    },
+    {
+      "type": "trigger",
+      "x": 2,
+      "y": 7,
+      "elevation": 0,
+      "var": "VAR_TEMP_1",
+      "var_value": "0",
+      "script": "HalaiIsland_Baiya_Bed"
+    }
+  ],
+  "bg_events": [
+    {
+      "type": "sign",
+      "x": 6,
+      "y": 3,
+      "elevation": 3,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "HalaiIsland_Baiya_PC"
+    },
+    {
+      "type": "sign",
+      "x": 6,
+      "y": 8,
+      "elevation": 4,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_NORTH",
+      "script": "HalaiIsland_Baiya_Shelf"
+    },
+    {
+      "type": "sign",
+      "x": 7,
+      "y": 8,
+      "elevation": 4,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_NORTH",
+      "script": "HalaiIsland_Baiya_Shelf"
+    },
+    {
+      "type": "sign",
+      "x": 8,
+      "y": 8,
+      "elevation": 4,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_NORTH",
+      "script": "HalaiIsland_Baiya_Shelf"
+    },
+    {
+      "type": "sign",
+      "x": 9,
+      "y": 8,
+      "elevation": 4,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_NORTH",
+      "script": "HalaiIsland_Baiya_Shelf"
+    },
+    {
+      "type": "sign",
+      "x": 4,
+      "y": 3,
+      "elevation": 3,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "HalaiIsland_Baiya_Bin"
+    }
+  ]
+}

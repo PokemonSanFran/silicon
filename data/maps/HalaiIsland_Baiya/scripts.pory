@@ -8,10 +8,117 @@ mapscripts HalaiIsland_Baiya_MapScripts {
 }
 
 script HalaiIsland_Baiya_OnTransition {
+    
+    callnative(Script_IsHalaiIslandUnderCrisis)
+    if (var(VAR_RESULT))
+    {
+        setflag(FLAG_TEMP_2)
+        setflag(FLAG_TEMP_3) 
+    }
+    
+    if(var(VAR_STORYLINE_STATE) >= STORY_POST_EARTHQUAKE)
+    {
+        setflag(FLAG_TEMP_3)  
+    }
+
     switch (var(VAR_STORYLINE_STATE))
     {
         default: call(LetsFixThis_HideObjectHouse_Script)
     }
+    
     call_if_set(FLAG_SHOULD_SKIP_CREDITS,Epilogue_Script_SetPostGameValues)
 }
 
+script HalaiIsland_Baiya_Hardcore
+{
+    if(var(VAR_HALAI_ISLAND_STATE) >= MEET_AT_ROUTE4)
+    {
+        msgbox(format("THE SHOW! MUST! GO! ON!\pHARDCORE!"))
+    }
+    else
+    {
+       msgbox(format("HARDCORE, BABY!")) 
+    }
+    closemessage
+    end
+}
+
+script HalaiIsland_Baiya_CrashUpstairs
+{
+    faceplayer
+    if(var(VAR_HALAI_ISLAND_STATE) >= MEET_AT_ROUTE4)
+    {
+        msgbox(format("For all your efforts, I will grant you the utmost honor.\pThe faculty to sleep on the one mattress in the house.\nYou've earned it."))
+    }
+    else
+    {
+       
+       msgbox(format("You cool with Baiya?\nRad.\nYou can crash upstairs, then.\pJust leave the bed to him, eh?")) 
+    }
+    closemessage
+    end
+}
+
+script HalaiIsland_Baiya_News
+{
+    faceplayer
+    msgbox(format("'Scuse me?\nI'm trying to watch the news."))
+    closemessage
+    applymovement(3, moves(face_up))
+    waitmovement(0)
+    end
+}
+
+script HalaiIsland_Baiya_CantHear
+{
+    faceplayer
+    msgbox(format("WHAT?!\nI CAN'T HEAR YOU!\pTURN THE MUSIC DOWN?\NNO WAY!"))
+    closemessage
+    end
+}
+
+script HalaiIsland_Baiya_GotEachOther
+{
+    faceplayer
+    if(var(VAR_HALAI_ISLAND_STATE) >= MEET_AT_ROUTE4)
+    {
+        msgbox(format("…The earthquake took out our comrade.\pIt's chill.\nThey went down fighting.\nJust like they wanted.\pWe must continue for them, too."))
+    }
+    else
+    {
+       
+       msgbox(format("Even if the whole world is against us, at least we got each other.")) 
+    }
+    closemessage
+    end
+}
+
+script HalaiIsland_Baiya_ScrewSharpRise
+{
+    faceplayer
+    msgbox(format("Sharp Rise is nothin' to me!\nWe're gonna take on 'em all!\nJust they wait!"))
+    closemessage
+    end
+}
+
+script HalaiIsland_Baiya_TV
+{
+    callnative(Script_IsHalaiIslandUnderCrisis)
+    if (var(VAR_RESULT))    
+    {
+        msgbox(format("Just static."))
+    }
+    else
+    {
+        msgbox(format("It's a cartoon.\nA Pawmi is being crushed by a Glameow with a comically large hammer.\p…It's time to go."))
+    }
+    closemessage
+    end
+}
+
+script HalaiIsland_Baiya_Fridge
+{
+    msgbox(format("It's full of sodas and instant noodles."))
+    closemessage
+    end
+}

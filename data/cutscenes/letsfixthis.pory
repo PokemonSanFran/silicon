@@ -31,8 +31,8 @@ script LetsFixThis_EliteVideo_Dialogue
 
 script LetsFixThis_GetMessage_Dialogue
 {
-    applymovement(BAIYA,Common_Movement_FaceLeft)
-        applymovement(PLAYER,Common_Movement_WalkRight)
+    applymovement(BAIYA,Common_Movement_FaceRight)
+        applymovement(PLAYER,Common_Movement_WalkLeft)
         waitmovement(PLAYER)
 
         playse(SE_POKENAV_CALL)
@@ -58,9 +58,9 @@ script LetsFixThis_GetMessage_Dialogue
         setvar(VAR_ARANTRAZ_STATE,PRE_SPEECHSPEECH)
         setvar(VAR_STORYLINE_STATE,STORY_RECIVED_RAVE_INVITE)
         setvar(VAR_WAREHOUSE_RAVE_STATE,GOT_RAVE_MESSAGE)
-        setflag(FLAG_LOCKEDOUT_PLAYED)
+        setflag(FLAG_LOCKEDOUT_PLAYER)
 
-        applymovement(BAIYA, moves(walk_right, walk_up * 3, step_end))
+        applymovement(BAIYA, moves(walk_up, walk_right * 2, walk_up, walk_right, walk_up, step_end))
         waitmovement(BAIYA)
         playse(SE_EXIT)
         waitse
