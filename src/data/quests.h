@@ -5435,7 +5435,7 @@ const struct SideQuest sSideQuests[QUEST_COUNT] =
                 .name = COMPOUND_STRING("Spoken Growing Up"),
                 .setupFunc = DebugQuest_Diggingupadaorasdirt,
                 side_quest_map(MAP_QUEST_DIGGINGUPADAORASDIRT_GROWING_UP),
-                .warpId = WARP_ID_QIUVILLAGE_APARTMENT_2F_ENTRANCE,
+                .warpId = WARP_ID_QIU_VILLAGE_APARTMENT_2F_TO_1F,
             },
             [STATE_QUEST_DIGGINGUPADAORASDIRT_SPOKEN_KEIYING] =
             {
