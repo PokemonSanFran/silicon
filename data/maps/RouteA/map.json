@@ -145,18 +145,20 @@
   ],
   "warp_events": [
     {
+        "warp_id": "WARP_ID_ROUTE_A_TO_GROTTO",
       "x": 35,
       "y": 15,
       "elevation": 0,
       "dest_map": "MAP_ROUTE_A_GROTTO",
-      "dest_warp_id": "0"
+      "dest_warp_id": "WARP_ID_GROTTO_TO_ROUTE_A_LEFT"
     },
     {
+        "warp_id": "WARP_ID_ROUTE_A_TO_PRESTO_BARGE",
       "x": 47,
       "y": 11,
       "elevation": 0,
       "dest_map": "MAP_PRESTO_BARGE_1",
-      "dest_warp_id": "0"
+      "dest_warp_id": "WARP_ID_PRESTO_BARGE_TO_ROUTE_A"
     }
   ],
   "coord_events": [],

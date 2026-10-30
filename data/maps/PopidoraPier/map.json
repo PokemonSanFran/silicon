@@ -227,11 +227,12 @@
   ],
   "warp_events": [
     {
+      "warp_id": "WARP_ID_POPIDORA_TO_ARCADE",
       "x": 62,
       "y": 4,
       "elevation": 0,
       "dest_map": "MAP_POPIDORA_PIER_ARCADE",
-      "dest_warp_id": "0"
+      "dest_warp_id": "WARP_ID_ARCADE_TO_POPIDORA_LEFT"
     }
   ],
   "coord_events": [

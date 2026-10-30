@@ -16,11 +16,12 @@
   "object_events": [],
   "warp_events": [
     {
+        "warp_id": "WARP_ID_BUILDING_SCOPE_HOUSE_TO_PETAROSA_BOROUGH",
       "x": 3,
       "y": 1,
       "elevation": 0,
       "dest_map": "MAP_PETAROSA_BOROUGH",
-      "dest_warp_id": "4"
+        "dest_warp_id": "WARP_ID_PETAROSA_BOROUGH_TO_BUILDING_SCOPE_HOUSE_EXIT"
     }
   ],
   "coord_events": [],

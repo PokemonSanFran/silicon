@@ -31,11 +31,12 @@
   ],
   "warp_events": [
     {
+        "warp_id": "WARP_ID_PRESTO_BARGE_TO_ROUTE_A",
       "x": 1,
       "y": 1,
       "elevation": 0,
       "dest_map": "MAP_ROUTE_A",
-      "dest_warp_id": "1"
+      "dest_warp_id": "WARP_ID_ROUTE_A_TO_PRESTO_BARGE"
     }
   ],
   "coord_events": [],

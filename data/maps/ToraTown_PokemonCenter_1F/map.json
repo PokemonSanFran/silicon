@@ -59,18 +59,20 @@
   ],
   "warp_events": [
     {
+        "warp_id": "WARP_ID_CENTER_TO_TORA_TOWN_LEFT",
       "x": 7,
       "y": 8,
       "elevation": 0,
       "dest_map": "MAP_TORA_TOWN",
-      "dest_warp_id": "4"
+      "dest_warp_id": "WARP_ID_TORA_TOWN_TO_CENTER"
     },
     {
+        "warp_id": "WARP_ID_CENTER_TO_TORA_TOWN_RIGHT",
       "x": 6,
       "y": 8,
       "elevation": 0,
       "dest_map": "MAP_TORA_TOWN",
-      "dest_warp_id": "4"
+      "dest_warp_id": "WARP_ID_TORA_TOWN_TO_CENTER"
     }
   ],
   "coord_events": [],

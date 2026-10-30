@@ -59,18 +59,20 @@
   ],
   "warp_events": [
     {
+        "warp_id": "WARP_ID_CENTER_TO_PETAROSA_BOROUGH_LEFT",
       "x": 7,
       "y": 8,
       "elevation": 0,
       "dest_map": "MAP_PETAROSA_BOROUGH",
-      "dest_warp_id": "6"
+      "dest_warp_id": "WARP_ID_PETAROSA_BOROUGH_TO_CENTER"
     },
     {
+        "warp_id": "WARP_ID_CENTER_TO_PETAROSA_BOROUGH_RIGHT",
       "x": 6,
       "y": 8,
       "elevation": 0,
       "dest_map": "MAP_PETAROSA_BOROUGH",
-      "dest_warp_id": "6"
+      "dest_warp_id": "WARP_ID_PETAROSA_BOROUGH_TO_CENTER"
     }
   ],
   "coord_events": [],

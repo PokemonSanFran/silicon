@@ -70,18 +70,20 @@
   ],
   "warp_events": [
     {
+        "warp_id": "WARP_ID_ROUTE_C_TO_GROTTO",
       "x": 4,
       "y": 36,
       "elevation": 0,
       "dest_map": "MAP_ROUTE_C_GROTTO",
-      "dest_warp_id": "0"
+      "dest_warp_id": "WARP_ID_GROTTO_TO_ROUTE_C_LEFT"
     },
     {
+        "warp_id": "WARP_ID_ROUTE_C_TO_PRESTO_BARGE",
       "x": 16,
       "y": 22,
       "elevation": 0,
       "dest_map": "MAP_PRESTO_BARGE_3",
-      "dest_warp_id": "0"
+      "dest_warp_id": "WARP_ID_PRESTO_BARGE_TO_ROUTE_C"
     }
   ],
   "coord_events": [],

@@ -59,18 +59,20 @@
   ],
   "warp_events": [
     {
+        "warp_id": "WARP_ID_CENTER_TO_TIRABUDIN_PLACE_RIGHT",
       "x": 7,
       "y": 8,
       "elevation": 0,
       "dest_map": "MAP_TIRABUDIN_PLACE",
-      "dest_warp_id": "2"
+      "dest_warp_id": "WARP_ID_TIRABUDIN_PLACE_TO_CENTER"
     },
     {
+        "warp_id": "WARP_ID_CENTER_TO_TIRABUDIN_PLACE_LEFT",
       "x": 6,
       "y": 8,
       "elevation": 0,
       "dest_map": "MAP_TIRABUDIN_PLACE",
-      "dest_warp_id": "2"
+      "dest_warp_id": "WARP_ID_TIRABUDIN_PLACE_TO_CENTER"
     }
   ],
   "coord_events": [],

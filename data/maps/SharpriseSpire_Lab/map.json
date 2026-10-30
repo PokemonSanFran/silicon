@@ -16,18 +16,20 @@
   "object_events": [],
   "warp_events": [
     {
+        "warp_id": "WARP_ID_LAB_TO_TOP_RIGHT",
       "x": 7,
       "y": 12,
       "elevation": 0,
       "dest_map": "MAP_SHARPRISE_SPIRE_TOP",
-      "dest_warp_id": "1"
+      "dest_warp_id": "WARP_ID_TOP_TO_LAB"
     },
     {
+        "warp_id": "WARP_ID_LAB_TO_TOP_LEFT",
       "x": 6,
       "y": 12,
       "elevation": 0,
       "dest_map": "MAP_SHARPRISE_SPIRE_TOP",
-      "dest_warp_id": "1"
+      "dest_warp_id": "WARP_ID_TOP_TO_LAB"
     }
   ],
   "coord_events": [],

@@ -232,18 +232,20 @@
   ],
   "warp_events": [
     {
+        "warp_id": "WARP_ID_LEAGUEOPS_TO_PRODUCTION",
       "x": 16,
       "y": 9,
       "elevation": 0,
       "dest_map": "MAP_SHARPRISE_SPIRE_PRODUCTION",
-      "dest_warp_id": "1"
+      "dest_warp_id": "WARP_ID_PRODUCTION_TO_LEAGUEOPS"
     },
     {
+        "warp_id": "WARP_ID_LEAGUEOPS_TO_TOP",
       "x": 10,
       "y": 55,
       "elevation": 0,
       "dest_map": "MAP_SHARPRISE_SPIRE_TOP",
-      "dest_warp_id": "0"
+      "dest_warp_id": "WARP_ID_TOP_TO_LEAGUEOPS"
     },
     {
       "warp_id": "WARP_ID_SPIRE_ELEVATOR_TO_LEAGUEOPS",
@@ -251,7 +253,7 @@
       "y": 10,
       "elevation": 0,
       "dest_map": "MAP_SHARPRISESPIRE_ELEVATOR",
-      "dest_warp_id": "0"
+      "dest_warp_id": "WARP_ID_SHARPRISE_ELEVATOR_ENTRANCE_LEFT"
     }
   ],
   "coord_events": [

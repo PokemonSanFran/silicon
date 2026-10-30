@@ -71,6 +71,14 @@
       "elevation": 0,
       "dest_map": "MAP_OROLAND",
       "dest_warp_id": "WARP_ID_OROLAND_TO_ROUTEB"
+    },
+    {
+      "warp_id": "WARP_ID_ROUTEB_TO_GROTTO",
+      "x": 3,
+      "y": 25,
+      "elevation": 0,
+      "dest_map": "MAP_HALAI_ISLAND",
+      "dest_warp_id": "WARP_ID_GROTTO_TO_ROUTE_B_RIGHT"
     }
   ],
   "coord_events": [],

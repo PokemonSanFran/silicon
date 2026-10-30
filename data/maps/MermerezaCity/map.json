@@ -116,18 +116,20 @@
         "dest_warp_id": "WARP_ID_MERMEREZA_GYM_TO_MERMEREZA_CITY_LEFT"
     },
     {
+        "warp_id": "WARP_ID_MERMERZA_CITY_TO_CONSULTING",
       "x": 28,
       "y": 12,
       "elevation": 0,
       "dest_map": "MAP_MERMEREZA_CITY_CONSULTING",
-      "dest_warp_id": "0"
+      "dest_warp_id": "WARP_ID_CONSULTING_TO_MERMEREZA_CITY_LEFT"
     },
     {
+        "warp_id": "WARP_ID_MERMERZA_CITY_TO_CENTER",
       "x": 38,
       "y": 18,
       "elevation": 0,
       "dest_map": "MAP_MERMEREZA_CITY_POKEMON_CENTER_1F",
-      "dest_warp_id": "0"
+      "dest_warp_id": "WARP_ID_CENTER_TO_MERMEREZA_CITY_LEFT"
     },
     {
       "warp_id": "WARP_ID_BAR_TO_MERMEREZA",

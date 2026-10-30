@@ -31,25 +31,28 @@
   ],
   "warp_events": [
     {
+        "warp_id": "WARP_ID_APARTMENT_TO_QIU_VILLAGE_LEFT",
       "x": 6,
       "y": 9,
       "elevation": 0,
       "dest_map": "MAP_QIU_VILLAGE",
-      "dest_warp_id": "0"
+      "dest_warp_id": "WARP_ID_QIU_VILLAGE_TO_APARTMENT"
     },
     {
+        "warp_id": "WARP_ID_APARTMENT_TO_QIU_VILLAGE_RIGHT",
       "x": 7,
       "y": 9,
       "elevation": 0,
       "dest_map": "MAP_QIU_VILLAGE",
-      "dest_warp_id": "0"
+      "dest_warp_id": "WARP_ID_QIU_VILLAGE_TO_APARTMENT"
     },
     {
+      "warp_id": "WARP_ID_QIU_VILLAGE_APARTMENT_1F_TO_2F",
       "x": 6,
       "y": 1,
       "elevation": 0,
       "dest_map": "MAP_QIU_VILLAGE_APARTMENT_2F",
-      "dest_warp_id": "0"
+      "dest_warp_id": "WARP_ID_QIU_VILLAGE_APARTMENT_2F_TO_1F"
     }
   ],
   "coord_events": [],

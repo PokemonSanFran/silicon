@@ -73,18 +73,20 @@
   ],
   "warp_events": [
     {
+        "warp_id": "WARP_ID_TOP_TO_LEAGUEOPS",
       "x": 4,
       "y": 1,
       "elevation": 0,
       "dest_map": "MAP_SHARPRISE_SPIRE_LEAGUEOPS",
-      "dest_warp_id": "1"
+      "dest_warp_id": "WARP_ID_LEAGUEOPS_TO_TOP"
     },
     {
+        "warp_id": "WARP_ID_TOP_TO_LAB",
       "x": 0,
       "y": 2,
       "elevation": 0,
       "dest_map": "MAP_SHARPRISE_SPIRE_LAB",
-      "dest_warp_id": "0"
+      "dest_warp_id": "WARP_ID_LAB_TO_TOP_LEFT"
     }
   ],
   "coord_events": [

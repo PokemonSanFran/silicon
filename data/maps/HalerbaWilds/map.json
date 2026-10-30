@@ -329,18 +329,20 @@
         "dest_warp_id": "WARP_ID_HALERBA_CITY_TO_WILDS_B"
     },
     {
+      "warp_id": "WARP_ID_HALERBA_WILDS_TO_TIRABUDIN_PLACE",
       "x": 43,
       "y": 14,
       "elevation": 0,
       "dest_map": "MAP_TIRABUDIN_PLACE",
-      "dest_warp_id": "0"
+      "dest_warp_id": "WARP_ID_TIRABUDIN_PLACE_TO_HALERBA_WILDS"
     },
     {
+        "warp_id": "WARP_ID_HALERBA_WILDS_TO_SPRING",
       "x": 6,
       "y": 23,
       "elevation": 0,
       "dest_map": "MAP_HALERBA_WILDS_SPRING",
-      "dest_warp_id": "0"
+      "dest_warp_id": "WARP_ID_SPRING_TO_HALERBA_WILDS"
     }
   ],
   "coord_events": [],

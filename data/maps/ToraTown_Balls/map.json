@@ -16,18 +16,20 @@
   "object_events": [],
   "warp_events": [
     {
+        "warp_id": "WARP_ID_BALLS_TO_TORA_TOWN_LEFT",
       "x": 4,
       "y": 6,
       "elevation": 0,
       "dest_map": "MAP_TORA_TOWN",
-      "dest_warp_id": "2"
+      "dest_warp_id": "WARP_ID_TORA_TOWN_TO_BALLS"
     },
     {
+        "warp_id": "WARP_ID_BALLS_TO_TORA_TOWN_RIGHT",
       "x": 5,
       "y": 6,
       "elevation": 0,
       "dest_map": "MAP_TORA_TOWN",
-      "dest_warp_id": "2"
+      "dest_warp_id": "WARP_ID_TORA_TOWN_TO_BALLS"
     }
   ],
   "coord_events": [],

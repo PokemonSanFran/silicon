@@ -89,15 +89,15 @@
   ],
   "warp_events": [
     {
-        "warp_id": "WARP_ID_IRISINA_TOWN_TO_GYM",
+      "warp_id": "WARP_ID_IRISINA_TOWN_TO_GYM",
       "x": 4,
       "y": 18,
       "elevation": 0,
       "dest_map": "MAP_IRISINA_TOWN_GYM",
-        "dest_warp_id": "WARP_ID_IRISINA_GYM_TO_TOWN_LEFT"
+      "dest_warp_id": "WARP_ID_IRISINA_GYM_TO_TOWN_LEFT"
     },
     {
-        "warp_id": "WARP_ID_IRISINA_TOWN_TO_BALL_SHOP",
+      "warp_id": "WARP_ID_IRISINA_TOWN_TO_BALL_SHOP",
       "x": 14,
       "y": 19,
       "elevation": 0,
@@ -105,7 +105,7 @@
       "dest_warp_id": "WARP_ID_IRISINA_BALLS_TO_TOWN_LEFT"
     },
     {
-        "warp_id": "WARP_ID_IRISINA_TOWN_TO_INFO_TECH",
+      "warp_id": "WARP_ID_IRISINA_TOWN_TO_INFO_TECH",
       "x": 18,
       "y": 26,
       "elevation": 0,
@@ -113,7 +113,7 @@
       "dest_warp_id": "WARP_ID_IRISINA_INFO_TECH_TO_TOWN_LEFT"
     },
     {
-        "warp_id": "WARP_ID_IRISINA_TOWN_TO_CENTER",
+      "warp_id": "WARP_ID_IRISINA_TOWN_TO_CENTER",
       "x": 1,
       "y": 25,
       "elevation": 0,

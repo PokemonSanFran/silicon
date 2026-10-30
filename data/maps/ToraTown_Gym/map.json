@@ -84,11 +84,12 @@
   ],
   "warp_events": [
     {
+        "warp_id": "WARP_ID_GYM_TO_TORA_TOWN",
       "x": 9,
       "y": 19,
       "elevation": 0,
       "dest_map": "MAP_TORA_TOWN",
-      "dest_warp_id": "0"
+      "dest_warp_id": "WARP_ID_TORA_TOWN_TO_GYM"
     }
   ],
   "coord_events": [],

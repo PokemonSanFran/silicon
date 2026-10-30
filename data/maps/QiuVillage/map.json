@@ -210,32 +210,36 @@
   ],
   "warp_events": [
     {
+        "warp_id": "WARP_ID_QIU_VILLAGE_TO_APARTMENT",
       "x": 2,
       "y": 5,
       "elevation": 0,
       "dest_map": "MAP_QIU_VILLAGE_APARTMENT",
-      "dest_warp_id": "0"
+      "dest_warp_id": "WARP_ID_APARTMENT_TO_QIU_VILLAGE_LEFT"
     },
     {
+      "warp_id": "WARP_ID_TO_QIU_VILLAGE_TO_RAMESH_HOUSE_BREAK_IN",
       "x": 15,
       "y": 13,
       "elevation": 0,
       "dest_map": "MAP_QIU_VILLAGE_RAMESH_HOUSE",
-      "dest_warp_id": "0"
+      "dest_warp_id": "WARP_ID_RAMESH_HOUSE_TO_QIU_VILLAGE_BREAK_IN"
     },
     {
+        "warp_id": "WARP_ID_QIU_VILLAGE_TO_RESTAURANT",
       "x": 6,
       "y": 5,
       "elevation": 0,
       "dest_map": "MAP_QIU_VILLAGE_RESTAURANT",
-      "dest_warp_id": "0"
+      "dest_warp_id": "WARP_ID_RESTAURANT_TO_QIU_VILLAGE_LEFT"
     },
     {
+      "warp_id": "WARP_ID_QIU_VILLAGE_TO_CENTER",
       "x": 17,
       "y": 8,
       "elevation": 0,
       "dest_map": "MAP_QIU_VILLAGE_POKEMON_CENTER_1F",
-      "dest_warp_id": "0"
+      "dest_warp_id": "WARP_ID_CENTER_TO_QIU_VILLAGE_LEFT"
     }
   ],
   "coord_events": [

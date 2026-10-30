@@ -59,18 +59,20 @@
   ],
   "warp_events": [
     {
+        "warp_id": "WARP_ID_CENTER_TO_QIU_VILLAGE_LEFT",
       "x": 7,
       "y": 8,
       "elevation": 0,
       "dest_map": "MAP_QIU_VILLAGE",
-      "dest_warp_id": "3"
+      "dest_warp_id": "WARP_ID_QIU_VILLAGE_TO_CENTER"
     },
     {
+        "warp_id": "WARP_ID_CENTER_TO_QIU_VILLAGE_RIGHT",
       "x": 6,
       "y": 8,
       "elevation": 0,
       "dest_map": "MAP_QIU_VILLAGE",
-      "dest_warp_id": "3"
+      "dest_warp_id": "WARP_ID_QIU_VILLAGE_TO_CENTER"
     }
   ],
   "coord_events": [],

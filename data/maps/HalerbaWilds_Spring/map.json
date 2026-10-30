@@ -57,11 +57,12 @@
   ],
   "warp_events": [
     {
+      "warp_id": "WARP_ID_SPRING_TO_HALERBA_WILDS",
       "x": 5,
       "y": 0,
       "elevation": 0,
       "dest_map": "MAP_HALERBA_WILDS",
-      "dest_warp_id": "7"
+      "dest_warp_id": "WARP_ID_HALERBA_WILDS_TO_SPRING"
     }
   ],
   "coord_events": [

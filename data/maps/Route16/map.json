@@ -67,8 +67,34 @@
       "flag": "0"
     }
   ],
-  "warp_events": [],
+  "warp_events": [
+    {
+      "warp_id": "WARP_ID_ROUTE16_TO_GROTTO",
+      "x": 30,
+      "y": 2,
+      "elevation": 3,
+      "dest_map": "MAP_ROUTE16_GROTTO",
+      "dest_warp_id": "WARP_ID_GROTTO_TO_ROUTE16_A"
+    }
+  ],
   "coord_events": [],
-  "bg_events": [],
+  "bg_events": [
+    {
+      "type": "sign",
+      "x": 30,
+      "y": 1,
+      "elevation": 3,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "Hiddengrotto_EnterGrotto_Dialogue"
+    },
+    {
+      "type": "sign",
+      "x": 30,
+      "y": 0,
+      "elevation": 3,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "Hiddengrotto_EnterGrotto_Dialogue"
+    }
+  ],
   "night_music": "MUS_PINTILLION_ROUTE_14_16_NIGHT"
 }

@@ -165,18 +165,20 @@
   ],
   "warp_events": [
     {
+        "warp_id": "WARP_ID_TIRABUDIN_PLACE_GYM_TO_GYM_LOBBY_RIGHT",
       "x": 6,
       "y": 27,
       "elevation": 0,
       "dest_map": "MAP_TIRABUDIN_PLACE_GYM_LOBBY",
-      "dest_warp_id": "2"
+      "dest_warp_id": "WARP_ID_GYM_LOBBY_TO_TIRABUDIN_PLACE_GYM"
     },
     {
+        "warp_id": "WARP_ID_TIRABUDIN_PLACE_GYM_TO_GYM_LOBBY_LEFT",
       "x": 5,
       "y": 27,
       "elevation": 0,
       "dest_map": "MAP_TIRABUDIN_PLACE_GYM_LOBBY",
-      "dest_warp_id": "2"
+      "dest_warp_id": "WARP_ID_GYM_LOBBY_TO_TIRABUDIN_PLACE_GYM"
     }
   ],
   "coord_events": [

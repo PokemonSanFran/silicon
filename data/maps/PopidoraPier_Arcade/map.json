@@ -50,7 +50,7 @@
       "y": 10,
       "elevation": 0,
       "dest_map": "MAP_POPIDORA_PIER",
-      "dest_warp_id": "0"
+      "dest_warp_id": "WARP_ID_POPIDORA_TO_ARCADE"
     },
     {
       "warp_id": "WARP_ID_ARCADE_TO_POPIDORA_RIGHT",
@@ -58,7 +58,7 @@
       "y": 10,
       "elevation": 0,
       "dest_map": "MAP_POPIDORA_PIER",
-      "dest_warp_id": "0"
+      "dest_warp_id": "WARP_ID_POPIDORA_TO_ARCADE"
     }
   ],
   "coord_events": [],

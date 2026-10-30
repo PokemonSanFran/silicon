@@ -141,18 +141,20 @@
       "dest_warp_id": "WARP_ID_THEATER_TO_PETAROSA_BOROUGH_LEFT"
     },
     {
+        "warp_id": "WARP_ID_PETAROSA_BOROUGH_TO_BUILDING_SCOPE_HOUSE_ENTER",
       "x": 2,
       "y": 0,
       "elevation": 0,
       "dest_map": "MAP_PETAROSA_BOROUGH_SQUATTERS_MANSION",
-      "dest_warp_id": "0"
+      "dest_warp_id": "WARP_ID_BUILDING_SCOPE_HOUSE_TO_PETAROSA_BOROUGH"
     },
     {
+      "warp_id": "WARP_ID_PETAROSA_BOROUGH_TO_CENTER",
       "x": 24,
       "y": 16,
       "elevation": 0,
       "dest_map": "MAP_PETAROSA_BOROUGH_POKEMON_CENTER_1F",
-      "dest_warp_id": "0"
+      "dest_warp_id": "WARP_ID_CENTER_TO_PETAROSA_BOROUGH_LEFT"
     },
     {
         "warp_id": "WARP_ID_PETAROSA_TO_WAREHOUSE",
@@ -163,11 +165,12 @@
         "dest_warp_id": "WARP_ID_WAREHOUSE_TO_PETAROSA"
     },
     {
+        "warp_id": "WARP_ID_PETAROSA_BOROUGH_TO_BUILDING_SCOPE_HOUSE_EXIT",
       "x": 3,
       "y": 0,
       "elevation": 0,
       "dest_map": "MAP_PETAROSA_BOROUGH_SQUATTERS_MANSION",
-      "dest_warp_id": "0"
+      "dest_warp_id": "WARP_ID_BUILDING_SCOPE_HOUSE_TO_PETAROSA_BOROUGH"
     }
   ],
   "coord_events": [

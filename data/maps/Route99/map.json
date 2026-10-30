@@ -294,11 +294,12 @@
   ],
   "warp_events": [
     {
+        "warp_id": "WARP_ID_ROUTE_99_TO_GROTTO_A",
       "x": 0,
       "y": 34,
       "elevation": 0,
       "dest_map": "MAP_ROUTE99_GROTTO",
-      "dest_warp_id": "0"
+      "dest_warp_id": "WARP_ID_GROTTO_TO_ROUTE_99_A"
     }
   ],
   "coord_events": [

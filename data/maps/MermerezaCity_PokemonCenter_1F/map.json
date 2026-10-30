@@ -59,18 +59,20 @@
   ],
   "warp_events": [
     {
+      "warp_id": "WARP_ID_CENTER_TO_MERMEREZA_CITY_RIGHT",
       "x": 7,
       "y": 8,
       "elevation": 0,
       "dest_map": "MAP_MERMEREZA_CITY",
-      "dest_warp_id": "2"
+      "dest_warp_id": "WARP_ID_MERMERZA_CITY_TO_CENTER"
     },
     {
+      "warp_id": "WARP_ID_CENTER_TO_MERMEREZA_CITY_LEFT",
       "x": 6,
       "y": 8,
       "elevation": 0,
       "dest_map": "MAP_MERMEREZA_CITY",
-      "dest_warp_id": "2"
+      "dest_warp_id": "WARP_ID_MERMERZA_CITY_TO_CENTER"
     }
   ],
   "coord_events": [],

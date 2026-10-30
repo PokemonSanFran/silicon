@@ -79,25 +79,28 @@
   ],
   "warp_events": [
     {
+        "warp_id": "WARP_ID_TIRABUDIN_PLACE_TO_HALERBA_WILDS",
       "x": 1,
       "y": 2,
       "elevation": 0,
       "dest_map": "MAP_HALERBA_WILDS",
-      "dest_warp_id": "6"
+      "dest_warp_id": "WARP_ID_HALERBA_WILDS_TO_TIRABUDIN_PLACE"
     },
     {
+        "warp_id": "WARP_ID_TIRABUDIN_PLACE_TO_GYM_LOBBY",
       "x": 4,
       "y": 26,
       "elevation": 0,
       "dest_map": "MAP_TIRABUDIN_PLACE_GYM_LOBBY",
-      "dest_warp_id": "1"
+      "dest_warp_id": "WARP_ID_GYM_LOBBY_TO_TIRABUDIN_PLACE_LEFT"
     },
     {
+        "warp_id": "WARP_ID_TIRABUDIN_PLACE_TO_CENTER",
       "x": 36,
       "y": 3,
       "elevation": 0,
       "dest_map": "MAP_TIRABUDIN_PLACE_POKEMON_CENTER_1F",
-      "dest_warp_id": "0"
+      "dest_warp_id": "WARP_ID_CENTER_TO_TIRABUDIN_PLACE_LEFT"
     }
   ],
   "coord_events": [
