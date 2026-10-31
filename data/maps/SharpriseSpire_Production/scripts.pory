@@ -1,5 +1,3 @@
-const FLAG_HIDE_RAMESH = FLAG_TEMP_2
-
 mapscripts SharpriseSpire_Production_MapScripts{
 	    MAP_SCRIPT_ON_TRANSITION{
         call_if_ge(VAR_TOWER_RAID_STATE,RAMESH_WARP_DOOR_UNLOCKED,SharpriseSpire_Script_HideProductionGuard)
@@ -29,7 +27,7 @@ script SharpriseSpire_Production_Ramesh_Visibility_Script{
     }
 
     if(var(VAR_TEMP_0) > 0 || (var(VAR_TEMP_1) == 2)){
-        setflag(FLAG_HIDE_RAMESH)
+        setobjectflagfromlocalid(LOCALID_SHARPRISE_SPIRE_PRODUCTION_RAMESH)
     }
     return
 }

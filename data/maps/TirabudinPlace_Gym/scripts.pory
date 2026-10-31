@@ -1,5 +1,3 @@
-const FLAG_HIDE_BD_GYM = FLAG_TEMP_3
-
 mapscripts TirabudinPlace_Gym_MapScripts {
     MAP_SCRIPT_ON_TRANSITION {
 		call_if_defeated(TRAINER_BD,TirabudinPlace_Gym_Leader_Visibility)

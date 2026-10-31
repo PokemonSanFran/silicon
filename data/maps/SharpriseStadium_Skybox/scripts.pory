@@ -22,7 +22,11 @@ mapscripts SharpriseStadium_Skybox_MapScripts {
     ]
 }
 
-script SharpriseStadium_Skybox_EmptySkybox_Script {
-    setflag(FLAG_HIDE_CHARLOTTE)
-    setflag(FLAG_HIDE_SPECTATORS)
+script SharpriseStadium_Skybox_EmptySkybox_Script
+{
+    setobjectflagfromlocalid(LOCALID_SHARPRISE_STADIUM_SKYBOX_CHARLOTTE)
+    setobjectflagfromlocalid(LOCALID_SHARPRISE_STADIUM_SKYBOX_RAMESH)
+    setobjectflagfromlocalid(LOCALID_SHARPRISE_STADIUM_SKYBOX_KEIYING)
+    setobjectflagfromlocalid(LOCALID_SHARPRISE_STADIUM_SKYBOX_LUCREZIA)
+    setobjectflagfromlocalid(LOCALID_SHARPRISE_STADIUM_SKYBOX_OLIVER)
 }

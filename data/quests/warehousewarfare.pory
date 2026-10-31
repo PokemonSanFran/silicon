@@ -1,7 +1,5 @@
 //script Quest_Warehousewarfare_
 //text gText_Warehousewarfare_
-const FLAG_HIDE_BARGE_GUARD = FLAG_TEMP_1
-
 script Quest_Warehousewarfare_Interact_Event_Script{
     lock
     faceplayer
@@ -106,7 +104,7 @@ script Quest_Warehousewarfare_Barge1Guard_Visibility_Script{
     returnqueststate(QUEST_WAREHOUSEWARFARE)
 
     if(var(VAR_RESULT) > QUEST_MENU_UNLOCK_QUEST){
-        setflag(FLAG_HIDE_BARGE_GUARD)
+        setobjectflagfromlocalid(LOCALID_ROUTE_A_BARGE_GUARD)
     }
     return
 }
@@ -117,7 +115,7 @@ script Quest_Warehousewarfare_Barge2Guard_Visibility_Script{
         if(var(VAR_RESULT) > QUEST_MENU_UNLOCK_QUEST){
             specialvar(VAR_RESULT,Quest_Warehousewarfare_CountRemainingSubquests)
                 if (var(VAR_RESULT) < 3){
-                    setflag(FLAG_HIDE_BARGE_GUARD)
+        setobjectflagfromlocalid(LOCALID_ROUTE_E_BARGE_GUARD)
                 }
         }
     return
@@ -129,7 +127,7 @@ script Quest_Warehousewarfare_Barge3Guard_Visibility_Script{
         if(var(VAR_RESULT) > QUEST_MENU_UNLOCK_QUEST){
             specialvar(VAR_RESULT,Quest_Warehousewarfare_CountRemainingSubquests)
                 if (var(VAR_RESULT) < 2){
-                    setflag(FLAG_HIDE_BARGE_GUARD)
+        setobjectflagfromlocalid(LOCALID_ROUTE_C_BARGE_GUARD)
                 }
         }
     return

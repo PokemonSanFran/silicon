@@ -1,6 +1,3 @@
-const FLAG_HIDE_ELEANOR = FLAG_TEMP_8
-const FLAG_HIDE_FRANK = FLAG_TEMP_5
-
 mapscripts Arantraz_MessHall_MapScripts
 {
     MAP_SCRIPT_ON_TRANSITION

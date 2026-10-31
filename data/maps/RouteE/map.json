@@ -26,7 +26,7 @@
   ],
   "object_events": [
     {
-        "local_id": "LOCALID_ROUTE_B_BARGE_GUARD",
+        "local_id": "LOCALID_ROUTE_E_BARGE_GUARD",
       "graphics_id": "OBJ_EVENT_GFX_BLACK_BELT",
       "x": 22,
       "y": 11,
@@ -40,7 +40,7 @@
       "flag": "FLAG_TEMP_1"
     },
     {
-      "localid": "LOCALID_BERRY_TREE_ROUTE_E_1",
+      "local_id": "LOCALID_BERRY_TREE_ROUTE_E_1",
       "graphics_id": "OBJ_EVENT_GFX_BERRY_TREE",
       "x": 20,
       "y": 11,
@@ -54,7 +54,7 @@
       "flag": "0"
     },
     {
-      "localid": "LOCALID_BERRY_TREE_ROUTE_E_2",
+      "local_id": "LOCALID_BERRY_TREE_ROUTE_E_2",
       "graphics_id": "OBJ_EVENT_GFX_BERRY_TREE",
       "x": 24,
       "y": 11,

@@ -40,7 +40,7 @@
       "flag": "0"
     },
     {
-      "localid": "LOCALID_BERRY_TREE_OROLAND_COLISEUM_EXTERIOR_2",
+      "local_id": "LOCALID_BERRY_TREE_OROLAND_COLISEUM_EXTERIOR_2",
       "graphics_id": "OBJ_EVENT_GFX_BERRY_TREE",
       "x": 14,
       "y": 17,

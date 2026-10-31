@@ -15,7 +15,7 @@
   "connections": null,
   "object_events": [
     {
-      "localid": "LOCALID_BERRY_TREE_HALERBA_GYM_C_1",
+      "local_id": "LOCALID_BERRY_TREE_HALERBA_GYM_C_1",
       "graphics_id": "OBJ_EVENT_GFX_BERRY_TREE",
       "x": 5,
       "y": 2,
@@ -29,7 +29,7 @@
       "flag": "0"
     },
     {
-      "localid": "LOCALID_BERRY_TREE_HALERBA_GYM_C_2",
+      "local_id": "LOCALID_BERRY_TREE_HALERBA_GYM_C_2",
       "graphics_id": "OBJ_EVENT_GFX_BERRY_TREE",
       "x": 13,
       "y": 2,

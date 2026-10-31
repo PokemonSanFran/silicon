@@ -1,19 +1,9 @@
-const FLAG_HIDE_PANNEN = FLAG_TEMP_2
-
-script Quest_Hiddengrottomapping_PannenVisibility_Script{
-    questmenu(QUEST_MENU_CHECK_INACTIVE,QUEST_HIDDENGROTTOMAPPING)
-
-    if (!var(VAR_RESULT)){
-        setflag(FLAG_HIDE_PANNEN)
-    }
-    return
-}
-
 script Quest_Hiddengrottomapping_StartQuest_Dialogue
 {
 	lock
+    msgbox(format("placeholder text, but a quest starts now."))
+    closemessage
     startquest(QUEST_HIDDENGROTTOMAPPING)
-    removeobject(1)
     release
     end
 }

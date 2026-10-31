@@ -1,14 +1,3 @@
-const FLAG_HIDE_HOSTESS = FLAG_TEMP_2
-const FLAG_HIDE_CHEF = FLAG_TEMP_3
-const FLAG_HIDE_JAINTOR = FLAG_TEMP_4
-const FLAG_HIDE_BUSSER = FLAG_TEMP_5
-const FLAG_HIDE_CASHIER = FLAG_TEMP_6
-const BELEN_MERMEREZA_CITY = 7
-
-const FLAG_HIDE_BELEN_MERMEREZA_CITY = FLAG_TEMP_4
-
-//gText_Restaurantexpansion2_
-//Quest_Restaurantexpansion2_
 script Quest_Restaurantexpansion2_StartQuest
 {
     faceplayer
