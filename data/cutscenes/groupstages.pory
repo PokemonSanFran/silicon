@@ -1,50 +1,38 @@
 const PLAYER = OBJ_EVENT_ID_PLAYER
-const LUCREZIA = 1 //FLAG_TEMP_1
-const ENTRANT = 1
-const CHARLOTTE = 2 //FLAG_TEMP_2
-const CHARLOTTE_SKYBOX = 8
-const BAIYA = 3 //FLAG_TEMP_3
-const OLIVER = 4 //FLAG_TEMP_4
-const GUARD = 5
-const FLAG_HIDE_LUCREZIA = FLAG_TEMP_1
-const FLAG_HIDE_CHARLOTTE = FLAG_TEMP_2
-const FLAG_HIDE_ARCEHR = FLAG_TEMP_3
-const FLAG_HIDE_OLIVER = FLAG_TEMP_4
-const FLAG_HIDE_RAMESH = FLAG_TEMP_6
 
 script GroupStages_Lockers_ObjectSetUp_Script {
-    setobjectxyperm(CHARLOTTE,10,3)
-        setflag(FLAG_HIDE_OLIVER)
-        setflag(FLAG_HIDE_LUCREZIA)
-        setflag(FLAG_HIDE_RAMESH)
+    setobjectxyperm(LOCALID_SHARPRISE_STADIUM_LOCKERS_CHARLOTTE,10,3)
+    setobjectflagfromlocalid(LOCALID_SHARPRISE_STADIUM_LOCKERS_OLIVER)
+    setobjectflagfromlocalid(LOCALID_SHARPRISE_STADIUM_LOCKERS_LUCREZIA)
+    setobjectflagfromlocalid(LOCALID_SHARPRISE_STADIUM_LOCKERS_RAMESH)
 }
 
 script GroupStages_Lockers_ObjectCleanUp_Script {
-    setflag(FLAG_HIDE_CHARLOTTE)
-        setflag(FLAG_HIDE_OLIVER)
-        setflag(FLAG_HIDE_LUCREZIA)
-        setflag(FLAG_HIDE_RAMESH)
+    setobjectflagfromlocalid(LOCALID_SHARPRISE_STADIUM_LOCKERS_CHARLOTTE)
+    setobjectflagfromlocalid(LOCALID_SHARPRISE_STADIUM_LOCKERS_OLIVER)
+    setobjectflagfromlocalid(LOCALID_SHARPRISE_STADIUM_LOCKERS_LUCREZIA)
+    setobjectflagfromlocalid(LOCALID_SHARPRISE_STADIUM_LOCKERS_RAMESH)
 }
 
 script GroupStages_Skybox_ObjectSetup_Script {
-    setobjectxyperm(CHARLOTTE_SKYBOX,16,6)
-    setobjectmovementtype(CHARLOTTE_SKYBOX,MOVEMENT_TYPE_FACE_DOWN)
+    setobjectxyperm(LOCALID_SHARPRISE_STADIUM_SKYBOX_CHARLOTTE,16,6)
+    setobjectmovementtype(LOCALID_SHARPRISE_STADIUM_SKYBOX_CHARLOTTE,MOVEMENT_TYPE_FACE_DOWN)
 }
 
 script GroupStages_GreetBeforeStart_Dialogue {
     lock
         playbgm(MUS_CHARLOTTE,TRUE)
-        applymovement(CHARLOTTE, moves(walk_down * 6, face_left, step_end))
-        waitmovement(CHARLOTTE)
+        applymovement(LOCALID_SHARPRISE_STADIUM_LOCKERS_CHARLOTTE, moves(walk_down * 6, face_left, step_end))
+        waitmovement(LOCALID_SHARPRISE_STADIUM_LOCKERS_CHARLOTTE)
         applymovement(PLAYER,Common_Movement_FaceRight)
         waitmovement(PLAYER)
         msgbox(format("Easy peasy! Good luck in there!"),,SPEAKER_CHARLOTTE)
         closemessage
-        applymovement(CHARLOTTE, moves(walk_in_place_down, step_end))
-        waitmovement(CHARLOTTE)
+        applymovement(LOCALID_SHARPRISE_STADIUM_LOCKERS_CHARLOTTE, moves(walk_in_place_down, step_end))
+        waitmovement(LOCALID_SHARPRISE_STADIUM_LOCKERS_CHARLOTTE)
         playse(SE_EXIT)
         waitse
-        removeobject(CHARLOTTE)
+        removeobject(LOCALID_SHARPRISE_STADIUM_LOCKERS_CHARLOTTE)
         fadedefaultbgm
         setvar(VAR_STORYLINE_STATE,STORY_READY_GROUP_STAGE)
         setvar(VAR_SHARPRISESTADIUM_TOURNAMENT_STATE,PRE_BATTLE_1)
@@ -77,13 +65,13 @@ script GroupStages_PreparePlayer_Script {
 }
 
 script GroupStages_MoveObjects_Script {
-    applymovement(GUARD,Common_Movement_WalkInPlaceUp)
+    applymovement(LOCALID_SHARPRISE_STADIUM_LOCKERS_GUARD,Common_Movement_WalkInPlaceUp)
         opendoor(10,1)
         waitdooranim
-        applymovement(GUARD,Common_Movement_WalkUp)
+        applymovement(LOCALID_SHARPRISE_STADIUM_LOCKERS_GUARD,Common_Movement_WalkUp)
         playse(SE_EXIT)
         waitse
-        removeobject(GUARD)
+        removeobject(LOCALID_SHARPRISE_STADIUM_LOCKERS_GUARD)
 
         getplayerxy(VAR_TEMP_0,VAR_TEMP_1)
 
@@ -111,8 +99,8 @@ script GroupStages_RoundRobinMatch_Script {
         msgbox(format("this is placeholder text."),,SPEAKER_ANNOUNCER,TAIL_SHOUT)
         closemessage
         applymovement(PLAYER,Common_Movement_WalkRight)
-        applymovement(ENTRANT,Common_Movement_WalkLeft)
-        waitmovement(ENTRANT)
+        applymovement(LOCALID_SHARPRISE_STADIUM_ARENA_OPPONENT,Common_Movement_WalkLeft)
+        waitmovement(LOCALID_SHARPRISE_STADIUM_ARENA_OPPONENT)
         msgbox(format("this is placeholder text."),,SPEAKER_ACE_TRAINER_M)
         closemessage
 
@@ -139,14 +127,14 @@ script GroupStages_PostRoundRobinMatch_Script {
         closemessage
 
         applymovement(PLAYER, moves(walk_left, face_right, step_end))
-        applymovement(ENTRANT, moves(walk_right * 2, step_end))
-        waitmovement(ENTRANT)
+        applymovement(LOCALID_SHARPRISE_STADIUM_ARENA_OPPONENT, moves(walk_right * 2, step_end))
+        waitmovement(LOCALID_SHARPRISE_STADIUM_ARENA_OPPONENT)
         msgbox(format("this is placeholder text."),,SPEAKER_ANNOUNCER)
         call(GroupStages_ChooseParty_Script)
 
-        removeobject(ENTRANT)
+        removeobject(LOCALID_SHARPRISE_STADIUM_ARENA_OPPONENT)
         call(SharpriseStadium_Arena_MapScripts_OnTransition)
-        addobject(ENTRANT)
+        addobject(LOCALID_SHARPRISE_STADIUM_ARENA_OPPONENT)
 
         goto(GroupStages_RoundRobinMatch_Script)
 }

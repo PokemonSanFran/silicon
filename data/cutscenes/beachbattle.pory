@@ -1,27 +1,14 @@
 const PLAYER = OBJ_EVENT_ID_PLAYER
-const CHARLOTTE = 1
-const FLAG_HIDE_CHARLOTTE = FLAG_TEMP_1
-
-script BeachBattle_ObjectVisibility_Script
-{
-    if (var(VAR_BEACH_BATTLE_STATE) != SAVE_CHARLOTTE_BEACH)
-    {
-        call(BeachBattle_HideCharlotte_Script)
-    }
-    else
-    {
-        call(BeachBattle_BattleSetUp_Script)
-    }
-}
 
 script BeachBattle_HideCharlotte_Script
 {
-    setflag(FLAG_HIDE_CHARLOTTE)
+    setobjectflagfromlocalid(LOCALID_CRESALTA_VISTA_CHARLOTTE)
 }
 
 script BeachBattle_BattleSetUp_Script
 {
-    setobjectxyperm(CHARLOTTE,10,24)
+    setobjectxyperm(LOCALID_CRESALTA_VISTA_CHARLOTTE,10,24)
+    setobjectxy(LOCALID_CRESALTA_VISTA_CHARLOTTE,10,24)
 }
 
 script BeachBattle_CharlotteWalkToPlayer
@@ -31,14 +18,14 @@ script BeachBattle_CharlotteWalkToPlayer
         closemessage
 
         playse(SE_PIN)
-        clearflag(FLAG_HIDE_CHARLOTTE)
-        addobject(CHARLOTTE)
+        clearobjectflagfromlocalid(LOCALID_CRESALTA_VISTA_CHARLOTTE)
+        addobject(LOCALID_CRESALTA_VISTA_CHARLOTTE)
 
         applymovement(PLAYER, moves(emote_exclamation_mark, face_down, step_end))
         waitmovement(PLAYER)
         playbgm(MUS_CHARLOTTE,TRUE)
-        moveobjecttocoords(CHARLOTTE,10,24,DIR_NORTH)
-        waitmovement(CHARLOTTE)
+        moveobjecttocoords(LOCALID_CRESALTA_VISTA_CHARLOTTE,10,24,DIR_NORTH)
+        waitmovement(LOCALID_CRESALTA_VISTA_CHARLOTTE)
         goto(BeachBattle_Approach_Dialogue)
 }
 
@@ -52,7 +39,7 @@ script BeachBattle_Interact_Script
 script BeachBattle_Approach_Dialogue
 {
         setvar(VAR_BEACH_BATTLE_STATE,SAVE_CHARLOTTE_BEACH)
-        setobjectxyperm(CHARLOTTE,10,24)
+        setobjectxyperm(LOCALID_CRESALTA_VISTA_CHARLOTTE,10,24)
         msgbox(format("I'm heading north for my last Badge. How's your challenge holding up?"),MSGBOX_DEFAULT,SPEAKER_CHARLOTTE)
 
         special(GetNumberOfBadges)
@@ -120,10 +107,10 @@ script BeachBattle_PostBattle_Dialogue
 
         closemessage
 
-        applymovement(CHARLOTTE, moves(walk_down * 7, step_end))
-        waitmovement(CHARLOTTE)
+        applymovement(LOCALID_CRESALTA_VISTA_CHARLOTTE, moves(walk_down * 7, step_end))
+        waitmovement(LOCALID_CRESALTA_VISTA_CHARLOTTE)
         fadedefaultbgm
-        removeobject(CHARLOTTE)
+        removeobject(LOCALID_CRESALTA_VISTA_CHARLOTTE)
         call(TryAutoSave)
         endcutscene
         release

@@ -1,10 +1,8 @@
 const PLAYER = OBJ_EVENT_ID_PLAYER
-const BAIYA = 1
-const FLAG_HIDE_BAIYA = FLAG_TEMP_1
 
 script LetsFixThis_HideObjectHouse_Script
 {
-    setflag(FLAG_HIDE_BAIYA)
+    setobjectflagfromlocalid(LOCALID_HALAI_HOME_BAIYA)
 }
 
 script LetsFixThis_EliteVideo_Dialogue
@@ -12,8 +10,8 @@ script LetsFixThis_EliteVideo_Dialogue
     startcutscene(JUMPPLAYER_LETSFIXTHIS)
     playbgm(MUS_ENCOUNTER_ELITE_FOUR,FALSE)
     lock
-        clearflag(FLAG_HIDE_BAIYA)
-        addobject(BAIYA)
+    clearobjectflagfromlocalid(LOCALID_HALAI_HOME_BAIYA)
+        addobject(LOCALID_HALAI_HOME_BAIYA)
 
         msgbox(format("Resido, your Elite Four is back! We couldn't stand by and watch these corporations destroy our home for profits."),,SPEAKER_FRANK)
 
@@ -31,7 +29,7 @@ script LetsFixThis_EliteVideo_Dialogue
 
 script LetsFixThis_GetMessage_Dialogue
 {
-    applymovement(BAIYA,Common_Movement_FaceLeft)
+    applymovement(LOCALID_HALAI_HOME_BAIYA,Common_Movement_FaceLeft)
         applymovement(PLAYER,Common_Movement_WalkRight)
         waitmovement(PLAYER)
 
@@ -60,11 +58,11 @@ script LetsFixThis_GetMessage_Dialogue
         setvar(VAR_WAREHOUSE_RAVE_STATE,GOT_RAVE_MESSAGE)
         setflag(FLAG_LOCKEDOUT_PLAYED)
 
-        applymovement(BAIYA, moves(walk_right, walk_up * 3, step_end))
-        waitmovement(BAIYA)
+        applymovement(LOCALID_HALAI_HOME_BAIYA, moves(walk_right, walk_up * 3, step_end))
+        waitmovement(LOCALID_HALAI_HOME_BAIYA)
         playse(SE_EXIT)
         waitse
-        removeobject(BAIYA)
+        removeobject(LOCALID_HALAI_HOME_BAIYA)
     call(TryAutoSave)
         endcutscene
         release

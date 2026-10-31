@@ -83,48 +83,6 @@
       "trainer_sight_or_berry_tree_id": "0",
       "script": "LetsBurnThisMotherDown_StartBattle_Script",
       "flag": "FLAG_TEMP_5"
-    },
-    {
-      "local_id": "LOCALID_ARANTRAZ_HOSPITAL_CHARLOTTE",
-      "graphics_id": "OBJ_EVENT_GFX_CHARLOTTE",
-      "x": 1,
-      "y": 4,
-      "elevation": 3,
-      "movement_type": "MOVEMENT_TYPE_NONE",
-      "movement_range_x": 0,
-      "movement_range_y": 0,
-      "trainer_type": "TRAINER_TYPE_NONE",
-      "trainer_sight_or_berry_tree_id": "0",
-      "script": "NULL",
-      "flag": "FLAG_TEMP_6"
-    },
-    {
-      "local_id": "LOCALID_ARANTRAZ_HOSPITAL_POLICE_A",
-      "graphics_id": "OBJ_EVENT_GFX_MYSTERY_GIFT_MAN",
-      "x": 2,
-      "y": 4,
-      "elevation": 3,
-      "movement_type": "MOVEMENT_TYPE_NONE",
-      "movement_range_x": 0,
-      "movement_range_y": 0,
-      "trainer_type": "TRAINER_TYPE_NONE",
-      "trainer_sight_or_berry_tree_id": "0",
-      "script": "NULL",
-      "flag": "FLAG_TEMP_7"
-    },
-    {
-      "local_id": "LOCALID_ARANTRAZ_HOSPITAL_POLICE_B",
-      "graphics_id": "OBJ_EVENT_GFX_MYSTERY_GIFT_MAN",
-      "x": 2,
-      "y": 4,
-      "elevation": 3,
-      "movement_type": "MOVEMENT_TYPE_NONE",
-      "movement_range_x": 0,
-      "movement_range_y": 0,
-      "trainer_type": "TRAINER_TYPE_NONE",
-      "trainer_sight_or_berry_tree_id": "0",
-      "script": "NULL",
-      "flag": "FLAG_TEMP_7"
     }
   ],
   "warp_events": [

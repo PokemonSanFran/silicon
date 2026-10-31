@@ -1,26 +1,11 @@
 const PLAYER = OBJ_EVENT_ID_PLAYER
-const POLICEA = 1
-const POLICEB = 2
-const POLICE_MON = 3
-const CHIEF = 4
-const ADAORA = 5
-const GRUNTA = 6
-const GRUNTB = 7
-
-const FLAG_HIDE_POLICE = FLAG_TEMP_1
-const FLAG_HIDE_CHIEF = FLAG_TEMP_4
-const FLAG_HIDE_GRUNTA = FLAG_TEMP_5
-const FLAG_HIDE_GRUNTB = FLAG_TEMP_7
-const FLAG_HIDE_ADAORA = FLAG_TEMP_9
-
 const LOCALID_ADAORA_FAINTED = (LOCALID_CAMERA + 1)
 const LOCALID_LEAGUEOPS_CHIEF = LOCALID_CAMERA + 6
 
 script HowDisappointing_ManageObject_Script
 {
     switch (var(VAR_HOWDISAPPOINTING_STATE))
-
-   {
+    {
         case MISSION_ASSIGNED: call(HowDisappointing_HideThe_Tide_Script)
         case GRUNT1_ARRESTED:
         case GRUNT2_ARRESTED:
@@ -28,7 +13,6 @@ script HowDisappointing_ManageObject_Script
         case SAVED_BEFORE_ADAORA:
         default: call(HowDisappointing_HideAll_Script)
     }
-    return
 }
 
 script HowDisappointing_MidMission_HideObjects_Script
@@ -42,34 +26,32 @@ script HowDisappointing_MidMission_HideObjects_Script
 script HowDisappointing_HideGrunt_Script
 {
     if (defeated(TRAINER_HOWDISAPPOINTING_GRUNT1))
-
-   {
-        setflag(FLAG_HIDE_GRUNTA)
+    {
+        setobjectflagfromlocalid(LOCALID_HODOU_CITY_HOW_DISAPPOINTING_COMRADE_A)
     }
     if (defeated(TRAINER_HOWDISAPPOINTING_GRUNT2))
 
-   {
-        setflag(FLAG_HIDE_GRUNTB)
+    {
+        setobjectflagfromlocalid(LOCALID_HODOU_CITY_HOW_DISAPPOINTING_COMRADE_B)
     }
     return
 }
 
 script HowDisappointing_HideGruntA_Script
 {
-    setflag(FLAG_HIDE_GRUNTA)
+    setobjectflagfromlocalid(LOCALID_HODOU_CITY_HOW_DISAPPOINTING_COMRADE_A)
     return
 }
 
 script HowDisappointing_HideGruntB_Script
 {
-    setflag(FLAG_HIDE_GRUNTB)
+        setobjectflagfromlocalid(LOCALID_HODOU_CITY_HOW_DISAPPOINTING_COMRADE_B)
     return
 }
 
 script HowDisappointing_CheckProgressAdaoraVisible_Script
 {
     if (!defeated(TRAINER_HOWDISAPPOINTING_GRUNT1) || !defeated(TRAINER_HOWDISAPPOINTING_GRUNT2))
-
    {
         call(HowDisappointing_HideAdaora_Script)
         return
@@ -80,21 +62,23 @@ script HowDisappointing_CheckProgressAdaoraVisible_Script
 
 script HowDisappointing_ShowAdaora_Script
 {
-    clearflag(FLAG_HIDE_ADAORA)
-    addobject(ADAORA)
+    clearobjectflagfromlocalid(LOCALID_HODOU_CITY_HOW_DISAPPOINTING_ADAORA)
+    addobject(LOCALID_HODOU_CITY_HOW_DISAPPOINTING_ADAORA)
     return
 }
 
 script HowDisappointing_HideAdaora_Script
 {
-    setflag(FLAG_HIDE_ADAORA)
+    setobjectflagfromlocalid(LOCALID_HODOU_CITY_HOW_DISAPPOINTING_ADAORA)
     return
 }
 
 script HowDisappointing_HideAll_Script
 {
-    setflag(FLAG_HIDE_POLICE)
-    setflag(FLAG_HIDE_CHIEF)
+    setobjectflagfromlocalid(LOCALID_HODOU_CITY_HOW_DISAPPOINTING_POLICE_A)
+    setobjectflagfromlocalid(LOCALID_HODOU_CITY_HOW_DISAPPOINTING_POLICE_B)
+    setobjectflagfromlocalid(LOCALID_HODOU_CITY_HOW_DISAPPOINTING_POLICE_MON)
+    setobjectflagfromlocalid(LOCALID_HODOU_CITY_HOW_DISAPPOINTING_CHIEF)
     call(HowDisappointing_HideThe_Tide_Script)
     return
 }
@@ -118,34 +102,36 @@ script HowDisappointing_ShowThe_Tide_Script
 
 script HowDisappointing_ShowGruntA_Script
 {
-    clearflag(FLAG_HIDE_GRUNTA)
+    clearobjectflagfromlocalid(LOCALID_HODOU_CITY_HOW_DISAPPOINTING_COMRADE_A)
     return
 }
 
 script HowDisappointing_ShowGruntB_Script
 {
-    clearflag(FLAG_HIDE_GRUNTB)
+        clearobjectflagfromlocalid(LOCALID_HODOU_CITY_HOW_DISAPPOINTING_COMRADE_B)
     return
 }
 
 script HowDisappointing_HidePolice_Script
 {
-    setflag(FLAG_HIDE_POLICE)
-    setflag(FLAG_HIDE_CHIEF)
+    setobjectflagfromlocalid(LOCALID_HODOU_CITY_HOW_DISAPPOINTING_POLICE_A)
+    setobjectflagfromlocalid(LOCALID_HODOU_CITY_HOW_DISAPPOINTING_POLICE_B)
+    setobjectflagfromlocalid(LOCALID_HODOU_CITY_HOW_DISAPPOINTING_POLICE_MON)
+    setobjectflagfromlocalid(LOCALID_HODOU_CITY_HOW_DISAPPOINTING_CHIEF)
     return
 }
 
 script HowDisappointing_HidePoliceShowGrunts
 {
     call(HowDisappointing_HidePolice_Script)
-    setobjectxy(ADAORA,35,20)
-    setobjectxyperm(ADAORA,35,20)
-    setobjectxy(GRUNTA,37,0)
-    setobjectxyperm(GRUNTA,37,0)
-    turnobject(GRUNTA,DIR_WEST)
-    setobjectxy(GRUNTB,17,16)
-    setobjectxyperm(GRUNTB,17,16)
-    turnobject(GRUNTA,DIR_EAST)
+    setobjectxy(LOCALID_HODOU_CITY_HOW_DISAPPOINTING_ADAORA,35,20)
+    setobjectxyperm(LOCALID_HODOU_CITY_HOW_DISAPPOINTING_ADAORA,35,20)
+    setobjectxy(LOCALID_HODOU_CITY_HOW_DISAPPOINTING_COMRADE_A,37,0)
+    setobjectxyperm(LOCALID_HODOU_CITY_HOW_DISAPPOINTING_COMRADE_A,37,0)
+    turnobject(LOCALID_HODOU_CITY_HOW_DISAPPOINTING_COMRADE_A,DIR_WEST)
+    setobjectxy(LOCALID_HODOU_CITY_HOW_DISAPPOINTING_COMRADE_B,17,16)
+    setobjectxyperm(LOCALID_HODOU_CITY_HOW_DISAPPOINTING_COMRADE_B,17,16)
+    turnobject(LOCALID_HODOU_CITY_HOW_DISAPPOINTING_COMRADE_A,DIR_EAST)
     return
 }
 
@@ -181,11 +167,11 @@ script HowDisappointing_StartRaid_Dialogue
   msgbox(format("Once they try to give us the slip, you’ll be in charge of hunting down the escaped members. We suspect they’ll flee into the city, and that's where you get after 'em. You don’t have to perform any arrests, just subdue them long enough for an officer to grab ‘em. Make sense, ya’ll?"),,SPEAKER_CHIEF)
   closemessage
 
-applymovement(POLICEA,Common_Movement_WalkInPlaceUp)
-applymovement(POLICEB,Common_Movement_WalkInPlaceUp)
-applymovement(POLICE_MON,Common_Movement_WalkInPlaceUp)
+applymovement(LOCALID_HODOU_CITY_HOW_DISAPPOINTING_POLICE_A,Common_Movement_WalkInPlaceUp)
+applymovement(LOCALID_HODOU_CITY_HOW_DISAPPOINTING_POLICE_B,Common_Movement_WalkInPlaceUp)
+applymovement(LOCALID_HODOU_CITY_HOW_DISAPPOINTING_POLICE_MON,Common_Movement_WalkInPlaceUp)
 msgbox(format("Yes sir!"),,SPEAKER_POLICEMAN)
-waitmovement(POLICE_MON)
+waitmovement(LOCALID_HODOU_CITY_HOW_DISAPPOINTING_POLICE_MON)
 
 msgbox(format("Oh, and Champion?"),,SPEAKER_CHIEF)
 
@@ -201,18 +187,18 @@ goto(HowDisappointing_RaidMovement_Script)
 }
 script HowDisappointing_MoveRaidIntoPosition_Script
 {
-    setobjectxy(POLICEA,20,5)
-    setobjectxy(POLICEB,21,5)
-    setobjectxy(POLICE_MON,23,5)
+    setobjectxy(LOCALID_HODOU_CITY_HOW_DISAPPOINTING_POLICE_A,20,5)
+    setobjectxy(LOCALID_HODOU_CITY_HOW_DISAPPOINTING_POLICE_B,21,5)
+    setobjectxy(LOCALID_HODOU_CITY_HOW_DISAPPOINTING_POLICE_MON,23,5)
     setobjectxy(PLAYER,24,5)
     TeleportCamera(24,5)
-    setobjectxy(CHIEF,22,4)
+    setobjectxy(LOCALID_HODOU_CITY_HOW_DISAPPOINTING_CHIEF,22,4)
 }
 script HowDisappointing_ClearRocketFlags_Script
 {
-clearflag(FLAG_HIDE_ADAORA)
-clearflag(FLAG_HIDE_GRUNTA)
-clearflag(FLAG_HIDE_GRUNTB)
+    clearobjectflagfromlocalid(LOCALID_HODOU_CITY_HOW_DISAPPOINTING_ADAORA)
+    clearobjectflagfromlocalid(LOCALID_HODOU_CITY_HOW_DISAPPOINTING_COMRADE_A)
+        clearobjectflagfromlocalid(LOCALID_HODOU_CITY_HOW_DISAPPOINTING_COMRADE_B)
 return
 }
 script HowDisappointing_RaidMovement_Script
@@ -226,24 +212,24 @@ script HowDisappointing_RaidMovement_Script
     opendoor(5,8)
     waitdooranim
 
-    applymovement(CHIEF, moves(walk_up, step_end))
-    waitmovement(CHIEF)
+    applymovement(LOCALID_HODOU_CITY_HOW_DISAPPOINTING_CHIEF, moves(walk_up, step_end))
+    waitmovement(LOCALID_HODOU_CITY_HOW_DISAPPOINTING_CHIEF)
     playse(SE_EXIT)
-    removeobject(CHIEF)
+    removeobject(LOCALID_HODOU_CITY_HOW_DISAPPOINTING_CHIEF)
 
-    applymovement(POLICEA, moves(walk_up, walk_right * 2, walk_up, step_end))
-    applymovement(POLICEB, moves(walk_up, walk_right, walk_up, step_end))
-    applymovement(POLICE_MON, moves(walk_up, walk_left, walk_up, step_end))
-    waitmovement(POLICEB)
+    applymovement(LOCALID_HODOU_CITY_HOW_DISAPPOINTING_POLICE_A, moves(walk_up, walk_right * 2, walk_up, step_end))
+    applymovement(LOCALID_HODOU_CITY_HOW_DISAPPOINTING_POLICE_B, moves(walk_up, walk_right, walk_up, step_end))
+    applymovement(LOCALID_HODOU_CITY_HOW_DISAPPOINTING_POLICE_MON, moves(walk_up, walk_left, walk_up, step_end))
+    waitmovement(LOCALID_HODOU_CITY_HOW_DISAPPOINTING_POLICE_B)
     playse(SE_EXIT)
     playse(SE_EXIT)
     playse(SE_EXIT)
     waitse
     waitse
     waitse
-    removeobject(POLICEA)
-    removeobject(POLICEB)
-    removeobject(POLICE_MON)
+    removeobject(LOCALID_HODOU_CITY_HOW_DISAPPOINTING_POLICE_A)
+    removeobject(LOCALID_HODOU_CITY_HOW_DISAPPOINTING_POLICE_B)
+    removeobject(LOCALID_HODOU_CITY_HOW_DISAPPOINTING_POLICE_MON)
     closedoor(5,8)
     waitdooranim
 
@@ -254,20 +240,20 @@ script HowDisappointing_RaidMovement_Script
 
     call(HowDisappointing_ClearRocketFlags_Script)
     playse(SE_EXIT)
-    addobject(GRUNTA)
-    applymovement(GRUNTA, moves(delay_16, walk_down * 3, face_left, emote_exclamation_mark, walk_up * 4, walk_right * 2, walk_faster_right* 4, step_end))
-    waitmovement(GRUNTA)
+    addobject(LOCALID_HODOU_CITY_HOW_DISAPPOINTING_COMRADE_A)
+    applymovement(LOCALID_HODOU_CITY_HOW_DISAPPOINTING_COMRADE_A, moves(delay_16, walk_down * 3, face_left, emote_exclamation_mark, walk_up * 4, walk_right * 2, walk_faster_right* 4, step_end))
+    waitmovement(LOCALID_HODOU_CITY_HOW_DISAPPOINTING_COMRADE_A)
 
     playse(SE_EXIT)
     waitse
-    addobject(GRUNTB)
-    applymovement(GRUNTB, moves(delay_16, walk_faster_down * 3, walk_faster_left * 9, walk_faster_down * 6, step_end))
-    waitmovement(GRUNTB)
+    addobject(LOCALID_HODOU_CITY_HOW_DISAPPOINTING_COMRADE_B)
+    applymovement(LOCALID_HODOU_CITY_HOW_DISAPPOINTING_COMRADE_B, moves(delay_16, walk_faster_down * 3, walk_faster_left * 9, walk_faster_down * 6, step_end))
+    waitmovement(LOCALID_HODOU_CITY_HOW_DISAPPOINTING_COMRADE_B)
 
     playse(SE_EXIT)
     waitse
-    addobject(ADAORA)
-    applymovement(ADAORA, moves(delay_16, walk_faster_down * 3, walk_faster_right * 3, walk_faster_down * 4, walk_faster_right * 4, walk_faster_right * 5, step_end))
+    addobject(LOCALID_HODOU_CITY_HOW_DISAPPOINTING_ADAORA)
+    applymovement(LOCALID_HODOU_CITY_HOW_DISAPPOINTING_ADAORA, moves(delay_16, walk_faster_down * 3, walk_faster_right * 3, walk_faster_down * 4, walk_faster_right * 4, walk_faster_right * 5, step_end))
     waitmovement(0)
 
     playse(SE_PIN)
@@ -329,28 +315,30 @@ script HowDisappointing_ArrestScene_Dialogue
     startcutscene(JUMPPLAYER_HOWDISAPPOINTING_ARREST)
     setvar(VAR_HOWDISAPPOINTING_STATE,DEFEATED_ADAORA_HODOU_CITY)
 	moveobjecttocoords(LOCALID_PLAYER,36,20,DIR_NORTH)
-    clearflag(FLAG_HIDE_POLICE)
+    clearobjectflagfromlocalid(LOCALID_HODOU_CITY_HOW_DISAPPOINTING_POLICE_A)
+    clearobjectflagfromlocalid(LOCALID_HODOU_CITY_HOW_DISAPPOINTING_POLICE_B)
+    clearobjectflagfromlocalid(LOCALID_HODOU_CITY_HOW_DISAPPOINTING_POLICE_MON)
     setvar(VAR_OBJ_GFX_ID_0,OBJ_EVENT_GFX_SUDOWOODO)
-    addobject(POLICE_MON)
-    addobject(POLICEA)
-    setobjectxyperm(POLICEA,35,13)
-    setobjectxy(POLICEA,35,13)
-    setobjectxyperm(POLICE_MON,36,13)
-    setobjectxy(POLICE_MON,36,13)
-    applymovement(POLICEA,HowDisappointing_WalkToArrest)
-    applymovement(POLICE_MON,HowDisappointing_WalkToArrest)
-    applymovement(ADAORA,Common_Movement_FaceUp)
-    waitmovement(POLICEA)
+    addobject(LOCALID_HODOU_CITY_HOW_DISAPPOINTING_POLICE_MON)
+    addobject(LOCALID_HODOU_CITY_HOW_DISAPPOINTING_POLICE_A)
+    setobjectxyperm(LOCALID_HODOU_CITY_HOW_DISAPPOINTING_POLICE_A,35,13)
+    setobjectxy(LOCALID_HODOU_CITY_HOW_DISAPPOINTING_POLICE_A,35,13)
+    setobjectxyperm(LOCALID_HODOU_CITY_HOW_DISAPPOINTING_POLICE_MON,36,13)
+    setobjectxy(LOCALID_HODOU_CITY_HOW_DISAPPOINTING_POLICE_MON,36,13)
+    applymovement(LOCALID_HODOU_CITY_HOW_DISAPPOINTING_POLICE_A,HowDisappointing_WalkToArrest)
+    applymovement(LOCALID_HODOU_CITY_HOW_DISAPPOINTING_POLICE_MON,HowDisappointing_WalkToArrest)
+    applymovement(LOCALID_HODOU_CITY_HOW_DISAPPOINTING_ADAORA,Common_Movement_FaceUp)
+    waitmovement(LOCALID_HODOU_CITY_HOW_DISAPPOINTING_POLICE_A)
 	waitmovement(LOCALID_PLAYER)
     msgbox(format("All right officers. {SUBJECT} already beat me. My Pokemon are fainted and I'm not running."),,SPEAKER_ADAORA)
     bufferspeciesname(STR_VAR_1,SPECIES_MIGHTYENA)
     buffermovename(STR_VAR_2,MOVE_TAKE_DOWN)
     msgbox(format("{STR_VAR_1}, use {STR_VAR_2}!"),,SPEAKER_POLICEMAN)
     closemessage
-    applymovement(POLICE_MON, moves(lock_facing_direction, walk_faster_down, walk_up, step_end))
+    applymovement(LOCALID_HODOU_CITY_HOW_DISAPPOINTING_POLICE_MON, moves(lock_facing_direction, walk_faster_down, walk_up, step_end))
     delay(8)
-    applymovement(ADAORA,HowDisappointing_FallDown_Movement)
-    waitmovement(ADAORA)
+    applymovement(LOCALID_HODOU_CITY_HOW_DISAPPOINTING_ADAORA,HowDisappointing_FallDown_Movement)
+    waitmovement(LOCALID_HODOU_CITY_HOW_DISAPPOINTING_ADAORA)
 	spawnobject(OBJ_EVENT_GFX_ADAORA_FAINTED,LOCALID_ADAORA_FAINTED,35,22,MOVEMENT_TYPE_FACE_DOWN)
 	delay(16)
 	moveobjecttocoords(LOCALID_PLAYER,36,22,DIR_WEST)
@@ -457,18 +445,16 @@ script HowDisappointing_GiveNextDirection_Script
         bufferstring(STR_VAR_1,"east")
     }
     call(HowDisappointing_CheckProgressAdaoraVisible_Script)
-    if (flag(FLAG_HIDE_ADAORA))
 
-   {
+
+    if (!defeated(TRAINER_HOWDISAPPOINTING_GRUNT1) || !defeated(TRAINER_HOWDISAPPOINTING_GRUNT2))
+    {
         msgbox(format("I saw another one heading {STR_VAR_1}, are you on it?"),,SPEAKER_POLICEMAN)
     }
     else
-
-   {
+    {
         msgbox(format("We got a call that the leader was trying to flee near the city entrance. Get after 'em!"),,SPEAKER_POLICEMAN)
     }
-    closemessage
-    return
 }
 
 script HowDisappointing_GruntABattle_Script
@@ -482,20 +468,20 @@ script HowDisappointing_GruntABattle_Script
 script HowDisappointing_GruntA_Arrest_Script
 {
     addvar(VAR_HOWDISAPPOINTING_STATE,1)
-    addobject(POLICEA)
-    setobjectxyperm(POLICEA,33,0)
-    setobjectxy(POLICEA,33,0)
-    applymovement(POLICEA,Common_Movement_WalkRight)
+    addobject(LOCALID_HODOU_CITY_HOW_DISAPPOINTING_POLICE_A)
+    setobjectxyperm(LOCALID_HODOU_CITY_HOW_DISAPPOINTING_POLICE_A,33,0)
+    setobjectxy(LOCALID_HODOU_CITY_HOW_DISAPPOINTING_POLICE_A,33,0)
+    applymovement(LOCALID_HODOU_CITY_HOW_DISAPPOINTING_POLICE_A,Common_Movement_WalkRight)
     msgbox(format("Fine! You got me. Get your pigs, I'll come quietly."))
     closemessage
-    waitmovement(POLICEA)
+    waitmovement(LOCALID_HODOU_CITY_HOW_DISAPPOINTING_POLICE_A)
     applymovement(PLAYER,Common_Movement_FaceLeft)
     waitmovement(PLAYER)
     msgbox(format("Good work {PLAYER}."))
     call(HowDisappointing_GiveNextDirection_Script)
     fadescreenswapbuffers(FADE_TO_BLACK)
-    removeobject(GRUNTA)
-    removeobject(POLICEA)
+    removeobject(LOCALID_HODOU_CITY_HOW_DISAPPOINTING_COMRADE_A)
+    removeobject(LOCALID_HODOU_CITY_HOW_DISAPPOINTING_POLICE_A)
     fadescreenswapbuffers(FADE_FROM_BLACK)
     release
     end
@@ -513,24 +499,24 @@ script HowDisappointing_GruntB_Arrest_Script
 {
     addvar(VAR_HOWDISAPPOINTING_STATE,1)
 
-    addobject(POLICEA)
-    addobject(POLICE_MON)
+    addobject(LOCALID_HODOU_CITY_HOW_DISAPPOINTING_POLICE_A)
+    addobject(LOCALID_HODOU_CITY_HOW_DISAPPOINTING_POLICE_MON)
 
-    setobjectxyperm(POLICEA,22,22)
-    setobjectxy(POLICEA,22,22)
-    setobjectxyperm(POLICE_MON,21,22)
-    setobjectxy(POLICE_MON,21,22)
+    setobjectxyperm(LOCALID_HODOU_CITY_HOW_DISAPPOINTING_POLICE_A,22,22)
+    setobjectxy(LOCALID_HODOU_CITY_HOW_DISAPPOINTING_POLICE_A,22,22)
+    setobjectxyperm(LOCALID_HODOU_CITY_HOW_DISAPPOINTING_POLICE_MON,21,22)
+    setobjectxy(LOCALID_HODOU_CITY_HOW_DISAPPOINTING_POLICE_MON,21,22)
 
-    applymovement(POLICEA,HowDisappointing_WalkUp5_Movement)
-    applymovement(POLICE_MON,HowDisappointing_WalkUp5_Movement)
+    applymovement(LOCALID_HODOU_CITY_HOW_DISAPPOINTING_POLICE_A,HowDisappointing_WalkUp5_Movement)
+    applymovement(LOCALID_HODOU_CITY_HOW_DISAPPOINTING_POLICE_MON,HowDisappointing_WalkUp5_Movement)
 
     msgbox(format("Screw this, I'm outta here!"),MSGBOX_DEFAULT,SPEAKER_GRUNT,TAIL_SHOUT,EMOTE_ANGRY)
     closemessage
-    applymovement(GRUNTB, moves(walk_faster_right * 5, face_up, face_down, step_end))
+    applymovement(LOCALID_HODOU_CITY_HOW_DISAPPOINTING_COMRADE_B, moves(walk_faster_right * 5, face_up, face_down, step_end))
     applymovement(PLAYER,Common_Movement_FaceRight)
     waitmovement(PLAYER)
-    waitmovement(POLICEA)
-    waitmovement(POLICE_MON)
+    waitmovement(LOCALID_HODOU_CITY_HOW_DISAPPOINTING_POLICE_A)
+    waitmovement(LOCALID_HODOU_CITY_HOW_DISAPPOINTING_POLICE_MON)
     msgbox(format("Nice try."),MSGBOX_DEFAULT,SPEAKER_POLICEMAN)
     bufferspeciesname(STR_VAR_1,SPECIES_LUXRAY)
     buffermovename(STR_VAR_2,MOVE_SHOCK_WAVE)
@@ -547,9 +533,9 @@ script HowDisappointing_GruntB_Arrest_Script
     closemessage
     call(HowDisappointing_GiveNextDirection_Script)
     fadescreenswapbuffers(FADE_TO_BLACK)
-    removeobject(GRUNTB)
-    removeobject(POLICEA)
-    removeobject(POLICE_MON)
+    removeobject(LOCALID_HODOU_CITY_HOW_DISAPPOINTING_COMRADE_B)
+    removeobject(LOCALID_HODOU_CITY_HOW_DISAPPOINTING_POLICE_A)
+    removeobject(LOCALID_HODOU_CITY_HOW_DISAPPOINTING_POLICE_MON)
     fadescreenswapbuffers(FADE_FROM_BLACK)
     release
     end

@@ -1,16 +1,8 @@
 const PLAYER = OBJ_EVENT_ID_PLAYER
-const BAIYA = 1
-const FLAG_HIDE_BAIYA = FLAG_TEMP_1
 
-script Battle8_SetUpObject_Script
+script Battle8_Script_HideBaiya
 {
-    setflag(FLAG_HIDE_BAIYA)
-}
-
-script Battle8_StartBattle_ObjectSetUp_Script
-{
-    setobjectxyperm(BAIYA,19,16)
-    setobjectxy(BAIYA,19,16)
+    setobjectflagfromlocalid(LOCALID_PINTILLION_HOUSE_EXTERIOR_BAIYA)
 }
 
 script Battle8_FaceGoToPlayer
@@ -21,8 +13,8 @@ script Battle8_FaceGoToPlayer
 
     playse(SE_PIN)
     moveobjecttocoords(LOCALID_PLAYER,19,17,DIR_NORTH)
-    applymovement(BAIYA,moves(emote_exclamation_mark))
-    waitmovement(BAIYA)
+    applymovement(LOCALID_PINTILLION_HOUSE_EXTERIOR_BAIYA,moves(emote_exclamation_mark))
+    waitmovement(LOCALID_PINTILLION_HOUSE_EXTERIOR_BAIYA)
     waitmovement(LOCALID_PLAYER)
 
     goto(Battle8_ExplainAttraction_Dialogue)
@@ -47,7 +39,7 @@ script Battle8_ExplainAttraction_Dialogue
 
         if (var(VAR_TEMP_0) == 26){
             closemessage
-                applymovement(BAIYA, moves(walk_right * 6, step_end))
+                applymovement(LOCALID_PINTILLION_HOUSE_EXTERIOR_BAIYA, moves(walk_right * 6, step_end))
                 waitmovement(0)
         }
 
@@ -93,9 +85,9 @@ script Battle8_BaiyaDefeated_Dialogue
         msgbox(format("This region has rich with so much culture that you won't see unless you dig deeper. If you actually care, the Seven Sisters Challenge is a good start."),MSGBOX_DEFAULT,SPEAKER_BAIYA)
         closemessage
 
-        moveobjecttocoords(BAIYA,8,16,DIR_WEST)
-        waitmovement(BAIYA)
-        removeobject(BAIYA)
+        moveobjecttocoords(LOCALID_PINTILLION_HOUSE_EXTERIOR_BAIYA,8,16,DIR_WEST)
+        waitmovement(LOCALID_PINTILLION_HOUSE_EXTERIOR_BAIYA)
+        removeobject(LOCALID_PINTILLION_HOUSE_EXTERIOR_BAIYA)
         fadedefaultbgm
         call(TryAutoSave)
         endcutscene
