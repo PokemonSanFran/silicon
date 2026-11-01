@@ -312,6 +312,7 @@ script YouRealizeTheyreEvilRight_InnerMonologue_Dialogue
     msgbox(format("They might think they're right. They do want to protect Resido and make a difference, but this isn't it."),,SPEAKER_ALICIA,TAIL_THOUGHT)
     msgbox(format("I've worked so hard to get this far. To become the Champion. I can make a difference as I am! Throwing it all away now doesn't make any sense."),,SPEAKER_ALICIA,TAIL_THOUGHT)
     msgbox(format("...No, I can't do it. I can't risk everything I've built. There must be another way. Is Baiya even telling the truth? SharpRise Capital wouldn't lie to me. That would get exposed! Is The Tide just manipulating me, like they tried with the social media stunt?"),,SPEAKER_ALICIA,TAIL_THOUGHT,EMOTE_SHOCK)
+    msgbox(format("If I go against SharpRise and they strip me of my title, what good is that going to do? If I want to help people, I can do more good as the Champion than as a criminal."),,SPEAKER_ALICIA,TAIL_THOUGHT)
     msgbox(format("I'm making the right choice. I'm staying true to my principles, and that's the the way forward. I can find a better way to fight for justice."),,SPEAKER_ALICIA,TAIL_THOUGHT)
     closemessage
     fadescreen(FADE_FROM_BLACK)
