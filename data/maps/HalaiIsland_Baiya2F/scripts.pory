@@ -18,23 +18,13 @@ script HalaiIsland_Baiya_PC
 
 script HalaiIsland_Baiya_Bed
 {
+    goto_if_ge(VAR_HALAI_ISLAND_STATE,MEET_AT_ROUTE4,CuconuTown_Compound_2F_Bed_Script)
     lock
-    if(var(VAR_HALAI_ISLAND_STATE) < MEET_AT_ROUTE4)
-    {
-        msgbox(format("Probably shouldn't sleep in Baiya's bed."), MSGBOX_DEFAULT,SPEAKER_PLAYER,TAIL_THOUGHT)
-        closemessage
-        applymovement(LOCALID_PLAYER, moves(walk_right))
-        waitmovement(0)
-        end
-    }
-    callnative(HealPlayerParty)
-
-    fadescreen(FADE_TO_BLACK) //Player closes their eyes
-    delay(16)
-
-    //Ask the player when they should go to bed
-    call(BedScript_SetNewTime_Script)
-    goto(BedScript_AdvanceStory_Script)
+    msgbox(format("Probably shouldn't sleep in Baiya's bed."), MSGBOX_DEFAULT,SPEAKER_PLAYER,TAIL_THOUGHT)
+    closemessage
+    applymovement(LOCALID_PLAYER, moves(walk_right))
+    waitmovement(0)
+    end
 }
 
 script HalaiIsland_Baiya_Shelf

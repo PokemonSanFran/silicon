@@ -4,7 +4,7 @@ const LOCALID_HALAI_GRUNTA = LOCALID_CAMERA + 1
 const LOCALID_HALAI_GRUNTB = LOCALID_CAMERA + 2
 const LOCALID_HALAI_GRUNTC = LOCALID_CAMERA + 3
 
-script Earthquake_HideObject_Script 
+script Earthquake_HideObject_Script
 {
 	setobjectxyperm(LOCALID_HALAI_BAIYA,28,33)
 	turnobject(LOCALID_HALAI_BAIYA,DIR_NORTH)
@@ -29,11 +29,11 @@ script Earthquake_HideTransport_Script
     callnative(Script_IsHalaiIslandUnderCrisis)
     if (var(VAR_RESULT) == TRUE)
     {
-		setobjectflagfromlocalid(LOCALID_HALAI_FERRY)	
+		setobjectflagfromlocalid(LOCALID_HALAI_FERRY)
     }
 }
 
-script Earthquake_PostRescue_Objects_Script 
+script Earthquake_PostRescue_Objects_Script
 {
 	addobject(LOCALID_HALAI_BAIYA)
 	addobject(LOCALID_HALAI_ADAORA)
@@ -59,9 +59,13 @@ script Earthquake_ThatNight_Dialogue
 {
 	fwdtime(1,0)
     startcutscene(JUMPPLAYER_EARTHQUAKE_INSIDE)
+    setvar(VAR_HALAI_ISLAND_STATE,POST_EARTHQUAKE)
 
 	clearobjectflagfromlocalid(LOCALID_HALAI_HOME_BAIYA)
     addobject(LOCALID_HALAI_HOME_BAIYA)
+    setobjectxyperm(LOCALID_HALAI_HOME_BAIYA,2,7)
+    setobjectxy(LOCALID_HALAI_HOME_BAIYA,2,7)
+
     applymovement(LOCALID_HALAI_HOME_BAIYA,Common_Movement_FaceDown)
     waitmovement(LOCALID_HALAI_HOME_BAIYA)
 
@@ -87,21 +91,23 @@ script Earthquake_ThatNight_Dialogue
     msgbox(format("I'm fine. Do you hear people screaming?"),MSGBOX_DEFAULT,SPEAKER_ALICIA)
     closemessage
 
-    applymovement(LOCALID_HALAI_HOME_BAIYA, moves(walk_up, walk_right, face_up, step_end))
+    moveobjecttocoords(LOCALID_HALAI_HOME_BAIYA,6,4,DIR_NORTH)
+    waitmovement(LOCALID_HALAI_HOME_BAIYA)
+
+    applymovement(LOCALID_HALAI_HOME_BAIYA,moves(delay_8 * 3,walk_in_place_up, delay_8))
     waitmovement(LOCALID_HALAI_HOME_BAIYA)
 
     msgbox(format("The power's dead. This… isn't good."),MSGBOX_DEFAULT,SPEAKER_BAIYA_TIDE)
     closemessage
 
-    applymovement(LOCALID_HALAI_HOME_BAIYA, moves(player_run_right*2, player_run_up*2, step_end))
+    moveobjecttocoords(LOCALID_HALAI_HOME_BAIYA,8,2,DIR_NORTH,1)
     waitmovement(LOCALID_HALAI_HOME_BAIYA)
     playse(SE_EXIT)
     waitse
     removeobject(LOCALID_HALAI_HOME_BAIYA)
 
-    setvar(VAR_HALAI_ISLAND_STATE,POST_EARTHQUAKE)
     fadeblackandsetremovewarpfadeflag
-    warp(MAP_HALAI_ISLAND,2)
+    warpsilent(MAP_HALAI_ISLAND,WARP_ID_HALAI_ISLAND_TO_BAIYA_HOME)
 	waitstate
 }
 
