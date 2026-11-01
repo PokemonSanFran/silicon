@@ -196,9 +196,9 @@
     },
     {
       "id": "HEAL_LOCATION_HALAI_ISLAND_BAIYA",
-      "map": "MAP_HALAI_ISLAND_BAIYA",
-      "x": 7,
-      "y": 2
+      "map": "MAP_HALAI_ISLAND_BAIYA2F",
+      "x": 5,
+      "y": 6
     },
     {
       "id": "HEAL_LOCATION_ARANTRAZ",

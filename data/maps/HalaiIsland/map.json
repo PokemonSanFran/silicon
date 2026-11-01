@@ -318,7 +318,7 @@
       "y": 32,
       "elevation": 0,
       "dest_map": "MAP_HALAI_ISLAND_BAIYA",
-      "dest_warp_id": "WARP_ID_BAIYA_HOME_TO_HALAI_ISLAND"
+      "dest_warp_id": "WARP_ID_BAIYA_HOME_TO_HALAI_ISLAND_LEFT"
     },
     {
       "warp_id": "WARP_ID_HALAI_ISLAND_TO_CENTER",

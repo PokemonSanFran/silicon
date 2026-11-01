@@ -6303,6 +6303,12 @@ void Script_ShouldUpdateMusicForRave(void)
 
 void UpdateMusicForRave(void)
 {
+    if (GetCurrentMap() == MAP_HALAI_ISLAND_BAIYA2F && IsHalaiIslandUnderCrisis() == FALSE)
+    {
+        SetMediumLowPassFilter();
+        return;
+    }
+    
     if (GetCurrentMap() != MAP_CURENO_PORT)
         return;
 

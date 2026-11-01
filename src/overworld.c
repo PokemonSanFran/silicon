@@ -1324,11 +1324,15 @@ static bool8 IsOnHalaiIslandDuringConstruction(struct WarpData *warp)
     if (IsHalaiIslandUnderConstruction() == FALSE)
         return FALSE;
 
+    if (GetCurrentMap() == MAP_HALAI_ISLAND_POKEMON_CENTER_1F
+    || GetCurrentMap() == MAP_HALAI_ISLAND_BAIYA
+    || GetCurrentMap() == MAP_HALAI_ISLAND_BAIYA2F)
+        return FALSE;
+
     if (Overworld_GetMapHeaderByGroupAndId(warp->mapGroup, warp->mapNum)->regionMapSectionId != MAPSEC_HALAI_ISLAND)
         return FALSE;
 
-    if (GetCurrentMap() == MAP_HALAI_ISLAND_POKEMON_CENTER_1F)
-        return FALSE;
+    
 
     return TRUE;
 }

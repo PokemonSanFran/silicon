@@ -1,0 +1,52 @@
+mapscripts HalaiIsland_Baiya2F_MapScripts {
+        MAP_SCRIPT_ON_TRANSITION
+    {
+        call(Earthquake_Script_PlayCrisisMusic)
+        call(LetsFixThis_HideObjectHouse_Script)
+        call_if_set(FLAG_SHOULD_SKIP_CREDITS,Epilogue_Script_SetPostGameValues)
+    }
+}
+
+
+script HalaiIsland_Baiya_PC
+{
+    msgbox(format("You instinctively look at Baiya's search history."))
+    msgbox(format("It's not even my computer and I feel like I just got put on a list…"), MSGBOX_DEFAULT,SPEAKER_PLAYER,TAIL_THOUGHT)
+    closemessage
+    end
+}
+
+script HalaiIsland_Baiya_Bed
+{
+    lock
+    if(var(VAR_HALAI_ISLAND_STATE) < MEET_AT_ROUTE4)
+    {
+        msgbox(format("Probably shouldn't sleep in Baiya's bed."), MSGBOX_DEFAULT,SPEAKER_PLAYER,TAIL_THOUGHT)
+        closemessage
+        applymovement(LOCALID_PLAYER, moves(walk_right))
+        waitmovement(0)
+        end
+    }
+    callnative(HealPlayerParty)
+
+    fadescreen(FADE_TO_BLACK) //Player closes their eyes
+    delay(16)
+
+    //Ask the player when they should go to bed
+    call(BedScript_SetNewTime_Script)
+    goto(BedScript_AdvanceStory_Script)
+}
+
+script HalaiIsland_Baiya_Shelf
+{
+    msgbox(format("It's crammed with books about political theory.\nThey look unopened."))
+    closemessage
+    end
+}
+
+script HalaiIsland_Baiya_Bin
+{
+    msgbox(format("…Shouldn't have looked!"))
+    closemessage
+    end
+}

@@ -11392,10 +11392,10 @@
     {
       "id": "LAYOUT_HALAI_ISLAND_BAIYA",
       "name": "HalaiIsland_Baiya_Layout",
-      "width": 9,
-      "height": 8,
-      "primary_tileset": "gTileset_Building",
-      "secondary_tileset": "gTileset_BrendansMaysHouse",
+      "width": 10,
+      "height": 11,
+      "primary_tileset": "gTileset_BuildingSilicon",
+      "secondary_tileset": "gTileset_RegularIndoors",
       "border_filepath": "data/layouts/HalaiIsland_Baiya/border.bin",
       "blockdata_filepath": "data/layouts/HalaiIsland_Baiya/map.bin",
       "border_height": 2,
@@ -13312,6 +13312,18 @@
       "secondary_tileset": "gTileset_FancyIndoors",
       "border_filepath": "data/layouts/CuconuTown_SharpriseCompound_2F_Corridor/border.bin",
       "blockdata_filepath": "data/layouts/CuconuTown_SharpriseCompound_2F_Corridor/map.bin",
+      "border_height": 2,
+      "border_width": 2
+    },
+    {
+      "id": "LAYOUT_HALAI_ISLAND_BAIYA2F",
+      "name": "HalaiIsland_Baiya2F_Layout",
+      "width": 23,
+      "height": 11,
+      "primary_tileset": "gTileset_BuildingSilicon",
+      "secondary_tileset": "gTileset_RegularIndoors",
+      "border_filepath": "data/layouts/HalaiIsland_Baiya2F/border.bin",
+      "blockdata_filepath": "data/layouts/HalaiIsland_Baiya2F/map.bin",
       "border_height": 2,
       "border_width": 2
     }

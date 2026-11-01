@@ -67,6 +67,7 @@ script Earthquake_ThatNight_Dialogue
 
     msgbox(format("That night…"))
     closemessage
+    applymovement(LOCALID_PLAYER, moves(face_left))
     fadescreen(FADE_FROM_BLACK)
 
     call(Earthquake_PlayFake_EventScript)
@@ -79,27 +80,24 @@ script Earthquake_ThatNight_Dialogue
     msgbox(format("Oh no!"),MSGBOX_DEFAULT,SPEAKER_RESIDENT_A,TAIL_SHOUT)
     closemessage
 
-    applymovement(PLAYER, moves(walk_right, step_end))
+    applymovement(PLAYER, moves(walk_left, step_end))
 
     msgbox(format("Help me!"),MSGBOX_DEFAULT,SPEAKER_RESIDENT_B,TAIL_SHOUT,EMOTE_SHOCK)
 
     msgbox(format("I'm fine. Do you hear people screaming?"),MSGBOX_DEFAULT,SPEAKER_ALICIA)
     closemessage
 
-    applymovement(LOCALID_HALAI_HOME_BAIYA, moves(walk_up * 2, step_end))
+    applymovement(LOCALID_HALAI_HOME_BAIYA, moves(walk_up, walk_right, face_up, step_end))
     waitmovement(LOCALID_HALAI_HOME_BAIYA)
 
     msgbox(format("The power's dead. This… isn't good."),MSGBOX_DEFAULT,SPEAKER_BAIYA_TIDE)
     closemessage
 
-    applymovement(LOCALID_HALAI_HOME_BAIYA, moves(player_run_right, player_run_up, step_end))
+    applymovement(LOCALID_HALAI_HOME_BAIYA, moves(player_run_right*2, player_run_up*2, step_end))
     waitmovement(LOCALID_HALAI_HOME_BAIYA)
     playse(SE_EXIT)
     waitse
     removeobject(LOCALID_HALAI_HOME_BAIYA)
-
-    applymovement(PLAYER, moves(player_run_right * 5, player_run_up * 3, step_end))
-    waitmovement(PLAYER)
 
     setvar(VAR_HALAI_ISLAND_STATE,POST_EARTHQUAKE)
     fadeblackandsetremovewarpfadeflag
