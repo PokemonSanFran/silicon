@@ -30,11 +30,11 @@ script HalaiIsland_Baiya_Hardcore
 {
     if(var(VAR_HALAI_ISLAND_STATE) >= MEET_AT_ROUTE4)
     {
-        msgbox(format("THE SHOW! MUST! GO! ON!\pHARDCORE!"))
+        msgbox(format("THE SHOW! MUST! GO! ON!\pHARDCORE!"),,SPEAKER_BAIYA_ROOMMATE_5,TAIL_SHOUT)
     }
     else
     {
-       msgbox(format("HARDCORE, BABY!"))
+       msgbox(format("HARDCORE, BABY!"),,SPEAKER_BAIYA_ROOMMATE_5,TAIL_SHOUT)
     }
     closemessage
     end
@@ -45,12 +45,12 @@ script HalaiIsland_Baiya_CrashUpstairs
     faceplayer
     if(var(VAR_HALAI_ISLAND_STATE) >= MEET_AT_ROUTE4)
     {
-        msgbox(format("For all your efforts, I will grant you the utmost honor.\pThe faculty to sleep on the one mattress in the house.\nYou've earned it."))
+        msgbox(format("For all your efforts, I will grant you the utmost honor.\pThe faculty to sleep on the one mattress in the house.\nYou've earned it."),,SPEAKER_BAIYA_ROOMMATE_1)
     }
     else
     {
 
-       msgbox(format("You cool with Baiya?\nRad.\nYou can crash upstairs, then.\pJust leave the bed to him, eh?"))
+       msgbox(format("You cool with Baiya?\nRad.\nYou can crash upstairs, then.\pJust leave the bed to him, eh?"),,SPEAKER_BAIYA_ROOMMATE_1)
     }
     closemessage
     end
@@ -59,7 +59,7 @@ script HalaiIsland_Baiya_CrashUpstairs
 script HalaiIsland_Baiya_News
 {
     faceplayer
-    msgbox(format("'Scuse me?\nI'm trying to watch the news."))
+    msgbox(format("'Scuse me?\nI'm trying to watch the news."),,SPEAKER_BAIYA_ROOMMATE_6,,EMOTE_ANGRY)
     closemessage
     applymovement(3, moves(face_up))
     waitmovement(0)
@@ -69,7 +69,7 @@ script HalaiIsland_Baiya_News
 script HalaiIsland_Baiya_CantHear
 {
     faceplayer
-    msgbox(format("WHAT?!\nI CAN'T HEAR YOU!\pTURN THE MUSIC DOWN?\NNO WAY!"))
+    msgbox(format("WHAT?!\nI CAN'T HEAR YOU!\pTURN THE MUSIC DOWN?\NNO WAY!"),,SPEAKER_BAIYA_ROOMMATE_4,TAIL_SHOUT)
     closemessage
     end
 }
@@ -79,12 +79,12 @@ script HalaiIsland_Baiya_GotEachOther
     faceplayer
     if(var(VAR_HALAI_ISLAND_STATE) >= MEET_AT_ROUTE4)
     {
-        msgbox(format("…The earthquake took out our comrade.\pIt's chill.\nThey went down fighting.\nJust like they wanted.\pWe must continue for them, too."))
+        msgbox(format("…The earthquake took out our comrade.\pIt's chill.\nThey went down fighting.\nJust like they wanted.\pWe must continue for them, too."),,SPEAKER_BAIYA_ROOMMATE_3,,EMOTE_SAD)
     }
     else
     {
 
-       msgbox(format("Even if the whole world is against us, at least we got each other."))
+       msgbox(format("Even if the whole world is against us, at least we got each other."),,SPEAKER_BAIYA_ROOMMATE_3)
     }
     closemessage
     end
@@ -93,7 +93,7 @@ script HalaiIsland_Baiya_GotEachOther
 script HalaiIsland_Baiya_ScrewSharpRise
 {
     faceplayer
-    msgbox(format("Sharp Rise is nothin' to me!\nWe're gonna take on 'em all!\nJust they wait!"))
+    msgbox(format("Sharp Rise is nothin' to me!\nWe're gonna take on 'em all!\nJust they wait!"),,SPEAKER_BAIYA_ROOMMATE_2)
     closemessage
     end
 }
@@ -103,7 +103,7 @@ script HalaiIsland_Baiya_TV
     callnative(Script_IsHalaiIslandUnderCrisis)
     if (var(VAR_RESULT))
     {
-        msgbox(format("Just static."))
+        msgbox(format("Just static."),,SPEAKER_BAIYA_ROOMMATE_5)
     }
     else
     {
