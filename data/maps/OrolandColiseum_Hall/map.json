@@ -15,7 +15,7 @@
   "connections": null,
   "object_events": [
     {
-        "local_id": "OBJ_EVENT_GFX_OROLAND_COLISEUM_HALL_MAGNUS",
+        "local_id": "LOCALID_OROLAND_COLISEUM_HALL_MAGNUS",
       "graphics_id": "OBJ_EVENT_GFX_MAGNUS",
       "x": 9,
       "y": 7,
@@ -29,7 +29,7 @@
       "flag": "0"
     },
     {
-        "local_id": "OBJ_EVENT_GFX_OROLAND_COLISEUM_HALL_TALA",
+        "local_id": "LOCALID_OROLAND_COLISEUM_HALL_TALA",
       "graphics_id": "OBJ_EVENT_GFX_TALA",
       "x": 2,
       "y": 6,
@@ -43,7 +43,7 @@
       "flag": "0"
     },
     {
-        "local_id": "OBJ_EVENT_GFX_OROLAND_COLISEUM_HALL_FRANK",
+        "local_id": "LOCALID_OROLAND_COLISEUM_HALL_FRANK",
       "graphics_id": "OBJ_EVENT_GFX_FRANK",
       "x": 2,
       "y": 7,
@@ -57,7 +57,7 @@
       "flag": "0"
     },
     {
-        "local_id": "OBJ_EVENT_GFX_OROLAND_COLISEUM_HALL_ELEANOR",
+        "local_id": "LOCALID_OROLAND_COLISEUM_HALL_ELEANOR",
       "graphics_id": "OBJ_EVENT_GFX_ELEANOR",
       "x": 9,
       "y": 4,
@@ -71,7 +71,7 @@
       "flag": "FLAG_TEMP_1"
     },
     {
-        "local_id": "OBJ_EVENT_GFX_OROLAND_COLISEUM_HALL_KEIYING",
+        "local_id": "LOCALID_OROLAND_COLISEUM_HALL_KEIYING",
       "graphics_id": "OBJ_EVENT_GFX_KEIYING",
       "x": 14,
       "y": 5,
@@ -85,7 +85,7 @@
       "flag": "0"
     },
     {
-        "local_id": "OBJ_EVENT_GFX_OROLAND_COLISEUM_HALL_IMELDA",
+        "local_id": "LOCALID_OROLAND_COLISEUM_HALL_IMELDA",
       "graphics_id": "OBJ_EVENT_GFX_IMELDA",
       "x": 14,
       "y": 4,
@@ -99,7 +99,7 @@
       "flag": "0"
     },
     {
-        "local_id": "OBJ_EVENT_GFX_OROLAND_COLISEUM_HALL_DOYLE",
+        "local_id": "LOCALID_OROLAND_COLISEUM_HALL_DOYLE",
       "graphics_id": "OBJ_EVENT_GFX_DOYLE",
       "x": 15,
       "y": 4,

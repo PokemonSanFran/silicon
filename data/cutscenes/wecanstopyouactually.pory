@@ -1,20 +1,16 @@
-const PLAYER = OBJ_EVENT_ID_PLAYER
-const POLICE_A = 2
-const POLICE_B = 3
-const LUCREZIA = 4
-
-const FLAG_HIDE_POLICE = FLAG_TEMP_2
+const LOCALID_SHARPRISESPIRE_TOP_POLICE_A = (LOCALID_CAMERA + 1)
+const LOCALID_SHARPRISESPIRE_TOP_POLICE_B = (LOCALID_CAMERA + 2)
 
 script WeCanStopYouActually_FixPlayerPosition_Script {
     getplayerxy(VAR_TEMP_0,VAR_TEMP_1)
 
         if (var(VAR_TEMP_0) != 15 || (var(VAR_TEMP_1) != 6)){
             fadescreen(FADE_TO_BLACK)
-                applymovement(LUCREZIA,Common_Movement_FaceDown)
-                waitmovement(LUCREZIA)
-                setobjectxy(LUCREZIA,15,5)
-                applymovement(PLAYER,Common_Movement_FaceUp)
-                setobjectxy(PLAYER,15,6)
+                applymovement(LOCALID_SHARPRISESPIRE_TOP_LUCREZIA,Common_Movement_FaceDown)
+                waitmovement(LOCALID_SHARPRISESPIRE_TOP_LUCREZIA)
+                setobjectxy(LOCALID_SHARPRISESPIRE_TOP_LUCREZIA,15,5)
+                applymovement(LOCALID_PLAYER,Common_Movement_FaceUp)
+                setobjectxy(LOCALID_PLAYER,15,6)
                 TeleportCamera(15,6)
                 fadescreen(FADE_FROM_BLACK)
         }
@@ -35,8 +31,8 @@ script WeCanStopYouActually_PostBattle_Dialogue {
 
         closemessage
 
-        applymovement(LUCREZIA, moves(walk_up, step_end))
-        waitmovement(LUCREZIA)
+        applymovement(LOCALID_SHARPRISESPIRE_TOP_LUCREZIA, moves(walk_up, step_end))
+        waitmovement(LOCALID_SHARPRISESPIRE_TOP_LUCREZIA)
         playse(SE_PC_LOGIN)
         special(TurnOnTVScreen)
         delay(30)
@@ -61,8 +57,8 @@ script WeCanStopYouActually_PostBattle_Dialogue {
 
         closemessage
 
-        applymovement(LUCREZIA, moves(walk_faster_left, walk_faster_right * 2, walk_faster_left * 2, walk_faster_right * 2, walk_faster_left * 2, walk_faster_right, face_down, step_end))
-        waitmovement(LUCREZIA)
+        applymovement(LOCALID_SHARPRISESPIRE_TOP_LUCREZIA, moves(walk_faster_left, walk_faster_right * 2, walk_faster_left * 2, walk_faster_right * 2, walk_faster_left * 2, walk_faster_right, face_down, step_end))
+        waitmovement(LOCALID_SHARPRISESPIRE_TOP_LUCREZIA)
 
         msgbox(format("YOU! They told you! That’s how you found out! And now if they confess… they don’t have to take it from you."),,SPEAKER_LUCREZIA)
 
@@ -70,7 +66,7 @@ script WeCanStopYouActually_PostBattle_Dialogue {
 
         closemessage
 
-        applymovement(LUCREZIA,Common_Movement_FaceLeft)
+        applymovement(LOCALID_SHARPRISESPIRE_TOP_LUCREZIA,Common_Movement_FaceLeft)
 
         msgbox(format("CHARLOTTE! RAMESH! SECURITY!"),,SPEAKER_LUCREZIA)
 
@@ -78,15 +74,15 @@ script WeCanStopYouActually_PostBattle_Dialogue {
 
         closemessage
 
-        applymovement(LUCREZIA,Common_Movement_FaceDown)
-        waitmovement(LUCREZIA)
+        applymovement(LOCALID_SHARPRISESPIRE_TOP_LUCREZIA,Common_Movement_FaceDown)
+        waitmovement(LOCALID_SHARPRISESPIRE_TOP_LUCREZIA)
 
         msgbox(format("…I’m not going to prison. I’m NOT GOING TO JAIL…"),,SPEAKER_LUCREZIA)
 
         closemessage
 
-        applymovement(LUCREZIA,Common_Movement_WalkDown)
-        waitmovement(LUCREZIA)
+        applymovement(LOCALID_SHARPRISESPIRE_TOP_LUCREZIA,Common_Movement_WalkDown)
+        waitmovement(LOCALID_SHARPRISESPIRE_TOP_LUCREZIA)
 
         goto(WeCanStopYouActually_StartBossBattle_Script)
 }
@@ -108,18 +104,17 @@ script WeCanStopYouActually_Arrest_Dialogue {
         setvar(VAR_TOWER_RAID_STATE,DEFEATED_LUCREZIA_SHARPRISESPIRE)
         setvar(VAR_STORYLINE_STATE,STORY_EPILOGUE)
 
-        clearflag(FLAG_HIDE_POLICE)
-        addobject(POLICE_A)
-        addobject(POLICE_B)
+        spawnobject(OBJ_EVENT_GFX_MYSTERY_GIFT_MAN,LOCALID_SHARPRISESPIRE_TOP_POLICE_A,7,7,MOVEMENT_TYPE_FACE_RIGHT)
+        spawnobject(OBJ_EVENT_GFX_MYSTERY_GIFT_MAN,LOCALID_SHARPRISESPIRE_TOP_POLICE_B,7,8,MOVEMENT_TYPE_FACE_RIGHT)
 
         msgbox(format("Lucrezia, you’re under arrest!"))
         closemessage
 
-        applymovement(POLICE_A, moves(walk_right * 7, walk_up * 2, face_right, step_end))
-        applymovement(POLICE_B, moves(walk_right * 9, walk_up * 3, face_left, step_end))
-        applymovement(PLAYER, moves(walk_right * 2, face_left, step_end))
+        applymovement(LOCALID_SHARPRISESPIRE_TOP_POLICE_A, moves(walk_right * 7, walk_up * 2, face_right, step_end))
+        applymovement(LOCALID_SHARPRISESPIRE_TOP_POLICE_B, moves(walk_right * 9, walk_up * 3, face_left, step_end))
+        applymovement(LOCALID_PLAYER, moves(walk_right * 2, face_left, step_end))
 
-        waitmovement(POLICE_B)
+        waitmovement(LOCALID_SHARPRISESPIRE_TOP_POLICE_B)
 
         msgbox(format("For what? Using the tools YOUR BOSSES gave me? We’re all going down together! You’re all toast!"),,SPEAKER_LUCREZIA)
 
@@ -144,21 +139,6 @@ script WeCanActuallyStopYou_Script_GoToPerpWalk
     end
 }
 
-const GRUNTA = 1
-const GRUNTB = 2
-const GRUNTC = 3
-const POLICEC = 4
-const OLIVER = 5
-const LUCREZIA_B = 6
-const CHARLOTTE = 7
-const RAMESH = 8
-const POLICED = 9
-const ELEANOR = 10
-const TALA = 11
-const MAGNUS = 12
-const FRANK = 13
-const ADAORA = 14
-
 script WeCanStopYouActaully_ArrestCutscene {
         setflag(FLAG_DONT_TRANSITION_MUSIC)
         playbgm(MUS_SRC_GETTING_ARRESTED,FALSE)
@@ -166,95 +146,95 @@ script WeCanStopYouActaully_ArrestCutscene {
         startcutscene(JUMPPLAYER_EPILOGUE)
         lockall
 
-        applymovement(GRUNTA,WeCanStopYouActually_MarchRight)
-        applymovement(GRUNTB,WeCanStopYouActually_MarchLeft)
-        applymovement(GRUNTC,WeCanStopYouActually_MarchRight)
-        applymovement(ADAORA,WeCanStopYouActually_MarchLeft)
-        waitmovement(ADAORA)
-        applymovement(PLAYER, moves(walk_right, face_left, step_end))
-        waitmovement(PLAYER)
+        applymovement(LOCALID_WECANSTOPYOUACTUALLY_COMRADE_A,WeCanStopYouActually_MarchRight)
+        applymovement(LOCALID_WECANSTOPYOUACTUALLY_COMRADE_B,WeCanStopYouActually_MarchLeft)
+        applymovement(LOCALID_WECANSTOPYOUACTUALLY_COMRADE_C,WeCanStopYouActually_MarchRight)
+        applymovement(LOCALID_WECANSTOPYOUACTUALLY_ADAORA,WeCanStopYouActually_MarchLeft)
+        waitmovement(LOCALID_WECANSTOPYOUACTUALLY_ADAORA)
+        applymovement(LOCALID_PLAYER, moves(walk_right, face_left, step_end))
+        waitmovement(LOCALID_PLAYER)
         delay(8)
 
-        addobject(POLICEC)
-        applymovement(POLICEC,WeCanStopYouActually_WalkOutOfBuilding)
+        addobject(LOCALID_WECANSTOPYOUACTUALLY_POLICE_A)
+        applymovement(LOCALID_WECANSTOPYOUACTUALLY_POLICE_A,WeCanStopYouActually_WalkOutOfBuilding)
         delay(16)
 
-        addobject(OLIVER)
-        applymovement(OLIVER,WeCanStopYouActually_WalkOutOfBuilding)
+        addobject(LOCALID_WECANSTOPYOUACTUALLY_OLIVER)
+        applymovement(LOCALID_WECANSTOPYOUACTUALLY_OLIVER,WeCanStopYouActually_WalkOutOfBuilding)
         delay(16)
 
-        addobject(LUCREZIA_B)
-        applymovement(LUCREZIA_B,WeCanStopYouActually_WalkOutOfBuilding)
+        addobject(LOCALID_WECANSTOPYOUACTUALLY_LUCREZIA)
+        applymovement(LOCALID_WECANSTOPYOUACTUALLY_LUCREZIA,WeCanStopYouActually_WalkOutOfBuilding)
         delay(16)
 
-        addobject(CHARLOTTE)
-        applymovement(CHARLOTTE,WeCanStopYouActually_WalkOutOfBuilding)
+        addobject(LOCALID_WECANSTOPYOUACTUALLY_CHARLOTTE)
+        applymovement(LOCALID_WECANSTOPYOUACTUALLY_CHARLOTTE,WeCanStopYouActually_WalkOutOfBuilding)
         delay(16)
 
-        addobject(RAMESH)
-        applymovement(RAMESH,WeCanStopYouActually_WalkOutOfBuilding)
+        addobject(LOCALID_WECANSTOPYOUACTUALLY_RAMESH)
+        applymovement(LOCALID_WECANSTOPYOUACTUALLY_RAMESH,WeCanStopYouActually_WalkOutOfBuilding)
         delay(16)
 
-        addobject(POLICED)
-        applymovement(POLICED,WeCanStopYouActually_WalkOutOfBuilding)
+        addobject(LOCALID_WECANSTOPYOUACTUALLY_POLICE_B)
+        applymovement(LOCALID_WECANSTOPYOUACTUALLY_POLICE_B,WeCanStopYouActually_WalkOutOfBuilding)
         delay(16)
 
-        waitmovement(POLICED)
+        waitmovement(LOCALID_WECANSTOPYOUACTUALLY_POLICE_B)
 
-        removeobject(POLICEC)
-        removeobject(OLIVER)
-        removeobject(LUCREZIA_B)
-        removeobject(CHARLOTTE)
-        removeobject(RAMESH)
-        removeobject(POLICED)
+        removeobject(LOCALID_WECANSTOPYOUACTUALLY_POLICE_A)
+        removeobject(LOCALID_WECANSTOPYOUACTUALLY_OLIVER)
+        removeobject(LOCALID_WECANSTOPYOUACTUALLY_LUCREZIA)
+        removeobject(LOCALID_WECANSTOPYOUACTUALLY_CHARLOTTE)
+        removeobject(LOCALID_WECANSTOPYOUACTUALLY_RAMESH)
+        removeobject(LOCALID_WECANSTOPYOUACTUALLY_POLICE_B)
 
-        addobject(ELEANOR)
+        addobject(LOCALID_WECANSTOPYOUACTUALLY_ELEANOR)
         random(4)
         if (var(VAR_RESULT) == 1){
-            applymovement(ELEANOR,WeCanStopYouActually_SalutePlayerHeart)
+            applymovement(LOCALID_WECANSTOPYOUACTUALLY_ELEANOR,WeCanStopYouActually_SalutePlayerHeart)
         }else {
-            applymovement(ELEANOR,WeCanStopYouActually_SalutePlayer)
+            applymovement(LOCALID_WECANSTOPYOUACTUALLY_ELEANOR,WeCanStopYouActually_SalutePlayer)
         }
     delay(32)
-        waitmovement(ELEANOR)
+        waitmovement(LOCALID_WECANSTOPYOUACTUALLY_ELEANOR)
 
-        addobject(TALA)
+        addobject(LOCALID_WECANSTOPYOUACTUALLY_TALA)
         random(4)
         if (var(VAR_RESULT) == 1){
-            applymovement(TALA,WeCanStopYouActually_SalutePlayerHeart)
+            applymovement(LOCALID_WECANSTOPYOUACTUALLY_TALA,WeCanStopYouActually_SalutePlayerHeart)
         }else {
-            applymovement(TALA,WeCanStopYouActually_SalutePlayer)
+            applymovement(LOCALID_WECANSTOPYOUACTUALLY_TALA,WeCanStopYouActually_SalutePlayer)
         }
     delay(32)
-        waitmovement(TALA)
+        waitmovement(LOCALID_WECANSTOPYOUACTUALLY_TALA)
 
-        addobject(MAGNUS)
+        addobject(LOCALID_WECANSTOPYOUACTUALLY_MAGNUS)
         random(4)
         if (var(VAR_RESULT) == 1){
-            applymovement(MAGNUS,WeCanStopYouActually_SalutePlayerHeart)
+            applymovement(LOCALID_WECANSTOPYOUACTUALLY_MAGNUS,WeCanStopYouActually_SalutePlayerHeart)
         }else {
-            applymovement(MAGNUS,WeCanStopYouActually_SalutePlayer)
+            applymovement(LOCALID_WECANSTOPYOUACTUALLY_MAGNUS,WeCanStopYouActually_SalutePlayer)
         }
     delay(32)
-        waitmovement(MAGNUS)
+        waitmovement(LOCALID_WECANSTOPYOUACTUALLY_MAGNUS)
 
-        addobject(FRANK)
+        addobject(LOCALID_WECANSTOPYOUACTUALLY_FRANK)
         random(4)
         if (var(VAR_RESULT) == 1){
-            applymovement(FRANK,WeCanStopYouActually_SalutePlayerHeart)
+            applymovement(LOCALID_WECANSTOPYOUACTUALLY_FRANK,WeCanStopYouActually_SalutePlayerHeart)
         }else {
-            applymovement(FRANK,WeCanStopYouActually_SalutePlayer)
+            applymovement(LOCALID_WECANSTOPYOUACTUALLY_FRANK,WeCanStopYouActually_SalutePlayer)
         }
     delay(32)
 
-        waitmovement(FRANK)
+        waitmovement(LOCALID_WECANSTOPYOUACTUALLY_FRANK)
 
-        removeobject(TALA)
-        removeobject(MAGNUS)
-        removeobject(FRANK)
-        removeobject(ELEANOR)
+        removeobject(LOCALID_WECANSTOPYOUACTUALLY_TALA)
+        removeobject(LOCALID_WECANSTOPYOUACTUALLY_MAGNUS)
+        removeobject(LOCALID_WECANSTOPYOUACTUALLY_FRANK)
+        removeobject(LOCALID_WECANSTOPYOUACTUALLY_ELEANOR)
 
-        applymovement(PLAYER,Common_Movement_FaceDown)
+        applymovement(LOCALID_PLAYER,Common_Movement_FaceDown)
         waitmovement(0)
 
         fadeblackandsetremovewarpfadeflag

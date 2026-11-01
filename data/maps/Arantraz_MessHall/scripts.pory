@@ -2,7 +2,6 @@ mapscripts Arantraz_MessHall_MapScripts
 {
     MAP_SCRIPT_ON_TRANSITION
 	{
-        call(YouRealizeTheyreEvilRight_HideGarbodor_Script)
 		call_if_eq(VAR_ARANTRAZ_STATE,0,YouRealizeTheyreEvilRight_HideBasement_Script)
 		call_if_eq(VAR_ARANTRAZ_STATE,FIRST_ARRIVED_ARANTRAZ,YouRealizeTheyreEvilRight_HideBasement_Script)
 		call_if_eq(VAR_ARANTRAZ_STATE,BATTLED_TALA,YouRealizeTheyreEvilRight_HideBasement_Script)

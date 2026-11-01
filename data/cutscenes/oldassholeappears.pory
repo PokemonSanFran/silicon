@@ -1,6 +1,4 @@
 const PLAYER = OBJ_EVENT_ID_PLAYER
-const CHARLOTTE = 1
-const FLAG_HIDE_CHARLOTTE = FLAG_TEMP_1
 
 script OldAssholeAppears_ControlVisibility_Script
 {
@@ -16,34 +14,34 @@ script OldAssholeAppears_ControlVisibility_Script
 
 script OldAssholeAppears_HideCharlotte_Script
 {
-    setflag(FLAG_HIDE_CHARLOTTE)
+    setobjectflagfromlocalid(LOCALID_ANBEH_BEND_CHARLOTTE)
 }
 
 script OldAssholeAppears_InteractedObject_Script
 {
-    setobjectxyperm(CHARLOTTE,15,10)
-    setobjectxy(CHARLOTTE,15,10)
+    setobjectxyperm(LOCALID_ANBEH_BEND_CHARLOTTE,15,10)
+    setobjectxy(LOCALID_ANBEH_BEND_CHARLOTTE,15,10)
 }
 
 script OldAssholeAppears_MoveCharlotteIntoPosition_Script
 {
-    clearflag(FLAG_HIDE_CHARLOTTE)
-    addobject(CHARLOTTE)
+    clearobjectflagfromlocalid(LOCALID_ANBEH_BEND_CHARLOTTE)
+    addobject(LOCALID_ANBEH_BEND_CHARLOTTE)
     getplayerxy(VAR_TEMP_0,VAR_TEMP_1)
 
     if (var(VAR_TEMP_0) != 20)
     {
         return
     }
-    setobjectxyperm(CHARLOTTE,12,10)
-    setobjectxy(CHARLOTTE,12,10)
+    setobjectxyperm(LOCALID_ANBEH_BEND_CHARLOTTE,12,10)
+    setobjectxy(LOCALID_ANBEH_BEND_CHARLOTTE,12,10)
 }
 
 script OldAssholeAppears_MoveCharlotteToPlayer
 {
     playbgm(MUS_CHARLOTTE, TRUE)
-    applymovement(CHARLOTTE, moves(walk_right * 7))
-    waitmovement(CHARLOTTE)
+    applymovement(LOCALID_ANBEH_BEND_CHARLOTTE, moves(walk_right * 7))
+    waitmovement(LOCALID_ANBEH_BEND_CHARLOTTE)
 }
 
 script OldAssholeAppear_TriggerCharlotte_Script
@@ -90,7 +88,7 @@ script OldAssholeAppears_PostBattle_Script
 {
     lockall
     startcutscene(JUMPPLAYER_OLDASSHOLEAPPEARS)
-    applymovement(CHARLOTTE,Common_Movement_FacePlayer)
+    applymovement(LOCALID_ANBEH_BEND_CHARLOTTE,Common_Movement_FacePlayer)
     msgbox(format("Good to see you're taking this all seriously, {PLAYER}! My rival should be strong to keep me sharp! Well, true to my word..."),,SPEAKER_CHARLOTTE)
     msgbox(format("Are you familiar with Arriba?"),MSGBOX_YESNO,SPEAKER_CHARLOTTE)
     if (var (VAR_RESULT) == YES){
@@ -100,8 +98,8 @@ script OldAssholeAppears_PostBattle_Script
     }
     msgbox(format("Let me see your phone..."),,SPEAKER_CHARLOTTE)
     closemessage
-    cueobjectplayer(CHARLOTTE)
-    waitmovement(CHARLOTTE)
+    cueobjectplayer(LOCALID_ANBEH_BEND_CHARLOTTE)
+    waitmovement(LOCALID_ANBEH_BEND_CHARLOTTE)
     msgbox(format("I went to the SharpRise Spire, and the League Commissioner gave me an Arriba upgrade for being the first Challenger to visit! They said I could give one upgrade to somebody else, so you'll do."),,SPEAKER_CHARLOTTE)
     callnative(BufferArribaDiscount)
     msgbox(format("The upgrade gives us a {STR_VAR_1}% discount on all Arriba rides. Not that I'm paying anyways..."),,SPEAKER_CHARLOTTE)
@@ -111,8 +109,8 @@ script OldAssholeAppears_PostBattle_Script
     bufferitemnameplural(STR_VAR_2,ITEM_MAX_ELIXER,2)
     msgbox(format("That reminds me, Daddy shipped over way too many {STR_VAR_1} and {STR_VAR_2}, so I'll heal you up too."),,SPEAKER_CHARLOTTE)
     closemessage
-    cueobjectplayer(CHARLOTTE)
-    waitmovement(CHARLOTTE)
+    cueobjectplayer(LOCALID_ANBEH_BEND_CHARLOTTE)
+    waitmovement(LOCALID_ANBEH_BEND_CHARLOTTE)
 
     playse(SE_USE_ITEM)
     special(HealPlayerParty)
@@ -131,10 +129,10 @@ script OldAssholeAppears_CharlotteExit_Script
     setvar(VAR_ANBEH_BEND_STATE,DEFEATED_CHARLOTTE_LOMBARD)
     addvar(VAR_STORYLINE_STATE,1)
     getplayerxy(VAR_TEMP_0, VAR_TEMP_1)
-    applymovement(CHARLOTTE, moves(walk_left * 6, walk_down * 2, walk_left * 3, step_end))
+    applymovement(LOCALID_ANBEH_BEND_CHARLOTTE, moves(walk_left * 6, walk_down * 2, walk_left * 3, step_end))
     waitmovement(0)
     fadedefaultbgm
-    removeobject(CHARLOTTE)
+    removeobject(LOCALID_ANBEH_BEND_CHARLOTTE)
     setvar(VAR_TEMP_0,0)
     endcutscene
     call(AaandWereBack_Monologue)

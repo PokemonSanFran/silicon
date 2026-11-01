@@ -1,52 +1,38 @@
-const PLAYER = OBJ_EVENT_ID_PLAYER
-const BAIYA = 1
-const MAGNUS = 2
-const TALA = 3
-const GARBODOR = 4
-const BAIYA_OUTSIDE = 10
-
-const FLAG_HIDE_BAIYA = FLAG_TEMP_1
-const FLAG_HIDE_GARBODOR = FLAG_TEMP_4
-const FLAG_HIDE_FRANK = FLAG_TEMP_5
-const FLAG_HIDE_VIGRIM = FLAG_TEMP_6
-const FLAG_HIDE_GRUNTS = FLAG_TEMP_7
-const FLAG_HIDE_ELEANOR = FLAG_TEMP_8
-const FLAG_HIDE_ARIANNA = FLAG_TEMP_9
+const LOCALID_ARANTRAZ_MESSHALL_BAIYA_POKEMON = (LOCALID_CAMERA + 1)
 
 //YouRealizeTheyreEvilRight_
 
 script YouRealizeTheyreEvilRight_HideObject_Script {
     if (var(VAR_ARANTRAZ_STATE) != BAIYA_SUMMONED_ARANTRAZ && var(VAR_ARANTRAZ_STATE) != POST_ARRIVE_ARANTRAZ){
-        setflag(FLAG_HIDE_BAIYA)
+        setobjectflagfromlocalid(LOCALID_ARANTRAZ_MESSHALL_BAIYA)
     }
     return
 }
 
-script YouRealizeTheyreEvilRight_HideGarbodor_Script {
-    setflag(FLAG_HIDE_GARBODOR)
-    return
-}
-
 script YouRealizeTheyreEvilRight_HideBasement_Script {
-    setflag(FLAG_HIDE_BAIYA)
+    setobjectflagfromlocalid(LOCALID_ARANTRAZ_MESSHALL_BAIYA)
 	setobjectflagfromlocalid(LOCALID_ARANTRAZ_MESSHALL_TALA)
 	setobjectflagfromlocalid(LOCALID_ARANTRAZ_MESSHALL_MAGNUS)
-    setflag(FLAG_HIDE_GARBODOR)
-    setflag(FLAG_HIDE_FRANK)
-    setflag(FLAG_HIDE_VIGRIM)
-    setflag(FLAG_HIDE_GRUNTS)
-    setflag(FLAG_HIDE_ELEANOR)
-    setflag(FLAG_HIDE_ARIANNA)
+    setobjectflagfromlocalid(LOCALID_ARANTRAZ_MESSHALL_FRANK)
+    setobjectflagfromlocalid(LOCALID_ARANTRAZ_MESSHALL_VIGRIM)
+    setobjectflagfromlocalid(LOCALID_ARANTRAZ_MESSHALL_COMRADE_A)
+    setobjectflagfromlocalid(LOCALID_ARANTRAZ_MESSHALL_COMRADE_B)
+    setobjectflagfromlocalid(LOCALID_ARANTRAZ_MESSHALL_COMRADE_C)
+    setobjectflagfromlocalid(LOCALID_ARANTRAZ_MESSHALL_COMRADE_D)
+    setobjectflagfromlocalid(LOCALID_ARANTRAZ_MESSHALL_ELEANOR)
+    setobjectflagfromlocalid(LOCALID_ARANTRAZ_MESSHALL_ADAORA)
     return
 }
 
 script YouRealizeTheyreEvilRight_Basement_SetUpObjects_Script {
-    setflag(FLAG_HIDE_GARBODOR)
-    setflag(FLAG_HIDE_FRANK)
-    setflag(FLAG_HIDE_VIGRIM)
-    setflag(FLAG_HIDE_GRUNTS)
-    setflag(FLAG_HIDE_ELEANOR)
-    setflag(FLAG_HIDE_ARIANNA)
+    setobjectflagfromlocalid(LOCALID_ARANTRAZ_MESSHALL_FRANK)
+    setobjectflagfromlocalid(LOCALID_ARANTRAZ_MESSHALL_VIGRIM)
+    setobjectflagfromlocalid(LOCALID_ARANTRAZ_MESSHALL_COMRADE_A)
+    setobjectflagfromlocalid(LOCALID_ARANTRAZ_MESSHALL_COMRADE_B)
+    setobjectflagfromlocalid(LOCALID_ARANTRAZ_MESSHALL_COMRADE_C)
+    setobjectflagfromlocalid(LOCALID_ARANTRAZ_MESSHALL_COMRADE_D)
+    setobjectflagfromlocalid(LOCALID_ARANTRAZ_MESSHALL_ELEANOR)
+    setobjectflagfromlocalid(LOCALID_ARANTRAZ_MESSHALL_ADAORA)
     return
 }
 
@@ -122,11 +108,11 @@ script YouRealizeTheyreEvilRight_InteractBaiya {
 
         closemessage
 
-        applymovement(BAIYA_OUTSIDE,Common_Movement_WalkUp)
+        applymovement(LOCALID_ARANTRAZ_EXTERIOR_BAIYA,Common_Movement_WalkUp)
         waitmovement(0)
         playse(SE_EXIT)
         waitse
-        removeobject(BAIYA_OUTSIDE)
+        removeobject(LOCALID_ARANTRAZ_EXTERIOR_BAIYA)
         call(TryAutoSave)
         release
         end
@@ -160,7 +146,7 @@ script YouRealizeTheyreEvil_Ghost4_Battle_Script{
         end
 }
 
-script YouRealizeTheyreEvilRight_RemoveGhost 
+script YouRealizeTheyreEvilRight_RemoveGhost
 {
 	closemessage
 	fadescreen(FADE_TO_BLACK)
@@ -170,13 +156,12 @@ script YouRealizeTheyreEvilRight_RemoveGhost
 }
 
 script YouRealizeTheyreEvil_ReleaseGarbodor_Script {
-    applymovement(BAIYA, moves(lock_facing_direction, walk_up, walk_in_place_down, unlock_facing_direction, step_end))
+    applymovement(LOCALID_ARANTRAZ_MESSHALL_BAIYA, moves(lock_facing_direction, walk_up, walk_in_place_down, unlock_facing_direction, step_end))
         waitmovement(0)
 
         playse(SE_BALL_OPEN)
         waitse
-        clearflag(FLAG_HIDE_GARBODOR)
-        addobject(GARBODOR)
+        spawnobject(OBJ_EVENT_GFX_SPECIES_SHINY(GARBODOR),OBJ_EVENT_GFX_SPECIES_SHINY(GARBODOR),4,12,MOVEMENT_TYPE_NONE)
         playmoncry(SPECIES_GARBODOR, CRY_MODE_ENCOUNTER)
         waitmoncry
         playse(SE_SHINY)
@@ -187,7 +172,7 @@ script YouRealizeTheyreEvilRight_PlayerArrived2F_Dialogue {
     lock
         playbgm(MUS_OKAY_LETS_FIX_IT,TRUE)
         startcutscene(JUMPPLAYER_YOUREALIZETHEYREEVILRIGHT_ISLAND)
-        applymovement(PLAYER, moves(walk_right * 2, walk_up, step_end))
+        applymovement(LOCALID_PLAYER, moves(walk_right * 2, walk_up, step_end))
         waitmovement(0)
         bufferspeciesname(STR_VAR_1,SPECIES_ARCEUS)
         msgbox(format("The Champion has arrived! A pleasure to meet at last. I'm Magnus, Leader of the Resido Elite Four. Or, at least I was. Now? {STR_VAR_1} knows what I even do…"),,SPEAKER_MAGNUS)
@@ -200,8 +185,8 @@ script YouRealizeTheyreEvilRight_PlayerArrived2F_Dialogue {
         closemessage
 
         playse(SE_PIN)
-        applymovement(TALA,Common_Movement_ExclamationMark)
-        applymovement(MAGNUS,Common_Movement_ExclamationMark)
+        applymovement(LOCALID_ARANTRAZ_MESSHALL_TALA,Common_Movement_ExclamationMark)
+        applymovement(LOCALID_ARANTRAZ_MESSHALL_MAGNUS,Common_Movement_ExclamationMark)
 
         msgbox(format("Well! How resourceful! Genius, even!"),,SPEAKER_MAGNUS)
 
@@ -222,8 +207,8 @@ script YouRealizeTheyreEvilRight_PlayerArrived2F_Dialogue {
         closemessage
 
         call(YouRealizeTheyreEvil_ReleaseGarbodor_Script)
-        applymovement(MAGNUS,Common_Movement_FaceLeft)
-        applymovement(TALA,Common_Movement_FaceUp)
+        applymovement(LOCALID_ARANTRAZ_MESSHALL_MAGNUS,Common_Movement_FaceLeft)
+        applymovement(LOCALID_ARANTRAZ_MESSHALL_TALA,Common_Movement_FaceUp)
 
         msgbox(format("This is one of the Garbodor from the SharpRise Stadium strike. {PLAYER}, you were told that The Tide planted these to blow up the construction site, right?"),,SPEAKER_BAIYA_TIDE)
 
@@ -234,9 +219,9 @@ script YouRealizeTheyreEvilRight_PlayerArrived2F_Dialogue {
         msgbox(format("I really doubt it."),,SPEAKER_ALICIA)
 		closemessage
 
-		applymovement(MAGNUS,Common_Movement_FaceLeft)
-		applymovement(PLAYER,Common_Movement_FaceRight)
-		waitmovement(PLAYER)
+		applymovement(LOCALID_ARANTRAZ_MESSHALL_MAGNUS,Common_Movement_FaceLeft)
+		applymovement(LOCALID_PLAYER,Common_Movement_FaceRight)
+		waitmovement(LOCALID_PLAYER)
 
         msgbox(format("{PLAYER}, I promise it will be worth your while. Would you just look?"),,SPEAKER_MAGNUS)
 
@@ -298,9 +283,9 @@ script YouRealizeTheyreEvilRight_Framing_Dialogue {
 
 script YouRealizeTheyreEvilRight_InnerMonologue_Dialogue
 {
-    applymovement(BAIYA, moves(walk_left, walk_down * 2, face_right, step_end))
+    applymovement(LOCALID_ARANTRAZ_MESSHALL_BAIYA, moves(walk_left, walk_down * 2, face_right, step_end))
     waitmovement(0)
-    applymovement(PLAYER,Common_Movement_FaceLeft)
+    applymovement(LOCALID_PLAYER,Common_Movement_FaceLeft)
     waitmovement(0)
 
     msgbox(format("Look, I know this is a lot of information to take in. I know you're going to make the right decision..."),,SPEAKER_BAIYA_TIDE)
@@ -322,12 +307,12 @@ script YouRealizeTheyreEvilRight_Confront_Dialogue{
     msgbox(format("I'm sorry if this disappoints you all, but I won't compromise mysel - my values. I'm not going to join you."),,SPEAKER_ALICIA)
     closemessage
     playse(SE_PIN)
-    applymovement(MAGNUS,Common_Movement_ExclamationMark)
-    applymovement(TALA,Common_Movement_ExclamationMark)
-    applymovement(BAIYA,Common_Movement_ExclamationMark)
-    waitmovement(BAIYA)
-    applymovement(TALA,Common_Movement_FacePlayer)
-    waitmovement(TALA)
+    applymovement(LOCALID_ARANTRAZ_MESSHALL_MAGNUS,Common_Movement_ExclamationMark)
+    applymovement(LOCALID_ARANTRAZ_MESSHALL_TALA,Common_Movement_ExclamationMark)
+    applymovement(LOCALID_ARANTRAZ_MESSHALL_BAIYA,Common_Movement_ExclamationMark)
+    waitmovement(LOCALID_ARANTRAZ_MESSHALL_BAIYA)
+    applymovement(LOCALID_ARANTRAZ_MESSHALL_TALA,Common_Movement_FacePlayer)
+    waitmovement(LOCALID_ARANTRAZ_MESSHALL_TALA)
     msgbox(format("Wait what? {PLAYER}, you're making a mistake!"),,SPEAKER_BAIYA_TIDE,,EMOTE_SHOCK)
     msgbox(format("Wow... Frank was wrong about you after all."),,SPEAKER_TALA,TAIL_WHISPER,EMOTE_SAD)
     msgbox(format("Don't you understand? You're being used, and they're not going to stop."),,SPEAKER_BAIYA_TIDE,,EMOTE_ANGRY)
@@ -335,11 +320,11 @@ script YouRealizeTheyreEvilRight_Confront_Dialogue{
     msgbox(format("Couldn't hack it? I got second to you, and you had a HUGE head start!"),,SPEAKER_BAIYA_TIDE,TAIL_SHOUT,EMOTE_ANGRY)
     msgbox(format("Baiya, {PLAYER} will not get it. Its too late."),,SPEAKER_MAGNUS)
     closemessage
-    applymovement(PLAYER,Common_Movement_FaceRight)
-    waitmovement(PLAYER)
+    applymovement(LOCALID_PLAYER,Common_Movement_FaceRight)
+    waitmovement(LOCALID_PLAYER)
     msgbox(format("I'm not giving up what I have because you guys think SharpRise Capital is some big bad. The Tide is a bunch of thugs, and if you want to throw away your legacies to work with them, fine. I won't be a part of it."),,SPEAKER_ALICIA)
     closemessage
-    applymovement(PLAYER,Common_Movement_WalkDown)
+    applymovement(LOCALID_PLAYER,Common_Movement_WalkDown)
         fadeblackandsetremovewarpfadeflag
     fadedefaultbgm
     warp(MAP_ARANTRAZ,39,14)
@@ -353,8 +338,8 @@ script YouRealizeTheyreEvilRight_PreventPlayer_Script{
         lock
         msgbox(format("...This isn't where I'm supposed to be."),,SPEAKER_ALICIA,TAIL_THOUGHT)
         closemessage
-        applymovement(PLAYER,Common_Movement_WalkUp)
-        waitmovement(PLAYER)
+        applymovement(LOCALID_PLAYER,Common_Movement_WalkUp)
+        waitmovement(LOCALID_PLAYER)
     }
     release
         end
@@ -376,7 +361,7 @@ script YouRealizeTheyreEvilRight_CantSleep_Dialogue {
 script YouRealizeTheyreEvilRight_NoIdea_Dialogue {
     setvar(VAR_STORYLINE_STATE,STORY_MORNING_OF_TIMELINE_SPLIT)
 
-    applymovement(PLAYER, moves(walk_down, walk_left * 2, walk_right * 2, step_end))
+    applymovement(LOCALID_PLAYER, moves(walk_down, walk_left * 2, walk_right * 2, step_end))
     waitmovement(0)
 
     if (flag(FLAG_TIMELINE_TIMETRAVEL)){
