@@ -2630,7 +2630,7 @@ static const struct PlayerAdventureText playerAdventureText[] =
     {
       {
         .textTargetType = QUEST_FLAVOR_GET_NAME_MAP,
-        .textTargetValue = MAP_HALAI_ISLAND_BAIYA,
+        .textTargetValue = MAP_HALAI_ISLAND_BAIYA2F,
       },
     },
     .textCondition =
@@ -3469,7 +3469,7 @@ static const struct PlayerAdventureText playerAdventureText[] =
     {
       {
         .textTargetType = QUEST_FLAVOR_GET_NAME_MAP,
-        .textTargetValue = MAP_HALAI_ISLAND_BAIYA,
+        .textTargetValue = MAP_HALAI_ISLAND_BAIYA2F,
       },
     },
     .textCondition =

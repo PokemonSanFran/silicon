@@ -138,7 +138,7 @@ script Epilogue_Script_WarpToBaiya
 {
     markzapread(ZAP_STORY_EPILOGUE)
     fadeblackandsetremovewarpfadeflag
-    warpsilent(MAP_HALAI_ISLAND_BAIYA,0)
+    warpsilent(MAP_HALAI_ISLAND_BAIYA2F,WARP_ID_2F_TO_BAIYA_HOME)
     waitstate
     release
     end
