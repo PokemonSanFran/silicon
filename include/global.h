@@ -313,7 +313,7 @@ struct Buzzr
     u8 Filter : 4;
     bool8 Sort : 1;
     bool8 IsRead[ZAP_COUNT];
-    u8 Order[ZAP_COUNT];
+    u16 Order[ZAP_COUNT];
 };
 // End buzzr Branch
 
