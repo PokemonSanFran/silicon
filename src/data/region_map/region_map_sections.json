@@ -1826,15 +1826,6 @@
       "visitedFlag": "FLAG_VISITED_ANBEH_BEND"
     },
     {
-      "id": "MAPSEC_PALACEFINEARTS",
-      "name": "Palacefinearts",
-      "x": 0,
-      "y": 0,
-      "width": 1,
-      "height": 1,
-      "visitedFlag": "FLAG_VISITED_PALACEFINEARTS"
-    },
-    {
       "id": "MAPSEC_FORT_YOBU",
       "name": "FortYobu",
       "x": 8,

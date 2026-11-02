@@ -1847,14 +1847,14 @@ const struct SideQuest sSideQuests[QUEST_COUNT] =
                 .name = COMPOUND_STRING("Complete Improv Battling"),
                 .setupFunc = DebugQuest_RestoreZenzuIslandGym,
                 side_quest_map(MAP_QUEST_RESTOREZENZUISLAND_3),
-                .warpId = WARP_ID_THEATER_TO_PETAROSA_LEFT,
+                .warpId = WARP_ID_THEATER_TO_PETAROSA_BOROUGH_LEFT,
             },
             [STATE_QUEST_RESTOREZENZUISLANDGYM_RECRUIT_FROM_IMPROV_BATTLING] =
             {
                 .name = COMPOUND_STRING("Recruit From Improv Battling"),
                 .setupFunc = DebugQuest_RestoreZenzuIslandGym,
                 side_quest_map(MAP_QUEST_RESTOREZENZUISLAND_3),
-                .warpId = WARP_ID_THEATER_TO_PETAROSA_LEFT,
+                .warpId = WARP_ID_THEATER_TO_PETAROSA_BOROUGH_LEFT,
             },
             [STATE_QUEST_RESTOREZENZUISLANDGYM_BEFORE_MINIARCADE] =
             {
@@ -1950,14 +1950,14 @@ const struct SideQuest sSideQuests[QUEST_COUNT] =
                 .name = COMPOUND_STRING("Started Quest"),
                 .setupFunc = DebugQuest_RestoreHodouCityGym,
                 side_quest_map(MAP_QUEST_RESTOREHODOUGYM_OUTSIDE),
-                .warpId = WARP_ID_HODOU_GYM_ENTRANCE,
+                .warpId = WARP_ID_HODOU_CITY_TO_GYM,
             },
             [STATE_QUEST_RESTOREHODOUGYM_AFTER_BATTLE]=
             {
                 .name = COMPOUND_STRING("After Battle"),
                 .setupFunc = DebugQuest_RestoreHodouCityGym,
                 side_quest_map(MAP_QUEST_RESTOREHODOUGYM_ORIGIN),
-                .warpId = WARP_ID_HODOU_GYM_TO_CITY_RIGHT,
+                .warpId = WARP_ID_HODOU_GYM_TO_HODOU_CITY_LEFT,
             },
             [STATE_QUEST_RESTOREHODOUGYM_BEFORE_FINDING_JOHNNY]=
             {
@@ -1982,14 +1982,14 @@ const struct SideQuest sSideQuests[QUEST_COUNT] =
                 .name = COMPOUND_STRING("Asked To Find Blackbelts"),
                 .setupFunc = DebugQuest_RestoreHodouCityGym,
                 side_quest_map(MAP_QUEST_RESTOREHODOUGYM_OUTSIDE),
-                .warpId = WARP_ID_HODOU_GYM_ENTRANCE,
+                .warpId = WARP_ID_HODOU_CITY_TO_GYM,
             },
             [STATE_QUEST_RESTOREHODOUGYM_BEFORE_ASKED_TO_FIND_BLACKBELTS]=
             {
                 .name = COMPOUND_STRING("Asked To Find Blackbelts"),
                 .setupFunc = DebugQuest_RestoreHodouCityGym,
                 side_quest_map(MAP_QUEST_RESTOREHODOUGYM_ORIGIN),
-                .warpId = WARP_ID_HODOU_GYM_TO_CITY_RIGHT,
+                .warpId = WARP_ID_HODOU_GYM_TO_HODOU_CITY_LEFT,
             },
             [STATE_QUEST_RESTOREHODOUGYM_BEFORE_BATTLED_ADAM]=
             {
@@ -2122,14 +2122,14 @@ const struct SideQuest sSideQuests[QUEST_COUNT] =
                 .name = COMPOUND_STRING("Reward"),
                 .setupFunc = DebugQuest_RestoreHodouCityGym,
                 side_quest_map(MAP_QUEST_RESTOREHODOUGYM_ORIGIN),
-                .warpId = WARP_ID_HODOU_GYM_TO_CITY_RIGHT,
+                .warpId = WARP_ID_HODOU_GYM_TO_HODOU_CITY_LEFT,
             },
             [STATE_QUEST_RESTOREHODOUGYM_COMPLETE]=
             {
                 .name = COMPOUND_STRING("Complete"),
                 .setupFunc = DebugQuest_RestoreHodouCityGym,
                 side_quest_map(MAP_QUEST_RESTOREHODOUGYM_ORIGIN),
-                .warpId = WARP_ID_HODOU_GYM_TO_CITY_RIGHT,
+                .warpId = WARP_ID_HODOU_GYM_TO_HODOU_CITY_LEFT,
             },
         },
     },
@@ -5435,14 +5435,14 @@ const struct SideQuest sSideQuests[QUEST_COUNT] =
                 .name = COMPOUND_STRING("Spoken Growing Up"),
                 .setupFunc = DebugQuest_Diggingupadaorasdirt,
                 side_quest_map(MAP_QUEST_DIGGINGUPADAORASDIRT_GROWING_UP),
-                .warpId = WARP_ID_QIUVILLAGE_APARTMENT_2F_ENTRANCE,
+                .warpId = WARP_ID_QIU_VILLAGE_APARTMENT_2F_TO_1F,
             },
             [STATE_QUEST_DIGGINGUPADAORASDIRT_SPOKEN_KEIYING] =
             {
                 .name = COMPOUND_STRING("Spoken Keiying"),
                 .setupFunc = DebugQuest_Diggingupadaorasdirt,
                 side_quest_map(MAP_QUEST_DIGGINGUPADAORASDIRT_KEIYING),
-                .warpId = WARP_ID_HODOU_GYM_ENTRANCE,
+                .warpId = WARP_ID_HODOU_GYM_TO_HODOU_CITY_LEFT,
             },
             [STATE_QUEST_DIGGINGUPADAORASDIRT_REWARD] =
             {

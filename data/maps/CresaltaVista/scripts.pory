@@ -6,9 +6,9 @@ mapscripts CresaltaVista_MapScripts
 	}
     MAP_SCRIPT_ON_TRANSITION
     {
-        call(BeachBattle_ObjectVisibility_Script)
+        call_if_ne(VAR_BEACH_BATTLE_STATE,SAVE_CHARLOTTE_BEACH,BeachBattle_HideCharlotte_Script)
+        call_if_eq(VAR_BEACH_BATTLE_STATE,SAVE_CHARLOTTE_BEACH,BeachBattle_BattleSetUp_Script)
         call(CutePokemon_Script_ControlMelissaCresaltaOutsideVisibility)
-        call(Quest_ShutDownMedicineMan_ControlLeaderVisibility)
         call(Quest_Hang20_Script_HideMon)
         call_if_quest_complete(QUEST_HANG20,Quest_Hang20_Script_HideLeader)
         call_if_lt(VAR_STORYLINE_STATE,STORY_COMPLETE_ARANTRAZ,Quest_Hang20_Script_HideLeader)

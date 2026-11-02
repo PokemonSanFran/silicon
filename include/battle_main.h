@@ -113,9 +113,7 @@ bool32 IsWildMonSmart(void);
 // Start siliconMerge
 //void ModifyPersonalityForNature(u32 *personality, u32 newNature);
 void CountDefeatedGlameow(void);
-void CountDefeatedGardenMons(void);
 void CountDefeatedCresaltaVista(void);
-void CountDefeatedBackyard(void);
 // End siliconMerge
 bool32 CanPlayerForfeitNormalTrainerBattle(void);
 bool32 DidPlayerForfeitNormalTrainerBattle(void);

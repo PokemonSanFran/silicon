@@ -57,20 +57,6 @@
       "flag": "FLAG_TEMP_B"
     },
     {
-      "local_id": "LOCALID_ARANTRAZ_MESSHALL_KAI_POKEMON",
-      "graphics_id": "OBJ_EVENT_GFX_SPECIES_SHINY(GARBODOR)",
-      "x": 4,
-      "y": 12,
-      "elevation": 3,
-      "movement_type": "MOVEMENT_TYPE_NONE",
-      "movement_range_x": 0,
-      "movement_range_y": 0,
-      "trainer_type": "TRAINER_TYPE_NONE",
-      "trainer_sight_or_berry_tree_id": "0",
-      "script": "NULL",
-      "flag": "FLAG_TEMP_4"
-    },
-    {
       "local_id": "LOCALID_ARANTRAZ_MESSHALL_ELEANOR",
       "graphics_id": "OBJ_EVENT_GFX_ELEANOR",
       "x": 9,
@@ -127,6 +113,7 @@
       "flag": "FLAG_TEMP_9"
     },
     {
+      "local_id": "LOCALID_ARANTRAZ_MESSHALL_COMRADE_A",
       "graphics_id": "OBJ_EVENT_GFX_COMRADE_8",
       "x": 9,
       "y": 8,
@@ -140,6 +127,7 @@
       "flag": "FLAG_TEMP_7"
     },
     {
+      "local_id": "LOCALID_ARANTRAZ_MESSHALL_COMRADE_B",
       "graphics_id": "OBJ_EVENT_GFX_COMRADE_7",
       "x": 7,
       "y": 8,
@@ -181,6 +169,7 @@
       "flag": "FLAG_TEMP_7"
     },
     {
+      "local_id": "LOCALID_ARANTRAZ_MESSHALL_COMRADE_C",
       "graphics_id": "OBJ_EVENT_GFX_COMRADE_3",
       "x": 11,
       "y": 13,
@@ -190,10 +179,11 @@
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "Quest_Redomugging_Interact_Script",
+      "script": "NULL",
       "flag": "FLAG_TEMP_3"
     },
     {
+      "local_id": "LOCALID_ARANTRAZ_MESSHALL_COMRADE_D",
       "graphics_id": "OBJ_EVENT_GFX_COMRADE_5",
       "x": 10,
       "y": 14,
@@ -203,7 +193,7 @@
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "Quest_Redomugging_Interact_Script",
+      "script": "NULL",
       "flag": "FLAG_TEMP_3"
     },
     {
@@ -223,11 +213,12 @@
   ],
   "warp_events": [
     {
+        "warp_id": "WARP_ID_MESS_TO_HOSPITAL",
       "x": 2,
       "y": 14,
       "elevation": 0,
       "dest_map": "MAP_ARANTRAZ_HOSPITAL",
-      "dest_warp_id": "1"
+        "dest_warp_id": "WARP_ID_HOSPITAL_TO_MESS"
     }
   ],
   "coord_events": [],

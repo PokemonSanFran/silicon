@@ -1,22 +1,10 @@
 // Player needs to learn hints B, C, and D to trigger Vigrim appearing at Lake Merrit.
 
-const PLAYER = OBJ_EVENT_ID_PLAYER
-const VIGRIM = 1
-const FLAG_HIDE_FRANK = FLAG_TEMP_1
-
-script MaskOff_HideObject_Script
-{
-    if (var(VAR_STORYLINE_STATE) < STORY_START_TRUE_TIMELINE)
-    {
-        setflag(FLAG_HIDE_FRANK)
-    }
-}
-
 script MaskOff_TransformObject_Script
 {
-    removeobject(VIGRIM)
+    removeobject(LOCALID_LAKE_WISHAAST_VIGRIM)
     setvar(VAR_OBJ_GFX_ID_1,OBJ_EVENT_GFX_DRAKE)
-    addobject(VIGRIM)
+    addobject(LOCALID_LAKE_WISHAAST_VIGRIM)
 }
 
 script MaskOff_AskAndIncrement_Script
@@ -180,8 +168,8 @@ script MaskOff_PostBattle_Dialogue
     lock
 
     playse(SE_PIN)
-    applymovement(PLAYER,Common_Movement_ExclamationMark)
-    waitmovement(PLAYER)
+    applymovement(LOCALID_PLAYER,Common_Movement_ExclamationMark)
+    waitmovement(LOCALID_PLAYER)
 
     msgbox(format("I formed The Tide as a response to SharpRise Capital’s growing influence over the region a few years ago. "),,SPEAKER_ELEANOR)
     msgbox(format("But why go into hiding as Vigrim?"),,SPEAKER_ALICIA)
@@ -206,9 +194,9 @@ script MaskOff_PostBattle_Dialogue
 
 script MaskOff_End_Dialogue
 {
-    applymovement(VIGRIM, moves(walk_up * 7, step_end))
-    waitmovement(VIGRIM)
-    removeobject(VIGRIM)
+    applymovement(LOCALID_LAKE_WISHAAST_VIGRIM, moves(walk_up * 7, step_end))
+    waitmovement(LOCALID_LAKE_WISHAAST_VIGRIM)
+    removeobject(LOCALID_LAKE_WISHAAST_VIGRIM)
     fadedefaultbgm
     call(TryAutoSave)
     endcutscene

@@ -1,8 +1,7 @@
 {
   "group_order": [
     "gMapGroup_Templates",
-    "gMapGroup_PsfTownsAndRoutes",
-    "gMapGroup_TownsAndRoutes",
+    "gMapGroup_ResidoTownsAndRoutes",
     "gMapGroup_IndoorCuconuTown",
     "gMapGroup_IndoorPerlaciaCity",
     "gMapGroup_IndoorMermerezaCity",
@@ -24,8 +23,17 @@
     "gMapGroup_IndoorZenzuIsland",
     "gMapGroup_IndoorHalaiIsland",
     "gMapGroup_SharpriseSpire",
+    "gMapGroup_IndoorPopidoraPier",
+    "gMapGroup_IndoorNavalBase",
+    "gMapGroup_IndoorShapriseStadium",
+    "gMapGroup_CoroporationInteriors",
     "gMapGroup_HiddenGrotto",
-    "gMapGroup_UltraSpace",
+    "gMapGroup_TownsAndRoutes",
+    "gMapGroup_Underwater",
+    "gMapGroup_LanjingTunnel",
+    "gMapGroup_IndoorArantraz",
+    "gMapGroup_PintillionInterior",
+    "gMapGroup_IndoorOrolandColiseum",
     "gMapGroup_IndoorLittleroot",
     "gMapGroup_IndoorOldale",
     "gMapGroup_IndoorDewford",
@@ -112,7 +120,7 @@
     "RegularIndoorTest",
     "FancyIndoorTest"
   ],
-  "gMapGroup_PsfTownsAndRoutes": [
+  "gMapGroup_ResidoTownsAndRoutes": [
     "CuconuTown",
     "Route6",
     "GlavezHill",
@@ -127,7 +135,6 @@
     "CapheCity",
     "Route9",
     "Route12",
-    "Psfroute9f45da86",
     "Route4",
     "NongyuBridge",
     "Route5",
@@ -138,7 +145,6 @@
     "PopidoraPier",
     "Route11",
     "HalaiIsland",
-    "Orolandferry",
     "RouteB",
     "Oroland",
     "Route99",
@@ -161,55 +167,227 @@
     "EspuleeOutskirts",
     "Route100",
     "LeaverraForest",
-    "LanjingTunnel_B1F",
-    "LeaverraForest_Inner",
-    "LanjingTunnel_B2F",
-    "NavalBase",
-    "SharpriseStadium_Entrance",
-    "SharpriseStadium_Lockers",
-    "SharpriseStadium_Skybox",
-    "SharpriseStadium_Arena",
-    "SharpriseStadium_Stands",
     "ZenzuIsland",
-    "Arantraz_Hospital",
-    "Arantraz_MessHall",
-    "Arantraz_Prison",
     "Route98",
     "WishaastLake",
     "Route3",
     "TorgeotClimb",
-    "OkayLetsFixit_Flashback",
     "QiuVillage",
-    "LayoutTester",
-    "HalaiIsland_PostEarthquake",
     "SecretPath",
     "PARC",
-    "WeCanStopYouActually_Cutscene",
     "Route20",
     "Route16",
     "RouteD",
-    "Route_D_Underwater",
     "WajabiLake",
-    "PintillonHouse_Interior_1F",
     "OrolandColiseum",
-    "OrolandColiseum_Hallway",
-    "OrolandColiseum_Arena",
-    "OrolandColiseum_Hall",
-    "Palacefinearts",
-    "Route12_Shelter",
-    "CurenoPort_Underground",
     "RouteC",
     "RouteE",
     "RouteA",
+    "LeaverraForest_Inner",
+    "OkayLetsFixit_Flashback",
+    "HalaiIsland_PostEarthquake",
+    "WeCanStopYouActually_Cutscene",
+    "CurenoPort_Underground",
+    "NavalBaseExterior"
+  ],
+  "gMapGroup_IndoorCuconuTown": [
+    "CuconuTown_SharpriseCompound_1F",
+    "CuconuTown_SharpriseCompound_2F",
+    "CuconuTown_SharpriseCompound_2F_Corridor",
+    "CuconuTown_PokemonCenter_1F",
+    "CuconuTown_Cafe"
+  ],
+  "gMapGroup_IndoorPerlaciaCity": [
+    "PerlaciaCity_Startup",
+    "PerlaciaCity_PokemonCenter_1F",
+    "PerlaciaCity_Sanitation",
+    "PerlaciaCity_Gym",
+    "PerlaciaCity_Gym_Entrance",
+    "Perlacia_City_Coffee"
+  ],
+  "gMapGroup_IndoorMermerezaCity": [
+    "MermerezaCity_Bar",
+    "MermerezaCity_Gym",
+    "MermerezaCity_PokemonCenter_1F",
+    "MermerezaCity_Consulting",
+    "MermerezaCity_Gym_Kitchen1",
+    "MermerezaCity_Gym_Kitchen2",
+    "MermerezaCity_Gym_Kitchen3"
+  ],
+  "gMapGroup_IndoorToraTown": [
+    "ToraTown_Gym",
+    "ToraTown_Ramen",
+    "ToraTown_Balls",
+    "ToraTown_MusicVenue",
+    "ToraTown_PokemonCenter_1F"
+  ],
+  "gMapGroup_IndoorChasilla": [
+    "Chasilla_PokemonCenter_1F",
+    "Chasilla_Research",
+    "Chasilla_Gym",
+    "Chasilla_BreedingCenter",
+    "Chasilla_IceCreamShop",
+    "Chasilla_University",
+    "Chasilla_MochiShop"
+  ],
+  "gMapGroup_IndoorFortYobu": [
+    "FortYobu_Gym"
+  ],
+  "gMapGroup_IndoorPetarosaBorough": [
+    "PetarosaBorough_PokemonCenter_1F",
+    "PetarosaBorough_SharpriseCompound_1F",
+    "PetarosaBorough_KeiYingMansion",
+    "PetarosaBorough_Improv",
+    "PetarosaBorough_SquattersMansion"
+  ],
+  "gMapGroup_IndoorTirabudinPlace": [
+    "TirabudinPlace_PokemonCenter_1F",
+    "TirabudinPlace_Gym",
+    "TirabudinPlace_Gym_Lobby",
+    "TirabudinPlace_Gym_BattleRoom"
+  ],
+  "gMapGroup_IndoorHalerbaCity": [
+    "HalerbaCity_PokemonCenter_1F",
+    "HalerbaCity_Pannen_House",
+    "HalerbaCity_Gym",
+    "Gldntepark_Helebra_Research",
+    "HalerbaCity_GymA",
+    "HalerbaCity_GymB",
+    "HalerbaCity_GymC"
+  ],
+  "gMapGroup_IndoorQiuVillage": [
+    "QiuVillage_Restaurant",
+    "QiuVillage_RameshHouse",
+    "QiuVillage_PokemonCenter_1F",
+    "QiuVillage_Apartment",
+    "QiuVillage_Apartment_2F"
+  ],
+  "gMapGroup_IndoorCapheCity": [
+    "CapheCity_GRUNTOffice",
+    "CapheCity_Library",
+    "CapheCity_Pantry",
+    "CapheCity_PantryMaze",
+    "CapheCommunityGarden",
+    "CapheCity_PokemonCenter_1F"
+  ],
+  "gMapGroup_IndoorCresaltaVista": [
+    "CresaltaVista_PokemonCenter_1F",
+    "CresaltaVista_ShopUnion",
+    "CresaltaVista_Gemhouse"
+  ],
+  "gMapGroup_IndoorGlavezHill": [
+    "GlavezHill_PokemonCenter_1F",
+    "GlavezHill_Taxiunion"
+  ],
+  "gMapGroup_IndoorCurenoPort": [
+    "CurenoPort_PokemonCenter_1F",
+    "CurenoPort_GearGrindGangHouse",
+    "Oroland_Warehouse"
+  ],
+  "gMapGroup_IndoorHodouCity": [
+    "HodouCity_Gym",
+    "HodouCity_Racisthouse",
+    "HodouCity_Tunnel",
+    "HodouCity_BackroomA",
+    "HodouCity_BackroomB",
+    "HodouCity_BackroomC",
+    "HodouCity_Herbal",
+    "HodouCity_Cookie",
+    "HodouCity_Alley1",
+    "HodouCity_PokemonCenter_1F"
+  ],
+  "gMapGroup_IndoorIrisinaTown": [
+    "IrisinaTown_PokemonCenter_1F",
+    "IrisinaTown_InfoTech",
+    "IrisinaTown_Balls",
+    "IrisinaTown_Gym"
+  ],
+  "gMapGroup_IndoorOroland": [
+    "Oroland_PokemonCenter_1F",
+    "Oroland_Newspaper"
+  ],
+  "gMapGroup_IndoorEspuleeOutskirts": [
+    "EspuleeOutskirts_Ranger",
+    "EspuleeOutskirts_EliteHome",
+    "EspuleeOutskirts_PokemonCenter_1F",
+    "EspuleeOutskirts_KomalaCabin_1F",
+    "EspuleeOutskirts_KomalaCabin_2F"
+  ],
+  "gMapGroup_IndoorZenzuIsland": [
+    "ZenzuIsland_PokemonCenter_1F"
+  ],
+  "gMapGroup_IndoorHalaiIsland": [
+    "HalaiIsland_Baiya",
+    "HalaiIsland_Baiya2F",
+    "ZenzuIsland_Restaurant",
+    "HalaiIsland_PokemonCenter_1F"
+  ],
+  "gMapGroup_SharpriseSpire": [
+    "SharpriseSpire_1F",
+    "SharpriseSpire_Elevator",
+    "SharpriseSpire_Lobby",
+    "SharpriseSpire_Arriba",
+    "SharpriseSpire_Presto",
+    "SharpriseSpire_Buzzr",
+    "SharpriseSpire_Park",
+    "SharpriseSpire_Giftshop",
+    "SharpriseSpire_Serverroom",
+    "SharpriseSpire_Production",
+    "SharpriseSpire_Leagueops",
+    "SharpriseSpire_Top",
+    "SharpriseSpire_Lab"
+  ],
+  "gMapGroup_IndoorPopidoraPier": [
+    "PopidoraPier_Arcade"
+  ],
+  "gMapGroup_IndoorNavalBase": [
+    "NavalBase"
+  ],
+  "gMapGroup_IndoorShapriseStadium": [
+    "SharpriseStadium_Entrance",
+    "SharpriseStadium_Lockers",
+    "SharpriseStadium_Skybox",
+    "SharpriseStadium_Arena",
+    "SharpriseStadium_Stands"
+  ],
+  "gMapGroup_CoroporationInteriors": [
     "Presto_Barge_1",
     "Presto_Barge_2",
     "Presto_Barge_3",
     "Arriba_CarInterior",
-    "PopidoraPier_Arcade",
-    "GlavezHill_Taxiunion",
-    "CapheCommunityGarden",
-    "NavalBaseExterior",
-    "HodouCity_Alley1"
+    "Fakenews_Warehouse",
+    "Arriba_B1F",
+    "Arriba_1F",
+    "Arriba_2F"
+  ],
+  "gMapGroup_HiddenGrotto": [
+    "RouteD_Grotto",
+    "Route20_Grotto",
+    "Route98_Grotto",
+    "Route8_Grotto",
+    "Route14_Grotto",
+    "Route6_Grotto",
+    "Route1_Grotto",
+    "Route99_Grotto",
+    "Route4_Grotto",
+    "Route7_Grotto",
+    "Route22_Grotto",
+    "Route100_Grotto",
+    "Route18_Grotto",
+    "PsfrouteA04e14ea_Grotto",
+    "Route2_Grotto",
+    "RouteC_Grotto",
+    "Route13_Grotto",
+    "RouteE_Grotto",
+    "RouteB_Grotto",
+    "RouteA_Grotto",
+    "Route11_Grotto",
+    "Route10_Grotto",
+    "Route12_Grotto",
+    "Route9_Grotto",
+    "Route5_Grotto",
+    "Route3_Grotto",
+    "Route16_Grotto"
   ],
   "gMapGroup_TownsAndRoutes": [
     "PetalburgCity",
@@ -270,195 +448,25 @@
     "Underwater_Route105",
     "Underwater_Route125"
   ],
-  "gMapGroup_IndoorCuconuTown": [
-    "CuconuTown_SharpriseCompound_1F",
-    "CuconuTown_SharpriseCompound_2F",
-    "CuconuTown_SharpriseCompound_2F_Corridor",
-    "CuconuTown_PokemonCenter_1F",
-    "CuconuTown_Cafe"
+  "gMapGroup_Underwater": [
+    "Route_D_Underwater"
   ],
-  "gMapGroup_IndoorPerlaciaCity": [
-    "PerlaciaCity_Startup",
-    "PerlaciaCity_PokemonCenter_1F",
-    "PerlaciaCity_Sanitation",
-    "PerlaciaCity_Gym",
-    "PerlaciaCity_Gym_Entrance",
-    "Perlacia_City_Coffee"
+  "gMapGroup_LanjingTunnel": [
+    "LanjingTunnel_B1F",
+    "LanjingTunnel_B2F"
   ],
-  "gMapGroup_IndoorMermerezaCity": [
-    "MermerezaCity_Bar",
-    "MermerezaCity_Gym",
-    "MermerezaCity_PokemonCenter_1F",
-    "MermerezaCity_Consulting",
-    "MermerezaCity_Gym_Kitchen1",
-    "MermerezaCity_Gym_Kitchen2",
-    "MermerezaCity_Gym_Kitchen3"
+  "gMapGroup_IndoorArantraz": [
+    "Arantraz_Hospital",
+    "Arantraz_MessHall",
+    "Arantraz_Prison"
   ],
-  "gMapGroup_IndoorToraTown": [
-    "ToraTown_Gym",
-    "ToraTown_Ramen",
-    "ToraTown_Balls",
-    "ToraTown_MusicVenue",
-    "ToraTown_PokemonCenter_1F"
+  "gMapGroup_PintillionInterior": [
+    "PintillonHouse_Interior_1F"
   ],
-  "gMapGroup_IndoorChasilla": [
-    "Chasilla_PokemonCenter_1F",
-    "Chasilla_Research",
-    "Chasilla_Gym",
-    "Chasilla_BreedingCenter",
-    "Chasilla_IceCreamShop",
-    "Chasilla_University",
-    "Chasilla_MochiShop"
-  ],
-  "gMapGroup_IndoorFortYobu": [
-    "FortYobu_Gym"
-  ],
-  "gMapGroup_IndoorPetarosaBorough": [
-    "PetarosaBorough_PokemonCenter_1F",
-    "PetarosaBorough_Hauntedhouse",
-    "PetarosaBorough_SharpriseCompound_1F",
-    "PetarosaBorough_KeiYingMansion",
-    "PetarosaBorough_Improv",
-    "PetarosaBorough_SquattersMansion",
-    "Fakenews_Warehouse"
-  ],
-  "gMapGroup_IndoorTirabudinPlace": [
-    "TirabudinPlace_PokemonCenter_1F",
-    "TirabudinPlace_Gym",
-    "TirabudinPlace_Gym_Lobby",
-    "TirabudinPlace_Gym_BattleRoom"
-  ],
-  "gMapGroup_IndoorHalerbaCity": [
-    "HalerbaCity_PokemonCenter_1F",
-    "HalerbaCity_Pannen_House",
-    "HalerbaCity_Gym",
-    "Gldntepark_Helebra_Research",
-    "HalerbaCity_GymA",
-    "HalerbaCity_GymB",
-    "HalerbaCity_GymC"
-  ],
-  "gMapGroup_IndoorQiuVillage": [
-    "QiuVillage_Restaurant",
-    "QiuVillage_RameshHouse",
-    "QiuVillage_PokemonCenter_1F",
-    "QiuVillage_Apartment",
-    "QiuVillage_Apartment_2F"
-  ],
-  "gMapGroup_IndoorCapheCity": [
-    "CapheCity_GRUNTOffice",
-    "CapheCity_Library",
-    "CapheCity_Pantry",
-    "CapheCity_PantryMaze",
-    "CapheCity_PokemonCenter_1F"
-  ],
-  "gMapGroup_IndoorCresaltaVista": [
-    "CresaltaVista_PokemonCenter_1F",
-    "CresaltaVista_ShopUnion",
-    "CresaltaVista_Gemhouse"
-  ],
-  "gMapGroup_IndoorGlavezHill": [
-    "GlavezHill_PokemonCenter_1F"
-  ],
-  "gMapGroup_IndoorCurenoPort": [
-    "CurenoPort_PokemonCenter_1F",
-    "CurenoPort_GearGrindGangHouse",
-    "Oroland_Warehouse",
-    "Arriba_B1F",
-    "Arriba_1F",
-    "Arriba_2F"
-  ],
-  "gMapGroup_IndoorHodouCity": [
-    "HodouCity_Gym",
-    "HodouCity_Racisthouse",
-    "HodouCity_Tunnel",
-    "HodouCity_BackroomA",
-    "HodouCity_BackroomB",
-    "HodouCity_BackroomC",
-    "HodouCity_BackroomD",
-    "HodouCity_Herbal",
-    "HodouCity_Cookie",
-    "HodouCity_PokemonCenter_1F"
-  ],
-  "gMapGroup_IndoorIrisinaTown": [
-    "IrisinaTown_PokemonCenter_1F",
-    "IrisinaTown_InfoTech",
-    "IrisinaTown_Balls",
-    "IrisinaTown_Gym"
-  ],
-  "gMapGroup_IndoorOroland": [
-    "Oroland_PokemonCenter_1F",
-    "Oroland_Newspaper"
-  ],
-  "gMapGroup_IndoorEspuleeOutskirts": [
-    "EspuleeOutskirts_Ranger",
-    "EspuleeOutskirts_EliteHome",
-    "EspuleeOutskirts_PokemonCenter_1F",
-    "EspuleeOutskirts_KomalaCabin_1F",
-    "EspuleeOutskirts_KomalaCabin_2F"
-  ],
-  "gMapGroup_IndoorZenzuIsland": [
-    "ZenzuIsland_PokemonCenter_1F"
-  ],
-  "gMapGroup_IndoorHalaiIsland": [
-    "HalaiIsland_Baiya",
-    "ZenzuIsland_Restaurant",
-    "HalaiIsland_PokemonCenter_1F"
-  ],
-  "gMapGroup_SharpriseSpire": [
-    "SharpriseSpire_1F",
-    "SharpriseSpire_Elevator",
-    "SharpriseSpire_Lobby",
-    "SharpriseSpire_Arriba",
-    "SharpriseSpire_Presto",
-    "SharpriseSpire_Buzzr",
-    "SharpriseSpire_Park",
-    "SharpriseSpire_Giftshop",
-    "SharpriseSpire_Serverroom",
-    "SharpriseSpire_Production",
-    "SharpriseSpire_Leagueops",
-    "SharpriseSpire_Top",
-    "SharpriseSpire_Lab"
-  ],
-  "gMapGroup_HiddenGrotto": [
-    "RouteD_Grotto",
-    "Route20_Grotto",
-    "Route98_Grotto",
-    "Route8_Grotto",
-    "Route14_Grotto",
-    "Route6_Grotto",
-    "Route1_Grotto",
-    "Route99_Grotto",
-    "Route4_Grotto",
-    "Route7_Grotto",
-    "Route22_Grotto",
-    "Route100_Grotto",
-    "Route18_Grotto",
-    "PsfrouteA04e14ea_Grotto",
-    "Route2_Grotto",
-    "RouteC_Grotto",
-    "Route13_Grotto",
-    "RouteE_Grotto",
-    "RouteB_Grotto",
-    "RouteA_Grotto",
-    "Route11_Grotto",
-    "Route10_Grotto",
-    "Route12_Grotto",
-    "Route9_Grotto",
-    "Route5_Grotto",
-    "Route3_Grotto",
-    "Route16_Grotto"
-  ],
-  "gMapGroup_UltraSpace": [
-    "UltraPaldea",
-    "UltraUnova",
-    "UltraOrre",
-    "UltraSinnoh",
-    "UltraHoenn",
-    "UltraAlola",
-    "UltraKalos",
-    "UltraJohto",
-    "UltraGalar",
-    "UltraKanto"
+  "gMapGroup_IndoorOrolandColiseum": [
+    "OrolandColiseum_Hallway",
+    "OrolandColiseum_Arena",
+    "OrolandColiseum_Hall"
   ],
   "gMapGroup_IndoorLittleroot": [
     "LittlerootTown_BrendansHouse_1F",

@@ -185,20 +185,20 @@
   ],
   "warp_events": [
     {
-      "warp_id": "WARP_ID_HODOU_GYM_TO_CITY_LEFT",
+      "warp_id": "WARP_ID_HODOU_GYM_TO_HODOU_CITY_LEFT",
       "x": 4,
       "y": 9,
       "elevation": 0,
       "dest_map": "MAP_HODOU_CITY",
-      "dest_warp_id": "5"
+      "dest_warp_id": "WARP_ID_HODOU_CITY_TO_GYM"
     },
     {
-      "warp_id": "WARP_ID_HODOU_GYM_TO_CITY_RIGHT",
+      "warp_id": "WARP_ID_HODOU_GYM_TO_HODOU_CITY_RIGHT",
       "x": 5,
       "y": 9,
       "elevation": 0,
       "dest_map": "MAP_HODOU_CITY",
-      "dest_warp_id": "5"
+      "dest_warp_id": "WARP_ID_HODOU_CITY_TO_GYM"
     }
   ],
   "coord_events": [],

@@ -43,6 +43,7 @@
       "flag": "0"
     },
     {
+      "local_id": "LOCALID_BERRY_TREE_LEAVERRA_FOREST_1",
       "graphics_id": "OBJ_EVENT_GFX_BERRY_TREE",
       "x": 21,
       "y": 28,
@@ -56,6 +57,7 @@
       "flag": "0"
     },
     {
+      "local_id": "LOCALID_BERRY_TREE_LEAVERRA_FOREST_2",
       "graphics_id": "OBJ_EVENT_GFX_BERRY_TREE",
       "x": 34,
       "y": 31,
@@ -71,32 +73,36 @@
   ],
   "warp_events": [
     {
+        "warp_id": "WARP_ID_LEAVERRA_TO_ROUTE100_A",
       "x": 48,
       "y": 31,
       "elevation": 0,
       "dest_map": "MAP_ROUTE100",
-      "dest_warp_id": "0"
+        "dest_warp_id": "WARP_ID_ROUTE100_TO_LEAVERRA_A"
     },
     {
+        "warp_id": "WARP_ID_LEAVERRA_TO_ROUTE100_B",
       "x": 49,
       "y": 31,
       "elevation": 0,
       "dest_map": "MAP_ROUTE100",
-      "dest_warp_id": "1"
+        "dest_warp_id": "WARP_ID_ROUTE100_TO_LEAVERRA_B"
     },
     {
+        "warp_id": "WARP_ID_LEAVERRA_TO_INNER_A",
       "x": 24,
       "y": 21,
       "elevation": 0,
       "dest_map": "MAP_LEAVERRA_FOREST_INNER",
-      "dest_warp_id": "1"
+      "dest_warp_id": "WARP_ID_INNER_TO_LEAVERRA_A"
     },
     {
+        "warp_id": "WARP_ID_LEAVERRA_TO_INNER_B",
       "x": 25,
       "y": 21,
       "elevation": 0,
       "dest_map": "MAP_LEAVERRA_FOREST_INNER",
-      "dest_warp_id": "1"
+      "dest_warp_id": "WARP_ID_INNER_TO_LEAVERRA_B"
     }
   ],
   "coord_events": [

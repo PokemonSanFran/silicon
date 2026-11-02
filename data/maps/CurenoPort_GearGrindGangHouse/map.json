@@ -43,6 +43,7 @@
       "flag": "0"
     },
     {
+        "local_id": "LOCALID_GEARGRINDGANG_A",
       "graphics_id": "OBJ_EVENT_GFX_CYCLING_TRIATHLETE_F",
       "x": 2,
       "y": 1,
@@ -56,6 +57,7 @@
       "flag": "0"
     },
     {
+        "local_id": "LOCALID_GEARGRINDGANG_B",
       "graphics_id": "OBJ_EVENT_GFX_CYCLING_TRIATHLETE_F",
       "x": 11,
       "y": 0,
@@ -169,18 +171,20 @@
   ],
   "warp_events": [
     {
+      "warp_id": "WARP_ID_HEAR_GRIND_GANG_HOUSE_TO_CURENO_PORT_LEFT",
       "x": 6,
       "y": 6,
       "elevation": 0,
       "dest_map": "MAP_CURENO_PORT",
-      "dest_warp_id": "0"
+      "dest_warp_id": "WARP_ID_CURENO_PORT_TO_GEAR_GRIND_GANG_HOUSE"
     },
     {
+      "warp_id": "WARP_ID_HEAR_GRIND_GANG_HOUSE_TO_CURENO_PORT_RIGHT",
       "x": 7,
       "y": 6,
       "elevation": 0,
       "dest_map": "MAP_CURENO_PORT",
-      "dest_warp_id": "0"
+      "dest_warp_id": "WARP_ID_CURENO_PORT_TO_GEAR_GRIND_GANG_HOUSE"
     }
   ],
   "coord_events": [],

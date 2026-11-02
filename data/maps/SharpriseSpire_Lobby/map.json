@@ -115,11 +115,12 @@
   ],
   "warp_events": [
     {
+      "warp_id": "WARP_ID_SHARPRISE_SPIRE_LOBBY_TO_ARRIBA",
       "x": 13,
       "y": 1,
       "elevation": 0,
       "dest_map": "MAP_SHARPRISE_SPIRE_ARRIBA",
-      "dest_warp_id": "0"
+      "dest_warp_id": "WARP_ID_ARRIBA_TO_SHARPRISE_SPIRE_LOBBY"
     },
     {
       "warp_id": "WARP_ID_SPIRE_ELEVATOR_TO_LOBBY",
@@ -127,14 +128,15 @@
       "y": 2,
       "elevation": 0,
       "dest_map": "MAP_SHARPRISESPIRE_ELEVATOR",
-      "dest_warp_id": "0"
+      "dest_warp_id": "WARP_ID_SHARPRISE_ELEVATOR_ENTRANCE_LEFT"
     },
     {
+        "warp_id": "WARP_ID_SHARPRISE_SPIRE_TO_QIU_VILLAGE_RAMESH_HOUSE",
       "x": 1,
       "y": 8,
       "elevation": 0,
       "dest_map": "MAP_QIU_VILLAGE_RAMESH_HOUSE",
-      "dest_warp_id": "1"
+      "dest_warp_id": "WARP_ID_QIU_VILLAGE_RAMESH_HOUSE_TO_SHARPRISE_SPIRE"
     }
   ],
   "coord_events": [],

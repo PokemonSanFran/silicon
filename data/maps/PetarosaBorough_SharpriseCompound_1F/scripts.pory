@@ -6,6 +6,5 @@ mapscripts PetarosaBorough_SharpriseCompound_1F_MapScripts {
             VAR_STORYLINE_STATE, STORY_MORNING_AFTER_TIMETRAVEL: YouRealizeTheyreEvilRight_NoIdea_Dialogue
     ]
     MAP_SCRIPT_ON_TRANSITION {
-        call(BeingChampionIsHard_ObjectCleanUp_Script)
     }
 }

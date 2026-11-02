@@ -26,19 +26,6 @@
   ],
   "object_events": [
     {
-      "graphics_id": "OBJ_EVENT_GFX_RUNNING_TRIATHLETE_M",
-      "x": 4,
-      "y": 10,
-      "elevation": 3,
-      "movement_type": "MOVEMENT_TYPE_FACE_LEFT",
-      "movement_range_x": 0,
-      "movement_range_y": 0,
-      "trainer_type": "TRAINER_TYPE_NORMAL",
-      "trainer_sight_or_berry_tree_id": "3",
-      "script": "Quest_ArtisanBalls2_TrainerB_Event_Script",
-      "flag": "FLAG_TEMP_C"
-    },
-    {
       "local_id": "LOCALID_DIGGINGTIDEMEMBERB",
       "graphics_id": "OBJ_EVENT_GFX_DIGGINGTIDEMEMBERB",
       "x": 13,
@@ -53,6 +40,7 @@
       "flag": "FLAG_TEMP_2"
     },
     {
+      "local_id": "LOCALID_BERRY_TREE_ROUTE_12_1",
       "graphics_id": "OBJ_EVENT_GFX_BERRY_TREE",
       "x": 3,
       "y": 13,
@@ -66,6 +54,7 @@
       "flag": "0"
     },
     {
+      "local_id": "LOCALID_BERRY_TREE_ROUTE_12_2",
       "graphics_id": "OBJ_EVENT_GFX_BERRY_TREE",
       "x": 13,
       "y": 7,
@@ -204,11 +193,12 @@
   ],
   "warp_events": [
     {
+        "warp_id": "WARP_ID_ROUTE12_TO_GROTTO",
       "x": 1,
       "y": 13,
       "elevation": 0,
       "dest_map": "MAP_ROUTE12_GROTTO",
-      "dest_warp_id": "0"
+        "dest_warp_id": "WARP_ID_GROTTO_TO_ROUTE12_A"
     }
   ],
   "coord_events": [

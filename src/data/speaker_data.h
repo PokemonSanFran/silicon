@@ -3095,4 +3095,46 @@ static const struct SpeakerData sSpeakerData[NUM_SPEAKERS] =
         .gender = MALE,
         .speakerIcon = SPEAKER_ICON_GIRL,
     },
+    [SPEAKER_BAIYA_ROOMMATE_1] =
+    {
+        .name = COMPOUND_STRING("Baiyahousemate1"),
+        .title = COMPOUND_STRING("Baiya's Housemate"),
+        .gender = MALE,
+        .speakerIcon = SPEAKER_ICON_ROCKET_GRUNT_F,
+    },
+    [SPEAKER_BAIYA_ROOMMATE_2] =
+    {
+        .name = COMPOUND_STRING("Baiyahousemate2"),
+        .title = COMPOUND_STRING("Baiya's Housemate"),
+        .gender = FEMALE,
+        .speakerIcon = SPEAKER_ICON_ROCKET_GRUNT_F,
+    },
+    [SPEAKER_BAIYA_ROOMMATE_3] =
+    {
+        .name = COMPOUND_STRING("Baiyahousemate3"),
+        .title = COMPOUND_STRING("Baiya's Housemate"),
+        .gender = MALE,
+        .speakerIcon = SPEAKER_ICON_ROCKET_GRUNT_F,
+    },
+    [SPEAKER_BAIYA_ROOMMATE_4] =
+    {
+        .name = COMPOUND_STRING("Baiyahousemate4"),
+        .title = COMPOUND_STRING("Baiya's Housemate"),
+        .gender = FEMALE,
+        .speakerIcon = SPEAKER_ICON_ROCKET_GRUNT_F,
+    },
+    [SPEAKER_BAIYA_ROOMMATE_5] =
+    {
+        .name = COMPOUND_STRING("Baiyahousemate5"),
+        .title = COMPOUND_STRING("Baiya's Housemate"),
+        .gender = MALE,
+        .speakerIcon = SPEAKER_ICON_ROCKET_GRUNT_F,
+    },
+    [SPEAKER_BAIYA_ROOMMATE_6] =
+    {
+        .name = COMPOUND_STRING("Baiyahousemate6"),
+        .title = COMPOUND_STRING("Baiya's Housemate"),
+        .gender = NON_BINARY,
+        .speakerIcon = SPEAKER_ICON_ROCKET_GRUNT_F,
+    },
 };

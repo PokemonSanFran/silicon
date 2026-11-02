@@ -57,18 +57,20 @@
   ],
   "warp_events": [
     {
+      "warp_id": "WARP_ID_CENTER_TO_HALAI_ISLAND_RIGHT",
       "x": 7,
       "y": 8,
       "elevation": 0,
       "dest_map": "MAP_HALAI_ISLAND",
-      "dest_warp_id": "3"
+      "dest_warp_id": "WARP_ID_HALAI_ISLAND_TO_CENTER"
     },
     {
+      "warp_id": "WARP_ID_CENTER_TO_HALAI_ISLAND_LEFT",
       "x": 6,
       "y": 8,
       "elevation": 0,
       "dest_map": "MAP_HALAI_ISLAND",
-      "dest_warp_id": "3"
+      "dest_warp_id": "WARP_ID_HALAI_ISLAND_TO_CENTER"
     }
   ],
   "coord_events": [],

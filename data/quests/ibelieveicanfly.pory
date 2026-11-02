@@ -1,12 +1,3 @@
-//Quest_IBelieveICanFly
-
-const FLAG_HIDE_GERTRUDE = FLAG_TEMP_3
-const GERTRUDE = 3
-
-script Quest_IBelieveICanFly_Gertrude_Visibility_Script{
-    return
-}
-
 script Quest_IBelieveICanFly_Interact_Gertrude_Script{
     goto_if_quest_active(QUEST_IBELIEVEICANFLY,Quest_IBelieveICanFly_Active_Dialogue)
     goto(Quest_IBelieveICanFly_StartQuest_Dialogue)
@@ -72,10 +63,10 @@ script Quest_IBelieveICanFly_Reward_Dialogue{
 script Quest_IBelieveICanFly_Gertrude_LeaveOutside_Script{
     opendoor(37,31)
     waitdooranim
-    applymovement(GERTRUDE, moves(walk_up, step_end))
-    waitmovement(GERTRUDE)
+    applymovement(LOCALID_TORGEOT_CLIMB_GERTRUDE, moves(walk_up, step_end))
+    waitmovement(LOCALID_TORGEOT_CLIMB_GERTRUDE)
     playse(SE_EXIT)
-    removeobject(GERTRUDE)
+    removeobject(LOCALID_TORGEOT_CLIMB_GERTRUDE)
     waitse
     closedoor(37,31)
     waitdooranim

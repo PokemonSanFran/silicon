@@ -196,9 +196,9 @@
     },
     {
       "id": "HEAL_LOCATION_HALAI_ISLAND_BAIYA",
-      "map": "MAP_HALAI_ISLAND_BAIYA",
-      "x": 7,
-      "y": 2
+      "map": "MAP_HALAI_ISLAND_BAIYA2F",
+      "x": 5,
+      "y": 6
     },
     {
       "id": "HEAL_LOCATION_ARANTRAZ",
@@ -333,12 +333,6 @@
       "y": 17
     },
     {
-      "id": "HEAL_LOCATION_PALACEFINEARTS",
-      "map": "MAP_PALACEFINEARTS",
-      "x": 19,
-      "y": 30
-    },
-    {
       "id": "HEAL_LOCATION_PETAROSA_BOROUGH",
       "map": "MAP_PETAROSA_BOROUGH",
       "x": 24,
@@ -397,12 +391,6 @@
       "map": "MAP_ROUTE3",
       "x": 22,
       "y": 15
-    },
-    {
-      "id": "HEAL_LOCATION_PSFROUTE9F45DA86",
-      "map": "MAP_PSFROUTE9F45DA86",
-      "x": 24,
-      "y": 2
     },
     {
       "id": "HEAL_LOCATION_ROUTE16",

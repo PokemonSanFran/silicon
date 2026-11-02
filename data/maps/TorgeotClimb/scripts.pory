@@ -1,7 +1,6 @@
 mapscripts TorgeotClimb_MapScripts {
     MAP_SCRIPT_ON_TRANSITION {
         call_if_subquest_complete(QUEST_WALLACEARMY,SUB_QUEST_4,WallaceArmy_Script_HideStanE)
-        call(Quest_IBelieveICanFly_Gertrude_Visibility_Script)
 		call(OkayLetsFixit_Script_HikoVisibility)
         call_if_quest_not_complete(QUEST_FINDTHEGUILTY,Quest_Findtheguilty_Script_HideTorgeotFindtheguilityplantH)
     }

@@ -1229,7 +1229,7 @@ void JumpPlayerTo_YoungPadawan(bool32 jumpType)
 void FlagsVarWarp_WaitYouWentWhere()
 {
     VarSet(VAR_WAIT_YOU_WENT_WHERE, POST_WAITYOUWENTWHERE);
-    SetWarpDestination(MAP_GROUP(MAP_PSFROUTE9F45DA86),MAP_NUM(MAP_PSFROUTE9F45DA86),WARP_ID_NONE,3,1);
+    SetWarpDestination(MAP_GROUP(MAP_POPIDORA_PIER),MAP_NUM(MAP_POPIDORA_PIER),0,USE_WARP_ID,USE_WARP_ID);
 }
 
 void JumpPlayerTo_WaitYouWentWhere(bool32 jumpType)
@@ -2303,9 +2303,9 @@ void JumpPlayerTo_MaskOff_Vigrim(bool32 jumpType)
 
 void FlagsVarWarp_LockedOut()
 {
-    FlagSet(FLAG_LOCKEDOUT_PLAYED);
+    FlagSet(FLAG_LOCKEDOUT_PLAYER);
     SetLastHealLocationWarp(HEAL_LOCATION_HALAI_ISLAND_BAIYA);
-    SetWarpDestination(MAP_GROUP(MAP_HALAI_ISLAND_BAIYA),MAP_NUM(MAP_HALAI_ISLAND_BAIYA),0,USE_WARP_ID,USE_WARP_ID);
+    SetWarpDestination(MAP_GROUP(MAP_HALAI_ISLAND_BAIYA2F),MAP_NUM(MAP_HALAI_ISLAND_BAIYA2F),WARP_ID_2F_TO_BAIYA_HOME,USE_WARP_ID,USE_WARP_ID);
 }
 
 void JumpPlayerTo_LockedOut(bool32 jumpType)
@@ -2329,7 +2329,7 @@ void FlagsVarWarp_LetsFixThis()
     PreventVariableFromReversion(VAR_WAREHOUSE_RAVE_STATE, warehouseState,
             GOT_RAVE_MESSAGE);
     Buzzr_MarkZapAsRead(ZAP_STORY_WAREHOUSE_RAVE);
-    SetWarpDestination(MAP_GROUP(MAP_HALAI_ISLAND_BAIYA),MAP_NUM(MAP_HALAI_ISLAND_BAIYA),0,USE_WARP_ID,USE_WARP_ID);
+    SetWarpDestination(MAP_GROUP(MAP_HALAI_ISLAND_BAIYA2F),MAP_NUM(MAP_HALAI_ISLAND_BAIYA2F),WARP_ID_2F_TO_BAIYA_HOME,USE_WARP_ID,USE_WARP_ID);
 }
 
 void JumpPlayerTo_LetsFixThis(bool32 jumpType)
@@ -2715,7 +2715,7 @@ void FlagsVarWarp_Epilogue(void)
     VarSet(VAR_STORYLINE_STATE, STORY_CLEAR);
     FlagSet(FLAG_SYS_GAME_CLEAR);
     Buzzr_MarkZapAsRead(ZAP_STORY_EPILOGUE);
-    SetWarpDestination(MAP_GROUP(MAP_HALAI_ISLAND_BAIYA),MAP_NUM(MAP_HALAI_ISLAND_BAIYA),0,USE_WARP_ID,USE_WARP_ID);
+    SetWarpDestination(MAP_GROUP(MAP_HALAI_ISLAND_BAIYA2F),MAP_NUM(MAP_HALAI_ISLAND_BAIYA2F),WARP_ID_2F_TO_BAIYA_HOME,USE_WARP_ID,USE_WARP_ID);
 }
 
 void JumpPlayerTo_Epilogue(bool32 jumpType)

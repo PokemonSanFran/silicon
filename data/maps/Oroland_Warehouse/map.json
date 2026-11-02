@@ -31,32 +31,37 @@
   ],
   "warp_events": [
     {
+        "warp_id": "WARP_ID_WAREHOUSE_CURENO_PORT_A",
       "x": 9,
       "y": 7,
       "elevation": 0,
       "dest_map": "MAP_CURENO_PORT",
-      "dest_warp_id": "5"
+      "dest_warp_id": "WARP_ID_CURENO_TO_WAREHOUSE"
     },
     {
+        "warp_id": "WARP_ID_WAREHOUSE_CURENO_PORT_B",
       "x": 9,
       "y": 6,
       "elevation": 0,
       "dest_map": "MAP_CURENO_PORT",
-      "dest_warp_id": "5"
+      "dest_warp_id": "WARP_ID_CURENO_TO_WAREHOUSE"
     },
     {
+        "warp_id": "WARP_ID_WAREHOUSE_CURENO_PORT_C",
       "x": 9,
       "y": 8,
       "elevation": 0,
       "dest_map": "MAP_CURENO_PORT",
-      "dest_warp_id": "5"
+      "dest_warp_id": "WARP_ID_CURENO_TO_WAREHOUSE"
     },
     {
+        "warp_id": "WARP_ID_WAREHOUSE_TO_CURENO_EXPLODE",
+      "x": 9,
       "x": 9,
       "y": 2,
       "elevation": 0,
       "dest_map": "MAP_CURENO_PORT",
-      "dest_warp_id": "4"
+      "dest_warp_id": "WARP_ID_CURENO_TO_WAREHOUSE_EXPLODE"
     }
   ],
   "coord_events": [

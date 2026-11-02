@@ -1,5 +1,4 @@
 mapscripts PetarosaBorough_SquattersMansion_MapScripts {
     MAP_SCRIPT_ON_TRANSITION {
-        call(Quest_BuildingScope_ToggleObjects_Script)
     }
 }

@@ -31,18 +31,20 @@
   ],
   "warp_events": [
     {
+        "warp_id": "WARP_ID_MOCHI_SHOP_TO_CHASILLA_LEFT",
       "x": 4,
       "y": 8,
       "elevation": 0,
       "dest_map": "MAP_CHASILLA",
-      "dest_warp_id": "8"
+      "dest_warp_id": "WARP_ID_CHASILLA_TO_MOCHI_SHOP"
     },
     {
+        "warp_id": "WARP_ID_MOCHI_SHOP_TO_CHASILLA_RIGHT",
       "x": 5,
       "y": 8,
       "elevation": 0,
       "dest_map": "MAP_CHASILLA",
-      "dest_warp_id": "8"
+      "dest_warp_id": "WARP_ID_CHASILLA_TO_MOCHI_SHOP"
     }
   ],
   "coord_events": [],

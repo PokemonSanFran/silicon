@@ -43,18 +43,20 @@
   ],
   "warp_events": [
     {
+        "warp_id": "WARP_ID_GROTTO_TO_ROUTE100_A",
       "x": 7,
       "y": 24,
       "elevation": 3,
       "dest_map": "MAP_ROUTE100",
-      "dest_warp_id": "2"
+        "dest_warp_id": "WARP_ID_ROUTE100_TO_GROTTO"
     },
     {
+        "warp_id": "WARP_ID_GROTTO_TO_ROUTE100_B",
       "x": 8,
       "y": 24,
       "elevation": 3,
       "dest_map": "MAP_ROUTE100",
-      "dest_warp_id": "2"
+        "dest_warp_id": "WARP_ID_ROUTE100_TO_GROTTO"
     }
   ],
   "coord_events": [],

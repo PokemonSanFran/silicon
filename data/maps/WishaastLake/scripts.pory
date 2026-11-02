@@ -1,6 +1,5 @@
 mapscripts WishaastLake_MapScripts {
     MAP_SCRIPT_ON_TRANSITION {
-        call(Quest_ShutDownMedicineMan_HideDealer_Script)
         call(WishaastLake_ObjectVisibility_Script)
     }
     MAP_SCRIPT_ON_FRAME_TABLE [
@@ -38,51 +37,4 @@ script WishaastLake_InteractEleanor_Event_Script {
 
     release
 	end
-}
-
-script WishaastLake_Herb_Dealer_Script{
-    lock
-    faceplayer
-    msgbox(format("hey man what can i get you today"))
-	waitmessage
-	pokemart(HerbDealerShop)
-    msgbox(format("thanks come again!"))
-    // After making a successful purchase in a Poké Mart, the Id of the map that the Player
-    // is at gets written to VAR_TEMP_1. If VAR_TEMP_1 is MAP_WISHAAST_LAKE in this context,
-    // that's because the Player made a successful purchase there.
-    if (var(VAR_TEMP_1) == MAP_WISHAAST_LAKE){
-        goto(Quest_ShutDownMedicineMan_MakePurchase_Dialogue)
-    }
-}
-
-mart HerbDealerShop{
-    ITEM_ENERGY_ROOT
-    ITEM_HEAL_POWDER
-}
-
-script WishaastLake_Interact_HerbBystander_Dialogue{
-    questmenu(QUEST_MENU_CHECK_COMPLETE,QUEST_SHUTDOWNMEDICINEMAN)
-
-    if(var(VAR_RESULT)){
-        msgbox(format("oh man did you hear? the herb guy got shut down. looks like somebody ratted him out for not having a license. now we can only buy from that place in CresaltaVista!"),MSGBOX_NPC)
-    }else {
-        msgbox(format("this guy has the best herbs, and so much cheaper than the place in CresaltaVista! I don't think this guy is like totally above board..."),MSGBOX_NPC)
-    }
-    end
-}
-
-text gText_WishaastLake_HeyManWhatCanI{
-    format("hey man what can i get you today")
-}
-
-text gText_WishaastLake_ThanksComeAgain{
-    format("thanks come again!")
-}
-
-text gText_WishaastLake_ThisGuyIs{
-    format("this guy has the best herbs, and so much cheaper than the place in CresaltaVista! I don't think this guy is like totally above board...")
-}
-
-text gText_WishaastLake_OhManDidYouHear{
-    format("oh man did you hear? the herb guy got shut down. looks like somebody ratted him out for not having a license. now we can only buy from that place in CresaltaVista!")
 }

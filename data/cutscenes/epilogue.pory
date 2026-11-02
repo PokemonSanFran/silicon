@@ -1,9 +1,5 @@
-const PLAYER = OBJ_EVENT_ID_PLAYER
-const BAIYA = 10
-const TALA = 9
-
-const FLAG_HIDE_TALA = FLAG_TEMP_1
-const FLAG_HIDE_BAIYA = FLAG_TEMP_2
+const BAIYA = LOCALID_CAMERA + 1
+const TALA= LOCALID_CAMERA + 2
 
 script Epilogue_Script_AddBaiya
 {
@@ -142,7 +138,7 @@ script Epilogue_Script_WarpToBaiya
 {
     markzapread(ZAP_STORY_EPILOGUE)
     fadeblackandsetremovewarpfadeflag
-    warpsilent(MAP_HALAI_ISLAND_BAIYA,0)
+    warpsilent(MAP_HALAI_ISLAND_BAIYA2F,WARP_ID_2F_TO_BAIYA_HOME)
     waitstate
     release
     end

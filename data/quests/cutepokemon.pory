@@ -1,21 +1,3 @@
-const MELISSA_PERLACIA_INSIDE = 1
-const MELISSA_PERLACIA_OUTSIDE = 11
-const FLAG_HIDE_MELISSA_PERLACIA_INSIDE = FLAG_TEMP_1
-const FLAG_HIDE_MELISSA_PERLACIA_OUTSIDE = FLAG_TEMP_5
-
-const MELISSA_QIU_INSIDE = 2
-const MELISSA_QIU_OUTSIDE = 9
-const FLAG_HIDE_MELISSA_QIU_INSIDE = FLAG_TEMP_1
-const FLAG_HIDE_MELISSA_QIU_OUTSIDE = FLAG_TEMP_5
-
-const MELISSA_CRESALTA_INSIDE = 1
-const MELISSA_CRESALTA_OUTSIDE = 10
-const FLAG_HIDE_MELISSA_CRESALTA_INSIDE = FLAG_TEMP_1
-const FLAG_HIDE_MELISSA_CRESALTA_OUTSIDE = FLAG_TEMP_2
-
-const MELISSA_HALAI_OUTSIDE = 23
-const FLAG_HIDE_MELISSA_HALAI_OUTSIDE = FLAG_TEMP_6
-
 script CutePokemon_Script_DebugGiveMon
 {
     lock
@@ -26,13 +8,13 @@ script CutePokemon_Script_DebugGiveMon
 
 script CutePokemon_Script_HideMelissaPerlaciaInside
 {
-    setflag(FLAG_HIDE_MELISSA_PERLACIA_INSIDE)
+    setobjectflagfromlocalid(LOCALID_PERLACIA_CITY_COFFEE_MELISSA)
     return
 }
 
 script CutePokemon_Script_HideMelissaPerlaciaOutside
 {
-    setflag(FLAG_HIDE_MELISSA_PERLACIA_OUTSIDE)
+    setobjectflagfromlocalid(LOCALID_PERLACIA_CITY_MELISSA)
     return
 }
 
@@ -50,7 +32,7 @@ script CutePokemon_Script_ControlMelissaPerlaciaInsideVisibility
 
 	if (var(VAR_CUTE_POKEMON_GUESS) == VAR_CUTE_POKEMON_STATE_NOT_STARTED)
 	{
-        setobjectxyperm(MELISSA_PERLACIA_INSIDE,4,4)
+        setobjectxyperm(LOCALID_PERLACIA_CITY_COFFEE_MELISSA,4,4)
         return
 	}
     call_if_subquest_complete(QUEST_CUTEPOKEMON,SUB_QUEST_1,CutePokemon_Script_HideMelissaPerlaciaInside)
@@ -60,9 +42,9 @@ script CutePokemon_Dialogue_GreetingPerlacia
 {
 	setvar(VAR_CUTE_POKEMON_GUESS,VAR_CUTE_POKEMON_GREETING_PERLACIA)
 	lock
-	addobject(MELISSA_PERLACIA_INSIDE)
-	applymovement(MELISSA_PERLACIA_INSIDE,CutePokemon_WalkToPlayer_Movement)
-	waitmovement(MELISSA_PERLACIA_INSIDE)
+	addobject(LOCALID_PERLACIA_CITY_COFFEE_MELISSA)
+	applymovement(LOCALID_PERLACIA_CITY_COFFEE_MELISSA,CutePokemon_WalkToPlayer_Movement)
+	waitmovement(LOCALID_PERLACIA_CITY_COFFEE_MELISSA)
 	msgbox(format("Welcome to The Boba Shop! Sorry, we’re short staffed today!"),,SPEAKER_MELISSA)
 	closemessage
 	release
@@ -196,13 +178,13 @@ script CutePokemon_Dialogue_CheckItemSpace
 
 script CutePokemon_Script_HideMelissaQiuInside
 {
-    setflag(FLAG_HIDE_MELISSA_QIU_INSIDE)
+    setobjectflagfromlocalid(LOCALID_QIU_VILLAGE_RESTAURANT_MELISSA)
     return
 }
 
 script CutePokemon_Script_HideMelissaQiuOutside
 {
-    setflag(FLAG_HIDE_MELISSA_QIU_OUTSIDE)
+    setobjectflagfromlocalid(LOCALID_QIU_MELISSA)
     return
 }
 
@@ -210,7 +192,7 @@ script CutePokemon_Script_ControlMelissaQiuInsideVisibility
 {
 	if (var(VAR_CUTE_POKEMON_GUESS) == VAR_CUTE_POKEMON_EISCUE_HINT_2)
 	{
-		setobjectxyperm(MELISSA_QIU_INSIDE,4,4)
+		setobjectxyperm(LOCALID_QIU_VILLAGE_RESTAURANT_MELISSA,4,4)
         return
 	}
 
@@ -235,9 +217,9 @@ script CutePokemon_Dialogue_GreetingQiu
 {
 	setvar(VAR_CUTE_POKEMON_GUESS,VAR_CUTE_POKEMON_GREETING_QIU)
 	lock
-	addobject(MELISSA_QIU_INSIDE)
-	applymovement(MELISSA_QIU_INSIDE,CutePokemon_WalkToPlayer_Movement)
-	waitmovement(MELISSA_QIU_INSIDE)
+	addobject(LOCALID_QIU_VILLAGE_RESTAURANT_MELISSA)
+	applymovement(LOCALID_QIU_VILLAGE_RESTAURANT_MELISSA,CutePokemon_WalkToPlayer_Movement)
+	waitmovement(LOCALID_QIU_VILLAGE_RESTAURANT_MELISSA)
 	msgbox(format("Welcome to The Boba Shop!"),,SPEAKER_MELISSA)
 	closemessage
 	release
@@ -252,9 +234,9 @@ script CutePokemon_Dialogue_RecognizeGoOutsideQiu
     buffermapname(STR_VAR_2,MAP_PERLACIA_CITY)
 	msgbox(format("Wait, didn’t you help me find {STR_VAR_1} in {STR_VAR_2}? I’ve trained with him a bit since you gave him to me. I’m about to go on my break. Let’s battle outside!"),MSGBOX_NPC,SPEAKER_MELISSA)
 	closemessage
-	applymovement(MELISSA_QIU_INSIDE,CutePokemon_WalkToExit_Movement)
+	applymovement(LOCALID_QIU_VILLAGE_RESTAURANT_MELISSA,CutePokemon_WalkToExit_Movement)
 	fadescreenswapbuffers(FADE_TO_BLACK)
-	removeobject(MELISSA_QIU_INSIDE)
+	removeobject(LOCALID_QIU_VILLAGE_RESTAURANT_MELISSA)
 	fadescreenswapbuffers(FADE_FROM_BLACK)
 	release
 	end
@@ -350,7 +332,7 @@ script CutePokemon_Script_QiuAsk
 	msgbox(format("Hell yeah! I knew you’d be a real one!"),,SPEAKER_MELISSA)
 	msgbox(format("Thanks for all your help so far. You’re really saving me as I waste away at these jobs. Here's something for your help!"),,SPEAKER_MELISSA)
 	closemessage
-	cueobjectplayer(MELISSA_QIU_OUTSIDE)
+	cueobjectplayer(LOCALID_QIU_MELISSA)
 	giveitem(ITEM_QUEST_CUTEPOKEMON_1,1)
 	release
 	end
@@ -358,13 +340,13 @@ script CutePokemon_Script_QiuAsk
 
 script CutePokemon_Script_HideMelissaCresaltaInside
 {
-    setflag(FLAG_HIDE_MELISSA_CRESALTA_INSIDE)
+    setobjectflagfromlocalid(LOCALID_CRESALTA_VISTA_RESTAURANT_MELISSA)
     return
 }
 
 script CutePokemon_Script_HideMelissaCresaltaOutside
 {
-    setflag(FLAG_HIDE_MELISSA_CRESALTA_OUTSIDE)
+    setobjectflagfromlocalid(LOCALID_CRESALTA_VISTA_MELISSA)
     return
 }
 
@@ -372,7 +354,7 @@ script CutePokemon_Script_ControlMelissaCresaltaInsideVisibility
 {
 	if (var(VAR_CUTE_POKEMON_GUESS) == VAR_CUTE_POKEMON_CORSOLA_HINT_2)
 	{
-		setobjectxyperm(MELISSA_CRESALTA_INSIDE,4,4)
+		setobjectxyperm(LOCALID_CRESALTA_VISTA_RESTAURANT_MELISSA,4,4)
 	}
 
     call_if_subquest_not_complete(QUEST_CUTEPOKEMON,SUB_QUEST_2,CutePokemon_Script_HideMelissaCresaltaInside)
@@ -395,9 +377,9 @@ script CutePokemon_Dialogue_GreetingCresalta
 {
 	setvar(VAR_CUTE_POKEMON_GUESS,VAR_CUTE_POKEMON_GREETING_CRESALTA)
 	lock
-	addobject(MELISSA_CRESALTA_INSIDE)
-	applymovement(MELISSA_CRESALTA_INSIDE,CutePokemon_WalkToPlayer_Movement)
-	waitmovement(MELISSA_CRESALTA_INSIDE)
+	addobject(LOCALID_CRESALTA_VISTA_RESTAURANT_MELISSA)
+	applymovement(LOCALID_CRESALTA_VISTA_RESTAURANT_MELISSA,CutePokemon_WalkToPlayer_Movement)
+	waitmovement(LOCALID_CRESALTA_VISTA_RESTAURANT_MELISSA)
 	msgbox(format("Welcome to The Boba Shop!"),,SPEAKER_MELISSA)
 	closemessage
 	release
@@ -412,9 +394,9 @@ script CutePokemon_Dialogue_RecognizeGoOutsideCresalta
     buffermapname(STR_VAR_2,MAP_QIU_VILLAGE)
 	msgbox(format("Wait, didn’t you help me find {STR_VAR_1} in {STR_VAR_2}? I’ve trained with her a bit since you gave her to me. I’m about to go on my break. Let’s battle outside!"),,SPEAKER_MELISSA)
 	closemessage
-	applymovement(MELISSA_CRESALTA_INSIDE,CutePokemon_WalkToExit_Movement)
+	applymovement(LOCALID_CRESALTA_VISTA_RESTAURANT_MELISSA,CutePokemon_WalkToExit_Movement)
 	fadescreenswapbuffers(FADE_TO_BLACK)
-	removeobject(MELISSA_CRESALTA_INSIDE)
+	removeobject(LOCALID_CRESALTA_VISTA_RESTAURANT_MELISSA)
 	fadescreenswapbuffers(FADE_FROM_BLACK)
 	release
 	end
@@ -502,7 +484,7 @@ script CutePokemon_Script_CresaltaAsk
 
 script CutePokemon_Script_HideMelissaHalaiOutside
 {
-    setflag(FLAG_HIDE_MELISSA_HALAI_OUTSIDE)
+    setobjectflagfromlocalid(LOCALID_HALAI_ISLAND_MELISSA)
     return
 }
 
@@ -600,7 +582,7 @@ script CutePokemon_Script_HalaiAsk
 	setvar(VAR_CUTE_POKEMON_GUESS,VAR_CUTE_POKEMON_CORRECT)
 	msgbox(format("Hell yeah! Thanks for being a real one and helping me find all these Pokémon. Take this, I made this myself on break!"),,SPEAKER_MELISSA)
 	closemessage
-	cueobjectplayer(MELISSA_QIU_OUTSIDE)
+	cueobjectplayer(LOCALID_QIU_MELISSA)
 	giveitem(ITEM_QUEST_CUTEPOKEMON_2,1)
 	completequest(QUEST_CUTEPOKEMON)
     setvar(VAR_CUTE_POKEMON_GUESS,VAR_CUTE_POKEMON_REMATCH_COMPLETE)

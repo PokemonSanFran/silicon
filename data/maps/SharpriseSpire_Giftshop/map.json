@@ -101,18 +101,20 @@
   ],
   "warp_events": [
     {
+      "warp_id": "WARP_ID_GIFTSHOP_TO_PARK",
       "x": 1,
       "y": 1,
       "elevation": 0,
       "dest_map": "MAP_SHARPRISE_SPIRE_PARK",
-      "dest_warp_id": "1"
+      "dest_warp_id": "WARP_ID_PARK_TO_GIFTSHOP"
     },
     {
+      "warp_id": "WARP_ID_GIFTSHOP_TO_SERVERROOM",
       "x": 8,
       "y": 1,
       "elevation": 0,
       "dest_map": "MAP_SHARPRISE_SPIRE_SERVERROOM",
-      "dest_warp_id": "0"
+      "dest_warp_id": "WARP_ID_SERVERROOM_TO_GIFTSHOP"
     },
     {
       "warp_id": "WARP_ID_SPIRE_ELEVATOR_TO_GIFTSHOP",
@@ -120,7 +122,7 @@
       "y": 2,
       "elevation": 0,
       "dest_map": "MAP_SHARPRISESPIRE_ELEVATOR",
-      "dest_warp_id": "0"
+      "dest_warp_id": "WARP_ID_SHARPRISE_ELEVATOR_ENTRANCE_LEFT"
     }
   ],
   "coord_events": [],

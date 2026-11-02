@@ -26,6 +26,7 @@
   ],
   "object_events": [
     {
+      "local_id": "LOCALID_ROUTE_2_CROWD_D",
       "graphics_id": "OBJ_EVENT_GFX_CAMERAMAN",
       "x": 15,
       "y": 36,
@@ -67,84 +68,7 @@
       "flag": "FLAG_TEMP_5"
     },
     {
-      "graphics_id": "OBJ_EVENT_GFX_MAN_2",
-      "x": 5,
-      "y": 21,
-      "elevation": 3,
-      "movement_type": "MOVEMENT_TYPE_FACE_UP",
-      "movement_range_x": 0,
-      "movement_range_y": 0,
-      "trainer_type": "TRAINER_TYPE_NONE",
-      "trainer_sight_or_berry_tree_id": "0",
-      "script": "Quest_NeighborhoodCleanUp_Interact_PersonA_Script",
-      "flag": "FLAG_TEMP_7"
-    },
-    {
-      "graphics_id": "OBJ_EVENT_GFX_FISHERMAN",
-      "x": 7,
-      "y": 24,
-      "elevation": 3,
-      "movement_type": "MOVEMENT_TYPE_WANDER_AROUND",
-      "movement_range_x": 0,
-      "movement_range_y": 0,
-      "trainer_type": "TRAINER_TYPE_NONE",
-      "trainer_sight_or_berry_tree_id": "0",
-      "script": "Quest_NeighborhoodCleanUp_Interact_PersonB_Script",
-      "flag": "FLAG_TEMP_8"
-    },
-    {
-      "graphics_id": "OBJ_EVENT_GFX_CAMPER",
-      "x": 8,
-      "y": 25,
-      "elevation": 3,
-      "movement_type": "MOVEMENT_TYPE_WANDER_AROUND",
-      "movement_range_x": 0,
-      "movement_range_y": 0,
-      "trainer_type": "TRAINER_TYPE_NONE",
-      "trainer_sight_or_berry_tree_id": "0",
-      "script": "Quest_NeighborhoodCleanUp_Interact_PersonA_Script",
-      "flag": "FLAG_TEMP_9"
-    },
-    {
-      "graphics_id": "OBJ_EVENT_GFX_BEAUTY",
-      "x": 9,
-      "y": 26,
-      "elevation": 3,
-      "movement_type": "MOVEMENT_TYPE_WANDER_AROUND",
-      "movement_range_x": 0,
-      "movement_range_y": 0,
-      "trainer_type": "TRAINER_TYPE_NONE",
-      "trainer_sight_or_berry_tree_id": "0",
-      "script": "Quest_NeighborhoodCleanUp_Interact_PersonD_Script",
-      "flag": "FLAG_TEMP_A"
-    },
-    {
-      "graphics_id": "OBJ_EVENT_GFX_GIRL_1",
-      "x": 10,
-      "y": 27,
-      "elevation": 3,
-      "movement_type": "MOVEMENT_TYPE_WANDER_AROUND",
-      "movement_range_x": 0,
-      "movement_range_y": 0,
-      "trainer_type": "TRAINER_TYPE_NONE",
-      "trainer_sight_or_berry_tree_id": "0",
-      "script": "Quest_NeighborhoodCleanUp_Interact_PersonE_Script",
-      "flag": "FLAG_TEMP_B"
-    },
-    {
-      "graphics_id": "OBJ_EVENT_GFX_MYSTERY_GIFT_MAN",
-      "x": 24,
-      "y": 28,
-      "elevation": 3,
-      "movement_type": "MOVEMENT_TYPE_NONE",
-      "movement_range_x": 0,
-      "movement_range_y": 0,
-      "trainer_type": "TRAINER_TYPE_NONE",
-      "trainer_sight_or_berry_tree_id": "0",
-      "script": "Quest_NeighborhoodCleanUp_Interact_Cop_Script",
-      "flag": "FLAG_TEMP_C"
-    },
-    {
+      "local_id": "LOCALID_ROUTE_2_CROWD_E",
       "graphics_id": "OBJ_EVENT_GFX_REPORTER_M",
       "x": 24,
       "y": 35,
@@ -158,6 +82,7 @@
       "flag": "FLAG_TEMP_5"
     },
     {
+      "local_id": "LOCALID_ROUTE_2_CROWD_F",
       "graphics_id": "OBJ_EVENT_GFX_CAMERAMAN",
       "x": 24,
       "y": 36,
@@ -211,6 +136,7 @@
       "flag": "0"
     },
     {
+      "local_id": "LOCALID_BERRY_TREE_ROUTE_2_1",
       "graphics_id": "OBJ_EVENT_GFX_BERRY_TREE",
       "x": 6,
       "y": 33,
@@ -224,6 +150,7 @@
       "flag": "0"
     },
     {
+      "local_id": "LOCALID_BERRY_TREE_ROUTE_2_2",
       "graphics_id": "OBJ_EVENT_GFX_BERRY_TREE",
       "x": 6,
       "y": 35,
@@ -267,25 +194,28 @@
   ],
   "warp_events": [
     {
+      "warp_id": "WARP_ID_ROUTE2_TO_CONSTRUCTION",
       "x": 21,
       "y": 30,
       "elevation": 0,
       "dest_map": "MAP_SHARPRISE_STADIUM_CONSTRUCTION",
-      "dest_warp_id": "0"
+      "dest_warp_id": "WARP_ID_CONSTRUCTION_TO_ROUTE2"
     },
     {
+        "warp_id": "WARP_ID_ROUTE2_TO_SHARPRISE_STADIUM",
       "x": 21,
       "y": 29,
       "elevation": 0,
       "dest_map": "MAP_SHARPRISE_STADIUM_ENTRANCE",
-      "dest_warp_id": "0"
+      "dest_warp_id": "WARP_ID_SHARPRISE_STADIUM_TO_ROUTE2_LEFT"
     },
     {
+        "warp_id": "WARP_ID_ROUTE2_TO_GROTTO_A",
       "x": 5,
       "y": 30,
       "elevation": 0,
       "dest_map": "MAP_ROUTE2_GROTTO",
-      "dest_warp_id": "0"
+      "dest_warp_id": "WARP_ID_GROTTO_TO_ROUTE2_A"
     }
   ],
   "coord_events": [],

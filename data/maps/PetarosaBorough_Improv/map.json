@@ -171,7 +171,7 @@
   ],
   "warp_events": [
     {
-      "warp_id": "WARP_ID_THEATER_TO_PETAROSA_LEFT",
+      "warp_id": "WARP_ID_THEATER_TO_PETAROSA_BOROUGH_LEFT",
       "x": 3,
       "y": 12,
       "elevation": 0,
@@ -179,7 +179,7 @@
       "dest_warp_id": "3"
     },
     {
-      "warp_id": "WARP_ID_THEATER_TO_PETAROSA_RIGHT",
+      "warp_id": "WARP_ID_THEATER_TO_PETAROSA_BOROUGH_RIGHT",
       "x": 4,
       "y": 12,
       "elevation": 0,

@@ -217,11 +217,12 @@
   ],
   "warp_events": [
     {
+        "warp_id": "WARP_ID_BASEMENT_TO_FLOWERS",
       "x": 5,
       "y": 5,
       "elevation": 0,
       "dest_map": "MAP_CAPHE_CITY_PANTRY",
-      "dest_warp_id": "1"
+      "dest_warp_id": "WARP_ID_FLOWERS_TO_BASEMENT"
     }
   ],
   "coord_events": [],

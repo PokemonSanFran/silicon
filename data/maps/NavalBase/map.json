@@ -143,25 +143,28 @@
   ],
   "warp_events": [
     {
+        "warp_id": "WARP_ID_NAVAL_BASE_INTERIOR_TO_HALAI_ISLAND_LEFT",
       "x": 22,
       "y": 26,
       "elevation": 0,
       "dest_map": "MAP_HALAI_ISLAND",
-      "dest_warp_id": "0"
+      "dest_warp_id": "WARP_ID_HALAI_ISLAND_TO_NAVAL_BASE_INTERIOR_B"
     },
     {
+        "warp_id": "WARP_ID_NAVAL_BASE_INTERIOR_TO_HALAI_ISLAND_RIGHT",
       "x": 23,
       "y": 26,
       "elevation": 0,
       "dest_map": "MAP_HALAI_ISLAND",
-      "dest_warp_id": "0"
+      "dest_warp_id": "WARP_ID_HALAI_ISLAND_TO_NAVAL_BASE_INTERIOR_B"
     },
     {
+        "warp_id": "WARP_ID_NAVAL_BASE_INTERIOR_EXPLOSION_TO_HALAI_ISLAND",
       "x": 12,
       "y": 1,
       "elevation": 0,
       "dest_map": "MAP_HALAI_ISLAND",
-      "dest_warp_id": "1"
+      "dest_warp_id": "WARP_ID_HALAI_ISLAND_TO_NAVAL_BASE_INTERIOR_A"
     }
   ],
   "coord_events": [

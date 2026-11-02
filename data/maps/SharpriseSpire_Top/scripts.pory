@@ -2,7 +2,8 @@ mapscripts SharpriseSpire_Top_MapScripts
 {
     MAP_SCRIPT_ON_TRANSITION
     {
-        call(SharpriseSpire_Top_ObjectVisibility_Script)
+        call_if_eq(VAR_TOWER_RAID_STATE,DEFEATED_LUCREZIA_SHARPRISESPIRE,YouCantStopMe_MoveObject_Script)
+        call_if_ne(VAR_TOWER_RAID_STATE,DEFEATED_LUCREZIA_SHARPRISESPIRE,YouCantStopMe_ObjectCleanUp_Script)
         call_if_quest_active(QUEST_ULTRAWORMHOLERESEARCH,Quest_Ultrawormholeresearch_ShowWarp_Script)
     }
     MAP_SCRIPT_ON_FRAME_TABLE
@@ -10,17 +11,6 @@ mapscripts SharpriseSpire_Top_MapScripts
         VAR_TOWER_RAID_STATE,DEFEATED_FIRST_LUCREZIA: WeCanStopYouActually_PostBattle_Dialogue
         VAR_TOWER_RAID_STATE, DEFEATED_SECOND_LUCREZIA: WeCanStopYouActually_Arrest_Dialogue
     ]
-}
-
-script SharpriseSpire_Top_ObjectVisibility_Script{
-
-     switch (var(VAR_TOWER_RAID_STATE)){
-         case DEFEATED_CHARLOTTE_SHARPRISESPIRE: call(YouCantStopMe_HideObject_Script)
-         case SAVE_LUCREZIA_SHARPRISESPIRE: call(YouCantStopMe_HideObject_Script)
-         case DEFEATED_LUCREZIA_SHARPRISESPIRE: call(YouCantStopMe_MoveObject_Script)
-        default: call(YouCantStopMe_ObjectCleanUp_Script)
-    }
-     return
 }
 
 script SharpriseSpire_Top_Lucrezia_Event_Script {

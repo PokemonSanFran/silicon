@@ -16,25 +16,28 @@
   "object_events": [],
   "warp_events": [
     {
+        "warp_id": "WARP_ID_SERVERROOM_TO_GIFTSHOP",
       "x": 1,
       "y": 1,
       "elevation": 0,
       "dest_map": "MAP_SHARPRISE_SPIRE_GIFTSHOP",
-      "dest_warp_id": "1"
+      "dest_warp_id": "WARP_ID_GIFTSHOP_TO_SERVERROOM"
     },
     {
+        "warp_id": "WARP_ID_SERVERROOM_TO_PRODUCTION",
       "x": 8,
       "y": 1,
       "elevation": 0,
       "dest_map": "MAP_SHARPRISE_SPIRE_PRODUCTION",
-      "dest_warp_id": "0"
+      "dest_warp_id": "WARP_ID_PRODUCTION_TO_SERVERROOM"
     },
     {
+      "warp_id": "WARP_ID_SPIRE_ELEVATOR_TO_SERVERROOM",
       "x": 4,
       "y": 2,
       "elevation": 0,
       "dest_map": "MAP_SHARPRISESPIRE_ELEVATOR",
-      "dest_warp_id": "0"
+      "dest_warp_id": "WARP_ID_SHARPRISE_ELEVATOR_ENTRANCE_LEFT"
     }
   ],
   "coord_events": [],

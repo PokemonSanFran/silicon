@@ -36,19 +36,6 @@
   ],
   "object_events": [
     {
-      "graphics_id": "OBJ_EVENT_GFX_POKEFAN_M",
-      "x": 46,
-      "y": 5,
-      "elevation": 3,
-      "movement_type": "MOVEMENT_TYPE_FACE_LEFT",
-      "movement_range_x": 0,
-      "movement_range_y": 0,
-      "trainer_type": "TRAINER_TYPE_NONE",
-      "trainer_sight_or_berry_tree_id": "0",
-      "script": "NULL",
-      "flag": "0"
-    },
-    {
       "local_id": "LOCALID_RETURNDOLLCHILD",
       "graphics_id": "OBJ_EVENT_GFX_LITTLE_GIRL",
       "x": 15,
@@ -63,58 +50,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "OBJ_EVENT_GFX_RAMESH",
-      "x": 14,
-      "y": 8,
-      "elevation": 3,
-      "movement_type": "MOVEMENT_TYPE_FACE_UP",
-      "movement_range_x": 0,
-      "movement_range_y": 0,
-      "trainer_type": "TRAINER_TYPE_NONE",
-      "trainer_sight_or_berry_tree_id": "0",
-      "script": "Quest_Recruitlocalartists_StartQuest_Dialogue",
-      "flag": "FLAG_TEMP_2"
-    },
-    {
-      "graphics_id": "OBJ_EVENT_GFX_DUSCLOPS",
-      "x": 46,
-      "y": 8,
-      "elevation": 3,
-      "movement_type": "MOVEMENT_TYPE_FACE_UP",
-      "movement_range_x": 0,
-      "movement_range_y": 0,
-      "trainer_type": "TRAINER_TYPE_NONE",
-      "trainer_sight_or_berry_tree_id": "0",
-      "script": "Quest_Recruitlocalartists_CoreEncounter_Script",
-      "flag": "FLAG_TEMP_1"
-    },
-    {
-      "graphics_id": "OBJ_EVENT_GFX_BOY_2",
-      "x": 37,
-      "y": 25,
-      "elevation": 3,
-      "movement_type": "MOVEMENT_TYPE_WANDER_AROUND",
-      "movement_range_x": 0,
-      "movement_range_y": 0,
-      "trainer_type": "TRAINER_TYPE_NONE",
-      "trainer_sight_or_berry_tree_id": "0",
-      "script": "MermerezaCity_1_Interact_Script",
-      "flag": "0"
-    },
-    {
-      "graphics_id": "OBJ_EVENT_GFX_SWIMMER_M",
-      "x": 43,
-      "y": 9,
-      "elevation": 3,
-      "movement_type": "MOVEMENT_TYPE_LOOK_AROUND",
-      "movement_range_x": 0,
-      "movement_range_y": 0,
-      "trainer_type": "TRAINER_TYPE_NONE",
-      "trainer_sight_or_berry_tree_id": "0",
-      "script": "MermerezaCity_2_Interact_Script",
-      "flag": "0"
-    },
-    {
+      "local_id": "LOCALID_MERMEREZA_CITY_TAXI",
       "graphics_id": "OBJ_EVENT_GFX_TRUCK",
       "x": 37,
       "y": 5,
@@ -128,6 +64,7 @@
       "flag": "0"
     },
     {
+      "local_id": "LOCALID_PERSAUSIVE_PASSENGER_SIBLING",
       "graphics_id": "OBJ_EVENT_GFX_COOK",
       "x": 17,
       "y": 25,
@@ -141,6 +78,7 @@
       "flag": "FLAG_QUEST_PERSUASIVE_SIBLING"
     },
     {
+      "local_id": "LOCALID_BERRY_TREE_MERMEREZA_CITY_1",
       "graphics_id": "OBJ_EVENT_GFX_BERRY_TREE",
       "x": 13,
       "y": 23,
@@ -154,6 +92,7 @@
       "flag": "0"
     },
     {
+      "local_id": "LOCALID_BERRY_TREE_MERMEREZA_CITY_2",
       "graphics_id": "OBJ_EVENT_GFX_BERRY_TREE",
       "x": 13,
       "y": 24,
@@ -169,25 +108,28 @@
   ],
   "warp_events": [
     {
+      "warp_id": "WARP_ID_MERMEREZA_CITY_TO_MERMEREZA_GYM",
       "x": 41,
       "y": 19,
       "elevation": 0,
       "dest_map": "MAP_MERMEREZA_CITY_GYM",
-      "dest_warp_id": "0"
+        "dest_warp_id": "WARP_ID_MERMEREZA_GYM_TO_MERMEREZA_CITY_LEFT"
     },
     {
+        "warp_id": "WARP_ID_MERMERZA_CITY_TO_CONSULTING",
       "x": 28,
       "y": 12,
       "elevation": 0,
       "dest_map": "MAP_MERMEREZA_CITY_CONSULTING",
-      "dest_warp_id": "0"
+      "dest_warp_id": "WARP_ID_CONSULTING_TO_MERMEREZA_CITY_LEFT"
     },
     {
+        "warp_id": "WARP_ID_MERMERZA_CITY_TO_CENTER",
       "x": 38,
       "y": 18,
       "elevation": 0,
       "dest_map": "MAP_MERMEREZA_CITY_POKEMON_CENTER_1F",
-      "dest_warp_id": "0"
+      "dest_warp_id": "WARP_ID_CENTER_TO_MERMEREZA_CITY_LEFT"
     },
     {
       "warp_id": "WARP_ID_BAR_TO_MERMEREZA",

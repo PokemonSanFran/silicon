@@ -1,17 +1,128 @@
 const PLAYER = OBJ_EVENT_ID_PLAYER
 
-mapscripts HalaiIsland_Baiya_MapScripts {
-    MAP_SCRIPT_ON_TRANSITION {
-        call(Earthquake_Script_PlayCrisisMusic)
-        call(HalaiIsland_Baiya_OnTransition)
-    }
-}
-
-script HalaiIsland_Baiya_OnTransition {
-    switch (var(VAR_STORYLINE_STATE))
+mapscripts HalaiIsland_Baiya_MapScripts
+{
+    MAP_SCRIPT_ON_TRANSITION
     {
-        default: call(LetsFixThis_HideObjectHouse_Script)
+        call(Earthquake_Script_PlayCrisisMusic)
+        callnative(Script_IsHalaiIslandUnderCrisis)
+        call_if_eq(VAR_RESULT,TRUE,HalaiIsland_Baiya_HideRoommates)
+        call_if_ge(VAR_STORYLINE_STATE,STORY_POST_EARTHQUAKE,HalaiIsland_Baiya_HideDeadRoommate)
     }
-    call_if_set(FLAG_SHOULD_SKIP_CREDITS,Epilogue_Script_SetPostGameValues)
 }
 
+script HalaiIsland_Baiya_HideRoommates
+{
+    setobjectflagfromlocalid(LOCALID_HALAI_BAIYA_HOME_ROOMMATE_1)
+    setobjectflagfromlocalid(LOCALID_HALAI_BAIYA_HOME_ROOMMATE_3)
+    setobjectflagfromlocalid(LOCALID_HALAI_BAIYA_HOME_ROOMMATE_4)
+    setobjectflagfromlocalid(LOCALID_HALAI_BAIYA_HOME_ROOMMATE_5)
+    setobjectflagfromlocalid(LOCALID_HALAI_BAIYA_HOME_ROOMMATE_6)
+    call(HalaiIsland_Baiya_HideDeadRoommate)
+}
+
+script HalaiIsland_Baiya_HideDeadRoommate
+{
+    setobjectflagfromlocalid(LOCALID_HALAI_BAIYA_HOME_ROOMMATE_2)
+}
+
+script HalaiIsland_Baiya_Hardcore
+{
+    if(var(VAR_HALAI_ISLAND_STATE) >= MEET_AT_ROUTE4)
+    {
+        msgbox(format("THE SHOW! MUST! GO! ON!\pHARDCORE!"),,SPEAKER_BAIYA_ROOMMATE_5,TAIL_SHOUT)
+    }
+    else
+    {
+       msgbox(format("HARDCORE, BABY!"),,SPEAKER_BAIYA_ROOMMATE_5,TAIL_SHOUT)
+    }
+    closemessage
+    end
+}
+
+script HalaiIsland_Baiya_CrashUpstairs
+{
+    faceplayer
+    if(var(VAR_HALAI_ISLAND_STATE) >= MEET_AT_ROUTE4)
+    {
+        msgbox(format("For all your efforts, I will grant you the utmost honor.\pThe faculty to sleep on the one mattress in the house.\nYou've earned it."),,SPEAKER_BAIYA_ROOMMATE_1)
+    }
+    else
+    {
+
+       msgbox(format("You cool with Baiya?\nRad.\nYou can crash upstairs, then.\pJust leave the bed to him, eh?"),,SPEAKER_BAIYA_ROOMMATE_1)
+    }
+    closemessage
+    end
+}
+
+script HalaiIsland_Baiya_News
+{
+    faceplayer
+    msgbox(format("'Scuse me?\nI'm trying to watch the news."),,SPEAKER_BAIYA_ROOMMATE_6,,EMOTE_ANGRY)
+    closemessage
+    applymovement(3, moves(face_up))
+    waitmovement(0)
+    end
+}
+
+script HalaiIsland_Baiya_CantHear
+{
+    faceplayer
+    msgbox(format("WHAT?!\nI CAN'T HEAR YOU!\pTURN THE MUSIC DOWN?\NNO WAY!"),,SPEAKER_BAIYA_ROOMMATE_4,TAIL_SHOUT)
+    closemessage
+    end
+}
+
+script HalaiIsland_Baiya_GotEachOther
+{
+    faceplayer
+    if(var(VAR_HALAI_ISLAND_STATE) >= MEET_AT_ROUTE4)
+    {
+        msgbox(format("…The earthquake took out our comrade.\pIt's chill.\nThey went down fighting.\nJust like they wanted.\pWe must continue for them, too."),,SPEAKER_BAIYA_ROOMMATE_3,,EMOTE_SAD)
+    }
+    else
+    {
+
+       msgbox(format("Even if the whole world is against us, at least we got each other."),,SPEAKER_BAIYA_ROOMMATE_3)
+    }
+    closemessage
+    end
+}
+
+script HalaiIsland_Baiya_ScrewSharpRise
+{
+    faceplayer
+    msgbox(format("Sharp Rise is nothin' to me!\nWe're gonna take on 'em all!\nJust they wait!"),,SPEAKER_BAIYA_ROOMMATE_2)
+    closemessage
+    end
+}
+
+script HalaiIsland_Baiya_TV
+{
+    callnative(Script_IsHalaiIslandUnderCrisis)
+    if (var(VAR_RESULT))
+    {
+        msgbox(format("Just static."),,SPEAKER_BAIYA_ROOMMATE_5)
+    }
+    else
+    {
+        bufferspeciesname(STR_VAR_1,SPECIES_PAWMI)
+        bufferspeciesname(STR_VAR_2,SPECIES_GLAMEOW)
+        msgbox(format("It's a cartoon.\nA {STR_VAR_1} is being crushed by a {STR_VAR_2} with a comically large hammer.\p…It's time to go."))
+    }
+    closemessage
+    end
+}
+
+script HalaiIsland_Baiya_Fridge
+{
+    msgbox(format("It's full of sodas and instant noodles."))
+    callnative(Script_IsHalaiIslandUnderCrisis)
+    if (var(VAR_RESULT))
+    {
+        msgbox(format("Everything is room temperature."))
+    }
+    closemessage
+    end
+}

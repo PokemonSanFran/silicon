@@ -4,7 +4,7 @@ mapscripts Route99_Grotto_MapScripts{
     ]
     MAP_SCRIPT_ON_TRANSITION
     {
-        call(Quest_Hiddengrottomapping_PannenVisibility_Script)
+        
         call(HiddenGrotto_Script_HideSecret)
     }
     MAP_SCRIPT_ON_RESUME

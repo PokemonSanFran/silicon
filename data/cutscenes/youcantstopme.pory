@@ -1,47 +1,29 @@
-const PLAYER = OBJ_EVENT_ID_PLAYER
-const OLIVER = 1
-const POLICE_A = 2
-const POLICE_B = 3
-const LUCREZIA = 4
-
-const FLAG_HIDE_OLIVER= FLAG_TEMP_1
-const FLAG_HIDE_POLICE = FLAG_TEMP_2
-const FLAG_HIDE_LUCREZIA = FLAG_TEMP_3
-
-script YouCantStopMe_HideObject_Script {
-    setflag(FLAG_HIDE_OLIVER)
-    setflag(FLAG_HIDE_POLICE)
-    return
-}
+const LOCALID_SHARPRISESPIRE_TOP_OLIVER = (LOCALID_CAMERA + 1)
 
 script YouCantStopMe_MoveObject_Script {
-    call(YouCantStopMe_HideObject_Script)
-        setobjectxy(LUCREZIA,15,5)
-        setobjectxyperm(LUCREZIA,15,5)
-        setobjectnewmovementtype(LUCREZIA,MOVEMENT_TYPE_FACE_DOWN)
+        setobjectxy(LOCALID_SHARPRISESPIRE_TOP_LUCREZIA,15,5)
+        setobjectxyperm(LOCALID_SHARPRISESPIRE_TOP_LUCREZIA,15,5)
+        setobjectnewmovementtype(LOCALID_SHARPRISESPIRE_TOP_LUCREZIA,MOVEMENT_TYPE_FACE_DOWN)
 }
 
-script YouCantStopMe_ObjectCleanUp_Script {
-    call(YouCantStopMe_HideObject_Script)
-    setflag(FLAG_HIDE_LUCREZIA)
-    return
+script YouCantStopMe_ObjectCleanUp_Script
+{
+    setobjectflagfromlocalid(LOCALID_SHARPRISESPIRE_TOP_LUCREZIA)
 }
 
 script YouCantStopMe_MoveOliverPlayer_Script{
-        clearflag(FLAG_HIDE_OLIVER)
-
         playse(SE_EXIT)
         waitse
 
-        addobject(OLIVER)
+        spawnobject(OBJ_EVENT_GFX_OLIVER,LOCALID_SHARPRISESPIRE_TOP_OLIVER,4,1,MOVEMENT_TYPE_NONE)
 
-        applymovement(OLIVER,Common_Movement_WalkDown)
+        applymovement(LOCALID_SHARPRISESPIRE_TOP_OLIVER,Common_Movement_WalkDown)
         fadescreen(FADE_TO_BLACK)
-        applymovement(OLIVER,Common_Movement_FaceRight)
-        applymovement(PLAYER,Common_Movement_FaceLeft)
+        applymovement(LOCALID_SHARPRISESPIRE_TOP_OLIVER,Common_Movement_FaceRight)
+        applymovement(LOCALID_PLAYER,Common_Movement_FaceLeft)
         delay(30)
-        setobjectxy(OLIVER,5,7)
-        setobjectxy(PLAYER,6,7)
+        setobjectxy(LOCALID_SHARPRISESPIRE_TOP_OLIVER,5,7)
+        setobjectxy(LOCALID_PLAYER,6,7)
         TeleportCamera(6,7)
         fadescreen(FADE_FROM_BLACK)
 }
@@ -80,11 +62,11 @@ script YouCantStopMe_LastChance_Dialogue {
         msgbox(format("I thought so."),,SPEAKER_ALICIA)
         closemessage
 
-        applymovement(OLIVER, moves(walk_left, walk_up * 6, step_end))
-        waitmovement(OLIVER)
+        applymovement(LOCALID_SHARPRISESPIRE_TOP_OLIVER, moves(walk_left, walk_up * 6, step_end))
+        waitmovement(LOCALID_SHARPRISESPIRE_TOP_OLIVER)
         playse(SE_EXIT)
         waitse
-        removeobject(OLIVER)
+        removeobject(LOCALID_SHARPRISESPIRE_TOP_OLIVER)
 
         setvar(VAR_TOWER_RAID_STATE,STOPPED_BY_OLIVER)
         call(TryAutoSave)
@@ -105,7 +87,7 @@ script YouCantStopMe_Confront_Dialogue {
 
         closemessage
 
-        applymovement(LUCREZIA,Common_Movement_FaceUp)
+        applymovement(LOCALID_SHARPRISESPIRE_TOP_LUCREZIA,Common_Movement_FaceUp)
 
         msgbox(format("Did you ever care about any of this?"),,SPEAKER_ALICIA)
 
@@ -126,18 +108,18 @@ script YouCantStopMe_Confront_Dialogue {
         if (var(VAR_TEMP_0) != 15 || (var(VAR_TEMP_1) != 5)){
             fadescreen(FADE_TO_BLACK)
                 delay(30)
-                applymovement(LUCREZIA,Common_Movement_FaceDown)
-                applymovement(PLAYER,Common_Movement_FaceUp)
-                setobjectxy(LUCREZIA,15,4)
-                setobjectxy(PLAYER,15,5)
+                applymovement(LOCALID_SHARPRISESPIRE_TOP_LUCREZIA,Common_Movement_FaceDown)
+                applymovement(LOCALID_PLAYER,Common_Movement_FaceUp)
+                setobjectxy(LOCALID_SHARPRISESPIRE_TOP_LUCREZIA,15,4)
+                setobjectxy(LOCALID_PLAYER,15,5)
                 TeleportCamera(15,5)
                 fadescreen(FADE_FROM_BLACK)
         }
 
-        applymovement(LUCREZIA,Common_Movement_WalkDown)
-        applymovement(PLAYER, moves(lock_facing_direction, walk_down, unlock_facing_direction, step_end))
-        waitmovement(LUCREZIA)
-        waitmovement(PLAYER)
+        applymovement(LOCALID_SHARPRISESPIRE_TOP_LUCREZIA,Common_Movement_WalkDown)
+        applymovement(LOCALID_PLAYER, moves(lock_facing_direction, walk_down, unlock_facing_direction, step_end))
+        waitmovement(LOCALID_SHARPRISESPIRE_TOP_LUCREZIA)
+        waitmovement(LOCALID_PLAYER)
 
         startmenu_savescreen
         goto(YouCantStopMe_StartBossBattle_Script)

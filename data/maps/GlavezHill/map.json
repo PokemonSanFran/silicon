@@ -31,58 +31,7 @@
   ],
   "object_events": [
     {
-      "graphics_id": "OBJ_EVENT_GFX_MAN_2",
-      "x": 14,
-      "y": 8,
-      "elevation": 3,
-      "movement_type": "MOVEMENT_TYPE_WANDER_AROUND",
-      "movement_range_x": 0,
-      "movement_range_y": 0,
-      "trainer_type": "TRAINER_TYPE_NONE",
-      "trainer_sight_or_berry_tree_id": "0",
-      "script": "Quest_NeighborhoodCleanUp3_Interact_PersonA_Script",
-      "flag": "FLAG_TEMP_7"
-    },
-    {
-      "graphics_id": "OBJ_EVENT_GFX_FISHERMAN",
-      "x": 15,
-      "y": 9,
-      "elevation": 3,
-      "movement_type": "MOVEMENT_TYPE_WANDER_AROUND",
-      "movement_range_x": 0,
-      "movement_range_y": 0,
-      "trainer_type": "TRAINER_TYPE_NONE",
-      "trainer_sight_or_berry_tree_id": "0",
-      "script": "Quest_NeighborhoodCleanUp3_Interact_PersonB_Script",
-      "flag": "FLAG_TEMP_8"
-    },
-    {
-      "graphics_id": "OBJ_EVENT_GFX_CAMPER",
-      "x": 16,
-      "y": 10,
-      "elevation": 3,
-      "movement_type": "MOVEMENT_TYPE_WANDER_AROUND",
-      "movement_range_x": 0,
-      "movement_range_y": 0,
-      "trainer_type": "TRAINER_TYPE_NONE",
-      "trainer_sight_or_berry_tree_id": "0",
-      "script": "Quest_NeighborhoodCleanUp3_Interact_PersonC_Script",
-      "flag": "FLAG_TEMP_9"
-    },
-    {
-      "graphics_id": "OBJ_EVENT_GFX_MYSTERY_GIFT_MAN",
-      "x": 12,
-      "y": 5,
-      "elevation": 0,
-      "movement_type": "MOVEMENT_TYPE_NONE",
-      "movement_range_x": 0,
-      "movement_range_y": 0,
-      "trainer_type": "TRAINER_TYPE_NONE",
-      "trainer_sight_or_berry_tree_id": "0",
-      "script": "Quest_NeighborhoodCleanUp3_Interact_Cop_Script",
-      "flag": "FLAG_TEMP_A"
-    },
-    {
+      "local_id": "LOCALID_GLAVEZ_HILL_TAXI",
       "graphics_id": "OBJ_EVENT_GFX_TRUCK",
       "x": 13,
       "y": 12,
@@ -174,6 +123,7 @@
       "flag": "0"
     },
     {
+      "local_id": "LOCALID_BERRY_TREE_GLAVEZ_HILL_1",
       "graphics_id": "OBJ_EVENT_GFX_BERRY_TREE",
       "x": 8,
       "y": 1,
@@ -187,6 +137,7 @@
       "flag": "0"
     },
     {
+      "local_id": "LOCALID_BERRY_TREE_GLAVEZ_HILL_2",
       "graphics_id": "OBJ_EVENT_GFX_BERRY_TREE",
       "x": 8,
       "y": 2,
@@ -202,37 +153,30 @@
   ],
   "warp_events": [
     {
+        "warp_id": "WARP_ID_GLAVEZ_HILL_TO_CENTER",
       "x": 16,
       "y": 4,
       "elevation": 0,
       "dest_map": "MAP_GLAVEZ_HILL_POKEMON_CENTER_1F",
-      "dest_warp_id": "0"
+      "dest_warp_id": "WARP_ID_CENTER_TO_GLAVEZ_HILL_RIGHT"
     },
     {
+        "warp_id": "WARP_ID_GLAVEZ_HILL_TO_TAXIUNION",
       "x": 6,
       "y": 3,
       "elevation": 0,
       "dest_map": "MAP_GLAVEZ_HILL_TAXIUNION",
-      "dest_warp_id": "0"
+      "dest_warp_id": "WARP_ID_TAXIUNION_TO_GLAVEZ_HILL_LEFT"
     },
     {
+        "warp_id": "WARP_ID_GLAVEZ_HILL_TO_GLAVEZ_HEIGHTS",
       "x": 10,
       "y": 6,
       "elevation": 0,
       "dest_map": "MAP_GLAVEZ_HEIGHTS",
-      "dest_warp_id": "0"
+        "dest_warp_id": "WARP_ID_GLAVEZ_HEIGHTS_TO_GLAVEZ_HILL"
     }
   ],
-  "coord_events": [
-    {
-      "type": "trigger",
-      "x": 13,
-      "y": 2,
-      "elevation": 0,
-      "var": "VAR_TEMP_0",
-      "var_value": "0",
-      "script": "Quest_GardenCleanUp_Debug_Script"
-    }
-  ],
+  "coord_events": [],
   "bg_events": []
 }

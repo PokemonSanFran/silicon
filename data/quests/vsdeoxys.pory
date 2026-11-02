@@ -1,22 +1,12 @@
 const PLAYER = OBJ_EVENT_ID_PLAYER
-
-const MINIOR = 9
-
-const VSDEOGUY = 2
-const VSDEOGUY_GDLNGTEPARTK = 4
-const VSDEOGUY_HALERBARESEARCH = 2
-const VSDEORESEARCHER = 1
-
-const FLAG_HIDE_MINIOR_ROCK = FLAG_TEMP_5
-const FLAG_HIDE_VSDEOGUY = FLAG_TEMP_6
-const FLAG_HIDE_VSDEOGUY_HALERBA = FLAG_TEMP_7
-const FLAG_HIDE_VSDEOGUY_RESEARCH = FLAG_TEMP_7
+const MINIOR = LOCALID_CAMERA + 1
+const VSDEOGUY_HALERBARESEARCH = LOCALID_CAMERA + 1
 
 script Vsdeoxys_Script_HideVsdeoguy_Gldngtepark
 {
     if(var(VAR_QUEST_VSDEOXYS)!= VSDEOGUY_LEFT_ROUTE)
     {
-        setflag(FLAG_HIDE_VSDEOGUY_RESEARCH)
+        setobjectflagfromlocalid(LOCALID_HALERBA_CITY_VSDEOGUY)
     }
 }
 
@@ -32,8 +22,8 @@ script Vsdeoxys_Script_HideObjectRoute
 
 script Vsdeoxys_Script_HideVsdeoguyMinior
 {
-    setflag(FLAG_HIDE_MINIOR_ROCK)
-    setflag(FLAG_HIDE_VSDEOGUY)
+    setobjectflagfromlocalid(LOCALID_ROUTE_9_MINIOR)
+    setobjectflagfromlocalid(LOCALID_ROUTE_9_VSDEOGUY)
 }
 
 script Vsdeoxys_Script_InteractVsdeoguy
@@ -167,7 +157,7 @@ script Vsdeoxys_Script_Encounter
     specialvar(VAR_RESULT, GetBattleOutcome)
     if (var(VAR_RESULT) == B_OUTCOME_CAUGHT)
     {
-        removeobject(VSDEOGUY)
+        removeobject(LOCALID_ROUTE_9_VSDEOGUY)
         goto(Vsdeoxys_Script_CaughtMinior)
     }
     else
@@ -208,10 +198,10 @@ script Vsdeoxys_Script_ReturnToOverworldAfterCapturingMinior
     msgbox(format("You caught it!\nWe’ve got proof now!\nMeet me at {STR_VAR_1} Research!"),MSGBOX_AUTOCLOSE,SPEAKER_VSDEOGUY)
 	closemessage
 
-	moveobjecttocoords(VSDEOGUY,34,39,DIR_NORTH,2)
+	moveobjecttocoords(LOCALID_ROUTE_9_VSDEOGUY,34,39,DIR_NORTH,2)
 	delay(32)
 	fadescreenswapbuffers(FADE_TO_BLACK)
-	removeobject(VSDEOGUY)
+	removeobject(LOCALID_ROUTE_9_VSDEOGUY)
 	fadescreenswapbuffers(FADE_FROM_BLACK)
 
     releaseall
@@ -219,10 +209,10 @@ script Vsdeoxys_Script_ReturnToOverworldAfterCapturingMinior
 
 script Vsdeoxys_Script_RunToPlayerAfterMiniorCatch
 {
-    setobjectxyperm(VSDEOGUY, 33, 39)
-    waitmovement(VSDEOGUY)
-    addobject(VSDEOGUY)
-	moveobjecttocoords(VSDEOGUY,31,45,DIR_WEST,2)
+    setobjectxyperm(LOCALID_ROUTE_9_VSDEOGUY, 33, 39)
+    waitmovement(LOCALID_ROUTE_9_VSDEOGUY)
+    addobject(LOCALID_ROUTE_9_VSDEOGUY)
+	moveobjecttocoords(LOCALID_ROUTE_9_VSDEOGUY,31,45,DIR_WEST,2)
 	applymovement(PLAYER,moves(face_up,delay_8 * 3))
 	waitmovement(PLAYER)
 	moveobjecttocoords(PLAYER,30,45,DIR_EAST)
@@ -237,10 +227,10 @@ script Vsdeoxys_Script_VsdeoguyEnterResearch
     waitmessage
     opendoor(39,8)
     waitdooranim
-    applymovement(VSDEOGUY_GDLNGTEPARTK,Common_Movement_FaceUp)
-    waitmovement(VSDEOGUY_GDLNGTEPARTK)
+    applymovement(LOCALID_HALERBA_CITY_VSDEOGUY,Common_Movement_FaceUp)
+    waitmovement(LOCALID_HALERBA_CITY_VSDEOGUY)
     playse(SE_EXIT)
-    removeobject(VSDEOGUY_GDLNGTEPARTK)
+    removeobject(LOCALID_HALERBA_CITY_VSDEOGUY)
     closedoor(39,8)
 }
 
@@ -249,7 +239,7 @@ script Vsdeoxys_Script_SetUpResearchObjects
     if (var(VAR_QUEST_VSDEOXYS) == VSDEOGUY_ENTERED_RESEARCH)
     {
         spawnobject(graphicsId=OBJ_EVENT_GFX_BOY_3,localId=VSDEOGUY_HALERBARESEARCH,x=9,y=10,movementType=MOVEMENT_TYPE_FACE_LEFT, elevation=3)
-        turnobject(VSDEORESEARCHER,DIR_EAST)
+        turnobject(LOCALID_HALERBA_RESEARCH_VSDEORESEARCHER,DIR_EAST)
     }
     return
 }
@@ -263,24 +253,24 @@ script Vsdeoxys_Dialogue_DiscussMiniorResearch
     waitmovement(PLAYER)
     msgbox(format("This time it's real! I have proof. We caught it. You gotta see it for yourself."),MSGBOX_AUTOCLOSE,SPEAKER_VSDEOGUY)
     msgbox(format("See what? That you -"),MSGBOX_AUTOCLOSE,SPEAKER_VSDEORESEARCHER)
-    applymovement(VSDEORESEARCHER, moves(walk_right, walk_down, face_right, step_end))
-    waitmovement(VSDEORESEARCHER)
+    applymovement(LOCALID_HALERBA_RESEARCH_VSDEORESEARCHER, moves(walk_right, walk_down, face_right, step_end))
+    waitmovement(LOCALID_HALERBA_RESEARCH_VSDEORESEARCHER)
     applymovement(PLAYER,Common_Movement_FaceLeft)
     msgbox(format("Are you {PLAYER}? I’ve seen the livestreams for the League. How did Deoxysg- "),MSGBOX_AUTOCLOSE,SPEAKER_VSDEORESEARCHER)
     msgbox(format("That’s how I know it’s legit! This Trainer is tough as nails, saw it with my own eyes!"),MSGBOX_AUTOCLOSE,SPEAKER_VSDEOGUY)
-    applymovement(VSDEORESEARCHER, moves(face_up, delay_16, face_right, step_end))
-    waitmovement(VSDEORESEARCHER)
+    applymovement(LOCALID_HALERBA_RESEARCH_VSDEORESEARCHER, moves(face_up, delay_16, face_right, step_end))
+    waitmovement(LOCALID_HALERBA_RESEARCH_VSDEORESEARCHER)
     msgbox(format("Okay! Let’s take a look at your Pokédex. Come with me."),MSGBOX_AUTOCLOSE,SPEAKER_VSDEORESEARCHER)
-    applymovement(VSDEORESEARCHER,Common_Movement_WalkUp)
-    waitmovement(VSDEORESEARCHER)
+    applymovement(LOCALID_HALERBA_RESEARCH_VSDEORESEARCHER,Common_Movement_WalkUp)
+    waitmovement(LOCALID_HALERBA_RESEARCH_VSDEORESEARCHER)
     applymovement(PLAYER, moves(walk_right, walk_up, step_end))
     waitmovement(PLAYER)
-    applymovement(VSDEORESEARCHER, moves(walk_up * 7, walk_right, face_down, step_end))
+    applymovement(LOCALID_HALERBA_RESEARCH_VSDEORESEARCHER, moves(walk_up * 7, walk_right, face_down, step_end))
     applymovement(VSDEOGUY_HALERBARESEARCH, moves(walk_up * 6, step_end))
     applymovement(PLAYER, moves(walk_up*6, step_end))
     waitmovement(PLAYER)
     msgbox(format("You know how my bosses are. I can’t have too many people in the lab. I’ll come back in a second."),MSGBOX_AUTOCLOSE,SPEAKER_VSDEORESEARCHER)
-    applymovement(VSDEORESEARCHER, moves(walk_right * 4, walk_up * 1, face_right, step_end))
+    applymovement(LOCALID_HALERBA_RESEARCH_VSDEORESEARCHER, moves(walk_right * 4, walk_up * 1, face_right, step_end))
     applymovement(PLAYER, moves(walk_right * 4, walk_up * 2, face_left, step_end))
     waitmovement(PLAYER)
     msgbox(format("Okay, I battled this -"),MSGBOX_AUTOCLOSE,SPEAKER_ALICIA)
@@ -290,14 +280,14 @@ msgbox(format("How did you know?"),MSGBOX_AUTOCLOSE,SPEAKER_ALICIA,TAIL_DEFAULT,
     msgbox(format("How did they trick you into helping them? All of the Trainers that could capture this thing are usually off doing literally anything else."),MSGBOX_AUTOCLOSE,SPEAKER_VSDEORESEARCHER)
 msgbox(format("I was invest -"),MSGBOX_AUTOCLOSE,SPEAKER_ALICIA)
     msgbox(format("You know what? Doesn’t matter. But I can’t have this guy bursting into here every month with some nonsense. So I need you to just stay here, and I think we can get them out of our hair once and for all."),MSGBOX_AUTOCLOSE,SPEAKER_VSDEORESEARCHER)
-    applymovement(VSDEORESEARCHER, moves(walk_down * 2, walk_left * 3, step_end))
-    waitmovement(VSDEORESEARCHER)
+    applymovement(LOCALID_HALERBA_RESEARCH_VSDEORESEARCHER, moves(walk_down * 2, walk_left * 3, step_end))
+    waitmovement(LOCALID_HALERBA_RESEARCH_VSDEORESEARCHER)
     applymovement(VSDEOGUY_HALERBARESEARCH,Common_Movement_FaceRight)
     waitmovement(VSDEOGUY_HALERBARESEARCH)
     applymovement(VSDEOGUY_HALERBARESEARCH, moves(delay_16, delay_16, emote_exclamation_mark, delay_2, walk_down * 7, step_end))
     waitmovement(VSDEOGUY_HALERBARESEARCH)
     removeobject(VSDEOGUY_HALERBARESEARCH)
-    applymovement(VSDEORESEARCHER, moves(walk_right * 3, step_end))
+    applymovement(LOCALID_HALERBA_RESEARCH_VSDEORESEARCHER, moves(walk_right * 3, step_end))
     applymovement(PLAYER, moves(walk_down * 2, face_left, step_end))
     waitmovement(PLAYER)
 msgbox(format("…what happened?"),MSGBOX_AUTOCLOSE,SPEAKER_ALICIA,TAIL_DEFAULT,EMOTE_CONFUSE,PHONE_OFF)
@@ -307,16 +297,16 @@ msgbox(format("Wait what?"),MSGBOX_AUTOCLOSE,SPEAKER_ALICIA,TAIL_DEFAULT,EMOTE_S
     msgbox(format("I told them they were absolutely onto something, you had the real deal, but they needed to delete Buzzr from their phone and told them they needed the first ticket to Fiore, where nobody could track them down."),MSGBOX_AUTOCLOSE,SPEAKER_VSDEORESEARCHER)
     msgbox(format("So... he’s just abandoning everything and leaving?"),MSGBOX_AUTOCLOSE,SPEAKER_ALICIA)
     msgbox(format("They’ve got nothing to leave behind, I promise. They’ve got no life outside of hunting this thing. Man, I’m so glad that’s over!"),MSGBOX_AUTOCLOSE,SPEAKER_VSDEORESEARCHER)
-    applymovement(VSDEORESEARCHER, moves(face_left, walk_left * 7, walk_down * 2, walk_left * 2, step_end))
-    waitmovement(VSDEORESEARCHER)
-    applymovement(VSDEORESEARCHER, moves(face_right, walk_right * 2, walk_up * 2, walk_right * 7, step_end))
-    waitmovement(VSDEORESEARCHER)
+    applymovement(LOCALID_HALERBA_RESEARCH_VSDEORESEARCHER, moves(face_left, walk_left * 7, walk_down * 2, walk_left * 2, step_end))
+    waitmovement(LOCALID_HALERBA_RESEARCH_VSDEORESEARCHER)
+    applymovement(LOCALID_HALERBA_RESEARCH_VSDEORESEARCHER, moves(face_right, walk_right * 2, walk_up * 2, walk_right * 7, step_end))
+    waitmovement(LOCALID_HALERBA_RESEARCH_VSDEORESEARCHER)
     msgbox(format("Seriously, you have no idea how much time and energy you’ve saved us. Thank you so much for playing along."),MSGBOX_AUTOCLOSE,SPEAKER_VSDEORESEARCHER)
     msgbox(format("You were smashing those meteors using your Pokémon,right? You can use this instead."),MSGBOX_AUTOCLOSE,SPEAKER_VSDEORESEARCHER)
     giveitem(ITEM_ROCKSMASH_TOOL)
     call(Vsdeoxys_Script_BufferDescribeRockSmashTool)
-    applymovement(VSDEORESEARCHER, moves(walk_left * 6, walk_down * 6, face_left, step_end))
-    waitmovement(VSDEORESEARCHER)
+    applymovement(LOCALID_HALERBA_RESEARCH_VSDEORESEARCHER, moves(walk_left * 6, walk_down * 6, face_left, step_end))
+    waitmovement(LOCALID_HALERBA_RESEARCH_VSDEORESEARCHER)
     call(Vsdeoxys_Script_QuestComplete)
     end
 }

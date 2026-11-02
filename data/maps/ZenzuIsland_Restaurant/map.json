@@ -31,18 +31,20 @@
   ],
   "warp_events": [
     {
+        "warp_id": "WARP_ID_RESTUARANT_TO_HALAI_LEFT",
       "x": 6,
       "y": 9,
       "elevation": 0,
       "dest_map": "MAP_HALAI_ISLAND",
-      "dest_warp_id": "4"
+      "dest_warp_id": "WARP_ID_HALAI_TO_RESTURANT"
     },
     {
+        "warp_id": "WARP_ID_RESTUARANT_TO_HALAI_RIGHT",
       "x": 7,
       "y": 9,
       "elevation": 0,
       "dest_map": "MAP_HALAI_ISLAND",
-      "dest_warp_id": "4"
+      "dest_warp_id": "WARP_ID_HALAI_TO_RESTURANT"
     }
   ],
   "coord_events": [],

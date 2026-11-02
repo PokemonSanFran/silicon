@@ -1,12 +1,8 @@
-//gText_Persuasivepassenger_
-//Quest_Persuasivepassenger_
-
 const GRUNT2 = 2
-const FLAG_HIDE_ARRIBA_CEO = FLAG_TEMP_1
 
 script Quest_Persuasivepassenger_CEO_Visbility_Script{
     if(defeated(TRAINER_ARRIBA_CEO)){
-        setflag(FLAG_HIDE_ARRIBA_CEO)
+        setobjectflagfromlocalid(LOCALID_ARRIBA_2F_CEO)
     }
     return
 }
@@ -294,10 +290,10 @@ script Quest_Persuasivepassenger_Grunt2_Event_Script{
 
 script Quest_Persuasivepassenger_DefeatedGrunt2_Script{
     lock
-    applymovement(GRUNT2, moves(walk_faster_up, step_end))
+    applymovement(LOCALID_ARRIBA_1F_STAIRS_GUARD_2, moves(walk_faster_up, step_end))
     playse(SE_EXIT)
-    waitmovement(GRUNT2)
-    removeobject(GRUNT2)
+    waitmovement(LOCALID_ARRIBA_1F_STAIRS_GUARD_2)
+    removeobject(LOCALID_ARRIBA_1F_STAIRS_GUARD_2)
     waitse
 }
 

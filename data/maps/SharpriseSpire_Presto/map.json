@@ -16,25 +16,28 @@
   "object_events": [],
   "warp_events": [
     {
+        "warp_id": "WARP_ID_PRESTO_TO_ARRIBA",
       "x": 1,
       "y": 1,
       "elevation": 0,
       "dest_map": "MAP_SHARPRISE_SPIRE_ARRIBA",
-      "dest_warp_id": "1"
+      "dest_warp_id": "WARP_ID_ARRIBA_TO_PRESTO"
     },
     {
+        "warp_id": "WARP_ID_PRESTO_TO_BUZZR",
       "x": 8,
       "y": 1,
       "elevation": 0,
       "dest_map": "MAP_SHARPRISE_SPIRE_BUZZR",
-      "dest_warp_id": "0"
+      "dest_warp_id": "WARP_ID_BUZZR_TO_PRESTO"
     },
     {
+      "warp_id": "WARP_ID_PRESTO_TO_SHARPRISE_ELEVATOR",
       "x": 4,
       "y": 2,
       "elevation": 0,
       "dest_map": "MAP_SHARPRISESPIRE_ELEVATOR",
-      "dest_warp_id": "0"
+      "dest_warp_id": "WARP_ID_SHARPRISE_ELEVATOR_ENTRANCE_LEFT"
     }
   ],
   "coord_events": [],

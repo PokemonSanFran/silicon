@@ -1,14 +1,14 @@
 const PLAYER = OBJ_EVENT_ID_PLAYER
-const RAMESH = 2
-const FLAG_HIDE_RAMESH = FLAG_TEMP_2
 
 script AlwaysWatchingWazowski_FloorWelcome_Script{
         lock
 
-        if (flag(FLAG_HIDE_RAMESH)){
-            setvar(VAR_SHARPRISE_SPIRE_PRODUCTION_STATE,POST_ALWAYS_WATCHING_WAZOWSKI)
-            release
-            end
+        if (var(VAR_SHARPRISE_SPIRE_PRODUCTION_STATE) == HAS_NOT_STEPPED_INTO_RAMESH_ROOM)
+        {
+            if (var(VAR_STORYLINE_STATE) > STORY_EAST_RESIDO_COMPLETE)
+            {
+                setvar(VAR_SHARPRISE_SPIRE_PRODUCTION_STATE,POST_ALWAYS_WATCHING_WAZOWSKI)
+            }
         }
 
         setvar(VAR_SHARPRISE_SPIRE_PRODUCTION_STATE,STEPPED_INTO_RAMESH_ROOM)
@@ -32,7 +32,7 @@ script AlwaysWatchingWazowski_MovePlayerIntoPlace_Script{
         waitmovement(PLAYER)
 
         playbgm(MUS_MT_PYRE,FALSE)
-        applymovement(RAMESH,Common_Movement_FacePlayer)
+        applymovement(LOCALID_SHARPRISE_SPIRE_PRODUCTION_RAMESH,Common_Movement_FacePlayer)
         goto(AlwaysWatchingWazowski_Intro_Dialogue)
 }
 
@@ -92,7 +92,7 @@ script AlwaysWatchingWazowski_MyProductivityHasDropped_Dialogue{
         applymovement(PLAYER,Common_Movement_FaceUp)
         msgbox(format("I imagine this has been very educational for you, {PLAYER}. But I can see my productivity has dropped 14% as a result of this conversation, and I have some content that needs to be scheduled very soon."),MSGBOX_DEFAULT,SPEAKER_RAMESH)
 
-        applymovement(RAMESH,Common_Movement_FaceUp)
+        applymovement(LOCALID_SHARPRISE_SPIRE_PRODUCTION_RAMESH,Common_Movement_FaceUp)
 
         fadedefaultbgm
 

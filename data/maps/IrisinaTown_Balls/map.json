@@ -31,18 +31,20 @@
   ],
   "warp_events": [
     {
+        "warp_id": "WARP_ID_IRISINA_BALLS_TO_TOWN_LEFT",
       "x": 3,
       "y": 8,
       "elevation": 0,
       "dest_map": "MAP_IRISINA_TOWN",
-      "dest_warp_id": "1"
+      "dest_warp_id": "WARP_ID_IRISINA_TOWN_TO_BALL_SHOP"
     },
     {
+        "warp_id": "WARP_ID_IRISINA_BALLS_TO_TOWN_RIGHT",
       "x": 4,
       "y": 8,
       "elevation": 0,
       "dest_map": "MAP_IRISINA_TOWN",
-      "dest_warp_id": "1"
+      "dest_warp_id": "WARP_ID_IRISINA_TOWN_TO_BALL_SHOP"
     }
   ],
   "coord_events": [],

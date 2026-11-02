@@ -98,11 +98,12 @@
   ],
   "warp_events": [
     {
+        "warp_id": "WARP_ID_PIOCA_BRIDGE_TO_LANJING_TUNNEL",
       "x": 15,
       "y": 6,
       "elevation": 0,
       "dest_map": "MAP_LANJING_TUNNEL",
-      "dest_warp_id": "0"
+        "dest_warp_id": "WARP_ID_LANJING_TUNNEL_TO_PIOCA_BRIDGE"
     }
   ],
   "coord_events": [

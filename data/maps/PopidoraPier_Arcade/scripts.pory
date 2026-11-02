@@ -1,7 +1,19 @@
-mapscripts PopidoraPier_Arcade_MapScripts {
+mapscripts PopidoraPier_Arcade_MapScripts 
+{
     MAP_SCRIPT_ON_TRANSITION
     {
         call_if_subquest_complete(QUEST_RESTOREZENZUGYM,SUB_QUEST_4,RestoreZenzuIsland_Script_HideArcademini)
         call(Quest_ManOfManyHats_Installnatureprobesworker_Attendant_Visibility_Script)
     }
+}
+
+script ArcadeMini_Script_Interact
+{
+	lock
+	faceplayer
+    goto_if_quest_active(QUEST_RESTOREZENZUGYM,RestoreZenzuIsland_Dialogue_RecruitArcademini)
+    goto_if_quest_complete(QUEST_BATTLEARCADEMINIQUEST,BattleArcadeMiniQuest_Script_Complete)
+	goto(BattleArcadeMiniQuest_Script_StartQuest)
+	closemessage
+	end
 }

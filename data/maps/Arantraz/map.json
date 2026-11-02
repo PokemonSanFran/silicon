@@ -21,6 +21,7 @@
   ],
   "object_events": [
     {
+      "local_id": "LOCALID_ARANTRAZ_BOAT_ATTENDANT",
       "graphics_id": "OBJ_EVENT_GFX_WOMAN_2",
       "x": 49,
       "y": 61,
@@ -34,6 +35,7 @@
       "flag": "FLAG_TEMP_3"
     },
     {
+      "local_id": "LOCALID_ARANTRAZ_BOAT",
       "graphics_id": "OBJ_EVENT_GFX_SS_TIDAL",
       "x": 45,
       "y": 60,
@@ -117,6 +119,7 @@
       "flag": "0"
     },
     {
+      "local_id": "LOCALID_ARANTRAZ_CHALLENGE_ATTENDANT",
       "graphics_id": "OBJ_EVENT_GFX_NINJA_BOY",
       "x": 38,
       "y": 60,
@@ -144,6 +147,7 @@
       "flag": "0"
     },
     {
+      "local_id": "LOCALID_ARANTRAZ_EXTERIOR_BAIYA",
       "graphics_id": "OBJ_EVENT_GFX_BAIYA",
       "x": 39,
       "y": 14,
@@ -170,6 +174,7 @@
       "flag": "0"
     },
     {
+      "local_id": "LOCALID_BERRY_TREE_ARANTRAZ_1",
       "graphics_id": "OBJ_EVENT_GFX_BERRY_TREE",
       "x": 24,
       "y": 61,
@@ -183,6 +188,7 @@
       "flag": "0"
     },
     {
+      "local_id": "LOCALID_BERRY_TREE_ARANTRAZ_2",
       "graphics_id": "OBJ_EVENT_GFX_BERRY_TREE",
       "x": 21,
       "y": 56,
@@ -252,11 +258,12 @@
   ],
   "warp_events": [
     {
+        "warp_id": "WARP_ID_ARANTRAZ_TO_HOSPITAL",
       "x": 39,
       "y": 13,
       "elevation": 0,
       "dest_map": "MAP_ARANTRAZ_HOSPITAL",
-      "dest_warp_id": "0"
+        "dest_warp_id": "WARP_ID_HOSPITAL_TO_ARANTRAZ"
     }
   ],
   "coord_events": [

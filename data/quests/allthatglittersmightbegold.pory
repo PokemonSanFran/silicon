@@ -1,8 +1,3 @@
-const PLAYER = OBJ_EVENT_ID_PLAYER
-
-//Quest_Allthatglittersmightbegold_
-//gText_Allthatglittersmightbegold_
-
 script Quest_Allthatglittersmightbegold_StartSparkle_Script{
     returnqueststate(QUEST_ALLTHATGLITTERSMIGHTBEGOLD)
 
@@ -64,7 +59,7 @@ script Quest_Allthatglittersmightbegold_ShowVideo_Dialogue{
 script Quest_Allthatglittersmightbegold_AfterVideo_Dialogue{
     setvar(VAR_QUEST_GLITTERS_GOLD_STATE,QUEST_ASSIGNED)
         clearflag(FLAG_HIDE_MAP_NAME_POPUP)
-        applymovement(PLAYER,Common_Movement_FaceUp)
+        applymovement(LOCALID_PLAYER,Common_Movement_FaceUp)
         msgbox(format("I'm too old to go on adventures anymore, but I'll cut you a deal. I'll lend you my diving equipment, and if you go down and get it for me, we'll split it... you keep 70%!"),,SPEAKER_ELIOR,,)
         startquest(QUEST_ALLTHATGLITTERSMIGHTBEGOLD)
         msgbox(format("Holla at me when you're ready to head down."),,SPEAKER_ELIOR,,)
@@ -133,8 +128,8 @@ script Quest_Allthatglittersmightbegold_ReturnSurface_Script{
 
 script Quest_Allthatglittersmightbegold_CheckSuccess_Script{
     lock
-    applymovement(PLAYER,Common_Movement_FaceUp)
-    waitmovement(PLAYER)
+    applymovement(LOCALID_PLAYER,Common_Movement_FaceUp)
+    waitmovement(LOCALID_PLAYER)
     setvar(VAR_QUEST_GLITTERS_GOLD_STATE,QUEST_ASSIGNED)
     goto_if_quest_reward(QUEST_ALLTHATGLITTERSMIGHTBEGOLD,Quest_Allthatglittersmightbegold_Reward_Dialogue)
     goto(Quest_Allthatglittersmightbegold_EmptyHanded_Dialogue)

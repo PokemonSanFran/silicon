@@ -1,6 +1,5 @@
 mapscripts HodouCity_Tunnel_MapScripts{
     MAP_SCRIPT_ON_TRANSITION{
-        call(Quest_Hodoucitytunnels_Script_TryHideTreasure)
     }
 }
 

@@ -83,11 +83,12 @@
   ],
   "warp_events": [
     {
+        "warp_id": "WARP_ID_FORT_YOBU_INTERIOR_TO_EXTERIOR",
       "x": 16,
       "y": 14,
       "elevation": 0,
       "dest_map": "MAP_FORT_YOBU",
-      "dest_warp_id": "0"
+        "dest_warp_id": "WARP_ID_FORT_YOBU_EXTERIOR_TO_INTERIOR"
     }
   ],
   "coord_events": [],

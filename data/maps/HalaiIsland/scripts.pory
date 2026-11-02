@@ -52,6 +52,11 @@ script HalaiIsland_LayoutSwap_Script
 }
 
 script HalaiIsland_MapScripts_OnLoad {
+        if(!(flag(FLAG_LOCKEDOUT_PLAYER)))
+        {
+            setmetatile(29, 32, 0x11, TRUE)
+            special(DrawWholeMapView)
+        }
         if (var(VAR_HALAI_ISLAND_STATE) > START_SURVIVAL_CHANCE && var(VAR_HALAI_ISLAND_STATE) < START_CHAMPIONSHIP_CLEAN_RAID){
             call(Navalbase_PostRaidTiles_Script)
         }

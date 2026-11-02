@@ -30,18 +30,20 @@
   ],
   "warp_events": [
     {
+        "warp_id": "WARP_ID_SHOP_UNION_TO_CRESALTA_VISTA_LEFT",
       "x": 2,
       "y": 4,
       "elevation": 0,
       "dest_map": "MAP_CRESALTA_VISTA",
-      "dest_warp_id": "1"
+        "dest_warp_id": "WARP_ID_CRESALTA_VISTA_TO_SHOP_UNION"
     },
     {
+        "warp_id": "WARP_ID_SHOP_UNION_TO_CRESALTA_VISTA_RIGHT",
       "x": 3,
       "y": 4,
       "elevation": 0,
       "dest_map": "MAP_CRESALTA_VISTA",
-      "dest_warp_id": "1"
+        "dest_warp_id": "WARP_ID_CRESALTA_VISTA_TO_SHOP_UNION"
     }
   ],
   "coord_events": [],

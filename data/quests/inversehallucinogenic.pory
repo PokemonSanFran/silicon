@@ -1,11 +1,3 @@
-//Quest_Inversehallucinogenic_
-const FLAG_HIDE_GYM_TRAINERS = FLAG_TEMP_1
-const FLAG_HIDE_DRUG_TRAINERS = FLAG_TEMP_2
-const FLAG_HIDE_BD_OUTSIDE = FLAG_TEMP_7
-const FLAG_HIDE_BD_GYM = FLAG_TEMP_3
-const BD_OUTSIDE = 27
-const BD = 1
-
 script Quest_Inversehallucinogenic_ScreenDistortion_Script{
     addvar(VAR_TEMP_0,1)
     questmenu(QUEST_MENU_CHECK_ACTIVE,QUEST_INVERSEHALLUCINOGENIC)
@@ -20,14 +12,14 @@ script Quest_Inversehallucinogenic_ScreenDistortion_Script{
 
 script Quest_Inversehallucinogenic_HideLeaderInGym_Script{
     if ((var(VAR_BD_STATE) == QUEST_1_COMPLETE)){
-        setflag(FLAG_HIDE_BD_GYM)
+        setobjectflagfromlocalid(LOCALID_TIRABUDINPLACE_GYM_BD)
     }
     return
 }
 
 script Quest_Inversehallucinogenic_HideBDOutside_Script
 {
-	setflag(FLAG_HIDE_BD_OUTSIDE)
+setobjectflagfromlocalid(LOCALID_TIRABUDIN_PLACE_BD)
 }
 
 script Quest_Inversehallucinogenic_ControlLeaderVisibilityOutside_Script
@@ -44,11 +36,19 @@ script Quest_Inversehallucinogenic_ControlTrainerVisibility_Script{
     questmenu(QUEST_MENU_CHECK_ACTIVE,QUEST_INVERSEHALLUCINOGENIC)
         if (var(VAR_RESULT))
 		{
-            setflag(FLAG_HIDE_GYM_TRAINERS)
+            setobjectflagfromlocalid(LOCALID_TIRABUDIN_PLACE_GYM_TRAINER_1)
+            setobjectflagfromlocalid(LOCALID_TIRABUDIN_PLACE_GYM_TRAINER_2)
+            setobjectflagfromlocalid(LOCALID_TIRABUDIN_PLACE_GYM_TRAINER_3)
+            setobjectflagfromlocalid(LOCALID_TIRABUDIN_PLACE_GYM_TRAINER_4)
+            setobjectflagfromlocalid(LOCALID_TIRABUDIN_PLACE_GYM_TRAINER_5)
+            setobjectflagfromlocalid(LOCALID_TIRABUDIN_PLACE_GYM_TRAINER_6)
         }
 		else
 		{
-            setflag(FLAG_HIDE_DRUG_TRAINERS)
+          setobjectflagfromlocalid(LOCALID_TIRABUDINPLACE_GYM_BD_A)
+          setobjectflagfromlocalid(LOCALID_TIRABUDINPLACE_GYM_BD_B)
+          setobjectflagfromlocalid(LOCALID_TIRABUDINPLACE_GYM_BD_C)
+          setobjectflagfromlocalid(LOCALID_TIRABUDINPLACE_GYM_BD_D)
         }
     return
 }
@@ -60,9 +60,9 @@ script Quest_Inversehallucinogenic_StartQuest_Script{
 
     opendoor(4,26)
     waitdooranim
-    applymovement(BD_OUTSIDE,Common_Movement_WalkUp)
-    waitmovement(BD_OUTSIDE)
-    removeobject(BD_OUTSIDE)
+    applymovement(LOCALID_TIRABUDIN_PLACE_BD,Common_Movement_WalkUp)
+    waitmovement(LOCALID_TIRABUDIN_PLACE_BD)
+    removeobject(LOCALID_TIRABUDIN_PLACE_BD)
     closedoor(4,26)
     waitdooranim
     release
@@ -153,8 +153,8 @@ script Quest_Inversehallucinogenic_PostBattle_Script{
     msgbox(format("It's been three years, and I'm starting to see that maybe there was another way."),,SPEAKER_BD)
     fadescreenswapbuffers(FADE_TO_BLACK)
     delay(20)
-    applymovement(BD,Common_Movement_FaceAwayPlayer)
-    waitmovement(BD)
+    applymovement(LOCALID_TIRABUDINPLACE_GYM_BD,Common_Movement_FaceAwayPlayer)
+    waitmovement(LOCALID_TIRABUDINPLACE_GYM_BD)
     fadescreenswapbuffers(FADE_FROM_BLACK)
     msgbox(format("Ugh man, I don't feel so good. What a wild trip! Thanks for your help testing, I'll review the footage later. Here, take this!"),,SPEAKER_BD)
 

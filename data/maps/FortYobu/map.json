@@ -26,6 +26,7 @@
   ],
   "object_events": [
     {
+      "local_id": "LOCALID_FORT_YOBU_EXTERIOR_KEIYING",
       "graphics_id": "OBJ_EVENT_GFX_KEIYING",
       "x": 19,
       "y": 6,
@@ -67,11 +68,12 @@
   ],
   "warp_events": [
     {
+        "warp_id": "WARP_ID_FORT_YOBU_EXTERIOR_TO_INTERIOR",
       "x": 23,
       "y": 5,
       "elevation": 0,
       "dest_map": "MAP_FORT_YOBU_GYM",
-      "dest_warp_id": "0"
+        "dest_warp_id": "WARP_ID_FORT_YOBU_INTERIOR_TO_EXTERIOR"
     }
   ],
   "coord_events": [],

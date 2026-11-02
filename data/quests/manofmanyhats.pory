@@ -1,13 +1,7 @@
-const FLAG_HIDE_INSTALLNATUREPROBESWORKER = FLAG_TEMP_A
-const FLAG_LOCK_DOOR = FLAG_TEMP_2
 const INSTALLNATUREPROBESWORKER_WAITER = LOCALID_QIU_VILLAGE_RESTAURANT_INSTALLNATUREPROBESWORKER
 const INSTALLNATUREPROBESWORKER_FISHERMAN = LOCALID_LAKE_WAJABI_INSTALLNATUREPROBESWORKER
 const INSTALLNATUREPROBESWORKER_ATTENDANT = LOCALID_POPIDORA_ARCADE_INSTALLNATUREPROBESWORKER
 const INSTALLNATUREPROBESWORKER_INTERACT = VAR_LAST_TALKED
-const TOOK_STATION_ITEM1 = FLAG_ITEM_QUEST_MANOFMANYHATS_ITEM1
-const TOOK_STATION_ITEM2 = FLAG_ITEM_QUEST_MANOFMANYHATS_ITEM2
-
-//Quest_ManOfManyHats_
 
 script Quest_ManOfManyHats_Installnatureprobesworker_Waiter_Visibility_Script
 {
@@ -64,7 +58,7 @@ script Quest_ManOfManyHats_Script_HideInstallNatureProbesWorker_Arcade
 script Quest_ManOfManyHats_Installnatureprobesworker_Waiter_Dialogue{
 	call(Quest_ManOfManyHats_Installnatureprobesworker_Interact_Script)
 	callnative(Quest_ManOfManyHats_ManOfManyHatsIncrementBoba)
-	msgbox("A “20% sweetness” boba order?{PAUSE 30} You must\nbe joking! {PAUSE 30}The machine only has buttons\nfor 10 or 30%!",,SPEAKER_INSTALLNATUREPROBESWORKER,TAIL_TALK,EMOTE_SWEAT)	
+	msgbox("A “20% sweetness” boba order?{PAUSE 30} You must\nbe joking! {PAUSE 30}The machine only has buttons\nfor 10 or 30%!",,SPEAKER_INSTALLNATUREPROBESWORKER,TAIL_TALK,EMOTE_SWEAT)
 	callnative(Quest_ManOfManyHats_ManOfManyHatsSetThirdJobVisible)
 	goto_if_eq(VAR_RESULT,TRUE,Quest_ManOfManyHats_StartQuest_Dialogue)
     closemessage
@@ -189,23 +183,18 @@ script Quest_ManOfManyHats_GuessDoorCombination_Dialogue
 {
 	lock
 	msgbox("It needs a password…",,SPEAKER_PLAYER,TAIL_THOUGHT)
+    closemessage
 	special(EnterCode)
     waitstate
+
     special(GetCodeFeedback)
-	if(var(VAR_RESULT) == QUEST_MANOFMANYHATS)
-	{
-		call(Quest_ManOfManyHats_UnlockingDoor)
-		release
-		end
-	}
-	else
-	{
-		playse(SE_FAILURE)
-		msgbox("Something tells me guessing isn't gonna\nget me anywhere.",,SPEAKER_PLAYER,TAIL_THOUGHT)
-		closemessage
-		release
-		end
-	}
+    goto_if_eq(VAR_RESULT,QUEST_MANOFMANYHATS,Quest_ManOfManyHats_UnlockingDoor)
+
+    playse(SE_FAILURE)
+    msgbox("Something tells me guessing isn't gonna\nget me anywhere.",,SPEAKER_PLAYER,TAIL_THOUGHT)
+    closemessage
+    release
+    end
 }
 
 script Quest_ManOfManyHats_EnterDoorCombination_Dialogue{
@@ -229,17 +218,6 @@ script Quest_ManOfManyHats_UnlockingDoor
 	warpdoor(MAP_ESPULEE_OUTSKIRTS_RANGER,0)
 	waitstate
 	return
-}
-
-script Quest_ManOfManyHats_CheckDoorLock_Script_Flags{
-	callnative(Script_Quest_ManOfManyHats_GetDoorUnlockBit)
-	if(var(VAR_RESULT)==TRUE){
-		setflag(FLAG_LOCK_DOOR)
-	}
-	else
-	{
-		clearflag(FLAG_LOCK_DOOR)
-	}
 }
 
 script Quest_ManOfManyHats_CheckDoorLock_Script_Metatiles{

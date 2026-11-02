@@ -15,6 +15,7 @@
   "connections": null,
   "object_events": [
     {
+        "local_id": "LOCALID_OROLAND_NEWSPAPER_CHERIE",
       "graphics_id": "OBJ_EVENT_GFX_WOMAN_4",
       "x": 11,
       "y": 8,
@@ -25,45 +26,6 @@
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
       "script": "PerlaciaCity_Dialogue_InteractCherie",
-      "flag": "0"
-    },
-    {
-      "graphics_id": "OBJ_EVENT_GFX_ARTIST",
-      "x": 11,
-      "y": 15,
-      "elevation": 3,
-      "movement_type": "MOVEMENT_TYPE_FACE_UP",
-      "movement_range_x": 0,
-      "movement_range_y": 0,
-      "trainer_type": "TRAINER_TYPE_NONE",
-      "trainer_sight_or_berry_tree_id": "0",
-      "script": "Quest_Redomugging_Interact_Victim_Script",
-      "flag": "FLAG_TEMP_1"
-    },
-    {
-      "graphics_id": "OBJ_EVENT_GFX_REPORTER_M",
-      "x": 11,
-      "y": 12,
-      "elevation": 3,
-      "movement_type": "MOVEMENT_TYPE_WALK_RIGHT_AND_LEFT",
-      "movement_range_x": 0,
-      "movement_range_y": 0,
-      "trainer_type": "TRAINER_TYPE_NONE",
-      "trainer_sight_or_berry_tree_id": "0",
-      "script": "Quest_Redomugging_SpottedByReporter_Script",
-      "flag": "0"
-    },
-    {
-      "graphics_id": "OBJ_EVENT_GFX_REPORTER_F",
-      "x": 4,
-      "y": 10,
-      "elevation": 3,
-      "movement_type": "MOVEMENT_TYPE_WALK_RIGHT_AND_LEFT",
-      "movement_range_x": 0,
-      "movement_range_y": 0,
-      "trainer_type": "TRAINER_TYPE_NONE",
-      "trainer_sight_or_berry_tree_id": "0",
-      "script": "Quest_Redomugging_SpottedByReporter_Script",
       "flag": "0"
     }
   ],
@@ -78,33 +40,6 @@
     }
   ],
   "coord_events": [
-    {
-      "type": "trigger",
-      "x": 13,
-      "y": 3,
-      "elevation": 0,
-      "var": "VAR_ALWAYS_ZERO",
-      "var_value": "0",
-      "script": "Quest_Redomugging_LeaveNewspaper_Script"
-    },
-    {
-      "type": "trigger",
-      "x": 14,
-      "y": 3,
-      "elevation": 0,
-      "var": "VAR_ALWAYS_ZERO",
-      "var_value": "0",
-      "script": "Quest_Redomugging_LeaveNewspaper_Script"
-    },
-    {
-      "type": "trigger",
-      "x": 15,
-      "y": 3,
-      "elevation": 0,
-      "var": "VAR_ALWAYS_ZERO",
-      "var_value": "0",
-      "script": "Quest_Redomugging_LeaveNewspaper_Script"
-    }
   ],
   "bg_events": [],
   "night_music": "MUS_OROLAND_NIGHT"

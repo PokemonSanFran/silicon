@@ -35,6 +35,7 @@
       "flag": "FLAG_TEMP_1"
     },
     {
+      "local_id": "LOCALID_TORA_TOWN_TAXI",
       "graphics_id": "OBJ_EVENT_GFX_TRUCK",
       "x": 6,
       "y": 2,
@@ -48,6 +49,7 @@
       "flag": "0"
     },
     {
+      "local_id": "LOCALID_BERRY_TREE_TORA_TOWN_1",
       "graphics_id": "OBJ_EVENT_GFX_BERRY_TREE",
       "x": 13,
       "y": 4,
@@ -61,6 +63,7 @@
       "flag": "0"
     },
     {
+      "local_id": "LOCALID_BERRY_TREE_TORA_TOWN_2",
       "graphics_id": "OBJ_EVENT_GFX_BERRY_TREE",
       "x": 13,
       "y": 5,
@@ -116,97 +119,47 @@
   ],
   "warp_events": [
     {
+        "warp_id": "WARP_ID_TORA_TOWN_TO_GYM",
       "x": 17,
       "y": 6,
       "elevation": 0,
       "dest_map": "MAP_TORA_TOWN_GYM",
-      "dest_warp_id": "0"
+      "dest_warp_id": "WARP_ID_GYM_TO_TORA_TOWN"
     },
     {
+        "warp_id": "WARP_ID_TORA_TOWN_TO_RAMEN",
       "x": 2,
       "y": 6,
       "elevation": 0,
       "dest_map": "MAP_TORA_TOWN_RAMEN",
-      "dest_warp_id": "0"
+      "dest_warp_id": "WARP_ID_RAMEN_TO_TORA_TOWN_LEFT"
     },
     {
+        "warp_id": "WARP_ID_TORA_TOWN_TO_BALLS",
       "x": 4,
       "y": 15,
       "elevation": 0,
       "dest_map": "MAP_TORA_TOWN_BALLS",
-      "dest_warp_id": "1"
+      "dest_warp_id": "WARP_ID_BALLS_TO_TORA_TOWN_LEFT"
     },
     {
+        "warp_id": "WARP_ID_TORA_TOWN_TO_MUSIC_VENUE",
       "x": 15,
       "y": 15,
       "elevation": 0,
       "dest_map": "MAP_TORA_TOWN_MUSIC_VENUE",
-      "dest_warp_id": "0"
+      "dest_warp_id": "WARP_ID_MUSIC_VENUE_TO_TORA_TOWN_LEFT"
     },
     {
+        "warp_id": "WARP_ID_TORA_TOWN_TO_CENTER",
       "x": 10,
       "y": 18,
       "elevation": 0,
       "dest_map": "MAP_TORA_TOWN_POKEMON_CENTER_1F",
-      "dest_warp_id": "0"
+      "dest_warp_id": "WARP_ID_CENTER_TO_TORA_TOWN_LEFT"
     }
   ],
-  "coord_events": [
-    {
-      "type": "trigger",
-      "x": 0,
-      "y": 19,
-      "elevation": 0,
-      "var": "VAR_TEMP_0",
-      "var_value": "0",
-      "script": "Quest_ArtisanBalls1_DebugA_Script"
-    },
-    {
-      "type": "trigger",
-      "x": 1,
-      "y": 19,
-      "elevation": 0,
-      "var": "VAR_TEMP_0",
-      "var_value": "0",
-      "script": "Quest_ArtisanBalls1_DebugB_Script"
-    },
-    {
-      "type": "trigger",
-      "x": 2,
-      "y": 19,
-      "elevation": 0,
-      "var": "VAR_TEMP_0",
-      "var_value": "0",
-      "script": "Quest_ArtisanBalls2_DebugA_Script"
-    },
-    {
-      "type": "trigger",
-      "x": 3,
-      "y": 19,
-      "elevation": 0,
-      "var": "VAR_TEMP_0",
-      "var_value": "0",
-      "script": "Quest_ArtisanBalls2_DebugB_Script"
-    },
-    {
-      "type": "trigger",
-      "x": 4,
-      "y": 19,
-      "elevation": 0,
-      "var": "VAR_TEMP_0",
-      "var_value": "0",
-      "script": "Quest_ArtisanBalls3_DebugA_Script"
-    }
-  ],
-  "bg_events": [
-    {
-      "type": "sign",
-      "x": 4,
-      "y": 15,
-      "elevation": 0,
-      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
-      "script": "Quest_ArtisanBalls3_Post_Dialogue"
-    }
-  ],
+  "coord_events": [],
+  "bg_events": [],
   "night_music": "MUS_TORA_TOWN_NIGHT"
 }

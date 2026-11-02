@@ -16,11 +16,12 @@
   "object_events": [],
   "warp_events": [
     {
+        "warp_id": "WARP_ID_KOMALA_CABIN_2F_TO_1F",
       "x": 8,
       "y": 1,
       "elevation": 0,
       "dest_map": "MAP_ESPULEE_OUTSKIRTS_KOMALA_CABIN_1F",
-      "dest_warp_id": "2"
+      "dest_warp_id": "WARP_ID_KOMALA_CABIN_TO_2F"
     }
   ],
   "coord_events": [

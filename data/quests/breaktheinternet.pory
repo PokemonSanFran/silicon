@@ -1,23 +1,4 @@
-//Quest_Breaktheinternet_
-
-const FLAG_HIDE_WAREHOUSE_GUARD = FLAG_TEMP_2
-const FLAG_HIDE_ISMAIL = FLAG_TEMP_1
-const FLAG_HIDE_ESPULEE_OUTSKIRTS_GIRL = FLAG_TEMP_7
-const FLAG_HIDE_QIU_VILLAGE_GUY = FLAG_TEMP_7
-const FLAG_HIDE_GRUNTS = FLAG_TEMP_2
-const FLAG_HIDE_GRUNTS_WAVE_2 = FLAG_TEMP_3
-const FLAG_HIDE_BUZZR_CEO = FLAG_TEMP_4
-const FLAG_HIDE_ISMAIL_PERLACIA = FLAG_TEMP_4
-const FLAG_HIDE_WAREHOUSE_SLURPUFF = FLAG_TEMP_5
-
 const PLAYER = OBJ_EVENT_ID_PLAYER
-const WAREHOUSE_ISMAIL = 1
-const WAREHOUSE_GRUNT4 = 5
-const WAREHOUSE_GRUNT5 = 6
-const WAREHOUSE_BUZZR_CEO = 8
-const WAREHOUSE_SLURPUFF = 4
-
-const PERLACIA_CITY_ISMAIL = 5
 
 script Quest_Breaktheinternet_EliteFour_Dialogue{
     setvar(VAR_QUEST_BREAKTHEINTERNET_STATE,TALA_MENTIONED_REPORTER)
@@ -31,10 +12,10 @@ script Quest_Breaktheinternet_SocialMediaReporter_Dialogue{
     call_if_quest_complete(QUEST_RABIESOUTBREAK,Quest_Breaktheinternet_Rabies_Dialogue)
 
     msgbox(format("I want to try to investigate where all these claims are coming from, because I think its only going to get worse. You're a Trainer, right? Let's exchange contact info. Keep your eyes peeled on social media for any more bogus stories, and I'll hit you up once I find a good lead."),MSGBOX_DEFAULT,SPEAKER_ISMAIL)
-    applymovement(PERLACIA_CITY_ISMAIL, moves(walk_left, walk_up, step_end))
+    applymovement(LOCALID_PERLACIA_CITY_BREAKTHEINTERNET_REPORTER, moves(walk_left, walk_up, step_end))
     playse(SE_EXIT)
-    waitmovement(PERLACIA_CITY_ISMAIL)
-    removeobject(PERLACIA_CITY_ISMAIL)
+    waitmovement(LOCALID_PERLACIA_CITY_BREAKTHEINTERNET_REPORTER)
+    removeobject(LOCALID_PERLACIA_CITY_BREAKTHEINTERNET_REPORTER)
     call(Quest_Breaktheinternet_CountQuestsAndProgress_Script)
     call(TryAutoSave)
     release
@@ -55,7 +36,7 @@ script Buzzr_HideReporter_Script
         if (
             (var(VAR_QUEST_BREAKTHEINTERNET_STATE) != TALA_MENTIONED_REPORTER))
         {
-            setflag(FLAG_HIDE_ISMAIL_PERLACIA)
+            setobjectflagfromlocalid(LOCALID_PERLACIA_CITY_BREAKTHEINTERNET_REPORTER)
         }
 }
 
@@ -82,7 +63,7 @@ script Quest_Breaktheinternet_Ismail_Visibility_Script{
         specialvar(VAR_0x8004,Quest_Breaktheinternet_CountRemainingSubquests)
 
         if ((var(VAR_0x8003) < 5) || (var(VAR_0x8004) < 2)){
-            setflag(FLAG_HIDE_ISMAIL)
+            setobjectflagfromlocalid(LOCALID_CUCUNO_CAFE_REPORTER)
         }
     return
 }
@@ -166,7 +147,7 @@ script Quest_Breaktheinternet_EspuleeOutskirtsGirl_Visibility_Script{
     subquestmenu(QUEST_MENU_CHECK_COMPLETE,QUEST_BREAKTHEINTERNET,SUB_QUEST_1)
 
         if (var(VAR_RESULT)){
-            setflag(FLAG_HIDE_ESPULEE_OUTSKIRTS_GIRL)
+            setobjectflagfromlocalid(LOCALID_QUEST_BREAKTHEINTERNET_GURL)
         }
 
     return
@@ -176,7 +157,7 @@ script Quest_Breaktheinternet_QiuVillageGuy_Visibility_Script{
     subquestmenu(QUEST_MENU_CHECK_COMPLETE,QUEST_BREAKTHEINTERNET,SUB_QUEST_2)
 
         if (var(VAR_RESULT)){
-            setflag(FLAG_HIDE_QIU_VILLAGE_GUY)
+        setobjectflagfromlocalid(LOCALID_QIU_GUY)
         }
 
     return
@@ -232,34 +213,37 @@ script Quest_Breaktheinternet_Warehouse_Enemy_Visibility_Script{
 }
 
 script Quest_Breaktheinternet_Slurpuff_Visibility_Script{
-    setflag(FLAG_HIDE_WAREHOUSE_SLURPUFF)
+    setobjectflagfromlocalid(LOCALID_FAKENEWS_WAREHOUSE_SLURPUFF)
     return
 }
 
 script Quest_Breaktheinternet_Warehouse_Grunts_Visibility_Script{
-    setflag(FLAG_HIDE_GRUNTS)
+setobjectflagfromlocalid(LOCALID_FAKENEWS_WAREHOUSE_GRUNT1)
+setobjectflagfromlocalid(LOCALID_FAKENEWS_WAREHOUSE_GRUNT2)
+setobjectflagfromlocalid(LOCALID_FAKENEWS_WAREHOUSE_GRUNT3)
     return
 }
 
 script Quest_Breaktheinternet_Warehouse_Grunts2_Visibility_Script{
-    setflag(FLAG_HIDE_GRUNTS_WAVE_2)
+setobjectflagfromlocalid(LOCALID_FAKENEWS_WAREHOUSE_GRUNT4)
+setobjectflagfromlocalid(LOCALID_FAKENEWS_WAREHOUSE_GRUNT5)
     return
 }
 
 script Quest_Breaktheinternet_Warehouse_Ismail_Visibility_Script{
-    setflag(FLAG_HIDE_ISMAIL)
+    setflag(LOCALID_FAKENEWS_WAREHOUSE_DITTO)
     return
 }
 
 script Quest_Breaktheinternet_Warehouse_CEO_Visibility_Script{
-    setflag(FLAG_HIDE_BUZZR_CEO)
+    setobjectflagfromlocalid(LOCALID_FAKENEWS_WAREHOUSE_BUZZR_CEO)
     return
 }
 
 script Quest_Breaktheinternet_WarehouseGuard_Script{
     specialvar(VAR_RESULT,Quest_Breaktheinternet_CountRemainingSubquests)
         if (var(VAR_RESULT) < 2){
-            setflag(FLAG_HIDE_WAREHOUSE_GUARD)
+        setobjectflagfromlocalid(LOCALID_PETAROSA_BOROUGH_BUZZR_GUARD)
         }
     return
 }
@@ -311,11 +295,11 @@ script Quest_Breaktheinternet_TriggerWave2Battle1_Script{
     msgbox(format("Stop right there!"))
     closemessage
     applymovement(PLAYER,Common_Movement_FaceRight)
-    addobject(WAREHOUSE_GRUNT4)
-    addobject(WAREHOUSE_GRUNT5)
-    applymovement(WAREHOUSE_GRUNT4,Quest_Breaktheinternet_GruntsWalkToPlayer)
-    applymovement(WAREHOUSE_GRUNT5,Quest_Breaktheinternet_GruntsWalkToPlayer)
-    waitmovement(WAREHOUSE_GRUNT4)
+    addobject(LOCALID_FAKENEWS_WAREHOUSE_GRUNT4)
+    addobject(LOCALID_FAKENEWS_WAREHOUSE_GRUNT5)
+    applymovement(LOCALID_FAKENEWS_WAREHOUSE_GRUNT4,Quest_Breaktheinternet_GruntsWalkToPlayer)
+    applymovement(LOCALID_FAKENEWS_WAREHOUSE_GRUNT5,Quest_Breaktheinternet_GruntsWalkToPlayer)
+    waitmovement(LOCALID_FAKENEWS_WAREHOUSE_GRUNT4)
     msgbox(format("This is the end for you."))
     trainerbattle_no_intro(TRAINER_BUZZR5,format("Are we going to end up like him...?"))
     goto(Quest_Breaktheinternet_Wave2Battle2_Script)
@@ -333,8 +317,8 @@ script Quest_Breaktheinternet_CompleteWave2_Script{
     lock
     msgbox(format("Our boss is tougher than us!"))
     fadescreenswapbuffers(FADE_TO_BLACK)
-    removeobject(WAREHOUSE_GRUNT4)
-    removeobject(WAREHOUSE_GRUNT5)
+    removeobject(LOCALID_FAKENEWS_WAREHOUSE_GRUNT4)
+    removeobject(LOCALID_FAKENEWS_WAREHOUSE_GRUNT5)
     fadescreenswapbuffers(FADE_FROM_BLACK)
     release
     end
@@ -371,34 +355,34 @@ script Quest_Breaktheinternet_StartFinalCutscene_Dialogue{
     closemessage
 playse(SE_PIN)
     applymovement(PLAYER,Common_Movement_ExclamationMark)
-    applymovement(WAREHOUSE_SLURPUFF,Common_Movement_ExclamationMark)
+    applymovement(LOCALID_FAKENEWS_WAREHOUSE_SLURPUFF,Common_Movement_ExclamationMark)
 waitse
     applymovement(PLAYER,Common_Movement_FaceRight)
-    applymovement(WAREHOUSE_SLURPUFF, moves(walk_down, walk_right, step_end))
+    applymovement(LOCALID_FAKENEWS_WAREHOUSE_SLURPUFF, moves(walk_down, walk_right, step_end))
     waitmovement(PLAYER)
     setvar(VAR_OBJ_GFX_ID_0,OBJ_EVENT_GFX_REPORTER_M)
-    addobject(WAREHOUSE_ISMAIL)
-    applymovement(WAREHOUSE_ISMAIL, moves(walk_left * 7, step_end))
-    waitmovement(WAREHOUSE_ISMAIL)
+    addobject(LOCALID_FAKENEWS_WAREHOUSE_DITTO)
+    applymovement(LOCALID_FAKENEWS_WAREHOUSE_DITTO, moves(walk_left * 7, step_end))
+    waitmovement(LOCALID_FAKENEWS_WAREHOUSE_DITTO)
     msgbox(format("{PLAYER} you come!"),,SPEAKER_ISMAIL)
     closemessage
-    applymovement(WAREHOUSE_SLURPUFF, moves(walk_left, walk_up, face_right, step_end))
-    waitmovement(WAREHOUSE_SLURPUFF)
+    applymovement(LOCALID_FAKENEWS_WAREHOUSE_SLURPUFF, moves(walk_left, walk_up, face_right, step_end))
+    waitmovement(LOCALID_FAKENEWS_WAREHOUSE_SLURPUFF)
     playmoncry(SPECIES_SLURPUFF,CRY_MODE_ROAR_2)
     bufferspeciesname(STR_VAR_1,SPECIES_SLURPUFF)
     msgbox(format("{STR_VAR_1} ran behind you. It looks scared."))
     msgbox(format("Oh? You not fooled?"),,SPEAKER_ISMAIL)
     closemessage
 //PSF TODO figure out how to do the transform script like Castform in merrp's followers
-    removeobject(WAREHOUSE_ISMAIL)
+    removeobject(LOCALID_FAKENEWS_WAREHOUSE_DITTO)
     setvar(VAR_OBJ_GFX_ID_0,OBJ_EVENT_GFX_DITTO_DOLL)
-    addobject(WAREHOUSE_ISMAIL)
-    setobjectxy(WAREHOUSE_ISMAIL,3,8)
+    addobject(LOCALID_FAKENEWS_WAREHOUSE_DITTO)
+    setobjectxy(LOCALID_FAKENEWS_WAREHOUSE_DITTO,3,8)
     msgbox(format("Guess you're smarter than we thought!"),,SPEAKER_BUZZR_CEO)
     closemessage
-    addobject(WAREHOUSE_BUZZR_CEO)
-    applymovement(WAREHOUSE_BUZZR_CEO, moves(walk_left * 8, face_up))
-    waitmovement(WAREHOUSE_BUZZR_CEO)
+    addobject(LOCALID_FAKENEWS_WAREHOUSE_BUZZR_CEO)
+    applymovement(LOCALID_FAKENEWS_WAREHOUSE_BUZZR_CEO, moves(walk_left * 8, face_up))
+    waitmovement(LOCALID_FAKENEWS_WAREHOUSE_BUZZR_CEO)
     applymovement(PLAYER,Common_Movement_FaceDown)
     waitmovement(PLAYER)
     msgbox(format("You appear to be competent, but this is the end for you."),,SPEAKER_BUZZR_CEO)
@@ -427,10 +411,10 @@ script Quest_Breaktheinternet_PostCEOBattle_Dialogue{
     msgbox(format("Your friend won't be an issue anymore. He learned his lesson."),,SPEAKER_BUZZR_CEO)
     closemessage
     fadescreenswapbuffers(FADE_TO_BLACK)
-    removeobject(WAREHOUSE_BUZZR_CEO)
-    removeobject(WAREHOUSE_ISMAIL)
-    removeobject(WAREHOUSE_GRUNT4)
-    removeobject(WAREHOUSE_GRUNT5)
+    removeobject(LOCALID_FAKENEWS_WAREHOUSE_BUZZR_CEO)
+    removeobject(LOCALID_FAKENEWS_WAREHOUSE_DITTO)
+    removeobject(LOCALID_FAKENEWS_WAREHOUSE_GRUNT4)
+    removeobject(LOCALID_FAKENEWS_WAREHOUSE_GRUNT5)
     fadescreenswapbuffers(FADE_FROM_BLACK)
     applymovement(PLAYER,Common_Movement_FaceLeft)
     waitmovement(PLAYER)
@@ -492,7 +476,7 @@ script Breaktheinternet_SendGiftToPC_Script {
 
 script Breaktheinternet_ReceivedGiftFanfare {
         bufferspeciesname(STR_VAR_2,SPECIES_SLURPUFF)
-        removeobject(WAREHOUSE_SLURPUFF)
+        removeobject(LOCALID_FAKENEWS_WAREHOUSE_SLURPUFF)
         playfanfare(MUS_OBTAIN_ITEM)
     bufferspeciesname(STR_VAR_1,SPECIES_SLURPUFF)
         msgbox(format("{PLAYER} took Ismail's {STR_VAR_1}!"))

@@ -1,10 +1,17 @@
-const FLAG_HIDE_INSIDE_TOWER = FLAG_TEMP_1
-
 mapscripts WeCanStopYouActually_Cutscene_MapScripts {
     MAP_SCRIPT_ON_FRAME_TABLE [
         VAR_STORYLINE_STATE, STORY_EPILOGUE: WeCanStopYouActaully_ArrestCutscene
     ]
     MAP_SCRIPT_ON_TRANSITION {
-        setflag(FLAG_HIDE_INSIDE_TOWER)
+      setobjectflagfromlocalid(LOCALID_WECANSTOPYOUACTUALLY_POLICE_A)
+      setobjectflagfromlocalid(LOCALID_WECANSTOPYOUACTUALLY_OLIVER)
+      setobjectflagfromlocalid(LOCALID_WECANSTOPYOUACTUALLY_LUCREZIA)
+      setobjectflagfromlocalid(LOCALID_WECANSTOPYOUACTUALLY_CHARLOTTE)
+      setobjectflagfromlocalid(LOCALID_WECANSTOPYOUACTUALLY_RAMESH)
+      setobjectflagfromlocalid(LOCALID_WECANSTOPYOUACTUALLY_POLICE_B)
+      setobjectflagfromlocalid(LOCALID_WECANSTOPYOUACTUALLY_ELEANOR)
+      setobjectflagfromlocalid(LOCALID_WECANSTOPYOUACTUALLY_TALA)
+      setobjectflagfromlocalid(LOCALID_WECANSTOPYOUACTUALLY_MAGNUS)
+      setobjectflagfromlocalid(LOCALID_WECANSTOPYOUACTUALLY_FRANK)
     }
 }

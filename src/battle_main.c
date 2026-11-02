@@ -5319,10 +5319,8 @@ static void HandleEndTurn_BattleWon(void)
     else
     {
         Quest_TeachATrainerToFish_RecordEnemy(); // siliconMerge
-        CountDefeatedBackyard(); // siliconMerge
         CountDefeatedCresaltaVista(); // siliconMerge
         CountDefeatedRabiesMon(); // siliconMerge
-        CountDefeatedGardenMons(); // siliconMerge
         gBattlescriptCurrInstr = BattleScript_PayDayMoneyAndPickUpItems;
     }
 
@@ -5393,41 +5391,6 @@ static void HandleEndTurn_BattleLost(void)
 //used for Quest_GardenCleanUp
 // if defeated a mon on Route1 while quest is astive, increment by 1
 // if quest is active AND defeated more than 47, mark quest as reward
-void CountDefeatedGardenMons(void){
-    u8 defeatedGardenMonCount = VarGet(VAR_DEFEATED_GARDEN_POKEMON);
-
-    if (GetCurrentMap() == MAP_ROUTE1)
-        defeatedGardenMonCount += 1;
-
-    if ((defeatedGardenMonCount > 47) && QuestMenu_GetSetQuestState(QUEST_GARDENCLEANUP,FLAG_GET_ACTIVE)){
-        QuestMenu_GetSetQuestState(QUEST_GARDENCLEANUP,FLAG_SET_REWARD);
-        QuestMenu_GetSetQuestState(QUEST_GARDENCLEANUP,FLAG_REMOVE_ACTIVE);
-    }
-
-    VarSet(VAR_DEFEATED_GARDEN_POKEMON,defeatedGardenMonCount);
-}
-
-void CountDefeatedBackyard(void)
-{
-    u8 defeatedBackyardCount = VarGet(VAR_DEFEATED_BACKYARD_COUNT), i = 0;
-
-    for (i = 0;i < 6;i++)
-    {
-        s32 enemySpecies = GetMonData(&gParties[B_TRAINER_OPPONENT_A][i],MON_DATA_SPECIES);
-
-        if ((GetCurrentMap() == MAP_ROUTE18 || GetCurrentMap() == MAP_ROUTE20) && (!(gBattleTypeFlags & BATTLE_TYPE_TRAINER)) && (enemySpecies)){
-            defeatedBackyardCount++;
-        }
-    }
-
-    if ((defeatedBackyardCount > 26) && QuestMenu_GetSetQuestState(QUEST_BUTONLYINMYBACKYARD,FLAG_GET_ACTIVE)){
-        QuestMenu_GetSetQuestState(QUEST_BUTONLYINMYBACKYARD,FLAG_SET_REWARD);
-        QuestMenu_GetSetQuestState(QUEST_BUTONLYINMYBACKYARD,FLAG_REMOVE_ACTIVE);
-    }
-
-    VarSet(VAR_DEFEATED_BACKYARD_COUNT,defeatedBackyardCount);
-}
-// End siliconMerge
 
 static void HandleEndTurn_RanFromBattle(void)
 {

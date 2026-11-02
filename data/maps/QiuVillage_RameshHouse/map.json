@@ -100,18 +100,20 @@
   ],
   "warp_events": [
     {
+        "warp_id": "WARP_ID_RAMESH_HOUSE_TO_QIU_VILLAGE_BREAK_IN",
       "x": 19,
       "y": 1,
       "elevation": 0,
       "dest_map": "MAP_QIU_VILLAGE",
-      "dest_warp_id": "1"
+      "dest_warp_id": "WARP_ID_TO_QIU_VILLAGE_TO_RAMESH_HOUSE_BREAK_IN"
     },
     {
+        "warp_id": "WARP_ID_QIU_VILLAGE_RAMESH_HOUSE_TO_SHARPRISE_SPIRE",
       "x": 11,
       "y": 3,
       "elevation": 0,
       "dest_map": "MAP_SHARPRISE_SPIRE_LOBBY",
-      "dest_warp_id": "2"
+      "dest_warp_id": "WARP_ID_SHARPRISE_SPIRE_TO_QIU_VILLAGE_RAMESH_HOUSE"
     }
   ],
   "coord_events": [],

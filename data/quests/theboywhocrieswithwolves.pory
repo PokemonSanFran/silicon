@@ -1,15 +1,9 @@
-const FLAG_HIDE_BOYWHOCRIESWOLVESDOCTOR = FLAG_TEMP_2
-const BOYWHOCRIESWOLVESDOCTOR = LOCALID_BOYWHOCRIESWOLVESDOCTOR
-
-//Quest_Theboywhocriedwithwolves_
-//gText_Theboywhocriedwithwolves_
-
 script Quest_Theboywhocriedwithwolves_Boywhocriedwolvesdoctor_Visibility_Script
 {
     questmenu(QUEST_MENU_CHECK_COMPLETE,QUEST_THEBOYWHOCRIESWITHWOLVES)
     if (var(VAR_RESULT))
     {
-        setflag(FLAG_HIDE_BOYWHOCRIESWOLVESDOCTOR)
+        setobjectflagfromlocalid(LOCALID_BOYWHOCRIESWOLVESDOCTOR)
     }
     return
 }
@@ -50,10 +44,10 @@ script Quest_Theboywhocriedwithwolves_Interact_Boywhocriesdoctor_Script
 
 script Quest_Theboywhocriedwithwolves_StartQuest_Dialogue
 {
-    cueobject(BOYWHOCRIESWOLVESDOCTOR, DIR_SOUTH)
+    cueobject(LOCALID_BOYWHOCRIESWOLVESDOCTOR, DIR_SOUTH)
     msgbox("Oh man… What am I gonna do?..",,SPEAKER_BOYCRIESWOLVESDOCTOR,,EMOTE_SWEAT)
-    applymovement(BOYWHOCRIESWOLVESDOCTOR, moves(face_player))
-    cueobjecttalking(BOYWHOCRIESWOLVESDOCTOR)
+    applymovement(LOCALID_BOYWHOCRIESWOLVESDOCTOR, moves(face_player))
+    cueobjecttalking(LOCALID_BOYWHOCRIESWOLVESDOCTOR)
 
     msgbox("Oh. Hello.",,SPEAKER_BOYCRIESWOLVESDOCTOR,TAIL_TALK)
     msgbox("S-some kids stole my stuff and threw it\nover the fence!",,SPEAKER_BOYCRIESWOLVESDOCTOR,TAIL_TALK)
@@ -120,7 +114,7 @@ script Quest_Theboywhocriedwithwolves_Script_RemoveItem3
 
 script Quest_Theboywhocriedwithwolves_AcknowledgeItems
 {
-    applymovement(BOYWHOCRIESWOLVESDOCTOR, moves(face_player))
+    applymovement(LOCALID_BOYWHOCRIESWOLVESDOCTOR, moves(face_player))
     checkitem(ITEM_QUEST_THEBOYWHOCRIESWITHWOLVES_FIRSTAIDKIT)
     if(var(VAR_RESULT) == TRUE)
     {
