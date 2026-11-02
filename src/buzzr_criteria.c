@@ -703,3 +703,12 @@ void ZapCriteria_TowerRaidStarted(void)
     gSpecialVar_Result = VarGet(VAR_TOWER_RAID_STATE) >= SEARCHING_RAMESH_HOUSE;
 }
 
+void ZapCriteria_WallaceArmy_HasSeenCancelledZap(void)
+{
+	gSpecialVar_Result = Buzzr_IsZapRead(ZAP_QUEST_WALLACEARMY_CANCEL_ANNOUNCE);
+}
+
+void ZapCriteria_IsWallaceArmyComplete(void)
+{
+    gSpecialVar_Result = (IsQuestCompletedState(QUEST_WALLACEARMY));
+}

@@ -152,3 +152,79 @@ script LeagueOps_LucreziaComputer_Script
     end
 }
 
+script SharpriseSpire_Leagueops_EventScript_1BC45966
+{
+    trainerbattle_single(TRAINER_1BC45966,format("I am a Random floor Trainer"),format("I lost!"))
+    msgbox(format("You defeated me!"),MSGBOX_AUTOCLOSE)
+    end
+}
+
+script SharpriseSpire_Leagueops_EventScript_1C2B088C
+{
+    trainerbattle_single(TRAINER_1C2B088C,format("I am a Random floor Trainer"),format("I lost!"))
+    msgbox(format("You defeated me!"),MSGBOX_AUTOCLOSE)
+    end
+}
+
+script SharpriseSpire_Leagueops_EventScript_1C6CA7F6
+{
+    trainerbattle_single(TRAINER_1C6CA7F6,format("I am a Random floor Trainer"),format("I lost!"))
+    msgbox(format("You defeated me!"),MSGBOX_AUTOCLOSE)
+    end
+}
+
+script SharpriseSpire_Leagueops_EventScript_1CBE4FB1
+{
+    trainerbattle_single(TRAINER_1CBE4FB1,format("I am a Random floor Trainer"),format("I lost!"))
+    msgbox(format("You defeated me!"),MSGBOX_AUTOCLOSE)
+    end
+}
+
+script SharpriseSpire_Leagueops_EventScript_Mel
+{
+    trainerbattle_single(TRAINER_DON_AND_MEL,format("I'm Mel and I'm a parody of Melania Trump."),format("I lost!"))
+    msgbox(format("You defeated me!"),MSGBOX_AUTOCLOSE)
+    end
+}
+
+script SharpriseSpire_Leagueops_EventScript_Don
+{
+    trainerbattle_single(TRAINER_DON_AND_MEL,format("I'm Don and I'm a parody of Donald Trump."),format("I lost!"))
+    msgbox(format("You defeated me!"),MSGBOX_AUTOCLOSE)
+    end
+}
+
+script SharpriseSpire_Leagueops_EventScript_1CC4D5D6
+{
+    trainerbattle_single(TRAINER_1CC4D5D6,format("I am a Random floor Trainer"),format("I lost!"))
+    msgbox(format("You defeated me!"),MSGBOX_AUTOCLOSE)
+    end
+}
+
+script SharpriseSpire_Leagueops_EventScript_1D63E5A1
+{
+    trainerbattle_single(TRAINER_1D63E5A1,format("I am a Random floor Trainer"),format("I lost!"))
+    msgbox(format("You defeated me!"),MSGBOX_AUTOCLOSE)
+    end
+}
+
+script SharpriseSpire_Leagueops_EventScript_1D7A6DED
+{
+    trainerbattle_single(TRAINER_1D7A6DED,format("I am a Random floor Trainer"),format("I lost!"))
+    msgbox(format("You defeated me!"),MSGBOX_AUTOCLOSE)
+    end
+}
+
+script SharpriseSpire_Leagueops_EventScript_1D93B10D
+{
+    trainerbattle_single(TRAINER_1D93B10D,format("I am a Random floor Trainer"),format("I lost!"))
+    msgbox(format("You defeated me!"),MSGBOX_AUTOCLOSE)
+    end
+}
+
+script SharpriseSpire_Leagueops_EventScript_Olly
+{
+    trainerbattle_single(TRAINER_OLLY,format("I am a Random floor Trainer"),format("I lost!"))
+    msgbox(format("You defeated me!"),MSGBOX_AUTOCLOSE)
+    end
+}

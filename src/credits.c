@@ -1542,7 +1542,10 @@ static void SpriteCB_CreditsMonBg(struct Sprite *sprite)
 
 static void DeterminePokemonToShow(void)
 {
-    enum NationalDexOrder starter = SpeciesToNationalPokedexNum(GetStarterPokemon(VarGet(VAR_STARTER_MON)));
+    // Start siliconMerge
+    //enum NationalDexOrder starter = SpeciesToNationalPokedexNum(GetStarterPokemon(VarGet(VAR_STARTER_MON)));
+    enum NationalDexOrder starter = SpeciesToNationalPokedexNum(VarGet(VAR_STARTER_MON));
+    // End siliconMerge
     u16 page;
     u16 dexNum;
     u16 j;

@@ -1585,3 +1585,25 @@ const struct Tileset gTileset_FancyIndoors =
     .metatileAttributes = gMetatileAttributes_PorytilesManaged_FancyIndoors,
     .callback = NULL,
 };
+
+const struct Tileset gTileset_FoggyRoutes =
+{
+    .isCompressed = TRUE,
+    .isSecondary = TRUE,
+    .tiles = gTilesetTiles_PorytilesManaged_FoggyRoutes,
+    .palettes = gTilesetPalettes_PorytilesManaged_FoggyRoutes,
+    .metatiles = gMetatiles_PorytilesManaged_FoggyRoutes,
+    .metatileAttributes = gMetatileAttributes_PorytilesManaged_FoggyRoutes,
+    .callback = NULL,
+};
+
+const struct Tileset gTileset_Desert =
+{
+    .isCompressed = TRUE,
+    .isSecondary = TRUE,
+    .tiles = gTilesetTiles_PorytilesManaged_Desert,
+    .palettes = gTilesetPalettes_PorytilesManaged_Desert,
+    .metatiles = gMetatiles_PorytilesManaged_Desert,
+    .metatileAttributes = gMetatileAttributes_PorytilesManaged_Desert,
+    .callback = NULL,
+};

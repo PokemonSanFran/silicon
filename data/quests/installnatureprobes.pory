@@ -92,7 +92,7 @@ script Quest_InstallNatureProbes_InstallHillProbe_Script{
 
     msgbox(format("Well, this is the tallest hill in the forest. Must be where that probe goes."),MSGBOX_DEFAULT,SPEAKER_PLAYER, TAIL_TALK)
 
-    subquestmenu(QUEST_MENU_COMPLETE_QUEST,QUEST_INSTALLNATUREPROBES,SUB_QUEST_2)
+    subquestmenu(QUEST_MENU_COMPLETE_QUEST,QUEST_INSTALLNATUREPROBES,SUB_QUEST_1)
     cueobjecttalking(PLAYER)
     removeitem(ITEM_QUEST_INSTALLNATUREPROBES_HILL)
     callnative(Quest_InstallNatureProbes_CountRemainingSubquestsTryProgressReward)
@@ -111,7 +111,7 @@ script Quest_InstallNatureProbes_InstallForestProbe_Script{
 
     msgbox(format("I think this is the deepest part of the forest. I'll put a probe down here."),MSGBOX_DEFAULT, SPEAKER_PLAYER, TAIL_TALK)
 
-    subquestmenu(QUEST_MENU_COMPLETE_QUEST,QUEST_INSTALLNATUREPROBES,SUB_QUEST_1)
+    subquestmenu(QUEST_MENU_COMPLETE_QUEST,QUEST_INSTALLNATUREPROBES,SUB_QUEST_2)
     cueobjecttalking(PLAYER)
     removeitem(ITEM_QUEST_INSTALLNATUREPROBES_FOREST)
     callnative(Quest_InstallNatureProbes_CountRemainingSubquestsTryProgressReward)

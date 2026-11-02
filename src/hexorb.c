@@ -117,13 +117,17 @@ static bool32 Hexorb_ShouldExistingStatusBlock(struct Pokemon *mon)
     return HEXORB_BLOCK_STATUS && (GetMonData(mon, MON_DATA_STATUS) & STATUS1_ANY);
 }
 
-enum HexorbResultCodes Hexorb_TryInflictStatus(struct Pokemon *mon, u32 status)
+enum HexorbResultCodes Hexorb_GetInflictResult(struct Pokemon *mon, u32 status)
 {
-    u32 clearStatus;
     u32 species = GetMonData(mon,MON_DATA_SPECIES);
 
     if (Hexorb_ShouldExistingStatusBlock(mon))
         return HEXORB_RESULT_FAIL_HAS_STATUS;
+
+    if (GetAilmentFromStatus(GetMonData(mon, MON_DATA_STATUS)) == GetAilmentFromStatus(status))
+    {
+        return HEXORB_RESULT_FAIL_SAME_STATUS;
+    }
 
     if (DoesAbilityPreventStatus(mon, status))
         return HEXORB_RESULT_FAIL_ABILITY;
@@ -133,6 +137,19 @@ enum HexorbResultCodes Hexorb_TryInflictStatus(struct Pokemon *mon, u32 status)
 
     if (Hexorb_DoesTypeBlockStatus(species, 1, status))
         return HEXORB_RESULT_FAIL_TYPE_1;
+
+    return HEXORB_RESULT_SUCCESS;
+}
+
+enum HexorbResultCodes Hexorb_TryInflictStatus(struct Pokemon *mon, u32 status)
+{
+    u32 clearStatus;
+    enum HexorbResultCodes result = Hexorb_GetInflictResult(mon, status);
+
+    if (result != HEXORB_RESULT_SUCCESS)
+    {
+        return result;
+    }
 
     clearStatus = STATUS1_NONE;
     SetMonData(mon, MON_DATA_STATUS, &clearStatus);
@@ -186,7 +203,11 @@ void Hexorb_ConstructAbilityFailureMessage(struct Pokemon* mon, u32 status)
 
 void Hexorb_ConstructStatusFailureMessage(struct Pokemon* mon)
 {
-    u32 status = GetMonData(mon, MON_DATA_STATUS);
+    Hexorb_ConstructAlreadyStatusedMessage(mon, GetMonData(mon, MON_DATA_STATUS));
+}
+
+void Hexorb_ConstructAlreadyStatusedMessage(struct Pokemon *mon, u32 status)
+{
     GetMonNickname(mon, gStringVar1);
     Hexorb_BufferBlockedStatusMessage(status);
     StringExpandPlaceholders(gStringVar4, COMPOUND_STRING("{STR_VAR_1} is already {STR_VAR_3}!{PAUSE_UNTIL_PRESS}"));

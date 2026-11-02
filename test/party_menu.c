@@ -3,6 +3,9 @@
 #include "party_menu.h"
 #include "pokemon.h"
 #include "test/test.h"
+#include "constants/party_menu.h"
+
+#if !UI_PARTY_MENU
 
 #define TEST_MENU_DIR_DOWN     1
 #define TEST_MENU_DIR_UP      -1
@@ -45,3 +48,5 @@ TEST("Full multi partner party menu wraps cancel up to partner party count")
 
     EXPECT_EQ(Test_UpdatePartySelectionSingleLayout(PARTY_SIZE + 1, TEST_MENU_DIR_UP, FALSE, 0), 1);
 }
+
+#endif // !UI_PARTY_MENU

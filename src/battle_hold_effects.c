@@ -174,7 +174,8 @@ static enum ItemEffect TryKingsRock(enum BattlerId battlerAtk, enum BattlerId ba
         holdEffectParam *= 2;
     if (ability != ABILITY_STENCH && RandomPercentage(RNG_HOLD_EFFECT_FLINCH, holdEffectParam))
     {
-        SetMoveEffectHelper(battlerAtk, battlerDef, MOVE_EFFECT_FLINCH, gBattlescriptCurrInstr, NO_FLAGS);
+        // This item effect is independent of Sheer Force; moves that natively flinch were rejected above.
+        SetMoveEffectHelper(battlerAtk, battlerDef, MOVE_EFFECT_FLINCH, gBattlescriptCurrInstr, EFFECT_BYPASS_SHEER_FORCE);
         effect = ITEM_EFFECT_OTHER;
     }
 
@@ -545,7 +546,7 @@ static enum ItemEffect TryStickyBarbOnTargetHit(enum BattlerId battlerDef, enum 
     {
         // No sticky hold checks.
         gEffectBattler = battlerDef;
-        StealTargetItem(battlerAtk, battlerDef, ITEM_NONE);  // Attacker takes target's barb
+        StealTargetItem(battlerAtk, battlerDef, ITEM_NONE, FALSE);  // Attacker takes target's barb
         BattleScriptCall(BattleScript_StickyBarbTransfer);
         effect = ITEM_EFFECT_OTHER;
     }

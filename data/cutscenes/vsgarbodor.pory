@@ -20,21 +20,6 @@ script VsGarbodor_Script_AddCharlotteMiddle
     spawnobject(OBJ_EVENT_GFX_CHARLOTTE,LOCALID_VS_GARBODOR_CHARLOTTE,10,8,MOVEMENT_TYPE_FACE_LEFT,3)
 }
 
-script TheStrikeStrikesBack_Script_AddSharpriseCharlotteTide
-{
-    spawnobject(OBJ_EVENT_GFX_OLIVER,LOCALID_ROUTE2_OLIVER,21,22,DIR_NORTH,3)
-    spawnobject(OBJ_EVENT_GFX_LUCREZIA,LOCALID_ROUTE2_LUCREZIA,20,21,DIR_NORTH,3)
-    spawnobject(OBJ_EVENT_GFX_CHARLOTTE,LOCALID_ROUTE2_CHARLOTTE,21,21,DIR_NORTH,3)
-
-    spawnobject(OBJ_EVENT_GFX_COMRADE_5,LOCALID_ROUTE2_TIDE_B,26,19,DIR_WEST,3)
-    spawnobject(OBJ_EVENT_GFX_COMRADE_9,LOCALID_ROUTE2_TIDE_A,26,20,DIR_WEST,3)
-    spawnobject(OBJ_EVENT_GFX_VIGRIM,LOCALID_ROUTE2_VIGRIM,25,20,DIR_WEST,3)
-
-    spawnobject(OBJ_EVENT_GFX_MYSTERY_GIFT_MAN,LOCALID_ROUTE2_POLICE_A,27,19,DIR_WEST,3)
-    spawnobject(OBJ_EVENT_GFX_MYSTERY_GIFT_MAN,LOCALID_ROUTE2_POLICE_B,27,20,DIR_WEST,3)
-}
-
-
 script VSGarbodor_Scouting_Dialogue {
     lock
         applymovement(PLAYER, Common_Movement_FaceRight)
@@ -222,15 +207,6 @@ script VSGarbodor_MoveCharlotte_Script {
     goto(VSGarbodor_DefeatedAll_Dialogue)
 }
 
-script PathfinderDebug
-{
-    setvar(VAR_CONSTRUCTION_STRIKE_STATE,DEFEATED_GARBODOR)
-        fadeblackandsetremovewarpfadeflag
-        warpsilent(MAP_ROUTE2, 255, 20, 22)
-		waitstate
-        delay(100)
-}
-
 script VSGarbodor_DefeatedAll_Dialogue {
     setvar(VAR_CONSTRUCTION_STRIKE_STATE,DEFEATED_GARBODOR)
 
@@ -244,7 +220,7 @@ script VSGarbodor_DefeatedAll_Dialogue {
         closemessage
 
         fadeblackandsetremovewarpfadeflag
-        warpsilent(MAP_ROUTE2, 255, 20, 22)
+        warpsilent(MAP_ROUTE2, 255, 20, 34)
 		waitstate
         delay(100)
 }
@@ -380,20 +356,5 @@ script VSGarbodor_ReturnToTheCompound_Dialogue
 movement VSGarbodor_PerpWalk {
     walk_left * 15
         step_end
-}
-
-script TheStrikeStrikesBack_Script_AddTurnCharlotteAndSharpriseNorth
-{
-	call(TheStrikeStrikesBack_Script_AddSharpriseCharlotteTide)
-    turnobject(LOCALID_PLAYER,DIR_NORTH)
-    turnobject(LOCALID_ROUTE2_CHARLOTTE,DIR_NORTH)
-    turnobject(LOCALID_ROUTE2_LUCREZIA,DIR_NORTH)
-    turnobject(LOCALID_ROUTE2_OLIVER,DIR_NORTH)
-
-	turnobject(LOCALID_ROUTE2_POLICE_A,DIR_WEST)
-	turnobject(LOCALID_ROUTE2_POLICE_B,DIR_WEST)
-	turnobject(LOCALID_ROUTE2_VIGRIM,DIR_WEST)
-	turnobject(LOCALID_ROUTE2_TIDE_B,DIR_WEST)
-	turnobject(LOCALID_ROUTE2_TIDE_A,DIR_WEST)
 }
 

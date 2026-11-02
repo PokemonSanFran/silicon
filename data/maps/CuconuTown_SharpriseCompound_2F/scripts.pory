@@ -12,7 +12,8 @@ script CuconuTown_Compound_2F_Bed_Script
 {
     lock
     //If has not visited Arantraz after being called there by Baiya, prevent player from sleeping
-    call(YouRealizeTheyreEvilRight_CantSleep_Script)
+    call_if_gt(VAR_ARANTRAZ_STATE,BATTLED_TALA,YouRealizeTheyreEvilRight_CantSleep_Script)
+    call_if_eq(VAR_PLAYER_HOME_STATE,CHECKED_OUT_BEDROOM,Swagbag_Script_PreventSleep)
 
     callnative(HealPlayerParty)
 

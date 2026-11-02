@@ -65,7 +65,7 @@ void DoDailyEvents(u32 daysSince)
     UpdateBirchState(daysSince);
     UpdateFrontierManiac(daysSince);
     UpdateFrontierGambler(daysSince);
-    SetShoalItemFlag(daysSince);
+    //SetShoalItemFlag(daysSince); // siliconMerge
     if (!OW_USE_DAILY_SEED_FOR_VANILLA_VARIABLES)
     {
         UpdateMirageRnd(daysSince);

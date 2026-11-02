@@ -4,8 +4,7 @@ mapscripts CapheCity_MapScripts {
 		callnative(WarpTaxiAfterCutscene)
 	}
     MAP_SCRIPT_ON_TRANSITION {
-        call(EnterAdaora_ObjectCleanUp_Script)
-        call(Quest_ManOfManyHats_Installnatureprobesworker_Attendant_Visibility_Script)
+        call_if_gt(VAR_CAPHE_CITY_STATE,LINE_IS_BLOCKING,EnterAdaora_ObjectCleanUp_Script)
 		call_if_unset(FLAG_SYS_APP_GOOGLE_GLASS_GET,RPS_Script_HideMontyopp)
 		call_if_unset(FLAG_SYS_APP_GOOGLE_GLASS_GET,RPS_Script_HideMonty)
         call_if_quest_not_inactive(QUEST_RPS,RPS_Script_HideMontyopp)
@@ -14,7 +13,6 @@ mapscripts CapheCity_MapScripts {
     }
     MAP_SCRIPT_ON_LOAD
     {
-        call(EnterAdaora_SetConeTiles_Script)
 		call_if_gt(VAR_CAPHE_CITY_STATE,LINE_IS_BLOCKING,EnterAdaora_SetConeTiles_Script)
         call(Quest_Restaurantexpansion_Script_BlockPantry)
     }

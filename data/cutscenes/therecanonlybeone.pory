@@ -25,6 +25,7 @@ script ThereCanOnlyBeOne_SetUpPlayer_Script
         callnative(ClearBag)
         callnative(ZeroPlayerPartyMons)
         setflag(FLAG_SYS_B_DASH)
+		clearflag(FLAG_VISITED_OROLAND_COLISEUM)
     }
     return
 }

@@ -57,18 +57,20 @@
   ],
   "warp_events": [
     {
+      "warp_id": "WARP_ID_POKEMON_CENTER_TO_ESPULEE_OUTSKIRTS_RIGHT",
       "x": 7,
       "y": 8,
       "elevation": 0,
       "dest_map": "MAP_ESPULEE_OUTSKIRTS",
-      "dest_warp_id": "4"
+      "dest_warp_id": "WARP_ID_ESPULEE_OUTSKIRTS_TO_POKEMON_CENTER"
     },
     {
+      "warp_id": "WARP_ID_POKEMON_CENTER_TO_ESPULEE_OUTSKIRTS_LEFT",
       "x": 6,
       "y": 8,
       "elevation": 0,
       "dest_map": "MAP_ESPULEE_OUTSKIRTS",
-      "dest_warp_id": "4"
+      "dest_warp_id": "WARP_ID_ESPULEE_OUTSKIRTS_TO_POKEMON_CENTER"
     }
   ],
   "coord_events": [],

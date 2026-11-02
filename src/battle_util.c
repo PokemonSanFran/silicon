@@ -41,6 +41,7 @@
 #include "pokedex.h"
 #include "mail.h"
 #include "field_weather.h"
+#include "silicon_battle_status_criteria.h" // battleInfo
 #include "constants/abilities.h"
 #include "constants/battle_anim.h"
 #include "constants/battle_move_effects.h"
@@ -2186,6 +2187,8 @@ enum WeatherFailure TryChangeBattleWeather(enum BattlerId battler, u32 battleWea
             gBattleStruct->weatherDuration = 8;
         else
             gBattleStruct->weatherDuration = 5;
+
+        gRecordedMaxBattleStatusValues.weatherDuration = gBattleStruct->weatherDuration; // battleInfo
     }
 
     if (ability != ABILITY_NONE) // Weather started by Ability
@@ -4650,7 +4653,7 @@ u32 AbilityBattleEffects(enum AbilityEffect caseID, enum BattlerId battler, enum
                         break;
                     }
 
-                    StealTargetItem(battler, targetBattler, ITEM_NONE);
+                    StealTargetItem(battler, targetBattler, ITEM_NONE, FALSE);
                     gBattlerAbility = battler;
                     gEffectBattler = targetBattler;
                     BattleScriptCall(BattleScript_MagicianActivates);
@@ -6262,7 +6265,7 @@ static inline u32 CalcTerrainBoostedPower(struct DamageContext *ctx, u32 basePow
         isTerrainAffected = IsBattlerTerrainAffected(ctx->battlerAtk, ctx->abilities[ctx->battlerAtk], ctx->holdEffects[ctx->battlerAtk], GetMoveTerrainBoost_Terrain(ctx->move), ctx->terrain);
     else if (GetMoveTerrainBoost_GroundCheck(ctx->move) == GROUND_CHECK_TARGET)
         isTerrainAffected = IsBattlerTerrainAffected(ctx->battlerDef, ctx->abilities[ctx->battlerDef], ctx->holdEffects[ctx->battlerDef], GetMoveTerrainBoost_Terrain(ctx->move), ctx->terrain);
-    else if (gFieldTimers.terrain == GetMoveTerrainBoost_Terrain(ctx->move)) // no ground check (Psyblade)
+    else if (ctx->terrain == GetMoveTerrainBoost_Terrain(ctx->move)) // no ground check (Psyblade)
         isTerrainAffected = TRUE;
 
     if (isTerrainAffected)
@@ -6914,7 +6917,7 @@ static inline u32 CalcMoveBasePowerAfterModifiers(struct DamageContext *ctx)
         && !IsMultiHitMove(move)
         && moveEffect != EFFECT_POWER_BASED_ON_USER_HP
         && moveEffect != EFFECT_POWER_BASED_ON_TARGET_HP
-        && GetMovePriority(move) == 0)
+        && GetMovePriority(move) <= 0)
     {
         return 60;
     }
@@ -7340,7 +7343,7 @@ static inline u32 CalcDefenseStat(struct DamageContext *ctx)
         }
         break;
     case ABILITY_GRASS_PELT:
-        if (gFieldTimers.terrain == B_TERRAIN_GRASSY && usesDefStat)
+        if (ctx->terrain == B_TERRAIN_GRASSY && usesDefStat)
         {
             modifier = uq4_12_multiply_half_down(modifier, UQ_4_12(1.5));
             if (ctx->updateFlags)
@@ -8013,7 +8016,10 @@ static inline s32 DoFutureSightAttackDamageCalc(struct DamageContext *ctx)
 // The chance is 1/N for each stage.
 static const u32 sGen7CriticalHitOdds[] = {24,  8,  2,  1,   1}; // 1/X
 static const u32 sGen6CriticalHitOdds[] = {16,  8,  2,  1,   1}; // 1/X
-static const u32 sCriticalHitOdds[]     = {16,  8,  4,  3,   2}; // 1/X, Gens 3,4,5
+// start battleInfo
+//static const u32 sCriticalHitOdds[]     = {16,  8,  4,  3,   2}; // 1/X, Gens 3,4,5
+const u32 sCriticalHitOdds[5]           = {16,  8,  4,  3,   2}; // 1/X, Gens 3,4,5
+// end battleInfo
 static const u32 sGen2CriticalHitOdds[] = {17, 32, 64, 85, 128}; // X/256
 
 u32 GetCriticalHitOdds(u32 critChance)
@@ -8038,7 +8044,10 @@ static inline bool32 IsBattlerLeekAffected(enum BattlerId battler, enum HoldEffe
     return FALSE;
 }
 
-static inline u32 GetHoldEffectCritChanceIncrease(enum BattlerId battler, enum HoldEffect holdEffect)
+// start battleInfo
+//static inline u32 GetHoldEffectCritChanceIncrease(enum BattlerId battler, enum HoldEffect holdEffect)
+u32 GetHoldEffectCritChanceIncrease(enum BattlerId battler, enum HoldEffect holdEffect)
+// end battleInfo
 {
     u32 critStageIncrease = 0;
 
@@ -8063,6 +8072,24 @@ static inline u32 GetHoldEffectCritChanceIncrease(enum BattlerId battler, enum H
     return critStageIncrease;
 }
 
+// start battleInfo
+// passive as in, unaffected by a move
+u32 CalcBattlerPassiveCritChance(enum BattlerId battler, enum HoldEffect holdEffect, enum Ability ability)
+{
+    u32 critChance = (gBattleMons[battler].volatiles.focusEnergy != 0 ? 2 : 0)
+                   + (gBattleMons[battler].volatiles.dragonCheer != 0 ? 1 : 0)
+                   + GetHoldEffectCritChanceIncrease(battler, holdEffect)
+                   + ((B_AFFECTION_MECHANICS == TRUE && GetBattlerAffectionHearts(battler) == AFFECTION_FIVE_HEARTS) ? 2 : 0)
+                   + (ability == ABILITY_SUPER_LUCK ? 1 : 0)
+                   + gBattleMons[battler].volatiles.bonusCritStages;
+
+    if (critChance >= ARRAY_COUNT(sCriticalHitOdds))
+        critChance = ARRAY_COUNT(sCriticalHitOdds) - 1;
+
+    return critChance;
+}
+// end battleInfo
+
 s32 CalcCritChanceStage(struct DamageContext *ctx)
 {
     s32 critChance = 0;
@@ -8079,6 +8106,8 @@ s32 CalcCritChanceStage(struct DamageContext *ctx)
     }
     else
     {
+        // start battleInfo
+        /*
         critChance  = (gBattleMons[ctx->battlerAtk].volatiles.focusEnergy != 0 ? 2 : 0)
                     + (gBattleMons[ctx->battlerAtk].volatiles.dragonCheer != 0 ? 1 : 0)
                     + GetMoveCriticalHitStage(ctx->move)
@@ -8086,6 +8115,10 @@ s32 CalcCritChanceStage(struct DamageContext *ctx)
                     + ((B_AFFECTION_MECHANICS == TRUE && GetBattlerAffectionHearts(ctx->battlerAtk) == AFFECTION_FIVE_HEARTS) ? 2 : 0)
                     + (ctx->abilities[ctx->battlerAtk] == ABILITY_SUPER_LUCK ? 1 : 0)
                     + gBattleMons[ctx->battlerAtk].volatiles.bonusCritStages;
+        */
+        critChance = CalcBattlerPassiveCritChance(ctx->battlerAtk, ctx->holdEffects[ctx->battlerAtk], ctx->abilities[ctx->battlerAtk])
+                   + GetMoveCriticalHitStage(ctx->move);
+        // end battleInfo
 
         if (critChance >= ARRAY_COUNT(sCriticalHitOdds))
             critChance = ARRAY_COUNT(sCriticalHitOdds) - 1;
@@ -9419,25 +9452,64 @@ void SortBattlersBySpeed(enum BattlerId *battlers, bool32 slowToFast)
     }
 }
 
+struct LostItem *GetLostItemState(enum BattleTrainer trainer, u32 slot)
+{
+    return &gBattleStruct->itemLost[trainer][slot];
+}
+
+void SetItemsToRestoreAfterBattle(enum BattleTrainer trainer, u32 partySlot)
+{
+    gBattleStruct->partyState[trainer][partySlot].usedHeldItem = ITEM_NONE;
+
+    struct LostItem *lostItem = GetLostItemState(trainer, partySlot);
+    lostItem->originalItem = GetMonData(&gParties[trainer][partySlot], MON_DATA_HELD_ITEM);
+    lostItem->restoreAfterBattle = B_RESTORE_HELD_BATTLE_ITEMS >= GEN_9 || B_TRAINERS_KNOCK_OFF_ITEMS;
+}
+
 void TryRestoreHeldItems(void)
 {
-    if (!B_TRAINERS_KNOCK_OFF_ITEMS && B_RESTORE_HELD_BATTLE_ITEMS < GEN_9)
-        return;
-
-    bool32 returnNPCItems = B_RETURN_STOLEN_NPC_ITEMS >= GEN_5 && gBattleTypeFlags & BATTLE_TYPE_TRAINER;
-
-    for (u32 i = 0; i < PARTY_SIZE; i++)
+    for (enum BattleTrainer trainer = 0; trainer < gBattlersCount; trainer++)
     {
-        if (gBattleStruct->itemLost[B_TRAINER_PLAYER][i].stolen || returnNPCItems)
+        for (u32 partySlot = 0; partySlot < PARTY_SIZE; partySlot++)
         {
-            enum Item lostItem = gBattleStruct->itemLost[B_TRAINER_PLAYER][i].originalItem;
+            struct LostItem *lostItem = GetLostItemState(trainer, partySlot);
+            enum Item originaItem = lostItem->originalItem;
 
-            if (GetItemPocket(lostItem) == POCKET_BERRIES && GetMonData(&gParties[B_TRAINER_PLAYER][i], MON_DATA_HELD_ITEM) != lostItem)
-                lostItem = ITEM_NONE;
+            if (lostItem->wildItemPending)
+            {
+                AddBagItem(originaItem, 1);
+                continue;
+            }
 
-            if ((lostItem != ITEM_NONE || returnNPCItems) && GetItemPocket(lostItem) != POCKET_BERRIES)
-                SetMonData(&gParties[B_TRAINER_PLAYER][i], MON_DATA_HELD_ITEM, &lostItem);
+            if (!lostItem->stolen && !lostItem->restoreAfterBattle)
+                continue;
+
+            if (originaItem == ITEM_NONE)
+                continue;
+
+            if (GetItemPocket(originaItem) == POCKET_BERRIES)
+                continue;
+
+            SetMonData(&gParties[trainer][partySlot], MON_DATA_HELD_ITEM, &originaItem);
         }
+    }
+}
+
+void RestoreCaughtWildMonHeldItem(struct Pokemon *mon, enum BattlerId battler)
+{
+    struct LostItem *lostItem = GetLostItemState(GetBattlerTrainer(battler), gBattlerPartyIndexes[battler]);
+
+    if (GetMonData(mon, MON_DATA_HELD_ITEM) != lostItem->originalItem)
+    {
+        enum Item itemToRestore = ITEM_NONE;
+        SetMonData(mon, MON_DATA_HELD_ITEM, &itemToRestore);
+    }
+
+    if (lostItem->wildItemPending)
+    {
+        enum Item itemToRestore = lostItem->originalItem;
+        SetMonData(mon, MON_DATA_HELD_ITEM, &itemToRestore);
+        lostItem->wildItemPending = FALSE;
     }
 }
 

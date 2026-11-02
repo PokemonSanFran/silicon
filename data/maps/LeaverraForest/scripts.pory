@@ -35,7 +35,7 @@ script LeaverraForest_ShoreSign_Script
 {
     buffermapname(STR_VAR_1,MAP_LEAVERRA_FOREST)
     msgbox("Fishing in {STR_VAR_1} is strictly\nprohibited due to the conservation of\naquatic wildlife. Violators will be\lgiven significant fines.",MSGBOX_SIGN)
-	goto_if_quest_not_inactive(QUEST_INSTALLNATUREPROBES,Quest_InstallNatureProbes_InstallForestProbe_Script)
+	goto_if_quest_not_inactive(QUEST_INSTALLNATUREPROBES,Quest_InstallNatureProbes_InstallShoreProbe_Script)
 	closemessage
 	release
 	end

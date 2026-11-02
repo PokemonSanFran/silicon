@@ -116,7 +116,6 @@ void CountDefeatedGlameow(void);
 void CountDefeatedGardenMons(void);
 void CountDefeatedCresaltaVista(void);
 void CountDefeatedBackyard(void);
-//void CustomTrainerPartyAssignMoves(struct Pokemon *mon, const struct TrainerMon *partyEntry);
 // End siliconMerge
 bool32 CanPlayerForfeitNormalTrainerBattle(void);
 bool32 DidPlayerForfeitNormalTrainerBattle(void);

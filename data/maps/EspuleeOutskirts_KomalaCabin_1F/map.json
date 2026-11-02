@@ -31,18 +31,20 @@
   ],
   "warp_events": [
     {
+      "warp_id": "WARP_ID_KOMALA_KABIN_TO_ESPULEE_OUTSKIRTS_LEFT",
       "x": 3,
       "y": 7,
       "elevation": 0,
       "dest_map": "MAP_ESPULEE_OUTSKIRTS",
-      "dest_warp_id": "5"
+      "dest_warp_id": "WARP_ID_ESPULEE_OUTSKIRTS_TO_KOMALA_KABIN"
     },
     {
+      "warp_id": "WARP_ID_KOMALA_KABIN_TO_ESPULEE_OUTSKIRTS_RIGHT",
       "x": 4,
       "y": 7,
       "elevation": 0,
       "dest_map": "MAP_ESPULEE_OUTSKIRTS",
-      "dest_warp_id": "5"
+      "dest_warp_id": "WARP_ID_ESPULEE_OUTSKIRTS_TO_KOMALA_KABIN"
     },
     {
       "x": 3,

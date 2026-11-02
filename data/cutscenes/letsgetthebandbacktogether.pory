@@ -58,7 +58,7 @@ script LetsGettheBandBackTogether_MeetInBasement_Script
 
     msgbox(format("What am I missing? Can’t we just call them or something?"),,SPEAKER_ALICIA)
 
-    msgbox(format("Eleanor hasn’t been heard from ever since SharpRise Capital took over. Just up and disappeared. I thought the other members would have heard from him, but Magnus said he’s been totally gone. They’re not even sure if they’re in the region anymore."),,SPEAKER_BAIYA)
+    msgbox(format("Eleanor hasn’t been heard from ever since SharpRise Capital took over. Just up and disappeared. I thought the other members would have heard from her, but Magnus said she’s been totally gone. They’re not even sure if they’re in the region anymore."),,SPEAKER_BAIYA)
 
     msgbox(format("Let’s split up. I’m going to talk to Adaora and try to convince them of the plan going forward. Can you see if you can get an idea where Eleanor might be?"),,SPEAKER_BAIYA)
     msgbox(format("We should start rallying the people behind our cause. You’re the champ, after all, let’s put that clout to work."),,SPEAKER_BAIYA)
@@ -108,7 +108,8 @@ script LetsGettheBandBackTogether_TrueTimelineSplit_Script {
 
         msgbox(format("Where do I even start?"),,SPEAKER_ALICIA)
 
-        msgbox(format("Try the newspaper in Perlacia City, they did an interview with Eleanor right before she disappeared.  I’m gonna make some moves too."),,SPEAKER_BAIYA)
+	buffermapname(STR_VAR_1,MAP_OROLAND_NEWSPAPER)
+        msgbox(format("Try the newspaper in {STR_VAR_1}, they did an interview with Eleanor right before she disappeared.  I’m gonna make some moves too."),,SPEAKER_BAIYA)
 
         closemessage
         applymovement(BAIYA, moves(walk_left * 2, walk_down * 2, step_end))

@@ -20,12 +20,12 @@
     },
     {
       "map": "MAP_CAPHE_CITY",
-      "offset": 7,
+      "offset": 6,
       "direction": "up"
     },
     {
       "map": "MAP_MERMEREZA_CITY",
-      "offset": 9,
+      "offset": 0,
       "direction": "down"
     }
   ],

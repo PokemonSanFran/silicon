@@ -25,12 +25,18 @@ script Quest_Inversehallucinogenic_HideLeaderInGym_Script{
     return
 }
 
-script Quest_Inversehallucinogenic_ControlLeaderVisibilityOutside_Script{
-    questmenu(QUEST_MENU_CHECK_ACTIVE,QUEST_INVERSEHALLUCINOGENIC)
-    if ((var(VAR_BD_STATE) != QUEST_1_COMPLETE) || var(VAR_RESULT)){
-        setflag(FLAG_HIDE_BD_OUTSIDE)
-    }
-    return
+script Quest_Inversehallucinogenic_HideBDOutside_Script
+{
+	setflag(FLAG_HIDE_BD_OUTSIDE)
+}
+
+script Quest_Inversehallucinogenic_ControlLeaderVisibilityOutside_Script
+{
+	call_if_lt(VAR_STORYLINE_STATE,STORY_DEFEATED_GARBODOR,Quest_Inversehallucinogenic_HideBDOutside_Script)
+	call_if_quest_not_complete(QUEST_SHUTDOWNMEDICINEMAN,Quest_Inversehallucinogenic_HideBDOutside_Script)
+	call_if_quest_active(QUEST_INVERSEHALLUCINOGENIC,Quest_Inversehallucinogenic_HideBDOutside_Script)
+	call_if_quest_reward(QUEST_INVERSEHALLUCINOGENIC,Quest_Inversehallucinogenic_HideBDOutside_Script)
+	call_if_quest_complete(QUEST_INVERSEHALLUCINOGENIC,Quest_Inversehallucinogenic_HideBDOutside_Script)
 }
 
 script Quest_Inversehallucinogenic_ControlTrainerVisibility_Script{

@@ -19,7 +19,7 @@ script WarpPlayerAfterFogEncounter
 
     if (var(VAR_0x8004) == MAP_ROUTE5)
     {
-        warpsilent(MAP_ROUTE5,18,5)
+        warpsilent(MAP_ROUTE5,57,11)
     }
 
     waitstate

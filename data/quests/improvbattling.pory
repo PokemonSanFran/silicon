@@ -366,10 +366,12 @@ script Improvbattling_Script_PlayerLost
     msgbox(format("Anytime you want to join us again just come up on stage."),,SPEAKER_IMPROVTROUPEA)
     msgbox(format("Unless one of us makes it big in the acting world, we'll be here!"),,SPEAKER_IMPROVTROUPEA)
     closemessage
+	callnative(Script_Improvbattling_ShouldLeaderMoveOffStage)
+	goto_if_eq(VAR_RESULT,TRUE,RestoreZenzuIsland_Script_RecruitImprovtroupeAEarly)
     moveobjecttocoords(LOCALID_PLAYER,4,5,DIR_NORTH)
-    applymovement(LOCALID_PETAROSA_THEATER_IMPROVTROUPEA,moves(walk_faster_down * 2))
     waitmovement(LOCALID_PLAYER)
     playse(SE_PIN)
+    applymovement(LOCALID_PETAROSA_THEATER_IMPROVTROUPEA,moves(emote_exclamation_mark, walk_faster_down * 2))
     waitmovement(LOCALID_PETAROSA_THEATER_IMPROVTROUPEA)
     waitse
     msgbox(format("You forgot your Pokémon!"),,SPEAKER_IMPROVTROUPEA)

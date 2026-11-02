@@ -3,7 +3,7 @@ const PLAYER = OBJ_EVENT_ID_PLAYER
 
 mapscripts WajabiLake_MapScripts{
     MAP_SCRIPT_ON_TRANSITION{
-        call(Quest_Theboywhocriedwithwolves_Ambrogio_Visibility_Script)
+        call(Quest_Theboywhocriedwithwolves_Boywhocriedwolvesdoctor_Visibility_Script)
         call(Quest_ManOfManyHats_Installnatureprobesworker_Fisherman_Visibility_Script)
         call_if_quest_inactive(QUEST_TEACHATRAINERTOFISH,TeachATrainerToFish_Script_HideLakeTeachTrainerFishA)
     }
@@ -20,10 +20,37 @@ script WajabiLake_Script_CheckIfPlayerMember
     end
 }
 
+script WajabiLake_Dialogue_DenyPlayer
+{
+    msgbox(format("Scanning.{PAUSE 30}.{PAUSE 30}.{PAUSE 30}.{PLAY_SE SE_FAILURE} Access denied. The Wajabi Golf Course is invitation only."),,SPEAKER_SPEAKER)
+    waitse
+}
+
+script WajabiLake_Interact_Keypad
+{
+    lock
+    goto_if_quest_not_complete(QUEST_BUTONLYINMYBACKYARD,WajabiLake_Interact_KeypaidFail)
+
+        msgbox(format("Scanning.{PAUSE 30}.{PAUSE 30}.{PAUSE 30}.{PLAY_SE SE_SUCCESS} You have been recognized as {PLAYER}."),,SPEAKER_SPEAKER)
+        waitse
+        msgbox(format("Please enter."),,SPEAKER_SPEAKER)
+        closemessage
+        release
+        end
+}
+
+script WajabiLake_Interact_KeypaidFail
+{
+    call(WajabiLake_Dialogue_DenyPlayer)
+        closemessage
+        release
+        end
+}
+
 script WajabiLake_Membersonly_Dialogue
 {
     lock
-    msgbox(format("Access is denied. This area is members only."),,SPEAKER_SPEAKER)
+    call(WajabiLake_Dialogue_DenyPlayer)
     msgbox(format("First place that even SharpriseCapital couldn't get me into..."),,SPEAKER_ALICIA,TAIL_THOUGHT)
     closemessage
     applymovement(PLAYER,Common_Movement_WalkUp)

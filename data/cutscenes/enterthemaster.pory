@@ -14,24 +14,20 @@ script EnterTheMaster_LeaverraForest_Inner_ObjectSetup_Script
 {
     switch (var(VAR_LEAVERRA_FOREST_STATE))
     {
+        case LEAVERRA_FOREST_MAZE_COMPLETE:
+        case FINISHED_FRANK_PUZZLES:
+            return
+        case MET_FRANK:
+            call(EnterTheMaster_RepositionCharlotteToRobot_Script)
+		default:
         case CHARLOTTE_WAITING_LEAVERRA_FOREST:
-            call(EnterTheMaster_LeaverraForest_Inner_HideObjects_Script)
         case CHARLOTTE_ENTERED_LEAVERRA_FOREST:
-            call(EnterTheMaster_LeaverraForest_Inner_HideObjects_Script)
         case POST_HAVE_YOU_SEEN_THE_NEWS:
 			call_if_lt(VAR_STORYLINE_STATE,STORY_CLEAR,Quest_Rematches_Script_HideFrank)
 			call_if_quest_not_complete(QUEST_WAREHOUSEWARFARE,Quest_Rematches_Script_HideFrank)
 			setobjectflagfromlocalid(LOCALID_LEAVERRA_CHARLOTTE)
 			setobjectflagfromlocalid(LOCALID_LEAVERRA_ROBOT_LEFT)
 			setobjectflagfromlocalid(LOCALID_LEAVERRA_ROBOT_RIGHT)
-        case LEAVERRA_FOREST_MAZE_COMPLETE:
-            return
-        case MET_FRANK:
-            call(EnterTheMaster_RepositionCharlotteToRobot_Script)
-        case FINISHED_FRANK_PUZZLES:
-            return
-		default:
-            return
     }
 }
 
@@ -274,7 +270,7 @@ script EnterTheMaster_MegaEvolution_Dialogue
     }
     else
     {
-        msgbox(format("Your {STR_VAR_1} is capable of Mega Evolution, as long as its holding the correspond Mega Stone, the {STR_VAR_2}."),MSGBOX_DEFAULT,SPEAKER_CHARLOTTE)
+        msgbox(format("Your {STR_VAR_1} is capable of Mega Evolution, as long as its holding the corresponding Mega Stone, the {STR_VAR_2}."),MSGBOX_DEFAULT,SPEAKER_CHARLOTTE)
     }
 }
 

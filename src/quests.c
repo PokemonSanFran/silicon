@@ -1763,10 +1763,12 @@ const u8 *GetQuestMap(s32 questId)
 
 const u8 *GetQuestRewardDesc(s32 questId)
 {
-    if (sSideQuests[questId].desc[FLAG_GET_REWARD] == NULL)
-        return gText_ExpandedPlaceholder_Empty;
-
-    return sSideQuests[questId].desc[FLAG_GET_REWARD];
+    if (sSideQuests[questId].descFunc == NULL)
+    {
+        if (sSideQuests[questId].desc[FLAG_GET_REWARD] == NULL)
+            return gText_ExpandedPlaceholder_Empty;
+    }
+    return sSideQuests[questId].descFunc();
 }
 
 const u8 *GetQuestDesc(s32 questId)

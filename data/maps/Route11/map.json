@@ -29,11 +29,6 @@
       "direction": "left"
     },
     {
-      "map": "MAP_ROUTE16",
-      "offset": 0,
-      "direction": "down"
-    },
-    {
       "map": "MAP_PALACEFINEARTS",
       "offset": 36,
       "direction": "up"

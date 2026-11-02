@@ -447,7 +447,7 @@ CleanuppoliceA gestures towards Player.
 ### Interact with CleanuppoliceA and Second Quest Active and Timeline True
 
 * CleanuppoliceA asks if the cleanup is going well
-* Player says its disguisting to use cleanup to talk about people - those are people being harassed
+* Player says its disgusting to use cleanup to talk about people - those are people being harassed
 * CleanuppoliceA claims they're just doing their job and people have to follow the rules
 * CleanuppoliceA says if the Player doesn't want to help, then get out of the way
 

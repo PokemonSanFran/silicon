@@ -74,7 +74,7 @@
 #define VAR_EARTHQUAKE_COUNT                                        0x4024
 #define VAR_EARTHQUAKE_STEP_COUNTER                                 0x4025
 #define VAR_DEXNAV_STEP_COUNTER                                     0x4026
-#define VAR_SILICON_UNUSED_0x4027                                   0x4027
+#define VAR_SILICON_LAST_REPEL_LURE_USED                            0x4027
 #define VAR_SILICON_UNUSED_0x4028                                   0x4028
 #define VAR_SILICON_UNUSED_0x4029                                   0x4029
 //#define VAR_FRIENDSHIP_STEP_COUNTER                               0x402A
@@ -238,7 +238,7 @@
 #define VAR_CYCLING_CHALLENGE_STATE                                 0x407F
 
 #define VAR_BEACH_BATTLE_STATE                                      0x4070
-#define VAR_CONSTRUCTION_STRIKE_STATE                               0x4071
+#define VAR_UNUSED_CURSED                                           0x4071 // this var randomly gets set to 1. i have no idea why. I have no idea how to fix it. don't use this var for anything.
 #define VAR_INNER_CONSTRUCTION_SITE_STATE                           0x4072
 #define VAR_TIME_TRAVEL_STATE                                       0x4073
 #define VAR_TOWER_RAID_STATE                                        0x4074
@@ -249,7 +249,7 @@
 #define VAR_LETSBURNTHISMOTHERSTATE                                 0x4079
 #define VAR_PLAYER_HOME_STATE                                       0x407A
 #define VAR_CAPHE_CITY_STATE                                        0x407B
-#define VAR_SILICON_UNUSED_0x407C                                   0x407C
+#define VAR_CONSTRUCTION_STRIKE_STATE                               0x407C
 #define VAR_SILICON_UNUSED_0x407D                                   0x407D
 #define VAR_SILICON_UNUSED_0x407E                                   0x407E
 #define VAR_SILICON_UNUSED_0x407F                                   0x407F
@@ -271,7 +271,7 @@
 #define VAR_NEW_MAUVILLE_STATE                                      0x408E
 #define VAR_BRAVO_TRAINER_BATTLE_TOWER_ON                           0x408F
 
-#define VAR_CHASILLA_AXE_STATE                                      0x4080
+#define VAR_SILICON_UNUSED_0x4080                                   0x4080
 #define VAR_DANCEBATTLE_STATE                                       0x4081
 #define VAR_DEFEATED_GLAMEOW_COUNT                                  0x4082
 #define VAR_DEFEATED_CRESALTA_VISTA_COUNT                           0x4083

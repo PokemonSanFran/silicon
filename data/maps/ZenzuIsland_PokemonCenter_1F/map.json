@@ -57,18 +57,20 @@
   ],
   "warp_events": [
     {
+      "warp_id": "WARP_CENTER_TO_ZENZU_ISLAND_RIGHT",
       "x": 7,
       "y": 8,
       "elevation": 0,
       "dest_map": "MAP_ZENZU_ISLAND",
-      "dest_warp_id": "1"
+      "dest_warp_id": "WARP_ZENZU_ISLAND_TO_CENTER"
     },
     {
+      "warp_id": "WARP_CENTER_TO_ZENZU_ISLAND_LEFT",
       "x": 6,
       "y": 8,
       "elevation": 0,
       "dest_map": "MAP_ZENZU_ISLAND",
-      "dest_warp_id": "1"
+      "dest_warp_id": "WARP_ZENZU_ISLAND_TO_CENTER"
     }
   ],
   "coord_events": [],

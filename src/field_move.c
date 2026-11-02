@@ -50,7 +50,7 @@ const struct FieldMoveUnlock gFieldMoveUnlocks[FIELD_MOVE_UNLOCK_COUNT] =
     [QUEST_UNLOCK] = 
     {
         .isUnlockedFunc = HasQuestForFieldMove,
-        .lockedMessage = COMPOUND_STRING("You need somebody to teach you!"),
+        .lockedMessage = COMPOUND_STRING("You need somebody to teach you!{PAUSE_UNTIL_PRESS}"),
     },
     // End siliconMerge
 };

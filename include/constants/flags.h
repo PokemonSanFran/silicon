@@ -167,7 +167,7 @@
 #define FLAG_UNHOUSED_REQUEST                                        0x56
 #define FLAG_FIRST_STEP_OUTSIDE                                      0x57
 #define FLAG_PLAYER_USING_TAXI                                       0x58
-#define FLAG_SILICON_UNUSED_0x59                                     0x59
+#define FLAG_QUEST_WALLACEARMY_WALLACEARMYSTANF_READY                0x59
 #define FLAG_SILICON_UNUSED_0x5A                                     0x5A
 #define FLAG_SILICON_UNUSED_0x5B                                     0x5B
 #define FLAG_SILICON_UNUSED_0x5C                                     0x5C
@@ -1325,12 +1325,12 @@
 #define FLAG_ITEM_WAJABI_LAKE_STUFF1                                 0x273
 #define FLAG_ITEM_WAJABI_LAKE_STUFF2                                 0x274
 #define FLAG_ITEM_WAJABI_LAKE_STUFF3                                 0x275
-#define FLAG_ITEM_WAJABI_LAKE_STUFF4                                 0x276
-#define FLAG_ITEM_WAJABI_LAKE_STUFF5                                 0x277
-#define FLAG_ITEM_WAJABI_LAKE_STUFF6                                 0x278
-#define FLAG_ITEM_WAJABI_LAKE_STUFF7                                 0x279
-#define FLAG_ITEM_WAJABI_LAKE_STUFF8                                 0x27A
-#define FLAG_ITEM_WAJABI_LAKE_STUFF9                                 0x27B
+#define FLAG_SILICON_UNUSED_0x276                                    0x276
+#define FLAG_SILICON_UNUSED_0x277                                    0x277
+#define FLAG_SILICON_UNUSED_0x278                                    0x278
+#define FLAG_SILICON_UNUSED_0x279                                    0x279
+#define FLAG_SILICON_UNUSED_0x27A                                    0x27A
+#define FLAG_SILICON_UNUSED_0x27B                                    0x27B
 #define FLAG_SILICON_UNUSED_0x27C                                    0x27C
 #define FLAG_SILICON_UNUSED_0x27D                                    0x27D
 #define FLAG_SILICON_UNUSED_0x27E                                    0x27E

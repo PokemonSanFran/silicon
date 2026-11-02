@@ -20,9 +20,9 @@ script Quest_Bodegaburnout_Dialouge_EleanorStart
     startquest(QUEST_BODEGABURNOUT)
     msgbox(format("It's easier to stay competitive if your competition is weaker, eh?"),,SPEAKER_ELEANOR)
     closemessage
-    applymovement(LOCALID_ARANTRAZ_ELEANOR,moves(walk_up * 6))
-    waitmovement(LOCALID_ARANTRAZ_ELEANOR)
-    removeobject(LOCALID_ARANTRAZ_ELEANOR)
+    applymovement(LOCALID_ARANTRAZ_MESSHALL_ELEANOR,moves(walk_up * 6))
+    waitmovement(LOCALID_ARANTRAZ_MESSHALL_ELEANOR)
+    removeobject(LOCALID_ARANTRAZ_MESSHALL_ELEANOR)
     release
     end
 }

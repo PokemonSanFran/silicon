@@ -30,7 +30,7 @@ script Quest_Allthatglittersmightbegold_Interact_Elior_Script{
 }
 
 script Quest_Allthatglittersmightbegold_StartQuest_Dialogue{
-    msgbox(format("Hey there, young one. You look like you're up for a challenge! My boat here and I, we go fishing out in the Bay every weekend. My newphew got me one of them fancy underside camera for my boat, and I was watching it and... well come look!"),MSGBOX_NPC,SPEAKER_ELIOR,,)
+    msgbox(format("Hey there, young one. You look like you're up for a challenge! My boat here and I, we go fishing out in the Bay every weekend. My nephew got me one of them fancy underside camera for my boat, and I was watching it and... well come look!"),MSGBOX_NPC,SPEAKER_ELIOR,,)
         closemessage
         goto(Quest_Allthatglittersmightbegold_BeforeVideo_Script)
 }
@@ -86,8 +86,8 @@ script Quest_Allthatglittersmightbegold_CoreEncounter_Script{
     startmenu_savescreen
         faceplayer
         setflag(FLAG_FORCE_SHINY)
-        setwildbattle(SPECIES_FLOATZEL, 60, ITEM_NONE)
-        playmoncry(SPECIES_FLOATZEL, CRY_MODE_ENCOUNTER)
+        setwildbattle(SPECIES_DONDOZO, 60, ITEM_NONE)
+        playmoncry(SPECIES_DONDOZO, CRY_MODE_ENCOUNTER)
         waitmoncry
         playse(SE_SHINY)
         call(Quest_Allthatglittersmightbegold_StartSparkle_Script)

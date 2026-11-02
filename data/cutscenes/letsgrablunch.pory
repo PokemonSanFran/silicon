@@ -1,8 +1,4 @@
 const PLAYER = OBJ_EVENT_ID_PLAYER
-const BAIYA = 1
-const FLAG_HIDE_BAIYA = FLAG_TEMP_2
-
-//the quest log should also reflect this
 
 script LetsGrabLunch_HideBaiya_Outside_Script
 {
@@ -14,15 +10,22 @@ script LetsGrabLunch_HideBaiya_Inside_Script
     setobjectflagfromlocalid(LOCALID_HODOU_RESTAURANT_BAIYA)
 }
 
+script LetsGrabLunch_MoveBaiya_Outside_Script
+{
+    setobjectxy(LOCALID_ZENZU_ISLAND_BAIYA,5,13)
+    setobjectxyperm(LOCALID_ZENZU_ISLAND_BAIYA,5,13)
+    setobjectmovementtype(LOCALID_ZENZU_ISLAND_BAIYA,MOVEMENT_TYPE_FACE_DOWN)
+}
+
 script LetsGrabLunch_StartConversation_Dialogue {
     lockall
         setvar(VAR_STORYLINE_STATE,STORY_SAVE_BAIYA_ZENZU_ISLAND)
-        clearflag(FLAG_TEMP_1)
-        addobject(BAIYA)
+		clearobjectflagfromlocalid(LOCALID_ZENZU_ISLAND_BAIYA)
+        addobject(LOCALID_ZENZU_ISLAND_BAIYA)
         playbgm(MUS_ENCOUNTER_CHAMPION,TRUE)
         applymovement(PLAYER,Common_Movement_FaceRight)
-        applymovement(BAIYA, moves(walk_left * 7, step_end))
-        waitmovement(0)
+		moveobjecttocoords(LOCALID_ZENZU_ISLAND_BAIYA,6,13,DIR_WEST)
+        waitmovement(LOCALID_ZENZU_ISLAND_BAIYA)
 
         msgbox(format("Huh. What are you doing here? Shouldn't you be busy?"),,SPEAKER_BAIYA)
 

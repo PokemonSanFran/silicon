@@ -27,7 +27,7 @@
   "object_events": [
     {
       "local_id": "LOCALID_ANGELDELIVERYBIKERA",
-      "graphics_id": "OBJ_EVENT_GFX_MAN_5",
+      "graphics_id": "OBJ_EVENT_GFX_ANGELDELIVERYBIKERA",
       "x": 6,
       "y": 18,
       "elevation": 0,

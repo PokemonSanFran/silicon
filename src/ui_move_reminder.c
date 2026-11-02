@@ -27,6 +27,8 @@
 #include "line_break.h"
 #include "international_string_util.h"
 #include "battle_main.h"
+#include "event_data.h"
+#include "pokemon_summary_screen.h"
 #include "quests.h"
 #include "ui_pokedex.h"
 #include "ui_mon_summary.h"
@@ -140,6 +142,7 @@ static bool32 MiscUtil_IsInputAdditive(s32);
 
 static void MainPage_ChooseMoveToTeach(u8);
 static void MainPage_ChooseMoveToForget(u8);
+static void MainPage_ExitSelectMove(u8, u32);
 static void MainPage_WaitCloseMessage(u8);
 static void MainPage_ResetListIdx(void);
 static void MainPage_NavigateList(s32, u32);
@@ -213,6 +216,16 @@ void MoveReminder_Init(enum MoveReminderModes mode, MainCallback callback, void 
     SetMainCallback2(CB2_InitSetup);
 }
 
+void MoveReminder_InitSelectMove(MainCallback callback, struct Pokemon *mon, enum Move newMove)
+{
+    MoveReminder_Init(MREMINDER_MODE_SELECT_MOVE, callback, mon, FALSE);
+    if (sMoveReminderDataPtr == NULL)
+        return;
+
+    sMoveReminderDataPtr->moveToTeach = newMove;
+    PageInterface_SetSubValue(SUBPAGE_INTERFACE_MAIN_CHOOSE_MOVE);
+}
+
 static void CB2_MoveReminder(void)
 {
     RunTasks();
@@ -264,7 +277,9 @@ static void CB2_InitSetup(void)
         ResetPaletteFade();
         FreeAllWindowBuffers();
         ResetSpriteData();
-        ResetTasks();
+        // persist the evolution scene task
+        if (MReminderMode_GetValue() != MREMINDER_MODE_SELECT_MOVE)
+            ResetTasks();
         gMain.state++;
         break;
     case INIT_SETUP_MONDATA:
@@ -1394,6 +1409,13 @@ static void MainPage_ChooseMoveToForget(u8 taskId)
 
     if (JOY_NEW(A_BUTTON))
     {
+        if (MReminderMode_GetValue() == MREMINDER_MODE_SELECT_MOVE)
+        {
+            PlaySE(SE_SELECT);
+            MainPage_ExitSelectMove(taskId, MainPage_GetCurrListIdx());
+            return;
+        }
+
         if (MainPage_GetCurrListIdx() == MAX_MON_MOVES)
         {
             MiscUtil_CancelTeachMove();
@@ -1417,9 +1439,25 @@ static void MainPage_ChooseMoveToForget(u8 taskId)
 
     if (JOY_NEW(B_BUTTON))
     {
+        if (MReminderMode_GetValue() == MREMINDER_MODE_SELECT_MOVE)
+        {
+            PlaySE(SE_PC_OFF);
+            MainPage_ExitSelectMove(taskId, MAX_MON_MOVES);
+            return;
+        }
+
         MiscUtil_CancelTeachMove();
         return;
     }
+}
+
+static void MainPage_ExitSelectMove(u8 taskId, u32 moveSlot)
+{
+    SetMoveSlotToReplace(moveSlot);
+    gSpecialVar_0x8005 = moveSlot;
+    gSpecialVar_Result = (moveSlot != MAX_MON_MOVES);
+    BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
+    gTasks[taskId].func = Task_MReminderInput_WaitFadeAndExit;
 }
 
 static void MainPage_WaitCloseMessage(u8 taskId)
@@ -1772,8 +1810,8 @@ static void MainPage_PrintMoveCategory(enum Move move)
     if (move == MOVE_NONE) return;
 
     BlitBitmapRectToWindow(MREMINDER_WINDOW_MAIN, sMoveReminder_CategoriesBlit,
-        0, category * 16,
-        16, 16 * DAMAGE_CATEGORY_COUNT,
+        0, (category - DAMAGE_CATEGORY_PHYSICAL) * 16,
+        16, 16 * (DAMAGE_CATEGORY_COUNT - DAMAGE_CATEGORY_PHYSICAL),
         PAGE_MAIN_MOVE_DETAILS_CAT_X, PAGE_MAIN_MOVE_DETAILS_CAT_Y,
         11, 9);
 }
@@ -1882,7 +1920,7 @@ static void FilterPage_HandleInput(u8 taskId)
             FilterPage_ToggleTypeFilter(type);
             break;
         case FILTER_GRID_Y_CATEGORY:
-            FilterPage_ToggleCategoryFilter(FilterPage_GetGridX());
+            FilterPage_ToggleCategoryFilter(DAMAGE_CATEGORY_PHYSICAL + FilterPage_GetGridX());
             break;
         case FILTER_GRID_Y_METHOD:
             FilterPage_ToggleMethodFilter(FilterPage_GetGridX());
@@ -2078,7 +2116,7 @@ static void FilterPage_PrintCategory(void)
         MREMINDER_TXTCLR_DEFAULT);
 
     u32 x = PAGE_FILTER_CLASSIFICATION_BASE_X, y = PAGE_FILTER_CLASSIFICATION_BASE_Y;
-    for (enum DamageCategory category = 0; category < DAMAGE_CATEGORY_COUNT; category++)
+    for (enum DamageCategory category = DAMAGE_CATEGORY_PHYSICAL; category < DAMAGE_CATEGORY_COUNT; category++)
     {
         bool32 filter = FilterPage_IsCategoryFilterActive(category);
         enum MoveReminderTextColors txtClr = filter ? MREMINDER_TXTCLR_FILTER : MREMINDER_TXTCLR_DEFAULT;
@@ -2086,7 +2124,7 @@ static void FilterPage_PrintCategory(void)
         MiscUtil_AddTextPrinter(MREMINDER_WINDOW_MAIN, gDamageCategoryNames[category], FONT_OUTLINED, x, y, txtClr);
 
         x += PAGE_FILTER_CLASSIFICATION_BASE_PADDING;
-        if (category) x += category;
+        if (category != DAMAGE_CATEGORY_PHYSICAL) x += category - DAMAGE_CATEGORY_PHYSICAL;
     }
 }
 

@@ -30,18 +30,20 @@
   ],
   "warp_events": [
     {
+      "warp_id": "WARP_ID_ELITE_HOME_TO__ESPULEE_OUTSKIRTS_LEFT",
       "x": 4,
       "y": 9,
       "elevation": 0,
       "dest_map": "MAP_ESPULEE_OUTSKIRTS",
-      "dest_warp_id": "1"
+      "dest_warp_id": "WARP_ID_ESPULEE_OUTSKIRTS_TO_ELITE_HOME"
     },
     {
+      "warp_id": "WARP_ID_ELITE_HOME_TO__ESPULEE_OUTSKIRTS_RIGHT",
       "x": 5,
       "y": 9,
       "elevation": 0,
       "dest_map": "MAP_ESPULEE_OUTSKIRTS",
-      "dest_warp_id": "1"
+      "dest_warp_id": "WARP_ID_ESPULEE_OUTSKIRTS_TO_ELITE_HOME"
     }
   ],
   "coord_events": [],

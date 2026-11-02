@@ -38,23 +38,6 @@
     }
   ],
   "coord_events": [],
-  "bg_events": [
-    {
-      "type": "sign",
-      "x": 2,
-      "y": 2,
-      "elevation": 0,
-      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
-      "script": "Chasilla_University_DisplayCase_Script"
-    },
-    {
-      "type": "sign",
-      "x": 1,
-      "y": 2,
-      "elevation": 0,
-      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
-      "script": "Chasilla_University_DisplayCase_Script"
-    }
-  ],
+  "bg_events": [],
   "night_music": "MUS_CHASILLA_NIGHT"
 }

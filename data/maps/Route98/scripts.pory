@@ -3,12 +3,8 @@ mapscripts Route98_MapScripts {
     {
         call_if_subquest_complete(QUEST_GETTHEBANDBACKTOGETHER,SUB_QUEST_1,Quest_Getthebandbacktogether_Hide_GetthebandbacktogetherbikerA)
         call(Route98_RouteFlag_Script)
-        call(Quest_Ultrawormholeresearch_ControlTotemVisibility)
-        call(AngelDelivery_Script_HideBikers)
-        goto(Route98_MapScripts_OnTransition)
     }
     MAP_SCRIPT_ON_RESUME{
-        call(Quest_Ultrawormholeresearch_TryRemoveTotem_Script)
     }
 }
 
@@ -18,10 +14,6 @@ script Route98_RouteFlag_Script{
         setflag(FLAG_VISITED_ROUTE98)
 	}
 	return
-}
-
-script Route98_MapScripts_OnTransition
-{
 }
 
 script Route98_Dialogue_InteractMatthew

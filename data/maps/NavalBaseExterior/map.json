@@ -92,15 +92,30 @@
       "trainer_sight_or_berry_tree_id": "0",
       "script": "EventScript_CutTree",
       "flag": "FLAG_TREE_NAVAL_BASE_3"
+    },
+    {
+      "local_id": "LOCALID_NAVALBASE_WALLACEARMYSTANF",
+      "graphics_id": "OBJ_EVENT_QUEST_WALLACEARMY_STAN_F",
+      "x": 10,
+      "y": 7,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_RIGHT",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "Quest_WallaceArmy_Script_InteractWallacearmystanF",
+      "flag": "FLAG_TEMP_6"
     }
   ],
   "warp_events": [
     {
+      "warp_id": "WARP_ID_NAVAL_BASE_EXTERIOR_TO_HALAI",
       "x": 10,
       "y": 14,
       "elevation": 0,
       "dest_map": "MAP_HALAI_ISLAND",
-      "dest_warp_id": "6"
+      "dest_warp_id": "WARP_ID_TO_HALAI_TO_NAVAL_BASE_EXTERIOR"
     }
   ],
   "coord_events": [],

@@ -82,19 +82,21 @@ script WeCanStopYouActually_PostBattle_Dialogue {
         waitmovement(LUCREZIA)
 
         msgbox(format("…I’m not going to prison. I’m NOT GOING TO JAIL…"),,SPEAKER_LUCREZIA)
-
         closemessage
 
-        applymovement(LUCREZIA,Common_Movement_WalkDown)
+        applymovement(LUCREZIA,moves(walk_left, walk_down))
+		applymovement(PLAYER,(moves(lock_facing_direction, walk_left, unlock_facing_direction)))
         waitmovement(LUCREZIA)
 
+        msgbox(format("It's over, Lucrezia."),,SPEAKER_PLAYER)
+        msgbox(format("You think you're going to stop me just because you defeated me in a battle?"),,SPEAKER_LUCREZIA,,EMOTE_CONFUSE)
+		closemessage
         goto(WeCanStopYouActually_StartBossBattle_Script)
 }
 
 script WeCanStopYouActually_StartBossBattle_Script {
         setvar(VAR_TOWER_RAID_STATE,SAVE_LUCREZIA_SHARPRISESPIRE)
         msgbox(format("I'LL THROW YOU OUT OF THIS BUILDING MYSELF, FROM THE TOP FLOOR IF I HAVE TO!"),,SPEAKER_LUCREZIA,TAIL_SHOUT,EMOTE_ANGRY)
-
         closemessage
 
         trainerbattle_no_intro(TRAINER_LUCREZIA_B,format("Nonononononono…"))
