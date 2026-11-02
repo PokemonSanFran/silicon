@@ -6308,7 +6308,7 @@ void UpdateMusicForRave(void)
         SetMediumLowPassFilter();
         return;
     }
-    
+
     if (GetCurrentMap() != MAP_CURENO_PORT)
         return;
 
@@ -6764,4 +6764,39 @@ void DebugQuest_WallaceArmy(u8 state)
             QuestMenu_ScriptSetComplete(QUEST_WALLACEARMY);
             break;
     }
+}
+
+// ***********************************************************************
+// Quest: Alola from Alola
+// ***********************************************************************
+
+enum AlolaFromAlolaStatus AlohaFromAlola_GetPartyStatus(void)
+{
+    u32 partyCount = gPartiesCount[B_TRAINER_PLAYER];
+    u32 alolaCount = 0;
+
+    for (u32 partySlot = 0; partySlot < partyCount; partySlot++)
+    {
+        struct Pokemon *pokemon = &gParties[B_TRAINER_PLAYER][partySlot];
+
+        if (!GetMonData(pokemon, MON_DATA_SANITY_HAS_SPECIES))
+            continue;
+
+        if (GetMonData(pokemon, MON_DATA_IS_EGG))
+            continue;
+
+        enum Species species = (GetMonData(pokemon,MON_DATA_SPECIES));
+
+        if (IsSpeciesFromAlola(species) == FALSE)
+            continue;
+
+        alolaCount++;
+    }
+
+    if (alolaCount < ALOLAFROMALOLA_PARTY_REQUIREMENT)
+        return ALOLAFROMALOLA_PARTY_NOT_ENOUGH;
+    else if (alolaCount == partyCount)
+        return ALOLAFROMALOLA_PARTY_FULL_ALOLA;
+    else
+        return ALOLAFROMALOLA_PARTY_PARTIAL_ALOLA;
 }

@@ -1550,4 +1550,19 @@ enum
 #define OBJ_EVENT_QUEST_WALLACEARMY_STAN_E OBJ_EVENT_GFX_CYCLING_TRIATHLETE_F
 #define OBJ_EVENT_QUEST_WALLACEARMY_STAN_F OBJ_EVENT_GFX_CYCLING_TRIATHLETE_M
 
+// ***********************************************************************
+// Quest: Aloha from Alola
+// ***********************************************************************
+
+enum AlolaFromAlolaStatus
+{
+    ALOLAFROMALOLA_PARTY_NOT_ENOUGH,
+    ALOLAFROMALOLA_PARTY_PARTIAL_ALOLA,
+    ALOLAFROMALOLA_PARTY_FULL_ALOLA,
+};
+
+#define ALOLAFROMALOLA_PARTY_REQUIREMENT 3
+
+#define MAP_QUEST_ALOHAFROMALOLA_ORIGIN
+
 #endif // GUARD_CONSTANTS_QUESTS_H
