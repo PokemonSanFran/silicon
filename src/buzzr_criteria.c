@@ -712,3 +712,13 @@ void ZapCriteria_IsWallaceArmyComplete(void)
 {
     gSpecialVar_Result = (IsQuestCompletedState(QUEST_WALLACEARMY));
 }
+
+void ZapCriteria_HasPlayerBattledTala(void)
+{
+    gSpecialVar_Result = (VarGet(VAR_ARANTRAZ_STATE) >= BATTLED_TALA);
+}
+
+void ZapCriteria_HasPlayerBattledEmrysWithZMoves(void)
+{
+    gSpecialVar_Result = (VarGet(VAR_EMRYS_STATE) >= EMRYS_QUEST_PROGRESS_USED_Z_MOVE);
+}

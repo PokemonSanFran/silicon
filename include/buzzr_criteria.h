@@ -114,5 +114,7 @@ void ZapCriteria_TowerRaidStarted(void);
 void ZapCriteria_WallaceArmy_HasSeenCancelledZap(void);
 void ZapCriteria_IsWallaceArmyComplete(void);
 void ZapCriteria_RegularZap(void);
+void ZapCriteria_HasPlayerBattledTala(void);
+void ZapCriteria_HasPlayerBattledEmrysWithZMoves(void);
 
 #endif // GUARD_BUZZR_CRITERIA_H

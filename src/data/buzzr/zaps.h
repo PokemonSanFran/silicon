@@ -2369,4 +2369,22 @@ const struct Zap gZaps[] =
         .dislikeCount = COMPOUND_STRING(""),
         .likeCount = COMPOUND_STRING(""),
     },
+    [ZAP_QUEST_ALOHAFROMALOLA_ORIGINAL_ANNOUNCEMENT] =
+    {
+        .userId = BUZZR_USER_EMRYS,
+        .content = COMPOUND_STRING("At {STR_VAR_1} Museum, come to my lecture on the history and culture of Z-Moves, with an exhibition against the fierce Kahuna, Olivia!"),
+        .isPrivate = FALSE,
+        .criteria = ZapCriteria_HasPlayerBattledTala,
+        .dislikeCount = COMPOUND_STRING(""),
+        .likeCount = COMPOUND_STRING(""),
+    },
+    [ZAP_QUEST_ALOHAFROMALOLA_UPDATED_ANNOUNCEMENT] =
+    {
+        .userId = BUZZR_USER_EMRYS,
+        .content = COMPOUND_STRING("UPDATE: The Z-Power Exhibition will be against the fierce Trainer, {PLAYER}. Don’t miss out!"),
+        .isPrivate = FALSE,
+        .criteria = ZapCriteria_HasPlayerBattledEmrysWithZMoves,
+        .dislikeCount = COMPOUND_STRING(""),
+        .likeCount = COMPOUND_STRING(""),
+    },
 };

@@ -2364,5 +2364,8 @@ static void Buzzr_ExpandStrings(enum BuzzrZapIds zapId)
         case ZAP_QUEST_WALLACEARMY_FINAL_STAN:
             GetMapName(gStringVar1,Overworld_GetMapHeaderByGroupAndId(MAP_GROUP(MAP_QUEST_WALLACEARMY_STAN_F),MAP_NUM(MAP_QUEST_WALLACEARMY_STAN_F))->regionMapSectionId,0);
             break;
+        case ZAP_QUEST_ALOHAFROMALOLA_ORIGINAL_ANNOUNCEMENT:
+            GetMapName(gStringVar1,Overworld_GetMapHeaderByGroupAndId(MAP_GROUP(MAP_QUEST_ALOHAFROMALOLA_REWARD),MAP_NUM(MAP_QUEST_ALOHAFROMALOLA_REWARD))->regionMapSectionId,0);
+            break;
     }
 }
