@@ -6793,7 +6793,7 @@ enum AlolaFromAlolaStatus AlohaFromAlola_GetPartyStatus(void)
         alolaCount++;
     }
 
-    if (alolaCount < ALOLAFROMALOLA_PARTY_REQUIREMENT)
+    if (alolaCount < ALOHAFROMALOLA_PARTY_REQUIREMENT)
         return ALOLAFROMALOLA_PARTY_NOT_ENOUGH;
     else if (alolaCount == partyCount)
         return ALOLAFROMALOLA_PARTY_FULL_ALOLA;

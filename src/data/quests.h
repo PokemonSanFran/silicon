@@ -3848,10 +3848,11 @@ const struct SideQuest sSideQuests[QUEST_COUNT] =
     },
     [QUEST_ALOHAFROMALOLA] =
     {
-        .name = gText_Quest_AlohaFromAlola_Name,
-        .desc[FLAG_GET_ACTIVE] = gText_Quest_AlohaFromAlola_Desc,
-        .desc[FLAG_GET_COMPLETED] = gText_Quest_AlohaFromAlola_DoneDesc,
-        .map = gText_Quest_AlohaFromAlola_Map,
+        .name = COMPOUND_STRING("Aloha From Alola"),
+        .desc[FLAG_GET_ACTIVE] = COMPOUND_STRING("Defeat Emrys in a practice battle to demonstrate you can handle the power of Z-Moves."),
+        .desc[FLAG_GET_COMPLETED] = COMPOUND_STRING("You performed in Emrys’ Z-Power Exhibition!"),
+        .descFunc = GetQuestDesc_AlohaFromAlola,
+        .map = COMPOUND_STRING("Perlacia City Museum"),
         .sprite = OBJ_EVENT_GFX_EMRYS,
         .spritetype = QUEST_SPRITE_TYPE_OBJECT,
         .subquests = NULL,

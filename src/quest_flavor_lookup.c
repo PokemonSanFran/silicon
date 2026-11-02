@@ -701,3 +701,20 @@ const u8 *GetQuestDesc_AngelDelivery(void)
     return gStringVar4;
 }
 
+const u8 *GetQuestDesc_AlohaFromAlola(void)
+{
+    enum QuestCases flag = ReturnQuestState(QUEST_ALOHAFROMALOLA);
+
+    GetMapName(gStringVar1,Overworld_GetMapHeaderByGroupAndId(MAP_GROUP(MAP_QUEST_ALOHAFROMALOLA_REWARD),MAP_NUM(MAP_QUEST_ALOHAFROMALOLA_REWARD))->regionMapSectionId,0);
+    ConvertIntToDecimalStringN(gStringVar2, ALOHAFROMALOLA_PARTY_REQUIREMENT, STR_CONV_MODE_LEFT_ALIGN, CountDigits(ALOHAFROMALOLA_PARTY_REQUIREMENT));
+
+    if ((flag == FLAG_GET_ACTIVE) && (VarGet(VAR_EMRYS_STATE) > EMRYS_QUEST_PROGRESS_LOST_EMRYS_Z_RING))
+    {
+        StringExpandPlaceholders(gStringVar4,COMPOUND_STRING("Assemble a party of {STR_VAR_2} Pokémon that are all found in the Alola region, and meet Emrys in the {STR_VAR_1} Museum lobby."));
+        return gStringVar4;
+    }
+
+    StringExpandPlaceholders(gStringVar4,sSideQuests[QUEST_ALOHAFROMALOLA].desc[flag]);
+    return gStringVar4;
+}
+

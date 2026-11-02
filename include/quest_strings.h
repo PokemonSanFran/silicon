@@ -53,11 +53,6 @@ extern const u8 gText_Quest_RecruitLocalArtists_Desc[];
 extern const u8 gText_Quest_RecruitLocalArtists_DoneDesc[];
 extern const u8 gText_Quest_RecruitLocalArtists_Map[];
 
-extern const u8 gText_Quest_AlohaFromAlola_Name[];
-extern const u8 gText_Quest_AlohaFromAlola_Desc[];
-extern const u8 gText_Quest_AlohaFromAlola_DoneDesc[];
-extern const u8 gText_Quest_AlohaFromAlola_Map[];
-
 extern const u8 gText_Quest_BuildingAnExhibit_Name[];
 extern const u8 gText_Quest_BuildingAnExhibit_Desc[];
 extern const u8 gText_Quest_BuildingAnExhibit_DoneDesc[];

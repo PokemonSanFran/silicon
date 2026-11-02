@@ -34,6 +34,7 @@ const u8 *GetQuestDesc_Manhunt(void);
 const u8 *GetQuestDesc_HowDisappointing(void);
 const u8 *GetQuestDesc_Letsburnthismotherdown(void);
 const u8 *GetQuestDesc_AngelDelivery(void);
+const u8 *GetQuestDesc_AlohaFromAlola(void);
 
 struct TextComponent
 {

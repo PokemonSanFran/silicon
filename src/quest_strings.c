@@ -58,11 +58,6 @@ const u8 gText_Quest_HybridCulture_Desc[] =_("Shinzo wants to better understandn
 const u8 gText_Quest_HybridCulture_DoneDesc[] =_("Shinzo has a lot to learn about Resido\nculture, but is greateful for your\nhelp.");
 const u8 gText_Quest_HybridCulture_Map[] =_("ToraTown");
 
-const u8 gText_Quest_AlohaFromAlola_Name[] = _("Aloha from Alola");
-const u8 gText_Quest_AlohaFromAlola_Desc[] =_("Description");
-const u8 gText_Quest_AlohaFromAlola_DoneDesc[] =_("DoneDescription");
-const u8 gText_Quest_AlohaFromAlola_Map[] =_("Oroland");
-
 const u8 gText_Quest_BuildingAnExhibit_Name[] = _("Building an Exhibit");
 const u8 gText_Quest_BuildingAnExhibit_Desc[] =_("Description");
 const u8 gText_Quest_BuildingAnExhibit_DoneDesc[] =_("DoneDescription");

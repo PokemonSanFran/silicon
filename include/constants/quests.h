@@ -1554,6 +1554,8 @@ enum
 // Quest: Aloha from Alola
 // ***********************************************************************
 
+#define MAP_QUEST_ALOHAFROMALOLA_REWARD MAP_PERLACIA_CITY_GYM_ENTRANCE
+
 enum AlolaFromAlolaStatus
 {
     ALOLAFROMALOLA_PARTY_NOT_ENOUGH,
@@ -1561,8 +1563,13 @@ enum AlolaFromAlolaStatus
     ALOLAFROMALOLA_PARTY_FULL_ALOLA,
 };
 
-#define ALOLAFROMALOLA_PARTY_REQUIREMENT 3
+enum EmrysVariableState
+{
+    EMRYS_QUEST_PROGRESS_NOT_STARTED,
+    EMRYS_QUEST_PROGRESS_LOST_EMRYS_Z_RING,
+    EMRYS_QUEST_PROGRESS_USED_Z_MOVE,
+};
 
-#define MAP_QUEST_ALOHAFROMALOLA_ORIGIN
+#define ALOHAFROMALOLA_PARTY_REQUIREMENT 3
 
 #endif // GUARD_CONSTANTS_QUESTS_H
