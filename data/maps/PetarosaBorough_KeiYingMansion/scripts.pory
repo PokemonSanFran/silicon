@@ -11,3 +11,84 @@ mapscripts PetarosaBorough_KeiYingMansion_MapScripts
         VAR_KEIYING_STATE, 0: KeiyingRaisonDetre_MoveIntoFoyer_Script
     ]
 }
+
+script KeiYingMansion_Painting
+{
+    msgbox(format("Looks like abstract art.\nGo figure."),,SPEAKER_ALICIA,TAIL_THOUGHT,EMOTE_DEFAULT)
+    msgbox(format("Wait…\nIs that Kei-Ying's signature…?"),,SPEAKER_ALICIA,TAIL_THOUGHT,EMOTE_SHOCK)
+    closemessage
+    end
+}
+
+script KeiYingMansion_Books
+{
+    msgbox(format("It's crammed full of books about fine arts."))
+    closemessage
+    end
+}
+
+script KeiYingMansion_TV
+{
+    msgbox(format("It's a black-and-white movie.\nA Mr. Rime is being squeezed through giant cogwheels."))
+    msgbox(format("Ok, this IS actually pretty funny."),,SPEAKER_ALICIA,TAIL_THOUGHT,EMOTE_DEFAULT)
+    closemessage
+}
+
+script KeiYingMansion_Guard
+{
+    faceplayer
+    msgbox(format("Ah, I'm terribly sorry.\nThe upper floor is reserved for Master Kei-Ying and his family.\NWe do hope you understand."))
+    closemessage
+    end
+}
+
+script KeiYingMansion_Fridge
+{
+    msgbox(format("The fridge is full of delicacies from other regions.\nKalos, Paldea, Johto…"))
+    msgbox(format("Is that a Slowpoke tail…?\nHopefully it's imitation."),,SPEAKER_ALICIA,TAIL_THOUGHT,EMOTE_SHOCK)
+    closemessage
+    end
+}
+
+script KeiYingMansion_MaidCooking
+{
+    msgbox(format("Out of the way!"))
+    closemessage
+    end
+}
+
+script KeiYingMansion_Cook1
+{
+    faceplayer
+    msgbox(format("Master Kei-Ying always has some extravagant requests for dishes.\pHe's a, how does he put it…\NConceptual food artist.\pWell, can't complain about the pay."))
+    applymovement(VAR_LAST_TALKED, moves(face_up))
+    closemessage
+    waitmovement(0)
+    end
+}
+
+script KeiYingMansion_Cook2
+{
+    faceplayer
+    msgbox(format("Master Kei-Ying this, Master Kei-Ying that…\pThe man can't even reheat his own leftovers without causing a fire!\p…Please don't tell him I said that."))
+    closemessage
+    applymovement(VAR_LAST_TALKED, moves(face_up))
+    waitmovement(0)
+    end
+}
+
+script KeiYingMansion_MaidSweeping
+{
+    lock
+    faceplayer
+    msgbox(format("Ugh…\nThese hallways take so long to clean!\nI wanna take a break."))
+    closemessage
+    end
+}
+
+script KeiYingMansion_Trash
+{
+    msgbox(format("Somehow, the inside of the trash can is as clean as the outside."))
+    closemessage
+    end
+}

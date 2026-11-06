@@ -32,7 +32,7 @@ script CuconuTown_SharpriseCompound_2F_Dialogue_LockDoor
 script CuconuTown_SharpriseCompound_2F_Dialogue_Bookcase
 {
 	lock
-	msgbox(format("It's full of books about Pokémon battling.\nAnd also, about how to invest in cryptocurrencies."), MSGBOX_DEFAULT)
+	msgbox(format("It's crammed full of books about Pokémon battling.\nAnd also, about how to invest in cryptocurrencies."), MSGBOX_DEFAULT)
 	closemessage
 	release
 	end

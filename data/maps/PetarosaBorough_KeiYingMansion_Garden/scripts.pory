@@ -1,0 +1,117 @@
+mapscripts PetarosaBorough_KeiYingMansion_Garden_MapScripts {
+    MAP_SCRIPT_ON_TRANSITION
+    {
+        if(var(VAR_STORYLINE_STATE) >= STORY_CLEAR)
+            {
+                setflag(FLAG_TEMP_3)
+                removeobject(LOCALID_KEIYING_MANSION_UNDERCOVER)
+            }
+        
+        elif(flag(FLAG_TIMELINE_TRUE) == TRUE)
+        {
+
+                setflag(FLAG_TEMP_1)
+                setflag(FLAG_TEMP_2)
+                setflag(FLAG_TEMP_4)
+                removeobject(LOCALID_KEIYING_MANSION_GARDENER_1)
+                removeobject(LOCALID_KEIYING_MANSION_GARDENER_2)
+                removeobject(LOCALID_KEIYING_MANSION_COMRADE)
+        }
+        else{
+            setflag(FLAG_TEMP_4)
+            removeobject(LOCALID_KEIYING_MANSION_COMRADE)
+        }
+    }
+}
+
+script KeiYingMansion_Gardener
+{
+    lock
+    faceplayer
+    msgbox(format("Master Kei-Ying is very particular about his garden.\pWhat at first glance may seem like a random assortment of grass, dirt, and bushes, has actually been planned quite meticulously."))
+    closemessage
+    end
+}
+
+script KeiYingMansion_DrilburInfestation
+{
+    lock
+    faceplayer
+    msgbox(format("Oh, dear.\nIt appears we may be dealing with a Drilbur infestation.\NMaster Kei-Ying will not be happy about this."))
+    closemessage
+    end
+}
+
+script KeiYingMansion_Undercover
+{
+    lock
+    faceplayer
+    if(flag(FLAG_TIMELINE_TRUE) == TRUE)
+    {
+
+        msgbox(format("What are YOU doing here!?"))
+        msgbox(format("And you are…?"),speaker=SPEAKER_ALICIA,tail=TAIL_DEFAULT,emote=EMOTE_CONFUSE)
+        msgbox(format("A friend.\nThis place is full of cameras, you know?\nAnd the cops are on speed dial.\pWouldn't want to be draw too much attention, now, would you?\nFood for thought."))
+        msgbox(format("How do you…?"),speaker=SPEAKER_ALICIA,tail=TAIL_DEFAULT,emote=EMOTE_CONFUSE)
+        msgbox(format("Look, you'll be fine as long and you stay in the garden.\nDo you what you gotta do, and leave."))
+        
+    }
+    elif(flag(FLAG_TIMELINE_FALSE) == TRUE)
+    {
+        msgbox(format("… … …\nScum."))
+        msgbox(format("…"),speaker=SPEAKER_ALICIA,tail=TAIL_DEFAULT,emote=EMOTE_SAD)
+    }
+    else
+    {
+        msgbox(format("Won't you leave me alone?\nI'm very busy trimming these hedges, as you can see.\p…Wait, aren't you…?\pRight.\nI'm watching you, buddy."))
+        msgbox(format("What's your deal?!"),speaker=SPEAKER_ALICIA,tail=TAIL_DEFAULT,emote=EMOTE_ANGRY)
+    }
+    closemessage
+    end
+
+}
+
+script KeiYingMansion_Comrade
+{
+    lock
+    faceplayer
+    msgbox(format("That's right!\nI was an undercover Tide member all along!\p…Tending the garden was kind of nice, though, and Kei-Ying doesn't seem to mind.\NI think I'll keep doing it."))
+    closemessage
+    end
+}
+
+script KeiYingMansion_StopPlayer_North
+{
+    call(KeiYingMansion_StopPlayer_Dialogue)
+    applymovement(LOCALID_PLAYER, moves(walk_down))
+    applymovement(LOCALID_KEIYING_MANSION_UNDERCOVER, moves(face_up))
+    waitmovement(LOCALID_PLAYER)
+    release
+    end
+}
+
+script KeiYingMansion_StopPlayer_South
+{
+    call(KeiYingMansion_StopPlayer_Dialogue)
+    applymovement(LOCALID_KEIYING_MANSION_UNDERCOVER, moves(face_down))
+    applymovement(LOCALID_PLAYER, moves(walk_up))
+    waitmovement(LOCALID_PLAYER)
+    release
+    end
+}
+
+script KeiYingMansion_StopPlayer_Dialogue
+{
+    if((var(VAR_WAREHOUSE_RAVE_STATE) >= DEFEATED_KEIYING_WAREHOUSE) && (var(VAR_STORYLINE_STATE) < STORY_CLEAR))
+        {
+            lock
+            msgbox(format("Hey, you!\nWhat are you doing?!\nGet back from there!"))
+            closemessage
+            return
+
+        } 
+    else
+    {
+        end
+    }
+}
