@@ -4,6 +4,10 @@ mapscripts Route10_MapScripts {
         call_if_subquest_complete(QUEST_GETTHEBANDBACKTOGETHER,SUB_QUEST_7,Quest_Getthebandbacktogether_Hide_GetthebandbacktogetherbikerG)
 
     }
+    MAP_SCRIPT_ON_FRAME_TABLE
+    [
+        FLAG_ACT_1_1_COMPLETE,TRUE: AaandWereBack_Monologue
+    ]
 }
 script Route10_Script_Interact_BodegaburnoutDeliveryStrengthH
 {

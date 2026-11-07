@@ -109,6 +109,7 @@ script GroupOfAssholes_StartBattle_Script {
 
 script GroupOfAssholesAppears_GroupLeaves_Dialogue {
         lockall
+        call(AaandWereBack_Script_IncrementStoryVariable)
         startcutscene(JUMPPLAYER_GROUPOFASSHOLESAPPEARS)
         setvar(VAR_GROUP_OF_ASSHOLES_STATE,PLAYER_HAS_DEFEATED_THE_TIDE)
         msgbox(format("Pfft, looks like the League sent by some enforcers to clear us out. Lame as hell."),SPEAKER_ROCKET_MEMBER_B)
@@ -155,10 +156,7 @@ script GroupOfAssholesAppears_GiveRewards_Dialogue {
     giveitem(ITEM_GROUP_OF_ASSHOLES_REWARD,1)
     msgbox(format("My sister gave that to me... but I'm like literally never going to use it. Me? A Trainer? Absolutely not."),,SPEAKER_DAVID)
     closemessage
-    addvar(VAR_STORYLINE_STATE,1)
-    setvar(VAR_TEMP_0,0)
     endcutscene
-    call(AaandWereBack_Monologue)
     call(TryAutoSave)
     releaseall
     end

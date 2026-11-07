@@ -16,6 +16,7 @@ mapscripts CurenoPort_MapScripts {
     [
         FLAG_VISITED_CURENO_PORT, FALSE: Generic_Mappreview
         VAR_WAREHOUSE_RAVE_STATE, DEFEATED_KEIYING_WAREHOUSE: WarehouseRave_OutsideWarehouse_Dialogue
+        FLAG_ACT_1_1_COMPLETE, TRUE: AaandWereBack_Monologue
     ]
 }
 

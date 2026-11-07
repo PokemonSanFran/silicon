@@ -7,5 +7,6 @@ mapscripts AnbehBend_MapScripts
     MAP_SCRIPT_ON_FRAME_TABLE
         [
         FLAG_VISITED_ANBEH_BEND, FALSE: Generic_Mappreview
+        FLAG_ACT_1_1_COMPLETE, TRUE: AaandWereBack_Monologue
         ]
 }

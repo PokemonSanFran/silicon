@@ -32,6 +32,7 @@ script HowDoWeGetHome_FerryFixed_Script{
 script HowDoWeGetHome_YellingDistance_Dialogue{
         setvar(VAR_CURENO_PORT_STATE,POST_HOW_DO_WE_GET_HOME)
         locktarget
+    call(AaandWereBack_Script_IncrementStoryVariable)
         startcutscene(JUMPPLAYER_HOWDOWEGETHOME)
 
         msgbox(format("Are you telling me our kids can't play here?! This is the only park in town!"),,SPEAKER_JULIUS)
@@ -112,10 +113,7 @@ script HowDoWeGetHome_MadisonHowDoWeGetHome_Dialogue {
         call(HowDoWeGetHome_SetCrowdMovementType_Script)
         call(HowDoWeGetHome_SetCrowdNewMovementType_Script)
         fadescreenswapbuffers(FADE_FROM_BLACK)
-        addvar(VAR_STORYLINE_STATE,1)
-        setvar(VAR_TEMP_0,0)
         fadedefaultbgm
-        call(AaandWereBack_Monologue)
         call(TryAutoSave)
         releaseall
         endcutscene

@@ -33,6 +33,7 @@ script EnterShinzo_StartGymBattle_Script
 
 script EnterShinzo_ShinzoDefeated_Script {
     lockall
+    call(AaandWereBack_Script_IncrementStoryVariable)
     cleargymtrainersandgetbadge(GYM_SHINZO)
     setvar(VAR_GYM_2_STATE,TORA_GYM_LEADER_DEFEATED)
     msgbox(format("Thank you, {PLAYER}. You exploited my mistakes amazingly. I hope you're proud!"),,SPEAKER_SHINZO)
@@ -42,11 +43,8 @@ script EnterShinzo_ShinzoDefeated_Script {
     cueobjectplayer(ITEM_GYM_REWARD_TORA)
     giveitem(ITEM_GYM_REWARD_TORA)
     closemessage
-    addvar(VAR_STORYLINE_STATE,1)
     call(WowYoureStrong_CheckCutsceneScript)
-    setvar(VAR_TEMP_0,0)
 	clearflag(FLAG_TEMP_1)
-    call(AaandWereBack_Monologue)
     call(TryAutoSave)
     releaseall
     end
