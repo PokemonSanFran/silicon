@@ -22,24 +22,30 @@ script WowYoureStrong_Script_CreateObjectsForBaiyaAndLucrezia
             setvar(VAR_LUCREZIA_X,15)
             setvar(VAR_LUCREZIA_Y,10)
         case MAP_MERMEREZA_CITY:
-            setvar(VAR_BAIYA_X,24)
-            setvar(VAR_BAIYA_Y,21)
-            setvar(VAR_LUCREZIA_X,28)
-            setvar(VAR_LUCREZIA_Y,22)
+            setvar(VAR_BAIYA_X,38)
+            setvar(VAR_BAIYA_Y,22)
+            setvar(VAR_LUCREZIA_X,35)
+            setvar(VAR_LUCREZIA_Y,21)
         case MAP_PERLACIA_CITY:
             setvar(VAR_BAIYA_X,23)
             setvar(VAR_BAIYA_Y,26)
             setvar(VAR_LUCREZIA_X,26)
             setvar(VAR_LUCREZIA_Y,27)
     }
-    spawnobject(OBJ_EVENT_GFX_BAIYA,LOCALID_WOWYOURESTRONG_BAIYA,VAR_LUCREZIA_X,VAR_LUCREZIA_Y,MOVEMENT_TYPE_FACE_UP,3)
-    spawnobject(OBJ_EVENT_GFX_LUCREZIA,LOCALID_WOWYOURESTRONG_LUCREZIA,VAR_BAIYA_X,VAR_BAIYA_Y,MOVEMENT_TYPE_FACE_UP,3)
+    spawnobject(OBJ_EVENT_GFX_BAIYA,LOCALID_WOWYOURESTRONG_BAIYA,VAR_BAIYA_X,VAR_BAIYA_Y,MOVEMENT_TYPE_FACE_UP,3)
+    spawnobject(OBJ_EVENT_GFX_LUCREZIA,LOCALID_WOWYOURESTRONG_LUCREZIA,VAR_LUCREZIA_X,VAR_LUCREZIA_Y,MOVEMENT_TYPE_FACE_UP,3)
 }
 
 script WowYoureStrong_WalkToPlayer_Script
 {
     lock
     startcutscene(JUMPPLAYER_WOWYOURESTRONG_PERLACIA_CITY)
+    specialvar(VAR_RESULT,GetCurrentMap)
+    if (var(VAR_RESULT) == MAP_MERMEREZA_CITY)
+    {
+        moveobjecttocoords(LOCALID_PLAYER,40,19,DIR_SOUTH)
+        waitmovement(LOCALID_PLAYER)
+    }
     setvar(VAR_SHARPRISESPIRE_CONFERENCE_STATE,POST_WOW_YOURE_STRONG)
     playse(SE_PIN)
     playbgm(MUS_RG_ENCOUNTER_DEOXYS,TRUE)
