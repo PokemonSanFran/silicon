@@ -2752,12 +2752,19 @@ static void ClearGymTrainers(enum GymLeaderIndex gymIndex)
         [GYM_SHINZO] =
         {
             FLAG_BADGE02_GET,
+            TRAINER_FLAGS_START + TRAINER_031A849F,
+            TRAINER_FLAGS_START + TRAINER_041FD20E,
+            TRAINER_FLAGS_START + TRAINER_045FDD44,
             TRAINER_FLAGS_START + TRAINER_SHINZO,
             TRAINER_NONE,
         },
         [GYM_EMRYS] =
         {
             FLAG_BADGE03_GET,
+            TRAINER_FLAGS_START + TRAINER_0AF40D0B,
+            TRAINER_FLAGS_START + TRAINER_0B48C7D0,
+            TRAINER_FLAGS_START + TRAINER_0C95C833,
+            TRAINER_FLAGS_START + TRAINER_0C0A9B2F,
             TRAINER_FLAGS_START + TRAINER_EMRYS,
             TRAINER_NONE,
         },
@@ -2770,6 +2777,10 @@ static void ClearGymTrainers(enum GymLeaderIndex gymIndex)
         [GYM_NERIENE] =
         {
             FLAG_BADGE05_GET,
+            TRAINER_FLAGS_START + TRAINER_1075163A,
+            TRAINER_FLAGS_START + TRAINER_10751EAA,
+            TRAINER_FLAGS_START + TRAINER_10E3552B,
+            TRAINER_FLAGS_START + TRAINER_1114BC23,
             TRAINER_FLAGS_START + TRAINER_NERIENE,
             TRAINER_NONE,
         },
@@ -2782,6 +2793,7 @@ static void ClearGymTrainers(enum GymLeaderIndex gymIndex)
         [GYM_BD] =
         {
             FLAG_BADGE07_GET,
+            TRAINER_FLAGS_START +TRAINER_TIRABUDIN_PLACE_GYM_1,
             TRAINER_FLAGS_START + TRAINER_BD,
             TRAINER_NONE,
         },
