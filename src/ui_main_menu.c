@@ -83,6 +83,7 @@ static void LoadMainMenuPalettes(void);
 static void Task_WaitFadeAndExitGracefully(u8);
 static void FadescreenAndExitGracefully(void);
 static void FreeResources(void);
+static void FreeMainMenuBackgrounds(void);
 static void FreeStructs(void);
 static void ToggleStatsBackground(void);
 static void MainMenu_SetUp(u8);
@@ -763,10 +764,9 @@ static void SetScheduleBgs(enum MainMenuBackgrounds backgroundId)
 
 static void LoadGraphics(void)
 {
-    enum MainMenuBackgrounds backgroundId;
     ResetTempTileDataBuffers();
 
-    for (backgroundId = BG0_MAINMENU_TEXT; backgroundId < BG_MAINMENU_COUNT; backgroundId++)
+    for (enum MainMenuBackgrounds backgroundId = BG0_MAINMENU_TEXT; backgroundId < BG_MAINMENU_COUNT; backgroundId++)
     {
         if (DebugShouldSkipBg(backgroundId))
             continue;
@@ -806,23 +806,26 @@ static void FadescreenAndExitGracefully(void)
 
 static void FreeResources(void)
 {
-    FreeAllSpritePalettes();
-    FreeStructs();
-    FreeBackgrounds();
-    FreeAllWindowBuffers();
     ResetSpriteData();
+    FreeSpriteTileRanges();
+    FreeAllSpritePalettes();
+    ClearDma3Requests();
+    FreeStructs();
+    FreeMainMenuBackgrounds();
+    FreeAllWindowBuffers();
+}
+
+static void FreeMainMenuBackgrounds(void)
+{
+    for (enum MainMenuBackgrounds backgroundId = 0; backgroundId < BG_MAINMENU_COUNT; backgroundId++)
+        TRY_FREE_AND_SET_NULL(sBgTilemapBuffer[backgroundId]);
 }
 
 static void FreeStructs(void)
 {
-    if (sMainMenuState != NULL)
-        Free(sMainMenuState);
-
-    if (sMainMenuLists != NULL)
-        Free(sMainMenuLists);
-
-    if (sMainMenuSprites != NULL)
-        Free(sMainMenuSprites);
+    TRY_FREE_AND_SET_NULL(sMainMenuLists);
+    TRY_FREE_AND_SET_NULL(sMainMenuState);
+    TRY_FREE_AND_SET_NULL(sMainMenuSprites);
 }
 
 static void SwitchMode(u8 taskId)
