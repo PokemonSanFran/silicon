@@ -1617,8 +1617,8 @@ static void Task_ReturnToPreviousScreen(u8 taskId)
     if (gPaletteFade.active)
         return;
 
-    FreeAllWindowBuffers();
     SetMainCallback2(sMainMenuState->savedCallback);
+    FreeResources();
     DestroyTask(taskId);
 }
 
