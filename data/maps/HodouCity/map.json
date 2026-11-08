@@ -293,11 +293,12 @@
       "dest_warp_id": "WARP_ID_HODOU_GYM_TO_HODOU_CITY_LEFT"
     },
     {
+      "warp_id": "WARP_ID_HODOU_TO_CENTER",
       "x": 35,
       "y": 3,
       "elevation": 0,
       "dest_map": "MAP_HODOU_CITY_POKEMON_CENTER_1F",
-      "dest_warp_id": "0"
+      "dest_warp_id": "WARP_ID_CENTER_TO_HODOU_RIGHT"
     },
     {
       "warp_id": "WARP_ID_HODOU_TO_ALLEY_1",
