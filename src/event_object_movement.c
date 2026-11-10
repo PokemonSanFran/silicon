@@ -1964,6 +1964,7 @@ u8 TrySpawnObjectEventTemplate(const struct ObjectEventTemplate *objectEventTemp
 
     HandleRematchIconForSingleObjectEvent(&gObjectEvents[objectEventId], objectEventId); // rematch_action
     OnOverworldWildEncounterSpawn(&gObjectEvents[objectEventId]);
+
     return objectEventId;
 }
 
@@ -6846,14 +6847,14 @@ bool8 IsMetatileDirectionallyImpassable(struct ObjectEvent *objectEvent, u8 next
         //|| gDirectionBlockedMetatileFuncs[direction - 1](MapGridGetMetatileBehaviorAt(x, y)))
     if (gOppositeDirectionBlockedMetatileFuncs[direction](objectEvent->currentMetatileBehavior)
         || gDirectionBlockedMetatileFuncs[direction](nextBehavior))
-       // Start nicoRoute10 
+       // Start nicoRoute10
         {
             if(elevation == 6)
                 return FALSE;
             else
                 return TRUE;
         }
-       // End nicoRoute10 
+       // End nicoRoute10
 //End pathfinder
         // return TRUE; // nicoRoute10
 
@@ -12673,10 +12674,10 @@ bool8 MovementType_OverworldWildEncounter_ApproachPlayer_Step11(struct ObjectEve
             s16 y = objectEvent->currentCoords.y;
             MoveCoords(objectEvent->movementDirection, &x, &y);
             // If colliding with the player object, don't try to walk around it.
-            // Start pathfinder 
+            // Start pathfinder
             //if (GetObjectObjectCollidesWith(objectEvent, x, y, FALSE) == gPlayerAvatar.objectEventId)
             if (GetObjectObjectCollidesWith(objectEvent, x, y, objectEvent->currentElevation, FALSE) == gPlayerAvatar.objectEventId)
-            // End pathfinder 
+            // End pathfinder
             {
                 ObjectEventSetSingleMovement(objectEvent, sprite, GetFaceDirectionMovementAction(objectEvent->facingDirection));
                 objectEvent->singleMovementActive = TRUE;
