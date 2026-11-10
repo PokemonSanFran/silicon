@@ -6308,7 +6308,7 @@ void UpdateMusicForRave(void)
         SetMediumLowPassFilter();
         return;
     }
-    
+
     if (GetCurrentMap() != MAP_CURENO_PORT)
         return;
 
