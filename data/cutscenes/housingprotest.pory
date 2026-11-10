@@ -1,45 +1,47 @@
 const PLAYER = OBJ_EVENT_ID_PLAYER
-const RABIA = 10 //FLAG_TEMP_1
-const VITOMIR = 11 //FLAG_TEMP_1
-const ARCANINE = 13 //FLAG_TEMP_2
-const LANDLORD = 12 //FLAG_TEMP_3
-const ADAORA = 14 //FLAG_TEMP_4
 const FLAG_TALKED_LANDLORD = FLAG_TEMP_1F
 
 script HousingProtest_ObjectSetUp_Script {
-    setflag(FLAG_TEMP_1)
-    setflag(FLAG_TEMP_2)
-    setflag(FLAG_TEMP_3)
-    setflag(FLAG_TEMP_4)
+    setobjectflagfromlocalid(LOCALID_ROUTE_99_HOUSING_PROTEST_LANDLORD)
+    setobjectflagfromlocalid(LOCALID_ROUTE_99_HOUSING_PROTEST_FAKE_COMRADE_A)
+    setobjectflagfromlocalid(LOCALID_ROUTE_99_HOUSING_PROTEST_FAKE_COMRADE_B)
+    setobjectflagfromlocalid(LOCALID_ROUTE_99_HOUSING_PROTEST_FAKE_COMRADE_MON)
 }
 
 script HousingProtest_PostSave_ObjectSetUp_Script {
-    setobjectxyperm(LANDLORD, 1, 18)
-    setobjectxyperm(RABIA, 1, 20)
-    setobjectxyperm(VITOMIR, 2, 20)
-    setflag(FLAG_TEMP_4)
+    setobjectxyperm(LOCALID_ROUTE_99_HOUSING_PROTEST_LANDLORD, 1, 18)
+    setobjectxyperm(LOCALID_ROUTE_99_HOUSING_PROTEST_FAKE_COMRADE_A, 1, 20)
+    setobjectxyperm(LOCALID_ROUTE_99_HOUSING_PROTEST_FAKE_COMRADE_B, 2, 20)
 }
 
 script HousingProtest_CleanUp_Landlord_Script {
-    setflag(FLAG_TEMP_1)
-    setflag(FLAG_TEMP_2)
-    setflag(FLAG_TEMP_3)
-    setflag(FLAG_TEMP_5)
-    clearflag(FLAG_TEMP_4)
+    setobjectflagfromlocalid(LOCALID_ROUTE_99_HOUSING_PROTEST_LANDLORD)
+    setobjectflagfromlocalid(LOCALID_ROUTE_99_HOUSING_PROTEST_FAKE_COMRADE_A)
+    setobjectflagfromlocalid(LOCALID_ROUTE_99_HOUSING_PROTEST_FAKE_COMRADE_B)
+    setobjectflagfromlocalid(LOCALID_ROUTE_99_HOUSING_PROTEST_FAKE_COMRADE_MON)
+    setobjectflagfromlocalid(LOCALID_ROUTE_99_HOUSING_PROTEST_A)
+    setobjectflagfromlocalid(LOCALID_ROUTE_99_HOUSING_PROTEST_B)
+    setobjectflagfromlocalid(LOCALID_ROUTE_99_HOUSING_PROTEST_C)
+    setobjectflagfromlocalid(LOCALID_ROUTE_99_HOUSING_PROTEST_D)
+    setobjectflagfromlocalid(LOCALID_ROUTE_99_HOUSING_PROTEST_E)
+    //setobjectflagfromlocalid(LOCALID_ROUTE_99_HOUSING_PROTEST_F)
+    //setobjectflagfromlocalid(LOCALID_ROUTE_99_HOUSING_PROTEST_G)
+    //setobjectflagfromlocalid(LOCALID_ROUTE_99_HOUSING_PROTEST_H)
+    //setobjectflagfromlocalid(LOCALID_ROUTE_99_HOUSING_PROTEST_I)
 }
 
 script HousingProtest_CleanUp_Script {
-    setobjectmovementtype(4, MOVEMENT_TYPE_WANDER_UP_AND_DOWN)
-    setobjectmovementtype(6, MOVEMENT_TYPE_WANDER_LEFT_AND_RIGHT)
-    removeobject(1)
-    removeobject(2)
-    removeobject(3)
-    removeobject(4)
-    removeobject(5)
-    removeobject(6)
-    removeobject(7)
-    removeobject(8)
-    removeobject(9)
+    setobjectmovementtype(LOCALID_ROUTE_99_HOUSING_PROTEST_E, MOVEMENT_TYPE_WANDER_UP_AND_DOWN)
+    //setobjectmovementtype(LOCALID_ROUTE_99_HOUSING_PROTEST_G, MOVEMENT_TYPE_WANDER_LEFT_AND_RIGHT)
+    setobjectflagfromlocalid(LOCALID_ROUTE_99_HOUSING_PROTEST_A)
+    setobjectflagfromlocalid(LOCALID_ROUTE_99_HOUSING_PROTEST_B)
+    setobjectflagfromlocalid(LOCALID_ROUTE_99_HOUSING_PROTEST_C)
+    setobjectflagfromlocalid(LOCALID_ROUTE_99_HOUSING_PROTEST_D)
+    setobjectflagfromlocalid(LOCALID_ROUTE_99_HOUSING_PROTEST_E)
+    //setobjectflagfromlocalid(LOCALID_ROUTE_99_HOUSING_PROTEST_F)
+    //setobjectflagfromlocalid(LOCALID_ROUTE_99_HOUSING_PROTEST_G)
+    //setobjectflagfromlocalid(LOCALID_ROUTE_99_HOUSING_PROTEST_H)
+    //setobjectflagfromlocalid(LOCALID_ROUTE_99_HOUSING_PROTEST_I)
 }
 
 script HousingProtest_StartChanting_Dialogue
@@ -103,17 +105,17 @@ script HousingProtest_LandlordWalkOutside_Script {
     waitdooranim
     applymovement(PLAYER, Common_Movement_FaceLeft)
     waitmovement(0)
-    clearflag(FLAG_TEMP_3)
-    addobject(LANDLORD)
-    applymovement(LANDLORD, Common_Movement_WalkDown)
+    clearobjectflagfromlocalid(LOCALID_ROUTE_99_HOUSING_PROTEST_LANDLORD)
+    addobject(LOCALID_ROUTE_99_HOUSING_PROTEST_LANDLORD)
+    applymovement(LOCALID_ROUTE_99_HOUSING_PROTEST_LANDLORD, Common_Movement_WalkDown)
     waitmovement(0)
-    applymovement(LANDLORD, Common_Movement_WalkDown)
+    applymovement(LOCALID_ROUTE_99_HOUSING_PROTEST_LANDLORD, Common_Movement_WalkDown)
     waitmovement(0)
     closedoor(2, 17)
     waitdooranim
-    applymovement(LANDLORD, Common_Movement_LookAround)
+    applymovement(LOCALID_ROUTE_99_HOUSING_PROTEST_LANDLORD, Common_Movement_LookAround)
     waitmovement(0)
-    applymovement(LANDLORD, Common_Movement_FaceDown)
+    applymovement(LOCALID_ROUTE_99_HOUSING_PROTEST_LANDLORD, Common_Movement_FaceDown)
     waitmovement(0)
     goto(HousingProtest_LandlordTalkToCrowd_Dialogue)
 }
@@ -121,56 +123,57 @@ script HousingProtest_LandlordWalkOutside_Script {
 script HousingProtest_LandlordTalkToCrowd_Dialogue {
     msgbox(format("I'm sure we can come to some understanding here, please..."),,SPEAKER_LANDLORD)
     closemessage
-    clearflag(FLAG_TEMP_1)
+    clearobjectflagfromlocalid(LOCALID_ROUTE_99_HOUSING_PROTEST_FAKE_COMRADE_A)
+    clearobjectflagfromlocalid(LOCALID_ROUTE_99_HOUSING_PROTEST_FAKE_COMRADE_B)
     playbgm(MUS_RG_ENCOUNTER_ROCKET, FALSE)
-    addobject(RABIA)
-    addobject(VITOMIR)
-    applymovement(RABIA, HousingProtest_ApproachLandlord)
-    applymovement(VITOMIR, HousingProtest_ApproachLandlord)
+    addobject(LOCALID_ROUTE_99_HOUSING_PROTEST_FAKE_COMRADE_A)
+    addobject(LOCALID_ROUTE_99_HOUSING_PROTEST_FAKE_COMRADE_B)
+    applymovement(LOCALID_ROUTE_99_HOUSING_PROTEST_FAKE_COMRADE_A, HousingProtest_ApproachLandlord)
+    applymovement(LOCALID_ROUTE_99_HOUSING_PROTEST_FAKE_COMRADE_B, HousingProtest_ApproachLandlord)
     waitmovement(0)
-    applymovement(LANDLORD, Common_Movement_ExclamationMark)
+    applymovement(LOCALID_ROUTE_99_HOUSING_PROTEST_LANDLORD, Common_Movement_ExclamationMark)
     playse(SE_PIN)
     waitmovement(0)
     msgbox(format("The only thing we're understanding is that you need to leave, and take your fancy apartments with you!"),,SPEAKER_RABIA)
     closemessage
-    applymovement(LANDLORD, moves(lock_facing_direction, walk_slow_up, delay_16, unlock_facing_direction, step_end))
+    applymovement(LOCALID_ROUTE_99_HOUSING_PROTEST_LANDLORD, moves(lock_facing_direction, walk_slow_up, delay_16, unlock_facing_direction, step_end))
     waitmovement(0)
     msgbox(format("Are you trying to intimidate me? I'm just doing my job. Don't make me call the police!"),,SPEAKER_LANDLORD)
     msgbox(format("They can't arrest of all us, right?"),,SPEAKER_RABIA)
     msgbox(format("Ain't gonna be nothing to defend when we done..."),,SPEAKER_VITOMIR)
     closemessage
-    applymovement(RABIA, Common_Movement_FaceRight)
-    applymovement(VITOMIR, Common_Movement_FaceRight)
+    applymovement(LOCALID_ROUTE_99_HOUSING_PROTEST_FAKE_COMRADE_A, Common_Movement_FaceRight)
+    applymovement(LOCALID_ROUTE_99_HOUSING_PROTEST_FAKE_COMRADE_B, Common_Movement_FaceRight)
     msgbox(format("If we, the people of Oroland can't stay here, nobody can. Let's bring it down!"),,SPEAKER_VITOMIR)
     closemessage
-    applymovement(1, Common_Movement_FaceLeft)
-    applymovement(2, Common_Movement_FaceLeft)
-    applymovement(3, Common_Movement_FaceLeft)
-    applymovement(4, Common_Movement_FaceLeft)
-    applymovement(5, Common_Movement_FaceLeft)
-    applymovement(6, Common_Movement_FaceLeft)
-    applymovement(7, Common_Movement_FaceLeft)
-    applymovement(8, Common_Movement_FaceLeft)
-    applymovement(9, Common_Movement_FaceLeft)
+    applymovement(LOCALID_ROUTE_99_HOUSING_PROTEST_A,moves(face_left))
+    applymovement(LOCALID_ROUTE_99_HOUSING_PROTEST_B,moves(face_left))
+    applymovement(LOCALID_ROUTE_99_HOUSING_PROTEST_C,moves(face_left))
+    applymovement(LOCALID_ROUTE_99_HOUSING_PROTEST_D,moves(face_left))
+    applymovement(LOCALID_ROUTE_99_HOUSING_PROTEST_E,moves(face_left))
+    //applymovement(LOCALID_ROUTE_99_HOUSING_PROTEST_F,moves(face_left))
+    //applymovement(LOCALID_ROUTE_99_HOUSING_PROTEST_G,moves(face_left))
+    //applymovement(LOCALID_ROUTE_99_HOUSING_PROTEST_H,moves(face_left))
+    //applymovement(LOCALID_ROUTE_99_HOUSING_PROTEST_I,moves(face_left))
     waitmovement(0)
-    applymovement(6, Common_Movement_ExclamationMark)
+    //applymovement(LOCALID_ROUTE_99_HOUSING_PROTEST_G, Common_Movement_ExclamationMark)
     waitmovement(0)
     msgbox(format("Yeah!"),,SPEAKER_PROTEST_A,TAIL_SHOUT,EMOTE_ANGRY)
-    applymovement(3, Common_Movement_ExclamationMark)
+    applymovement(LOCALID_ROUTE_99_HOUSING_PROTEST_D, Common_Movement_ExclamationMark)
     msgbox(format("Let's do this!"),,SPEAKER_PROTEST_C,TAIL_SHOUT,EMOTE_ANGRY)
     waitmovement(0)
-    applymovement(2, Common_Movement_ExclamationMark)
+    applymovement(LOCALID_ROUTE_99_HOUSING_PROTEST_C, Common_Movement_ExclamationMark)
     msgbox(format("Screw these developers!"),,SPEAKER_PROTEST_D,TAIL_SHOUT,EMOTE_ANGRY)
     waitmovement(0)
     closemessage
-    applymovement(RABIA, Common_Movement_FaceUp)
-    applymovement(VITOMIR, Common_Movement_FaceUp)
+    applymovement(LOCALID_ROUTE_99_HOUSING_PROTEST_FAKE_COMRADE_A, Common_Movement_FaceUp)
+    applymovement(LOCALID_ROUTE_99_HOUSING_PROTEST_FAKE_COMRADE_B, Common_Movement_FaceUp)
     waitmovement(0)
     playse(SE_BALL_OPEN)
     waitse
-    clearflag(FLAG_TEMP_2)
+    clearobjectflagfromlocalid(LOCALID_ROUTE_99_HOUSING_PROTEST_FAKE_COMRADE_MON)
     callnative(HousingProtest_BufferMostPowerfulAttackAndMove)
-    addobject(ARCANINE)
+    addobject(LOCALID_ROUTE_99_HOUSING_PROTEST_FAKE_COMRADE_MON)
     playmoncry(VAR_TEMP_0, CRY_MODE_ENCOUNTER)
     waitmoncry
     msgbox(format("Look, I'm just the super. I don't own this building, but I am responsible for making sure you don't trash it. I'm trying to reason with you and you're threatening me?"),,SPEAKER_LANDLORD)
@@ -178,7 +181,7 @@ script HousingProtest_LandlordTalkToCrowd_Dialogue {
     msgbox(format("Cut it out!"),MSGBOX_DEFAULT,SPEAKER_ALICIA)
         closemessage
     applymovement(PLAYER, moves(walk_left * 3, face_down, step_end))
-    applymovement(LANDLORD, moves(walk_left, face_down, step_end))
+    applymovement(LOCALID_ROUTE_99_HOUSING_PROTEST_LANDLORD, moves(walk_left, face_down, step_end))
     waitmovement(0)
     msgbox(format("Every time I see you guys, you're attacking innocent people. Don't you have something more productive to do?"),MSGBOX_DEFAULT,SPEAKER_ALICIA,,EMOTE_ANGRY)
         msgbox(format("Innocent? These clowns?! Damn, you transplants really got it twisted."),,SPEAKER_RABIA)
@@ -186,9 +189,9 @@ script HousingProtest_LandlordTalkToCrowd_Dialogue {
     msgbox(format("I can take both of you. Leave him alone, or you're going through me."),MSGBOX_DEFAULT,SPEAKER_ALICIA)
         closemessage
     setvar(VAR_ROUTE99_STATE,SAVE_THE_TIDE_ROUTE99)
-    copyobjectxytoperm(LANDLORD)
-    copyobjectxytoperm(RABIA)
-    copyobjectxytoperm(VITOMIR)
+    copyobjectxytoperm(LOCALID_ROUTE_99_HOUSING_PROTEST_LANDLORD)
+    copyobjectxytoperm(LOCALID_ROUTE_99_HOUSING_PROTEST_FAKE_COMRADE_A)
+    copyobjectxytoperm(LOCALID_ROUTE_99_HOUSING_PROTEST_FAKE_COMRADE_B)
     startmenu_savescreen
     goto(HousingProtest_StartBattle_Script)
 }
@@ -200,8 +203,8 @@ script HousingProtest_StartBattle_Script {
 
 script HousingProtest_StartBattle_PostSave_Script {
     locktarget
-    setobjectnewmovementtype(4, MOVEMENT_TYPE_WANDER_UP_AND_DOWN)
-    setobjectnewmovementtype(6, MOVEMENT_TYPE_WANDER_LEFT_AND_RIGHT)
+    setobjectmovementtype(LOCALID_ROUTE_99_HOUSING_PROTEST_E, MOVEMENT_TYPE_WANDER_UP_AND_DOWN)
+    //setobjectmovementtype(LOCALID_ROUTE_99_HOUSING_PROTEST_G, MOVEMENT_TYPE_WANDER_LEFT_AND_RIGHT)
 	goto(HousingScript_StartActualBattle_Script)
 }
 
@@ -216,13 +219,14 @@ script HousingScript_StartActualBattle_Script
 
 script HousingProtest_PostBattle_Dialogue {
     lockall
+    clearflag(FLAG_TALKED_LANDLORD)
     startcutscene(JUMPPLAYER_HOUSINGPROTEST)
     setvar(VAR_STORYLINE_STATE,STORY_DEFEAT_CHASILLA_PROTEST)
-    setobjectnewmovementtype(4, MOVEMENT_TYPE_WANDER_UP_AND_DOWN)
-    setobjectnewmovementtype(6, MOVEMENT_TYPE_WANDER_LEFT_AND_RIGHT)
+    setobjectmovementtype(LOCALID_ROUTE_99_HOUSING_PROTEST_E, MOVEMENT_TYPE_WANDER_UP_AND_DOWN)
+    //setobjectmovementtype(LOCALID_ROUTE_99_HOUSING_PROTEST_G, MOVEMENT_TYPE_WANDER_LEFT_AND_RIGHT)
     playse(SE_BALL_OPEN)
     waitse
-    removeobject(ARCANINE)
+    removeobject(LOCALID_ROUTE_99_HOUSING_PROTEST_FAKE_COMRADE_MON)
     setvar(VAR_ROUTE99_STATE,DEFEATED_THE_TIDE_ROUTE99)
     msgbox(format("You proud now? C'mon Vitomir."),,SPEAKER_RABIA)
     msgbox(format("Keep on licking those boots, fam. Dumbass..."),,SPEAKER_VITOMIR)
@@ -235,6 +239,7 @@ script HousingProtest_PostBattle_Dialogue {
 }
 
 script HousingProtest_GruntsAwalkAway_Script {
+
     getplayerxy(VAR_TEMP_0, VAR_TEMP_1)
 
     if (var (VAR_TEMP_1) == 21) {
@@ -243,29 +248,34 @@ script HousingProtest_GruntsAwalkAway_Script {
         call(HousingProtest_MoveGruntsExit_Script)
     }
     waitmovement(0)
-    removeobject(VITOMIR)
-    removeobject(RABIA)
+    removeobject(LOCALID_ROUTE_99_HOUSING_PROTEST_FAKE_COMRADE_B)
+    removeobject(LOCALID_ROUTE_99_HOUSING_PROTEST_FAKE_COMRADE_A)
     fadedefaultbgm
 }
 
 script HousingProtest_MoveGruntsExit_Script {
-    applymovement(VITOMIR, HousingProtest_WalkSouthFromLandlord)
-    applymovement(RABIA, HousingProtest_WalkSouthFromLandlord)
+    applymovement(LOCALID_ROUTE_99_HOUSING_PROTEST_FAKE_COMRADE_B, HousingProtest_WalkSouthFromLandlord)
+    applymovement(LOCALID_ROUTE_99_HOUSING_PROTEST_FAKE_COMRADE_A, HousingProtest_WalkSouthFromLandlord)
 }
 
 script HousingProtest_MoveGruntsAroundPlayer_Script {
-    applymovement(RABIA, HousingProtest_WalkAroundPlayer)
-    applymovement(VITOMIR, HousingProtest_WalkAroundPlayer)
+    applymovement(LOCALID_ROUTE_99_HOUSING_PROTEST_FAKE_COMRADE_A, HousingProtest_WalkAroundPlayer)
+    applymovement(LOCALID_ROUTE_99_HOUSING_PROTEST_FAKE_COMRADE_B, HousingProtest_WalkAroundPlayer)
 }
 
 script HousingProtest_InteractLandlord_Script {
     lock
 
-    if (var (VAR_ROUTE99_STATE) < DEFEATED_THE_TIDE_ROUTE99){
+    if (var (VAR_ROUTE99_STATE) < DEFEATED_THE_TIDE_ROUTE99)
+    {
         msgbox(format("Oh god... they're going to kill me!"), MSGBOX_NPC,SPEAKER_LANDLORD)
-    } elif (!flag (FLAG_TALKED_LANDLORD)){
+    }
+    elif (!flag(FLAG_TALKED_LANDLORD))
+    {
         call(HousingProtest_InteractLandlord_Dialogue)
-    } else {
+    }
+    else
+    {
         msgbox(format("I don't get paid enough to be the super and security..."), MSGBOX_NPC,SPEAKER_LANDLORD,TAIL_WHISPER)
     }
 
@@ -276,15 +286,15 @@ script HousingProtest_InteractLandlord_Script {
 
 script HousingProtest_InteractLandlord_Dialogue {
     setflag(FLAG_TALKED_LANDLORD)
-
-    msgbox(format("Thank you very much. You're right, The Tide has a tendency to pick on the defenseless like me."), MSGBOX_NPC,SPEAKER_LANDLORD)
-    msgbox(format("Why were people protesting?"),MSGBOX_DEFAULT,SPEAKER_ALICIA)
-        msgbox(format("Some of the citizens of Oroland feel that they are... entitled to live anywhere within their city limits."),,SPEAKER_LANDLORD)
+    faceplayer
+    msgbox(format("Thank you very much. You're right, The Tide has a tendency to pick on the defenseless like me."), ,SPEAKER_LANDLORD)
+    msgbox(format("Why were people protesting?"),,SPEAKER_ALICIA)
+    msgbox(format("Some of the citizens of Oroland feel that they are... entitled to live anywhere within their city limits."),,SPEAKER_LANDLORD)
     msgbox(format("I don't get why they don't think they're subject to the same rent rules and regulations as the rest of us."),,SPEAKER_LANDLORD,,EMOTE_ANGRY)
-    msgbox(format("So people were coming to take over the building?"),MSGBOX_DEFAULT,SPEAKER_ALICIA)
-        msgbox(format("I guess so?"),,SPEAKER_LANDLORD)
-    msgbox(format("What about the police?"),MSGBOX_DEFAULT,SPEAKER_ALICIA)
-        msgbox(format("I'm sure they would have stopped it, but these protests are getting more and more common. The police can't be everywhere at once!"),,SPEAKER_LANDLORD)
+    msgbox(format("So people were coming to take over the building?"),,SPEAKER_ALICIA)
+    msgbox(format("I guess so?"),,SPEAKER_LANDLORD)
+    msgbox(format("What about the police?"),,SPEAKER_ALICIA)
+    msgbox(format("I'm sure they would have stopped it, but these protests are getting more and more common. The police can't be everywhere at once!"),,SPEAKER_LANDLORD)
 }
 
 movement HousingProtest_WalkPlayer1Left {
