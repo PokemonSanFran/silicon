@@ -4605,8 +4605,26 @@ Name: Blank
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Buneary
-Level: 1
+Pidgeot
+Level: 50
+
+Alakazam
+Level: 50
+
+Clefable
+Level: 50
+
+Ninetales
+Level: 50
+
+Eiscue
+Level: 50
+
+Gyarados
+Level: 50
+
+Parasect
+Level: 50
 
 === TRAINER_QUEST_BODEGABURNOUTDELIVERYA ===
 Name: Blank
