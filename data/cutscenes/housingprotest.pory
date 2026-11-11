@@ -238,18 +238,21 @@ script HousingProtest_PostBattle_Dialogue {
     end
 }
 
-script HousingProtest_GruntsAwalkAway_Script {
-
-    getplayerxy(VAR_TEMP_0, VAR_TEMP_1)
-
-    if (var (VAR_TEMP_1) == 21) {
-        call(HousingProtest_MoveGruntsAroundPlayer_Script)
-    } else {
-        call(HousingProtest_MoveGruntsExit_Script)
-    }
-    waitmovement(0)
-    removeobject(LOCALID_ROUTE_99_HOUSING_PROTEST_FAKE_COMRADE_B)
+script HousingProtest_GruntsAwalkAway_Script
+{
+    moveobjecttocoords(LOCALID_ROUTE_99_HOUSING_PROTEST_FAKE_COMRADE_A,5,31,DIR_SOUTH)
+    moveobjecttocoords(LOCALID_ROUTE_99_HOUSING_PROTEST_FAKE_COMRADE_B,5,31,DIR_SOUTH)
+    delay(24)
+    waitmovement(LOCALID_ROUTE_99_HOUSING_PROTEST_FAKE_COMRADE_B)
+    fadescreenswapbuffers(FADE_TO_BLACK)
     removeobject(LOCALID_ROUTE_99_HOUSING_PROTEST_FAKE_COMRADE_A)
+    removeobject(LOCALID_ROUTE_99_HOUSING_PROTEST_FAKE_COMRADE_B)
+    removeobject(LOCALID_ROUTE_99_HOUSING_PROTEST_A)
+    removeobject(LOCALID_ROUTE_99_HOUSING_PROTEST_B)
+    removeobject(LOCALID_ROUTE_99_HOUSING_PROTEST_C)
+    removeobject(LOCALID_ROUTE_99_HOUSING_PROTEST_D)
+    removeobject(LOCALID_ROUTE_99_HOUSING_PROTEST_E)
+    fadescreenswapbuffers(FADE_FROM_BLACK)
     fadedefaultbgm
 }
 
