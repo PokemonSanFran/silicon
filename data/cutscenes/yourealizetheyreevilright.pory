@@ -4,7 +4,7 @@ const LOCALID_ARANTRAZ_MESSHALL_BAIYA_POKEMON = (LOCALID_CAMERA + 7)
 
 script YouRealizeTheyreEvilRight_HideObject_Script {
     if (var(VAR_ARANTRAZ_STATE) != BAIYA_SUMMONED_ARANTRAZ && var(VAR_ARANTRAZ_STATE) != POST_ARRIVE_ARANTRAZ){
-        setobjectflagfromlocalid(LOCALID_ARANTRAZ_MESSHALL_BAIYA)
+        setobjectflagfromlocalid(LOCALID_ARANTRAZ_EXTERIOR_BAIYA)
     }
     return
 }
