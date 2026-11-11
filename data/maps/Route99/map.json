@@ -238,7 +238,7 @@
   ],
   "warp_events": [
     {
-        "warp_id": "WARP_ID_ROUTE_99_TO_GROTTO_A",
+      "warp_id": "WARP_ID_ROUTE_99_TO_GROTTO_A",
       "x": 0,
       "y": 34,
       "elevation": 0,

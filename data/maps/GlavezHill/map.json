@@ -153,7 +153,7 @@
   ],
   "warp_events": [
     {
-        "warp_id": "WARP_ID_GLAVEZ_HILL_TO_CENTER",
+      "warp_id": "WARP_ID_GLAVEZ_HILL_TO_CENTER",
       "x": 16,
       "y": 4,
       "elevation": 0,
@@ -161,7 +161,7 @@
       "dest_warp_id": "WARP_ID_CENTER_TO_GLAVEZ_HILL_RIGHT"
     },
     {
-        "warp_id": "WARP_ID_GLAVEZ_HILL_TO_TAXIUNION",
+      "warp_id": "WARP_ID_GLAVEZ_HILL_TO_TAXIUNION",
       "x": 6,
       "y": 3,
       "elevation": 0,
@@ -169,12 +169,12 @@
       "dest_warp_id": "WARP_ID_TAXIUNION_TO_GLAVEZ_HILL_LEFT"
     },
     {
-        "warp_id": "WARP_ID_GLAVEZ_HILL_TO_GLAVEZ_HEIGHTS",
+      "warp_id": "WARP_ID_GLAVEZ_HILL_TO_GLAVEZ_HEIGHTS",
       "x": 10,
       "y": 6,
       "elevation": 0,
       "dest_map": "MAP_GLAVEZ_HEIGHTS",
-        "dest_warp_id": "WARP_ID_GLAVEZ_HEIGHTS_TO_GLAVEZ_HILL"
+      "dest_warp_id": "WARP_ID_GLAVEZ_HEIGHTS_TO_GLAVEZ_HILL"
     }
   ],
   "coord_events": [],

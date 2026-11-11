@@ -26,7 +26,7 @@
   ],
   "object_events": [
     {
-        "local_id": "LOCALID_ROUTE_C_BARGE_GUARD",
+      "local_id": "LOCALID_ROUTE_C_BARGE_GUARD",
       "graphics_id": "OBJ_EVENT_GFX_BLACK_BELT",
       "x": 16,
       "y": 23,
@@ -70,7 +70,7 @@
   ],
   "warp_events": [
     {
-        "warp_id": "WARP_ID_ROUTE_C_TO_GROTTO",
+      "warp_id": "WARP_ID_ROUTE_C_TO_GROTTO",
       "x": 4,
       "y": 36,
       "elevation": 0,
@@ -78,7 +78,7 @@
       "dest_warp_id": "WARP_ID_GROTTO_TO_ROUTE_C_LEFT"
     },
     {
-        "warp_id": "WARP_ID_ROUTE_C_TO_PRESTO_BARGE",
+      "warp_id": "WARP_ID_ROUTE_C_TO_PRESTO_BARGE",
       "x": 16,
       "y": 22,
       "elevation": 0,
