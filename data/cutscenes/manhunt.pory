@@ -537,7 +537,7 @@ script Manhunt_StartVigrimBattle_Script
     lock
     faceplayer
     setvar(VAR_MANHUNT_STATE,DEFEATED_MANHUNT_VIGRIM)
-    addvar(VAR_STORYLINE_STATE,1)
+    call(TheStrikeStrikesBack_Script_IncrementStoryVariable)
     startcutscene(JUMPPLAYER_MANHUNT_VIGRIM)
 
     msgbox(format("I won't fight you any further. Call your backup."),,SPEAKER_VIGRIM,TAIL_WHISPER,EMOTE_SAD)

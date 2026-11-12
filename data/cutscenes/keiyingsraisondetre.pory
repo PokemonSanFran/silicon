@@ -304,7 +304,7 @@ script KeiyingRaisonDetre_NewsStory_Script {
         waitmovement(0)
         removeobject(CRYING_MAID)
         removeobject(KEIYING)
-        addvar(VAR_STORYLINE_STATE,1)
+        call(TheStrikeStrikesBack_Script_IncrementStoryVariable)
         setvar(VAR_KEIYING_STATE, STATE_KEIYING_POST_RAISON_DETRE)
         fadescreen(FADE_FROM_BLACK)
         call(TryAutoSave)
