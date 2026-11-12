@@ -10,15 +10,15 @@
   "allow_cycling": false,
   "allow_escaping": false,
   "allow_running": true,
-  "show_map_name": true,
+  "show_map_name": false,
   "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
   "connections": null,
   "object_events": [
     {
       "local_id": "LOCALID_KEIYING_MANSION_CHILD_MALE",
       "graphics_id": "OBJ_EVENT_GFX_LITTLE_BOY_3",
-      "x": 25,
-      "y": 11,
+      "x": 21,
+      "y": 22,
       "elevation": 3,
       "movement_type": "MOVEMENT_TYPE_NONE",
       "movement_range_x": 0,
@@ -31,8 +31,8 @@
     {
       "local_id": "LOCALID_KEIYING_MANSION_CHILD_FEMALE",
       "graphics_id": "OBJ_EVENT_GFX_GIRL_2",
-      "x": 26,
-      "y": 10,
+      "x": 22,
+      "y": 21,
       "elevation": 3,
       "movement_type": "MOVEMENT_TYPE_NONE",
       "movement_range_x": 0,
@@ -45,8 +45,8 @@
     {
       "local_id": "LOCALID_KEIYING_MANSION_KEYING",
       "graphics_id": "OBJ_EVENT_GFX_KEIYING",
-      "x": 23,
-      "y": 10,
+      "x": 19,
+      "y": 21,
       "elevation": 3,
       "movement_type": "MOVEMENT_TYPE_FACE_RIGHT",
       "movement_range_x": 0,
@@ -57,24 +57,23 @@
       "flag": "FLAG_TEMP_2"
     },
     {
-      "local_id": "LOCALID_KEIYING_MANSION_MAID_2",
-      "graphics_id": "OBJ_EVENT_GFX_NURSE",
-      "x": 42,
-      "y": 4,
+      "graphics_id": "OBJ_EVENT_GFX_UNION_ROOM_NURSE",
+      "x": 33,
+      "y": 6,
       "elevation": 3,
       "movement_type": "MOVEMENT_TYPE_WALK_RIGHT_AND_LEFT",
-      "movement_range_x": 0,
+      "movement_range_x": 4,
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "NULL",
-      "flag": "FLAG_TEMP_2"
+      "script": "KeiYingMansion_MaidCooking",
+      "flag": "0"
     },
     {
       "local_id": "LOCALID_KEIYING_MANSION_MAID_1",
       "graphics_id": "OBJ_EVENT_GFX_UNION_ROOM_NURSE",
-      "x": 39,
-      "y": 4,
+      "x": 3,
+      "y": 14,
       "elevation": 3,
       "movement_type": "MOVEMENT_TYPE_WALK_LEFT_AND_RIGHT",
       "movement_range_x": 0,
@@ -83,29 +82,128 @@
       "trainer_sight_or_berry_tree_id": "0",
       "script": "NULL",
       "flag": "0"
+    },
+    {
+      "graphics_id": "OBJ_EVENT_GFX_CONTEST_JUDGE",
+      "x": 20,
+      "y": 3,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "KeiYingMansion_Guard",
+      "flag": "0"
+    },
+    {
+      "graphics_id": "OBJ_EVENT_GFX_GENTLEMAN",
+      "x": 38,
+      "y": 3,
+      "elevation": 0,
+      "movement_type": "MOVEMENT_TYPE_FACE_UP",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "KeiYingMansion_Cook2",
+      "flag": "0"
+    },
+    {
+      "graphics_id": "OBJ_EVENT_GFX_GENTLEMAN",
+      "x": 33,
+      "y": 3,
+      "elevation": 0,
+      "movement_type": "MOVEMENT_TYPE_FACE_UP",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "KeiYingMansion_Cook1",
+      "flag": "0"
+    },
+    {
+      "local_id": "LOCALID_KEIYING_MANSION_MAID_2",
+      "graphics_id": "OBJ_EVENT_GFX_UNION_ROOM_NURSE",
+      "x": 10,
+      "y": 13,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_WANDER_UP_AND_DOWN",
+      "movement_range_x": 0,
+      "movement_range_y": 3,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "KeiYingMansion_MaidSweeping",
+      "flag": "0"
+    },
+    {
+      "graphics_id": "OBJ_EVENT_GFX_GENTLEMAN",
+      "x": 39,
+      "y": 5,
+      "elevation": 0,
+      "movement_type": "MOVEMENT_TYPE_FACE_UP",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "KeiYingMansion_Trash",
+      "flag": "0"
+    },
+    {
+      "graphics_id": "OBJ_EVENT_GFX_GENTLEMAN",
+      "x": 0,
+      "y": 20,
+      "elevation": 0,
+      "movement_type": "MOVEMENT_TYPE_FACE_UP",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "KeiYingMansion_Trash",
+      "flag": "0"
+    },
+    {
+      "graphics_id": "OBJ_EVENT_GFX_GENTLEMAN",
+      "x": 34,
+      "y": 2,
+      "elevation": 0,
+      "movement_type": "MOVEMENT_TYPE_FACE_UP",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "KeiYingMansion_Trash",
+      "flag": "0"
     }
   ],
   "warp_events": [
     {
-      "x": 24,
-      "y": 17,
+      "x": 20,
+      "y": 25,
       "elevation": 0,
       "dest_map": "MAP_PETAROSA_BOROUGH",
       "dest_warp_id": "0"
     },
     {
-      "x": 25,
-      "y": 17,
+      "x": 20,
+      "y": 19,
       "elevation": 0,
-      "dest_map": "MAP_PETAROSA_BOROUGH",
+      "dest_map": "MAP_PETAROSA_BOROUGH_KEI_YING_MANSION_GARDEN",
       "dest_warp_id": "0"
+    },
+    {
+      "x": 20,
+      "y": 8,
+      "elevation": 0,
+      "dest_map": "MAP_PETAROSA_BOROUGH_KEI_YING_MANSION_GARDEN",
+      "dest_warp_id": "2"
     }
   ],
   "coord_events": [
     {
       "type": "trigger",
-      "x": 15,
-      "y": 10,
+      "x": 11,
+      "y": 18,
       "elevation": 0,
       "var": "VAR_KEIYING_STATE",
       "var_value": "1",
@@ -113,8 +211,8 @@
     },
     {
       "type": "trigger",
-      "x": 14,
-      "y": 10,
+      "x": 10,
+      "y": 18,
       "elevation": 0,
       "var": "VAR_KEIYING_STATE",
       "var_value": "1",
@@ -122,8 +220,8 @@
     },
     {
       "type": "trigger",
-      "x": 6,
-      "y": 4,
+      "x": 2,
+      "y": 12,
       "elevation": 0,
       "var": "VAR_KEIYING_STATE",
       "var_value": "2",
@@ -131,8 +229,8 @@
     },
     {
       "type": "trigger",
-      "x": 37,
-      "y": 10,
+      "x": 33,
+      "y": 18,
       "elevation": 0,
       "var": "VAR_KEIYING_STATE",
       "var_value": "3",
@@ -140,8 +238,8 @@
     },
     {
       "type": "trigger",
-      "x": 36,
-      "y": 10,
+      "x": 32,
+      "y": 18,
       "elevation": 0,
       "var": "VAR_KEIYING_STATE",
       "var_value": "3",
@@ -149,22 +247,182 @@
     },
     {
       "type": "trigger",
-      "x": 24,
-      "y": 16,
-      "elevation": 3,
-      "var": "VAR_TEMP_F",
-      "var_value": "0",
-      "script": "KeiyingRaisonDetre_PreventPlayerLeaving_Script"
-    },
-    {
-      "type": "trigger",
-      "x": 25,
-      "y": 16,
+      "x": 20,
+      "y": 25,
       "elevation": 3,
       "var": "VAR_TEMP_F",
       "var_value": "0",
       "script": "KeiyingRaisonDetre_PreventPlayerLeaving_Script"
     }
   ],
-  "bg_events": []
+  "bg_events": [
+    {
+      "type": "sign",
+      "x": 13,
+      "y": 6,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_NORTH",
+      "script": "KeiYingMansion_Painting"
+    },
+    {
+      "type": "sign",
+      "x": 12,
+      "y": 6,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_NORTH",
+      "script": "KeiYingMansion_Painting"
+    },
+    {
+      "type": "sign",
+      "x": 14,
+      "y": 6,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_NORTH",
+      "script": "KeiYingMansion_Painting"
+    },
+    {
+      "type": "sign",
+      "x": 15,
+      "y": 6,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_NORTH",
+      "script": "KeiYingMansion_Painting"
+    },
+    {
+      "type": "sign",
+      "x": 26,
+      "y": 7,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "CuconuTown_SharpriseCompound_2F_Dialogue_Statue"
+    },
+    {
+      "type": "sign",
+      "x": 27,
+      "y": 7,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "CuconuTown_SharpriseCompound_2F_Dialogue_Statue"
+    },
+    {
+      "type": "sign",
+      "x": 15,
+      "y": 20,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "CuconuTown_SharpriseCompound_2F_Dialogue_Statue"
+    },
+    {
+      "type": "sign",
+      "x": 16,
+      "y": 20,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "CuconuTown_SharpriseCompound_2F_Dialogue_Statue"
+    },
+    {
+      "type": "sign",
+      "x": 17,
+      "y": 25,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "CuconuTown_SharpriseCompound_2F_Dialogue_Statue"
+    },
+    {
+      "type": "sign",
+      "x": 18,
+      "y": 25,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "CuconuTown_SharpriseCompound_2F_Dialogue_Statue"
+    },
+    {
+      "type": "sign",
+      "x": 22,
+      "y": 25,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "CuconuTown_SharpriseCompound_2F_Dialogue_Statue"
+    },
+    {
+      "type": "sign",
+      "x": 23,
+      "y": 25,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "CuconuTown_SharpriseCompound_2F_Dialogue_Statue"
+    },
+    {
+      "type": "sign",
+      "x": 6,
+      "y": 10,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_NORTH",
+      "script": "KeiYingMansion_Books"
+    },
+    {
+      "type": "sign",
+      "x": 7,
+      "y": 10,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_NORTH",
+      "script": "KeiYingMansion_Books"
+    },
+    {
+      "type": "sign",
+      "x": 1,
+      "y": 10,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_NORTH",
+      "script": "KeiYingMansion_TV"
+    },
+    {
+      "type": "sign",
+      "x": 2,
+      "y": 10,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_NORTH",
+      "script": "KeiYingMansion_TV"
+    },
+    {
+      "type": "sign",
+      "x": 3,
+      "y": 10,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_NORTH",
+      "script": "KeiYingMansion_TV"
+    },
+    {
+      "type": "sign",
+      "x": 37,
+      "y": 15,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_NORTH",
+      "script": "KeiYingMansion_Books"
+    },
+    {
+      "type": "sign",
+      "x": 38,
+      "y": 15,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_NORTH",
+      "script": "KeiYingMansion_Books"
+    },
+    {
+      "type": "sign",
+      "x": 39,
+      "y": 15,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_NORTH",
+      "script": "KeiYingMansion_Books"
+    },
+    {
+      "type": "sign",
+      "x": 31,
+      "y": 2,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_NORTH",
+      "script": "KeiYingMansion_Fridge"
+    }
+  ]
 }

@@ -1,6 +1,6 @@
 {
-  "data/tilesets/secondary/fancy_indoors/porytiles_bin/metatile_attributes.bin": "d4a404f76abb08f3245aefc258671c05",
-  "data/tilesets/secondary/fancy_indoors/porytiles_bin/metatiles.bin": "d6892603bd0374ac28fdd5ee07f3f192",
+  "data/tilesets/secondary/fancy_indoors/porytiles_bin/metatile_attributes.bin": "d5aa6e3e238df6371fced34412f2b93c",
+  "data/tilesets/secondary/fancy_indoors/porytiles_bin/metatiles.bin": "135d33d1d959c103969262b2bd0b2748",
   "data/tilesets/secondary/fancy_indoors/porytiles_bin/palettes/00.pal": "6fc3bad0f86551321018d7c66c7e9b64",
   "data/tilesets/secondary/fancy_indoors/porytiles_bin/palettes/01.pal": "b324c3e89be895ac24935a8503a0154e",
   "data/tilesets/secondary/fancy_indoors/porytiles_bin/palettes/02.pal": "b324c3e89be895ac24935a8503a0154e",
@@ -17,9 +17,9 @@
   "data/tilesets/secondary/fancy_indoors/porytiles_bin/palettes/13.pal": "59f83737350efeb148a299bdbf87e97f",
   "data/tilesets/secondary/fancy_indoors/porytiles_bin/palettes/14.pal": "59f83737350efeb148a299bdbf87e97f",
   "data/tilesets/secondary/fancy_indoors/porytiles_bin/palettes/15.pal": "59f83737350efeb148a299bdbf87e97f",
-  "data/tilesets/secondary/fancy_indoors/porytiles_bin/tiles.png": "d33fffc865aeed6667e17a49c98f93c6",
-  "data/tilesets/secondary/fancy_indoors/porytiles_src/attributes.csv": "367a50b404934ce2701b2f3f1355cbb3",
-  "data/tilesets/secondary/fancy_indoors/porytiles_src/bottom.png": "b66e7203f5f208a3eef79e59d114239d",
-  "data/tilesets/secondary/fancy_indoors/porytiles_src/middle.png": "fbf238427cde7c0d8db709396d9459f0",
-  "data/tilesets/secondary/fancy_indoors/porytiles_src/top.png": "de39e750e42ed58b0353be61fc321dcf"
+  "data/tilesets/secondary/fancy_indoors/porytiles_bin/tiles.png": "8a7d2a943a34b8bd4a2e1e38342c688c",
+  "data/tilesets/secondary/fancy_indoors/porytiles_src/attributes.csv": "ec4136b1cd0dbdb27fc36783af7a4400",
+  "data/tilesets/secondary/fancy_indoors/porytiles_src/bottom.png": "6b78140776f786067225e292f24fd34b",
+  "data/tilesets/secondary/fancy_indoors/porytiles_src/middle.png": "b7cb696879ab34a202c523d1fc532dd5",
+  "data/tilesets/secondary/fancy_indoors/porytiles_src/top.png": "044330f0ddb5f4f9891f91fc52322fa1"
 }
