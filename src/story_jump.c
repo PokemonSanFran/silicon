@@ -2743,68 +2743,71 @@ static void ClearGymTrainers(enum GymLeaderIndex gymIndex)
         [GYM_BELEN] =
         {
             FLAG_BADGE01_GET,
-            TRAINER_FLAGS_START + TRAINER_BELEN,
-            TRAINER_FLAGS_START + TRAINER_CHEFA,
-            TRAINER_FLAGS_START + TRAINER_CHEFB,
-            TRAINER_FLAGS_START + TRAINER_CHEFC,
+            TRAINER_BELEN,
+            TRAINER_CHEFA,
+            TRAINER_CHEFB,
+            TRAINER_CHEFC,
             TRAINER_NONE,
         },
         [GYM_SHINZO] =
         {
             FLAG_BADGE02_GET,
-            TRAINER_FLAGS_START + TRAINER_031A849F,
-            TRAINER_FLAGS_START + TRAINER_041FD20E,
-            TRAINER_FLAGS_START + TRAINER_045FDD44,
-            TRAINER_FLAGS_START + TRAINER_SHINZO,
+            TRAINER_031A849F,
+            TRAINER_041FD20E,
+            TRAINER_045FDD44,
+            TRAINER_SHINZO,
             TRAINER_NONE,
         },
         [GYM_EMRYS] =
         {
             FLAG_BADGE03_GET,
-            TRAINER_FLAGS_START + TRAINER_0AF40D0B,
-            TRAINER_FLAGS_START + TRAINER_0B48C7D0,
-            TRAINER_FLAGS_START + TRAINER_0C95C833,
-            TRAINER_FLAGS_START + TRAINER_0C0A9B2F,
-            TRAINER_FLAGS_START + TRAINER_EMRYS,
+            TRAINER_0AF40D0B,
+            TRAINER_0B48C7D0,
+            TRAINER_0C95C833,
+            TRAINER_0C0A9B2F,
+            TRAINER_EMRYS,
             TRAINER_NONE,
         },
         [GYM_PUA] =
         {
             FLAG_BADGE04_GET,
-            TRAINER_FLAGS_START + TRAINER_PUA,
+            TRAINER_PUA,
             TRAINER_NONE,
         },
         [GYM_NERIENE] =
         {
             FLAG_BADGE05_GET,
-            TRAINER_FLAGS_START + TRAINER_1075163A,
-            TRAINER_FLAGS_START + TRAINER_10751EAA,
-            TRAINER_FLAGS_START + TRAINER_10E3552B,
-            TRAINER_FLAGS_START + TRAINER_1114BC23,
-            TRAINER_FLAGS_START + TRAINER_NERIENE,
+            TRAINER_1075163A,
+            TRAINER_10751EAA,
+            TRAINER_10E3552B,
+            TRAINER_1114BC23,
+            TRAINER_NERIENE,
             TRAINER_NONE,
         },
         [GYM_DIMU] =
         {
             FLAG_BADGE06_GET,
-            TRAINER_FLAGS_START + TRAINER_DIMU,
+            TRAINER_DIMU,
             TRAINER_NONE,
         },
         [GYM_BD] =
         {
             FLAG_BADGE07_GET,
-            TRAINER_FLAGS_START +TRAINER_TIRABUDIN_PLACE_GYM_1,
-            TRAINER_FLAGS_START + TRAINER_BD,
+            TRAINER_TIRABUDIN_PLACE_GYM_1,
+            TRAINER_BD,
             TRAINER_NONE,
         },
         [GYM_AMI] =
         {
             FLAG_BADGE08_GET,
-            TRAINER_FLAGS_START + TRAINER_AMIARGENTO,
+            TRAINER_AMIARGENTO,
             TRAINER_NONE,
         },
     };
 
     for (u32 trainerIndex = 0; gymTrainerList[gymIndex][trainerIndex] != TRAINER_NONE; trainerIndex++)
-        FlagSet(gymTrainerList[gymIndex][trainerIndex]);
+    {
+        u32 trainerFlagStart = (trainerIndex != 0) ? TRAINER_FLAGS_START : 0;
+        FlagSet((gymTrainerList[gymIndex][trainerIndex])+trainerFlagStart);
+    }
 }
