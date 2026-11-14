@@ -73,25 +73,20 @@
   ],
   "warp_events": [
     {
+        "warp_id": "WARP_ID_GARDEN_TO_KEIYING_MANSION_BOTTOM",
       "x": 14,
       "y": 19,
       "elevation": 0,
       "dest_map": "MAP_PETAROSA_BOROUGH_KEI_YING_MANSION",
-      "dest_warp_id": "1"
+          "dest_warp_id": "WARP_ID_KEIYING_MANSION_TO_GARDEN_BOTTOM"
     },
     {
-      "x": 14,
-      "y": 19,
-      "elevation": 0,
-      "dest_map": "MAP_PETAROSA_BOROUGH_KEI_YING_MANSION",
-      "dest_warp_id": "1"
-    },
-    {
+        "warp_id": "WARP_ID_GARDEN_TO_KEIYING_MANSION_TOP",
       "x": 14,
       "y": 5,
       "elevation": 0,
       "dest_map": "MAP_PETAROSA_BOROUGH_KEI_YING_MANSION",
-      "dest_warp_id": "2"
+          "dest_warp_id": "WARP_ID_KEIYING_MANSION_TO_GARDEN_TOP"
     }
   ],
   "coord_events": [

@@ -57,6 +57,7 @@
       "flag": "FLAG_TEMP_2"
     },
     {
+      "local_id": "LOCALID_KEIYING_MANSION_MAID_COOK",
       "graphics_id": "OBJ_EVENT_GFX_UNION_ROOM_NURSE",
       "x": 33,
       "y": 6,
@@ -84,6 +85,7 @@
       "flag": "0"
     },
     {
+      "local_id": "LOCALID_KEIYING_MANSION_UPSTAIRS_GUARD",
       "graphics_id": "OBJ_EVENT_GFX_CONTEST_JUDGE",
       "x": 20,
       "y": 3,
@@ -97,6 +99,7 @@
       "flag": "0"
     },
     {
+      "local_id": "LOCALID_KEIYING_MANSION_COOK2",
       "graphics_id": "OBJ_EVENT_GFX_GENTLEMAN",
       "x": 38,
       "y": 3,
@@ -110,6 +113,7 @@
       "flag": "0"
     },
     {
+      "local_id": "LOCALID_KEIYING_MANSION_COOK1",
       "graphics_id": "OBJ_EVENT_GFX_GENTLEMAN",
       "x": 33,
       "y": 3,
@@ -137,11 +141,12 @@
       "flag": "0"
     },
     {
+      "local_id": "LOCALID_KEIYING_MANSION_TRASH",
       "graphics_id": "OBJ_EVENT_GFX_GENTLEMAN",
       "x": 39,
       "y": 5,
       "elevation": 0,
-      "movement_type": "MOVEMENT_TYPE_FACE_UP",
+      "movement_type": "MOVEMENT_TYPE_INVISIBLE",
       "movement_range_x": 0,
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
@@ -150,11 +155,12 @@
       "flag": "0"
     },
     {
+      "local_id": "LOCALID_KEIYING_MANSION_TRASH_2",
       "graphics_id": "OBJ_EVENT_GFX_GENTLEMAN",
       "x": 0,
       "y": 20,
       "elevation": 0,
-      "movement_type": "MOVEMENT_TYPE_FACE_UP",
+      "movement_type": "MOVEMENT_TYPE_INVISIBLE",
       "movement_range_x": 0,
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
@@ -163,11 +169,12 @@
       "flag": "0"
     },
     {
+      "local_id": "LOCALID_KEIYING_MANSION_TRASH_3",
       "graphics_id": "OBJ_EVENT_GFX_GENTLEMAN",
       "x": 34,
       "y": 2,
       "elevation": 0,
-      "movement_type": "MOVEMENT_TYPE_FACE_UP",
+      "movement_type": "MOVEMENT_TYPE_INVISIBLE",
       "movement_range_x": 0,
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
@@ -177,26 +184,29 @@
     }
   ],
   "warp_events": [
+      {
+          "warp_id": "WARP_ID_KEIYING_MANSION_TO_PETAROSA_BOROUGH",
+          "x": 20,
+          "y": 25,
+          "elevation": 0,
+          "dest_map": "MAP_PETAROSA_BOROUGH",
+          "dest_warp_id": "WARP_ID_PETAROSA_BOROUGH_TO_KEIYING_MANSION"
+      },
     {
-      "x": 20,
-      "y": 25,
-      "elevation": 0,
-      "dest_map": "MAP_PETAROSA_BOROUGH",
-      "dest_warp_id": "0"
-    },
-    {
+          "warp_id": "WARP_ID_KEIYING_MANSION_TO_GARDEN_BOTTOM",
       "x": 20,
       "y": 19,
       "elevation": 0,
       "dest_map": "MAP_PETAROSA_BOROUGH_KEI_YING_MANSION_GARDEN",
-      "dest_warp_id": "0"
+      "dest_warp_id": "WARP_ID_GARDEN_TO_KEIYING_MANSION_BOTTOM"
     },
     {
+          "warp_id": "WARP_ID_KEIYING_MANSION_TO_GARDEN_TOP",
       "x": 20,
       "y": 8,
       "elevation": 0,
       "dest_map": "MAP_PETAROSA_BOROUGH_KEI_YING_MANSION_GARDEN",
-      "dest_warp_id": "2"
+      "dest_warp_id": "WARP_ID_GARDEN_TO_KEIYING_MANSION_TOP"
     }
   ],
   "coord_events": [
