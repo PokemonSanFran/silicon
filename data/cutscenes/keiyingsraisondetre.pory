@@ -27,6 +27,10 @@ script KeiyingRaisonDetre_MoveIntoFoyer_Script {
     lock
         startcutscene(JUMPPLAYER_KEIYINGSRAISONDETRE)
         setvar(VAR_KEIYING_STATE,STATE_KEIYING_MET_KIDS)
+
+        addobject(LOCALID_KEIYING_MANSION_CHILD_MALE)
+        moveobjecttocoords(LOCALID_KEIYING_MANSION_CHILD_MALE,20,21,DIR_SOUTH)
+
         applymovement(ALEKSANDER, KeiyingRaisonDetre_ComeDownStairs)
         delay(48)
         applymovement(SUMMER, KeiyingRaisonDetre_ComeDownStairs)
@@ -325,14 +329,3 @@ script KeiyingRaisonDetre_PreventPlayerLeaving_Script
     release
         end
 }
-
-movement KeiyingRaisonDetre_ComeDownStairs {
-    walk_down * 4
-        step_end
-}
-
-movement KeiyingRaisonDetre_RunUpstairs {
-    walk_up * 7
-        step_end
-}
-
