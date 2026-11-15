@@ -1607,3 +1607,14 @@ const struct Tileset gTileset_Desert =
     .metatileAttributes = gMetatileAttributes_PorytilesManaged_Desert,
     .callback = NULL,
 };
+
+const struct Tileset gTileset_Volcano =
+{
+    .isCompressed = TRUE,
+    .isSecondary = TRUE,
+    .tiles = gTilesetTiles_PorytilesManaged_Volcano,
+    .palettes = gTilesetPalettes_PorytilesManaged_Volcano,
+    .metatiles = gMetatiles_PorytilesManaged_Volcano,
+    .metatileAttributes = gMetatileAttributes_PorytilesManaged_Volcano,
+    .callback = NULL,
+};

@@ -18,3 +18,17 @@ script Route12_Script_Interact_Quest_GetthebandbacktogetherbikerD
     release
     end
 }
+
+script Route12_EventScript_Sign1
+{
+    msgbox(format("▶ Route 12\n{UP_ARROW} Anbeh Bend\n{DOWN_ARROW} Capeh City"), MSGBOX_SIGN)
+    closemessage
+    end
+}
+
+script Route12_EventScript_Sign2
+{
+    msgbox(format("▶ Anbeh Bend\n{DOWN_ARROW} Route 12\n{DOWN_ARROW}{DOWN_ARROW} Capeh City"), MSGBOX_SIGN)
+    closemessage
+    end
+}

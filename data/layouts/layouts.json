@@ -10456,12 +10456,12 @@
     {
       "id": "LAYOUT_ROUTE12",
       "name": "Route12_Layout",
-      "width": 19,
-      "height": 20,
-      "border_width": 2,
+      "width": 57,
+      "height": 26,
+      "border_width": 3,
       "border_height": 2,
-      "primary_tileset": "gTileset_General",
-      "secondary_tileset": "gTileset_Petalburg",
+      "primary_tileset": "gTileset_GeneralSilicon",
+      "secondary_tileset": "gTileset_Volcano",
       "border_filepath": "data/layouts/Route12/border.bin",
       "blockdata_filepath": "data/layouts/Route12/map.bin",
       "layout_version": "emerald"
