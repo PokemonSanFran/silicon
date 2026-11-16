@@ -36,7 +36,8 @@ script KeiYingMansion_DrilburInfestation
 {
     lock
     faceplayer
-    msgbox(format("Oh, dear.\nIt appears we may be dealing with a Drilbur infestation.\NMaster Kei-Ying will not be happy about this."))
+    bufferspeciesname(STR_VAR_1,SPECIES_DRILBUR)
+    msgbox(format("Oh, dear.\nIt appears we may be dealing with a {STR_VAR_1} infestation.\NMaster Kei-Ying will not be happy about this."))
     closemessage
     end
 }
