@@ -73,20 +73,20 @@
   ],
   "warp_events": [
     {
-        "warp_id": "WARP_ID_GARDEN_TO_KEIYING_MANSION_BOTTOM",
+      "warp_id": "WARP_ID_GARDEN_TO_KEIYING_MANSION_BOTTOM",
       "x": 14,
       "y": 19,
       "elevation": 0,
       "dest_map": "MAP_PETAROSA_BOROUGH_KEI_YING_MANSION",
-          "dest_warp_id": "WARP_ID_KEIYING_MANSION_TO_GARDEN_BOTTOM"
+      "dest_warp_id": "WARP_ID_KEIYING_MANSION_TO_GARDEN_BOTTOM"
     },
     {
-        "warp_id": "WARP_ID_GARDEN_TO_KEIYING_MANSION_TOP",
+      "warp_id": "WARP_ID_GARDEN_TO_KEIYING_MANSION_TOP",
       "x": 14,
       "y": 5,
       "elevation": 0,
       "dest_map": "MAP_PETAROSA_BOROUGH_KEI_YING_MANSION",
-          "dest_warp_id": "WARP_ID_KEIYING_MANSION_TO_GARDEN_TOP"
+      "dest_warp_id": "WARP_ID_KEIYING_MANSION_TO_GARDEN_TOP"
     }
   ],
   "coord_events": [
@@ -102,12 +102,29 @@
     {
       "type": "trigger",
       "x": 14,
-      "y": 19,
+      "y": 18,
       "elevation": 0,
       "var": "VAR_TEMP_0",
       "var_value": "0",
       "script": "KeiYingMansion_StopPlayer_South"
     }
   ],
-  "bg_events": []
+  "bg_events": [
+    {
+      "type": "sign",
+      "x": 16,
+      "y": 14,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "CuconuTown_SharpriseCompound_2F_Dialogue_Statue"
+    },
+    {
+      "type": "sign",
+      "x": 15,
+      "y": 14,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "CuconuTown_SharpriseCompound_2F_Dialogue_Statue"
+    }
+  ]
 }
