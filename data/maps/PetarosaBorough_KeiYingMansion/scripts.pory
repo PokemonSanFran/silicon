@@ -44,7 +44,7 @@ script KeiYingMansion_TV
 script KeiYingMansion_Guard
 {
     faceplayer
-    msgbox(format("Ah, I'm terribly sorry.\nThe upper floor is reserved for Master Kei-Ying and his family.\NWe do hope you understand."))
+    msgbox(format("Ah, I'm terribly sorry.\nThe upper floor is reserved for Master Kei-Ying and his family.\NWe do hope you understand."),,SPEAKER_KEIYING_GUARD)
     closemessage
     end
 }
@@ -58,7 +58,7 @@ script KeiYingMansion_Fridge
 
 script KeiYingMansion_MaidCooking
 {
-    msgbox(format("Out of the way!"))
+    msgbox(format("Out of the way!"),,SPEAKER_KEIYINGMAIDCOOK)
     closemessage
     end
 }
@@ -66,7 +66,7 @@ script KeiYingMansion_MaidCooking
 script KeiYingMansion_Cook1
 {
     faceplayer
-    msgbox(format("Master Kei-Ying always has some extravagant requests for dishes.\pHe's a, how does he put it…\NConceptual food artist.\pWell, can't complain about the pay."))
+    msgbox(format("Master Kei-Ying always has some extravagant requests for dishes.\pHe's a, how does he put it…\NConceptual food artist.\pWell, can't complain about the pay."),,SPEAKER_KEIYINGCOOK1)
     applymovement(VAR_LAST_TALKED, moves(face_up))
     closemessage
     waitmovement(0)
@@ -76,7 +76,7 @@ script KeiYingMansion_Cook1
 script KeiYingMansion_Cook2
 {
     faceplayer
-    msgbox(format("Master Kei-Ying this, Master Kei-Ying that…\pThe man can't even reheat his own leftovers without causing a fire!\p…Please don't tell him I said that."))
+    msgbox(format("Master Kei-Ying this, Master Kei-Ying that…\pThe man can't even reheat his own leftovers without causing a fire!\p…Please don't tell him I said that."),,SPEAKER_KEIYINGCOOK2)
     closemessage
     applymovement(VAR_LAST_TALKED, moves(face_up))
     waitmovement(0)
@@ -87,7 +87,7 @@ script KeiYingMansion_MaidSweeping
 {
     lock
     faceplayer
-    msgbox(format("Ugh…\nThese hallways take so long to clean!\nI wanna take a break."))
+    msgbox(format("Ugh…\nThese hallways take so long to clean!\nI wanna take a break."),,SPEAKER_KEIYINGMAID)
     closemessage
     end
 }

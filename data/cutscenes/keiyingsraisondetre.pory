@@ -171,7 +171,7 @@ script KeiyingRaisonDetre_Wine_Dialogue {
         playse(SE_DING_DONG)
         waitfanfare
 
-        msgbox(format("Dinner is served!"),,SPEAKER_MAID)
+        msgbox(format("Dinner is served!"),,SPEAKER_KEIYINGMAID2)
         closemessage
         applymovement(LOCALID_KEIYING_MANSION_KEIYING,moves(face_down))
         waitmovement(LOCALID_KEIYING_MANSION_KEIYING)
@@ -295,9 +295,9 @@ script KeiyingRaisonDetre_NewsStory_Script
     waitmovement(LOCALID_KEIYING_MANSION_CRYING_MAID)
     moveobjecttocoords(LOCALID_KEIYING_MANSION_CRYING_MAID,4,13,DIR_SOUTH)
     callnative(BufferTitleFromPossessivePronouns)
-    msgbox(format("Is there anything else I can get you, {STR_VAR_1} {PLAYER}?"),,SPEAKER_MAID,,EMOTE_SAD)
+    msgbox(format("Is there anything else I can get you, {STR_VAR_1} {PLAYER}?"),,SPEAKER_KEIYINGMAID2,,EMOTE_SAD)
     msgbox(format("Are you okay? What's wrong?"),,SPEAKER_ALICIA)
-    msgbox(format("I'm sorry. My… son is in the hospital after the riots last night. The Tide keeps getting impressionable young folk involved in their nonsense… I hope the city can get rid of them!"),,SPEAKER_MAID)
+    msgbox(format("I'm sorry. My… son is in the hospital after the riots last night. The Tide keeps getting impressionable young folk involved in their nonsense… I hope the city can get rid of them!"),,SPEAKER_KEIYINGMAID2)
     closemessage
     waitmovement(LOCALID_KEIYING_MANSION_CRYING_MAID)
     moveobjecttocoords(LOCALID_KEIYING_MANSION_CRYING_MAID, 10, 20, DIR_SOUTH,3)
