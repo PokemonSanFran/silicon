@@ -10794,12 +10794,12 @@
     {
       "id": "LAYOUT_PETAROSA_BOROUGH_MANSION",
       "name": "PetarosaBorough_Mansion_Layout",
-      "width": 46,
-      "height": 18,
+      "width": 40,
+      "height": 26,
       "border_width": 2,
       "border_height": 2,
-      "primary_tileset": "gTileset_Building",
-      "secondary_tileset": "gTileset_LilycoveMuseum",
+      "primary_tileset": "gTileset_BuildingSilicon",
+      "secondary_tileset": "gTileset_FancyIndoors",
       "border_filepath": "data/layouts/PetarosaBorough_KeiYingMansion/border.bin",
       "blockdata_filepath": "data/layouts/PetarosaBorough_KeiYingMansion/map.bin",
       "layout_version": "emerald"
@@ -13522,6 +13522,18 @@
       "secondary_tileset": "gTileset_FancyIndoors",
       "border_filepath": "data/layouts/CuconuTown_SharpriseCompound_2F_Corridor/border.bin",
       "blockdata_filepath": "data/layouts/CuconuTown_SharpriseCompound_2F_Corridor/map.bin"
+    },
+    {
+      "id": "LAYOUT_PETAROSA_BOROUGH_KEI_YING_MANSION_GARDEN",
+      "name": "PetarosaBorough_KeiYingMansion_Garden_Layout",
+      "width": 29,
+      "height": 25,
+      "border_width": 2,
+      "border_height": 2,
+      "primary_tileset": "gTileset_GeneralSilicon",
+      "secondary_tileset": "gTileset_Petarosa",
+      "border_filepath": "data/layouts/PetarosaBorough_KeiYingMansion_Garden/border.bin",
+      "blockdata_filepath": "data/layouts/PetarosaBorough_KeiYingMansion_Garden/map.bin"
     }
   ]
 }
