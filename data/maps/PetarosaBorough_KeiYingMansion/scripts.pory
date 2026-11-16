@@ -2,13 +2,19 @@ mapscripts PetarosaBorough_KeiYingMansion_MapScripts
 {
     MAP_SCRIPT_ON_TRANSITION
     {
-        call_if_eq(VAR_KEIYING_STATE,STATE_KEIYING_POST_RAISON_DETRE,KeiyingRaisonDetre_ObjectCleanUp_Script)
-        //call_if_ne(VAR_KEIYING_STATE,STATE_KEIYING_POST_RAISON_DETRE,KeiyingRaisonDetre_HideObjectKids_Script)
+        call_if_ge(VAR_KEIYING_STATE,STATE_KEIYING_START_DINNER,KeiyingRaisonDetre_ObjectCleanUp_Script)
+        call_if_eq(VAR_KEIYING_STATE,STATE_KEIYING_FINISH_DINNER,KeiyingRaisonDetre_ObjectCleanUp_Script)
+        call_if_eq(VAR_KEIYING_STATE, STATE_KEIYING_FINISH_DINNER, KeiyingRaisonDetre_Script_FaceNorth)
     }
 
     MAP_SCRIPT_ON_FRAME_TABLE
     [
-        VAR_KEIYING_STATE, 0: KeiyingRaisonDetre_MoveIntoFoyer_Script
+        VAR_KEIYING_STATE, STATE_KEIYING_NOT_ENTERED_HOUSE: KeiyingRaisonDetre_MoveIntoFoyer_Script
+        VAR_KEIYING_STATE, STATE_KEIYING_FINISH_DINNER: KeiyingRaisonDetre_NewsStory_Script
+    ]
+    MAP_SCRIPT_ON_WARP_INTO_MAP_TABLE
+    [
+        VAR_KEIYING_STATE, STATE_KEIYING_FINISH_DINNER: KeiyingRaisonDetre_Script_FaceNorth
     ]
 }
 
@@ -29,8 +35,9 @@ script KeiYingMansion_Books
 
 script KeiYingMansion_TV
 {
-    msgbox(format("It's a black-and-white movie.\nA Mr. Rime is being squeezed through giant cogwheels."))
-    msgbox(format("Ok, this IS actually pretty funny."),,SPEAKER_ALICIA,TAIL_THOUGHT,EMOTE_DEFAULT)
+    bufferspeciesname(STR_VAR_1,SPECIES_MR_MIME)
+    msgbox(format("It's a black-and-white movie.\nA {STR_VAR_1} is being squeezed through giant cogwheels."))
+    msgbox(format("Ok, this IS actually pretty funny."),,SPEAKER_ALICIA,TAIL_THOUGHT,EMOTE_LAUGH)
     closemessage
 }
 
@@ -45,7 +52,6 @@ script KeiYingMansion_Guard
 script KeiYingMansion_Fridge
 {
     msgbox(format("The fridge is full of delicacies from other regions.\nKalos, Paldea, Johto…"))
-    msgbox(format("Is that a Slowpoke tail…?\nHopefully it's imitation."),,SPEAKER_ALICIA,TAIL_THOUGHT,EMOTE_SHOCK)
     closemessage
     end
 }

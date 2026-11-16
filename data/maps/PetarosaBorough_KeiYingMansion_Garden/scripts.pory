@@ -1,27 +1,26 @@
 mapscripts PetarosaBorough_KeiYingMansion_Garden_MapScripts {
     MAP_SCRIPT_ON_TRANSITION
     {
-        if(var(VAR_STORYLINE_STATE) >= STORY_CLEAR)
-            {
-                setflag(FLAG_TEMP_3)
-                removeobject(LOCALID_KEIYING_MANSION_UNDERCOVER)
-            }
-        
-        elif(flag(FLAG_TIMELINE_TRUE) == TRUE)
-        {
-
-                setflag(FLAG_TEMP_1)
-                setflag(FLAG_TEMP_2)
-                setflag(FLAG_TEMP_4)
-                removeobject(LOCALID_KEIYING_MANSION_GARDENER_1)
-                removeobject(LOCALID_KEIYING_MANSION_GARDENER_2)
-                removeobject(LOCALID_KEIYING_MANSION_COMRADE)
-        }
-        else{
-            setflag(FLAG_TEMP_4)
-            removeobject(LOCALID_KEIYING_MANSION_COMRADE)
-        }
+        call_if_ge(VAR_STORYLINE_STATE,STORY_CLEAR,KeiYingMansion_Script_HideUndercover)
+        call_if_set(FLAG_TIMELINE_TRUE,KeiYingMansion_Script_HideGardener)
+        call_if_lt(VAR_STORYLINE_STATE,STORY_CLEAR,KeiYingMansion_Script_HideComrade)
     }
+}
+
+script KeiYingMansion_Script_HideGardener
+{
+    setobjectflagfromlocalid(LOCALID_KEIYING_MANSION_GARDENER_1)
+    setobjectflagfromlocalid(LOCALID_KEIYING_MANSION_GARDENER_2)
+}
+
+script KeiYingMansion_Script_HideComrade
+{
+    setobjectflagfromlocalid(LOCALID_KEIYING_MANSION_COMRADE)
+}
+
+script KeiYingMansion_Script_HideUndercover
+{
+    setobjectflagfromlocalid(LOCALID_KEIYING_MANSION_UNDERCOVER)
 }
 
 script KeiYingMansion_Gardener
@@ -54,7 +53,7 @@ script KeiYingMansion_Undercover
         msgbox(format("A friend.\nThis place is full of cameras, you know?\nAnd the cops are on speed dial.\pWouldn't want to be draw too much attention, now, would you?\nFood for thought."))
         msgbox(format("How do you…?"),speaker=SPEAKER_ALICIA,tail=TAIL_DEFAULT,emote=EMOTE_CONFUSE)
         msgbox(format("Look, you'll be fine as long and you stay in the garden.\nDo you what you gotta do, and leave."))
-        
+
     }
     elif(flag(FLAG_TIMELINE_FALSE) == TRUE)
     {
@@ -109,7 +108,7 @@ script KeiYingMansion_StopPlayer_Dialogue
             closemessage
             return
 
-        } 
+        }
     else
     {
         end
