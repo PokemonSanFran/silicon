@@ -429,3 +429,6 @@ const u16 gMetatileAttributes_PorytilesManaged_Desert[] = INCBIN_U16("data/tiles
 
 const u16 gMetatiles_PorytilesManaged_Petarosa[] = INCBIN_U16("data/tilesets/secondary/petarosa/porytiles_bin/metatiles.bin");
 const u16 gMetatileAttributes_PorytilesManaged_Petarosa[] = INCBIN_U16("data/tilesets/secondary/petarosa/porytiles_bin/metatile_attributes.bin");
+
+const u16 gMetatiles_PorytilesManaged_Volcano[] = INCBIN_U16("data/tilesets/secondary/volcano/porytiles_bin/metatiles.bin");
+const u16 gMetatileAttributes_PorytilesManaged_Volcano[] = INCBIN_U16("data/tilesets/secondary/volcano/porytiles_bin/metatile_attributes.bin");
