@@ -2240,3 +2240,4 @@ EventScript_PalletTown_PlayersHouse_2F_TurnOnPC::
 	.include "data/maps/CuconuTown_SharpriseCompound_2F_Corridor/scripts.inc"
 
 	.include "data/maps/HalaiIsland_Baiya2F/scripts.inc"
+	.include "data/maps/PetarosaBorough_KeiYingMansion_Garden/scripts.inc"

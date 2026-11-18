@@ -60,7 +60,10 @@ script Route8_EventScript_026E91A6
 
 script Route8_EventScript_Sign
 {
-    msgbox(format("▶ Route 8\n{UP_ARROW} Mermereza City\n{DOWN_ARROW} Glavez Hill"))
+	buffermapname(STR_VAR_1,MAP_ROUTE8)
+	buffermapname(STR_VAR_2,MAP_MERMEREZA_CITY)
+	buffermapname(STR_VAR_3,MAP_GLAVEZ_HILL)
+    msgbox(format("▶ {STR_VAR_1}\n{UP_ARROW} {STR_VAR_2}\n{DOWN_ARROW} {STR_VAR_3}"))
     closemessage
     end
 }

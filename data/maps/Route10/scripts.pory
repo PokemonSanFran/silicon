@@ -119,7 +119,10 @@ script Route10_EventScript_070F6125
 
 script Route10_EventScript_Sign1
 {
-    msgbox(format("▶ Route 10\n{UP_ARROW} Caphe City\n{DOWN_ARROW} Mermereza City"))
+	buffermapname(STR_VAR_1,MAP_ROUTE10)
+	buffermapname(STR_VAR_2,MAP_CAPHE_CITY)
+	buffermapname(STR_VAR_3,MAP_MERMEREZA_CITY)
+    msgbox(format("▶ {STR_VAR_1}\n{UP_ARROW} {STR_VAR_2}\n{DOWN_ARROW} {STR_VAR_3}"), MSGBOX_SIGN)
     closemessage
     end
 }

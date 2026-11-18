@@ -3137,4 +3137,74 @@ static const struct SpeakerData sSpeakerData[NUM_SPEAKERS] =
         .gender = NON_BINARY,
         .speakerIcon = SPEAKER_ICON_ROCKET_GRUNT_F,
     },
+    [SPEAKER_KEIYINGGARDENER] =
+    {
+        .name = COMPOUND_STRING("Keiyinggardener"),
+        .title = COMPOUND_STRING("Gardener"),
+        .gender = MALE,
+        .speakerIcon = SPEAKER_ICON_POKE_MANIAC,
+    },
+    [SPEAKER_KEIYINGGARDENATTENDANT] =
+    {
+        .name = COMPOUND_STRING("Keiyinggardenattendant"),
+        .title = COMPOUND_STRING("House Staff"),
+        .gender = MALE,
+        .speakerIcon = SPEAKER_ICON_OLD_MAN,
+    },
+    [SPEAKER_KEIYINGGARDENER_UNDERCOVER] =
+    {
+        .name = COMPOUND_STRING("Keiyinggardenerundercover"),
+        .title = COMPOUND_STRING("Gardener"),
+        .gender = MALE,
+        .speakerIcon = SPEAKER_ICON_OLD_WOMAN,
+    },
+    [SPEAKER_KEIYINGGARDENER_COMRADE] =
+    {
+        .name = COMPOUND_STRING("Keiyinggardenerundercover"),
+        .title = COMPOUND_STRING("Comrade"),
+        .gender = MALE,
+        .speakerIcon = SPEAKER_ICON_ROCKET_GRUNT_F,
+    },
+    [SPEAKER_KEIYING_GUARD] =
+    {
+        .name = COMPOUND_STRING("Keiyingguard"),
+        .title = COMPOUND_STRING("Security Guard"),
+        .gender = MALE,
+        .speakerIcon = SPEAKER_ICON_LANCE,
+    },
+    [SPEAKER_KEIYINGMAIDCOOK] =
+    {
+        .name = COMPOUND_STRING("Keiyingcook"),
+        .title = COMPOUND_STRING("Cook"),
+        .gender = MALE,
+        .speakerIcon = SPEAKER_ICON_POLICEMAN,
+    },
+    [SPEAKER_KEIYINGCOOK1] =
+    {
+        .name = COMPOUND_STRING("Keiyingcook1"),
+        .title = COMPOUND_STRING("Cook"),
+        .gender = MALE,
+        .speakerIcon = SPEAKER_ICON_COLLECTOR,
+    },
+    [SPEAKER_KEIYINGCOOK2] =
+    {
+        .name = COMPOUND_STRING("Keiyingcook2"),
+        .title = COMPOUND_STRING("Cook"),
+        .gender = MALE,
+        .speakerIcon = SPEAKER_ICON_ELM,
+    },
+    [SPEAKER_KEIYINGMAID] =
+    {
+        .name = COMPOUND_STRING("Keiyingmaid"),
+        .title = COMPOUND_STRING("House Staff"),
+        .gender = MALE,
+        .speakerIcon = SPEAKER_ICON_WOMAN,
+    },
+    [SPEAKER_KEIYINGMAID2] =
+    {
+        .name = COMPOUND_STRING("Keiyingmaid"),
+        .title = COMPOUND_STRING("House Staff"),
+        .gender = MALE,
+        .speakerIcon = SPEAKER_ICON_WOMAN,
+    },
 };
