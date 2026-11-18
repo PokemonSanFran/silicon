@@ -22,6 +22,8 @@
 *.fwjpnfont
 sound/**/*.bin
 sound/songs/midi/*.s
+.wrangler/*.*
+.wrangler/
 tools/agbcc
 tools/compresSmol/
 *.map

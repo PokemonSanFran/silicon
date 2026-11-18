@@ -1319,7 +1319,11 @@ static void BattleSetup_ConfigureTrainerBattle(TrainerBattleParameter *battlePar
 #if FREE_MATCH_CALL == FALSE
     if (battleParams->params.isRematch)
     {
-        battleParams->params.opponentA = GetRematchTrainerId(battleParams->params.opponentA);
+        // Start rematch_action
+        //battleParams->params.opponentA = GetRematchTrainerId(battleParams->params.opponentA);
+        if (battleParams->params.opponentA == TRAINER_NONE)
+            battleParams->params.opponentA = GetRematchTrainerId(battleParams->params.opponentA);
+        // End rematch_action
     }
 #endif //FREE_MATCH_CALL
 
@@ -2271,6 +2275,9 @@ bool8 ShouldTryRematchBattle(void)
 
 bool8 ShouldTryRematchBattleForTrainerId(u16 trainerId)
 {
+    // Start rematch_action
+    return (IsFirstTrainerIdReadyForRematch(gRematchTable, trainerId));
+    // End rematch_action
     if (IsFirstTrainerIdReadyForRematch(gRematchTable, trainerId))
         return TRUE;
 

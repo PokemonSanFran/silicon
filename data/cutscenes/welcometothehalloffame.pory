@@ -1,7 +1,5 @@
-const PLAYER = OBJ_EVENT_ID_PLAYER
-const BAIYA = 1
-const LUCREZIA = 2
-const FLAG_HIDE_LUCREZIA = FLAG_TEMP_1
+const LOCALID_SHARPRISE_STADIUM_ARENA_BAIYA = LOCALID_SHARPRISE_STADIUM_ARENA_OPPONENT
+const LOCALID_SHARPRISE_STADIUM_ARENA_LUCREZIA = (LOCALID_CAMERA + 1)
 
 script WelcomeToTheHallOfFame_PostBattle_Dialogue {
     startcutscene(JUMPPLAYER_WELCOMETOTHEHALLOFFAME)
@@ -12,11 +10,10 @@ script WelcomeToTheHallOfFame_PostBattle_Dialogue {
         call(BattleFrontier_BattleDomeBattleRoom_EventScript_AudienceLookAround)
         delay(60)
 
-        clearflag(FLAG_HIDE_LUCREZIA)
-        addobject(LUCREZIA)
-        applymovement(LUCREZIA, moves(walk_left * 4, walk_up * 3, walk_left * 6, step_end))
-        applymovement(BAIYA, moves(walk_right, walk_up, face_down, step_end))
-        waitmovement(LUCREZIA)
+        spawnobject(OBJ_EVENT_GFX_LUCREZIA,LOCALID_SHARPRISE_STADIUM_ARENA_LUCREZIA,17,9,MOVEMENT_TYPE_NONE)
+        applymovement(LOCALID_SHARPRISE_STADIUM_ARENA_LUCREZIA, moves(walk_left * 4, walk_up * 3, walk_left * 6, step_end))
+        applymovement(LOCALID_SHARPRISE_STADIUM_ARENA_BAIYA, moves(walk_right, walk_up, face_down, step_end))
+        waitmovement(LOCALID_SHARPRISE_STADIUM_ARENA_LUCREZIA)
 
         msgbox(format("To the hundreds of you, here, in the stands. To the millions of you, watching from all over the world.  To all the fans. We say “Thank you, from the bottom of our hearts”. This first season was absolutely a success, and we can't wait to do it again. "),,SPEAKER_LUCREZIA)
 
@@ -25,12 +22,12 @@ script WelcomeToTheHallOfFame_PostBattle_Dialogue {
         playse(SE_M_ENCORE2)
         call(BattleFrontier_BattleDomeBattleRoom_EventScript_AudienceLookAround)
         fadescreen(FADE_TO_BLACK)
-        setobjectxy(PLAYER,9,6)
-        setobjectxy(BAIYA,8,7)
-        setobjectxy(LUCREZIA,7,7)
-        turnobject(BAIYA,DIR_SOUTH)
-        turnobject(LUCREZIA,DIR_SOUTH)
-        turnobject(PLAYER,DIR_SOUTH)
+        setobjectxy(LOCALID_PLAYER,9,6)
+        setobjectxy(LOCALID_SHARPRISE_STADIUM_ARENA_BAIYA,8,7)
+        setobjectxy(LOCALID_SHARPRISE_STADIUM_ARENA_LUCREZIA,7,7)
+        turnobject(LOCALID_SHARPRISE_STADIUM_ARENA_BAIYA,DIR_SOUTH)
+        turnobject(LOCALID_SHARPRISE_STADIUM_ARENA_LUCREZIA,DIR_SOUTH)
+        turnobject(LOCALID_PLAYER,DIR_SOUTH)
         TeleportCamera(9,6)
         fadescreen(FADE_FROM_BLACK)
 

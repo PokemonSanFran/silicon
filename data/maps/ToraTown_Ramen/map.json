@@ -15,6 +15,7 @@
   "connections": null,
   "object_events": [
     {
+        "local_id": "LOCALID_TORA_TOWN_RAMEN_FANNY",
       "graphics_id": "OBJ_EVENT_GFX_EXPERT_F",
       "x": 9,
       "y": 5,
@@ -26,45 +27,6 @@
       "trainer_sight_or_berry_tree_id": "0",
       "script": "ToraTown_Ramen_InteractFanny_Event_Script",
       "flag": "0"
-    },
-    {
-      "graphics_id": "OBJ_EVENT_GFX_GAMEBOY_KID",
-      "x": 1,
-      "y": 3,
-      "elevation": 3,
-      "movement_type": "MOVEMENT_TYPE_FACE_RIGHT",
-      "movement_range_x": 0,
-      "movement_range_y": 0,
-      "trainer_type": "TRAINER_TYPE_NONE",
-      "trainer_sight_or_berry_tree_id": "0",
-      "script": "NULL",
-      "flag": "FLAG_TEMP_1"
-    },
-    {
-      "graphics_id": "OBJ_EVENT_GFX_WOMAN_3",
-      "x": 4,
-      "y": 3,
-      "elevation": 3,
-      "movement_type": "MOVEMENT_TYPE_FACE_LEFT",
-      "movement_range_x": 0,
-      "movement_range_y": 0,
-      "trainer_type": "TRAINER_TYPE_NONE",
-      "trainer_sight_or_berry_tree_id": "0",
-      "script": "NULL",
-      "flag": "FLAG_TEMP_1"
-    },
-    {
-      "graphics_id": "OBJ_EVENT_GFX_KIRLIA",
-      "x": 4,
-      "y": 4,
-      "elevation": 3,
-      "movement_type": "MOVEMENT_TYPE_FACE_LEFT",
-      "movement_range_x": 0,
-      "movement_range_y": 0,
-      "trainer_type": "TRAINER_TYPE_NONE",
-      "trainer_sight_or_berry_tree_id": "0",
-      "script": "NULL",
-      "flag": "FLAG_TEMP_1"
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_GENTLEMAN",
@@ -82,18 +44,20 @@
   ],
   "warp_events": [
     {
+        "warp_id": "WARP_ID_RAMEN_TO_TORA_TOWN_LEFT",
       "x": 7,
       "y": 9,
       "elevation": 0,
       "dest_map": "MAP_TORA_TOWN",
-      "dest_warp_id": "1"
+      "dest_warp_id": "WARP_ID_TORA_TOWN_TO_RAMEN"
     },
     {
+        "warp_id": "WARP_ID_RAMEN_TO_TORA_TOWN_RIGHT",
       "x": 8,
       "y": 9,
       "elevation": 0,
       "dest_map": "MAP_TORA_TOWN",
-      "dest_warp_id": "1"
+      "dest_warp_id": "WARP_ID_TORA_TOWN_TO_RAMEN"
     }
   ],
   "coord_events": [],

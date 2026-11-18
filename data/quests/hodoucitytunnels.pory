@@ -1,24 +1,3 @@
-const PLAYER = OBJ_EVENT_ID_PLAYER
-const FLAG_HIDE_TREASURE = FLAG_TEMP_1
-
-script Quest_Hodoucitytunnels_Script_TryHideTreasure
-{
-    checkitem(ITEM_QUEST_HODOUTUNNELS_TREASURE,1)
-    if (var(VAR_RESULT))
-    {
-        goto(Quest_Hodoucitytunnels_Script_HideTreasure)
-    }
-
-    goto_if_quest_reward(QUEST_HODOUTUNNELS,Quest_Hodoucitytunnels_Script_HideTreasure)
-    goto_if_quest_complete(QUEST_HODOUTUNNELS,Quest_Hodoucitytunnels_Script_HideTreasure
-)
-}
-
-script Quest_Hodoucitytunnels_Script_HideTreasure
-{
-    setflag(FLAG_HIDE_TREASURE)
-}
-
 script Quest_HodouCityTunnels_Event_Script
 {
     lock
@@ -145,7 +124,7 @@ script Quest_Hodoucitytunnels_Script_SecretEnding
     bufferitemname(STR_VAR_1,ITEM_QUEST_HODOUTUNNELS_TREASURE)
     msgbox(format("Red scroll... is this {STR_VAR_1} yours?"),,SPEAKER_ALICIA)
     closemessage
-    cueobjecttalking(PLAYER)
+    cueobjecttalking(LOCALID_PLAYER)
     msgbox(format("Yes! My photos! Oh, I never thought I'd see these again. Thank you so much!"),,SPEAKER_TUNNELSPERSON,TAIL_SHOUT,EMOTE_SHOCK)
     closemessage
     questmenu(QUEST_MENU_SET_REWARD,QUEST_HODOUTUNNELS)

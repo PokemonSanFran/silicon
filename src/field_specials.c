@@ -4528,24 +4528,6 @@ u32 Script_GetGameStat(void)
     return GetGameStat(gSpecialVar_Result);
 }
 
-bool8 AlohaFromAlolaCheck(void)
-{
-    u8 i, count = 0;
-
-    if (CalculatePlayerPartyCount() == 3)
-    {
-        for (i = 0; i <= 3; i++)
-        {
-            u16 species = GetMonData(&gParties[B_TRAINER_PLAYER][i], MON_DATA_SPECIES);
-            if ((gSpeciesInfo[species].isAlolanForm)
-             || (gSpeciesInfo[species].isAlolaDex))
-                count++;
-        }
-    }
-
-    return (count == 3) ? TRUE : FALSE;
-}
-
 bool8 Script_CheckForMonAndMove(void)
 {
     u8 i;

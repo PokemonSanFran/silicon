@@ -130,7 +130,7 @@
 //#define FLAG_ADVENTURE_STARTED                                     0x43 // RECEIVED                                                     Pokédex.
 #define FLAG_HIDE_FACILITY_OPPONENT                                  0x44
 #define FLAG_IS_RESIDO_CHAMPION                                      0x45
-#define FLAG_LOCKEDOUT_PLAYED                                        0x46
+#define FLAG_LOCKEDOUT_PLAYER                                        0x46
 #define FLAG_PLAYED_CATCH_TUTORIAL                                   0x47
 #define FLAG_PLAYER_HAS_SEEN_SHINY                                   0x48
 #define FLAG_QUEST_PERSUASIVE_PASSENGER_PLAYER_KIDNAPPED             0x49
@@ -168,7 +168,7 @@
 #define FLAG_FIRST_STEP_OUTSIDE                                      0x57
 #define FLAG_PLAYER_USING_TAXI                                       0x58
 #define FLAG_QUEST_WALLACEARMY_WALLACEARMYSTANF_READY                0x59
-#define FLAG_SILICON_UNUSED_0x5A                                     0x5A
+#define FLAG_ITEM_HODOU_CITY_TUNNELS_TREASURE                        0x5A
 #define FLAG_SILICON_UNUSED_0x5B                                     0x5B
 #define FLAG_SILICON_UNUSED_0x5C                                     0x5C
 #define FLAG_SILICON_UNUSED_0x5D                                     0x5D
@@ -2570,7 +2570,7 @@
 #define FLAG_VISITED_OROLAND                                         (SYSTEM_FLAGS + 0x48)
 #define FLAG_VISITED_OROLAND_COLISEUM                                (SYSTEM_FLAGS + 0x49)
 #define FLAG_VISITED_OROLANDFERRY                                    (SYSTEM_FLAGS + 0x4A)
-#define FLAG_VISITED_PALACEFINEARTS                                  (SYSTEM_FLAGS + 0x4B)
+#define FLAG_VISITED_SYSTEM_FLAGS_0x4B                               (SYSTEM_FLAGS + 0x4B)
 #define FLAG_VISITED_PARC                                            (SYSTEM_FLAGS + 0x4C)
 #define FLAG_VISITED_PERLACIA_CITY                                   (SYSTEM_FLAGS + 0x4D)
 #define FLAG_VISITED_PETAROSA_BOROUGH                                (SYSTEM_FLAGS + 0x4E)

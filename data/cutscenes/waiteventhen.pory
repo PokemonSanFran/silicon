@@ -1,11 +1,3 @@
-const PLAYER = OBJ_EVENT_ID_PLAYER
-const BAIYA = 1
-const ADAORA = 2
-const MAGNUS = 3
-const PKMNC = 6
-
-const FLAG_HIDE_SEARCH = FLAG_TEMP_1
-
 script WaitEvenThen_TurnOnMachine_Script {
     setmetatile(32, 2, 0x8D8, TRUE)
         setmetatile(33, 2, 0x8D9, TRUE)
@@ -19,48 +11,52 @@ script WaitEvenThen_TurnOnMachine_Script {
 }
 
 script WaitEvenThen_BossSetUp_Script {
-        clearflag(FLAG_HIDE_SEARCH)
+        clearobjectflagfromlocalid(LOCALID_PARC_BAIYA)
+        clearobjectflagfromlocalid(LOCALID_PARC_ADAORA)
+        clearobjectflagfromlocalid(LOCALID_PARC_MAGNUS)
 
-        addobject(ADAORA)
-        addobject(MAGNUS)
-        addobject(BAIYA)
+        addobject(LOCALID_PARC_ADAORA)
+        addobject(LOCALID_PARC_MAGNUS)
+        addobject(LOCALID_PARC_BAIYA)
 
-        setobjectmovementtype(MAGNUS,MOVEMENT_TYPE_FACE_UP)
-        setobjectxyperm(MAGNUS,39,4)
-        setobjectxy(MAGNUS,39,4)
+        setobjectmovementtype(LOCALID_PARC_MAGNUS,MOVEMENT_TYPE_FACE_UP)
+        setobjectxyperm(LOCALID_PARC_MAGNUS,39,4)
+        setobjectxy(LOCALID_PARC_MAGNUS,39,4)
 
-        setobjectmovementtype(BAIYA,MOVEMENT_TYPE_FACE_UP)
-        setobjectxy(BAIYA,34,6)
-        setobjectxyperm(BAIYA,34,6)
+        setobjectmovementtype(LOCALID_PARC_BAIYA,MOVEMENT_TYPE_FACE_UP)
+        setobjectxy(LOCALID_PARC_BAIYA,34,6)
+        setobjectxyperm(LOCALID_PARC_BAIYA,34,6)
 
-        setobjectmovementtype(ADAORA,MOVEMENT_TYPE_FACE_UP)
-        setobjectxy(ADAORA,33,7)
-        setobjectxyperm(ADAORA,33,7)
+        setobjectmovementtype(LOCALID_PARC_ADAORA,MOVEMENT_TYPE_FACE_UP)
+        setobjectxy(LOCALID_PARC_ADAORA,33,7)
+        setobjectxyperm(LOCALID_PARC_ADAORA,33,7)
 
-        setobjectxy(PKMNC,33,5)
-        setobjectxyperm(PKMNC,33,5)
+        setobjectxy(LOCALID_PARC_MON_BOSS,33,5)
+        setobjectxyperm(LOCALID_PARC_MON_BOSS,33,5)
 }
 
 script WaitEvenThen_ObjectSetUp_Script {
     fadescreenswapbuffers(FADE_TO_BLACK)
 
-        setobjectxy(PLAYER,25,4)
+        setobjectxy(LOCALID_PLAYER,25,4)
         TeleportCamera(25,4)
-        applymovement(PLAYER,Common_Movement_FaceRight)
+        applymovement(LOCALID_PLAYER,Common_Movement_FaceRight)
 
-        clearflag(FLAG_HIDE_SEARCH)
+        clearobjectflagfromlocalid(LOCALID_PARC_BAIYA)
+        clearobjectflagfromlocalid(LOCALID_PARC_ADAORA)
+        clearobjectflagfromlocalid(LOCALID_PARC_MAGNUS)
 
-        addobject(BAIYA)
-        setobjectxy(BAIYA,25,5)
-        applymovement(BAIYA,Common_Movement_FaceRight)
+        addobject(LOCALID_PARC_BAIYA)
+        setobjectxy(LOCALID_PARC_BAIYA,25,5)
+        applymovement(LOCALID_PARC_BAIYA,Common_Movement_FaceRight)
 
-        addobject(ADAORA)
-        setobjectxy(ADAORA,24,4)
-        applymovement(ADAORA,Common_Movement_FaceRight)
+        addobject(LOCALID_PARC_ADAORA)
+        setobjectxy(LOCALID_PARC_ADAORA,24,4)
+        applymovement(LOCALID_PARC_ADAORA,Common_Movement_FaceRight)
 
-        addobject(MAGNUS)
-        setobjectxy(MAGNUS,24,5)
-        applymovement(MAGNUS,Common_Movement_FaceRight)
+        addobject(LOCALID_PARC_MAGNUS)
+        setobjectxy(LOCALID_PARC_MAGNUS,24,5)
+        applymovement(LOCALID_PARC_MAGNUS,Common_Movement_FaceRight)
 
         fadescreenswapbuffers(FADE_FROM_BLACK)
 }
@@ -70,11 +66,11 @@ script WaitEvenThen_PrepareBossEncounter_Dialogue {
         call(WaitEvenThen_ObjectSetUp_Script)
         playbgm(MUS_OKAY_LETS_FIX_IT,TRUE)
 
-        applymovement(PLAYER, moves(walk_right * 6, walk_down * 2, walk_right * 2, face_up, step_end))
-        applymovement(BAIYA, moves(walk_right * 6, walk_down, walk_right * 3, face_up, step_end))
-        applymovement(ADAORA, moves(walk_right * 7, walk_down * 3, walk_right * 2, face_up, step_end))
-        applymovement(MAGNUS, moves(walk_right * 7, walk_down * 2, walk_right * 3, face_up, step_end))
-        waitmovement(MAGNUS)
+        applymovement(LOCALID_PLAYER, moves(walk_right * 6, walk_down * 2, walk_right * 2, face_up, step_end))
+        applymovement(LOCALID_PARC_BAIYA, moves(walk_right * 6, walk_down, walk_right * 3, face_up, step_end))
+        applymovement(LOCALID_PARC_ADAORA, moves(walk_right * 7, walk_down * 3, walk_right * 2, face_up, step_end))
+        applymovement(LOCALID_PARC_MAGNUS, moves(walk_right * 7, walk_down * 2, walk_right * 3, face_up, step_end))
+        waitmovement(LOCALID_PARC_MAGNUS)
 
         msgbox(format("I found the access commands. I think I can turn this off, but I’m certain that it's going to attack us when we do."),,SPEAKER_MAGNUS)
 
@@ -82,8 +78,8 @@ script WaitEvenThen_PrepareBossEncounter_Dialogue {
 
         closemessage
 
-        applymovement(MAGNUS, moves(walk_right, walk_up, walk_right * 2, walk_up * 2, walk_right * 2, face_up, step_end))
-        waitmovement(MAGNUS)
+        applymovement(LOCALID_PARC_MAGNUS, moves(walk_right, walk_up, walk_right * 2, walk_up * 2, walk_right * 2, face_up, step_end))
+        waitmovement(LOCALID_PARC_MAGNUS)
 
         playse(SE_PC_LOGIN)
         waitse
@@ -92,7 +88,7 @@ script WaitEvenThen_PrepareBossEncounter_Dialogue {
         waitse
 
         call(WaitEvenThen_TurnOnMachine_Script)
-        applymovement(PKMNC,Common_Movement_WalkDown)
+        applymovement(LOCALID_PARC_MON_BOSS,Common_Movement_WalkDown)
 
         playmoncry(SPECIES_EXCADRILL,CRY_MODE_ENCOUNTER)
         waitmoncry
@@ -100,13 +96,13 @@ script WaitEvenThen_PrepareBossEncounter_Dialogue {
 
         msgbox(format("ROAR"),MSGBOX_AUTOCLOSE)
 
-        setobjectxy(BAIYA,34,6)
-        setobjectxyperm(BAIYA,34,6)
-        setobjectxy(ADAORA,33,7)
-        setobjectxyperm(ADAORA,33,7)
-        setobjectxyperm(MAGNUS,39,4)
-        setobjectxy(MAGNUS,39,4)
-        setobjectnewmovementtype(MAGNUS,MOVEMENT_TYPE_FACE_UP)
+        setobjectxy(LOCALID_PARC_BAIYA,34,6)
+        setobjectxyperm(LOCALID_PARC_BAIYA,34,6)
+        setobjectxy(LOCALID_PARC_ADAORA,33,7)
+        setobjectxyperm(LOCALID_PARC_ADAORA,33,7)
+        setobjectxyperm(LOCALID_PARC_MAGNUS,39,4)
+        setobjectxy(LOCALID_PARC_MAGNUS,39,4)
+        setobjectnewmovementtype(LOCALID_PARC_MAGNUS,MOVEMENT_TYPE_FACE_UP)
         startmenu_savescreen
         goto(WaitEvenThen_BossEncounter_Script)
 }
@@ -116,9 +112,9 @@ script WaitEvenThen_MovePlayerToBoss {
 
     if (var(VAR_TEMP_0) != 33 || (var(VAR_TEMP_1) != 6)){
         fadescreenswapbuffers(FADE_TO_BLACK)
-        setobjectxy(PLAYER,33,6)
+        setobjectxy(LOCALID_PLAYER,33,6)
         TeleportCamera(33,6)
-        applymovement(PLAYER,Common_Movement_FaceUp)
+        applymovement(LOCALID_PLAYER,Common_Movement_FaceUp)
         fadescreenswapbuffers(FADE_FROM_BLACK)
     }
         goto(WaitEvenThen_BossEncounter_Script)
@@ -151,7 +147,7 @@ script WaitEvenThen_ClearBossPokemon_Script
         startcutscene(JUMPPLAYER_WAITEVENTHEN)
         closemessage
         fadescreenswapbuffers(FADE_TO_BLACK)
-        removeobject(PKMNC)
+        removeobject(LOCALID_PARC_MON_BOSS)
         fadescreenswapbuffers(FADE_FROM_BLACK)
         goto(WaitEvenThen_PostBossDialogue)
 }
@@ -162,9 +158,9 @@ script WaitEvenThen_PostBossDialogue {
         setvar(VAR_STORYLINE_STATE,STORY_POST_DYNAMAX_BOSS)
         setvar(VAR_HALAI_ISLAND_STATE,POST_THIS_ISNT_RANDOM)
 
-        applymovement(PLAYER,Common_Movement_FaceDown)
-        applymovement(BAIYA,Common_Movement_FaceDown)
-        applymovement(MAGNUS,Common_Movement_FaceDown)
+        applymovement(LOCALID_PLAYER,Common_Movement_FaceDown)
+        applymovement(LOCALID_PARC_BAIYA,Common_Movement_FaceDown)
+        applymovement(LOCALID_PARC_MAGNUS,Common_Movement_FaceDown)
 
         msgbox(format("Damn, a Power Spot, all the way out here?"),,SPEAKER_BAIYA_TIDE)
 
@@ -174,12 +170,12 @@ script WaitEvenThen_PostBossDialogue {
 
         closemessage
 
-        applymovement(MAGNUS, moves(walk_down * 2, walk_left * 14, step_end))
-        applymovement(ADAORA, moves(walk_left * 6, walk_up * 3, walk_left * 4, step_end))
-        waitmovement(ADAORA)
+        applymovement(LOCALID_PARC_MAGNUS, moves(walk_down * 2, walk_left * 14, step_end))
+        applymovement(LOCALID_PARC_ADAORA, moves(walk_left * 6, walk_up * 3, walk_left * 4, step_end))
+        waitmovement(LOCALID_PARC_ADAORA)
 
-        applymovement(BAIYA,Common_Movement_FaceLeft)
-        applymovement(PLAYER,Common_Movement_FaceRight)
+        applymovement(LOCALID_PARC_BAIYA,Common_Movement_FaceLeft)
+        applymovement(LOCALID_PLAYER,Common_Movement_FaceRight)
 
         msgbox(format("Coming with me, {PLAYER}?"),MSGBOX_YESNO,,SPEAKER_BAIYA_TIDE)
 
@@ -187,19 +183,19 @@ script WaitEvenThen_PostBossDialogue {
 
         if (var(VAR_RESULT) == YES){
         fadeblackandsetremovewarpfadeflag
-            warp(MAP_HALAI_ISLAND,255,34,13)
+            warpsilent(MAP_HALAI_ISLAND,255,34,13)
 		waitstate
                 end
         }else {
                 msgbox(format("Meet us in the center of town, okay?"),,SPEAKER_BAIYA_TIDE)
                 closemessage
 
-                applymovement(BAIYA, moves(walk_up, walk_left * 9, step_end))
-                waitmovement(BAIYA)
+                applymovement(LOCALID_PARC_BAIYA, moves(walk_up, walk_left * 9, step_end))
+                waitmovement(LOCALID_PARC_BAIYA)
 
-                removeobject(BAIYA)
-                removeobject(MAGNUS)
-                removeobject(ADAORA)
+                removeobject(LOCALID_PARC_BAIYA)
+                removeobject(LOCALID_PARC_MAGNUS)
+                removeobject(LOCALID_PARC_ADAORA)
         }
         fadedefaultbgm
         call(TryAutoSave)

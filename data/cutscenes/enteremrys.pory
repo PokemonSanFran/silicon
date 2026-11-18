@@ -72,7 +72,7 @@ script EnterEmrys_Defeated_Script {
     cleargymtrainersandgetbadge(GYM_EMRYS)
     setvar(VAR_GYM_3_STATE,PERLACIA_GYM_LEADER_DEFEATED)
     setvar(VAR_EMRYS_STATE,BATTLE_1_COMPLETE)
-    addvar(VAR_STORYLINE_STATE, 1)
+    call(AaandWereBack_Script_IncrementStoryVariable)
     call(WowYoureStrong_CheckCutsceneScript)
     msgbox(format("Wow, I'll really need to re-think my tactical core values. Awesome battle, {PLAYER}!"),,SPEAKER_EMRYS)
     closemessage

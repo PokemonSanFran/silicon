@@ -88,8 +88,10 @@ static void Task_FinishSoftboiled(u8 taskId)
     AnimatePartySlot(gPartyMenu.slotId, 0);
     gPartyMenu.slotId = gPartyMenu.slotId2;
     AnimatePartySlot(gPartyMenu.slotId2, 1);
+#if !UI_PARTY_MENU
     ClearStdWindowAndFrameToTransparent(6, FALSE);
     ClearWindowTilemap(6);
+#endif
     DisplayPartyMenuStdMessage(PARTY_MSG_CHOOSE_MON);
     gTasks[taskId].func = Task_HandleChooseMonInput;
 }

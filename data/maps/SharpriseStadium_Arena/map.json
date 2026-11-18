@@ -15,6 +15,7 @@
   "connections": null,
   "object_events": [
     {
+      "local_id": "LOCALID_SHARPRISE_STADIUM_ARENA_OPPONENT",
       "graphics_id": "OBJ_EVENT_GFX_VAR_0",
       "x": 12,
       "y": 6,
@@ -26,35 +27,24 @@
       "trainer_sight_or_berry_tree_id": "0",
       "script": "NULL",
       "flag": "0"
-    },
-    {
-      "graphics_id": "OBJ_EVENT_GFX_LUCREZIA",
-      "x": 17,
-      "y": 9,
-      "elevation": 3,
-      "movement_type": "MOVEMENT_TYPE_NONE",
-      "movement_range_x": 0,
-      "movement_range_y": 0,
-      "trainer_type": "TRAINER_TYPE_NONE",
-      "trainer_sight_or_berry_tree_id": "0",
-      "script": "NULL",
-      "flag": "FLAG_TEMP_1"
     }
   ],
   "warp_events": [
     {
+        "warp_id": "WARP_ID_ARENA_TO_LOCKERS_LEFT",
       "x": 17,
       "y": 9,
       "elevation": 0,
       "dest_map": "MAP_SHARPRISE_STADIUM_LOCKERS",
-      "dest_warp_id": "2"
+      "dest_warp_id": "WARP_ID_LOCKERS_TO_ARENA"
     },
     {
+        "warp_id": "WARP_ID_ARENA_TO_LOCKERS_RIGHT",
       "x": 18,
       "y": 9,
       "elevation": 0,
       "dest_map": "MAP_SHARPRISE_STADIUM_LOCKERS",
-      "dest_warp_id": "2"
+      "dest_warp_id": "WARP_ID_LOCKERS_TO_ARENA"
     }
   ],
   "coord_events": [

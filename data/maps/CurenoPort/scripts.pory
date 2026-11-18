@@ -7,7 +7,6 @@ mapscripts CurenoPort_MapScripts {
 		call(WarehouseRave_Script_StartOutsideMusic)
         call(HowDoWeGetHome_PostSceneObjectCleanUp_Script)
         call(HowDoWeGetHome_FerryFixed_Script)
-        call(Quest_NeighborhoodCleanUp2_ObjectVisibility_Script)
         call(Quest_Diggingupadaorasdirt_Script_ControlVisibilityDigginginvestigator)
     }
     MAP_SCRIPT_ON_WARP_INTO_MAP_TABLE [
@@ -17,6 +16,7 @@ mapscripts CurenoPort_MapScripts {
     [
         FLAG_VISITED_CURENO_PORT, FALSE: Generic_Mappreview
         VAR_WAREHOUSE_RAVE_STATE, DEFEATED_KEIYING_WAREHOUSE: WarehouseRave_OutsideWarehouse_Dialogue
+        FLAG_ACT_1_1_COMPLETE, TRUE: AaandWereBack_Monologue
     ]
 }
 

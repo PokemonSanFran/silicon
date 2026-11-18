@@ -40,6 +40,7 @@
       "flag": "FLAG_TEMP_1"
     },
     {
+      "local_id": "LOCALID_BERRY_TREE_ROUTE_14_1",
       "graphics_id": "OBJ_EVENT_GFX_BERRY_TREE",
       "x": 3,
       "y": 7,
@@ -53,6 +54,7 @@
       "flag": "0"
     },
     {
+      "local_id": "LOCALID_BERRY_TREE_ROUTE_14_2",
       "graphics_id": "OBJ_EVENT_GFX_BERRY_TREE",
       "x": 4,
       "y": 7,
@@ -121,11 +123,12 @@
   ],
   "warp_events": [
     {
+      "warp_id": "WARP_ID_ROUTE14_TO_GROTTO",
       "x": 2,
       "y": 12,
       "elevation": 3,
       "dest_map": "MAP_ROUTE14_GROTTO",
-      "dest_warp_id": "0"
+      "dest_warp_id": "WARP_ID_GROTTO_TO_ROUTE14_A"
     }
   ],
   "coord_events": [],

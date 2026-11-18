@@ -35,6 +35,7 @@
       "flag": "FLAG_TEMP_1"
     },
     {
+      "local_id": "LOCALID_TORGEOT_CLIMB_GERTRUDE",
       "graphics_id": "OBJ_EVENT_GFX_OLD_WOMAN",
       "x": 37,
       "y": 32,
@@ -48,6 +49,7 @@
       "flag": "FLAG_TEMP_3"
     },
     {
+      "local_id": "LOCALID_BERRY_TREE_TORGEOT_CLIMB_1",
       "graphics_id": "OBJ_EVENT_GFX_BERRY_TREE",
       "x": 31,
       "y": 21,
@@ -61,6 +63,7 @@
       "flag": "0"
     },
     {
+      "local_id": "LOCALID_BERRY_TREE_TORGEOT_CLIMB_2",
       "graphics_id": "OBJ_EVENT_GFX_BERRY_TREE",
       "x": 31,
       "y": 22,

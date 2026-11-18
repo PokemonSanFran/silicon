@@ -1,38 +1,34 @@
-const FLAG_HIDE_FRANK = FLAG_TEMP_1
-
-mapscripts EspuleeOutskirts_EliteHome_MapScripts {
-    MAP_SCRIPT_ON_TRANSITION{
-        call(EspuleeOutskirts_EliteHome_Frank_Visibility_Script)
+mapscripts EspuleeOutskirts_EliteHome_MapScripts 
+{
+    MAP_SCRIPT_ON_TRANSITION
+	{
+		call_if_lt(VAR_STORYLINE_STATE,STORY_START_CHAMPIONSHIP,EspuleeOutskirts_EliteHome_Script_HideFrank)
+		call_if_gt(VAR_STORYLINE_STATE,STORY_POST_YOU_REALIZE_WERE_EVIL,EspuleeOutskirts_EliteHome_Script_HideFrank)
     }
 }
 
-script EspuleeOutskirts_EliteHome_Frank_Visibility_Script{
-    if (var(VAR_STORYLINE_STATE) < STORY_START_CHAMPIONSHIP || var(VAR_STORYLINE_STATE) > STORY_POST_YOU_REALIZE_WERE_EVIL){
-        setflag(FLAG_HIDE_FRANK)
-    }
-    return
+script EspuleeOutskirts_EliteHome_Script_HideFrank
+{
+	setobjectflagfromlocalid(LOCALID_ESPULEE_OUTSKIRTS_ELITE_HOME_FRANK)
 }
 
-script EspuleeOutskirts_EliteHome_PictureFrame_Dialogue {
-    lock
+script EspuleeOutskirts_EliteHome_PictureFrame_Dialogue 
+{
+	lock
 
-        if (var(VAR_MASK_OFF_STATE)> GOT_MASK_OFF_CLUE_1){
-            call(MaskOff_QuestK_Dialogue)
-        } elif (var(VAR_LEAVERRA_FOREST_STATE) > LEAVERRA_FOREST_MAZE_COMPLETE){
-            msgbox(format("A digital photo frame. The picture being displayed shows Frank with somebody at a ramen restaurant."),MSGBOX_AUTOCLOSE)
-        } else {
-            msgbox(format("A digital photo frame. The picture being displayed shows two people together at a ramen restaurant."),MSGBOX_AUTOCLOSE)
-        }
+	if (var(VAR_MASK_OFF_STATE)> GOT_MASK_OFF_CLUE_1)
+	{
+		call(MaskOff_QuestK_Dialogue)
+	} 
+	elif (var(VAR_LEAVERRA_FOREST_STATE) > LEAVERRA_FOREST_MAZE_COMPLETE)
+	{
+		msgbox(format("A digital photo frame. The picture being displayed shows Frank with somebody at a ramen restaurant."),MSGBOX_AUTOCLOSE)
+	} 
+	else 
+	{
+		msgbox(format("A digital photo frame. The picture being displayed shows two people together at a ramen restaurant."),MSGBOX_AUTOCLOSE)
+	}
 
-    release
-        end
+	release
+	end
 }
-
-text gText_EspuleeOutskirts_EliteHome_ADigitalPhoto_Unknown {
-    format("A digital photo frame. The picture being displayed shows two people together at a ramen restaurant.")
-}
-
-text gText_EspuleeOutskirts_EliteHome_ADigitalPhoto {
-    format("A digital photo frame. The picture being displayed shows Frank with somebody at a ramen restaurant.")
-}
-

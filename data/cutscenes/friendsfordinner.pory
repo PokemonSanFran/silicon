@@ -1,11 +1,10 @@
 const PLAYER = OBJ_EVENT_ID_PLAYER
 const KEIYING = 1
 
-script FriendsForDinner_BlockMansionAccess_Script {
-    if (var(VAR_FORT_YOBU_STATE) < MET_KEIYING_OUTSIDE_GYM){
-        setobjectxy(2,14,11)
-            setobjectxyperm(2,14,11)
-    }
+script FriendsForDinner_BlockMansionAccess_Script
+{
+    setobjectxy(LOCALID_KEIYING_SECURITY_RIGHT,14,11)
+    setobjectxyperm(LOCALID_KEIYING_SECURITY_RIGHT,14,11)
 }
 
 script FriendsForDinner_HideObjects_Script {

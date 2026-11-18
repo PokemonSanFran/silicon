@@ -3,11 +3,9 @@ mapscripts Route6_MapScripts
     MAP_SCRIPT_ON_TRANSITION
     {
         call_if_subquest_complete(QUEST_RESTOREHODOUGYM,SUB_QUEST_6,Quest_Restorehodoucity_HideBlackbelt_Route6_Script)
-        call(Quest_Ultrawormholeresearch_ControlTotemVisibility)
         call(CatchTutorial_HideProfessor_Script)
     }
     MAP_SCRIPT_ON_RESUME{
-        call(Quest_Ultrawormholeresearch_TryRemoveTotem_Script)
     }
 }
 
@@ -60,14 +58,20 @@ script Route6_EventScript_00E46F7D
 
 script Route6_EventScript_Sign1
 {
-    msgbox(format("▶ Route 6\n{UP_ARROW} Glavez Hill\n{DOWN_ARROW} Cuconu Town"), MSGBOX_SIGN)
+	buffermapname(STR_VAR_1,MAP_ROUTE6)
+	buffermapname(STR_VAR_2,MAP_GLAVEZ_HILL)
+	buffermapname(STR_VAR_3,MAP_CUCONU_TOWN)
+    msgbox(format("▶ {STR_VAR_1}\n{UP_ARROW} {STR_VAR_2}\n{DOWN_ARROW} {STR_VAR_3}"), MSGBOX_SIGN)
     closemessage
     end
 }
 
 script Route6_EventScript_Sign2
 {
-    msgbox(format("▶ Glavez Hill\n{DOWN_ARROW} Route 6, Cuconu Town"), MSGBOX_SIGN)
+	buffermapname(STR_VAR_1,MAP_GLAVEZ_HILL)
+	buffermapname(STR_VAR_2,MAP_ROUTE6)
+	buffermapname(STR_VAR_3,MAP_CUCONU_TOWN)
+    msgbox(format("▶ {STR_VAR_1}\n{DOWN_ARROW} {STR_VAR_2}, {STR_VAR_3}"), MSGBOX_SIGN)
     closemessage
     end
 }

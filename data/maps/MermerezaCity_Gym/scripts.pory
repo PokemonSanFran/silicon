@@ -1,7 +1,3 @@
-const PLAYER = OBJ_EVENT_ID_PLAYER
-const BELEN = 1
-const FLAG_HIDE_BELEN = FLAG_TEMP_1
-
 mapscripts MermerezaCity_Gym_MapScripts {
     MAP_SCRIPT_ON_TRANSITION {
         call(EnterBelen_StartGymBattle_ObjectSetup_Script)
@@ -10,6 +6,7 @@ mapscripts MermerezaCity_Gym_MapScripts {
     MAP_SCRIPT_ON_FRAME_TABLE
     [
         VAR_GYM_1_STATE, NOT_STARTED: EnterBelen_Dialogue_FirstIntroGym
+        FLAG_ACT_1_1_COMPLETE, TRUE: AaandWereBack_Monologue
     ]
 }
 

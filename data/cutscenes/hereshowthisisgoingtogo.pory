@@ -1,31 +1,22 @@
 const PLAYER = OBJ_EVENT_ID_PLAYER
-const LUCREZIA = 1 //FLAG_TEMP_1
-const CHARLOTTE = 2 //FLAG_TEMP_2
-const BAIYA = 3 //FLAG_TEMP_3
-const OLIVER = 4 //FLAG_TEMP_4
-const FLAG_HIDE_LUCREZIA = FLAG_TEMP_1
-const FLAG_HIDE_CHARLOTTE = FLAG_TEMP_2
-const FLAG_HIDE_ARCEHR = FLAG_TEMP_3
-const FLAG_HIDE_OLIVER = FLAG_TEMP_4
-const FLAG_HIDE_RAMESH = FLAG_TEMP_6
 
 script HeresHowThisIsGoingToGo_ObjectSetUp_Script{
-    setflag(FLAG_HIDE_RAMESH)
+    setobjectflagfromlocalid(LOCALID_SHARPRISE_STADIUM_LOCKERS_RAMESH)
     return
 }
 
 script HeresHowThisIsGoingToGo_ShowBaiyaandCharlotte{
-    setflag(FLAG_HIDE_RAMESH)
-    setflag(FLAG_HIDE_LUCREZIA)
-    setflag(FLAG_HIDE_OLIVER)
-    setobjectxy(BAIYA,4,5)
-    setobjectxyperm(BAIYA,4,5)
+    setobjectflagfromlocalid(LOCALID_SHARPRISE_STADIUM_LOCKERS_RAMESH)
+    setobjectflagfromlocalid(LOCALID_SHARPRISE_STADIUM_LOCKERS_LUCREZIA)
+    setobjectflagfromlocalid(LOCALID_SHARPRISE_STADIUM_LOCKERS_OLIVER)
+    setobjectxy(LOCALID_SHARPRISE_STADIUM_LOCKERS_BAIYA,4,5)
+    setobjectxyperm(LOCALID_SHARPRISE_STADIUM_LOCKERS_BAIYA,4,5)
     return
 }
 
 script HeresHowThisIsGoingToGo_Lockers_ObjectCleanUp_Script {
-    setflag(FLAG_HIDE_LUCREZIA)
-    setflag(FLAG_HIDE_OLIVER)
+    setobjectflagfromlocalid(LOCALID_SHARPRISE_STADIUM_LOCKERS_LUCREZIA)
+    setobjectflagfromlocalid(LOCALID_SHARPRISE_STADIUM_LOCKERS_OLIVER)
     return
 }
 
@@ -98,8 +89,8 @@ script HeresHowThisIsGoingToGo_ExplainLeagueDialogue
     playbgm(MUS_ACCEPT_LETTER,FALSE)
     startcutscene(JUMPPLAYER_HERESHOWTHISISGOINGTOGO)
     applymovement(PLAYER,Common_Movement_FaceUp)
-    applymovement(CHARLOTTE,Common_Movement_FaceUp)
-    applymovement(BAIYA,Common_Movement_FaceUp)
+    applymovement(LOCALID_SHARPRISE_STADIUM_LOCKERS_CHARLOTTE,Common_Movement_FaceUp)
+    applymovement(LOCALID_SHARPRISE_STADIUM_LOCKERS_BAIYA,Common_Movement_FaceUp)
     waitmovement(0)
 
 msgbox(format("Congratulations on all of your hard work! Welcome to the first stage of the Resido League Championship!"),,SPEAKER_LUCREZIA)
@@ -115,7 +106,7 @@ msgbox(format("…"))
 msgbox(format("So here's the simple explanation: Win five battles in a row, and you'll be the Champion! If you want the more detailed version, you can view the rules on the monitor to my right."),,SPEAKER_LUCREZIA)
 closemessage
 
-applymovement(LUCREZIA,Common_Movement_FaceLeft)
+applymovement(LOCALID_SHARPRISE_STADIUM_LOCKERS_LUCREZIA,Common_Movement_FaceLeft)
 msgbox(format("Your groups, and the eventual final bracket, can also be seen on the monitor. We'll be starting with Group A in two hours. Good luck."),,SPEAKER_LUCREZIA)
 
     closemessage
@@ -124,12 +115,12 @@ fadescreenswapbuffers(FADE_TO_BLACK)
 setvar(VAR_STORYLINE_STATE,STORY_CHAMPIONSHIP_EXPLAINED)
 playse(SE_EXIT)
 waitse
-removeobject(LUCREZIA)
-removeobject(OLIVER)
+removeobject(LOCALID_SHARPRISE_STADIUM_LOCKERS_LUCREZIA)
+removeobject(LOCALID_SHARPRISE_STADIUM_LOCKERS_OLIVER)
 call(HeresHowThisIsGoingToGo_CleanUpVObjects_Script)
 fadescreenswapbuffers(FADE_FROM_BLACK)
-applymovement(BAIYA, moves(walk_down, walk_left * 7, walk_up * 2, step_end))
-waitmovement(BAIYA)
+applymovement(LOCALID_SHARPRISE_STADIUM_LOCKERS_BAIYA, moves(walk_down, walk_left * 7, walk_up * 2, step_end))
+waitmovement(LOCALID_SHARPRISE_STADIUM_LOCKERS_BAIYA)
 	fadedefaultbgm
     call(TryAutoSave)
     endcutscene

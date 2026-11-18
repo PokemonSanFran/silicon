@@ -1,7 +1,3 @@
-const PLAYER = OBJ_EVENT_ID_PLAYER
-const CHARLOTTE = 1
-const FLAG_HIDE_CHARLOTTE = FLAG_TEMP_1
-
 mapscripts AnbehBend_MapScripts
 {
     MAP_SCRIPT_ON_TRANSITION
@@ -11,5 +7,6 @@ mapscripts AnbehBend_MapScripts
     MAP_SCRIPT_ON_FRAME_TABLE
         [
         FLAG_VISITED_ANBEH_BEND, FALSE: Generic_Mappreview
+        FLAG_ACT_1_1_COMPLETE, TRUE: AaandWereBack_Monologue
         ]
 }

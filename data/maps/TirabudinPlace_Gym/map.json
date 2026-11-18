@@ -29,6 +29,7 @@
       "flag": "FLAG_TEMP_3"
     },
     {
+        "local_id": "LOCALID_TIRABUDIN_PLACE_GYM_TRAINER_1",
       "graphics_id": "OBJ_EVENT_GFX_LITTLE_GIRL",
       "x": 14,
       "y": 6,
@@ -42,6 +43,7 @@
       "flag": "FLAG_TEMP_1"
     },
     {
+        "local_id": "LOCALID_TIRABUDIN_PLACE_GYM_TRAINER_2",
       "graphics_id": "OBJ_EVENT_GFX_MART_EMPLOYEE",
       "x": 16,
       "y": 9,
@@ -55,6 +57,7 @@
       "flag": "FLAG_TEMP_1"
     },
     {
+        "local_id": "LOCALID_TIRABUDIN_PLACE_GYM_TRAINER_3",
       "graphics_id": "OBJ_EVENT_GFX_SWIMMER_F",
       "x": 10,
       "y": 3,
@@ -68,6 +71,7 @@
       "flag": "FLAG_TEMP_1"
     },
     {
+        "local_id": "LOCALID_TIRABUDIN_PLACE_GYM_TRAINER_4",
       "graphics_id": "OBJ_EVENT_GFX_WOMAN_2",
       "x": 8,
       "y": 20,
@@ -81,6 +85,7 @@
       "flag": "FLAG_TEMP_1"
     },
     {
+      "local_id": "LOCALID_TIRABUDINPLACE_GYM_BD_A",
       "graphics_id": "OBJ_EVENT_GFX_BD",
       "x": 10,
       "y": 3,
@@ -94,6 +99,7 @@
       "flag": "FLAG_TEMP_2"
     },
     {
+      "local_id": "LOCALID_TIRABUDINPLACE_GYM_BD_B",
       "graphics_id": "OBJ_EVENT_GFX_BD",
       "x": 14,
       "y": 6,
@@ -107,6 +113,7 @@
       "flag": "FLAG_TEMP_2"
     },
     {
+      "local_id": "LOCALID_TIRABUDINPLACE_GYM_BD_C",
       "graphics_id": "OBJ_EVENT_GFX_BD",
       "x": 16,
       "y": 9,
@@ -120,6 +127,7 @@
       "flag": "FLAG_TEMP_2"
     },
     {
+      "local_id": "LOCALID_TIRABUDINPLACE_GYM_BD_D",
       "graphics_id": "OBJ_EVENT_GFX_BD",
       "x": 8,
       "y": 20,
@@ -133,6 +141,7 @@
       "flag": "FLAG_TEMP_2"
     },
     {
+        "local_id": "LOCALID_TIRABUDIN_PLACE_GYM_TRAINER_5",
       "graphics_id": "OBJ_EVENT_GFX_COOK",
       "x": 15,
       "y": 12,
@@ -143,9 +152,10 @@
       "trainer_type": "TRAINER_TYPE_NORMAL",
       "trainer_sight_or_berry_tree_id": "1",
       "script": "TirabudinGym_EventScript_1387ABBC",
-      "flag": "0"
+      "flag": "FLAG_TEMP_1"
     },
     {
+        "local_id": "LOCALID_TIRABUDIN_PLACE_GYM_TRAINER_6",
       "graphics_id": "OBJ_EVENT_GFX_SCIENTIST_2",
       "x": 1,
       "y": 16,
@@ -156,23 +166,25 @@
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
       "script": "TirabudinGym_EventScript_114EB3AD",
-      "flag": "0"
+      "flag": "FLAG_TEMP_1"
     }
   ],
   "warp_events": [
     {
+        "warp_id": "WARP_ID_TIRABUDIN_PLACE_GYM_TO_GYM_LOBBY_RIGHT",
       "x": 6,
       "y": 27,
       "elevation": 0,
       "dest_map": "MAP_TIRABUDIN_PLACE_GYM_LOBBY",
-      "dest_warp_id": "2"
+      "dest_warp_id": "WARP_ID_GYM_LOBBY_TO_TIRABUDIN_PLACE_GYM"
     },
     {
+        "warp_id": "WARP_ID_TIRABUDIN_PLACE_GYM_TO_GYM_LOBBY_LEFT",
       "x": 5,
       "y": 27,
       "elevation": 0,
       "dest_map": "MAP_TIRABUDIN_PLACE_GYM_LOBBY",
-      "dest_warp_id": "2"
+      "dest_warp_id": "WARP_ID_GYM_LOBBY_TO_TIRABUDIN_PLACE_GYM"
     }
   ],
   "coord_events": [

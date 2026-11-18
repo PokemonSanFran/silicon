@@ -15,34 +15,21 @@
   "connections": [
     {
       "map": "MAP_CAPHE_CITY",
-      "offset": -7,
+      "offset": 0,
       "direction": "down"
     },
     {
       "map": "MAP_ANBEH_BEND",
-      "offset": -12,
+      "offset": 6,
       "direction": "up"
     }
   ],
   "object_events": [
     {
-      "graphics_id": "OBJ_EVENT_GFX_RUNNING_TRIATHLETE_M",
-      "x": 4,
-      "y": 10,
-      "elevation": 3,
-      "movement_type": "MOVEMENT_TYPE_FACE_LEFT",
-      "movement_range_x": 0,
-      "movement_range_y": 0,
-      "trainer_type": "TRAINER_TYPE_NORMAL",
-      "trainer_sight_or_berry_tree_id": "3",
-      "script": "Quest_ArtisanBalls2_TrainerB_Event_Script",
-      "flag": "FLAG_TEMP_C"
-    },
-    {
       "local_id": "LOCALID_DIGGINGTIDEMEMBERB",
       "graphics_id": "OBJ_EVENT_GFX_DIGGINGTIDEMEMBERB",
-      "x": 13,
-      "y": 13,
+      "x": 20,
+      "y": 15,
       "elevation": 0,
       "movement_type": "MOVEMENT_TYPE_WANDER_AROUND",
       "movement_range_x": 0,
@@ -53,9 +40,10 @@
       "flag": "FLAG_TEMP_2"
     },
     {
+      "local_id": "LOCALID_BERRY_TREE_ROUTE_12_1",
       "graphics_id": "OBJ_EVENT_GFX_BERRY_TREE",
-      "x": 3,
-      "y": 13,
+      "x": 13,
+      "y": 7,
       "elevation": 3,
       "movement_type": "MOVEMENT_TYPE_BERRY_TREE_GROWTH",
       "movement_range_x": 0,
@@ -66,8 +54,9 @@
       "flag": "0"
     },
     {
+      "local_id": "LOCALID_BERRY_TREE_ROUTE_12_2",
       "graphics_id": "OBJ_EVENT_GFX_BERRY_TREE",
-      "x": 13,
+      "x": 14,
       "y": 7,
       "elevation": 3,
       "movement_type": "MOVEMENT_TYPE_BERRY_TREE_GROWTH",
@@ -80,8 +69,8 @@
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_BREAKABLE_ROCK",
-      "x": 0,
-      "y": 8,
+      "x": 31,
+      "y": 14,
       "elevation": 0,
       "movement_type": "MOVEMENT_TYPE_NONE",
       "movement_range_x": 0,
@@ -93,8 +82,8 @@
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_BREAKABLE_ROCK",
-      "x": 0,
-      "y": 6,
+      "x": 10,
+      "y": 10,
       "elevation": 0,
       "movement_type": "MOVEMENT_TYPE_NONE",
       "movement_range_x": 0,
@@ -106,8 +95,8 @@
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_BREAKABLE_ROCK",
-      "x": 1,
-      "y": 7,
+      "x": 32,
+      "y": 13,
       "elevation": 0,
       "movement_type": "MOVEMENT_TYPE_NONE",
       "movement_range_x": 0,
@@ -120,8 +109,8 @@
     {
       "local_id": "LOCALID_BODEGABURNOUTRESCUE_ROCK_SMASH_P",
       "graphics_id": "OBJ_EVENT_GFX_BODEGABURNOUTRESCUE_ROCK_SMASH_P",
-      "x": 0,
-      "y": 7,
+      "x": 7,
+      "y": 12,
       "elevation": 0,
       "movement_type": "MOVEMENT_TYPE_NONE",
       "movement_range_x": 0,
@@ -134,8 +123,8 @@
     {
       "local_id": "LOCALID_GETTHEBANDBACKTOGETHERBIKERD",
       "graphics_id": "OBJ_EVENT_GFX_QUEST_GETTHEBANDBACKTOGETHERBIKERD",
-      "x": 14,
-      "y": 3,
+      "x": 28,
+      "y": 6,
       "elevation": 3,
       "movement_type": "MOVEMENT_TYPE_LOOK_AROUND",
       "movement_range_x": 0,
@@ -148,8 +137,8 @@
     {
       "local_id": "LOCALID_ROUTE12_SHINZO",
       "graphics_id": "OBJ_EVENT_GFX_SHINZO",
-      "x": 16,
-      "y": 10,
+      "x": 14,
+      "y": 14,
       "elevation": 3,
       "movement_type": "MOVEMENT_TYPE_FACE_UP",
       "movement_range_x": 0,
@@ -162,8 +151,8 @@
     {
       "local_id": "LOCALID_ROUTE12_SQUAWKABILLY_WHITE",
       "graphics_id": "OBJ_EVENT_MON+SPECIES_SQUAWKABILLY_WHITE",
-      "x": 16,
-      "y": 8,
+      "x": 14,
+      "y": 11,
       "elevation": 0,
       "movement_type": "MOVEMENT_TYPE_WALK_IN_PLACE_DOWN",
       "movement_range_x": 0,
@@ -176,8 +165,8 @@
     {
       "local_id": "LOCALID_ROUTE12_SHINZO_MON",
       "graphics_id": "OBJ_EVENT_GFX_VAR_0",
-      "x": 16,
-      "y": 9,
+      "x": 14,
+      "y": 16,
       "elevation": 0,
       "movement_type": "MOVEMENT_TYPE_WALK_IN_PLACE_UP",
       "movement_range_x": 0,
@@ -190,8 +179,8 @@
     {
       "local_id": "LOCALID_ROUTE12_SQUAWKABILLY_GREEN",
       "graphics_id": "OBJ_EVENT_MON+SPECIES_SQUAWKABILLY_GREEN",
-      "x": 17,
-      "y": 9,
+      "x": 15,
+      "y": 11,
       "elevation": 0,
       "movement_type": "MOVEMENT_TYPE_WALK_IN_PLACE_LEFT",
       "movement_range_x": 0,
@@ -200,58 +189,44 @@
       "trainer_sight_or_berry_tree_id": "0",
       "script": "HybridCulture_Script_ResumeBatle",
       "flag": "FLAG_TEMP_A"
+    },
+    {
+      "graphics_id": "OBJ_EVENT_GFX_BREAKABLE_ROCK",
+      "x": 45,
+      "y": 4,
+      "elevation": 0,
+      "movement_type": "MOVEMENT_TYPE_NONE",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "EventScript_RockSmash",
+      "flag": "FLAG_TEMP_1F"
     }
   ],
   "warp_events": [
     {
-      "x": 1,
-      "y": 13,
+        "warp_id": "WARP_ID_ROUTE12_TO_GROTTO_LEFT",
+      "x": 47,
+      "y": 2,
       "elevation": 0,
       "dest_map": "MAP_ROUTE12_GROTTO",
       "dest_warp_id": "0"
+    },
+    {
+        "warp_id": "WARP_ID_ROUTE12_TO_GROTTO_RIGHT",
+      "x": 46,
+      "y": 2,
+      "elevation": 0,
+      "dest_map": "MAP_ROUTE12_GROTTO",
+        "dest_warp_id": "WARP_ID_GROTTO_TO_ROUTE12_A"
     }
   ],
   "coord_events": [
     {
       "type": "trigger",
-      "x": 17,
-      "y": 8,
-      "elevation": 0,
-      "var": "VAR_TEMP_2",
-      "var_value": "0",
-      "script": "HybridCulture_Try_StartAttraction2"
-    },
-    {
-      "type": "trigger",
-      "x": 18,
-      "y": 7,
-      "elevation": 0,
-      "var": "VAR_TEMP_2",
-      "var_value": "0",
-      "script": "HybridCulture_Try_StartAttraction2"
-    },
-    {
-      "type": "trigger",
-      "x": 18,
-      "y": 6,
-      "elevation": 0,
-      "var": "VAR_TEMP_2",
-      "var_value": "0",
-      "script": "HybridCulture_Try_StartAttraction2"
-    },
-    {
-      "type": "trigger",
-      "x": 17,
-      "y": 5,
-      "elevation": 0,
-      "var": "VAR_TEMP_2",
-      "var_value": "0",
-      "script": "HybridCulture_Try_StartAttraction2"
-    },
-    {
-      "type": "trigger",
       "x": 16,
-      "y": 5,
+      "y": 14,
       "elevation": 0,
       "var": "VAR_TEMP_2",
       "var_value": "0",
@@ -260,7 +235,7 @@
     {
       "type": "trigger",
       "x": 15,
-      "y": 6,
+      "y": 14,
       "elevation": 0,
       "var": "VAR_TEMP_2",
       "var_value": "0",
@@ -268,8 +243,35 @@
     },
     {
       "type": "trigger",
-      "x": 15,
-      "y": 7,
+      "x": 17,
+      "y": 13,
+      "elevation": 0,
+      "var": "VAR_TEMP_2",
+      "var_value": "0",
+      "script": "HybridCulture_Try_StartAttraction2"
+    },
+    {
+      "type": "trigger",
+      "x": 14,
+      "y": 14,
+      "elevation": 0,
+      "var": "VAR_TEMP_2",
+      "var_value": "0",
+      "script": "HybridCulture_Try_StartAttraction2"
+    },
+    {
+      "type": "trigger",
+      "x": 17,
+      "y": 12,
+      "elevation": 0,
+      "var": "VAR_TEMP_2",
+      "var_value": "0",
+      "script": "HybridCulture_Try_StartAttraction2"
+    },
+    {
+      "type": "trigger",
+      "x": 17,
+      "y": 11,
       "elevation": 0,
       "var": "VAR_TEMP_2",
       "var_value": "0",
@@ -278,7 +280,52 @@
     {
       "type": "trigger",
       "x": 16,
-      "y": 8,
+      "y": 10,
+      "elevation": 0,
+      "var": "VAR_TEMP_2",
+      "var_value": "0",
+      "script": "HybridCulture_Try_StartAttraction2"
+    },
+    {
+      "type": "trigger",
+      "x": 15,
+      "y": 10,
+      "elevation": 0,
+      "var": "VAR_TEMP_2",
+      "var_value": "0",
+      "script": "HybridCulture_Try_StartAttraction2"
+    },
+    {
+      "type": "trigger",
+      "x": 14,
+      "y": 10,
+      "elevation": 0,
+      "var": "VAR_TEMP_2",
+      "var_value": "0",
+      "script": "HybridCulture_Try_StartAttraction2"
+    },
+    {
+      "type": "trigger",
+      "x": 13,
+      "y": 11,
+      "elevation": 0,
+      "var": "VAR_TEMP_2",
+      "var_value": "0",
+      "script": "HybridCulture_Try_StartAttraction2"
+    },
+    {
+      "type": "trigger",
+      "x": 13,
+      "y": 12,
+      "elevation": 0,
+      "var": "VAR_TEMP_2",
+      "var_value": "0",
+      "script": "HybridCulture_Try_StartAttraction2"
+    },
+    {
+      "type": "trigger",
+      "x": 13,
+      "y": 13,
       "elevation": 0,
       "var": "VAR_TEMP_2",
       "var_value": "0",
@@ -288,19 +335,35 @@
   "bg_events": [
     {
       "type": "sign",
-      "x": 1,
-      "y": 11,
+      "x": 47,
+      "y": 1,
       "elevation": 3,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
       "script": "Hiddengrotto_EnterGrotto_Dialogue"
     },
     {
       "type": "sign",
-      "x": 1,
-      "y": 12,
+      "x": 46,
+      "y": 1,
       "elevation": 3,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
       "script": "Hiddengrotto_EnterGrotto_Dialogue"
+    },
+    {
+      "type": "sign",
+      "x": 18,
+      "y": 22,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_NORTH",
+      "script": "Route12_EventScript_Sign1"
+    },
+    {
+      "type": "sign",
+      "x": 34,
+      "y": 0,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_NORTH",
+      "script": "Route12_EventScript_Sign2"
     }
   ]
 }

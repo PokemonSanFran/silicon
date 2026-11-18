@@ -31,32 +31,36 @@
   ],
   "warp_events": [
     {
+        "warp_id": "WARP_ID_GYM_TO_HALERBA_CITY",
       "x": 9,
       "y": 19,
       "elevation": 0,
       "dest_map": "MAP_HALERBA_CITY",
-      "dest_warp_id": "2"
+      "dest_warp_id": "WARP_ID_HALERBA_CITY_TO_GYM"
     },
     {
+        "warp_id": "WARP_ID_HALERBA_CITY_GYM_TO_A",
       "x": 10,
       "y": 17,
       "elevation": 0,
       "dest_map": "MAP_HALERBA_CITY_GYM_A",
-      "dest_warp_id": "0"
+      "dest_warp_id": "WARP_ID_HALERBA_GYM_A_TO_GYM_ENTRANCE"
     },
     {
+        "warp_id": "WARP_ID_HALERBA_CITY_GYM_TO_B",
       "x": 8,
       "y": 15,
       "elevation": 0,
       "dest_map": "MAP_HALERBA_CITY_GYM_B",
-      "dest_warp_id": "0"
+      "dest_warp_id": "WARP_ID_HALERBA_GYM_B_TO_GYM_ENTRANCE"
     },
     {
+        "warp_id": "WARP_ID_HALERBA_CITY_GYM_TO_C",
       "x": 10,
       "y": 13,
       "elevation": 0,
       "dest_map": "MAP_HALERBA_CITY_GYM_C",
-      "dest_warp_id": "0"
+      "dest_warp_id": "WARP_ID_HALERBA_GYM_C_TO_GYM_ENTRANCE"
     }
   ],
   "coord_events": [],

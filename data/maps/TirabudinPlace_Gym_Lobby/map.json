@@ -15,6 +15,7 @@
   "connections": null,
   "object_events": [
     {
+        "local_id": "LOCALID_TIRABUDIN_GYM_LOBBY_SINGLES",
       "graphics_id": "OBJ_EVENT_GFX_BEAUTY",
       "x": 5,
       "y": 4,
@@ -28,6 +29,7 @@
       "flag": "0"
     },
     {
+        "local_id": "LOCALID_TIRABUDIN_GYM_LOBBY_DOUBLE",
       "graphics_id": "OBJ_EVENT_GFX_POKEFAN_F",
       "x": 8,
       "y": 4,
@@ -41,6 +43,7 @@
       "flag": "0"
     },
     {
+        "local_id": "LOCALID_TIRABUDIN_GYM_LOBBY_MULTI",
       "graphics_id": "OBJ_EVENT_GFX_GENTLEMAN",
       "x": 12,
       "y": 4,
@@ -54,6 +57,7 @@
       "flag": "0"
     },
     {
+        "local_id": "LOCALID_TIRABUDIN_GYM_LOBBY_MULTI_LINK",
       "graphics_id": "OBJ_EVENT_GFX_WOMAN_1",
       "x": 16,
       "y": 4,
@@ -69,25 +73,28 @@
   ],
   "warp_events": [
     {
+        "warp_id": "WARP_ID_GYM_LOBBY_TO_TIRABUDIN_PLACE_LEFT",
       "x": 10,
       "y": 9,
       "elevation": 0,
       "dest_map": "MAP_TIRABUDIN_PLACE",
-      "dest_warp_id": "1"
+      "dest_warp_id": "WARP_ID_TIRABUDIN_PLACE_TO_GYM_LOBBY"
     },
     {
+        "warp_id": "WARP_ID_GYM_LOBBY_TO_TIRABUDIN_PLACE_RIGHT",
       "x": 11,
       "y": 9,
       "elevation": 0,
       "dest_map": "MAP_TIRABUDIN_PLACE",
-      "dest_warp_id": "1"
+      "dest_warp_id": "WARP_ID_TIRABUDIN_PLACE_TO_GYM_LOBBY"
     },
     {
+        "warp_id": "WARP_ID_GYM_LOBBY_TO_TIRABUDIN_PLACE_GYM",
       "x": 4,
       "y": 1,
       "elevation": 0,
       "dest_map": "MAP_TIRABUDIN_PLACE_GYM",
-      "dest_warp_id": "0"
+      "dest_warp_id": "WARP_ID_TIRABUDIN_PLACE_GYM_TO_GYM_LOBBY_LEFT"
     }
   ],
   "coord_events": [],

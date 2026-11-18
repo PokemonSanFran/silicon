@@ -16,7 +16,7 @@ script LockedOut_PreventPlayer_Script
         msgbox(format("Access denied."),,SPEAKER_DOOR)
         closemessage
 
-        if (!flag(FLAG_LOCKEDOUT_PLAYED))
+        if (!flag(FLAG_LOCKEDOUT_PLAYER))
         {
             call(LockedOut_PhoneCall_Dialogue)
         }
@@ -32,7 +32,7 @@ script LockedOut_PreventPlayer_Script
 script LockedOut_PhoneCall_Dialogue
 {
         startcutscene(JUMPPLAYER_LOCKEDOUT)
-    setflag(FLAG_LOCKEDOUT_PLAYED)
+    setflag(FLAG_LOCKEDOUT_PLAYER)
         msgbox(format("Shit wait, already?!"),,SPEAKER_ALICIA)
 
         closemessage

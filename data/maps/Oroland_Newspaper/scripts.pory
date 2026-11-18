@@ -2,7 +2,6 @@ mapscripts Oroland_Newspaper_MapScripts
 {
     MAP_SCRIPT_ON_TRANSITION
     {
-        call(Quest_Redomugging_Hide_Victim_Script)
     }
 }
 

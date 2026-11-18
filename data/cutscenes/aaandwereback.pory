@@ -25,21 +25,23 @@ script AaandWereBack_ObjectHide_Script
     setobjectflagfromlocalid(SHARPRISE_COMPOUND_1F_OLIVER)
 }
 
-script AaandWereBack_Monologue
+script AaandWereBack_Script_IncrementStoryVariable
 {
-    setvar(VAR_PLAYER_HOME_STATE,FINISHED_1_1)
-    addvar(VAR_TEMP_0,1)
+    addvar(VAR_STORYLINE_STATE,1)
+
     if (var(VAR_STORYLINE_STATE) != STORY_EAST_RESIDO_COMPLETE)
     {
         return
     }
 
-    if (flag(FLAG_ACT_1_1_COMPLETE))
-    {
-        return
-    }
+    setflag(FLAG_ACT_1_1_COMPLETE)
+}
 
+script AaandWereBack_Monologue
+{
     lock
+    clearflag(FLAG_ACT_1_1_COMPLETE)
+    setvar(VAR_PLAYER_HOME_STATE,FINISHED_1_1)
     buffermapname(STR_VAR_1,MAP_HALAI_ISLAND)
     bufferitemname(STR_VAR_2,ITEM_GO_GOGGLES)
     buffermapname(STR_VAR_3,MAP_CUCONU_TOWN_SHARPRISE_COMPOUND_1F)
@@ -47,7 +49,6 @@ script AaandWereBack_Monologue
     closemessage
     call(AaandWereBack_WarpToCompound_Script)
     release
-    setflag(FLAG_ACT_1_1_COMPLETE)
     end
 }
 

@@ -31,6 +31,7 @@
   ],
   "warp_events": [
     {
+        "warp_id": "WARP_ID_SHARPRISE_ELEVATOR_ENTRANCE_LEFT",
       "x": 1,
       "y": 5,
       "elevation": 0,
@@ -38,6 +39,7 @@
       "dest_warp_id": "WARP_ID_DYNAMIC"
     },
     {
+        "warp_id": "WARP_ID_SHARPRISE_ELEVATOR_ENTRANCE_RIGHT",
       "x": 2,
       "y": 5,
       "elevation": 0,
