@@ -21,6 +21,7 @@
   ],
   "object_events": [
     {
+      "local_id": "LOCALID_TIRABUDIN_PLACE_TAXI",
       "graphics_id": "OBJ_EVENT_GFX_TRUCK",
       "x": 35,
       "y": 25,
@@ -34,58 +35,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "OBJ_EVENT_GFX_GIRL_3",
-      "x": 20,
-      "y": 24,
-      "elevation": 3,
-      "movement_type": "MOVEMENT_TYPE_WALK_IN_PLACE_DOWN",
-      "movement_range_x": 0,
-      "movement_range_y": 0,
-      "trainer_type": "TRAINER_TYPE_NONE",
-      "trainer_sight_or_berry_tree_id": "0",
-      "script": "NULL",
-      "flag": "FLAG_TEMP_6"
-    },
-    {
-      "graphics_id": "OBJ_EVENT_GFX_GIRL_3",
-      "x": 21,
-      "y": 25,
-      "elevation": 3,
-      "movement_type": "MOVEMENT_TYPE_WALK_IN_PLACE_LEFT",
-      "movement_range_x": 0,
-      "movement_range_y": 0,
-      "trainer_type": "TRAINER_TYPE_NONE",
-      "trainer_sight_or_berry_tree_id": "0",
-      "script": "NULL",
-      "flag": "FLAG_TEMP_6"
-    },
-    {
-      "graphics_id": "OBJ_EVENT_GFX_GIRL_3",
-      "x": 19,
-      "y": 25,
-      "elevation": 3,
-      "movement_type": "MOVEMENT_TYPE_WALK_IN_PLACE_RIGHT",
-      "movement_range_x": 0,
-      "movement_range_y": 0,
-      "trainer_type": "TRAINER_TYPE_NONE",
-      "trainer_sight_or_berry_tree_id": "0",
-      "script": "NULL",
-      "flag": "FLAG_TEMP_6"
-    },
-    {
-      "graphics_id": "OBJ_EVENT_GFX_GIRL_3",
-      "x": 20,
-      "y": 26,
-      "elevation": 3,
-      "movement_type": "MOVEMENT_TYPE_WALK_IN_PLACE_UP",
-      "movement_range_x": 0,
-      "movement_range_y": 0,
-      "trainer_type": "TRAINER_TYPE_NONE",
-      "trainer_sight_or_berry_tree_id": "0",
-      "script": "NULL",
-      "flag": "FLAG_TEMP_6"
-    },
-    {
+      "local_id": "LOCALID_TIRABUDIN_PLACE_BD",
       "graphics_id": "OBJ_EVENT_GFX_BD",
       "x": 4,
       "y": 27,
@@ -99,6 +49,7 @@
       "flag": "FLAG_TEMP_7"
     },
     {
+      "local_id": "LOCALID_BERRY_TREE_TIRABUDIN_PLACE_1",
       "graphics_id": "OBJ_EVENT_GFX_BERRY_TREE",
       "x": 7,
       "y": 24,
@@ -112,6 +63,7 @@
       "flag": "0"
     },
     {
+      "local_id": "LOCALID_BERRY_TREE_TIRABUDIN_PLACE_2",
       "graphics_id": "OBJ_EVENT_GFX_BERRY_TREE",
       "x": 32,
       "y": 20,
@@ -127,25 +79,28 @@
   ],
   "warp_events": [
     {
+        "warp_id": "WARP_ID_TIRABUDIN_PLACE_TO_HALERBA_WILDS",
       "x": 1,
       "y": 2,
       "elevation": 0,
       "dest_map": "MAP_HALERBA_WILDS",
-      "dest_warp_id": "6"
+      "dest_warp_id": "WARP_ID_HALERBA_WILDS_TO_TIRABUDIN_PLACE"
     },
     {
+        "warp_id": "WARP_ID_TIRABUDIN_PLACE_TO_GYM_LOBBY",
       "x": 4,
       "y": 26,
       "elevation": 0,
       "dest_map": "MAP_TIRABUDIN_PLACE_GYM_LOBBY",
-      "dest_warp_id": "1"
+      "dest_warp_id": "WARP_ID_GYM_LOBBY_TO_TIRABUDIN_PLACE_LEFT"
     },
     {
+        "warp_id": "WARP_ID_TIRABUDIN_PLACE_TO_CENTER",
       "x": 36,
       "y": 3,
       "elevation": 0,
       "dest_map": "MAP_TIRABUDIN_PLACE_POKEMON_CENTER_1F",
-      "dest_warp_id": "0"
+      "dest_warp_id": "WARP_ID_CENTER_TO_TIRABUDIN_PLACE_LEFT"
     }
   ],
   "coord_events": [

@@ -221,19 +221,29 @@ script RestoreZenzuIsland_Script_HideImprovtroupe
     setobjectflagfromlocalid(LOCALID_PETAROSA_THEATER_IMPROVTROUPEC)
 }
 
-script RestoreZenzuIsland_Dialogue_RecruitImprovtroupeA
+script RestoreZenzuIsland_Script_RecruitImprovtroupeAEarly
+{
+    msgbox(format("Actually, I came here to talk to you about that!"),,SPEAKER_PLAYER)
+	goto(RestoreZenzuIsland_Dialogue_RecruitImprovtroupeA)
+}
+
+script RestoreZenzuIsland_Dialogue_RecruitImprovtroupeAInteract
 {
     lock
     if (flag(FLAG_TIMELINE_FALSE) == TRUE)
     {
         return
     }
-    subquestmenu(QUEST_MENU_COMPLETE_QUEST,QUEST_RESTOREZENZUGYM,SUB_QUEST_3)
-    callnative(Quest_Restorezenzugym_CountRemainingSubquestsTryProgressReward)
     msgbox(format("{PLAYER}! We're just taking a break - are you here to get some practice in?"),,SPEAKER_IMPROVTROUPEA)
     msgbox(format("No! I actually wanted to talk to you."),,SPEAKER_PLAYER)
     msgbox(format("After we battled you mentioned you wanted to get into acting, right?"),,SPEAKER_PLAYER)
     msgbox(format("It's what we all want to do! It's all we all want to do!"),,SPEAKER_IMPROVTROUPEA)
+}
+
+script RestoreZenzuIsland_Dialogue_RecruitImprovtroupeA
+{
+    subquestmenu(QUEST_MENU_COMPLETE_QUEST,QUEST_RESTOREZENZUGYM,SUB_QUEST_3)
+    callnative(Quest_Restorezenzugym_CountRemainingSubquestsTryProgressReward)
     closemessage
     fadescreen(FADE_TO_BLACK)
     delay(2)
@@ -242,9 +252,15 @@ script RestoreZenzuIsland_Dialogue_RecruitImprovtroupeA
     msgbox(format("We'll go talk to Doyle."),,SPEAKER_IMPROVTROUPEA)
     closemessage
     fadescreen(FADE_TO_BLACK)
+	moveobjecttocoords(LOCALID_PLAYER,4,5,DIR_NORTH)
     removeobject(LOCALID_PETAROSA_THEATER_IMPROVTROUPEA)
     removeobject(LOCALID_PETAROSA_THEATER_IMPROVTROUPEB)
     removeobject(LOCALID_PETAROSA_THEATER_IMPROVTROUPEC)
+	clearobjectflagfromlocalid(LOCALID_PETAROSA_THEATER_IMPROVTROUPEX)
+    addobject(LOCALID_PETAROSA_THEATER_IMPROVTROUPEX)
+    addobject(LOCALID_PETAROSA_THEATER_IMPROVTROUPEY)
+    addobject(LOCALID_PETAROSA_THEATER_IMPROVTROUPEZ)
+	waitmovement(LOCALID_PLAYER)
     fadescreen(FADE_FROM_BLACK)
     releaseall
     end

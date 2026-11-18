@@ -34,6 +34,7 @@
 #include "data.h"
 #include "confetti_util.h"
 #include "constants/rgb.h"
+#include "constants/heal_locations.h" // siliconMerge
 
 #define HALL_OF_FAME_MAX_TEAMS 30
 #define TAG_CONFETTI 1001
@@ -772,7 +773,12 @@ static void Task_Hof_HandleExit(u8 taskId)
         ResetBgsAndClearDma3BusyFlags(0);
         DestroyTask(taskId);
         FreeAllHoFMem();
-        StartCredits();
+        // Start siliconMerge
+        //StartCredits();
+        SetWarpDestinationToHealLocation(HEAL_LOCATION_PETAROSA_BOROUGH_COMPOUND_1F);
+        WarpIntoMap();
+        SetMainCallback2(CB2_LoadMap);
+        // End siliconMerge
     }
 }
 

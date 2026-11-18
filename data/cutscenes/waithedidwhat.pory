@@ -190,6 +190,7 @@ script WaitHeDidWhat_StartBattle_Script{
         applymovement(PLAYER,Common_Movement_WalkRight)
         applymovement(1,Common_Movement_WalkLeft)
         waitmovement(0)
+		msgbox(format("Okay... I've beaten Baiya before, and this is what I came to Resido to do. Time to become the Champion!"),,SPEAKER_ALICIA,TAIL_THOUGHT)
         msgbox(format("I'll beat you... for Resido!"),,SPEAKER_BAIYA,TAIL_SHOUT)
         trainerbattle_no_intro(TRAINER_BAIYA_FINALS,format("…so close."))
         closemessage

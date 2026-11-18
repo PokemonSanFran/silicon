@@ -3123,4 +3123,116 @@ static const struct SpeakerData sSpeakerData[NUM_SPEAKERS] =
         .gender = MALE,
         .speakerIcon = SPEAKER_ICON_GIRL,
     },
+    [SPEAKER_BAIYA_ROOMMATE_1] =
+    {
+        .name = COMPOUND_STRING("Baiyahousemate1"),
+        .title = COMPOUND_STRING("Baiya's Housemate"),
+        .gender = MALE,
+        .speakerIcon = SPEAKER_ICON_ROCKET_GRUNT_F,
+    },
+    [SPEAKER_BAIYA_ROOMMATE_2] =
+    {
+        .name = COMPOUND_STRING("Baiyahousemate2"),
+        .title = COMPOUND_STRING("Baiya's Housemate"),
+        .gender = FEMALE,
+        .speakerIcon = SPEAKER_ICON_ROCKET_GRUNT_F,
+    },
+    [SPEAKER_BAIYA_ROOMMATE_3] =
+    {
+        .name = COMPOUND_STRING("Baiyahousemate3"),
+        .title = COMPOUND_STRING("Baiya's Housemate"),
+        .gender = MALE,
+        .speakerIcon = SPEAKER_ICON_ROCKET_GRUNT_F,
+    },
+    [SPEAKER_BAIYA_ROOMMATE_4] =
+    {
+        .name = COMPOUND_STRING("Baiyahousemate4"),
+        .title = COMPOUND_STRING("Baiya's Housemate"),
+        .gender = FEMALE,
+        .speakerIcon = SPEAKER_ICON_ROCKET_GRUNT_F,
+    },
+    [SPEAKER_BAIYA_ROOMMATE_5] =
+    {
+        .name = COMPOUND_STRING("Baiyahousemate5"),
+        .title = COMPOUND_STRING("Baiya's Housemate"),
+        .gender = MALE,
+        .speakerIcon = SPEAKER_ICON_ROCKET_GRUNT_F,
+    },
+    [SPEAKER_BAIYA_ROOMMATE_6] =
+    {
+        .name = COMPOUND_STRING("Baiyahousemate6"),
+        .title = COMPOUND_STRING("Baiya's Housemate"),
+        .gender = NON_BINARY,
+        .speakerIcon = SPEAKER_ICON_ROCKET_GRUNT_F,
+    },
+    [SPEAKER_KEIYINGGARDENER] =
+    {
+        .name = COMPOUND_STRING("Keiyinggardener"),
+        .title = COMPOUND_STRING("Gardener"),
+        .gender = MALE,
+        .speakerIcon = SPEAKER_ICON_POKE_MANIAC,
+    },
+    [SPEAKER_KEIYINGGARDENATTENDANT] =
+    {
+        .name = COMPOUND_STRING("Keiyinggardenattendant"),
+        .title = COMPOUND_STRING("House Staff"),
+        .gender = MALE,
+        .speakerIcon = SPEAKER_ICON_OLD_MAN,
+    },
+    [SPEAKER_KEIYINGGARDENER_UNDERCOVER] =
+    {
+        .name = COMPOUND_STRING("Keiyinggardenerundercover"),
+        .title = COMPOUND_STRING("Gardener"),
+        .gender = MALE,
+        .speakerIcon = SPEAKER_ICON_OLD_WOMAN,
+    },
+    [SPEAKER_KEIYINGGARDENER_COMRADE] =
+    {
+        .name = COMPOUND_STRING("Keiyinggardenerundercover"),
+        .title = COMPOUND_STRING("Comrade"),
+        .gender = MALE,
+        .speakerIcon = SPEAKER_ICON_ROCKET_GRUNT_F,
+    },
+    [SPEAKER_KEIYING_GUARD] =
+    {
+        .name = COMPOUND_STRING("Keiyingguard"),
+        .title = COMPOUND_STRING("Security Guard"),
+        .gender = MALE,
+        .speakerIcon = SPEAKER_ICON_LANCE,
+    },
+    [SPEAKER_KEIYINGMAIDCOOK] =
+    {
+        .name = COMPOUND_STRING("Keiyingcook0"),
+        .title = COMPOUND_STRING("Cook"),
+        .gender = MALE,
+        .speakerIcon = SPEAKER_ICON_POLICEMAN,
+    },
+    [SPEAKER_KEIYINGCOOK1] =
+    {
+        .name = COMPOUND_STRING("Keiyingcook1"),
+        .title = COMPOUND_STRING("Cook"),
+        .gender = MALE,
+        .speakerIcon = SPEAKER_ICON_COLLECTOR,
+    },
+    [SPEAKER_KEIYINGCOOK2] =
+    {
+        .name = COMPOUND_STRING("Keiyingcook2"),
+        .title = COMPOUND_STRING("Cook"),
+        .gender = MALE,
+        .speakerIcon = SPEAKER_ICON_ELM,
+    },
+    [SPEAKER_KEIYINGMAID] =
+    {
+        .name = COMPOUND_STRING("Keiyingmaid"),
+        .title = COMPOUND_STRING("House Staff"),
+        .gender = MALE,
+        .speakerIcon = SPEAKER_ICON_WOMAN,
+    },
+    [SPEAKER_KEIYINGMAID2] =
+    {
+        .name = COMPOUND_STRING("Keiyingmaid2"),
+        .title = COMPOUND_STRING("House Staff"),
+        .gender = MALE,
+        .speakerIcon = SPEAKER_ICON_WOMAN,
+    },
 };

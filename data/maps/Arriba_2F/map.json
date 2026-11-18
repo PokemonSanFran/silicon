@@ -15,6 +15,7 @@
   "connections": 0,
   "object_events": [
     {
+        "local_id": "LOCALID_ARRIBA_2F_CEO",
       "graphics_id": "OBJ_EVENT_GFX_TUBER_F",
       "x": 8,
       "y": 4,
@@ -30,11 +31,12 @@
   ],
   "warp_events": [
     {
+      "warp_id": "WARP_ID_2F_TO_ARRIBA",
       "x": 8,
       "y": 1,
       "elevation": 0,
       "dest_map": "MAP_ARRIBA_1F",
-      "dest_warp_id": "3"
+      "dest_warp_id": "WARP_ID_ARRIBA_TO_2F"
     }
   ],
   "coord_events": [],

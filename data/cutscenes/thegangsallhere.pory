@@ -146,6 +146,7 @@ script TheGangsAllHere_ThisIsOffice_Script
 
 script TheGangsAllHere_ComeOnIn_Dialogue
 {
+    call(AaandWereBack_Script_IncrementStoryVariable)
     startcutscene(JUMPPLAYER_THEGANGSALLHERE)
     setvar(VAR_SHARPRISESPIRE_CONFERENCE_STATE,POST_THE_GANGS_ALL_HERE)
     playbgm(MUS_RG_ENCOUNTER_DEOXYS,FALSE)
@@ -253,10 +254,7 @@ script TheGangsAllHere_EndScene_Dialogue{
     fadedefaultbgm
     removeobject(LOCALID_SHARPRISE_LUCREZIA)
     destroyfollowernpc
-    addvar(VAR_STORYLINE_STATE,1)
-    setvar(VAR_TEMP_0,0)
     endcutscene
-    call(AaandWereBack_Monologue)
     call(TryAutoSave)
     release
     end

@@ -238,7 +238,7 @@
 #define VAR_CYCLING_CHALLENGE_STATE                                 0x407F
 
 #define VAR_BEACH_BATTLE_STATE                                      0x4070
-#define VAR_CONSTRUCTION_STRIKE_STATE                               0x4071
+#define VAR_UNUSED_CURSED                                           0x4071 // this var randomly gets set to 1. i have no idea why. I have no idea how to fix it. don't use this var for anything.
 #define VAR_INNER_CONSTRUCTION_SITE_STATE                           0x4072
 #define VAR_TIME_TRAVEL_STATE                                       0x4073
 #define VAR_TOWER_RAID_STATE                                        0x4074
@@ -249,7 +249,7 @@
 #define VAR_LETSBURNTHISMOTHERSTATE                                 0x4079
 #define VAR_PLAYER_HOME_STATE                                       0x407A
 #define VAR_CAPHE_CITY_STATE                                        0x407B
-#define VAR_SILICON_UNUSED_0x407C                                   0x407C
+#define VAR_CONSTRUCTION_STRIKE_STATE                               0x407C
 #define VAR_SILICON_UNUSED_0x407D                                   0x407D
 #define VAR_SILICON_UNUSED_0x407E                                   0x407E
 #define VAR_SILICON_UNUSED_0x407F                                   0x407F

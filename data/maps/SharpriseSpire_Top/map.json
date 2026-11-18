@@ -15,45 +15,7 @@
   "connections": null,
   "object_events": [
     {
-      "graphics_id": "OBJ_EVENT_GFX_OLIVER",
-      "x": 4,
-      "y": 1,
-      "elevation": 3,
-      "movement_type": "MOVEMENT_TYPE_NONE",
-      "movement_range_x": 0,
-      "movement_range_y": 0,
-      "trainer_type": "TRAINER_TYPE_NONE",
-      "trainer_sight_or_berry_tree_id": "0",
-      "script": "NULL",
-      "flag": "FLAG_TEMP_1"
-    },
-    {
-      "graphics_id": "OBJ_EVENT_GFX_MYSTERY_GIFT_MAN",
-      "x": 7,
-      "y": 7,
-      "elevation": 3,
-      "movement_type": "MOVEMENT_TYPE_FACE_RIGHT",
-      "movement_range_x": 0,
-      "movement_range_y": 0,
-      "trainer_type": "TRAINER_TYPE_NONE",
-      "trainer_sight_or_berry_tree_id": "0",
-      "script": "NULL",
-      "flag": "FLAG_TEMP_2"
-    },
-    {
-      "graphics_id": "OBJ_EVENT_GFX_MYSTERY_GIFT_MAN",
-      "x": 7,
-      "y": 8,
-      "elevation": 3,
-      "movement_type": "MOVEMENT_TYPE_FACE_RIGHT",
-      "movement_range_x": 0,
-      "movement_range_y": 0,
-      "trainer_type": "TRAINER_TYPE_NONE",
-      "trainer_sight_or_berry_tree_id": "0",
-      "script": "NULL",
-      "flag": "FLAG_TEMP_2"
-    },
-    {
+        "local_id": "LOCALID_SHARPRISESPIRE_TOP_LUCREZIA",
       "graphics_id": "OBJ_EVENT_GFX_LUCREZIA",
       "x": 15,
       "y": 4,
@@ -69,18 +31,20 @@
   ],
   "warp_events": [
     {
+        "warp_id": "WARP_ID_TOP_TO_LEAGUEOPS",
       "x": 4,
       "y": 1,
       "elevation": 0,
       "dest_map": "MAP_SHARPRISE_SPIRE_LEAGUEOPS",
-      "dest_warp_id": "1"
+      "dest_warp_id": "WARP_ID_LEAGUEOPS_TO_TOP"
     },
     {
+        "warp_id": "WARP_ID_TOP_TO_LAB",
       "x": 0,
       "y": 2,
       "elevation": 0,
       "dest_map": "MAP_SHARPRISE_SPIRE_LAB",
-      "dest_warp_id": "0"
+      "dest_warp_id": "WARP_ID_LAB_TO_TOP_LEFT"
     }
   ],
   "coord_events": [

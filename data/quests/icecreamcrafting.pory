@@ -1,8 +1,6 @@
-const FLAG_HIDE_SMOOTHIECUSTOMER = FLAG_TEMP_1
-
 script Quest_SmoothieCrafting_Script_HideSmoothiecustomer
 {
-    setflag(FLAG_HIDE_SMOOTHIECUSTOMER)
+    setobjectflagfromlocalid(LOCALID_SMOOTHIECUSTOMER)
 }
 
 script Quest_SmoothieCrafting_Script_Interact

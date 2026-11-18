@@ -45,6 +45,7 @@
 #include "tv.h"
 #include "window.h"
 #include "ui_mon_summary.h" // monSummary
+#include "ui_move_reminder.h" // monSummary
 #include "constants/battle_move_effects.h"
 #include "constants/items.h"
 #include "constants/moves.h"
@@ -1281,6 +1282,11 @@ void ShowPokemonSummaryScreen(u8 mode, void *mons, u8 monIndex, u8 maxMonIndex, 
 
 void ShowSelectMovePokemonSummaryScreen(struct Pokemon *mons, u8 monIndex, void (*callback)(void), u16 newMove)
 {
+    // Start monSummary
+    MoveReminder_InitSelectMove(callback, &mons[monIndex], newMove);
+    return;
+    // End monSummary
+
     ShowPokemonSummaryScreen(SUMMARY_MODE_SELECT_MOVE, mons, monIndex, gPartiesCount[B_TRAINER_PLAYER] - 1, callback);
     sMonSummaryScreen->newMove = newMove;
 }

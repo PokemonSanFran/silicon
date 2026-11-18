@@ -133,7 +133,7 @@ static const struct PlayerAdventureText playerAdventureText[] =
     }
   },
   {
-    .text = COMPOUND_STRING("Explore everything eastern Resido has to offer!"),
+    .text = COMPOUND_STRING("Explore everything eastern mainland Resido has to offer!"),
     .textCondition =
     {
       {
@@ -200,7 +200,7 @@ static const struct PlayerAdventureText playerAdventureText[] =
     }
   },
   {
-    .text = COMPOUND_STRING("Explore everything eastern Resido has to offer!"),
+    .text = COMPOUND_STRING("See all of the sights across mainland eastern Resido has to offer! A"),
     .textCondition =
     {
       {
@@ -243,7 +243,7 @@ static const struct PlayerAdventureText playerAdventureText[] =
     }
   },
   {
-    .text = COMPOUND_STRING("Explore everything eastern Resido has to offer!"),
+    .text = COMPOUND_STRING("Seek out the tallest and lowest points of eastern mainland Resido!"),
     .textCondition =
     {
       {
@@ -311,7 +311,7 @@ static const struct PlayerAdventureText playerAdventureText[] =
     }
   },
   {
-    .text = COMPOUND_STRING("Explore everything eastern Resido has to offer!"),
+    .text = COMPOUND_STRING("Visit all the different towns and cities in eastern mainland Resido!"),
     .textCondition =
     {
       {
@@ -736,7 +736,7 @@ static const struct PlayerAdventureText playerAdventureText[] =
     }
   },
   {
-    .text = COMPOUND_STRING("Explore everything western Resido has to offer!"),
+    .text = COMPOUND_STRING("Explore all the different locations western Resido has to offer!"),
     .textCondition =
     {
       {
@@ -2618,7 +2618,7 @@ static const struct PlayerAdventureText playerAdventureText[] =
       },
       {
         .dataType = QUEST_FLAVOR_COMPARE_FLAG,
-        .dataAddress = FLAG_LOCKEDOUT_PLAYED,
+        .dataAddress = FLAG_LOCKEDOUT_PLAYER,
         .compareOp = EQUAL,
         .targetValue = FALSE,
       },
@@ -2630,7 +2630,7 @@ static const struct PlayerAdventureText playerAdventureText[] =
     {
       {
         .textTargetType = QUEST_FLAVOR_GET_NAME_MAP,
-        .textTargetValue = MAP_HALAI_ISLAND_BAIYA,
+        .textTargetValue = MAP_HALAI_ISLAND_BAIYA2F,
       },
     },
     .textCondition =
@@ -2643,7 +2643,7 @@ static const struct PlayerAdventureText playerAdventureText[] =
       },
       {
         .dataType = QUEST_FLAVOR_COMPARE_FLAG,
-        .dataAddress = FLAG_LOCKEDOUT_PLAYED,
+        .dataAddress = FLAG_LOCKEDOUT_PLAYER,
         .compareOp = EQUAL,
         .targetValue = TRUE,
       },
@@ -3469,7 +3469,7 @@ static const struct PlayerAdventureText playerAdventureText[] =
     {
       {
         .textTargetType = QUEST_FLAVOR_GET_NAME_MAP,
-        .textTargetValue = MAP_HALAI_ISLAND_BAIYA,
+        .textTargetValue = MAP_HALAI_ISLAND_BAIYA2F,
       },
     },
     .textCondition =

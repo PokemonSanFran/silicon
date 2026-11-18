@@ -954,6 +954,9 @@ void CheckSetVisitedRouteFlags(void)
         if (mapA != currentMap && mapB != currentMap && mapDestination != currentMap)
             continue;
 
+        if (FlagGet(gRegionMapEntries[MAP_CAPHE_CITY].visitedFlag) && (currentMap == MAP_ANBEH_BEND))
+            FlagSet(gRegionMapEntries[MAP_ROUTE12].visitedFlag);
+
         if (mapDestination == MAPSEC_TORGEOT_CLIMB)
         {
             if (VarGet(VAR_TIME_TRAVEL_STATE) <= TIME_TRAVEL_NEVER_STARTED)
@@ -1324,11 +1327,15 @@ static bool8 IsOnHalaiIslandDuringConstruction(struct WarpData *warp)
     if (IsHalaiIslandUnderConstruction() == FALSE)
         return FALSE;
 
+    if (GetCurrentMap() == MAP_HALAI_ISLAND_POKEMON_CENTER_1F
+    || GetCurrentMap() == MAP_HALAI_ISLAND_BAIYA
+    || GetCurrentMap() == MAP_HALAI_ISLAND_BAIYA2F)
+        return FALSE;
+
     if (Overworld_GetMapHeaderByGroupAndId(warp->mapGroup, warp->mapNum)->regionMapSectionId != MAPSEC_HALAI_ISLAND)
         return FALSE;
 
-    if (GetCurrentMap() == MAP_HALAI_ISLAND_POKEMON_CENTER_1F)
-        return FALSE;
+
 
     return TRUE;
 }
@@ -1407,7 +1414,7 @@ u16 GetLocationMusic(struct WarpData *warp)
     const struct MapHeader *mapHeader = Overworld_GetMapHeaderByGroupAndId(warp->mapGroup, warp->mapNum);
     if (mapHeader->nightMusic != MUS_NONE && GetTimeOfDay() == TIME_NIGHT)
         return mapHeader->nightMusic;
-    
+
     return mapHeader->music;
 }
 

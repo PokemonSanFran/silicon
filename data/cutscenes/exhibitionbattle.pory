@@ -1,11 +1,9 @@
 const PLAYER = OBJ_EVENT_ID_PLAYER
 const DIANTHA = 1
-const FLAG_HIDE_BAIYA = FLAG_TEMP_3
-const LUCREZIA = 5
 const VAR_TALKED_CHARLOTTE = VAR_TEMP_F
 
 script ExhibitionBattle_HideObject_Script {
-    setflag(FLAG_HIDE_BAIYA)
+    setobjectflagfromlocalid(LOCALID_SHARPRISE_STADIUM_LOCKERS_BAIYA)
 }
 
 script ExhibitionBattle_CheckMissionProgress_Script{
@@ -31,7 +29,7 @@ script ExhibitionBattle_TimeSkip_Script {
 script ExhibitionBattle_PrepPlayer_Script {
     lock
         setvar(VAR_STORYLINE_STATE,STORY_SAVE_DIANTHA)
-        applymovement(LUCREZIA, moves(walk_right * 5, walk_up, step_end))
+        applymovement(LOCALID_SHARPRISE_STADIUM_SKYBOX_LUCREZIA, moves(walk_right * 5, walk_up, step_end))
         waitmovement(0)
         msgbox(format("Okay, time for your exhibition battle. Winning or losing doesn't matter… just give us a good show! Are you ready?"),MSGBOX_YESNO,SPEAKER_OLIVER)
 
@@ -69,7 +67,7 @@ script ExhibitionBattle_BattleDiantha_Script {
 
         msgbox(format("Can the Grand Duchess hold a candle to our superstar? Let's get the exhibition underway!"),MSGBOX_AUTOCLOSE)
 
-        applymovement(DIANTHA,Common_Movement_WalkLeft)
+        applymovement(LOCALID_SHARPRISE_STADIUM_ARENA_OPPONENT,Common_Movement_WalkLeft)
         waitmovement(0)
 
         trainerbattle_continue_after_lose(TRAINER_DIANTHA,format("Watching you and your Pokémon, I couldn't help but be reminded of Serena - the same strength, the same bond with your team... It’s truly inspiring! You’ve both proven that there’s no limit to what you can achieve when you believe in each other."))
@@ -125,7 +123,8 @@ script ExhibitionBattle_Charlotte_Dialogue
 
         if (var(VAR_TALKED_CHARLOTTE) > 0)
         {
-            msgbox(format("I wonder if that development in CurenoPort has been committed yet…"),,SPEAKER_CHARLOTTE_SHARPRISE)
+            buffermapname(STR_VAR_1,MAP_CURENO_PORT)
+            msgbox(format("I wonder if that development in {STR_VAR_1} has been committed yet…"),,SPEAKER_CHARLOTTE_SHARPRISE)
             return
         }
 

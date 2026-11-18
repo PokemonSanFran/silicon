@@ -1,9 +1,7 @@
 mapscripts Route5_MapScripts {
     MAP_SCRIPT_ON_TRANSITION{
-        call(Quest_Ultrawormholeresearch_ControlTotemVisibility)
     }
     MAP_SCRIPT_ON_RESUME{
-        call(Quest_Ultrawormholeresearch_TryRemoveTotem_Script)
     }
     MAP_SCRIPT_ON_FRAME_TABLE [
         VAR_FAINTED_FOG_STATE, ENCOUNTERED_FOG_MON: WarpPlayerAfterFogEncounter
@@ -26,14 +24,20 @@ script Route5_InteractHomeless_Script
 
 script Route8_EventScript_Sign1
 {
-    msgbox(format("▶ Route 5\n{LEFT_ARROW} Irisina Town\n{RIGHT_ARROW} Mermereza City\pTravellers are advised to be mindful of the heavy fog."), MSGBOX_SIGN)
+	buffermapname(STR_VAR_1,MAP_ROUTE5)
+	buffermapname(STR_VAR_2,MAP_IRISINA_TOWN)
+	buffermapname(STR_VAR_3,MAP_MERMEREZA_CITY)
+    msgbox(format("▶ {STR_VAR_1}\n{LEFT_ARROW} {STR_VAR_2}\n{RIGHT_ARROW} {STR_VAR_3}\pTravellers are advised to be mindful of the heavy fog."), MSGBOX_SIGN)
     closemessage
     end
 }
 
 script Route8_EventScript_Sign2
 {
-    msgbox(format("▶ Route 5\n{RIGHT_ARROW} Mermereza City\n{LEFT_ARROW} Irisina Town\pTravellers are advised to be mindful of the heavy fog."), MSGBOX_SIGN)
+	buffermapname(STR_VAR_1,MAP_ROUTE5)
+	buffermapname(STR_VAR_2,MAP_MERMEREZA_CITY)
+	buffermapname(STR_VAR_3,MAP_IRISINA_TOWN)
+    msgbox(format("▶ {STR_VAR_1}\n{RIGHT_ARROW} {STR_VAR_2}\n{LEFT_ARROW} {STR_VAR_3}\pTravellers are advised to be mindful of the heavy fog."), MSGBOX_SIGN)
     closemessage
     end
 }

@@ -62,9 +62,10 @@ script StressCup_Script_PrepParty
     frontier_set(FRONTIER_DATA_LVL_MODE,FRONTIER_LVL_OPEN)
     setvar(VAR_0x8005,4)
     special(ChoosePartyForBattleFrontier)
-    if(var(VAR_0x8004) == PARTY_NOTHING_CHOSEN)
+    if(var(VAR_0x8004) == PARTY_NOTHING_CHOSEN || (var(VAR_RESULT) == 0))
     {
         msgbox(format("Pick four Pokemon to battle with. That's how my tournaments ran!"),,SPEAKER_STRESSCUPORGANIZER)
+        closemessage
         goto(StressCup_Script_PrepParty)
     }
     dome_reduceparty

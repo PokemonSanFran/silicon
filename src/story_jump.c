@@ -1228,7 +1228,7 @@ void JumpPlayerTo_YoungPadawan(bool32 jumpType)
 void FlagsVarWarp_WaitYouWentWhere()
 {
     VarSet(VAR_WAIT_YOU_WENT_WHERE, POST_WAITYOUWENTWHERE);
-    SetWarpDestination(MAP_GROUP(MAP_PSFROUTE9F45DA86),MAP_NUM(MAP_PSFROUTE9F45DA86),WARP_ID_NONE,3,1);
+    SetWarpDestination(MAP_GROUP(MAP_POPIDORA_PIER),MAP_NUM(MAP_POPIDORA_PIER),0,USE_WARP_ID,USE_WARP_ID);
 }
 
 void JumpPlayerTo_WaitYouWentWhere(bool32 jumpType)
@@ -2302,9 +2302,9 @@ void JumpPlayerTo_MaskOff_Vigrim(bool32 jumpType)
 
 void FlagsVarWarp_LockedOut()
 {
-    FlagSet(FLAG_LOCKEDOUT_PLAYED);
+    FlagSet(FLAG_LOCKEDOUT_PLAYER);
     SetLastHealLocationWarp(HEAL_LOCATION_HALAI_ISLAND_BAIYA);
-    SetWarpDestination(MAP_GROUP(MAP_HALAI_ISLAND_BAIYA),MAP_NUM(MAP_HALAI_ISLAND_BAIYA),0,USE_WARP_ID,USE_WARP_ID);
+    SetWarpDestination(MAP_GROUP(MAP_HALAI_ISLAND_BAIYA2F),MAP_NUM(MAP_HALAI_ISLAND_BAIYA2F),WARP_ID_2F_TO_BAIYA_HOME,USE_WARP_ID,USE_WARP_ID);
 }
 
 void JumpPlayerTo_LockedOut(bool32 jumpType)
@@ -2328,7 +2328,7 @@ void FlagsVarWarp_LetsFixThis()
     PreventVariableFromReversion(VAR_WAREHOUSE_RAVE_STATE, warehouseState,
             GOT_RAVE_MESSAGE);
     Buzzr_MarkZapAsRead(ZAP_STORY_WAREHOUSE_RAVE);
-    SetWarpDestination(MAP_GROUP(MAP_HALAI_ISLAND_BAIYA),MAP_NUM(MAP_HALAI_ISLAND_BAIYA),0,USE_WARP_ID,USE_WARP_ID);
+    SetWarpDestination(MAP_GROUP(MAP_HALAI_ISLAND_BAIYA2F),MAP_NUM(MAP_HALAI_ISLAND_BAIYA2F),WARP_ID_2F_TO_BAIYA_HOME,USE_WARP_ID,USE_WARP_ID);
 }
 
 void JumpPlayerTo_LetsFixThis(bool32 jumpType)
@@ -2714,7 +2714,7 @@ void FlagsVarWarp_Epilogue(void)
     VarSet(VAR_STORYLINE_STATE, STORY_CLEAR);
     FlagSet(FLAG_SYS_GAME_CLEAR);
     Buzzr_MarkZapAsRead(ZAP_STORY_EPILOGUE);
-    SetWarpDestination(MAP_GROUP(MAP_HALAI_ISLAND_BAIYA),MAP_NUM(MAP_HALAI_ISLAND_BAIYA),0,USE_WARP_ID,USE_WARP_ID);
+    SetWarpDestination(MAP_GROUP(MAP_HALAI_ISLAND_BAIYA2F),MAP_NUM(MAP_HALAI_ISLAND_BAIYA2F),WARP_ID_2F_TO_BAIYA_HOME,USE_WARP_ID,USE_WARP_ID);
 }
 
 void JumpPlayerTo_Epilogue(bool32 jumpType)
@@ -2742,56 +2742,71 @@ static void ClearGymTrainers(enum GymLeaderIndex gymIndex)
         [GYM_BELEN] =
         {
             FLAG_BADGE01_GET,
-            TRAINER_FLAGS_START + TRAINER_BELEN,
-            TRAINER_FLAGS_START + TRAINER_CHEFA,
-            TRAINER_FLAGS_START + TRAINER_CHEFB,
-            TRAINER_FLAGS_START + TRAINER_CHEFC,
+            TRAINER_BELEN,
+            TRAINER_CHEFA,
+            TRAINER_CHEFB,
+            TRAINER_CHEFC,
             TRAINER_NONE,
         },
         [GYM_SHINZO] =
         {
             FLAG_BADGE02_GET,
-            TRAINER_FLAGS_START + TRAINER_SHINZO,
+            TRAINER_031A849F,
+            TRAINER_041FD20E,
+            TRAINER_045FDD44,
+            TRAINER_SHINZO,
             TRAINER_NONE,
         },
         [GYM_EMRYS] =
         {
             FLAG_BADGE03_GET,
-            TRAINER_FLAGS_START + TRAINER_EMRYS,
+            TRAINER_0AF40D0B,
+            TRAINER_0B48C7D0,
+            TRAINER_0C95C833,
+            TRAINER_0C0A9B2F,
+            TRAINER_EMRYS,
             TRAINER_NONE,
         },
         [GYM_PUA] =
         {
             FLAG_BADGE04_GET,
-            TRAINER_FLAGS_START + TRAINER_PUA,
+            TRAINER_PUA,
             TRAINER_NONE,
         },
         [GYM_NERIENE] =
         {
             FLAG_BADGE05_GET,
-            TRAINER_FLAGS_START + TRAINER_NERIENE,
+            TRAINER_1075163A,
+            TRAINER_10751EAA,
+            TRAINER_10E3552B,
+            TRAINER_1114BC23,
+            TRAINER_NERIENE,
             TRAINER_NONE,
         },
         [GYM_DIMU] =
         {
             FLAG_BADGE06_GET,
-            TRAINER_FLAGS_START + TRAINER_DIMU,
+            TRAINER_DIMU,
             TRAINER_NONE,
         },
         [GYM_BD] =
         {
             FLAG_BADGE07_GET,
-            TRAINER_FLAGS_START + TRAINER_BD,
+            TRAINER_TIRABUDIN_PLACE_GYM_1,
+            TRAINER_BD,
             TRAINER_NONE,
         },
         [GYM_AMI] =
         {
             FLAG_BADGE08_GET,
-            TRAINER_FLAGS_START + TRAINER_AMIARGENTO,
+            TRAINER_AMIARGENTO,
             TRAINER_NONE,
         },
     };
 
     for (u32 trainerIndex = 0; gymTrainerList[gymIndex][trainerIndex] != TRAINER_NONE; trainerIndex++)
-        FlagSet(gymTrainerList[gymIndex][trainerIndex]);
+    {
+        u32 trainerFlagStart = (trainerIndex != 0) ? TRAINER_FLAGS_START : 0;
+        FlagSet((gymTrainerList[gymIndex][trainerIndex])+trainerFlagStart);
+    }
 }

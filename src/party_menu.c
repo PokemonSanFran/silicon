@@ -90,6 +90,8 @@
 #include "field_puzzles.h" // siliconMerge
 #include "surprise_trade.h" // surpriseTrade
 
+#if !UI_PARTY_MENU
+
 enum {
     MENU_SUMMARY,
     MENU_SWITCH,
@@ -5841,7 +5843,10 @@ static void Task_LearnNextMoveOrClosePartyMenu(u8 taskId)
         {
             if (gPartyMenu.learnMoveState == 2) // never occurs
                 gSpecialVar_Result = TRUE;
-            Task_ReturnToChooseMonAfterText(taskId);
+            if (gPartyMenu.action == PARTY_ACTION_USE_ITEM)
+                Task_ReturnToChooseMonAfterText(taskId);
+            else
+                Task_ClosePartyMenu(taskId);
         }
     }
 }
@@ -9157,3 +9162,5 @@ s8 Test_UpdatePartySelectionSingleLayout(s8 slotId, s8 movementDir, bool8 choose
     return slotId;
 }
 #endif
+
+#endif // !UI_PARTY_MENU

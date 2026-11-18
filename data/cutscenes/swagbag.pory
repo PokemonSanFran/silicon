@@ -11,6 +11,14 @@ script Swagbag_IncrementState_Script{
     return
 }
 
+script Swagbag_Script_PreventSleep
+{
+	msgbox(format("I just got here! I can't sleep yet."),,SPEAKER_ALICIA,TAIL_THOUGHT,EMOTE_HAPPY)
+	closemessage
+	release
+	end
+}
+
 script swagbag_ObjectHide_Script
 {
     setobjectmovementtype(SHARPRISE_COMPOUND_1F_OLIVER, MOVEMENT_TYPE_FACE_LEFT)
@@ -71,8 +79,7 @@ script Swagbag_PokedexApps_Dialogue {
         msgbox(format("Right! Maps works very well in Resido, and is another available app on your phone. You can press {START_BUTTON} to access all \lof your apps."),,SPEAKER_OLIVER)
 
         playfanfare(MUS_OBTAIN_KEY_ITEM)
-        callnative(BufferStipendAmount)
-        msgbox(format("{PLAYER} received ¥{STR_VAR_1}, and updated phone apps from Oliver."))
+        msgbox(format("{PLAYER} received updated phone apps from Oliver."))
         waitmessage
         waitfanfare
         goto(Swagbag_WhenCanWeStart_Dialogue)

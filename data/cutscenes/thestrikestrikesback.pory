@@ -27,6 +27,11 @@ script TheStrikeStrikesBack_AddRocketObjects_Script
     spawnobject(OBJ_EVENT_GFX_COMRADE_9,LOCALID_ROUTE2_TIDE_B,22,18,DIR_SOUTH,3)
 }
 
+script TheStrikeStrikesBack_Script_IncrementStoryVariable
+{
+    addvar(VAR_STORYLINE_STATE,1)
+}
+
 script TheStrikeStrikesBack_CrowdFacesNorth_Script
 {
     playse(SE_PIN)

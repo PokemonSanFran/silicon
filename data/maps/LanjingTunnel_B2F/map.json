@@ -83,11 +83,12 @@
   ],
   "warp_events": [
     {
+      "warp_id": "WARP_ID_LANJING_TUNNEL_B2F_TO_B1F",
       "x": 17,
       "y": 10,
       "elevation": 0,
       "dest_map": "MAP_LANJING_TUNNEL_B1F",
-      "dest_warp_id": "1"
+      "dest_warp_id": "WARP_ID_LANJING_TUNNEL_B1F_TO_B2F"
     }
   ],
   "coord_events": [],

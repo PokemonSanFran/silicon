@@ -59,18 +59,20 @@
   ],
   "warp_events": [
     {
+        "warp_id": "WARP_ID_ICE_CREAM_TO_CHASILLA_LEFT",
       "x": 4,
       "y": 8,
       "elevation": 0,
       "dest_map": "MAP_CHASILLA",
-      "dest_warp_id": "2"
+      "dest_warp_id": "WARP_ID_CHASILLA_TO_ICE_CREAM"
     },
     {
+        "warp_id": "WARP_ID_ICE_CREAM_TO_CHASILLA_RIGHT",
       "x": 5,
       "y": 8,
       "elevation": 0,
       "dest_map": "MAP_CHASILLA",
-      "dest_warp_id": "2"
+      "dest_warp_id": "WARP_ID_CHASILLA_TO_ICE_CREAM"
     }
   ],
   "coord_events": [],

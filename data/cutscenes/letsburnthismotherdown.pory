@@ -1,31 +1,21 @@
 const PLAYER = OBJ_EVENT_ID_PLAYER
 
-const BAIYA = 5
-const CHARLOTTE_ARANTRAZ = 6
-const POLICE_A = 7
-const POLICE_B = 8
-
-const FLAG_HIDE_CHARLOTTE_ARANTRAZ = FLAG_TEMP_6
-const FLAG_HIDE_POLICE = FLAG_TEMP_7
-const FLAG_HIDE_BAIYA_ARANTRAZ = FLAG_TEMP_5
-
 const LOCALID_BAIYA_FAINTED = (LOCALID_CAMERA + 1)
+const LOCALID_ARANTRAZ_HOSPITAL_CHARLOTTE = (LOCALID_CAMERA + 2)
+const LOCALID_ARANTRAZ_HOSPITAL_POLICE_B = (LOCALID_CAMERA + 3)
+const LOCALID_ARANTRAZ_HOSPITAL_POLICE_A = (LOCALID_CAMERA + 4)
 
 script LetsBurnThisMotherDown_ObjectShow_Script
 {
-    clearflag(FLAG_HIDE_BAIYA_ARANTRAZ)
-    setflag(FLAG_HIDE_CHARLOTTE_ARANTRAZ)
-    setflag(FLAG_HIDE_POLICE)
-    addobject(BAIYA)
-    setobjectxy(BAIYA,1,8)
-    setobjectxyperm(BAIYA,1,8)
+    clearobjectflagfromlocalid(LOCALID_ARANTRAZ_HOSPITAL_BAIYA)
+    addobject(LOCALID_ARANTRAZ_HOSPITAL_BAIYA)
+    setobjectxy(LOCALID_ARANTRAZ_HOSPITAL_BAIYA,1,8)
+    setobjectxyperm(LOCALID_ARANTRAZ_HOSPITAL_BAIYA,1,8)
 }
 
 script LetsBurnThisMotherDown_ObjectHide_Script
 {
-    setflag(FLAG_HIDE_BAIYA_ARANTRAZ)
-    setflag(FLAG_HIDE_CHARLOTTE_ARANTRAZ)
-    setflag(FLAG_HIDE_POLICE)
+    setobjectflagfromlocalid(LOCALID_ARANTRAZ_HOSPITAL_BAIYA)
 }
 
 script LetsBurnThisMotherDown_Interact_Oliver_Script
@@ -105,12 +95,12 @@ script LetsBurnThisMotherDown_ConfrontPlayer
 
     setvar(VAR_LETSBURNTHISMOTHERSTATE,SAVE_BAIYA_ARANTRAZ)
 
-    clearflag(FLAG_HIDE_BAIYA_ARANTRAZ)
-    addobject(BAIYA)
+    clearobjectflagfromlocalid(LOCALID_ARANTRAZ_HOSPITAL_BAIYA)
+    addobject(LOCALID_ARANTRAZ_HOSPITAL_BAIYA)
     playbgm(MUS_ENCOUNTER_CHAMPION,TRUE)
 
     applymovement(PLAYER,Common_Movement_WalkUp)
-    applymovement(BAIYA, moves(walk_down * 3))
+    applymovement(LOCALID_ARANTRAZ_HOSPITAL_BAIYA, moves(walk_down * 3))
     waitmovement(0)
 
     msgbox(format("You chose the wrong side {PLAYER}!"),MSGBOX_DEFAULT,SPEAKER_BAIYA_TIDE)
@@ -151,7 +141,7 @@ switch(var(VAR_RESULT))
 
     closemessage
 
-    applymovement(BAIYA,Common_Movement_WalkDown)
+    applymovement(LOCALID_ARANTRAZ_HOSPITAL_BAIYA,Common_Movement_WalkDown)
     waitmovement(0)
 
     msgbox(format("They ignore us, and when we get fed up and take matters into our own hands, they label us terrorists. They frame us. They try to turn our region against us. For what? Feeding the homeless? Asking workers to be treated fairly? {PLAYER}, these people are monsters."),MSGBOX_DEFAULT,SPEAKER_BAIYA_TIDE)
@@ -205,7 +195,7 @@ script LetsBurnThisMotherDown_PostBattle_Dialogue
     setvar(VAR_LETSBURNTHISMOTHERSTATE,DEFEATED_BAIYA_ARANTRAZ)
     questmenu(QUEST_MENU_SET_REWARD,QUEST_LETSBURNTHISMOTHERDOWN)
 
-    applymovement(BAIYA, moves(lock_facing_direction, walk_up, unlock_facing_direction))
+    applymovement(LOCALID_ARANTRAZ_HOSPITAL_BAIYA, moves(lock_facing_direction, walk_up, unlock_facing_direction))
     waitmovement(0)
 
 	callnative(LetsBurnThisMotherDown_BufferMostPowerfulAttack)
@@ -215,13 +205,12 @@ script LetsBurnThisMotherDown_PostBattle_Dialogue
     fadescreenswapbuffers(FADE_TO_WHITE)
     playse(SE_M_HYPER_BEAM2)
     waitse
-	removeobject(BAIYA)
+	removeobject(LOCALID_ARANTRAZ_HOSPITAL_BAIYA)
 	delay(8)
 	spawnobject(OBJ_EVENT_GFX_BAIYA_FAINTED,LOCALID_BAIYA_FAINTED,2,7,MOVEMENT_TYPE_FACE_DOWN)
     fadescreenswapbuffers(FADE_FROM_WHITE)
 
-    clearflag(FLAG_HIDE_CHARLOTTE_ARANTRAZ)
-    addobject(CHARLOTTE_ARANTRAZ)
+    spawnobject(OBJ_EVENT_GFX_CHARLOTTE,LOCALID_ARANTRAZ_HOSPITAL_CHARLOTTE,1,4,MOVEMENT_TYPE_FACE_UP)
     playbgm(MUS_CHARLOTTE,TRUE)
     applymovement(6, moves(walk_down * 4))
     waitmovement(0)
@@ -263,11 +252,11 @@ script LetsBurnThisMotherDown_PostBattle_Dialogue
     msgbox(format("The authorities should be right behind me."),,SPEAKER_CHARLOTTE_SHARPRISE)
     closemessage
 
-    clearflag(FLAG_HIDE_POLICE)
-    addobject(POLICE_A)
-    addobject(POLICE_B)
-    applymovement(POLICE_A, moves(walk_down))
-    applymovement(POLICE_B, moves(walk_down, walk_left, walk_down, face_right))
+    spawnobject(OBJ_EVENT_GFX_MYSTERY_GIFT_MAN,LOCALID_ARANTRAZ_HOSPITAL_POLICE_A,2,4,MOVEMENT_TYPE_NONE)
+    spawnobject(OBJ_EVENT_GFX_MYSTERY_GIFT_MAN,LOCALID_ARANTRAZ_HOSPITAL_POLICE_B,2,4,MOVEMENT_TYPE_NONE)
+
+    applymovement(LOCALID_ARANTRAZ_HOSPITAL_POLICE_A, moves(walk_down))
+    applymovement(LOCALID_ARANTRAZ_HOSPITAL_POLICE_B, moves(walk_down, walk_left, walk_down, face_right))
     waitmovement(0)
 
     fadedefaultbgm

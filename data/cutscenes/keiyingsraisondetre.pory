@@ -1,9 +1,5 @@
-const PLAYER = OBJ_EVENT_ID_PLAYER
-const ALEKSANDER = 1
-const SUMMER = 2
-const KEIYING = 3
-const CRYING_MAID = 4
 const CAMERA = OBJ_EVENT_ID_CAMERA
+const LOCALID_KEIYING_MANSION_CRYING_MAID = LOCALID_CAMERA + 1
 
 script KeiyingRaisonDetre_HideObjectKids_Script
 {
@@ -11,65 +7,78 @@ script KeiyingRaisonDetre_HideObjectKids_Script
     setobjectflagfromlocalid(LOCALID_KEIYING_MANSION_CHILD_MALE)
 }
 
-script KeiyingRaisonDetre_HideObjectMaid_Script
-{
-    setobjectflagfromlocalid(LOCALID_KEIYING_MANSION_MAID_1)
-    setobjectflagfromlocalid(LOCALID_KEIYING_MANSION_MAID_2)
-}
-
 script KeiyingRaisonDetre_ObjectCleanUp_Script
 {
     call(KeiyingRaisonDetre_HideObjectMaid_Script)
     call(KeiyingRaisonDetre_HideObjectKids_Script)
+    call(KeiyingRaisonDetre_HideObjectHideKeiying_Script)
+}
+
+script KeiyingRaisonDetre_HideObjectHideKeiying_Script
+{
+    setobjectflagfromlocalid(LOCALID_KEIYING_MANSION_KEIYING)
+}
+
+script KeiyingRaisonDetre_HideObjectMaid_Script
+{
+    setobjectflagfromlocalid(LOCALID_KEIYING_MANSION_MAID_2)
 }
 
 script KeiyingRaisonDetre_MoveIntoFoyer_Script {
     lock
         startcutscene(JUMPPLAYER_KEIYINGSRAISONDETRE)
         setvar(VAR_KEIYING_STATE,STATE_KEIYING_MET_KIDS)
-        applymovement(ALEKSANDER, KeiyingRaisonDetre_ComeDownStairs)
+
+        addobject(LOCALID_KEIYING_MANSION_CHILD_MALE)
+
+        moveobjecttocoords(LOCALID_PLAYER,20,24,DIR_NORTH)
+        moveobjecttocoords(LOCALID_KEIYING_MANSION_CHILD_FEMALE,21,22,DIR_SOUTH)
+        moveobjecttocoords(LOCALID_KEIYING_MANSION_CHILD_MALE,20,21,DIR_SOUTH,3)
         delay(48)
-        applymovement(SUMMER, KeiyingRaisonDetre_ComeDownStairs)
-        waitmovement(0)
-        release
         goto(KeiyingRaisonDetre_KidsMeetPlayer_Dialogue)
         end
 }
 
 script KeiyingRaisonDetre_KidsMeetPlayer_Dialogue {
-        fwdtime(EVENING_HOUR_BEGIN,0)
     msgbox(format("Aaaahhhh! {PLAYER}! You're here! In the flesh!"),,SPEAKER_ALEKSANDER)
+        closemessage
+        waitmovement(LOCALID_KEIYING_MANSION_CHILD_FEMALE)
+        applymovement(LOCALID_KEIYING_MANSION_CHILD_FEMALE,moves(face_up))
         msgbox(format("…Alek, you're a freak."),,SPEAKER_SUMMER)
         closemessage
+        waitmovement(LOCALID_KEIYING_MANSION_CHILD_FEMALE)
 
-        applymovement(ALEKSANDER, moves(jump_2_left, jump_2_right, jump_2_left, jump_2_right, jump_2_left, jump_2_right, jump_2_left, jump_2_right, jump_2_left, jump_2_right, jump_2_left, jump_2_right, jump_2_left, jump_2_right, face_left, step_end))
+        applymovement(LOCALID_KEIYING_MANSION_CHILD_MALE, moves(jump_2_left, jump_2_right, jump_2_left, jump_2_right, jump_2_left, jump_2_right, jump_2_left, jump_2_right, jump_2_left, jump_2_right, jump_2_left, jump_2_right, jump_2_left, jump_2_right, face_down, step_end))
 
         msgbox(format("Aren't you excited Summer?! Maybe they'll sign your {PLAYER} shirt! "),,SPEAKER_ALEKSANDER)
-        msgbox(format("…shut up!"),,SPEAKER_SUMMER)
+        msgbox(format("…shut up!"),,SPEAKER_SUMMER,TAIL_WHISPER)
         msgbox(format("Oh oh oh, show us how you took down Belen! Can we see some battle moves? Oh come on yes, let's battle, right now, yeah yeah yeah!"),,SPEAKER_ALEKSANDER)
         msgbox(format("All right, all right, calm down. I told you you'd have to stifle your excitement, didn't I?"),,SPEAKER_KEIYING)
-        applymovement(KEIYING, moves(walk_down * 4, step_end))
+        moveobjecttocoords(LOCALID_KEIYING_MANSION_KEIYING,19,22,DIR_EAST)
+        waitmovement(LOCALID_KEIYING_MANSION_CHILD_MALE)
+        applymovement(LOCALID_KEIYING_MANSION_CHILD_MALE,moves(face_left))
+        applymovement(LOCALID_KEIYING_MANSION_CHILD_FEMALE,moves(face_left))
         msgbox(format("You don't want to scare {PLAYER} away, do you?"),,SPEAKER_KEIYING)
         msgbox(format("No no no! Oh, I'm gonna go get all my League stuff, I'll be right back!"),,SPEAKER_ALEKSANDER)
         closemessage
-        applymovement(ALEKSANDER, KeiyingRaisonDetre_RunUpstairs)
-        waitmovement(0)
+        waitmovement(LOCALID_KEIYING_MANSION_CHILD_MALE)
+        moveobjecttocoords(LOCALID_KEIYING_MANSION_CHILD_MALE,11,20,DIR_SOUTH)
+        applymovement(LOCALID_KEIYING_MANSION_KEIYING,moves(face_down))
+        waitmovement(LOCALID_KEIYING_MANSION_KEIYING)
         msgbox(format("Sorry about that. They get… very excited. And don't let Summer's demeanor fool you. I think they've watched your battle against Emrys at least 40 times."),,SPEAKER_KEIYING)
-        applymovement(SUMMER, Common_Movement_FaceLeft)
-        waitmovement(0)
-        msgbox(format("Dad!"),,SPEAKER_SUMMER)
+        applymovement(LOCALID_KEIYING_MANSION_CHILD_FEMALE, moves(face_left))
+        waitmovement(LOCALID_KEIYING_MANSION_CHILD_FEMALE)
+        msgbox(format("Dad!"),,SPEAKER_SUMMER,TAIL_SHOUT,EMOTE_ANGRY)
         closemessage
-        applymovement(SUMMER, KeiyingRaisonDetre_RunUpstairs)
-        waitmovement(0)
-        removeobject(SUMMER)
-        removeobject(ALEKSANDER)
+        moveobjecttocoords(LOCALID_KEIYING_MANSION_CHILD_FEMALE,33,22,DIR_SOUTH)
         goto(KeiyingRaisonDetre_CityDiscussion_Dialogue)
         end
 }
 
 script KeiyingRaisonDetre_CityDiscussion_Dialogue {
-    applymovement(PLAYER, moves(walk_up, walk_left * 2, walk_up, step_end))
-        waitmovement(0)
+        applymovement(LOCALID_KEIYING_MANSION_KEIYING,moves(face_right))
+        moveobjecttocoords(LOCALID_PLAYER,20,22,DIR_WEST)
+        waitmovement(LOCALID_PLAYER)
         msgbox(format("Your house is beautiful. Actually, the entire city is beautiful."),MSGBOX_DEFAULT,SPEAKER_ALICIA)
 
         buffermapname(STR_VAR_1,MAP_PETAROSA_BOROUGH)
@@ -87,16 +96,18 @@ script KeiyingRaisonDetre_CityDiscussion_Dialogue {
         msgbox(format("I completely understand, trust me. When I worked in {STR_VAR_1}, it wasn't this bad, but despite my best efforts, things have gotten worse."),,SPEAKER_KEIYING)
         closemessage
 
-        applymovement(KEIYING, moves(walk_up, face_down, step_end))
-        waitmovement(0)
+        applymovement(LOCALID_KEIYING_MANSION_KEIYING, moves(walk_left, face_right, step_end))
+        waitmovement(LOCALID_KEIYING_MANSION_KEIYING)
 
         msgbox(format("Come, let's talk."),,SPEAKER_KEIYING)
         closemessage
-        applymovement(KEIYING, moves(walk_left * 8, step_end))
-        waitmovement(0)
-        setobjectxy(KEIYING, 3, 4)
-        setobjectxyperm(KEIYING, 3, 4)
-        turnobject(KEIYING, DIR_EAST)
+        removeobject(LOCALID_KEIYING_MANSION_CHILD_MALE)
+        removeobject(LOCALID_KEIYING_MANSION_CHILD_FEMALE)
+        moveobjecttocoords(LOCALID_KEIYING_MANSION_KEIYING,11,17,DIR_WEST)
+        waitmovement(LOCALID_KEIYING_MANSION_KEIYING)
+        setobjectxy(LOCALID_KEIYING_MANSION_KEIYING, 4, 12)
+        setobjectxyperm(LOCALID_KEIYING_MANSION_KEIYING, 4, 12)
+        setobjectnewmovementtype(LOCALID_KEIYING_MANSION_KEIYING,MOVEMENT_TYPE_FACE_LEFT)
         release
         end
 }
@@ -110,18 +121,18 @@ script KeiyingRaisonDetre_ComeSit_Dialogue {
         end
 }
 
-script KeiyingRaisonDetre_InteractAtTable_Script {
-    lock
-        msgbox(format("Take a seat."),,SPEAKER_KEIYING)
-        closemessage
-        release
-        end
+script KeiyingRaisonDetre_InteractAtTable_Script
+{
+    msgbox(format("Take a seat."),MSGBOX_NPC,SPEAKER_KEIYING)
+    end
 }
 
 script KeiyingRaisonDetre_Wine_Dialogue {
         startcutscene(JUMPPLAYER_KEIYINGSRAISONDETRE)
-    applymovement(PLAYER, Common_Movement_FaceLeft)
-        waitmovement(0)
+    applymovement(LOCALID_PLAYER, moves(face_up))
+    applymovement(LOCALID_KEIYING_MANSION_KEIYING, moves(face_down))
+        waitmovement(LOCALID_PLAYER)
+        waitmovement(LOCALID_KEIYING_MANSION_KEIYING)
 
         msgbox(format("How much do you know about Lucrezia?"),,SPEAKER_KEIYING)
 
@@ -150,8 +161,8 @@ script KeiyingRaisonDetre_Wine_Dialogue {
         msgbox(format("SharpRise Capital is going to make Resido the region where Trainers come to become rock stars. Resido's new talent will attract the best and the brightest, and the region will be richer for it. We can uplift all of Resido's citizens to something much much greater. You're an investment, {PLAYER}, but it's all part of a much bigger play."),,SPEAKER_KEIYING)
         closemessage
 
-        applymovement(KEIYING,Common_Movement_FaceAwayPlayer)
-        waitmovement(KEIYING)
+        applymovement(LOCALID_KEIYING_MANSION_KEIYING,moves(face_up))
+        waitmovement(LOCALID_KEIYING_MANSION_KEIYING)
 
         msgbox(format("I choose to believe that this is for the greater good."),,SPEAKER_KEIYING,TAIL_WHISPER)
 
@@ -160,16 +171,19 @@ script KeiyingRaisonDetre_Wine_Dialogue {
         playse(SE_DING_DONG)
         waitfanfare
 
-        msgbox(format("Dinner is served!"),,SPEAKER_MAID)
-
+        msgbox(format("Dinner is served!"),,SPEAKER_KEIYINGMAID2)
+        closemessage
+        applymovement(LOCALID_KEIYING_MANSION_KEIYING,moves(face_down))
+        waitmovement(LOCALID_KEIYING_MANSION_KEIYING)
         msgbox(format("Ah, let's eat!"),,SPEAKER_KEIYING)
         closemessage
-        applymovement(KEIYING, moves(walk_down * 6, step_end))
-        waitmovement(0)
-        release
-        setobjectxy(KEIYING, 37, 5)
-        setobjectxyperm(KEIYING, 37, 5)
+        moveobjecttocoords(LOCALID_KEIYING_MANSION_KEIYING,8,14,DIR_EAST)
+        delay(24)
+        fadescreen(FADE_TO_BLACK)
+        setobjectxy(LOCALID_KEIYING_MANSION_KEIYING, 33, 7)
+        setobjectxyperm(LOCALID_KEIYING_MANSION_KEIYING, 33, 7)
         setvar(VAR_KEIYING_STATE,STATE_KEIYING_START_DINNER)
+        fadescreen(FADE_FROM_BLACK)
         call(TryAutoSave)
         endcutscene
         end
@@ -177,35 +191,33 @@ script KeiyingRaisonDetre_Wine_Dialogue {
 
 script KeiyingRaisonDetre_StartDinner_Script {
 
-        moveobjecttocoords(LOCALID_PLAYER,45,5,DIR_WEST)
+        moveobjecttocoords(LOCALID_PLAYER,39,7,DIR_WEST)
         waitmovement(LOCALID_PLAYER)
+        setvar(VAR_KEIYING_STATE,STATE_KEIYING_FINISH_DINNER)
         startcutscene(JUMPPLAYER_KEIYINGSRAISONDETRE)
-
         msgbox(format("{PLAYER}, we're honored to have you in our home. Enjoy dinner!"),,SPEAKER_KEIYING)
         closemessage
         fadescreen(FADE_TO_BLACK)
-        addobject(ALEKSANDER)
-        addobject(SUMMER)
-        setobjectxy(SUMMER, 42, 7)
-        setobjectxy(ALEKSANDER, 40, 7)
-        setobjectxy(KEIYING, 37, 5)
-        turnobject(SUMMER, DIR_NORTH)
-        turnobject(ALEKSANDER, DIR_NORTH)
+        addobject(LOCALID_KEIYING_MANSION_CHILD_MALE)
+        addobject(LOCALID_KEIYING_MANSION_CHILD_FEMALE)
+        setobjectxy(LOCALID_KEIYING_MANSION_CHILD_FEMALE, 35, 9)
+        setobjectxy(LOCALID_KEIYING_MANSION_CHILD_MALE, 37, 9)
+        setobjectxy(LOCALID_KEIYING_MANSION_KEIYING, 33, 7)
+        turnobject(LOCALID_KEIYING_MANSION_CHILD_FEMALE, DIR_NORTH)
+        turnobject(LOCALID_KEIYING_MANSION_CHILD_MALE, DIR_NORTH)
         goto(KeiyingRaisonDetre_DinnerConversation_Dialogue)
         end
 }
 
 script KeiyingRaisonDetre_DinnerConversation_Dialogue {
         special(SpawnCameraObject)
-        TeleportCamera(37,5)
+        TeleportCamera(39,7)
         special(DrawWholeMapView)
         fadescreen(FADE_FROM_BLACK)
-        applymovement(CAMERA, moves(walk_slow_right * 6, step_end))
-        msgbox(format("Is it true your dad is Red from Pallet Town?"),,SPEAKER_ALEKSANDER)
-        closemessage
-        msgbox(format("How many badges did you have in Orre?"),,SPEAKER_ALEKSANDER)
-        closemessage
         callnative(BufferFavoriteFood)
+        applymovement(CAMERA, moves(walk_down * 2,walk_slow_left * 6, step_end))
+        msgbox(format("Is it true your dad is Red from Pallet Town?"),,SPEAKER_ALEKSANDER)
+        msgbox(format("How many badges did you have in Orre?"),,SPEAKER_ALEKSANDER)
         msgbox(format("Dad, I was right, {PLAYER} does like {STR_VAR_1}!"),,SPEAKER_SUMMER)
         closemessage
 		waitmovement(CAMERA)
@@ -221,45 +233,47 @@ script KeiyingRaisonDetre_DinnerConversation_Dialogue {
 
 script KeiyingRaisonDetre_RunToWork_Dialogue {
 
-        fwdtime(EVENING_HOUR_BEGIN+1,30)
+    fwdtime(EVENING_HOUR_BEGIN+1,30)
     msgbox(format("Sorry, that's my phone and I need to take that."),,SPEAKER_KEIYING)
         closemessage
-        applymovement(KEIYING, moves(walk_left, step_end))
-        waitmovement(0)
-        applymovement(KEIYING, Common_Movement_FaceLeft)
-        waitmovement(0)
-        delay(32)
-        applymovement(KEIYING, Common_Movement_FaceRight)
-        waitmovement(0)
+        applymovement(LOCALID_KEIYING_MANSION_KEIYING, moves(walk_left * 2, delay_8 * 8, walk_right))
+        waitmovement(LOCALID_KEIYING_MANSION_KEIYING)
         msgbox(format("Ah!...There's an urgent matter at work. I'm so sorry kids, I'll try to hurry back."),,SPEAKER_KEIYING)
         buffermapname(STR_VAR_1,MAP_CUCONU_TOWN_SHARPRISE_COMPOUND_2F)
         msgbox(format("{PLAYER}, I would hate to have you make the trek back to {STR_VAR_1} this late. We have a guest room, if you'd like to stay here."),,SPEAKER_KEIYING)
         msgbox(format("Oh, that would be great, thanks!"),,SPEAKER_ALICIA,,EMOTE_HAPPY)
         closemessage
 
-        applymovement(KEIYING, moves(walk_down * 3, walk_right * 5, walk_up, walk_in_place_slow_left, delay_16, walk_in_place_slow_right, delay_16, walk_down, walk_left * 6, step_end))
-        waitmovement(0)
+        moveobjecttocoords(LOCALID_KEIYING_MANSION_KEIYING,36,9,DIR_NORTH)
+        waitmovement(LOCALID_KEIYING_MANSION_KEIYING)
+        applymovement(LOCALID_KEIYING_MANSION_KEIYING, moves(walk_in_place_slow_left, delay_16, walk_in_place_slow_right, delay_16))
+        waitmovement(LOCALID_KEIYING_MANSION_KEIYING)
+        moveobjecttocoords(LOCALID_KEIYING_MANSION_KEIYING,20,7,DIR_WEST)
+        delay(40)
 		call(KeiyingRaisonDetre_Dialogue_ExplainWarpPanels)
 
         msgbox(format("Oh damn, you weren't kidding."),MSGBOX_DEFAULT,SPEAKER_ALICIA)
 
         msgbox(format("I don't know why they bother. Our parents are never even home. They're trying so hard to save the world, they're totally ignoring the one right in front of them.\NI wish he would go back to being a Gym Leader!"),,SPEAKER_SUMMER)
         closemessage
-        applymovement(SUMMER, moves(walk_down, walk_left * 5, step_end))
-        waitmovement(0)
+        moveobjecttocoords(LOCALID_KEIYING_MANSION_CHILD_FEMALE,21,7,DIR_WEST)
+        delay(24)
         fadescreen(FADE_TO_BLACK)
-        removeobject(SUMMER)
-        removeobject(ALEKSANDER)
         fwdtime(MORNING_HOUR_BEGIN,0)
         msgbox("The next morning…")
         closemessage
-        goto(KeiyingRaisonDetre_NewsStory_Script)
-        end
+        warpsilent(MAP_PETAROSA_BOROUGH_KEI_YING_MANSION,3,14)
+        waitstate
+}
+
+script KeiyingRaisonDetre_Script_FaceNorth
+{
+    turnobject(LOCALID_PLAYER,DIR_NORTH)
 }
 
 script KeiyingRaisonDetre_Dialogue_ExplainWarpPanels
 {
-	msgbox(format("Wait, I thought that hallway just goes upstairs?"),MSGBOX_DEFAULT,SPEAKER_ALICIA)
+	msgbox(format("Wait, I thought those stairs just go upstairs?"),MSGBOX_DEFAULT,SPEAKER_ALICIA)
 
 	msgbox(format("Yeah, it does. Daddy just teleports to work!"),,SPEAKER_SUMMER)
 	msgbox(format("…what?"),MSGBOX_DEFAULT,SPEAKER_ALICIA)
@@ -268,71 +282,81 @@ script KeiyingRaisonDetre_Dialogue_ExplainWarpPanels
 
 }
 
-script KeiyingRaisonDetre_NewsStory_Script {
-    setobjectxy(CRYING_MAID, 44, 4)
-        turnobject(CRYING_MAID, DIR_NORTH)
-        turnobject(5, DIR_NORTH)
-        setobjectnewmovementtype(CRYING_MAID, MOVEMENT_TYPE_FACE_UP)
-        setobjectnewmovementtype(5, MOVEMENT_TYPE_FACE_UP)
-        lockall
-        special(ReturnCameraToPlayer)
-        special(RemoveCameraObject)
-        fadescreen(FADE_FROM_BLACK)
-        special(TurnOnTVScreen)
-        delay(60)
-        msgbox(format("And now we go to Da Lin, for more details about last night's riots. "),,SPEAKER_NEWS)
-        buffermapname(STR_VAR_1,MAP_CAPHE_CITY)
-        msgbox(format("Thanks Ken. We're gathering details on the ground here, but it sounds like this riot was instigated by members of The Tide, culminating in violent attacks on the {STR_VAR_1} Police Force. Both sides sustained significant injury, and dozens of members of The Tide were taken into custody last night. Back to you, Ken."),,SPEAKER_NEWS_B)
-        msgbox(format("We're also learning that the Police Department released a press statement ten minutes ago, primarily addressing The Tide, asking for an end to the violence and begging them to “work with us, not against us”. We'll have more updates within the hour."),,SPEAKER_NEWS)
-        closemessage
-        special(TurnOffTVScreen)
-        applymovement(4, moves(walk_right, face_down, step_end))
-        waitmovement(0)
+script KeiyingRaisonDetre_NewsStory_Script
+{
+    lockall
+    spawnobject(OBJ_EVENT_GFX_UNION_ROOM_NURSE,LOCALID_KEIYING_MANSION_CRYING_MAID,5,20)
+    moveobjecttocoords(LOCALID_KEIYING_MANSION_CRYING_MAID,5,14,DIR_NORTH)
+    msgbox(format("And now we go to Da Lin, for more details about last night's riots. "),,SPEAKER_NEWS)
+    buffermapname(STR_VAR_1,MAP_CAPHE_CITY)
+    msgbox(format("Thanks Ken. We're gathering details on the ground here, but it sounds like this riot was instigated by members of The Tide, culminating in violent attacks on the {STR_VAR_1} Police Force. Both sides sustained significant injury, and dozens of members of The Tide were taken into custody last night. Back to you, Ken."),,SPEAKER_NEWS_B)
+    msgbox(format("We're also learning that the Police Department released a press statement ten minutes ago, primarily addressing The Tide, asking for an end to the violence and begging them to “work with us, not against us”. We'll have more updates within the hour."),,SPEAKER_NEWS)
+    closemessage
+    waitmovement(LOCALID_KEIYING_MANSION_CRYING_MAID)
+    moveobjecttocoords(LOCALID_KEIYING_MANSION_CRYING_MAID,4,13,DIR_SOUTH)
+    callnative(BufferTitleFromPossessivePronouns)
+    msgbox(format("Is there anything else I can get you, {STR_VAR_1} {PLAYER}?"),,SPEAKER_KEIYINGMAID2,,EMOTE_SAD)
+    msgbox(format("Are you okay? What's wrong?"),,SPEAKER_ALICIA)
+    msgbox(format("I'm sorry. My… son is in the hospital after the riots last night. The Tide keeps getting impressionable young folk involved in their nonsense… I hope the city can get rid of them!"),,SPEAKER_KEIYINGMAID2)
+    closemessage
+    waitmovement(LOCALID_KEIYING_MANSION_CRYING_MAID)
+    moveobjecttocoords(LOCALID_KEIYING_MANSION_CRYING_MAID, 10, 20, DIR_SOUTH,3)
+    delay(32)
+    fadescreen(FADE_TO_BLACK)
+    removeobject(LOCALID_KEIYING_MANSION_CRYING_MAID)
+    removeobject(LOCALID_KEIYING_MANSION_KEIYING)
+    removeobject(LOCALID_KEIYING_MANSION_CHILD_FEMALE)
+    removeobject(LOCALID_KEIYING_MANSION_CHILD_MALE)
+    addvar(VAR_STORYLINE_STATE,1)
+    setvar(VAR_KEIYING_STATE, STATE_KEIYING_POST_RAISON_DETRE)
+    fadescreen(FADE_FROM_BLACK)
+    call(TryAutoSave)
+    endcutscene
+    release
+    end
+}
 
-        callnative(BufferTitleFromPossessivePronouns)
-        msgbox(format("Is there anything else I can get you, {STR_VAR_1} {PLAYER}?"),,SPEAKER_MAID)
-        applymovement(PLAYER, Common_Movement_FaceUp)
-        waitmovement(0)
-
-        msgbox(format("Are you okay? What's wrong?"),MSGBOX_DEFAULT,SPEAKER_ALICIA)
-
-        msgbox(format("I'm sorry. My… son is in the ICU after the riots last night. The Tide keeps getting impressionable young folk involved in their nonsense… I hope the city can get rid of them!"),,SPEAKER_MAID)
-        closemessage
-        applymovement(CRYING_MAID, moves(walk_up * 2, walk_faster_left * 8))
-        delay(32)
-        fadescreen(FADE_TO_BLACK)
-        waitmovement(0)
-        removeobject(CRYING_MAID)
-        removeobject(KEIYING)
-        addvar(VAR_STORYLINE_STATE,1)
-        setvar(VAR_KEIYING_STATE, STATE_KEIYING_POST_RAISON_DETRE)
-        fadescreen(FADE_FROM_BLACK)
-        call(TryAutoSave)
-        endcutscene
+script KeiyingRaisonDetre_PreventPlayerGarden_Top_Script
+{
+    if (var(VAR_KEIYING_STATE) >= STATE_KEIYING_POST_RAISON_DETRE)
+    {
         release
         end
+    }
+    msgbox(format("The garden has wild Pokémon... I don't want to get distracted!"),MSGBOX_DEFAULT,SPEAKER_ALICIA,TAIL_THOUGHT)
+    closemessage
+    applymovement(LOCALID_PLAYER, moves(walk_up))
+    waitmovement(LOCALID_PLAYER)
+    release
+    end
+}
+
+script KeiyingRaisonDetre_PreventPlayerGarden_Bottom_Script
+{
+    if (var(VAR_KEIYING_STATE) >= STATE_KEIYING_POST_RAISON_DETRE)
+    {
+        release
+        end
+    }
+    msgbox(format("The garden has wild Pokémon... I don't want to get distracted!"),MSGBOX_DEFAULT,SPEAKER_ALICIA,TAIL_THOUGHT)
+    closemessage
+    applymovement(LOCALID_PLAYER, moves(walk_down))
+    waitmovement(LOCALID_PLAYER)
+    release
+    end
 }
 
 script KeiyingRaisonDetre_PreventPlayerLeaving_Script
 {
-    if (var(VAR_KEIYING_STATE) < STATE_KEIYING_POST_RAISON_DETRE)
+    if (var(VAR_KEIYING_STATE) >= STATE_KEIYING_POST_RAISON_DETRE)
     {
-        msgbox(format("Kei-Ying has been so generous... I should stay."),MSGBOX_DEFAULT,SPEAKER_ALICIA,TAIL_THOUGHT)
-            closemessage
-            applymovement(PLAYER, Common_Movement_WalkUp)
-            waitmovement(0)
-    }
-    release
+        release
         end
+    }
+    msgbox(format("Kei-Ying has been so generous... I should stay."),MSGBOX_DEFAULT,SPEAKER_ALICIA,TAIL_THOUGHT)
+    closemessage
+    applymovement(LOCALID_PLAYER, moves(walk_up))
+    waitmovement(LOCALID_PLAYER)
+    release
+    end
 }
-
-movement KeiyingRaisonDetre_ComeDownStairs {
-    walk_down * 4
-        step_end
-}
-
-movement KeiyingRaisonDetre_RunUpstairs {
-    walk_up * 7
-        step_end
-}
-
