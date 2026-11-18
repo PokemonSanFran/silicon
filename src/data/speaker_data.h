@@ -3174,7 +3174,7 @@ static const struct SpeakerData sSpeakerData[NUM_SPEAKERS] =
     },
     [SPEAKER_KEIYINGMAIDCOOK] =
     {
-        .name = COMPOUND_STRING("Keiyingcook"),
+        .name = COMPOUND_STRING("Keiyingcook0"),
         .title = COMPOUND_STRING("Cook"),
         .gender = MALE,
         .speakerIcon = SPEAKER_ICON_POLICEMAN,
@@ -3202,7 +3202,7 @@ static const struct SpeakerData sSpeakerData[NUM_SPEAKERS] =
     },
     [SPEAKER_KEIYINGMAID2] =
     {
-        .name = COMPOUND_STRING("Keiyingmaid"),
+        .name = COMPOUND_STRING("Keiyingmaid2"),
         .title = COMPOUND_STRING("House Staff"),
         .gender = MALE,
         .speakerIcon = SPEAKER_ICON_WOMAN,
