@@ -679,6 +679,7 @@ gSongTable::
 	song mus_hodou_city_night, MUSIC_PLAYER_BGM, 0
 	song mus_lake_wajabi_wishaat, MUSIC_PLAYER_BGM, 0
 	song mus_route98_route99_orolandcolisseum_night, MUSIC_PLAYER_BGM, 0
+	song mus_perlacia_city_night, MUSIC_PLAYER_BGM, 0
 	song ph_trap_blend, MUSIC_PLAYER_SE2, 2
 	song ph_trap_held, MUSIC_PLAYER_SE2, 2
 	song ph_trap_solo, MUSIC_PLAYER_SE2, 2
