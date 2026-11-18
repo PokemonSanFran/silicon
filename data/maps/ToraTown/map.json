@@ -119,7 +119,7 @@
   ],
   "warp_events": [
     {
-        "warp_id": "WARP_ID_TORA_TOWN_TO_GYM",
+      "warp_id": "WARP_ID_TORA_TOWN_TO_GYM",
       "x": 17,
       "y": 6,
       "elevation": 0,
@@ -127,7 +127,7 @@
       "dest_warp_id": "WARP_ID_GYM_TO_TORA_TOWN"
     },
     {
-        "warp_id": "WARP_ID_TORA_TOWN_TO_RAMEN",
+      "warp_id": "WARP_ID_TORA_TOWN_TO_RAMEN",
       "x": 2,
       "y": 6,
       "elevation": 0,
@@ -135,7 +135,7 @@
       "dest_warp_id": "WARP_ID_RAMEN_TO_TORA_TOWN_LEFT"
     },
     {
-        "warp_id": "WARP_ID_TORA_TOWN_TO_BALLS",
+      "warp_id": "WARP_ID_TORA_TOWN_TO_BALLS",
       "x": 4,
       "y": 15,
       "elevation": 0,
@@ -143,7 +143,7 @@
       "dest_warp_id": "WARP_ID_BALLS_TO_TORA_TOWN_LEFT"
     },
     {
-        "warp_id": "WARP_ID_TORA_TOWN_TO_MUSIC_VENUE",
+      "warp_id": "WARP_ID_TORA_TOWN_TO_MUSIC_VENUE",
       "x": 15,
       "y": 15,
       "elevation": 0,
@@ -151,7 +151,7 @@
       "dest_warp_id": "WARP_ID_MUSIC_VENUE_TO_TORA_TOWN_LEFT"
     },
     {
-        "warp_id": "WARP_ID_TORA_TOWN_TO_CENTER",
+      "warp_id": "WARP_ID_TORA_TOWN_TO_CENTER",
       "x": 10,
       "y": 18,
       "elevation": 0,

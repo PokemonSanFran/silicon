@@ -112,14 +112,20 @@ script Route9_Script_Interact_WallacearmystanD
 
 script Route9_EventScript_Sign1
 {
-    msgbox(format("▶ Route 9\n{LEFT_ARROW} Tora Town\n{RIGHT_ARROW} Caphe City"), MSGBOX_SIGN)
+	buffermapname(STR_VAR_1,MAP_ROUTE9)
+	buffermapname(STR_VAR_2,MAP_TORA_TOWN)
+	buffermapname(STR_VAR_3,MAP_CAPHE_CITY)
+    msgbox(format("▶ {STR_VAR_1}\n{LEFT_ARROW} {STR_VAR_2}\n{RIGHT_ARROW} {STR_VAR_3}"), MSGBOX_SIGN)
     closemessage
     end
 }
 
 script Route9_EventScript_Sign2
 {
-    msgbox(format("▶ Route 9\n{UP_ARROW} Tora Town\n{RIGHT_ARROW} Caphe City"), MSGBOX_SIGN)
+	buffermapname(STR_VAR_1,MAP_ROUTE9)
+	buffermapname(STR_VAR_2,MAP_TORA_TOWN)
+	buffermapname(STR_VAR_3,MAP_CAPHE_CITY)
+    msgbox(format("▶ {STR_VAR_1}\n{UP_ARROW} {STR_VAR_2}\n{RIGHT_ARROW} {STR_VAR_3}"), MSGBOX_SIGN)
     closemessage
     end
 }

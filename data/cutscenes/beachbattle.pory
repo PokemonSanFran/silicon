@@ -90,7 +90,7 @@ script BeachBattle_PostBattle_Dialogue
 {
     lock
         startcutscene(JUMPPLAYER_BEACHBATTLE)
-        addvar(VAR_STORYLINE_STATE,1)
+        call(TheStrikeStrikesBack_Script_IncrementStoryVariable)
         playbgm(MUS_ENCOUNTER_BRENDAN,TRUE)
         setvar(VAR_BEACH_BATTLE_STATE,POST_BEACH_BATTLE)
 

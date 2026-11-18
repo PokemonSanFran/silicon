@@ -2,7 +2,7 @@ script ANewStrike_BreakingNews_Dialogue {
     clearflag(FLAG_CONSTRUCTION_BREAKING_NEWS)
     lockall
     startcutscene(JUMPPLAYER_ANEWSTRIKE)
-    addvar(VAR_STORYLINE_STATE,1)
+    call(TheStrikeStrikesBack_Script_IncrementStoryVariable)
     showzap(ZAP_STORY_STRIKE_BEGIN_1)
     showzap(ZAP_STORY_STRIKE_BEGIN_2)
     goto(ANewStrike_PlayerSelf_Dialogue)

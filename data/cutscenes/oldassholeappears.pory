@@ -87,6 +87,7 @@ script OldAssholeAppears_StartBattle_Script
 script OldAssholeAppears_PostBattle_Script
 {
     lockall
+    call(AaandWereBack_Script_IncrementStoryVariable)
     startcutscene(JUMPPLAYER_OLDASSHOLEAPPEARS)
     applymovement(LOCALID_ANBEH_BEND_CHARLOTTE,Common_Movement_FacePlayer)
     msgbox(format("Good to see you're taking this all seriously, {PLAYER}! My rival should be strong to keep me sharp! Well, true to my word..."),,SPEAKER_CHARLOTTE)
@@ -127,15 +128,11 @@ script OldAssholeAppears_PostBattle_Script
 script OldAssholeAppears_CharlotteExit_Script
 {
     setvar(VAR_ANBEH_BEND_STATE,DEFEATED_CHARLOTTE_LOMBARD)
-    addvar(VAR_STORYLINE_STATE,1)
-    getplayerxy(VAR_TEMP_0, VAR_TEMP_1)
     applymovement(LOCALID_ANBEH_BEND_CHARLOTTE, moves(walk_left * 6, walk_down * 2, walk_left * 3, step_end))
     waitmovement(0)
     fadedefaultbgm
     removeobject(LOCALID_ANBEH_BEND_CHARLOTTE)
-    setvar(VAR_TEMP_0,0)
     endcutscene
-    call(AaandWereBack_Monologue)
     call(TryAutoSave)
     releaseall
     end

@@ -1,8 +1,13 @@
 const PLAYER = OBJ_EVENT_ID_PLAYER
 
-script Quest_Breaktheinternet_EliteFour_Dialogue{
-    setvar(VAR_QUEST_BREAKTHEINTERNET_STATE,TALA_MENTIONED_REPORTER)
+script Quest_Breaktheinternet_EliteFour_Dialogue
+{
+    if (var(VAR_QUEST_BREAKTHEINTERNET_STATE) < TALA_MENTIONED_REPORTER)
+    {
+        setvar(VAR_QUEST_BREAKTHEINTERNET_STATE,TALA_MENTIONED_REPORTER)
+    }
     msgbox(format("you should talk to my reporter friend in PerlaciaCity."),MSGBOX_NPC,SPEAKER_TALA)
+    end
 }
 
 script Quest_Breaktheinternet_SocialMediaReporter_Dialogue{

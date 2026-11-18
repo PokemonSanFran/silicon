@@ -169,11 +169,11 @@ script HybridCulture_Dialogue_StartAttraction2
     lock
     setvar(VAR_CULTURAL_PURITY,HYBRID_CULTURE_HAS_CHALLENGED_POKEMON)
     fadescreenswapbuffers(FADE_TO_BLACK)
-    setobjectxy(LOCALID_PLAYER,17,8)
+    setobjectxy(LOCALID_PLAYER,15,14)
     turnobject(LOCALID_PLAYER,DIR_WEST)
-    TeleportCamera(17,8)
+    TeleportCamera(15,14)
     clearobjectflagfromlocalid(LOCALID_ROUTE12_SHINZO)
-    setobjectxyperm(LOCALID_ROUTE12_SHINZO,16,8)
+    setobjectxyperm(LOCALID_ROUTE12_SHINZO,14,14)
     addobject(LOCALID_ROUTE12_SHINZO)
     applymovement(LOCALID_ROUTE12_SHINZO,moves(face_up))
     applymovement(LOCALID_PLAYER,moves(face_up))
@@ -198,7 +198,7 @@ script HybridCulture_Dialogue_StartAttraction2
     msgbox(format("Kaw!"))
     waitmoncry
     closemessage
-    setobjectxyperm(LOCALID_ROUTE12_SQUAWKABILLY_WHITE,16,5)
+    setobjectxyperm(LOCALID_ROUTE12_SQUAWKABILLY_WHITE,14,11)
     clearobjectflagfromlocalid(LOCALID_ROUTE12_SQUAWKABILLY_WHITE)
     addobject(LOCALID_ROUTE12_SQUAWKABILLY_WHITE)
     playmoncry(SPECIES_QUEST_HYBRID_CULTURE,CRY_MODE_ENCOUNTER)
@@ -219,7 +219,7 @@ script HybridCulture_Dialogue_StartAttraction2
     msgbox(format("Another {STR_VAR_1} attacked!"))
     waitmoncry
     closemessage
-    setobjectxyperm(LOCALID_ROUTE12_SQUAWKABILLY_GREEN,17,5)
+    setobjectxyperm(LOCALID_ROUTE12_SQUAWKABILLY_GREEN,15,11)
     clearobjectflagfromlocalid(LOCALID_ROUTE12_SQUAWKABILLY_GREEN)
     addobject(LOCALID_ROUTE12_SQUAWKABILLY_GREEN)
     playmoncry(SPECIES_QUEST_HYBRID_CULTURE,CRY_MODE_ENCOUNTER)
@@ -262,8 +262,8 @@ script HybridCulture_Script_ResumeBatle
     fadescreenswapbuffers(FADE_TO_BLACK)
     applymovement(LOCALID_ROUTE12_SQUAWKABILLY_GREEN,moves(face_down))
     applymovement(LOCALID_PLAYER,moves(face_up))
-    setobjectxy(LOCALID_PLAYER,17,10)
-    TeleportCamera(17,10)
+    setobjectxy(LOCALID_PLAYER,15,15)
+    TeleportCamera(15,15)
     waitmovement(LOCALID_ROUTE12_SQUAWKABILLY_GREEN)
     waitmovement(LOCALID_PLAYER)
     fadescreenswapbuffers(FADE_FROM_BLACK)

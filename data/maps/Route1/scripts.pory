@@ -35,14 +35,20 @@ script Route1_Script_Interact_BodegaburnoutDeliveryB
 
 script Route1_EventScript_Sign1
 {
-    msgbox(format("▶ Route 1\n{RIGHT_ARROW} Cureno Port\n{LEFT_ARROW} Glavez Hill"), MSGBOX_SIGN)
+	buffermapname(STR_VAR_1,MAP_ROUTE1)
+	buffermapname(STR_VAR_2,MAP_CURENO_PORT)
+	buffermapname(STR_VAR_3,MAP_GLAVEZ_HILL)
+    msgbox(format("▶ {STR_VAR_1}\n{RIGHT_ARROW} {STR_VAR_2}\n{LEFT_ARROW} {STR_VAR_3}"), MSGBOX_SIGN)
     closemessage
     end
 }
 
 script Route1_EventScript_Sign2
 {
-    msgbox(format("▶ Route 1\n{LEFT_ARROW} Glavez Hill\n{RIGHT_ARROW} Cureno Port"), MSGBOX_SIGN)
+	buffermapname(STR_VAR_1,MAP_ROUTE1)
+	buffermapname(STR_VAR_2,MAP_GLAVEZ_HILL)
+	buffermapname(STR_VAR_3,MAP_CURENO_PORT)
+    msgbox(format("▶ {STR_VAR_1}\n{LEFT_ARROW} {STR_VAR_2}\n{RIGHT_ARROW} {STR_VAR_3}"), MSGBOX_SIGN)
     closemessage
     end
 }

@@ -28,7 +28,7 @@ script NewAssholeAppears_Script_MovePlayerAndBaiyaIntoPosition
 		moveobjecttocoords(LOCALID_ROUTE10_BAIYA,30,3,DIR_EAST)
 		moveobjecttocoords(LOCALID_PLAYER,31,3,DIR_WEST)
     }
-    
+
     waitmovement(LOCALID_PLAYER)
     waitmovement(LOCALID_ROUTE10_BAIYA)
 }
@@ -38,7 +38,7 @@ script BaiyaAlpha_Event_Script
 	lock
 	faceplayer
     playbgm(MUS_ENCOUNTER_CHAMPION,TRUE)
-    switch(var(VAR_ROUTE10_STATE)) 
+    switch(var(VAR_ROUTE10_STATE))
 	{
         case HAS_NOT_MET_BAIYA: goto(NewAssholeAppears_Intro_Dialogue)
         case SAVED_BEFORE_BAIYA_ROUTE10: goto(NewAssholeAppears_StartBattle_Script)
@@ -81,9 +81,8 @@ script NewAssholeAppears_StartBattle_Script{
 }
 
 script NewAssholeAppears_PostBattle_Script {
-   	lock 
-    addvar(VAR_STORYLINE_STATE,1)
-    setvar(VAR_TEMP_0,0)
+   	lock
+    call(AaandWereBack_Script_IncrementStoryVariable)
     startcutscene(JUMPPLAYER_NEWASSHOLEAPPEARS)
     setvar(VAR_ROUTE10_STATE,DEFEATED_BAIYA_ROUTE10)
     msgbox(format("Are you done being an ass, whateveryournameis?"),,SPEAKER_ALICIA)
@@ -107,7 +106,6 @@ script NewAssholeAppears_BaiyaExit_Script{
 	fadescreenswapbuffers(FADE_TO_BLACK)
     removeobject(LOCALID_ROUTE10_BAIYA)
 	fadescreenswapbuffers(FADE_FROM_BLACK)
-    call(AaandWereBack_Monologue)
     call(TryAutoSave)
     releaseall
     end

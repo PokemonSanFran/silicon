@@ -1,7 +1,7 @@
 const PLAYER = OBJ_EVENT_ID_PLAYER
 const BD = 1
 
-script EnterBD_StartBattle_ObjectSetup_Script 
+script EnterBD_StartBattle_ObjectSetup_Script
 {
     setobjectxyperm(BD,3,5)
     setobjectmovementtype(BD, MOVEMENT_TYPE_FACE_RIGHT)
@@ -76,7 +76,7 @@ script EnterBD_PostBattle_Script {
     cleargymtrainersandgetbadge(GYM_BD)
     setvar(VAR_GYM_7_STATE,GYM_DEFEATED_LEADER)
     setvar(VAR_BD_STATE,BATTLE_1_COMPLETE)
-    addvar(VAR_STORYLINE_STATE, 1)
+    call(TheStrikeStrikesBack_Script_IncrementStoryVariable)
     zapfanfare(ZAP_GYM_TIRABUDIN_PLACE_BADGE,MUS_GET_BADGE)
     cueobjectplayer(BD)
     giveitem(ITEM_GYM_REWARD_TIRABUDIN)

@@ -117,12 +117,12 @@
   ],
   "warp_events": [
     {
-      "warp_id": "WARP_ID_PETAROSA_BOROUGH_TO_KEIYING_MANSION",
+              "warp_id": "WARP_ID_PETAROSA_BOROUGH_TO_KEIYING_MANSION",
       "x": 14,
       "y": 10,
       "elevation": 0,
       "dest_map": "MAP_PETAROSA_BOROUGH_KEI_YING_MANSION",
-      "dest_warp_id": "WARP_ID_KEIYING_MANSION_TO_PETAROSA_BOROUGH_RIGHT"
+            "dest_warp_id": "WARP_ID_KEIYING_MANSION_TO_PETAROSA_BOROUGH"
     },
     {
       "warp_id": "WARP_ID_PETAROSA_BOROUGH_TO_SHARPRISE_COMPOUND",

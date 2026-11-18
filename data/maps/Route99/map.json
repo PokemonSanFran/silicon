@@ -96,62 +96,6 @@
       "flag": "FLAG_TEMP_5"
     },
     {
-      "local_id": "LOCALID_ROUTE_99_HOUSING_PROTEST_F",
-      "graphics_id": "OBJ_EVENT_GFX_UNION_ROOM_NURSE",
-      "x": 6,
-      "y": 20,
-      "elevation": 3,
-      "movement_type": "MOVEMENT_TYPE_WALK_SEQUENCE_UP_RIGHT_DOWN_LEFT",
-      "movement_range_x": 0,
-      "movement_range_y": 0,
-      "trainer_type": "TRAINER_TYPE_NONE",
-      "trainer_sight_or_berry_tree_id": "0",
-      "script": "NULL",
-      "flag": "FLAG_TEMP_5"
-    },
-    {
-      "local_id": "LOCALID_ROUTE_99_HOUSING_PROTEST_G",
-      "graphics_id": "OBJ_EVENT_GFX_FISHERMAN",
-      "x": 9,
-      "y": 21,
-      "elevation": 3,
-      "movement_type": "MOVEMENT_TYPE_WALK_SEQUENCE_UP_LEFT_DOWN_RIGHT",
-      "movement_range_x": 0,
-      "movement_range_y": 0,
-      "trainer_type": "TRAINER_TYPE_NONE",
-      "trainer_sight_or_berry_tree_id": "0",
-      "script": "NULL",
-      "flag": "FLAG_TEMP_5"
-    },
-    {
-      "local_id": "LOCALID_ROUTE_99_HOUSING_PROTEST_H",
-      "graphics_id": "OBJ_EVENT_GFX_OLD_MAN",
-      "x": 9,
-      "y": 23,
-      "elevation": 3,
-      "movement_type": "MOVEMENT_TYPE_WALK_SEQUENCE_UP_LEFT_DOWN_RIGHT",
-      "movement_range_x": 0,
-      "movement_range_y": 0,
-      "trainer_type": "TRAINER_TYPE_NONE",
-      "trainer_sight_or_berry_tree_id": "0",
-      "script": "NULL",
-      "flag": "FLAG_TEMP_5"
-    },
-    {
-      "local_id": "LOCALID_ROUTE_99_HOUSING_PROTEST_I",
-      "graphics_id": "OBJ_EVENT_GFX_LINK_RECEPTIONIST",
-      "x": 6,
-      "y": 22,
-      "elevation": 3,
-      "movement_type": "MOVEMENT_TYPE_WALK_SEQUENCE_UP_RIGHT_DOWN_LEFT",
-      "movement_range_x": 0,
-      "movement_range_y": 0,
-      "trainer_type": "TRAINER_TYPE_NONE",
-      "trainer_sight_or_berry_tree_id": "0",
-      "script": "NULL",
-      "flag": "FLAG_TEMP_5"
-    },
-    {
       "local_id": "LOCALID_ROUTE_99_HOUSING_PROTEST_FAKE_COMRADE_A",
       "graphics_id": "OBJ_EVENT_GFX_COMRADE_6",
       "x": 1,
@@ -294,7 +238,7 @@
   ],
   "warp_events": [
     {
-        "warp_id": "WARP_ID_ROUTE_99_TO_GROTTO_A",
+      "warp_id": "WARP_ID_ROUTE_99_TO_GROTTO_A",
       "x": 0,
       "y": 34,
       "elevation": 0,
@@ -465,5 +409,6 @@
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
       "script": "Hiddengrotto_EnterGrotto_Dialogue"
     }
-  ]
+  ],
+  "night_music": "MUS_ROUTE98_ROUTE99_OROLANDCOLISSEUM_NIGHT"
 }

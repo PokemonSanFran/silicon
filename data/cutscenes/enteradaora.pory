@@ -1,12 +1,12 @@
 const PLAYER = OBJ_EVENT_ID_PLAYER
 
-script EnterAdaora_ObjectCleanUp_Script 
+script EnterAdaora_ObjectCleanUp_Script
 {
 	call(EnterAdaora_RepositionLine)
 	setobjectflagfromlocalid(LOCALID_CAPHE_ADAORA)
 }
 
-script EnterAdaora_SetConeTiles_Script 
+script EnterAdaora_SetConeTiles_Script
 {
 	call(EnterAdaora_Script_SetNorthCone)
 	call(EnterAdaora_Script_SetSouthCone)
@@ -68,6 +68,8 @@ script EnterAdaora_PreventPlayerProgress_Dialogue
 script EnterAdaora_Intro_Dialogue{
     lockall
         startcutscene(JUMPPLAYER_ENTERADAORA)
+        call(AaandWereBack_Script_IncrementStoryVariable)
+        setvar(VAR_CAPHE_CITY_STATE,LINE_IS_NOT_BLOCKING)
         msgbox(format("Woah, who the hell do you think you are?"),MSGBOX_DEFAULT,SPEAKER_SIARL,,EMOTE_ANGRY)
         msgbox(format("No sorry, I'm just trying to get through, are you able to -"),MSGBOX_DEFAULT,SPEAKER_ALICIA)
                 msgbox(format("Look, we're trying to help everybody here, and we're doing the best we can. You gotta get in line like everybody else."),MSGBOX_DEFAULT,SPEAKER_SIARL,,EMOTE_ANGRY)
@@ -208,11 +210,7 @@ script EnterAdaora_GiveKeystone_Dialogue{
         waitmovement(LOCALID_CAPHE_ADAORA)
         removeobject(LOCALID_CAPHE_ADAORA)
         fadedefaultbgm
-        addvar(VAR_STORYLINE_STATE,1)
-        setvar(VAR_CAPHE_CITY_STATE,LINE_IS_NOT_BLOCKING)
-        setvar(VAR_TEMP_0,0)
         endcutscene
-        call(AaandWereBack_Monologue)
         call(TryAutoSave)
         releaseall
         end

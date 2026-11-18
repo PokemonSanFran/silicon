@@ -48,7 +48,7 @@
       "y": 23,
       "elevation": 3,
       "dest_map": "MAP_ROUTE12",
-        "dest_warp_id": "WARP_ID_ROUTE12_TO_GROTTO"
+        "dest_warp_id": "WARP_ID_ROUTE12_TO_GROTTO_LEFT"
     },
     {
         "warp_id": "WARP_ID_GROTTO_TO_ROUTE12_B",
@@ -56,7 +56,7 @@
       "y": 23,
       "elevation": 3,
       "dest_map": "MAP_ROUTE12",
-        "dest_warp_id": "WARP_ID_ROUTE12_TO_GROTTO"
+        "dest_warp_id": "WARP_ID_ROUTE12_TO_GROTTO_RIGHT"
     }
   ],
   "coord_events": [],

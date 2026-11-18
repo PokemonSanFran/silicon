@@ -73,7 +73,7 @@ script Battle8_BaiyaDefeated_Dialogue
     lock
         startcutscene(JUMPPLAYER_BATTLE8)
         setvar(VAR_BATTLE_8_STATE,DEFEATED_BAIYA_PINTILLONHOUSE)
-        addvar(VAR_STORYLINE_STATE,1)
+        call(TheStrikeStrikesBack_Script_IncrementStoryVariable)
 
         msgbox(format("You know, it doesn't have to be like this. I'm not out to get you."),,SPEAKER_ALICIA)
 
