@@ -215,5 +215,6 @@
       "script": "LetsGettheBandBackTogether_PreventPlayerEnterTower_Script"
     }
   ],
-  "bg_events": []
+  "bg_events": [],
+  "night_music": "MUS_PERLACIA_CITY_NIGHT"
 }
