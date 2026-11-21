@@ -97,7 +97,7 @@ script LetsBurnThisMotherDown_ConfrontPlayer
 
     clearobjectflagfromlocalid(LOCALID_ARANTRAZ_HOSPITAL_BAIYA)
     addobject(LOCALID_ARANTRAZ_HOSPITAL_BAIYA)
-    playbgm(MUS_ENCOUNTER_CHAMPION,TRUE)
+    playbgm(MUS_ENCOUNTER_BAIYA,TRUE)
 
     applymovement(PLAYER,Common_Movement_WalkUp)
     applymovement(LOCALID_ARANTRAZ_HOSPITAL_BAIYA, moves(walk_down * 3))

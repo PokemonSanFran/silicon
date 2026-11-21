@@ -9,7 +9,7 @@ script Battle8_FaceGoToPlayer
 {
     lock
     setvar(VAR_BATTLE_8_STATE,SAVE_BAIYA_PINTILLONHOUSE)
-    playbgm(MUS_ENCOUNTER_CHAMPION,TRUE)
+    playbgm(MUS_ENCOUNTER_BAIYA,TRUE)
 
     playse(SE_PIN)
     moveobjecttocoords(LOCALID_PLAYER,19,17,DIR_NORTH)
@@ -22,7 +22,7 @@ script Battle8_FaceGoToPlayer
 
 script Battle8_InteractBaiya
 {
-    playbgm(MUS_ENCOUNTER_CHAMPION,TRUE)
+    playbgm(MUS_ENCOUNTER_BAIYA,TRUE)
     if (var(VAR_BATTLE_8_STATE) == NOT_INTERACTED_BAIYA)
     {
        call(Battle8_ExplainAttraction_Dialogue)

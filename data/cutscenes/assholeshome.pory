@@ -14,7 +14,7 @@ script AssholesHome_WalkToPlayer_Script {
         lock
         applymovement(PLAYER,Common_Movement_ExclamationMark)
         playse(SE_PIN)
-        playbgm(MUS_ENCOUNTER_CHAMPION,TRUE)
+        playbgm(MUS_ENCOUNTER_BAIYA,TRUE)
         applymovement(LOCALID_HALAI_BAIYA, moves(walk_down * 2, step_end))
         waitmovement(0)
         applymovement(PLAYER,Common_Movement_FaceUp)

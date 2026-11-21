@@ -5,7 +5,7 @@ script NewAssholeAppears_Script_HideBaiya
 
 script NewAssholeAppears_WalkToPlayer_Script {
 	lock
-    playbgm(MUS_ENCOUNTER_CHAMPION,TRUE)
+    playbgm(MUS_ENCOUNTER_BAIYA,TRUE)
     playse(SE_PIN)
     applymovement(LOCALID_ROUTE10_BAIYA,Common_Movement_ExclamationMark)
     waitmovement(LOCALID_ROUTE10_BAIYA)
@@ -37,7 +37,7 @@ script BaiyaAlpha_Event_Script
 {
 	lock
 	faceplayer
-    playbgm(MUS_ENCOUNTER_CHAMPION,TRUE)
+    playbgm(MUS_ENCOUNTER_BAIYA,TRUE)
     switch(var(VAR_ROUTE10_STATE))
 	{
         case HAS_NOT_MET_BAIYA: goto(NewAssholeAppears_Intro_Dialogue)
