@@ -4725,6 +4725,7 @@ static void DebugAction_Jump_JumpPlayerToStoryPoint(u8 taskId, enum StoryJumpPoi
     X(MUS_HODOU_CITY_NIGHT) \
     X(MUS_LAKE_WAJABI_WISHAAT) \
     X(MUS_ROUTE98_ROUTE99_OROLANDCOLISSEUM_NIGHT) \
+    X(MUS_PERLACIA_CITY_NIGHT) \
 
 #define SOUND_LIST_SE               \
     X(SE_USE_ITEM)                  \
