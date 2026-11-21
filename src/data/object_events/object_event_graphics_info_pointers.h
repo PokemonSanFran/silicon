@@ -535,6 +535,7 @@ extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_PuaWalking;
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_PuaSurfing;
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_KeiyingWalking;
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_MagnusWalking;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_EleanorWalking;
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_NerieneWalking;
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_ShinzoWalking;
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_BaiyaFainted;
@@ -897,6 +898,7 @@ const struct ObjectEventGraphicsInfo *const gObjectEventGraphicsInfoPointers[NUM
     [OBJ_EVENT_GFX_PUA_SURFING] =            &gObjectEventGraphicsInfo_PuaSurfing,
     [OBJ_EVENT_GFX_KEIYING] =                  &gObjectEventGraphicsInfo_KeiyingWalking,
     [OBJ_EVENT_GFX_MAGNUS] =                   &gObjectEventGraphicsInfo_MagnusWalking,
+    [OBJ_EVENT_GFX_ELEANOR] =                   &gObjectEventGraphicsInfo_EleanorWalking,
     [OBJ_EVENT_GFX_NERIENE] =                  &gObjectEventGraphicsInfo_NerieneWalking,
     [OBJ_EVENT_GFX_SHINZO] =                   &gObjectEventGraphicsInfo_ShinzoWalking,
     [OBJ_EVENT_GFX_BAIYA_FAINTED] =              &gObjectEventGraphicsInfo_BaiyaFainted,

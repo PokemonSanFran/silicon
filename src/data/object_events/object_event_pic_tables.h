@@ -1878,6 +1878,11 @@ const struct SpriteFrameImage gObjectEventPicTable_MagnusWalking[] =
     overworld_ascending_frames(gObjectEventPic_MagnusWalking,4,4),
 };
 
+const struct SpriteFrameImage gObjectEventPicTable_EleanorWalking[] =
+{
+    overworld_ascending_frames(gObjectEventPic_EleanorWalking,4,4),
+};
+
 const struct SpriteFrameImage gObjectEventPicTable_NerieneWalking[] =
 {
     overworld_ascending_frames(gObjectEventPic_NerieneWalking,4,4),
