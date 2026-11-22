@@ -6770,7 +6770,7 @@ void DebugQuest_WallaceArmy(u8 state)
 // Quest: Alola from Alola
 // ***********************************************************************
 
-enum AlolaFromAlolaStatus AlohaFromAlola_GetPartyStatus(void)
+bool8 AlohaFromAlola_GetPartyStatus(void)
 {
     u32 partyCount = gPartiesCount[B_TRAINER_PLAYER];
     u32 alolaCount = 0;
@@ -6793,10 +6793,89 @@ enum AlolaFromAlolaStatus AlohaFromAlola_GetPartyStatus(void)
         alolaCount++;
     }
 
-    if (alolaCount < ALOHAFROMALOLA_PARTY_REQUIREMENT)
-        return ALOLAFROMALOLA_PARTY_NOT_ENOUGH;
-    else if (alolaCount == partyCount)
-        return ALOLAFROMALOLA_PARTY_FULL_ALOLA;
-    else
-        return ALOLAFROMALOLA_PARTY_PARTIAL_ALOLA;
+    return (alolaCount >= ALOHAFROMALOLA_PARTY_REQUIREMENT);
+}
+
+void Script_AlohaFromAlola_GetPartyStatus(void)
+{
+    gSpecialVar_Result = AlohaFromAlola_GetPartyStatus();
+}
+
+void AlolaFromAlolaGenerateMon(void)
+{
+    enum Species species = SPECIES_QUEST_ALOHA_FROM_ALOLA;
+    u32 level = LEVEL_QUEST_ALOHA_FROM_ALOLA;
+    u32 power = 0;
+    enum Move generatedMove = MOVE_NONE;
+
+    const struct LevelUpMove *learnset = GetSpeciesLevelUpLearnset(species);
+    for (u32 i = 0; learnset[i].move != LEVEL_UP_MOVE_END; i++)
+    {
+        if (learnset[i].level > level)
+            break;
+
+        enum Move move = learnset[i].move;
+        u32 tempPower = GetMovePower(move);
+
+        if (tempPower <= power)
+            continue;
+
+        generatedMove = move;
+        power = tempPower;
+    }
+
+    const u16 *teachableLearnset = GetSpeciesTeachableLearnset(species);
+    for (u32 i = 0; teachableLearnset[i] != MOVE_UNAVAILABLE; i++)
+    {
+        enum Move move = teachableLearnset[i];
+        u32 tempPower = GetMovePower(move);
+
+        if (tempPower <= power)
+            continue;
+
+        generatedMove = move;
+        power = tempPower;
+    }
+
+    enum Item generatedItem = gTypesInfo[GetMoveType(generatedMove)].zCrystal;
+
+    struct PokemonTemplate monTemplate =
+    {
+        .species = SPECIES_QUEST_ALOHA_FROM_ALOLA,
+        .level = level,
+        .heldItem = generatedItem,
+        .ball = BALL_TIMER,
+        .nature = NATURE_RANDOM,
+        .abilityNum = NUM_ABILITY_PERSONALITY,
+        .gender = MON_GENDER_RANDOM,
+        .isShiny = SHINY_MODE_RANDOM,
+        .moves= {generatedMove,MOVE_NONE,MOVE_NONE,MOVE_NONE},
+        .evs = {6,252,0,252,0,0},
+        .ivs = {31,31,31,31,31,31},
+        .origin = GIFTMON_ORIGIN,
+    };
+
+    ScriptGiveMonParameterized(B_SIDE_PLAYER,PARTY_SIZE,&monTemplate);
+}
+
+void TryIncrementAlohaFromAlolaQuestState(enum BattlerId battler)
+{
+    if (GetBattlerAtPosition(B_POSITION_PLAYER_LEFT) != battler)
+        return;
+
+    if (IsQuestActiveState(QUEST_ALOHAFROMALOLA) == FALSE)
+        return;
+
+    if (TRAINER_BATTLE_PARAM.opponentA != TRAINER_EMRYS_ALOHAFROMALOLA_1 && TRAINER_BATTLE_PARAM.opponentB != TRAINER_EMRYS_ALOHAFROMALOLA_1)
+        return;
+
+    if (VarGet(VAR_EMRYS_STATE) >= EMRYS_QUEST_PROGRESS_USED_Z_MOVE)
+        return;
+
+    VarSet(VAR_EMRYS_STATE,EMRYS_QUEST_PROGRESS_USED_Z_MOVE);
+}
+
+bool32 IsCurrentBattleAlolaExhibition(void)
+{
+    return (FlagGet(FLAG_ALOLA_BATTLE));
 }

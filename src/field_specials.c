@@ -4683,6 +4683,36 @@ void PreparePartyForSkyBattle(void)
     CompactPartySlots();
 }
 
+// Start siliconQuests
+void PreparePartyForAlolaBattle(void)
+{
+    int participatingPokemonSlot = 0;
+    u8 partyCount = CalculatePlayerPartyCount();
+    u32 usedCount = 0;
+
+    FlagSet(FLAG_ALOLA_BATTLE);
+    SavePlayerParty();
+
+    for (u32 i = 0; i < partyCount; i++)
+    {
+        struct Pokemon* pokemon = &gParties[B_TRAINER_PLAYER][i];
+        enum Species species = (GetMonData(pokemon,MON_DATA_SPECIES));
+
+        if (IsSpeciesFromAlola(species) && (usedCount < ALOHAFROMALOLA_PARTY_REQUIREMENT))
+        {
+            usedCount++;
+            participatingPokemonSlot += 1 << i;
+        }
+        else
+        {
+            ZeroMonData(pokemon);
+        }
+    }
+    VarSet(B_VAR_SKY_BATTLE,participatingPokemonSlot);
+    CompactPartySlots();
+}
+// End siliconQuests
+
 void GetObjectPosition(u16* xPointer, u16* yPointer, u32 localId, u32 useTemplate)
 {
     u32 objectId;

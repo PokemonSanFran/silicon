@@ -169,7 +169,7 @@
 #define FLAG_PLAYER_USING_TAXI                                       0x58
 #define FLAG_QUEST_WALLACEARMY_WALLACEARMYSTANF_READY                0x59
 #define FLAG_ITEM_HODOU_CITY_TUNNELS_TREASURE                        0x5A
-#define FLAG_SILICON_UNUSED_0x5B                                     0x5B
+#define FLAG_ALOLA_BATTLE                                            0x5B
 #define FLAG_SILICON_UNUSED_0x5C                                     0x5C
 #define FLAG_SILICON_UNUSED_0x5D                                     0x5D
 #define FLAG_SILICON_UNUSED_0x5E                                     0x5E
