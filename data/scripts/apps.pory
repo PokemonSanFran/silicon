@@ -57,6 +57,33 @@ script EventScript_UpgradeApp
     return
 }
 
+script EventScript_GimmickUnlock
+{
+    playfanfare(MUS_OBTAIN_ITEM)
+    message(gText_GimmickUnlock)
+    waitfanfare
+    waitbuttonpress
+    return
+}
+
+script EventScript_InstallMegaEvolution
+{
+    bufferstring(STR_VAR_1,"Mega Evolution")
+    call(EventScript_GimmickUnlock)
+    setvar(VAR_ADVENTURE_GUIDE_TO_OPEN, GUIDE_GIMMICK_MEGA)
+    call(RunAdventureGuideScript)
+    return
+}
+
+script EventScript_InstallZMoves
+{
+    bufferstring(STR_VAR_1,"Z-Moves")
+    call(EventScript_GimmickUnlock)
+    setvar(VAR_ADVENTURE_GUIDE_TO_OPEN, GUIDE_GIMMICK_Z)
+    call(RunAdventureGuideScript)
+    return
+}
+
 text gText_AppObtained
 {
     format("Installed the {STR_VAR_1} application on the phone!")
@@ -65,4 +92,9 @@ text gText_AppObtained
 text gText_AppUpgrade
 {
     format("The {STR_VAR_1} application on the phone was upgraded!")
+}
+
+text gText_GimmickUnlock
+{
+    format("You now can wield the power of {STR_VAR_1} during battle!")
 }
