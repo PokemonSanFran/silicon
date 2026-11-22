@@ -222,18 +222,12 @@ script EnterTheMaster_ClearingIntro_Dialogue
         msgbox(format("…Oh."),,SPEAKER_CHARLOTTE)
 
         msgbox(format("So what's next?"),MSGBOX_DEFAULT,SPEAKER_ALICIA)
-        bufferitemname(STR_VAR_1,ITEM_MEGA_RING)
-        msgbox(format("{PLAYER}, you've probably seen other Trainers using Mega Evolution. SharpRise wants their Trainers have access to the most powerful techniques, so in addition to my fee, SharpRise has provided {PLAYER} with a {STR_VAR_1}. Charlotte, I know you've already started to get a handle on it, but {PLAYER} here..."),,SPEAKER_FRANK)
+        msgbox(format("{PLAYER}, you've probably seen other Trainers using Mega Evolution. SharpRise wants their Trainers have access to the most powerful techniques, so in addition to my fee, SharpRise have made it possible for you to access Mega Evolution through your phone. Charlotte, I see you've already gotten access to it, but {PLAYER} here..."),,SPEAKER_FRANK)
         closemessage
         cueobjectplayer(LOCALID_LEAVERRA_FRANK)
-        giveitem(ITEM_MEGA_RING)
-        msgbox(format("Charlotte, do you wanna - "),,SPEAKER_FRANK)
-        bufferitemname(STR_VAR_1,ITEM_MEGA_RING)
-        msgbox(format("When your Pokémon is holding its Mega Stone and you have a {STR_VAR_1}, you can press {START_BUTTON} in battle to trigger a transformation! At the beginning of your turn, your Pokémon will Mega Evolve, which will juice their stats and sometimes give them a new type or ability."),,SPEAKER_CHARLOTTE)
-        bufferitemname(STR_VAR_1,ITEM_MEGA_RING)
-        msgbox(format("Your {STR_VAR_1} will only work once per battle, and your Pokémon will revert back to normal after it faints or when the battle ends."),,SPEAKER_CHARLOTTE)
-        call(EnterTheMaster_MegaEvolution_Dialogue)
-        msgbox(format("Pretty much got all the basics."),,SPEAKER_FRANK)
+        waitmovement(LOCALID_LEAVERRA_FRANK)
+        call(EventScript_InstallMegaEvolution)
+        msgbox(format("You should have it now, {PLAYER}."),,SPEAKER_FRANK)
         msgbox(format("If you go further back into the clearing, there's battle simulation bots there. The right side one is for {PLAYER} - they're calibrated specifically based on the battle data that SharpRise Capital gave me for both of you."),MSGBOX_DEFAULT,SPEAKER_FRANK)
         goto(EnterTheMaster_ExplainRobots_Dialogue_First)
 }
