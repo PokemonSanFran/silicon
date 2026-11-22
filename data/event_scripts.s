@@ -2241,3 +2241,5 @@ EventScript_PalletTown_PlayersHouse_2F_TurnOnPC::
 
 	.include "data/maps/HalaiIsland_Baiya2F/scripts.inc"
 	.include "data/maps/PetarosaBorough_KeiYingMansion_Garden/scripts.inc"
+
+	.include "data/maps/PerlaciaCity_Exhibition/scripts.inc"

@@ -10458,8 +10458,6 @@
       "name": "Route12_Layout",
       "width": 57,
       "height": 26,
-      "border_width": 3,
-      "border_height": 2,
       "primary_tileset": "gTileset_GeneralSilicon",
       "secondary_tileset": "gTileset_Volcano",
       "border_filepath": "data/layouts/Route12/border.bin",
@@ -10772,8 +10770,6 @@
       "name": "PetarosaBorough_Mansion_Layout",
       "width": 40,
       "height": 26,
-      "border_width": 2,
-      "border_height": 2,
       "primary_tileset": "gTileset_BuildingSilicon",
       "secondary_tileset": "gTileset_FancyIndoors",
       "border_filepath": "data/layouts/PetarosaBorough_KeiYingMansion/border.bin",
@@ -13320,28 +13316,40 @@
       "border_width": 2
     },
     {
-        "id": "LAYOUT_HALAI_ISLAND_BAIYA2F",
-        "name": "HalaiIsland_Baiya2F_Layout",
-        "width": 23,
-        "height": 11,
-        "primary_tileset": "gTileset_BuildingSilicon",
-        "secondary_tileset": "gTileset_RegularIndoors",
-        "border_filepath": "data/layouts/HalaiIsland_Baiya2F/border.bin",
-        "blockdata_filepath": "data/layouts/HalaiIsland_Baiya2F/map.bin",
-        "border_height": 2,
-        "border_width": 2
+      "id": "LAYOUT_HALAI_ISLAND_BAIYA2F",
+      "name": "HalaiIsland_Baiya2F_Layout",
+      "width": 23,
+      "height": 11,
+      "primary_tileset": "gTileset_BuildingSilicon",
+      "secondary_tileset": "gTileset_RegularIndoors",
+      "border_filepath": "data/layouts/HalaiIsland_Baiya2F/border.bin",
+      "blockdata_filepath": "data/layouts/HalaiIsland_Baiya2F/map.bin",
+      "border_height": 2,
+      "border_width": 2
     },
     {
       "id": "LAYOUT_PETAROSA_BOROUGH_KEI_YING_MANSION_GARDEN",
       "name": "PetarosaBorough_KeiYingMansion_Garden_Layout",
       "width": 29,
       "height": 25,
-      "border_width": 2,
-      "border_height": 2,
       "primary_tileset": "gTileset_GeneralSilicon",
       "secondary_tileset": "gTileset_Petarosa",
       "border_filepath": "data/layouts/PetarosaBorough_KeiYingMansion_Garden/border.bin",
-      "blockdata_filepath": "data/layouts/PetarosaBorough_KeiYingMansion_Garden/map.bin"
+      "blockdata_filepath": "data/layouts/PetarosaBorough_KeiYingMansion_Garden/map.bin",
+      "border_height": 2,
+      "border_width": 2
+    },
+    {
+      "id": "LAYOUT_PERLACIA_CITY_EXHIBITION",
+      "name": "PerlaciaCity_Exhibition_Layout",
+      "width": 10,
+      "height": 10,
+      "primary_tileset": "gTileset_Building",
+      "secondary_tileset": "gTileset_OceanicMuseum",
+      "border_filepath": "data/layouts/PerlaciaCity_Exhibition/border.bin",
+      "blockdata_filepath": "data/layouts/PerlaciaCity_Exhibition/map.bin",
+      "border_height": 2,
+      "border_width": 2
     }
   ]
 }

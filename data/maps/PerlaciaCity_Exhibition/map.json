@@ -1,0 +1,29 @@
+{
+  "id": "MAP_PERLACIA_CITY_EXHIBITION",
+  "name": "PerlaciaCity_Exhibition",
+  "layout": "LAYOUT_PERLACIA_CITY_EXHIBITION",
+  "music": "MUS_PERLACIA_GYM",
+  "region_map_section": "MAPSEC_PERLACIA_CITY",
+  "requires_flash": false,
+  "weather": "WEATHER_NONE",
+  "map_type": "MAP_TYPE_NONE",
+  "allow_cycling": false,
+  "allow_escaping": false,
+  "allow_running": false,
+  "show_map_name": false,
+  "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
+  "connections": null,
+  "object_events": [],
+  "warp_events": [
+    {
+      "warp_id": "WARP_ID_PERLACIA_EXHIBITION_TO_MUSEUM",
+      "x": 4,
+      "y": 9,
+      "elevation": 0,
+      "dest_map": "MAP_PERLACIA_CITY_GYM_ENTRANCE",
+      "dest_warp_id": "WARP_ID_PERLACIA_MUSEUM_TO_EXHIBITION"
+    }
+  ],
+  "coord_events": [],
+  "bg_events": []
+}

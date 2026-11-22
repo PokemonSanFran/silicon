@@ -38,6 +38,14 @@
       "elevation": 0,
       "dest_map": "MAP_PERLACIA_CITY",
       "dest_warp_id": "WARP_ID_PERLACIA_CITY_TO_GYM_1"
+    },
+    {
+      "warp_id": "WARP_ID_PERLACIA_MUSEUM_TO_EXHIBITION",
+      "x": 17,
+      "y": 8,
+      "elevation": 0,
+      "dest_map": "MAP_PERLACIA_CITY_EXHIBITION",
+      "dest_warp_id": "WARP_ID_PERLACIA_EXHIBITION_TO_MUSEUM"
     }
   ],
   "coord_events": [],
