@@ -112,4 +112,6 @@ bool32 Quest_ManOfManyHats_ShouldStayFish(void);
 bool32 Quest_ManOfManyHats_ShouldStayArcade(void);
 bool32 Quest_ManOfManyHats_ShouldStayBoba(void);
 bool8 AlohaFromAlola_GetPartyStatus(void);
+bool32 IsCurrentBattleAlolaExhibition(void);
+void TryIncrementAlohaFromAlolaQuestState(enum BattlerId battler);
 #endif //GUARD_QUESTLOGIC_H
