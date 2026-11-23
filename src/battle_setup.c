@@ -1646,8 +1646,13 @@ void HandleBattleVariantEndParty(void)
     ResetTemporaryLittleCupVar();
 
     //if (B_FLAG_SKY_BATTLE == 0 || !FlagGet(B_FLAG_SKY_BATTLE))
-    if (!FlagGet(B_FLAG_SKY_BATTLE) && !(IsCurrentBattleLittleCup()))
+    if (!FlagGet(B_FLAG_SKY_BATTLE) && !(IsCurrentBattleLittleCup()) && !(IsCurrentBattleAlolaExhibition()))
         return;
+
+    if (IsCurrentBattleAlolaExhibition())
+    {
+        SaveChangesToPlayerParty();
+    }
 
     if (FlagGet(B_FLAG_SKY_BATTLE))
     { // flyEncounters
@@ -1662,6 +1667,7 @@ void HandleBattleVariantEndParty(void)
     // End littlecup
     LoadPlayerParty();
     FlagClear(B_FLAG_SKY_BATTLE);
+    FlagClear(FLAG_ALOLA_BATTLE);
 }
 
 static void CB2_EndTrainerBattle(void)
