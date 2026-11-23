@@ -15,6 +15,7 @@ mapscripts PerlaciaCity_MapScripts {
     MAP_SCRIPT_ON_TRANSITION {
         call(Buzzr_HideReporter_Script)
         call(CutePokemon_Script_ControlMelissaPerlaciaOutsideVisibility)
+        call_if_ge(VAR_EMRYS_STATE,EMRYS_QUEST_PROGRESS_USED_Z_MOVE,AlohaFromAlola_HidePerlaciaLeader)
     }
 
     MAP_SCRIPT_ON_FRAME_TABLE [
