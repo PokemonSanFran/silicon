@@ -1,3 +1,7 @@
-mapscripts PerlaciaCity_Gym_Entrance_MapScripts 
+mapscripts PerlaciaCity_Gym_Entrance_MapScripts
 {
+    MAP_SCRIPT_ON_TRANSITION
+    {
+        call_if_quest_not_reward(QUEST_ALOHAFROMALOLA,AlohaFromAlola_Script_HideEmrysMuseumLobby)
+    }
 }
