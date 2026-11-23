@@ -1,6 +1,7 @@
 #include "global.h"
 #include "malloc.h"
 #include "battle.h"
+#include "quest_logic.h" // siliconQuests
 #include "pokemon.h"
 #include "battle_ai_record.h"
 #include "battle_controllers.h"
@@ -161,6 +162,7 @@ enum Move GetUsableZMove(enum BattlerId battler, enum Move move)
 
 void ActivateZMove(enum BattlerId battler)
 {
+    TryIncrementAlohaFromAlolaQuestState(battler);
     SetActiveGimmick(battler, GIMMICK_Z_MOVE);
 }
 
