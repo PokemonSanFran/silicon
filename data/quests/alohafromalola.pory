@@ -1,5 +1,3 @@
-const LOCALID_PERLACIA_EXHIBITION_EMRYS = LOCALID_CAMERA + 1
-
 script AlohaFromAlola_Script_InteractPerlacia
 {
     lock
@@ -97,10 +95,35 @@ script AlohaFromAlola_HidePerlaciaLeader
 script AlohaFromAlola_Script_InteractEmrysExhibition
 {
     lock
+    goto_if_quest_reward(QUEST_ALOHAFROMALOLA,AlohaFromAlola_Dialogue_EmrysHobnob)
     faceplayer
     callnative(Script_AlohaFromAlola_GetPartyStatus)
     goto_if_eq(VAR_RESULT,FALSE,AlohaFromAlola_Dialogue_PartyNotReady)
     goto(AlohaFromAlola_Dialogue_PartyReady)
+    release
+    end
+}
+
+script AlohaFromAlola_Dialogue_Donor2
+{
+    lock
+    faceplayer
+    buffermapname(STR_VAR_1,MAP_SHARPRISE_SPIRE_1F)
+    msgbox(format("The last time I was in Resido, the {STR_VAR_1} wasn't even built. Now it's taller than the previous tallest building in Resido by one foot!"),,SPEAKER_MUSEUM_DONOR2)
+    msgbox(format("I've heard some of the locas hate what its done to the skyline... but its one more tower!"),,SPEAKER_MUSEUM_DONOR2)
+    closemessage
+    release
+    end
+}
+
+script AlohaFromAlola_Dialogue_Donor3
+{
+    lock
+    faceplayer
+    buffermapname(STR_VAR_1,MAP_PERLACIA_CITY_GYM_ENTRANCE)
+    msgbox(format("Each member of the museum's board come from a different discipline. We constantly have to advocate for areas to get expansion or research funding, which is why the museum covers so much - arts,biology, history and more."),,SPEAKER_MUSEUM_DONOR3)
+    msgbox(format("We have our disagreements, but I know the board knows deep down that the arts are why the {STR_VAR_1} Museum are the region's cultural touchstone!"),,SPEAKER_MUSEUM_DONOR3)
+    closemessage
     release
     end
 }
@@ -111,18 +134,14 @@ script AlohaFromAlola_Dialogue_PartyReady
     msgbox(format("Your party is exquisite!"),,SPEAKER_EMRYS,,EMOTE_LOVE)
     msgbox(format("You’re right on time - people are starting to get impatient!"),,SPEAKER_EMRYS,,EMOTE_HAPPY)
     closemessage
-    goto(AlohaFromAlola_Dialogue_StartExhibition)
-}
-
-script AlohaFromAlola_Dialogue_StartExhibition
-{
+    goto(AlohaFromAlola_Dialogue_BeforeBattle)
 }
 
 script AlohaFromAlola_Dialogue_PartyNotReady
 {
     msgbox(format("You’re not ready yet?"),,SPEAKER_EMRYS)
     call(AlohaFromAlola_Dialogue_StateRequirements)
-    msgbox(format("Talk to me once you’ve met the requirements!"),,SPEAKER_EMRYS)
+    msgbox(format("Talk to me once you're ready!"),,SPEAKER_EMRYS)
     closemessage
     release
     end
@@ -146,83 +165,85 @@ const LOCALID_PERLACIA_EXHIBITION_CROWD15 = (LOCALID_CAMERA + 15)
 
 script AlohaFromAlola_Script_CreateCrowd
 {
-    createvobject(OBJ_EVENT_GFX_BOY_2,LOCALID_PERLACIA_EXHIBITION_CROWD1,1,1,3,DIR_NORTH)
-    createvobject(OBJ_EVENT_GFX_BOY_2,LOCALID_PERLACIA_EXHIBITION_CROWD2,1,1,3,DIR_NORTH)
-    createvobject(OBJ_EVENT_GFX_BOY_2,LOCALID_PERLACIA_EXHIBITION_CROWD3,1,1,3,DIR_NORTH)
-    createvobject(OBJ_EVENT_GFX_BOY_2,LOCALID_PERLACIA_EXHIBITION_CROWD4,1,1,3,DIR_NORTH)
-    createvobject(OBJ_EVENT_GFX_BOY_2,LOCALID_PERLACIA_EXHIBITION_CROWD5,1,1,3,DIR_NORTH)
-    createvobject(OBJ_EVENT_GFX_BOY_2,LOCALID_PERLACIA_EXHIBITION_CROWD6,1,1,3,DIR_NORTH)
-    createvobject(OBJ_EVENT_GFX_BOY_2,LOCALID_PERLACIA_EXHIBITION_CROWD7,1,1,3,DIR_NORTH)
-    createvobject(OBJ_EVENT_GFX_BOY_2,LOCALID_PERLACIA_EXHIBITION_CROWD8,1,1,3,DIR_NORTH)
-    createvobject(OBJ_EVENT_GFX_BOY_2,LOCALID_PERLACIA_EXHIBITION_CROWD9,1,1,3,DIR_NORTH)
-    createvobject(OBJ_EVENT_GFX_BOY_2,LOCALID_PERLACIA_EXHIBITION_CROWD10,1,1,3,DIR_NORTH)
-    createvobject(OBJ_EVENT_GFX_BOY_2,LOCALID_PERLACIA_EXHIBITION_CROWD11,1,1,3,DIR_NORTH)
-    createvobject(OBJ_EVENT_GFX_BOY_2,LOCALID_PERLACIA_EXHIBITION_CROWD12,1,1,3,DIR_NORTH)
-    createvobject(OBJ_EVENT_GFX_BOY_2,LOCALID_PERLACIA_EXHIBITION_CROWD13,1,1,3,DIR_NORTH)
-    createvobject(OBJ_EVENT_GFX_BOY_2,LOCALID_PERLACIA_EXHIBITION_CROWD14,1,1,3,DIR_NORTH)
-    createvobject(OBJ_EVENT_GFX_BOY_2,LOCALID_PERLACIA_EXHIBITION_CROWD15,1,1,3,DIR_NORTH)
+    createvobject(OBJ_EVENT_GFX_BOY_2,LOCALID_PERLACIA_EXHIBITION_CROWD1,2,2,3,DIR_SOUTH)
+    createvobject(OBJ_EVENT_GFX_BOY_2,LOCALID_PERLACIA_EXHIBITION_CROWD2,3,1,3,DIR_SOUTH)
+    createvobject(OBJ_EVENT_GFX_BOY_2,LOCALID_PERLACIA_EXHIBITION_CROWD3,5,2,3,DIR_SOUTH)
+    createvobject(OBJ_EVENT_GFX_BOY_2,LOCALID_PERLACIA_EXHIBITION_CROWD4,7,1,3,DIR_SOUTH)
+
+    createvobject(OBJ_EVENT_GFX_BOY_2,LOCALID_PERLACIA_EXHIBITION_CROWD5,8,3,3,DIR_WEST)
+    createvobject(OBJ_EVENT_GFX_BOY_2,LOCALID_PERLACIA_EXHIBITION_CROWD6,8,4,3,DIR_WEST)
+    createvobject(OBJ_EVENT_GFX_BOY_2,LOCALID_PERLACIA_EXHIBITION_CROWD7,9,5,3,DIR_WEST)
+    createvobject(OBJ_EVENT_GFX_BOY_2,LOCALID_PERLACIA_EXHIBITION_CROWD8,8,7,3,DIR_WEST)
+
+    createvobject(OBJ_EVENT_GFX_BOY_2,LOCALID_PERLACIA_EXHIBITION_CROWD9,1,2,3,DIR_EAST)
+    createvobject(OBJ_EVENT_GFX_BOY_2,LOCALID_PERLACIA_EXHIBITION_CROWD10,1,4,3,DIR_EAST)
+    createvobject(OBJ_EVENT_GFX_BOY_2,LOCALID_PERLACIA_EXHIBITION_CROWD11,0,6,3,DIR_EAST)
+    createvobject(OBJ_EVENT_GFX_BOY_2,LOCALID_PERLACIA_EXHIBITION_CROWD12,1,6,3,DIR_EAST)
+
+    createvobject(OBJ_EVENT_GFX_BOY_2,LOCALID_PERLACIA_EXHIBITION_CROWD13,3,8,3,DIR_NORTH)
+    createvobject(OBJ_EVENT_GFX_BOY_2,LOCALID_PERLACIA_EXHIBITION_CROWD14,4,7,3,DIR_NORTH)
+    createvobject(OBJ_EVENT_GFX_BOY_2,LOCALID_PERLACIA_EXHIBITION_CROWD15,7,8,3,DIR_NORTH)
 }
 
 script AlohaFromAlola_Script_RemoveCrowd
 {
-    spawnobject(OBJ_EVENT_GFX_EMRYS,LOCALID_PERLACIA_EXHIBITION_EMRYS,5,7,MOVEMENT_TYPE_FACE_DOWN)
-    removeobject(LOCALID_PERLACIA_EXHIBITION_CROWD1)
-    removeobject(LOCALID_PERLACIA_EXHIBITION_CROWD2)
-    removeobject(LOCALID_PERLACIA_EXHIBITION_CROWD3)
-    removeobject(LOCALID_PERLACIA_EXHIBITION_CROWD4)
-    removeobject(LOCALID_PERLACIA_EXHIBITION_CROWD5)
-    removeobject(LOCALID_PERLACIA_EXHIBITION_CROWD6)
-    removeobject(LOCALID_PERLACIA_EXHIBITION_CROWD7)
-    removeobject(LOCALID_PERLACIA_EXHIBITION_CROWD8)
-    removeobject(LOCALID_PERLACIA_EXHIBITION_CROWD9)
-    removeobject(LOCALID_PERLACIA_EXHIBITION_CROWD10)
-    removeobject(LOCALID_PERLACIA_EXHIBITION_CROWD11)
-    removeobject(LOCALID_PERLACIA_EXHIBITION_CROWD12)
-    removeobject(LOCALID_PERLACIA_EXHIBITION_CROWD13)
-    removeobject(LOCALID_PERLACIA_EXHIBITION_CROWD14)
-    removeobject(LOCALID_PERLACIA_EXHIBITION_CROWD15)
+    callnative(DestroyVirtualObjects)
 }
 
 script AlohaFromAlola_Dialogue_BeforeBattle
 {
-    applymovement(LOCALID_PERLACIA_EXHIBITION_EMRYS,moves(walk_up * 2, delay_8 * 2, walk_down,face_player))
+    moveobjecttocoords(LOCALID_PERLACIA_EXHIBITION_EMRYS,3,3,DIR_NORTH)
+    waitmovement(LOCALID_PERLACIA_EXHIBITION_EMRYS)
+    delay(8)
+    moveobjecttocoords(LOCALID_PERLACIA_EXHIBITION_EMRYS,3,6,DIR_SOUTH)
+    waitmovement(LOCALID_PERLACIA_EXHIBITION_EMRYS)
+    applymovement(LOCALID_PERLACIA_EXHIBITION_EMRYS,moves(face_player))
     waitmovement(LOCALID_PERLACIA_EXHIBITION_EMRYS)
     msgbox(format("{PLAYER}, I’d be willing to make it worth your while if you could… tip the scales of battle in my favor. Understood?"),,SPEAKER_EMRYS,TAIL_WHISPER)
     msgbox(format("You want me to lose?"),,SPEAKER_PLAYER,,EMOTE_CONFUSE)
     msgbox(format("Oh, {PLAYER}!"),,SPEAKER_EMRYS,TAIL_SHOUT,EMOTE_SHOCK)
     msgbox(format("I would never demand you sully your reputation. Just a mere…suggestion!"),,SPEAKER_EMRYS)
     closemessage
-    applymovement(LOCALID_PERLACIA_EXHIBITION_EMRYS,moves(walk_up) * 5)
+    moveobjecttocoords(LOCALID_PERLACIA_EXHIBITION_EMRYS,4,4,DIR_EAST)
     delay(16)
     fadescreen(FADE_TO_BLACK)
     call(AlohaFromAlola_Script_CreateCrowd)
-    setobjectxy(LOCALID_PLAYER,10,10)
-    setobjectxyperm(LOCALID_PLAYER,10,10)
-    TeleportCamera(10,10)
+    setobjectxy(LOCALID_PLAYER,7,4)
+    TeleportCamera(7,4)
     turnobject(LOCALID_PLAYER,DIR_WEST)
     waitmovement(LOCALID_PERLACIA_EXHIBITION_EMRYS)
-    setobjectxy(LOCALID_PERLACIA_EXHIBITION_EMRYS,12,10)
-    setobjectxyperm(LOCALID_PERLACIA_EXHIBITION_EMRYS,12,10)
-    turnobject(LOCALID_PERLACIA_EXHIBITION_EMRYS,DIR_EAST)
+    setobjectxy(LOCALID_PERLACIA_EXHIBITION_EMRYS,4,4)
+    setobjectxyperm(LOCALID_PERLACIA_EXHIBITION_EMRYS,4,4)
     msgbox(format("Several hours later…"))
     closemessage
     fadescreen(FADE_FROM_BLACK)
-    msgbox(format("The modern people of Alola have finally learned to wield Necrozma’s light in battle, known as Zenith, or Z-Power."),,SPEAKER_EMRYS)
-    msgbox(format("And to help me in this endeavor, {PLAYER} has volunteered to help me demonstrate!"),,SPEAKER_EMRYS)
+    bufferspeciesname(STR_VAR_1,SPECIES_NECROZMA)
+    msgbox(format("The modern people of Alola have finally learned to wield {STR_VAR_1}’s light in battle, known as Zenith Power, or to the layperson, Z-Power."),,SPEAKER_EMRYS)
+    msgbox(format("And to help me in this endeavor, {PLAYER} has volunteered to help me demonstrate Zenith Power!"),,SPEAKER_EMRYS)
     closemessage
+    applymovement(LOCALID_PLAYER,(moves(walk_left)))
+    applymovement(LOCALID_PERLACIA_EXHIBITION_EMRYS,(moves(walk_right)))
+    waitmovement(LOCALID_PERLACIA_EXHIBITION_EMRYS)
+    setvar(VAR_EMRYS_STATE,EMRYS_QUEST_PROGRESS_EXHIBITION_BATTLE_START)
     trainerbattle_continue_after_lose(TRAINER_EMRYS_ALOHAFROMALOLA_2,format("Quite a demonstration, no?"))
     goto(AlohaFromAlola_Script_DoBattleCleanup)
 }
 
 script AlohaFromAlola_Script_DoBattleCleanup
 {
+    setvar(VAR_EMRYS_STATE,EMRYS_QUEST_PROGRESS_EXHIBITION_BATTLE_END)
     questmenu(QUEST_MENU_SET_REWARD,QUEST_ALOHAFROMALOLA)
-    moveobjecttocoords(LOCALID_PERLACIA_EXHIBITION_EMRYS,10,10,DIR_NORTH)
+    applymovement(LOCALID_PERLACIA_EXHIBITION_EMRYS,moves(walk_down))
     waitmovement(LOCALID_PERLACIA_EXHIBITION_EMRYS)
+    moveobjecttocoords(LOCALID_PLAYER,7,6,DIR_WEST)
     msgbox(format("Thank you all for coming out! And thanks again to {PLAYER} for their assistance!"),,SPEAKER_EMRYS)
     playse(SE_APPLAUSE)
     closemessage
-    moveobjecttocoords(LOCALID_PERLACIA_EXHIBITION_EMRYS,8,10,DIR_WEST)
+    applymovement(LOCALID_PERLACIA_EXHIBITION_EMRYS,moves(walk_up))
+    waitmovement(LOCALID_PERLACIA_EXHIBITION_EMRYS)
+    delay(24)
+    waitmovement(LOCALID_PLAYER)
+    moveobjecttocoords(LOCALID_PERLACIA_EXHIBITION_EMRYS,6,6,DIR_EAST)
     waitmovement(LOCALID_PERLACIA_EXHIBITION_EMRYS)
     msgbox(format("{PLAYER}!"),,SPEAKER_EMRYS)
     closemessage
@@ -230,18 +251,21 @@ script AlohaFromAlola_Script_DoBattleCleanup
     call_if_eq(VAR_RESULT,B_OUTCOME_LOST,AlohaFromAlola_Dialogue_Secret)
     msgbox(format("I need to hobnob with the principal donors of the museum. Come see me in the lobby later."),,SPEAKER_EMRYS)
     closemessage
-    applymovement(LOCALID_PERLACIA_EXHIBITION_EMRYS,moves(walk_down * 5))
+    moveobjecttocoords(LOCALID_PERLACIA_EXHIBITION_EMRYS,4,9,DIR_SOUTH)
     delay(16)
     fadescreen(FADE_TO_BLACK)
     playse(SE_EXIT)
-    waitmovement(LOCALID_PERLACIA_EXHIBITION_EMRYS)
-    waitse
     call(AlohaFromAlola_Script_RemoveCrowd)
+    removeobject(LOCALID_PERLACIA_EXHIBITION_EMRYS)
     fadescreen(FADE_FROM_BLACK)
     release
     end
 }
 
+script AlohaFromAlola_Script_HideEmrysExhibition
+{
+    setobjectflagfromlocalid(LOCALID_PERLACIA_EXHIBITION_EMRYS)
+}
 
 script AlohaFromAlola_Dialogue_Secret
 {
@@ -256,4 +280,69 @@ script AlohaFromAlola_Dialogue_Secret
 	waitbuttonpress
 	hidemoneybox
     msgbox(format("I assume that will also pay for your discretion in this matter."),,SPEAKER_EMRYS,TAIL_WHISPER)
+}
+
+script AlohaFromAlola_Dialogue_EmrysHobnob
+{
+    lock
+    moveobjecttocoords(LOCALID_PLAYER,12,13,DIR_NORTH)
+    msgbox(format("Given the advances of high temporal proximity in synthetic Mega Stones, I've seen voracious appetites develop around novel employments of Infinity Energy..."),,SPEAKER_EMRYS)
+    msgbox(format("I heard some rumors about creating Galarian armor made from Infinity Energy!"),,SPEAKER_MUSEUM_DONOR1)
+    msgbox(format("Ah, but mere scuttlebutt cannot be given acceditation!"),,SPEAKER_EMRYS)
+    closemessage
+    applymovement(LOCALID_PERLACIA_LOBBY_EMRYS,moves(face_player))
+    waitmovement(LOCALID_PERLACIA_LOBBY_EMRYS)
+    goto(AlohaFromAlola_Script_Reward)
+}
+
+script AlohaFromAlola_Script_HideEmrysMuseumLobby
+{
+    setobjectflagfromlocalid(LOCALID_PERLACIA_LOBBY_EMRYS)
+}
+
+script AlohaFromAlola_Script_Reward
+{
+    lock
+    checkitemspace(ITEM_QUEST_ALOHA_FROM_ALOLA_REWARD,1)
+    goto_if_eq(VAR_RESULT,TRUE,AlohaFromAlola_Script_GiveReward)
+    faceplayer
+    msgbox(format("{PLAYER}! I have something quite fascinating for you. Make room in your bag and come talk to me!"),,SPEAKER_EMRYS)
+    closemessage
+    release
+    end
+}
+
+script AlohaFromAlola_Script_GiveReward
+{
+    msgbox(format("{PLAYER}! Thank you again for your help with the exhibition."),,SPEAKER_EMRYS)
+    moveobjecttocoords(LOCALID_PERLACIA_LOBBY_DONOR,9,2,DIR_NORTH)
+    msgbox(format("It was quite successful, and I’m thrilled that the people of Resido are learning more about the cultures of the world through my efforts."),,SPEAKER_EMRYS)
+    msgbox(format("Do you recall my portion of the lecture regarding species specific Zenith…?"),,SPEAKER_EMRYS)
+    msgbox(format("Which hour was that during…? It was so long…"),,SPEAKER_PLAYER,TAIL_THOUGHT,EMOTE_CONFUSE)
+    msgbox(format("No? It’s fine, it was quite dense."),,SPEAKER_EMRYS)
+    msgbox(format("Some Pokémon have special Z-Crystals that only work on them, and give them a very special move. Most of the Pokémon that receive this opportunity aren’t found in Resido, with one exception!"),,SPEAKER_EMRYS)
+    closemessage
+    removeobject(LOCALID_PERLACIA_LOBBY_DONOR)
+    cueobjectplayer(LOCALID_PERLACIA_LOBBY_EMRYS)
+    giveitem(ITEM_QUEST_ALOHA_FROM_ALOLA_REWARD,1)
+    bufferspeciesname(STR_VAR_1,SPECIES_PRIMARINA)
+    bufferitemname(STR_VAR_2,ITEM_QUEST_ALOHA_FROM_ALOLA_REWARD)
+    buffermovename(STR_VAR_3,MOVE_SPARKLING_ARIA)
+    msgbox(format("Give the {STR_VAR_2} to a {STR_VAR_1} knows the move {STR_VAR_3}."),,SPEAKER_EMRYS)
+
+    buffermovename(STR_VAR_3,MOVE_OCEANIC_OPERETTA)
+    msgbox(format("If you activate your Zenith Power during battle, you'll unleash the fearsome {STR_VAR_3}!"),,SPEAKER_EMRYS)
+    msgbox(format("I hope it proves useful."),,SPEAKER_EMRYS)
+    msgbox(format("Presto sells more Z-Crystals too, but I hear those with a discerning eye might find them around the region too!"),,SPEAKER_EMRYS)
+    msgbox(format("Now, I have other exhibits to work on. I’m sure our paths will cross again. Farewell!"),,SPEAKER_EMRYS)
+    closemessage
+    moveobjecttocoords(LOCALID_PERLACIA_LOBBY_EMRYS,9,16,DIR_SOUTH)
+    completequest(QUEST_ALOHAFROMALOLA)
+    fadescreen(FADE_TO_BLACK)
+    playse(SE_EXIT)
+    removeobject(LOCALID_PERLACIA_LOBBY_EMRYS)
+    waitse
+    fadescreen(FADE_FROM_BLACK)
+    release
+    end
 }
