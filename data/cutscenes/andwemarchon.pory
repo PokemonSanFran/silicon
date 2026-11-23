@@ -317,6 +317,7 @@ script AndWeMarchOn_Script_ParadeEnd
     playse(SE_APPLAUSE)
     fadescreenswapbuffers(FADE_TO_BLACK)
     waitse
+    callnative(DestroyVirtualObjects)
     removeobject(LOCALID_PARADE_TALA)
     removeobject(LOCALID_PARADE_FLOAT_1)
     removeobject(LOCALID_PARADE_FLOAT_2)
