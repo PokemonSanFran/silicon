@@ -535,12 +535,15 @@ extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_PuaWalking;
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_PuaSurfing;
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_KeiyingWalking;
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_MagnusWalking;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_FrankWalking;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_TalaWalking;
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_EleanorWalking;
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_NerieneWalking;
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_ShinzoWalking;
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_BaiyaFainted;
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_AdaoraFainted;
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_BaiyaFieldMove;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_TalaFieldMove;
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Comrade_1;
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Comrade_2;
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Comrade_3;
@@ -899,11 +902,14 @@ const struct ObjectEventGraphicsInfo *const gObjectEventGraphicsInfoPointers[NUM
     [OBJ_EVENT_GFX_KEIYING] =                  &gObjectEventGraphicsInfo_KeiyingWalking,
     [OBJ_EVENT_GFX_MAGNUS] =                   &gObjectEventGraphicsInfo_MagnusWalking,
     [OBJ_EVENT_GFX_ELEANOR] =                   &gObjectEventGraphicsInfo_EleanorWalking,
+    [OBJ_EVENT_GFX_TALA] =                   &gObjectEventGraphicsInfo_TalaWalking,
+    [OBJ_EVENT_GFX_FRANK] =                   &gObjectEventGraphicsInfo_FrankWalking,
     [OBJ_EVENT_GFX_NERIENE] =                  &gObjectEventGraphicsInfo_NerieneWalking,
     [OBJ_EVENT_GFX_SHINZO] =                   &gObjectEventGraphicsInfo_ShinzoWalking,
     [OBJ_EVENT_GFX_BAIYA_FAINTED] =              &gObjectEventGraphicsInfo_BaiyaFainted,
     [OBJ_EVENT_GFX_ADAORA_FAINTED] =           &gObjectEventGraphicsInfo_AdaoraFainted,
     [OBJ_EVENT_GFX_BAIYA_FIELD_MOVE] =           &gObjectEventGraphicsInfo_BaiyaFieldMove,
+    [OBJ_EVENT_GFX_TALA_FIELD_MOVE] =           &gObjectEventGraphicsInfo_TalaFieldMove,
     // End silicon
     [OBJ_EVENT_GFX_LIGHT_SPRITE] =             &gObjectEventGraphicsInfo_BallLight,
     [OBJ_EVENT_GFX_APRICORN_TREE] =            &gObjectEventGraphicsInfo_ApricornTree,

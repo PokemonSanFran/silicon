@@ -521,6 +521,12 @@ const u16 gObjectEventPal_KeiyingWalking[] = INCGFX_U16("graphics/object_events/
 const u32 gObjectEventPic_MagnusWalking[] = INCBIN_U32("graphics/object_events/pics/people/magnus/walking.4bpp", "graphics/object_events/pics/people/magnus/running.4bpp");
 const u16 gObjectEventPal_MagnusWalking[] = INCGFX_U16("graphics/object_events/palettes/magnus.pal", ".gbapal");
 
+const u32 gObjectEventPic_FrankWalking[] = INCBIN_U32("graphics/object_events/pics/people/frank/walking.4bpp", "graphics/object_events/pics/people/frank/running.4bpp");
+const u16 gObjectEventPal_FrankWalking[] = INCGFX_U16("graphics/object_events/palettes/frank.pal", ".gbapal");
+
+const u32 gObjectEventPic_TalaWalking[] = INCGFX_U32("graphics/object_events/pics/people/tala/walking.png", ".4bpp", "-mwidth 4 -mheight 4");
+const u16 gObjectEventPal_TalaWalking[] = INCGFX_U16("graphics/object_events/palettes/tala.pal", ".gbapal");
+
 const u32 gObjectEventPic_EleanorWalking[] = INCBIN_U32("graphics/object_events/pics/people/eleanor/walking.4bpp", "graphics/object_events/pics/people/eleanor/running.4bpp");
 const u16 gObjectEventPal_EleanorWalking[] = INCGFX_U16("graphics/object_events/palettes/eleanor.pal", ".gbapal");
 
@@ -588,6 +594,8 @@ const u32 gObjectEventPic_CharlotteNormal[] = INCBIN_U32("graphics/object_events
 const u16 gObjectEventPal_CharlotteNormal[] = INCGFX_U16("graphics/trainers/back_pics/charlotte.png", ".gbapal");
 
 const u32 gObjectEventPic_CharlotteFieldMove[] = INCGFX_U32("graphics/object_events/pics/people/charlotte/fieldMove.png", ".4bpp", "-mwidth 4 -mheight 4");
+
+const u32 gObjectEventPic_TalaFieldMove[] = INCGFX_U32("graphics/object_events/pics/people/tala/fieldMove.png", ".4bpp", "-mwidth 4 -mheight 4");
 
 const u32 gObjectEventPic_Trachy[] = INCGFX_U32("graphics/object_events/pics/people/trachy.png", ".4bpp", "-mwidth 4 -mheight 4");
 const u16 gObjectEventPal_Trachy[] = INCGFX_U16("graphics/object_events/pics/people/trachy.png", ".gbapal");

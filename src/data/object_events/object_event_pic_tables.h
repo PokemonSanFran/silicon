@@ -1878,6 +1878,16 @@ const struct SpriteFrameImage gObjectEventPicTable_MagnusWalking[] =
     overworld_ascending_frames(gObjectEventPic_MagnusWalking,4,4),
 };
 
+const struct SpriteFrameImage gObjectEventPicTable_TalaWalking[] =
+{
+    overworld_ascending_frames(gObjectEventPic_TalaWalking,4,4),
+};
+
+const struct SpriteFrameImage gObjectEventPicTable_FrankWalking[] =
+{
+    overworld_ascending_frames(gObjectEventPic_FrankWalking,4,4),
+};
+
 const struct SpriteFrameImage gObjectEventPicTable_EleanorWalking[] =
 {
     overworld_ascending_frames(gObjectEventPic_EleanorWalking,4,4),
@@ -1987,6 +1997,11 @@ const struct SpriteFrameImage gObjectEventPicTable_CharlotteNormal[] = {
 const struct SpriteFrameImage gObjectEventPicTable_CharlotteFieldMove[] =
 {
     overworld_ascending_frames(gObjectEventPic_CharlotteFieldMove, 4, 4),
+};
+
+const struct SpriteFrameImage gObjectEventPicTable_TalaFieldMove[] =
+{
+    overworld_ascending_frames(gObjectEventPic_TalaFieldMove, 4, 4),
 };
 
 const struct SpriteFrameImage gObjectEventPicTable_Trachy[] = {
