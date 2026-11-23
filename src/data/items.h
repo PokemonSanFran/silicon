@@ -7747,7 +7747,7 @@ const struct ItemInfo gItemsInfo[] =
     #if I_PRICE >= GEN_9
         // Start siliconMerge
         //#define GEM_PRICE 15000
-        #define GEM_PRICE 0 
+        #define GEM_PRICE 0
         // End siliconMerge
     #elif I_PRICE >= GEN_7
         #define GEM_PRICE 4000
@@ -8098,11 +8098,17 @@ const struct ItemInfo gItemsInfo[] =
     },
 
     // Z-Crystals
+    #define Z_CRYSTAL_PRICE 15000 // siliconQuests
 
     [ITEM_NORMALIUM_Z] =
     {
         .name = ITEM_NAME("Normalium Z"),
-        .price = 0,
+        // Start siliconQuests
+        //.price = 0,
+        .price = Z_CRYSTAL_PRICE,
+        .criteriaGoal = QUEST_ALOHAFROMALOLA,
+        .shopCriteriaFunc = ShopCriteriaFunc_QuestCompletion,
+        // End siliconQuests
         .holdEffect = HOLD_EFFECT_Z_CRYSTAL,
         .description = COMPOUND_STRING(
                 "Upgrade Normal-\n"
@@ -8115,14 +8121,17 @@ const struct ItemInfo gItemsInfo[] =
         .secondaryId = TYPE_NORMAL,
         .iconPic = gItemIcon_NormaliumZ,
         .iconPalette = gItemIconPalette_NormaliumZ,
-        .criteriaGoal = 0,
-        .shopCriteriaFunc = ShopCriteriaFunc_TotalBadges,
     },
 
     [ITEM_FIRIUM_Z] =
     {
       .name = ITEM_NAME("Firium Z"),
-      .price = 0,
+      // Start siliconQuests
+      //.price = 0,
+      .price = Z_CRYSTAL_PRICE,
+        .criteriaGoal = QUEST_ALOHAFROMALOLA,
+        .shopCriteriaFunc = ShopCriteriaFunc_QuestCompletion,
+      // End siliconQuests
       .holdEffect = HOLD_EFFECT_Z_CRYSTAL,
       .description = COMPOUND_STRING(
         "Upgrade Fire-\n"
@@ -8140,7 +8149,12 @@ const struct ItemInfo gItemsInfo[] =
     [ITEM_WATERIUM_Z] =
     {
       .name = ITEM_NAME("Waterium Z"),
-      .price = 0,
+      // Start siliconQuests
+      //.price = 0,
+      .price = Z_CRYSTAL_PRICE,
+        .criteriaGoal = QUEST_ALOHAFROMALOLA,
+        .shopCriteriaFunc = ShopCriteriaFunc_QuestCompletion,
+      // End siliconQuests
       .holdEffect = HOLD_EFFECT_Z_CRYSTAL,
       .description = COMPOUND_STRING(
         "Upgrade Water-\n"
@@ -8158,7 +8172,12 @@ const struct ItemInfo gItemsInfo[] =
     [ITEM_ELECTRIUM_Z] =
     {
       .name = ITEM_NAME("Electrium Z"),
-      .price = 0,
+      // Start siliconQuests
+      //.price = 0,
+      .price = Z_CRYSTAL_PRICE,
+        .criteriaGoal = QUEST_ALOHAFROMALOLA,
+        .shopCriteriaFunc = ShopCriteriaFunc_QuestCompletion,
+      // End siliconQuests
       .holdEffect = HOLD_EFFECT_Z_CRYSTAL,
       .description = COMPOUND_STRING(
         "Upgrade Electric-\n"
@@ -8176,7 +8195,12 @@ const struct ItemInfo gItemsInfo[] =
     [ITEM_GRASSIUM_Z] =
     {
       .name = ITEM_NAME("Grassium Z"),
-      .price = 0,
+      // Start siliconQuests
+      //.price = 0,
+      .price = Z_CRYSTAL_PRICE,
+        .criteriaGoal = QUEST_ALOHAFROMALOLA,
+        .shopCriteriaFunc = ShopCriteriaFunc_QuestCompletion,
+      // End siliconQuests
       .holdEffect = HOLD_EFFECT_Z_CRYSTAL,
       .description = COMPOUND_STRING(
         "Upgrade Grass-\n"
@@ -8194,7 +8218,12 @@ const struct ItemInfo gItemsInfo[] =
     [ITEM_ICIUM_Z] =
     {
       .name = ITEM_NAME("Icium Z"),
-      .price = 0,
+      // Start siliconQuests
+      //.price = 0,
+      .price = Z_CRYSTAL_PRICE,
+        .criteriaGoal = QUEST_ALOHAFROMALOLA,
+        .shopCriteriaFunc = ShopCriteriaFunc_QuestCompletion,
+      // End siliconQuests
       .holdEffect = HOLD_EFFECT_Z_CRYSTAL,
       .description = COMPOUND_STRING(
         "Upgrade Ice-\n"
@@ -8212,7 +8241,12 @@ const struct ItemInfo gItemsInfo[] =
     [ITEM_FIGHTINIUM_Z] =
     {
       .name = ITEM_NAME("Fightinium Z"),
-      .price = 0,
+      // Start siliconQuests
+      //.price = 0,
+      .price = Z_CRYSTAL_PRICE,
+        .criteriaGoal = QUEST_ALOHAFROMALOLA,
+        .shopCriteriaFunc = ShopCriteriaFunc_QuestCompletion,
+      // End siliconQuests
       .holdEffect = HOLD_EFFECT_Z_CRYSTAL,
       .description = COMPOUND_STRING(
         "Upgrade Fighting-\n"
@@ -8230,7 +8264,12 @@ const struct ItemInfo gItemsInfo[] =
     [ITEM_POISONIUM_Z] =
     {
       .name = ITEM_NAME("Poisonium Z"),
-      .price = 0,
+      // Start siliconQuests
+      //.price = 0,
+      .price = Z_CRYSTAL_PRICE,
+        .criteriaGoal = QUEST_ALOHAFROMALOLA,
+        .shopCriteriaFunc = ShopCriteriaFunc_QuestCompletion,
+      // End siliconQuests
       .holdEffect = HOLD_EFFECT_Z_CRYSTAL,
       .description = COMPOUND_STRING(
         "Upgrade Poison-\n"
@@ -8248,7 +8287,12 @@ const struct ItemInfo gItemsInfo[] =
     [ITEM_GROUNDIUM_Z] =
     {
       .name = ITEM_NAME("Groundium Z"),
-      .price = 0,
+      // Start siliconQuests
+      //.price = 0,
+      .price = Z_CRYSTAL_PRICE,
+        .criteriaGoal = QUEST_ALOHAFROMALOLA,
+        .shopCriteriaFunc = ShopCriteriaFunc_QuestCompletion,
+      // End siliconQuests
       .holdEffect = HOLD_EFFECT_Z_CRYSTAL,
       .description = COMPOUND_STRING(
         "Upgrade Ground-\n"
@@ -8266,7 +8310,12 @@ const struct ItemInfo gItemsInfo[] =
     [ITEM_FLYINIUM_Z] =
     {
       .name = ITEM_NAME("Flyinium Z"),
-      .price = 0,
+      // Start siliconQuests
+      //.price = 0,
+      .price = Z_CRYSTAL_PRICE,
+        .criteriaGoal = QUEST_ALOHAFROMALOLA,
+        .shopCriteriaFunc = ShopCriteriaFunc_QuestCompletion,
+      // End siliconQuests
       .holdEffect = HOLD_EFFECT_Z_CRYSTAL,
       .description = COMPOUND_STRING(
         "Upgrade Flying-\n"
@@ -8284,7 +8333,12 @@ const struct ItemInfo gItemsInfo[] =
     [ITEM_PSYCHIUM_Z] =
     {
       .name = ITEM_NAME("Psychium Z"),
-      .price = 0,
+      // Start siliconQuests
+      //.price = 0,
+      .price = Z_CRYSTAL_PRICE,
+        .criteriaGoal = QUEST_ALOHAFROMALOLA,
+        .shopCriteriaFunc = ShopCriteriaFunc_QuestCompletion,
+      // End siliconQuests
       .holdEffect = HOLD_EFFECT_Z_CRYSTAL,
       .description = COMPOUND_STRING(
         "Upgrade Psychic-\n"
@@ -8302,7 +8356,12 @@ const struct ItemInfo gItemsInfo[] =
     [ITEM_BUGINIUM_Z] =
     {
       .name = ITEM_NAME("Buginium Z"),
-      .price = 0,
+      // Start siliconQuests
+      //.price = 0,
+      .price = Z_CRYSTAL_PRICE,
+        .criteriaGoal = QUEST_ALOHAFROMALOLA,
+        .shopCriteriaFunc = ShopCriteriaFunc_QuestCompletion,
+      // End siliconQuests
       .holdEffect = HOLD_EFFECT_Z_CRYSTAL,
       .description = COMPOUND_STRING(
         "Upgrade Bug-\n"
@@ -8320,7 +8379,12 @@ const struct ItemInfo gItemsInfo[] =
     [ITEM_ROCKIUM_Z] =
     {
       .name = ITEM_NAME("Rockium Z"),
-      .price = 0,
+      // Start siliconQuests
+      //.price = 0,
+      .price = Z_CRYSTAL_PRICE,
+        .criteriaGoal = QUEST_ALOHAFROMALOLA,
+        .shopCriteriaFunc = ShopCriteriaFunc_QuestCompletion,
+      // End siliconQuests
       .holdEffect = HOLD_EFFECT_Z_CRYSTAL,
       .description = COMPOUND_STRING(
         "Upgrade Rock-\n"
@@ -8338,7 +8402,12 @@ const struct ItemInfo gItemsInfo[] =
     [ITEM_GHOSTIUM_Z] =
     {
       .name = ITEM_NAME("Ghostium Z"),
-      .price = 0,
+      // Start siliconQuests
+      //.price = 0,
+      .price = Z_CRYSTAL_PRICE,
+        .criteriaGoal = QUEST_ALOHAFROMALOLA,
+        .shopCriteriaFunc = ShopCriteriaFunc_QuestCompletion,
+      // End siliconQuests
       .holdEffect = HOLD_EFFECT_Z_CRYSTAL,
       .description = COMPOUND_STRING(
         "Upgrade Ghost-\n"
@@ -8356,7 +8425,12 @@ const struct ItemInfo gItemsInfo[] =
     [ITEM_DRAGONIUM_Z] =
     {
       .name = ITEM_NAME("Dragonium Z"),
-      .price = 0,
+      // Start siliconQuests
+      //.price = 0,
+      .price = Z_CRYSTAL_PRICE,
+        .criteriaGoal = QUEST_ALOHAFROMALOLA,
+        .shopCriteriaFunc = ShopCriteriaFunc_QuestCompletion,
+      // End siliconQuests
       .holdEffect = HOLD_EFFECT_Z_CRYSTAL,
       .description = COMPOUND_STRING(
         "Upgrade Dragon-\n"
@@ -8374,7 +8448,12 @@ const struct ItemInfo gItemsInfo[] =
     [ITEM_DARKINIUM_Z] =
     {
       .name = ITEM_NAME("Darkinium Z"),
-      .price = 0,
+      // Start siliconQuests
+      //.price = 0,
+      .price = Z_CRYSTAL_PRICE,
+        .criteriaGoal = QUEST_ALOHAFROMALOLA,
+        .shopCriteriaFunc = ShopCriteriaFunc_QuestCompletion,
+      // End siliconQuests
       .holdEffect = HOLD_EFFECT_Z_CRYSTAL,
       .description = COMPOUND_STRING(
         "Upgrade Dark-\n"
@@ -8392,7 +8471,12 @@ const struct ItemInfo gItemsInfo[] =
     [ITEM_STEELIUM_Z] =
     {
       .name = ITEM_NAME("Steelium Z"),
-      .price = 0,
+      // Start siliconQuests
+      //.price = 0,
+      .price = Z_CRYSTAL_PRICE,
+        .criteriaGoal = QUEST_ALOHAFROMALOLA,
+        .shopCriteriaFunc = ShopCriteriaFunc_QuestCompletion,
+      // End siliconQuests
       .holdEffect = HOLD_EFFECT_Z_CRYSTAL,
       .description = COMPOUND_STRING(
         "Upgrade Steel-\n"
@@ -8410,7 +8494,12 @@ const struct ItemInfo gItemsInfo[] =
     [ITEM_FAIRIUM_Z] =
     {
       .name = ITEM_NAME("Fairium Z"),
-      .price = 0,
+      // Start siliconQuests
+      //.price = 0,
+      .price = Z_CRYSTAL_PRICE,
+        .criteriaGoal = QUEST_ALOHAFROMALOLA,
+        .shopCriteriaFunc = ShopCriteriaFunc_QuestCompletion,
+      // End siliconQuests
       .holdEffect = HOLD_EFFECT_Z_CRYSTAL,
       .description = COMPOUND_STRING(
         "Upgrade Fairy-\n"
@@ -8536,7 +8625,12 @@ const struct ItemInfo gItemsInfo[] =
     [ITEM_PRIMARIUM_Z] =
     {
       .name = ITEM_NAME("Primarium Z"),
-      .price = 0,
+      // Start siliconQuests
+      //.price = 0,
+      .price = Z_CRYSTAL_PRICE,
+        .criteriaGoal = QUEST_ALOHAFROMALOLA,
+        .shopCriteriaFunc = ShopCriteriaFunc_QuestCompletion,
+      // End siliconQuests
       .holdEffect = HOLD_EFFECT_Z_CRYSTAL,
       .description = COMPOUND_STRING(
         "Upgrade Primarina's\n"
