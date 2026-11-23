@@ -471,7 +471,7 @@
 #define P_FAMILY_CELESTEELA              P_GEN_7_POKEMON
 #define P_FAMILY_KARTANA                 P_GEN_7_POKEMON
 #define P_FAMILY_GUZZLORD                P_GEN_7_POKEMON
-#define P_FAMILY_NECROZMA                FALSE
+#define P_FAMILY_NECROZMA                TRUE
 #define P_FAMILY_MAGEARNA                FALSE
 #define P_FAMILY_MARSHADOW               FALSE
 #define P_FAMILY_POIPOLE                 P_GEN_7_POKEMON
