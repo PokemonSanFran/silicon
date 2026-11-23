@@ -337,10 +337,27 @@ Level: 100
 
 === PARTNER_ELEANOR ===
 Name: Eleanor
-Class: Leader 
 Pic: Eleanor 
 Gender: Female 
 Music: Female 
 
 Swampert @ Swampertite
+Level: 100
+
+=== PARTNER_FRANK ===
+Name: Frank
+Pic: Frank 
+Gender: Male 
+Music: Male 
+
+Magmortar @ Firium Z  
+Level: 100
+
+=== PARTNER_TALA ===
+Name: Tala 
+Pic: Tala 
+Gender: Female 
+Music: Female 
+
+Pidgeot @ Pidgeotite
 Level: 100
