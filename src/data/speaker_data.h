@@ -3207,4 +3207,25 @@ static const struct SpeakerData sSpeakerData[NUM_SPEAKERS] =
         .gender = MALE,
         .speakerIcon = SPEAKER_ICON_WOMAN,
     },
+    [SPEAKER_MUSEUM_DONOR1] =
+    {
+        .name = COMPOUND_STRING("Museumdonor1"),
+        .title = COMPOUND_STRING("Museum Donor"),
+        .gender = MALE,
+        .speakerIcon = SPEAKER_ICON_JANINE,
+    },
+    [SPEAKER_MUSEUM_DONOR2] =
+    {
+        .name = COMPOUND_STRING("Museumdonor2"),
+        .title = COMPOUND_STRING("Museum Donor"),
+        .gender = MALE,
+        .speakerIcon = SPEAKER_ICON_JUGGLER,
+    },
+    [SPEAKER_MUSEUM_DONOR3] =
+    {
+        .name = COMPOUND_STRING("Museumdonor3"),
+        .title = COMPOUND_STRING("Museum Donor"),
+        .gender = MALE,
+        .speakerIcon = SPEAKER_ICON_EUSINE,
+    },
 };
