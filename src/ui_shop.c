@@ -1166,9 +1166,7 @@ u32 ShopInventory_ProcessCategoryCounts(u8 *categoryCounts)
 
 bool32 ShopPurchase_IsCategoryOneTimePurchase(enum ShopMenuCategories category)
 {
-    return (category == SHOP_CATEGORY_TMS
-            || category == SHOP_CATEGORY_MEGA_STONES
-            || category == SHOP_CATEGORY_Z_CRYSTALS);
+    return (category == SHOP_CATEGORY_TMS);
 }
 
 bool32 ShopPurchase_IsItemOneTimePurchase(u32 itemId)
