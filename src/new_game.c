@@ -2,6 +2,7 @@
 #include "clock.h"
 #include "new_game.h"
 #include "random.h"
+#include "quest_logic.h" // siliconQuests
 #include "clock.h"
 #include "pokemon.h"
 #include "roamer.h"
@@ -285,6 +286,7 @@ void NewGameInitData(void)
     ClearFollowerNPCData();
     HiddenGrotto_SetAllSecretFlags(); // hiddenGrotto
     ResetSavedGrottoMon();
+    AlolaFromAlola_HideAllOverworldZCrystals(); //siliconQuests
 }
 
 static void ResetMiniGamesRecords(void)
