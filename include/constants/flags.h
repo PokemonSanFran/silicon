@@ -1353,23 +1353,6 @@
 #define FLAG_ITEM_ROUTE_133_BIG_PEARL                                0x28E
 #define FLAG_ITEM_ROUTE_133_STAR_PIECE                               0x28F
 
-#define FLAG_SILICON_UNUSED_0x280                                    0x280
-#define FLAG_SILICON_UNUSED_0x281                                    0x281
-#define FLAG_SILICON_UNUSED_0x282                                    0x282
-#define FLAG_SILICON_UNUSED_0x283                                    0x283
-#define FLAG_SILICON_UNUSED_0x284                                    0x284
-#define FLAG_SILICON_UNUSED_0x285                                    0x285
-#define FLAG_SILICON_UNUSED_0x286                                    0x286
-#define FLAG_SILICON_UNUSED_0x287                                    0x287
-#define FLAG_SILICON_UNUSED_0x288                                    0x288
-#define FLAG_SILICON_UNUSED_0x289                                    0x289
-#define FLAG_SILICON_UNUSED_0x28A                                    0x28A
-#define FLAG_SILICON_UNUSED_0x28B                                    0x28B
-#define FLAG_SILICON_UNUSED_0x28C                                    0x28C
-#define FLAG_SILICON_UNUSED_0x28D                                    0x28D
-#define FLAG_SILICON_UNUSED_0x28E                                    0x28E
-#define FLAG_SILICON_UNUSED_0x28F                                    0x28F
-
 #define FLAG_ITEM_NORMALIUM_Z                                        0x280
 #define FLAG_ITEM_FIRIUM_Z                                           0x281
 #define FLAG_ITEM_WATERIUM_Z                                         0x282
