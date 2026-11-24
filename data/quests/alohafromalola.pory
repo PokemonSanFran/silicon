@@ -336,6 +336,7 @@ script AlohaFromAlola_Script_GiveReward
     msgbox(format("Presto sells more Z-Crystals too, but I hear those with a discerning eye might find them around the region too!"),,SPEAKER_EMRYS)
     msgbox(format("Now, I have other exhibits to work on. I’m sure our paths will cross again. Farewell!"),,SPEAKER_EMRYS)
     closemessage
+    callnative(AlolaFromAlola_ShowAllOverworldZCrystals)
     moveobjecttocoords(LOCALID_PERLACIA_LOBBY_EMRYS,9,16,DIR_SOUTH)
     completequest(QUEST_ALOHAFROMALOLA)
     fadescreen(FADE_TO_BLACK)
