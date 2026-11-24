@@ -75,6 +75,7 @@ void DebugQuest_InstallNatureProbes(u8 state);
 void DebugQuest_ManOfManyHats(u8 state);
 void DebugQuest_WallaceArmy(u8 state);
 void DebugQuest_BoyWhoCriesWithWolves(u8 state);
+void DebugQuest_AlohaFromAlola(u8 state);
 
 void AwardPartyMonChampionRibbon(void);
 void Script_CheckIfAnyMonHasChampionRibbon(void);
@@ -114,4 +115,5 @@ bool32 Quest_ManOfManyHats_ShouldStayBoba(void);
 bool8 AlohaFromAlola_GetPartyStatus(void);
 bool32 IsCurrentBattleAlolaExhibition(void);
 void TryIncrementAlohaFromAlolaQuestState(enum BattlerId battler);
+void AlolaFromAlola_HideAllOverworldZCrystals(void);
 #endif //GUARD_QUESTLOGIC_H

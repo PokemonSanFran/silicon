@@ -6770,6 +6770,91 @@ void DebugQuest_WallaceArmy(u8 state)
 // Quest: Alola from Alola
 // ***********************************************************************
 
+void DebugQuest_AlohaFromAlola_GiveMon(void)
+{
+    struct PokemonTemplate monTemplate =
+    {
+        .level = 50,
+        .nature = NATURE_RANDOM,
+        .abilityNum = NUM_ABILITY_PERSONALITY,
+        .gender = MON_GENDER_RANDOM,
+        .isShiny = SHINY_MODE_RANDOM,
+        .moves= {MOVE_CELEBRATE,MOVE_NONE,MOVE_NONE,MOVE_NONE},
+        .evs = {85,85,85,85,85,85},
+        .ivs = {0,0,0,0,0,0},
+        .origin = GIFTMON_ORIGIN,
+    };
+
+    for (u32 monIndex = 0; monIndex < ALOHAFROMALOLA_PARTY_REQUIREMENT; monIndex++)
+    {
+        u32 species = SPECIES_MEWTWO;
+        while (IsSpeciesFromAlola(species) == FALSE)
+            species = Random() % RESIDO_DEX_COUNT;
+
+        monTemplate.species = species;
+        ScriptGiveMonParameterized(B_SIDE_PLAYER,PARTY_SIZE,&monTemplate);
+    }
+}
+
+void AlolaFromAlola_ChangeAllOverworldZCrystals(bool32 shouldHide)
+{
+    for (u32 crystalIndex = 0; crystalIndex < NUMBER_OF_MON_TYPES; crystalIndex++)
+    {
+        u32 flag = gTypesInfo[crystalIndex].zCrystalItemFlag;
+
+        if (flag == 0)
+            continue;
+
+        if (shouldHide)
+            FlagSet(flag);
+        else
+            FlagClear(flag);
+    }
+}
+
+void AlolaFromAlola_HideAllOverworldZCrystals(void)
+{
+    AlolaFromAlola_ChangeAllOverworldZCrystals(TRUE);
+}
+
+void AlolaFromAlola_ShowAllOverworldZCrystals(void)
+{
+    AlolaFromAlola_ChangeAllOverworldZCrystals(FALSE);
+}
+
+
+void DebugQuest_AlohaFromAlola(u8 state)
+{
+    switch (state)
+    {
+        case STATE_QUEST_ALOHAFROMALOLA_NOT_STARTED:
+            FlagSet(FLAG_SYS_STARTER_APPS_GET);
+            JumpPlayerTo_YoungPadawan(JUMP_DEBUG);
+            break;
+        case STATE_QUEST_ALOHAFROMALOLA_STARTED:
+            VarSet(VAR_EMRYS_STATE,EMRYS_QUEST_PROGRESS_LOST_EMRYS_Z_RING);
+            SetTrainerDiscovered(TRAINER_EMRYS_ALOHAFROMALOLA_1);
+            QuestMenu_ScriptSetActive(QUEST_ALOHAFROMALOLA);
+            break;
+        case STATE_QUEST_ALOHAFROMALOLA_NOT_READY:
+            VarSet(VAR_EMRYS_STATE,EMRYS_QUEST_PROGRESS_USED_Z_MOVE);
+            break;
+        case STATE_QUEST_ALOHAFROMALOLA_HAS_MONS:
+            DebugQuest_AlohaFromAlola_GiveMon();
+            break;
+        case STATE_QUEST_ALOHAFROMALOLA_REWARD:
+            VarSet(VAR_EMRYS_STATE,EMRYS_QUEST_PROGRESS_EXHIBITION_BATTLE_END);
+            SetTrainerDiscovered(TRAINER_EMRYS_ALOHAFROMALOLA_2);
+            AddMoney(&gSaveBlock1Ptr->money,MONEY_QUEST_ALOHA_FROM_ALOLA_REWARD);
+            QuestMenu_ScriptSetReward(QUEST_ALOHAFROMALOLA);
+            break;
+        case STATE_QUEST_ALOHAFROMALOLA_COMPLETE:
+            AlolaFromAlola_ShowAllOverworldZCrystals();
+            AddBagItem(ITEM_QUEST_ALOHA_FROM_ALOLA_REWARD,1);
+            QuestMenu_ScriptSetComplete(QUEST_ALOHAFROMALOLA);
+            break;
+    }
+}
 bool8 AlohaFromAlola_GetPartyStatus(void)
 {
     u32 partyCount = gPartiesCount[B_TRAINER_PLAYER];

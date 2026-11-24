@@ -1370,6 +1370,23 @@
 #define FLAG_SILICON_UNUSED_0x28E                                    0x28E
 #define FLAG_SILICON_UNUSED_0x28F                                    0x28F
 
+#define FLAG_ITEM_NORMALIUM_Z                                        0x280
+#define FLAG_ITEM_FIRIUM_Z                                           0x281
+#define FLAG_ITEM_WATERIUM_Z                                         0x282
+#define FLAG_ITEM_ELECTRIUM_Z                                        0x283
+#define FLAG_ITEM_GRASSIUM_Z                                         0x284
+#define FLAG_ITEM_ICIUM_Z                                            0x285
+#define FLAG_ITEM_FIGHTINIUM_Z                                       0x286
+#define FLAG_ITEM_POISONIUM_Z                                        0x287
+#define FLAG_ITEM_GROUNDIUM_Z                                        0x288
+#define FLAG_ITEM_FLYINIUM_Z                                         0x289
+#define FLAG_ITEM_PSYCHIUM_Z                                         0x28A
+#define FLAG_ITEM_BUGINIUM_Z                                         0x28B
+#define FLAG_ITEM_ROCKIUM_Z                                          0x28C
+#define FLAG_ITEM_GHOSTIUM_Z                                         0x28D
+#define FLAG_ITEM_DRAGONIUM_Z                                        0x28E
+#define FLAG_ITEM_DARKINIUM_Z                                        0x28F
+
 #define FLAG_ITEM_PETALBURG_CITY_MAX_REVIVE                          0x290
 #define FLAG_ITEM_PETALBURG_CITY_ETHER                               0x291
 #define FLAG_ITEM_RUSTBORO_CITY_X_DEFEND                             0x292
@@ -1387,8 +1404,8 @@
 #define FLAG_ITEM_GRANITE_CAVE_B2F_REPEL                             0x29E
 #define FLAG_ITEM_GRANITE_CAVE_B2F_RARE_CANDY                        0x29F
 
-#define FLAG_SILICON_UNUSED_0x290                                    0x290
-#define FLAG_SILICON_UNUSED_0x291                                    0x291
+#define FLAG_ITEM_STEELIUM_Z                                         0x290
+#define FLAG_ITEM_FAIRIUM_Z                                          0x291
 #define FLAG_SILICON_UNUSED_0x292                                    0x292
 #define FLAG_SILICON_UNUSED_0x293                                    0x293
 #define FLAG_SILICON_UNUSED_0x294                                    0x294
