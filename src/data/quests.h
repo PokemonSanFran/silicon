@@ -3856,7 +3856,52 @@ const struct SideQuest sSideQuests[QUEST_COUNT] =
         .sprite = OBJ_EVENT_GFX_EMRYS,
         .spritetype = QUEST_SPRITE_TYPE_OBJECT,
         .subquests = NULL,
-        .numSubquests = 0
+        .numSubquests = 0,
+        .states =
+        {
+            [STATE_QUEST_ALOHAFROMALOLA_NOT_STARTED] =
+            {
+                .name = COMPOUND_STRING("Not Started"),
+                .setupFunc = DebugQuest_AlohaFromAlola,
+                side_quest_map(MAP_QUEST_ALOHAFROMALOLA_BEGINNING),
+                .warpId = WARP_ID_PERLACIA_CITY_TO_GYM_1,
+            },
+            [STATE_QUEST_ALOHAFROMALOLA_STARTED] =
+            {
+                .name = COMPOUND_STRING("Started"),
+                .setupFunc = DebugQuest_AlohaFromAlola,
+                side_quest_map(MAP_QUEST_ALOHAFROMALOLA_BEGINNING),
+                .warpId = WARP_ID_PERLACIA_CITY_TO_GYM_1,
+            },
+            [STATE_QUEST_ALOHAFROMALOLA_NOT_READY] =
+            {
+                .name = COMPOUND_STRING("Not Ready"),
+                .setupFunc = DebugQuest_AlohaFromAlola,
+                side_quest_map(MAP_QUEST_ALOHAFROMALOLA_BATTLE),
+                .warpId = WARP_ID_PERLACIA_EXHIBITION_TO_MUSEUM,
+            },
+            [STATE_QUEST_ALOHAFROMALOLA_HAS_MONS] =
+            {
+                .name = COMPOUND_STRING("Has Mons"),
+                .setupFunc = DebugQuest_AlohaFromAlola,
+                side_quest_map(MAP_QUEST_ALOHAFROMALOLA_BATTLE),
+                .warpId = WARP_ID_PERLACIA_EXHIBITION_TO_MUSEUM,
+            },
+            [STATE_QUEST_ALOHAFROMALOLA_REWARD] =
+            {
+                .name = COMPOUND_STRING("Reward"),
+                .setupFunc = DebugQuest_AlohaFromAlola,
+                side_quest_map(MAP_QUEST_ALOHAFROMALOLA_REWARD),
+                .warpId = WARP_ID_PERLACIA_MUSEUM_TO_EXHIBITION,
+            },
+            [STATE_QUEST_ALOHAFROMALOLA_COMPLETE] =
+            {
+                .name = COMPOUND_STRING("Complete"),
+                .setupFunc = DebugQuest_AlohaFromAlola,
+                side_quest_map(MAP_QUEST_ALOHAFROMALOLA_REWARD),
+                .warpId = WARP_ID_PERLACIA_MUSEUM_TO_EXHIBITION,
+            },
+        },
     },
     [QUEST_BUILDINGANEXHIBIT] =
     {
