@@ -202,7 +202,7 @@
       "dest_warp_id": "WARP_ID_CONSTRUCTION_TO_ROUTE2"
     },
     {
-      "warp_id": "WARP_ID_ROUTE2_TO_SHARPRISE_STADIUM",
+        "warp_id": "WARP_ID_ROUTE2_TO_SHARPRISE_STADIUM",
       "x": 21,
       "y": 29,
       "elevation": 0,
@@ -210,7 +210,7 @@
       "dest_warp_id": "WARP_ID_SHARPRISE_STADIUM_TO_ROUTE2_LEFT"
     },
     {
-      "warp_id": "WARP_ID_ROUTE2_TO_GROTTO_A",
+        "warp_id": "WARP_ID_ROUTE2_TO_GROTTO_A",
       "x": 5,
       "y": 30,
       "elevation": 0,
