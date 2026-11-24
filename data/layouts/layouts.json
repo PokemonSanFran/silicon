@@ -10462,7 +10462,7 @@
       "secondary_tileset": "gTileset_Volcano",
       "border_filepath": "data/layouts/Route12/border.bin",
       "blockdata_filepath": "data/layouts/Route12/map.bin",
-      "border_height": 2,
+      "border_height": 3,
       "border_width": 2,
       "layout_version": "emerald"
     },
