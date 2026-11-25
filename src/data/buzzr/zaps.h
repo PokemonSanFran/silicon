@@ -2387,4 +2387,13 @@ const struct Zap gZaps[] =
         .dislikeCount = COMPOUND_STRING(""),
         .likeCount = COMPOUND_STRING(""),
     },
+    [ZAP_QUEST_EMRYS_BUILDINGANEXHIBIT] =
+    {
+        .userId = BUZZR_USER_EMRYS,
+        .content = COMPOUND_STRING("The {STR_VAR_1} Museum is looking to procure donations for an upcoming exhibit showcasing the history of the {STR_VAR_2}. Collectors, please reach out!"),
+        .isPrivate = FALSE,
+        .criteria = ZapCriteria_HasPlayerBattledTala,
+        .dislikeCount = COMPOUND_STRING(""),
+        .likeCount = COMPOUND_STRING(""),
+    },
 };

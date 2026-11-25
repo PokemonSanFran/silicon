@@ -2367,5 +2367,9 @@ static void Buzzr_ExpandStrings(enum BuzzrZapIds zapId)
         case ZAP_QUEST_ALOHAFROMALOLA_ORIGINAL_ANNOUNCEMENT:
             GetMapName(gStringVar1,Overworld_GetMapHeaderByGroupAndId(MAP_GROUP(MAP_QUEST_ALOHAFROMALOLA_REWARD),MAP_NUM(MAP_QUEST_ALOHAFROMALOLA_REWARD))->regionMapSectionId,0);
             break;
+        case ZAP_QUEST_EMRYS_BUILDINGANEXHIBIT:
+            GetMapName(gStringVar1,Overworld_GetMapHeaderByGroupAndId(MAP_GROUP(MAP_PERLACIA_CITY_EXHIBITION),MAP_NUM(MAP_PERLACIA_CITY_EXHIBITION))->regionMapSectionId,0);
+            GetMapName(gStringVar1,Overworld_GetMapHeaderByGroupAndId(MAP_GROUP(MAP_QUEST_BUILDINGANEXHIBIT_SUBJECT),MAP_NUM(MAP_QUEST_BUILDINGANEXHIBIT_SUBJECT))->regionMapSectionId,0);
+            break;
     }
 }
