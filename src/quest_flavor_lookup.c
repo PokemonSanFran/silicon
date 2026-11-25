@@ -473,6 +473,10 @@ const u8 *GetQuestDesc_CulturalPurity(void)
 const u8 *GetQuestDesc_HybridCulture(void)
 {
     u32 flag = ReturnQuestState(QUEST_HYBRIDCULTURE);
+
+    if (flag == FLAG_GET_REWARD)
+        GetMapName(gStringVar1,Overworld_GetMapHeaderByGroupAndId(MAP_GROUP(MAP_QUEST_HYBRID_CULTURE_START),MAP_NUM(MAP_QUEST_HYBRID_CULTURE_START))->regionMapSectionId,0);
+
     StringExpandPlaceholders(gStringVar4,sSideQuests[QUEST_HYBRIDCULTURE].desc[flag]);
 
     if (flag != FLAG_GET_ACTIVE)
@@ -715,6 +719,16 @@ const u8 *GetQuestDesc_AlohaFromAlola(void)
     }
 
     StringExpandPlaceholders(gStringVar4,sSideQuests[QUEST_ALOHAFROMALOLA].desc[flag]);
+    return gStringVar4;
+}
+
+const u8 *GetQuestDesc_BuildingAnExhibit(void)
+{
+    enum QuestCases flag = ReturnQuestState(QUEST_BUILDINGANEXHIBIT);
+
+    GetMapName(gStringVar1,Overworld_GetMapHeaderByGroupAndId(MAP_GROUP(MAP_QUEST_BUILDINGANEXHIBIT_SUBJECT),MAP_NUM(MAP_QUEST_BUILDINGANEXHIBIT_SUBJECT))->regionMapSectionId,0);
+
+    StringExpandPlaceholders(gStringVar4,sSideQuests[QUEST_BUILDINGANEXHIBIT].desc[flag]);
     return gStringVar4;
 }
 

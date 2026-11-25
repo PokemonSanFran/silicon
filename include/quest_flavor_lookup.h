@@ -35,6 +35,7 @@ const u8 *GetQuestDesc_HowDisappointing(void);
 const u8 *GetQuestDesc_Letsburnthismotherdown(void);
 const u8 *GetQuestDesc_AngelDelivery(void);
 const u8 *GetQuestDesc_AlohaFromAlola(void);
+const u8 *GetQuestDesc_BuildingAnExhibit(void);
 
 struct TextComponent
 {

@@ -53,11 +53,6 @@ extern const u8 gText_Quest_RecruitLocalArtists_Desc[];
 extern const u8 gText_Quest_RecruitLocalArtists_DoneDesc[];
 extern const u8 gText_Quest_RecruitLocalArtists_Map[];
 
-extern const u8 gText_Quest_BuildingAnExhibit_Name[];
-extern const u8 gText_Quest_BuildingAnExhibit_Desc[];
-extern const u8 gText_Quest_BuildingAnExhibit_DoneDesc[];
-extern const u8 gText_Quest_BuildingAnExhibit_Map[];
-
 extern const u8 gText_Quest_UnknownPuaQuestA_Name[];
 extern const u8 gText_Quest_UnknownPuaQuestA_Desc[];
 extern const u8 gText_Quest_UnknownPuaQuestA_DoneDesc[];
@@ -411,19 +406,6 @@ extern const u8 gText_Quest_HybridCulture_Sub2_Map[];
 extern const u8 gText_Quest_HybridCulture_Sub3_Name[];
 extern const u8 gText_Quest_HybridCulture_Sub3_Desc[];
 extern const u8 gText_Quest_HybridCulture_Sub3_Map[];
-
-extern const u8 gText_Quest_BuildingAnExhibit_Sub1_Name[];
-extern const u8 gText_Quest_BuildingAnExhibit_Sub1_Desc[];
-extern const u8 gText_Quest_BuildingAnExhibit_Sub1_Map[];
-extern const u8 gText_Quest_BuildingAnExhibit_Sub2_Name[];
-extern const u8 gText_Quest_BuildingAnExhibit_Sub2_Desc[];
-extern const u8 gText_Quest_BuildingAnExhibit_Sub2_Map[];
-extern const u8 gText_Quest_BuildingAnExhibit_Sub3_Name[];
-extern const u8 gText_Quest_BuildingAnExhibit_Sub3_Desc[];
-extern const u8 gText_Quest_BuildingAnExhibit_Sub3_Map[];
-extern const u8 gText_Quest_BuildingAnExhibit_Sub4_Name[];
-extern const u8 gText_Quest_BuildingAnExhibit_Sub4_Desc[];
-extern const u8 gText_Quest_BuildingAnExhibit_Sub4_Map[];
 
 extern const u8 gText_Quest_ContractorPorygon_Sub1_Name[];
 extern const u8 gText_Quest_ContractorPorygon_Sub1_Desc[];

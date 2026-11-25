@@ -58,11 +58,6 @@ const u8 gText_Quest_HybridCulture_Desc[] =_("Shinzo wants to better understandn
 const u8 gText_Quest_HybridCulture_DoneDesc[] =_("Shinzo has a lot to learn about Resido\nculture, but is greateful for your\nhelp.");
 const u8 gText_Quest_HybridCulture_Map[] =_("ToraTown");
 
-const u8 gText_Quest_BuildingAnExhibit_Name[] = _("Building an Exhibit");
-const u8 gText_Quest_BuildingAnExhibit_Desc[] =_("Description");
-const u8 gText_Quest_BuildingAnExhibit_DoneDesc[] =_("DoneDescription");
-const u8 gText_Quest_BuildingAnExhibit_Map[] =_("PerlaciaCity");
-
 const u8 gText_Quest_UnknownPuaQuestA_Name[] = _("Unknown Pua Quest A");
 const u8 gText_Quest_UnknownPuaQuestA_Desc[] =_("Description");
 const u8 gText_Quest_UnknownPuaQuestA_DoneDesc[] =_("DoneDescription");
@@ -398,19 +393,6 @@ const u8 gText_Quest_HybridCulture_Sub2_Map[] = _("ToraTown");
 const u8 gText_Quest_HybridCulture_Sub3_Name[] = _("Traditions");
 const u8 gText_Quest_HybridCulture_Sub3_Desc[] = _("The best way to get berries only found\nin Sinnoh is to defeat their Trainers in\nbattle.");
 const u8 gText_Quest_HybridCulture_Sub3_Map[] = _("ToraTown");
-
-const u8 gText_Quest_BuildingAnExhibit_Sub1_Name[] = _("Ticket Stub");
-const u8 gText_Quest_BuildingAnExhibit_Sub1_Desc[] = _("Sub Lorem");
-const u8 gText_Quest_BuildingAnExhibit_Sub1_Map[] = _("CresaltaVista");
-const u8 gText_Quest_BuildingAnExhibit_Sub2_Name[] = _("Champion's Cape");
-const u8 gText_Quest_BuildingAnExhibit_Sub2_Desc[] = _("Sub Lorem");
-const u8 gText_Quest_BuildingAnExhibit_Sub2_Map[] = _("HalerbaCity");
-const u8 gText_Quest_BuildingAnExhibit_Sub3_Name[] = _("Toxic Spikes");
-const u8 gText_Quest_BuildingAnExhibit_Sub3_Desc[] = _("Sub Lorem");
-const u8 gText_Quest_BuildingAnExhibit_Sub3_Map[] = _("IrisinaTown");
-const u8 gText_Quest_BuildingAnExhibit_Sub4_Name[] = _("Bobblehead");
-const u8 gText_Quest_BuildingAnExhibit_Sub4_Desc[] = _("Sub Lorem");
-const u8 gText_Quest_BuildingAnExhibit_Sub4_Map[] = _("Oroland");
 
 const u8 gText_Quest_ContractorPorygon_Sub1_Name[] = _("Curry");
 const u8 gText_Quest_ContractorPorygon_Sub1_Desc[] = _("Sub Lorem");
