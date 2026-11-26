@@ -528,7 +528,7 @@ const u32 gObjectEventPic_TalaWalking[] = INCGFX_U32("graphics/object_events/pic
 const u16 gObjectEventPal_TalaWalking[] = INCGFX_U16("graphics/object_events/palettes/tala.pal", ".gbapal");
 
 const u32 gObjectEventPic_EleanorWalking[] = INCBIN_U32("graphics/object_events/pics/people/eleanor/walking.4bpp", "graphics/object_events/pics/people/eleanor/running.4bpp");
-const u16 gObjectEventPal_EleanorWalking[] = INCGFX_U16("graphics/object_events/palettes/eleanor.pal", ".gbapal");
+const u16 gObjectEventPal_EleanorWalking[] = INCGFX_U16("graphics/object_events/pics/people/eleanor/walking.png", ".gbapal");
 
 const u32 gObjectEventPic_NerieneWalking[] = INCGFX_U32("graphics/object_events/pics/people/neriene.png", ".4bpp", "-mwidth 4 -mheight 4");
 const u16 gObjectEventPal_NerieneWalking[] = INCGFX_U16("graphics/object_events/palettes/neriene.pal", ".gbapal");
