@@ -10681,7 +10681,7 @@
       "height": 35,
       "border_width": 2,
       "border_height": 2,
-      "primary_tileset": "gTileset_General",
+      "primary_tileset": "gTileset_GeneralSilicon",
       "secondary_tileset": "gTileset_Slateport",
       "border_filepath": "data/layouts/Oroland/border.bin",
       "blockdata_filepath": "data/layouts/Oroland/map.bin",
@@ -11288,12 +11288,12 @@
     {
       "id": "LAYOUT_ROUTE98",
       "name": "Route98_Layout",
-      "width": 30,
-      "height": 30,
-      "border_width": 2,
+      "width": 74,
+      "height": 97,
+      "border_width": 3,
       "border_height": 2,
-      "primary_tileset": "gTileset_General",
-      "secondary_tileset": "gTileset_Petalburg",
+      "primary_tileset": "gTileset_GeneralSilicon",
+      "secondary_tileset": "gTileset_FoggyRoutes",
       "border_filepath": "data/layouts/Route98/border.bin",
       "blockdata_filepath": "data/layouts/Route98/map.bin",
       "layout_version": "emerald"
@@ -13534,6 +13534,18 @@
       "secondary_tileset": "gTileset_Petarosa",
       "border_filepath": "data/layouts/PetarosaBorough_KeiYingMansion_Garden/border.bin",
       "blockdata_filepath": "data/layouts/PetarosaBorough_KeiYingMansion_Garden/map.bin"
+    },
+    {
+      "id": "LAYOUT_ROUTE98_FLOODED",
+      "name": "Route98_Flooded",
+      "width": 74,
+      "height": 97,
+      "border_width": 2,
+      "border_height": 2,
+      "primary_tileset": "gTileset_GeneralSilicon",
+      "secondary_tileset": "gTileset_FoggyRoutes",
+      "border_filepath": "data/layouts/Route98_Flooded/border.bin",
+      "blockdata_filepath": "data/layouts/Route98_Flooded/map.bin"
     }
   ]
 }

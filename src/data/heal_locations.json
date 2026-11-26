@@ -479,8 +479,8 @@
     {
       "id": "HEAL_LOCATION_ROUTE98",
       "map": "MAP_ROUTE98",
-      "x": 16,
-      "y": 16
+      "x": 15,
+      "y": 19
     },
     {
       "id": "HEAL_LOCATION_ROUTE99",
