@@ -1,6 +1,6 @@
 {
-  "data/tilesets/secondary/foggy_routes/porytiles_bin/metatile_attributes.bin": "aa491c1c7846d8c75ca01c637206df73",
-  "data/tilesets/secondary/foggy_routes/porytiles_bin/metatiles.bin": "2741729fbfce3b12ee10930ce00279f3",
+  "data/tilesets/secondary/foggy_routes/porytiles_bin/metatile_attributes.bin": "e565f4e4d249626793a95f7193be62b7",
+  "data/tilesets/secondary/foggy_routes/porytiles_bin/metatiles.bin": "431c35eecbf1cde328634fe89f94d44d",
   "data/tilesets/secondary/foggy_routes/porytiles_bin/palettes/00.pal": "7f81a1409f4330b0358050bcf36660c4",
   "data/tilesets/secondary/foggy_routes/porytiles_bin/palettes/01.pal": "5b47fc4d67bf776efbc06c58a3890cf0",
   "data/tilesets/secondary/foggy_routes/porytiles_bin/palettes/02.pal": "2231306584733106272fcbf2454f3f5d",
@@ -18,8 +18,8 @@
   "data/tilesets/secondary/foggy_routes/porytiles_bin/palettes/14.pal": "59f83737350efeb148a299bdbf87e97f",
   "data/tilesets/secondary/foggy_routes/porytiles_bin/palettes/15.pal": "59f83737350efeb148a299bdbf87e97f",
   "data/tilesets/secondary/foggy_routes/porytiles_bin/tiles.png": "39ca7eefed0c1224c674e84678ecc142",
-  "data/tilesets/secondary/foggy_routes/porytiles_src/attributes.csv": "4753d508b8ffc4d293c4d211f270a85f",
-  "data/tilesets/secondary/foggy_routes/porytiles_src/bottom.png": "ea53512ae8c8820b5e36fb7edac6fc84",
+  "data/tilesets/secondary/foggy_routes/porytiles_src/attributes.csv": "e3d18a191752041aef618768514493ea",
+  "data/tilesets/secondary/foggy_routes/porytiles_src/bottom.png": "4d93d47dfdca50dfbffd7cb43c572a6c",
   "data/tilesets/secondary/foggy_routes/porytiles_src/middle.png": "b6e4765877174e7561579e4f2f9b6e24",
-  "data/tilesets/secondary/foggy_routes/porytiles_src/top.png": "7433a96879126ae50ee95b6d66c04ef4"
+  "data/tilesets/secondary/foggy_routes/porytiles_src/top.png": "655c88c197ef4b26e4939bccbab7cc07"
 }

@@ -8,6 +8,12 @@ mapscripts Route98_MapScripts {
     }
 }
 
+script Route98_SwapLayout
+{
+    setmaplayoutindex(LAYOUT_ROUTE98_FLOODED)
+    return
+}
+
 script Route98_RouteFlag_Script{
 	if(flag(FLAG_VISITED_OROLAND_COLISEUM) && flag(FLAG_VISITED_OROLAND))
     {
