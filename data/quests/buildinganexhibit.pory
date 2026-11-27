@@ -1,0 +1,221 @@
+script BuildingAnExhibit_Script_HideEmrysRoute
+{
+    setobjectflagfromlocalid(LOCALID_ROUTE98_EMRYS)
+}
+
+script BuildingAnExhibit_Script_InteractEmrys
+{
+    lock
+    faceplayer
+    goto_if_quest_reward(QUEST_BUILDINGANEXHIBIT,BuildingAnExhibit_Dialogue_EmrysReward)
+    goto_if_quest_active(QUEST_BUILDINGANEXHIBIT,BuildingAnExhibit_Dialogue_EmrysActive)
+    goto_if_quest_inactive(QUEST_BUILDINGANEXHIBIT,BuildingAnExhibit_Dialogue_EmrysStartQuest)
+}
+
+script BuildingAnExhibit_Dialogue_EmrysStartQuest
+{
+    msgbox(format("{PLAYER}! How serendipitous."),,SPEAKER_EMRYS)
+    closemessage
+    applymovement(LOCALID_ROUTE98_EMRYS,moves(face_down))
+    waitmovement(LOCALID_ROUTE98_EMRYS)
+    buffermapname(STR_VAR_1,MAP_OROLAND_COLISEUM_ARENA)
+    msgbox(format("I was here to admire the {STR_VAR_1}."),,SPEAKER_EMRYS)
+    msgbox(format("Now that Sharprise Capital has erected their grand stadium, this one is slated for destruction."),,SPEAKER_EMRYS)
+    msgbox(format("A shame! So much history in those bricks, lost to time."),,SPEAKER_EMRYS)
+    closemessage
+    applymovement(LOCALID_ROUTE98_EMRYS,moves(face_player))
+    waitmovement(LOCALID_ROUTE98_EMRYS)
+    msgbox(format("I’m putting together an exhibit to honor the {STR_VAR_1}. It’s very close to completion, but the final touches are in the “Hall of the Elite”. It’s a section dedicated to the Trainers over the years that were members of the Elite Four."),,SPEAKER_EMRYS)
+    msgbox(format("Unfortunately, there are a select few items that have managed to evade my grasp."),,SPEAKER_EMRYS)
+    msgbox(format("If you come across them in your travels, could you inquire about their willingness to sell?"),,SPEAKER_EMRYS)
+    closemessage
+    startquest(QUEST_BUILDINGANEXHIBIT)
+    msgbox(format("As a matter of fact…"),,SPEAKER_EMRYS)
+    showmoneybox(0,0)
+    cueobjecttalking(LOCALID_ROUTE98_EMRYS)
+    playse(SE_SHOP)
+    addmoney(MONEY_QUEST_BUILDINGANEXHIBIT,TRUE)
+    waitse
+    waitbuttonpress
+    hidemoneybox
+    msgbox(format("Emrys, what is all this money for?!?!"),,SPEAKER_PLAYER,TAIL_WHISPER,EMOTE_SHOCK)
+    msgbox(format("Funds for your acquisition negotiations. That should be enough money to cover all four items, and feel free to offer them whatever is necessary."),,SPEAKER_EMRYS)
+    msgbox(format("Between the cultural power of the museum and the money, there’s no problems you can’t solve!"),,SPEAKER_EMRYS,,EMOTE_HAPPY)
+    msgbox(format("Now, I’ve added some rumored locations to your Todo list, but if you need more information, I’m happy to give a brief overview."),,SPEAKER_EMRYS)
+    msgbox(format("Godspeed, Curator {PLAYER}!"),,SPEAKER_EMRYS)
+    closemessage
+    release
+    end
+}
+
+script BuildingAnExhibit_Dialogue_EmrysActive
+{
+    msgbox(format("Curator {PLAYER}!"),,SPEAKER_EMRYS)
+    goto(BuildingAnExhibit_Dialogue_PresentMenu)
+}
+
+script BuildingAnExhibit_Dialogue_PresentMenu
+{
+    msgbox(format("Which items for the collection did you want clarification on?"),,SPEAKER_EMRYS)
+    dynmultichoice(0,0,FALSE,3,0,NULL,format("Bobblehead"),format("Cape"),format("Glass"),format("Ticket Stub"),format("Never Mind."))
+    switch(var(VAR_RESULT))
+    {
+        case 0: call(Buildinganexhibit_Dialogue_ExplainBobblehead)
+        case 1: call(Buildinganexhibit_Dialogue_ExplainCape)
+        case 2: call(Buildinganexhibit_Dialogue_ExplainGlass)
+        case 3: call(Buildinganexhibit_Dialogue_ExplainTicketStub)
+        default:
+            msgbox(format("Nothing? Godspeed!"),,SPEAKER_EMRYS)
+    }
+    closemessage
+    release
+    end
+}
+
+script BuildingAnExhibit_Dialogue_EmrysReward
+{
+    msgbox(format("Am I understanding correctly that your success rate was zero."),,SPEAKER_EMRYS)
+    msgbox(format("How unfortunate."),,SPEAKER_EMRYS)
+    msgbox(format("I’m sorry Emrys! I talked to all of them, but it turns out putting together this exhibit is really hard."),,SPEAKER_PLAYER)
+    msgbox(format("No no, I don’t blame you at all. You’ve actually been extremely helpful in at least confirming the locations of some of the items. I might even be able to get a lead on the Cape that was lost to time."),,SPEAKER_EMRYS)
+    msgbox(format("You were excellent, {PLAYER}."),,SPEAKER_EMRYS)
+    showmoneybox(0,0)
+
+    checkmoney(MONEY_QUEST_BUILDINGANEXHIBIT)
+    if (var(VAR_RESULT) == FALSE)
+    {
+        msgbox(format("I spent the money! Man, this is not going to be easy…"),,SPEAKER_PLAYER,TAIL_THOUGHT)
+        msgbox(format("Ah yes, the grant money - hold onto it."),,SPEAKER_EMRYS)
+        msgbox(format("What?!"),,SPEAKER_PLAYER,TAIL_THOUGHT,EMOTE_SHOCK)
+    }
+    else
+    {
+        msgbox(format("Oh, I should return the grant money. It was $30-"),,SPEAKER_PLAYER)
+        msgbox(format("Oh that? Never mind it."),,SPEAKER_EMRYS)
+    }
+    hidemoneybox
+    goto(BuildingAnExhibit_Dialogue_EmrysFinishQuest)
+}
+
+script BuildingAnExhibit_Dialogue_EmrysFinishQuest
+{
+    msgbox(format("You performed some real labor, consider it your salary."),,SPEAKER_EMRYS)
+    msgbox(format("I truly do appreciate your efforts, {PLAYER}."),,SPEAKER_EMRYS)
+    closemessage
+    completequest(QUEST_BUILDINGANEXHIBIT)
+    msgbox(format("When I was promoted to head of the museum, Sharprise capitalized on the existing connection and offered me the Gym Leader role."),,SPEAKER_EMRYS)
+    msgbox(format("My family are all skilled hobbyist battlers, but I was the first to be a professional."),,SPEAKER_EMRYS)
+    msgbox(format("I take pride in being the best, but being the best Gym Leader is challenging as I’m also running the museum. I need to work harder at balancing both worlds."),,SPEAKER_EMRYS)
+    buffermapname(STR_VAR_1,MAP_PERLACIA_CITY_GYM)
+    msgbox(format("If you’re ever interested, I'd love to have a rematch at the {STR_VAR_1} Gym."),,SPEAKER_EMRYS)
+    closemessage
+    moveobjecttocoords(LOCALID_ROUTE98_EMRYS,1,1,DIR_NORTH)
+    delay(24)
+    fadescreen(FADE_TO_BLACK)
+    removeobject(LOCALID_ROUTE98_EMRYS)
+    fadescreen(FADE_FROM_BLACK)
+    release
+    end
+}
+
+script Buildinganexhibit_Dialogue_ExplainBobblehead
+{
+    goto_if_subquest_complete(QUEST_BUILDINGANEXHIBIT,SUB_QUEST_1,Buildinganexhibit_Dialogue_ExplainBobblehead_Complete)
+    msgbox(format("When new Elite Four members were added, the Resido League released small idols to commemorate the occasion."),,SPEAKER_EMRYS)
+    msgbox(format("Given his sought-after physical attributes in his younger years, Elite Four Magnus’ bobblehead was unusually popular. They immediately sold out and were never reissued."),,SPEAKER_EMRYS)
+    buffermapname(STR_VAR_1,MAP_CRESALTA_VISTA)
+    msgbox(format("I heard whispers of a woman in {STR_VAR_1} who came into one via an inheritance."),,SPEAKER_EMRYS)
+    goto(BuildingAnExhibit_Dialogue_Now)
+}
+
+script Buildinganexhibit_Dialogue_ExplainCape
+{
+    goto_if_subquest_complete(QUEST_BUILDINGANEXHIBIT,SUB_QUEST_2,Buildinganexhibit_Dialogue_ExplainCape_Complete)
+    msgbox(format("The last Resido Champion of the old League was Usul. The details around his coronation are strange, but after winning he immediately left the region, and has more or less disappeared from the public eye."),,SPEAKER_EMRYS)
+    msgbox(format("Word has it that something happened at his coronation party."),,SPEAKER_EMRYS)
+    msgbox(format("He left in such a hurry that he left behind his cape, which he received upon becoming Champion."),,SPEAKER_EMRYS)
+    buffermapname(STR_VAR_1,MAP_HALERBA_CITY)
+    msgbox(format("I’ve been told a League staffer acquired it afterwards, but even that part is difficult to verify. My research indicates that it could be in {STR_VAR_1}."),,SPEAKER_EMRYS)
+    goto(BuildingAnExhibit_Dialogue_Now)
+
+}
+
+script Buildinganexhibit_Dialogue_ExplainGlass
+{
+    goto_if_subquest_complete(QUEST_BUILDINGANEXHIBIT,SUB_QUEST_3,Buildinganexhibit_Dialogue_ExplainGlass_Complete)
+    buffermapname(STR_VAR_1,MAP_ARANTRAZ)
+    msgbox(format("The riots on {STR_VAR_1} many years ago were partially led by the Elite Four’s Tala. She was often involved in battles with the police, defending the criminals that were locked away."),,SPEAKER_EMRYS)
+    bufferspeciesname(STR_VAR_1,SPECIES_PIDGEOT)
+    buffermovename(STR_VAR_2,MOVE_HEAT_WAVE)
+msgbox(format("One of the most infamous legends of these battles involves her {STR_VAR_1} launching a {STR_VAR_2} that was so powerful,it melted some of the sand into glass."),,SPEAKER_EMRYS)
+    msgbox(format("The science doesn’t support this - sand melts at 1700 degrees celsius, but the legend was so prevailing she briefly had the nickname “Glasswielder Tala”."),,SPEAKER_EMRYS)
+    buffermapname(STR_VAR_3,MAP_IRISINA_TOWN)
+    msgbox(format("It’s rumored that a piece of it lives on in {STR_VAR_3}."),,SPEAKER_EMRYS)
+    goto(BuildingAnExhibit_Dialogue_Now)
+}
+
+script Buildinganexhibit_Dialogue_ExplainTicketStub
+{
+    goto_if_subquest_complete(QUEST_BUILDINGANEXHIBIT,SUB_QUEST_4,Buildinganexhibit_Dialogue_ExplainTicketStub_Complete)
+    msgbox(format("When the Dragon-type master Lance had become the Indigo League Champion, he went on a worldwide tour, challenging some of the best Trainers from every region."),,SPEAKER_EMRYS)
+    msgbox(format("Lance’s cousin and Gym Leader, Clair, had joined him for this visit, and the League capitalized on the opportunity by scheduling an exhibition - Lance and Clair versus Elite Four Ellen and Elite Four Frank."),,SPEAKER_EMRYS)
+    msgbox(format("The battle is considered one of the greatest in Resido history, and tickets from the event are treasured as collectors items by both Dragon Clan and Resido fans."),,SPEAKER_EMRYS)
+    buffermapname(STR_VAR_1,MAP_OROLAND)
+    msgbox(format("There is a now deleted zap where somebody claims to have acquired one in {STR_VAR_1}, but I haven't been able to verify."),,SPEAKER_EMRYS)
+    goto(BuildingAnExhibit_Dialogue_Now)
+}
+
+script Buildinganexhibit_Dialogue_ExplainBobblehead_Complete
+{
+    msgbox(format("I found the woman who had a bobblehead."),,SPEAKER_PLAYER)
+    msgbox(format("Excellent! How much did she sell for."),,SPEAKER_EMRYS)
+    msgbox(format("She didn’t! The bobblehead belonged to her grandfather who was -"),,SPEAKER_PLAYER,,EMOTE_SWEAT)
+    msgbox(format("He had a really strong connection to it. She can’t let it go."),,SPEAKER_PLAYER)
+    msgbox(format("I struggle to understand how she could want to keep it. Doesn’t she want her grandfather’s contribution to greater society?"),,SPEAKER_EMRYS)
+    goto(BuildingAnExhibit_Dialogue_Fascinating)
+}
+
+script Buildinganexhibit_Dialogue_ExplainCape_Complete
+{
+    buffermapname(STR_VAR_1,MAP_OROLAND_COLISEUM_ARENA)
+    msgbox(format("So the Cape was in possession by somebody that used to work at {STR_VAR_1}."),,SPEAKER_PLAYER)
+    msgbox(format("Excellent! Were you able to stay within budget?"),,SPEAKER_EMRYS)
+    msgbox(format("They didn’t sell it to me because they don’t have it anymore."),,SPEAKER_PLAYER)
+    msgbox(format("The person I talked to lost their job when {STR_VAR_1} was decommissioned and sold the Cape to a pawn shop 5 years ago. They didn’t seem to be happy about it either."),,SPEAKER_PLAYER)
+    msgbox(format("They pawned it off? An item with such a rich legacy. A few dollars versus preservation in the halls of history."),,SPEAKER_EMRYS)
+    goto(BuildingAnExhibit_Dialogue_Fascinating)
+}
+
+script Buildinganexhibit_Dialogue_ExplainGlass_Complete
+{
+    buffermapname(STR_VAR_3,MAP_IRISINA_TOWN)
+    msgbox(format("There’s a Trainer in {STR_VAR_3} who has the piece of glass you’re talking about."),,SPEAKER_PLAYER)
+    msgbox(format("Excellent! What did it cost you?"),,SPEAKER_EMRYS)
+    msgbox(format("Nothing - they wouldn't sell it to me or the museum."),,SPEAKER_PLAYER)
+    msgbox(format("He told me they would sell the glass once the museum “gave back all the stolen artifacts”."),,SPEAKER_PLAYER)
+    msgbox(format("Ugh, people like that have no idea what they’re talking about."),,SPEAKER_EMRYS)
+    msgbox(format("Museums are an institute of preservation and cultural exchange."),,SPEAKER_EMRYS)
+    goto(BuildingAnExhibit_Dialogue_Fascinating)
+}
+
+script Buildinganexhibit_Dialogue_ExplainTicketStub_Complete
+{
+    msgbox(format("The ticket stub’s owner won it online in an auction and was using it as a good luck charm."),,SPEAKER_PLAYER)
+    msgbox(format("I’m sure the money from the purchase was even luckier!"),,SPEAKER_EMRYS)
+    msgbox(format("Actually, they lost the stub in a Pokémon training accident. He was trying to replicate one of Clair’s moves and burned it up."),,SPEAKER_PLAYER,,EMOTE_SWEAT)
+    msgbox(format("A good luck charm? I can’t imagine having something so priceless on your person, and without any environmental consideration."),,SPEAKER_EMRYS)
+    goto(BuildingAnExhibit_Dialogue_Fascinating)
+}
+
+script BuildingAnExhibit_Dialogue_Fascinating
+{
+    msgbox(format("Fascinating."),,SPEAKER_EMRYS)
+    msgbox(format("I'll have to figure out an alternative plan. Thanks for the update, {PLAYER}."),,SPEAKER_EMRYS)
+    goto(BuildingAnExhibit_Dialogue_Now)
+}
+
+script BuildingAnExhibit_Dialogue_Now
+{
+    msgbox(format("Now."),,SPEAKER_EMRYS)
+    goto(BuildingAnExhibit_Dialogue_PresentMenu)
+}

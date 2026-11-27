@@ -2,6 +2,8 @@ mapscripts Route98_MapScripts {
     MAP_SCRIPT_ON_TRANSITION
     {
         call_if_subquest_complete(QUEST_GETTHEBANDBACKTOGETHER,SUB_QUEST_1,Quest_Getthebandbacktogether_Hide_GetthebandbacktogetherbikerA)
+        call_if_quest_complete(QUEST_BUILDINGANEXHIBIT,BuildingAnExhibit_Script_HideEmrysRoute)
+        call_if_quest_not_complete(QUEST_ALOHAFROMALOLA,BuildingAnExhibit_Script_HideEmrysRoute)
         call(Route98_RouteFlag_Script)
     }
     MAP_SCRIPT_ON_RESUME{
