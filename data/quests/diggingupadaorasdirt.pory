@@ -46,7 +46,7 @@ script Quest_Diggingupadaorasdirt_Dialogue_DigginginvesttigatorStartQuest
 script Quest_Diggingupadaorasdirt_Dialogue_DigginginvesttigatorActive
 {
     msgbox(format("Well? What have you got for me? Any progress on those leads?"),,SPEAKER_DIGGINGINVESTTIGATOR)
-    dynmultichoice(20,2,FALSE,4,0,NULL,format("Influence"),format("Leadership"),format("Growing Up"),format("Hodou Gym"),format("Never Mind"))
+    dynmultichoice(0,0,FALSE,3,0,NULL,format("Influence"),format("Leadership"),format("Growing Up"),format("Hodou Gym"),format("Never Mind"))
     switch(var(VAR_RESULT))
     {
         case 0: call(Quest_Diggingupadaorasdirt_Dialogue_ExplainInfluence)
